@@ -198,8 +198,6 @@ export function formatStatusDisplay(status: StatusProses): { label: string; colo
   return statusMap[status] || { label: status, color: 'bg-stone-100 text-stone-700' };
 }
 
-import { SupabaseClient } from "@supabase/supabase-js";
-
 // ============================================================================
 // ROLE DEFINITIONS - 5 DASHBOARD TYPES
 // ============================================================================
@@ -386,34 +384,6 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
   };
 
   return baseMenuItems[role] || [];
-}
-
-export async function isAdmin(supabase: SupabaseClient): Promise<boolean> {
-  try {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    return !!user;
-  } catch (error) {
-    return false;
-  }
-}
-
-// Get user role from profile
-export async function getUserRole(supabase: SupabaseClient, userId: string): Promise<UserRole | null> {
-  try {
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('role')
-      .eq('id', userId)
-      .single();
-
-    if (error || !data) return null;
-    return data.role as UserRole;
-  } catch {
-    return null;
-  }
 }
 
 // Validate role access to a route

@@ -1,22 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient, supabaseAdmin } from "@/lib/supabase/server";
-import { isAdmin } from "@/lib/access-control";
+import { cookies } from "next/headers";
+import { prisma } from "@/lib/prisma";
 
 export async function GET() {
   try {
-    // Use supabaseAdmin for reading tahun ajaran list (non-sensitive data)
-    const { data, error } = await supabaseAdmin
-      .from("tahun_ajaran")
-      .select("id, nama, tahun_mulai, tahun_selesai, is_active")
-      .order("tahun_mulai", { ascending: false });
-
-    if (error) {
-      console.error("Error fetching tahun ajaran:", error);
-      return NextResponse.json(
-        { error: "Failed to fetch tahun ajaran" },
-        { status: 500 }
-      );
-    }
+    const data = await prisma.tahunAjaran.findMany({
+      select: {
+        id: true,
+        nama: true,
+        tahun_mulai: true,
+        tahun_selesai: true,
+        is_active: true,
+      },
+      orderBy: { tahun_mulai: "desc" },
+    });
 
     return NextResponse.json({ data: data || [] });
   } catch (error) {
@@ -30,12 +27,25 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = await createClient();
+    // 1. Validasi session manual
+    const cookieStore = await cookies();
+    const sessionCookie = cookieStore.get("app_session");
 
-    // Check admin authorization
-    const authorized = await isAdmin(supabase);
-    if (!authorized) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+    if (!sessionCookie) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    let session;
+    try {
+      session = JSON.parse(sessionCookie.value);
+    } catch {
+      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
+    }
+
+    // Check custom role
+    const allowedRoles = ["admin", "admin_super"];
+    if (!allowedRoles.includes(session.role)) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
     const body = await request.json();
@@ -58,12 +68,12 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if tahun ajaran already exists
-    const { data: existing } = await supabase
-      .from("tahun_ajaran")
-      .select("id")
-      .eq("tahun_mulai", tahun_mulai)
-      .eq("tahun_selesai", tahun_selesai)
-      .single();
+    const existing = await prisma.tahunAjaran.findFirst({
+      where: {
+        tahun_mulai,
+        tahun_selesai,
+      },
+    });
 
     if (existing) {
       return NextResponse.json(
@@ -72,38 +82,31 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // If setting as active, deactivate others first
-    if (is_active) {
-      await supabase
-        .from("tahun_ajaran")
-        .update({ is_active: false })
-        .eq("is_active", true);
-    }
+    // Use transaction to deactivate others if needed
+    const result = await prisma.$transaction(async (tx) => {
+      // If setting as active, deactivate others first
+      if (is_active) {
+        await tx.tahunAjaran.updateMany({
+          where: { is_active: true },
+          data: { is_active: false },
+        });
+      }
 
-    // Create new tahun ajaran
-    const { data, error } = await supabase
-      .from("tahun_ajaran")
-      .insert({
-        tahun_mulai,
-        tahun_selesai,
-        nama,
-        is_active,
-        tanggal_buka_pendaftaran,
-        tanggal_tutup_pendaftaran,
-        biaya_pendaftaran,
-      })
-      .select()
-      .single();
+      // Create new tahun ajaran
+      return await tx.tahunAjaran.create({
+        data: {
+          tahun_mulai,
+          tahun_selesai,
+          nama,
+          is_active,
+          tanggal_buka_pendaftaran: new Date(tanggal_buka_pendaftaran),
+          tanggal_tutup_pendaftaran: new Date(tanggal_tutup_pendaftaran),
+          biaya_pendaftaran,
+        },
+      });
+    });
 
-    if (error) {
-      console.error("Error creating tahun ajaran:", error);
-      return NextResponse.json(
-        { error: "Failed to create tahun ajaran" },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json({ success: true, data });
+    return NextResponse.json({ success: true, data: result });
   } catch (error) {
     console.error("Tahun ajaran POST error:", error);
     return NextResponse.json(

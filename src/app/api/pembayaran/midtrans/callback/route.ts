@@ -1,15 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase/server";
+import { prisma } from "@/lib/prisma";
 import crypto from "crypto";
 
 /**
  * POST /api/pembayaran/midtrans/callback
  * Menerima notifikasi dari Midtrans (webhook)
- *
- * Midtrans akan mengirim notifikasi ke endpoint ini setelah:
- * - Pembayaran berhasil (settlement, capture)
- * - Pembayaran pending
- * - Pembayaran gagal (deny, expire, cancel)
  */
 export async function POST(request: NextRequest) {
   try {
@@ -30,8 +25,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ status: "error", message: "Server key not configured" }, { status: 500 });
     }
 
-    // Generate signature key for verification
-    // signature_key = SHA512(order_id+status_code+gross_amount+ServerKey)
     const signatureKey = notification.signature_key;
     const orderId = notification.order_id;
     const statusCode = notification.status_code;
@@ -48,13 +41,12 @@ export async function POST(request: NextRequest) {
     }
 
     // 3. Find the payment record by order_id
-    const { data: pembayaran, error: fetchError } = await supabaseAdmin
-      .from("pembayaran")
-      .select("id, pendaftar_id, status_pembayaran")
-      .eq("midtrans_order_id", orderId)
-      .single();
+    const pembayaran = await prisma.pembayaran.findFirst({
+      where: { midtrans_order_id: orderId },
+      select: { id: true, pendaftar_id: true, status_pembayaran: true }
+    });
 
-    if (fetchError || !pembayaran) {
+    if (!pembayaran) {
       console.error("Payment not found for order_id:", orderId);
       return NextResponse.json({ status: "error", message: "Payment not found" }, { status: 404 });
     }
@@ -92,54 +84,47 @@ export async function POST(request: NextRequest) {
     }
 
     // 5. Update payment record
-    const { error: updateError } = await supabaseAdmin
-      .from("pembayaran")
-      .update({
+    await prisma.pembayaran.update({
+      where: { id: pembayaran.id },
+      data: {
         midtrans_transaction_id: notification.transaction_id,
         midtrans_transaction_status: transactionStatus,
         midtrans_payment_type: notification.payment_type,
         midtrans_response_json: notification,
         status_pembayaran: newStatus,
-        verified_at: newStatus === "verified" ? new Date().toISOString() : null,
+        verified_at: newStatus === "verified" ? new Date() : null,
         catatan_verifikasi:
           newStatus === "verified"
             ? `Pembayaran otomatis via ${notification.payment_type}`
             : newStatus === "rejected"
-            ? `Pembayaran ${transactionStatus}`
-            : null,
-        updated_at: new Date().toISOString(),
-      })
-      .eq("id", pembayaran.id);
-
-    if (updateError) {
-      console.error("Error updating payment:", updateError);
-      return NextResponse.json({ status: "error", message: "Failed to update payment" }, { status: 500 });
-    }
+              ? `Pembayaran ${transactionStatus}`
+              : null,
+        updated_at: new Date(),
+      }
+    });
 
     // 6. Update pendaftar status if payment is successful
     if (shouldUpdatePendaftar) {
       // Get current pendaftar status
-      const { data: pendaftar } = await supabaseAdmin
-        .from("pendaftar")
-        .select("status_pendaftaran")
-        .eq("id", pembayaran.pendaftar_id)
-        .single();
+      const pendaftar = await prisma.pendaftar.findUnique({
+        where: { id: pembayaran.pendaftar_id },
+        select: { status_pendaftaran: true }
+      });
 
       // Only update if still waiting for payment
-      // Database constraint only allows: draft, payment_verification, verified, rejected, scheduled, accepted
       if (
         pendaftar &&
         (pendaftar.status_pendaftaran === "draft" ||
           pendaftar.status_pendaftaran === "waiting_payment" ||
           pendaftar.status_pendaftaran === "payment_verification")
       ) {
-        await supabaseAdmin
-          .from("pendaftar")
-          .update({
-            status_pendaftaran: "verified", // Payment verified
-            updated_at: new Date().toISOString(),
-          })
-          .eq("id", pembayaran.pendaftar_id);
+        await prisma.pendaftar.update({
+          where: { id: pembayaran.pendaftar_id },
+          data: {
+            status_pendaftaran: "verified",
+            updated_at: new Date(),
+          }
+        });
 
         console.log(`Pendaftar ${pembayaran.pendaftar_id} status updated to verified`);
       }
@@ -154,10 +139,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
-/**
- * GET /api/pembayaran/midtrans/callback
- * Health check endpoint untuk Midtrans
- */
 export async function GET() {
   return NextResponse.json({ status: "ok", message: "Midtrans callback endpoint is ready" });
 }

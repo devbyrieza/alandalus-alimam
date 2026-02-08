@@ -1,0 +1,94 @@
+{
+  "timestamp": "2026-02-06T15:15:11.522Z",
+  "database_url": "postgresql:***@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?pgbouncer=true",
+  "results": [
+    {
+      "table": "profiles",
+      "count": 22,
+      "status": "success"
+    },
+    {
+      "table": "tahun_ajaran",
+      "count": 2,
+      "status": "success"
+    },
+    {
+      "table": "pendaftar",
+      "count": 0,
+      "status": "error",
+      "error": "\nInvalid `prisma.pendaftar.findMany()` invocation in\nC:\\Users\\itpua\\Dev\\Work\\pp-alimam\\migration\\backup\\export-data.ts:65:22\n\n  62 \n  63 // 3. Pendaftar\n  64 results.push(await exportTable('pendaftar', () =>\n→ 65   prisma.pendaftar.findMany(\nError converting field \"user_id\" of expected non-nullable type \"String\", found incompatible value of \"null\"."
+    },
+    {
+      "table": "orang_tua",
+      "count": 2,
+      "status": "success"
+    },
+    {
+      "table": "dokumen",
+      "count": 3,
+      "status": "success"
+    },
+    {
+      "table": "pembayaran",
+      "count": 8,
+      "status": "success"
+    },
+    {
+      "table": "jadwal_ujian",
+      "count": 0,
+      "status": "success"
+    },
+    {
+      "table": "nilai_ujian",
+      "count": 0,
+      "status": "success"
+    },
+    {
+      "table": "data_rapor",
+      "count": 0,
+      "status": "success"
+    },
+    {
+      "table": "data_prestasi",
+      "count": 0,
+      "status": "success"
+    },
+    {
+      "table": "data_kesehatan",
+      "count": 0,
+      "status": "success"
+    },
+    {
+      "table": "data_asrama",
+      "count": 0,
+      "status": "success"
+    },
+    {
+      "table": "pengumuman",
+      "count": 0,
+      "status": "success"
+    },
+    {
+      "table": "reservasi_psb",
+      "count": 0,
+      "status": "success"
+    },
+    {
+      "table": "data_perubahan_request",
+      "count": 0,
+      "status": "error",
+      "error": "\nInvalid `prisma.dataPerubahanRequest.findMany()` invocation in\nC:\\Users\\itpua\\Dev\\Work\\pp-alimam\\migration\\backup\\export-data.ts:125:33\n\n  122 \n  123 // 15. Data Perubahan Request\n  124 results.push(await exportTable('data_perubahan_request', () =>\n→ 125   prisma.dataPerubahanRequest.findMany(\nThe table `public.data_perubahan_request` does not exist in the current database."
+    },
+    {
+      "table": "otp_verifications",
+      "count": 8,
+      "status": "success"
+    },
+    {
+      "table": "auth_users",
+      "count": 22,
+      "status": "success"
+    }
+  ],
+  "totalRecords": 67
+}

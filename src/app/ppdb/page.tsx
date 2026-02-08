@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   Calendar,
@@ -22,11 +22,12 @@ import {
   ChevronRight,
   Sparkles,
   Target,
+  Loader2,
 } from "lucide-react";
 import ScrollAnimation from "@/components/ui/ScrollAnimation";
 import { Container } from "@/components/layout/Container";
 
-export default function PPDBPage() {
+function PPDBContent() {
   const searchParams = useSearchParams();
   const jenjang = searchParams.get('jenjang');
   const requirements = [
@@ -622,5 +623,23 @@ export default function PPDBPage() {
         </Container>
       </section>
     </main>
+  );
+}
+
+// Loading fallback
+function LoadingFallback() {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <Loader2 className="w-12 h-12 text-[var(--color-brown-600)] animate-spin mb-4" />
+      <p className="text-[var(--color-brown-600)] font-medium">Memuat data...</p>
+    </div>
+  );
+}
+
+export default function PPDBPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <PPDBContent />
+    </Suspense>
   );
 }

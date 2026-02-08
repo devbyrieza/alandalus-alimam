@@ -1,25 +1,20 @@
-// File: /src/app/api/auth/send-otp/routes.ts
-// UPDATE penting: bagian OTP channel logic
-
 import { NextRequest, NextResponse } from "next/server";
 import { sendOTP } from "@/lib/notifications/multi-channel";
 import type { OTPChannel } from "@/lib/notifications/multi-channel";
 import { normalizePhoneNumber } from "@/lib/validations/registration";
-import { createClient } from "@supabase/supabase-js";
+import { prisma } from "@/lib/prisma";
+import crypto from "crypto";
 
-// Helper functions
 function generateOTP(): string {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
 function hashOTP(otp: string): string {
-  const crypto = require("crypto");
   return crypto.createHash("sha256").update(otp).digest("hex");
 }
 
 const normalizePhone = normalizePhoneNumber;
 
-// Rate limiter store (in production, use Redis)
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 
 function updateRateLimit(phone: string): void {
@@ -27,16 +22,11 @@ function updateRateLimit(phone: string): void {
   const limit = rateLimitStore.get(phone);
 
   if (!limit || now > limit.resetTime) {
-    rateLimitStore.set(phone, { count: 1, resetTime: now + 60 * 60 * 1000 }); // 1 hour
+    rateLimitStore.set(phone, { count: 1, resetTime: now + 60 * 60 * 1000 });
   } else {
     limit.count++;
   }
 }
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || "",
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
-);
 
 export async function POST(request: NextRequest) {
   try {
@@ -50,92 +40,58 @@ export async function POST(request: NextRequest) {
       jenjang,
       email,
       telegram_username,
-      otp_channel = "whatsapp", // DEFAULT: WhatsApp
+      otp_channel = "whatsapp",
     } = body;
 
-    // VALIDASI: Hanya izinkan whatsapp atau sms
     if (!["whatsapp", "sms"].includes(otp_channel)) {
       return NextResponse.json(
-        {
-          success: false,
-          error: "Channel OTP tidak valid. Pilih: whatsapp atau sms",
-        },
+        { success: false, error: "Channel OTP tidak valid. Pilih: whatsapp atau sms" },
         { status: 400 },
       );
     }
 
-    // ... validasi lain tetap ...
-
-    // GENERATE OTP
     const otp = generateOTP();
     const hashedOTP = hashOTP(otp);
     const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
-
-    // NORMALIZE PHONE untuk semua channel
     const normalizedPhone = normalizePhone(no_hp);
 
-    // KIRIM OTP DENGAN MULTI-CHANNEL
     const otpResult = await sendOTP({
       channel: otp_channel as OTPChannel,
       identifier: normalizedPhone,
       otp,
       nama: nama_lengkap,
-      data: {
-        phone: normalizedPhone,
-        email,
-        telegram_username,
-      },
+      data: { phone: normalizedPhone, email },
     });
 
     if (!otpResult.success) {
       return NextResponse.json(
-        {
-          success: false,
-          error: otpResult.message || "Gagal mengirim OTP",
-        },
+        { success: false, error: otpResult.message || "Gagal mengirim OTP" },
         { status: 500 },
       );
     }
 
-    // SIMPAN OTP KE DATABASE (hanya jika berhasil kirim)
-    const otpData = {
-      phone: normalizedPhone,
-      otp_hash: hashedOTP,
-      expires_at: expiresAt.toISOString(),
-      attempts: 0,
-      otp_channel: otpResult.channel, // Gunakan channel aktual (bisa fallback)
-      otp_identifier: normalizedPhone,
-      created_at: new Date().toISOString(),
-      registration_data: JSON.stringify({
-        nik,
-        nama_lengkap,
-        tanggal_lahir,
-        no_hp: normalizedPhone,
-        jenis_kelamin,
-        jenjang,
-        email,
-        telegram_username,
-      }),
-    };
+    await prisma.otpVerification.create({
+      data: {
+        phone: normalizedPhone,
+        otp_hash: hashedOTP,
+        expires_at: expiresAt,
+        attempts: 0,
+        otp_channel: otpResult.channel,
+        registration_data: JSON.stringify({
+          nik,
+          nama_lengkap,
+          tanggal_lahir,
+          no_hp: normalizedPhone,
+          jenis_kelamin,
+          jenjang,
+          email,
+          telegram_username,
+        }),
+      },
+    });
 
-    const { data: otpRecord, error: otpError } = await supabase
-      .from("otp_verifications")
-      .insert(otpData)
-      .select()
-      .single();
-
-    if (otpError) {
-      console.error("Error storing OTP:", otpError);
-      return NextResponse.json(
-        { success: false, error: "Gagal menyimpan OTP" },
-        { status: 500 },
-      );
-    }
-
-    // UPDATE RATE LIMIT
     updateRateLimit(normalizedPhone);
 
-    // RESPONSE SUCCESS
     return NextResponse.json({
       success: true,
       message: otpResult.message,
@@ -151,11 +107,7 @@ export async function POST(request: NextRequest) {
   } catch (error: any) {
     console.error("Send OTP error:", error);
     return NextResponse.json(
-      {
-        success: false,
-        error: error.message || "Terjadi kesalahan server",
-        note: "Cek konfigurasi Twilio dan Nusasms di .env",
-      },
+      { success: false, error: error.message || "Terjadi kesalahan server" },
       { status: 500 },
     );
   }

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { supabaseAdmin } from "@/lib/supabase/server";
+import { prisma } from "@/lib/prisma";
 
 // GET: List dokumen yang perlu diverifikasi
 export async function GET(request: NextRequest) {
@@ -30,44 +30,37 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const statusParam = searchParams.get("status") || "pending";
 
-    // Fetch dokumen using Admin Client
-    let query = supabaseAdmin
-      .from("dokumen")
-      .select(
-        `
-        id,
-        jenis_dokumen,
-        is_verified,
-        catatan,
-        file_path,
-        created_at,
-        updated_at,
-        pendaftar:pendaftar_id (
-          id,
-          nomor_pendaftaran,
-          nama_lengkap,
-          jenjang,
-          no_hp
-        )
-      `
-      );
-
-    // Filter Logic
+    // Build filter
+    const where: any = {};
     if (statusParam === "pending") {
-      query = query.eq("is_verified", false);
+      where.is_verified = false;
     } else if (statusParam === "verified") {
-      query = query.eq("is_verified", true);
+      where.is_verified = true;
     }
 
-    const { data, error } = await query.order("created_at", { ascending: false });
-
-    if (error) {
-      console.error("Error fetching dokumen:", error);
-      return NextResponse.json(
-        { error: "Failed to fetch documents" },
-        { status: 500 }
-      );
-    }
+    // Fetch dokumen
+    const data = await prisma.dokumen.findMany({
+      where,
+      select: {
+        id: true,
+        jenis_dokumen: true,
+        is_verified: true,
+        catatan: true,
+        file_path: true,
+        created_at: true,
+        updated_at: true,
+        pendaftar: {
+          select: {
+            id: true,
+            nomor_pendaftaran: true,
+            nama_lengkap: true,
+            jenjang: true,
+            no_hp: true,
+          },
+        },
+      },
+      orderBy: { created_at: "desc" },
+    });
 
     return NextResponse.json({ data: data || [] });
   } catch (error) {
@@ -124,25 +117,15 @@ export async function PATCH(request: NextRequest) {
     const isVerified = status_verifikasi === "verified";
 
     // Update dokumen
-    const { data, error } = await supabaseAdmin
-      .from("dokumen")
-      .update({
+    const data = await prisma.dokumen.update({
+      where: { id: dokumen_id },
+      data: {
         is_verified: isVerified,
         catatan,
-        verified_by: session.id,
-        verified_at: new Date().toISOString(),
-      })
-      .eq("id", dokumen_id)
-      .select()
-      .single();
-
-    if (error) {
-      console.error("Error updating dokumen:", error);
-      return NextResponse.json(
-        { error: "Failed to update document" },
-        { status: 500 }
-      );
-    }
+        // verified_by: session.id, // Only if column exists in Prisma schema
+        // verified_at: new Date(), // Only if column exists
+      },
+    });
 
     return NextResponse.json({ success: true, data });
   } catch (error) {

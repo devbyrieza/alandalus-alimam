@@ -1,30 +1,19 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// AUTH HELPER - UPDATED V3.0 (Simple & Aman) 🛡️
+// AUTH HELPER - V4.0 (Custom Cookie-based Auth)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Path: src/lib/auth.ts
+// Migrated from Supabase to custom cookie-based auth
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-import { createBrowserClient } from "@supabase/ssr";
-
 // ===================================
-// 🔌 SUPABASE CLIENT
-// ===================================
-export const getSupabaseClient = () => {
-  return createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
-};
-
-// ===================================
-// 📧 EMAIL HELPER (STANDARDIZED)
+// EMAIL HELPER (STANDARDIZED)
 // ===================================
 export const generateAuthEmail = (nik: string): string => {
   return `${nik}@pendaftar.local`;
 };
 
 // ===================================
-// ✅ VALIDATION HELPERS
+// VALIDATION HELPERS
 // ===================================
 
 export const validateNIK = (
@@ -125,97 +114,57 @@ export const validateNama = (
 };
 
 // ===================================
-// 👤 SESSION HELPERS
+// SESSION HELPERS (Cookie-based)
 // ===================================
 
 /**
- * Get current user
+ * Session data returned from /api/auth/session
  */
-export const getCurrentUser = async () => {
-  try {
-    const supabase = getSupabaseClient();
-    const {
-      data: { user },
-      error,
-    } = await supabase.auth.getUser();
+export interface SessionData {
+  id: string;
+  role: string;
+  nama?: string;
+  expires_at?: string;
+}
 
-    if (error || !user) {
+/**
+ * Fetch current session from server API
+ * Uses httpOnly cookie (app_session) - must go through API route
+ */
+export const getCurrentSession = async (): Promise<SessionData | null> => {
+  try {
+    const response = await fetch("/api/auth/session", {
+      method: "GET",
+      credentials: "include",
+    });
+
+    if (!response.ok) {
       return null;
     }
 
-    return user;
+    const data = await response.json();
+    return data.session || null;
   } catch (error) {
     return null;
   }
 };
 
 /**
- * Get current session
- */
-export const getCurrentSession = async () => {
-  try {
-    const supabase = getSupabaseClient();
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.getSession();
-
-    if (error || !session) {
-      return null;
-    }
-
-    return session;
-  } catch (error) {
-    return null;
-  }
-};
-
-/**
- * Get current user profile with pendaftar data
- */
-export const getCurrentProfile = async () => {
-  try {
-    const supabase = getSupabaseClient();
-    const user = await getCurrentUser();
-
-    if (!user) {
-      return null;
-    }
-
-    const { data, error } = await supabase
-      .from("profiles")
-      .select(
-        `
-        *,
-        pendaftar:pendaftar(*)
-      `
-      )
-      .eq("id", user.id)
-      .single();
-
-    if (error || !data) {
-      return null;
-    }
-
-    return data;
-  } catch (error) {
-    return null;
-  }
-};
-
-/**
- * Logout user
+ * Logout user by clearing the app_session cookie via API
  */
 export const logoutUser = async (): Promise<{
   success: boolean;
   error?: string;
 }> => {
   try {
-    const supabase = getSupabaseClient();
-    const { error } = await supabase.auth.signOut();
+    const response = await fetch("/api/auth/logout", {
+      method: "POST",
+      credentials: "include",
+    });
 
-    if (error) {
-      return { success: false, error: error.message };
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      return { success: false, error: data.error || "Gagal logout" };
     }
 
     return { success: true };
@@ -224,12 +173,9 @@ export const logoutUser = async (): Promise<{
   }
 };
 
-// ===================================
-// 🆕 NEW: SESSION INFO HELPERS
-// ===================================
-
 /**
  * Get session remaining time in seconds
+ * Reads expires_at from session data
  */
 export const getSessionRemainingTime = async (): Promise<number> => {
   try {
@@ -243,7 +189,7 @@ export const getSessionRemainingTime = async (): Promise<number> => {
     const now = Date.now();
     const remainingMs = expiresAt - now;
 
-    return Math.max(0, Math.floor(remainingMs / 1000)); // Convert ke detik
+    return Math.max(0, Math.floor(remainingMs / 1000));
   } catch (error) {
     return 0;
   }
@@ -305,7 +251,7 @@ export const formatSessionExpiry = async (): Promise<string> => {
 };
 
 // ===================================
-// 🎨 FORMAT HELPERS
+// FORMAT HELPERS
 // ===================================
 
 export const formatNIKDisplay = (nik: string): string => {

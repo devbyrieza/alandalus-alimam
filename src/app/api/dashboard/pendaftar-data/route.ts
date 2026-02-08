@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { supabaseAdmin } from "@/lib/supabase/server";
+import { prisma } from "@/lib/prisma";
 
 // GET: Fetch data pendaftar berdasarkan session
 export async function GET(request: NextRequest) {
@@ -36,18 +36,15 @@ export async function GET(request: NextRequest) {
     }
 
     // 4. Fetch data pendaftar dari database
-    const { data: pendaftar, error } = await supabaseAdmin
-      .from("pendaftar")
-      .select(`
-        *,
-        orang_tua (*),
-        dokumen (*)
-      `)
-      .eq("id", session.id)
-      .single();
+    const pendaftar = await prisma.pendaftar.findUnique({
+      where: { id: session.id },
+      include: {
+        orang_tua: true,
+        dokumen: true,
+      },
+    });
 
-    if (error || !pendaftar) {
-      console.error("Error fetching pendaftar:", error);
+    if (!pendaftar) {
       return NextResponse.json(
         { success: false, error: "Data pendaftar tidak ditemukan" },
         { status: 404 }

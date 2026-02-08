@@ -1,11 +1,6 @@
 // app/api/verifikasi/mark-sent/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || "",
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
-);
+import { prisma } from "@/lib/prisma";
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,29 +13,45 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Update OTP status ke 'sent'
-    const { data, error } = await supabase
-      .from("otp_verifications")
-      .update({
-        sent_at: new Date().toISOString(),
-        status: "sent",
-      })
-      .eq(otp_id ? "id" : "phone", otp_id || phone)
-      .select()
-      .single();
+    // Cari record yg akan diupdate
+    // Prioritas otp_id, fallback ke phone (cari yg terbaru yg belum verified)
+    let recordToUpdate;
 
-    if (error) {
-      console.error("Supabase error:", error);
+    if (otp_id) {
+      recordToUpdate = await prisma.otpVerification.findUnique({
+        where: { id: otp_id }
+      });
+    } else {
+      recordToUpdate = await prisma.otpVerification.findFirst({
+        where: {
+          phone: phone,
+          verified_at: null,
+          expires_at: { gt: new Date() }
+        },
+        orderBy: { created_at: 'desc' }
+      });
+    }
+
+    if (!recordToUpdate) {
       return NextResponse.json(
-        { success: false, error: error.message },
-        { status: 500 },
+        { success: false, error: "OTP record not found or expired" },
+        { status: 404 }
       );
     }
+
+    // Update OTP status ke 'sent'
+    const updated = await prisma.otpVerification.update({
+      where: { id: recordToUpdate.id },
+      data: {
+        sent_at: new Date(),
+        status: "sent",
+      }
+    });
 
     return NextResponse.json({
       success: true,
       message: "OTP sudah ditandai sebagai terkirim",
-      data,
+      data: updated,
       timestamp: new Date().toISOString(),
     });
   } catch (error: any) {

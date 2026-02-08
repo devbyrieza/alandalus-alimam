@@ -1,5 +1,6 @@
 // lib/verification/sms.ts
 import { normalizePhone } from "./multi-channel";
+import { sendWhatsAppMessage } from "@/lib/whatsapp/wablas";
 
 export async function sendSms(
   to: string,
@@ -8,38 +9,12 @@ export async function sendSms(
   try {
     const phone = normalizePhone(to);
 
-    // Gunakan Twilio SMS
-    if (process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN) {
-      const accountSid = process.env.TWILIO_ACCOUNT_SID;
-      const authToken = process.env.TWILIO_AUTH_TOKEN;
-      const client = require("twilio")(accountSid, authToken);
+    // Kirim via Wablas (WhatsApp message, lebih reliable dari SMS)
+    const message = `Kode verifikasi PPDB Ponpes Al-Imam Al-Islami: ${otp}`;
+    const result = await sendWhatsAppMessage(phone, message);
 
-      const message = await client.messages.create({
-        body: `Kode verifikasi PPDB Ponpes Al-Imam Al-Islami: ${otp}`,
-        from: process.env.TWILIO_PHONE_NUMBER,
-        to: phone,
-      });
-
-      return { success: true, messageId: message.sid };
-    }
-
-    // Gunakan NusaSMS (nanti)
-    if (process.env.NUSASMS_API_KEY) {
-      const response = await fetch("https://api.nusasms.com/api/v3/sms/send", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${process.env.NUSASMS_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          to: phone.replace("+", ""),
-          message: `Kode verifikasi PPDB Ponpes Al-Imam Al-Islami: ${otp}`,
-          from: "PPDB-ALIMAM",
-        }),
-      });
-
-      const data = await response.json();
-      return { success: data.success, messageId: data.message_id };
+    if (result.success) {
+      return { success: true, messageId: result.messageId };
     }
 
     // Fallback untuk development
@@ -48,7 +23,7 @@ export async function sendSms(
       return { success: true, messageId: "dev-sms-" + Date.now() };
     }
 
-    return { success: false, error: "SMS service not configured" };
+    return { success: false, error: result.error || "SMS service error" };
   } catch (error: any) {
     console.error("SMS send error:", error);
     return { success: false, error: error.message };

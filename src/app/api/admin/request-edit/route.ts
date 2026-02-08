@@ -1,13 +1,30 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 export async function PUT(request: Request) {
     try {
+        // 1. Validasi session manual
+        const cookieStore = await cookies();
+        const sessionCookie = cookieStore.get("app_session");
+
+        if (!sessionCookie) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
+        let session;
+        try {
+            session = JSON.parse(sessionCookie.value);
+        } catch {
+            return NextResponse.json({ error: "Invalid session" }, { status: 401 });
+        }
+
+        // Check custom role
+        const allowedRoles = ["admin", "admin_super", "admin_berkas", "admin_keuangan", "penguji"];
+        if (!allowedRoles.includes(session.role)) {
+            return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+        }
+
         const body = await request.json();
         const { request_id, action, admin_note } = body;
 
@@ -38,7 +55,7 @@ export async function PUT(request: Request) {
             );
         }
 
-        const updatedRequest = await (prisma as any).dataPerubahanRequest.update({
+        const updatedRequest = await prisma.dataPerubahanRequest.update({
             where: { id: request_id },
             data: updateData,
         });

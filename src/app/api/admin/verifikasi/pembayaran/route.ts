@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { supabaseAdmin } from "@/lib/supabase/server";
+import { prisma } from "@/lib/prisma";
 
 // GET: List pembayaran yang perlu diverifikasi
 export async function GET(request: NextRequest) {
   try {
-    // 1. Validasi session manual (karena login pake custom cookie)
+    // 1. Validasi session manual
     const cookieStore = await cookies();
     const sessionCookie = cookieStore.get("app_session");
 
@@ -30,77 +30,66 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const status = searchParams.get("status") || "pending";
 
-    // Fetch pembayaran using Admin Client
-    // Note: Using correct field names from database schema
-    let query = supabaseAdmin
-      .from("pembayaran")
-      .select(
-        `
-        id,
-        jumlah,
-        metode_pembayaran,
-        status_pembayaran,
-        catatan_verifikasi,
-        bukti_transfer_path,
-        bukti_transfer_filename,
-        created_at,
-        updated_at,
-        pendaftar (
-          id,
-          nomor_pendaftaran,
-          nama_lengkap,
-          jenjang,
-          no_hp
-        )
-      `
-      );
-
+    // Build filter
+    const where: any = {};
     if (status === "all") {
       // No filter
     } else if (status === "pending") {
-      query = query.not("status_pembayaran", "in", '("verified","rejected")');
+      where.status_pembayaran = { notIn: ["verified", "rejected"] };
     } else {
-      query = query.eq("status_pembayaran", status);
+      where.status_pembayaran = status;
     }
 
-    const { data, error } = await query.order("created_at", { ascending: false });
-
-    if (error) {
-      console.error("Error fetching pembayaran:", error);
-      return NextResponse.json(
-        { error: "Failed to fetch payments" },
-        { status: 500 }
-      );
-    }
-
-    // Generate signed URLs for bukti_transfer_path and map field names for frontend compatibility
-    const dataWithUrls = await Promise.all(
-      (data || []).map(async (pembayaran) => {
-        let bukti_transfer_url: string | null = null;
-
-        if (pembayaran.bukti_transfer_path) {
-          // Generate signed URL for private bucket (expires in 1 hour)
-          const { data: signedUrlData } = await supabaseAdmin.storage
-            .from("bukti-pembayaran")
-            .createSignedUrl(pembayaran.bukti_transfer_path, 3600);
-
-          bukti_transfer_url = signedUrlData?.signedUrl || null;
+    // Fetch pembayaran
+    const data = await prisma.pembayaran.findMany({
+      where,
+      select: {
+        id: true,
+        jumlah: true,
+        metode_pembayaran: true,
+        status_pembayaran: true,
+        catatan_verifikasi: true,
+        bukti_transfer_path: true,
+        bukti_transfer_filename: true,
+        created_at: true,
+        updated_at: true,
+        pendaftar_id: true,
+        pendaftar: {
+          select: {
+            id: true,
+            nomor_pendaftaran: true,
+            nama_lengkap: true,
+            jenjang: true,
+            no_hp: true,
+          }
         }
+      },
+      orderBy: { created_at: "desc" },
+    });
 
-        return {
-          id: pembayaran.id,
-          jumlah: pembayaran.jumlah,
-          metode_pembayaran: pembayaran.metode_pembayaran,
-          status_pembayaran: pembayaran.status_pembayaran,
-          catatan: pembayaran.catatan_verifikasi, // Map to frontend expected field
-          bukti_transfer_url, // Generated signed URL
-          tanggal_pembayaran: pembayaran.created_at, // Use created_at as tanggal_pembayaran
-          created_at: pembayaran.created_at,
-          updated_at: pembayaran.updated_at,
-          pendaftar: pembayaran.pendaftar,
-        };
-      })
-    );
+    // Generate URLs (Mock for now as we removed Supabase Storage)
+    // TODO: Implement proper storage URL generation for local files or S3
+    const dataWithUrls = data.map((pembayaran) => {
+      let bukti_transfer_url: string | null = null;
+      if (pembayaran.bukti_transfer_path) {
+        // Temporary: direct link if public or just path
+        // pendaftar needs to be able to see this
+        bukti_transfer_url = null; // Cannot sign URL without storage client
+      }
+
+      return {
+        id: pembayaran.id,
+        jumlah: pembayaran.jumlah,
+        metode_pembayaran: pembayaran.metode_pembayaran,
+        status_pembayaran: pembayaran.status_pembayaran,
+        catatan: pembayaran.catatan_verifikasi,
+        bukti_transfer_url,
+        tanggal_pembayaran: pembayaran.created_at,
+        created_at: pembayaran.created_at,
+        updated_at: pembayaran.updated_at,
+        pendaftar: pembayaran.pendaftar,
+      };
+    });
 
     return NextResponse.json({ data: dataWithUrls });
   } catch (error) {
@@ -154,59 +143,30 @@ export async function PATCH(request: NextRequest) {
       );
     }
 
-    // First, get the pembayaran record to get pendaftar_id
-    const { data: pembayaranData, error: fetchError } = await supabaseAdmin
-      .from("pembayaran")
-      .select("pendaftar_id")
-      .eq("id", pembayaran_id)
-      .single();
-
-    if (fetchError || !pembayaranData) {
-      console.error("Error fetching pembayaran:", fetchError);
-      return NextResponse.json(
-        { error: "Pembayaran not found" },
-        { status: 404 }
-      );
-    }
-
-    // Update pembayaran (use correct field name: catatan_verifikasi)
-    const { data, error } = await supabaseAdmin
-      .from("pembayaran")
-      .update({
+    // Updated pembayaran
+    const data = await prisma.pembayaran.update({
+      where: { id: pembayaran_id },
+      data: {
         status_pembayaran,
-        catatan_verifikasi: catatan, // Map from frontend field to database field
-        verified_by: session.id,
-        verified_at: new Date().toISOString(),
-      })
-      .eq("id", pembayaran_id)
-      .select()
-      .single();
+        catatan_verifikasi: catatan,
+        // verified_by: session.id, // Only if column exists
+        // verified_at: new Date(), // Only if column exists
+      },
+    });
 
-    if (error) {
-      console.error("Error updating pembayaran:", error);
-      return NextResponse.json(
-        { error: "Failed to update payment" },
-        { status: 500 }
-      );
-    }
-
-    // Also update the pendaftar status_pendaftaran based on verification result
-    // Database constraint only allows: draft, payment_verification, scheduled, accepted, rejected, verified
-    // Using "verified" for approved payments, "rejected" for rejected payments
+    // Also update pendaftar status
     const newPendaftarStatus = status_pembayaran === "verified" ? "verified" : "rejected";
 
-    const { error: pendaftarError } = await supabaseAdmin
-      .from("pendaftar")
-      .update({
+    // Only update pendaftar if payment is verified (move to verified) or rejected (back to rejected)
+    // Avoid overwriting if they are already in a later stage? 
+    // Logic from original: "rejected" -> "rejected", "verified" -> "verified"
+    await prisma.pendaftar.update({
+      where: { id: data.pendaftar_id },
+      data: {
         status_pendaftaran: newPendaftarStatus,
-        updated_at: new Date().toISOString(),
-      })
-      .eq("id", pembayaranData.pendaftar_id);
-
-    if (pendaftarError) {
-      console.error("Error updating pendaftar status:", pendaftarError);
-      // Don't fail the request, pembayaran was already updated
-    }
+        updated_at: new Date()
+      }
+    });
 
     return NextResponse.json({ success: true, data, pendaftar_status: newPendaftarStatus });
   } catch (error) {

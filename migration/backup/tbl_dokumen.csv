@@ -1,0 +1,4 @@
+id,pendaftar_id,jenis_dokumen,file_name,file_path,file_size,file_type,is_verified,verified_by,verified_at,catatan,created_at,updated_at
+86385bd8-4eb7-4007-9c58-fc1c3970e51c,81c06db2-7c49-41c9-8eef-48fd13fb1dba,foto_santri,ILI20269168_foto_santri.jpg,uploads/ILI20269168/ILI20269168_foto_santri.jpg,345038,image/jpeg,f,,,,2026-01-27 00:27:48.931342+00,2026-01-27 00:27:48.931342+00
+a5cf2c6f-82b3-45a0-ba88-08d21b0c4b51,eca877bc-4e03-47d7-8132-4d2b1d944bc7,kartu_keluarga,kartu_keluarga.pdf,uploads/kartu_keluarga.pdf,,,t,555a555a-dee0-4f11-8005-f202ca2fd1e9,2026-02-03 02:55:20.453+00,,2026-02-03 02:55:20.455+00,2026-02-03 02:55:20.455+00
+0742652a-3b37-436c-8721-aea9c9e5e1e4,eca877bc-4e03-47d7-8132-4d2b1d944bc7,akta_kelahiran,akta_kelahiran.pdf,uploads/akta_kelahiran.pdf,,,t,555a555a-dee0-4f11-8005-f202ca2fd1e9,2026-02-03 02:55:21.295+00,,2026-02-03 02:55:21.297+00,2026-02-03 02:55:21.297+00

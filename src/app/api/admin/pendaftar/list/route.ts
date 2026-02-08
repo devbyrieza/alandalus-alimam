@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { supabaseAdmin } from "@/lib/supabase/server";
+import { prisma } from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
 
 export async function GET(request: NextRequest) {
   try {
@@ -25,7 +26,6 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    // Use Admin Client to bypass RLS
     // Get query params
     const searchParams = request.nextUrl.searchParams;
     const page = parseInt(searchParams.get("page") || "1");
@@ -39,133 +39,101 @@ export async function GET(request: NextRequest) {
     const kecamatan = searchParams.get("kecamatan") || "";
     const kelurahan = searchParams.get("kelurahan") || "";
 
-    const offset = (page - 1) * limit;
+    const skip = (page - 1) * limit;
 
-    // Build query
-    let query = supabaseAdmin
-      .from("pendaftar")
-      .select(
-        `
-        id,
-        nomor_pendaftaran,
-        nik,
-        nama_lengkap,
-        jenis_kelamin,
-        jenjang,
-        tanggal_lahir,
-        no_hp,
-        email,
-        status_pendaftaran,
-        created_at,
-        tahun_ajaran:tahun_ajaran_id (
-          nama
-        ),
-        pembayaran (
-          status_pembayaran
-        ),
-        dokumen (
-          jenis_dokumen,
-          is_verified
-        ),
-        nilai_ujian (
-          nilai_total
-        )
-      `,
-        { count: "exact" }
-      );
+    // Build filter
+    const where: Prisma.PendaftarWhereInput = {};
 
-    // Apply filters
+    // Search filter
     if (search) {
-      query = query.or(
-        `nama_lengkap.ilike.%${search}%,nik.ilike.%${search}%,nomor_pendaftaran.ilike.%${search}%`
-      );
+      where.OR = [
+        { nama_lengkap: { contains: search, mode: "insensitive" } },
+        { nik: { contains: search, mode: "insensitive" } },
+        { nomor_pendaftaran: { contains: search, mode: "insensitive" } },
+      ];
     }
 
-    // Handle filter categories from dashboard
+    // Status filter
     if (status) {
-      // Map dashboard filter categories to actual status values
-      // NOTE: Database constraint only allows: draft, payment_verification, verified, rejected, scheduled, accepted
       const filterMapping: Record<string, string[]> = {
-        // Pembayaran
         belum_bayar: ["draft"],
         menunggu_verifikasi_pembayaran: ["payment_verification"],
         sudah_bayar: ["verified", "scheduled", "accepted"],
         pembayaran_ditolak: ["rejected"],
-        // Data Lengkap
-        belum_isi_data: ["verified"],  // payment approved but data not complete
-        sudah_isi_data: ["scheduled", "accepted"],  // data completed, moved to next stage
-        // Dokumen (using existing valid statuses)
+        belum_isi_data: ["verified"],
+        sudah_isi_data: ["scheduled", "accepted"],
         belum_upload_dokumen: ["verified"],
-        menunggu_verifikasi_dokumen: [],  // Not in current constraint
+        menunggu_verifikasi_dokumen: [],
         dokumen_terverifikasi: ["scheduled", "accepted"],
-        dokumen_ditolak: [],  // Not in current constraint
-        // Ujian
+        dokumen_ditolak: [],
         terjadwal_ujian: ["scheduled"],
         belum_ujian: ["scheduled"],
         sudah_ujian: ["accepted"],
         hasil_ujian: ["accepted"],
-        // Penerimaan
         diterima: ["accepted"],
         belum_daftar_ulang: ["accepted"],
-        sudah_daftar_ulang: [],  // Not in current constraint
+        sudah_daftar_ulang: [],
       };
 
       const statusValues = filterMapping[status];
       if (statusValues && statusValues.length > 0) {
-        // Use IN filter for multiple status values
-        query = query.in("status_pendaftaran", statusValues);
+        where.status_pendaftaran = { in: statusValues };
       } else {
-        // Single status value (legacy support)
-        query = query.eq("status_pendaftaran", status);
+        where.status_pendaftaran = status;
       }
     }
 
-    if (jenjang) {
-      query = query.eq("jenjang", jenjang);
-    }
+    // Other filters
+    if (jenjang) where.jenjang = jenjang;
+    if (tahunAjaran) where.tahun_ajaran_id = tahunAjaran;
+    if (provinsi) where.provinsi = provinsi;
+    if (kabupaten) where.kabupaten = kabupaten;
+    if (kecamatan) where.kecamatan = kecamatan;
+    if (kelurahan) where.kelurahan = kelurahan;
 
-    if (tahunAjaran) {
-      query = query.eq("tahun_ajaran_id", tahunAjaran);
-    }
-
-    if (provinsi) {
-      query = query.eq("provinsi", provinsi);
-    }
-
-    if (kabupaten) {
-      query = query.eq("kabupaten", kabupaten);
-    }
-
-    if (kecamatan) {
-      query = query.eq("kecamatan", kecamatan);
-    }
-
-    if (kelurahan) {
-      query = query.eq("kelurahan", kelurahan);
-    }
-
-    // Apply pagination and sorting
-    query = query
-      .order("created_at", { ascending: false })
-      .range(offset, offset + limit - 1);
-
-    const { data, error, count } = await query;
-
-    if (error) {
-      console.error("Error fetching pendaftar:", error);
-      return NextResponse.json(
-        { error: "Failed to fetch data" },
-        { status: 500 }
-      );
-    }
+    // Execute query with transaction for count and data
+    const [total, data] = await prisma.$transaction([
+      prisma.pendaftar.count({ where }),
+      prisma.pendaftar.findMany({
+        where,
+        select: {
+          id: true,
+          nomor_pendaftaran: true,
+          nik: true,
+          nama_lengkap: true,
+          jenis_kelamin: true,
+          jenjang: true,
+          tanggal_lahir: true,
+          no_hp: true,
+          email: true,
+          status_pendaftaran: true,
+          created_at: true,
+          tahun_ajaran: {
+            select: { nama: true }
+          },
+          pembayaran: {
+            select: { status_pembayaran: true }
+          },
+          dokumen: {
+            select: { jenis_dokumen: true, is_verified: true }
+          },
+          nilai_ujian: {
+            select: { nilai_total: true }
+          }
+        },
+        orderBy: { created_at: "desc" },
+        skip,
+        take: limit,
+      }),
+    ]);
 
     return NextResponse.json({
       data: data || [],
       pagination: {
         page,
         limit,
-        total: count || 0,
-        totalPages: Math.ceil((count || 0) / limit),
+        total,
+        totalPages: Math.ceil(total / limit),
       },
     });
   } catch (error) {

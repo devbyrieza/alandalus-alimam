@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { supabaseAdmin } from "@/lib/supabase/server";
+import { prisma } from "@/lib/prisma";
 import ExcelJS from 'exceljs';
+import { Prisma } from "@prisma/client";
 
 export async function GET(request: NextRequest) {
   try {
     // Validate session
     const cookieStore = await cookies();
-    // ... (rest of code logic remains but imports are moved)
-
     const sessionCookie = cookieStore.get("app_session");
 
     if (!sessionCookie) {
@@ -32,42 +31,40 @@ export async function GET(request: NextRequest) {
     const type = url.searchParams.get("type") || "all"; // all, lunas, pending
     const format = url.searchParams.get("format") || "csv";
 
-    // Fetch data
-    let query = supabaseAdmin
-      .from("pendaftar")
-      .select(`
-        id,
-        nomor_pendaftaran,
-        nama_lengkap,
-        nik,
-        jenis_kelamin,
-        jenjang,
-        no_hp,
-        email,
-        provinsi,
-        kabupaten,
-        status_pendaftaran,
-        created_at,
-        pembayaran (
-          id,
-          jumlah,
-          metode_pembayaran,
-          status_pembayaran,
-          created_at,
-          verified_at
-        )
-      `)
-      .order("created_at", { ascending: false });
-
-    const { data, error } = await query;
-
-    if (error) {
-      console.error("Error fetching data:", error);
-      return NextResponse.json({ error: "Failed to fetch data" }, { status: 500 });
-    }
+    // Fetch data using Prisma
+    const data = await prisma.pendaftar.findMany({
+      select: {
+        id: true,
+        nomor_pendaftaran: true,
+        nama_lengkap: true,
+        nik: true,
+        jenis_kelamin: true,
+        jenjang: true,
+        no_hp: true,
+        email: true,
+        provinsi: true,
+        kabupaten: true,
+        status_pendaftaran: true,
+        created_at: true,
+        pembayaran: {
+          select: {
+            id: true,
+            jumlah: true,
+            metode_pembayaran: true,
+            status_pembayaran: true,
+            created_at: true,
+            verified_at: true,
+          },
+          // Take the latest payment if multiple exists (though usually one related to registration)
+          orderBy: { created_at: "desc" },
+          take: 1,
+        }
+      },
+      orderBy: { created_at: "desc" },
+    });
 
     // Process data
-    const processedData = (data || []).map((p: any) => {
+    const processedData = data.map((p) => {
       const pembayaran = p.pembayaran?.[0];
       return {
         nomor_pendaftaran: p.nomor_pendaftaran,
@@ -81,7 +78,7 @@ export async function GET(request: NextRequest) {
         kabupaten: p.kabupaten || "",
         status_pendaftaran: p.status_pendaftaran,
         tanggal_daftar: new Date(p.created_at).toLocaleDateString("id-ID"),
-        jumlah_pembayaran: pembayaran?.jumlah || 0,
+        jumlah_pembayaran: pembayaran?.jumlah ? Number(pembayaran.jumlah) : 0,
         metode_pembayaran: pembayaran?.metode_pembayaran || "",
         status_pembayaran: pembayaran?.status_pembayaran || "belum_bayar",
         tanggal_pembayaran: pembayaran?.created_at
@@ -96,10 +93,13 @@ export async function GET(request: NextRequest) {
     // Filter by type
     let filteredData = processedData;
     if (type === "lunas") {
-      filteredData = processedData.filter((p: any) => p.status_pembayaran === "verified");
+      filteredData = processedData.filter((p) => p.status_pembayaran === "verified");
     } else if (type === "pending") {
       filteredData = processedData.filter(
-        (p: any) => p.status_pembayaran === "pending" || p.status_pembayaran === "belum_bayar"
+        (p) =>
+          p.status_pembayaran === "pending" ||
+          p.status_pembayaran === "belum_bayar" ||
+          p.status_pembayaran === "payment_verification"
       );
     }
 
@@ -139,7 +139,7 @@ export async function GET(request: NextRequest) {
 
       const filename = `pembayaran_ppdb_${type}_${new Date().toISOString().split("T")[0]}.xlsx`;
 
-      return new NextResponse(buffer, {
+      return new NextResponse(buffer as any, {
         status: 200,
         headers: {
           'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
@@ -168,7 +168,7 @@ export async function GET(request: NextRequest) {
       "Tanggal Verifikasi",
     ];
 
-    const rows = filteredData.map((item: any) => [
+    const rows = filteredData.map((item) => [
       item.nomor_pendaftaran,
       item.nama_lengkap,
       item.nik,
@@ -190,7 +190,7 @@ export async function GET(request: NextRequest) {
     // Create CSV content
     const csvContent = [
       headers.join(","),
-      ...rows.map((row: any[]) =>
+      ...rows.map((row) =>
         row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(",")
       ),
     ].join("\n");

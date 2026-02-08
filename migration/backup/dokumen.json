@@ -1,0 +1,47 @@
+[
+  {
+    "id": "86385bd8-4eb7-4007-9c58-fc1c3970e51c",
+    "pendaftar_id": "81c06db2-7c49-41c9-8eef-48fd13fb1dba",
+    "jenis_dokumen": "foto_santri",
+    "file_name": "ILI20269168_foto_santri.jpg",
+    "file_path": "uploads/ILI20269168/ILI20269168_foto_santri.jpg",
+    "file_size": 345038,
+    "file_type": "image/jpeg",
+    "is_verified": false,
+    "verified_by": null,
+    "verified_at": null,
+    "catatan": null,
+    "created_at": "2026-01-27T00:27:48.931Z",
+    "updated_at": "2026-01-27T00:27:48.931Z"
+  },
+  {
+    "id": "a5cf2c6f-82b3-45a0-ba88-08d21b0c4b51",
+    "pendaftar_id": "eca877bc-4e03-47d7-8132-4d2b1d944bc7",
+    "jenis_dokumen": "kartu_keluarga",
+    "file_name": "kartu_keluarga.pdf",
+    "file_path": "uploads/kartu_keluarga.pdf",
+    "file_size": null,
+    "file_type": null,
+    "is_verified": true,
+    "verified_by": "555a555a-dee0-4f11-8005-f202ca2fd1e9",
+    "verified_at": "2026-02-03T02:55:20.453Z",
+    "catatan": null,
+    "created_at": "2026-02-03T02:55:20.455Z",
+    "updated_at": "2026-02-03T02:55:20.455Z"
+  },
+  {
+    "id": "0742652a-3b37-436c-8721-aea9c9e5e1e4",
+    "pendaftar_id": "eca877bc-4e03-47d7-8132-4d2b1d944bc7",
+    "jenis_dokumen": "akta_kelahiran",
+    "file_name": "akta_kelahiran.pdf",
+    "file_path": "uploads/akta_kelahiran.pdf",
+    "file_size": null,
+    "file_type": null,
+    "is_verified": true,
+    "verified_by": "555a555a-dee0-4f11-8005-f202ca2fd1e9",
+    "verified_at": "2026-02-03T02:55:21.295Z",
+    "catatan": null,
+    "created_at": "2026-02-03T02:55:21.297Z",
+    "updated_at": "2026-02-03T02:55:21.297Z"
+  }
+]

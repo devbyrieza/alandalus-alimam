@@ -1,0 +1,200 @@
+[
+  {
+    "id": "adbbaa9f-729c-47c5-9ef8-014953430496",
+    "role": "pendaftar",
+    "full_name": "",
+    "email": null,
+    "phone": "",
+    "created_at": "2026-01-13T07:14:34.419Z",
+    "updated_at": "2026-01-13T07:14:34.419Z"
+  },
+  {
+    "id": "07e7e9e1-5ff1-48fe-ad89-0ed26b9fe33f",
+    "role": "pendaftar",
+    "full_name": "",
+    "email": null,
+    "phone": "",
+    "created_at": "2026-01-18T10:21:58.085Z",
+    "updated_at": "2026-01-18T10:21:58.085Z"
+  },
+  {
+    "id": "1c4a9465-6438-4344-867b-148b367e388c",
+    "role": "admin",
+    "full_name": "Admin PPDB",
+    "email": null,
+    "phone": "085876137361",
+    "created_at": "2026-01-24T03:10:17.496Z",
+    "updated_at": "2026-01-24T03:15:15.258Z"
+  },
+  {
+    "id": "7b03e8c3-04dd-4877-aa15-af63a0f2820e",
+    "role": "penguji",
+    "full_name": "Ustadz Ahmad Hidayat",
+    "email": null,
+    "phone": "081234567890",
+    "created_at": "2026-01-24T03:10:52.475Z",
+    "updated_at": "2026-01-24T03:15:15.258Z"
+  },
+  {
+    "id": "1ea2c5a1-27bc-4b07-8c2d-3293d9793017",
+    "role": "penguji",
+    "full_name": "Ustadzah Fatimah Zahra",
+    "email": null,
+    "phone": "081234567891",
+    "created_at": "2026-01-24T03:11:18.264Z",
+    "updated_at": "2026-01-24T03:15:15.258Z"
+  },
+  {
+    "id": "acda3f43-c50b-456d-baa9-5e9fcbbc5a84",
+    "role": "pendaftar",
+    "full_name": "",
+    "email": null,
+    "phone": "",
+    "created_at": "2026-02-01T09:14:00.922Z",
+    "updated_at": "2026-02-01T09:14:00.922Z"
+  },
+  {
+    "id": "4b674467-18c7-43ce-872d-182fb0364478",
+    "role": "admin",
+    "full_name": "Admin Test",
+    "email": null,
+    "phone": "6281234567890",
+    "created_at": "2026-02-01T09:14:39.487Z",
+    "updated_at": "2026-02-01T09:14:39.720Z"
+  },
+  {
+    "id": "555a555a-dee0-4f11-8005-f202ca2fd1e9",
+    "role": "admin",
+    "full_name": "Super Admin",
+    "email": null,
+    "phone": "081234567890",
+    "created_at": "2026-02-03T02:41:29.220Z",
+    "updated_at": "2026-02-03T02:55:14.509Z"
+  },
+  {
+    "id": "a0bd413e-db52-4b2c-bbc4-68efb8775fad",
+    "role": "pendaftar",
+    "full_name": "Ahmad Draft",
+    "email": null,
+    "phone": "081234567891",
+    "created_at": "2026-02-03T02:41:30.016Z",
+    "updated_at": "2026-02-03T02:55:15.056Z"
+  },
+  {
+    "id": "7e475bf2-9faf-4d2d-ae73-c9748e22ee40",
+    "role": "pendaftar",
+    "full_name": "Budi Pending",
+    "email": null,
+    "phone": "081234567892",
+    "created_at": "2026-02-03T02:41:30.861Z",
+    "updated_at": "2026-02-03T02:55:15.607Z"
+  },
+  {
+    "id": "254f4ca1-d702-4027-b981-daf20547bf89",
+    "role": "pendaftar",
+    "full_name": "Citra Verified",
+    "email": null,
+    "phone": "081234567893",
+    "created_at": "2026-02-03T02:41:31.649Z",
+    "updated_at": "2026-02-03T02:55:16.139Z"
+  },
+  {
+    "id": "61365a3a-9bd7-4ba0-b5b6-ce37fe0c2e27",
+    "role": "pendaftar",
+    "full_name": "Dewi Completed",
+    "email": null,
+    "phone": "081234567894",
+    "created_at": "2026-02-03T02:41:32.529Z",
+    "updated_at": "2026-02-03T02:55:16.673Z"
+  },
+  {
+    "id": "63e227c1-72f2-4227-a70e-250ea4ac70dc",
+    "role": "pendaftar",
+    "full_name": "Randi Terano",
+    "email": null,
+    "phone": "",
+    "created_at": "2026-02-04T08:17:04.527Z",
+    "updated_at": "2026-02-04T08:17:04.527Z"
+  },
+  {
+    "id": "6f08422b-43b7-4391-89f9-25a34592286c",
+    "role": "pendaftar",
+    "full_name": "Joni Test",
+    "email": null,
+    "phone": "",
+    "created_at": "2026-02-04T08:23:29.877Z",
+    "updated_at": "2026-02-04T08:23:29.877Z"
+  },
+  {
+    "id": "94dd4993-2d80-4c27-9d41-ff9c0234ae69",
+    "role": "pendaftar",
+    "full_name": "Joko Test",
+    "email": null,
+    "phone": "",
+    "created_at": "2026-02-04T08:26:06.682Z",
+    "updated_at": "2026-02-04T08:26:06.682Z"
+  },
+  {
+    "id": "81e38bb3-1fe7-4b7f-9f00-b978c918e905",
+    "role": "pendaftar",
+    "full_name": "Ilham Test",
+    "email": null,
+    "phone": "",
+    "created_at": "2026-02-04T08:28:08.456Z",
+    "updated_at": "2026-02-04T08:28:08.456Z"
+  },
+  {
+    "id": "132dc2e2-ada3-4c5f-813d-216bd7c0a86a",
+    "role": "pendaftar",
+    "full_name": "Zahwa Test Santri",
+    "email": null,
+    "phone": "",
+    "created_at": "2026-02-04T08:34:01.207Z",
+    "updated_at": "2026-02-04T08:34:01.207Z"
+  },
+  {
+    "id": "a091171a-a4f0-4270-93f8-98ad2666fa48",
+    "role": "pendaftar",
+    "full_name": "Daud Test Santri",
+    "email": null,
+    "phone": "",
+    "created_at": "2026-02-04T14:07:41.533Z",
+    "updated_at": "2026-02-04T14:07:41.533Z"
+  },
+  {
+    "id": "a16a27b6-4722-4c42-b4fe-1aa1c5cee568",
+    "role": "pendaftar",
+    "full_name": "wahab rajasam",
+    "email": null,
+    "phone": "",
+    "created_at": "2026-02-05T01:51:51.197Z",
+    "updated_at": "2026-02-05T01:51:51.197Z"
+  },
+  {
+    "id": "e3de74fb-b5c1-4f46-b17a-8cf9291d7673",
+    "role": "penguji",
+    "full_name": "Penguji Tes",
+    "email": "penguji@tes.com",
+    "phone": "-",
+    "created_at": "2026-02-05T02:33:37.459Z",
+    "updated_at": "2026-02-05T02:33:37.676Z"
+  },
+  {
+    "id": "a68b20df-133a-4a04-97f9-5f9f22e1e433",
+    "role": "admin_keuangan",
+    "full_name": "Staff Keuangan Tes",
+    "email": "keuangan@tes.com",
+    "phone": "-",
+    "created_at": "2026-02-05T02:34:33.365Z",
+    "updated_at": "2026-02-05T02:34:33.540Z"
+  },
+  {
+    "id": "439a12e7-d619-48d3-ad30-f059698afb80",
+    "role": "admin_berkas",
+    "full_name": "Staff Berkas",
+    "email": "berkas@tes.com",
+    "phone": "-",
+    "created_at": "2026-02-05T02:35:06.639Z",
+    "updated_at": "2026-02-05T02:35:06.895Z"
+  }
+]

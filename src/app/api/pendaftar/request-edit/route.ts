@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
-import { prisma } from "@/lib/prisma"; // Adjust path if necessary
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
+import { cookies } from "next/headers";
+import { prisma } from "@/lib/prisma";
 
 export async function GET(request: Request) {
     try {
@@ -18,8 +14,21 @@ export async function GET(request: Request) {
             );
         }
 
+        // 1. Validasi session manual
+        const cookieStore = await cookies();
+        const sessionCookie = cookieStore.get("app_session");
+
+        if (!sessionCookie) {
+            return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
+        }
+
+        const session = JSON.parse(sessionCookie.value);
+        if (session.role === "pendaftar" && session.id !== pendaftar_id) {
+            return NextResponse.json({ success: false, error: "Forbidden" }, { status: 403 });
+        }
+
         // Get the latest ACTIVE request (not completed or rejected)
-        const latestRequest = await (prisma as any).dataPerubahanRequest.findFirst({
+        const latestRequest = await prisma.dataPerubahanRequest.findFirst({
             where: {
                 pendaftar_id: pendaftar_id,
                 status: {
@@ -54,8 +63,21 @@ export async function POST(request: Request) {
             );
         }
 
+        // 1. Validasi session manual
+        const cookieStore = await cookies();
+        const sessionCookie = cookieStore.get("app_session");
+
+        if (!sessionCookie) {
+            return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
+        }
+
+        const session = JSON.parse(sessionCookie.value);
+        if (session.role === "pendaftar" && session.id !== pendaftar_id) {
+            return NextResponse.json({ success: false, error: "Forbidden" }, { status: 403 });
+        }
+
         // Check if there is already an active request
-        const existingRequest = await (prisma as any).dataPerubahanRequest.findFirst({
+        const existingRequest = await prisma.dataPerubahanRequest.findFirst({
             where: {
                 pendaftar_id: pendaftar_id,
                 status: {
@@ -72,7 +94,7 @@ export async function POST(request: Request) {
         }
 
         // Create new request
-        const newRequest = await (prisma as any).dataPerubahanRequest.create({
+        const newRequest = await prisma.dataPerubahanRequest.create({
             data: {
                 pendaftar_id,
                 reason,

@@ -1,0 +1,291 @@
+[
+  {
+    "id": "adbbaa9f-729c-47c5-9ef8-014953430496",
+    "email": "1601078302300002@pendaftar.local",
+    "phone": null,
+    "created_at": "2026-01-13T07:14:34.420Z",
+    "updated_at": "2026-01-19T12:39:21.194Z",
+    "raw_user_meta_data": {
+      "no_hp": "085886750096",
+      "nama_lengkap": "Ahmad Test Santri",
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-01-13T07:14:34.475Z"
+  },
+  {
+    "id": "07e7e9e1-5ff1-48fe-ad89-0ed26b9fe33f",
+    "email": "1608037391900001@pendaftar.local",
+    "phone": null,
+    "created_at": "2026-01-18T10:21:58.087Z",
+    "updated_at": "2026-01-18T10:21:58.128Z",
+    "raw_user_meta_data": {
+      "no_hp": "081374990091",
+      "nama_lengkap": "Aulia Test Santriwati",
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-01-18T10:21:58.126Z"
+  },
+  {
+    "id": "1c4a9465-6438-4344-867b-148b367e388c",
+    "email": "admin@alimam.sch.id",
+    "phone": null,
+    "created_at": "2026-01-24T03:10:17.497Z",
+    "updated_at": "2026-02-05T02:30:01.900Z",
+    "raw_user_meta_data": {
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-01-24T03:10:17.543Z"
+  },
+  {
+    "id": "7b03e8c3-04dd-4877-aa15-af63a0f2820e",
+    "email": "ustadz.ahmad@alimam.sch.id",
+    "phone": null,
+    "created_at": "2026-01-24T03:10:52.475Z",
+    "updated_at": "2026-01-31T04:28:47.959Z",
+    "raw_user_meta_data": {
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-01-24T03:10:52.485Z"
+  },
+  {
+    "id": "1ea2c5a1-27bc-4b07-8c2d-3293d9793017",
+    "email": "ustadzah.fatimah@alimam.sch.id",
+    "phone": null,
+    "created_at": "2026-01-24T03:11:18.265Z",
+    "updated_at": "2026-01-24T03:11:18.271Z",
+    "raw_user_meta_data": {
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-01-24T03:11:18.270Z"
+  },
+  {
+    "id": "acda3f43-c50b-456d-baa9-5e9fcbbc5a84",
+    "email": "admin_dev@alimam.sch.id",
+    "phone": null,
+    "created_at": "2026-02-01T09:14:00.922Z",
+    "updated_at": "2026-02-01T09:14:01.006Z",
+    "raw_user_meta_data": {
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-02-01T09:14:01.005Z"
+  },
+  {
+    "id": "4b674467-18c7-43ce-872d-182fb0364478",
+    "email": "admin_test@alimam.sch.id",
+    "phone": null,
+    "created_at": "2026-02-01T09:14:39.488Z",
+    "updated_at": "2026-02-01T09:14:39.495Z",
+    "raw_user_meta_data": {
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-02-01T09:14:39.494Z"
+  },
+  {
+    "id": "555a555a-dee0-4f11-8005-f202ca2fd1e9",
+    "email": "admin@alimam.com",
+    "phone": null,
+    "created_at": "2026-02-03T02:41:29.221Z",
+    "updated_at": "2026-02-03T02:41:29.250Z",
+    "raw_user_meta_data": {
+      "full_name": "Super Admin",
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-02-03T02:41:29.248Z"
+  },
+  {
+    "id": "a0bd413e-db52-4b2c-bbc4-68efb8775fad",
+    "email": "user.draft@example.com",
+    "phone": null,
+    "created_at": "2026-02-03T02:41:30.017Z",
+    "updated_at": "2026-02-03T02:41:30.020Z",
+    "raw_user_meta_data": {
+      "full_name": "Ahmad Draft",
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-02-03T02:41:30.020Z"
+  },
+  {
+    "id": "7e475bf2-9faf-4d2d-ae73-c9748e22ee40",
+    "email": "user.pending@example.com",
+    "phone": null,
+    "created_at": "2026-02-03T02:41:30.862Z",
+    "updated_at": "2026-02-03T02:41:30.870Z",
+    "raw_user_meta_data": {
+      "full_name": "Budi Pending",
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-02-03T02:41:30.868Z"
+  },
+  {
+    "id": "254f4ca1-d702-4027-b981-daf20547bf89",
+    "email": "user.verified@example.com",
+    "phone": null,
+    "created_at": "2026-02-03T02:41:31.649Z",
+    "updated_at": "2026-02-03T02:41:31.654Z",
+    "raw_user_meta_data": {
+      "full_name": "Citra Verified",
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-02-03T02:41:31.653Z"
+  },
+  {
+    "id": "61365a3a-9bd7-4ba0-b5b6-ce37fe0c2e27",
+    "email": "user.completed@example.com",
+    "phone": null,
+    "created_at": "2026-02-03T02:41:32.529Z",
+    "updated_at": "2026-02-03T02:41:32.534Z",
+    "raw_user_meta_data": {
+      "full_name": "Dewi Completed",
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-02-03T02:41:32.533Z"
+  },
+  {
+    "id": "63e227c1-72f2-4227-a70e-250ea4ac70dc",
+    "email": null,
+    "phone": "62858765498303",
+    "created_at": "2026-02-04T08:17:04.529Z",
+    "updated_at": "2026-02-04T08:17:04.582Z",
+    "raw_user_meta_data": {
+      "full_name": "Randi Terano",
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-02-04T08:17:04.575Z"
+  },
+  {
+    "id": "6f08422b-43b7-4391-89f9-25a34592286c",
+    "email": null,
+    "phone": "62858765498686",
+    "created_at": "2026-02-04T08:23:29.878Z",
+    "updated_at": "2026-02-04T08:23:29.935Z",
+    "raw_user_meta_data": {
+      "full_name": "Joni Test",
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-02-04T08:23:29.930Z"
+  },
+  {
+    "id": "94dd4993-2d80-4c27-9d41-ff9c0234ae69",
+    "email": null,
+    "phone": "62858765498687",
+    "created_at": "2026-02-04T08:26:06.682Z",
+    "updated_at": "2026-02-04T08:26:06.693Z",
+    "raw_user_meta_data": {
+      "full_name": "Joko Test",
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-02-04T08:26:06.689Z"
+  },
+  {
+    "id": "81e38bb3-1fe7-4b7f-9f00-b978c918e905",
+    "email": null,
+    "phone": "6285876549860",
+    "created_at": "2026-02-04T08:28:08.456Z",
+    "updated_at": "2026-02-04T08:28:08.464Z",
+    "raw_user_meta_data": {
+      "full_name": "Ilham Test",
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-02-04T08:28:08.462Z"
+  },
+  {
+    "id": "132dc2e2-ada3-4c5f-813d-216bd7c0a86a",
+    "email": null,
+    "phone": "6285876543897",
+    "created_at": "2026-02-04T08:34:01.207Z",
+    "updated_at": "2026-02-04T08:34:01.218Z",
+    "raw_user_meta_data": {
+      "full_name": "Zahwa Test Santri",
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-02-04T08:34:01.214Z"
+  },
+  {
+    "id": "a091171a-a4f0-4270-93f8-98ad2666fa48",
+    "email": null,
+    "phone": "6281276548890",
+    "created_at": "2026-02-04T14:07:41.535Z",
+    "updated_at": "2026-02-04T14:07:41.608Z",
+    "raw_user_meta_data": {
+      "full_name": "Daud Test Santri",
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-02-04T14:07:41.599Z"
+  },
+  {
+    "id": "a16a27b6-4722-4c42-b4fe-1aa1c5cee568",
+    "email": null,
+    "phone": "6281326611671",
+    "created_at": "2026-02-05T01:51:51.209Z",
+    "updated_at": "2026-02-05T01:51:51.267Z",
+    "raw_user_meta_data": {
+      "full_name": "wahab rajasam",
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-02-05T01:51:51.262Z"
+  },
+  {
+    "id": "e3de74fb-b5c1-4f46-b17a-8cf9291d7673",
+    "email": "penguji@tes.com",
+    "phone": null,
+    "created_at": "2026-02-05T02:33:37.465Z",
+    "updated_at": "2026-02-05T03:58:31.238Z",
+    "raw_user_meta_data": {
+      "role": "penguji",
+      "full_name": "Penguji Tes",
+      "nama_lengkap": "Penguji Tes",
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-02-05T02:33:37.492Z"
+  },
+  {
+    "id": "a68b20df-133a-4a04-97f9-5f9f22e1e433",
+    "email": "keuangan@tes.com",
+    "phone": null,
+    "created_at": "2026-02-05T02:34:33.365Z",
+    "updated_at": "2026-02-06T03:49:22.589Z",
+    "raw_user_meta_data": {
+      "role": "admin_keuangan",
+      "full_name": "Staff Keuangan Tes",
+      "nama_lengkap": "Staff Keuangan Tes",
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-02-05T02:34:33.368Z"
+  },
+  {
+    "id": "439a12e7-d619-48d3-ad30-f059698afb80",
+    "email": "berkas@tes.com",
+    "phone": null,
+    "created_at": "2026-02-05T02:35:06.639Z",
+    "updated_at": "2026-02-05T03:53:35.837Z",
+    "raw_user_meta_data": {
+      "role": "admin_berkas",
+      "full_name": "Staff Berkas",
+      "nama_lengkap": "Staff Berkas",
+      "email_verified": true
+    },
+    "role": "authenticated",
+    "email_confirmed_at": "2026-02-05T02:35:06.646Z"
+  }
+]

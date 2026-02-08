@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { supabaseAdmin } from "@/lib/supabase/server";
+import { prisma } from "@/lib/prisma";
 
 // GET: Generate signed URL untuk preview dokumen
 export async function GET(request: NextRequest) {
@@ -38,41 +38,36 @@ export async function GET(request: NextRequest) {
     }
 
     // 3. Cari dokumen di database
-    const { data: dokumen, error: dokumenError } = await supabaseAdmin
-      .from("dokumen")
-      .select("file_path, file_type")
-      .eq("pendaftar_id", session.id)
-      .eq("jenis_dokumen", jenisDokumen)
-      .single();
+    const dokumen = await prisma.dokumen.findFirst({
+      where: {
+        pendaftar_id: session.id,
+        jenis_dokumen: jenisDokumen
+      },
+      select: {
+        file_path: true,
+        file_type: true
+      }
+    });
 
-    if (dokumenError || !dokumen) {
+    if (!dokumen) {
       return NextResponse.json(
         { success: false, error: "Dokumen tidak ditemukan" },
         { status: 404 }
       );
     }
 
-    // 4. Generate signed URL (berlaku 1 jam)
-    const { data: signedUrlData, error: signedUrlError } = await supabaseAdmin
-      .storage
-      .from("dokumen-pendaftaran")
-      .createSignedUrl(dokumen.file_path, 3600); // 1 jam
-
-    if (signedUrlError || !signedUrlData) {
-      console.error("Signed URL error:", signedUrlError);
-      return NextResponse.json(
-        { success: false, error: "Gagal membuat link preview" },
-        { status: 500 }
-      );
-    }
+    // 4. Generate URL pointing to our local file serving API
+    // file_path stored in DB is relative: "dokumen-pendaftaran/USER_ID/filename.pdf"
+    // Our API route: /api/files/dokumen-pendaftaran/USER_ID/filename.pdf
+    const fileUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/files/${dokumen.file_path}`;
 
     // 5. Return URL
     return NextResponse.json({
       success: true,
       data: {
-        url: signedUrlData.signedUrl,
+        url: fileUrl,
         file_type: dokumen.file_type,
-        expires_in: 3600, // detik
+        expires_in: 3600, // Not actually expiring, but for compatibility
       },
     });
   } catch (error: any) {

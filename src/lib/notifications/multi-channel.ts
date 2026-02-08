@@ -1,8 +1,8 @@
 // File: /src/lib/notifications/multi-channel.ts
-// Multi-channel OTP delivery system
+// Multi-channel OTP delivery system via Wablas
 
-import { sendWhatsAppOTP } from "./whatsapp"; // Twilio WhatsApp
-import { sendSMSOTP } from "./sms"; // Twilio SMS
+import { sendWhatsAppOTP } from "./whatsapp";
+import { sendSMSOTP } from "./sms";
 
 // Type definitions
 export type OTPChannel = "whatsapp" | "sms";
@@ -15,7 +15,6 @@ export interface SendOTPRequest {
   data?: {
     phone?: string;
     email?: string;
-    telegram_username?: string;
   };
 }
 
@@ -26,28 +25,52 @@ export interface SendOTPResponse {
   messageId?: string;
   retryChannels?: OTPChannel[];
 }
-// UPDATE: Change fallback order - WhatsApp first, then SMS
-const fallbackOrder: OTPChannel[] = ["whatsapp", "sms"];
 
-// UPDATE sendOTP function:
 export async function sendOTP(
   request: SendOTPRequest,
 ): Promise<SendOTPResponse> {
-  const { channel, identifier, otp, nama, data } = request;
+  const { channel, identifier, otp, nama } = request;
 
-  // WhatsApp: Hanya untuk SMS fallback saja dalam sistem ini
-  // Karena WhatsApp manual via Admin menggunakan WhatsApp Business App
+  // WhatsApp: Otomatis via Wablas API
   if (channel === "whatsapp") {
-    // Jangan kirim via Twilio, karena WhatsApp di mode manual
+    try {
+      const result = await sendWhatsAppOTP(identifier, otp, nama);
+
+      if (result.success) {
+        return {
+          success: true,
+          message: "OTP berhasil dikirim via WhatsApp",
+          channel: "whatsapp",
+          messageId: result.messageId,
+        };
+      }
+    } catch (error) {
+      console.error("❌ WhatsApp failed:", error);
+    }
+
+    // Fallback ke SMS jika WhatsApp gagal
+    try {
+      const smsResult = await sendSMSOTP(identifier, otp, nama);
+      if (smsResult.success) {
+        return {
+          success: true,
+          message: "WhatsApp gagal, OTP dikirim via SMS sebagai fallback",
+          channel: "sms",
+          messageId: smsResult.messageId,
+        };
+      }
+    } catch (error) {
+      console.error("❌ SMS fallback also failed:", error);
+    }
+
     return {
-      success: true,
-      message: `OTP siap untuk dikirim manual admin via WhatsApp Business`,
+      success: false,
+      message: "Gagal mengirim OTP via WhatsApp dan SMS",
       channel: "whatsapp",
-      messageId: `manual_${Date.now()}`,
     };
   }
 
-  // Priority: SMS via Twilio Trial
+  // SMS channel (juga via Wablas WhatsApp)
   if (channel === "sms") {
     try {
       const result = await sendSMSOTP(identifier, otp, nama);
@@ -55,7 +78,7 @@ export async function sendOTP(
       if (result.success) {
         return {
           success: true,
-          message: `OTP berhasil dikirim via SMS`,
+          message: "OTP berhasil dikirim",
           channel: "sms",
           messageId: result.messageId,
         };
@@ -66,7 +89,7 @@ export async function sendOTP(
 
     return {
       success: false,
-      message: "Gagal mengirim OTP via SMS",
+      message: "Gagal mengirim OTP",
       channel: "sms",
     };
   }
@@ -78,7 +101,6 @@ export async function sendOTP(
   };
 }
 
-// UPDATE: Remove telegram/email validation
 export function validateIdentifier(
   channel: OTPChannel,
   identifier: string,
@@ -86,7 +108,6 @@ export function validateIdentifier(
   switch (channel) {
     case "whatsapp":
     case "sms":
-      // Indonesian phone number validation
       const phoneRegex = /^(08|628|\+628)\d{8,12}$/;
       return phoneRegex.test(identifier.replace(/[\s\-\(\)]/g, ""));
     default:

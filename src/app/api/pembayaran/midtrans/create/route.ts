@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { supabaseAdmin } from "@/lib/supabase/server";
-import crypto from "crypto";
+import { prisma } from "@/lib/prisma";
 
 /**
  * POST /api/pembayaran/midtrans/create
@@ -50,27 +49,14 @@ export async function POST(request: NextRequest) {
     }
 
     // 3. Ambil data pendaftar
-    const { data: pendaftar, error: pendaftarError } = await supabaseAdmin
-      .from("pendaftar")
-      .select(`
-        id,
-        nomor_pendaftaran,
-        nama_lengkap,
-        email,
-        no_hp,
-        tahun_ajaran_id,
-        status_pendaftaran,
-        tahun_ajaran:tahun_ajaran_id (
-          id,
-          nama,
-          biaya_pendaftaran,
-          tanggal_tutup_pendaftaran
-        )
-      `)
-      .eq("id", session.id)
-      .single();
+    const pendaftar = await prisma.pendaftar.findUnique({
+      where: { id: session.id },
+      include: {
+        tahun_ajaran: true,
+      },
+    });
 
-    if (pendaftarError || !pendaftar) {
+    if (!pendaftar) {
       return NextResponse.json(
         { success: false, error: "Data pendaftar tidak ditemukan" },
         { status: 404 }
@@ -78,28 +64,19 @@ export async function POST(request: NextRequest) {
     }
 
     // 4. Cek deadline
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const tahunAjaranData = pendaftar.tahun_ajaran as any;
-    const tahunAjaran = {
-      id: tahunAjaranData?.id || "",
-      nama: tahunAjaranData?.nama || "",
-      biaya_pendaftaran: Number(tahunAjaranData?.biaya_pendaftaran || 0),
-      tanggal_tutup_pendaftaran: tahunAjaranData?.tanggal_tutup_pendaftaran || "",
-    };
-
-    // NOTE: Jangan blokir pembuatan transaksi berdasarkan deadline pendaftaran.
+    const tahunAjaran = pendaftar.tahun_ajaran;
     const now = new Date();
     // Gunakan tanggal tutup pendaftaran sebagai deadline, atau default 7 hari jika tidak ada
     const deadlineStr = tahunAjaran.tanggal_tutup_pendaftaran;
     const deadline = deadlineStr ? new Date(deadlineStr) : new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
 
     // 5. Cek apakah sudah ada pembayaran yang verified
-    const { data: existingPayment } = await supabaseAdmin
-      .from("pembayaran")
-      .select("id, status_pembayaran")
-      .eq("pendaftar_id", session.pendaftar_id)
-      .eq("status_pembayaran", "verified")
-      .maybeSingle();
+    const existingPayment = await prisma.pembayaran.findFirst({
+      where: {
+        pendaftar_id: session.id,
+        status_pembayaran: "verified",
+      }
+    });
 
     if (existingPayment) {
       return NextResponse.json(
@@ -170,28 +147,18 @@ export async function POST(request: NextRequest) {
     }
 
     // 9. Simpan record pembayaran dengan status pending
-    const { data: insertedPayment, error: insertError } = await supabaseAdmin
-      .from("pembayaran")
-      .insert({
-        pendaftar_id: session.pendaftar_id,
+    const insertedPayment = await prisma.pembayaran.create({
+      data: {
+        pendaftar_id: session.id,
         tahun_ajaran_id: pendaftar.tahun_ajaran_id,
         metode_pembayaran: "midtrans",
         jumlah: grossAmount,
         midtrans_order_id: orderId,
         midtrans_response_json: midtransData,
         status_pembayaran: "pending",
-        expired_at: new Date(now.getTime() + transactionData.expiry.duration * 24 * 60 * 60 * 1000).toISOString(),
-      })
-      .select("id")
-      .single();
-
-    if (insertError) {
-      console.error("Insert pembayaran error:", insertError);
-      return NextResponse.json(
-        { success: false, error: "Gagal menyimpan data pembayaran" },
-        { status: 500 }
-      );
-    }
+        expired_at: new Date(now.getTime() + transactionData.expiry.duration * 24 * 60 * 60 * 1000),
+      },
+    });
 
     // 10. Return snap token
     return NextResponse.json({

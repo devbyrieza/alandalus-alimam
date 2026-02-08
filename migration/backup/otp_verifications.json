@@ -1,0 +1,98 @@
+[
+  {
+    "id": "164ceda2-38f1-4ee9-bea7-dae2cc4385c8",
+    "phone": "+6281274655536",
+    "otp_hash": "563f82f1d80e04dfb2f7759ac18ada0f026865000e00213fef03c971733abb7f",
+    "expires_at": "2026-02-04T07:56:04.089Z",
+    "attempts": 0,
+    "verified_at": null,
+    "registration_data": "{\"nik\":\"1609209273600033\",\"nama_lengkap\":\"Randi Tedi\",\"tanggal_lahir\":\"2010-05-10\",\"no_hp\":\"+6281274655536\",\"jenis_kelamin\":\"L\",\"jenjang\":\"IL\"}",
+    "created_at": "2026-02-04T07:51:04.092Z",
+    "otp_channel": "whatsapp",
+    "otp_identifier": null
+  },
+  {
+    "id": "8ecc4f94-44fc-45bc-a5a1-481c84900bff",
+    "phone": "+6281274655536",
+    "otp_hash": "205802f3e92dde8b5c33b63eb98706975a47b0d7de131fc7cb7d1d926805efab",
+    "expires_at": "2026-02-04T08:00:48.069Z",
+    "attempts": 0,
+    "verified_at": null,
+    "registration_data": "{\"nik\":\"1609209273600033\",\"nama_lengkap\":\"Randi Tedi\",\"tanggal_lahir\":\"2010-05-10\",\"no_hp\":\"+6281274655536\",\"jenis_kelamin\":\"L\",\"jenjang\":\"IL\"}",
+    "created_at": "2026-02-04T07:55:48.073Z",
+    "otp_channel": "whatsapp",
+    "otp_identifier": null
+  },
+  {
+    "id": "5bcef26e-cc2c-4c3d-a7f4-3a4dabb16055",
+    "phone": "+6281274655536",
+    "otp_hash": "cc88d8061166f5e4ee9c03655277a1dd787c3e77dfc0d8d555d65d86fde31c14",
+    "expires_at": "2026-02-04T08:03:40.321Z",
+    "attempts": 0,
+    "verified_at": null,
+    "registration_data": "{\"nik\":\"1609209273600033\",\"nama_lengkap\":\"Randi Tedi\",\"tanggal_lahir\":\"2010-05-10\",\"no_hp\":\"+6281274655536\",\"jenis_kelamin\":\"L\",\"jenjang\":\"IL\"}",
+    "created_at": "2026-02-04T07:58:40.325Z",
+    "otp_channel": "whatsapp",
+    "otp_identifier": null
+  },
+  {
+    "id": "5f69fcc7-750d-4123-acd6-f6c2db76ea58",
+    "phone": "+6281274655536",
+    "otp_hash": "6775a675500d131a1982d24c60fe5c8d272d29de98b940e3eb5e00dea85e9670",
+    "expires_at": "2026-02-04T08:05:30.883Z",
+    "attempts": 0,
+    "verified_at": null,
+    "registration_data": "{\"nik\":\"1609209273600033\",\"nama_lengkap\":\"Randi Tedi\",\"tanggal_lahir\":\"2010-05-10\",\"no_hp\":\"+6281274655536\",\"jenis_kelamin\":\"L\",\"jenjang\":\"IL\"}",
+    "created_at": "2026-02-04T08:00:30.884Z",
+    "otp_channel": "whatsapp",
+    "otp_identifier": null
+  },
+  {
+    "id": "df65b547-4434-4380-8222-c5b9abac874c",
+    "phone": "+6281274655536",
+    "otp_hash": "54aba9cce5085bf02d48ca5bfdae615a852999ae310f6d3423d41b72e0f02af5",
+    "expires_at": "2026-02-04T08:07:29.880Z",
+    "attempts": 0,
+    "verified_at": null,
+    "registration_data": "{\"nik\":\"1609209273600033\",\"nama_lengkap\":\"Randi Tedi\",\"tanggal_lahir\":\"2010-05-10\",\"no_hp\":\"+6281274655536\",\"jenis_kelamin\":\"L\",\"jenjang\":\"IL\"}",
+    "created_at": "2026-02-04T08:02:29.880Z",
+    "otp_channel": "whatsapp",
+    "otp_identifier": null
+  },
+  {
+    "id": "6d7b2c5e-7711-4e3e-ada5-59418ff88b0b",
+    "phone": "+62858765498303",
+    "otp_hash": "569bcba8a5eaebee6921ef0367c0bdb6b9004686ef4df6b83df61640b28cf789",
+    "expires_at": "2026-02-04T08:18:19.456Z",
+    "attempts": 0,
+    "verified_at": null,
+    "registration_data": "{\"nik\":\"1678090373630001\",\"nama_lengkap\":\"Randi Terano\",\"tanggal_lahir\":\"2010-09-10\",\"no_hp\":\"+62858765498303\",\"jenis_kelamin\":\"L\",\"jenjang\":\"MTs\"}",
+    "created_at": "2026-02-04T08:13:19.459Z",
+    "otp_channel": "whatsapp",
+    "otp_identifier": null
+  },
+  {
+    "id": "ee6e9c9d-bfca-43f5-97db-051553f39eb0",
+    "phone": "+62858765498303",
+    "otp_hash": "a1c4a1defa21e9880ec3e3029a6f1908908529199b3c953f55cf43f9530756e0",
+    "expires_at": "2026-02-04T08:22:10.462Z",
+    "attempts": 0,
+    "verified_at": null,
+    "registration_data": "{\"nik\":\"1678090373630001\",\"nama_lengkap\":\"Randi Terano\",\"tanggal_lahir\":\"2010-09-10\",\"no_hp\":\"+62858765498303\",\"jenis_kelamin\":\"L\",\"jenjang\":\"MTs\"}",
+    "created_at": "2026-02-04T08:17:10.463Z",
+    "otp_channel": "whatsapp",
+    "otp_identifier": null
+  },
+  {
+    "id": "37663318-367f-4b0c-86b7-fbc245f97533",
+    "phone": "+62858765498686",
+    "otp_hash": "63b2ba02ab93f634c842feef757e4fb16089d98bb5f5ec2b8a4c70f8449855cf",
+    "expires_at": "2026-02-04T08:28:18.114Z",
+    "attempts": 0,
+    "verified_at": null,
+    "registration_data": "{\"nik\":\"1678090373630003\",\"nama_lengkap\":\"Joni Test\",\"tanggal_lahir\":\"2010-09-10\",\"no_hp\":\"+62858765498686\",\"jenis_kelamin\":\"L\",\"jenjang\":\"IL\"}",
+    "created_at": "2026-02-04T08:23:18.123Z",
+    "otp_channel": "whatsapp",
+    "otp_identifier": null
+  }
+]

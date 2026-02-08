@@ -1,15 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
-import { isAdmin } from "@/lib/access-control";
+import { cookies } from "next/headers";
+import { prisma } from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
   try {
-    const supabase = await createClient();
+    // 1. Validasi session manual
+    const cookieStore = await cookies();
+    const sessionCookie = cookieStore.get("app_session");
 
-    // Check admin authorization
-    const authorized = await isAdmin(supabase);
-    if (!authorized) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+    if (!sessionCookie) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    let session;
+    try {
+      session = JSON.parse(sessionCookie.value);
+    } catch {
+      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
+    }
+
+    // Check custom role
+    const allowedRoles = ["admin", "admin_super", "admin_berkas", "admin_keuangan"];
+    if (!allowedRoles.includes(session.role)) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
     const body = await req.json();
@@ -43,6 +56,9 @@ export async function POST(req: NextRequest) {
       "accepted",
       "rejected",
       "enrolled",
+      // Add simplified statuses if needed
+      "verified",
+      "payment_verification"
     ];
 
     if (!validStatuses.includes(status_proses)) {
@@ -53,23 +69,26 @@ export async function POST(req: NextRequest) {
     }
 
     // Bulk update
-    const { data, error } = await supabase
-      .from("pendaftar")
-      .update({ status_proses, updated_at: new Date().toISOString() })
-      .in("id", ids)
-      .select();
+    const result = await prisma.pendaftar.updateMany({
+      where: {
+        id: { in: ids },
+      },
+      data: {
+        status_pendaftaran: status_proses,
+        updated_at: new Date(),
+      },
+    });
 
-    if (error) {
-      console.error("Error bulk updating:", error);
-      return NextResponse.json(
-        { error: "Failed to update pendaftar" },
-        { status: 500 }
-      );
-    }
+    // Fetch updated data to return (optional, simulating previous generic response)
+    const data = await prisma.pendaftar.findMany({
+      where: {
+        id: { in: ids },
+      },
+    });
 
     return NextResponse.json({
       success: true,
-      updated_count: data.length,
+      updated_count: result.count,
       data,
     });
   } catch (error) {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   Users,
@@ -78,7 +78,7 @@ interface TahunAjaran {
   is_active: boolean;
 }
 
-export default function AdminPendaftarPage() {
+function AdminPendaftarContent() {
   const searchParams = useSearchParams();
   const urlFilter = searchParams.get("filter") || "";
 
@@ -1073,5 +1073,20 @@ export default function AdminPendaftarPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function AdminPendaftarPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <Loader2 className="w-12 h-12 animate-spin text-blue-600 mx-auto mb-4" />
+          <p className="text-stone-600 font-medium">Memuat halaman...</p>
+        </div>
+      </div>
+    }>
+      <AdminPendaftarContent />
+    </Suspense>
   );
 }

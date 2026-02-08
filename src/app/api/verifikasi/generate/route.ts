@@ -1,11 +1,6 @@
 // app/api/verifikasi/generate/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || "",
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
-);
+import { prisma } from "@/lib/prisma";
 
 function generateOTP(): string {
   return Math.floor(100000 + Math.random() * 900000).toString();
@@ -27,26 +22,16 @@ export async function POST(request: NextRequest) {
     const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 menit
 
     // Simpan ke database
-    const { data, error } = await supabase
-      .from("otp_verifications")
-      .insert({
+    await prisma.otpVerification.create({
+      data: {
         phone,
         otp_hash: otp, // Dalam production, hash ini
-        expires_at: expiresAt.toISOString(),
+        expires_at: expiresAt,
         otp_channel: channel,
-        created_at: new Date().toISOString(),
+        // Prisma model expects status/sent_at which have defaults or are optional, so fine.
         registration_data: JSON.stringify({ phone, nama }),
-      })
-      .select()
-      .single();
-
-    if (error) {
-      console.error("Supabase error:", error);
-      return NextResponse.json(
-        { success: false, error: error.message },
-        { status: 500 },
-      );
-    }
+      },
+    });
 
     return NextResponse.json({
       success: true,

@@ -1,10 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
-);
+import { prisma } from "@/lib/prisma";
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,25 +7,14 @@ export async function POST(request: NextRequest) {
     const { phone, otp, nama } = body;
 
     // Simpan ke database
-    const { data, error } = await supabase
-      .from("pending_sms")
-      .insert({
-        phone: phone,
-        otp: otp,
-        nama: nama,
+    const data = await prisma.pendingSms.create({
+      data: {
+        phone,
+        otp,
+        nama,
         status: "pending",
-        created_at: new Date().toISOString(),
-      })
-      .select()
-      .single();
-
-    if (error) {
-      console.error("Database error:", error);
-      return NextResponse.json(
-        { success: false, error: error.message },
-        { status: 500 },
-      );
-    }
+      },
+    });
 
     return NextResponse.json({
       success: true,

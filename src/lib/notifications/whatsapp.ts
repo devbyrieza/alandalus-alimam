@@ -1,9 +1,9 @@
 // File: /src/lib/notifications/whatsapp.ts
 /**
- * WhatsApp OTP Service using Twilio (Trial/Sandbox)
+ * WhatsApp OTP Service using Wablas API
  */
 
-import twilio from "twilio";
+import { sendWhatsAppOTP as sendViaWablas } from "@/lib/whatsapp/wablas";
 
 export async function sendWhatsAppOTP(
   phone: string,
@@ -11,62 +11,44 @@ export async function sendWhatsAppOTP(
   nama: string,
 ): Promise<{ success: boolean; messageId?: string; error?: string }> {
   try {
-    // Validasi environment variables
-    const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID;
-    const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
+    const result = await sendViaWablas(phone, otp, nama);
 
-    if (!twilioAccountSid || !twilioAuthToken) {
-      console.error(
-        "❌ Twilio credentials tidak ditemukan di .env",
-      );
-      console.log("📱 [SIMULATION] WhatsApp akan dikirim ke:", phone);
-      console.log(`🔐 Kode OTP: ${otp} untuk ${nama}`);
-
+    if (result.success) {
       return {
         success: true,
-        messageId: `wa_sim_${Date.now()}`,
+        messageId: result.messageId,
       };
     }
 
-    // Normalize phone untuk Indonesia
-    let normalizedPhone = phone.replace(/\D/g, "");
-    if (normalizedPhone.startsWith("0")) {
-      normalizedPhone = "62" + normalizedPhone.slice(1);
-    } else if (!normalizedPhone.startsWith("62")) {
-      normalizedPhone = "62" + normalizedPhone;
+    // Fallback: development simulation
+    if (process.env.NODE_ENV === "development") {
+      console.log("📱 [DEV FALLBACK] WhatsApp OTP:", otp, "untuk", phone);
+      return {
+        success: true,
+        messageId: `wa_dev_${Date.now()}`,
+      };
     }
 
-    const client = twilio(twilioAccountSid, twilioAuthToken);
-    const toWhatsAppNumber = `whatsapp:+${normalizedPhone}`;
-    
-    // Twilio WhatsApp Sandbox number (for trial)
-    const fromWhatsAppNumber = "whatsapp:+14155238886";
-
-    // Message template
-    const message = `Assalamu'alaikum ${nama},\n\n📱 *Kode Verifikasi PPDB AL-IMAM*\n\n🔐 *${otp}*\n\n⏰ Berlaku 5 menit\n\n⚠️ JANGAN bagikan kode ini!\n\nBarakallahu fiikum 🤲`;
-
-    // Send via Twilio
-    const result = await client.messages.create({
-      body: message,
-      from: fromWhatsAppNumber,
-      to: toWhatsAppNumber,
-    });
-
-    console.log(`✅ WhatsApp OTP sent to ${phone}: ${result.sid}`);
     return {
-      success: true,
-      messageId: result.sid,
+      success: false,
+      error: result.error || "Gagal mengirim WhatsApp OTP",
     };
   } catch (error: any) {
     console.error("❌ WhatsApp error:", error.message);
-    
-    // Fallback simulation
-    console.log("📱 [FALLBACK SIMULATION] WhatsApp gagal, mode simulasi");
+
+    // Fallback simulation for development
+    if (process.env.NODE_ENV === "development") {
+      console.log("📱 [FALLBACK] WhatsApp gagal, mode simulasi");
+      return {
+        success: true,
+        messageId: `wa_fallback_${Date.now()}`,
+        error: error.message,
+      };
+    }
+
     return {
-      success: true,
-      messageId: `wa_fallback_${Date.now()}`,
+      success: false,
       error: error.message,
     };
   }
 }
-

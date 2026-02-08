@@ -27,7 +27,6 @@ import {
 } from "lucide-react";
 import BackToHomeButton from "@/components/common/BackToHomeButton";
 import { logoutUser } from "@/lib/auth";
-import { createClient } from "@/lib/supabase";
 
 interface PendaftarData {
   id: string;
@@ -128,55 +127,42 @@ export default function DashboardPage() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   useEffect(() => {
-    checkAuth();
+    checkAuthAndFetchData();
   }, []);
 
-  const checkAuth = async () => {
+  const checkAuthAndFetchData = async () => {
     try {
-      // Call server API to get session (server-side can read httpOnly cookies!)
-      const response = await fetch("/api/auth/session", {
-        method: "GET",
-        credentials: "include", // Include cookies in request
-      });
+      // 1. Fetch data from our new API route
+      // This will check session automatically and return 401 if not logged in
+      const response = await fetch("/api/dashboard/pendaftar-data");
+
+      if (response.status === 401) {
+        console.log("❌ No session or unauthorized");
+        router.push("/login");
+        setIsLoading(false);
+        return;
+      }
 
       if (!response.ok) {
-        console.log("❌ No session - API returned:", response.status);
-        router.push("/login");
+        console.error("Failed to fetch dashboard data:", response.status);
+        alert("Gagal memuat data dashboard. Silakan coba lagi.");
         setIsLoading(false);
         return;
       }
 
-      const { session } = await response.json();
+      const result = await response.json();
 
-      if (!session || !session.id || session.role !== "pendaftar") {
-        console.log("❌ Invalid session or wrong role");
+      if (!result.pendaftar) {
+        console.error("No pendaftar data in response");
         router.push("/login");
-        setIsLoading(false);
         return;
       }
 
-      console.log("✅ Session valid - Role:", session.role);
+      console.log("✅ Pendaftar data loaded:", result.pendaftar.nama_lengkap);
+      setPendaftar(result.pendaftar);
 
-      // Fetch pendaftar data using ID from session
-      const supabase = createClient();
-      const { data, error } = await supabase
-        .from("pendaftar")
-        .select("*")
-        .eq("id", session.id)
-        .single();
-
-      if (error || !data) {
-        console.error("Error fetching pendaftar:", error);
-        alert("Data pendaftar tidak ditemukan. Hubungi admin.");
-        router.push("/login");
-        setIsLoading(false);
-        return;
-      }
-
-      console.log("✅ Pendaftar data loaded:", data.nama_lengkap);
-      setPendaftar(data);
     } catch (error) {
-      console.error("Auth error:", error);
+      console.error("Error loading dashboard:", error);
       router.push("/login");
     } finally {
       setIsLoading(false);
@@ -380,18 +366,18 @@ export default function DashboardPage() {
               </p>
               <div
                 className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 xs:px-3.5 sm:px-4 py-2 xs:py-2.5 sm:py-2 rounded-lg font-bold text-xs xs:text-sm sm:text-sm border-2 ${statusInfo.color === "green"
-                    ? "bg-green-50 border-green-500 text-green-700"
-                    : statusInfo.color === "red"
-                      ? "bg-red-50 border-red-500 text-red-700"
-                      : statusInfo.color === "blue"
-                        ? "bg-blue-50 border-blue-500 text-blue-700"
-                        : statusInfo.color === "yellow"
-                          ? "bg-yellow-50 border-yellow-500 text-yellow-700"
-                          : statusInfo.color === "teal"
-                            ? "bg-teal-50 border-teal-500 text-teal-700"
-                            : statusInfo.color === "purple"
-                              ? "bg-purple-50 border-purple-500 text-purple-700"
-                              : "bg-gray-50 border-gray-500 text-gray-700"
+                  ? "bg-green-50 border-green-500 text-green-700"
+                  : statusInfo.color === "red"
+                    ? "bg-red-50 border-red-500 text-red-700"
+                    : statusInfo.color === "blue"
+                      ? "bg-blue-50 border-blue-500 text-blue-700"
+                      : statusInfo.color === "yellow"
+                        ? "bg-yellow-50 border-yellow-500 text-yellow-700"
+                        : statusInfo.color === "teal"
+                          ? "bg-teal-50 border-teal-500 text-teal-700"
+                          : statusInfo.color === "purple"
+                            ? "bg-purple-50 border-purple-500 text-purple-700"
+                            : "bg-gray-50 border-gray-500 text-gray-700"
                   }`}
               >
                 <StatusIcon className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />

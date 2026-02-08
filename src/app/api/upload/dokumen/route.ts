@@ -1,78 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { supabaseAdmin } from "@/lib/supabase/server";
+import { prisma } from "@/lib/prisma";
+import { saveFileLocal } from "@/lib/storage/local";
 
-// Konfigurasi dokumen sesuai persyaratan PPDB Al-Imam
+// Konfigurasi dokumen
 const DOKUMEN_CONFIG: Record<string, {
   label: string;
-  maxSize: number; // dalam bytes
+  maxSize: number;
   allowedTypes: string[];
   required: boolean;
 }> = {
-  kartu_keluarga: {
-    label: "Scan Kartu Keluarga",
-    maxSize: 2 * 1024 * 1024, // 2MB
-    allowedTypes: ["image/jpeg", "image/png", "application/pdf"],
-    required: true,
-  },
-  akta_kelahiran: {
-    label: "Scan Akte Kelahiran",
-    maxSize: 2 * 1024 * 1024,
-    allowedTypes: ["image/jpeg", "image/png", "application/pdf"],
-    required: true,
-  },
-  rapor_sem1: {
-    label: "Scan Rapor Semester 1 Terakhir",
-    maxSize: 2 * 1024 * 1024,
-    allowedTypes: ["image/jpeg", "image/png", "application/pdf"],
-    required: true,
-  },
-  rapor_sem2: {
-    label: "Scan Rapor Semester 2 Terakhir",
-    maxSize: 2 * 1024 * 1024,
-    allowedTypes: ["image/jpeg", "image/png", "application/pdf"],
-    required: true,
-  },
-  nisn: {
-    label: "Scan NISN (Nomor Induk Siswa Nasional)",
-    maxSize: 2 * 1024 * 1024,
-    allowedTypes: ["image/jpeg", "image/png", "application/pdf"],
-    required: true,
-  },
-  foto_setengah_badan: {
-    label: "Foto Setengah Badan",
-    maxSize: 2 * 1024 * 1024,
-    allowedTypes: ["image/jpeg", "image/png"],
-    required: true,
-  },
-  surat_kesehatan: {
-    label: "Surat Keterangan Sehat (Download format)",
-    maxSize: 2 * 1024 * 1024,
-    allowedTypes: ["image/jpeg", "image/png", "application/pdf"],
-    required: true,
-  },
-  pakta_integritas: {
-    label: "Scan Pakta Integritas (Download format)",
-    maxSize: 2 * 1024 * 1024,
-    allowedTypes: ["image/jpeg", "image/png", "application/pdf"],
-    required: true,
-  },
-  pernyataan_bebas_negatif: {
-    label: "Scan Pernyataan Bebas Perilaku Negatif (Download format)",
-    maxSize: 2 * 1024 * 1024,
-    allowedTypes: ["image/jpeg", "image/png", "application/pdf"],
-    required: true,
-  },
+  kartu_keluarga: { label: "Scan Kartu Keluarga", maxSize: 2 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
+  akta_kelahiran: { label: "Scan Akte Kelahiran", maxSize: 2 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
+  rapor_sem1: { label: "Scan Rapor Semester 1 Terakhir", maxSize: 2 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
+  rapor_sem2: { label: "Scan Rapor Semester 2 Terakhir", maxSize: 2 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
+  nisn: { label: "Scan NISN", maxSize: 2 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
+  foto_setengah_badan: { label: "Foto Setengah Badan", maxSize: 2 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png"], required: true },
+  surat_kesehatan: { label: "Surat Keterangan Sehat", maxSize: 2 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
+  pakta_integritas: { label: "Scan Pakta Integritas", maxSize: 2 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
+  pernyataan_bebas_negatif: { label: "Scan Pernyataan Bebas Perilaku Negatif", maxSize: 2 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
 };
 
-// Helper function untuk format ukuran file
 function formatFileSize(bytes: number): string {
   if (bytes < 1024) return bytes + " B";
   if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
   return (bytes / (1024 * 1024)).toFixed(1) + " MB";
 }
 
-// POST: Upload dokumen
 export async function POST(request: NextRequest) {
   try {
     // 1. Validasi session
@@ -81,7 +35,7 @@ export async function POST(request: NextRequest) {
 
     if (!sessionCookie) {
       return NextResponse.json(
-        { success: false, error: "Sesi tidak ditemukan. Silakan login kembali." },
+        { success: false, error: "Sesi tidak ditemukan" },
         { status: 401 }
       );
     }
@@ -124,127 +78,66 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 4. Validasi ukuran file
+    // 4. Validasi ukuran & tipe
     if (file.size > config.maxSize) {
       return NextResponse.json(
-        {
-          success: false,
-          error: `Ukuran file terlalu besar! Maksimal ${formatFileSize(config.maxSize)} untuk ${config.label}`,
-        },
+        { success: false, error: `Ukuran file terlalu besar! Maksimal ${formatFileSize(config.maxSize)}` },
         { status: 400 }
       );
     }
-
-    // 5. Validasi tipe file
     if (!config.allowedTypes.includes(file.type)) {
-      const allowedExtensions = config.allowedTypes
-        .map((t) => {
-          if (t === "image/jpeg") return "JPG";
-          if (t === "image/png") return "PNG";
-          if (t === "application/pdf") return "PDF";
-          return t;
-        })
-        .join(", ");
-
       return NextResponse.json(
-        {
-          success: false,
-          error: `Format file tidak didukung! Gunakan ${allowedExtensions} untuk ${config.label}`,
-        },
+        { success: false, error: "Format file tidak didukung" },
         { status: 400 }
       );
     }
 
-    // 6. Ambil data pendaftar untuk nomor pendaftaran
-    const { data: pendaftar, error: pendaftarError } = await supabaseAdmin
-      .from("pendaftar")
-      .select("nomor_pendaftaran")
-      .eq("id", session.id)
-      .single();
+    // 5. Ambil data pendaftar (Check existence)
+    const pendaftar = await prisma.pendaftar.findUnique({
+      where: { id: session.id },
+      select: { nomor_pendaftaran: true },
+    });
 
-    if (pendaftarError || !pendaftar) {
+    if (!pendaftar) {
       return NextResponse.json(
-        { success: false, error: "Data pendaftar tidak ditemukan" },
+        { success: false, error: "Pendaftar tidak ditemukan" },
         { status: 404 }
       );
     }
 
-    // 7. Buat nama file yang unik
+    // 7. Save File Local
     const fileExtension = file.name.split(".").pop()?.toLowerCase() || "bin";
     const fileName = `${pendaftar.nomor_pendaftaran}_${jenisDokumen}.${fileExtension}`;
-    const filePath = `uploads/${pendaftar.nomor_pendaftaran}/${fileName}`;
 
-    // 8. Convert file to buffer
-    const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
+    // Save to storage_data/dokumen-pendaftaran/{pendaftar_id}/...
+    const filePath = await saveFileLocal(file, 'dokumen-pendaftaran', session.id, fileName);
 
-    // 9. Upload ke Supabase Storage
-    const { data: uploadData, error: uploadError } = await supabaseAdmin.storage
-      .from("dokumen-pendaftaran")
-      .upload(filePath, buffer, {
-        contentType: file.type,
-        cacheControl: "3600",
-        upsert: true, // Timpa jika sudah ada
-      });
-
-    if (uploadError) {
-      console.error("Upload error:", uploadError);
-
-      // Handle bucket not found error
-      if (uploadError.message?.includes("Bucket not found")) {
-        return NextResponse.json(
-          {
-            success: false,
-            error: "Storage belum dikonfigurasi. Hubungi admin untuk setup Supabase Storage bucket 'dokumen-pendaftaran'.",
-          },
-          { status: 500 }
-        );
+    // 10. Check Existing
+    const existingDokumen = await prisma.dokumen.findFirst({
+      where: {
+        pendaftar_id: session.id,
+        jenis_dokumen: jenisDokumen,
       }
+    });
 
-      return NextResponse.json(
-        { success: false, error: `Gagal mengupload file: ${uploadError.message}` },
-        { status: 500 }
-      );
-    }
-
-    // 10. Cek apakah sudah ada record dokumen sebelumnya
-    const { data: existingDokumen } = await supabaseAdmin
-      .from("dokumen")
-      .select("id")
-      .eq("pendaftar_id", session.id)
-      .eq("jenis_dokumen", jenisDokumen)
-      .single();
-
-    // 11. Simpan/update ke tabel dokumen
     if (existingDokumen) {
-      // Update existing
-      const { error: updateError } = await supabaseAdmin
-        .from("dokumen")
-        .update({
+      await prisma.dokumen.update({
+        where: { id: existingDokumen.id },
+        data: {
           file_name: fileName,
           file_path: filePath,
           file_size: file.size,
           file_type: file.type,
-          is_verified: false, // Reset verifikasi
+          is_verified: false,
           verified_by: null,
           verified_at: null,
           catatan: null,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", existingDokumen.id);
-
-      if (updateError) {
-        console.error("Update dokumen error:", updateError);
-        return NextResponse.json(
-          { success: false, error: "Gagal menyimpan data dokumen" },
-          { status: 500 }
-        );
-      }
+          updated_at: new Date(),
+        }
+      });
     } else {
-      // Insert new
-      const { error: insertError } = await supabaseAdmin
-        .from("dokumen")
-        .insert({
+      await prisma.dokumen.create({
+        data: {
           pendaftar_id: session.id,
           jenis_dokumen: jenisDokumen,
           file_name: fileName,
@@ -252,18 +145,10 @@ export async function POST(request: NextRequest) {
           file_size: file.size,
           file_type: file.type,
           is_verified: false,
-        });
-
-      if (insertError) {
-        console.error("Insert dokumen error:", insertError);
-        return NextResponse.json(
-          { success: false, error: "Gagal menyimpan data dokumen" },
-          { status: 500 }
-        );
-      }
+        }
+      });
     }
 
-    // 12. Return sukses
     return NextResponse.json({
       success: true,
       message: `${config.label} berhasil diupload`,
@@ -284,7 +169,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// GET: Ambil konfigurasi dokumen
 export async function GET() {
   return NextResponse.json({
     success: true,

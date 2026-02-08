@@ -1,49 +1,58 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
-import { isAdmin } from "@/lib/access-control";
+import { cookies } from "next/headers";
+import { prisma } from "@/lib/prisma";
 
 export async function POST() {
   try {
-    const supabase = await createClient();
+    // 1. Validasi session manual
+    const cookieStore = await cookies();
+    const sessionCookie = cookieStore.get("app_session");
 
-    // Check admin authorization
-    const authorized = await isAdmin(supabase);
-    if (!authorized) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+    if (!sessionCookie) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    let session;
+    try {
+      session = JSON.parse(sessionCookie.value);
+    } catch {
+      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
+    }
+
+    // Check custom role
+    const allowedRoles = ["admin", "admin_super"];
+    if (!allowedRoles.includes(session.role)) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
     // Check if 2026/2027 already exists
-    const { data: existing } = await supabase
-      .from("tahun_ajaran")
-      .select("id, nama, is_active")
-      .eq("tahun_mulai", 2026)
-      .eq("tahun_selesai", 2027)
-      .single();
+    const existing = await prisma.tahunAjaran.findFirst({
+      where: {
+        tahun_mulai: 2026,
+        tahun_selesai: 2027,
+      },
+    });
 
     if (existing) {
       // Force update price to 200000
-      await supabase
-        .from("tahun_ajaran")
-        .update({ biaya_pendaftaran: 200000 })
-        .eq("id", existing.id);
+      await prisma.tahunAjaran.update({
+        where: { id: existing.id },
+        data: { biaya_pendaftaran: 200000 },
+      });
 
       // If exists but not active, activate it
       if (!existing.is_active) {
         // Deactivate all others first
-        await supabase
-          .from("tahun_ajaran")
-          .update({ is_active: false })
-          .eq("is_active", true);
-
-        // Activate 2026/2027
-        const { error: updateError } = await supabase
-          .from("tahun_ajaran")
-          .update({ is_active: true })
-          .eq("id", existing.id);
-
-        if (updateError) {
-          throw updateError;
-        }
+        await prisma.$transaction([
+          prisma.tahunAjaran.updateMany({
+            where: { is_active: true },
+            data: { is_active: false },
+          }),
+          prisma.tahunAjaran.update({
+            where: { id: existing.id },
+            data: { is_active: true },
+          }),
+        ]);
 
         return NextResponse.json({
           success: true,
@@ -59,39 +68,32 @@ export async function POST() {
       });
     }
 
-    // Deactivate all existing tahun ajaran
-    await supabase
-      .from("tahun_ajaran")
-      .update({ is_active: false })
-      .eq("is_active", true);
-
     // Create 2026/2027 tahun ajaran
-    const { data, error } = await supabase
-      .from("tahun_ajaran")
-      .insert({
-        tahun_mulai: 2026,
-        tahun_selesai: 2027,
-        nama: "2026/2027",
-        is_active: true,
-        tanggal_buka_pendaftaran: "2026-01-01",
-        tanggal_tutup_pendaftaran: "2026-07-31",
-        biaya_pendaftaran: 200000,
-      })
-      .select()
-      .single();
+    const result = await prisma.$transaction(async (tx) => {
+      // Deactivate all existing tahun ajaran
+      await tx.tahunAjaran.updateMany({
+        where: { is_active: true },
+        data: { is_active: false },
+      });
 
-    if (error) {
-      console.error("Error creating tahun ajaran:", error);
-      return NextResponse.json(
-        { error: "Failed to create tahun ajaran: " + error.message },
-        { status: 500 }
-      );
-    }
+      // Create 2026/2027
+      return await tx.tahunAjaran.create({
+        data: {
+          tahun_mulai: 2026,
+          tahun_selesai: 2027,
+          nama: "2026/2027",
+          is_active: true,
+          tanggal_buka_pendaftaran: new Date("2026-01-01"),
+          tanggal_tutup_pendaftaran: new Date("2026-07-31"),
+          biaya_pendaftaran: 200000,
+        },
+      });
+    });
 
     return NextResponse.json({
       success: true,
       message: "Tahun Ajaran 2026/2027 berhasil dibuat dan diaktifkan",
-      data,
+      data: result,
     });
   } catch (error) {
     console.error("Seed tahun ajaran error:", error);
@@ -105,24 +107,33 @@ export async function POST() {
 // GET method to check current status
 export async function GET() {
   try {
-    const supabase = await createClient();
+    // 1. Validasi session manual
+    const cookieStore = await cookies();
+    const sessionCookie = cookieStore.get("app_session");
 
-    const authorized = await isAdmin(supabase);
-    if (!authorized) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+    if (!sessionCookie) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { data, error } = await supabase
-      .from("tahun_ajaran")
-      .select("*")
-      .order("tahun_mulai", { ascending: false });
-
-    if (error) {
-      throw error;
+    let session;
+    try {
+      session = JSON.parse(sessionCookie.value);
+    } catch {
+      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
     }
 
-    const active = data?.find((ta) => ta.is_active);
-    const has2026 = data?.find((ta) => ta.tahun_mulai === 2026 && ta.tahun_selesai === 2027);
+    // Check custom role
+    const allowedRoles = ["admin", "admin_super"];
+    if (!allowedRoles.includes(session.role)) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
+    const data = await prisma.tahunAjaran.findMany({
+      orderBy: { tahun_mulai: "desc" },
+    });
+
+    const active = data.find((ta) => ta.is_active);
+    const has2026 = data.find((ta) => ta.tahun_mulai === 2026 && ta.tahun_selesai === 2027);
 
     return NextResponse.json({
       all: data,

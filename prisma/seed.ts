@@ -1,53 +1,12 @@
-
 import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
-import { createClient } from '@supabase/supabase-js';
-import * as fs from 'fs';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://hcknodoayqarjbrzcgrp.supabase.co';
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhja25vZG9heXFhcmpicnpjZ3JwIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2ODE3MTg5MywiZXhwIjoyMDgzNzQ3ODkzfQ.FQjPyAkO6TBQRCDI6HnbhE_AqdmfDDgLa1Gpe8kj-9s';
+import * as bcrypt from 'bcryptjs';
+import * as crypto from 'crypto';
 
 const prisma = new PrismaClient();
-const supabase = createClient(supabaseUrl, supabaseServiceKey, {
-    auth: {
-        autoRefreshToken: false,
-        persistSession: false
-    }
-});
 
 async function main() {
     console.log('Start seeding...');
-
-    // 0. SCHEMA PATCH (Temporary Fix for missing columns)
-    try {
-        console.log('Patching Schema...');
-        // ... (existing code)
-
-        // DEBUG CHECK CONSTRAINT
-        const constraint = await prisma.$queryRaw`
-            SELECT pg_get_constraintdef(oid) AS constraint_def
-            FROM pg_constraint
-            WHERE conname = 'dokumen_jenis_dokumen_check';
-        `;
-        console.log('=== CONSTRAINT DEBUG ===');
-        console.log(JSON.stringify(constraint, null, 2));
-        console.log('========================');
-
-        console.log('Dropping restrictive constraints...');
-        await prisma.$executeRawUnsafe(`ALTER TABLE dokumen DROP CONSTRAINT IF EXISTS dokumen_jenis_dokumen_check;`);
-        await prisma.$executeRawUnsafe(`ALTER TABLE orang_tua ADD COLUMN IF NOT EXISTS alamat_wali TEXT;`);
-        await prisma.$executeRawUnsafe(`ALTER TABLE orang_tua ADD COLUMN IF NOT EXISTS rt_wali TEXT;`);
-        await prisma.$executeRawUnsafe(`ALTER TABLE orang_tua ADD COLUMN IF NOT EXISTS rw_wali TEXT;`);
-        await prisma.$executeRawUnsafe(`ALTER TABLE orang_tua ADD COLUMN IF NOT EXISTS kelurahan_wali TEXT;`);
-        await prisma.$executeRawUnsafe(`ALTER TABLE orang_tua ADD COLUMN IF NOT EXISTS kecamatan_wali TEXT;`);
-        await prisma.$executeRawUnsafe(`ALTER TABLE orang_tua ADD COLUMN IF NOT EXISTS kabupaten_wali TEXT;`);
-        await prisma.$executeRawUnsafe(`ALTER TABLE orang_tua ADD COLUMN IF NOT EXISTS provinsi_wali TEXT;`);
-        await prisma.$executeRawUnsafe(`ALTER TABLE orang_tua ADD COLUMN IF NOT EXISTS kode_pos_wali TEXT;`);
-        await prisma.$executeRawUnsafe(`ALTER TABLE orang_tua ADD COLUMN IF NOT EXISTS hubungan_wali TEXT;`);
-        console.log('Schema Patched.');
-    } catch (e) {
-        console.error('Schema Patch Failed (ignoring if unrelated):', e);
-    }
 
     // 1. Seed Tahun Ajaran
     let tahunAjaran = await prisma.tahunAjaran.findFirst({
@@ -93,9 +52,16 @@ async function main() {
 
     console.log('Using Tahun Ajaran:', tahunAjaran.nama);
 
-    // 2. Create Users in Supabase Auth & Seed Profiles
+    // 2. Create Users (Profiles) DIRECTLY in Database (No Supabase Auth)
     const usersToCreate = [
-        { email: 'admin@alimam.com', password: 'password123', role: 'admin', name: 'Super Admin', phone: '081234567890', label: 'ADMIN' },
+        { email: 'admin@alimam.com', password: 'password123', role: 'admin_super', name: 'Super Admin', phone: '081234567890', label: 'ADMIN_SUPER' },
+
+        // Specific Role Admins
+        { email: 'admin.berkas@alimam.com', password: 'password123', role: 'admin_berkas', name: 'Admin Berkas', phone: '081234567801', label: 'ADMIN_BERKAS' },
+        { email: 'admin.keuangan@alimam.com', password: 'password123', role: 'admin_keuangan', name: 'Admin Keuangan', phone: '081234567802', label: 'ADMIN_KEUANGAN' },
+        { email: 'penguji@alimam.com', password: 'password123', role: 'penguji', name: 'Ustadz Penguji', phone: '081234567803', label: 'PENGUJI' },
+
+        // Pendaftar Test Accounts
         { email: 'user.draft@example.com', password: 'password123', role: 'pendaftar', name: 'Ahmad Draft', phone: '081234567891', label: 'DRAFT' },
         { email: 'user.pending@example.com', password: 'password123', role: 'pendaftar', name: 'Budi Pending', phone: '081234567892', label: 'PENDING' },
         { email: 'user.verified@example.com', password: 'password123', role: 'pendaftar', name: 'Citra Verified', phone: '081234567893', label: 'VERIFIED' },
@@ -107,52 +73,52 @@ async function main() {
     for (const u of usersToCreate) {
         console.log(`Processing user: ${u.email}...`);
 
-        let userId;
-        const { data: { users } } = await supabase.auth.admin.listUsers();
-        const existingUser = users.find(x => x.email === u.email);
+        // Check if profile exists by email
+        const existingProfile = await prisma.profile.findFirst({
+            where: { email: u.email }
+        });
 
-        if (existingUser) {
-            userId = existingUser.id;
-            console.log(`User exists: ${userId}`);
-        } else {
-            console.log(`Creating new user...`);
-            const { data, error } = await supabase.auth.admin.createUser({
-                email: u.email,
-                password: u.password,
-                email_confirm: true,
-                user_metadata: { full_name: u.name }
+        let userId = existingProfile?.id;
+
+        if (!existingProfile) {
+            // Create new profile
+            userId = crypto.randomUUID();
+            const hashedPassword = await bcrypt.hash(u.password, 10);
+
+            await prisma.profile.create({
+                data: {
+                    id: userId,
+                    email: u.email,
+                    password_hash: hashedPassword,
+                    role: u.role,
+                    full_name: u.name,
+                    phone: u.phone,
+                    updated_at: new Date(),
+                }
             });
-
-            if (error) {
-                console.error(`Error creating user ${u.email}:`, error.message);
-                throw error;
-            }
-            userId = data.user.id;
+            console.log(`Created new user: ${u.email}`);
+        } else {
+            // Update existing profile (optional, to ensure password matches)
+            const hashedPassword = await bcrypt.hash(u.password, 10);
+            await prisma.profile.update({
+                where: { id: userId },
+                data: {
+                    password_hash: hashedPassword,
+                    role: u.role,
+                    full_name: u.name,
+                    phone: u.phone
+                }
+            });
+            console.log(`Updated existing user: ${u.email}`);
         }
 
-        createdUsers[u.label] = userId;
-
-        // Upsert Profile
-        await prisma.profile.upsert({
-            where: { id: userId },
-            update: {
-                role: u.role,
-                full_name: u.name,
-                phone: u.phone
-            },
-            create: {
-                id: userId,
-                role: u.role,
-                full_name: u.name,
-                phone: u.phone
-            }
-        });
+        createdUsers[u.label] = userId!;
     }
 
     console.log('Created/Verified Users & Profiles');
 
     // 3. Seed Pendaftar
-    const { ADMIN, DRAFT, PENDING, VERIFIED, COMPLETED } = createdUsers;
+    const { ADMIN, ADMIN_SUPER, ADMIN_BERKAS, ADMIN_KEUANGAN, PENGUJI, DRAFT, PENDING, VERIFIED, COMPLETED } = createdUsers;
 
     // --- Case 1: Draft (MTs) ---
     console.log('Seeding DRAFT...');
@@ -237,7 +203,7 @@ async function main() {
                     file_name: `${d}.pdf`,
                     file_path: `uploads/${d}.pdf`,
                     is_verified: true,
-                    verified_by: ADMIN,
+                    verified_by: createdUsers['ADMIN_BERKAS'] || ADMIN,
                     verified_at: new Date(),
                 }
             });
@@ -252,7 +218,7 @@ async function main() {
             metode_pembayaran: 'manual', // CORRECTED: 'manual_transfer' -> 'manual'
             jumlah: 250000,
             status_pembayaran: 'verified',
-            verified_by: ADMIN,
+            verified_by: createdUsers['ADMIN_KEUANGAN'] || ADMIN,
             verified_at: new Date(),
         }
     });

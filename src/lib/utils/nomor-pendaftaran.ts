@@ -1,9 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
-);
+import { prisma } from "@/lib/prisma";
 
 // ===================================
 // NOMOR PENDAFTARAN GENERATION
@@ -32,31 +27,29 @@ const supabase = createClient(
 export async function generateNomorPendaftaran(
   jenjang: string,
   jenis_kelamin: string,
-  tahunAjaranId?: number,
+  tahunAjaranId?: string,
 ): Promise<string> {
   let tahunAjaranData;
 
   if (tahunAjaranId) {
     // Use provided tahun ajaran ID
-    const { data, error } = await supabase
-      .from("tahun_ajaran")
-      .select("id, tahun")
-      .eq("id", tahunAjaranId)
-      .single();
+    const data = await prisma.tahunAjaran.findUnique({
+      where: { id: tahunAjaranId },
+      select: { id: true, tahun_mulai: true },
+    });
 
-    if (error || !data) {
+    if (!data) {
       throw new Error("Tahun ajaran tidak ditemukan");
     }
     tahunAjaranData = data;
   } else {
     // Get active tahun ajaran
-    const { data, error } = await supabase
-      .from("tahun_ajaran")
-      .select("id, tahun")
-      .eq("is_active", true)
-      .single();
+    const data = await prisma.tahunAjaran.findFirst({
+      where: { is_active: true },
+      select: { id: true, tahun_mulai: true },
+    });
 
-    if (error || !data) {
+    if (!data) {
       throw new Error("Tahun ajaran aktif tidak ditemukan");
     }
     tahunAjaranData = data;
@@ -66,17 +59,23 @@ export async function generateNomorPendaftaran(
   const prefix = generatePrefix(jenjang, jenis_kelamin);
 
   // Get year from tahun ajaran (last 2 digits)
-  const tahun = tahunAjaranData.tahun.toString().slice(-2);
+  const tahun = String(tahunAjaranData.tahun_mulai).slice(-2);
 
   // Get last nomor for this prefix + tahun ajaran
-  const { data: lastPendaftar } = await supabase
-    .from("pendaftar")
-    .select("nomor_pendaftaran")
-    .eq("tahun_ajaran_id", tahunAjaranData.id)
-    .like("nomor_pendaftaran", `${prefix}${tahun}%`)
-    .order("nomor_pendaftaran", { ascending: false })
-    .limit(1)
-    .maybeSingle();
+  const lastPendaftar = await prisma.pendaftar.findFirst({
+    where: {
+      tahun_ajaran_id: tahunAjaranData.id,
+      nomor_pendaftaran: {
+        startsWith: `${prefix}${tahun}`,
+      },
+    },
+    orderBy: {
+      nomor_pendaftaran: "desc",
+    },
+    select: {
+      nomor_pendaftaran: true,
+    },
+  });
 
   let nextNumber = 1;
 
@@ -228,16 +227,10 @@ export function parseNomorPendaftaran(nomorPendaftaran: string): {
 export async function isNomorPendaftaranExists(
   nomorPendaftaran: string,
 ): Promise<boolean> {
-  const { data, error } = await supabase
-    .from("pendaftar")
-    .select("id")
-    .eq("nomor_pendaftaran", nomorPendaftaran)
-    .maybeSingle();
-
-  if (error) {
-    console.error("Error checking nomor pendaftaran:", error);
-    return false;
-  }
+  const data = await prisma.pendaftar.findFirst({
+    where: { nomor_pendaftaran: nomorPendaftaran },
+    select: { id: true },
+  });
 
   return !!data;
 }
@@ -249,16 +242,10 @@ export async function isNomorPendaftaranExists(
  * @returns True if already exists
  */
 export async function isNIKExists(nik: string): Promise<boolean> {
-  const { data, error } = await supabase
-    .from("pendaftar")
-    .select("id")
-    .eq("nik", nik)
-    .maybeSingle();
-
-  if (error) {
-    console.error("Error checking NIK:", error);
-    return false;
-  }
+  const data = await prisma.pendaftar.findFirst({
+    where: { nik: nik },
+    select: { id: true },
+  });
 
   return !!data;
 }
@@ -279,25 +266,24 @@ export async function getRegistrationStats(): Promise<{
   byPrefix: Record<string, number>;
 }> {
   // Get active tahun ajaran
-  const { data: tahunAjaran } = await supabase
-    .from("tahun_ajaran")
-    .select("id")
-    .eq("is_active", true)
-    .single();
+  const tahunAjaran = await prisma.tahunAjaran.findFirst({
+    where: { is_active: true },
+    select: { id: true },
+  });
 
   if (!tahunAjaran) {
     return { total: 0, byJenjang: {}, byGender: {}, byPrefix: {} };
   }
 
   // Get all pendaftar for this tahun ajaran
-  const { data: pendaftar, error } = await supabase
-    .from("pendaftar")
-    .select("jenjang, jenis_kelamin, nomor_pendaftaran")
-    .eq("tahun_ajaran_id", tahunAjaran.id);
-
-  if (error || !pendaftar) {
-    return { total: 0, byJenjang: {}, byGender: {}, byPrefix: {} };
-  }
+  const pendaftar = await prisma.pendaftar.findMany({
+    where: { tahun_ajaran_id: tahunAjaran.id },
+    select: {
+      jenjang: true,
+      jenis_kelamin: true,
+      nomor_pendaftaran: true,
+    },
+  });
 
   // Calculate statistics
   const total = pendaftar.length;
@@ -404,16 +390,22 @@ export function validatePhoneFormat(phone: string): boolean {
 export async function getNextSequence(
   prefix: string,
   tahun: string,
-  tahunAjaranId: number,
+  tahunAjaranId: string,
 ): Promise<number> {
-  const { data: lastPendaftar } = await supabase
-    .from("pendaftar")
-    .select("nomor_pendaftaran")
-    .eq("tahun_ajaran_id", tahunAjaranId)
-    .like("nomor_pendaftaran", `${prefix}${tahun}%`)
-    .order("nomor_pendaftaran", { ascending: false })
-    .limit(1)
-    .maybeSingle();
+  const lastPendaftar = await prisma.pendaftar.findFirst({
+    where: {
+      tahun_ajaran_id: tahunAjaranId,
+      nomor_pendaftaran: {
+        startsWith: `${prefix}${tahun}`,
+      },
+    },
+    orderBy: {
+      nomor_pendaftaran: "desc",
+    },
+    select: {
+      nomor_pendaftaran: true,
+    },
+  });
 
   if (lastPendaftar?.nomor_pendaftaran) {
     const match = lastPendaftar.nomor_pendaftaran.match(/\d{5}$/);
@@ -445,17 +437,16 @@ export async function generateBatchNomorPendaftaran(
   const prefix = generatePrefix(jenjang, jenis_kelamin);
 
   // Get active tahun ajaran
-  const { data: tahunAjaran } = await supabase
-    .from("tahun_ajaran")
-    .select("id, tahun")
-    .eq("is_active", true)
-    .single();
+  const tahunAjaran = await prisma.tahunAjaran.findFirst({
+    where: { is_active: true },
+    select: { id: true, tahun_mulai: true },
+  });
 
   if (!tahunAjaran) {
     throw new Error("Tahun ajaran aktif tidak ditemukan");
   }
 
-  const tahun = tahunAjaran.tahun.toString().slice(-2);
+  const tahun = String(tahunAjaran.tahun_mulai).slice(-2);
   const startSequence = await getNextSequence(prefix, tahun, tahunAjaran.id);
 
   const nomorList: string[] = [];
@@ -474,45 +465,3 @@ export async function generateBatchNomorPendaftaran(
 
   return nomorList;
 }
-
-// ===================================
-// EXAMPLE USAGE
-// ===================================
-
-/*
-// Generate new nomor for MTs Ikhwan
-const nomor = await generateNomorPendaftaran("MTs", "L");
-console.log(nomor); // MTI2600001
-
-// Generate for IL Akhwat
-const nomor2 = await generateNomorPendaftaran("IL", "P");
-console.log(nomor2); // ILA2600001
-
-// Validate format
-const isValid = validateNomorPendaftaranFormat("MTI2600001");
-console.log(isValid); // true
-
-// Parse nomor
-const parsed = parseNomorPendaftaran("MTI2600001");
-console.log(parsed);
-// { prefix: "MTI", jenjang: "MTs", jenis_kelamin: "L", year: "26", sequence: 1 }
-
-// Get statistics
-const stats = await getRegistrationStats();
-console.log(stats);
-// {
-//   total: 123,
-//   byJenjang: { MTs: 50, IL: 40, MA: 33 },
-//   byGender: { Ikhwan: 65, Akhwat: 58 },
-//   byPrefix: { MTI: 30, MTA: 20, ILI: 22, ILA: 18, MAI: 18, MAA: 15 }
-// }
-
-// Check NIK exists
-const nikExists = await isNIKExists("3201234567890123");
-console.log(nikExists); // false (if not exists)
-
-// Generate batch numbers
-const batchNumbers = await generateBatchNomorPendaftaran("MTs", "L", 5);
-console.log(batchNumbers);
-// ["MTI2600001", "MTI2600002", "MTI2600003", "MTI2600004", "MTI2600005"]
-*/

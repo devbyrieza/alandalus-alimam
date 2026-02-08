@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { supabaseAdmin } from "@/lib/supabase/server";
+import { prisma } from "@/lib/prisma";
 
 // Daftar semua jenis dokumen sesuai persyaratan PPDB Al-Imam
 const JENIS_DOKUMEN = [
@@ -46,22 +46,13 @@ export async function GET(request: NextRequest) {
     }
 
     // 2. Ambil semua dokumen pendaftar
-    const { data: dokumenList, error } = await supabaseAdmin
-      .from("dokumen")
-      .select("*")
-      .eq("pendaftar_id", session.id);
-
-    if (error) {
-      console.error("Error fetching dokumen:", error);
-      return NextResponse.json(
-        { success: false, error: "Gagal mengambil data dokumen" },
-        { status: 500 }
-      );
-    }
+    const dokumenList = await prisma.dokumen.findMany({
+      where: { pendaftar_id: session.id },
+    });
 
     // 3. Mapping status untuk setiap jenis dokumen
     const dokumenStatus = JENIS_DOKUMEN.map((jenis) => {
-      const dokumen = dokumenList?.find((d) => d.jenis_dokumen === jenis.key);
+      const dokumen = dokumenList.find((d) => d.jenis_dokumen === jenis.key);
 
       let status: "pending" | "uploaded" | "verified" | "rejected" = "pending";
       if (dokumen) {
@@ -106,9 +97,9 @@ export async function GET(request: NextRequest) {
         dokumen: dokumenStatus,
         summary: {
           total: JENIS_DOKUMEN.length,
-          uploaded: dokumenList?.length || 0,
+          uploaded: dokumenList.length || 0,
           verified: verifiedCount,
-          pending: JENIS_DOKUMEN.length - (dokumenList?.length || 0),
+          pending: JENIS_DOKUMEN.length - (dokumenList.length || 0),
           progress: {
             required: {
               total: totalRequired,
@@ -117,8 +108,8 @@ export async function GET(request: NextRequest) {
             },
             all: {
               total: JENIS_DOKUMEN.length,
-              uploaded: dokumenList?.length || 0,
-              percentage: Math.round(((dokumenList?.length || 0) / JENIS_DOKUMEN.length) * 100),
+              uploaded: dokumenList.length || 0,
+              percentage: Math.round(((dokumenList.length || 0) / JENIS_DOKUMEN.length) * 100),
             },
           },
         },

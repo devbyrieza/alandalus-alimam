@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { supabaseAdmin } from "@/lib/supabase/server";
+import { prisma } from "@/lib/prisma";
 
 /**
  * GET /api/pendaftar/data-lengkap
@@ -39,13 +39,11 @@ export async function GET() {
     const pendaftarId = session.id;
 
     // 2. Ambil data pendaftar
-    const { data: pendaftar, error: pendaftarError } = await supabaseAdmin
-      .from("pendaftar")
-      .select("*")
-      .eq("id", pendaftarId)
-      .single();
+    const pendaftar = await prisma.pendaftar.findUnique({
+      where: { id: pendaftarId },
+    });
 
-    if (pendaftarError || !pendaftar) {
+    if (!pendaftar) {
       return NextResponse.json(
         { success: false, error: "Data pendaftar tidak ditemukan" },
         { status: 404 }
@@ -53,16 +51,11 @@ export async function GET() {
     }
 
     // 3. Parse data_lengkap jika ada (JSON column)
-    let dataLengkap = null;
+    let dataLengkap: any = null;
     if (pendaftar.data_lengkap) {
-      try {
-        dataLengkap =
-          typeof pendaftar.data_lengkap === "string"
-            ? JSON.parse(pendaftar.data_lengkap)
-            : pendaftar.data_lengkap;
-      } catch {
-        dataLengkap = null;
-      }
+      // Prisma returns JSON object directly for Json fields, no need to parse if string
+      // But if it was stored as stringified JSON manually, we might need to check type
+      dataLengkap = pendaftar.data_lengkap;
     }
 
     // 4. Merge data dari kolom utama dan data_lengkap
@@ -71,7 +64,7 @@ export async function GET() {
         nik: pendaftar.nik || "",
         nama_lengkap: pendaftar.nama_lengkap || "",
         tempat_lahir: dataLengkap?.santri?.tempat_lahir || "",
-        tanggal_lahir: pendaftar.tanggal_lahir || "",
+        tanggal_lahir: pendaftar.tanggal_lahir ? new Date(pendaftar.tanggal_lahir).toISOString().split('T')[0] : "",
         jenis_kelamin: pendaftar.jenis_kelamin === "L" ? "Laki-laki" : pendaftar.jenis_kelamin === "P" ? "Perempuan" : "",
         agama: dataLengkap?.santri?.agama || "Islam",
         kewarganegaraan: dataLengkap?.santri?.kewarganegaraan || "Indonesia",
@@ -215,56 +208,50 @@ export async function POST(request: NextRequest) {
     if (santri.jenis_kelamin === "Perempuan") jenisKelaminDb = "P";
 
     // 5. Simpan data utama ke kolom pendaftar
-    const { error: updateError } = await supabaseAdmin
-      .from("pendaftar")
-      .update({
+    // data_lengkap is Json type in Prisma, so pass object directly
+    const dataLengkapObj = {
+      santri: {
+        tempat_lahir: santri.tempat_lahir,
+        agama: santri.agama,
+        kewarganegaraan: santri.kewarganegaraan,
+        anak_ke: santri.anak_ke,
+        jumlah_saudara: santri.jumlah_saudara,
+        golongan_darah: santri.golongan_darah,
+        tinggi_badan: santri.tinggi_badan,
+        berat_badan: santri.berat_badan,
+        riwayat_penyakit: santri.riwayat_penyakit,
+        alamat_lengkap: santri.alamat_lengkap,
+        rt: santri.rt,
+        rw: santri.rw,
+        kelurahan: santri.kelurahan,
+        kecamatan: santri.kecamatan,
+        kabupaten: santri.kabupaten,
+        provinsi: santri.provinsi,
+        kode_pos: santri.kode_pos,
+        email: santri.email,
+        asal_sekolah: santri.asal_sekolah,
+        nisn: santri.nisn,
+        alamat_sekolah: santri.alamat_sekolah,
+        tahun_lulus: santri.tahun_lulus,
+      },
+      ayah,
+      ibu,
+      wali,
+      wali_sama_dengan_ortu,
+    };
+
+    const updated = await prisma.pendaftar.update({
+      where: { id: pendaftarId },
+      data: {
         nama_lengkap: santri.nama_lengkap,
         nik: santri.nik,
-        tanggal_lahir: santri.tanggal_lahir || null,
+        tanggal_lahir: santri.tanggal_lahir ? new Date(santri.tanggal_lahir) : null,
         jenis_kelamin: jenisKelaminDb,
         no_hp: santri.no_hp,
-        // Simpan data lengkap sebagai JSON
-        data_lengkap: JSON.stringify({
-          santri: {
-            tempat_lahir: santri.tempat_lahir,
-            agama: santri.agama,
-            kewarganegaraan: santri.kewarganegaraan,
-            anak_ke: santri.anak_ke,
-            jumlah_saudara: santri.jumlah_saudara,
-            golongan_darah: santri.golongan_darah,
-            tinggi_badan: santri.tinggi_badan,
-            berat_badan: santri.berat_badan,
-            riwayat_penyakit: santri.riwayat_penyakit,
-            alamat_lengkap: santri.alamat_lengkap,
-            rt: santri.rt,
-            rw: santri.rw,
-            kelurahan: santri.kelurahan,
-            kecamatan: santri.kecamatan,
-            kabupaten: santri.kabupaten,
-            provinsi: santri.provinsi,
-            kode_pos: santri.kode_pos,
-            email: santri.email,
-            asal_sekolah: santri.asal_sekolah,
-            nisn: santri.nisn,
-            alamat_sekolah: santri.alamat_sekolah,
-            tahun_lulus: santri.tahun_lulus,
-          },
-          ayah,
-          ibu,
-          wali,
-          wali_sama_dengan_ortu,
-        }),
-        updated_at: new Date().toISOString(),
-      })
-      .eq("id", pendaftarId);
-
-    if (updateError) {
-      console.error("Error updating pendaftar:", updateError);
-      return NextResponse.json(
-        { success: false, error: "Gagal menyimpan data: " + updateError.message },
-        { status: 500 }
-      );
-    }
+        data_lengkap: dataLengkapObj,
+        updated_at: new Date(),
+      },
+    });
 
     return NextResponse.json({
       success: true,

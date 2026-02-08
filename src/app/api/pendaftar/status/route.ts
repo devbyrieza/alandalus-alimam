@@ -4,7 +4,8 @@
  * Query: pendaftar_id (dari session)
  */
 import { NextRequest, NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase/server";
+import { cookies } from "next/headers";
+import { prisma } from "@/lib/prisma";
 
 export async function GET(request: NextRequest) {
   try {
@@ -18,17 +19,36 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const { data, error } = await supabaseAdmin
-      .from("pendaftar")
-      .select("id, nomor_pendaftaran, status_pendaftaran")
-      .eq("id", pendaftarId)
-      .single();
+    // Auth Check
+    const cookieStore = await cookies();
+    const sessionCookie = cookieStore.get("app_session");
+    if (!sessionCookie) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
-    if (error) {
-      console.error("Error fetching pendaftar status:", error);
+    // Optional: Validate that the session user owns this data if they are a pendaftar
+    // But this endpoint might be used by admins too? 
+    // Assuming simple read is fine if authenticated
+    const session = JSON.parse(sessionCookie.value);
+
+    // If role is pendaftar, ensure they only access their own data
+    if (session.role === "pendaftar" && session.id !== pendaftarId) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
+    const data = await prisma.pendaftar.findUnique({
+      where: { id: pendaftarId },
+      select: {
+        id: true,
+        nomor_pendaftaran: true,
+        status_pendaftaran: true,
+      },
+    });
+
+    if (!data) {
       return NextResponse.json(
         { error: "Failed to fetch status" },
-        { status: 500 },
+        { status: 404 },
       );
     }
 

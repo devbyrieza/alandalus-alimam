@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { supabaseAdmin } from "@/lib/supabase/server";
+import { prisma } from "@/lib/prisma";
 
 /**
  * GET /api/pembayaran/status
@@ -36,30 +36,17 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // pendaftar_id = session.id (untuk role pendaftar, id adalah pendaftar.id)
     const pendaftarId = session.id;
 
     // 2. Ambil data pendaftar beserta tahun ajaran
-    const { data: pendaftar, error: pendaftarError } = await supabaseAdmin
-      .from("pendaftar")
-      .select(`
-        id,
-        nomor_pendaftaran,
-        nama_lengkap,
-        tahun_ajaran_id,
-        status_pendaftaran,
-        tahun_ajaran:tahun_ajaran_id (
-          id,
-          nama,
-          biaya_pendaftaran,
-          tanggal_tutup_pendaftaran
-        )
-      `)
-      .eq("id", pendaftarId)
-      .single();
+    const pendaftar = await prisma.pendaftar.findUnique({
+      where: { id: pendaftarId },
+      include: {
+        tahun_ajaran: true,
+      },
+    });
 
-    if (pendaftarError || !pendaftar) {
-      console.error("Error fetching pendaftar:", pendaftarError);
+    if (!pendaftar) {
       return NextResponse.json(
         { success: false, error: "Data pendaftar tidak ditemukan" },
         { status: 404 }
@@ -67,32 +54,19 @@ export async function GET(request: NextRequest) {
     }
 
     // 3. Ambil data pembayaran terbaru (jika ada)
-    const { data: pembayaran, error: pembayaranError } = await supabaseAdmin
-      .from("pembayaran")
-      .select("*")
-      .eq("pendaftar_id", pendaftarId)
-      .order("created_at", { ascending: false })
-      .limit(1)
-      .maybeSingle();
-
-    if (pembayaranError) {
-      console.error("Error fetching pembayaran:", pembayaranError);
-      // Tidak error jika belum ada pembayaran
-    }
+    const pembayaran = await prisma.pembayaran.findFirst({
+      where: { pendaftar_id: pendaftarId },
+      orderBy: { created_at: "desc" },
+    });
 
     // 4. Hitung deadline pembayaran
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const tahunAjaranData = pendaftar.tahun_ajaran as any;
     const tahunAjaran = {
-      id: tahunAjaranData?.id || "",
-      nama: tahunAjaranData?.nama || "",
-      biaya_pendaftaran: Number(tahunAjaranData?.biaya_pendaftaran || 0),
-      tanggal_tutup_pendaftaran: tahunAjaranData?.tanggal_tutup_pendaftaran || "",
+      id: pendaftar.tahun_ajaran.id,
+      nama: pendaftar.tahun_ajaran.nama,
+      biaya_pendaftaran: Number(pendaftar.tahun_ajaran.biaya_pendaftaran),
+      tanggal_tutup_pendaftaran: pendaftar.tahun_ajaran.tanggal_tutup_pendaftaran,
     };
 
-    // Deadline pembayaran: jangan mengunci user di sisi API.
-    // (Jika butuh penutupan pendaftaran, sebaiknya dikontrol dari flow pendaftaran/admin.)
-    const deadline = new Date(tahunAjaran.tanggal_tutup_pendaftaran);
     const isExpired = false;
 
     // 5. Tentukan status pembayaran
@@ -108,8 +82,6 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    // NOTE: Tidak mengubah status menjadi "expired" agar pendaftar tetap bisa membayar/upload bukti.
-
     // 6. Return response
     return NextResponse.json({
       success: true,
@@ -121,9 +93,10 @@ export async function GET(request: NextRequest) {
           status_pendaftaran: pendaftar.status_pendaftaran,
         },
         tahun_ajaran: {
+          // Convert Date to string for JSON serialization compatibility
           id: tahunAjaran.id,
           nama: tahunAjaran.nama,
-          biaya_pendaftaran: Number(tahunAjaran.biaya_pendaftaran),
+          biaya_pendaftaran: tahunAjaran.biaya_pendaftaran,
           tanggal_tutup_pendaftaran: tahunAjaran.tanggal_tutup_pendaftaran,
         },
         pembayaran: pembayaran ? {

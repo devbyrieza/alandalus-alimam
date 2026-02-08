@@ -1,6 +1,6 @@
 // src/app/api/pendaftar/status/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase/server";
+import { prisma } from "@/lib/prisma";
 
 export async function GET(request: NextRequest) {
   try {
@@ -15,24 +15,26 @@ export async function GET(request: NextRequest) {
     }
 
     // Query database
-    const { data, error } = await supabaseAdmin
-      .from("pendaftar")
-      .select("id, nomor_pendaftaran, status_proses")
-      .eq("id", pendaftarId)
-      .single();
+    const data = await prisma.pendaftar.findUnique({
+      where: { id: pendaftarId },
+      select: {
+        id: true,
+        nomor_pendaftaran: true,
+        status_pendaftaran: true // Remapped from status_proses
+      }
+    });
 
-    if (error) {
-      console.error("Error fetching pendaftar status:", error);
+    if (!data) {
       return NextResponse.json(
-        { error: "Failed to fetch status" },
-        { status: 500 },
+        { error: "Pendaftar not found" },
+        { status: 404 },
       );
     }
 
     return NextResponse.json({
       id: data.id,
       nomor_pendaftaran: data.nomor_pendaftaran,
-      status_proses: data.status_proses || "draft",
+      status_proses: data.status_pendaftaran || "draft",
     });
   } catch (error) {
     console.error("Error in status API:", error);

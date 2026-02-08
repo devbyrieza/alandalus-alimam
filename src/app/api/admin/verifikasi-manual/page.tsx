@@ -90,7 +90,7 @@ export default function VerifikasiManualPage() {
 
       const data = await res.json();
       if (data.success) {
-        alert("SMS berhasil dikirim via Twilio!");
+        alert("SMS berhasil dikirim via Wablas!");
         fetchPending();
       } else {
         alert("Gagal kirim SMS: " + data.error);
@@ -217,7 +217,7 @@ export default function VerifikasiManualPage() {
                       className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 flex items-center gap-2"
                     >
                       <Phone className="w-4 h-4" />
-                      Kirim SMS via Twilio
+                      Kirim via Wablas
                     </button>
                   )}
                 </div>

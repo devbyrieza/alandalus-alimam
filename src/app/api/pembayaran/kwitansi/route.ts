@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { supabaseAdmin } from "@/lib/supabase/server";
+import { prisma } from "@/lib/prisma";
 
 /**
  * GET /api/pembayaran/kwitansi
@@ -39,23 +39,14 @@ export async function GET(request: NextRequest) {
     const pendaftarId = session.id;
 
     // 2. Ambil data pendaftar
-    const { data: pendaftar, error: pendaftarError } = await supabaseAdmin
-      .from("pendaftar")
-      .select(`
-        id,
-        nomor_pendaftaran,
-        nama_lengkap,
-        jenjang,
-        tahun_ajaran:tahun_ajaran_id (
-          id,
-          nama,
-          biaya_pendaftaran
-        )
-      `)
-      .eq("id", pendaftarId)
-      .single();
+    const pendaftar = await prisma.pendaftar.findUnique({
+      where: { id: pendaftarId },
+      include: {
+        tahun_ajaran: true,
+      },
+    });
 
-    if (pendaftarError || !pendaftar) {
+    if (!pendaftar) {
       return NextResponse.json(
         { success: false, error: "Data pendaftar tidak ditemukan" },
         { status: 404 }
@@ -63,16 +54,15 @@ export async function GET(request: NextRequest) {
     }
 
     // 3. Ambil data pembayaran yang sudah verified
-    const { data: pembayaran, error: pembayaranError } = await supabaseAdmin
-      .from("pembayaran")
-      .select("*")
-      .eq("pendaftar_id", pendaftarId)
-      .eq("status_pembayaran", "verified")
-      .order("verified_at", { ascending: false })
-      .limit(1)
-      .maybeSingle();
+    const pembayaran = await prisma.pembayaran.findFirst({
+      where: {
+        pendaftar_id: pendaftarId,
+        status_pembayaran: "verified",
+      },
+      orderBy: { verified_at: "desc" }
+    });
 
-    if (pembayaranError || !pembayaran) {
+    if (!pembayaran) {
       return NextResponse.json(
         { success: false, error: "Pembayaran belum terverifikasi" },
         { status: 400 }
@@ -80,11 +70,12 @@ export async function GET(request: NextRequest) {
     }
 
     // Parse tahun ajaran
-    const tahunAjaran = pendaftar.tahun_ajaran as any;
+    const tahunAjaran = pendaftar.tahun_ajaran;
 
     // Format tanggal
-    const formatDate = (dateString: string) => {
-      return new Date(dateString).toLocaleDateString("id-ID", {
+    const formatDate = (date: Date | string | null) => {
+      if (!date) return "-";
+      return new Date(date).toLocaleDateString("id-ID", {
         day: "numeric",
         month: "long",
         year: "numeric",
@@ -92,12 +83,14 @@ export async function GET(request: NextRequest) {
     };
 
     // Format rupiah
-    const formatRupiah = (amount: number) => {
+    const formatRupiah = (amount: number | object) => {
+      // Handle Decimal type from Prisma
+      const val = typeof amount === 'object' ? Number(amount) : amount;
       return new Intl.NumberFormat("id-ID", {
         style: "currency",
         currency: "IDR",
         minimumFractionDigits: 0,
-      }).format(amount);
+      }).format(val);
     };
 
     // Generate nomor kwitansi
@@ -308,7 +301,7 @@ export async function GET(request: NextRequest) {
 
       <div class="amount-box">
         <div class="amount-label">Jumlah Pembayaran</div>
-        <div class="amount-value">${formatRupiah(Number(pembayaran.jumlah))}</div>
+        <div class="amount-value">${formatRupiah(pembayaran.jumlah)}</div>
       </div>
 
       <div class="status-box">
