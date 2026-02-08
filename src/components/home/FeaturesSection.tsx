@@ -41,7 +41,7 @@ export default function FeaturesSection() {
                 <span>Keunggulan Absolut</span>
               </div>
               <h2 className="text-3xl md:text-5xl font-bold text-ink-900 mb-6 tracking-tight leading-tight">
-                Kenapa Harus Pondok Pesantren <br />
+                Kenapa Harus Pesantren <br />
                 <span className="text-brown-700">Al-Imam Al-Islami?</span>
               </h2>
               <p className="text-lg text-ink-500 leading-relaxed">

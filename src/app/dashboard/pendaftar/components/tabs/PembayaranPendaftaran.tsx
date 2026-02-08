@@ -75,7 +75,7 @@ interface PaymentStatusResponse {
 
 const BANK_INFO = {
   nama_bank: "BSI (Bank Syariah Indonesia)",
-  nomor_rekening: "1234567890",
+  nomor_rekening: "4222224441",
   atas_nama: "Ponpes Al-Imam Al-Islami",
   kode_bank: "451",
 };
@@ -925,13 +925,13 @@ export default function PembayaranPendaftaranTab({
             <p className="text-sm text-ink-500 mb-4 leading-relaxed">
               Mengalami kendala saat melakukan pembayaran? Hubungi tim support kami.
             </p>
-            <a href="https://wa.me/6285722253236" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 bg-white rounded-xl border border-ink-100 hover:border-teal-200 transition-colors group">
+            <a href="https://wa.me/6285111524441" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 bg-white rounded-xl border border-ink-100 hover:border-teal-200 transition-colors group">
               <div className="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center">
                 <MessageCircle className="w-5 h-5 text-green-600 group-hover:scale-110 transition-transform" />
               </div>
               <div>
                 <p className="text-xs font-bold text-ink-400 uppercase">WhatsApp Admin</p>
-                <p className="font-bold text-ink-900 text-sm">+62 857-2225-3236</p>
+                <p className="font-bold text-ink-900 text-sm">+62 851-1152-4441</p>
               </div>
             </a>
           </div>

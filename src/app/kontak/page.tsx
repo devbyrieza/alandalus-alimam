@@ -126,8 +126,8 @@ export default function ContactPage() {
                                 <p className="text-ink-500 mb-3 text-sm">
                                     Hubungi kami pada jam kerja (08.00 - 16.00)
                                 </p>
-                                <a href="tel:+6285722253236" className="text-xl font-black text-teal-600 hover:text-teal-700 transition-colors">
-                                    +62 857-2225-3236
+                                <a href="tel:+6285111524441" className="text-xl font-black text-teal-600 hover:text-teal-700 transition-colors">
+                                    +62 851-1152-4441
                                 </a>
                             </div>
 
@@ -136,8 +136,8 @@ export default function ContactPage() {
                                     <Mail className="w-6 h-6" />
                                 </div>
                                 <h3 className="font-bold text-lg text-brown-900 mb-2">Email Resmi</h3>
-                                <a href="mailto:alimamalislami@gmail.com" className="text-ink-700 font-medium hover:text-gold-600 transition-colors break-all">
-                                    alimamalislami@gmail.com
+                                <a href="mailto:infopesantrenalimam@gmail.com" className="text-ink-700 font-medium hover:text-gold-600 transition-colors break-all">
+                                    infopesantrenalimam@gmail.com
                                 </a>
                             </div>
 
@@ -283,14 +283,14 @@ export default function ContactPage() {
                             <div className="card-glass p-3 h-[400px]">
                                 <div className="rounded-[1.5rem] overflow-hidden w-full h-full bg-surface-100 relative">
                                     <iframe
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.456!2d106.860!3d-6.910!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNTQnMzYuMCJTIDEwNsKwNTEnMzYuMCJF!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid"
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.5!2d106.84!3d-6.89!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e683a0a194b4ff1%3A0x9a57be7a985db27a!2sPondok+Pesantren+Al-Imam+Al-Islami!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
                                         width="100%"
                                         height="100%"
                                         style={{ border: 0 }}
                                         allowFullScreen
                                         loading="lazy"
                                         referrerPolicy="no-referrer-when-downgrade"
-                                        title="Lokasi Pondok Pesantren Al-Imam Al-Islami"
+                                        title="Lokasi Pesantren Al-Imam Al-Islami"
                                         className="grayscale hover:grayscale-0 transition-all duration-700"
                                     />
                                 </div>

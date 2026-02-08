@@ -22,14 +22,14 @@ const CONTACT_INFO = [
   {
     icon: Phone,
     title: "Layanan Telepon",
-    content: "+62 857-2225-3236",
+    content: "+62 851-1152-4441",
     detail: "Senin-Sabtu (08.00 - 16.00)",
     color: "teal",
   },
   {
     icon: Mail,
     title: "Email Resmi",
-    content: "info@alimamalislami.sch.id",
+    content: "infopesantrenalimam@gmail.com",
     detail: "Kirim pertanyaan kapan saja",
     color: "gold",
   },

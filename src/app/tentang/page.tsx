@@ -84,7 +84,7 @@ export default function TentangPage() {
 
                             <div className="prose prose-lg text-ink-600 leading-relaxed text-justify">
                                 <p>
-                                    <strong>Pondok Pesantren Al-Imam Al-Islami</strong> merupakan salah satu pusat pendidikan Islam terkemuka yang berlokasi di Cikembar, Sukabumi, Jawa Barat. Didirikan dengan visi mulia pada tahun 1995 oleh <em>Al-Ustadz KH. Bukhori Muslim Rahimahullah</em>.
+                                    <strong>Pesantren Al-Imam Al-Islami</strong> merupakan salah satu pusat pendidikan Islam terkemuka yang berlokasi di Cikembar, Sukabumi, Jawa Barat. Didirikan dengan visi mulia pada tahun 1995 oleh <em>Al-Ustadz KH. Bukhori Muslim Rahimahullah</em>.
                                 </p>
                                 <p>
                                     Sejak awal berdiri, pesantren ini berkomitmen penuh untuk berkhidmah kepada umat melalui jalur pendidikan dan dakwah. Kami membuka kesempatan luas melalui program beasiswa yatim dan dhuafa, serta menjaga biaya pendidikan tetap terjangkau tanpa mengurangi kualitas.

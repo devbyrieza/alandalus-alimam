@@ -137,7 +137,7 @@ export async function sendRegistrationSuccess(
   messageId?: string;
 }> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://ppdb.al-imam.com";
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://pesantren-alimam.com";
 
     const messageText = `Assalamu'alaikum Bapak/Ibu,
 

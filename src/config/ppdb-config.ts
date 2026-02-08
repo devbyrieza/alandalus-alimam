@@ -6,11 +6,11 @@
 export const PPDB_CONFIG = {
   // 🏫 INFO PESANTREN (GANTI INI DULU!)
   pesantren: {
-    nama: "Pondok Pesantren Al-Imam Al-Islami",
+    nama: "Pesantren Al-Imam Al-Islami",
     singkatan: "Al-Imam",
-    alamat: "Jl. Contoh Alamat No. 123, Kota, Provinsi",
-    telepon: "+62 812-3456-7890",
-    email: "info@al-imam.sch.id",
+    alamat: "Jl. Pelabuhan Ratu II KM 18, Kp. Pupunjul, Desa Cikembar, Kec. Cikembar, Kab. Sukabumi, Jawa Barat 43157",
+    telepon: "+62 851-1152-4441",
+    email: "infopesantrenalimam@gmail.com",
     website: "https://www.al-imam.sch.id",
   },
 
@@ -19,7 +19,7 @@ export const PPDB_CONFIG = {
     // Primary Colors (Warna Utama)
     primary: {
       50: "#fdf8f6",
-      100: "#f2e8e5", 
+      100: "#f2e8e5",
       200: "#eaddd7",
       300: "#e0cec7",
       400: "#d2bab0",
@@ -29,16 +29,16 @@ export const PPDB_CONFIG = {
       800: "#4e342e",
       900: "#3e2723",  // Warna teks gelap
     },
-    
+
     // Secondary Colors (Warna Pelengkap)
     secondary: {
       50: "#fffcf5",
       100: "#fdf8f3",
-      200: "#f5ebe0", 
+      200: "#f5ebe0",
       300: "#ebe0d1",
       400: "#d4b06e",
     },
-    
+
     // Accent Colors (Warna Aksen)
     accent: {
       gold: "#fbbf24",     // Untuk highlight & achievement
@@ -58,11 +58,11 @@ export const PPDB_CONFIG = {
       theme: "brown"
     },
     {
-      id: "il", 
+      id: "il",
       name: "I'dad Lughowi",
       fullName: "Program Persiapan Bahasa Arab",
       description: "Program intensif persiapan bahasa Arab untuk jenjang lebih tinggi.",
-      image: "/images/program-il.jpg", 
+      image: "/images/program-il.jpg",
       theme: "gold"
     }
   ],
@@ -75,13 +75,13 @@ export const PPDB_CONFIG = {
       note: "Tidak dapat dikembalikan"
     },
     {
-      label: "Uang Pangkal", 
+      label: "Uang Pangkal",
       amount: "Rp 9.800.000",
       note: "Pembayaran dapat dicicil"
     },
     {
       label: "Iuran Taawun/Tahun",
-      amount: "Rp 13.200.000", 
+      amount: "Rp 13.200.000",
       note: "All in (SPP + Makan + Asrama)"
     },
     {
@@ -94,17 +94,17 @@ export const PPDB_CONFIG = {
   // 📋 PERSYARATAN BERKAS (SESUAIKAN!)
   requirements: [
     "Fotocopy Kartu Keluarga (1 lembar)",
-    "Fotocopy Akta Kelahiran (1 lembar)", 
+    "Fotocopy Akta Kelahiran (1 lembar)",
     "Fotocopy Rapor (2 semester terakhir)",
     "Pas Foto 3x4 (4 lembar)"
   ],
 
   // 🔗 KONTAK & SOSMED (GANTI SESUAI!)
   contact: {
-    whatsapp: "+6281234567890",
-    instagram: "@alimam_official",
-    facebook: "PondokPesantrenAlImam",
-    youtube: "Al-Imam Official"
+    whatsapp: "+6285111524441",
+    instagram: "@pp_alimam",
+    facebook: "ppalimam",
+    youtube: "@alimamtv"
   },
 
   // ⚙️ SETTING TEKNIS (UMUMNYA TIDAK PERLU DIUBAH)
@@ -130,7 +130,7 @@ export const getColors = () => PPDB_CONFIG.colors;
 // Untuk generate CSS variables otomatis
 export const generateCSSVariables = () => {
   const { colors } = PPDB_CONFIG;
-  
+
   return {
     primary: colors.primary,
     secondary: colors.secondary,

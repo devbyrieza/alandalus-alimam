@@ -212,7 +212,7 @@ function PPDBContent() {
             </h1>
 
             <p className="text-sm xs:text-base sm:text-lg text-[var(--color-brown-700)] dark:text-[var(--color-cream-200)] mb-8 sm:mb-10 leading-relaxed max-w-2xl mx-auto px-4 sm:px-0">
-              Bergabunglah bersama keluarga besar Pondok Pesantren Al-Imam.
+              Bergabunglah bersama keluarga besar Pesantren Al-Imam.
               Mewujudkan pendidikan Islam yang komprehensif, memadukan ilmu syar'i
               dengan kompetensi akademis untuk masa depan buah hati Anda.
             </p>

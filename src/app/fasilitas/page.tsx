@@ -128,7 +128,7 @@ export default function FasilitasPage() {
             <span className="text-gold-600 font-bold tracking-widest uppercase text-sm mb-3 block">Fasilitas Utama</span>
             <h2 className="text-4xl md:text-5xl font-black text-brown-900 mb-6">Pusat Kegiatan Santri</h2>
             <p className="text-xl text-ink-600 leading-relaxed">
-              Sarana vital yang menjadi jantung aktivitas harian di Pondok Pesantren Al-Imam.
+              Sarana vital yang menjadi jantung aktivitas harian di Pesantren Al-Imam.
             </p>
           </div>
 

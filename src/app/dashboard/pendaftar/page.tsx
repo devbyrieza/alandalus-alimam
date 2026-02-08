@@ -185,7 +185,7 @@ export default function DashboardPendaftarPage() {
             <p className="text-stone-500">Jika Anda mengalami kendala saat pendaftaran, silakan hubungi panitia via WhatsApp.</p>
           </div>
         </div>
-        <a href="https://wa.me/6281234567890" target="_blank" className="px-6 py-3 bg-white border border-stone-200 text-stone-700 font-bold rounded-xl hover:bg-stone-50 transition-colors shadow-sm">
+        <a href="https://wa.me/6285111524441" target="_blank" className="px-6 py-3 bg-white border border-stone-200 text-stone-700 font-bold rounded-xl hover:bg-stone-50 transition-colors shadow-sm">
           Hubungi Panitia
         </a>
       </div>

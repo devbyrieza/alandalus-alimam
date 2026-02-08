@@ -16,9 +16,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { href: "https://youtube.com/@alimamalislami", icon: Youtube, color: "hover:text-red-500" },
-    { href: "https://instagram.com/alimamalislami", icon: Instagram, color: "hover:text-pink-600" },
-    { href: "https://facebook.com/alimamalislami", icon: Facebook, color: "hover:text-blue-600" },
+    { href: "https://youtube.com/@alimamtv", icon: Youtube, color: "hover:text-red-500" },
+    { href: "https://instagram.com/pp_alimam", icon: Instagram, color: "hover:text-pink-600" },
+    { href: "https://facebook.com/ppalimam", icon: Facebook, color: "hover:text-blue-600" },
   ];
 
   return (
@@ -93,14 +93,14 @@ export default function Footer() {
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-4 h-4 text-ink-400" />
-                  <a href="tel:+6285722253236" className="text-sm text-ink-600 hover:text-brown-700 font-medium font-sans">
-                    +62 857-2225-3236
+                  <a href="tel:+6285111524441" className="text-sm text-ink-600 hover:text-brown-700 font-medium font-sans">
+                    +62 851-1152-4441
                   </a>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="w-4 h-4 text-ink-400" />
-                  <a href="mailto:info@alislam.sch.id" className="text-sm text-ink-600 hover:text-brown-700 font-medium">
-                    info@alimamalislami.sch.id
+                  <a href="mailto:infopesantrenalimam@gmail.com" className="text-sm text-ink-600 hover:text-brown-700 font-medium">
+                    infopesantrenalimam@gmail.com
                   </a>
                 </div>
               </div>
@@ -122,7 +122,7 @@ export default function Footer() {
 
         <div className="mt-16 pt-8 border-t border-surface-100 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-ink-400 font-medium">
-            &copy; {currentYear} Pondok Pesantren Al-Imam Al-Islami.
+            &copy; {currentYear} Pesantren Al-Imam Al-Islami.
           </p>
           <div className="flex gap-6">
             <Link href="/privacy" className="text-xs text-ink-400 hover:text-ink-600 font-medium">Privacy Policy</Link>
