@@ -64,8 +64,8 @@ function PPDBContent() {
     },
     {
       phase: "Ujian Seleksi",
-      date: "Jadwal Menyusul",
-      desc: "Tes Al-Qur'an, Tes Seleksi Online (Kemampuan Dasar Akademik, Identifikasi Kepribadian, Tes Kesiapan), Wawancara Santri & Orang Tua.",
+      date: "Pilih Jadwal",
+      desc: "Pilih jadwal ujian yang tersedia. Tes Al-Qur'an, Tes Seleksi Online (Kemampuan Dasar Akademik, Identifikasi Kepribadian, Tes Kesiapan), Wawancara Santri & Orang Tua.",
       status: "upcoming",
     },
     {
