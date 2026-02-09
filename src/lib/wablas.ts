@@ -65,21 +65,19 @@ export async function sendMessage({ phone, message }: SendMessageParams): Promis
     try {
         const formattedPhone = formatPhoneNumber(phone);
 
-        const response = await fetch(`${WABLAS_DOMAIN}/api/send-message`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': WABLAS_TOKEN,
-            },
-            body: JSON.stringify({
-                phone: formattedPhone,
-                message: message,
-            }),
+        // Wablas API uses GET request with query parameters
+        const url = new URL(`${WABLAS_DOMAIN}/api/send-message`);
+        url.searchParams.append('phone', formattedPhone);
+        url.searchParams.append('message', message);
+        url.searchParams.append('token', WABLAS_TOKEN);
+
+        const response = await fetch(url.toString(), {
+            method: 'GET',
         });
 
         const data = await response.json();
 
-        if (!response.ok) {
+        if (!response.ok || !data.status) {
             console.error('Wablas API error:', data);
             return { status: false, message: data.message || 'Failed to send message' };
         }
