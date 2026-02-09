@@ -309,7 +309,7 @@ function PPDBContent() {
                 <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-16 -mt-16" />
                 <div className="absolute bottom-0 left-0 w-48 h-48 bg-gold-500/10 rounded-full blur-3xl -ml-10 -mb-10" />
 
-                <h3 className="text-2xl font-black mb-6 relative z-10">Mengapa Al-Imam?</h3>
+                <h3 className="text-2xl font-black text-white mb-6 relative z-10">Mengapa Al-Imam?</h3>
                 <div className="space-y-6 relative z-10">
                   {[
                     { title: "Kurikulum Terintegrasi", desc: "Perpaduan Kurikulum Nasional & Pesantren Salafiyah." },
@@ -318,19 +318,19 @@ function PPDBContent() {
                     { title: "Ekstrakurikuler", desc: "Bela diri, Memanah, Berkuda, IT Club, Bahasa." },
                   ].map((item, i) => (
                     <div key={i} className="flex gap-4">
-                      <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 font-bold text-gold-400">
+                      <div className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center shrink-0 font-bold text-gold-400">
                         0{i + 1}
                       </div>
                       <div>
-                        <h4 className="font-bold text-lg mb-1">{item.title}</h4>
-                        <p className="text-white/70 text-sm leading-relaxed">{item.desc}</p>
+                        <h4 className="font-bold text-lg mb-1 text-white">{item.title}</h4>
+                        <p className="text-white/80 text-sm leading-relaxed">{item.desc}</p>
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-10 pt-8 border-t border-white/10">
-                  <p className="text-sm text-white/60 mb-4">Masih ragu? Konsultasi gratis.</p>
+                <div className="mt-10 pt-8 border-t border-white/20">
+                  <p className="text-sm text-white/70 mb-4">Masih ragu? Konsultasi gratis.</p>
                   <a
                     href="https://wa.me/6285111524441"
                     target="_blank"
