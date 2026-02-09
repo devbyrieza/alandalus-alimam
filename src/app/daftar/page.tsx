@@ -242,8 +242,8 @@ export default function DaftarPage() {
                   </h3>
                   <div data-error={!!fieldErrors.jenjang} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {[
-                      { value: "MTs", title: "MTs Regular", subtitle: "Setara SMP (3 Tahun)" },
-                      { value: "IL", title: "I'dad Lughowi", subtitle: "Persiapan SMA (1 Tahun)" },
+                      { value: "MTs", title: "MTs Regular", subtitle: "Setara SMP" },
+                      { value: "IL", title: "I'dad Lughowi", subtitle: "Setara SMA" },
                     ].map((option) => (
                       <div
                         key={option.value}
