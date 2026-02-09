@@ -152,14 +152,14 @@ export default function DashboardPage() {
 
       const result = await response.json();
 
-      if (!result.pendaftar) {
+      if (!result.data) {
         console.error("No pendaftar data in response");
         router.push("/login");
         return;
       }
 
-      console.log("✅ Pendaftar data loaded:", result.pendaftar.nama_lengkap);
-      setPendaftar(result.pendaftar);
+      console.log("✅ Pendaftar data loaded:", result.data.nama_lengkap);
+      setPendaftar(result.data);
 
     } catch (error) {
       console.error("Error loading dashboard:", error);
