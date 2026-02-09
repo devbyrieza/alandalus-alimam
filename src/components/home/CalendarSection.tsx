@@ -86,7 +86,7 @@ export default function CalendarSection() {
               </p>
 
               <div className="space-y-3 w-full max-w-xs">
-                <Link href="/agenda" className="btn-primary w-full justify-center">
+                <Link href="/kalender" className="btn-primary w-full justify-center">
                   Lihat Kalender Lengkap
                 </Link>
                 <Link href="#" className="btn-secondary w-full justify-center border-surface-200">

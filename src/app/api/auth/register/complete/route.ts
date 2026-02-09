@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { generateNomorPendaftaran } from "@/lib/utils/nomor-pendaftaran";
-import { sendRegistrationSuccess } from "@/lib/whatsapp/wablas";
+import { notifyRegistrationSuccess } from "@/lib/wablas";
 
 export async function POST(request: NextRequest) {
   try {
@@ -82,16 +82,19 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Send registration success notification
+    // Send WhatsApp notification
     try {
       if (no_hp) {
-        const result = await sendRegistrationSuccess(no_hp, nama_lengkap, nomorPendaftaran, nik);
-        if (!result.success) {
-          console.error("Notification failed:", result.error);
-        }
+        await notifyRegistrationSuccess({
+          phone: no_hp,
+          nama: nama_lengkap,
+          nomor_pendaftaran: nomorPendaftaran,
+          jenjang,
+        });
       }
     } catch (error) {
-      console.error("Registration notification error:", error);
+      console.error("WhatsApp notification error:", error);
+      // Don't fail registration if notification fails
     }
 
     // Delete OTP record

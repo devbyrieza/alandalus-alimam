@@ -118,7 +118,7 @@ export default function GallerySection() {
               <p className="text-ink-500 mb-6 max-w-md text-justify">
                 Setiap detik sangat berharga. Kami mengatur jadwal santri agar seimbang antara ibadah, belajar, istirahat, dan bersosialisasi.
               </p>
-              <Link href="/agenda" className="btn-primary inline-flex">
+              <Link href="/kalender" className="btn-primary inline-flex">
                 Lihat Jadwal Lengkap <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </div>

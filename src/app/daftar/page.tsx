@@ -273,7 +273,7 @@ export default function DaftarPage() {
                 </h3>
                 <div data-error={!!fieldErrors.jenjang} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {[
-                    { value: "MTs", title: "MTs Regular", subtitle: "Setara SMP" },
+                    { value: "MTs", title: "Madrasah Tsanawiyah", subtitle: "Setara SMP" },
                     { value: "IL", title: "I'dad Lughowi", subtitle: "Setara SMA" },
                   ].map((option) => (
                     <div
@@ -410,7 +410,7 @@ export default function DaftarPage() {
                       <select
                         value={countryCode}
                         onChange={(e) => setCountryCode(e.target.value)}
-                        className="appearance-none h-full pl-4 pr-8 py-3.5 rounded-l-xl bg-surface-100 border border-r-0 border-surface-200 text-ink-900 font-bold focus:bg-white focus:border-brown-500 focus:ring-4 focus:ring-brown-500/10 transition-all cursor-pointer text-sm"
+                        className="appearance-none h-full pl-4 pr-8 py-3.5 rounded-l-xl bg-surface-100 border border-r-0 border-surface-200 text-ink-900 font-bold focus:bg-white focus:border-brown-500 focus:ring-4 focus:ring-brown-500/10 transition-all cursor-pointer text-sm w-[120px] sm:w-auto truncate"
                       >
                         {countries.map((c) => (
                           <option key={c.name} value={c.code}>
@@ -467,6 +467,13 @@ export default function DaftarPage() {
 
             </form>
           </div>
+        </div>
+
+        {/* Footer Link */}
+        <div className="mt-8 text-center relative z-10">
+          <a href="/" className="text-ink-400 hover:text-brown-700 text-sm font-semibold transition-colors">
+            Kembali ke Beranda
+          </a>
         </div>
       </Container>
     </main>

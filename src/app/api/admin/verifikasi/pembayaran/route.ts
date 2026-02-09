@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
+import { notifyPaymentVerified } from "@/lib/wablas";
 
 // GET: List pembayaran yang perlu diverifikasi
 export async function GET(request: NextRequest) {
@@ -144,13 +145,21 @@ export async function PATCH(request: NextRequest) {
     }
 
     // Updated pembayaran
-    const data = await prisma.pembayaran.update({
+    const pembayaran = await prisma.pembayaran.update({
       where: { id: pembayaran_id },
       data: {
         status_pembayaran,
         catatan_verifikasi: catatan,
         // verified_by: session.id, // Only if column exists
         // verified_at: new Date(), // Only if column exists
+      },
+      include: {
+        pendaftar: {
+          select: {
+            nama_lengkap: true,
+            no_hp: true,
+          },
+        },
       },
     });
 
@@ -161,14 +170,32 @@ export async function PATCH(request: NextRequest) {
     // Avoid overwriting if they are already in a later stage? 
     // Logic from original: "rejected" -> "rejected", "verified" -> "verified"
     await prisma.pendaftar.update({
-      where: { id: data.pendaftar_id },
+      where: { id: pembayaran.pendaftar_id },
       data: {
         status_pendaftaran: newPendaftarStatus,
         updated_at: new Date()
       }
     });
 
-    return NextResponse.json({ success: true, data, pendaftar_status: newPendaftarStatus });
+    // Send WhatsApp notification
+    try {
+      if (pembayaran.pendaftar?.no_hp) {
+        await notifyPaymentVerified({
+          phone: pembayaran.pendaftar.no_hp,
+          nama: pembayaran.pendaftar.nama_lengkap,
+          jumlah: `Rp ${parseInt(pembayaran.jumlah.toString()).toLocaleString('id-ID')}`,
+          metode: pembayaran.metode_pembayaran,
+          tanggal: new Date(pembayaran.created_at).toLocaleDateString('id-ID'),
+          status: status_pembayaran,
+          catatan: catatan || undefined,
+        });
+      }
+    } catch (error) {
+      console.error("WhatsApp notification error:", error);
+      // Don't fail verification if notification fails
+    }
+
+    return NextResponse.json({ success: true, data: pembayaran, pendaftar_status: newPendaftarStatus });
   } catch (error) {
     console.error("Error in pembayaran verification update API:", error);
     return NextResponse.json(

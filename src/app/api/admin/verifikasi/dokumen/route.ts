@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
+import { notifyDocumentVerified } from "@/lib/wablas";
 
 // GET: List dokumen yang perlu diverifikasi
 export async function GET(request: NextRequest) {
@@ -117,7 +118,7 @@ export async function PATCH(request: NextRequest) {
     const isVerified = status_verifikasi === "verified";
 
     // Update dokumen
-    const data = await prisma.dokumen.update({
+    const dokumen = await prisma.dokumen.update({
       where: { id: dokumen_id },
       data: {
         is_verified: isVerified,
@@ -125,9 +126,33 @@ export async function PATCH(request: NextRequest) {
         // verified_by: session.id, // Only if column exists in Prisma schema
         // verified_at: new Date(), // Only if column exists
       },
+      include: {
+        pendaftar: {
+          select: {
+            nama_lengkap: true,
+            no_hp: true,
+          },
+        },
+      },
     });
 
-    return NextResponse.json({ success: true, data });
+    // Send WhatsApp notification
+    try {
+      if (dokumen.pendaftar?.no_hp) {
+        await notifyDocumentVerified({
+          phone: dokumen.pendaftar.no_hp,
+          nama: dokumen.pendaftar.nama_lengkap,
+          dokumen_list: `• ${dokumen.jenis_dokumen}`,
+          status: status_verifikasi,
+          catatan: catatan || undefined,
+        });
+      }
+    } catch (error) {
+      console.error("WhatsApp notification error:", error);
+      // Don't fail verification if notification fails
+    }
+
+    return NextResponse.json({ success: true, data: dokumen });
   } catch (error) {
     console.error("Error in dokumen verification update API:", error);
     return NextResponse.json(

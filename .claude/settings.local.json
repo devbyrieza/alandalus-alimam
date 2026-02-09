@@ -36,7 +36,23 @@
       "Bash(gh api:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "WebFetch(domain:wablas.com)"
+      "WebFetch(domain:wablas.com)",
+      "WebFetch(domain:www.instagram.com)",
+      "WebFetch(domain:www.facebook.com)",
+      "WebFetch(domain:alandalus.sch.id)",
+      "WebFetch(domain:www.ululalbab.sch.id)",
+      "WebFetch(domain:pesantrenalandalusululalbab.com)",
+      "WebFetch(domain:en.wikipedia.org)",
+      "WebFetch(domain:www.youtube.com)",
+      "WebFetch(domain:www.google.com)",
+      "WebFetch(domain:duckduckgo.com)",
+      "WebFetch(domain:search.brave.com)",
+      "WebFetch(domain:www.alimamalislami.sch.id)",
+      "WebFetch(domain:alandalus-ululalbaab.com)",
+      "WebFetch(domain:pesantren-alandalus.com)",
+      "WebFetch(domain:sekolahsunnah.com)",
+      "WebFetch(domain:guyub.id)",
+      "WebFetch(domain:sukabumiheadline.com)"
     ]
   }
 }

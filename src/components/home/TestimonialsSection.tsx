@@ -6,32 +6,32 @@ import { Container } from "@/components/layout/Container";
 
 const TESTIMONIALS = [
   {
-    name: "H. Abdullah",
-    role: "Wali Santri MTs",
+    name: "Uki Kautsar (Ex-Noah)",
+    role: "Public Figure & Pemerhati Pendidikan",
+    initial: "U",
+    quote:
+      "Melihat konsep pendidikan yang diterapkan, saya optimis lembaga ini mampu melahirkan generasi yang tidak hanya cerdas secara akademik, tapi juga memiliki adab dan pemahaman agama yang lurus.",
+  },
+  {
+    name: "Ust. Dr. Muhammad Arifin Badri, M.A.",
+    role: "Pembina & Doktor Universitas Islam Madinah",
     initial: "A",
     quote:
-      "Awalnya saya ragu melepas anak mondok. Tapi melihat perubahannya yang sekarang rajin sholat, sopan sama orang tua, dan hafalannya lancar, saya sujud syukur.",
+      "Kurikulum yang memadukan hafalan Al-Qur'an, bahasa Arab, dan ilmu umum adalah kunci melahirkan pemimpin masa depan. Sistem pendidikan ini berada di jalur yang tepat untuk mewujudkan visi tersebut.",
   },
   {
-    name: "Ustadz Faisal",
-    role: "Alumni Al-Azhar Mesir",
-    initial: "F",
+    name: "Bpk. Welli Kosasih",
+    role: "Wali Santri MTs",
+    initial: "W",
     quote:
-      "Al-Imam memberikan bekal bahasa Arab yang sangat kuat. Saat saya tes masuk Al-Azhar, saya merasa terbantu sekali dengan dasar yang diajarkan di sini.",
+      "Alhamdulillah, perubahan karakter anak saya sangat positif. Para asatidz sangat perhatian, tidak hanya pada hafalan, tapi juga pada kemandirian dan sopan santun sehari-hari.",
   },
   {
-    name: "Ibu Nurhasanah",
-    role: "Wali Santri I'dad",
-    initial: "N",
+    name: "Muhammad Fatih",
+    role: "Mahasiswa Universitas Islam Madinah",
+    initial: "A",
     quote:
-      "Lingkungannya sangat kondusif dan jauh dari pengaruh negatif gadget. Anak saya jadi lebih fokus belajar dan mandiri mengurus diri sendiri.",
-  },
-  {
-    name: "Bpk. Hermawan",
-    role: "Wali Santri",
-    initial: "H",
-    quote:
-      "Biaya sangat terjangkau untuk fasilitas dan kualitas pendidikan seperti ini. Asramanya nyaman, makannya bergizi, dan pembinanya sangat perhatian.",
+      "Bekal bahasa Arab dan dasar-dasar ilmu syar'i yang saya dapatkan sangat kuat. Alhamdulillah, memudahkan saya saat melanjutkan studi di Universitas Islam Madinah.",
   },
 ] as const;
 

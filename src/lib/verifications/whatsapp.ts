@@ -1,6 +1,6 @@
 // lib/verification/whatsapp.ts
 import { normalizePhone } from "./multi-channel";
-import { sendWhatsAppOTP } from "@/lib/whatsapp/wablas";
+import { sendMessage } from "@/lib/wablas";
 
 export async function sendWhatsAppMessage(
   to: string,
@@ -9,11 +9,23 @@ export async function sendWhatsAppMessage(
   try {
     const phone = normalizePhone(to);
 
-    // Kirim via Wablas API
-    const result = await sendWhatsAppOTP(phone, otp, "Pendaftar");
+    // Create OTP message
+    const message = `🔐 *Kode Verifikasi PPDB Al-Imam*
 
-    if (result.success) {
-      return { success: true, messageId: result.messageId };
+Kode OTP Anda adalah: *${otp}*
+
+Kode ini berlaku selama 5 menit.
+
+⚠️ Jangan berikan kode ini kepada siapapun!
+
+Jazakumullahu khairan,
+Panitia PPDB Al-Imam`;
+
+    // Kirim via Wablas API
+    const result = await sendMessage({ phone, message });
+
+    if (result.status) {
+      return { success: true, messageId: result.data?.id || `wa_${Date.now()}` };
     }
 
     // Fallback untuk development
@@ -22,7 +34,7 @@ export async function sendWhatsAppMessage(
       return { success: true, messageId: "dev-" + Date.now() };
     }
 
-    return { success: false, error: result.error || "WhatsApp service error" };
+    return { success: false, error: result.message || "WhatsApp service error" };
   } catch (error: any) {
     console.error("WhatsApp send error:", error);
     return { success: false, error: error.message };

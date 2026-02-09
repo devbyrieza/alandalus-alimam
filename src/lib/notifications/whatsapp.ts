@@ -3,7 +3,7 @@
  * WhatsApp OTP Service using Wablas API
  */
 
-import { sendWhatsAppOTP as sendViaWablas } from "@/lib/whatsapp/wablas";
+import { sendMessage } from "@/lib/wablas";
 
 export async function sendWhatsAppOTP(
   phone: string,
@@ -11,12 +11,30 @@ export async function sendWhatsAppOTP(
   nama: string,
 ): Promise<{ success: boolean; messageId?: string; error?: string }> {
   try {
-    const result = await sendViaWablas(phone, otp, nama);
+    // OTP Message Template
+    const message = `🔐 *Kode Verifikasi PPDB Al-Imam*
 
-    if (result.success) {
+Assalamu'alaikum ${nama},
+
+Kode OTP Anda adalah:
+
+*${otp}*
+
+Kode ini berlaku selama *5 menit*.
+
+⚠️ *PENTING:*
+• Jangan berikan kode ini kepada siapapun
+• Tim Al-Imam tidak akan pernah meminta kode OTP Anda
+
+Jazakumullahu khairan,
+Panitia PPDB Al-Imam`;
+
+    const result = await sendMessage({ phone, message });
+
+    if (result.status) {
       return {
         success: true,
-        messageId: result.messageId,
+        messageId: result.data?.id || `wa_${Date.now()}`,
       };
     }
 
@@ -31,7 +49,7 @@ export async function sendWhatsAppOTP(
 
     return {
       success: false,
-      error: result.error || "Gagal mengirim WhatsApp OTP",
+      error: result.message || "Gagal mengirim WhatsApp OTP",
     };
   } catch (error: any) {
     console.error("❌ WhatsApp error:", error.message);
@@ -39,6 +57,7 @@ export async function sendWhatsAppOTP(
     // Fallback simulation for development
     if (process.env.NODE_ENV === "development") {
       console.log("📱 [FALLBACK] WhatsApp gagal, mode simulasi");
+      console.log(`OTP untuk ${nama} (${phone}): ${otp}`);
       return {
         success: true,
         messageId: `wa_fallback_${Date.now()}`,

@@ -1,7 +1,7 @@
 // File: /src/lib/notifications/sms.ts
 // SMS/WhatsApp OTP delivery via Wablas
 
-import { sendWhatsAppOTP } from "@/lib/whatsapp/wablas";
+import { sendWhatsAppOTP } from "./whatsapp";
 
 export async function sendSMSOTP(
   phone: string,

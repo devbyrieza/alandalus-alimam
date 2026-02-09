@@ -1,6 +1,6 @@
 // lib/verification/sms.ts
 import { normalizePhone } from "./multi-channel";
-import { sendWhatsAppMessage } from "@/lib/whatsapp/wablas";
+import { sendMessage } from "@/lib/wablas";
 
 export async function sendSms(
   to: string,
@@ -11,10 +11,10 @@ export async function sendSms(
 
     // Kirim via Wablas (WhatsApp message, lebih reliable dari SMS)
     const message = `Kode verifikasi PPDB Ponpes Al-Imam Al-Islami: ${otp}`;
-    const result = await sendWhatsAppMessage(phone, message);
+    const result = await sendMessage({ phone, message });
 
-    if (result.success) {
-      return { success: true, messageId: result.messageId };
+    if (result.status) {
+      return { success: true, messageId: result.data?.id || `sms_${Date.now()}` };
     }
 
     // Fallback untuk development
@@ -23,7 +23,7 @@ export async function sendSms(
       return { success: true, messageId: "dev-sms-" + Date.now() };
     }
 
-    return { success: false, error: result.error || "SMS service error" };
+    return { success: false, error: result.message || "SMS service error" };
   } catch (error: any) {
     console.error("SMS send error:", error);
     return { success: false, error: error.message };
