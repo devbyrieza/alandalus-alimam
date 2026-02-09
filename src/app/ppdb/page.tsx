@@ -110,8 +110,8 @@ function PPDBContent() {
 
   const biaya = [
     { label: "Biaya Pendaftaran", value: "Rp 200.000" },
-    { label: "Uang Pangkal", value: "Rp 9.800.000" },
-    { label: "SPP Bulanan", value: "Rp 1.100.000" },
+    { label: "Uang Pangkal", value: "Rp 7.500.000" },
+    { label: "SPP Bulanan", value: "Rp 1.000.000" },
   ];
 
   const faqs = [
@@ -121,7 +121,7 @@ function PPDBContent() {
     },
     {
       q: "Berapa total biaya masuk?",
-      a: "Total biaya masuk sekitar Rp 17.500.000 (termasuk Uang Pangkal, SPP Juli, Seragam, Buku, dll). Detail rincian ada di formulir."
+      a: "Biaya pendaftaran Rp 200.000, Uang Pangkal Rp 7.500.000, dan SPP bulanan Rp 1.000.000. Detail rincian lainnya akan diinformasikan saat daftar ulang."
     },
     {
       q: "Apakah uang pendaftaran bisa kembali?",
