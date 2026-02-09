@@ -115,7 +115,7 @@ export default function GallerySection() {
           <div className="relative z-10 grid lg:grid-cols-2 gap-10 items-center">
             <div>
               <h3 className="text-2xl font-bold text-ink-900 mb-2">Jadwal Harian Produktif</h3>
-              <p className="text-ink-500 mb-6 max-w-md">
+              <p className="text-ink-500 mb-6 max-w-md text-justify">
                 Setiap detik sangat berharga. Kami mengatur jadwal santri agar seimbang antara ibadah, belajar, istirahat, dan bersosialisasi.
               </p>
               <Link href="/agenda" className="btn-primary inline-flex">

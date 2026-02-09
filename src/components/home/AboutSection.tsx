@@ -37,7 +37,7 @@ export default function AboutSection() {
               <h3 className="text-2xl font-bold text-ink-900 mb-4 tracking-tight">
                 Visi & Misi Kami
               </h3>
-              <p className="text-ink-500 leading-relaxed mb-8 text-lg">
+              <p className="text-ink-500 leading-relaxed mb-8 text-lg text-justify">
                 "Menjadi lembaga pendidikan Islam terkemuka yang menghasilkan
                 generasi Qur'ani, berakhlak mulia, berilmu luas, dan bermanfaat
                 bagi umat."
@@ -69,7 +69,7 @@ export default function AboutSection() {
               Pendidikan Terbaik untuk <span className="text-gradient-brown">Buah Hati Anda</span>
             </h2>
 
-            <p className="text-lg text-ink-500 mb-10 leading-relaxed">
+            <p className="text-lg text-ink-500 mb-10 leading-relaxed text-justify">
               Kami menggabungkan nilai-nilai Salafus Shalih dengan metodologi pengajaran modern untuk mencetak santri yang siap menghadapi tantangan zaman.
             </p>
 

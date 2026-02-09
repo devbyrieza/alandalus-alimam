@@ -13,11 +13,23 @@ const WABLAS_API_URL = "https://api.wablas.com/api/send-message";
 function normalizePhoneNumber(phone: string): string {
   let normalized = phone.replace(/[^\d]/g, "");
 
-  if (normalized.startsWith("0")) {
+  // Jika diawali 08 (Indonesian format common mistake), ganti 628
+  if (normalized.startsWith("08")) {
     normalized = "62" + normalized.substring(1);
-  } else if (!normalized.startsWith("62")) {
+  }
+
+  // Jika sudah valid international format (length > 10 typically), biarkan
+  // Wablas butuh Country Code + Number. 
+
+  // Fallback default to 62 if ONLY digits and length indicated local without 0
+  if (!normalized.startsWith("62") && normalized.length <= 13 && normalized.startsWith("8")) {
     normalized = "62" + normalized;
   }
+
+  // NOTE: Logic diatas agak opinionated untuk Indonesia.
+  // Idealnya backend terima full number dari FE.
+  // Karena FE sekarang kirim full number (CC+Number), maka normalized ini
+  // hanya perlu pastikan tidak ada karakter aneh.
 
   return normalized;
 }
@@ -244,7 +256,7 @@ export async function sendSMS(
 export function validatePhoneNumber(phone: string): boolean {
   try {
     const normalized = normalizePhoneNumber(phone);
-    return /^62\d{9,12}$/.test(normalized);
+    return /^\d{7,15}$/.test(normalized);
   } catch {
     return false;
   }

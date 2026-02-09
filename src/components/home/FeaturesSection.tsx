@@ -38,13 +38,13 @@ export default function FeaturesSection() {
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-50 text-gold-700 text-xs font-bold uppercase tracking-widest mb-4">
                 <Award className="w-3.5 h-3.5" />
-                <span>Keunggulan Absolut</span>
+                <span>Keunggulan Utama</span>
               </div>
               <h2 className="text-3xl md:text-5xl font-bold text-ink-900 mb-6 tracking-tight leading-tight">
                 Kenapa Harus Pesantren <br />
                 <span className="text-brown-700">Al-Imam Al-Islami?</span>
               </h2>
-              <p className="text-lg text-ink-500 leading-relaxed">
+              <p className="text-lg text-ink-500 leading-relaxed text-justify">
                 Kami tidak hanya mengajarkan ilmu, tetapi juga mendidik karakter. Lingkungan yang kondusif untuk tumbuh kembang spiritual, intelektual, dan emosional santri.
               </p>
             </div>
@@ -57,7 +57,7 @@ export default function FeaturesSection() {
                   </div>
                   <div>
                     <h4 className="font-bold text-ink-900 text-base mb-1">{feature.title}</h4>
-                    <p className="text-sm text-ink-500 leading-relaxed">{feature.description}</p>
+                    <p className="text-sm text-ink-500 leading-relaxed text-justify">{feature.description}</p>
                   </div>
                 </div>
               ))}

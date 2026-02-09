@@ -47,8 +47,8 @@ export default function ContactPage() {
     const SOCIAL_MEDIA = [
         {
             name: "Instagram",
-            username: "@pp_alimam",
-            url: "https://instagram.com/pp_alimam",
+            username: "pesantrenalimamsukabumi",
+            url: "https://www.instagram.com/pesantrenalimamsukabumi/",
             icon: Instagram,
             color: "bg-pink-500",
             textColor: "text-pink-600",
@@ -57,8 +57,8 @@ export default function ContactPage() {
         },
         {
             name: "Facebook",
-            username: "Ponpes Al-Imam Al-Islami",
-            url: "https://facebook.com/ppalimam",
+            username: "Pesantren Al-Imam Al-Islami (Official Fanpage)",
+            url: "https://www.facebook.com/ppsbalimamalislami/",
             icon: Facebook,
             color: "bg-blue-600",
             textColor: "text-blue-600",
@@ -67,8 +67,8 @@ export default function ContactPage() {
         },
         {
             name: "Youtube",
-            username: "Al-Imam TV",
-            url: "https://youtube.com/@alimamtv",
+            username: "Al Imam Al Islami Cikembar Sukabumi",
+            url: "https://www.youtube.com/@AlImamAlIslamiCikembarSukabumi",
             icon: Youtube,
             color: "bg-red-600",
             textColor: "text-red-600",
@@ -126,8 +126,8 @@ export default function ContactPage() {
                                 <p className="text-ink-500 mb-3 text-sm">
                                     Hubungi kami pada jam kerja (08.00 - 16.00)
                                 </p>
-                                <a href="tel:+6285111524441" className="text-xl font-black text-teal-600 hover:text-teal-700 transition-colors">
-                                    +62 851-1152-4441
+                                <a href="tel:+6285888871997" className="text-xl font-black text-teal-600 hover:text-teal-700 transition-colors">
+                                    +62 858-8887-1997
                                 </a>
                             </div>
 

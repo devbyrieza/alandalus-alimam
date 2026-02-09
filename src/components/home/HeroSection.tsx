@@ -73,7 +73,7 @@ export default function HeroSection() {
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-ink-300" />
-                <span>(0266) 734-5601</span>
+                <span>+62 858-8887-1997</span>
               </div>
             </div>
           </div>

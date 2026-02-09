@@ -15,14 +15,33 @@ function hashOTP(otp: string): string {
 
 const normalizePhone = normalizePhoneNumber;
 
+const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
+const MAX_OTP_ATTEMPTS = 5; // Max 5 OTPs per hour per number
+
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
+
+function checkRateLimit(phone: string): boolean {
+  const now = Date.now();
+  const limit = rateLimitStore.get(phone);
+
+  if (!limit) {
+    return true; // No record, allowed
+  }
+
+  if (now > limit.resetTime) {
+    rateLimitStore.delete(phone); // Expired, allowed
+    return true;
+  }
+
+  return limit.count < MAX_OTP_ATTEMPTS;
+}
 
 function updateRateLimit(phone: string): void {
   const now = Date.now();
   const limit = rateLimitStore.get(phone);
 
   if (!limit || now > limit.resetTime) {
-    rateLimitStore.set(phone, { count: 1, resetTime: now + 60 * 60 * 1000 });
+    rateLimitStore.set(phone, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
   } else {
     limit.count++;
   }
@@ -57,9 +76,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Normalization
+    const normalizePhone = normalizePhoneNumber;
+    const normalizedPhone = normalizePhone(no_hp);
+
+    // Rate Limiting Check
+    if (!checkRateLimit(normalizedPhone)) {
+      return NextResponse.json(
+        { success: false, error: "Terlalu banyak permintaan OTP. Coba lagi nanti." },
+        { status: 429 },
+      );
+    }
+
     const otp = generateOTP();
     const hashedOTP = hashOTP(otp);
-    const normalizedPhone = normalizePhone(no_hp);
     const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
 
     const otpResult = await sendOTP({

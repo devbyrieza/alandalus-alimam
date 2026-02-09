@@ -502,7 +502,7 @@ export default function DashboardPage() {
                 {/* WhatsApp Button - Responsive */}
 
                 <a
-                  href="https://wa.me/6285111524441"
+                  href="https://wa.me/6285888871997"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 xs:px-5 sm:px-4 py-2.5 xs:py-3 sm:py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold text-xs xs:text-sm sm:text-sm transition-all duration-300 transform hover:scale-105 active:scale-95"
@@ -514,11 +514,11 @@ export default function DashboardPage() {
                 {/* Phone Button - Responsive */}
 
                 <a
-                  href="tel:+6285111524441"
+                  href="tel:+6285888871997"
                   className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 xs:px-5 sm:px-4 py-2.5 xs:py-3 sm:py-2 bg-[var(--color-teal-600)] hover:bg-[var(--color-teal-700)] text-white rounded-lg font-semibold text-xs xs:text-sm sm:text-sm transition-all duration-300 transform hover:scale-105 active:scale-95"
                 >
                   <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                  <span>+62 851-1152-4441</span>
+                  <span>+62 858-8887-1997</span>
                 </a>
               </div>
             </div>

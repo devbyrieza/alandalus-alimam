@@ -32,8 +32,8 @@ export const registrationSchema = z.object({
     .min(10, "Nomor WhatsApp minimal 10 digit")
     .max(15, "Nomor WhatsApp maksimal 15 digit")
     .regex(
-      /^(08|628|\+628)\d{8,12}$/,
-      "Format nomor WhatsApp tidak valid (contoh: 081234567890)",
+      /^\d{7,15}$/,
+      "Format nomor WhatsApp tidak valid",
     ),
 
   jenis_kelamin: z
@@ -82,13 +82,18 @@ export function normalizePhoneNumber(phone: string): string {
   // Remove spaces, dashes, parentheses
   let normalized = phone.replace(/[\s\-\(\)]/g, "");
 
-  // Convert to +62 format
+  // Jika diawali 08 (Format lokal Indonesia umum), ubah ke +62
   if (normalized.startsWith("08")) {
     normalized = "+62" + normalized.slice(1);
-  } else if (normalized.startsWith("628")) {
+  } else if (normalized.startsWith("62")) {
+    // Jika diawali 62 (tanpa +), tambahkan +
     normalized = "+" + normalized;
-  } else if (!normalized.startsWith("+62")) {
-    normalized = "+62" + normalized;
+  }
+
+  // Jika tidak diawali +, tambahkan + (asumsi input dari FE sudah ada CC tapi tanpa +)
+  // Kecuali jika user input 0xxx (selain 08) yang mungkin salah, tapi kita biarkan dulu
+  if (!normalized.startsWith("+")) {
+    normalized = "+" + normalized;
   }
 
   return normalized;

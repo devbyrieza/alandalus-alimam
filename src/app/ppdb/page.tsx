@@ -332,7 +332,7 @@ function PPDBContent() {
                 <div className="mt-8 pt-6 border-t border-brown-200 relative z-10">
                   <p className="text-sm text-ink-500 mb-4">Masih ragu? Konsultasi gratis.</p>
                   <a
-                    href="https://wa.me/6285111524441"
+                    href="https://wa.me/6285888871997"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-brown-700 hover:bg-brown-800 text-white font-bold transition-all shadow-md"

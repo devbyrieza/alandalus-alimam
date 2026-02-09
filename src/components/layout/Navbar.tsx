@@ -49,8 +49,8 @@ export default function Navbar() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-            ? "bg-white/95 backdrop-blur-md shadow-clay-sm py-3"
-            : "bg-white py-4 md:py-5"
+          ? "bg-white/95 backdrop-blur-md shadow-clay-sm py-3"
+          : "bg-white py-4 md:py-5"
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,10 +65,13 @@ export default function Navbar() {
 
               <div>
                 <h1 className="text-sm md:text-base font-bold text-ink-900 leading-tight tracking-tight">
-                  PP Al-Imam
+                  Pesantren Al-Imam
                 </h1>
-                <p className="text-[10px] md:text-[11px] text-ink-500 font-medium">
-                  Cikembar, Sukabumi
+                <p className="text-[10px] md:text-[11px] text-ink-500 font-medium leading-tight">
+                  Managed by Al-Andalus
+                </p>
+                <p className="text-[9px] md:text-[10px] text-ink-400 leading-tight">
+                  Bekerja Sama Dengan Universitas Islam Terkemuka di 3 Benua
                 </p>
               </div>
             </Link>
@@ -80,8 +83,8 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={`px-5 py-2 text-sm font-semibold rounded-pill transition-all duration-300 ${isActive(link.href)
-                      ? "bg-white text-brown-700 shadow-sm"
-                      : "text-ink-600 hover:text-brown-700 hover:bg-white/50"
+                    ? "bg-white text-brown-700 shadow-sm"
+                    : "text-ink-600 hover:text-brown-700 hover:bg-white/50"
                     }`}
                 >
                   {link.label}
@@ -130,8 +133,8 @@ export default function Navbar() {
                 href={link.href}
                 onClick={() => setIsMenuOpen(false)}
                 className={`flex items-center justify-between p-4 rounded-2xl text-lg font-bold transition-all ${isActive(link.href)
-                    ? "bg-surface-50 text-brown-700"
-                    : "text-ink-600 hover:bg-surface-50"
+                  ? "bg-surface-50 text-brown-700"
+                  : "text-ink-600 hover:bg-surface-50"
                   }`}
               >
                 {link.label}

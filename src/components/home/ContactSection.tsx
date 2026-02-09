@@ -22,7 +22,7 @@ const CONTACT_INFO = [
   {
     icon: Phone,
     title: "Layanan Telepon",
-    content: "+62 851-1152-4441",
+    content: "+62 858-8887-1997",
     detail: "Senin-Sabtu (08.00 - 16.00)",
     color: "teal",
   },
@@ -69,13 +69,13 @@ export default function ContactSection() {
               {CONTACT_INFO.map((item, idx) => (
                 <div key={idx} className={`bg-white p-6 rounded-3xl shadow-clay-sm hover:shadow-clay-md transition-shadow group ${idx === 0 ? 'sm:col-span-2' : ''}`}>
                   <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-4 transition-colors ${item.color === 'brown' ? 'bg-brown-50 text-brown-600 group-hover:bg-brown-100' :
-                      item.color === 'teal' ? 'bg-teal-50 text-teal-600 group-hover:bg-teal-100' :
-                        'bg-gold-50 text-gold-600 group-hover:bg-gold-100'
+                    item.color === 'teal' ? 'bg-teal-50 text-teal-600 group-hover:bg-teal-100' :
+                      'bg-gold-50 text-gold-600 group-hover:bg-gold-100'
                     }`}>
                     <item.icon className="w-6 h-6" />
                   </div>
                   <h3 className="text-ink-900 font-bold text-lg mb-1">{item.title}</h3>
-                  <p className="text-ink-600 font-medium text-sm">{item.content}</p>
+                  <p className="text-ink-600 font-medium text-sm break-all">{item.content}</p>
                   <p className="text-ink-400 text-xs mt-1">{item.detail}</p>
                 </div>
               ))}

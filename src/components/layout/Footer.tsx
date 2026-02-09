@@ -16,9 +16,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { href: "https://youtube.com/@alimamtv", icon: Youtube, color: "hover:text-red-500" },
-    { href: "https://instagram.com/pp_alimam", icon: Instagram, color: "hover:text-pink-600" },
-    { href: "https://facebook.com/ppalimam", icon: Facebook, color: "hover:text-blue-600" },
+    { href: "https://www.youtube.com/@AlImamAlIslamiCikembarSukabumi", icon: Youtube, color: "hover:text-red-500" },
+    { href: "https://www.instagram.com/pesantrenalimamsukabumi/", icon: Instagram, color: "hover:text-pink-600" },
+    { href: "https://www.facebook.com/ppsbalimamalislami/", icon: Facebook, color: "hover:text-blue-600" },
   ];
 
   return (
@@ -33,8 +33,11 @@ export default function Footer() {
                 <School className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-bold text-ink-900 text-lg leading-tight">PP Al-Imam</h3>
-                <p className="text-xs text-ink-500 font-medium">Cikembar, Sukabumi</p>
+                <h3 className="font-bold text-ink-900 text-lg leading-tight">Pesantren Al-Imam</h3>
+                <p className="text-xs text-ink-500 font-medium leading-tight">Managed by Al-Andalus</p>
+                <p className="text-[10px] text-ink-400 mt-0.5 leading-tight max-w-[200px]">
+                  Bekerja Sama Dengan Universitas Islam Terkemuka di 3 Benua
+                </p>
               </div>
             </div>
             <p className="text-ink-500 text-sm leading-relaxed max-w-sm">
@@ -93,13 +96,13 @@ export default function Footer() {
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-4 h-4 text-ink-400" />
-                  <a href="tel:+6285111524441" className="text-sm text-ink-600 hover:text-brown-700 font-medium font-sans">
-                    +62 851-1152-4441
+                  <a href="tel:+6285888871997" className="text-sm text-ink-600 hover:text-brown-700 font-medium font-sans">
+                    +62 858-8887-1997
                   </a>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Mail className="w-4 h-4 text-ink-400" />
-                  <a href="mailto:pesantrenalimamsukabumi@gmail.com" className="text-sm text-ink-600 hover:text-brown-700 font-medium">
+                <div className="flex items-start gap-3">
+                  <Mail className="w-4 h-4 text-ink-400 mt-0.5 shrink-0" />
+                  <a href="mailto:pesantrenalimamsukabumi@gmail.com" className="text-sm text-ink-600 hover:text-brown-700 font-medium break-all">
                     pesantrenalimamsukabumi@gmail.com
                   </a>
                 </div>

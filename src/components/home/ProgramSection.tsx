@@ -12,7 +12,7 @@ import { Container } from "@/components/layout/Container";
 
 const PROGRAMS = [
     {
-        title: "MTs Al-Imam",
+        title: "MTs",
         subtitle: "Madrasah Tsanawiyah (Setara SMP)",
         desc: "Program pendidikan 3 tahun dengan kurikulum terpadu (Umum & Kepesantrenan). Fokus pada tahfidz dan dasar ilmu syar'i.",
         features: [
@@ -21,21 +21,21 @@ const PROGRAMS = [
             "Kurikulum Diknas & Pesantren",
             "Ekstrakurikuler Pilihan"
         ],
-        quota: "32 Kursi",
+        quota: "25 Kursi",
         color: "brown",
         icon: School
     },
     {
-        title: "I'dad Lughowi",
-        subtitle: "Persiapan Bahasa & Syar'i (Setara SMA)",
-        desc: "Program intensif 4 tahun untuk mencetak kader dai dan ulama. Fokus pada penguasaan kitab kuning dan bahasa Arab mendalam.",
+        title: "IL",
+        subtitle: "I'dad Lughowi (Setara SMA)",
+        desc: "Program intensif 4 tahun (1 tahun persiapan bahasa & 3 tahun Aliyah) untuk mencetak kader dai dan ulama. Fokus pada penguasaan kitab kuning dan bahasa Arab mendalam.",
         features: [
             "Target Hafalan 30 Juz (Mutqin)",
             "Kajian Kitab Kuning Gundul",
             "Sanad Al-Qur'an Bersambung",
             "Pengabdian Masyarakat (Khomis)"
         ],
-        quota: "32 Kursi",
+        quota: "25 Kursi",
         color: "gold",
         icon: BookOpen
     },
@@ -82,7 +82,7 @@ export default function ProgramSection() {
 
                                 <h3 className="text-2xl font-bold text-ink-900 mb-1">{program.title}</h3>
                                 <p className="text-sm font-bold text-brown-600 mb-4">{program.subtitle}</p>
-                                <p className="text-ink-500 text-sm leading-relaxed mb-8 flex-grow">
+                                <p className="text-ink-500 text-sm leading-relaxed mb-8 flex-grow text-justify">
                                     {program.desc}
                                 </p>
 

@@ -19,9 +19,9 @@ const IMPORTANT_DATES = [
     color: "gold",
   },
   {
-    date: "25 Mei 2026",
-    title: "Tes Masuk",
-    description: "Ujian tulis dan wawancara calon santri",
+    date: "10 Feb - 30 Mei 2026",
+    title: "Tes Masuk (Fleksibel)",
+    description: "Dapat dilakukan kapan saja setelah upload berkas",
     color: "brown",
   },
   {
@@ -54,15 +54,15 @@ export default function CalendarSection() {
               {IMPORTANT_DATES.map((item, idx) => (
                 <div key={idx} className="relative flex items-start gap-6 group">
                   <div className={`w-12 h-12 rounded-full border-4 border-surface-50 flex items-center justify-center relative z-10 shrink-0 ${item.color === 'gold' ? 'bg-gold-500 text-white shadow-gold-200' :
-                      item.color === 'brown' ? 'bg-brown-600 text-white shadow-brown-200' :
-                        'bg-teal-500 text-white shadow-teal-200'
+                    item.color === 'brown' ? 'bg-brown-600 text-white shadow-brown-200' :
+                      'bg-teal-500 text-white shadow-teal-200'
                     } shadow-lg group-hover:scale-110 transition-transform`}>
                     <span className="text-xs font-bold">{idx + 1}</span>
                   </div>
                   <div className="bg-white p-5 rounded-2xl shadow-clay-sm border border-surface-100 flex-grow hover:shadow-clay-md transition-shadow">
                     <span className={`inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase mb-2 ${item.color === 'gold' ? 'bg-gold-50 text-gold-700' :
-                        item.color === 'brown' ? 'bg-brown-50 text-brown-700' :
-                          'bg-teal-50 text-teal-700'
+                      item.color === 'brown' ? 'bg-brown-50 text-brown-700' :
+                        'bg-teal-50 text-teal-700'
                       }`}>
                       {item.date}
                     </span>

@@ -7,19 +7,7 @@ function hashOTP(otp: string): string {
   return crypto.createHash("sha256").update(otp).digest("hex");
 }
 
-function normalizePhone(phone: string): string {
-  let normalized = phone.replace(/[^\d+]/g, "");
-  if (normalized.startsWith("0")) {
-    normalized = "+62" + normalized.substring(1);
-  }
-  if (normalized.startsWith("8")) {
-    normalized = "+62" + normalized;
-  }
-  if (!normalized.startsWith("+")) {
-    normalized = "+" + normalized;
-  }
-  return normalized;
-}
+import { normalizePhoneNumber } from "@/lib/validations/registration";
 
 export async function POST(request: NextRequest) {
   try {
@@ -32,7 +20,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const normalizedPhone = normalizePhone(no_hp);
+    const normalizedPhone = normalizePhoneNumber(no_hp);
     const hashedOTP = hashOTP(otp_code);
 
     // Verify OTP

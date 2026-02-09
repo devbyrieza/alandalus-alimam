@@ -25,7 +25,7 @@ export default function FloatingWhatsApp() {
 
             {/* Main Button */}
             <Link
-                href="https://wa.me/6285111524441"
+                href="https://wa.me/6285888871997"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
