@@ -70,7 +70,7 @@ export default function AboutSection() {
             </h2>
 
             <p className="text-lg text-ink-500 mb-10 leading-relaxed text-justify">
-              Kami menggabungkan nilai-nilai Salafus Shalih dengan metodologi pengajaran modern untuk mencetak santri yang siap menghadapi tantangan zaman.
+              Kami menggabungkan nilai-nilai Salafush Shalih dengan metodologi pengajaran modern untuk mencetak santri yang siap menghadapi tantangan zaman.
             </p>
 
             <div className="space-y-4 mb-10">

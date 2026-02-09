@@ -37,7 +37,7 @@ export default function TentangPage() {
                     </h1>
 
                     <p className="text-lg md:text-xl text-brown-100 max-w-3xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
-                        Lembaga pendidikan Islam yang berdedikasi mencetak generasi Qur'ani yang berakhlak mulia, berilmu luas, dan siap berkontribusi untuk umat dengan manhaj Salafus Shalih.
+                        Lembaga pendidikan Islam yang berdedikasi mencetak generasi Qur'ani yang berakhlak mulia, berilmu luas, dan siap berkontribusi untuk umat dengan manhaj salafush shalih.
                     </p>
                 </Container>
             </section>
@@ -140,7 +140,7 @@ export default function TentangPage() {
                             </div>
                             <h3 className="text-2xl font-black text-brown-900 mb-4">Visi</h3>
                             <p className="text-lg text-ink-600 italic leading-relaxed">
-                                "Menjadi lembaga pendidikan Islam unggulan dalam rangka mewujudkan generasi khairu ummah yang memiliki manhaj Al Qur'an dan As Sunnah sesuai pemahaman as-salaf ash-shalih."
+                                "Menjadi lembaga pendidikan Islam unggulan dalam rangka mewujudkan generasi khairu ummah yang memiliki manhaj Al Qur'an dan As Sunnah sesuai pemahaman salafush shalih."
                             </p>
                         </div>
 

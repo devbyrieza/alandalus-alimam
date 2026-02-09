@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     template: "%s | Pesantren Al-Imam Al-Islami",
   },
   description:
-    "Pendaftaran Santri Baru Pesantren Al-Imam Al-Islami. Pendidikan berbasis Al-Qur'an dan As-Sunnah sesuai pemahaman salafus shalih. Sukabumi, Jawa Barat.",
+    "Pendaftaran Santri Baru Pesantren Al-Imam Al-Islami. Pendidikan berbasis Al-Qur'an dan As-Sunnah sesuai pemahaman salafush shalih. Sukabumi, Jawa Barat.",
   keywords: [
     "ponpes al-imam",
     "pesantren sukabumi",
@@ -95,7 +95,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Pesantren Al-Imam Al-Islami | PPDB 2026/2027",
     description:
-      "Pendidikan berbasis Al-Qur'an dan As-Sunnah sesuai pemahaman salafus shalih. Daftar sekarang untuk tahun ajaran 2026/2027.",
+      "Pendidikan berbasis Al-Qur'an dan As-Sunnah sesuai pemahaman salafush shalih. Daftar sekarang untuk tahun ajaran 2026/2027.",
     url: "https://www.alimamalislami.sch.id",
     siteName: "Pesantren Al-Imam Al-Islami",
     images: [
@@ -114,7 +114,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Pesantren Al-Imam Al-Islami | PPDB 2026/2027",
     description:
-      "Pendidikan berbasis Al-Qur'an dan As-Sunnah sesuai pemahaman salafus shalih.",
+      "Pendidikan berbasis Al-Qur'an dan As-Sunnah sesuai pemahaman salafush shalih.",
     images: ["/twitter-image.jpg"],
     creator: "@alimam_islami",
   },

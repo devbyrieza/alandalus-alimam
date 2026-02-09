@@ -43,7 +43,7 @@ export default function HeroSection() {
                 </span>
               </h1>
               <p className="text-base lg:text-lg text-ink-500 leading-relaxed max-w-xl mx-auto lg:mx-0 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100 font-medium">
-                Membangun generasi Qur'ani yang cerdas, berakhlak mulia, dan siap memimpin masa depan dengan landasan salafus shalih.
+                Membangun generasi Qur'ani yang cerdas, berakhlak mulia, dan siap memimpin masa depan dengan landasan salafush shalih.
               </p>
             </div>
 

@@ -41,7 +41,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-ink-500 text-sm leading-relaxed max-w-sm text-justify">
-              Membangun generasi Qur'ani yang berakhlak mulia, cerdas, dan siap memimpin masa depan dengan landasan salafus shalih.
+              Membangun generasi Qur'ani yang berakhlak mulia, cerdas, dan siap memimpin masa depan dengan landasan salafush shalih.
             </p>
 
             <div className="flex gap-3">
