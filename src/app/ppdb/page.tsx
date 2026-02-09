@@ -70,8 +70,8 @@ function PPDBContent() {
     },
     {
       phase: "Pengumuman",
-      date: "Via WhatsApp",
-      desc: "Hasil seleksi dikirim ke nomor orang tua/wali.",
+      date: "WhatsApp & Dashboard",
+      desc: "Hasil seleksi diumumkan via WhatsApp dan dapat dilihat di dashboard pendaftar.",
       status: "upcoming",
     },
     {
