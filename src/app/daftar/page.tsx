@@ -425,7 +425,6 @@ export default function DaftarPage() {
 
               </form>
             </div>
-          </div>
         </div>
       </Container>
     </main>
