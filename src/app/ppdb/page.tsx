@@ -121,7 +121,7 @@ function PPDBContent() {
     },
     {
       q: "Berapa total biaya masuk?",
-      a: "Biaya pendaftaran Rp 200.000, Uang Pangkal Rp 7.500.000, dan SPP bulanan Rp 1.000.000. Detail rincian lainnya akan diinformasikan saat daftar ulang."
+      a: "Biaya pendaftaran Rp 200.000, Uang Pangkal Rp 7.500.000, dan SPP bulanan Rp 1.000.000. Bila ada detail rincian lainnya akan diinformasikan saat daftar ulang."
     },
     {
       q: "Apakah uang pendaftaran bisa kembali?",
