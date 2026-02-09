@@ -31,7 +31,11 @@
       "Bash(npm install:*)",
       "Bash(pnpm install:*)",
       "Bash(pnpm prisma migrate dev:*)",
-      "Bash(pnpm prisma db push:*)"
+      "Bash(pnpm prisma db push:*)",
+      "Bash(pnpm build:*)",
+      "Bash(gh api:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }

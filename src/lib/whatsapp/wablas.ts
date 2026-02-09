@@ -29,6 +29,12 @@ async function sendViaWablas(
   phone: string,
   message: string,
 ): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  // Temporary bypass: skip WhatsApp when API not ready
+  if (process.env.SKIP_WHATSAPP_OTP === "true") {
+    console.log(`📱 [SKIP] WhatsApp OTP dilewati (SKIP_WHATSAPP_OTP=true) untuk ${phone}`);
+    return { success: true, messageId: `skip_${Date.now()}` };
+  }
+
   const apiKey = process.env.WABLAS_API_KEY;
 
   if (!apiKey) {

@@ -27,7 +27,6 @@ function DaftarSuksesContent() {
   const jenjang = searchParams.get("jenjang") || "";
   const jenis_kelamin = searchParams.get("jenis_kelamin") || "";
   const nik = searchParams.get("nik") || "";
-  const channel = searchParams.get("channel") || "whatsapp";
 
   const [copiedField, setCopiedField] = useState<"nomor" | "nik" | null>(null);
   // Clear sessionStorage saat sukses (data tidak diperlukan lagi)
@@ -161,8 +160,7 @@ function DaftarSuksesContent() {
           <li className="flex items-start gap-2">
             <Check className="w-3 h-3 text-teal-600 shrink-0 mt-0.5" />
             <span>
-              Notifikasi telah dikirim ke{" "}
-              {channel === "whatsapp" ? "WhatsApp" : "SMS"} Anda
+              Setelah login, lakukan <strong>pembayaran</strong> lalu lengkapi data & upload berkas
             </span>
           </li>
         </ul>

@@ -33,12 +33,10 @@ function VerifikasiOTPContent() {
   // Simulation Code Check
   const sim_code = searchParams.get("sim_code");
 
-  // Auto-fill simulation code (optional, or just display)
+  // Auto-fill OTP code when provided (WhatsApp not available yet)
   useEffect(() => {
-    if (sim_code) {
-      console.log("Simulation Mode: OTP is", sim_code);
-      // Optional: Auto-fill for easier testing
-      // setOtpCode(sim_code.split(""));
+    if (sim_code && sim_code.length === 6) {
+      setOtpCode(sim_code.split(""));
     }
   }, [sim_code]);
 
@@ -221,19 +219,24 @@ function VerifikasiOTPContent() {
         </div>
 
         <h1 className="text-2xl font-black text-stone-900 mb-2">
-          Verifikasi via WhatsApp
+          Verifikasi {sim_code ? "Kode" : "via WhatsApp"}
         </h1>
         <p className="text-sm text-stone-600 mb-1">
-          Kami telah mengirim kode 6 digit ke:
+          {sim_code
+            ? "Masukkan kode verifikasi yang tertera di bawah ini:"
+            : "Kami telah mengirim kode 6 digit ke:"}
         </p>
-        <p className="text-lg font-black text-teal-700">{no_hp}</p>
+        {!sim_code && <p className="text-lg font-black text-teal-700">{no_hp}</p>}
 
-        {/* Simulation Banner */}
+        {/* OTP Display Banner (when WhatsApp not available) */}
         {sim_code && (
-          <div className="mt-4 p-3 bg-blue-50 border-2 border-blue-200 rounded-xl animate-pulse">
-            <p className="text-xs font-bold text-blue-800 uppercase mb-1">Mode Simulasi</p>
-            <p className="text-sm text-blue-900">
-              Kode OTP Anda: <span className="font-mono text-xl font-black">{sim_code}</span>
+          <div className="mt-4 p-3 bg-teal-50 border-2 border-teal-200 rounded-xl">
+            <p className="text-xs font-bold text-teal-800 mb-1">Kode Verifikasi Anda</p>
+            <p className="text-sm text-teal-900">
+              Masukkan kode berikut: <span className="font-mono text-xl font-black">{sim_code}</span>
+            </p>
+            <p className="text-xs text-teal-600 mt-1">
+              Layanan WhatsApp sedang dalam proses aktivasi
             </p>
           </div>
         )}
