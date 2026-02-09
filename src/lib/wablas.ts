@@ -74,7 +74,7 @@ export async function sendMessage({ phone, message }: SendMessageParams): Promis
 
         // Add secret key if available (required for IP not in whitelist)
         if (WABLAS_SECRET_KEY) {
-            url.searchParams.append('secret', WABLAS_SECRET_KEY);
+            url.searchParams.append('secret_key', WABLAS_SECRET_KEY);
         }
 
         const response = await fetch(url.toString(), {
