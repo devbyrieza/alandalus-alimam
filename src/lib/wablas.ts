@@ -26,6 +26,7 @@ export interface SendTemplateParams {
 // Configuration
 const WABLAS_DOMAIN = process.env.WABLAS_DOMAIN || '';
 const WABLAS_TOKEN = process.env.WABLAS_TOKEN || '';
+const WABLAS_SECRET_KEY = process.env.WABLAS_SECRET_KEY || '';
 
 if (!WABLAS_DOMAIN || !WABLAS_TOKEN) {
     console.warn('⚠️ Wablas credentials not configured. WhatsApp notifications will be disabled.');
@@ -70,6 +71,11 @@ export async function sendMessage({ phone, message }: SendMessageParams): Promis
         url.searchParams.append('phone', formattedPhone);
         url.searchParams.append('message', message);
         url.searchParams.append('token', WABLAS_TOKEN);
+
+        // Add secret key if available (required for IP not in whitelist)
+        if (WABLAS_SECRET_KEY) {
+            url.searchParams.append('secret', WABLAS_SECRET_KEY);
+        }
 
         const response = await fetch(url.toString(), {
             method: 'GET',
