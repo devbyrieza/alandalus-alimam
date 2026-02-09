@@ -102,12 +102,12 @@ export default function DaftarPage() {
 
     if (!formData.no_hp) {
       errors.no_hp = "Nomor WhatsApp/HP orang tua wajib diisi";
-    } else if (
-      !/^(08|628|\+628)\d{8,12}$/.test(
-        formData.no_hp.replace(/[\s\-\(\)]/g, "")
-      )
-    ) {
-      errors.no_hp = "Format nomor tidak valid (contoh: 081234567890)";
+    } else {
+      // Normalize: hapus awalan 0, 62, +62 jika user tetap ketik
+      const cleaned = formData.no_hp.replace(/[\s\-\(\)]/g, "").replace(/^(\+?62|0)/, "");
+      if (!/^8\d{7,12}$/.test(cleaned)) {
+        errors.no_hp = "Nomor tidak valid. Masukkan nomor setelah +62 (contoh: 81234567890)";
+      }
     }
 
     if (!formData.jenis_kelamin) {
@@ -138,12 +138,17 @@ export default function DaftarPage() {
     setIsLoading(true);
 
     try {
+      // Normalize nomor: pastikan format 08xxx
+      const normalizedHp = formData.no_hp.replace(/^(\+?62|0)/, "");
+      const fullHp = `0${normalizedHp}`;
+
       // 1. Kirim OTP via WhatsApp
       const response = await fetch("/api/register/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          no_hp: fullHp,
           otp_channel: "whatsapp", // Force WhatsApp
         }),
       });
@@ -159,7 +164,7 @@ export default function DaftarPage() {
         nik: formData.nik,
         nama_lengkap: formData.nama_lengkap,
         tanggal_lahir: formData.tanggal_lahir,
-        no_hp: formData.no_hp,
+        no_hp: fullHp,
         jenis_kelamin: formData.jenis_kelamin,
         jenjang: formData.jenjang,
         channel: "whatsapp",
