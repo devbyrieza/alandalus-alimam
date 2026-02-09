@@ -6,32 +6,32 @@ import { Container } from "@/components/layout/Container";
 
 const TESTIMONIALS = [
   {
-    name: "H. Ahmad Rifa'i",
+    name: "H. Abdullah",
     role: "Wali Santri MTs",
     initial: "A",
     quote:
-      "Perubahan akhlak anak saya luar biasa sejak mondok di sini. Dari yang susah disuruh sholat, sekarang malah ngingetin kami sekeluarga waktu sholat.",
+      "Awalnya saya ragu melepas anak mondok. Tapi melihat perubahannya yang sekarang rajin sholat, sopan sama orang tua, dan hafalannya lancar, saya sujud syukur.",
   },
   {
-    name: "Siti Fatimah, S.Pd",
-    role: "Wali Santri MA",
-    initial: "S",
+    name: "Ustadz Faisal",
+    role: "Alumni Al-Azhar Mesir",
+    initial: "F",
     quote:
-      "Saya guru, jadi saya tahu bedanya pendidikan biasa dengan yang di Al-Imam. Anak saya hafal Qur'an PLUS ranking 3 di kelas. Dua-duanya dapat!",
+      "Al-Imam memberikan bekal bahasa Arab yang sangat kuat. Saat saya tes masuk Al-Azhar, saya merasa terbantu sekali dengan dasar yang diajarkan di sini.",
   },
   {
-    name: "Drs. M. Yusuf",
-    role: "Wali Santri Tahfidz",
-    initial: "M",
+    name: "Ibu Nurhasanah",
+    role: "Wali Santri I'dad",
+    initial: "N",
     quote:
-      "Awalnya cuma hafal 3 juz, sekarang sudah 15 juz dalam 2 tahun. Bacaannya tartil, artinya paham pula. Ini hasil nyata, bukan janji kosong.",
+      "Lingkungannya sangat kondusif dan jauh dari pengaruh negatif gadget. Anak saya jadi lebih fokus belajar dan mandiri mengurus diri sendiri.",
   },
   {
-    name: "Kel. Abdullah",
-    role: "Wali 3 Santri",
-    initial: "A",
+    name: "Bpk. Hermawan",
+    role: "Wali Santri",
+    initial: "H",
     quote:
-      "3 anak kami semua di sini, dari SMP sampai SMA. Biaya lebih murah dari sekolah swasta plus dapat asrama, makan, dan bimbingan 24 jam.",
+      "Biaya sangat terjangkau untuk fasilitas dan kualitas pendidikan seperti ini. Asramanya nyaman, makannya bergizi, dan pembinanya sangat perhatian.",
   },
 ] as const;
 

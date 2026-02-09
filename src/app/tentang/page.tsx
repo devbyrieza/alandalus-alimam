@@ -139,7 +139,7 @@ export default function TentangPage() {
                                 <Target className="w-8 h-8" />
                             </div>
                             <h3 className="text-2xl font-black text-brown-900 mb-4">Visi</h3>
-                            <p className="text-ink-600 leading-relaxed italic border-l-4 border-brown-200 pl-4">
+                            <p className="text-lg text-ink-600 italic leading-relaxed">
                                 "Menjadi lembaga pendidikan Islam unggulan dalam rangka mewujudkan generasi khairu ummah yang memiliki manhaj Al Qur'an dan As Sunnah sesuai pemahaman as-salaf ash-shalih."
                             </p>
                         </div>

@@ -40,7 +40,7 @@ export default function Footer() {
                 </p>
               </div>
             </div>
-            <p className="text-ink-500 text-sm leading-relaxed max-w-sm">
+            <p className="text-ink-500 text-sm leading-relaxed max-w-sm text-justify">
               Membangun generasi Qur'ani yang berakhlak mulia, cerdas, dan siap memimpin masa depan dengan landasan salafus shalih.
             </p>
 
@@ -111,7 +111,7 @@ export default function Footer() {
               {/* Call to Action Box */}
               <div className="bg-surface-50 rounded-2xl p-5 border border-surface-100">
                 <h5 className="font-bold text-ink-900 text-sm mb-2">Pendaftaran 2026 Dibuka!</h5>
-                <p className="text-xs text-ink-500 mb-4">Mulai 10 Februari 2026. Kuota terbatas.</p>
+                <p className="text-xs text-ink-500 mb-4 text-justify">Mulai 10 Februari 2026. Kuota terbatas.</p>
                 <Link
                   href="/daftar"
                   className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-white border border-brown-200 text-brown-700 text-xs font-bold rounded-xl shadow-sm hover:shadow-md hover:border-brown-300 transition-all"

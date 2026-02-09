@@ -282,24 +282,24 @@ export default function FasilitasPage() {
                   <div className="w-16 h-16 bg-teal-100 rounded-2xl flex items-center justify-center text-teal-700 mb-8">
                     <Trophy className="w-8 h-8" />
                   </div>
-                  <h3 className="text-3xl font-black text-brown-900 mb-4">Minisoccer Court</h3>
+                  <h3 className="text-3xl font-black text-brown-900 mb-4">Lapangan Olahraga</h3>
                   <p className="text-lg text-ink-600 mb-8 leading-relaxed">
-                    Lapangan rumput sintetis standar nasional untuk menyalurkan bakat olahraga santri. Rutin digunakan untuk latihan futsal dan kompetisi antar kelas.
+                    Area olahraga multifungsi untuk menjaga kebugaran santri. Digunakan untuk Futsal, Basket, Voli, dan kegiatan ekstrakurikuler memanah.
                   </p>
 
                   <div className="grid grid-cols-2 gap-6">
                     <div className="flex items-start gap-4">
                       <CheckCircle2 className="w-6 h-6 text-teal-500 flex-shrink-0" />
                       <div>
-                        <h4 className="font-bold text-brown-900">Rumput Sintetis</h4>
-                        <p className="text-sm text-ink-500">Standar FIFA</p>
+                        <h4 className="font-bold text-brown-900">Multifungsi</h4>
+                        <p className="text-sm text-ink-500">Futsal, Basket, Voli</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
                       <CheckCircle2 className="w-6 h-6 text-teal-500 flex-shrink-0" />
                       <div>
-                        <h4 className="font-bold text-brown-900">Night Mode</h4>
-                        <p className="text-sm text-ink-500">Penerangan LED</p>
+                        <h4 className="font-bold text-brown-900">Area Luas</h4>
+                        <p className="text-sm text-ink-500">Outdoor Activity</p>
                       </div>
                     </div>
                   </div>
@@ -314,24 +314,24 @@ export default function FasilitasPage() {
                   <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mb-8">
                     <Droplets className="w-8 h-8" />
                   </div>
-                  <h3 className="text-3xl font-black text-brown-900 mb-4">Depot Air Minum</h3>
+                  <h3 className="text-3xl font-black text-brown-900 mb-4">Kantin & Koperasi</h3>
                   <p className="text-lg text-ink-600 mb-8 leading-relaxed">
-                    Fasilitas air minum isi ulang gratis dengan sistem filtrasi higienis. Menjamin kebutuhan hidrasi santri terpenuhi setiap saat tanpa biaya tambahan.
+                    Menyediakan kebutuhan harian santri dan makanan sehat yang higienis. Dikelola dengan prinsip kejujuran untuk melatih kemandirian santri.
                   </p>
 
                   <div className="grid grid-cols-2 gap-6">
                     <div className="flex items-start gap-4">
                       <CheckCircle2 className="w-6 h-6 text-blue-500 flex-shrink-0" />
                       <div>
-                        <h4 className="font-bold text-brown-900">100% Gratis</h4>
-                        <p className="text-sm text-ink-500">Unlimited Refill</p>
+                        <h4 className="font-bold text-brown-900">Menu Sehat</h4>
+                        <p className="text-sm text-ink-500">Bergizi & Halal</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
                       <CheckCircle2 className="w-6 h-6 text-blue-500 flex-shrink-0" />
                       <div>
-                        <h4 className="font-bold text-brown-900">Higienis</h4>
-                        <p className="text-sm text-ink-500">Filtrasi RO UV</p>
+                        <h4 className="font-bold text-brown-900">Lengkap</h4>
+                        <p className="text-sm text-ink-500">Kebutuhan Harian</p>
                       </div>
                     </div>
                   </div>

@@ -19,25 +19,25 @@ const GALLERY_ITEMS = [
   {
     image: "/images/santri-pembelajaran-kitab.png",
     title: "Kajian Kitab Kuning",
-    description: "Metode Bandongan & Sorogan",
+    description: "Mengkaji Kitab Turats & Ulama Salaf",
     icon: BookOpen,
   },
   {
     image: "/images/tahfidz.JPG",
-    title: "Program Tahfidz",
-    description: "Setoran Hafalan Harian",
+    title: "Halaqoh Tahfidz",
+    description: "Setoran Hafalan & Muroja'ah",
     icon: BookMarked,
   },
   {
     image: "/images/ekstra-atau-ekskul.jpg",
     title: "Ekstrakurikuler",
-    description: "Bela Diri & Seni Islami",
+    description: "Bela Diri, Panahan & Lifeskill",
     icon: Target,
   },
   {
     image: "/images/masjid.png",
-    title: "Fasilitas Pesantren",
-    description: "Masjid & Asrama Modern",
+    title: "Masjid Jami'",
+    description: "Pusat Ibadah & Tarbiyah Santri",
     icon: School,
   },
 ] as const;

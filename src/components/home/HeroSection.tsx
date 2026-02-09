@@ -97,7 +97,7 @@ export default function HeroSection() {
             </div>
 
             {/* Floating Card - Wablas Style */}
-            <div className="absolute bottom-6 -left-4 lg:-left-8 z-20">
+            <div className="absolute bottom-6 left-0 lg:-left-8 z-20">
               <div className="card-wablas bg-white/95 backdrop-blur-xl p-4 flex items-center gap-3 animate-bounce-slow">
                 <div className="w-12 h-12 bg-brown-50 rounded-xl flex items-center justify-center text-brown-700 shadow-inner">
                   <GraduationCap className="w-6 h-6" />

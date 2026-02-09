@@ -7,23 +7,23 @@ import { Container } from "@/components/layout/Container";
 const FEATURES = [
   {
     icon: BookOpen,
-    title: "Kurikulum Kaffah",
-    description: "Perpaduan harmonis kurikulum nasional, kepesantrenan, dan tahfidz.",
+    title: "Manhaj Salaf",
+    description: "Pendidikan berbasis pemahaman para Salafush Shalih, menanamkan aqidah yang lurus dan akhlak mulia.",
   },
   {
     icon: Award,
-    title: "Akreditasi A",
-    description: "Diakui secara nasional dengan standar mutu pendidikan yang tinggi.",
+    title: "Kurikulum Terpadu",
+    description: "Memadukan Kurikulum Nasional, Diniyah (Pesantren), dan Tahfidz Al-Qur'an secara seimbang.",
   },
   {
     icon: Users,
-    title: "Asatidzah Kompeten",
-    description: "Lulusan perguruan tinggi terbaik dalam & luar negeri.",
+    title: "Jaringan Alumni Luas",
+    description: "Akses informasi kuliah ke Timur Tengah (Al-Azhar, UIM, Yaman) dan Perguruan Tinggi Negeri.",
   },
   {
     icon: ShieldCheck,
-    title: "Lingkungan Aman",
-    description: "Aman dari pengaruh negatif luar dengan pendampingan 24 jam.",
+    title: "Lingkungan Edukatif",
+    description: "Kawasan pesantren yang asri, aman, dan kondusif, jauh dari hiruk-pikuk perkotaan.",
   },
 ] as const;
 

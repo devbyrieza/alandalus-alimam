@@ -20,22 +20,23 @@ import { Button } from "@/components/ui/button";
 const PROGRAMS = [
     {
         id: "mts",
-        name: "MTs Al-Imam",
-        fullName: "Madrasah Tsanawiyah Al-Imam",
-        description: "Program pendidikan setara SMP dengan paduan kurikulum Nasional (Kemenag) dan Kepesantrenan untuk membentuk karakter santri yang berakhlak mulia dan berwawasan luas.",
+        name: "Madrasah Tsanawiyah",
+        buttonLabel: "Daftar MTs",
+        fullName: "Program Madrasah Tsanawiyah (Setara SMP)",
+        description: "Program pendidikan tingkat menengah pertama yang memadukan Kurikulum Nasional (Kemenag) dengan Kurikulum Pesantren (Diniyah) untuk membentuk santri yang berakhlak mulia, kokoh dalam aqidah, dan unggul dalam prestasi.",
         stats: [
             { label: "Masa Studi", value: "3 Tahun" },
-            { label: "Target Hapalan", value: "5 Juz" },
+            { label: "Target Hafalan", value: "Min. 3 Juz/Thn" },
             { label: "Bahasa", value: "Arab & Inggris" },
         ],
         curriculum: [
-            "Tahfidz Al-Qur'an (Target 5 Juz Mutqin)",
-            "Bahasa Arab (Nahwu, Shorof, Muhadatsah)",
-            "Kajian Kitab Kuning Dasar (Fiqh, Aqidah, Akhlaq)",
-            "Kurikulum Nasional (Matematika, IPA, B.Indo, B.Inggris)",
-            "Ekstrakurikuler (Pramuka, Silat, Panahan, Futsal)",
+            "Tahfidz Al-Qur'an (Target Minimal 3 Juz/Tahun)",
+            "Bahasa Arab Aktif (Muhadatsah & Yaumiyah)",
+            "Kajian Kitab Kuning (Aqidah, Fiqih, Akhlaq)",
+            "Kurikulum Nasional (Matematika, IPA, B.Inggris)",
+            "Ekstrakurikuler (Bela Diri, Panahan, Futsal)",
         ],
-        image: "/images/santri-pembelajaran-kitab.png", // Kitab learning image
+        image: "/images/mts.png", // New MTs image
         theme: "brown",
         gradient: "from-brown-800 to-brown-600",
         accent: "text-brown-600",
@@ -44,21 +45,22 @@ const PROGRAMS = [
     {
         id: "il",
         name: "I'dad Lughowi",
+        buttonLabel: "Daftar IL",
         fullName: "Program I'dad Lughowi (Setara SMA)",
-        description: "Program pendidikan 4 tahun (1 tahun persiapan bahasa + 3 tahun MA) yang setara dengan SMA/MA. Memadukan kurikulum kepesantrenan dan umum untuk mencetak kader ulama dan profesional.",
+        description: "Program pendidikan 4 tahun yang diawali dengan 1 tahun intensif Bahasa Arab & Syariah (I'dad), dilanjutkan dengan 3 tahun jenjang Madrasah Aliyah (MA). Lulusan mendapatkan ijazah negara (Setara SMA) dan ijazah pesantren.",
         stats: [
-            { label: "Masa Studi", value: "4 Tahun" },
-            { label: "Jenjang", value: "Setara SMA" },
-            { label: "Target", value: "Hafal 30 Juz" },
+            { label: "Masa Studi", value: "4 Tahun (1+3)" },
+            { label: "Jenjang", value: "Setara SMA/MA" },
+            { label: "Target", value: "Lancar Bhs Arab" },
         ],
         curriculum: [
-            "Tahun 1: Intensif Bahasa Arab & Dasar Syar'i",
-            "Tahun 2-4: Kurikulum MA & Lanjutan Diniyah",
-            "Tahfidz Al-Qur'an (Target 30 Juz)",
-            "Kajian Kitab Kuning/Turats",
-            "Ijazah Negara (Paket C/Formal)",
+            "Tahun 1: Intensif Bahasa Arab (Nahwu, Shorof, Balaghah)",
+            "Tahun 2-4: Kurikulum MA (Kepesantrenan & Umum)",
+            "Tahfidz Al-Qur'an (Lanjutan & Muroja'ah)",
+            "Kajian Kitab Turats & TICE (Adopsi Al-Andalus)",
+            "Persiapan Kuliah Timur Tengah & PTN",
         ],
-        image: "/images/tahfidz.JPG", // Tahfidz image
+        image: "/images/il.png", // New IL image
         theme: "gold",
         gradient: "from-gold-600 to-gold-400",
         accent: "text-gold-600",
@@ -160,7 +162,7 @@ export default function ProgramPage() {
                                     <h2 className="text-2xl md:text-4xl font-black text-brown-900 mb-4 font-display">
                                         {program.fullName}
                                     </h2>
-                                    <p className="text-ink-600 text-base leading-relaxed mb-6">
+                                    <p className="text-ink-600 text-base leading-relaxed mb-6 text-justify">
                                         {program.description}
                                     </p>
 
@@ -210,7 +212,7 @@ export default function ProgramPage() {
                                         asChild
                                     >
                                         <Link href={`/ppdb?jenjang=${program.id.toUpperCase()}`}>
-                                            <span className="mr-2">Daftar {program.name}</span>
+                                            <span className="mr-2">{program.buttonLabel}</span>
                                             <ArrowRight className="w-4 h-4" />
                                         </Link>
                                     </Button>
@@ -228,9 +230,9 @@ export default function ProgramPage() {
                                             sizes="(max-width: 1024px) 100vw, 50vw"
                                             priority={idx === 0}
                                         />
-                                        {/* Overlay: gelap di bawah agar teks terbaca + tint warna program */}
-                                        <div className={`absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent z-10`} />
-                                        <div className={`absolute inset-0 bg-gradient-to-br ${program.gradient} opacity-40 z-10 mix-blend-multiply`} />
+                                        {/* Overlay: lebih terang agar gambar terlihat jelas */}
+                                        <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10`} />
+                                        <div className={`absolute inset-0 bg-gradient-to-br ${program.gradient} opacity-20 z-10 mix-blend-multiply`} />
                                         <div className="absolute inset-0 bg-[url('/images/pattern.png')] bg-repeat opacity-10 z-10 mix-blend-overlay" />
 
                                         <div className="absolute inset-0 z-20 p-6 lg:p-8 flex flex-col justify-end text-white">
@@ -240,12 +242,12 @@ export default function ProgramPage() {
 
                                             {/* FIXED: Tambah text shadow dan outline untuk visibility lebih baik */}
                                             <div className="bg-black/40 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
-                                                <h3 className="text-2xl lg:text-3xl font-display font-black mb-1 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]" 
+                                                <h3 className="text-2xl lg:text-3xl font-display font-black mb-1 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
                                                     style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.5)' }}>
                                                     {program.name}
                                                 </h3>
-                                                <p className="text-white/90 text-sm lg:text-base font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]" 
-                                                   style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.9)' }}>
+                                                <p className="text-white/90 text-sm lg:text-base font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]"
+                                                    style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.9)' }}>
                                                     Mencetak Generasi Rabbani
                                                 </p>
                                             </div>

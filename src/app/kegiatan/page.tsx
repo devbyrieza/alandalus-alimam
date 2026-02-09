@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   BookOpen,
   BookMarked,
@@ -29,6 +30,9 @@ import {
   Zap,
   Shield,
   Trophy,
+  MessagesSquare,
+  BadgeCheck,
+  GraduationCap,
 } from "lucide-react";
 import ScrollAnimation from "@/components/ui/ScrollAnimation";
 import { Container } from "@/components/layout/Container";
@@ -343,7 +347,7 @@ export default function KegiatanPage() {
         "/images/santri-pembelajaran-kitab.png",
       title: "Pembelajaran Kitab Kuning",
       description:
-        "Bukan sekadar hafalan! Santri kami PAHAM isi kitab, bisa berdebat ilmiah, dan siap jadi ulama muda yang membanggakan keluarga",
+        "Bukan sekadar hafalan! Santri kami PAHAM isi kitab, bisa berdiskusi ilmiah, dan siap jadi ulama muda yang membanggakan keluarga",
       icon: BookOpen,
       gradient: "from-[var(--color-brown-900)]/90 via-[var(--color-brown-800)]/70 to-[var(--color-gold-700)]/50",
       bgColor: "bg-[var(--color-brown-800)]",
@@ -355,12 +359,12 @@ export default function KegiatanPage() {
       results: [
         {
           icon: TrendingUp,
-          text: "95% santri menguasai nahwu-shorof dalam 1 tahun",
+          text: "Mampu membaca kitab gundul (Nahwu-Shorof Applied)",
         },
-        { icon: Award, text: "Juara 1 Debat Kitab se-Jawa Barat 2024" },
+        { icon: Award, text: "Aktif dalam Bahtsul Masail & Muhadoroh" },
         {
           icon: CheckCircle2,
-          text: "Lulusan diterima di Universitas Al-Azhar & Madinah",
+          text: "Alumni tersebar di PTN & Timur Tengah",
         },
       ],
       testimonial: {
@@ -372,24 +376,24 @@ export default function KegiatanPage() {
     {
       image:
         "/images/tahfidz.JPG",
-      title: "Program Tahfidz 30 Juz",
+      title: "Program Tahfidz Al-Qur'an",
       description:
-        "Target PASTI tercapai! Dengan metode terbukti, anak Anda bisa hafal 30 juz + PAHAM artinya. Bukan mimpi, ini JAMINAN kami!",
+        "Metode menghafal yang terukur disesuaikan dengan kemampuan santri dan target jenjang pendidikan (bisa mencapai 30 juz bagi yang takhasus/lanjut).",
       icon: BookMarked,
       gradient: "from-[var(--color-gold-700)]/90 via-[var(--color-gold-600)]/70 to-[var(--color-teal-600)]/50",
       bgColor: "bg-[var(--color-gold-600)]",
       stats: [
-        { label: "Target Hafalan", value: "30 Juz" },
+        { label: "Target Hafalan", value: "3 - 30 Juz" },
         { label: "Metode Proven", value: "Talaqqi" },
         { label: "Setoran", value: "Harian" },
       ],
       results: [
         {
           icon: TrendingUp,
-          text: "Rata-rata 7-10 juz per tahun untuk santri rajin",
+          text: "Mencapai Target Hafalan Sesuai Jenjang (Min. 3 Juz/Thn)",
         },
-        { icon: Award, text: "15 santri wisuda tahfidz 30 juz tahun 2024" },
-        { icon: CheckCircle2, text: "Bacaan tartil + tajwid sempurna dijamin" },
+        { icon: Award, text: "Memiliki Bacaan Standar Sanad/Talaqqi" },
+        { icon: CheckCircle2, text: "Mampu Membaca Al-Qur'an Tartil & Tajwid" },
       ],
       testimonial: {
         quote:
@@ -412,11 +416,11 @@ export default function KegiatanPage() {
         { label: "Jam/Minggu", value: "6+" },
       ],
       results: [
-        { icon: Trophy, text: "Juara 1 Pencak Silat Popda Sukabumi 2024" },
-        { icon: Award, text: "Finalis Olimpiade Sains Nasional (OSN) 2024" },
+        { icon: Trophy, text: "Memiliki Kemampuan Bela Diri (Silat/Karate)" },
+        { icon: Award, text: "Berprestasi dalam Minat Bakat (Sains & Bahasa)" },
         {
           icon: CheckCircle2,
-          text: "85% santri minimal kuasai 2 skill non-akademik",
+          text: "Berjiwa Kepemimpinan & Siap Berorganisasi",
         },
       ],
       testimonial: {
@@ -586,11 +590,11 @@ export default function KegiatanPage() {
     <>
       {/* Hero Section - Fully Responsive */}
       <section className="relative overflow-hidden bg-brown-900 flex items-center min-h-[400px] md:min-h-[500px] py-12 md:py-16">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[url('/images/pattern.png')] bg-repeat opacity-5 mix-blend-overlay" />
-      {/* Decorative Elements - Hidden on mobile */}
-      <div className="hidden sm:block absolute top-20 left-10 w-48 h-48 sm:w-72 sm:h-72 bg-[var(--color-gold-500)] rounded-full blur-3xl opacity-10 animate-float" />
-      <div className="hidden sm:block absolute bottom-20 right-10 w-64 h-64 sm:w-96 sm:h-96 bg-[var(--color-brown-700)] rounded-full blur-3xl opacity-10 animate-float delay-500" />
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-[url('/images/pattern.png')] bg-repeat opacity-5 mix-blend-overlay" />
+        {/* Decorative Elements - Hidden on mobile */}
+        <div className="hidden sm:block absolute top-20 left-10 w-48 h-48 sm:w-72 sm:h-72 bg-[var(--color-gold-500)] rounded-full blur-3xl opacity-10 animate-float" />
+        <div className="hidden sm:block absolute bottom-20 right-10 w-64 h-64 sm:w-96 sm:h-96 bg-[var(--color-brown-700)] rounded-full blur-3xl opacity-10 animate-float delay-500" />
 
         <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <div className="mb-4 sm:mb-6">
@@ -623,6 +627,52 @@ export default function KegiatanPage() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* 2. Hasil Nyata - Real Data */}
+      <section className="py-12 md:py-16 relative">
+        <Container>
+          <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-clay-lg relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brown-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+
+            <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-50 text-gold-700 text-xs font-bold uppercase tracking-widest mb-4">
+                  <Star className="w-3.5 h-3.5" />
+                  <span>Output Santri</span>
+                </div>
+                <h2 className="text-3xl md:text-5xl font-black text-ink-900 mb-6 font-display">
+                  Hasil Nyata <br />
+                  <span className="text-brown-600">Pendidikan Kami</span>
+                </h2>
+                <p className="text-lg text-ink-600 leading-relaxed mb-8">
+                  Kami tidak sekadar berjanji, tapi bukti. Alhamdulillah, dengan izin Allah, santri kami telah menunjukkan prestasi nyata dalam akademik dan akhlak.
+                </p>
+                <div className="flex gap-4">
+                  <Link href="/ppdb" className="btn-primary">
+                    Daftar Sekarang
+                  </Link>
+                </div>
+              </div>
+
+              <div className="grid gap-4">
+                {[
+                  { text: "Bahasa Arab sebagai Bahasa Pengantar Harian", icon: MessagesSquare },
+                  { text: "Hafalan Al-Qur'an Lancar & Berstandar Sanad", icon: BadgeCheck },
+                  { text: "Juara Musabaqah Hifdzil Qur'an (MHQ) & Pidato", icon: Trophy },
+                  { text: "Alumni Diterima di Timur Tengah, LIPIA & PTN", icon: GraduationCap },
+                ].map((item, idx) => (
+                  <div key={idx} className="bg-surface-50 p-4 rounded-xl flex items-center gap-4 border border-surface-100 hover:border-gold-300 transition-colors">
+                    <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-gold-600 shrink-0">
+                      <item.icon className="w-5 h-5" />
+                    </div>
+                    <span className="font-bold text-ink-800">{item.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Container>
       </section>
 
       {/* Kegiatan Utama Section - Responsive */}

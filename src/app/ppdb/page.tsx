@@ -116,8 +116,8 @@ function PPDBContent() {
 
   const faqs = [
     {
-      q: "Apakah ada kuota khusus alumni?",
-      a: "Tentu, alumni SD Al-Imam mendapatkan jalur prioritas namun tetap melalui tes pemetaan."
+      q: "Apakah santri wajib tinggal di asrama?",
+      a: "Ya, seluruh santri wajib mukim (asrama) agar dapat mengikuti program pendidikan yang terintegrasi dan pembinaan akhlak secara intensif."
     },
     {
       q: "Berapa total biaya masuk?",
