@@ -29,7 +29,7 @@ const CONTACT_INFO = [
   {
     icon: Mail,
     title: "Email Resmi",
-    content: "infopesantrenalimam@gmail.com",
+    content: "pesantrenalimamsukabumi@gmail.com",
     detail: "Kirim pertanyaan kapan saja",
     color: "gold",
   },

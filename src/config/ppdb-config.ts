@@ -10,7 +10,8 @@ export const PPDB_CONFIG = {
     singkatan: "Al-Imam",
     alamat: "Jl. Pelabuhan Ratu II KM 18, Kp. Pupunjul, Desa Cikembar, Kec. Cikembar, Kab. Sukabumi, Jawa Barat 43157",
     telepon: "+62 851-1152-4441",
-    email: "infopesantrenalimam@gmail.com",
+    email: "pesantrenalimamsukabumi@gmail.com",
+    emailPpdb: "ppdb.pesantrenalimam@gmail.com",
     website: "https://www.al-imam.sch.id",
   },
 

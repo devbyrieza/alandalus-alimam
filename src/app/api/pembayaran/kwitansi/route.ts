@@ -257,7 +257,7 @@ export async function GET(request: NextRequest) {
     <div class="header">
       <h1>PONPES AL-IMAM AL-ISLAMI</h1>
       <p>Jl. Pelabuhan Ratu II KM 18, Cikembar, Sukabumi, Jawa Barat 43157</p>
-      <p>Telp: +62 851-1152-4441 | Email: infopesantrenalimam@gmail.com</p>
+      <p>Telp: +62 851-1152-4441 | Email: ppdb.pesantrenalimam@gmail.com</p>
     </div>
 
     <div class="kwitansi-title">

@@ -136,8 +136,8 @@ export default function ContactPage() {
                                     <Mail className="w-6 h-6" />
                                 </div>
                                 <h3 className="font-bold text-lg text-brown-900 mb-2">Email Resmi</h3>
-                                <a href="mailto:infopesantrenalimam@gmail.com" className="text-ink-700 font-medium hover:text-gold-600 transition-colors break-all">
-                                    infopesantrenalimam@gmail.com
+                                <a href="mailto:pesantrenalimamsukabumi@gmail.com" className="text-ink-700 font-medium hover:text-gold-600 transition-colors break-all">
+                                    pesantrenalimamsukabumi@gmail.com
                                 </a>
                             </div>
 
