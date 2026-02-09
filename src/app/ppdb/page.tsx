@@ -22,6 +22,8 @@ import {
   Loader2,
   Check,
   HelpCircle,
+  Download,
+  CreditCard,
 } from "lucide-react";
 import ScrollAnimation from "@/components/ui/ScrollAnimation";
 import { Container } from "@/components/layout/Container";
@@ -87,23 +89,29 @@ function PPDBContent() {
       title: "Dokumen Wajib",
       icon: FileText,
       items: [
-        "Scan Kartu Keluarga (KK)",
-        "Scan Akta Kelahiran",
-        "Scan Rapor 2 Semester Terakhir",
-        "Scan NISN",
-        "Pas Foto Setengah Badan (Background Putih)"
+        { name: "Scan Kartu Keluarga (KK)", download: false },
+        { name: "Scan Akte Kelahiran", download: false },
+        { name: "Scan Rapor 2 Semester Terakhir", download: false },
+        { name: "Scan Nomor Induk Siswa Nasional (NISN)", download: false },
+        { name: "Foto Setengah Badan", download: false },
       ]
     },
     {
-      title: "Dokumen Tambahan",
+      title: "Dokumen Download",
       icon: CheckCircle,
+      description: "Format disediakan panitia. Download, isi, scan, lalu upload.",
       items: [
-        "Surat Keterangan Sehat",
-        "Pakta Integritas (Download di Dashboard)",
-        "Surat Pernyataan Bebas Narkoba",
-        "Bukti Transfer Biaya Pendaftaran"
+        { name: "Surat Keterangan Sehat", download: true },
+        { name: "Pakta Integritas", download: true },
+        { name: "Pernyataan Bebas Perilaku Negatif", download: true },
       ]
     }
+  ];
+
+  const biaya = [
+    { label: "Biaya Pendaftaran", value: "Rp 200.000" },
+    { label: "Uang Pangkal", value: "Rp 9.800.000" },
+    { label: "SPP Bulanan", value: "Rp 1.100.000" },
   ];
 
   const faqs = [
@@ -222,30 +230,72 @@ function PPDBContent() {
         </Container>
       </section>
 
-      {/* Requirements & Info */}
+      {/* Biaya Pendaftaran */}
       <section className="py-20 bg-white border-y border-surface-200">
+        <Container>
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-black text-ink-900 mb-4">Biaya Pendaftaran</h2>
+              <p className="text-ink-600">Rincian biaya PPDB Tahun Ajaran 2026/2027.</p>
+            </div>
+
+            <div className="grid sm:grid-cols-3 gap-6 mb-8">
+              {biaya.map((item, idx) => (
+                <ScrollAnimation key={idx} delay={idx * 0.1} className="bg-surface-50 rounded-2xl p-6 border border-surface-200 text-center hover:shadow-md transition-all">
+                  <div className="w-12 h-12 mx-auto bg-white rounded-xl flex items-center justify-center mb-4 border border-surface-200 shadow-sm">
+                    <CreditCard className="w-5 h-5 text-brown-600" />
+                  </div>
+                  <p className="text-sm font-medium text-ink-500 mb-2">{item.label}</p>
+                  <p className="text-2xl font-black text-ink-900">{item.value}</p>
+                </ScrollAnimation>
+              ))}
+            </div>
+
+            <div className="bg-brown-50 border border-brown-100 rounded-xl p-4 text-center">
+              <p className="text-sm text-brown-800">
+                <span className="font-bold">Catatan:</span> Uang pendaftaran yang sudah dibayarkan tidak dapat dikembalikan dengan alasan apapun.
+              </p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Persyaratan & Mengapa Al-Imam */}
+      <section className="py-20">
         <Container>
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             <div>
               <h2 className="text-3xl font-black text-ink-900 mb-6">Persyaratan Berkas</h2>
               <p className="text-ink-600 mb-8">
-                Siapkan dokumen berikut dalam format digital (PDF/JPG) sebelum mengisi formulir pendaftaran online.
+                Siapkan dokumen berikut dalam format digital (PDF/JPG). Upload dilakukan setelah pembayaran dan pengisian data lengkap.
               </p>
 
               <div className="space-y-6">
                 {requirements.map((req, idx) => (
-                  <div key={idx} className="bg-surface-50 rounded-2xl p-6 border border-surface-200">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center border border-surface-200 shadow-sm">
+                  <div key={idx} className="bg-white rounded-2xl p-6 border border-surface-200 shadow-sm">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-lg bg-surface-50 flex items-center justify-center border border-surface-200">
                         <req.icon className="w-5 h-5 text-brown-600" />
                       </div>
-                      <h3 className="font-bold text-ink-900">{req.title}</h3>
+                      <div>
+                        <h3 className="font-bold text-ink-900">{req.title}</h3>
+                        {req.description && (
+                          <p className="text-xs text-ink-500">{req.description}</p>
+                        )}
+                      </div>
                     </div>
-                    <ul className="space-y-3">
+                    <ul className="space-y-3 mt-4">
                       {req.items.map((item, i) => (
-                        <li key={i} className="flex items-start gap-3 text-sm text-ink-700">
-                          <Check className="w-4 h-4 text-teal-600 mt-0.5 shrink-0" />
-                          <span>{item}</span>
+                        <li key={i} className="flex items-center gap-3 text-sm text-ink-700">
+                          {item.download ? (
+                            <Download className="w-4 h-4 text-brown-600 shrink-0" />
+                          ) : (
+                            <Check className="w-4 h-4 text-teal-600 shrink-0" />
+                          )}
+                          <span>{item.name}</span>
+                          {item.download && (
+                            <span className="text-xs bg-brown-50 text-brown-700 px-2 py-0.5 rounded-full font-semibold">Download</span>
+                          )}
                         </li>
                       ))}
                     </ul>
