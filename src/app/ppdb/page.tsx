@@ -145,11 +145,9 @@ function PPDBContent() {
                 Pendaftaran T.A 2026/2027 Dibuka
               </div>
 
-              <h1 className="text-4xl md:text-6xl font-black text-ink-900 mb-6 leading-tight tracking-tight">
+              <h1 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brown-700 via-brown-600 to-gold-600 mb-6 leading-tight tracking-tight">
                 Siapkan Masa Depan <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brown-600 to-gold-600">
-                  Generasi Qur'ani
-                </span>
+                Generasi Qur&apos;ani
               </h1>
 
               <p className="text-lg md:text-xl text-ink-600 mb-10 max-w-2xl mx-auto leading-relaxed">
