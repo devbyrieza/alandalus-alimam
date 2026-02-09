@@ -33,12 +33,7 @@ function VerifikasiOTPContent() {
   // Simulation Code Check
   const sim_code = searchParams.get("sim_code");
 
-  // Auto-fill OTP code when provided (WhatsApp not available yet)
-  useEffect(() => {
-    if (sim_code && sim_code.length === 6) {
-      setOtpCode(sim_code.split(""));
-    }
-  }, [sim_code]);
+  // sim_code is displayed in the banner above for manual entry
 
   // ... rest of state
   const [countdown, setCountdown] = useState(300); // 5 menit
