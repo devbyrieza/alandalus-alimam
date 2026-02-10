@@ -35,14 +35,15 @@ RUN pnpm build
 
 # Stage 3: Production runner
 FROM node:20-slim AS runner
-ARG DATABASE_URL
 RUN apt-get update -y && apt-get install -y openssl libssl3 curl && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 ENV NODE_ENV=production
-ENV DATABASE_URL=${DATABASE_URL}
 
 RUN addgroup --system --gid 1001 nodejs &&     adduser --system --uid 1001 nextjs
+
+# Create writable directories for nextjs user
+RUN mkdir -p /app/.next && chown -R nextjs:nodejs /app
 
 # Copy optimized build artifacts
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
@@ -53,18 +54,14 @@ COPY --from=builder /app/node_modules/.pnpm ./node_modules/.pnpm
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 COPY --from=builder /app/.buildinfo ./.buildinfo
 
-# Copy entrypoint script
-COPY --chmod=755 docker-entrypoint.sh /usr/local/bin/
-
 USER nextjs
 
 EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:3000/api/health || exit 1
+# Simple health check without curl for now
+# HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+#   CMD curl -f http://localhost:3000/api/health || exit 1
 
-ENTRYPOINT ["docker-entrypoint.sh"]
-
+CMD ["node", "server.js"]

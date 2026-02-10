@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-# Create .env file from environment variables
-echo "DATABASE_URL=${DATABASE_URL}" > .env
+# Export DATABASE_URL to ensure it's available to the Node.js process
+export DATABASE_URL="${DATABASE_URL}"
 
 # Start the application
 exec node server.js
