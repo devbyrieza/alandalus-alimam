@@ -35,10 +35,12 @@ RUN pnpm build
 
 # Stage 3: Production runner
 FROM node:20-slim AS runner
+ARG DATABASE_URL
 RUN apt-get update -y && apt-get install -y openssl libssl3 curl && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 ENV NODE_ENV=production
+ENV DATABASE_URL=${DATABASE_URL}
 
 RUN addgroup --system --gid 1001 nodejs &&     adduser --system --uid 1001 nextjs
 
