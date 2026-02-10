@@ -14,6 +14,7 @@ export const exportToExcel = (
     fileName: string,
     sheetName: string = "Data"
 ) => {
+    console.log("Starting export to Excel... (Build: " + process.env.NEXT_BUILD_ID + ")");
     const worksheet = XLSX.utils.json_to_sheet(data);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);

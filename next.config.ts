@@ -3,7 +3,9 @@ import type { NextConfig } from "next";
 // Trigger rebuild
 const nextConfig: NextConfig = {
   output: "standalone",
-  /* config options here */
+  generateBuildId: async () => {
+    return `build-${Date.now()}`
+  },
 };
 
 export default nextConfig;
