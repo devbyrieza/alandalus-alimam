@@ -138,8 +138,13 @@ export default function AdminSidebar({ children, userRole, adminName }: AdminSid
                                 <NavLink key={item.name} item={item} />
                             ))}
 
+                            <p className="px-4 text-xs font-bold text-ink-400 uppercase tracking-wider mb-2 mt-6">Proses Seleksi</p>
+                            {menuItems.slice(3, 7).map((item) => (
+                                <NavLink key={item.name} item={item} />
+                            ))}
+
                             <p className="px-4 text-xs font-bold text-ink-400 uppercase tracking-wider mb-2 mt-6">Manajemen</p>
-                            {menuItems.slice(3).map((item) => (
+                            {menuItems.slice(7).map((item) => (
                                 <NavLink key={item.name} item={item} />
                             ))}
                         </nav>
