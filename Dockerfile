@@ -1,5 +1,6 @@
 # Stage 1: Dependencies
 FROM node:20-slim AS deps
+ARG DATABASE_URL
 RUN apt-get update -y && apt-get install -y openssl libssl3 && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 RUN npm install -g pnpm
@@ -13,6 +14,7 @@ RUN npx prisma generate
 
 # Stage 2: Build
 FROM node:20-slim AS builder
+ARG DATABASE_URL
 RUN apt-get update -y && apt-get install -y openssl libssl3 && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 RUN npm install -g pnpm
