@@ -615,7 +615,7 @@ function AdminPendaftarContent() {
           {/* Jenjang Filter */}
           <div>
             <label className="block text-sm font-medium text-stone-700 mb-2">
-              Filter Jenjang
+              Filter Jenjang Sekolah
             </label>
             <select
               value={jenjangFilter}
