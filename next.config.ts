@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
     }
     return 'dev'
   },
+  // Expose environment variables to the runtime
+  env: {
+    DATABASE_URL: process.env.DATABASE_URL,
+  },
   // Optimize for faster builds
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
