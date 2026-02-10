@@ -518,13 +518,6 @@ function AdminPendaftarContent() {
                 PDF
               </button>
             </div>
-            <button
-              onClick={fetchPendaftar}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
-            >
-              <RefreshCw className="w-4 h-4" />
-              Refresh
-            </button>
           </div>
         </div>
       </div>
@@ -779,66 +772,68 @@ function AdminPendaftarContent() {
       </div>
 
       {/* Bulk Actions */}
-      {selectedIds.length > 0 && (
-        <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl shadow-lg p-4 border-2 border-purple-200">
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <CheckSquare className="w-5 h-5 text-purple-600" />
-                <span className="font-bold text-purple-900">
-                  {selectedIds.length} item terpilih
-                </span>
+      {
+        selectedIds.length > 0 && (
+          <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl shadow-lg p-4 border-2 border-purple-200">
+            <div className="flex items-center justify-between flex-wrap gap-4">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <CheckSquare className="w-5 h-5 text-purple-600" />
+                  <span className="font-bold text-purple-900">
+                    {selectedIds.length} item terpilih
+                  </span>
+                </div>
+                <button
+                  onClick={() => setSelectedIds([])}
+                  className="text-sm text-purple-600 hover:text-purple-800 underline"
+                >
+                  Batalkan pilihan
+                </button>
               </div>
-              <button
-                onClick={() => setSelectedIds([])}
-                className="text-sm text-purple-600 hover:text-purple-800 underline"
-              >
-                Batalkan pilihan
-              </button>
-            </div>
 
-            <div className="flex items-center gap-3">
-              <select
-                value={bulkStatus}
-                onChange={(e) => setBulkStatus(e.target.value)}
-                className="px-4 py-2 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none"
-              >
-                <option value="" disabled={bulkStatus !== ""}>Pilih status baru...</option>
-                <option value="draft">Draft</option>
-                <option value="awaiting_payment">Menunggu Pembayaran</option>
-                <option value="paid">Sudah Bayar</option>
-                <option value="data_completed">Data Lengkap</option>
-                <option value="docs_uploaded">Dokumen Terupload</option>
-                <option value="docs_verified">Dokumen Terverifikasi</option>
-                <option value="scheduled">Terjadwal Ujian</option>
-                <option value="tested">Sudah Ujian</option>
-                <option value="announced">Diumumkan</option>
-                <option value="accepted">Diterima</option>
-                <option value="rejected">Ditolak</option>
-                <option value="enrolled">Terdaftar</option>
-              </select>
+              <div className="flex items-center gap-3">
+                <select
+                  value={bulkStatus}
+                  onChange={(e) => setBulkStatus(e.target.value)}
+                  className="px-4 py-2 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none"
+                >
+                  <option value="" disabled={bulkStatus !== ""}>Pilih status baru...</option>
+                  <option value="draft">Draft</option>
+                  <option value="awaiting_payment">Menunggu Pembayaran</option>
+                  <option value="paid">Sudah Bayar</option>
+                  <option value="data_completed">Data Lengkap</option>
+                  <option value="docs_uploaded">Dokumen Terupload</option>
+                  <option value="docs_verified">Dokumen Terverifikasi</option>
+                  <option value="scheduled">Terjadwal Ujian</option>
+                  <option value="tested">Sudah Ujian</option>
+                  <option value="announced">Diumumkan</option>
+                  <option value="accepted">Diterima</option>
+                  <option value="rejected">Ditolak</option>
+                  <option value="enrolled">Terdaftar</option>
+                </select>
 
-              <button
-                onClick={handleBulkUpdate}
-                disabled={!bulkStatus || bulkUpdating}
-                className="flex items-center gap-2 px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {bulkUpdating ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    Updating...
-                  </>
-                ) : (
-                  <>
-                    <Edit className="w-4 h-4" />
-                    Update Status
-                  </>
-                )}
-              </button>
+                <button
+                  onClick={handleBulkUpdate}
+                  disabled={!bulkStatus || bulkUpdating}
+                  className="flex items-center gap-2 px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {bulkUpdating ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Updating...
+                    </>
+                  ) : (
+                    <>
+                      <Edit className="w-4 h-4" />
+                      Update Status
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
       {/* Table */}
       <div className="bg-white rounded-xl shadow-lg border-2 border-blue-100 overflow-hidden">
@@ -1092,7 +1087,7 @@ function AdminPendaftarContent() {
           </>
         )}
       </div>
-    </div>
+    </div >
   );
 }
 
