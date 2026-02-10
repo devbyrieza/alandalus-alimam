@@ -35,7 +35,7 @@ RUN pnpm build
 
 # Stage 3: Production runner
 FROM node:20-slim AS runner
-RUN apt-get update -y && apt-get install -y openssl libssl3 curl && rm -rf /var/lib/apt/lists/*
+RUN apt-get update -y && apt-get install -y openssl libssl3 && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 ENV NODE_ENV=production
@@ -59,9 +59,5 @@ USER nextjs
 EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
-
-# Simple health check without curl for now
-# HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-#   CMD curl -f http://localhost:3000/api/health || exit 1
 
 CMD ["node", "server.js"]
