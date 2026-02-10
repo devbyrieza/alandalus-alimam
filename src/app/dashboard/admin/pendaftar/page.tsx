@@ -628,7 +628,6 @@ function AdminPendaftarContent() {
               <option value="">Semua Jenjang</option>
               <option value="MTs">MTs (Madrasah Tsanawiyah)</option>
               <option value="IL">I'dadiyah Lughawiy</option>
-              <option value="MA">MA (Madrasah Aliyah)</option>
             </select>
           </div>
 
