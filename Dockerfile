@@ -17,6 +17,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NODE_ENV=production
 RUN npx prisma generate
+# Force rebuild with timestamp
+RUN echo "BUILD_TIMESTAMP=$(date +%s)" > .buildinfo
 RUN pnpm build
 
 # Stage 3: Production runner
@@ -35,6 +37,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules/.pnpm ./node_modules/.pnpm
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
+COPY --from=builder /app/.buildinfo ./.buildinfo
 
 USER nextjs
 
