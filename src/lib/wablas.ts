@@ -66,19 +66,28 @@ export async function sendMessage({ phone, message }: SendMessageParams): Promis
     try {
         const formattedPhone = formatPhoneNumber(phone);
 
-        // Wablas API uses GET request with query parameters
-        const url = new URL(`${WABLAS_DOMAIN}/api/send-message`);
-        url.searchParams.append('phone', formattedPhone);
-        url.searchParams.append('message', message);
-        url.searchParams.append('token', WABLAS_TOKEN);
+        // Wablas API - POST with Authorization header: token.secret_key
+        const url = `${WABLAS_DOMAIN}/api/send-message`;
 
-        // Add secret key if available (required for IP not in whitelist)
-        if (WABLAS_SECRET_KEY) {
-            url.searchParams.append('secret_key', WABLAS_SECRET_KEY);
-        }
+        // Build Authorization header with token and secret key
+        const authToken = WABLAS_SECRET_KEY
+            ? `${WABLAS_TOKEN}.${WABLAS_SECRET_KEY}`
+            : WABLAS_TOKEN;
 
-        const response = await fetch(url.toString(), {
-            method: 'GET',
+        console.log('🔑 Using auth with secret key:', WABLAS_SECRET_KEY ? 'YES' : 'NO');
+
+        // Build form data for POST body
+        const formData = new URLSearchParams();
+        formData.append('phone', formattedPhone);
+        formData.append('message', message);
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': authToken,
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formData.toString(),
         });
 
         const data = await response.json();
