@@ -481,7 +481,7 @@ function AdminPendaftarContent() {
             </div>
             <div>
               <h2 className="text-2xl font-black text-stone-900">
-                {activeFilterLabel || "Daftar Pendaftar"}
+                {activeFilterLabel || "Data Pendaftar"}
               </h2>
               <p className="text-stone-600">
                 Total: {pagination.total} pendaftar
