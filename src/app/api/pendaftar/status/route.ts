@@ -40,8 +40,10 @@ export async function GET(request: NextRequest) {
       where: { id: pendaftarId },
       select: {
         id: true,
+        nama_lengkap: true,
         nomor_pendaftaran: true,
         status_pendaftaran: true,
+        updated_at: true,
       },
     });
 
@@ -55,8 +57,10 @@ export async function GET(request: NextRequest) {
     // status_proses = status_pendaftaran (kompatibel dengan access-control)
     return NextResponse.json({
       id: data.id,
+      nama_lengkap: data.nama_lengkap,
       nomor_pendaftaran: data.nomor_pendaftaran,
       status_proses: data.status_pendaftaran || "draft",
+      updated_at: data.updated_at,
     });
   } catch (error) {
     console.error("Error in status API:", error);

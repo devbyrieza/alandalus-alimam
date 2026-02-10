@@ -9,7 +9,10 @@ import {
   CheckCircle,
   User,
   Hash,
+  FileSpreadsheet,
+  FileText,
 } from "lucide-react";
+import { exportToExcel, exportToPDF } from "@/lib/utils/export";
 
 interface Peserta {
   id: string;
@@ -29,6 +32,7 @@ export default function InputNilaiPage() {
   const [saving, setSaving] = useState<string | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState<Partial<Peserta>>({});
+  const [exporting, setExporting] = useState(false);
 
   useEffect(() => {
     fetchPeserta();
@@ -46,6 +50,44 @@ export default function InputNilaiPage() {
       console.error("Error fetching peserta:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleExport = async (type: "excel" | "pdf") => {
+    try {
+      setExporting(true);
+      // Use filtered data if searching, otherwise all data
+      const dataToExport = search
+        ? peserta.filter(p =>
+          p.nama_lengkap.toLowerCase().includes(search.toLowerCase()) ||
+          p.nomor_pendaftaran.toLowerCase().includes(search.toLowerCase())
+        )
+        : peserta;
+
+      const data = dataToExport.map((item) => ({
+        "Nama Lengkap": item.nama_lengkap || "-",
+        "Nomor Pendaftaran": item.nomor_pendaftaran || "-",
+        "Jenjang": item.jenjang || "-",
+        "Nilai Tulis": item.nilai_tulis ?? 0,
+        "Nilai Wawancara": item.nilai_wawancara ?? 0,
+        "Nilai Tahfidz": item.nilai_tahfidz ?? 0,
+        "Catatan": item.catatan || "-"
+      }));
+
+      const filename = `nilai-ujian-${new Date().toISOString().split("T")[0]}`;
+
+      if (type === "excel") {
+        exportToExcel(data, filename, "Nilai Ujian");
+      } else {
+        const headers = Object.keys(data[0] || {});
+        const rows = data.map((item: any) => Object.values(item));
+        exportToPDF("Rekap Nilai Ujian", headers, rows, filename, "landscape");
+      }
+    } catch (error) {
+      console.error("Error exporting:", error);
+      alert("Gagal export data");
+    } finally {
+      setExporting(false);
     }
   };
 
@@ -111,6 +153,34 @@ export default function InputNilaiPage() {
             <p className="text-stone-600">
               Total: {peserta.length} peserta ujian
             </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => handleExport("excel")}
+              disabled={exporting}
+              className="flex items-center gap-2 px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors disabled:opacity-50 text-sm font-medium"
+              title="Download Excel"
+            >
+              {exporting ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <FileSpreadsheet className="w-4 h-4" />
+              )}
+              Excel
+            </button>
+            <button
+              onClick={() => handleExport("pdf")}
+              disabled={exporting}
+              className="flex items-center gap-2 px-3 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg transition-colors disabled:opacity-50 text-sm font-medium"
+              title="Download PDF"
+            >
+              {exporting ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <FileText className="w-4 h-4" />
+              )}
+              PDF
+            </button>
           </div>
         </div>
       </div>

@@ -38,8 +38,11 @@ export default function DashboardPendaftarPage() {
           const statusRes = await fetch(`/api/pendaftar/status?pendaftar_id=${session.pendaftar_id}`);
           const statusData = await statusRes.json();
 
+          const fullName = statusData.nama_lengkap || session.full_name || session.name || "Pendaftar";
+          const firstName = fullName.split(' ')[0]; // Ambil kata pertama saja
+
           setData({
-            nama: statusData.nama_lengkap || session.full_name || session.name || "Pendaftar",
+            nama: firstName,
             nomorPendaftaran: statusData.nomor_pendaftaran || "-",
             status: statusData.status_proses || "draft",
             lastUpdate: statusData.updated_at || new Date().toISOString()
@@ -88,7 +91,7 @@ export default function DashboardPendaftarPage() {
               </span>
             </div>
             <h1 className="text-3xl md:text-4xl font-black mb-4 leading-tight">
-              Ahlan Wa Sahlan, <br />
+              Selamat Datang, <br />
               <span className="text-emerald-200">{data.nama}</span>
             </h1>
             <p className="text-emerald-50 text-lg mb-8 max-w-lg">

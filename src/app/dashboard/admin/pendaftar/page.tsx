@@ -21,9 +21,11 @@ import {
   Download,
   Edit,
   ArrowLeft,
+  FileSpreadsheet,
 } from "lucide-react";
 import Link from "next/link";
 import { UserRole } from "@/lib/access-control";
+import { exportToExcel, exportToPDF } from "@/lib/utils/export";
 
 // Filter labels for dashboard categories
 const FILTER_LABELS: Record<string, string> = {
@@ -374,7 +376,7 @@ function AdminPendaftarContent() {
     }
   };
 
-  const handleExport = async () => {
+  const handleExport = async (type: "excel" | "pdf") => {
     try {
       setExporting(true);
       const params = new URLSearchParams();
@@ -386,15 +388,18 @@ function AdminPendaftarContent() {
       const response = await fetch(`/api/admin/pendaftar/export?${params}`);
       if (!response.ok) throw new Error("Failed to export");
 
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `pendaftar-${new Date().toISOString().split("T")[0]}.csv`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
+      const result = await response.json();
+      const data = result.data;
+      const filename = `data-pendaftar-${new Date().toISOString().split("T")[0]}`;
+
+      if (type === "excel") {
+        exportToExcel(data, filename, "Data Pendaftar");
+      } else {
+        // Transform for PDF
+        const headers = Object.keys(data[0] || {});
+        const rows = data.map((item: any) => Object.values(item));
+        exportToPDF("Data Pendaftar Santri Baru", headers, rows, filename, "landscape");
+      }
     } catch (error) {
       console.error("Error exporting:", error);
       alert("Gagal export data");
@@ -485,18 +490,34 @@ function AdminPendaftarContent() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <button
-              onClick={handleExport}
-              disabled={exporting}
-              className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors disabled:opacity-50"
-            >
-              {exporting ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
-              ) : (
-                <Download className="w-4 h-4" />
-              )}
-              Export CSV
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => handleExport("excel")}
+                disabled={exporting}
+                className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors disabled:opacity-50"
+                title="Download Excel"
+              >
+                {exporting ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <FileSpreadsheet className="w-4 h-4" />
+                )}
+                Excel
+              </button>
+              <button
+                onClick={() => handleExport("pdf")}
+                disabled={exporting}
+                className="flex items-center gap-2 px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg transition-colors disabled:opacity-50"
+                title="Download PDF"
+              >
+                {exporting ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <FileText className="w-4 h-4" />
+                )}
+                PDF
+              </button>
+            </div>
             <button
               onClick={fetchPendaftar}
               className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"

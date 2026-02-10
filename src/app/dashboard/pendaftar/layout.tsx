@@ -50,6 +50,9 @@ export default function DashboardLayout({
   const [namaLengkap, setNamaLengkap] = useState("");
   const [loading, setLoading] = useState(true);
 
+  // Extract first name for greeting
+  const namaDepan = namaLengkap.split(' ')[0] || namaLengkap;
+
   // Get formatted status
   const statusInfo = formatStatusDisplay(statusProses);
   const nextStep = getNextStep(statusProses);
@@ -313,7 +316,7 @@ export default function DashboardLayout({
                     <User className="w-16 h-16 text-brown-600" />
                   </div>
                   <p className="text-xs font-semibold text-ink-500 mb-1">Selamat Datang,</p>
-                  <p className="font-bold text-ink-900 truncate mb-2">{namaLengkap}</p>
+                  <p className="font-bold text-ink-900 truncate mb-2">{namaDepan}</p>
                   <div className="flex items-center gap-2 text-xs text-ink-600 bg-white px-2 py-1 rounded-lg inline-flex shadow-sm border border-surface-100">
                     <span className="font-mono text-brown-700 font-bold">{nomorPendaftaran}</span>
                   </div>
@@ -366,7 +369,7 @@ export default function DashboardLayout({
 
                 <div className="p-4 bg-brown-50">
                   <p className="text-xs font-bold text-brown-800 mb-1">PENDAFTAR:</p>
-                  <p className="font-bold text-ink-900">{namaLengkap}</p>
+                  <p className="font-bold text-ink-900">{namaDepan}</p>
                   <p className="font-mono text-xs text-ink-500">{nomorPendaftaran}</p>
                 </div>
 

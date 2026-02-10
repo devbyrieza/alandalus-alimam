@@ -52,7 +52,24 @@
       "WebFetch(domain:pesantren-alandalus.com)",
       "WebFetch(domain:sekolahsunnah.com)",
       "WebFetch(domain:guyub.id)",
-      "WebFetch(domain:sukabumiheadline.com)"
+      "WebFetch(domain:sukabumiheadline.com)",
+      "WebFetch(domain:api-docs.watzap.id)",
+      "WebFetch(domain:docs.watzap.id)",
+      "WebFetch(domain:watzap.id)",
+      "Bash(ls:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(pnpm dev:*)",
+      "Bash(ssh -o StrictHostKeyChecking=no root@72.61.141.50 \"cd /opt/al-imam && pwd && git status\")",
+      "Bash(ssh root@72.61.141.50 \"cd /opt/al-imam && git fetch && git reset --hard origin/main\")",
+      "Bash(ssh root@72.61.141.50 \"cd /opt/al-imam && grep -A 5 ''POST with Authorization'' src/lib/wablas.ts\")",
+      "Bash(ssh root@72.61.141.50 \"cd /opt/al-imam && ls -la src/lib/ | grep wablas\")",
+      "Bash(ssh:*)",
+      "Bash(scp:*)",
+      "Bash(tar czf:*)",
+      "Bash(nslookup:*)",
+      "Bash(ping:*)",
+      "Bash(tar:*)"
     ]
   }
 }

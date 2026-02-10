@@ -108,50 +108,34 @@ export async function GET(req: NextRequest) {
       "Tanggal Daftar",
     ];
 
-    const csvRows = [headers.join(",")];
+    // Return as JSON for client-side export
+    const exportData = pendaftarData.map((item) => ({
+      "Nomor Pendaftaran": item.nomor_pendaftaran || "-",
+      "NIK": item.nik ? `'${item.nik}` : "-", // Text format for Excel
+      "Nama Lengkap": item.nama_lengkap || "-",
+      "Jenis Kelamin": item.jenis_kelamin === "L" ? "Laki-laki" : "Perempuan",
+      "Tempat Lahir": item.tempat_lahir || "-",
+      "Tanggal Lahir": item.tanggal_lahir
+        ? new Date(item.tanggal_lahir).toLocaleDateString("id-ID")
+        : "-",
+      "Jenjang": item.jenjang || "-",
+      "Asal Sekolah": item.asal_sekolah || "-",
+      "Alamat": item.alamat || "-",
+      "Kelurahan": item.kelurahan || "-",
+      "Kecamatan": item.kecamatan || "-",
+      "Kota/Kabupaten": item.kabupaten || "-",
+      "Provinsi": item.provinsi || "-",
+      "Kode Pos": item.kode_pos || "-",
+      "No HP": item.no_hp ? `'${item.no_hp}` : "-",
+      "Email": item.email || "-",
+      "Status": item.status_pendaftaran || "-",
+      "Tahun Ajaran": item.tahun_ajaran?.nama || "-",
+      "Tanggal Daftar": item.created_at
+        ? new Date(item.created_at).toLocaleDateString("id-ID")
+        : "-",
+    }));
 
-    for (const item of pendaftarData) {
-      const row = [
-        item.nomor_pendaftaran || "",
-        item.nik || "",
-        `"${(item.nama_lengkap || "").replace(/"/g, '""')}"`,
-        item.jenis_kelamin === "L" ? "Laki-laki" : "Perempuan",
-        `"${(item.tempat_lahir || "").replace(/"/g, '""')}"`,
-        item.tanggal_lahir ? new Date(item.tanggal_lahir).toLocaleDateString("id-ID") : "",
-        item.jenjang || "",
-        `"${(item.asal_sekolah || "").replace(/"/g, '""')}"`,
-        `"${(item.alamat || "").replace(/"/g, '""')}"`,
-        `"${(item.kelurahan || "").replace(/"/g, '""')}"`,
-        `"${(item.kecamatan || "").replace(/"/g, '""')}"`,
-        `"${(item.kabupaten || "").replace(/"/g, '""')}"`,
-        `"${(item.provinsi || "").replace(/"/g, '""')}"`,
-        item.kode_pos || "",
-        item.no_hp || "",
-        item.email || "",
-        item.status_pendaftaran || "",
-        item.tahun_ajaran?.nama || "",
-        item.created_at
-          ? new Date(item.created_at).toLocaleDateString("id-ID")
-          : "",
-      ];
-      csvRows.push(row.join(","));
-    }
-
-    const csvContent = csvRows.join("\n");
-
-    // Add BOM
-    const bom = "\uFEFF";
-    const csvWithBom = bom + csvContent;
-
-    // Return as downloadable CSV file
-    return new NextResponse(csvWithBom, {
-      headers: {
-        "Content-Type": "text/csv; charset=utf-8",
-        "Content-Disposition": `attachment; filename="pendaftar-${new Date()
-          .toISOString()
-          .split("T")[0]}.csv"`,
-      },
-    });
+    return NextResponse.json({ data: exportData });
   } catch (error) {
     console.error("Export error:", error);
     return NextResponse.json(

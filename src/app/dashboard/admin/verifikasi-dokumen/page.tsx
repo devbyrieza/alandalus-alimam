@@ -22,7 +22,9 @@ import {
   ExternalLink,
   CheckSquare,
   Square,
+  FileSpreadsheet,
 } from "lucide-react";
+import { exportToExcel, exportToPDF } from "@/lib/utils/export";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -66,6 +68,7 @@ export default function VerifikasiDokumenPage() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [selectedForBulk, setSelectedForBulk] = useState<Set<string>>(new Set());
   const [bulkProcessing, setBulkProcessing] = useState(false);
+  const [exporting, setExporting] = useState(false);
 
   const fetchDokumen = useCallback(async () => {
     try {
@@ -128,6 +131,42 @@ export default function VerifikasiDokumenPage() {
   useEffect(() => {
     fetchDokumen();
   }, [fetchDokumen]);
+
+  const handleExport = async (type: "excel" | "pdf") => {
+    try {
+      setExporting(true);
+      // Fetch ALL data
+      const response = await fetch(`/api/admin/verifikasi/dokumen?status=all`);
+      if (!response.ok) throw new Error("Failed to export");
+
+      const result = await response.json();
+
+      const data = result.data.map((item: any) => ({
+        "Nama Pendaftar": item.pendaftar?.nama_lengkap || "-",
+        "No Pendaftaran": item.pendaftar?.nomor_pendaftaran || "-",
+        "Jenjang": item.pendaftar?.jenjang || "-",
+        "Jenis Dokumen": item.jenis_dokumen || "-",
+        "Status": item.is_verified ? "Terverifikasi" : "Belum Verifikasi",
+        "Catatan": item.catatan || "-",
+        "Tanggal Upload": new Date(item.created_at).toLocaleDateString("id-ID")
+      }));
+
+      const filename = `data-dokumen-${new Date().toISOString().split("T")[0]}`;
+
+      if (type === "excel") {
+        exportToExcel(data, filename, "Data Dokumen");
+      } else {
+        const headers = Object.keys(data[0] || {});
+        const rows = data.map((item: any) => Object.values(item));
+        exportToPDF("Laporan Verifikasi Dokumen", headers, rows, filename, "landscape");
+      }
+    } catch (error) {
+      console.error("Error exporting:", error);
+      alert("Gagal export data");
+    } finally {
+      setExporting(false);
+    }
+  };
 
   const handleQuickVerify = async (dokumenId: string, status: "verified" | "rejected", catatan?: string) => {
     try {
@@ -274,6 +313,36 @@ export default function VerifikasiDokumenPage() {
                 {pendaftarList.length} pendaftar, {totalDocs} dokumen
               </p>
             </div>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => handleExport("excel")}
+              disabled={exporting}
+              className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors disabled:opacity-50"
+              title="Download Excel"
+            >
+              {exporting ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <FileSpreadsheet className="w-4 h-4" />
+              )}
+              Excel
+            </button>
+            <button
+              onClick={() => handleExport("pdf")}
+              disabled={exporting}
+              className="flex items-center gap-2 px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg transition-colors disabled:opacity-50"
+              title="Download PDF"
+            >
+              {exporting ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <FileText className="w-4 h-4" />
+              )}
+              PDF
+            </button>
           </div>
           <button
             onClick={fetchDokumen}
@@ -438,11 +507,10 @@ export default function VerifikasiDokumenPage() {
                   {pendaftar.dokumen.map((dok) => (
                     <div
                       key={dok.id}
-                      className={`border-2 rounded-xl overflow-hidden transition-all ${
-                        selectedForBulk.has(dok.id)
-                          ? "border-amber-400 bg-amber-50"
-                          : "border-stone-200 hover:border-amber-300"
-                      }`}
+                      className={`border-2 rounded-xl overflow-hidden transition-all ${selectedForBulk.has(dok.id)
+                        ? "border-amber-400 bg-amber-50"
+                        : "border-stone-200 hover:border-amber-300"
+                        }`}
                     >
                       {/* Document Preview */}
                       <div className="relative aspect-[4/3] bg-stone-100">
@@ -472,11 +540,10 @@ export default function VerifikasiDokumenPage() {
                         {statusFilter === "pending" && (
                           <button
                             onClick={() => toggleSelectDoc(dok.id)}
-                            className={`absolute top-2 left-2 p-1 rounded-lg transition-colors ${
-                              selectedForBulk.has(dok.id)
-                                ? "bg-amber-500 text-white"
-                                : "bg-white/80 text-stone-600 hover:bg-white"
-                            }`}
+                            className={`absolute top-2 left-2 p-1 rounded-lg transition-colors ${selectedForBulk.has(dok.id)
+                              ? "bg-amber-500 text-white"
+                              : "bg-white/80 text-stone-600 hover:bg-white"
+                              }`}
                           >
                             {selectedForBulk.has(dok.id) ? (
                               <CheckSquare className="w-5 h-5" />
@@ -547,11 +614,10 @@ export default function VerifikasiDokumenPage() {
 
                         {/* Status badge for non-pending */}
                         {statusFilter !== "pending" && (
-                          <div className={`flex items-center gap-2 py-2 px-3 rounded-lg ${
-                            dok.status_verifikasi === "verified"
-                              ? "bg-green-100 text-green-700"
-                              : "bg-red-100 text-red-700"
-                          }`}>
+                          <div className={`flex items-center gap-2 py-2 px-3 rounded-lg ${dok.status_verifikasi === "verified"
+                            ? "bg-green-100 text-green-700"
+                            : "bg-red-100 text-red-700"
+                            }`}>
                             {dok.status_verifikasi === "verified" ? (
                               <CheckCircle className="w-4 h-4" />
                             ) : (
@@ -579,28 +645,30 @@ export default function VerifikasiDokumenPage() {
       </div>
 
       {/* Image Preview Modal */}
-      {previewUrl && (
-        <div
-          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
-          onClick={() => setPreviewUrl(null)}
-        >
-          <div className="relative max-w-4xl max-h-[90vh] w-full">
-            <Image
-              src={previewUrl}
-              alt="Preview"
-              width={1200}
-              height={800}
-              className="object-contain w-full h-full"
-            />
-            <button
-              onClick={() => setPreviewUrl(null)}
-              className="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/40 rounded-full text-white transition-colors"
-            >
-              <X className="w-6 h-6" />
-            </button>
+      {
+        previewUrl && (
+          <div
+            className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+            onClick={() => setPreviewUrl(null)}
+          >
+            <div className="relative max-w-4xl max-h-[90vh] w-full">
+              <Image
+                src={previewUrl}
+                alt="Preview"
+                width={1200}
+                height={800}
+                className="object-contain w-full h-full"
+              />
+              <button
+                onClick={() => setPreviewUrl(null)}
+                className="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/40 rounded-full text-white transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )
+      }
+    </div >
   );
 }

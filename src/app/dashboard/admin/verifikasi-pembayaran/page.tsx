@@ -13,8 +13,11 @@ import {
   Calendar,
   Phone,
   DollarSign,
+  FileSpreadsheet,
+  FileText,
 } from "lucide-react";
 import Link from "next/link";
+import { exportToExcel, exportToPDF } from "@/lib/utils/export";
 
 interface Pembayaran {
   id: string;
@@ -43,6 +46,7 @@ export default function VerifikasiPembayaranPage() {
   const [showModal, setShowModal] = useState(false);
   const [catatan, setCatatan] = useState("");
   const [processing, setProcessing] = useState(false);
+  const [exporting, setExporting] = useState(false);
 
   useEffect(() => {
     fetchPembayaran();
@@ -62,6 +66,45 @@ export default function VerifikasiPembayaranPage() {
       console.error("Error fetching pembayaran:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleExport = async (type: "excel" | "pdf") => {
+    try {
+      setExporting(true);
+      // Fetch ALL data for export
+      const response = await fetch(`/api/admin/verifikasi/pembayaran?status=all`);
+      if (!response.ok) throw new Error("Failed to export");
+
+      const result = await response.json();
+      const rawData = result.data;
+
+      // Format data for export
+      const data = rawData.map((item: any) => ({
+        "Nama Lengkap": item.pendaftar?.nama_lengkap || "-",
+        "Nomor Pendaftaran": item.pendaftar?.nomor_pendaftaran || "-",
+        "Jenjang": item.pendaftar?.jenjang || "-",
+        "Nominal": item.jumlah ? parseInt(item.jumlah).toLocaleString('id-ID') : "0",
+        "Metode Pembayaran": item.metode_pembayaran || "-",
+        "Status": item.status_pembayaran || "-",
+        "Tanggal Bayar": item.tanggal_pembayaran ? new Date(item.tanggal_pembayaran).toLocaleDateString("id-ID") : "-",
+        "Catatan": item.catatan || "-"
+      }));
+
+      const filename = `data-pembayaran-${new Date().toISOString().split("T")[0]}`;
+
+      if (type === "excel") {
+        exportToExcel(data, filename, "Data Pembayaran");
+      } else {
+        const headers = Object.keys(data[0] || {});
+        const rows = data.map((item: any) => Object.values(item));
+        exportToPDF("Laporan Pembayaran Masuk", headers, rows, filename, "landscape");
+      }
+    } catch (error) {
+      console.error("Error exporting:", error);
+      alert("Gagal export data");
+    } finally {
+      setExporting(false);
     }
   };
 
@@ -138,13 +181,43 @@ export default function VerifikasiPembayaranPage() {
               </p>
             </div>
           </div>
-          <button
-            onClick={fetchPembayaran}
-            className="flex items-center gap-2 px-6 py-3 bg-white hover:bg-stone-50 border border-stone-200 text-stone-700 rounded-xl font-bold transition-all shadow-sm hover:shadow-md"
-          >
-            <RefreshCw className="w-4 h-4" />
-            Refresh Data
-          </button>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => handleExport("excel")}
+                disabled={exporting}
+                className="flex items-center gap-2 px-4 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold transition-all shadow-sm hover:shadow-md disabled:opacity-50"
+                title="Download Excel"
+              >
+                {exporting ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <FileSpreadsheet className="w-4 h-4" />
+                )}
+                Excel
+              </button>
+              <button
+                onClick={() => handleExport("pdf")}
+                disabled={exporting}
+                className="flex items-center gap-2 px-4 py-3 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-bold transition-all shadow-sm hover:shadow-md disabled:opacity-50"
+                title="Download PDF"
+              >
+                {exporting ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <FileText className="w-4 h-4" />
+                )}
+                PDF
+              </button>
+            </div>
+            <button
+              onClick={fetchPembayaran}
+              className="flex items-center gap-2 px-6 py-3 bg-white hover:bg-stone-50 border border-stone-200 text-stone-700 rounded-xl font-bold transition-all shadow-sm hover:shadow-md"
+            >
+              <RefreshCw className="w-4 h-4" />
+              Refresh Data
+            </button>
+          </div>
         </div>
 
         {/* Stats / Filter Bar */}
