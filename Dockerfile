@@ -33,7 +33,7 @@ RUN pnpm build
 
 # Stage 3: Production runner
 FROM node:20-slim AS runner
-RUN apt-get update -y && apt-get install -y openssl libssl3 && rm -rf /var/lib/apt/lists/*
+RUN apt-get update -y && apt-get install -y openssl libssl3 curl && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 ENV NODE_ENV=production
