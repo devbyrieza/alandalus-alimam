@@ -11,8 +11,9 @@ const nextConfig: NextConfig = {
     return 'dev'
   },
   // Expose environment variables to the runtime
+  // Expose environment variables to the runtime
   env: {
-    DATABASE_URL: process.env.DATABASE_URL,
+    // DATABASE_URL should NOT be here to avoid build-time inlining
   },
   // Optimize for faster builds
   compiler: {
