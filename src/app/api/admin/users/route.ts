@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { hashPassword } from "@/lib/utils/password";
 import crypto from "crypto";
 
-async function checkSuperAdmin() {
+async function checkHeadOfIT() {
   const cookieStore = await cookies();
   const sessionCookie = cookieStore.get("app_session");
 
@@ -12,7 +12,8 @@ async function checkSuperAdmin() {
 
   try {
     const session = JSON.parse(sessionCookie.value);
-    if (session.role === "admin_super" || session.role === "admin") {
+    // ONLY head_of_it can manage users. Admin Super cannot.
+    if (session.role === "head_of_it") {
       return session;
     }
   } catch {
@@ -24,7 +25,7 @@ async function checkSuperAdmin() {
 
 // GET: List all admin/staff users
 export async function GET() {
-  const admin = await checkSuperAdmin();
+  const admin = await checkHeadOfIT();
   if (!admin) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
   }
@@ -45,7 +46,7 @@ export async function GET() {
 
 // POST: Create new user
 export async function POST(request: Request) {
-  const admin = await checkSuperAdmin();
+  const admin = await checkHeadOfIT();
   if (!admin) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
   }
@@ -91,7 +92,7 @@ export async function POST(request: Request) {
 
 // PUT: Update user (Reset Password or Change Role)
 export async function PUT(request: Request) {
-  const admin = await checkSuperAdmin();
+  const admin = await checkHeadOfIT();
   if (!admin) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
   }
@@ -121,7 +122,7 @@ export async function PUT(request: Request) {
 
 // DELETE: Delete user
 export async function DELETE(request: Request) {
-  const admin = await checkSuperAdmin();
+  const admin = await checkHeadOfIT();
   if (!admin) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
   }

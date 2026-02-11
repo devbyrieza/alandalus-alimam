@@ -38,6 +38,9 @@ model Profile {
   nilai_input_ortu      NilaiUjian[]    @relation("NilaiInputByOrtu")
   jadwal_penguji_santri JadwalUjian[]   @relation("PengujiSantri")
   jadwal_penguji_ortu   JadwalUjian[]   @relation("PengujiOrtu")
+  jadwal_penguji_quran  JadwalUjian[]   @relation("PengujiQuran")
+  nilai_input_quran     NilaiUjian[]    @relation("NilaiInputByQuran")
+  sessions_created      ExamSession[]   @relation("SessionCreatedBy")
 
   @@map("profiles")
 }
@@ -271,6 +274,7 @@ model JadwalUjian {
   id                   String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   tahun_ajaran_id      String   @db.Uuid
   pendaftar_id         String   @db.Uuid
+  exam_session_id      String?  @db.Uuid // Link to the chosen slot
   tanggal_ujian        DateTime @db.Date
   metode_ujian         String   @default("offline")
   google_meet_link     String?
@@ -283,6 +287,14 @@ model JadwalUjian {
   ruangan_santri       String?
   penguji_santri_id    String?  @db.Uuid
   status_santri        String?  @default("scheduled")
+
+  // Jadwal Quran (New Station)
+  penguji_quran_id     String?  @db.Uuid
+  status_quran         String?  @default("scheduled")
+  
+  // Online Test Status
+  status_online_test   String?  @default("pending")
+  online_test_link     String?
 
   // Jadwal Orang Tua
   waktu_mulai_ortu   DateTime @db.Time(6)
@@ -301,9 +313,36 @@ model JadwalUjian {
   pendaftar      Pendaftar    @relation(fields: [pendaftar_id], references: [id], onDelete: Cascade)
   penguji_santri Profile?     @relation("PengujiSantri", fields: [penguji_santri_id], references: [id])
   penguji_ortu   Profile?     @relation("PengujiOrtu", fields: [penguji_ortu_id], references: [id])
+  penguji_quran  Profile?     @relation("PengujiQuran", fields: [penguji_quran_id], references: [id])
+  exam_session   ExamSession? @relation(fields: [exam_session_id], references: [id])
   nilai_ujian    NilaiUjian[]
 
   @@map("jadwal_ujian")
+}
+
+// ============================================================================
+// EXAM SESSIONS (SLOTS)
+// ============================================================================
+
+model ExamSession {
+  id              String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  title           String?
+  start_time      DateTime @db.Timestamptz(6)
+  end_time        DateTime @db.Timestamptz(6)
+  quota           Int      @default(10)
+  booked_count    Int      @default(0)
+  location        String?
+  notes           String?
+  is_active       Boolean  @default(true)
+  created_by      String?  @db.Uuid
+  created_at      DateTime @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime @default(now()) @db.Timestamptz(6)
+  
+  // Relations
+  creator         Profile? @relation("SessionCreatedBy", fields: [created_by], references: [id])
+  bookings        JadwalUjian[]
+
+  @@map("exam_sessions")
 }
 
 // ============================================================================
@@ -322,11 +361,16 @@ model NilaiUjian {
 
   // Tes Santri (Wawancara + Quran)
   nilai_wawancara_santri Decimal?  @db.Decimal
-  nilai_tes_quran        Decimal?  @db.Decimal
   nilai_santri_total     Decimal?  @db.Decimal
   catatan_santri         String?
   input_by_santri        String?   @db.Uuid
   input_at_santri        DateTime? @db.Timestamptz(6)
+
+  // Tes Quran (Split Input)
+  nilai_tes_quran        Decimal?  @db.Decimal // Moved here for logical grouping
+  catatan_quran          String?   // New field for separating notes
+  input_by_quran         String?   @db.Uuid
+  input_at_quran         DateTime? @db.Timestamptz(6)
 
   // Tes Orang Tua
   nilai_wawancara_ortu Decimal?  @db.Decimal
@@ -346,7 +390,8 @@ model NilaiUjian {
   pendaftar               Pendaftar    @relation(fields: [pendaftar_id], references: [id], onDelete: Cascade)
   input_by_santri_profile Profile?     @relation("NilaiInputBySantri", fields: [input_by_santri], references: [id])
   input_by_ortu_profile   Profile?     @relation("NilaiInputByOrtu", fields: [input_by_ortu], references: [id])
-
+  input_by_quran_profile  Profile?     @relation("NilaiInputByQuran", fields: [input_by_quran], references: [id])
+  
   @@map("nilai_ujian")
 }
 

@@ -11,18 +11,24 @@ import {
   Hash,
   FileSpreadsheet,
   FileText,
+  AlertCircle,
 } from "lucide-react";
 import { exportToExcel, exportToPDF } from "@/lib/utils/export";
 
 interface Peserta {
-  id: string;
+  id: string; // Pendaftar ID
+  jadwal_id: string;
   nomor_pendaftaran: string;
   nama_lengkap: string;
   jenjang: string;
-  nilai_tulis: number | null;
-  nilai_wawancara: number | null;
-  nilai_tahfidz: number | null;
-  catatan: string | null;
+  roles: string[]; // ['wawancara', 'quran', 'ortu']
+  nilai_wawancara_santri: number | null;
+  nilai_tes_quran: number | null;
+  nilai_wawancara_ortu: number | null;
+  catatan_santri: string | null;
+  catatan_quran: string | null;
+  catatan_ortu: string | null;
+  nilai_id: string | null;
 }
 
 export default function InputNilaiPage() {
@@ -31,8 +37,12 @@ export default function InputNilaiPage() {
   const [search, setSearch] = useState("");
   const [saving, setSaving] = useState<string | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
+
+  // Dynamic form data
   const [formData, setFormData] = useState<Partial<Peserta>>({});
+
   const [exporting, setExporting] = useState(false);
+  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   useEffect(() => {
     fetchPeserta();
@@ -56,35 +66,25 @@ export default function InputNilaiPage() {
   const handleExport = async (type: "excel" | "pdf") => {
     try {
       setExporting(true);
-      // Use filtered data if searching, otherwise all data
       const dataToExport = search
-        ? peserta.filter(p =>
-          p.nama_lengkap.toLowerCase().includes(search.toLowerCase()) ||
-          p.nomor_pendaftaran.toLowerCase().includes(search.toLowerCase())
-        )
+        ? peserta.filter(p => p.nama_lengkap.toLowerCase().includes(search.toLowerCase()))
         : peserta;
 
       const data = dataToExport.map((item) => ({
-        "Nama Lengkap": item.nama_lengkap || "-",
-        "Nomor Pendaftaran": item.nomor_pendaftaran || "-",
-        "Jenjang": item.jenjang || "-",
-        "Nilai Tulis": item.nilai_tulis ?? 0,
-        "Nilai Wawancara": item.nilai_wawancara ?? 0,
-        "Nilai Tahfidz": item.nilai_tahfidz ?? 0,
-        "Catatan": item.catatan || "-"
+        "Nama": item.nama_lengkap,
+        "No. Daftar": item.nomor_pendaftaran,
+        "Wawancara Santri": item.nilai_wawancara_santri || "-",
+        "Tes Al-Qur'an": item.nilai_tes_quran || "-",
+        "Wawancara Ortu": item.nilai_wawancara_ortu || "-",
+        "Catatan Santri": item.catatan_santri || "-",
+        "Catatan Ortu": item.catatan_ortu || "-"
       }));
 
       const filename = `nilai-ujian-${new Date().toISOString().split("T")[0]}`;
+      if (type === "excel") exportToExcel(data, filename, "Nilai");
+      else exportToPDF("Rekap Nilai", Object.keys(data[0] || {}), data.map((i: any) => Object.values(i)), filename, "landscape");
 
-      if (type === "excel") {
-        exportToExcel(data, filename, "Nilai Ujian");
-      } else {
-        const headers = Object.keys(data[0] || {});
-        const rows = data.map((item: any) => Object.values(item));
-        exportToPDF("Rekap Nilai Ujian", headers, rows, filename, "landscape");
-      }
     } catch (error) {
-      console.error("Error exporting:", error);
       alert("Gagal export data");
     } finally {
       setExporting(false);
@@ -94,30 +94,52 @@ export default function InputNilaiPage() {
   const handleEdit = (item: Peserta) => {
     setEditingId(item.id);
     setFormData({
-      nilai_tulis: item.nilai_tulis,
-      nilai_wawancara: item.nilai_wawancara,
-      nilai_tahfidz: item.nilai_tahfidz,
-      catatan: item.catatan,
+      nilai_wawancara_santri: item.nilai_wawancara_santri,
+      nilai_tes_quran: item.nilai_tes_quran,
+      nilai_wawancara_ortu: item.nilai_wawancara_ortu,
+      catatan_santri: item.catatan_santri,
+      catatan_quran: item.catatan_quran,
+      catatan_ortu: item.catatan_ortu,
     });
+    setMessage(null);
   };
 
-  const handleSave = async (id: string) => {
+  const handleSave = async (id: string, roles: string[]) => {
     try {
       setSaving(id);
+
+      // Filter payload to only send what user is authorized to edit + generic notes
+      const payload: any = {};
+      if (roles.includes('wawancara')) {
+        if (formData.nilai_wawancara_santri !== undefined) payload.nilai_wawancara_santri = formData.nilai_wawancara_santri;
+        if (formData.catatan_santri !== undefined) payload.catatan_santri = formData.catatan_santri;
+      }
+      if (roles.includes('quran')) {
+        if (formData.nilai_tes_quran !== undefined) payload.nilai_tes_quran = formData.nilai_tes_quran;
+        // If both roles exist, last one wins for note. Ideally separate.
+        if (formData.catatan_santri !== undefined && !roles.includes('wawancara')) payload.catatan_santri = formData.catatan_santri;
+      }
+      if (roles.includes('ortu')) {
+        if (formData.nilai_wawancara_ortu !== undefined) payload.nilai_wawancara_ortu = formData.nilai_wawancara_ortu;
+        if (formData.catatan_ortu !== undefined) payload.catatan_ortu = formData.catatan_ortu;
+      }
+
       const response = await fetch(`/api/penguji/nilai/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
         await fetchPeserta();
         setEditingId(null);
         setFormData({});
+        setMessage({ type: "success", text: "Nilai berhasil disimpan" });
+      } else {
+        throw new Error("Gagal menyimpan");
       }
     } catch (error) {
-      console.error("Error saving nilai:", error);
-      alert("Gagal menyimpan nilai");
+      setMessage({ type: "error", text: "Gagal menyimpan nilai" });
     } finally {
       setSaving(null);
     }
@@ -129,257 +151,172 @@ export default function InputNilaiPage() {
       p.nomor_pendaftaran.toLowerCase().includes(search.toLowerCase())
   );
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="text-center">
-          <Loader2 className="w-12 h-12 animate-spin text-violet-600 mx-auto mb-4" />
-          <p className="text-stone-600">Memuat daftar peserta...</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-violet-100">
+      <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-violet-100 flex justify-between items-center">
         <div className="flex items-center gap-4">
           <div className="p-3 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl">
             <ClipboardCheck className="w-8 h-8 text-white" />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-stone-900">Input Nilai</h2>
-            <p className="text-stone-600">
-              Total: {peserta.length} peserta ujian
-            </p>
+            <h2 className="text-2xl font-black text-stone-900">Input Nilai Ujian</h2>
+            <p className="text-stone-600">Total: {peserta.length} peserta</p>
           </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => handleExport("excel")}
-              disabled={exporting}
-              className="flex items-center gap-2 px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors disabled:opacity-50 text-sm font-medium"
-              title="Download Excel"
-            >
-              {exporting ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
-              ) : (
-                <FileSpreadsheet className="w-4 h-4" />
-              )}
-              Excel
-            </button>
-            <button
-              onClick={() => handleExport("pdf")}
-              disabled={exporting}
-              className="flex items-center gap-2 px-3 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg transition-colors disabled:opacity-50 text-sm font-medium"
-              title="Download PDF"
-            >
-              {exporting ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
-              ) : (
-                <FileText className="w-4 h-4" />
-              )}
-              PDF
-            </button>
-          </div>
+        </div>
+        <div className="flex gap-2">
+          <button onClick={() => handleExport("excel")} disabled={exporting} className="btn-sm bg-emerald-600 text-white px-3 py-1 rounded">Excel</button>
+          <button onClick={() => handleExport("pdf")} disabled={exporting} className="btn-sm bg-rose-600 text-white px-3 py-1 rounded">PDF</button>
         </div>
       </div>
 
-      {/* Search */}
-      <div className="bg-white rounded-xl shadow-lg p-4 border-2 border-violet-100">
-        <div className="flex items-center gap-3">
-          <Search className="w-5 h-5 text-stone-400" />
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Cari nama atau nomor pendaftaran..."
-            className="flex-1 px-4 py-2 border-2 border-stone-200 rounded-lg focus:border-violet-500 focus:outline-none"
-          />
+      {message && (
+        <div className={`p-4 rounded-xl border-2 flex items-center gap-2 ${message.type === "success" ? "bg-green-50 border-green-200 text-green-800" : "bg-red-50 border-red-200 text-red-800"}`}>
+          {message.type === "success" ? <CheckCircle className="w-5 h-5" /> : <AlertCircle className="w-5 h-5" />}
+          <span className="font-medium">{message.text}</span>
         </div>
-      </div>
+      )}
 
       {/* List */}
       <div className="space-y-4">
-        {filteredPeserta.length === 0 ? (
-          <div className="bg-white rounded-xl p-12 border-2 border-stone-200 shadow-sm">
-            <div className="text-center">
-              <ClipboardCheck className="w-16 h-16 text-stone-300 mx-auto mb-4" />
-              <p className="text-stone-600">Tidak ada peserta ditemukan</p>
-            </div>
-          </div>
-        ) : (
-          filteredPeserta.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white rounded-xl shadow-lg p-6 border-2 border-violet-100"
-            >
-              {/* Peserta Info */}
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-violet-100 rounded-lg">
-                  <User className="w-5 h-5 text-violet-600" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg text-stone-900">
-                    {item.nama_lengkap}
-                  </h3>
-                  <div className="flex items-center gap-3 text-sm text-stone-600">
-                    <span className="flex items-center gap-1">
-                      <Hash className="w-3 h-3" />
-                      {item.nomor_pendaftaran}
-                    </span>
-                    <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-bold">
-                      {item.jenjang}
-                    </span>
-                  </div>
-                </div>
-                {item.nilai_tulis !== null &&
-                  item.nilai_wawancara !== null &&
-                  item.nilai_tahfidz !== null && (
-                    <div className="ml-auto">
-                      <CheckCircle className="w-6 h-6 text-green-600" />
-                    </div>
-                  )}
-              </div>
+        {loading ? <div className="text-center py-10"><Loader2 className="animate-spin inline text-violet-600" /></div> :
+          filteredPeserta.length === 0 ? <p className="text-center text-stone-500 py-10">Tidak ada data.</p> :
+            filteredPeserta.map((item) => {
+              const isEditing = editingId === item.id;
+              const canEditWawancara = item.roles.includes('wawancara');
+              const canEditQuran = item.roles.includes('quran');
+              const canEditOrtu = item.roles.includes('ortu');
 
-              {editingId === item.id ? (
-                /* Edit Mode */
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                  <div>
-                    <label className="block text-xs text-stone-600 mb-1">
-                      Nilai Tulis (0-100)
-                    </label>
-                    <input
-                      type="number"
-                      min="0"
-                      max="100"
-                      value={formData.nilai_tulis ?? ""}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          nilai_tulis: parseFloat(e.target.value) || null,
-                        })
-                      }
-                      className="w-full px-3 py-2 border-2 border-stone-200 rounded-lg focus:border-violet-500 focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs text-stone-600 mb-1">
-                      Nilai Wawancara (0-100)
-                    </label>
-                    <input
-                      type="number"
-                      min="0"
-                      max="100"
-                      value={formData.nilai_wawancara ?? ""}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          nilai_wawancara: parseFloat(e.target.value) || null,
-                        })
-                      }
-                      className="w-full px-3 py-2 border-2 border-stone-200 rounded-lg focus:border-violet-500 focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs text-stone-600 mb-1">
-                      Nilai Tahfidz (0-100)
-                    </label>
-                    <input
-                      type="number"
-                      min="0"
-                      max="100"
-                      value={formData.nilai_tahfidz ?? ""}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          nilai_tahfidz: parseFloat(e.target.value) || null,
-                        })
-                      }
-                      className="w-full px-3 py-2 border-2 border-stone-200 rounded-lg focus:border-violet-500 focus:outline-none"
-                    />
-                  </div>
-                  <div className="md:col-span-3">
-                    <label className="block text-xs text-stone-600 mb-1">
-                      Catatan
-                    </label>
-                    <textarea
-                      value={formData.catatan ?? ""}
-                      onChange={(e) =>
-                        setFormData({ ...formData, catatan: e.target.value })
-                      }
-                      className="w-full px-3 py-2 border-2 border-stone-200 rounded-lg focus:border-violet-500 focus:outline-none resize-none"
-                      rows={2}
-                    />
-                  </div>
-                </div>
-              ) : (
-                /* Display Mode */
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                  <div>
-                    <p className="text-xs text-stone-500">Nilai Tulis</p>
-                    <p className="font-bold text-lg text-violet-600">
-                      {item.nilai_tulis ?? "-"}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-stone-500">Nilai Wawancara</p>
-                    <p className="font-bold text-lg text-violet-600">
-                      {item.nilai_wawancara ?? "-"}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-stone-500">Nilai Tahfidz</p>
-                    <p className="font-bold text-lg text-violet-600">
-                      {item.nilai_tahfidz ?? "-"}
-                    </p>
-                  </div>
-                  {item.catatan && (
-                    <div className="md:col-span-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                      <p className="text-sm text-blue-900">
-                        <strong>Catatan:</strong> {item.catatan}
-                      </p>
+              return (
+                <div key={item.id} className="bg-white rounded-xl shadow-lg p-6 border-2 border-violet-100">
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-violet-100 rounded-lg"><User className="w-5 h-5 text-violet-600" /></div>
+                      <div>
+                        <h3 className="font-bold text-lg text-stone-900">{item.nama_lengkap}</h3>
+                        <div className="flex items-center gap-2 text-sm text-stone-600">
+                          <Hash className="w-3 h-3" /> {item.nomor_pendaftaran}
+                          <span className="px-2 py-0.5 bg-gray-100 rounded text-xs">{item.jenjang}</span>
+                        </div>
+                      </div>
                     </div>
-                  )}
-                </div>
-              )}
+                    <div>
+                      {!isEditing && (
+                        <button onClick={() => handleEdit(item)} className="px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700">Input / Edit Nilai</button>
+                      )}
+                    </div>
+                  </div>
 
-              {/* Actions */}
-              {editingId === item.id ? (
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => handleSave(item.id)}
-                    disabled={saving === item.id}
-                    className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
-                  >
-                    {saving === item.id ? (
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                    ) : (
-                      <Save className="w-4 h-4" />
+                  {/* Form / View */}
+                  <div className="grid md:grid-cols-3 gap-6">
+                    {/* Wawancara Santri */}
+                    {(canEditWawancara || item.nilai_wawancara_santri) && (
+                      <div className={`p-4 rounded-lg border content-section ${canEditWawancara ? 'bg-blue-50 border-blue-100' : 'bg-gray-50'}`}>
+                        <h4 className="font-bold text-blue-900 mb-2">Wawancara Santri</h4>
+                        {isEditing && canEditWawancara ? (
+                          <div className="space-y-2">
+                            <label className="text-xs font-bold">Nilai (0-100)</label>
+                            <input
+                              type="number"
+                              className="w-full p-2 border rounded"
+                              value={formData.nilai_wawancara_santri ?? ''}
+                              onChange={e => setFormData({ ...formData, nilai_wawancara_santri: Number(e.target.value) })}
+                            />
+                            <label className="text-xs font-bold">Catatan</label>
+                            <textarea
+                              className="w-full p-2 border rounded"
+                              rows={2}
+                              value={formData.catatan_santri ?? ''}
+                              onChange={e => setFormData({ ...formData, catatan_santri: e.target.value })}
+                            />
+                          </div>
+                        ) : (
+                          <div className="space-y-1">
+                            <div className="text-sm">Nilai: <span className="font-bold">{item.nilai_wawancara_santri || '-'}</span></div>
+                            <div className="text-sm text-stone-500 italic">{item.catatan_santri || 'Tidak ada catatan'}</div>
+                          </div>
+                        )}
+                      </div>
                     )}
-                    Simpan
-                  </button>
-                  <button
-                    onClick={() => {
-                      setEditingId(null);
-                      setFormData({});
-                    }}
-                    className="px-4 py-2 bg-stone-200 hover:bg-stone-300 text-stone-700 rounded-lg font-medium transition-colors"
-                  >
-                    Batal
-                  </button>
+
+                    {/* Al-Qur'an */}
+                    {(canEditQuran || item.nilai_tes_quran) && (
+                      <div className={`p-4 rounded-lg border content-section ${canEditQuran ? 'bg-emerald-50 border-emerald-100' : 'bg-gray-50'}`}>
+                        <h4 className="font-bold text-emerald-900 mb-2">Tes Al-Qur'an</h4>
+                        {isEditing && canEditQuran ? (
+                          <div className="space-y-2">
+                            <label className="text-xs font-bold">Nilai (0-100)</label>
+                            <input
+                              type="number"
+                              className="w-full p-2 border rounded"
+                              value={formData.nilai_tes_quran ?? ''}
+                              onChange={e => setFormData({ ...formData, nilai_tes_quran: Number(e.target.value) })}
+                            />
+                            {!canEditWawancara && (
+                              <>
+                                <label className="text-xs font-bold">Catatan</label>
+                                <textarea
+                                  className="w-full p-2 border rounded"
+                                  rows={2}
+                                  value={formData.catatan_quran ?? ''}
+                                  onChange={e => setFormData({ ...formData, catatan_quran: e.target.value })}
+                                />
+                              </>
+                            )}
+                          </div>
+                        ) : (
+                          <div className="space-y-1">
+                            <div className="text-sm">Nilai: <span className="font-bold">{item.nilai_tes_quran || '-'}</span></div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Wawancara Ortu */}
+                    {(canEditOrtu || item.nilai_wawancara_ortu) && (
+                      <div className={`p-4 rounded-lg border content-section ${canEditOrtu ? 'bg-amber-50 border-amber-100' : 'bg-gray-50'}`}>
+                        <h4 className="font-bold text-amber-900 mb-2">Wawancara Wali</h4>
+                        {isEditing && canEditOrtu ? (
+                          <div className="space-y-2">
+                            <label className="text-xs font-bold">Nilai (0-100)</label>
+                            <input
+                              type="number"
+                              className="w-full p-2 border rounded"
+                              value={formData.nilai_wawancara_ortu ?? ''}
+                              onChange={e => setFormData({ ...formData, nilai_wawancara_ortu: Number(e.target.value) })}
+                            />
+                            <label className="text-xs font-bold">Catatan</label>
+                            <textarea
+                              className="w-full p-2 border rounded"
+                              rows={2}
+                              value={formData.catatan_ortu ?? ''}
+                              onChange={e => setFormData({ ...formData, catatan_ortu: e.target.value })}
+                            />
+                          </div>
+                        ) : (
+                          <div className="space-y-1">
+                            <div className="text-sm">Nilai: <span className="font-bold">{item.nilai_wawancara_ortu || '-'}</span></div>
+                            <div className="text-sm text-stone-500 italic">{item.catatan_ortu || 'Tidak ada catatan'}</div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  {isEditing && (
+                    <div className="flex gap-2 mt-4 justify-end">
+                      <button onClick={() => setEditingId(null)} className="px-4 py-2 border rounded-lg hover:bg-stone-50">Batal</button>
+                      <button
+                        onClick={() => handleSave(item.id, item.roles)}
+                        disabled={saving === item.id}
+                        className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center gap-2"
+                      >
+                        {saving === item.id && <Loader2 className="animate-spin w-4 h-4" />} Simpan
+                      </button>
+                    </div>
+                  )}
                 </div>
-              ) : (
-                <button
-                  onClick={() => handleEdit(item)}
-                  className="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg font-medium transition-colors"
-                >
-                  {item.nilai_tulis !== null ? "Edit Nilai" : "Input Nilai"}
-                </button>
-              )}
-            </div>
-          ))
-        )}
+              );
+            })}
       </div>
     </div>
   );

@@ -206,7 +206,7 @@ export default function AdminDashboardPage() {
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-ink-900 whitespace-nowrap">
             {role === 'admin_keuangan' ? 'Dashboard Keuangan' :
               role === 'admin_berkas' ? 'Dashboard Berkas' :
-                'Ringkasan'}
+                'Dashboard Admin'}
           </h1>
           <p className="text-ink-500 mt-2 text-lg">
             Monitor perkembangan PPDB secara real-time.
@@ -471,6 +471,6 @@ export default function AdminDashboardPage() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }

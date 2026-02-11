@@ -33,6 +33,8 @@ export async function sendOTP(
 
   // WhatsApp: Otomatis via Wablas API
   if (channel === "whatsapp") {
+    let waError = "Unknown WhatsApp error";
+
     try {
       const result = await sendWhatsAppOTP(identifier, otp, nama);
 
@@ -44,8 +46,10 @@ export async function sendOTP(
           messageId: result.messageId,
         };
       }
-    } catch (error) {
+      waError = result.error || "Gagal mengirim via WhatsApp";
+    } catch (error: any) {
       console.error("❌ WhatsApp failed:", error);
+      waError = error.message || "Exception sending WhatsApp";
     }
 
     // Fallback ke SMS jika WhatsApp gagal
@@ -65,7 +69,7 @@ export async function sendOTP(
 
     return {
       success: false,
-      message: "Gagal mengirim OTP via WhatsApp dan SMS",
+      message: `Gagal mengirim OTP: ${waError}`, // Return specific WhatsApp error
       channel: "whatsapp",
     };
   }

@@ -26,15 +26,18 @@ interface AdminUser {
     created_at: string;
 }
 
+// Role display names
 const ROLE_OPTIONS = [
+    { value: "head_of_it", label: "Kepala IT (Root Admin)" },
+    { value: "admin_super", label: "Admin Super (Mudir/Ketua)" },
     { value: "admin_berkas", label: "Admin Berkas" },
     { value: "admin_keuangan", label: "Admin Keuangan" },
     { value: "penguji", label: "Penguji" },
-    { value: "admin_super", label: "Admin Super" },
 ];
 
 export default function UserManagementPage() {
     const [users, setUsers] = useState<AdminUser[]>([]);
+
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
