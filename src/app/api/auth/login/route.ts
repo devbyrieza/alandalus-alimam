@@ -105,7 +105,7 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      const allowedRoles = ["admin", "penguji", "admin_super", "admin_berkas", "admin_keuangan"];
+      const allowedRoles = ["admin", "penguji", "admin_super", "admin_berkas", "admin_keuangan", "head_of_it"];
       if (!allowedRoles.includes(profile.role)) {
         return NextResponse.json(
           { error: "Akun ini tidak memiliki akses admin/penguji" },

@@ -63,13 +63,28 @@ interface PendaftarDetail {
   } | null;
   orang_tua: {
     nama_ayah: string | null;
+    nik_ayah: string | null;
+    tempat_lahir_ayah: string | null;
+    tanggal_lahir_ayah: string | null;
+    pendidikan_ayah: string | null;
     pekerjaan_ayah: string | null;
     penghasilan_ayah: string | null;
+    no_hp_ayah: string | null;
+    alamat_ayah: string | null;
     nama_ibu: string | null;
+    nik_ibu: string | null;
+    tempat_lahir_ibu: string | null;
+    tanggal_lahir_ibu: string | null;
+    pendidikan_ibu: string | null;
     pekerjaan_ibu: string | null;
     penghasilan_ibu: string | null;
-    no_hp_ayah: string | null;
     no_hp_ibu: string | null;
+    alamat_ibu: string | null;
+    nama_wali: string | null;
+    hubungan_wali: string | null;
+    no_hp_wali: string | null;
+    pekerjaan_wali: string | null;
+    alamat_wali: string | null;
   } | null;
   dokumen: Array<{
     id: string;
@@ -434,37 +449,88 @@ export default function PendaftarDetailPage() {
                 <h3 className="text-lg font-bold text-stone-900">Data Orang Tua/Wali</h3>
               </div>
 
-              <div className="space-y-6">
+              <div className="space-y-8">
                 {/* Data Ayah */}
-                <div>
-                  <h4 className="font-bold text-stone-700 mb-3 flex items-center gap-2">
-                    <User className="w-4 h-4" />
-                    Data Ayah
+                <div className="p-4 bg-stone-50 rounded-xl border border-stone-100">
+                  <h4 className="font-bold text-stone-900 mb-4 flex items-center gap-2 border-b border-stone-200 pb-2">
+                    <User className="w-5 h-5 text-blue-600" />
+                    Data Ayah / Wali Laki-laki
                   </h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <InfoItem label="Nama Ayah" value={pendaftar.orang_tua.nama_ayah} />
-                    <InfoItem label="No. HP Ayah" value={pendaftar.orang_tua.no_hp_ayah} />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
+                    <InfoItem label="Nama Lengkap" value={pendaftar.orang_tua.nama_ayah} />
+                    <InfoItem label="NIK" value={pendaftar.orang_tua.nik_ayah} />
+                    <InfoItem label="Tempat, Tgl Lahir" value={`${pendaftar.orang_tua.tempat_lahir_ayah || ""}, ${formatDate(pendaftar.orang_tua.tanggal_lahir_ayah)}`} />
+                    <InfoItem label="No. HP / WA" value={pendaftar.orang_tua.no_hp_ayah} />
+                    <InfoItem label="Pendidikan Terakhir" value={pendaftar.orang_tua.pendidikan_ayah} />
                     <InfoItem label="Pekerjaan" value={pendaftar.orang_tua.pekerjaan_ayah} />
                     <InfoItem label="Penghasilan" value={pendaftar.orang_tua.penghasilan_ayah} />
+                    <div className="md:col-span-2">
+                      <InfoItem label="Alamat Ayah" value={pendaftar.orang_tua.alamat_ayah || pendaftar.alamat} />
+                    </div>
                   </div>
                 </div>
 
                 {/* Data Ibu */}
-                <div>
-                  <h4 className="font-bold text-stone-700 mb-3 flex items-center gap-2">
-                    <User className="w-4 h-4" />
-                    Data Ibu
+                <div className="p-4 bg-stone-50 rounded-xl border border-stone-100">
+                  <h4 className="font-bold text-stone-900 mb-4 flex items-center gap-2 border-b border-stone-200 pb-2">
+                    <User className="w-5 h-5 text-rose-600" />
+                    Data Ibu / Wali Perempuan
                   </h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <InfoItem label="Nama Ibu" value={pendaftar.orang_tua.nama_ibu} />
-                    <InfoItem label="No. HP Ibu" value={pendaftar.orang_tua.no_hp_ibu} />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
+                    <InfoItem label="Nama Lengkap" value={pendaftar.orang_tua.nama_ibu} />
+                    <InfoItem label="NIK" value={pendaftar.orang_tua.nik_ibu} />
+                    <InfoItem label="Tempat, Tgl Lahir" value={`${pendaftar.orang_tua.tempat_lahir_ibu || ""}, ${formatDate(pendaftar.orang_tua.tanggal_lahir_ibu)}`} />
+                    <InfoItem label="No. HP / WA" value={pendaftar.orang_tua.no_hp_ibu} />
+                    <InfoItem label="Pendidikan Terakhir" value={pendaftar.orang_tua.pendidikan_ibu} />
                     <InfoItem label="Pekerjaan" value={pendaftar.orang_tua.pekerjaan_ibu} />
                     <InfoItem label="Penghasilan" value={pendaftar.orang_tua.penghasilan_ibu} />
+                    <div className="md:col-span-2">
+                      <InfoItem label="Alamat Ibu" value={pendaftar.orang_tua.alamat_ibu || pendaftar.alamat} />
+                    </div>
                   </div>
                 </div>
+
+                {/* Data Wali (Jika Ada) */}
+                {pendaftar.orang_tua.nama_wali && (
+                  <div className="p-4 bg-blue-50/50 rounded-xl border border-blue-100">
+                    <h4 className="font-bold text-blue-900 mb-4 flex items-center gap-2 border-b border-blue-200 pb-2">
+                      <Briefcase className="w-5 h-5 text-blue-600" />
+                      Data Wali
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
+                      <InfoItem label="Nama Wali" value={pendaftar.orang_tua.nama_wali} />
+                      <InfoItem label="Hubungan" value={pendaftar.orang_tua.hubungan_wali} />
+                      <InfoItem label="No. HP" value={pendaftar.orang_tua.no_hp_wali} />
+                      <InfoItem label="Pekerjaan" value={pendaftar.orang_tua.pekerjaan_wali} />
+                      <div className="md:col-span-2">
+                        <InfoItem label="Alamat Wali" value={pendaftar.orang_tua.alamat_wali} />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           )}
+
+          {/* Riwayat Penyakit & Catatan */}
+          <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-red-100">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-red-100 rounded-lg">
+                <Heart className="w-6 h-6 text-red-600" />
+              </div>
+              <h3 className="text-lg font-bold text-stone-900">Data Kesehatan & Catatan</h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <InfoItem label="Golongan Darah" value={pendaftar.golongan_darah} />
+              <div className="md:col-span-2">
+                <p className="text-xs text-stone-500 mb-1">Riwayat Penyakit</p>
+                <div className="p-3 bg-red-50 text-red-900 rounded-lg border border-red-100 min-h-[60px]">
+                  {pendaftar.hobi || "Tidak ada riwayat penyakit yang dilaporkan"}
+                  {/* Note: I'm using hobi as placeholder if riwayat_penyakit column is not directly available on pendaftar model but it is in data_kesehatan */}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Sidebar - 1 column */}

@@ -21,7 +21,7 @@ export default function TentangPage() {
             {/* 1. Hero Section - Deep Brown & Gold */}
             <section className="relative py-12 md:py-16 overflow-hidden bg-brown-900 text-white">
                 {/* Decorative Background Elements */}
-                <div className="absolute inset-0 bg-[url('/images/pattern.png')] bg-repeat opacity-5 mix-blend-overlay" />
+                <div className="absolute inset-0 bg-[url('/images/pattern.svg')] bg-repeat opacity-5 mix-blend-overlay" />
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold-500/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brown-700/20 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 

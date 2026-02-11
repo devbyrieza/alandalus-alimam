@@ -20,7 +20,6 @@ const nextConfig: NextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
   experimental: {
-    forceSwcTransforms: true,
     optimizePackageImports: ['lucide-react', '@headlessui/react'],
   },
   // Cache optimization

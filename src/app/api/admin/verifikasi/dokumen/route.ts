@@ -35,8 +35,12 @@ export async function GET(request: NextRequest) {
     const where: any = {};
     if (statusParam === "pending") {
       where.is_verified = false;
+      where.catatan = null;
     } else if (statusParam === "verified") {
       where.is_verified = true;
+    } else if (statusParam === "rejected") {
+      where.is_verified = false;
+      where.NOT = { catatan: null };
     }
 
     // Fetch dokumen
@@ -92,7 +96,7 @@ export async function PATCH(request: NextRequest) {
     }
 
     // Check custom role
-    const allowedRoles = ["admin", "admin_super", "admin_berkas", "admin_keuangan", "penguji"];
+    const allowedRoles = ["admin", "admin_berkas", "admin_keuangan", "penguji", "admin_super"];
     if (!allowedRoles.includes(session.role)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
@@ -122,13 +126,14 @@ export async function PATCH(request: NextRequest) {
       where: { id: dokumen_id },
       data: {
         is_verified: isVerified,
-        catatan,
+        catatan: isVerified ? null : catatan,
         // verified_by: session.id, // Only if column exists in Prisma schema
         // verified_at: new Date(), // Only if column exists
       },
       include: {
         pendaftar: {
           select: {
+            id: true,
             nama_lengkap: true,
             no_hp: true,
           },
@@ -150,6 +155,46 @@ export async function PATCH(request: NextRequest) {
     } catch (error) {
       console.error("WhatsApp notification error:", error);
       // Don't fail verification if notification fails
+    }
+
+    // CHECK STATUS PROGRESSION / REVERSION
+    if (dokumen.pendaftar_id) {
+      const currentPendaftar = await prisma.pendaftar.findUnique({
+        where: { id: dokumen.pendaftar_id },
+        select: { status_pendaftaran: true }
+      });
+
+      if (isVerified) {
+        // 1. Get all documents for this pendaftar
+        const allDocs = await prisma.dokumen.findMany({
+          where: { pendaftar_id: dokumen.pendaftar_id }
+        });
+
+        // 2. Define required docs
+        const REQUIRED_DOCS = [
+          'kartu_keluarga', 'akta_kelahiran', 'rapor_sem1', 'rapor_sem2',
+          'nisn', 'foto_setengah_badan', 'surat_kesehatan', 'pakta_integritas', 'pernyataan_bebas_negatif'
+        ];
+
+        // 3. check if every required doc is present and verified
+        const verifiedTypes = new Set(allDocs.filter(d => d.is_verified).map(d => d.jenis_dokumen));
+        const allRequiredVerified = REQUIRED_DOCS.every(type => verifiedTypes.has(type));
+
+        if (allRequiredVerified && currentPendaftar?.status_pendaftaran === 'docs_uploaded') {
+          await prisma.pendaftar.update({
+            where: { id: dokumen.pendaftar_id },
+            data: { status_pendaftaran: 'docs_verified' }
+          });
+        }
+      } else {
+        // REJECTED: Revert status if it was 'docs_verified'
+        if (currentPendaftar?.status_pendaftaran === 'docs_verified') {
+          await prisma.pendaftar.update({
+            where: { id: dokumen.pendaftar_id },
+            data: { status_pendaftaran: 'docs_uploaded' }
+          });
+        }
+      }
     }
 
     return NextResponse.json({ success: true, data: dokumen });

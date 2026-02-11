@@ -38,9 +38,9 @@ Panitia PPDB Al-Imam`;
       };
     }
 
-    // Fallback: development simulation or explicit skip
-    if (process.env.NODE_ENV === "development" || process.env.SKIP_WHATSAPP_OTP === "true") {
-      console.log("📱 [DEV/SKIP] WhatsApp OTP (Simulated):", otp, "untuk", phone);
+    // Fallback: only if explicitly skipped
+    if (process.env.SKIP_WHATSAPP_OTP === "true") {
+      console.log("📱 [SKIP] WhatsApp OTP (Simulated):", otp, "untuk", phone);
       return {
         success: true,
         messageId: `wa_sim_${Date.now()}`,
@@ -54,9 +54,9 @@ Panitia PPDB Al-Imam`;
   } catch (error: any) {
     console.error("❌ WhatsApp error:", error.message);
 
-    // Fallback simulation for development or explicit skip
-    if (process.env.NODE_ENV === "development" || process.env.SKIP_WHATSAPP_OTP === "true") {
-      console.log("📱 [FALLBACK/SKIP] WhatsApp gagal, mode simulasi");
+    // Fallback simulation only if explicitly requested
+    if (process.env.SKIP_WHATSAPP_OTP === "true") {
+      console.log("📱 [SKIP] WhatsApp gagal, mode simulasi");
       console.log(`OTP untuk ${nama} (${phone}): ${otp}`);
       return {
         success: true,

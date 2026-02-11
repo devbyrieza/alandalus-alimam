@@ -90,7 +90,7 @@ export default function DashboardPendaftarPage() {
                 Update: {new Date(data.lastUpdate).toLocaleDateString('id-ID')}
               </span>
             </div>
-            <h1 className="text-3xl md:text-4xl font-black mb-4 leading-tight">
+            <h1 className="text-3xl md:text-4xl font-black mb-4 leading-tight text-white shadow-sm">
               Selamat Datang, <br />
               <span className="text-emerald-200">{data.nama}</span>
             </h1>

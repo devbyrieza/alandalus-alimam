@@ -73,9 +73,8 @@ export async function GET(request: NextRequest) {
     const dataWithUrls = data.map((pembayaran) => {
       let bukti_transfer_url: string | null = null;
       if (pembayaran.bukti_transfer_path) {
-        // Temporary: direct link if public or just path
-        // pendaftar needs to be able to see this
-        bukti_transfer_url = null; // Cannot sign URL without storage client
+        // Construct URL for the /api/files/[...path] route
+        bukti_transfer_url = `/api/files/${pembayaran.bukti_transfer_path}`;
       }
 
       return {

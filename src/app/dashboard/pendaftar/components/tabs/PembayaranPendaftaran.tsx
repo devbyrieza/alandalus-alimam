@@ -626,7 +626,7 @@ export default function PembayaranPendaftaranTab({
               <p className="text-emerald-50 font-medium max-w-lg">
                 {isStatusOnly
                   ? "Lihat status verifikasi pembayaran Anda dan riwayat bukti transfer."
-                  : "Selesaikan pembayaran untuk mengaktifkan akun pendaftaran Anda dan lanjut ke tahap seleksi."}
+                  : "Selesaikan pembayaran untuk membuka akses pengisian data santri lengkap."}
               </p>
             </div>
           </div>

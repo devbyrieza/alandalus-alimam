@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Loader2 } from "lucide-react";
+import { Loader2, ChevronDown } from "lucide-react";
 
 interface WilayahData {
     id: string;
@@ -160,30 +160,8 @@ export default function WilayahSelector({
         } else if (field === "kecamatan") {
             newValue.kelurahan = "";
             newValue.kode_pos = "";
-        } else if (field === "kelurahan") {
-            // Not resetting anything, but maybe setting zip code?
-            // Logic handled in render or separate effect?
-            // Better here: find the selected village and set zip code
-            // We need to wait for `villages` state but here `val` is the name.
-            // We can find it in the current `villages` list.
-            // NOTE: Because setState is async, we rely on the current 'villages' list which SHOULD be populated.
         }
 
-        onChange(newValue);
-    };
-
-    // Handle Village Change specifically to set Zip Code
-    const handleKelurahanChange = (val: string) => {
-        // Find village object to get zip code
-        // Assuming API returns object with postal_code? We need to verify.
-        // If not, we might not be able to auto-fill.
-        // We'll assume structure has it or just update the value.
-
-        // Check if we can find it in the villages list
-        // Note: The list might not be perfectly sync if waiting for loading, but usually it is.
-
-        // For now we just update the name
-        const newValue = { ...value, kelurahan: val };
         onChange(newValue);
     };
 
@@ -200,7 +178,7 @@ export default function WilayahSelector({
                             value={value.provinsi}
                             onChange={(e) => handleChange("provinsi", e.target.value)}
                             disabled={disabled || loading.provinsi}
-                            className="w-full px-4 py-2.5 border-2 border-stone-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors disabled:bg-stone-100 disabled:text-stone-500 appearance-none"
+                            className="w-full px-4 py-2.5 border-2 border-stone-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors disabled:bg-stone-100 disabled:text-stone-500 appearance-none cursor-pointer"
                         >
                             <option value="">Pilih Provinsi</option>
                             {provinces.map((p) => (
@@ -209,6 +187,7 @@ export default function WilayahSelector({
                                 </option>
                             ))}
                         </select>
+                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 pointer-events-none" />
                         {loading.provinsi && (
                             <div className="absolute right-3 top-3">
                                 <Loader2 className="w-4 h-4 animate-spin text-teal-600" />
@@ -227,7 +206,7 @@ export default function WilayahSelector({
                             value={value.kabupaten}
                             onChange={(e) => handleChange("kabupaten", e.target.value)}
                             disabled={disabled || !value.provinsi || loading.kabupaten}
-                            className="w-full px-4 py-2.5 border-2 border-stone-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors disabled:bg-stone-100 disabled:text-stone-500 appearance-none"
+                            className="w-full px-4 py-2.5 border-2 border-stone-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors disabled:bg-stone-100 disabled:text-stone-500 appearance-none cursor-pointer"
                         >
                             <option value="">Pilih Kabupaten/Kota</option>
                             {regencies.map((r) => (
@@ -236,6 +215,7 @@ export default function WilayahSelector({
                                 </option>
                             ))}
                         </select>
+                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 pointer-events-none" />
                         {loading.kabupaten && (
                             <div className="absolute right-3 top-3">
                                 <Loader2 className="w-4 h-4 animate-spin text-teal-600" />
@@ -254,7 +234,7 @@ export default function WilayahSelector({
                             value={value.kecamatan}
                             onChange={(e) => handleChange("kecamatan", e.target.value)}
                             disabled={disabled || !value.kabupaten || loading.kecamatan}
-                            className="w-full px-4 py-2.5 border-2 border-stone-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors disabled:bg-stone-100 disabled:text-stone-500 appearance-none"
+                            className="w-full px-4 py-2.5 border-2 border-stone-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors disabled:bg-stone-100 disabled:text-stone-500 appearance-none cursor-pointer"
                         >
                             <option value="">Pilih Kecamatan</option>
                             {districts.map((d) => (
@@ -263,6 +243,7 @@ export default function WilayahSelector({
                                 </option>
                             ))}
                         </select>
+                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 pointer-events-none" />
                         {loading.kecamatan && (
                             <div className="absolute right-3 top-3">
                                 <Loader2 className="w-4 h-4 animate-spin text-teal-600" />
@@ -281,13 +262,10 @@ export default function WilayahSelector({
                             value={value.kelurahan}
                             onChange={(e) => {
                                 const selectedName = e.target.value;
-                                // Try to find zip code?
-                                // Depending on data structure, if 'villages' has postal code we can use it.
-                                // Not implementing auto-zip-code yet until verified.
                                 handleChange("kelurahan", selectedName);
                             }}
                             disabled={disabled || !value.kecamatan || loading.kelurahan}
-                            className="w-full px-4 py-2.5 border-2 border-stone-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors disabled:bg-stone-100 disabled:text-stone-500 appearance-none"
+                            className="w-full px-4 py-2.5 border-2 border-stone-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors disabled:bg-stone-100 disabled:text-stone-500 appearance-none cursor-pointer"
                         >
                             <option value="">Pilih Kelurahan/Desa</option>
                             {villages.map((v) => (
@@ -296,6 +274,7 @@ export default function WilayahSelector({
                                 </option>
                             ))}
                         </select>
+                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 pointer-events-none" />
                         {loading.kelurahan && (
                             <div className="absolute right-3 top-3">
                                 <Loader2 className="w-4 h-4 animate-spin text-teal-600" />
@@ -307,18 +286,20 @@ export default function WilayahSelector({
                 {/* KODE POS */}
                 <div>
                     <label className="block text-sm font-medium text-stone-700 mb-1">
-                        Kode Pos
+                        Kode Pos <span className="text-red-500">*</span>
                     </label>
-                    <input
-                        type="text"
-                        name="kode_pos"
-                        value={value.kode_pos}
-                        onChange={(e) => handleChange("kode_pos", e.target.value)}
-                        placeholder="43111"
-                        maxLength={5}
-                        disabled={disabled}
-                        className="w-full px-4 py-2.5 border-2 border-stone-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors disabled:bg-stone-100 disabled:text-stone-500"
-                    />
+                    <div className="relative">
+                        <input
+                            type="text"
+                            name="kode_pos"
+                            value={value.kode_pos}
+                            onChange={(e) => handleChange("kode_pos", e.target.value)}
+                            placeholder="Contoh: 10110"
+                            maxLength={5}
+                            disabled={disabled}
+                            className="w-full px-4 py-2.5 border-2 border-stone-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors disabled:bg-stone-100 disabled:text-stone-500"
+                        />
+                    </div>
                 </div>
             </div>
         </div>

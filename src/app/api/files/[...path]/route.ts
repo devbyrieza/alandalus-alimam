@@ -8,8 +8,9 @@ import { getFileLocal } from "@/lib/storage/local";
  * URL format: /api/files/category/owner_id/filename
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function GET(request: NextRequest, { params }: { params: any }) {
+export async function GET(request: NextRequest, props: { params: Promise<{ path: string[] }> }) {
     try {
+        const params = await props.params;
         const { path } = params; // array of path segments
 
         if (!path || path.length < 3) {

@@ -591,7 +591,7 @@ export default function KegiatanPage() {
       {/* Hero Section - Fully Responsive */}
       <section className="relative overflow-hidden bg-brown-900 flex items-center min-h-[400px] md:min-h-[500px] py-12 md:py-16">
         {/* Background Pattern */}
-        <div className="absolute inset-0 bg-[url('/images/pattern.png')] bg-repeat opacity-5 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-[url('/images/pattern.svg')] bg-repeat opacity-5 mix-blend-overlay" />
         {/* Decorative Elements - Hidden on mobile */}
         <div className="hidden sm:block absolute top-20 left-10 w-48 h-48 sm:w-72 sm:h-72 bg-[var(--color-gold-500)] rounded-full blur-3xl opacity-10 animate-float" />
         <div className="hidden sm:block absolute bottom-20 right-10 w-64 h-64 sm:w-96 sm:h-96 bg-[var(--color-brown-700)] rounded-full blur-3xl opacity-10 animate-float delay-500" />

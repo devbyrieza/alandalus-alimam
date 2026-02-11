@@ -8,260 +8,207 @@ import { prisma } from "@/lib/prisma";
  */
 export async function GET() {
   try {
-    // 1. Validasi session
     const cookieStore = await cookies();
     const sessionCookie = cookieStore.get("app_session");
 
     if (!sessionCookie) {
-      return NextResponse.json(
-        { success: false, error: "Sesi tidak ditemukan" },
-        { status: 401 }
-      );
+      return NextResponse.json({ success: false, error: "Sesi tidak ditemukan" }, { status: 401 });
     }
 
     let session;
     try {
       session = JSON.parse(sessionCookie.value);
     } catch {
-      return NextResponse.json(
-        { success: false, error: "Sesi tidak valid" },
-        { status: 401 }
-      );
+      return NextResponse.json({ success: false, error: "Sesi tidak valid" }, { status: 401 });
     }
 
     if (session.role !== "pendaftar") {
-      return NextResponse.json(
-        { success: false, error: "Akses tidak diizinkan" },
-        { status: 403 }
-      );
+      return NextResponse.json({ success: false, error: "Akses tidak diizinkan" }, { status: 403 });
     }
 
     const pendaftarId = session.id;
-
-    // 2. Ambil data pendaftar
     const pendaftar = await prisma.pendaftar.findUnique({
       where: { id: pendaftarId },
     });
 
     if (!pendaftar) {
-      return NextResponse.json(
-        { success: false, error: "Data pendaftar tidak ditemukan" },
-        { status: 404 }
-      );
+      return NextResponse.json({ success: false, error: "Data pendaftar tidak ditemukan" }, { status: 404 });
     }
 
-    // 3. Parse data_lengkap jika ada (JSON column)
-    let dataLengkap: any = null;
-    if (pendaftar.data_lengkap) {
-      // Prisma returns JSON object directly for Json fields, no need to parse if string
-      // But if it was stored as stringified JSON manually, we might need to check type
-      dataLengkap = pendaftar.data_lengkap;
-    }
+    const dataLengkap: any = pendaftar.data_lengkap || {};
 
-    // 4. Merge data dari kolom utama dan data_lengkap
-    const response = {
+    // Merge top-level data from database columns as source of truth for main identity
+    const responseData = {
       santri: {
-        nik: pendaftar.nik || "",
-        nama_lengkap: pendaftar.nama_lengkap || "",
-        tempat_lahir: dataLengkap?.santri?.tempat_lahir || "",
-        tanggal_lahir: pendaftar.tanggal_lahir ? new Date(pendaftar.tanggal_lahir).toISOString().split('T')[0] : "",
-        jenis_kelamin: pendaftar.jenis_kelamin === "L" ? "Laki-laki" : pendaftar.jenis_kelamin === "P" ? "Perempuan" : "",
-        agama: dataLengkap?.santri?.agama || "Islam",
-        kewarganegaraan: dataLengkap?.santri?.kewarganegaraan || "Indonesia",
-        anak_ke: dataLengkap?.santri?.anak_ke || 1,
-        jumlah_saudara: dataLengkap?.santri?.jumlah_saudara || 1,
-        golongan_darah: dataLengkap?.santri?.golongan_darah || "",
-        tinggi_badan: dataLengkap?.santri?.tinggi_badan || 0,
-        berat_badan: dataLengkap?.santri?.berat_badan || 0,
-        riwayat_penyakit: dataLengkap?.santri?.riwayat_penyakit || "",
-        alamat_lengkap: dataLengkap?.santri?.alamat_lengkap || "",
-        rt: dataLengkap?.santri?.rt || "",
-        rw: dataLengkap?.santri?.rw || "",
-        kelurahan: dataLengkap?.santri?.kelurahan || "",
-        kecamatan: dataLengkap?.santri?.kecamatan || "",
-        kabupaten: dataLengkap?.santri?.kabupaten || "",
-        provinsi: dataLengkap?.santri?.provinsi || "",
-        kode_pos: dataLengkap?.santri?.kode_pos || "",
-        no_hp: pendaftar.no_hp || "",
-        email: dataLengkap?.santri?.email || "",
-        asal_sekolah: dataLengkap?.santri?.asal_sekolah || "",
-        nisn: dataLengkap?.santri?.nisn || "",
-        alamat_sekolah: dataLengkap?.santri?.alamat_sekolah || "",
-        tahun_lulus: dataLengkap?.santri?.tahun_lulus || "",
+        ...dataLengkap.santri,
+        nik: pendaftar.nik || dataLengkap.santri?.nik || "",
+        nama_lengkap: pendaftar.nama_lengkap || dataLengkap.santri?.nama_lengkap || "",
+        tanggal_lahir: pendaftar.tanggal_lahir
+          ? new Date(pendaftar.tanggal_lahir).toISOString().split('T')[0]
+          : dataLengkap.santri?.tanggal_lahir || "",
+        jenis_kelamin: pendaftar.jenis_kelamin === "L" ? "Laki-laki" : pendaftar.jenis_kelamin === "P" ? "Perempuan" : dataLengkap.santri?.jenis_kelamin || "",
+        no_hp: pendaftar.no_hp || dataLengkap.santri?.no_hp || "",
       },
-      ayah: dataLengkap?.ayah || {
-        nama_lengkap: "",
-        nik: "",
-        tempat_lahir: "",
-        tanggal_lahir: "",
-        agama: "Islam",
-        pendidikan_terakhir: "",
-        pekerjaan: "",
-        penghasilan: "",
-        no_hp: "",
-        email: "",
-        alamat: "",
-        status_hidup: "Masih Hidup",
-      },
-      ibu: dataLengkap?.ibu || {
-        nama_lengkap: "",
-        nik: "",
-        tempat_lahir: "",
-        tanggal_lahir: "",
-        agama: "Islam",
-        pendidikan_terakhir: "",
-        pekerjaan: "",
-        penghasilan: "",
-        no_hp: "",
-        email: "",
-        alamat: "",
-        status_hidup: "Masih Hidup",
-      },
-      wali: dataLengkap?.wali || {
-        hubungan: "",
-        nama_lengkap: "",
-        nik: "",
-        tempat_lahir: "",
-        tanggal_lahir: "",
-        agama: "Islam",
-        pendidikan_terakhir: "",
-        pekerjaan: "",
-        penghasilan: "",
-        no_hp: "",
-        email: "",
-        alamat: "",
-      },
-      wali_sama_dengan_ortu: dataLengkap?.wali_sama_dengan_ortu ?? true,
+      ayah: dataLengkap.ayah || { status_hidup: "Masih Hidup" },
+      ibu: dataLengkap.ibu || { status_hidup: "Masih Hidup" },
+      wali: dataLengkap.wali || {},
+      wali_sama_dengan_ortu: dataLengkap.wali_sama_dengan_ortu ?? true,
     };
 
     return NextResponse.json({
       success: true,
-      data: response,
+      data: {
+        ...responseData,
+        status_pendaftaran: pendaftar.status_pendaftaran
+      },
     });
   } catch (error) {
     console.error("Error in GET /api/pendaftar/data-lengkap:", error);
-    return NextResponse.json(
-      { success: false, error: "Terjadi kesalahan" },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, error: "Terjadi kesalahan" }, { status: 500 });
   }
 }
 
 /**
  * POST /api/pendaftar/data-lengkap
- * Menyimpan data lengkap pendaftar
+ * Menyimpan data lengkap pendaftar (termasuk auto-save draft)
  */
 export async function POST(request: NextRequest) {
   try {
-    // 1. Validasi session
     const cookieStore = await cookies();
     const sessionCookie = cookieStore.get("app_session");
 
     if (!sessionCookie) {
-      return NextResponse.json(
-        { success: false, error: "Sesi tidak ditemukan" },
-        { status: 401 }
-      );
+      return NextResponse.json({ success: false, error: "Sesi tidak ditemukan" }, { status: 401 });
     }
 
     let session;
     try {
       session = JSON.parse(sessionCookie.value);
     } catch {
-      return NextResponse.json(
-        { success: false, error: "Sesi tidak valid" },
-        { status: 401 }
-      );
-    }
-
-    if (session.role !== "pendaftar") {
-      return NextResponse.json(
-        { success: false, error: "Akses tidak diizinkan" },
-        { status: 403 }
-      );
+      return NextResponse.json({ success: false, error: "Sesi tidak valid" }, { status: 401 });
     }
 
     const pendaftarId = session.id;
-
-    // 2. Parse body
     const body = await request.json();
-    const { santri, ayah, ibu, wali, wali_sama_dengan_ortu } = body;
+    const { santri, ayah, ibu, wali, wali_sama_dengan_ortu, is_draft } = body;
 
-    // 3. Validasi data wajib
-    if (!santri?.nama_lengkap || !santri?.tempat_lahir) {
-      return NextResponse.json(
-        { success: false, error: "Nama lengkap dan tempat lahir wajib diisi" },
-        { status: 400 }
-      );
+    // Relaxation: If is_draft, we don't require anything. 
+    // If not draft (manual Save), we still keep some sanity checks but less strict.
+    if (!is_draft) {
+      if (!santri?.nama_lengkap) {
+        return NextResponse.json({ success: false, error: "Nama lengkap santri wajib diisi" }, { status: 400 });
+      }
     }
 
-    if (!ayah?.nama_lengkap || !ibu?.nama_lengkap) {
-      return NextResponse.json(
-        { success: false, error: "Nama ayah dan ibu wajib diisi" },
-        { status: 400 }
-      );
-    }
+    // Prepare data for individual columns (identity sync)
+    let jenisKelaminDb = null;
+    if (santri?.jenis_kelamin === "Laki-laki") jenisKelaminDb = "L";
+    else if (santri?.jenis_kelamin === "Perempuan") jenisKelaminDb = "P";
 
-    // 4. Konversi jenis kelamin
-    let jenisKelaminDb = santri.jenis_kelamin;
-    if (santri.jenis_kelamin === "Laki-laki") jenisKelaminDb = "L";
-    if (santri.jenis_kelamin === "Perempuan") jenisKelaminDb = "P";
-
-    // 5. Simpan data utama ke kolom pendaftar
-    // data_lengkap is Json type in Prisma, so pass object directly
+    // Reconstruct data_lengkap object to be saved
     const dataLengkapObj = {
-      santri: {
-        tempat_lahir: santri.tempat_lahir,
-        agama: santri.agama,
-        kewarganegaraan: santri.kewarganegaraan,
-        anak_ke: santri.anak_ke,
-        jumlah_saudara: santri.jumlah_saudara,
-        golongan_darah: santri.golongan_darah,
-        tinggi_badan: santri.tinggi_badan,
-        berat_badan: santri.berat_badan,
-        riwayat_penyakit: santri.riwayat_penyakit,
-        alamat_lengkap: santri.alamat_lengkap,
-        rt: santri.rt,
-        rw: santri.rw,
-        kelurahan: santri.kelurahan,
-        kecamatan: santri.kecamatan,
-        kabupaten: santri.kabupaten,
-        provinsi: santri.provinsi,
-        kode_pos: santri.kode_pos,
-        email: santri.email,
-        asal_sekolah: santri.asal_sekolah,
-        nisn: santri.nisn,
-        alamat_sekolah: santri.alamat_sekolah,
-        tahun_lulus: santri.tahun_lulus,
-      },
-      ayah,
-      ibu,
-      wali,
-      wali_sama_dengan_ortu,
+      santri: santri || {},
+      ayah: ayah || {},
+      ibu: ibu || {},
+      wali: wali || {},
+      wali_sama_dengan_ortu: wali_sama_dengan_ortu ?? true,
     };
 
-    const updated = await prisma.pendaftar.update({
+    // Update main pendaftar record
+    const updateData: any = {
+      data_lengkap: dataLengkapObj,
+      updated_at: new Date(),
+    };
+
+    // Sync individual columns for the Santri (Main Pendaftar Table)
+    if (santri) {
+      if (santri.nama_lengkap) updateData.nama_lengkap = santri.nama_lengkap;
+      if (santri.nik) updateData.nik = santri.nik;
+      if (santri.tanggal_lahir) updateData.tanggal_lahir = new Date(santri.tanggal_lahir);
+      if (jenisKelaminDb) updateData.jenis_kelamin = jenisKelaminDb;
+      if (santri.no_hp) updateData.no_hp = santri.no_hp;
+
+      // Sync Alamat & Wilayah
+      if (santri.alamat) updateData.alamat = santri.alamat;
+      if (santri.rt) updateData.rt = santri.rt;
+      if (santri.rw) updateData.rw = santri.rw;
+      if (santri.kelurahan) updateData.kelurahan = santri.kelurahan;
+      if (santri.kecamatan) updateData.kecamatan = santri.kecamatan;
+      if (santri.kabupaten) updateData.kabupaten = santri.kabupaten;
+      if (santri.provinsi) updateData.provinsi = santri.provinsi;
+      if (santri.kode_pos) updateData.kode_pos = santri.kode_pos;
+
+      // Sync Academic & Bio
+      if (santri.asal_sekolah) updateData.asal_sekolah = santri.asal_sekolah;
+      if (santri.nisn) updateData.nisn = santri.nisn;
+      if (santri.anak_ke) updateData.anak_ke = parseInt(santri.anak_ke.toString());
+      if (santri.berapa_bersaudara) updateData.jumlah_saudara = parseInt(santri.berapa_bersaudara.toString());
+    }
+
+    // UPDATE PENDAFTAR
+    const updatedPendaftar = await prisma.pendaftar.update({
       where: { id: pendaftarId },
-      data: {
-        nama_lengkap: santri.nama_lengkap,
-        nik: santri.nik,
-        tanggal_lahir: santri.tanggal_lahir ? new Date(santri.tanggal_lahir) : null,
-        jenis_kelamin: jenisKelaminDb,
-        no_hp: santri.no_hp,
-        data_lengkap: dataLengkapObj,
-        updated_at: new Date(),
-      },
+      data: updateData,
     });
+
+    // SYNC TO ORANG_TUA TABLE
+    if (ayah || ibu || wali) {
+      await prisma.orangTua.upsert({
+        where: { pendaftar_id: pendaftarId },
+        create: {
+          pendaftar_id: pendaftarId,
+          // Ayah
+          nama_ayah: ayah?.nama_lengkap,
+          nik_ayah: ayah?.nik,
+          tanggal_lahir_ayah: ayah?.tanggal_lahir ? new Date(ayah.tanggal_lahir) : null,
+          pendidikan_ayah: ayah?.pendidikan_terakhir,
+          pekerjaan_ayah: ayah?.pekerjaan,
+          penghasilan_ayah: ayah?.penghasilan_rata_rata,
+          no_hp_ayah: ayah?.no_hp,
+          // Ibu
+          nama_ibu: ibu?.nama_lengkap,
+          nik_ibu: ibu?.nik,
+          tanggal_lahir_ibu: ibu?.tanggal_lahir ? new Date(ibu.tanggal_lahir) : null,
+          pendidikan_ibu: ibu?.pendidikan_terakhir,
+          pekerjaan_ibu: ibu?.pekerjaan,
+          penghasilan_ibu: ibu?.penghasilan_rata_rata,
+          no_hp_ibu: ibu?.no_hp,
+          // Wali
+          nama_wali: wali?.nama_lengkap,
+          no_hp_wali: wali?.no_hp,
+          hubungan_wali: wali?.hubungan_status,
+        },
+        update: {
+          // Ayah
+          nama_ayah: ayah?.nama_lengkap,
+          nik_ayah: ayah?.nik,
+          tanggal_lahir_ayah: ayah?.tanggal_lahir ? new Date(ayah.tanggal_lahir) : null,
+          pendidikan_ayah: ayah?.pendidikan_terakhir,
+          pekerjaan_ayah: ayah?.pekerjaan,
+          penghasilan_ayah: ayah?.penghasilan_rata_rata,
+          no_hp_ayah: ayah?.no_hp,
+          // Ibu
+          nama_ibu: ibu?.nama_lengkap,
+          nik_ibu: ibu?.nik,
+          tanggal_lahir_ibu: ibu?.tanggal_lahir ? new Date(ibu.tanggal_lahir) : null,
+          pendidikan_ibu: ibu?.pendidikan_terakhir,
+          pekerjaan_ibu: ibu?.pekerjaan,
+          penghasilan_ibu: ibu?.penghasilan_rata_rata,
+          no_hp_ibu: ibu?.no_hp,
+          // Wali
+          nama_wali: wali?.nama_lengkap,
+          no_hp_wali: wali?.no_hp,
+          hubungan_wali: wali?.hubungan_status,
+        }
+      });
+    }
 
     return NextResponse.json({
       success: true,
-      message: "Data berhasil disimpan",
+      message: is_draft ? "Draft tersimpan" : "Data berhasil disimpan",
     });
   } catch (error: any) {
     console.error("Error in POST /api/pendaftar/data-lengkap:", error);
-    return NextResponse.json(
-      { success: false, error: "Terjadi kesalahan saat menyimpan data" },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, error: "Terjadi kesalahan saat menyimpan data" }, { status: 500 });
   }
 }

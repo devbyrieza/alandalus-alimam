@@ -11,7 +11,7 @@ async function checkAdmin() {
     if (["admin_super", "admin", "admin_berkas", "admin_keuangan", "penguji"].includes(session.role)) {
       return session;
     }
-  } catch {}
+  } catch { }
   return null;
 }
 
@@ -99,46 +99,69 @@ export async function GET() {
       menunggu_verifikasi_pembayaran: statusCounts.payment_verification || 0,
       sudah_bayar:
         (statusCounts.verified || 0) +
+        (statusCounts.data_completed || 0) +
+        (statusCounts.docs_uploaded || 0) +
+        (statusCounts.docs_verified || 0) +
         (statusCounts.scheduled || 0) +
-        (statusCounts.accepted || 0),
+        (statusCounts.tested || 0) +
+        (statusCounts.announced || 0) +
+        (statusCounts.accepted || 0) +
+        (statusCounts.enrolled || 0),
       pembayaran_ditolak: statusCounts.rejected || 0,
 
       // === DATA LENGKAP ===
       belum_isi_data: statusCounts.verified || 0,
       sudah_isi_data:
+        (statusCounts.data_completed || 0) +
+        (statusCounts.docs_uploaded || 0) +
+        (statusCounts.docs_verified || 0) +
         (statusCounts.scheduled || 0) +
-        (statusCounts.accepted || 0),
+        (statusCounts.tested || 0) +
+        (statusCounts.announced || 0) +
+        (statusCounts.accepted || 0) +
+        (statusCounts.enrolled || 0),
 
       // === DOKUMEN ===
-      belum_upload_dokumen: 0,
-      menunggu_verifikasi_dokumen: 0,
+      belum_upload_dokumen: statusCounts.data_completed || 0,
+      menunggu_verifikasi_dokumen: statusCounts.docs_uploaded || 0,
       dokumen_terverifikasi:
+        (statusCounts.docs_verified || 0) +
         (statusCounts.scheduled || 0) +
-        (statusCounts.accepted || 0),
-      dokumen_ditolak: 0,
+        (statusCounts.tested || 0) +
+        (statusCounts.announced || 0) +
+        (statusCounts.accepted || 0) +
+        (statusCounts.enrolled || 0),
+      dokumen_ditolak: 0, // Need specific flag if we want to track this separate from docs_uploaded
 
       // === UJIAN & WAWANCARA ===
       terjadwal_ujian: statusCounts.scheduled || 0,
-      belum_ujian: statusCounts.scheduled || 0,
-      sudah_ujian: statusCounts.accepted || 0,
-      hasil_ujian: statusCounts.accepted || 0,
+      belum_ujian: statusCounts.docs_verified || 0,
+      sudah_ujian:
+        (statusCounts.tested || 0) +
+        (statusCounts.announced || 0) +
+        (statusCounts.accepted || 0) +
+        (statusCounts.enrolled || 0),
+      hasil_ujian:
+        (statusCounts.announced || 0) +
+        (statusCounts.accepted || 0) +
+        (statusCounts.enrolled || 0),
 
       // === PENERIMAAN ===
       diterima: statusCounts.accepted || 0,
       belum_daftar_ulang: statusCounts.accepted || 0,
-      sudah_daftar_ulang: 0,
+      sudah_daftar_ulang: statusCounts.enrolled || 0,
 
       // === LEGACY (for backward compatibility) ===
-      pending_verification: 0,
-      verified: statusCounts.verified || 0,
+      pending_verification: statusCounts.docs_uploaded || 0,
+      verified: statusCounts.docs_verified || 0,
       rejected: statusCounts.rejected || 0,
       pending_payment:
         (statusCounts.draft || 0) + (statusCounts.payment_verification || 0),
       paid: statusCounts.verified || 0,
       scheduled_exams: statusCounts.scheduled || 0,
-      announced: 0,
+      announced: statusCounts.announced || 0,
       accepted: statusCounts.accepted || 0,
-      enrolled: 0,
+      enrolled: statusCounts.enrolled || 0,
 
       // === STATISTIK PER JENJANG ===
       stats_per_jenjang: Object.entries(jenjangCounts).map(([jenjang, data]) => ({
@@ -166,6 +189,12 @@ export async function GET() {
         proses: (statusCounts.draft || 0) + (statusCounts.payment_verification || 0),
         ditolak: statusCounts.rejected || 0,
       },
+
+      // === PERUBAHAN DATA ===
+      permintaan_edit_pending: await prisma.dataPerubahanRequest.count({
+        where: { status: 'pending' }
+      }),
+      permintaan_edit_total: await prisma.dataPerubahanRequest.count(),
 
       // Raw counts for debugging
       _raw_status_counts: statusCounts,

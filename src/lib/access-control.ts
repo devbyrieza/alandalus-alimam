@@ -353,12 +353,13 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
     admin_berkas: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
       { name: 'Daftar Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
+      { name: 'Permintaan Edit', href: '/dashboard/admin/perubahan-data', icon: 'Edit3' },
       { name: 'Verifikasi Dokumen', href: '/dashboard/admin/verifikasi-dokumen', icon: 'FileCheck' },
       { name: 'Cek Data Pendaftar', href: '/dashboard/admin/pendaftar?filter=belum_upload_dokumen', icon: 'FileText' },
     ],
     admin_keuangan: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
-      { name: 'Daftar Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
+      { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
       { name: 'Verifikasi Pembayaran', href: '/dashboard/admin/verifikasi-pembayaran', icon: 'CreditCard' },
     ],
     penguji: [
@@ -368,12 +369,14 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
     ],
     head_of_it: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
+      { name: 'Permintaan Edit', href: '/dashboard/admin/perubahan-data', icon: 'Edit3' },
       { name: 'Manajemen User', href: '/dashboard/admin/users', icon: 'UserCog' },
       { name: 'Pengaturan', href: '/dashboard/admin/pengaturan', icon: 'Settings' },
     ],
     admin_super: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
       { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
+      { name: 'Permintaan Edit', href: '/dashboard/admin/perubahan-data', icon: 'Edit3' },
       { name: 'Verifikasi Pembayaran', href: '/dashboard/admin/verifikasi-pembayaran', icon: 'CreditCard' },
       { name: 'Verifikasi Dokumen', href: '/dashboard/admin/verifikasi-dokumen', icon: 'FileCheck' },
       { name: 'Jadwal Ujian', href: '/dashboard/admin/jadwal-ujian', icon: 'Calendar' },
@@ -412,6 +415,7 @@ export function canAccessRoute(role: UserRole, route: string): boolean {
       '/dashboard/admin',
       '/dashboard/admin/users',
       '/dashboard/admin/pengaturan',
+      '/dashboard/admin/perubahan-data',
     ];
     // Allow strict matches or sub-paths for users
     return allowed.some(r => route === r || route.startsWith(r + '/'));
@@ -428,6 +432,7 @@ export function canAccessRoute(role: UserRole, route: string): boolean {
       '/dashboard/admin',
       '/dashboard/admin/pendaftar',
       '/dashboard/admin/verifikasi-dokumen',
+      '/dashboard/admin/perubahan-data',
     ];
     return allowedRoutes.some(r => route.startsWith(r));
   }

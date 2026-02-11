@@ -224,9 +224,9 @@ Assalamu'alaikum {{nama}},
 Alhamdulillah, pembayaran Anda telah kami terima dan verifikasi.
 
 💰 *Detail Pembayaran:*
-• Jumlah: {{jumlah}}
-• Metode: {{metode}}
-• Tanggal: {{tanggal}}
+* Jumlah: {{jumlah}}
+* Metode: {{metode}}
+* Tanggal: {{tanggal}}
 
 📝 *Langkah Selanjutnya:*
 Anda akan dihubungi untuk jadwal tes masuk. Pantau terus dashboard Anda.
@@ -373,7 +373,7 @@ export async function notifyDocumentVerified(data: {
             dokumen_list: data.dokumen_list,
             catatan: data.catatan || '',
             dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
-            kontak: '0813-1234-5678', // TODO: Update dengan nomor Al-Imam
+            kontak: '0858-8887-1997', // TODO: Update dengan nomor Al-Imam
         },
     });
 }
@@ -402,7 +402,7 @@ export async function notifyPaymentVerified(data: {
             tanggal: data.tanggal,
             catatan: data.catatan || '',
             dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
-            kontak: '0813-1234-5678', // TODO: Update dengan nomor Al-Imam
+            kontak: '0858-8887-1997', // TODO: Update dengan nomor Al-Imam
         },
     });
 }
@@ -441,6 +441,32 @@ export async function notifyTestSchedule(data: {
         variables: {
             ...data,
             dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
+        },
+    });
+}
+
+/**
+ * Send announcement notification
+ */
+export async function notifyStatusChange(data: {
+    phone: string;
+    nama: string;
+    status: 'accepted' | 'rejected';
+    jenjang?: string;
+    tahun_ajaran?: string;
+    dashboard_url?: string;
+}) {
+    // Only accepted template exists for now
+    if (data.status !== 'accepted') return { status: false, message: 'Template not found' };
+
+    return sendTemplate({
+        phone: data.phone,
+        templateId: 'announcement_accepted',
+        variables: {
+            nama: data.nama,
+            jenjang: data.jenjang || '-',
+            tahun_ajaran: data.tahun_ajaran || '2025/2026',
+            dashboard_url: data.dashboard_url || `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
         },
     });
 }

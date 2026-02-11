@@ -79,7 +79,7 @@ export default function FeaturesSection() {
                   <p className="text-sm font-bold text-ink-500">Tahun Pengalaman</p>
                 </div>
                 <div className="bg-brown-800 p-6 rounded-3xl shadow-clay-lg h-64 flex flex-col justify-center items-center text-center relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-[url('/images/pattern.png')] opacity-10 mix-blend-overlay" />
+                  <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-10 mix-blend-overlay" />
                   <BookOpenCheck className="w-12 h-12 mb-4 text-white group-hover:scale-110 transition-transform" />
                   <p className="font-bold text-lg text-white drop-shadow-md">Tahfidz<br />Intensif</p>
                 </div>

@@ -98,7 +98,7 @@ export default function ProgramPage() {
         <main className="bg-surface-50 min-h-screen">
             {/* 1. Hero Section - Brown Aesthetic */}
             <section className="relative py-12 md:py-16 overflow-hidden bg-brown-900">
-                <div className="absolute inset-0 bg-[url('/images/pattern.png')] bg-repeat opacity-5 mix-blend-overlay" />
+                <div className="absolute inset-0 bg-[url('/images/pattern.svg')] bg-repeat opacity-5 mix-blend-overlay" />
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold-500/10 rounded-full blur-[100px] pointer-events-none" />
 
                 <Container className="relative z-10 text-center">
@@ -233,7 +233,7 @@ export default function ProgramPage() {
                                         {/* Overlay: lebih terang agar gambar terlihat jelas */}
                                         <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10`} />
                                         <div className={`absolute inset-0 bg-gradient-to-br ${program.gradient} opacity-20 z-10 mix-blend-multiply`} />
-                                        <div className="absolute inset-0 bg-[url('/images/pattern.png')] bg-repeat opacity-10 z-10 mix-blend-overlay" />
+                                        <div className="absolute inset-0 bg-[url('/images/pattern.svg')] bg-repeat opacity-10 z-10 mix-blend-overlay" />
 
                                         <div className="absolute inset-0 z-20 p-6 lg:p-8 flex flex-col justify-end text-white">
                                             <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center mb-auto border border-white/30">

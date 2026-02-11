@@ -55,7 +55,7 @@ export default function FasilitasPage() {
     <main className="bg-surface-50 min-h-screen">
       {/* 1. Hero Section - Deep Brown */}
       <section className="relative py-12 md:py-16 overflow-hidden bg-brown-900">
-        <div className="absolute inset-0 bg-[url('/images/pattern.png')] bg-repeat opacity-5 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-[url('/images/pattern.svg')] bg-repeat opacity-5 mix-blend-overlay" />
         {/* Glow Effects */}
         <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-gold-500/10 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none" />

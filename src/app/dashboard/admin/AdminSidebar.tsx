@@ -134,17 +134,7 @@ export default function AdminSidebar({ children, userRole, adminName }: AdminSid
                         {/* Navigation */}
                         <nav className="flex-1 overflow-y-auto px-4 space-y-1 scrollbar-hide py-2">
                             <p className="px-4 text-xs font-bold text-ink-400 uppercase tracking-wider mb-2 mt-2">Menu Utama</p>
-                            {menuItems.slice(0, 3).map((item) => (
-                                <NavLink key={item.name} item={item} />
-                            ))}
-
-                            <p className="px-4 text-xs font-bold text-ink-400 uppercase tracking-wider mb-2 mt-6">Proses Seleksi</p>
-                            {menuItems.slice(3, 7).map((item) => (
-                                <NavLink key={item.name} item={item} />
-                            ))}
-
-                            <p className="px-4 text-xs font-bold text-ink-400 uppercase tracking-wider mb-2 mt-6">Manajemen</p>
-                            {menuItems.slice(7).map((item) => (
+                            {menuItems.map((item) => (
                                 <NavLink key={item.name} item={item} />
                             ))}
                         </nav>

@@ -20,8 +20,8 @@ export async function sendSMSOTP(
       };
     }
 
-    // Fallback: Simulation mode for development
-    if (process.env.NODE_ENV === "development") {
+    // Fallback: Simulation mode only if explicitly suppressed
+    if (process.env.SKIP_WHATSAPP_OTP === "true") {
       console.log("📱 [SIMULATION] OTP akan dikirim ke:", phone);
       console.log(`🔐 Kode OTP: ${otp} untuk ${nama}`);
       return {

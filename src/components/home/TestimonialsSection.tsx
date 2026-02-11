@@ -96,7 +96,7 @@ export default function TestimonialsSection() {
         {/* Stats CTA */}
         <div className="bg-brown-900 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden text-center shadow-clay-lg">
           {/* Decorative */}
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/pattern.png')] opacity-5 mix-blend-overlay" />
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/pattern.svg')] opacity-5 mix-blend-overlay" />
           <div className="absolute -top-20 -right-20 w-80 h-80 bg-brown-600/30 rounded-full blur-3xl" />
 
           <div className="relative z-10 max-w-2xl mx-auto">

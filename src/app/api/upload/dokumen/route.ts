@@ -149,6 +149,20 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    // UPDATE STATUS PENDAFTAR JIKA MASIH 'data_completed'
+    // Agar masuk ke dashboard admin sebagai "Menunggu Verifikasi Dokumen"
+    const currentPendaftar = await prisma.pendaftar.findUnique({
+      where: { id: session.id },
+      select: { status_pendaftaran: true }
+    });
+
+    if (currentPendaftar?.status_pendaftaran === 'data_completed') {
+      await prisma.pendaftar.update({
+        where: { id: session.id },
+        data: { status_pendaftaran: 'docs_uploaded' }
+      });
+    }
+
     return NextResponse.json({
       success: true,
       message: `${config.label} berhasil diupload`,

@@ -42,7 +42,7 @@ export async function middleware(request: NextRequest) {
   // PROTECT: /dashboard/admin
   // ═══════════════════════════════════════════
   if (pathname.startsWith("/dashboard/admin")) {
-    const allowedAdminRoles = ["admin_berkas", "admin_keuangan", "admin_super", "admin"];
+    const allowedAdminRoles = ["admin_berkas", "admin_keuangan", "admin_super", "admin", "head_of_it"];
     if (!userRole || !allowedAdminRoles.includes(userRole)) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
@@ -67,7 +67,7 @@ export async function middleware(request: NextRequest) {
 
     if (userRole === "pendaftar") {
       return NextResponse.redirect(new URL("/dashboard/pendaftar", request.url));
-    } else if (["admin_berkas", "admin_keuangan", "admin_super", "admin"].includes(userRole)) {
+    } else if (["admin_berkas", "admin_keuangan", "admin_super", "admin", "head_of_it"].includes(userRole)) {
       return NextResponse.redirect(new URL("/dashboard/admin", request.url));
     } else if (userRole === "penguji") {
       return NextResponse.redirect(new URL("/dashboard/penguji", request.url));
@@ -82,7 +82,7 @@ export async function middleware(request: NextRequest) {
   if (pathname === "/login" && userRole) {
     if (userRole === "pendaftar") {
       return NextResponse.redirect(new URL("/dashboard/pendaftar", request.url));
-    } else if (["admin_berkas", "admin_keuangan", "admin_super", "admin"].includes(userRole)) {
+    } else if (["admin_berkas", "admin_keuangan", "admin_super", "admin", "head_of_it"].includes(userRole)) {
       return NextResponse.redirect(new URL("/dashboard/admin", request.url));
     } else if (userRole === "penguji") {
       return NextResponse.redirect(new URL("/dashboard/penguji", request.url));

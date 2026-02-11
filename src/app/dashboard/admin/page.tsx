@@ -64,6 +64,8 @@ interface DashboardStats {
     proses: number;
     ditolak: number;
   };
+  permintaan_edit_pending: number;
+  permintaan_edit_total: number;
 }
 
 const JENJANG_LABELS: Record<string, string> = {
@@ -98,6 +100,8 @@ export default function AdminDashboardPage() {
     stats_per_provinsi: [],
     stats_gender: { "Laki-laki": 0, "Perempuan": 0 },
     pie_chart_status: { diterima: 0, menunggu: 0, proses: 0, ditolak: 0 },
+    permintaan_edit_pending: 0,
+    permintaan_edit_total: 0,
   });
 
   const [activeTahunAjaran, setActiveTahunAjaran] = useState<{ nama: string } | null>(null);
@@ -191,6 +195,30 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="space-y-8 pb-12">
+      {/* 4. NOTIFICATION BANNER - For specific roles */}
+      {(role === 'admin_super' || role === 'admin' || role === 'admin_berkas' || role === 'head_of_it') && stats.permintaan_edit_pending > 0 && (
+        <div className="bg-amber-50 border-2 border-amber-200 rounded-[2rem] p-6 shadow-clay-sm animate-in fade-in slide-in-from-top-4 duration-500">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-5">
+              <div className="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 shadow-inner">
+                <AlertCircle className="w-8 h-8" />
+              </div>
+              <div>
+                <h3 className="text-xl font-black text-amber-900 leading-tight">Permintaan Perubahan Data</h3>
+                <p className="text-amber-700 font-medium">Ada <span className="text-amber-900 font-black">{stats.permintaan_edit_pending}</span> pendaftar yang mengajukan perubahan data yang sudah terkunci.</p>
+              </div>
+            </div>
+            <Link
+              href="/dashboard/admin/perubahan-data"
+              className="btn-primary bg-amber-600 hover:bg-amber-700 shadow-amber-500/20 px-8 py-3 rounded-2xl whitespace-nowrap"
+            >
+              Proses Sekarang
+              <ArrowUpRight className="w-5 h-5 ml-2" />
+            </Link>
+          </div>
+        </div>
+      )}
+
       {/* 1. Ultra-Clean Header Section */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>

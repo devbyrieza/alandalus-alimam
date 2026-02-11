@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { useRouter } from "next/navigation";
 import {
   Upload,
   FileText,
@@ -16,8 +17,16 @@ import {
   FileCheck,
   Loader2,
   Download,
-  User,
   ClipboardList,
+  User,
+  MapPin,
+  School,
+  Activity,
+  Heart,
+  Briefcase,
+  GraduationCap,
+  Users,
+  AlertTriangle,
 } from "lucide-react";
 import DataLengkapForm from "./DataLengkapForm";
 
@@ -26,7 +35,7 @@ import DataLengkapForm from "./DataLengkapForm";
 // ============================================
 
 type DokumenStatus = "pending" | "uploaded" | "verified" | "rejected";
-type TabType = "isi-data" | "data" | "upload" | "download";
+type TabType = "isi-data" | "data";
 
 interface DokumenItem {
   key: string;
@@ -383,6 +392,7 @@ function DokumenCard({
 // ============================================
 
 export default function KelengkapanBerkasTab() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<TabType>("isi-data");
   const [dokumenList, setDokumenList] = useState<DokumenItem[]>([]);
   const [dokumenConfig, setDokumenConfig] = useState<
@@ -400,20 +410,19 @@ export default function KelengkapanBerkasTab() {
     message: string;
   } | null>(null);
   const [summary, setSummary] = useState<{
-    total: number;
-    uploaded: number;
-    verified: number;
-    pending: number;
     progress: {
       required: { total: number; uploaded: number; percentage: number };
       all: { total: number; uploaded: number; percentage: number };
     };
   } | null>(null);
+  const [isDataComplete, setIsDataComplete] = useState(false);
+  const [missingSections, setMissingSections] = useState<string[]>([]);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   // Fetch data
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async (silent = false) => {
     try {
-      setLoading(true);
+      if (!silent) setLoading(true);
       setError(null);
 
       const [statusRes, configRes, dataRes] = await Promise.all([
@@ -438,7 +447,59 @@ export default function KelengkapanBerkasTab() {
       }
 
       if (registerData.success && registerData.data) {
-        setDataPendaftaran(registerData.data);
+        const pendaftar = registerData.data;
+        setDataPendaftaran(pendaftar);
+
+        // Calculate Completion
+        const d = pendaftar.data_lengkap || {};
+        const missing: string[] = [];
+
+        // Check Santri
+        const s = d.santri || {};
+        // NIK can come from pendaftar top level or JSON blob
+        const santriNik = s.nik || pendaftar.nik;
+
+        const isSantriBasic = s.nama_lengkap && santriNik && s.tempat_lahir && s.tanggal_lahir && s.provinsi && s.kabupaten && s.kecamatan && s.kelurahan && s.kode_pos && s.alamat && s.rt && s.rw;
+        const isSantriPhysical = s.anak_ke && s.berapa_bersaudara && s.golongan_darah && (s.tinggi_badan > 0) && (s.berat_badan > 0) && s.riwayat_penyakit;
+        const isSekolahComplete = s.asal_sekolah && s.nisn && s.tahun_lulus;
+
+        if (!isSantriBasic) missing.push("Identitas Santri");
+        if (!isSantriPhysical) missing.push("Data Fisik Santri");
+        if (!isSekolahComplete) missing.push("Data Sekolah");
+
+        // Check Ortu
+        const ayah = d.ayah || {};
+        const ibu = d.ibu || {};
+        const isAyahDeceased = ayah.status_hidup === "Sudah Meninggal";
+        const isIbuDeceased = ibu.status_hidup === "Sudah Meninggal";
+
+        // Logic tinggal bersama
+        const isTinggalBersamaOrtu = ["Kedua Orang Tua", "Ayah", "Ibu"].includes(s.tinggal_bersama);
+
+        if (!isAyahDeceased && (
+          !ayah.nama_lengkap || !ayah.nik || !ayah.tanggal_lahir || !ayah.pendidikan_terakhir || !ayah.pekerjaan || !ayah.no_hp || !ayah.no_wa ||
+          (!isTinggalBersamaOrtu && (!ayah.alamat || !ayah.rt || !ayah.rw || !ayah.provinsi || !ayah.kabupaten))
+        )) {
+          missing.push("Data Ayah");
+        }
+
+        if (!isIbuDeceased && (
+          !ibu.nama_lengkap || !ibu.nik || !ibu.tanggal_lahir || !ibu.pendidikan_terakhir || !ibu.pekerjaan || !ibu.no_hp || !ibu.no_wa ||
+          (!isTinggalBersamaOrtu && (!ibu.alamat || !ibu.rt || !ibu.rw || !ibu.provinsi || !ibu.kabupaten))
+        )) {
+          missing.push("Data Ibu");
+        }
+
+        // Check Wali if both parents deceased or lives with wali
+        if ((isAyahDeceased && isIbuDeceased) || s.tinggal_bersama === "Wali") {
+          const wali = d.wali || {};
+          if (!wali.nama_lengkap || !wali.nik || !wali.hubungan || !wali.no_hp || !wali.alamat || !wali.rt || !wali.rw || !wali.provinsi || !wali.kabupaten) {
+            missing.push("Data Wali");
+          }
+        }
+
+        setMissingSections(missing);
+        setIsDataComplete(missing.length === 0);
       }
     } catch (err: any) {
       setError(err.message || "Terjadi kesalahan");
@@ -448,8 +509,8 @@ export default function KelengkapanBerkasTab() {
   }, []);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    fetchData(activeTab === "data");
+  }, [fetchData, activeTab]);
 
   const showToast = (type: "success" | "error", message: string) => {
     setToast({ type, message });
@@ -491,7 +552,7 @@ export default function KelengkapanBerkasTab() {
       }
 
       showToast("success", data.message || "File berhasil diupload");
-      await fetchData();
+      await fetchData(true);
     } catch (err: any) {
       showToast("error", err.message || "Gagal mengupload file");
     } finally {
@@ -566,7 +627,7 @@ export default function KelengkapanBerkasTab() {
           </h3>
           <p className="text-red-700 mb-6">{error}</p>
           <button
-            onClick={fetchData}
+            onClick={() => fetchData()}
             className="btn-primary bg-red-600 hover:bg-red-700 shadow-red-500/20"
           >
             <RefreshCw className="w-4 h-4 mr-2" />
@@ -607,19 +668,16 @@ export default function KelengkapanBerkasTab() {
             <ClipboardList className="w-8 h-8 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl md:text-3xl font-black mb-2 tracking-tight">Kelengkapan Data & Berkas</h1>
+            <h1 className="text-2xl md:text-3xl font-black mb-2 tracking-tight text-white">Kelengkapan Data & Berkas</h1>
             <p className="text-teal-100 font-medium max-w-xl">Lengkapi biodata diri dan upload dokumen persyaratan untuk melanjutkan proses pendaftaran.</p>
           </div>
         </div>
       </div>
 
-      {/* Tab Navigation */}
       <div className="glass-panel p-1.5 rounded-2xl flex flex-wrap gap-1 shadow-clay-sm">
         {[
           { id: "isi-data", label: "Isi Data Lengkap", icon: User },
-          { id: "data", label: "Lihat Data", icon: FileText },
-          { id: "upload", label: "Upload Berkas", icon: Upload },
-          { id: "download", label: "Download Berkas", icon: Download },
+          { id: "data", label: "Lihat Data", icon: Eye },
         ].map((tab) => {
           const isActive = activeTab === tab.id;
           const Icon = tab.icon;
@@ -628,8 +686,8 @@ export default function KelengkapanBerkasTab() {
               key={tab.id}
               onClick={() => setActiveTab(tab.id as TabType)}
               className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${isActive
-                  ? 'bg-teal-500 text-white shadow-md shadow-teal-500/20'
-                  : 'text-ink-500 hover:bg-surface-100 hover:text-ink-800'
+                ? 'bg-teal-500 text-white shadow-md shadow-teal-500/20'
+                : 'text-ink-500 hover:bg-surface-100 hover:text-ink-800'
                 }`}
             >
               <Icon className={`w-4 h-4 ${isActive ? 'text-teal-100' : 'text-ink-400'}`} />
@@ -642,7 +700,12 @@ export default function KelengkapanBerkasTab() {
       {/* Tab: Isi Data Lengkap */}
       {activeTab === "isi-data" && (
         <div className="bg-transparent">
-          <DataLengkapForm />
+          <DataLengkapForm onSuccess={() => {
+            fetchData(true);
+            setActiveTab("data");
+            // Scroll to top to see ringkasan
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }} />
         </div>
       )}
 
@@ -661,33 +724,190 @@ export default function KelengkapanBerkasTab() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-surface-50 p-6 rounded-2xl border border-ink-100">
-                <div>
-                  <p className="text-xs font-bold text-ink-400 uppercase tracking-wide mb-1">Nomor Pendaftaran</p>
-                  <p className="text-xl font-bold text-teal-600 font-mono tracking-tight">{dataPendaftaran.nomor_pendaftaran}</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 bg-surface-50 p-6 rounded-3xl border border-ink-100 shadow-inner">
+                <div className="md:col-span-2 lg:col-span-1">
+                  <p className="text-[10px] font-black text-ink-400 uppercase tracking-[0.2em] mb-1">Nomor Pendaftaran</p>
+                  <p className="text-xl font-black text-teal-600 font-mono">{dataPendaftaran.nomor_pendaftaran}</p>
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-ink-400 uppercase tracking-wide mb-1">Nama Lengkap</p>
-                  <p className="text-lg font-bold text-ink-900">{dataPendaftaran.nama_lengkap}</p>
+                  <p className="text-[10px] font-black text-ink-400 uppercase tracking-[0.2em] mb-1">Nama Lengkap Santri</p>
+                  <p className="text-base font-bold text-ink-900">{dataPendaftaran.nama_lengkap}</p>
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-ink-400 uppercase tracking-wide mb-1">Email</p>
-                  <p className="text-base font-medium text-ink-700">{dataPendaftaran.email}</p>
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-ink-400 uppercase tracking-wide mb-1">Nomor Ponsel</p>
-                  <p className="text-base font-medium text-ink-700">{dataPendaftaran.nomor_ponsel}</p>
+                  <p className="text-[10px] font-black text-ink-400 uppercase tracking-[0.2em] mb-1">NIK Santri</p>
+                  <p className="text-base font-bold text-ink-900">{dataPendaftaran.data_lengkap?.santri?.nik || dataPendaftaran.nik || "-"}</p>
                 </div>
               </div>
 
-              <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex gap-3">
-                <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-sm font-bold text-emerald-800">Data Tersimpan Aman</p>
-                  <p className="text-sm text-emerald-700 mt-1">
-                    Data pendaftaran Anda sudah tercatat. Silakan lanjutkan ke tab <strong>Upload Berkas</strong> untuk melengkapi persyaratan.
-                  </p>
+              {/* Detail Data Tables */}
+              <div className="space-y-6">
+                {/* 1. Identitas Lengkap */}
+                <div className="bg-white border border-ink-100 rounded-[2rem] overflow-hidden shadow-sm">
+                  <div className="bg-surface-50 px-6 py-4 border-b border-ink-100 flex items-center gap-3">
+                    <User className="w-5 h-5 text-teal-600" />
+                    <h3 className="font-bold text-ink-900 text-sm uppercase tracking-wider">Identitas & Fisik</h3>
+                  </div>
+                  <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-8">
+                    <SummaryItem label="Tempat, Tgl Lahir" value={`${dataPendaftaran.data_lengkap?.santri?.tempat_lahir || "-"}, ${dataPendaftaran.data_lengkap?.santri?.tanggal_lahir || "-"}`} />
+                    <SummaryItem label="Jenis Kelamin" value={dataPendaftaran.data_lengkap?.santri?.jenis_kelamin || "-"} />
+                    <SummaryItem label="Kewarganegaraan" value={dataPendaftaran.data_lengkap?.santri?.kewarganegaraan || "-"} />
+                    <SummaryItem label="Anak Ke / Bersaudara" value={`${dataPendaftaran.data_lengkap?.santri?.anak_ke || 0} dari ${dataPendaftaran.data_lengkap?.santri?.berapa_bersaudara || 0}`} />
+                    <SummaryItem label="Tinggi / Berat Badan" value={`${dataPendaftaran.data_lengkap?.santri?.tinggi_badan || 0} cm / ${dataPendaftaran.data_lengkap?.santri?.berat_badan || 0} kg`} />
+                    <SummaryItem label="Golongan Darah" value={dataPendaftaran.data_lengkap?.santri?.golongan_darah || "-"} />
+                    <SummaryItem label="Tinggal Bersama" value={dataPendaftaran.data_lengkap?.santri?.tinggal_bersama || "-"} />
+                    <SummaryItem label="Riwayat Penyakit" value={dataPendaftaran.data_lengkap?.santri?.riwayat_penyakit || "-"} />
+                    <div className="md:col-span-2">
+                      <SummaryItem label="Alamat Domisili" value={`${dataPendaftaran.data_lengkap?.santri?.alamat || "-"}, RT ${dataPendaftaran.data_lengkap?.santri?.rt || "00"}/RW ${dataPendaftaran.data_lengkap?.santri?.rw || "00"}, ${dataPendaftaran.data_lengkap?.santri?.kelurahan || "-"}, ${dataPendaftaran.data_lengkap?.santri?.kecamatan || "-"}, ${dataPendaftaran.data_lengkap?.santri?.kabupaten || "-"}, ${dataPendaftaran.data_lengkap?.santri?.provinsi || "-"}`} />
+                    </div>
+                  </div>
                 </div>
+
+                {/* 2. Sekolah Asal */}
+                <div className="bg-white border border-ink-100 rounded-[2rem] overflow-hidden shadow-sm">
+                  <div className="bg-surface-50 px-6 py-4 border-b border-ink-100 flex items-center gap-3">
+                    <School className="w-5 h-5 text-teal-600" />
+                    <h3 className="font-bold text-ink-900 text-sm uppercase tracking-wider">Sekolah Asal</h3>
+                  </div>
+                  <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-8">
+                    <SummaryItem label="Nama Sekolah" value={dataPendaftaran.data_lengkap?.santri?.asal_sekolah || "-"} />
+                    <SummaryItem label="NISN" value={dataPendaftaran.data_lengkap?.santri?.nisn || "-"} />
+                    <SummaryItem label="Tahun Lulus" value={dataPendaftaran.data_lengkap?.santri?.tahun_lulus || "-"} />
+                    <div className="md:col-span-2">
+                      <SummaryItem label="Alamat Sekolah" value={dataPendaftaran.data_lengkap?.santri?.alamat_sekolah || "-"} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. Orang Tua / Wali */}
+                <div className="bg-white border border-ink-100 rounded-[2rem] overflow-hidden shadow-sm">
+                  <div className="bg-surface-50 px-6 py-4 border-b border-ink-100 flex items-center gap-3">
+                    <Users className="w-5 h-5 text-teal-600" />
+                    <h3 className="font-bold text-ink-900 text-sm uppercase tracking-wider">Orang Tua / Wali</h3>
+                  </div>
+                  <div className="p-6 space-y-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                      {/* Ayah */}
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between border-b border-ink-50 pb-2">
+                          <h4 className="font-black text-xs text-ink-400 uppercase tracking-[0.2em]">Data Ayah</h4>
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${dataPendaftaran.data_lengkap?.ayah?.status_hidup === "Masih Hidup" ? "bg-emerald-100 text-emerald-700" : "bg-stone-200 text-stone-600"}`}>
+                            {dataPendaftaran.data_lengkap?.ayah?.status_hidup || "Masih Hidup"}
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <SummaryItem label="Nama Lengkap" value={dataPendaftaran.data_lengkap?.ayah?.nama_lengkap || "-"} />
+                          <SummaryItem label="NIK" value={dataPendaftaran.data_lengkap?.ayah?.nik || "-"} />
+                          <SummaryItem label="Tempat, Tgl Lahir" value={`${dataPendaftaran.data_lengkap?.ayah?.tempat_lahir || "-"}, ${dataPendaftaran.data_lengkap?.ayah?.tanggal_lahir || "-"}`} />
+                          <SummaryItem label="Pendidikan" value={dataPendaftaran.data_lengkap?.ayah?.pendidikan_terakhir || "-"} />
+                          <SummaryItem label="Pekerjaan" value={`${dataPendaftaran.data_lengkap?.ayah?.pekerjaan}${dataPendaftaran.data_lengkap?.ayah?.pekerjaan === "Lainnya" ? ` (${dataPendaftaran.data_lengkap?.ayah?.pekerjaan_lainnya})` : ""} ` || "-"} />
+                          <SummaryItem label="Penghasilan" value={dataPendaftaran.data_lengkap?.ayah?.penghasilan || "-"} />
+                          <SummaryItem label="WhatsApp/HP" value={`${dataPendaftaran.data_lengkap?.ayah?.no_wa || "-"} / ${dataPendaftaran.data_lengkap?.ayah?.no_hp || "-"}`} />
+                          <SummaryItem label="Email" value={dataPendaftaran.data_lengkap?.ayah?.email || "-"} />
+                          {dataPendaftaran.data_lengkap?.ayah?.alamat && (
+                            <div className="sm:col-span-2">
+                              <SummaryItem label="Alamat Ayah (Berbeda)" value={`${dataPendaftaran.data_lengkap?.ayah?.alamat}, RT ${dataPendaftaran.data_lengkap?.ayah?.rt}/RW ${dataPendaftaran.data_lengkap?.ayah?.rw}, ${dataPendaftaran.data_lengkap?.ayah?.kelurahan}, ${dataPendaftaran.data_lengkap?.ayah?.kecamatan}, ${dataPendaftaran.data_lengkap?.ayah?.kabupaten}`} />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Ibu */}
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between border-b border-ink-50 pb-2">
+                          <h4 className="font-black text-xs text-ink-400 uppercase tracking-[0.2em]">Data Ibu</h4>
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${dataPendaftaran.data_lengkap?.ibu?.status_hidup === "Masih Hidup" ? "bg-emerald-100 text-emerald-700" : "bg-stone-200 text-stone-600"}`}>
+                            {dataPendaftaran.data_lengkap?.ibu?.status_hidup || "Masih Hidup"}
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <SummaryItem label="Nama Lengkap" value={dataPendaftaran.data_lengkap?.ibu?.nama_lengkap || "-"} />
+                          <SummaryItem label="NIK" value={dataPendaftaran.data_lengkap?.ibu?.nik || "-"} />
+                          <SummaryItem label="Tempat, Tgl Lahir" value={`${dataPendaftaran.data_lengkap?.ibu?.tempat_lahir || "-"}, ${dataPendaftaran.data_lengkap?.ibu?.tanggal_lahir || "-"}`} />
+                          <SummaryItem label="Pendidikan" value={dataPendaftaran.data_lengkap?.ibu?.pendidikan_terakhir || "-"} />
+                          <SummaryItem label="Pekerjaan" value={`${dataPendaftaran.data_lengkap?.ibu?.pekerjaan}${dataPendaftaran.data_lengkap?.ibu?.pekerjaan === "Lainnya" ? ` (${dataPendaftaran.data_lengkap?.ibu?.pekerjaan_lainnya})` : ""} ` || "-"} />
+                          <SummaryItem label="Penghasilan" value={dataPendaftaran.data_lengkap?.ibu?.penghasilan || "-"} />
+                          <SummaryItem label="WhatsApp/HP" value={`${dataPendaftaran.data_lengkap?.ibu?.no_wa || "-"} / ${dataPendaftaran.data_lengkap?.ibu?.no_hp || "-"}`} />
+                          <SummaryItem label="Email" value={dataPendaftaran.data_lengkap?.ibu?.email || "-"} />
+                          {dataPendaftaran.data_lengkap?.ibu?.alamat && (
+                            <div className="sm:col-span-2">
+                              <SummaryItem label="Alamat Ibu (Berbeda)" value={`${dataPendaftaran.data_lengkap?.ibu?.alamat}, RT ${dataPendaftaran.data_lengkap?.ibu?.rt}/RW ${dataPendaftaran.data_lengkap?.ibu?.rw}, ${dataPendaftaran.data_lengkap?.ibu?.kelurahan}, ${dataPendaftaran.data_lengkap?.ibu?.kecamatan}, ${dataPendaftaran.data_lengkap?.ibu?.kabupaten}`} />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    {(dataPendaftaran.data_lengkap?.santri?.tinggal_bersama === "Wali" || (dataPendaftaran.data_lengkap?.ayah?.status_hidup === "Sudah Meninggal" && dataPendaftaran.data_lengkap?.ibu?.status_hidup === "Sudah Meninggal")) && (
+                      <div className="space-y-4 pt-8 border-t border-ink-50">
+                        <h4 className="font-black text-xs text-ink-400 uppercase tracking-[0.2em] border-b border-ink-50 pb-2">Data Wali</h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                          <SummaryItem label="Nama Wali" value={dataPendaftaran.data_lengkap?.wali?.nama_lengkap || "-"} />
+                          <SummaryItem label="Hubungan" value={dataPendaftaran.data_lengkap?.wali?.hubungan || "-"} />
+                          <SummaryItem label="NIK" value={dataPendaftaran.data_lengkap?.wali?.nik || "-"} />
+                          <SummaryItem label="WhatsApp" value={dataPendaftaran.data_lengkap?.wali?.no_wa || "-"} />
+                          <SummaryItem label="Pendidikan" value={dataPendaftaran.data_lengkap?.wali?.pendidikan_terakhir || "-"} />
+                          <SummaryItem label="Pekerjaan" value={dataPendaftaran.data_lengkap?.wali?.pekerjaan || "-"} />
+                          <SummaryItem label="Penghasilan" value={dataPendaftaran.data_lengkap?.wali?.penghasilan || "-"} />
+                          <SummaryItem label="Email" value={dataPendaftaran.data_lengkap?.wali?.email || "-"} />
+                          <div className="sm:col-span-2 lg:col-span-4">
+                            <SummaryItem label="Alamat Wali" value={`${dataPendaftaran.data_lengkap?.wali?.alamat || "-"}, RT ${dataPendaftaran.data_lengkap?.wali?.rt || "00"}/RW ${dataPendaftaran.data_lengkap?.wali?.rw || "00"}, ${dataPendaftaran.data_lengkap?.wali?.kelurahan || "-"}, ${dataPendaftaran.data_lengkap?.wali?.kecamatan || "-"}, ${dataPendaftaran.data_lengkap?.wali?.kabupaten || "-"}, ${dataPendaftaran.data_lengkap?.wali?.provinsi || "-"}`} />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {!isDataComplete ? (
+                <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl flex gap-3">
+                  <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-bold text-amber-800">Data Belum Lengkap</p>
+                    <p className="text-sm text-amber-700 mt-1">
+                      Anda belum mengisi seluruh data yang wajib diisi pada tab <strong>Isi Data Lengkap</strong>.
+                      Bagian yang belum lengkap: <span className="font-bold">{missingSections.join(", ")}</span>.
+                      <br />
+                      Silakan lengkapi data Anda terlebih dahulu sebelum melakukan konfirmasi.
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex gap-3">
+                  <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-bold text-emerald-800">Verifikasi Data Anda</p>
+                    <p className="text-sm text-emerald-700 mt-1">
+                      Silakan pastikan semua data di atas sudah benar. Jika sudah yakin, silakan klik tombol konfirmasi di bawah untuk membuka menu <strong>Upload Berkas</strong>.
+                      <br />
+                      <span className="text-xs text-emerald-600 mt-2 block italic">* Setelah dikonfirmasi, data tidak bisa diubah lagi kecuali melalui Admin Support.</span>
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button
+                  onClick={() => {
+                    setActiveTab("isi-data");
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="w-full sm:w-auto py-3 px-8 rounded-xl text-lg font-bold border-2 border-teal-500 text-teal-600 hover:bg-teal-50 transition-all"
+                >
+                  Kembali Edit Data
+                </button>
+
+                <button
+                  disabled={!isDataComplete}
+                  onClick={() => setShowConfirmModal(true)}
+                  className={`w-full sm:w-auto py-3 px-10 rounded-xl text-lg font-bold shadow-lg transition-all flex items-center justify-center gap-2 ${isDataComplete
+                    ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-500/20'
+                    : 'bg-stone-200 text-stone-400 cursor-not-allowed shadow-none'
+                    }`}
+                >
+                  Konfirmasi Data & Lanjut ke Upload Berkas
+                  <CheckCircle className="w-5 h-5 ml-1" />
+                </button>
               </div>
             </div>
           ) : (
@@ -701,141 +921,67 @@ export default function KelengkapanBerkasTab() {
         </div>
       )}
 
-      {/* Tab: Upload Berkas */}
-      {activeTab === "upload" && (
-        <div className="space-y-8">
-          {summary && (
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              {/* Stats Cards - Clay Style */}
-              <div className="glass-panel p-4 rounded-2xl border border-white/50 shadow-clay-sm">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
-                    <FileText className="w-5 h-5 text-amber-600" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-ink-400 uppercase">Total</p>
-                    <p className="text-2xl font-black text-ink-900">{summary.total}</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="glass-panel p-4 rounded-2xl border border-white/50 shadow-clay-sm">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-                    <Upload className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-ink-400 uppercase">Uploaded</p>
-                    <p className="text-2xl font-black text-ink-900">{summary.uploaded}<span className="text-sm text-ink-400 font-medium">/{summary.total}</span></p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="glass-panel p-4 rounded-2xl border border-white/50 shadow-clay-sm">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center">
-                    <CheckCircle className="w-5 h-5 text-emerald-600" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-ink-400 uppercase">Verified</p>
-                    <p className="text-2xl font-black text-ink-900">{summary.verified}<span className="text-sm text-ink-400 font-medium">/{summary.total}</span></p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="glass-panel p-4 rounded-2xl border border-white/50 shadow-clay-sm">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-teal-100 rounded-xl flex items-center justify-center">
-                    <span className="text-xs font-black text-teal-600">{summary.progress.required.percentage}%</span>
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-xs font-bold text-ink-400 uppercase mb-1">Progress Wajib</p>
-                    <div className="h-2 bg-surface-200 rounded-full overflow-hidden">
-                      <div className="h-full bg-teal-500 rounded-full" style={{ width: `${summary.progress.required.percentage}%` }} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          <div className="bg-amber-50 border border-amber-100 rounded-2xl p-5 flex gap-4">
-            <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center shrink-0">
-              <AlertCircle className="w-6 h-6 text-amber-600" />
-            </div>
-            <div>
-              <h4 className="font-bold text-amber-900 text-sm mb-1">Petunjuk Upload Dokumen</h4>
-              <ul className="grid md:grid-cols-2 gap-x-8 gap-y-1 text-xs font-medium text-amber-800 list-disc list-inside opacity-90">
-                <li>Pastikan dokumen terbaca jelas (tidak blur)</li>
-                <li>Format foto wajib JPG/PNG (Maks 1MB)</li>
-                <li>Dokumen scan boleh PDF (Maks 2MB)</li>
-                <li>Dokumen dapat diupload ulang jika ditolak</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            <div className="flex items-center gap-3 pb-2 border-b border-ink-100">
-              <span className="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-sm">!</span>
-              <h2 className="text-lg font-bold text-ink-900">Dokumen Wajib</h2>
+      {showConfirmModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-ink-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white rounded-[2rem] shadow-2xl max-w-md w-full overflow-hidden animate-in zoom-in-95 duration-200 p-8 text-center relative">
+            <div className="w-20 h-20 bg-amber-50 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-inner border border-amber-100 rotate-3">
+              <AlertTriangle className="w-10 h-10 text-amber-500" />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {dokumenList
-                .filter((d) => d.required)
-                .map((dokumen) => (
-                  <DokumenCard
-                    key={dokumen.key}
-                    dokumen={dokumen}
-                    config={dokumenConfig[dokumen.key]}
-                    isUploading={uploadingKeys.has(dokumen.key)}
-                    uploadProgress={uploadProgress[dokumen.key] || 0}
-                    onUpload={(file) => handleUpload(dokumen.key, file)}
-                    onPreview={() => handlePreview(dokumen)}
-                  />
-                ))}
+            <h3 className="text-2xl font-black text-ink-900 mb-3 tracking-tight">Konfirmasi Permanen</h3>
+
+            <p className="text-ink-600 mb-8 leading-relaxed">
+              Apakah Anda yakin seluruh data sudah benar?
+              <span className="block mt-2 p-3 bg-amber-50 rounded-xl text-amber-700 text-sm font-bold border border-amber-100">
+                ⚠️ Data yang sudah dikonfirmasi tidak dapat diubah kembali.
+              </span>
+            </p>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowConfirmModal(false)}
+                className="flex-1 py-3.5 px-4 rounded-xl font-bold text-ink-600 bg-surface-100 hover:bg-surface-200 transition-all active:scale-95"
+              >
+                Periksa Lagi
+              </button>
+              <button
+                onClick={async () => {
+                  try {
+                    setLoading(true);
+                    const res = await fetch("/api/pendaftar/konfirmasi-data", { method: "POST" });
+                    const result = await res.json();
+                    if (result.success) {
+                      router.push("/dashboard/pendaftar/upload-berkas");
+                    } else {
+                      alert(result.error || "Gagal melakukan konfirmasi");
+                      setLoading(false);
+                      setShowConfirmModal(false);
+                    }
+                  } catch (err) {
+                    alert("Terjadi kesalahan koneksi");
+                    setLoading(false);
+                    setShowConfirmModal(false);
+                  }
+                }}
+                disabled={loading}
+                className="flex-1 py-3.5 px-4 rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 text-white font-bold hover:shadow-lg hover:shadow-teal-500/30 transition-all active:scale-95 flex items-center justify-center gap-2 disabled:opacity-70 disabled:active:scale-100"
+              >
+                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Ya, Lanjut"}
+              </button>
             </div>
-
-            {dokumenList.some(d => !d.required) && (
-              <>
-                <div className="flex items-center gap-3 pb-2 border-b border-ink-100 mt-8">
-                  <span className="w-8 h-8 rounded-lg bg-surface-200 text-ink-500 flex items-center justify-center font-bold text-sm">?</span>
-                  <h2 className="text-lg font-bold text-ink-900">Dokumen Pendukung (Opsional)</h2>
-                </div>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {dokumenList
-                    .filter((d) => !d.required)
-                    .map((dokumen) => (
-                      <DokumenCard
-                        key={dokumen.key}
-                        dokumen={dokumen}
-                        config={dokumenConfig[dokumen.key]}
-                        isUploading={uploadingKeys.has(dokumen.key)}
-                        uploadProgress={uploadProgress[dokumen.key] || 0}
-                        onUpload={(file) => handleUpload(dokumen.key, file)}
-                        onPreview={() => handlePreview(dokumen)}
-                      />
-                    ))}
-                </div>
-              </>
-            )}
-
           </div>
         </div>
       )}
 
-      {/* Tab: Download Berkas */}
-      {activeTab === "download" && (
-        <div className="glass-panel p-8 rounded-[2rem] text-center">
-          <div className="w-20 h-20 bg-surface-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Download className="w-10 h-10 text-ink-300" />
-          </div>
-          <h2 className="text-xl font-bold text-ink-900 mb-2">Fitur Segera Hadir</h2>
-          <p className="text-ink-500 max-w-md mx-auto">
-            Fitur download template berkas pendaftaran akan segera tersedia.
-          </p>
-        </div>
-      )}
+    </div>
+  );
+}
+
+function SummaryItem({ label, value }: { label: string; value: string | number }) {
+  return (
+    <div>
+      <p className="text-[10px] font-black text-ink-400 uppercase tracking-[0.15em] mb-1">{label}</p>
+      <p className="text-sm font-bold text-ink-800 break-words">{value}</p>
     </div>
   );
 }

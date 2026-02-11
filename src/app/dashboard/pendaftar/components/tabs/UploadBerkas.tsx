@@ -189,46 +189,58 @@ function DokumenCard({
 
   return (
     <div
-      className={`bg-white rounded-xl border-2 transition-all duration-300 overflow-hidden ${
-        isDragging
-          ? "border-teal-500 bg-teal-50 shadow-lg scale-[1.02]"
+      className={`group rounded-[1.5rem] border transition-all duration-300 overflow-hidden relative ${isDragging
+          ? "border-teal-500 bg-teal-50 shadow-lg scale-[1.02] ring-4 ring-teal-500/10"
           : dokumen.status === "verified"
-          ? "border-green-200"
-          : dokumen.status === "rejected"
-          ? "border-red-200"
-          : dokumen.status === "uploaded"
-          ? "border-blue-200"
-          : "border-stone-200 hover:border-teal-300"
-      }`}
+            ? "border-emerald-200 bg-emerald-50/50"
+            : dokumen.status === "rejected"
+              ? "border-red-200 bg-red-50/50"
+              : dokumen.status === "uploaded"
+                ? "border-blue-200 bg-blue-50/50"
+                : "border-ink-100 bg-white hover:border-teal-300 hover:shadow-lg hover:shadow-teal-900/5"
+        }`}
     >
+      {/* Status Bar */}
+      <div className={`absolute top-0 left-0 bottom-0 w-1.5 transition-colors ${dokumen.status === "verified" ? "bg-emerald-500" :
+          dokumen.status === "rejected" ? "bg-red-500" :
+            dokumen.status === "uploaded" ? "bg-blue-500" :
+              "bg-transparent group-hover:bg-teal-500"
+        }`} />
+
       {/* Header */}
       <div
-        className="p-4 cursor-pointer"
+        className="p-5 pl-7 cursor-pointer"
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-4 flex-1">
             <div
-              className={`w-10 h-10 rounded-lg flex items-center justify-center ${getStatusColor(
-                dokumen.status
-              )}`}
+              className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm transition-all ${dokumen.status === "verified" ? "bg-emerald-100 text-emerald-600" :
+                  dokumen.status === "rejected" ? "bg-red-100 text-red-600" :
+                    dokumen.status === "uploaded" ? "bg-blue-100 text-blue-600" :
+                      "bg-surface-100 text-ink-400 group-hover:bg-teal-50 group-hover:text-teal-600"
+                }`}
             >
-              <StatusIcon className="w-5 h-5" />
+              <StatusIcon className="w-6 h-6" />
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h4 className="font-bold text-stone-900">{dokumen.label}</h4>
+            <div className="flex-1">
+              <div className="flex flex-wrap items-center gap-2 mb-1">
+                <h4 className="font-bold text-ink-900 text-lg">{dokumen.label}</h4>
                 {dokumen.required ? (
-                  <span className="px-2 py-0.5 text-xs font-medium bg-amber-100 text-amber-700 rounded">
+                  <span className="px-2 py-0.5 text-[10px] uppercase font-black tracking-wider bg-amber-100 text-amber-700 rounded-lg">
                     Wajib
                   </span>
                 ) : (
-                  <span className="px-2 py-0.5 text-xs font-medium bg-stone-100 text-stone-600 rounded">
+                  <span className="px-2 py-0.5 text-[10px] uppercase font-black tracking-wider bg-surface-200 text-ink-500 rounded-lg">
                     Opsional
                   </span>
                 )}
               </div>
-              <p className="text-sm text-stone-500">
+              <p className={`text-sm font-medium ${dokumen.status === "verified" ? "text-emerald-700" :
+                  dokumen.status === "rejected" ? "text-red-700" :
+                    dokumen.status === "uploaded" ? "text-blue-700" :
+                      "text-ink-500"
+                }`}>
                 {getStatusLabel(dokumen.status)}
               </p>
             </div>
@@ -240,30 +252,34 @@ function DokumenCard({
                   e.stopPropagation();
                   onPreview();
                 }}
-                className="p-2 text-stone-500 hover:text-teal-600 hover:bg-teal-50 rounded-lg transition-colors"
+                className="w-10 h-10 flex items-center justify-center text-ink-400 hover:text-teal-600 hover:bg-white rounded-xl transition-all shadow-sm border border-transparent hover:border-ink-100"
                 title="Lihat Dokumen"
               >
                 <Eye className="w-5 h-5" />
               </button>
             )}
-            {isExpanded ? (
-              <ChevronUp className="w-5 h-5 text-stone-400" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-stone-400" />
-            )}
+            <div className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all ${isExpanded ? "bg-ink-900 text-white" : "bg-surface-100 text-ink-400 group-hover:bg-white group-hover:shadow-sm"}`}>
+              {isExpanded ? (
+                <ChevronUp className="w-5 h-5" />
+              ) : (
+                <ChevronDown className="w-5 h-5" />
+              )}
+            </div>
           </div>
         </div>
 
         {/* Progress bar saat upload */}
         {isUploading && (
-          <div className="mt-3">
-            <div className="flex items-center justify-between text-sm mb-1">
-              <span className="text-teal-600 font-medium">Mengupload...</span>
-              <span className="text-stone-500">{uploadProgress}%</span>
+          <div className="mt-4 bg-white p-3 rounded-xl border border-ink-100 shadow-sm animate-in fade-in slide-in-from-top-2">
+            <div className="flex items-center justify-between text-xs font-bold mb-2">
+              <span className="text-teal-600 flex items-center gap-2">
+                <Loader2 className="w-3 h-3 animate-spin" /> Mengupload...
+              </span>
+              <span className="text-ink-500">{uploadProgress}%</span>
             </div>
-            <div className="h-2 bg-stone-200 rounded-full overflow-hidden">
+            <div className="h-2 bg-surface-100 rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-teal-500 to-teal-600 rounded-full transition-all duration-300"
+                className="h-full bg-gradient-to-r from-teal-400 to-teal-600 rounded-full transition-all duration-300"
                 style={{ width: `${uploadProgress}%` }}
               />
             </div>
@@ -273,59 +289,74 @@ function DokumenCard({
 
       {/* Expanded Content */}
       {isExpanded && (
-        <div className="px-4 pb-4 border-t border-stone-100">
+        <div className="px-7 pb-7 pt-2 border-t border-ink-100/50">
           {/* Info dokumen yang sudah diupload */}
           {dokumen.status !== "pending" && dokumen.file_name && (
-            <div className="mt-4 p-3 bg-stone-50 rounded-lg">
-              <div className="flex items-center gap-3">
+            <div className="mb-6 bg-white p-4 rounded-2xl border border-ink-100 shadow-sm relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-surface-100 rounded-bl-full -mr-4 -mt-4 z-0" />
+              <div className="flex items-center gap-4 relative z-10">
                 {(() => {
                   const FileIcon = getFileIcon(dokumen.file_type);
                   return (
-                    <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-stone-200">
-                      <FileIcon className="w-5 h-5 text-stone-600" />
+                    <div className="w-14 h-14 bg-surface-50 rounded-xl flex items-center justify-center border border-ink-100 shadow-inner">
+                      <FileIcon className="w-7 h-7 text-ink-500" />
                     </div>
                   );
                 })()}
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-stone-900 truncate">
+                  <p className="font-bold text-ink-900 truncate">
                     {dokumen.file_name}
                   </p>
-                  <p className="text-sm text-stone-500">
-                    {formatFileSize(dokumen.file_size || 0)} &bull;{" "}
-                    {dokumen.uploaded_at
-                      ? new Date(dokumen.uploaded_at).toLocaleDateString(
-                          "id-ID",
-                          {
-                            day: "numeric",
-                            month: "short",
-                            year: "numeric",
-                          }
-                        )
-                      : "-"}
-                  </p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="px-2 py-0.5 bg-surface-100 rounded text-[10px] font-bold text-ink-500 uppercase tracking-wide">
+                      {dokumen.file_type?.split("/")[1]?.toUpperCase() || "FILE"}
+                    </span>
+                    <span className="text-xs text-ink-400">
+                      {formatFileSize(dokumen.file_size || 0)}
+                    </span>
+                    <span className="text-xs text-ink-300">&bull;</span>
+                    <span className="text-xs text-ink-400">
+                      {dokumen.uploaded_at
+                        ? new Date(dokumen.uploaded_at).toLocaleDateString("id-ID", {
+                          day: "numeric",
+                          month: "short",
+                          year: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit"
+                        })
+                        : "-"}
+                    </span>
+                  </div>
                 </div>
               </div>
 
               {/* Catatan jika ditolak */}
               {dokumen.status === "rejected" && dokumen.catatan && (
-                <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg">
-                  <p className="text-sm text-red-700">
-                    <strong>Catatan:</strong> {dokumen.catatan}
-                  </p>
+                <div className="mt-4 p-4 bg-red-50 border border-red-100 rounded-xl flex gap-3 items-start">
+                  <XCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-xs font-black text-red-800 uppercase tracking-wider mb-1">Perlu Perbaikan</p>
+                    <p className="text-sm text-red-700 leading-relaxed">
+                      {dokumen.catatan}
+                    </p>
+                  </div>
                 </div>
               )}
 
               {/* Info verifikasi */}
               {dokumen.status === "verified" && dokumen.verified_at && (
-                <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
-                  <p className="text-sm text-green-700">
-                    Diverifikasi pada{" "}
-                    {new Date(dokumen.verified_at).toLocaleDateString("id-ID", {
-                      day: "numeric",
-                      month: "long",
-                      year: "numeric",
-                    })}
-                  </p>
+                <div className="mt-4 p-4 bg-emerald-50 border border-emerald-100 rounded-xl flex gap-3 items-center">
+                  <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0" />
+                  <div>
+                    <p className="text-xs font-black text-emerald-800 uppercase tracking-wider mb-0.5">Terverifikasi</p>
+                    <p className="text-sm text-emerald-700">
+                      Dokumen telah disetujui pada {new Date(dokumen.verified_at).toLocaleDateString("id-ID", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
+                    </p>
+                  </div>
                 </div>
               )}
             </div>
@@ -333,11 +364,10 @@ function DokumenCard({
 
           {/* Upload Area */}
           <div
-            className={`mt-4 border-2 border-dashed rounded-xl p-6 text-center transition-all cursor-pointer ${
-              isDragging
+            className={`border-2 border-dashed rounded-[1.5rem] p-8 text-center transition-all cursor-pointer group ${isDragging
                 ? "border-teal-500 bg-teal-50"
-                : "border-stone-300 hover:border-teal-400 hover:bg-stone-50"
-            } ${isUploading ? "pointer-events-none opacity-50" : ""}`}
+                : "border-ink-200 hover:border-teal-400 hover:bg-surface-50"
+              } ${isUploading ? "pointer-events-none opacity-50" : ""}`}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
@@ -350,22 +380,26 @@ function DokumenCard({
               accept={config?.allowedTypes.join(",")}
               onChange={handleFileSelect}
             />
-            <div className="flex flex-col items-center gap-3">
+            <div className="flex flex-col items-center gap-4">
               {isUploading ? (
-                <Loader2 className="w-10 h-10 text-teal-500 animate-spin" />
+                <div className="w-16 h-16 rounded-full bg-teal-50 flex items-center justify-center">
+                  <Loader2 className="w-8 h-8 text-teal-600 animate-spin" />
+                </div>
               ) : (
-                <div className="w-14 h-14 bg-teal-100 rounded-full flex items-center justify-center">
-                  <Upload className="w-7 h-7 text-teal-600" />
+                <div className="w-16 h-16 bg-surface-100 rounded-2xl flex items-center justify-center group-hover:bg-teal-100 group-hover:scale-110 transition-all duration-300 shadow-inner">
+                  <Upload className="w-8 h-8 text-ink-400 group-hover:text-teal-600 transition-colors" />
                 </div>
               )}
               <div>
-                <p className="font-medium text-stone-700">
+                <p className="font-bold text-ink-700 text-lg group-hover:text-teal-700 transition-colors">
                   {dokumen.status === "pending"
                     ? "Klik atau seret file ke sini"
-                    : "Upload ulang file"}
+                    : "Ganti File"}
                 </p>
-                <p className="text-sm text-stone-500 mt-1">
-                  Format: {allowedExtensions} &bull; Maks {maxSizeDisplay}
+                <p className="text-sm text-ink-400 mt-2 max-w-xs mx-auto leading-relaxed">
+                  Format: <span className="font-semibold text-ink-600">{allowedExtensions}</span>
+                  <br />
+                  Ukuran Maksimal: <span className="font-semibold text-ink-600">{maxSizeDisplay}</span>
                 </p>
               </div>
             </div>
@@ -561,11 +595,10 @@ export default function UploadBerkasTab() {
       {/* Toast Notification */}
       {toast && (
         <div
-          className={`fixed top-4 right-4 z-50 px-6 py-4 rounded-xl shadow-lg flex items-center gap-3 animate-fadeInRight ${
-            toast.type === "success"
-              ? "bg-green-500 text-white"
-              : "bg-red-500 text-white"
-          }`}
+          className={`fixed top-4 right-4 z-50 px-6 py-4 rounded-xl shadow-lg flex items-center gap-3 animate-fadeInRight ${toast.type === "success"
+            ? "bg-green-500 text-white"
+            : "bg-red-500 text-white"
+            }`}
         >
           {toast.type === "success" ? (
             <CheckCircle className="w-5 h-5" />
@@ -583,83 +616,93 @@ export default function UploadBerkasTab() {
       )}
 
       {/* Header */}
-      <div className="bg-gradient-to-r from-teal-500 to-teal-600 rounded-2xl p-6 text-white">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-black">Upload Berkas</h1>
-            <p className="text-teal-100">
-              Upload dokumen persyaratan pendaftaran
-            </p>
+      {/* Header */}
+      <div className="glass-panel p-8 rounded-[2rem] shadow-clay-md relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="flex items-center gap-5">
+            <div className="w-16 h-16 bg-gradient-to-br from-teal-400 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg shadow-teal-500/30 rotate-3">
+              <Upload className="w-8 h-8 text-white" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-black text-ink-900 tracking-tight">Upload Berkas</h1>
+              <p className="text-ink-500 font-medium mt-1">
+                Lengkapi dokumen persyaratan untuk verifikasi data.
+              </p>
+            </div>
           </div>
           <button
             onClick={fetchDokumenStatus}
-            className="inline-flex items-center gap-2 px-5 py-3 bg-white text-teal-700 font-bold rounded-xl hover:bg-teal-50 transition-all"
+            disabled={loading}
+            className="inline-flex items-center gap-2 px-5 py-3 bg-white border border-ink-100 text-ink-600 font-bold rounded-xl hover:bg-surface-50 transition-all shadow-sm active:scale-95 disabled:opacity-50"
           >
-            <RefreshCw className="w-4 h-4" />
-            Refresh
+            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+            Refresh Status
           </button>
         </div>
       </div>
 
       {/* Progress Summary */}
       {summary && (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-white rounded-xl p-4 border-2 border-stone-200 shadow-sm">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="bg-white rounded-2xl p-5 border border-ink-100 shadow-sm hover:shadow-md transition-all">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center">
                 <FileText className="w-6 h-6 text-amber-600" />
               </div>
               <div>
-                <p className="text-sm text-stone-600">Total Dokumen</p>
-                <p className="text-lg font-bold text-stone-900">
+                <p className="text-xs font-bold text-ink-400 uppercase tracking-wider">Total Dokumen</p>
+                <p className="text-2xl font-black text-ink-900 leading-none mt-1">
                   {summary.total}
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-4 border-2 border-stone-200 shadow-sm">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+          <div className="bg-white rounded-2xl p-5 border border-ink-100 shadow-sm hover:shadow-md transition-all">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
                 <Upload className="w-6 h-6 text-blue-600" />
               </div>
               <div>
-                <p className="text-sm text-stone-600">Sudah Diupload</p>
-                <p className="text-lg font-bold text-stone-900">
-                  {summary.uploaded}/{summary.total}
-                </p>
+                <p className="text-xs font-bold text-ink-400 uppercase tracking-wider">Sudah Diupload</p>
+                <div className="flex items-baseline gap-1 mt-1">
+                  <p className="text-2xl font-black text-ink-900 leading-none">{summary.uploaded}</p>
+                  <span className="text-sm text-ink-400 font-medium">/ {summary.total}</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-4 border-2 border-stone-200 shadow-sm">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                <FileCheck className="w-6 h-6 text-green-600" />
+          <div className="bg-white rounded-2xl p-5 border border-ink-100 shadow-sm hover:shadow-md transition-all">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center">
+                <FileCheck className="w-6 h-6 text-emerald-600" />
               </div>
               <div>
-                <p className="text-sm text-stone-600">Terverifikasi</p>
-                <p className="text-lg font-bold text-stone-900">
-                  {summary.verified}/{summary.total}
-                </p>
+                <p className="text-xs font-bold text-ink-400 uppercase tracking-wider">Terverifikasi</p>
+                <div className="flex items-baseline gap-1 mt-1">
+                  <p className="text-2xl font-black text-ink-900 leading-none">{summary.verified}</p>
+                  <span className="text-sm text-ink-400 font-medium">/ {summary.total}</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-4 border-2 border-stone-200 shadow-sm">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center">
+          <div className="bg-white rounded-2xl p-5 border border-ink-100 shadow-sm hover:shadow-md transition-all">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-teal-50 rounded-xl flex items-center justify-center">
                 <div className="w-6 h-6 flex items-center justify-center">
-                  <span className="text-lg font-bold text-teal-600">
+                  <span className="text-xs font-black text-teal-600">
                     {summary.progress.required.percentage}%
                   </span>
                 </div>
               </div>
-              <div>
-                <p className="text-sm text-stone-600">Progress Wajib</p>
-                <div className="w-full h-2 bg-stone-200 rounded-full mt-1">
+              <div className="flex-1">
+                <p className="text-xs font-bold text-ink-400 uppercase tracking-wider">Progress Wajib</p>
+                <div className="w-full h-2.5 bg-surface-100 rounded-full mt-2 overflow-hidden">
                   <div
-                    className="h-full bg-teal-500 rounded-full transition-all"
+                    className="h-full bg-gradient-to-r from-teal-400 to-teal-600 rounded-full transition-all duration-500 shadow-[0_2px_10px_theme(colors.teal.500/30%)]"
                     style={{
                       width: `${summary.progress.required.percentage}%`,
                     }}
@@ -672,25 +715,18 @@ export default function UploadBerkasTab() {
       )}
 
       {/* Info Box */}
-      <div className="bg-amber-50 border-2 border-amber-200 rounded-xl p-4">
-        <div className="flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
-          <div>
-            <p className="text-sm text-amber-800">
-              <span className="font-bold">Petunjuk Upload:</span>
-            </p>
-            <ul className="text-sm text-amber-700 mt-1 space-y-1">
-              <li>
-                &bull; Pastikan dokumen jelas dan dapat dibaca dengan baik
-              </li>
-              <li>&bull; Format foto wajib JPG/PNG, dokumen boleh PDF</li>
-              <li>&bull; Ukuran maksimal 1MB untuk foto, 2MB untuk dokumen</li>
-              <li>
-                &bull; Dokumen yang sudah diupload dapat diupload ulang jika
-                diperlukan
-              </li>
-            </ul>
-          </div>
+      <div className="bg-amber-50/50 border border-amber-100 rounded-[1.5rem] p-6 flex flex-col md:flex-row items-start gap-4 shadow-sm">
+        <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center flex-shrink-0 text-amber-600">
+          <AlertCircle className="w-5 h-5" />
+        </div>
+        <div>
+          <h4 className="font-bold text-amber-900 mb-2 text-lg">Petunjuk Upload Dokumen</h4>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-sm text-amber-800 list-disc pl-4 marker:text-amber-500">
+            <li>Pastikan dokumen hasil scan atau foto terlihat <strong>jelas dan terbaca</strong></li>
+            <li>Format yang diterima: <strong>JPG, PNG, atau PDF</strong></li>
+            <li>Ukuran maksimal file: <strong>1MB (Foto), 2MB (Dokumen)</strong></li>
+            <li>Anda dapat mengupload ulang jika terjadi kesalahan sebelum diverifikasi</li>
+          </ul>
         </div>
       </div>
 

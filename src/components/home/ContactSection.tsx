@@ -41,7 +41,7 @@ export default function ContactSection() {
       <Container>
         <div className="bg-surface-50 rounded-[3rem] p-8 md:p-12 border border-surface-100 relative overflow-hidden">
           {/* Background Map Decoration (Abstract) */}
-          <div className="absolute inset-0 opacity-5 bg-[url('/images/pattern.png')] pointer-events-none" />
+          <div className="absolute inset-0 opacity-5 bg-[url('/images/pattern.svg')] pointer-events-none" />
 
           <div className="relative z-10 flex flex-col lg:flex-row gap-12 items-center">
 

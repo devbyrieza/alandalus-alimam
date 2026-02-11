@@ -142,13 +142,7 @@ export default function DashboardLayout({
       icon: Upload,
       active: pathname === "/dashboard/pendaftar/upload-berkas",
     },
-    {
-      name: "Download Berkas",
-      href: "/dashboard/pendaftar/download-berkas",
-      tabName: "download-berkas" as TabName,
-      icon: Download,
-      active: pathname === "/dashboard/pendaftar/download-berkas",
-    },
+
     {
       name: "Undangan Seleksi",
       href: "/dashboard/pendaftar/undangan-seleksi",
@@ -225,8 +219,8 @@ export default function DashboardLayout({
         <Link
           href={item.href}
           className={`group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 ${item.active
-              ? "bg-brown-700 text-white shadow-lg shadow-brown-200"
-              : "text-ink-600 hover:bg-brown-50 hover:text-brown-700"
+            ? "bg-brown-700 text-white shadow-lg shadow-brown-200"
+            : "text-ink-600 hover:bg-brown-50 hover:text-brown-700"
             }`}
         >
           <item.icon className={`w-5 h-5 mr-3 flex-shrink-0 transition-colors ${item.active ? 'text-white' : 'text-ink-400 group-hover:text-brown-600'}`} />

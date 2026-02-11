@@ -81,7 +81,7 @@ export default function ContactPage() {
         <main className="bg-surface-50 min-h-screen">
             {/* 1. Hero Section - Brown Aesthetic */}
             <section className="relative py-12 md:py-16 bg-brown-900 border-b border-white/5">
-                <div className="absolute inset-0 bg-[url('/images/pattern.png')] bg-repeat opacity-5 mix-blend-overlay" />
+                <div className="absolute inset-0 bg-[url('/images/pattern.svg')] bg-repeat opacity-5 mix-blend-overlay" />
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold-500/10 rounded-full blur-[100px] pointer-events-none" />
 
                 <Container className="relative z-10 text-center">
