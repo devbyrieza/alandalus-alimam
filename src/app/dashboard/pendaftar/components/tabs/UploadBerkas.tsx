@@ -16,6 +16,7 @@ import {
   ChevronUp,
   FileCheck,
   Loader2,
+  Send,
 } from "lucide-react";
 
 // ============================================
@@ -190,21 +191,21 @@ function DokumenCard({
   return (
     <div
       className={`group rounded-[1.5rem] border transition-all duration-300 overflow-hidden relative ${isDragging
-          ? "border-teal-500 bg-teal-50 shadow-lg scale-[1.02] ring-4 ring-teal-500/10"
-          : dokumen.status === "verified"
-            ? "border-emerald-200 bg-emerald-50/50"
-            : dokumen.status === "rejected"
-              ? "border-red-200 bg-red-50/50"
-              : dokumen.status === "uploaded"
-                ? "border-blue-200 bg-blue-50/50"
-                : "border-ink-100 bg-white hover:border-teal-300 hover:shadow-lg hover:shadow-teal-900/5"
+        ? "border-teal-500 bg-teal-50 shadow-lg scale-[1.02] ring-4 ring-teal-500/10"
+        : dokumen.status === "verified"
+          ? "border-emerald-200 bg-emerald-50/50"
+          : dokumen.status === "rejected"
+            ? "border-red-200 bg-red-50/50"
+            : dokumen.status === "uploaded"
+              ? "border-blue-200 bg-blue-50/50"
+              : "border-ink-100 bg-white hover:border-teal-300 hover:shadow-lg hover:shadow-teal-900/5"
         }`}
     >
       {/* Status Bar */}
       <div className={`absolute top-0 left-0 bottom-0 w-1.5 transition-colors ${dokumen.status === "verified" ? "bg-emerald-500" :
-          dokumen.status === "rejected" ? "bg-red-500" :
-            dokumen.status === "uploaded" ? "bg-blue-500" :
-              "bg-transparent group-hover:bg-teal-500"
+        dokumen.status === "rejected" ? "bg-red-500" :
+          dokumen.status === "uploaded" ? "bg-blue-500" :
+            "bg-transparent group-hover:bg-teal-500"
         }`} />
 
       {/* Header */}
@@ -216,9 +217,9 @@ function DokumenCard({
           <div className="flex items-center gap-4 flex-1">
             <div
               className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm transition-all ${dokumen.status === "verified" ? "bg-emerald-100 text-emerald-600" :
-                  dokumen.status === "rejected" ? "bg-red-100 text-red-600" :
-                    dokumen.status === "uploaded" ? "bg-blue-100 text-blue-600" :
-                      "bg-surface-100 text-ink-400 group-hover:bg-teal-50 group-hover:text-teal-600"
+                dokumen.status === "rejected" ? "bg-red-100 text-red-600" :
+                  dokumen.status === "uploaded" ? "bg-blue-100 text-blue-600" :
+                    "bg-surface-100 text-ink-400 group-hover:bg-teal-50 group-hover:text-teal-600"
                 }`}
             >
               <StatusIcon className="w-6 h-6" />
@@ -237,9 +238,9 @@ function DokumenCard({
                 )}
               </div>
               <p className={`text-sm font-medium ${dokumen.status === "verified" ? "text-emerald-700" :
-                  dokumen.status === "rejected" ? "text-red-700" :
-                    dokumen.status === "uploaded" ? "text-blue-700" :
-                      "text-ink-500"
+                dokumen.status === "rejected" ? "text-red-700" :
+                  dokumen.status === "uploaded" ? "text-blue-700" :
+                    "text-ink-500"
                 }`}>
                 {getStatusLabel(dokumen.status)}
               </p>
@@ -365,8 +366,8 @@ function DokumenCard({
           {/* Upload Area */}
           <div
             className={`border-2 border-dashed rounded-[1.5rem] p-8 text-center transition-all cursor-pointer group ${isDragging
-                ? "border-teal-500 bg-teal-50"
-                : "border-ink-200 hover:border-teal-400 hover:bg-surface-50"
+              ? "border-teal-500 bg-teal-50"
+              : "border-ink-200 hover:border-teal-400 hover:bg-surface-50"
               } ${isUploading ? "pointer-events-none opacity-50" : ""}`}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
@@ -437,6 +438,35 @@ export default function UploadBerkasTab() {
       all: { total: number; uploaded: number; percentage: number };
     };
   } | null>(null);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async () => {
+    try {
+      setIsSubmitting(true);
+      const response = await fetch("/api/pendaftar/submit-dokumen", {
+        method: "POST"
+      });
+      const result = await response.json();
+
+      if (!result.success) {
+        throw new Error(result.error || "Gagal mengirim berkas");
+      }
+
+      showToast("success", "Berkas berhasil dikirim! Status pendaftaran Anda telah diperbarui.");
+
+      // Refresh component data
+      await fetchDokumenStatus();
+
+      // Optional: Trigger full page refresh or notify parent to update sidebar status
+      window.location.reload();
+
+    } catch (err: any) {
+      showToast("error", err.message || "Terjadi kesalahan");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   // Fetch dokumen status
   const fetchDokumenStatus = useCallback(async () => {
@@ -724,7 +754,7 @@ export default function UploadBerkasTab() {
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-sm text-amber-800 list-disc pl-4 marker:text-amber-500">
             <li>Pastikan dokumen hasil scan atau foto terlihat <strong>jelas dan terbaca</strong></li>
             <li>Format yang diterima: <strong>JPG, PNG, atau PDF</strong></li>
-            <li>Ukuran maksimal file: <strong>1MB (Foto), 2MB (Dokumen)</strong></li>
+            <li>Ukuran maksimal file: <strong>5MB (Foto & Dokumen)</strong></li>
             <li>Anda dapat mengupload ulang jika terjadi kesalahan sebelum diverifikasi</li>
           </ul>
         </div>
@@ -780,20 +810,55 @@ export default function UploadBerkasTab() {
         </div>
       </div>
 
-      {/* Bottom Info */}
-      <div className="bg-teal-50 border-2 border-teal-200 rounded-xl p-6">
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-teal-500 text-white rounded-full flex items-center justify-center flex-shrink-0">
-            <FileCheck className="w-6 h-6" />
+      {/* Submit Section */}
+      <div className="bg-white border text-center border-ink-200 rounded-3xl p-8 shadow-sm">
+        <div className="max-w-xl mx-auto space-y-6">
+          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto transition-colors ${summary && summary.progress.required.percentage === 100
+            ? "bg-teal-100 text-teal-600"
+            : "bg-surface-100 text-ink-300"
+            }`}>
+            <FileCheck className="w-8 h-8" />
           </div>
+
           <div>
-            <h3 className="font-bold text-teal-900">Setelah Upload Selesai</h3>
-            <p className="text-sm text-teal-700 mt-1">
-              Tim verifikasi akan memeriksa dokumen Anda dalam 1-2 hari kerja.
-              Anda akan mendapat notifikasi jika ada dokumen yang perlu
-              diperbaiki.
+            <h3 className="text-xl font-black text-ink-900 mb-2">
+              {summary && summary.progress.required.percentage === 100
+                ? "Semua Dokumen Wajib Terisi"
+                : "Lengkapi Dokumen Wajib"}
+            </h3>
+            <p className="text-ink-500 font-medium leading-relaxed">
+              {summary && summary.progress.required.percentage === 100
+                ? "Pastikan semua data sudah benar sebelum mengirim. Data yang dikirim tidak dapat diubah sampai diverifikasi admin."
+                : "Anda belum dapat mengirim berkas. Mohon lengkapi semua dokumen yang bertanda 'Wajib' di atas."}
             </p>
           </div>
+
+          <button
+            onClick={handleSubmit}
+            disabled={!summary || summary.progress.required.percentage < 100 || isSubmitting}
+            className={`w-full py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 transition-all ${summary && summary.progress.required.percentage === 100 && !isSubmitting
+              ? "bg-teal-600 text-white hover:bg-teal-700 shadow-xl shadow-teal-600/20 hover:-translate-y-1"
+              : "bg-surface-200 text-ink-400 cursor-not-allowed"
+              }`}
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="w-6 h-6 animate-spin" />
+                <span>Mengirim Berkas...</span>
+              </>
+            ) : (
+              <>
+                <Send className="w-6 h-6" />
+                <span>Kirim Semua Berkas</span>
+              </>
+            )}
+          </button>
+
+          {summary && summary.progress.required.percentage === 100 && (
+            <p className="text-xs text-ink-400 font-medium">
+              Dengan mengklik tombol ini, Anda menyatakan bahwa data yang diupload adalah benar.
+            </p>
+          )}
         </div>
       </div>
     </div>

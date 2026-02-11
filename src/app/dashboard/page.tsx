@@ -24,9 +24,12 @@ import {
   Zap,
   Calendar,
   PartyPopper,
+  ClipboardList,
+  UserCheck,
 } from "lucide-react";
 import BackToHomeButton from "@/components/common/BackToHomeButton";
 import { logoutUser } from "@/lib/auth";
+import { hasReachedStatus, StatusProses } from "@/lib/access-control";
 
 interface PendaftarData {
   id: string;
@@ -34,7 +37,7 @@ interface PendaftarData {
   nama_lengkap: string;
   jenis_kelamin: string;
   jenjang: string;
-  status_pendaftaran: string;
+  status_pendaftaran: StatusProses;
   created_at: string;
 }
 
@@ -434,7 +437,11 @@ export default function DashboardPage() {
           {/* Step 2: Data Pribadi */}
           <Link
             href="/dashboard/pendaftar"
-            className="group bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-surface-200 hover:border-teal-500 p-4 xs:p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl active:scale-95"
+            className={`group bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-surface-200 p-4 xs:p-5 sm:p-6 transition-all duration-300 active:scale-95 ${!hasReachedStatus(pendaftar.status_pendaftaran, "verified")
+              ? "opacity-50 pointer-events-none grayscale cursor-not-allowed"
+              : "hover:border-teal-500 hover:-translate-y-1 hover:shadow-xl"
+              }`}
+            aria-disabled={!hasReachedStatus(pendaftar.status_pendaftaran, "verified")}
           >
             <div className="flex items-start justify-between mb-3 sm:mb-4">
               <div className="w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[var(--color-teal-100)] flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
@@ -460,7 +467,11 @@ export default function DashboardPage() {
           {/* Step 3: Upload Dokumen */}
           <Link
             href="/dashboard/pendaftar/upload-berkas"
-            className="group bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-surface-200 hover:border-brown-500 p-4 xs:p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:col-span-2 md:col-span-1 active:scale-95"
+            className={`group bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-surface-200 p-4 xs:p-5 sm:p-6 transition-all duration-300 sm:col-span-2 md:col-span-1 active:scale-95 ${!hasReachedStatus(pendaftar.status_pendaftaran, "data_completed")
+              ? "opacity-50 pointer-events-none grayscale cursor-not-allowed"
+              : "hover:border-brown-500 hover:-translate-y-1 hover:shadow-xl"
+              }`}
+            aria-disabled={!hasReachedStatus(pendaftar.status_pendaftaran, "data_completed")}
           >
             <div className="flex items-start justify-between mb-3 sm:mb-4">
               <div className="w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[var(--color-brown-100)] flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
@@ -480,6 +491,96 @@ export default function DashboardPage() {
             <div className="text-[10px] xs:text-xs sm:text-xs text-[var(--color-brown-600)] font-semibold flex items-center gap-1">
               <Sparkles className="w-3 h-3 sm:w-3 sm:h-3 flex-shrink-0" />
               <span>Terima file foto/PDF</span>
+            </div>
+          </Link>
+
+          {/* Step 4: Ujian & Seleksi - Disabled until docs verified */}
+          <Link
+            href="/dashboard/pendaftar/undangan-seleksi"
+            className={`group bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-surface-200 p-4 xs:p-5 sm:p-6 transition-all duration-300 active:scale-95 ${!hasReachedStatus(pendaftar.status_pendaftaran, "docs_verified")
+              ? "opacity-50 pointer-events-none grayscale cursor-not-allowed"
+              : "hover:border-purple-500 hover:-translate-y-1 hover:shadow-xl"
+              }`}
+            aria-disabled={!hasReachedStatus(pendaftar.status_pendaftaran, "docs_verified")}
+          >
+            <div className="flex items-start justify-between mb-3 sm:mb-4">
+              <div className="w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-purple-100 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+                <ClipboardList className="w-5 h-5 xs:w-5.5 xs:h-5.5 sm:w-6 sm:h-6 text-purple-700" />
+              </div>
+              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] xs:text-xs font-bold bg-purple-100 text-purple-700">
+                Step 4
+              </span>
+            </div>
+            <h3 className="text-base xs:text-lg sm:text-lg font-bold text-ink-900 mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2 leading-tight">
+              <ClipboardList className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+              <span>Seleksi</span>
+            </h3>
+            <p className="text-xs xs:text-sm sm:text-sm text-ink-500 leading-relaxed mb-2 sm:mb-3">
+              Cek jadwal & ikuti rangkaian tes: Al-Qur'an, Akademik, & Wawancara
+            </p>
+            <div className="text-[10px] xs:text-xs sm:text-xs text-purple-600 font-semibold flex items-center gap-1">
+              <Calendar className="w-3 h-3 sm:w-3 sm:h-3 flex-shrink-0" />
+              <span>Lihat Jadwal & Tes</span>
+            </div>
+          </Link>
+
+          {/* Step 5: Pengumuman - Disabled until tested */}
+          <Link
+            href="/dashboard/pendaftar/pengumuman"
+            className={`group bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-surface-200 p-4 xs:p-5 sm:p-6 transition-all duration-300 active:scale-95 sm:col-span-2 md:col-span-1 ${!hasReachedStatus(pendaftar.status_pendaftaran, "tested")
+              ? "opacity-50 pointer-events-none grayscale cursor-not-allowed"
+              : "hover:border-blue-500 hover:-translate-y-1 hover:shadow-xl"
+              }`}
+            aria-disabled={!hasReachedStatus(pendaftar.status_pendaftaran, "tested")}
+          >
+            <div className="flex items-start justify-between mb-3 sm:mb-4">
+              <div className="w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-blue-100 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+                <Trophy className="w-5 h-5 xs:w-5.5 xs:h-5.5 sm:w-6 sm:h-6 text-blue-700" />
+              </div>
+              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] xs:text-xs font-bold bg-blue-100 text-blue-700">
+                Step 5
+              </span>
+            </div>
+            <h3 className="text-base xs:text-lg sm:text-lg font-bold text-ink-900 mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2 leading-tight">
+              <Trophy className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+              <span>Pengumuman</span>
+            </h3>
+            <p className="text-xs xs:text-sm sm:text-sm text-ink-500 leading-relaxed mb-2 sm:mb-3">
+              Lihat hasil seleksi penerimaan santri baru
+            </p>
+            <div className="text-[10px] xs:text-xs sm:text-xs text-blue-600 font-semibold flex items-center gap-1">
+              <Sparkles className="w-3 h-3 sm:w-3 sm:h-3 flex-shrink-0" />
+              <span>Semoga mendapat hasil terbaik!</span>
+            </div>
+          </Link>
+
+          {/* Step 6: Daftar Ulang - Disabled until accepted */}
+          <Link
+            href="/dashboard/pendaftar/daftar-ulang"
+            className={`group bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-surface-200 p-4 xs:p-5 sm:p-6 transition-all duration-300 active:scale-95 ${!hasReachedStatus(pendaftar.status_pendaftaran, "accepted")
+              ? "opacity-50 pointer-events-none grayscale cursor-not-allowed"
+              : "hover:border-green-500 hover:-translate-y-1 hover:shadow-xl"
+              }`}
+            aria-disabled={!hasReachedStatus(pendaftar.status_pendaftaran, "accepted")}
+          >
+            <div className="flex items-start justify-between mb-3 sm:mb-4">
+              <div className="w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-green-100 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+                <UserCheck className="w-5 h-5 xs:w-5.5 xs:h-5.5 sm:w-6 sm:h-6 text-green-700" />
+              </div>
+              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] xs:text-xs font-bold bg-green-100 text-green-700">
+                Step 6
+              </span>
+            </div>
+            <h3 className="text-base xs:text-lg sm:text-lg font-bold text-ink-900 mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2 leading-tight">
+              <UserCheck className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+              <span>Daftar Ulang</span>
+            </h3>
+            <p className="text-xs xs:text-sm sm:text-sm text-ink-500 leading-relaxed mb-2 sm:mb-3">
+              Lakukan registrasi ulang bagi santri yang diterima
+            </p>
+            <div className="text-[10px] xs:text-xs sm:text-xs text-green-600 font-semibold flex items-center gap-1">
+              <CheckCircle className="w-3 h-3 sm:w-3 sm:h-3 flex-shrink-0" />
+              <span>Tahap Akhir</span>
             </div>
           </Link>
         </div>

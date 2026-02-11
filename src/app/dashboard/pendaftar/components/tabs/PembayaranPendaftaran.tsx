@@ -27,6 +27,8 @@ import {
   ArrowRight,
   Check,
   Download,
+  Trash2,
+  Star as StarIcon,
 } from "lucide-react";
 
 // ============================================
@@ -171,6 +173,12 @@ function getDaysRemaining(deadline: string): number {
   return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 }
 
+function formatFileSize(bytes: number): string {
+  if (bytes < 1024) return bytes + " B";
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+  return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+}
+
 // ============================================
 // COPY BUTTON COMPONENT
 // ============================================
@@ -299,7 +307,19 @@ function UploadArea({
   isRejected,
 }: UploadAreaProps) {
   const [isDragging, setIsDragging] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (selectedFile) {
+      const url = URL.createObjectURL(selectedFile);
+      setPreviewUrl(url);
+      return () => URL.revokeObjectURL(url);
+    } else {
+      setPreviewUrl(null);
+    }
+  }, [selectedFile]);
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -317,37 +337,53 @@ function UploadArea({
       setIsDragging(false);
       const files = e.dataTransfer.files;
       if (files.length > 0) {
-        onUpload(files[0]);
+        setSelectedFile(files[0]);
       }
     },
-    [onUpload]
+    []
   );
 
   const handleFileSelect = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const files = e.target.files;
       if (files && files.length > 0) {
-        onUpload(files[0]);
+        setSelectedFile(files[0]);
       }
       if (fileInputRef.current) {
         fileInputRef.current.value = "";
       }
     },
-    [onUpload]
+    []
   );
 
   const handleClick = () => {
-    if (!isUploading) {
+    if (!isUploading && !selectedFile) {
       fileInputRef.current?.click();
     }
   };
 
+  const handleRemoveFile = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setSelectedFile(null);
+  };
+
+  const handleUploadClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (selectedFile) {
+      onUpload(selectedFile);
+      // Don't clear selectedFile here, wait for parent to handle success/reset
+    }
+  };
+
+  // If uploading, we might want to keep showing the preview with a spinner overlay
+  // Or just the progress bar. Let's show progress overlay on top of preview if available.
+
   return (
     <div className="space-y-6">
-      {/* Current file info */}
-      {currentFile && !isRejected && (
+      {/* Current file info (Always show existing file if available and NOT currently selecting a NEW file) */}
+      {currentFile && !selectedFile && !isRejected && (
         <div className="p-4 bg-blue-50 border border-blue-100 rounded-2xl flex items-center gap-4">
-          <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center border border-blue-100 shadow-sm">
+          <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center border border-blue-100 shadow-sm transition-transform hover:scale-110">
             <FileText className="w-6 h-6 text-blue-500" />
           </div>
           <div className="flex-1 min-w-0">
@@ -362,12 +398,14 @@ function UploadArea({
 
       {/* Upload area */}
       <div
-        className={`relative overflow-hidden group border-2 border-dashed rounded-2xl p-8 text-center transition-all cursor-pointer ${isDragging
-          ? "border-teal-500 bg-teal-50/50"
-          : isRejected
+        className={`relative overflow-hidden group border-2 border-dashed rounded-[2rem] transition-all ${isDragging
+          ? "border-teal-500 bg-teal-50/50 scale-[1.01]"
+          : isRejected && !selectedFile
             ? "border-red-300 bg-red-50 hover:border-red-400"
-            : "border-ink-200 hover:border-teal-400 hover:bg-surface-50"
-          } ${isUploading ? "pointer-events-none opacity-50" : ""}`}
+            : selectedFile
+              ? "border-teal-500 bg-white" // Solid border when file selected
+              : "border-ink-200 hover:border-teal-400 hover:bg-surface-50 cursor-pointer"
+          } ${isUploading ? "pointer-events-none opacity-80" : ""}`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
@@ -381,42 +419,108 @@ function UploadArea({
           onChange={handleFileSelect}
         />
 
-        <div className="flex flex-col items-center gap-5 relative z-10">
-          {isUploading ? (
-            <div className="relative">
-              <div className="w-16 h-16 rounded-full border-4 border-teal-100 animate-pulse" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-xs font-bold text-teal-600">{uploadProgress}%</span>
+        {/* PREVIEW SECTION */}
+        {selectedFile ? (
+          <div className="p-6">
+            <div className="flex flex-col items-center gap-6">
+              {/* Image Preview or File Icon */}
+              <div className="relative group/preview">
+                {selectedFile.type.startsWith("image/") && previewUrl ? (
+                  <div className="relative w-full max-w-sm mx-auto overflow-hidden rounded-2xl border border-ink-100 shadow-sm">
+                    <img src={previewUrl} alt="Preview" className="w-full h-auto max-h-[300px] object-contain bg-surface-50" />
+                  </div>
+                ) : (
+                  <div className="w-24 h-24 bg-surface-100 rounded-2xl flex items-center justify-center mx-auto">
+                    <FileText className="w-12 h-12 text-ink-400" />
+                  </div>
+                )}
+
+                {/* Remove Button (Top Right of preview area) */}
+                {!isUploading && (
+                  <button
+                    onClick={handleRemoveFile}
+                    className="absolute -top-2 -right-2 bg-red-500 text-white p-1.5 rounded-full shadow-lg transition-transform hover:scale-110 md:opacity-0 md:group-hover/preview:opacity-100"
+                    title="Hapus file"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+
+              <div className="text-center">
+                <p className="font-bold text-ink-900 text-lg truncate max-w-xs mx-auto">
+                  {selectedFile.name}
+                </p>
+                <p className="text-sm text-ink-500 font-medium">
+                  {formatFileSize(selectedFile.size)}
+                </p>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-3 w-full sm:w-auto">
+                <button
+                  onClick={handleRemoveFile}
+                  className="flex-1 sm:flex-none px-6 py-3 bg-surface-100 text-ink-600 font-bold rounded-xl hover:bg-surface-200 transition-colors"
+                >
+                  Ganti
+                </button>
+                <button
+                  onClick={handleUploadClick}
+                  disabled={isUploading}
+                  className="flex-1 sm:flex-none px-8 py-3 bg-teal-600 text-white font-bold rounded-xl hover:bg-teal-700 transition-colors shadow-lg shadow-teal-500/30 flex items-center justify-center gap-2"
+                >
+                  {isUploading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Upload className="w-5 h-5" />}
+                  {isUploading ? "Mengirim..." : "Kirim Bukti"}
+                </button>
               </div>
             </div>
-          ) : (
+
+            {/* Progress Overlay */}
+            {isUploading && (
+              <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-20">
+                <div className="text-center">
+                  <div className="relative w-20 h-20 mx-auto mb-4">
+                    <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                      <path className="text-surface-200" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="4" />
+                      <path className="text-teal-500 transition-all duration-300 ease-out" strokeDasharray={`${uploadProgress}, 100`} d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="4" />
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center font-bold text-teal-700 text-sm">
+                      {uploadProgress}%
+                    </div>
+                  </div>
+                  <p className="font-bold text-teal-800">Mengupload...</p>
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          // EMPTY STATE
+          <div className="p-10 flex flex-col items-center gap-5 relative z-10">
             <div
-              className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 ${isRejected
+              className={`w-20 h-20 rounded-3xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shadow-sm ${isRejected && !currentFile
                 ? "bg-red-100 text-red-600"
                 : "bg-teal-50 text-teal-600"
                 }`}
             >
-              <Upload className="w-8 h-8" />
+              <Upload className="w-10 h-10" />
             </div>
-          )}
 
-          <div>
-            <p className={`font-bold text-lg ${isRejected ? "text-red-700" : "text-ink-900"}`}>
-              {isRejected
-                ? "Upload Ulang Bukti Transfer"
-                : currentFile
-                  ? "Ganti Bukti Transfer"
-                  : "Klik atau Seret File ke Sini"}
-            </p>
-            <p className="text-sm text-ink-500 mt-1 font-medium">
-              Format: JPG, PNG, atau PDF (Maks. 2MB)
-            </p>
+            <div>
+              <p
+                className={`font-bold text-xl ${isRejected && !currentFile ? "text-red-700" : "text-ink-900"
+                  }`}
+              >
+                {isRejected && !currentFile
+                  ? "Upload Ulang Bukti Transfer"
+                  : currentFile
+                    ? "Ganti Bukti Transfer"
+                    : "Klik atau Seret File ke Sini"}
+              </p>
+              <p className="text-sm text-ink-500 mt-2 font-medium max-w-xs mx-auto leading-relaxed text-justify">
+                Pastikan foto bukti transfer terlihat jelas dan terbaca. Format: JPG, PNG, PDF (Max 5MB)
+              </p>
+            </div>
           </div>
-        </div>
-
-        {/* Progress bar background for visual feedback */}
-        {isUploading && (
-          <div className="absolute bottom-0 left-0 h-1 bg-teal-500 transition-all duration-300" style={{ width: `${uploadProgress}%` }} />
         )}
       </div>
     </div>
@@ -481,7 +585,7 @@ export default function PembayaranPendaftaranTab({
       setIsUploading(true);
       setUploadProgress(0);
 
-      if (file.size > 2 * 1024 * 1024) throw new Error("Ukuran file terlalu besar! Maksimal 2MB");
+      if (file.size > 5 * 1024 * 1024) throw new Error("Ukuran file terlalu besar! Maksimal 5MB");
       const allowedTypes = ["image/jpeg", "image/png", "application/pdf"];
       if (!allowedTypes.includes(file.type)) throw new Error("Format file tidak didukung! Gunakan JPG, PNG, atau PDF");
 
@@ -715,139 +819,196 @@ export default function PembayaranPendaftaranTab({
             <div className="space-y-8">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <h3 className="text-xl font-bold text-ink-900 px-2">Pilih Metode Pembayaran</h3>
-                <div className="bg-emerald-50 text-emerald-800 px-4 py-2 rounded-lg font-bold text-sm border border-emerald-200">
-                  Total: Rp 200.000
+                {/* Total Price Tag */}
+                <div className="bg-indigo-50 text-indigo-700 px-6 py-3 rounded-2xl font-black text-lg border border-indigo-100 shadow-sm flex items-center gap-2">
+                  <span>Total:</span>
+                  <span className="text-2xl">{formatRupiah(biayaPendaftaran)}</span>
                 </div>
               </div>
 
+              {/* PAYMENT CARDS GRID */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-              {/* OPTION 1: MIDTRANS (DEV) */}
-              <div
-                className={`glass-panel p-6 rounded-[2rem] border transition-all cursor-pointer hover:border-indigo-300 hover:shadow-indigo-500/10 group ${activePaymentMethod === 'midtrans' ? 'border-indigo-500 ring-4 ring-indigo-500/10' : 'border-white/50'}`}
-                onClick={() => setActivePaymentMethod(prev => prev === 'midtrans' ? null : 'midtrans')}
-              >
-                <div className="flex items-center justify-between relative overflow-hidden">
-                  {/* DEV BADGE */}
-                  <div className="absolute -top-3 -right-3 bg-amber-100 text-amber-700 text-[10px] font-bold px-3 py-1 rounded-bl-xl border-l border-b border-amber-200 shadow-sm z-10">
-                    Tahap Pengembangan
-                  </div>
+                {/* CARD 1: MIDTRANS (DEV) */}
+                <div className="relative group bg-white rounded-[2.5rem] p-8 border border-ink-100 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1 overflow-hidden opacity-80 hover:opacity-100 grayscale-[0.5] hover:grayscale-0">
+                  {/* Background Decor */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-amber-50 rounded-bl-[4rem] -z-0" />
 
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center group-hover:bg-indigo-100 transition-colors">
-                      <span className="font-black text-xl text-indigo-300">1</span>
-                    </div>
-                    <div className="text-left">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h4 className="font-bold text-ink-900 text-lg">Virtual Account / QRIS</h4>
-                        <span className="bg-ink-100 text-ink-600 text-[10px] uppercase font-bold px-2 py-0.5 rounded">Otomatis</span>
+                  <div className="relative z-10 flex flex-col h-full">
+                    <div className="mb-6">
+                      <div className="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mb-6 shadow-alert-100/50 text-amber-600">
+                        <CreditCard className="w-8 h-8" />
                       </div>
-                      <p className="text-sm text-ink-500 font-medium">BCA, BNI, BRI, Mandiri & QRIS</p>
+                      <h4 className="font-bold text-ink-500 uppercase tracking-widest text-xs mb-2">Tahap Pengembangan</h4>
+                      <h3 className="font-black text-2xl text-ink-900 mb-2">Virtual Account</h3>
+
+
+                      <div className="inline-block bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full mb-6">
+                        Otomatis
+                      </div>
+
+                      <ul className="space-y-3 mb-8">
+                        {[
+                          "BCA, BNI, BRI, Mandiri & QRIS",
+                          "Verifikasi Otomatis",
+                          "Proses Instan (Real-time)"
+                        ].map((item, idx) => (
+                          <li key={idx} className="flex items-start gap-3 text-ink-400 text-sm font-medium">
+                            <div className="w-5 h-5 rounded-full bg-ink-100 flex items-center justify-center shrink-0 mt-0.5">
+                              <Check className="w-3 h-3 text-ink-400" />
+                            </div>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                  </div>
-                  <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all ${activePaymentMethod === 'midtrans' ? 'border-indigo-500 bg-indigo-500 text-white' : 'border-ink-200'}`}>
-                    {activePaymentMethod === 'midtrans' && <Check className="w-4 h-4" />}
+
+                    <div className="mt-auto">
+                      <button disabled className="w-full py-4 rounded-xl font-bold bg-ink-100 text-ink-400 cursor-not-allowed">
+                        Segera Hadir
+                      </button>
+                    </div>
                   </div>
                 </div>
 
-                {activePaymentMethod === 'midtrans' && (
-                  <div className="mt-6 pt-6 border-t border-ink-100/50">
-                    <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-4 flex gap-3">
-                      <Info className="w-5 h-5 text-amber-600 shrink-0" />
-                      <p className="text-sm text-amber-800">
-                        <strong>Fitur Belum Siap:</strong> Metode pembayaran ini sedang dalam tahap pengembangan. Silakan gunakan Opsi 2 (Transfer Manual) untuk saat ini.
-                      </p>
+                {/* CARD 2: BSI MANUAL */}
+                <div
+                  onClick={() => setActivePaymentMethod('manual')}
+                  className={`relative group bg-white rounded-[2.5rem] p-8 border-2 transition-all cursor-pointer shadow-lg hover:-translate-y-1 hover:shadow-xl ${activePaymentMethod === 'manual'
+                    ? 'border-teal-500 ring-4 ring-teal-500/10 shadow-teal-500/10'
+                    : 'border-white hover:border-teal-300'
+                    }`}
+                >
+                  {activePaymentMethod === 'manual' && (
+                    <div className="absolute top-6 right-6 lg:right-8">
+                      <div className="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center animate-in zoom-in">
+                        <Check className="w-5 h-5 text-white" />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Recommendation Badge */}
+                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-teal-500 to-emerald-500 text-white text-sm font-bold px-6 py-2 rounded-full shadow-lg shadow-teal-500/30 z-20 flex items-center gap-2">
+                    <StarIcon className="w-4 h-4 fill-white" />
+                    Rekomendasi
+                  </div>
+
+                  <div className="relative z-10 flex flex-col h-full pt-4">
+                    <div className="mb-6">
+                      <div className="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center mb-6 shadow-sm text-teal-600">
+                        <Building2 className="w-8 h-8" />
+                      </div>
+                      <h4 className="font-bold text-teal-600 uppercase tracking-widest text-xs mb-2">Transfer Manual</h4>
+                      <h3 className="font-black text-2xl text-ink-900 mb-2">Bank BSI</h3>
+
+
+                      <div className="inline-block bg-teal-100 text-teal-700 text-xs font-bold px-3 py-1 rounded-full mb-6">
+                        Manual Check
+                      </div>
+
+                      <ul className="space-y-3 mb-8">
+                        {[
+                          "Transfer ke Rekening Pesantren",
+                          "Verifikasi Admin (1x24 Jam)",
+                          "Aman & Terpercaya",
+                          "Upload Bukti Transfer"
+                        ].map((item, idx) => (
+                          <li key={idx} className="flex items-start gap-3 text-ink-600 text-sm font-medium">
+                            <div className="w-5 h-5 rounded-full bg-teal-100 flex items-center justify-center shrink-0 mt-0.5">
+                              <Check className="w-3 h-3 text-teal-600" />
+                            </div>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
 
-                    <p className="text-sm text-ink-600 mb-4 leading-relaxed opacity-50">
-                      Metode ini mendukung Virtual Account (BCA, BNI, BRI, Mandiri) dan QRIS. Pembayaran akan terverifikasi secara otomatis tanpa perlu upload bukti.
-                    </p>
-                    <button
-                      onClick={handleMidtransPayment}
-                      disabled={true} // DISABLED FOR DEV
-                      className="w-full py-4 bg-indigo-600/50 text-white rounded-xl font-bold cursor-not-allowed flex items-center justify-center gap-2"
-                    >
-                      <Loader2 className="w-5 h-5 animate-spin hidden" />
-                      <Wallet className="w-5 h-5" />
-                      <span>Bayar via Midtrans (Coming Soon)</span>
-                    </button>
+                    <div className="mt-auto">
+                      <button className={`w-full py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-2 ${activePaymentMethod === 'manual'
+                        ? 'bg-teal-600 text-white hover:bg-teal-700 shadow-lg shadow-teal-600/20'
+                        : 'bg-teal-50 text-teal-700 hover:bg-teal-100'
+                        }`}>
+                        {activePaymentMethod === 'manual' ? (
+                          <>
+                            <Check className="w-5 h-5" />
+                            <span>Metode Dipilih</span>
+                          </>
+                        ) : "Pilih Metode Ini"}
+                      </button>
+                    </div>
                   </div>
-                )}
+                </div>
               </div>
 
-              {/* OPTION 2: MANUAL TRANSFER */}
-              <div
-                className={`glass-panel p-6 rounded-[2rem] border transition-all cursor-pointer hover:border-teal-300 hover:shadow-teal-500/10 group ${activePaymentMethod === 'manual' ? 'border-teal-500 ring-4 ring-teal-500/10' : 'border-white/50'}`}
-                onClick={() => setActivePaymentMethod(prev => prev === 'manual' ? null : 'manual')}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 bg-teal-50 rounded-2xl flex items-center justify-center group-hover:bg-teal-100 transition-colors">
-                      <span className="font-black text-xl text-teal-600">2</span>
+              {/* DETAIL & UPLOAD SECTION (SHOWN BELOW GRID) */}
+              {activePaymentMethod === 'manual' && (
+                <div className="mt-8 pt-8 border-t border-ink-100 animate-in slide-in-from-bottom-4 fade-in duration-500">
+                  <div className="max-w-5xl mx-auto space-y-8">
+                    <div className="text-center mb-8">
+                      <h3 className="text-2xl font-black text-ink-900 mb-2">Instruksi Pembayaran</h3>
+                      <p className="text-ink-500">Silakan transfer sesuai nominal ke rekening di bawah ini, lalu upload bukti transfer.</p>
                     </div>
-                    <div className="text-left">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h4 className="font-bold text-ink-900 text-lg">Transfer Manual (BSI)</h4>
-                        <span className="bg-teal-100 text-teal-700 text-[10px] uppercase font-bold px-2 py-0.5 rounded">Rekomendasi</span>
-                      </div>
-                      <p className="text-sm text-ink-500 font-medium">Transfer ke Rekening Pesantren</p>
-                    </div>
-                  </div>
-                  <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all ${activePaymentMethod === 'manual' ? 'border-teal-500 bg-teal-500 text-white' : 'border-ink-200'}`}>
-                    {activePaymentMethod === 'manual' && <Check className="w-4 h-4" />}
-                  </div>
-                </div>
 
-                {/* Expanded Content */}
-                {activePaymentMethod === 'manual' && (
-                  <div className="mt-6 pt-6 border-t border-ink-100/50 animate-in slide-in-from-top-2">
-                    <div className="bg-gradient-to-br from-teal-50 to-white border border-teal-100 rounded-2xl p-6 mb-6 shadow-sm">
-                      <div className="flex justify-between items-start mb-6">
-                        <div className="flex items-center gap-3">
-                          {/* Bank Logo Placeholder if needed */}
-                          <div className="bg-white p-2 rounded-lg border border-ink-100">
-                            <Building2 className="w-6 h-6 text-teal-700" />
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                      {/* LEFT COLUMN: BANK INFO */}
+                      <div className="bg-gradient-to-br from-teal-50 to-white border border-teal-100 rounded-[2.5rem] p-8 shadow-sm relative overflow-hidden flex flex-col justify-between">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-teal-100/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+
+                        <div className="relative z-10">
+                          <div className="flex justify-between items-start mb-8">
+                            <div>
+                              <p className="text-xs font-bold text-teal-600 uppercase tracking-widest mb-2">Bank Syariah Indonesia (BSI)</p>
+                            </div>
+                            <div className="bg-white p-3 rounded-2xl shadow-sm border border-teal-100 flex items-center justify-center text-teal-600">
+                              <Building2 className="w-8 h-8" />
+                            </div>
                           </div>
-                          <div>
-                            <p className="text-xs font-bold text-ink-400 uppercase tracking-widest">Bank Tujuan</p>
-                            <h4 className="font-black text-xl text-ink-900">{BANK_INFO.nama_bank}</h4>
+
+                          <div className="mb-8">
+                            <div className="flex flex-wrap items-center gap-4 mb-2">
+                              <h4 className="font-black text-4xl sm:text-5xl text-ink-900 tracking-tight">{BANK_INFO.nomor_rekening}</h4>
+                              <CopyButton text={BANK_INFO.nomor_rekening} label="Salin" />
+                            </div>
+                            <p className="text-lg font-bold text-ink-500">a.n {BANK_INFO.atas_nama}</p>
+                          </div>
+                        </div>
+
+                        <div className="mt-auto relative z-10">
+                          <div className="flex items-start gap-4 bg-white/80 p-5 rounded-2xl border border-teal-100 backdrop-blur-sm shadow-sm">
+                            <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
+                              <AlertCircle className="w-5 h-5 text-amber-600" />
+                            </div>
+                            <p className="text-sm text-ink-600 leading-relaxed font-medium text-justify w-full">
+                              <strong>Penting:</strong> Pastikan nominal transfer tepat <strong>{formatRupiah(biayaPendaftaran)}</strong> agar proses verifikasi berjalan lancar.
+                            </p>
                           </div>
                         </div>
                       </div>
 
-                      <div className="flex flex-col sm:flex-row items-center justify-between bg-white p-5 rounded-xl border border-teal-200 mb-4 shadow-sm gap-4">
-                        <div className="text-center sm:text-left w-full">
-                          <p className="text-xs text-ink-400 mb-1">Nomor Rekening</p>
-                          <p className="font-mono text-2xl sm:text-3xl font-black text-teal-700 tracking-wider">{BANK_INFO.nomor_rekening}</p>
-                          <p className="text-xs font-bold text-ink-500 mt-1">a.n {BANK_INFO.atas_nama}</p>
+                      {/* RIGHT COLUMN: UPLOAD AREA */}
+                      <div className="bg-white rounded-[2.5rem] border-2 border-dashed border-ink-200 p-8 flex flex-col justify-center relative group hover:border-teal-300 transition-colors">
+                        <div className="text-center mb-8">
+                          <h5 className="font-bold text-ink-900 text-lg flex items-center justify-center gap-2 mb-2">
+                            <Upload className="w-5 h-5 text-teal-600" />
+                            Upload Bukti Transfer
+                          </h5>
+                          <p className="text-sm text-ink-400">Format: JPG, PNG, PDF (Maks. 5MB)</p>
                         </div>
-                        <CopyButton text={BANK_INFO.nomor_rekening} label="No. Rekening" />
-                      </div>
 
-                      <div className="flex items-start gap-3 bg-amber-50 p-3 rounded-lg border border-amber-100">
-                        <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-                        <p className="text-sm text-amber-800">
-                          <strong>Penting:</strong> Pastikan nominal transfer sesuai tagihan <strong>(Rp 200.000)</strong>
-                        </p>
-                      </div>
-                    </div>
+                        <UploadArea
+                          onUpload={handleManualUpload}
+                          isUploading={isUploading}
+                          uploadProgress={uploadProgress}
+                          currentFile={data.pembayaran?.bukti_transfer_filename ? { name: data.pembayaran.bukti_transfer_filename, path: '' } : null}
+                          isRejected={isPaymentRejected}
+                        />
 
-                    <div className="space-y-4">
-                      <h5 className="font-bold text-ink-900 flex items-center gap-2 text-lg">
-                        <Upload className="w-5 h-5 text-teal-600" />
-                        Upload Bukti Transfer
-                      </h5>
-                      <UploadArea
-                        onUpload={handleManualUpload}
-                        isUploading={isUploading}
-                        uploadProgress={uploadProgress}
-                        currentFile={data.pembayaran?.bukti_transfer_filename ? { name: data.pembayaran.bukti_transfer_filename, path: '' } : null}
-                        isRejected={isPaymentRejected}
-                      />
+
+                      </div>
                     </div>
                   </div>
-                )}
-              </div>
-
+                </div>
+              )}
             </div>
           )}
 

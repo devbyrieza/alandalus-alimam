@@ -10,15 +10,15 @@ const DOKUMEN_CONFIG: Record<string, {
   allowedTypes: string[];
   required: boolean;
 }> = {
-  kartu_keluarga: { label: "Scan Kartu Keluarga", maxSize: 2 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
-  akta_kelahiran: { label: "Scan Akte Kelahiran", maxSize: 2 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
-  rapor_sem1: { label: "Scan Rapor Semester 1 Terakhir", maxSize: 2 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
-  rapor_sem2: { label: "Scan Rapor Semester 2 Terakhir", maxSize: 2 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
-  nisn: { label: "Scan NISN", maxSize: 2 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
-  foto_setengah_badan: { label: "Foto Setengah Badan", maxSize: 2 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png"], required: true },
-  surat_kesehatan: { label: "Surat Keterangan Sehat", maxSize: 2 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
-  pakta_integritas: { label: "Scan Pakta Integritas", maxSize: 2 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
-  pernyataan_bebas_negatif: { label: "Scan Pernyataan Bebas Perilaku Negatif", maxSize: 2 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
+  kartu_keluarga: { label: "Scan Kartu Keluarga", maxSize: 5 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
+  akta_kelahiran: { label: "Scan Akte Kelahiran", maxSize: 5 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
+  rapor_sem1: { label: "Scan Rapor Semester 1 Terakhir", maxSize: 5 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
+  rapor_sem2: { label: "Scan Rapor Semester 2 Terakhir", maxSize: 5 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
+  nisn: { label: "Scan NISN", maxSize: 5 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
+  foto_setengah_badan: { label: "Foto Setengah Badan", maxSize: 5 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png"], required: true },
+  surat_kesehatan: { label: "Surat Keterangan Sehat", maxSize: 5 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
+  pakta_integritas: { label: "Scan Pakta Integritas", maxSize: 5 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
+  pernyataan_bebas_negatif: { label: "Scan Pernyataan Bebas Perilaku Negatif", maxSize: 5 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
 };
 
 function formatFileSize(bytes: number): string {
@@ -149,19 +149,21 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // UPDATE STATUS PENDAFTAR JIKA MASIH 'data_completed'
-    // Agar masuk ke dashboard admin sebagai "Menunggu Verifikasi Dokumen"
-    const currentPendaftar = await prisma.pendaftar.findUnique({
-      where: { id: session.id },
-      select: { status_pendaftaran: true }
-    });
+    // UPDATE STATUS PENDAFTAR: REMOVED AUTO UPDATE
+    // Status will be updated manually via /api/pendaftar/submit-dokumen endpoint
+    // to allow users to review multiple files before "Sending" them to admin.
 
-    if (currentPendaftar?.status_pendaftaran === 'data_completed') {
-      await prisma.pendaftar.update({
-        where: { id: session.id },
-        data: { status_pendaftaran: 'docs_uploaded' }
-      });
-    }
+    // const currentPendaftar = await prisma.pendaftar.findUnique({
+    //   where: { id: session.id },
+    //   select: { status_pendaftaran: true }
+    // });
+
+    // if (currentPendaftar?.status_pendaftaran === 'data_completed') {
+    //   await prisma.pendaftar.update({
+    //     where: { id: session.id },
+    //     data: { status_pendaftaran: 'docs_uploaded' }
+    //   });
+    // }
 
     return NextResponse.json({
       success: true,

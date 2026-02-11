@@ -11,14 +11,15 @@ import { getFileLocal } from "@/lib/storage/local";
 export async function GET(request: NextRequest, props: { params: Promise<{ path: string[] }> }) {
     try {
         const params = await props.params;
-        const { path } = params; // array of path segments
+        const { path: pathSegments } = params; // Rename for clarity
 
-        if (!path || path.length < 3) {
+        if (!pathSegments || pathSegments.length < 3) {
             return NextResponse.json({ error: "Invalid path" }, { status: 400 });
         }
 
-        const [category, ownerId, filename] = path;
-        const relativePath = path.join("/");
+        // Validate structure: category/ownerId/filename
+        const [category, ownerId] = pathSegments;
+        const relativePath = pathSegments.join("/");
 
         // 1. Auth Check
         const cookieStore = await cookies();
