@@ -14,16 +14,17 @@ async function getSession() {
 }
 
 // PATCH: Update score (Upsert)
+// PATCH: Update score (Upsert)
 export async function PATCH(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     const session = await getSession();
     if (!session) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const pendaftarId = params.id;
+    const { id: pendaftarId } = await params;
     const userId = session.user_id || session.id;
 
     try {
