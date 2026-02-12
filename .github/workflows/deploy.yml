@@ -12,14 +12,17 @@ jobs:
     steps:
     - name: Trigger Coolify Deployment
       run: |
-        # This will trigger webhook if configured in Coolify
-        curl -X POST \
-          -H "Accept: application/vnd.github.v3+json" \
-          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          https://api.github.com/repos/${{ github.repository }}/dispatches \
-          -d '{"event_type":"deploy_to_production"}'
+        if [ -z "${{ secrets.COOLIFY_WEBHOOK }}" ]; then
+          echo "❌ Error: COOLIFY_WEBHOOK secret is not set in GitHub repository."
+          echo "Please add it to: Settings -> Secrets and variables -> Actions"
+          exit 1
+        fi
+        
+        echo "🚀 Triggering Coolify deployment..."
+        curl -s -X GET "${{ secrets.COOLIFY_WEBHOOK }}"
+        echo "✅ Trigger sent successfully."
           
-    - name: Notify Deployment
+    - name: Notify Deployment Status
       run: |
-        echo "🚀 Deployment triggered for commit ${{ github.sha }}"
-        echo "📊 Changes will be live at https://pesantren-alimam.com"
+        echo "📊 Changes pushed to main. Coolify trigger sent."
+        echo "🌐 Monitor progress at: https://pesantren-alimam.com"
