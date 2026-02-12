@@ -36,7 +36,7 @@ export default function HeroSection() {
               <h1 className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-display font-bold text-ink-900 tracking-tight leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-700">
                 Pesantren <br />
                 <span className="text-brown-700 relative whitespace-nowrap">
-                  Al-Imam (v2)
+                  Al-Imam
                   <svg className="absolute w-full h-3 -bottom-1 left-0 text-brown-200 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
                     <path d="M0 5 Q 50 10 100 5 L 100 0 Q 50 5 0 0 Z" fill="currentColor" />
                   </svg>
