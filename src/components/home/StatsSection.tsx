@@ -6,25 +6,25 @@ import { Container } from "@/components/layout/Container";
 const STATS_DATA = [
   {
     icon: Calendar,
-    value: "29+",
+    value: "30+",
     label: "Tahun Mengabdi",
-    sublabel: "Sejak 1995",
+    sublabel: "Sejak 1995 (Mulai 2026 dikelola Al-Andalus)",
   },
   {
     icon: Users,
-    value: "500+",
+    value: "70+",
     label: "Santri Aktif",
     sublabel: "Putra & Putri",
   },
   {
     icon: Award,
-    value: "A",
-    label: "Akreditasi",
-    sublabel: "MTs & MA",
+    value: "Resmi",
+    label: "Standard Nasional",
+    sublabel: "Kemendikdasmen RI (B)",
   },
   {
     icon: GraduationCap,
-    value: "50+",
+    value: "20+",
     label: "Tenaga Pendidik",
     sublabel: "Berpengalaman",
   },

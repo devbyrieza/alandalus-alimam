@@ -74,9 +74,15 @@ export default function FeaturesSection() {
           <div className="lg:w-1/2 relative">
             <div className="relative z-10 grid grid-cols-2 gap-4">
               <div className="space-y-4 mt-8">
-                <div className="bg-white p-6 rounded-3xl shadow-clay-md h-48 flex flex-col justify-end items-start border-l-4 border-l-brown-500">
-                  <p className="text-4xl font-black text-ink-900 mb-1">29+</p>
-                  <p className="text-sm font-bold text-ink-500">Tahun Pengalaman</p>
+                <div className="bg-white p-6 rounded-3xl shadow-clay-md h-48 flex flex-col justify-end items-start border-l-4 border-l-brown-500 group">
+                  <p className="text-4xl font-black text-ink-900 mb-1">30+</p>
+                  <div className="space-y-1">
+                    <p className="text-sm font-bold text-ink-500">Tahun Mengabdi</p>
+                    <p className="text-[11px] leading-tight text-ink-400 italic">
+                      Sejak 1995 <br />
+                      <span className="text-brown-600 font-medium">(Mulai 2026 dikelola oleh Al-Andalus)</span>
+                    </p>
+                  </div>
                 </div>
                 <div className="bg-brown-800 p-6 rounded-3xl shadow-clay-lg h-64 flex flex-col justify-center items-center text-center relative overflow-hidden group">
                   <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-10 mix-blend-overlay" />
@@ -92,8 +98,13 @@ export default function FeaturesSection() {
                   <p className="font-bold text-ink-900">Lingkungan<br />Islami</p>
                 </div>
                 <div className="bg-gold-500 p-6 rounded-3xl shadow-clay-md h-48 flex flex-col justify-end items-start">
-                  <p className="text-4xl font-black mb-1 text-brown-900">A</p>
-                  <p className="text-sm font-bold text-brown-800">Terakreditasi BAN-SM</p>
+                  <p className="text-3xl font-black mb-1 text-brown-900">NASIONAL</p>
+                  <div className="space-y-0.5">
+                    <p className="text-sm font-bold text-brown-800">Terakreditasi Resmi</p>
+                    <p className="text-[10px] text-brown-900/60 font-medium leading-tight">
+                      Kemendikdasmen RI (B)
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

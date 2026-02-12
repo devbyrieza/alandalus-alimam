@@ -100,7 +100,7 @@ export default function TestimonialsSection() {
           <div className="absolute -top-20 -right-20 w-80 h-80 bg-brown-600/30 rounded-full blur-3xl" />
 
           <div className="relative z-10 max-w-2xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Bergabunglah dengan 500+ Keluarga Lainnya</h3>
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Bergabunglah dengan 70+ Keluarga Lainnya</h3>
             <p className="text-brown-100 mb-8 leading-relaxed">
               Berikan pendidikan terbaik dunia akhirat untuk putra-putri tercinta. Pendaftaran tahun ajaran 2026/2027 telah dibuka.
             </p>

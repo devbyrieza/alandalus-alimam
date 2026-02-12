@@ -14,11 +14,13 @@ const PROGRAMS = [
     {
         title: "MTs",
         subtitle: "Madrasah Tsanawiyah (Setara SMP)",
-        desc: "Program pendidikan 3 tahun dengan kurikulum terpadu (Umum & Kepesantrenan). Fokus pada tahfidz dan dasar ilmu syar'i.",
+        desc: "Program pendidikan 3 tahun dengan kurikulum terpadu Kemendikdasmen dan khas Al-Andalus. Fokus pada pondasi adab, tahfidz, dan dasar ilmu syar'i.",
         features: [
-            "Target Hafalan Min. 3 Juz/Tahun",
-            "Bahasa Arab Harian",
-            "Kurikulum Terpadu (Kemenag+Pesantren)",
+            "Target Hafalan 12 Juz",
+            "Kurikulum Kemendikdasmen & Al-Andalus",
+            "Bahasa Arab Harian & Kitab Turats",
+            "TICE & Karakter Entrepreneur",
+            "Sanad Al-Qur'an Bersambung",
             "Ekstrakurikuler Pilihan"
         ],
         quota: "25 Kursi",
@@ -28,12 +30,14 @@ const PROGRAMS = [
     {
         title: "IL",
         subtitle: "I'dad Lughowi (Setara SMA)",
-        desc: "Program 4 tahun (1 tahun intensif bahasa + 3 tahun MA) untuk mencetak kader ulama. Fokus pada penguasaan kitab kuning dan bahasa Arab mendalam.",
+        desc: "Program 4 tahun (intensif bahasa + MA) untuk mencetak kader ulama dan intelektual muslim. Fokus pada penguasaan kitab kuning, bahasa Arab mendalam, dan persiapan studi lanjut.",
         features: [
-            "Target Hafalan 3 - 30 Juz",
-            "Kajian Kitab Turats & TICE",
+            "Target Hafalan 16 Juz",
+            "Kurikulum Kemendikdasmen & Al-Andalus",
+            "Bahasa Arab Harian & Kitab Turats",
+            "Persiapan Kuliah PTN & Timur Tengah",
             "Sanad Al-Qur'an Bersambung",
-            "Persiapan Kuliah Timur Tengah"
+            "TICE & Wawasan Global"
         ],
         quota: "25 Kursi",
         color: "gold",

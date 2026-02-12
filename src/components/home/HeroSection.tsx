@@ -28,7 +28,7 @@ export default function HeroSection() {
             {/* Accented Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brown-50 border border-brown-100/50 text-brown-700 text-xs font-bold uppercase tracking-widest animate-in fade-in slide-in-from-bottom-4 mb-2 mx-auto lg:mx-0 w-fit">
               <School className="w-3.5 h-3.5" />
-              <span>Terakreditasi A • Sejak 1995</span>
+              <span>Terakreditasi Nasional • Sejak 1995</span>
             </div>
 
             {/* Title */}

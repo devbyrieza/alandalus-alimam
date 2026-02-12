@@ -2,122 +2,101 @@
 
 import Link from "next/link";
 import {
-  GraduationCap,
-  BookOpen,
   CheckCircle,
-  ArrowRight,
-  School
+  Target,
+  Rocket
 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 
-const BENEFITS = [
-  "Kurikulum terpadu Rabbani, Cendekia, dan Mandiri",
-  "Terakreditasi A (BAN SM) Standar Nasional",
-  "Kerjasama Universitas Islam di 3 Benua",
-  "Pengajar Alumni Timur Tengah & LIPIA",
-  "Fasilitas Asrama & Kelas Modern",
-  "Biaya Terjangkau dengan Beasiswa",
-] as const;
-
 export default function AboutSection() {
   return (
-    <section id="about" className="py-12 md:py-16 bg-surface-50">
+    <section id="about" className="py-12 md:py-24 bg-surface-50">
       <Container>
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-6xl mx-auto">
 
-          {/* Left - Vision Card (Wablas Style) */}
-          <div className="order-2 lg:order-1 relative">
-            <div className="card-wablas bg-white p-8 md:p-10 relative z-10 rotate-1 hover:rotate-0 transition-transform duration-500">
-              <div className="w-16 h-16 rounded-2xl bg-brown-50 flex items-center justify-center mb-6 shadow-sm">
-                <div className="w-10 h-10 bg-brown-700 rounded-xl flex items-center justify-center text-white">
-                  <School className="w-5 h-5" />
-                </div>
-              </div>
-
-              <h3 className="text-2xl font-bold text-ink-900 mb-4 tracking-tight">
-                Visi & Misi Kami
-              </h3>
-              <div className="space-y-4">
-                <div>
-                  <h4 className="text-xs font-black text-brown-600 uppercase tracking-widest mb-1">Visi Kami</h4>
-                  <p className="text-ink-900 leading-relaxed font-bold text-lg">
-                    Kaderisasi Ummat Rabbani Cendekia Mandiri
-                  </p>
-                </div>
-                <div>
-                  <h4 className="text-xs font-black text-brown-600 uppercase tracking-widest mb-1">Misi Kami</h4>
-                  <ul className="text-ink-500 leading-relaxed space-y-2 text-sm">
-                    <li className="flex gap-2">
-                      <span className="text-brown-500 font-bold">•</span>
-                      <span>Menyelenggarakan pendidikan Berbasis TICE (Tahfidz, Islamic Curriculum, dan Enterpreneurship)</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="text-brown-500 font-bold">•</span>
-                      <span>Mencetak Hamalatul Qur'an dengan bekal ilmu syar'i yang mumpuni</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="text-brown-500 font-bold">•</span>
-                      <span>Menanamkan jiwa Entrepreneurship Muslim yang berwawasan Global</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4 pt-6 border-t border-surface-100">
-                <div className="flex-1">
-                  <p className="text-xs font-bold text-ink-400 uppercase tracking-wider mb-1">Managed By</p>
-                  <p className="text-base font-bold text-brown-900">Yayasan Al-Imam Al-Islami</p>
-                </div>
-                <Link href="/tentang" className="btn-secondary px-6 py-2 text-sm border-surface-200">
-                  Profil
-                </Link>
-              </div>
-            </div>
-
-            {/* Decorative BG */}
-            <div className="absolute top-4 -right-4 w-full h-full bg-brown-100/50 rounded-3xl -z-0" />
-          </div>
-
-          {/* Right - Benefits List */}
-          <div className="order-1 lg:order-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 text-teal-700 text-xs font-bold uppercase tracking-widest mb-4">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brown-50 text-brown-700 text-xs font-bold uppercase tracking-widest mb-4">
               <CheckCircle className="w-3.5 h-3.5" />
-              <span>Kenapa Memilih Kami?</span>
+              <span>Profil Pesantren</span>
             </div>
 
             <h2 className="text-3xl md:text-5xl font-bold text-ink-900 mb-6 tracking-tight">
               Pendidikan Terbaik untuk <span className="text-gradient-brown">Buah Hati Anda</span>
             </h2>
 
-            <p className="text-lg text-ink-500 mb-10 leading-relaxed text-justify">
+            <p className="text-lg text-ink-500 max-w-2xl mx-auto leading-relaxed">
               Kami menggabungkan nilai-nilai Salafush Shalih dengan metodologi pengajaran modern untuk mencetak santri yang siap menghadapi tantangan zaman.
             </p>
+          </div>
 
-            <div className="space-y-4 mb-10">
-              {BENEFITS.map((benefit, idx) => (
-                <div key={idx} className="flex items-start gap-4 group">
-                  <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
+          <div className="grid md:grid-cols-2 gap-8 mb-16">
+            {/* Card Visi */}
+            <div className="relative group">
+              <div className="card-wablas bg-white p-8 md:p-10 relative z-10 h-full flex flex-col hover:shadow-clay-lg transition-all duration-500 border border-surface-100">
+                <div className="w-14 h-14 rounded-2xl bg-brown-50 flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                  <div className="w-9 h-9 bg-brown-700 rounded-xl flex items-center justify-center text-white">
+                    <Target className="w-5 h-5" />
                   </div>
-                  <span className="text-base text-ink-700 font-medium group-hover:text-ink-900 transition-colors">
-                    {benefit}
-                  </span>
                 </div>
-              ))}
+
+                <h3 className="text-2xl font-bold text-ink-900 mb-2 tracking-tight">Visi Kami</h3>
+                <p className="text-xs font-black text-brown-600 uppercase tracking-widest mb-6">Kaderisasi Ummat</p>
+
+                <div className="flex-1">
+                  <p className="text-ink-900 leading-relaxed font-bold text-xl italic border-l-4 border-brown-500 pl-4 py-3 bg-brown-50/30 rounded-r-xl">
+                    "Kaderisasi Ummat Rabbani Cendekia Mandiri"
+                  </p>
+                </div>
+              </div>
+              <div className="absolute top-4 -right-2 w-full h-full bg-brown-100/20 rounded-3xl -z-0" />
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/tentang" className="btn-primary">
-                Pelajari Lebih Lanjut
-              </Link>
-              <Link href="/program" className="btn-secondary">
-                Lihat Kurikulum
-              </Link>
+            {/* Card Misi */}
+            <div className="relative group">
+              <div className="card-wablas bg-white p-8 md:p-10 relative z-10 h-full flex flex-col hover:shadow-clay-lg transition-all duration-500 border border-surface-100">
+                <div className="w-14 h-14 rounded-2xl bg-teal-50 flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                  <div className="w-9 h-9 bg-teal-700 rounded-xl flex items-center justify-center text-white">
+                    <Rocket className="w-5 h-5" />
+                  </div>
+                </div>
+
+                <h3 className="text-2xl font-bold text-ink-900 mb-2 tracking-tight">Misi Kami</h3>
+                <p className="text-xs font-black text-teal-600 uppercase tracking-widest mb-6">Langkah Strategis</p>
+
+                <ul className="text-ink-700 leading-relaxed space-y-4 text-base flex-1">
+                  <li className="flex gap-3">
+                    <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-teal-500 shrink-0" />
+                    <span className="text-justify">Menyelenggarakan pendidikan Berbasis <strong>TICE</strong> (Tahfidz, Islamic Curriculum, dan Enterpreneurship)</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-teal-500 shrink-0" />
+                    <span className="text-justify">Mencetak <strong>Hamalatul Qur'an</strong> dengan bekal ilmu syar'i yang mumpuni</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-teal-500 shrink-0" />
+                    <span className="text-justify">Menanamkan jiwa <strong>Entrepreneurship Muslim</strong> yang berwawasan Global</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="absolute top-4 -right-2 w-full h-full bg-teal-100/20 rounded-3xl -z-0" />
             </div>
           </div>
 
+          <div className="flex flex-col items-center gap-6 pt-10 border-t border-surface-200">
+            <div className="text-center">
+              <p className="text-xs font-bold text-ink-400 uppercase tracking-wider mb-2">Managed By</p>
+              <p className="text-xl font-black text-brown-900">Al-Andalus</p>
+            </div>
+            <div className="flex justify-center">
+              <Link href="/tentang" className="btn-primary px-10 py-3 text-sm shadow-clay-sm">
+                Profil Lengkap
+              </Link>
+            </div>
+          </div>
         </div>
       </Container>
     </section>
   );
 }
+
+
