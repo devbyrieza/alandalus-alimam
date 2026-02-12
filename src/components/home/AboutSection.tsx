@@ -77,19 +77,19 @@ export default function AboutSection() {
                     <div className="mt-2 w-5 h-5 rounded-full bg-teal-50 flex items-center justify-center shrink-0 border border-teal-100 group-hover:bg-teal-100 transition-colors">
                       <div className="w-2 h-2 rounded-full bg-teal-600" />
                     </div>
-                    <span className="text-left font-medium leading-relaxed">Menyelenggarakan pendidikan Berbasis <span className="text-teal-700 font-bold">TICE</span> (Tahfidz, Islamic Curriculum, dan Enterpreneurship)</span>
+                    <span className="text-justify font-medium leading-relaxed">Menyelenggarakan pendidikan Berbasis <span className="text-teal-700 font-bold">TICE</span> (Tahfidz, Islamic Curriculum, dan Enterpreneurship)</span>
                   </li>
                   <li className="flex gap-4 items-start">
                     <div className="mt-2 w-5 h-5 rounded-full bg-teal-50 flex items-center justify-center shrink-0 border border-teal-100 group-hover:bg-teal-100 transition-colors">
                       <div className="w-2 h-2 rounded-full bg-teal-600" />
                     </div>
-                    <span className="text-left font-medium leading-relaxed">Mencetak <span className="text-teal-700 font-bold">Hamalatul Qur'an</span> dengan bekal ilmu syar'i yang mumpuni</span>
+                    <span className="text-justify font-medium leading-relaxed">Mencetak <span className="text-teal-700 font-bold">Hamalatul Qur'an</span> dengan bekal ilmu syar'i yang mumpuni</span>
                   </li>
                   <li className="flex gap-4 items-start">
                     <div className="mt-2 w-5 h-5 rounded-full bg-teal-50 flex items-center justify-center shrink-0 border border-teal-100 group-hover:bg-teal-100 transition-colors">
                       <div className="w-2 h-2 rounded-full bg-teal-600" />
                     </div>
-                    <span className="text-left font-medium leading-relaxed">Menanamkan jiwa <span className="text-teal-700 font-bold">Entrepreneurship Muslim</span> yang berwawasan Global</span>
+                    <span className="text-justify font-medium leading-relaxed">Menanamkan jiwa <span className="text-teal-700 font-bold">Entrepreneurship Muslim</span> yang berwawasan Global</span>
                   </li>
                 </ul>
               </div>
