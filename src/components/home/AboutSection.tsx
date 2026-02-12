@@ -32,53 +32,68 @@ export default function AboutSection() {
           <div className="grid md:grid-cols-2 gap-8 mb-16">
             {/* Card Visi */}
             <div className="relative group">
-              <div className="card-wablas bg-white p-8 md:p-10 relative z-10 h-full flex flex-col hover:shadow-clay-lg transition-all duration-500 border border-surface-100">
-                <div className="w-14 h-14 rounded-2xl bg-brown-50 flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform">
-                  <div className="w-9 h-9 bg-brown-700 rounded-xl flex items-center justify-center text-white">
+              <div className="card-wablas bg-white p-8 md:p-10 relative z-10 h-full flex flex-col hover:shadow-clay-lg transition-all duration-500 border border-surface-100 overflow-hidden">
+                {/* Decorative Background Pattern */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-brown-50 rounded-full blur-3xl -mr-16 -mt-16 opacity-50 group-hover:bg-brown-100 transition-colors duration-500" />
+
+                <div className="w-14 h-14 rounded-2xl bg-brown-50 flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform duration-500">
+                  <div className="w-9 h-9 bg-brown-700 rounded-xl flex items-center justify-center text-white shadow-md shadow-brown-200">
                     <Target className="w-5 h-5" />
                   </div>
                 </div>
 
                 <h3 className="text-2xl font-bold text-ink-900 mb-2 tracking-tight">Visi Kami</h3>
-                <p className="text-xs font-black text-brown-600 uppercase tracking-widest mb-6">Kaderisasi Ummat</p>
+                <p className="text-[10px] font-extrabold text-brown-600 uppercase tracking-widest mb-6 bg-brown-50 w-fit px-2 py-0.5 rounded-md">Kaderisasi Ummat</p>
 
                 <div className="flex-1">
-                  <p className="text-ink-900 leading-relaxed font-bold text-xl italic border-l-4 border-brown-500 pl-4 py-3 bg-brown-50/30 rounded-r-xl">
-                    "Kaderisasi Ummat Rabbani Cendekia Mandiri"
-                  </p>
+                  <div className="relative">
+                    <p className="text-ink-900 leading-relaxed font-black text-2xl md:text-3xl italic border-l-4 border-brown-500 pl-6 py-4 bg-gradient-to-r from-brown-50/50 to-transparent rounded-r-2xl">
+                      "Kaderisasi Ummat Rabbani Cendekia Mandiri"
+                    </p>
+                    <div className="absolute -left-1 top-0 bottom-0 w-1 bg-brown-200 rounded-full" />
+                  </div>
                 </div>
               </div>
-              <div className="absolute top-4 -right-2 w-full h-full bg-brown-100/20 rounded-3xl -z-0" />
+              <div className="absolute top-4 -right-2 w-full h-full bg-brown-100/10 rounded-3xl -z-0 group-hover:bg-brown-100/20 transition-colors duration-500" />
             </div>
 
             {/* Card Misi */}
             <div className="relative group">
-              <div className="card-wablas bg-white p-8 md:p-10 relative z-10 h-full flex flex-col hover:shadow-clay-lg transition-all duration-500 border border-surface-100">
-                <div className="w-14 h-14 rounded-2xl bg-teal-50 flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform">
-                  <div className="w-9 h-9 bg-teal-700 rounded-xl flex items-center justify-center text-white">
+              <div className="card-wablas bg-white p-8 md:p-10 relative z-10 h-full flex flex-col hover:shadow-clay-lg transition-all duration-500 border border-surface-100 overflow-hidden">
+                {/* Decorative Background Pattern */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-teal-50 rounded-full blur-3xl -mr-16 -mt-16 opacity-50 group-hover:bg-teal-100 transition-colors duration-500" />
+
+                <div className="w-14 h-14 rounded-2xl bg-teal-50 flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform duration-500">
+                  <div className="w-9 h-9 bg-teal-700 rounded-xl flex items-center justify-center text-white shadow-md shadow-teal-200">
                     <Rocket className="w-5 h-5" />
                   </div>
                 </div>
 
                 <h3 className="text-2xl font-bold text-ink-900 mb-2 tracking-tight">Misi Kami</h3>
-                <p className="text-xs font-black text-teal-600 uppercase tracking-widest mb-6">Langkah Strategis</p>
+                <p className="text-[10px] font-extrabold text-teal-600 uppercase tracking-widest mb-6 bg-teal-50 w-fit px-2 py-0.5 rounded-md">Langkah Strategis</p>
 
-                <ul className="text-ink-700 leading-relaxed space-y-4 text-base flex-1">
-                  <li className="flex gap-3">
-                    <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-teal-500 shrink-0" />
-                    <span className="text-justify">Menyelenggarakan pendidikan Berbasis <strong>TICE</strong> (Tahfidz, Islamic Curriculum, dan Enterpreneurship)</span>
+                <ul className="text-ink-700 leading-loose space-y-5 text-base flex-1">
+                  <li className="flex gap-4 items-start">
+                    <div className="mt-2 w-5 h-5 rounded-full bg-teal-50 flex items-center justify-center shrink-0 border border-teal-100 group-hover:bg-teal-100 transition-colors">
+                      <div className="w-2 h-2 rounded-full bg-teal-600" />
+                    </div>
+                    <span className="text-left font-medium leading-relaxed">Menyelenggarakan pendidikan Berbasis <span className="text-teal-700 font-bold">TICE</span> (Tahfidz, Islamic Curriculum, dan Enterpreneurship)</span>
                   </li>
-                  <li className="flex gap-3">
-                    <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-teal-500 shrink-0" />
-                    <span className="text-justify">Mencetak <strong>Hamalatul Qur'an</strong> dengan bekal ilmu syar'i yang mumpuni</span>
+                  <li className="flex gap-4 items-start">
+                    <div className="mt-2 w-5 h-5 rounded-full bg-teal-50 flex items-center justify-center shrink-0 border border-teal-100 group-hover:bg-teal-100 transition-colors">
+                      <div className="w-2 h-2 rounded-full bg-teal-600" />
+                    </div>
+                    <span className="text-left font-medium leading-relaxed">Mencetak <span className="text-teal-700 font-bold">Hamalatul Qur'an</span> dengan bekal ilmu syar'i yang mumpuni</span>
                   </li>
-                  <li className="flex gap-3">
-                    <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-teal-500 shrink-0" />
-                    <span className="text-justify">Menanamkan jiwa <strong>Entrepreneurship Muslim</strong> yang berwawasan Global</span>
+                  <li className="flex gap-4 items-start">
+                    <div className="mt-2 w-5 h-5 rounded-full bg-teal-50 flex items-center justify-center shrink-0 border border-teal-100 group-hover:bg-teal-100 transition-colors">
+                      <div className="w-2 h-2 rounded-full bg-teal-600" />
+                    </div>
+                    <span className="text-left font-medium leading-relaxed">Menanamkan jiwa <span className="text-teal-700 font-bold">Entrepreneurship Muslim</span> yang berwawasan Global</span>
                   </li>
                 </ul>
               </div>
-              <div className="absolute top-4 -right-2 w-full h-full bg-teal-100/20 rounded-3xl -z-0" />
+              <div className="absolute top-4 -right-2 w-full h-full bg-teal-100/10 rounded-3xl -z-0 group-hover:bg-teal-100/20 transition-colors duration-500" />
             </div>
           </div>
 
