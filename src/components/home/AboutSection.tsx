@@ -37,11 +37,31 @@ export default function AboutSection() {
               <h3 className="text-2xl font-bold text-ink-900 mb-4 tracking-tight">
                 Visi & Misi Kami
               </h3>
-              <p className="text-ink-500 leading-relaxed mb-8 text-lg text-justify">
-                "Menjadi lembaga pendidikan Islam terkemuka yang menghasilkan
-                generasi Qur'ani, berakhlak mulia, berilmu luas, dan bermanfaat
-                bagi umat."
-              </p>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-xs font-black text-brown-600 uppercase tracking-widest mb-1">Visi Kami</h4>
+                  <p className="text-ink-900 leading-relaxed font-bold text-lg">
+                    Kaderisasi Ummat Rabbani Cendekia Mandiri
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-xs font-black text-brown-600 uppercase tracking-widest mb-1">Misi Kami</h4>
+                  <ul className="text-ink-500 leading-relaxed space-y-2 text-sm">
+                    <li className="flex gap-2">
+                      <span className="text-brown-500 font-bold">•</span>
+                      <span>Menyelenggarakan pendidikan Berbasis TICE (Tahfidz, Islamic Curriculum, dan Enterpreneurship)</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="text-brown-500 font-bold">•</span>
+                      <span>Mencetak Hamlatul Qur'an dengan bekal ilmu syar'i yang mumpuni</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="text-brown-500 font-bold">•</span>
+                      <span>Menanamkan jiwa Entrepreneurship Muslim yang berwawasan Global</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
 
               <div className="flex items-center gap-4 pt-6 border-t border-surface-100">
                 <div className="flex-1">
