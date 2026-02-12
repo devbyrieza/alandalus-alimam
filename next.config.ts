@@ -1,27 +1,20 @@
 import type { NextConfig } from "next";
 
-// Auto-deployment optimized configuration
 const nextConfig: NextConfig = {
   output: "standalone",
-  generateBuildId: async () => {
-    // Only generate new build ID if there are actual changes
-    if (process.env.NODE_ENV === 'production') {
-      return `build-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`
-    }
-    return 'dev'
-  },
-  // Expose environment variables to the runtime
-  // Expose environment variables to the runtime
-  env: {
-    // DATABASE_URL should NOT be here to avoid build-time inlining
-  },
+
+  // Hapus generateBuildId yang menggunakan random
+  // Biarkan Next.js handle build ID secara otomatis
+
   // Optimize for faster builds
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
+
   experimental: {
     optimizePackageImports: ['lucide-react', '@headlessui/react'],
   },
+
   // Cache optimization
   onDemandEntries: {
     maxInactiveAge: 25 * 1000,
