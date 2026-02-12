@@ -26,11 +26,11 @@ export default function HomePage() {
         </ScrollAnimation>
 
         <ScrollAnimation delay={0.1}>
-          <ProgramSection />
+          <FeaturesSection />
         </ScrollAnimation>
 
         <ScrollAnimation delay={0.1}>
-          <FeaturesSection />
+          <ProgramSection />
         </ScrollAnimation>
 
         <ScrollAnimation delay={0.1}>
