@@ -1,29 +1,34 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, Award, Users, BookOpenCheck, ArrowRight, ShieldCheck } from "lucide-react";
+import { BookOpen, Award, Users, BookOpenCheck, ArrowRight, ShieldCheck, Zap } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 
 const FEATURES = [
   {
     icon: BookOpen,
-    title: "Manhaj Salaf",
-    description: "Pendidikan berbasis pemahaman para Salafush Shalih, menanamkan aqidah yang lurus dan akhlak mulia.",
+    title: "Kitab Turots & Bahasa Arab",
+    description: "Pendidikan Islam berbasis Kitab Turots dengan Bahasa Arab sebagai bahasa pengantar pembelajaran harian.",
   },
   {
-    icon: Award,
-    title: "Kurikulum Terpadu",
-    description: "Memadukan Kurikulum Nasional, Diniyah (Pesantren), dan Tahfidz Al-Qur'an secara seimbang.",
+    icon: Zap,
+    title: "Aktif & Inovatif",
+    description: "Pembelajaran yang aktif, inovatif, kreatif, dan menyenangkan untuk mengoptimalkan potensi setiap santri.",
   },
   {
     icon: Users,
-    title: "Jaringan Alumni Luas",
-    description: "Akses informasi kuliah ke Timur Tengah (Al-Azhar, UIM, Yaman) dan Perguruan Tinggi Negeri.",
+    title: "Guru Kompeten & Ahli",
+    description: "Dibimbing oleh tenaga pengajar yang kompeten, ahli di bidangnya, dan merupakan lulusan universitas ternama.",
   },
   {
     icon: ShieldCheck,
-    title: "Lingkungan Edukatif",
-    description: "Kawasan pesantren yang asri, aman, dan kondusif, jauh dari hiruk-pikuk perkotaan.",
+    title: "Karakter & Ibadah",
+    description: "Pembiasaan ibadah dan penanaman karakter Islami yang kuat berbasis kesadaran diri dan ketaqwaan.",
+  },
+  {
+    icon: Award,
+    title: "Fasilitas Memadai",
+    description: "Didukung dengan fasilitas yang lengkap dan memadai untuk menunjang seluruh aktivitas pendidikan.",
   },
 ] as const;
 
