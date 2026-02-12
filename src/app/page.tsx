@@ -3,8 +3,11 @@ import HeroSection from "@/components/home/HeroSection";
 import StatsSection from "@/components/home/StatsSection";
 import ScrollAnimation from "@/components/ui/ScrollAnimation";
 import AboutSection from "@/components/home/AboutSection";
+import BoardSection from "@/components/home/BoardSection";
 import ProgramSection from "@/components/home/ProgramSection";
 import FeaturesSection from "@/components/home/FeaturesSection";
+import FacilitiesSection from "@/components/home/FacilitiesSection";
+import ExtraSection from "@/components/home/ExtraSection";
 import GallerySection from "@/components/home/GallerySection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import CalendarSection from "@/components/home/CalendarSection";
@@ -26,6 +29,10 @@ export default function HomePage() {
         </ScrollAnimation>
 
         <ScrollAnimation delay={0.1}>
+          <BoardSection />
+        </ScrollAnimation>
+
+        <ScrollAnimation delay={0.1}>
           <ProgramSection />
         </ScrollAnimation>
 
@@ -34,7 +41,15 @@ export default function HomePage() {
         </ScrollAnimation>
 
         <ScrollAnimation delay={0.1}>
+          <FacilitiesSection />
+        </ScrollAnimation>
+
+        <ScrollAnimation delay={0.1}>
           <GallerySection />
+        </ScrollAnimation>
+
+        <ScrollAnimation delay={0.1}>
+          <ExtraSection />
         </ScrollAnimation>
 
         <ScrollAnimation delay={0.1}>

@@ -35,7 +35,7 @@ const PROGRAMS = [
             "Target Hafalan 16 Juz",
             "Kurikulum Kemendikdasmen & Al-Andalus",
             "Bahasa Arab Harian & Kitab Turats",
-            "Persiapan Kuliah PTN & Timur Tengah",
+            "Orientasi: PT Luar Negeri (Timur Tengah) & PTN Favorit (Nasional)",
             "Sanad Al-Qur'an Bersambung",
             "TICE & Wawasan Global"
         ],
