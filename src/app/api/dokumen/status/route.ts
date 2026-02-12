@@ -90,11 +90,18 @@ export async function GET(request: NextRequest) {
       (d) => d.status === "verified"
     ).length;
 
-    // 5. Return data
+    // 5. Get Pendaftar Status
+    const pendaftar = await prisma.pendaftar.findUnique({
+      where: { id: session.id },
+      select: { status_pendaftaran: true }
+    });
+
+    // 6. Return data
     return NextResponse.json({
       success: true,
       data: {
         dokumen: dokumenStatus,
+        pendaftar_status: pendaftar?.status_pendaftaran || 'draft',
         summary: {
           total: JENIS_DOKUMEN.length,
           uploaded: dokumenList.length || 0,

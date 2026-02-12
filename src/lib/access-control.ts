@@ -165,7 +165,7 @@ export function getNextStep(currentStatus: StatusProses): {
     'verified': { status: 'data_completed', action: 'Isi formulir data lengkap', href: '/dashboard/pendaftar/kelengkapan-berkas' },
     'paid': { status: 'data_completed', action: 'Isi formulir data lengkap', href: '/dashboard/pendaftar/kelengkapan-berkas' },
     'data_completed': { status: 'docs_uploaded', action: 'Upload dokumen persyaratan', href: '/dashboard/pendaftar/upload-berkas' },
-    'docs_uploaded': { status: 'docs_verified', action: 'Tunggu verifikasi dokumen', href: '/dashboard/pendaftar/status' },
+    'docs_uploaded': { status: 'docs_verified', action: 'Tunggu verifikasi dokumen', href: '/dashboard/pendaftar/upload-berkas' },
     'docs_verified': { status: 'scheduled', action: 'Tunggu jadwal seleksi', href: '/dashboard/pendaftar/pengumuman' },
     'scheduled': { status: 'tested', action: 'Ikuti ujian seleksi', href: '/dashboard/pendaftar/pengumuman' },
     'tested': { status: 'announced', action: 'Tunggu pengumuman hasil', href: '/dashboard/pendaftar/pengumuman' },
@@ -186,7 +186,7 @@ export function formatStatusDisplay(status: StatusProses): { label: string; colo
     'paid': { label: 'Pembayaran Lunas', color: 'bg-blue-100 text-blue-700' },
     'rejected': { label: 'Pembayaran Ditolak', color: 'bg-red-100 text-red-700' },
     'data_completed': { label: 'Data Lengkap', color: 'bg-teal-100 text-teal-700' },
-    'docs_uploaded': { label: 'Dokumen Diupload', color: 'bg-indigo-100 text-indigo-700' },
+    'docs_uploaded': { label: 'Dokumen Berhasil Diupload', color: 'bg-indigo-100 text-indigo-700' },
     'docs_verified': { label: 'Dokumen Terverifikasi', color: 'bg-green-100 text-green-700' },
     'scheduled': { label: 'Terjadwal Ujian', color: 'bg-purple-100 text-purple-700' },
     'tested': { label: 'Sudah Ujian', color: 'bg-violet-100 text-violet-700' },
@@ -352,10 +352,9 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
   const baseMenuItems = {
     admin_berkas: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
-      { name: 'Daftar Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
+      { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
       { name: 'Permintaan Edit', href: '/dashboard/admin/perubahan-data', icon: 'Edit3' },
       { name: 'Verifikasi Dokumen', href: '/dashboard/admin/verifikasi-dokumen', icon: 'FileCheck' },
-      { name: 'Cek Data Pendaftar', href: '/dashboard/admin/pendaftar?filter=belum_upload_dokumen', icon: 'FileText' },
     ],
     admin_keuangan: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
@@ -387,9 +386,8 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
     ],
     admin: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
-      { name: 'Daftar Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
+      { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
       { name: 'Verifikasi Pembayaran', href: '/dashboard/admin/verifikasi-pembayaran', icon: 'CreditCard' },
-      { name: 'Cek Data Pendaftar', href: '/dashboard/admin/pendaftar?filter=belum_upload_dokumen', icon: 'FileText' },
       { name: 'Verifikasi Dokumen', href: '/dashboard/admin/verifikasi-dokumen', icon: 'FileCheck' },
       { name: 'Jadwal Ujian', href: '/dashboard/admin/jadwal-ujian', icon: 'Calendar' },
       { name: 'Pengumuman', href: '/dashboard/admin/pengumuman', icon: 'Trophy' },

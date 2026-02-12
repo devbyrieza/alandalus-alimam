@@ -45,7 +45,8 @@ export async function GET(request: NextRequest) {
       },
       select: {
         file_path: true,
-        file_type: true
+        file_type: true,
+        updated_at: true // Select updated_at for cache busting
       }
     });
 
@@ -59,7 +60,8 @@ export async function GET(request: NextRequest) {
     // 4. Generate URL pointing to our local file serving API
     // file_path stored in DB is relative: "dokumen-pendaftaran/USER_ID/filename.pdf"
     // Our API route: /api/files/dokumen-pendaftaran/USER_ID/filename.pdf
-    const fileUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/files/${dokumen.file_path}`;
+    const timestamp = dokumen.updated_at ? new Date(dokumen.updated_at).getTime() : Date.now();
+    const fileUrl = `/api/files/${dokumen.file_path}?t=${timestamp}`;
 
     // 5. Return URL
     return NextResponse.json({

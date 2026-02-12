@@ -56,7 +56,7 @@ export default function AdminSidebar({ children, userRole, adminName }: AdminSid
     const menuItems = rawMenuItems.map(item => ({
         ...item,
         icon: ICON_MAP[item.icon] || LayoutDashboard, // Fallback icon
-        active: pathname === item.href || (item.name === "Cek Data Pendaftar" && pathname.includes("filter=belum_upload_dokumen"))
+        active: pathname === item.href
     }));
 
     const NavLink = ({ item }: { item: (typeof menuItems)[0] }) => {

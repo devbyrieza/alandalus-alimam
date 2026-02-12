@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import Swal from "sweetalert2";
 import {
   Upload,
   FileText,
@@ -17,6 +18,8 @@ import {
   FileCheck,
   Loader2,
   Send,
+  Lock,
+  ShieldCheck,
 } from "lucide-react";
 
 // ============================================
@@ -98,7 +101,7 @@ function getStatusLabel(status: DokumenStatus) {
     case "verified":
       return "Terverifikasi";
     case "uploaded":
-      return "Menunggu Verifikasi";
+      return "Berhasil Diupload";
     case "rejected":
       return "Ditolak";
     default:
@@ -117,6 +120,7 @@ interface DokumenCardProps {
   uploadProgress: number;
   onUpload: (file: File) => void;
   onPreview: () => void;
+  isLocked: boolean;
 }
 
 function DokumenCard({
@@ -126,6 +130,7 @@ function DokumenCard({
   uploadProgress,
   onUpload,
   onPreview,
+  isLocked,
 }: DokumenCardProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -179,7 +184,7 @@ function DokumenCard({
   // Allowed extensions for display
   const allowedExtensions = config?.allowedTypes
     .map((t) => {
-      if (t === "image/jpeg") return "JPG";
+      if (t === "image/jpeg") return "JPG/JPEG";
       if (t === "image/png") return "PNG";
       if (t === "application/pdf") return "PDF";
       return t;
@@ -368,19 +373,21 @@ function DokumenCard({
             className={`border-2 border-dashed rounded-[1.5rem] p-8 text-center transition-all cursor-pointer group ${isDragging
               ? "border-teal-500 bg-teal-50"
               : "border-ink-200 hover:border-teal-400 hover:bg-surface-50"
-              } ${isUploading ? "pointer-events-none opacity-50" : ""}`}
+              } ${(isUploading || isLocked) ? "pointer-events-none opacity-50" : ""}`}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
             onClick={handleClick}
           >
-            <input
-              ref={fileInputRef}
-              type="file"
-              className="hidden"
-              accept={config?.allowedTypes.join(",")}
-              onChange={handleFileSelect}
-            />
+            {!isLocked && (
+              <input
+                ref={fileInputRef}
+                type="file"
+                className="hidden"
+                accept={config?.allowedTypes.join(",")}
+                onChange={handleFileSelect}
+              />
+            )}
             <div className="flex flex-col items-center gap-4">
               {isUploading ? (
                 <div className="w-16 h-16 rounded-full bg-teal-50 flex items-center justify-center">
@@ -388,20 +395,33 @@ function DokumenCard({
                 </div>
               ) : (
                 <div className="w-16 h-16 bg-surface-100 rounded-2xl flex items-center justify-center group-hover:bg-teal-100 group-hover:scale-110 transition-all duration-300 shadow-inner">
-                  <Upload className="w-8 h-8 text-ink-400 group-hover:text-teal-600 transition-colors" />
+                  {isLocked ? (
+                    <ShieldCheck className="w-8 h-8 text-emerald-500" />
+                  ) : (
+                    <Upload className="w-8 h-8 text-ink-400 group-hover:text-teal-600 transition-colors" />
+                  )}
                 </div>
               )}
               <div>
                 <p className="font-bold text-ink-700 text-lg group-hover:text-teal-700 transition-colors">
-                  {dokumen.status === "pending"
-                    ? "Klik atau seret file ke sini"
-                    : "Ganti File"}
+                  {isLocked
+                    ? "Berkas Terkunci"
+                    : dokumen.status === "pending"
+                      ? "Klik atau seret file ke sini"
+                      : "Ganti File"}
                 </p>
-                <p className="text-sm text-ink-400 mt-2 max-w-xs mx-auto leading-relaxed">
-                  Format: <span className="font-semibold text-ink-600">{allowedExtensions}</span>
-                  <br />
-                  Ukuran Maksimal: <span className="font-semibold text-ink-600">{maxSizeDisplay}</span>
-                </p>
+                {!isLocked && (
+                  <p className="text-sm text-ink-400 mt-2 max-w-xs mx-auto leading-relaxed">
+                    Format: <span className="font-semibold text-ink-600">{allowedExtensions}</span>
+                    <br />
+                    Ukuran Maksimal: <span className="font-semibold text-ink-600">{maxSizeDisplay}</span>
+                  </p>
+                )}
+                {isLocked && (
+                  <p className="text-sm text-ink-400 mt-2 max-w-xs mx-auto leading-relaxed">
+                    Data sudah dikunci & menunggu verifikasi admin.
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -424,6 +444,7 @@ export default function UploadBerkasTab() {
   const [error, setError] = useState<string | null>(null);
   const [uploadingKeys, setUploadingKeys] = useState<Set<string>>(new Set());
   const [uploadProgress, setUploadProgress] = useState<UploadProgress>({});
+  const [pendaftarStatus, setPendaftarStatus] = useState<string>("draft");
   const [toast, setToast] = useState<{
     type: "success" | "error";
     message: string;
@@ -441,28 +462,58 @@ export default function UploadBerkasTab() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+
+
   const handleSubmit = async () => {
+    // 1. Konfirmasi User
+    const result = await Swal.fire({
+      title: "Kunci Berkas Pendaftaran?",
+      text: "Setelah dikunci, dokumen tidak dapat diubah lagi tanpa bantuan admin. Pastikan semua berkas sudah sesuai.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ya, Kunci Sekarang",
+      cancelButtonText: "Periksa Lagi",
+      confirmButtonColor: "#14b8a6", // teal-500
+      cancelButtonColor: "#ef4444", // red-500
+      reverseButtons: true,
+      focusConfirm: false,
+    });
+
+    if (!result.isConfirmed) return;
+
     try {
       setIsSubmitting(true);
       const response = await fetch("/api/pendaftar/submit-dokumen", {
         method: "POST"
       });
-      const result = await response.json();
+      const apiResult = await response.json();
 
-      if (!result.success) {
-        throw new Error(result.error || "Gagal mengirim berkas");
+      if (!apiResult.success) {
+        throw new Error(apiResult.error || "Gagal mengunci berkas");
       }
 
-      showToast("success", "Berkas berhasil dikirim! Status pendaftaran Anda telah diperbarui.");
+      // 2. Sukses! Tampilkan pesan dan redirect/refresh
+      await Swal.fire({
+        title: "Berkas Berhasil Dikunci!",
+        text: "Dokumen Anda sedang dalam antrian verifikasi admin. Halaman Seleksi akan terbuka jika sudah disetujui.",
+        icon: "success",
+        confirmButtonColor: "#14b8a6",
+        confirmButtonText: "Dimengerti",
+      });
 
-      // Refresh component data
+      // Refresh data untuk update isLocked
       await fetchDokumenStatus();
 
-      // Optional: Trigger full page refresh or notify parent to update sidebar status
-      window.location.reload();
+      // Ke dashboard utama agar sidebar terupdate
+      window.location.href = "/dashboard/pendaftar";
 
     } catch (err: any) {
-      showToast("error", err.message || "Terjadi kesalahan");
+      Swal.fire({
+        title: "Gagal Mengunci",
+        text: err.message || "Terjadi kesalahan sistem",
+        icon: "error",
+        confirmButtonColor: "#ef4444",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -488,6 +539,7 @@ export default function UploadBerkasTab() {
 
       setDokumenList(statusData.data.dokumen);
       setSummary(statusData.data.summary);
+      setPendaftarStatus(statusData.data.pendaftar_status);
 
       if (configData.success) {
         setDokumenConfig(configData.data);
@@ -502,6 +554,8 @@ export default function UploadBerkasTab() {
   useEffect(() => {
     fetchDokumenStatus();
   }, [fetchDokumenStatus]);
+
+  const isLocked = ['docs_uploaded', 'docs_verified', 'scheduled', 'tested', 'announced', 'accepted', 'enrolled'].includes(pendaftarStatus);
 
   // Show toast
   const showToast = (type: "success" | "error", message: string) => {
@@ -760,7 +814,6 @@ export default function UploadBerkasTab() {
         </div>
       </div>
 
-      {/* Dokumen Wajib Section */}
       <div className="space-y-4">
         <h2 className="text-lg font-bold text-stone-900 flex items-center gap-2">
           <span className="w-8 h-8 bg-amber-500 text-white rounded-lg flex items-center justify-center text-sm font-bold">
@@ -780,12 +833,15 @@ export default function UploadBerkasTab() {
                 uploadProgress={uploadProgress[dokumen.key] || 0}
                 onUpload={(file) => handleUpload(dokumen.key, file)}
                 onPreview={() => handlePreview(dokumen)}
+                isLocked={isLocked}
               />
             ))}
         </div>
       </div>
 
       {/* Dokumen Opsional Section */}
+      {/* Dokumen Opsional Section - REMOVED as per user request */}
+      {/* 
       <div className="space-y-4">
         <h2 className="text-lg font-bold text-stone-900 flex items-center gap-2">
           <span className="w-8 h-8 bg-stone-400 text-white rounded-lg flex items-center justify-center text-sm font-bold">
@@ -808,56 +864,79 @@ export default function UploadBerkasTab() {
               />
             ))}
         </div>
-      </div>
+      </div> 
+      */}
 
-      {/* Submit Section */}
+      {/* Submit/Lock Section */}
       <div className="bg-white border text-center border-ink-200 rounded-3xl p-8 shadow-sm">
         <div className="max-w-xl mx-auto space-y-6">
-          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto transition-colors ${summary && summary.progress.required.percentage === 100
-            ? "bg-teal-100 text-teal-600"
-            : "bg-surface-100 text-ink-300"
-            }`}>
-            <FileCheck className="w-8 h-8" />
-          </div>
+          {isLocked ? (
+            <>
+              <div className="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto transition-colors">
+                <ShieldCheck className="w-8 h-8" />
+              </div>
 
-          <div>
-            <h3 className="text-xl font-black text-ink-900 mb-2">
-              {summary && summary.progress.required.percentage === 100
-                ? "Semua Dokumen Wajib Terisi"
-                : "Lengkapi Dokumen Wajib"}
-            </h3>
-            <p className="text-ink-500 font-medium leading-relaxed">
-              {summary && summary.progress.required.percentage === 100
-                ? "Pastikan semua data sudah benar sebelum mengirim. Data yang dikirim tidak dapat diubah sampai diverifikasi admin."
-                : "Anda belum dapat mengirim berkas. Mohon lengkapi semua dokumen yang bertanda 'Wajib' di atas."}
-            </p>
-          </div>
+              <div>
+                <h3 className="text-xl font-black text-ink-900 mb-2">Dokumen Telah Dikunci</h3>
+                <p className="text-ink-500 font-medium leading-relaxed">
+                  Sistem mendeteksi dokumen Anda sedang dalam tahap verifikasi admin. Halaman <strong>Undangan Seleksi</strong> akan otomatis terbuka setelah admin menyetujui semua berkas wajib Anda.
+                </p>
+              </div>
 
-          <button
-            onClick={handleSubmit}
-            disabled={!summary || summary.progress.required.percentage < 100 || isSubmitting}
-            className={`w-full py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 transition-all ${summary && summary.progress.required.percentage === 100 && !isSubmitting
-              ? "bg-teal-600 text-white hover:bg-teal-700 shadow-xl shadow-teal-600/20 hover:-translate-y-1"
-              : "bg-surface-200 text-ink-400 cursor-not-allowed"
-              }`}
-          >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="w-6 h-6 animate-spin" />
-                <span>Mengirim Berkas...</span>
-              </>
-            ) : (
-              <>
-                <Send className="w-6 h-6" />
-                <span>Kirim Semua Berkas</span>
-              </>
-            )}
-          </button>
+              <div className="p-4 bg-emerald-50 border border-emerald-100 rounded-xl flex gap-3 items-center justify-center">
+                <CheckCircle className="w-5 h-5 text-emerald-600" />
+                <span className="text-emerald-800 font-bold text-sm">Sedang Diverifikasi Admin</span>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto transition-colors ${summary && summary.progress.required.percentage === 100
+                ? "bg-teal-100 text-teal-600"
+                : "bg-surface-100 text-ink-300"
+                }`}>
+                <FileCheck className="w-8 h-8" />
+              </div>
 
-          {summary && summary.progress.required.percentage === 100 && (
-            <p className="text-xs text-ink-400 font-medium">
-              Dengan mengklik tombol ini, Anda menyatakan bahwa data yang diupload adalah benar.
-            </p>
+              <div>
+                <h3 className="text-xl font-black text-ink-900 mb-2">
+                  {summary && summary.progress.required.percentage === 100
+                    ? "Semua Dokumen Wajib Terisi"
+                    : "Lengkapi Dokumen Wajib"}
+                </h3>
+                <p className="text-ink-500 font-medium leading-relaxed">
+                  {summary && summary.progress.required.percentage === 100
+                    ? "Silakan periksa kembali semua berkas sebelum dikunci. Setelah dikunci, berkas tidak dapat diubah lagi."
+                    : "Anda belum dapat mengunci berkas. Mohon lengkapi semua dokumen yang bertanda 'Wajib' di atas."}
+                </p>
+              </div>
+
+              <button
+                onClick={handleSubmit}
+                disabled={!summary || summary.progress.required.percentage < 100 || isSubmitting}
+                className={`w-full py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 transition-all ${summary && summary.progress.required.percentage === 100 && !isSubmitting
+                  ? "bg-teal-600 text-white hover:bg-teal-700 shadow-xl shadow-teal-600/20 hover:-translate-y-1"
+                  : "bg-surface-200 text-ink-400 cursor-not-allowed"
+                  }`}
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-6 h-6 animate-spin" />
+                    <span>Memproses...</span>
+                  </>
+                ) : (
+                  <>
+                    <Lock className="w-6 h-6" />
+                    <span>Finalisasi & Kunci Berkas</span>
+                  </>
+                )}
+              </button>
+
+              {summary && summary.progress.required.percentage === 100 && (
+                <p className="text-xs text-ink-400 font-medium">
+                  Setelah dikunci, berkas hanya dapat diubah dengan menghubungi bantuan admin.
+                </p>
+              )}
+            </>
           )}
         </div>
       </div>

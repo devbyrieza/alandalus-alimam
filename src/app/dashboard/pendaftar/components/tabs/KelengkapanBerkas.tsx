@@ -119,7 +119,7 @@ function getStatusLabel(status: DokumenStatus) {
     case "verified":
       return "Terverifikasi";
     case "uploaded":
-      return "Menunggu Verifikasi";
+      return "Berhasil Diupload";
     case "rejected":
       return "Ditolak";
     default:

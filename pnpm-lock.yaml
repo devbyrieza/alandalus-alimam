@@ -59,6 +59,9 @@ importers:
       react-hot-toast:
         specifier: ^2.6.0
         version: 2.6.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      sweetalert2:
+        specifier: ^11.26.18
+        version: 11.26.18
       tailwind-merge:
         specifier: ^3.4.0
         version: 3.4.0
@@ -1137,6 +1140,9 @@ packages:
     resolution: {integrity: sha512-qsjeeq5YjBZ5eMdFuUa4ZosMLxgr5RZ+F+Y1OrDhuOCEInRMA3x74XdBtggJcj9kOeInz0WE+LgCPDkZFlBYJw==}
     engines: {node: '>=12.0.0'}
 
+  sweetalert2@11.26.18:
+    resolution: {integrity: sha512-3O5feBqV+hTIOwCRKGuZGHosjiuBAKP/vpBl6vKFZeVYfCUGdXqXuuidn6YXHan3f6e62UdmnjwJBt8UtDVBhg==}
+
   tailwind-merge@3.4.0:
     resolution: {integrity: sha512-uSaO4gnW+b3Y2aWoWfFpX62vn2sR3skfhbjsEnaBI81WD1wBLlHZe5sWf0AqjksNdYTbGBEd0UasQMT3SNV15g==}
 
@@ -2127,6 +2133,8 @@ snapshots:
 
   svg-pathdata@6.0.3:
     optional: true
+
+  sweetalert2@11.26.18: {}
 
   tailwind-merge@3.4.0: {}
 

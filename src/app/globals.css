@@ -127,6 +127,15 @@
     background-image: none; /* Removed mesh gradient for cleaner look */
   }
 
+  /* Global Button Cursor Override - Ensure all buttons have pointer cursor */
+  button,
+  [type='button'],
+  [type='reset'],
+  [type='submit'],
+  [role='button'] {
+    cursor: pointer;
+  }
+
   /* Typography Scale */
   h1, h2, h3, h4, h5, h6 {
     @apply font-display font-bold tracking-tight text-ink-900;

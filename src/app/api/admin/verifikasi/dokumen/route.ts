@@ -30,9 +30,14 @@ export async function GET(request: NextRequest) {
     // Get query params
     const searchParams = request.nextUrl.searchParams;
     const statusParam = searchParams.get("status") || "pending";
+    const pendaftarId = searchParams.get("pendaftar_id");
 
     // Build filter
     const where: any = {};
+    if (pendaftarId) {
+      where.pendaftar_id = pendaftarId;
+    }
+
     if (statusParam === "pending") {
       where.is_verified = false;
       where.catatan = null;
@@ -52,6 +57,7 @@ export async function GET(request: NextRequest) {
         is_verified: true,
         catatan: true,
         file_path: true,
+        file_type: true,
         created_at: true,
         updated_at: true,
         pendaftar: {
@@ -67,7 +73,16 @@ export async function GET(request: NextRequest) {
       orderBy: { created_at: "desc" },
     });
 
-    return NextResponse.json({ data: data || [] });
+    // Transform to include file_url
+    const transformedData = data.map((dok) => {
+      const timestamp = dok.updated_at ? new Date(dok.updated_at).getTime() : Date.now();
+      return {
+        ...dok,
+        file_url: `/api/files/${dok.file_path}?t=${timestamp}`,
+      };
+    });
+
+    return NextResponse.json({ data: transformedData || [] });
   } catch (error) {
     console.error("Error in dokumen verification API:", error);
     return NextResponse.json(
