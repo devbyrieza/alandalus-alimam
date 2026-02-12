@@ -25,20 +25,20 @@ export default function HomePage() {
           <StatsSection />
         </ScrollAnimation>
 
-        <ScrollAnimation delay={0.1} direction="up">
-          <AboutSection />
-        </ScrollAnimation>
-
-        <ScrollAnimation delay={0.1}>
-          <BoardSection />
-        </ScrollAnimation>
-
         <ScrollAnimation delay={0.1}>
           <ProgramSection />
         </ScrollAnimation>
 
         <ScrollAnimation delay={0.1}>
           <FeaturesSection />
+        </ScrollAnimation>
+
+        <ScrollAnimation delay={0.1}>
+          <BoardSection />
+        </ScrollAnimation>
+
+        <ScrollAnimation delay={0.1} direction="up">
+          <AboutSection />
         </ScrollAnimation>
 
         <ScrollAnimation delay={0.1}>
