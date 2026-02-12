@@ -110,8 +110,8 @@ function PPDBContent() {
 
   const biaya = [
     { label: "Biaya Pendaftaran", value: "Rp 200.000" },
-    { label: "Uang Pangkal", value: "Rp 7.500.000" },
-    { label: "SPP Bulanan", value: "Rp 1.000.000" },
+    { label: "Uang Pangkal", value: "Rp 9.800.000" },
+    { label: "Taawun (SPP) / Bln", value: "Rp 1.100.000" },
   ];
 
   const faqs = [
@@ -332,13 +332,13 @@ function PPDBContent() {
                 <div className="mt-8 pt-6 border-t border-brown-200 relative z-10">
                   <p className="text-sm text-ink-500 mb-4">Masih ragu? Konsultasi gratis.</p>
                   <a
-                    href="https://wa.me/6285888871997"
+                    href="https://wa.me/6285888871997?text=Halo%20Admin%20PPDB%20Al-Imam%2C%20saya%20ingin%20bertanya%20mengenai%20pendaftaran%20santri%20baru..."
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-brown-700 hover:bg-brown-800 text-white font-bold transition-all shadow-md"
                   >
                     <Phone className="w-5 h-5" />
-                    Chat WhatsApp
+                    Konsultasi via WhatsApp
                   </a>
                 </div>
               </div>

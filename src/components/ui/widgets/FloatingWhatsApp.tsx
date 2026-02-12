@@ -25,7 +25,7 @@ export default function FloatingWhatsApp() {
 
             {/* Main Button */}
             <Link
-                href="https://wa.me/6285888871997"
+                href="https://wa.me/6285888871997?text=Halo%20Admin%20Al-Imam%2C%20saya%20ingin%20bertanya%20mengenai..."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
