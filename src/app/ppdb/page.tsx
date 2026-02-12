@@ -313,7 +313,7 @@ function PPDBContent() {
                 <div className="space-y-5 relative z-10">
                   {[
                     { title: "Kurikulum Terintegrasi", desc: "Perpaduan Kurikulum Nasional & Pesantren Salafiyah." },
-                    { title: "Target Hafalan", desc: "30 Juz Mutqin dalam 6 tahun masa pendidikan (MTs & MA)." },
+                    { title: "Target Hafalan", desc: "30 Juz Mutqin dalam 6 tahun masa pendidikan (MTs & IL)." },
                     { title: "Lingkungan Kondusif", desc: "Jauh dari hiruk pikuk kota, udara sejuk, air bersih." },
                     { title: "Ekstrakurikuler", desc: "Bela diri, Memanah, Berkuda, IT Club, Bahasa." },
                   ].map((item, i) => (
