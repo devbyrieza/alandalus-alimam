@@ -19,9 +19,10 @@ const PROGRAMS = [
             "Target Hafalan 12 Juz",
             "Kurikulum Kemendikdasmen & Al-Andalus",
             "Bahasa Arab Harian & Kitab Turats",
-            "TICE & Karakter Entrepreneur",
             "Sanad Al-Qur'an Bersambung",
-            "Ekstrakurikuler Pilihan"
+            "TICE & Wawasan Global",
+            "Ekstrakurikuler Pilihan",
+            "Orientasi: PT Luar Negeri (Timur Tengah) & PTN Favorit (Nasional)"
         ],
         quota: "25 Kursi",
         color: "brown",
@@ -35,9 +36,10 @@ const PROGRAMS = [
             "Target Hafalan 16 Juz",
             "Kurikulum Kemendikdasmen & Al-Andalus",
             "Bahasa Arab Harian & Kitab Turats",
-            "Orientasi: PT Luar Negeri (Timur Tengah) & PTN Favorit (Nasional)",
             "Sanad Al-Qur'an Bersambung",
-            "TICE & Wawasan Global"
+            "TICE & Wawasan Global",
+            "Ekstrakurikuler Pilihan",
+            "Orientasi: PT Luar Negeri (Timur Tengah) & PTN Favorit (Nasional)"
         ],
         quota: "25 Kursi",
         color: "gold",
