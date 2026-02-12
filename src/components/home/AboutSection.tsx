@@ -53,7 +53,7 @@ export default function AboutSection() {
                     </li>
                     <li className="flex gap-2">
                       <span className="text-brown-500 font-bold">•</span>
-                      <span>Mencetak Hamlatul Qur'an dengan bekal ilmu syar'i yang mumpuni</span>
+                      <span>Mencetak Hamalatul Qur'an dengan bekal ilmu syar'i yang mumpuni</span>
                     </li>
                     <li className="flex gap-2">
                       <span className="text-brown-500 font-bold">•</span>
