@@ -31,11 +31,11 @@ const PROGRAMS = [
         description: "Pendidikan tingkat menengah dengan Sinergi Kurikulum Nasional & Pesantren yang terintegrasi secara komprehensif untuk mencetak santri yang berakhlak mulia dan unggul dalam prestasi.",
         stats: [
             { label: "Durasi", value: "3 Tahun", icon: Clock },
-            { label: "Target", value: "3 Juz/Thn", icon: Trophy },
+            { label: "Target", value: "12 Juz", icon: Trophy },
             { label: "Bahasa", value: "Dwi-Bahasa", icon: Globe },
         ],
         curriculum: [
-            "Tahfidz Al-Qur'an Intensif",
+            "Target Hafalan 12 Juz",
             "Bahasa Arab (Muhadatsah & Yaumiyah)",
             "Kajian Kitab Turats (Aqidah, Fiqih, Akhlaq)",
             "Kurikulum Nasional Lengkap",
@@ -54,12 +54,12 @@ const PROGRAMS = [
         description: "Program intensif 4 tahun dengan Kurikulum Terintegrasi Komprehensif; diawali 1 tahun penguatan Bahasa Arab & Syariah (I'dad), dilanjutkan 3 tahun jenjang Madrasah Aliyah (MA) yang resmi.",
         stats: [
             { label: "Durasi", value: "4 Tahun", icon: Clock },
-            { label: "Jenjang", value: "Setara SMA", icon: GraduationCap },
+            { label: "Target", value: "16 Juz", icon: Trophy },
             { label: "Fokus", value: "Kajian Syar'i", icon: BookOpen },
         ],
         curriculum: [
             "Tahun I'dad: Intensif Bahasa Arab & Syariah",
-            "Tahfidz Lanjutan & Muroja'ah",
+            "Target Hafalan 16 Juz",
             "Kurikulum MA Terakreditasi",
             "Kajian Kitab Turats Mendalam",
             "Pembinaan Dakwah & Organisasi"
@@ -205,11 +205,12 @@ export default function ProgramPage() {
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
+                                        className="text-center lg:text-left"
                                     >
                                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-black text-ink-950 leading-[0.95] mb-8">
                                             {program.fullName}
                                         </h2>
-                                        <p className="text-xl text-ink-600 font-medium leading-relaxed mb-10">
+                                        <p className="text-xl text-ink-600 font-medium leading-relaxed mb-10 text-center lg:text-justify">
                                             {program.description}
                                         </p>
                                     </motion.div>

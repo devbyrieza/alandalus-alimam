@@ -83,10 +83,10 @@ export default function HeroSection() {
                 <span>Terakreditasi Pendasmen • Sejak 1995</span>
               </motion.div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold text-ink-950 leading-[1.1] tracking-tight">
-                Mencetak Generasi <br />
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold text-ink-950 leading-[1.1] tracking-tight">
+                Generasi Rabbani, <br />
                 <span className="text-brown-600 relative inline-block">
-                  Qur'ani & Unggul
+                  Cendekia & Mandiri
                   <svg className="absolute -bottom-2 left-0 w-full h-2 text-brown-200" viewBox="0 0 100 10" preserveAspectRatio="none">
                     <path d="M0 5 Q 50 10 100 5" fill="none" stroke="currentColor" strokeWidth="4" />
                   </svg>
@@ -94,7 +94,7 @@ export default function HeroSection() {
               </h1>
 
               <p className="text-lg lg:text-xl text-ink-600 leading-relaxed max-w-xl mx-auto lg:mx-0 font-medium font-sans">
-                Membangun karakter Islam yang kokoh dengan landasan Al-Qur'an dan As-Sunnah untuk menghadapi tantangan masa depan.
+                Pendidikan Islam unggul berbasis Kurikulum TICE untuk melahirkan kader Qur'ani yang beradab, berilmu, dan siap menghadapi tantangan zaman.
               </p>
             </div>
 

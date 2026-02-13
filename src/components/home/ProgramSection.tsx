@@ -17,7 +17,7 @@ const PROGRAMS = [
         subtitle: "Tingkat Menengah (Setara SMP)",
         desc: "Pendidikan 3 tahun dengan kurikulum terpadu Tahfidz dan Akademik Nasional. Fokus pada pembentukan adab dan dasar ilmu syar'i.",
         features: [
-            "Tahfidz Mutqin 12 Juz",
+            "Target Hafalan 12 Juz",
             "Sinergi Kurikulum Nasional & Al-Andalus",
             "Bahasa Arab & Kitab Turats",
             "Sanad Al-Qur'an & Hadith",
@@ -32,7 +32,7 @@ const PROGRAMS = [
         subtitle: "Persiapan & Menengah Atas (Setara SMA)",
         desc: "Program intensif bahasa dan Syari'at untuk mencetak kader ulama masa depan. Persiapan matang studi ke Univ. Islam Timur Tengah.",
         features: [
-            "Tahfidz Lanjutan 16 Juz",
+            "Target Hafalan 16 Juz",
             "Penguasaan Kitab Turats",
             "Bahasa Arab Aktif & Formal",
             "Persiapan LIPIA & Univ. Madinah",
@@ -103,14 +103,14 @@ export default function ProgramSection() {
                                         <program.icon className="w-7 h-7" />
                                     </div>
                                     <div className="px-3 py-1 rounded-lg bg-surface-50 border border-surface-200 text-[11px] font-extrabold text-ink-500 uppercase tracking-widest">
-                                        Quota: {program.quota}
+                                        Kuota: {program.quota}
                                     </div>
                                 </div>
 
                                 <div className="flex-grow">
                                     <h3 className="text-2xl font-bold text-ink-950 mb-2">{program.title}</h3>
                                     <p className="text-sm font-bold text-brown-600/80 mb-6 tracking-wide">{program.subtitle}</p>
-                                    <p className="text-ink-600 leading-relaxed mb-8 font-medium text-justify">
+                                    <p className="text-ink-600 leading-relaxed mb-8 font-medium">
                                         {program.desc}
                                     </p>
 
@@ -129,7 +129,7 @@ export default function ProgramSection() {
 
                                 <Link href="/program">
                                     <button className="w-full py-4 px-6 rounded-2xl bg-surface-50 border-2 border-surface-100 text-ink-950 font-bold transition-all duration-300 hover:bg-brown-700 hover:border-brown-700 hover:text-white flex items-center justify-center gap-2 group/btn">
-                                        Detail Kurikulum
+                                        Detail Program
                                         <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                                     </button>
                                 </Link>

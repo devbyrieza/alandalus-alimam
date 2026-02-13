@@ -62,7 +62,7 @@ export default function ContactSection() {
                 Ada Pertanyaan? <br />
                 <span className="text-brown-600">Kami Siap Membantu</span>
               </h2>
-              <p className="text-lg text-ink-600 font-medium mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+              <p className="text-lg text-ink-600 font-medium mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed text-center lg:text-left">
                 Jangan ragu untuk menghubungi kami. Tim administrasi kami siap melayani pertanyaan seputar pendaftaran, kurikulum, dan informasi pesantren.
               </p>
 

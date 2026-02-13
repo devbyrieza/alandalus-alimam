@@ -81,7 +81,7 @@ export default function Footer() {
                 <div className="w-10 h-10 rounded-xl bg-brown-50 flex items-center justify-center text-brown-600 flex-shrink-0">
                   <MapPin className="w-5 h-5" />
                 </div>
-                <div className="text-sm font-medium text-ink-600">
+                <div className="text-sm font-medium text-ink-600 text-left">
                   Jl. Cikembar No. 12, Sukabumi,<br />Jawa Barat 43157
                 </div>
               </div>
@@ -89,7 +89,7 @@ export default function Footer() {
                 <div className="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 flex-shrink-0">
                   <Phone className="w-5 h-5" />
                 </div>
-                <div className="text-sm font-bold text-ink-950">
+                <div className="text-sm font-bold text-ink-950 text-left">
                   +62 851-1152-4441
                   <p className="text-[10px] text-ink-500 font-medium tracking-wide">Customer Service</p>
                 </div>
@@ -98,7 +98,7 @@ export default function Footer() {
                 <div className="w-10 h-10 rounded-xl bg-surface-100 flex items-center justify-center text-ink-500 flex-shrink-0">
                   <Mail className="w-5 h-5" />
                 </div>
-                <div className="text-sm font-bold text-ink-950">
+                <div className="text-sm font-bold text-ink-950 text-left">
                   pesantrenalimamsukabumi@gmail.com
                 </div>
               </div>

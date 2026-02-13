@@ -87,7 +87,7 @@ export default function DashboardPendaftarPage() {
               </span>
               <span className="flex items-center gap-1 text-xs font-medium text-emerald-100">
                 <Clock className="w-3 h-3" />
-                Update: {new Date(data.lastUpdate).toLocaleDateString('id-ID')}
+                Pembaruan: {new Date(data.lastUpdate).toLocaleDateString('id-ID')}
               </span>
             </div>
             <h1 className="text-3xl md:text-4xl font-black mb-4 leading-tight text-white shadow-sm">
@@ -146,7 +146,7 @@ export default function DashboardPendaftarPage() {
           <p className="text-lg font-bold text-stone-800">
             {['docs_verified', 'scheduled', 'tested', 'announced', 'accepted'].includes(data.status)
               ? "Terverifikasi"
-              : "Pending"}
+              : "Menunggu"}
           </p>
         </div>
 
@@ -170,7 +170,7 @@ export default function DashboardPendaftarPage() {
           </div>
           <p className="text-stone-500 text-sm font-medium mb-1">Hasil Seleksi</p>
           <p className="text-lg font-bold text-stone-800">
-            {data.status === 'accepted' ? "DITERIMA" :
+            {data.status === 'accepted' ? "Diterima" :
               data.status === 'announced' ? "Diumumkan" :
                 "Menunggu"}
           </p>

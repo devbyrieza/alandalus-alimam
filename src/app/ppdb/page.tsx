@@ -82,7 +82,7 @@ const TimelineItem = ({ item, index }: { item: any, index: number }) => (
           {item.date}
         </span>
       </div>
-      <p className="text-lg text-ink-600 leading-relaxed font-medium">{item.desc}</p>
+      <p className="text-lg text-ink-600 leading-relaxed font-medium text-justify">{item.desc}</p>
     </div>
   </motion.div>
 );
@@ -98,8 +98,8 @@ function PPDBContent() {
   const stats = [
     { label: "Kuota MTs", value: "25 Santri", icon: Users },
     { label: "Kuota I'dad", value: "25 Santri", icon: Users },
-    { label: "Asatidz", value: "Alumni TimTeng", icon: GraduationCap },
-    { label: "Target", value: "TimTeng & LIPIA", icon: Target },
+    { label: "Asatidz", value: "Lulusan Terbaik", icon: GraduationCap },
+    { label: "Target", value: "TimTeng & PTN Favorit", icon: Target },
   ];
 
   const timeline = [
@@ -112,7 +112,7 @@ function PPDBContent() {
     {
       phase: "Pembayaran Registrasi",
       date: "Setelah Daftar",
-      desc: "Lakukan pembayaran biaya pendaftaran via Virtual Account yang tersedia di dashboard.",
+      desc: "Lakukan pembayaran biaya pendaftaran via Transfer Manual BSI yang tersedia di dashboard.",
       status: "upcoming",
     },
     {
@@ -124,7 +124,7 @@ function PPDBContent() {
     {
       phase: "Ujian Seleksi",
       date: "Jadwal Dipilih",
-      desc: "Tes Al-Qur'an (Tahfidz/Tajwid), Tes Akademik Dasar, Kepribadian, dan Wawancara.",
+      desc: "Tes Al-Qur'an (Tahfidz/Tajwid), Kemampuan Dasar Akademik, Identifikasi Kepribadian, Tes Kesiapan & Wawancara (Santri & Orang Tua/Wali).",
       status: "upcoming",
     },
     {
@@ -136,7 +136,7 @@ function PPDBContent() {
     {
       phase: "Daftar Ulang",
       date: "Setelah Lulus",
-      desc: "Melakukan pelunasan biaya masuk dan penandatanganan pakta integritas santri.",
+      desc: "Melakukan pelunasan biaya masuk.",
       status: "upcoming",
     },
   ];
@@ -146,28 +146,29 @@ function PPDBContent() {
       title: "Dokumen Persyaratan",
       icon: FileText,
       items: [
-        { name: "Scan Kartu Keluarga (KK)", type: "Required" },
-        { name: "Scan Akte Kelahiran", type: "Required" },
-        { name: "Scan Rapor 2 Semester Terakhir", type: "Required" },
-        { name: "Scan NISN (Data Kemdikbud)", type: "Required" },
-        { name: "Pas Foto Berwarna Terbaru", type: "Required" },
+        { name: "Scan Kartu Keluarga", type: "Wajib" },
+        { name: "Scan Akte Kelahiran", type: "Wajib" },
+        { name: "Scan Rapor 2 Semester Terakhir", type: "Wajib" },
+        { name: "Scan Nomor Induk Siswa Nasional (NISN)", type: "Wajib" },
+        { name: "Foto Setengah Badan", type: "Wajib" },
       ]
     },
     {
       title: "Dokumen Pendukung",
       icon: CheckCircle,
+      note: "Ketiga format dokumen di atas dapat di-unduh melalui akun Dashboard pendaftar saat Anda sudah berada di tahap upload berkas.",
       items: [
-        { name: "Sertifikat Prestasi (Jika ada)", type: "Opsional" },
-        { name: "Kartu Jaminan Sosial (Jika ada)", type: "Opsional" },
-        { name: "Surat Keterangan Berkelakuan Baik", type: "Wajib" },
+        { name: "Surat Keterangan Sehat (Format Panitia)", type: "Wajib" },
+        { name: "Scan Pakta Integritas (Format Panitia)", type: "Wajib" },
+        { name: "Scan Pernyataan Bebas Perilaku Negatif (Format Panitia)", type: "Wajib" },
       ]
     }
   ];
 
   const biaya = [
     { label: "Biaya Pendaftaran", value: "Rp 200rb", icon: CreditCard },
-    { label: "Uang Pangkal", value: "Rp 9.8Jt", icon: Shield },
-    { label: "Taawun (SPP)", value: "Rp 1.1Jt", icon: Star },
+    { label: "Uang Pangkal", value: "Rp 7.5Jt", icon: Shield },
+    { label: "Taawun (SPP)", value: "Rp 1Jt", icon: Star },
   ];
 
   return (
@@ -193,7 +194,7 @@ function PPDBContent() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
+              className="text-4xl sm:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
             >
               Siapkan Generasi <br />
               <span className="text-brown-600">Terbaik Kita</span>
@@ -248,10 +249,10 @@ function PPDBContent() {
                 <Clock className="w-3.5 h-3.5" />
                 <span>Tahapan Pendaftaran</span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-8 leading-tight">
+              <h2 className="text-3xl md:text-5xl font-display font-black text-ink-950 mb-8 leading-tight">
                 Alur Seleksi <br /> <span className="text-brown-600">Lengkap & Transparan</span>
               </h2>
-              <p className="text-xl text-ink-600 leading-relaxed font-medium mb-10">
+              <p className="text-xl text-ink-600 leading-relaxed font-medium mb-10 text-justify">
                 Kami memastikan setiap proses pendaftaran berlangsung dengan adil dan informatif bagi calon santri dan orang tua.
               </p>
 
@@ -285,7 +286,7 @@ function PPDBContent() {
       <section className="py-24 md:py-32 bg-white">
         <Container>
           <div className="text-center mb-16 md:mb-24">
-            <h2 className="text-4xl md:text-6xl font-display font-black text-ink-950 mb-6">Informasi Investasi <br /><span className="text-brown-600">Pendidikan</span></h2>
+            <h2 className="text-3xl md:text-6xl font-display font-black text-ink-950 mb-6">Informasi Investasi <br /><span className="text-brown-600">Pendidikan</span></h2>
             <p className="text-xl text-ink-600 max-w-2xl mx-auto font-medium">Bentuk ikhtiar orang tua dalam memfasilitasi masa depan terbaik ananda.</p>
           </div>
 
@@ -360,11 +361,18 @@ function PPDBContent() {
                               }`}>
                               <Check className="w-5 h-5" />
                             </div>
-                            <span className="flex-1 font-bold text-ink-700">{item.name}</span>
-                            <span className="text-[10px] font-black uppercase tracking-widest text-ink-300 group-hover:text-brown-600">{item.type}</span>
+                            <span className="flex-1 font-bold text-ink-700 leading-tight">{item.name}</span>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-ink-300 group-hover:text-brown-600 shrink-0">{item.type}</span>
                           </li>
                         ))}
                       </ul>
+                      {(req as any).note && (
+                        <div className="mt-8 pt-8 border-t border-surface-100">
+                          <p className="text-sm text-ink-500 font-medium leading-relaxed italic text-justify">
+                            {(req as any).note}
+                          </p>
+                        </div>
+                      )}
                     </motion.div>
                   )
                 })}
@@ -381,22 +389,22 @@ function PPDBContent() {
               >
                 <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
                 <div className="relative z-10">
-                  <h3 className="text-3xl font-display font-black mb-10">Kenapa Pilih Kami?</h3>
+                  <h3 className="text-3xl font-display font-black mb-10 text-white tracking-tight">Kenapa Pilih Kami?</h3>
                   <div className="grid gap-6">
                     {[
-                      { icon: BookOpen, title: "Kurikulum Mutakhir", desc: "Integrasi kurikulum salaf & nasional." },
-                      { icon: GraduationCap, title: "Guru Berkompeten", desc: "Alumni Timur Tengah & Universitas Ternama." },
+                      { icon: BookOpen, title: "Kurikulum Mutakhir", desc: "Perpaduan kurikulum Nasional & kurikulum khas Al-Andalus." },
+                      { icon: GraduationCap, title: "Guru Berkompeten", desc: "Alumni Perguruan Tinggi Terbaik Dalam & Luar Negeri serta Pondok Pesantren Unggulan." },
                       { icon: MapPin, title: "Lingkungan Asri", desc: "Suasana belajar yang tenang & udara bersih." },
                     ].map((feat, i) => {
                       const FeatIcon = feat.icon;
                       return (
-                        <div key={i} className="flex gap-5 items-start bg-white/5 p-6 rounded-[2rem] border border-white/5 backdrop-blur-sm">
+                        <div key={i} className="flex gap-5 items-start bg-white/5 p-6 rounded-[2rem] border border-white/5 backdrop-blur-sm group transition-all duration-300">
                           <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0">
                             <FeatIcon className="w-6 h-6 text-gold-400" />
                           </div>
                           <div>
-                            <h4 className="font-display font-black text-xl mb-1">{feat.title}</h4>
-                            <p className="text-white/60 font-medium">{feat.desc}</p>
+                            <h4 className="font-display font-black text-xl mb-1 text-white">{feat.title}</h4>
+                            <p className="text-white/80 font-medium leading-relaxed">{feat.desc}</p>
                           </div>
                         </div>
                       )
@@ -409,20 +417,32 @@ function PPDBContent() {
                 <h3 className="text-3xl font-display font-black text-ink-950 px-2">Pertanyaan Populer</h3>
                 <div className="space-y-4">
                   {[
-                    "Apakah santri wajib asrama?",
-                    "Kapan batas akhir pendaftaran?",
-                    "Bagaimana sistem kurikulumnya?",
-                  ].map((q, i) => (
-                    <motion.div
-                      key={i}
-                      whileHover={{ x: 10 }}
-                      className="bg-white p-6 rounded-2xl border border-surface-100 shadow-premium-sm flex items-center gap-5 group cursor-pointer"
-                    >
-                      <div className="w-10 h-10 bg-surface-50 rounded-xl flex items-center justify-center text-brown-600 group-hover:bg-brown-600 group-hover:text-white transition-all shadow-premium-xs">
-                        <HelpCircle className="w-5 h-5" />
-                      </div>
-                      <span className="flex-1 font-black text-ink-950">{q}</span>
-                      <ChevronRight className="w-5 h-5 text-surface-200 group-hover:text-ink-950 transition-colors" />
+                    {
+                      q: "Apakah santri wajib asrama?",
+                      a: "Ya, seluruh santri di Pesantren Al-Imam wajib tinggal di asrama untuk mengikuti seluruh rangkaian kegiatan tarbiyah, halaqah tahfidz, dan pembelajaran kitab turats secara maksimal."
+                    },
+                    {
+                      q: "Kapan batas akhir pendaftaran?",
+                      a: "Pendaftaran PPDB Tahun Ajaran 2026/2027 dibuka mulai tanggal 10 Februari sampai dengan 30 Mei 2026. Namun, pendaftaran dapat ditutup lebih awal jika kuota santri baru sudah terpenuhi."
+                    },
+                    {
+                      q: "Bagaimana sistem kurikulumnya?",
+                      a: "Kami menerapkan Kurikulum Terpadu yang menggabungkan kurikulum Nasional dengan kurikulum khas Al-Andalus yang berfokus pada penguasaan Bahasa Arab, Tahfidz Al-Qur'an, dan Kitab Turats."
+                    }
+                  ].map((faq, i) => (
+                    <motion.div key={i} className="group">
+                      <details className="bg-white rounded-2xl border border-surface-100 shadow-premium-sm transition-all duration-300 open:shadow-premium-lg">
+                        <summary className="p-6 flex items-center gap-5 cursor-pointer list-none">
+                          <div className="w-10 h-10 bg-surface-50 rounded-xl flex items-center justify-center text-brown-600 group-hover:bg-brown-600 group-hover:text-white transition-all">
+                            <HelpCircle className="w-5 h-5" />
+                          </div>
+                          <span className="flex-1 font-black text-ink-950 tracking-tight">{faq.q}</span>
+                          <ChevronRight className="w-5 h-5 text-surface-200 group-open:rotate-90 transition-transform duration-300" />
+                        </summary>
+                        <div className="px-6 pb-6 pt-2 pl-20">
+                          <p className="text-ink-600 font-medium leading-relaxed text-justify">{faq.a}</p>
+                        </div>
+                      </details>
                     </motion.div>
                   ))}
                 </div>
@@ -445,7 +465,7 @@ function PPDBContent() {
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
 
             <div className="relative z-10">
-              <h2 className="text-4xl md:text-6xl font-display font-black mb-8 text-white leading-tight">
+              <h2 className="text-3xl md:text-6xl font-display font-black mb-8 text-white leading-tight">
                 Mulai Perjalanan <br /> <span className="text-gold-400">Ananda Di Sini</span>
               </h2>
               <p className="text-xl text-brown-100 max-w-2xl mx-auto mb-12 font-medium leading-relaxed">

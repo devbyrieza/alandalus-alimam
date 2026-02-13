@@ -15,15 +15,15 @@ import { motion } from "framer-motion";
 
 const IMPORTANT_DATES = [
   {
-    date: "10 Feb 2026",
-    title: "Pembukaan PPDB",
-    description: "Gelombang 1 dibuka untuk semua jenjang santri baru.",
+    date: "10 Feb - 30 Mei 2026",
+    title: "Pendaftaran PPDB",
+    description: "Pendaftaran santri baru dibuka secara online melalui website resmi.",
     color: "brown",
   },
   {
-    date: "10 Feb - 30 Mei 2026",
-    title: "Tes Masuk (Fleksibel)",
-    description: "Ujian lisan dan tertulis setelah proses verifikasi berkas.",
+    date: "Sesuai Jadwal",
+    title: "Tes Seleksi",
+    description: "Ujian lisan dan tertulis dilaksanakan setelah verifikasi berkas.",
     color: "teal",
   },
   {
@@ -69,16 +69,16 @@ export default function CalendarSection() {
                     className="relative flex items-start gap-8 group"
                   >
                     <div className={`w-12 h-12 rounded-2xl flex items-center justify-center relative z-10 shrink-0 shadow-premium-sm transition-transform duration-500 group-hover:scale-110 ${item.color === 'brown' ? 'bg-brown-700 text-white' :
-                        item.color === 'teal' ? 'bg-teal-600 text-white' :
-                          'bg-gold-500 text-white'
+                      item.color === 'teal' ? 'bg-teal-600 text-white' :
+                        'bg-gold-500 text-white'
                       }`}>
                       <span className="font-display font-black text-lg">{idx + 1}</span>
                     </div>
                     <div className="bg-surface-50 p-6 md:p-8 rounded-[2rem] border border-surface-100 flex-grow hover:bg-white hover:shadow-premium-lg hover:border-brown-100 transition-all duration-500">
                       <div className="flex items-center justify-between gap-4 mb-3">
                         <span className={`px-3 py-1 rounded-lg text-[11px] font-extrabold uppercase tracking-wider ${item.color === 'brown' ? 'bg-brown-50 text-brown-700 border border-brown-100' :
-                            item.color === 'teal' ? 'bg-teal-50 text-teal-700 border border-teal-100' :
-                              'bg-gold-50 text-gold-700 border border-gold-100'
+                          item.color === 'teal' ? 'bg-teal-50 text-teal-700 border border-teal-100' :
+                            'bg-gold-50 text-gold-700 border border-gold-100'
                           }`}>
                           {item.date}
                         </span>

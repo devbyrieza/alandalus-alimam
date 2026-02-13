@@ -5,30 +5,12 @@ import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
 
 const BOARD_MEMBERS = [
-    {
-        name: "Ustadz Nurdin Apud Sabrini, Lc, M.A",
-        role: "Dewan Pembina/Advisor",
-    },
-    {
-        name: "Ustadz Dr Muhammad Arifin Badri, Lc, M.A",
-        role: "Dewan Pembina/Advisor",
-    },
-    {
-        name: "Ustadz Wahab Rajasam, M.Pd",
-        role: "Dewan Pembina/Advisor",
-    },
-    {
-        name: "KH Dudun Abdul Gofar",
-        role: "Dewan Pembina/Advisor",
-    },
-    {
-        name: "Bpk. Tasmen Tascha, SE",
-        role: "Dewan Pembina/Advisor",
-    },
-    {
-        name: "Ustadz Dwi Wahyu Iskandar, M.Pd",
-        role: "Dewan Pembina/Advisor",
-    },
+    { name: "Ustadz Nurdin Apud Sabrini, Lc, M.A" },
+    { name: "Ustadz Dr Muhammad Arifin Badri, Lc, M.A" },
+    { name: "Ustadz Wahab Rajasam, M.Pd" },
+    { name: "KH Dudun Abdul Gofar" },
+    { name: "Bpk. Tasmen Tascha, SE" },
+    { name: "Ustadz Dwi Wahyu Iskandar, M.Pd" },
 ] as const;
 
 export default function BoardSection() {
@@ -56,7 +38,7 @@ export default function BoardSection() {
                         transition={{ delay: 0.1 }}
                         className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-8 tracking-tight"
                     >
-                        Dewan <span className="text-brown-600">Pembina & Penasihat</span>
+                        Dewan <span className="text-brown-600">Pembina</span>
                     </motion.h2>
 
                     <motion.p
@@ -84,10 +66,9 @@ export default function BoardSection() {
                                 <User className="w-8 h-8 text-brown-600 group-hover:text-white transition-colors" />
                             </div>
                             <div className="min-w-0">
-                                <h4 className="font-bold text-ink-950 text-lg leading-tight mb-1 truncate whitespace-nowrap overflow-hidden group-hover:text-brown-700 transition-colors" title={member.name}>
+                                <h4 className="font-bold text-ink-950 text-lg leading-tight group-hover:text-brown-700 transition-colors" title={member.name}>
                                     {member.name}
                                 </h4>
-                                <p className="text-[10px] font-extrabold text-ink-400 uppercase tracking-widest">{member.role}</p>
                             </div>
                         </motion.div>
                     ))}

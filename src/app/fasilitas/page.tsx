@@ -79,7 +79,7 @@ export default function FasilitasPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="text-5xl md:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
+                className="text-4xl sm:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
               >
                 Fasilitas <br />
                 <span className="text-brown-600">Terbaik Kita</span>
@@ -95,9 +95,9 @@ export default function FasilitasPage() {
               </motion.p>
 
               <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-                <HeroStat icon={Home} value="50+" label="Kamar Asrama" delay={0.3} />
-                <HeroStat icon={School} value="32" label="Ruang Kelas" delay={0.4} />
-                <HeroStat icon={BookOpen} value="3K+" label="Koleksi Buku" delay={0.5} />
+                <HeroStat icon={Home} value="15+" label="Kamar Asrama" delay={0.3} />
+                <HeroStat icon={School} value="12+" label="Ruang Kelas" delay={0.4} />
+                <HeroStat icon={BookOpen} value="1K+" label="Koleksi Buku" delay={0.5} />
               </div>
             </div>
 
@@ -163,7 +163,7 @@ export default function FasilitasPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-6xl font-display font-black text-ink-950 mb-8"
+              className="text-3xl md:text-6xl font-display font-black text-ink-950 mb-8"
             >
               Pusat Kegiatan Santri
             </motion.h2>
@@ -196,7 +196,7 @@ export default function FasilitasPage() {
                     <Home className="w-10 h-10" />
                   </div>
 
-                  <h3 className="text-4xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Masjid Jami' <br /> Al-Imam</h3>
+                  <h3 className="text-3xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Masjid Jami' <br /> Al-Imam</h3>
                   <p className="text-xl text-ink-600 mb-10 leading-relaxed font-medium">
                     Pusat peribadatan santri yang mampu menampung 1000 jamaah. Dilengkapi pendingin ruangan, karpet premium, dan sistem audio berkualitas tinggi.
                   </p>
@@ -278,7 +278,7 @@ export default function FasilitasPage() {
                     <Building className="w-10 h-10" />
                   </div>
 
-                  <h3 className="text-4xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Asrama <br /> Berkualitas</h3>
+                  <h3 className="text-3xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Asrama <br /> Berkualitas</h3>
                   <p className="text-xl text-ink-600 mb-10 leading-relaxed font-medium">
                     Hunian nyaman dengan sirkulasi udara optimal. Setiap kamar didesain dengan konsep kekeluargaan dan dilengkapi fasilitas penyimpanan pribadi.
                   </p>
@@ -306,6 +306,197 @@ export default function FasilitasPage() {
                 </div>
               </motion.div>
             </div>
+            {/* Ruang Kelas */}
+            <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="order-2 lg:order-1"
+              >
+                <div className="bg-white p-12 lg:p-16 rounded-[3.5rem] shadow-premium-lg border border-surface-100 relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 p-12 opacity-5 -rotate-12 transition-transform group-hover:rotate-0 duration-700">
+                    <School className="w-48 h-48" />
+                  </div>
+
+                  <div className="w-20 h-20 bg-blue-50 rounded-3xl flex items-center justify-center text-blue-600 mb-10 shadow-premium-sm transition-transform group-hover:scale-110">
+                    <School className="w-10 h-10" />
+                  </div>
+
+                  <h3 className="text-3xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Ruang Kelas <br /> Modern</h3>
+                  <p className="text-xl text-ink-600 mb-10 leading-relaxed font-medium">
+                    Ruang kelas yang didesain ergonomis dan modern untuk konsentrasi belajar maksimal. Setiap kelas dilengkapi alat peraga edukatif dan sirkulasi udara yang baik.
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-8">
+                    <div className="flex items-start gap-4 group/item">
+                      <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center shrink-0 shadow-premium-sm">
+                        <CheckCircle2 className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h4 className="font-black text-ink-950 text-lg uppercase tracking-tight">Ergonomis</h4>
+                        <p className="text-sm text-ink-500 font-medium">Meja Kursi Nyaman</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4 group/item">
+                      <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center shrink-0 shadow-premium-sm">
+                        <CheckCircle2 className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h4 className="font-black text-ink-950 text-lg uppercase tracking-tight">Interaktif</h4>
+                        <p className="text-sm text-ink-500 font-medium">Fasilitas Multimedia</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="order-1 lg:order-2"
+              >
+                <div className="aspect-square rounded-[4rem] bg-white p-4 shadow-premium-2xl relative rotate-2 hover:rotate-0 transition-transform duration-700 border border-surface-100">
+                  <div className="relative w-full h-full rounded-[3.2rem] overflow-hidden">
+                    <Image
+                      src="/images/kelas-dari-dalam.png"
+                      alt="Ruang Kelas Modern"
+                      fill
+                      className="object-cover transition-transform duration-700 hover:scale-110"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Lapangan Minisoccer */}
+            <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="order-1"
+              >
+                <div className="aspect-square rounded-[4rem] bg-white p-4 shadow-premium-2xl relative -rotate-2 hover:rotate-0 transition-transform duration-700 border border-surface-100">
+                  <div className="relative w-full h-full rounded-[3.2rem] overflow-hidden">
+                    <Image
+                      src="/images/lapangan-minisoccer.jpeg"
+                      alt="Lapangan Minisoccer"
+                      fill
+                      className="object-cover transition-transform duration-700 hover:scale-110"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="order-2"
+              >
+                <div className="bg-white p-12 lg:p-16 rounded-[3.5rem] shadow-premium-lg border border-surface-100 relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 p-12 opacity-5 rotate-12 transition-transform group-hover:rotate-0 duration-700">
+                    <Trophy className="w-48 h-48" />
+                  </div>
+
+                  <div className="w-20 h-20 bg-green-50 rounded-3xl flex items-center justify-center text-green-600 mb-10 shadow-premium-sm transition-transform group-hover:scale-110">
+                    <Trophy className="w-10 h-10" />
+                  </div>
+
+                  <h3 className="text-3xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Lapangan <br /> Minisoccer</h3>
+                  <p className="text-xl text-ink-600 mb-10 leading-relaxed font-medium">
+                    Sarana olahraga outdoor berkualitas untuk mendukung kesehatan fisik dan bakat atletik santri. Lapangan rumput sintetis standar yang aman dan nyaman.
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-8">
+                    <div className="flex items-start gap-4 group/item">
+                      <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center shrink-0 shadow-premium-sm">
+                        <CheckCircle2 className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h4 className="font-black text-ink-950 text-lg uppercase tracking-tight">Kualitas</h4>
+                        <p className="text-sm text-ink-500 font-medium">Rumput Sintetis Premium</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4 group/item">
+                      <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center shrink-0 shadow-premium-sm">
+                        <CheckCircle2 className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h4 className="font-black text-ink-950 text-lg uppercase tracking-tight">Sejarah</h4>
+                        <p className="text-sm text-ink-500 font-medium">Area Luas & Bersih</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Depot Air Minum */}
+            <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="order-2 lg:order-1"
+              >
+                <div className="bg-white p-12 lg:p-16 rounded-[3.5rem] shadow-premium-lg border border-surface-100 relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 p-12 opacity-5 -rotate-12 transition-transform group-hover:rotate-0 duration-700">
+                    <Droplet className="w-48 h-48" />
+                  </div>
+
+                  <div className="w-20 h-20 bg-blue-50 rounded-3xl flex items-center justify-center text-blue-600 mb-10 shadow-premium-sm transition-transform group-hover:scale-110">
+                    <Droplet className="w-10 h-10" />
+                  </div>
+
+                  <h3 className="text-3xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Depot Air Minum <br /> Isi Ulang</h3>
+                  <p className="text-xl text-ink-600 mb-10 leading-relaxed font-medium">
+                    Fasilitas air minum higienis gratis bagi seluruh santri. Menggunakan sistem filtrasi terstandar untuk menjamin kemurnian dan kesehatan air konsumsi harian.
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-8">
+                    <div className="flex items-start gap-4 group/item">
+                      <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center shrink-0 shadow-premium-sm">
+                        <CheckCircle2 className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h4 className="font-black text-ink-950 text-lg uppercase tracking-tight">Gratis</h4>
+                        <p className="text-sm text-ink-500 font-medium">Untuk Seluruh Santri</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4 group/item">
+                      <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center shrink-0 shadow-premium-sm">
+                        <CheckCircle2 className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h4 className="font-black text-ink-950 text-lg uppercase tracking-tight">Higienis</h4>
+                        <p className="text-sm text-ink-500 font-medium">Sistem Filtrasi Modern</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="order-1 lg:order-2"
+              >
+                <div className="aspect-square rounded-[4rem] bg-white p-4 shadow-premium-2xl relative rotate-2 hover:rotate-0 transition-transform duration-700 border border-surface-100">
+                  <div className="relative w-full h-full rounded-[3.2rem] overflow-hidden">
+                    <Image
+                      src="/images/depot-galon-gratis.png"
+                      alt="Depot Air Minum"
+                      fill
+                      className="object-cover transition-transform duration-700 hover:scale-110"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </Container>
       </section>
@@ -318,7 +509,7 @@ export default function FasilitasPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-6"
+              className="text-3xl md:text-5xl font-display font-black text-ink-950 mb-6"
             >
               Fasilitas Penunjang
             </motion.h2>
@@ -379,7 +570,7 @@ export default function FasilitasPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-6"
+              className="text-3xl md:text-5xl font-display font-black text-ink-950 mb-6"
             >
               Galeri <span className="text-brown-600">Fasilitas</span>
             </motion.h2>
@@ -443,7 +634,7 @@ export default function FasilitasPage() {
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
 
             <div className="relative z-10">
-              <h2 className="text-4xl md:text-6xl font-display font-black mb-8 text-white leading-tight">
+              <h2 className="text-3xl md:text-6xl font-display font-black mb-8 text-white leading-tight">
                 Ingin Melihat <br /> <span className="text-gold-400">Langsung?</span>
               </h2>
               <p className="text-xl text-brown-100 max-w-2xl mx-auto mb-12 font-medium">

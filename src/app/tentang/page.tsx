@@ -45,7 +45,7 @@ export default function TentangPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-5xl md:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
+                        className="text-4xl sm:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
                     >
                         Dedikasi Untuk <br />
                         <span className="text-brown-600">Generasi Qur'ani</span>
@@ -76,7 +76,7 @@ export default function TentangPage() {
                             <span className="text-xs font-black uppercase tracking-[0.3em]">Ahlan Wa Sahlan</span>
                             <div className="w-8 h-0.5 bg-brown-600/30 rounded-full" />
                         </motion.div>
-                        <h2 className="text-4xl md:text-6xl font-display font-black text-ink-950 tracking-tight leading-tight">
+                        <h2 className="text-3xl md:text-6xl font-display font-black text-ink-950 tracking-tight leading-tight">
                             Masa Depan Qur'ani <br className="hidden md:block" />
                             Dimulai dari <span className="text-brown-600 underline decoration-brown-600/20 underline-offset-8">Sini</span>
                         </h2>
@@ -153,7 +153,7 @@ export default function TentangPage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                             >
-                                <h2 className="text-4xl md:text-5xl font-display font-black text-ink-950 leading-tight mb-6">
+                                <h2 className="text-3xl md:text-5xl font-display font-black text-ink-950 leading-tight mb-6">
                                     Sejarah & <br />
                                     <span className="text-brown-600">Profil Pesantren</span>
                                 </h2>
@@ -219,7 +219,7 @@ export default function TentangPage() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.1 }}
-                            className="text-4xl md:text-6xl font-display font-black text-ink-950 mb-8"
+                            className="text-3xl md:text-6xl font-display font-black text-ink-950 mb-8"
                         >
                             Visi & Misi
                         </motion.h2>
@@ -246,8 +246,8 @@ export default function TentangPage() {
                                 <Target className="w-8 h-8" />
                             </div>
                             <h3 className="text-2xl font-black text-ink-950 mb-6">Visi</h3>
-                            <p className="text-2xl font-display font-black text-ink-900 italic leading-snug">
-                                "Kaderisasi Generasi Rabbani Cendekia Mandiri"
+                            <p className="text-xl font-display font-black text-ink-900 italic leading-[1.4]">
+                                "Terwujudnya Lembaga Pendidikan Islam Unggul dalam Melahirkan Generasi Rabbani, Cendekia, dan Mandiri."
                             </p>
                         </motion.div>
 
@@ -265,9 +265,9 @@ export default function TentangPage() {
                             <h3 className="text-2xl font-black text-ink-950 mb-8">Misi Utama</h3>
                             <ul className="space-y-6">
                                 {[
-                                    { text: "Pendidikan Berbasis ", highlight: "TICE" },
-                                    { text: "Mencetak ", highlight: "Hamalatul Qur'an" },
-                                    { text: "Jiwa ", highlight: "Entrepreneurship Muslim" }
+                                    { text: "Menyelenggarakan Pendidikan Berbasis ", highlight: "TICE (Technology, Islamic, Character, Entrepreneurship)" },
+                                    { text: "Membentuk ", highlight: "Hamalatul Qur'an" },
+                                    { text: "Menanamkan Jiwa ", highlight: "Entrepreneurship Muslim" }
                                 ].map((item, idx) => (
                                     <li key={idx} className="flex gap-4 items-start group/item">
                                         <div className="w-6 h-6 rounded-full bg-teal-600 text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-1 shadow-premium-sm">
@@ -326,7 +326,7 @@ export default function TentangPage() {
                         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5 pointer-events-none" />
 
                         <div className="relative z-10">
-                            <h2 className="text-4xl md:text-6xl font-display font-black mb-8 text-white tracking-tight leading-tight">
+                            <h2 className="text-3xl md:text-6xl font-display font-black mb-8 text-white tracking-tight leading-tight">
                                 Mari Menjadi Bagian <br />
                                 Keluarga <span className="text-gold-400">Al-Imam</span>
                             </h2>

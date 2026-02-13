@@ -74,7 +74,7 @@ export default function ActivitiesSection() {
                             </div>
                             <div className="p-8 pt-6">
                                 <h3 className="text-xl font-bold text-ink-950 mb-4 tracking-tight group-hover:text-brown-700 transition-colors">{activity.name}</h3>
-                                <p className="text-ink-500 font-medium text-sm leading-relaxed text-justify mb-8 flex-grow">
+                                <p className="text-ink-500 font-medium text-sm leading-relaxed mb-8 flex-grow">
                                     {activity.description}
                                 </p>
                             </div>

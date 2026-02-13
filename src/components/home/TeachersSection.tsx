@@ -10,7 +10,7 @@ const TEACHER_BACKGROUNDS = [
         location: "Pascasarjana, Riyadh, KSA",
     },
     {
-        institution: "Univ Sidi Mohamed ben Abdellah",
+        institution: "Univ. Sidi Mohamed ben Abdellah",
         location: "Pascasarjana, Fes, Maroko",
     },
     {
@@ -18,32 +18,32 @@ const TEACHER_BACKGROUNDS = [
         location: "Kairo, Mesir",
     },
     {
-        institution: "LIPIA Jakarta",
-        location: "Univ. Islam Imam Muhammad bin Saud",
-    },
-    {
-        institution: "Rabithoh 'Alam Islamy",
+        institution: "Rabithah Al-Alam Al-Islami",
         location: "Makkah Al-Mukarromah",
-    },
-    {
-        institution: "STIBA Ar-Rayah",
-        location: "Sukabumi",
-    },
-    {
-        institution: "Universitas Negeri Yogyakarta",
-        location: "Pascasarjana",
     },
     {
         institution: "Native Speaker",
         location: "Timur Tengah",
     },
     {
-        institution: "Dosen & Praktisi Ahli",
-        location: "Tenaga Ahli",
+        institution: "LIPIA Jakarta",
+        location: "Univ. Islam Imam Muhammad bin Saud",
+    },
+    {
+        institution: "Universitas Negeri Yogyakarta",
+        location: "Pascasarjana",
+    },
+    {
+        institution: "STIBA Ar-Raayah",
+        location: "Sukabumi",
     },
     {
         institution: "Lulusan Pondok Terkemuka",
-        location: "Nasional & Internasional",
+        location: "Nasional",
+    },
+    {
+        institution: "Dosen & Praktisi Ahli",
+        location: "Tenaga Ahli",
     },
 ] as const;
 
@@ -78,14 +78,14 @@ export default function TeachersSection() {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
                             {[
-                                { icon: Globe, label: "Lulusan Luar Negeri", sub: "Timur Tengah & Maroko", color: "brown" },
-                                { icon: Award, label: "Dosen & Pakar", sub: "Tenaga Pendidik Profesional", color: "gold" },
-                                { icon: Users, label: "Native Speakers", sub: "Langsung dari Sumbernya", color: "teal" }
+                                { icon: Globe, label: "Lulusan Luar Negeri", sub: "Timur Tengah, Mesir & Maroko", color: "brown" },
+                                { icon: Users, label: "Native Speakers", sub: "Timur Tengah", color: "teal" },
+                                { icon: Award, label: "Dosen & Pakar", sub: "Tenaga Pendidik Profesional", color: "gold" }
                             ].map((feature, i) => (
                                 <div key={i} className="flex items-center gap-5 p-4 rounded-2xl bg-surface-50 border border-surface-100/50">
                                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-premium-sm ${feature.color === 'brown' ? 'bg-brown-50 text-brown-600' :
-                                            feature.color === 'gold' ? 'bg-gold-50 text-gold-600' :
-                                                'bg-teal-50 text-teal-600'
+                                        feature.color === 'gold' ? 'bg-gold-50 text-gold-600' :
+                                            'bg-teal-50 text-teal-600'
                                         }`}>
                                         <feature.icon className="w-6 h-6" />
                                     </div>

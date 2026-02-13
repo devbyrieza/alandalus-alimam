@@ -12,12 +12,12 @@ const GALLERY_CATEGORIES = [
     items: [
       { src: "/images/masjid.png", label: "Masjid Jami' Al-Imam" },
       { src: "/images/asrama.png", label: "Asrama Santri" },
+      { src: "/images/tentang.png.png", label: "Gedung Utama" },
       { src: "/images/gedung-utama-dan-lapangan-basket.jpeg", label: "Gedung Utama & Lapangan Basket" },
       { src: "/images/gedung-kelas.jpeg", label: "Gedung Kelas" },
-      { src: "/images/halaman-dekat-masjid.jpeg", label: "Halaman Pesantren" },
       { src: "/images/kelas-dari-dalam.png", label: "Ruang Kelas dari Dalam" },
-      { src: "/images/lapangan-minisoccer.jpeg", label: "Lapangan Mini Soccer" },
       { src: "/images/luar-kelas.png", label: "Area Luar Kelas" },
+      { src: "/images/lapangan-minisoccer.jpeg", label: "Lapangan Mini Soccer" },
       { src: "/images/kantor-ppdb-tamu.png", label: "Kantor PPDB & Tamu" },
       { src: "/images/depot-galon-gratis.png", label: "Depot Galon Gratis" },
     ],
@@ -33,11 +33,8 @@ const GALLERY_CATEGORIES = [
   {
     title: "Suasana Pesantren",
     items: [
-      { src: "/images/hero.png", label: "Pesantren Al-Imam Al-Islami" },
       { src: "/images/welcome-selamat-datang.png", label: "Selamat Datang di Al-Imam" },
-      { src: "/images/tentang.png.png", label: "Profil Pesantren" },
-      { src: "/images/mts.png", label: "Program Madrasah Tsanawiyah" },
-      { src: "/images/il.png", label: "Program I'dad Lughowi" },
+      { src: "/images/halaman-dekat-masjid.jpeg", label: "Halaman Pesantren" },
     ],
   },
 ];

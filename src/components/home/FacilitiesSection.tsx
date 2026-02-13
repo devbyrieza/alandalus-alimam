@@ -8,13 +8,13 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 const FACILITIES = [
-    { name: "Masjid Kapasitas 800 Jamaah", icon: Home, color: "brown" },
+    { name: "Masjid Kapasitas 1000 Jamaah", icon: Home, color: "brown" },
     { name: "Gedung Sekolah Terpadu", icon: School, color: "blue" },
     { name: "Asrama Representatif", icon: Building2, color: "ink" },
     { name: "Fasilitas Olahraga", icon: Dumbbell, color: "gold" },
     { name: "Laboratorium IPA", icon: Beaker, color: "teal" },
-    { name: "UKS (Kesehatan Santri)", icon: HeartPulse, color: "red" },
-    { name: "Mini Market Amanah", icon: ShoppingCart, color: "orange" },
+    { name: "UKS (Unit Kesehatan Santri)", icon: HeartPulse, color: "red" },
+    { name: "Mini Market", icon: ShoppingCart, color: "orange" },
     { name: "Lab. Komputer", icon: Monitor, color: "indigo" },
     { name: "Ruang Makan Bersama", icon: UtensilsCrossed, color: "amber" },
     { name: "Perpustakaan Digital", icon: Library, color: "emerald" },

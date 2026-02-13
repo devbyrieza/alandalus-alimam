@@ -12,6 +12,7 @@ import ExtraSection from "@/components/home/ExtraSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import CalendarSection from "@/components/home/CalendarSection";
 import ContactSection from "@/components/home/ContactSection";
+import CtaSection from "@/components/home/CtaSection";
 
 export default function HomePage() {
   return (
@@ -65,6 +66,10 @@ export default function HomePage() {
 
         <ScrollAnimation delay={0.1}>
           <ContactSection />
+        </ScrollAnimation>
+
+        <ScrollAnimation delay={0.1}>
+          <CtaSection />
         </ScrollAnimation>
       </main>
     </>

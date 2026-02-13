@@ -122,7 +122,7 @@ const FeatureCard = ({
   >
     {/* Image Side */}
     <div className={`relative ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-      <div className={`aspect-[4/3] rounded-[3.5rem] overflow-hidden shadow-premium-2xl relative group rotate-${index % 2 === 0 ? '2' : '-2'} hover:rotate-0 transition-transform duration-700 border border-surface-100 p-2 bg-white`}>
+      <div className={`aspect-[4/3] rounded-[3.5rem] overflow-hidden shadow-premium-2xl relative group ${index % 2 === 0 ? 'rotate-2' : '-rotate-2'} hover:rotate-0 transition-transform duration-700 border border-surface-100 p-2 bg-white`}>
         <div className="relative w-full h-full rounded-[3rem] overflow-hidden">
           <Image
             src={item.image}
@@ -348,7 +348,7 @@ export default function KegiatanPage() {
       accentColor: "bg-brown-500",
       bgColor: "bg-brown-600",
       stats: [
-        { label: "Kitab Dikuasai", value: "15+" },
+        { label: "Kitab Dikuasai", value: "30+" },
         { label: "Ustadz Expert", value: "20+" },
         { label: "Jam/Hari", value: "4+" },
       ],
@@ -370,12 +370,12 @@ export default function KegiatanPage() {
       accentColor: "bg-gold-500",
       bgColor: "bg-gold-500",
       stats: [
-        { label: "Target Utama", value: "30 Juz" },
+        { label: "Target Utama", value: "28 Juz" },
         { label: "Metode Proven", value: "Talaqqi" },
         { label: "Setoran", value: "Harian" },
       ],
       results: [
-        { icon: TrendingUp, text: "Capaian Hafalan Terukur (Min. 3 Juz/Tahun)" },
+        { icon: TrendingUp, text: "Target Hafalan Terukur (± 4 Juz/Tahun)" },
         { icon: Award, text: "Standar Bacaan Bersanad & Tartil" },
         { icon: CheckCircle2, text: "Mampu Menjadi Imam Shalat Berjamaah" },
       ],
@@ -409,8 +409,8 @@ export default function KegiatanPage() {
   ];
 
   const heroStats: HeroStat[] = [
-    { icon: BookOpen, value: "15+", label: "Kitab Turats", sublabel: "Dikuasai mendalam" },
-    { icon: BookMarked, value: "30 Juz", label: "Target Tahfidz", sublabel: "Metode Talaqqi" },
+    { icon: BookOpen, value: "30+", label: "Kitab Turats", sublabel: "Kajian Mendalam" },
+    { icon: BookMarked, value: "28 Juz", label: "Target Tahfidz", sublabel: "Metode Talaqqi" },
     { icon: Target, value: "10+", label: "Ekstrakurikuler", sublabel: "Asah bakat santri" },
   ];
 
@@ -536,7 +536,7 @@ export default function KegiatanPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
+            className="text-4xl sm:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
           >
             Membangun <br />
             <span className="text-brown-600">Generasi Qur'ani</span>
@@ -572,7 +572,7 @@ export default function KegiatanPage() {
 
             <div className="relative z-10">
               <span className="text-gold-600 font-extrabold tracking-widest uppercase text-xs mb-6 block">Output Santri</span>
-              <h2 className="text-4xl lg:text-6xl font-display font-black text-ink-950 mb-8 leading-none">
+              <h2 className="text-3xl lg:text-6xl font-display font-black text-ink-950 mb-8 leading-none">
                 Hasil Nyata <br />
                 <span className="text-brown-600">Pendidikan Kita</span>
               </h2>
@@ -590,7 +590,7 @@ export default function KegiatanPage() {
             <div className="relative z-10 grid gap-6">
               {[
                 { text: "Bahasa Arab sebagai Bahasa Pengantar", icon: MessageCircle },
-                { text: "Hafalan Berstandar Sanad (Min. 3 Juz/Thn)", icon: BadgeCheck },
+                { text: "Target Hafalan Berstandar Sanad (± 4 Juz/Thn)", icon: BadgeCheck },
                 { text: "Lulusan Diterima di LIPIA, PTN & Timur Tengah", icon: GraduationCap },
                 { text: "Juara Musabaqah Nasional & Prestasi Sains", icon: Trophy },
               ].map((item, idx) => (
@@ -614,7 +614,7 @@ export default function KegiatanPage() {
       <section className="py-24 md:py-32">
         <Container>
           <div className="text-center max-w-3xl mx-auto mb-24">
-            <motion.h2 className="text-4xl md:text-6xl font-display font-black text-ink-950 mb-8">
+            <motion.h2 className="text-3xl md:text-6xl font-display font-black text-ink-950 mb-8">
               Kurikulum Unggulan
             </motion.h2>
             <p className="text-xl text-ink-600 font-medium leading-relaxed">
@@ -634,7 +634,7 @@ export default function KegiatanPage() {
       <section className="py-24 md:py-32 bg-surface-50/50">
         <Container>
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-8">
+            <h2 className="text-3xl md:text-5xl font-display font-black text-ink-950 mb-8">
               Produktivitas 24 Jam
             </h2>
             <p className="text-xl text-ink-600 font-medium leading-relaxed">
@@ -654,11 +654,11 @@ export default function KegiatanPage() {
       <section className="py-24 md:py-32">
         <Container>
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-6">
+            <h2 className="text-3xl md:text-5xl font-display font-black text-ink-950 mb-6">
               Kegiatan Penunjang
             </h2>
             <p className="text-xl text-ink-600 font-medium leading-relaxed">
-              Aktivitas rutin mingguan dan bulanan yang dirancang untuk mematangkan *soft skills* dan pengalaman santri.
+              Aktivitas rutin mingguan dan bulanan yang dirancang untuk mematangkan <span className="text-brown-600 font-bold uppercase tracking-tight">soft skills</span> dan pengalaman santri.
             </p>
           </div>
 
@@ -674,7 +674,7 @@ export default function KegiatanPage() {
       <section className="py-24 md:py-32 bg-surface-50">
         <Container>
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-6">
+            <h2 className="text-3xl md:text-5xl font-display font-black text-ink-950 mb-6">
               Minat & Bakat
             </h2>
             <p className="text-xl text-ink-600 font-medium leading-relaxed">
@@ -703,7 +703,7 @@ export default function KegiatanPage() {
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
 
             <div className="relative z-10">
-              <h2 className="text-4xl md:text-6xl font-display font-black mb-8 text-white leading-tight">
+              <h2 className="text-3xl md:text-6xl font-display font-black mb-8 text-white leading-tight">
                 Mulai Perjalanan <br /> <span className="text-gold-400">Terbaik</span> Mereka
               </h2>
               <p className="text-xl text-brown-100 max-w-2xl mx-auto mb-12 font-medium">
