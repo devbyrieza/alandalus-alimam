@@ -31,7 +31,7 @@ export default function Footer() {
               </div>
               <div>
                 <h3 className="text-xl font-extrabold text-ink-950 tracking-tight leading-none">Al-Imam</h3>
-                <p className="text-[10px] font-bold text-ink-500 uppercase tracking-[0.2em] mt-2">Ponpes Al-Islami</p>
+                <p className="text-[10px] font-bold text-ink-500 uppercase tracking-[0.2em] mt-2">Managed by Al-Andalus</p>
               </div>
             </Link>
             <p className="text-ink-600 font-medium leading-relaxed max-w-xs">
@@ -91,7 +91,7 @@ export default function Footer() {
                 </div>
                 <div className="text-sm font-bold text-ink-950">
                   +62 851-1152-4441
-                  <p className="text-[10px] text-ink-500 font-medium tracking-wide">WhatsApp Center</p>
+                  <p className="text-[10px] text-ink-500 font-medium tracking-wide">Customer Service</p>
                 </div>
               </div>
               <div className="flex gap-4">
@@ -99,7 +99,7 @@ export default function Footer() {
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="text-sm font-bold text-ink-950">
-                  info@alimam.sch.id
+                  pesantrenalimamsukabumi@gmail.com
                 </div>
               </div>
             </div>

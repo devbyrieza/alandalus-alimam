@@ -203,10 +203,10 @@ export default function ContactPage() {
                         />
                         <ContactInfoCard
                             icon={MessageCircle}
-                            title="Nomor WhatsApp"
+                            title="Nomor WhatsApp CS"
                             content="+62 851-1152-4441"
                             href="https://wa.me/6285111524441"
-                            subContent="Respon Cepat Jam Kerja"
+                            subContent="Layanan Informasi (Bpk. Admin)"
                             delay={0.2}
                         />
                         <ContactInfoCard

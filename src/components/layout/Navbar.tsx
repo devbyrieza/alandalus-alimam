@@ -55,12 +55,12 @@ export default function Navbar() {
                 </div>
                 <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full" />
               </div>
-              <div className="hidden sm:block">
+              <div className="block">
                 <h1 className="text-lg font-extrabold text-ink-950 leading-none tracking-tight">
                   Al-Imam
                 </h1>
                 <p className="text-[11px] font-bold text-ink-500 uppercase tracking-widest mt-1">
-                  Pesantren Islami
+                  Managed by Al-Andalus
                 </p>
               </div>
             </Link>

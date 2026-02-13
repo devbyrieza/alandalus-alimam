@@ -39,8 +39,8 @@ RUN apt-get update -y && apt-get install -y openssl libssl3 && rm -rf /var/lib/a
 WORKDIR /app
 
 ENV NODE_ENV=production
-ENV WABLAS_TOKEN=52uAU5EigOWgiGE0Iiz0giVET41xuXNvNXKeR2NBJP76AvQ9lRFSyi6
-ENV WABLAS_SECRET_KEY=HCRURtX1
+ENV WABLAS_TOKEN=kTrgeA9v6F4jF2Jj5JJEiZI3ficNtnYPgdIJUCR9AyFwwzVyJgKw2zy
+ENV WABLAS_SECRET_KEY=qpdqYZiu
 
 RUN addgroup --system --gid 1001 nodejs &&     adduser --system --uid 1001 nextjs
 
