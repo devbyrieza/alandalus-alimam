@@ -69,7 +69,8 @@
       "Bash(tar czf:*)",
       "Bash(nslookup:*)",
       "Bash(ping:*)",
-      "Bash(tar:*)"
+      "Bash(tar:*)",
+      "Bash(dir:*)"
     ]
   }
 }

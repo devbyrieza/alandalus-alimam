@@ -17,8 +17,8 @@ import { Container } from "@/components/layout/Container";
 
 const GALLERY_ITEMS = [
   {
-    image: "/images/santri-pembelajaran-kitab.png",
-    title: "Kajian Kitab Kuning",
+    image: "/images/pembelajaran-kitab-turotz.png",
+    title: "Kajian Kitab Turats",
     description: "Mengkaji Kitab Turats & Ulama Salaf",
     icon: BookOpen,
   },
@@ -29,7 +29,7 @@ const GALLERY_ITEMS = [
     icon: BookMarked,
   },
   {
-    image: "/images/ekstra-atau-ekskul.jpg",
+    image: "/images/extra-karate.jpg",
     title: "Ekstrakurikuler",
     description: "Bela Diri, Panahan & Lifeskill",
     icon: Target,

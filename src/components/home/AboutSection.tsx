@@ -4,110 +4,135 @@ import Link from "next/link";
 import {
   CheckCircle,
   Target,
-  Rocket
+  Rocket,
+  ArrowRight
 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
+import { motion } from "framer-motion";
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-12 md:py-24 bg-surface-50">
+    <section id="about" className="py-24 md:py-32 bg-surface-50 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
+
       <Container>
         <div className="max-w-6xl mx-auto">
 
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brown-50 text-brown-700 text-xs font-bold uppercase tracking-widest mb-4">
+          {/* Header */}
+          <div className="text-center mb-20">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-surface-200 text-brown-700 text-xs font-bold uppercase tracking-widest mb-6 shadow-premium-sm"
+            >
               <CheckCircle className="w-3.5 h-3.5" />
               <span>Profil Pesantren</span>
-            </div>
+            </motion.div>
 
-            <h2 className="text-3xl md:text-5xl font-bold text-ink-900 mb-6 tracking-tight">
-              Pendidikan Terbaik untuk <span className="text-gradient-brown">Buah Hati Anda</span>
-            </h2>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-8 tracking-tight leading-none"
+            >
+              Pendidikan Terbaik untuk <span className="text-brown-600">Buah Hati Anda</span>
+            </motion.h2>
 
-            <p className="text-lg text-ink-500 max-w-2xl mx-auto leading-relaxed">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-lg text-ink-600 max-w-2xl mx-auto leading-relaxed font-medium"
+            >
               Kami menggabungkan nilai-nilai Salafush Shalih dengan metodologi pengajaran modern untuk mencetak santri yang siap menghadapi tantangan zaman.
-            </p>
+            </motion.p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-16">
+          <div className="grid md:grid-cols-2 gap-10 lg:gap-16 mb-24">
             {/* Card Visi */}
-            <div className="relative group">
-              <div className="card-wablas bg-white p-8 md:p-10 relative z-10 h-full flex flex-col hover:shadow-clay-lg transition-all duration-500 border border-surface-100 overflow-hidden">
-                {/* Decorative Background Pattern */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-brown-50 rounded-full blur-3xl -mr-16 -mt-16 opacity-50 group-hover:bg-brown-100 transition-colors duration-500" />
-
-                <div className="w-14 h-14 rounded-2xl bg-brown-50 flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform duration-500">
-                  <div className="w-9 h-9 bg-brown-700 rounded-xl flex items-center justify-center text-white shadow-md shadow-brown-200">
-                    <Target className="w-5 h-5" />
-                  </div>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative group"
+            >
+              <div className="bg-white rounded-[2.5rem] p-10 md:p-12 relative z-10 h-full flex flex-col shadow-premium-lg border border-surface-100 hover:shadow-premium-xl transition-all duration-500 overflow-hidden">
+                <div className="w-16 h-16 rounded-2xl bg-brown-50 flex items-center justify-center mb-8 shadow-premium-sm group-hover:scale-110 transition-transform duration-500">
+                  <Target className="w-8 h-8 text-brown-600" />
                 </div>
 
-                <h3 className="text-2xl font-bold text-ink-900 mb-2 tracking-tight">Visi Kami</h3>
-                <p className="text-[10px] font-extrabold text-brown-600 uppercase tracking-widest mb-6 bg-brown-50 w-fit px-2 py-0.5 rounded-md">Kaderisasi Ummat</p>
+                <h3 className="text-3xl font-display font-bold text-ink-950 mb-4 tracking-tight">Visi Kami</h3>
+                <p className="text-[11px] font-extrabold text-brown-600 uppercase tracking-[0.2em] mb-8 bg-brown-50 px-3 py-1 rounded-lg w-fit">Kaderisasi Generasi</p>
 
                 <div className="flex-1">
-                  <div className="relative">
-                    <p className="text-ink-900 leading-relaxed font-black text-2xl md:text-3xl italic border-l-4 border-brown-500 pl-6 py-4 bg-gradient-to-r from-brown-50/50 to-transparent rounded-r-2xl">
-                      "Kaderisasi Ummat Rabbani Cendekia Mandiri"
+                  <blockquote className="relative">
+                    <p className="text-ink-950 leading-snug font-black text-2xl md:text-3xl italic">
+                      "Kaderisasi Generasi Rabbani Cendekia Mandiri"
                     </p>
-                    <div className="absolute -left-1 top-0 bottom-0 w-1 bg-brown-200 rounded-full" />
-                  </div>
+                    <div className="mt-8 w-12 h-1.5 bg-brown-200 rounded-full" />
+                  </blockquote>
                 </div>
               </div>
-              <div className="absolute top-4 -right-2 w-full h-full bg-brown-100/10 rounded-3xl -z-0 group-hover:bg-brown-100/20 transition-colors duration-500" />
-            </div>
+            </motion.div>
 
             {/* Card Misi */}
-            <div className="relative group">
-              <div className="card-wablas bg-white p-8 md:p-10 relative z-10 h-full flex flex-col hover:shadow-clay-lg transition-all duration-500 border border-surface-100 overflow-hidden">
-                {/* Decorative Background Pattern */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-teal-50 rounded-full blur-3xl -mr-16 -mt-16 opacity-50 group-hover:bg-teal-100 transition-colors duration-500" />
-
-                <div className="w-14 h-14 rounded-2xl bg-teal-50 flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform duration-500">
-                  <div className="w-9 h-9 bg-teal-700 rounded-xl flex items-center justify-center text-white shadow-md shadow-teal-200">
-                    <Rocket className="w-5 h-5" />
-                  </div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative group"
+            >
+              <div className="bg-white rounded-[2.5rem] p-10 md:p-12 relative z-10 h-full flex flex-col shadow-premium-lg border border-surface-100 hover:shadow-premium-xl transition-all duration-500 overflow-hidden">
+                <div className="w-16 h-16 rounded-2xl bg-teal-50 flex items-center justify-center mb-8 shadow-premium-sm group-hover:scale-110 transition-transform duration-500">
+                  <Rocket className="w-8 h-8 text-teal-600" />
                 </div>
 
-                <h3 className="text-2xl font-bold text-ink-900 mb-2 tracking-tight">Misi Kami</h3>
-                <p className="text-[10px] font-extrabold text-teal-600 uppercase tracking-widest mb-6 bg-teal-50 w-fit px-2 py-0.5 rounded-md">Langkah Strategis</p>
+                <h3 className="text-3xl font-display font-bold text-ink-950 mb-4 tracking-tight">Misi Kami</h3>
+                <p className="text-[11px] font-extrabold text-teal-600 uppercase tracking-[0.2em] mb-8 bg-teal-50 px-3 py-1 rounded-lg w-fit">Langkah Strategis</p>
 
-                <ul className="text-ink-700 leading-loose space-y-5 text-base flex-1">
-                  <li className="flex gap-4 items-start">
-                    <div className="mt-2 w-5 h-5 rounded-full bg-teal-50 flex items-center justify-center shrink-0 border border-teal-100 group-hover:bg-teal-100 transition-colors">
-                      <div className="w-2 h-2 rounded-full bg-teal-600" />
-                    </div>
-                    <span className="text-justify font-medium leading-relaxed">Menyelenggarakan pendidikan Berbasis <span className="text-teal-700 font-bold">TICE</span> (Tahfidz, Islamic Curriculum, dan Enterpreneurship)</span>
-                  </li>
-                  <li className="flex gap-4 items-start">
-                    <div className="mt-2 w-5 h-5 rounded-full bg-teal-50 flex items-center justify-center shrink-0 border border-teal-100 group-hover:bg-teal-100 transition-colors">
-                      <div className="w-2 h-2 rounded-full bg-teal-600" />
-                    </div>
-                    <span className="text-justify font-medium leading-relaxed">Mencetak <span className="text-teal-700 font-bold">Hamalatul Qur'an</span> dengan bekal ilmu syar'i yang mumpuni</span>
-                  </li>
-                  <li className="flex gap-4 items-start">
-                    <div className="mt-2 w-5 h-5 rounded-full bg-teal-50 flex items-center justify-center shrink-0 border border-teal-100 group-hover:bg-teal-100 transition-colors">
-                      <div className="w-2 h-2 rounded-full bg-teal-600" />
-                    </div>
-                    <span className="text-justify font-medium leading-relaxed">Menanamkan jiwa <span className="text-teal-700 font-bold">Entrepreneurship Muslim</span> yang berwawasan Global</span>
-                  </li>
+                <ul className="space-y-6 flex-1">
+                  {[
+                    { text: "Menyelenggarakan pendidikan Berbasis ", highlight: "TICE", suffix: " (Tahfidz, Islamic Curriculum, dan Enterpreneurship)" },
+                    { text: "Mencetak ", highlight: "Hamalatul Qur'an", suffix: " dengan bekal ilmu syar'i yang mumpuni" },
+                    { text: "Menanamkan jiwa ", highlight: "Entrepreneurship Muslim", suffix: " yang berwawasan Global" }
+                  ].map((misi, i) => (
+                    <li key={i} className="flex gap-4 items-start">
+                      <div className="mt-1.5 w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center shrink-0 border border-teal-100 group-hover:bg-teal-100 transition-colors">
+                        <CheckCircle className="w-3.5 h-3.5 text-teal-600" />
+                      </div>
+                      <p className="text-base font-medium text-ink-700 leading-relaxed text-justify">
+                        {misi.text}<span className="text-ink-950 font-bold">{misi.highlight}</span>{misi.suffix}
+                      </p>
+                    </li>
+                  ))}
                 </ul>
               </div>
-              <div className="absolute top-4 -right-2 w-full h-full bg-teal-100/10 rounded-3xl -z-0 group-hover:bg-teal-100/20 transition-colors duration-500" />
-            </div>
+            </motion.div>
           </div>
 
-          <div className="flex flex-col items-center gap-6 pt-10 border-t border-surface-200">
-            <div className="text-center">
-              <p className="text-xs font-bold text-ink-400 uppercase tracking-wider mb-2">Managed By</p>
-              <p className="text-xl font-black text-brown-900">Al-Andalus</p>
+          {/* Bottom CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col items-center gap-10 pt-16 border-t border-surface-200"
+          >
+            <div className="text-center group cursor-pointer">
+              <p className="text-[10px] font-extrabold text-ink-400 uppercase tracking-[0.3em] mb-3">Principal Advisor</p>
+              <p className="text-2xl font-display font-black text-brown-900 group-hover:text-brown-700 transition-colors">YAYASAN AL-ANDALUS</p>
             </div>
-            <div className="flex justify-center">
-              <Link href="/tentang" className="btn-primary px-10 py-3 text-sm shadow-clay-sm">
-                Profil Lengkap
-              </Link>
-            </div>
-          </div>
+
+            <Link href="/tentang" className="group flex items-center gap-3">
+              <button className="px-10 py-5 rounded-pill bg-brown-700 text-white font-bold shadow-premium-lg hover:shadow-premium-xl hover:bg-brown-800 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2">
+                Eksplor Profil Lengkap
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </Link>
+          </motion.div>
         </div>
       </Container>
     </section>

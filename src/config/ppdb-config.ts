@@ -9,7 +9,7 @@ export const PPDB_CONFIG = {
     nama: "Pesantren Al-Imam Al-Islami",
     singkatan: "Al-Imam",
     alamat: "Jl. Pelabuhan Ratu II KM 18, Kp. Pupunjul, Desa Cikembar, Kec. Cikembar, Kab. Sukabumi, Jawa Barat 43157",
-    telepon: "+62 858-8887-1997",
+    telepon: "+62 851-1152-4441",
     email: "pesantrenalimamsukabumi@gmail.com",
     emailPpdb: "ppdb.pesantrenalimam@gmail.com",
     website: "https://www.al-imam.sch.id",
@@ -55,7 +55,7 @@ export const PPDB_CONFIG = {
       name: "MTs",
       fullName: "Madrasah Tsanawiyah",
       description: "Program pendidikan formal setara SMP dengan kurikulum integrasi pesantren.",
-      image: "/images/program-mts.jpg",
+      image: "/images/mts.png",
       theme: "brown"
     },
     {
@@ -63,7 +63,7 @@ export const PPDB_CONFIG = {
       name: "I'dad Lughowi",
       fullName: "Program Persiapan Bahasa Arab",
       description: "Program intensif persiapan bahasa Arab untuk jenjang lebih tinggi.",
-      image: "/images/program-il.jpg",
+      image: "/images/il.png",
       theme: "gold"
     }
   ],
@@ -102,7 +102,7 @@ export const PPDB_CONFIG = {
 
   // 🔗 KONTAK & SOSMED (GANTI SESUAI!)
   contact: {
-    whatsapp: "+6285888871997",
+    whatsapp: "+6285111524441",
     instagram: "@pesantrenalimamsukabumi",
     facebook: "Pesantren Al-Imam Al-Islami (Official Fanpage)",
     youtube: "Al Imam Al Islami Cikembar Sukabumi"

@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
-  User,
   Lock,
   IdCard,
   Mail,
@@ -13,11 +13,53 @@ import {
   Loader2,
   AlertCircle,
   Sparkles,
-  FileText,
   School,
   ArrowRight,
   ShieldCheck,
+  ArrowLeft,
+  FileText,
 } from "lucide-react";
+import { Container } from "@/components/layout/Container";
+import { motion, AnimatePresence } from "framer-motion";
+
+// ========================================
+// REUSABLE COMPONENTS
+// ========================================
+
+const AuthInput = ({
+  label,
+  icon: Icon,
+  error,
+  children
+}: {
+  label: string,
+  icon: any,
+  error?: string,
+  children: React.ReactNode
+}) => (
+  <div className="space-y-3">
+    <label className="text-[10px] font-black text-ink-400 uppercase tracking-[0.2em] ml-1">{label}</label>
+    <div className="relative group">
+      <div className="absolute left-6 top-1/2 -translate-y-1/2 text-ink-300 group-focus-within:text-brown-600 transition-colors duration-300">
+        <Icon className="w-5 h-5" />
+      </div>
+      {children}
+    </div>
+    {error && (
+      <motion.p
+        initial={{ opacity: 0, x: -10 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="text-xs text-red-600 font-bold ml-1 flex items-center gap-1.5"
+      >
+        <AlertCircle className="w-3.5 h-3.5" /> {error}
+      </motion.p>
+    )}
+  </div>
+);
+
+// ========================================
+// MAIN COMPONENT
+// ========================================
 
 export default function LoginPage() {
   const router = useRouter();
@@ -46,7 +88,6 @@ export default function LoginPage() {
     setError("");
     setIsLoading(true);
 
-    // Validasi input
     if (!nikPendaftar || !nomorPendaftaran) {
       setError("NIK dan Nomor Pendaftaran wajib diisi");
       setIsLoading(false);
@@ -59,13 +100,8 @@ export default function LoginPage() {
       return;
     }
 
-    // Format nomor pendaftaran: MTI/MTA/ILI/ILA/MAI/MAA + 6-8 digit
-    if (
-      !/^(MTI|MTA|ILI|ILA|MAI|MAA)\d{6,8}$/.test(nomorPendaftaran)
-    ) {
-      setError(
-        "Format nomor pendaftaran tidak valid (contoh: MTI2600001 atau ILI20269168)"
-      );
+    if (!/^(MTI|MTA|ILI|ILA|MAI|MAA)\d{6,8}$/.test(nomorPendaftaran)) {
+      setError("Format nomor pendaftaran tidak valid (contoh: MTI2600001)");
       setIsLoading(false);
       return;
     }
@@ -82,12 +118,8 @@ export default function LoginPage() {
       });
 
       const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Login gagal");
 
-      if (!response.ok) {
-        throw new Error(data.error || "Login gagal");
-      }
-
-      // Success - gunakan full page reload untuk pastikan cookie di-set
       setIsLoading(false);
       window.location.href = "/dashboard";
     } catch (error: any) {
@@ -102,7 +134,6 @@ export default function LoginPage() {
     setError("");
     setIsLoading(true);
 
-    // Validasi input
     if (!emailAdmin || !passwordAdmin) {
       setError("Email dan Password wajib diisi");
       setIsLoading(false);
@@ -121,21 +152,14 @@ export default function LoginPage() {
       });
 
       const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Login gagal");
 
-      if (!response.ok) {
-        throw new Error(data.error || "Login gagal");
-      }
-
-      // Success - gunakan full page reload untuk pastikan cookie di-set
       setIsLoading(false);
-
-      // Redirect sesuai role menggunakan full page reload
-      if (["admin", "admin_super", "admin_berkas", "admin_keuangan"].includes(data.role)) {
+      if (["admin", "admin_super", "admin_berkas", "admin_keuangan", "head_of_it"].includes(data.role)) {
         window.location.href = "/dashboard/admin";
       } else if (data.role === "penguji") {
         window.location.href = "/dashboard/penguji";
       } else {
-        console.error("Unknown role:", data.role);
         throw new Error(`Role tidak dikenali: ${data.role}`);
       }
     } catch (error: any) {
@@ -145,239 +169,236 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen bg-surface-50 flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Background Decor - Hostinger Style: Very subtle, very clean */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-brown-100/30 rounded-full blur-[100px]" />
-        <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-gold-100/30 rounded-full blur-[100px]" />
-      </div>
+    <main className="min-h-screen bg-white flex items-center justify-center p-6 relative overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brown-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gold-50/30 rounded-full blur-[100px] -translate-x-1/2 translate-y-1/2 pointer-events-none" />
+      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
 
-      <div className="w-full max-w-[420px] relative z-10 animate-in fade-in zoom-in-95 duration-500">
+      <Container className="relative z-10 flex flex-col items-center">
         {/* Logo / Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-brown-600 to-brown-800 rounded-2xl shadow-xl shadow-brown-900/10 mb-6">
-            <School className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-3xl font-black text-ink-900 mb-2 tracking-tight">
-            Selamat Datang
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-12"
+        >
+          <Link href="/">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-white rounded-3xl shadow-premium-sm border border-surface-100 mb-8 hover:scale-110 transition-transform group">
+              <School className="w-10 h-10 text-brown-600 group-hover:text-gold-600 transition-colors" />
+            </div>
+          </Link>
+          <h1 className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-3 tracking-tight">
+            Portal <span className="text-brown-600">Al-Imam</span>
           </h1>
-          <p className="text-ink-500 font-medium">
-            Masuk ke Portal PPDB Al-Imam
+          <p className="text-lg text-ink-500 font-medium">
+            Masuk ke Sistem Administrasi & Pendaftaran
           </p>
-        </div>
+        </motion.div>
 
         {/* Main Card */}
-        <div className="bg-white rounded-3xl shadow-clay-xl p-8 border border-surface-200/50">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.1 }}
+          className="w-full max-w-[480px] bg-white rounded-[4rem] shadow-premium-2xl p-10 md:p-14 border border-surface-100 relative overflow-hidden"
+        >
+          {/* Subtle inside gradient */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-brown-50/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
-          {/* Pill Tab Switcher - Hostinger Style */}
-          <div className="bg-surface-100 p-1.5 rounded-full flex relative mb-8">
+          {/* Tab Switcher - Premium "Pill" style */}
+          <div className="bg-surface-50 p-2 rounded-[2rem] flex relative mb-12 border border-surface-100">
             {/* Animated Background Pill */}
-            <div
-              className={`absolute top-1.5 bottom-1.5 rounded-full bg-white shadow-sm transition-all duration-300 ease-spring ${activeTab === 'pendaftar' ? 'left-1.5 w-[calc(50%-6px)]' : 'left-[calc(50%+3px)] w-[calc(50%-6px)]'
+            <motion.div
+              layoutId="auth-tab"
+              transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+              className={`absolute top-2 bottom-2 rounded-[1.5rem] bg-white shadow-premium-sm ${activeTab === 'pendaftar' ? 'left-2 w-[calc(50%-8px)]' : 'left-[calc(50%+4px)] w-[calc(50%-8px)]'
                 }`}
             />
 
             <button
               onClick={() => { setActiveTab("pendaftar"); setError(""); }}
-              className={`flex-1 relative z-10 py-2.5 text-sm font-bold text-center rounded-full transition-colors duration-300 ${activeTab === "pendaftar" ? "text-brown-700" : "text-ink-500 hover:text-ink-700"
-                }`}
+              className={`flex-1 relative z-10 py-3.5 text-xs font-black uppercase tracking-widest text-center rounded-2xl transition-colors duration-300 ${activeTab === "pendaftar" ? "text-brown-700" : "text-ink-400 hover:text-ink-600"}`}
             >
               Pendaftar
             </button>
             <button
               onClick={() => { setActiveTab("admin"); setError(""); }}
-              className={`flex-1 relative z-10 py-2.5 text-sm font-bold text-center rounded-full transition-colors duration-300 ${activeTab === "admin" ? "text-brown-700" : "text-ink-500 hover:text-ink-700"
-                }`}
+              className={`flex-1 relative z-10 py-3.5 text-xs font-black uppercase tracking-widest text-center rounded-2xl transition-colors duration-300 ${activeTab === "admin" ? "text-brown-700" : "text-ink-400 hover:text-ink-600"}`}
             >
-              Admin / Penguji
+              Staff Portal
             </button>
           </div>
 
           {/* Error Alert */}
-          {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-100 rounded-xl flex items-start gap-3 animate-in fade-in slide-in-from-top-2">
-              <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
-              <p className="text-sm text-red-700 font-semibold leading-tight">{error}</p>
-            </div>
-          )}
-
-          {/* Forms */}
-          <div className="relative min-h-[300px]">
-
-            {/* Form Pendaftar */}
-            {activeTab === "pendaftar" && (
-              <form onSubmit={handleLoginPendaftar} className="space-y-5 animate-in fade-in slide-in-from-left-4 duration-300">
-                <div className="space-y-5">
-                  <div>
-                    <label className="block text-xs font-bold text-ink-600 uppercase tracking-wider mb-2 ml-1">
-                      Nomor Pendaftaran
-                    </label>
-                    <div className="relative group">
-                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-400 group-focus-within:text-brown-600 transition-colors">
-                        <FileText className="w-5 h-5" />
-                      </div>
-                      <input
-                        type="text"
-                        value={nomorPendaftaran}
-                        onChange={(e) => setNomorPendaftaran(e.target.value.toUpperCase())}
-                        placeholder="MTI2600001"
-                        className="w-full px-5 py-3.5 pl-12 rounded-xl bg-surface-50 border border-surface-200 text-ink-900 placeholder:text-ink-400 focus:bg-white focus:border-brown-500 focus:ring-4 focus:ring-brown-500/10 transition-all font-semibold uppercase"
-                        disabled={isLoading}
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-ink-600 uppercase tracking-wider mb-2 ml-1">
-                      NIK Santri
-                    </label>
-                    <div className="relative group">
-                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-400 group-focus-within:text-brown-600 transition-colors">
-                        <IdCard className="w-5 h-5" />
-                      </div>
-                      <input
-                        type="text"
-                        inputMode="numeric"
-                        maxLength={16}
-                        value={nikPendaftar}
-                        onChange={(e) => setNikPendaftar(e.target.value.replace(/\D/g, ""))}
-                        placeholder="3201234567890000"
-                        className="w-full px-5 py-3.5 pl-12 rounded-xl bg-surface-50 border border-surface-200 text-ink-900 placeholder:text-ink-400 focus:bg-white focus:border-brown-500 focus:ring-4 focus:ring-brown-500/10 transition-all font-semibold"
-                        disabled={isLoading}
-                      />
-                    </div>
-                  </div>
+          <AnimatePresence mode="wait">
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, height: 0, marginBottom: 0 }}
+                animate={{ opacity: 1, height: "auto", marginBottom: 32 }}
+                exit={{ opacity: 0, height: 0, marginBottom: 0 }}
+                className="p-5 bg-red-50 border border-red-100 rounded-3xl flex items-start gap-4 overflow-hidden"
+              >
+                <div className="w-10 h-10 bg-red-500 rounded-2xl flex items-center justify-center text-white shrink-0 shadow-premium-xs">
+                  <AlertCircle className="w-6 h-6" />
                 </div>
+                <p className="text-sm text-red-700 font-bold leading-tight mt-0.5">{error}</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-                <div className="pt-2">
-                  <button
+          {/* Forms with AnimatePresence for smooth transitions */}
+          <div className="relative">
+            <AnimatePresence mode="wait">
+              {activeTab === "pendaftar" ? (
+                <motion.form
+                  key="form-pendaftar"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  onSubmit={handleLoginPendaftar}
+                  className="space-y-8"
+                >
+                  <AuthInput label="Nomor Pendaftaran" icon={FileText}>
+                    <input
+                      type="text"
+                      value={nomorPendaftaran}
+                      onChange={(e) => setNomorPendaftaran(e.target.value.toUpperCase())}
+                      placeholder="Contoh: MTI2600001"
+                      className="w-full px-8 py-5 pl-16 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-950 uppercase placeholder:normal-case placeholder:font-medium placeholder:text-ink-300"
+                      disabled={isLoading}
+                    />
+                  </AuthInput>
+
+                  <AuthInput label="NIK Calon Santri" icon={IdCard}>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={16}
+                      value={nikPendaftar}
+                      onChange={(e) => setNikPendaftar(e.target.value.replace(/\D/g, ""))}
+                      placeholder="16 Digit NIK Sesuai KK"
+                      className="w-full px-8 py-5 pl-16 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-300"
+                      disabled={isLoading}
+                    />
+                  </AuthInput>
+
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-4 rounded-xl font-bold text-white bg-brown-700 hover:bg-brown-800 shadow-lg shadow-brown-900/10 hover:shadow-xl hover:shadow-brown-900/20 active:scale-[0.98] transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="w-full py-6 rounded-[2rem] bg-brown-900 text-white font-black text-xl hover:bg-gold-500 shadow-premium-lg transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                   >
                     {isLoading ? (
-                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <Loader2 className="w-6 h-6 animate-spin" />
                     ) : (
                       <>
-                        <span>Masuk Sekarang</span>
-                        <ArrowRight className="w-5 h-5" />
+                        <span>Masuk Portal</span>
+                        <LogIn className="w-6 h-6" />
                       </>
                     )}
-                  </button>
-                </div>
+                  </motion.button>
 
-                <div className="relative py-4">
-                  <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t border-surface-200" />
+                  <div className="text-center pt-4">
+                    <p className="text-sm text-ink-400 font-bold uppercase tracking-widest mb-4">Belum Punya Akun?</p>
+                    <Link
+                      href="/daftar"
+                      className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-surface-50 text-brown-700 font-black text-sm border border-surface-100 hover:bg-white hover:shadow-premium-sm transition-all"
+                    >
+                      Daftar Baru Di Sini
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
                   </div>
-                  <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-white px-3 text-ink-400 font-bold tracking-wider">
-                      Atau
-                    </span>
-                  </div>
-                </div>
+                </motion.form>
+              ) : (
+                <motion.form
+                  key="form-admin"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  onSubmit={handleLoginAdmin}
+                  className="space-y-8"
+                >
+                  <AuthInput label="Email Institusi" icon={Mail}>
+                    <input
+                      type="email"
+                      value={emailAdmin}
+                      onChange={(e) => setEmailAdmin(e.target.value)}
+                      placeholder="admin@alimam.sch.id"
+                      className="w-full px-8 py-5 pl-16 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-gold-300 focus:ring-4 focus:ring-gold-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-300"
+                      disabled={isLoading}
+                    />
+                  </AuthInput>
 
-                <div className="text-center">
-                  <p className="text-ink-500 text-sm mb-2">Belum punya akun?</p>
-                  <a
-                    href="/daftar"
-                    className="inline-flex items-center gap-2 text-brown-700 font-bold hover:text-brown-900 hover:underline transition-colors"
-                  >
-                    Daftar Santri Baru
-                  </a>
-                </div>
-              </form>
-            )}
-
-            {/* Form Admin */}
-            {activeTab === "admin" && (
-              <form onSubmit={handleLoginAdmin} className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
-                <div className="space-y-5">
-                  <div>
-                    <label className="block text-xs font-bold text-ink-600 uppercase tracking-wider mb-2 ml-1">
-                      Email Institusi
-                    </label>
-                    <div className="relative group">
-                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-400 group-focus-within:text-gold-600 transition-colors">
-                        <Mail className="w-5 h-5" />
-                      </div>
-                      <input
-                        type="email"
-                        value={emailAdmin}
-                        onChange={(e) => setEmailAdmin(e.target.value)}
-                        placeholder="admin@alimam.sch.id"
-                        className="w-full px-5 py-3.5 pl-12 rounded-xl bg-surface-50 border border-surface-200 text-ink-900 placeholder:text-ink-400 focus:bg-white focus:border-gold-500 focus:ring-4 focus:ring-gold-500/10 transition-all font-medium"
-                        disabled={isLoading}
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-ink-600 uppercase tracking-wider mb-2 ml-1">
-                      Password
-                    </label>
-                    <div className="relative group">
-                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-400 group-focus-within:text-gold-600 transition-colors">
-                        <Lock className="w-5 h-5" />
-                      </div>
+                  <AuthInput label="Password" icon={Lock}>
+                    <div className="relative">
                       <input
                         type={showPassword ? "text" : "password"}
                         value={passwordAdmin}
                         onChange={(e) => setPasswordAdmin(e.target.value)}
                         placeholder="••••••••"
-                        className="w-full px-5 py-3.5 pl-12 pr-12 rounded-xl bg-surface-50 border border-surface-200 text-ink-900 placeholder:text-ink-400 focus:bg-white focus:border-gold-500 focus:ring-4 focus:ring-gold-500/10 transition-all font-medium"
+                        className="w-full px-8 py-5 pl-16 pr-16 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-gold-300 focus:ring-4 focus:ring-gold-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-300"
                         disabled={isLoading}
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-400 hover:text-ink-600 transition-colors"
+                        className="absolute right-6 top-1/2 -translate-y-1/2 text-ink-300 hover:text-ink-600 transition-colors duration-300"
                       >
-                        {showPassword ? (
-                          <EyeOff className="w-5 h-5" />
-                        ) : (
-                          <Eye className="w-5 h-5" />
-                        )}
+                        {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                       </button>
                     </div>
-                  </div>
-                </div>
+                  </AuthInput>
 
-                <div className="pt-2">
-                  <button
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-4 rounded-xl font-bold text-white bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 shadow-lg shadow-gold-500/20 hover:shadow-xl hover:shadow-gold-500/30 active:scale-[0.98] transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="w-full py-6 rounded-[2rem] bg-gold-500 text-white font-black text-xl hover:bg-brown-900 shadow-premium-lg transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                   >
                     {isLoading ? (
-                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <Loader2 className="w-6 h-6 animate-spin" />
                     ) : (
                       <>
-                        <ShieldCheck className="w-5 h-5" />
                         <span>Login Staff</span>
+                        <ShieldCheck className="w-6 h-6" />
                       </>
                     )}
-                  </button>
-                </div>
+                  </motion.button>
 
-                <div className="bg-gold-50/50 rounded-xl p-4 border border-gold-100/50">
-                  <p className="text-xs text-gold-800 text-center leading-relaxed">
-                    Halaman ini khusus untuk Admin, Panitia, dan Penguji. <br />
-                    <span className="font-semibold">Lupa password?</span> Hubungi Administrator Pusat.
-                  </p>
-                </div>
-              </form>
-            )}
+                  <div className="p-6 bg-gold-50/50 rounded-3xl border border-gold-100 flex items-start gap-4">
+                    <div className="w-8 h-8 rounded-xl bg-gold-100 flex items-center justify-center text-gold-700 shrink-0">
+                      <Sparkles className="w-4 h-4" />
+                    </div>
+                    <p className="text-xs text-gold-900 font-bold leading-relaxed">
+                      Lupa password? Silakan hubungi Head of IT atau Admin Pusat untuk reset akses Anda.
+                    </p>
+                  </div>
+                </motion.form>
+              )}
+            </AnimatePresence>
           </div>
-        </div>
+        </motion.div>
 
         {/* Footer Link */}
-        <div className="mt-8 text-center">
-          <a href="/" className="text-ink-400 hover:text-brown-700 text-sm font-semibold transition-colors">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="mt-12"
+        >
+          <Link
+            href="/"
+            className="group flex items-center gap-3 text-ink-400 hover:text-brown-700 font-black uppercase tracking-[0.2em] text-[10px] transition-all"
+          >
+            <div className="w-8 h-8 rounded-full bg-surface-50 border border-surface-100 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <ArrowLeft className="w-4 h-4" />
+            </div>
             Kembali ke Beranda
-          </a>
-        </div>
-      </div>
+          </Link>
+        </motion.div>
+      </Container>
     </main>
   );
 }

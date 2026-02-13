@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
   AlertCircle,
   User,
@@ -12,9 +13,12 @@ import {
   ArrowRight,
   School,
   ChevronDown,
+  Sparkles,
+  RefreshCw,
 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { countries } from "@/lib/data/countries";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface FormData {
   nik: string;
@@ -24,6 +28,38 @@ interface FormData {
   jenis_kelamin: "L" | "P" | "";
   jenjang: "MTs" | "IL" | "";
 }
+
+// ========================================
+// REUSABLE COMPONENTS
+// ========================================
+
+const InputField = ({
+  label,
+  error,
+  children
+}: {
+  label: string,
+  error?: string,
+  children: React.ReactNode
+}) => (
+  <div className="space-y-3">
+    <label className="text-xs font-black text-ink-400 uppercase tracking-widest ml-1">{label}</label>
+    {children}
+    {error && (
+      <motion.p
+        initial={{ opacity: 0, x: -10 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="text-xs text-red-600 font-bold ml-1 flex items-center gap-1"
+      >
+        <AlertCircle className="w-3.5 h-3.5" /> {error}
+      </motion.p>
+    )}
+  </div>
+);
+
+// ========================================
+// MAIN COMPONENT
+// ========================================
 
 export default function DaftarPage() {
   const router = useRouter();
@@ -49,8 +85,8 @@ export default function DaftarPage() {
   });
 
   const [countryCode, setCountryCode] = useState("+62");
-
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -107,17 +143,13 @@ export default function DaftarPage() {
     if (!formData.no_hp) {
       errors.no_hp = "Nomor WhatsApp/HP orang tua wajib diisi";
     } else {
-      // Normalize: hapus awalan 0, 62, +62 jika user tetap ketik
       let cleaned = formData.no_hp.replace(/[\s\-\(\)]/g, "");
-
-      // Jika country code +62, pastikan format valid Indonesia
       if (countryCode === "+62") {
         cleaned = cleaned.replace(/^(\+?62|0)/, "");
         if (!/^8\d{7,13}$/.test(cleaned)) {
           errors.no_hp = "Nomor tidak valid (contoh: 81234567890)";
         }
       } else {
-        // Untuk negara lain, pastikan hanya angka dan panjang masuk akal
         if (!/^\d{6,15}$/.test(cleaned)) {
           errors.no_hp = "Nomor telepon tidak valid";
         }
@@ -136,8 +168,6 @@ export default function DaftarPage() {
     return Object.keys(errors).length === 0;
   };
 
-  const [isLoading, setIsLoading] = useState(false);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -152,40 +182,31 @@ export default function DaftarPage() {
     setIsLoading(true);
 
     try {
-      // Combine country code + phone number
-      // Untuk Indonesia: handle 08xxx -> ambil 8xxx
       let finalPhone = formData.no_hp.replace(/[\s\-\(\)]/g, "");
-
       if (countryCode === "+62") {
         finalPhone = finalPhone.replace(/^(\+?62|0)/, "");
       } else {
-        // Negara lain: strip leading 0 if any (users might typ 0123...)
         finalPhone = finalPhone.replace(/^0+/, "");
       }
 
-      // Format yang dikirim ke API: CountryCode + Number (tanpa +)
-      // e.g., 62812345... or 6012345...
       const codeClean = countryCode.replace("+", "");
       const fullHp = `${codeClean}${finalPhone}`;
 
-      // 1. Kirim OTP via WhatsApp
       const response = await fetch("/api/register/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
           no_hp: fullHp,
-          otp_channel: "whatsapp", // Force WhatsApp
+          otp_channel: "whatsapp",
         }),
       });
 
       const data = await response.json();
-
       if (!response.ok) {
         throw new Error(data.error || "Gagal mengirim OTP");
       }
 
-      // 2. Redirect ke halaman verifikasi
       const params = new URLSearchParams({
         nik: formData.nik,
         nama_lengkap: formData.nama_lengkap,
@@ -196,7 +217,6 @@ export default function DaftarPage() {
         channel: "whatsapp",
       });
 
-      // Pass simulation code if available (for demo)
       if (data.simulation_code) {
         params.append("sim_code", data.simulation_code);
       }
@@ -210,38 +230,73 @@ export default function DaftarPage() {
   };
 
   return (
-    <main className="min-h-screen bg-surface-50 py-12 relative overflow-hidden">
+    <main className="min-h-screen bg-white py-12 md:py-24 relative overflow-hidden">
       {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brown-100/40 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-teal-50/40 rounded-full blur-[120px] pointer-events-none translate-y-1/2 -translate-x-1/3" />
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brown-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-teal-50/30 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
 
-      <Container>
+      <Container className="relative z-10">
         {/* Header */}
-        <div className="text-center mb-10 relative z-10">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-white rounded-xl shadow-clay-sm mb-4">
-            <School className="w-6 h-6 text-brown-600" />
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-2xl shadow-premium-sm border border-surface-100 mb-6 group hover:scale-110 transition-transform">
+            <School className="w-8 h-8 text-brown-600" />
           </div>
-          <h1 className="text-3xl font-black text-ink-900 mb-2">Pendaftaran Santri Baru</h1>
-          <p className="text-ink-500">Tahun Ajaran 2026/2027</p>
-        </div>
+          <motion.h1
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-display font-black text-ink-950 mb-3 tracking-tight"
+          >
+            Mulai Pendaftaran <span className="text-brown-600">Terpadu</span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-lg md:text-xl text-ink-500 font-medium"
+          >
+            Tahap Awal Penerimaan Santri Baru T.A 2026/2027
+          </motion.p>
+        </motion.div>
 
-        <div className="relative z-10 w-full max-w-2xl mx-auto">
-          <div className="bg-white rounded-3xl shadow-clay-lg p-6 sm:p-8 border border-surface-200/60">
+        <div className="w-full max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3 }}
+            className="bg-white rounded-[3.5rem] shadow-premium-2xl p-8 md:p-16 border border-surface-100 relative overflow-hidden"
+          >
+            {/* Soft decorative blur inside card */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-brown-50/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
             {/* Saved Data Notice */}
-            {(formData.nik || formData.nama_lengkap || formData.no_hp) && (
-              <div className="bg-teal-50 border border-teal-100 rounded-xl p-4 mb-8 flex items-start gap-3 animate-in fade-in slide-in-from-top-2">
-                <CheckCircle className="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5" />
-                <div className="flex-1">
-                  <p className="text-sm font-bold text-teal-800">
-                    Melanjutkan Pengisian Data
-                  </p>
-                  <p className="text-xs text-teal-600 mt-0.5">
-                    Data Anda tersimpan otomatis.
+            <AnimatePresence>
+              {(formData.nik || formData.nama_lengkap || formData.no_hp) && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0, marginBottom: 0 }}
+                  animate={{ opacity: 1, height: "auto", marginBottom: 40 }}
+                  exit={{ opacity: 0, height: 0, marginBottom: 0 }}
+                  className="bg-teal-50 border border-teal-100/50 rounded-3xl p-6 flex items-start gap-4 relative z-10 overflow-hidden"
+                >
+                  <div className="w-10 h-10 bg-teal-500 rounded-full flex items-center justify-center text-white shrink-0 shadow-premium-xs">
+                    <CheckCircle className="w-6 h-6" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-lg font-display font-black text-teal-900 leading-none mb-1">
+                      Melanjutkan Draft Pendaftaran
+                    </p>
+                    <p className="text-sm text-teal-600 font-medium">
+                      Data yang anda masukkan sebelumnya telah tersimpan otomatis dalam sesi ini.
+                    </p>
                     <button
                       type="button"
                       onClick={() => {
-                        if (confirm("Yakin ingin menghapus semua data?")) {
+                        if (confirm("Hapus seluruh draf dan mulai dari awal?")) {
                           sessionStorage.removeItem("pendaftaran_form");
                           setFormData({
                             nik: "",
@@ -254,86 +309,93 @@ export default function DaftarPage() {
                           setFieldErrors({});
                         }
                       }}
-                      className="font-bold underline ml-1 hover:text-teal-900"
+                      className="mt-3 flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-teal-800 hover:text-teal-950 transition-colors"
                     >
-                      Mulai Ulang?
+                      <RefreshCw className="w-3 h-3" /> Start Over
                     </button>
-                  </p>
-                </div>
-              </div>
-            )}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
-            <form onSubmit={handleSubmit} className="space-y-8">
+            <form onSubmit={handleSubmit} className="space-y-12 relative z-10">
 
               {/* Section: Jenjang */}
-              <section>
-                <h3 className="text-lg font-bold text-ink-900 mb-4 flex items-center gap-2">
-                  <GraduationCap className="w-5 h-5 text-brown-600" />
-                  Pilih Jenjang
-                </h3>
-                <div data-error={!!fieldErrors.jenjang} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-10 h-10 rounded-xl bg-surface-50 flex items-center justify-center text-brown-600 shadow-premium-xs">
+                    <GraduationCap className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-2xl font-display font-black text-ink-950">Pilih Jenjang</h3>
+                </div>
+
+                <div data-error={!!fieldErrors.jenjang} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {[
-                    { value: "MTs", title: "Madrasah Tsanawiyah", subtitle: "Setara SMP" },
-                    { value: "IL", title: "I'dad Lughowi", subtitle: "Setara SMA" },
+                    { value: "MTs", title: "Madrasah Tsanawiyah", subtitle: "Lulusan SD/Sederajat" },
+                    { value: "IL", title: "I'dad Lughowi", subtitle: "Lulusan SMP/Sederajat" },
                   ].map((option) => (
-                    <div
+                    <motion.div
                       key={option.value}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                       onClick={() => setFormData((prev) => ({ ...prev, jenjang: option.value as any }))}
-                      className={`cursor-pointer rounded-2xl p-4 border-2 transition-all duration-200 ${formData.jenjang === option.value
-                        ? "border-brown-600 bg-brown-50 ring-1 ring-brown-600"
-                        : "border-surface-200 bg-white hover:border-brown-300 hover:shadow-md"
+                      className={`cursor-pointer rounded-[2rem] p-6 border-2 transition-all duration-300 ${formData.jenjang === option.value
+                        ? "border-brown-600 bg-brown-50 shadow-premium-md"
+                        : "border-surface-100 bg-white hover:border-surface-200 hover:shadow-premium-sm"
                         }`}
                     >
-                      <div className="flex items-center gap-3">
-                        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${formData.jenjang === option.value ? "border-brown-600" : "border-ink-300"
+                      <div className="flex items-center gap-4">
+                        <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${formData.jenjang === option.value ? "border-brown-600" : "border-surface-200"
                           }`}>
-                          {formData.jenjang === option.value && <div className="w-2.5 h-2.5 rounded-full bg-brown-600" />}
+                          {formData.jenjang === option.value && <motion.div layoutId="jk-dot" className="w-3 h-3 rounded-full bg-brown-600" />}
                         </div>
                         <div>
-                          <p className="font-bold text-ink-900">{option.title}</p>
-                          <p className="text-xs text-ink-500">{option.subtitle}</p>
+                          <p className="font-display font-black text-xl text-ink-950 leading-none mb-1">{option.title}</p>
+                          <p className="text-xs text-ink-400 font-black uppercase tracking-widest">{option.subtitle}</p>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
                 {fieldErrors.jenjang && (
-                  <p className="text-sm text-red-600 mt-2 font-medium flex items-center gap-1">
-                    <AlertCircle className="w-4 h-4" /> {fieldErrors.jenjang}
+                  <p className="text-xs text-red-600 mt-4 font-bold flex items-center gap-1 ml-1">
+                    <AlertCircle className="w-3.5 h-3.5" /> {fieldErrors.jenjang}
                   </p>
                 )}
-              </section>
-
-              <hr className="border-surface-200" />
+              </motion.section>
 
               {/* Section: Data Diri */}
-              <section>
-                <h3 className="text-lg font-bold text-ink-900 mb-4 flex items-center gap-2">
-                  <User className="w-5 h-5 text-brown-600" />
-                  Data Calon Santri
-                </h3>
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="space-y-8"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-surface-50 flex items-center justify-center text-brown-600 shadow-premium-xs">
+                    <User className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-2xl font-display font-black text-ink-950">Data Calon Santri</h3>
+                </div>
 
-                <div className="grid md:grid-cols-2 gap-5">
-                  <div className="md:col-span-2" data-error={!!fieldErrors.nama_lengkap}>
-                    <label className="block text-xs font-bold text-ink-600 uppercase tracking-wider mb-2 ml-1">
-                      Nama Lengkap
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.nama_lengkap}
-                      onChange={(e) => setFormData((prev) => ({ ...prev, nama_lengkap: e.target.value }))}
-                      placeholder="Sesuai Akta Kelahiran"
-                      className="w-full px-5 py-3.5 rounded-xl bg-surface-50 border border-surface-200 text-ink-900 focus:bg-white focus:border-brown-500 focus:ring-4 focus:ring-brown-500/10 transition-all font-medium"
-                    />
-                    {fieldErrors.nama_lengkap && (
-                      <p className="text-xs text-red-600 mt-1.5 font-bold ml-1">{fieldErrors.nama_lengkap}</p>
-                    )}
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="md:col-span-2">
+                    <InputField label="Nama Lengkap" error={fieldErrors.nama_lengkap}>
+                      <input
+                        type="text"
+                        value={formData.nama_lengkap}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, nama_lengkap: e.target.value }))}
+                        placeholder="Sesuai Akta Kelahiran santri"
+                        className="w-full px-8 py-5 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900 placeholder:text-ink-300"
+                      />
+                    </InputField>
                   </div>
 
-                  <div data-error={!!fieldErrors.nik}>
-                    <label className="block text-xs font-bold text-ink-600 uppercase tracking-wider mb-2 ml-1">
-                      NIK
-                    </label>
+                  <InputField label="NIK Santri" error={fieldErrors.nik}>
                     <input
                       type="text"
                       inputMode="numeric"
@@ -341,84 +403,76 @@ export default function DaftarPage() {
                       value={formData.nik}
                       onChange={(e) => setFormData((prev) => ({ ...prev, nik: e.target.value.replace(/\D/g, "") }))}
                       placeholder="16 Digit NIK"
-                      className="w-full px-5 py-3.5 rounded-xl bg-surface-50 border border-surface-200 text-ink-900 focus:bg-white focus:border-brown-500 focus:ring-4 focus:ring-brown-500/10 transition-all font-medium"
+                      className="w-full px-8 py-5 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900 placeholder:text-ink-300"
                     />
-                    {fieldErrors.nik && (
-                      <p className="text-xs text-red-600 mt-1.5 font-bold ml-1">{fieldErrors.nik}</p>
-                    )}
-                  </div>
+                  </InputField>
 
-                  <div data-error={!!fieldErrors.tanggal_lahir}>
-                    <label className="block text-xs font-bold text-ink-600 uppercase tracking-wider mb-2 ml-1">
-                      Tanggal Lahir
-                    </label>
+                  <InputField label="Tanggal Lahir" error={fieldErrors.tanggal_lahir}>
                     <input
                       type="date"
                       value={formData.tanggal_lahir}
                       onChange={(e) => setFormData((prev) => ({ ...prev, tanggal_lahir: e.target.value }))}
-                      className="w-full px-5 py-3.5 rounded-xl bg-surface-50 border border-surface-200 text-ink-900 focus:bg-white focus:border-brown-500 focus:ring-4 focus:ring-brown-500/10 transition-all font-medium"
+                      className="w-full px-8 py-5 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900"
                     />
-                    {fieldErrors.tanggal_lahir && (
-                      <p className="text-xs text-red-600 mt-1.5 font-bold ml-1">{fieldErrors.tanggal_lahir}</p>
-                    )}
-                  </div>
+                  </InputField>
 
-                  <div className="md:col-span-2" data-error={!!fieldErrors.jenis_kelamin}>
-                    <label className="block text-xs font-bold text-ink-600 uppercase tracking-wider mb-2 ml-1">
-                      Jenis Kelamin
-                    </label>
-                    <div className="flex gap-4">
-                      {[{ val: 'L', label: 'Laki-laki' }, { val: 'P', label: 'Perempuan' }].map((jk) => (
-                        <label key={jk.val} className={`flex-1 flex items-center justify-center px-4 py-3 rounded-xl border-2 cursor-pointer transition-all ${formData.jenis_kelamin === jk.val
-                          ? "bg-brown-50 border-brown-600 text-brown-800 font-bold"
-                          : "bg-white border-surface-200 text-ink-600 hover:border-brown-300"
-                          }`}>
-                          <input
-                            type="radio"
-                            name="jk"
-                            value={jk.val}
-                            checked={formData.jenis_kelamin === jk.val}
-                            onChange={() => setFormData(p => ({ ...p, jenis_kelamin: jk.val as any }))}
-                            className="hidden"
-                          />
-                          {jk.label}
-                        </label>
-                      ))}
-                    </div>
-                    {fieldErrors.jenis_kelamin && (
-                      <p className="text-xs text-red-600 mt-1.5 font-bold ml-1">{fieldErrors.jenis_kelamin}</p>
-                    )}
+                  <div className="md:col-span-2">
+                    <InputField label="Jenis Kelamin" error={fieldErrors.jenis_kelamin}>
+                      <div className="flex gap-4">
+                        {[{ val: 'L', label: 'Santri Ikhwan' }, { val: 'P', label: 'Santri Akhwat' }].map((jk) => (
+                          <motion.label
+                            key={jk.val}
+                            whileTap={{ scale: 0.98 }}
+                            className={`flex-1 flex items-center justify-center px-6 py-4 rounded-3xl border-2 cursor-pointer transition-all duration-300 ${formData.jenis_kelamin === jk.val
+                              ? "bg-brown-900 border-brown-900 text-white font-black shadow-premium-md"
+                              : "bg-surface-50 border-transparent text-ink-500 hover:border-surface-200"
+                              }`}>
+                            <input
+                              type="radio"
+                              name="jk"
+                              value={jk.val}
+                              checked={formData.jenis_kelamin === jk.val}
+                              onChange={() => setFormData(p => ({ ...p, jenis_kelamin: jk.val as any }))}
+                              className="hidden"
+                            />
+                            {jk.label}
+                          </motion.label>
+                        ))}
+                      </div>
+                    </InputField>
                   </div>
                 </div>
-              </section>
-
-              <hr className="border-surface-200" />
+              </motion.section>
 
               {/* Section: Kontak */}
-              <section>
-                <h3 className="text-lg font-bold text-ink-900 mb-4 flex items-center gap-2">
-                  <Phone className="w-5 h-5 text-brown-600" />
-                  Kontak Wali Santri
-                </h3>
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="space-y-8"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-surface-50 flex items-center justify-center text-brown-600 shadow-premium-xs">
+                    <Phone className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-2xl font-display font-black text-ink-950">Kontak Verifikasi</h3>
+                </div>
 
-                <div data-error={!!fieldErrors.no_hp}>
-                  <label className="block text-xs font-bold text-ink-600 uppercase tracking-wider mb-2 ml-1">
-                    Nomor WhatsApp
-                  </label>
-                  <div className="relative flex">
+                <InputField label="Nomor WhatsApp Orang Tua" error={fieldErrors.no_hp}>
+                  <div className="relative flex shadow-premium-xs rounded-[1.5rem] overflow-hidden">
                     <div className="relative">
                       <select
                         value={countryCode}
                         onChange={(e) => setCountryCode(e.target.value)}
-                        className="appearance-none h-full pl-4 pr-8 py-3.5 rounded-l-xl bg-surface-100 border border-r-0 border-surface-200 text-ink-900 font-bold focus:bg-white focus:border-brown-500 focus:ring-4 focus:ring-brown-500/10 transition-all cursor-pointer text-sm w-[120px] sm:w-auto truncate"
+                        className="appearance-none h-full pl-6 pr-10 py-5 bg-surface-100/50 border-r border-surface-200 text-ink-950 font-black focus:bg-white transition-all cursor-pointer text-sm"
                       >
                         {countries.map((c) => (
                           <option key={c.name} value={c.code}>
-                            {c.flag} {c.code} ({c.name})
+                            {c.flag} {c.code}
                           </option>
                         ))}
                       </select>
-                      <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-400 pointer-events-none" />
+                      <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-400 pointer-events-none" />
                     </div>
                     <input
                       type="tel"
@@ -428,53 +482,62 @@ export default function DaftarPage() {
                         const val = e.target.value.replace(/\D/g, "");
                         setFormData((prev) => ({ ...prev, no_hp: val }))
                       }}
-                      placeholder={countryCode === "+62" ? "81234567890" : "Nomor Telepon"}
-                      className="flex-1 w-full px-5 py-3.5 rounded-r-xl bg-surface-50 border border-surface-200 text-ink-900 focus:bg-white focus:border-brown-500 focus:ring-4 focus:ring-brown-500/10 transition-all font-medium border-l-0"
+                      placeholder={countryCode === "+62" ? "812 3456 7890" : "Phone Number"}
+                      className="flex-1 px-8 py-5 bg-surface-50 border-none focus:bg-white focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-950 placeholder:text-ink-300"
                     />
                   </div>
-                  <p className="text-xs text-ink-500 mt-2 ml-1">
-                    Kode OTP akan dikirim ke nomor ini. Pastikan aktif di WhatsApp.
+                  <p className="text-xs text-ink-400 font-bold uppercase tracking-widest mt-3 ml-1">
+                    Kami akan mengirimkan kode OTP via WhatsApp ke nomor tersebut.
                   </p>
-                  {fieldErrors.no_hp && (
-                    <p className="text-xs text-red-600 mt-1.5 font-bold ml-1">{fieldErrors.no_hp}</p>
-                  )}
-                </div>
-              </section>
+                </InputField>
+              </motion.section>
 
-              <div className="pt-4">
-                <button
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 }}
+                className="pt-10"
+              >
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-4 rounded-xl font-bold text-lg text-white bg-gradient-to-r from-brown-700 to-brown-800 hover:from-brown-800 hover:to-brown-900 shadow-xl shadow-brown-900/10 hover:shadow-2xl hover:-translate-y-0.5 transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="w-full py-6 rounded-[2rem] bg-brown-900 text-white font-black text-xl hover:bg-gold-500 shadow-premium-lg transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                 >
                   {isLoading ? (
                     <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      <span>Memproses...</span>
+                      <Loader2 className="w-6 h-6 animate-spin" />
+                      <span>Sedang Memproses...</span>
                     </>
                   ) : (
                     <>
-                      <span>Lanjutkan</span>
-                      <ArrowRight className="w-5 h-5" />
+                      <span>Lanjutkan Registrasi</span>
+                      <ArrowRight className="w-6 h-6" />
                     </>
                   )}
-                </button>
+                </motion.button>
 
-                <p className="text-center text-sm text-ink-500 mt-6">
-                  Sudah mendaftar sebelumnya? <a href="/login" className="text-brown-700 font-bold hover:underline">Login disini</a>
+                <p className="text-center text-sm text-ink-400 font-bold uppercase tracking-widest mt-8">
+                  Punya Akun? <Link href="/login" className="text-brown-700 hover:text-gold-600 transition-colors">Masuk di sini</Link>
                 </p>
-              </div>
+              </motion.div>
 
             </form>
-          </div>
+          </motion.div>
         </div>
 
         {/* Footer Link */}
-        <div className="mt-8 text-center relative z-10">
-          <a href="/" className="text-ink-400 hover:text-brown-700 text-sm font-semibold transition-colors">
-            Kembali ke Beranda
-          </a>
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="mt-12 text-center"
+        >
+          <Link href="/" className="inline-flex items-center gap-2 text-ink-400 hover:text-brown-700 text-xs font-black uppercase tracking-widest transition-colors">
+            <RefreshCw className="w-3.5 h-3.5" /> Kembali Ke Beranda
+          </Link>
+        </motion.div>
       </Container>
     </main>
   );

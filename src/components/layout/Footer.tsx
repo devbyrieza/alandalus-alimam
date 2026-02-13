@@ -9,130 +9,120 @@ import {
   MapPin,
   Phone,
   Mail,
-  ArrowRight
+  Twitter,
+  Globe,
+  ArrowUpRight
 } from "lucide-react";
+import { Container } from "@/components/layout/Container";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const socialLinks = [
-    { href: "https://www.youtube.com/@AlImamAlIslamiCikembarSukabumi", icon: Youtube, color: "hover:text-red-500" },
-    { href: "https://www.instagram.com/pesantrenalimamsukabumi/", icon: Instagram, color: "hover:text-pink-600" },
-    { href: "https://www.facebook.com/ppsbalimamalislami/", icon: Facebook, color: "hover:text-blue-600" },
-  ];
-
   return (
-    <footer className="bg-white border-t border-surface-100 pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+    <footer className="bg-white border-t border-surface-200 pt-24 pb-12 overflow-hidden">
+      <Container>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20">
 
-          {/* Brand Column (4 Cols) */}
-          <div className="lg:col-span-4 space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-brown-700 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-brown-900/10">
+          {/* Brand Info */}
+          <div className="lg:col-span-1 space-y-8">
+            <Link href="/" className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-brown-700 text-white shadow-premium-md">
                 <School className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-bold text-ink-900 text-lg leading-tight">Pesantren Al-Imam</h3>
-                <p className="text-xs text-ink-500 font-medium leading-tight">Managed by Al-Andalus</p>
-                <p className="text-[10px] text-ink-400 mt-0.5 leading-tight max-w-[200px]">
-                  Bekerja Sama Dengan Universitas Islam Terkemuka di 3 Benua
-                </p>
+                <h3 className="text-xl font-extrabold text-ink-950 tracking-tight leading-none">Al-Imam</h3>
+                <p className="text-[10px] font-bold text-ink-500 uppercase tracking-[0.2em] mt-2">Ponpes Al-Islami</p>
               </div>
-            </div>
-            <p className="text-ink-500 text-sm leading-relaxed max-w-sm text-justify">
-              Membangun generasi Qur'ani yang berakhlak mulia, cerdas, dan siap memimpin masa depan dengan landasan salafush shalih.
+            </Link>
+            <p className="text-ink-600 font-medium leading-relaxed max-w-xs">
+              Membangun generasi Qur'ani yang cerdas & berakhlak mulia sesuai pemahaman salafush shalih.
             </p>
-
-            <div className="flex gap-3">
-              {socialLinks.map((social, idx) => (
-                <a
-                  key={idx}
-                  href={social.href}
-                  target="_blank"
-                  className={`w-10 h-10 rounded-full bg-surface-50 flex items-center justify-center text-ink-600 hover:bg-white hover:shadow-clay-sm transition-all duration-300 ${social.color}`}
-                >
-                  <social.icon className="w-5 h-5" />
-                </a>
+            <div className="flex gap-4">
+              {[Instagram, Youtube, Facebook, Twitter].map((Icon, i) => (
+                <Link key={i} href="#" className="w-10 h-10 rounded-xl bg-surface-50 border border-surface-200 flex items-center justify-center text-ink-500 hover:bg-brown-700 hover:text-white hover:border-brown-700 transition-all duration-300">
+                  <Icon className="w-5 h-5" />
+                </Link>
               ))}
             </div>
           </div>
 
-          {/* Links Column (3 Cols) */}
-          <div className="lg:col-span-3 space-y-6">
-            <h4 className="font-bold text-ink-900">Program</h4>
+          {/* Quick Links */}
+          <div className="space-y-8">
+            <h4 className="text-sm font-extrabold text-ink-950 uppercase tracking-widest">Lembaga</h4>
             <ul className="space-y-4">
-              <li>
-                <Link href="/program#mts" className="group flex items-center justify-between text-sm text-ink-600 hover:text-brown-700">
-                  <span>MTs Al-Imam</span>
-                  <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
-                </Link>
-              </li>
-              <li>
-                <Link href="/program#il" className="group flex items-center justify-between text-sm text-ink-600 hover:text-brown-700">
-                  <span>I'dad Lughowi</span>
-                  <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
-                </Link>
-              </li>
-              <li>
-                <Link href="/kegiatan" className="group flex items-center justify-between text-sm text-ink-600 hover:text-brown-700">
-                  <span>Ekstrakurikuler</span>
-                  <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
-                </Link>
-              </li>
+              {['Tentang Kami', 'Program Studi', 'Fasilitas', 'Kegiatan Santri'].map((item) => (
+                <li key={item}>
+                  <Link href="#" className="text-ink-600 font-bold hover:text-brown-700 flex items-center gap-2 group">
+                    {item}
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Contact Column (5 Cols) */}
-          <div className="lg:col-span-5 space-y-6">
-            <h4 className="font-bold text-ink-900">Kontak Kami</h4>
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-brown-500 shrink-0 mt-0.5" />
-                  <p className="text-sm text-ink-600">
-                    Jl. Pelabuhan Ratu II KM 18, Desa Bojongkembar, Cikembar, Sukabumi
-                  </p>
+          {/* Support */}
+          <div className="space-y-8">
+            <h4 className="text-sm font-extrabold text-ink-950 uppercase tracking-widest">Informasi</h4>
+            <ul className="space-y-4">
+              {['Pendaftaran PPDB', 'Biaya Pendidikan', 'Beasiswa Tahfidz', 'Kalender Akademik'].map((item) => (
+                <li key={item}>
+                  <Link href="#" className="text-ink-600 font-bold hover:text-brown-700 transition-colors">{item}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div className="space-y-8">
+            <h4 className="text-sm font-extrabold text-ink-950 uppercase tracking-widest">Kontak Kami</h4>
+            <div className="space-y-6">
+              <div className="flex gap-4">
+                <div className="w-10 h-10 rounded-xl bg-brown-50 flex items-center justify-center text-brown-600 flex-shrink-0">
+                  <MapPin className="w-5 h-5" />
                 </div>
-                <div className="flex items-center gap-3">
-                  <Phone className="w-4 h-4 text-ink-400" />
-                  <a href="tel:+6285888871997" className="text-sm text-ink-600 hover:text-brown-700 font-medium font-sans">
-                    +62 858-8887-1997
-                  </a>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Mail className="w-4 h-4 text-ink-400 mt-0.5 shrink-0" />
-                  <a href="mailto:pesantrenalimamsukabumi@gmail.com" className="text-sm text-ink-600 hover:text-brown-700 font-medium break-all">
-                    pesantrenalimamsukabumi@gmail.com
-                  </a>
+                <div className="text-sm font-medium text-ink-600">
+                  Jl. Cikembar No. 12, Sukabumi,<br />Jawa Barat 43157
                 </div>
               </div>
-
-              {/* Call to Action Box */}
-              <div className="bg-surface-50 rounded-2xl p-5 border border-surface-100">
-                <h5 className="font-bold text-ink-900 text-sm mb-2">Pendaftaran 2026 Dibuka!</h5>
-                <p className="text-xs text-ink-500 mb-4 text-justify">Mulai 10 Februari 2026. Kuota terbatas.</p>
-                <Link
-                  href="/daftar"
-                  className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-white border border-brown-200 text-brown-700 text-xs font-bold rounded-xl shadow-sm hover:shadow-md hover:border-brown-300 transition-all"
-                >
-                  Daftar Sekarang
-                </Link>
+              <div className="flex gap-4">
+                <div className="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 flex-shrink-0">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <div className="text-sm font-bold text-ink-950">
+                  +62 851-1152-4441
+                  <p className="text-[10px] text-ink-500 font-medium tracking-wide">WhatsApp Center</p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="w-10 h-10 rounded-xl bg-surface-100 flex items-center justify-center text-ink-500 flex-shrink-0">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div className="text-sm font-bold text-ink-950">
+                  info@alimam.sch.id
+                </div>
               </div>
             </div>
           </div>
+
         </div>
 
-        <div className="mt-16 pt-8 border-t border-surface-100 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-ink-400 font-medium">
-            &copy; {currentYear} Pesantren Al-Imam Al-Islami.
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-surface-100 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-sm font-bold text-ink-400">
+            &copy; {currentYear} Pesantren Al-Imam Al-Islami. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            <Link href="/privacy" className="text-xs text-ink-400 hover:text-ink-600 font-medium">Privacy Policy</Link>
-            <Link href="/terms" className="text-xs text-ink-400 hover:text-ink-600 font-medium">Terms of Service</Link>
+          <div className="flex items-center gap-6 text-sm font-bold text-ink-400">
+            <Link href="#" className="hover:text-ink-950 transition-colors">Privacy Policy</Link>
+            <Link href="#" className="hover:text-ink-950 transition-colors">Terms of Service</Link>
+            <div className="flex items-center gap-2">
+              <Globe className="w-4 h-4" />
+              <span>ID / AR</span>
+            </div>
           </div>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }
+

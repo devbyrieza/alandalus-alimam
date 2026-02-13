@@ -1,4 +1,3 @@
-import Navbar from "@/components/layout/Navbar";
 import HeroSection from "@/components/home/HeroSection";
 import StatsSection from "@/components/home/StatsSection";
 import ScrollAnimation from "@/components/ui/ScrollAnimation";
@@ -8,12 +7,11 @@ import ProgramSection from "@/components/home/ProgramSection";
 import FeaturesSection from "@/components/home/FeaturesSection";
 import TeachersSection from "@/components/home/TeachersSection";
 import FacilitiesSection from "@/components/home/FacilitiesSection";
+import ActivitiesSection from "@/components/home/ActivitiesSection";
 import ExtraSection from "@/components/home/ExtraSection";
-import GallerySection from "@/components/home/GallerySection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import CalendarSection from "@/components/home/CalendarSection";
 import ContactSection from "@/components/home/ContactSection";
-import Footer from "@/components/layout/Footer";
 
 export default function HomePage() {
   return (
@@ -26,19 +24,11 @@ export default function HomePage() {
         </ScrollAnimation>
 
         <ScrollAnimation delay={0.1}>
-          <FeaturesSection />
-        </ScrollAnimation>
-
-        <ScrollAnimation delay={0.1}>
-          <ProgramSection />
+          <AboutSection />
         </ScrollAnimation>
 
         <ScrollAnimation delay={0.1}>
           <BoardSection />
-        </ScrollAnimation>
-
-        <ScrollAnimation delay={0.1} direction="up">
-          <AboutSection />
         </ScrollAnimation>
 
         <ScrollAnimation delay={0.1}>
@@ -46,11 +36,19 @@ export default function HomePage() {
         </ScrollAnimation>
 
         <ScrollAnimation delay={0.1}>
+          <ProgramSection />
+        </ScrollAnimation>
+
+        <ScrollAnimation delay={0.1}>
+          <FeaturesSection />
+        </ScrollAnimation>
+
+        <ScrollAnimation delay={0.1}>
           <FacilitiesSection />
         </ScrollAnimation>
 
         <ScrollAnimation delay={0.1}>
-          <GallerySection />
+          <ActivitiesSection />
         </ScrollAnimation>
 
         <ScrollAnimation delay={0.1}>

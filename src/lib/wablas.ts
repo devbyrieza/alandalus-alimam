@@ -348,7 +348,7 @@ export async function notifyRegistrationSuccess(data: {
             nomor_pendaftaran: data.nomor_pendaftaran,
             jenjang: data.jenjang === 'MTs' ? 'Madrasah Tsanawiyah (MTs)' : "I'dad Lughowi (Setara SMA)",
             dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
-            kontak: '0813-1234-5678', // TODO: Update dengan nomor Al-Imam
+            kontak: '0851-1152-4441',
         },
     });
 }
@@ -373,7 +373,7 @@ export async function notifyDocumentVerified(data: {
             dokumen_list: data.dokumen_list,
             catatan: data.catatan || '',
             dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
-            kontak: '0858-8887-1997', // TODO: Update dengan nomor Al-Imam
+            kontak: '0851-1152-4441',
         },
     });
 }
@@ -402,7 +402,7 @@ export async function notifyPaymentVerified(data: {
             tanggal: data.tanggal,
             catatan: data.catatan || '',
             dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
-            kontak: '0858-8887-1997', // TODO: Update dengan nomor Al-Imam
+            kontak: '0851-1152-4441',
         },
     });
 }

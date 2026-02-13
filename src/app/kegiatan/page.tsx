@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   BookOpen,
   BookMarked,
@@ -33,8 +34,10 @@ import {
   MessagesSquare,
   BadgeCheck,
   GraduationCap,
+  ArrowRight,
+  Camera
 } from "lucide-react";
-import ScrollAnimation from "@/components/ui/ScrollAnimation";
+import { motion } from "framer-motion";
 import { Container } from "@/components/layout/Container";
 
 // ========================================
@@ -56,7 +59,7 @@ interface KegiatanUtama {
   title: string;
   description: string;
   icon: any;
-  gradient: string;
+  accentColor: string;
   bgColor: string;
   stats: StatItem[];
   results: ResultItem[];
@@ -91,7 +94,6 @@ interface KegiatanMingguan {
   icon: any;
   color: string;
   bg: string;
-  border: string;
 }
 
 interface Ekstrakurikuler {
@@ -112,128 +114,108 @@ const FeatureCard = ({
   item: KegiatanUtama;
   index: number;
 }) => (
-  <ScrollAnimation
-    className="group bg-white dark:bg-[var(--color-cream-200)] rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl border border-[var(--color-cream-300)] dark:border-[var(--color-cream-300)] overflow-hidden transition-all duration-500 hover:-translate-y-1 sm:hover:-translate-y-2"
-    delay={index * 0.1}
+  <motion.div
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-center ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}
   >
-    <div className="grid lg:grid-cols-5 gap-0">
-      {/* Image - Responsive height */}
-      <div
-        className={`relative h-44 xs:h-48 sm:h-56 lg:h-auto overflow-hidden lg:col-span-2 ${index % 2 === 0 ? "lg:order-1" : "lg:order-2"
-          }`}
-      >
-        <img
-          src={item.image}
-          alt={item.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          loading="lazy"
-        />
-        <div
-          className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-20`}
-        />
-
-        {/* Success Badge - Responsive */}
-        <div className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 bg-white/95 backdrop-blur-sm px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-lg shadow-lg">
-          <div className="flex items-center gap-1 sm:gap-1.5">
-            <Trophy className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[var(--color-gold-600)]" />
-            <span className="text-[9px] xs:text-[10px] sm:text-xs font-black text-[var(--color-brown-900)]">
-              PROGRAM UNGGULAN
-            </span>
-          </div>
+    {/* Image Side */}
+    <div className={`relative ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+      <div className={`aspect-[4/3] rounded-[3.5rem] overflow-hidden shadow-premium-2xl relative group rotate-${index % 2 === 0 ? '2' : '-2'} hover:rotate-0 transition-transform duration-700 border border-surface-100 p-2 bg-white`}>
+        <div className="relative w-full h-full rounded-[3rem] overflow-hidden">
+          <Image
+            src={item.image}
+            alt={item.title}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
         </div>
       </div>
 
-      {/* Content - Responsive padding */}
-      <div
-        className={`p-4 xs:p-5 sm:p-5 lg:p-6 flex flex-col justify-center lg:col-span-3 ${index % 2 === 0 ? "lg:order-2" : "lg:order-1"
-          }`}
-      >
-        <div
-          className={`w-9 h-9 sm:w-10 sm:h-10 ${item.bgColor} rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg mb-2.5 sm:mb-3 group-hover:scale-110 transition-all duration-300`}
-        >
-          <item.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-        </div>
+      {/* Program Badge */}
+      <div className="absolute -top-4 -right-4 bg-white px-6 py-3 rounded-2xl shadow-premium-lg border border-surface-50 z-10 flex items-center gap-2">
+        <Trophy className="w-5 h-5 text-gold-500" />
+        <span className="text-xs font-black text-ink-950 uppercase tracking-widest">Unggulan</span>
+      </div>
+    </div>
 
-        {/* Title - Responsive text */}
-        <h3 className="text-base xs:text-lg sm:text-xl lg:text-xl font-black text-[var(--color-brown-900)] mb-2 sm:mb-2.5 leading-tight font-display">
-          {item.title}
-        </h3>
+    {/* Content Side */}
+    <div className="flex flex-col justify-center">
+      <div className={`w-16 h-16 ${item.bgColor} rounded-3xl flex items-center justify-center shadow-premium-sm mb-8 transition-transform hover:scale-110`}>
+        <item.icon className="w-8 h-8 text-white" />
+      </div>
 
-        {/* Description - Responsive text */}
-        <p className="text-xs xs:text-sm sm:text-sm text-[var(--color-text-600)] mb-2.5 sm:mb-3 leading-relaxed">
-          {item.description}
-        </p>
+      <h3 className="text-4xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-tight">
+        {item.title}
+      </h3>
 
-        {/* Stats - Responsive grid */}
-        <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mb-2.5 sm:mb-3">
-          {item.stats.map((stat, statIdx) => (
-            <div
-              key={statIdx}
-              className="text-center p-2 sm:p-2.5 bg-gradient-to-br from-[var(--color-cream-50)] to-[var(--color-gold-50)] rounded-lg border border-[var(--color-gold-200)] hover:shadow-md transition-all hover:border-[var(--color-gold-300)]"
-            >
-              <div className="text-base xs:text-lg sm:text-xl lg:text-xl font-black text-[var(--color-gold-700)] mb-0.5">
-                {stat.value}
-              </div>
-              <div className="text-[9px] xs:text-[10px] sm:text-xs text-[var(--color-text-600)] font-semibold leading-tight">
-                {stat.label}
-              </div>
+      <p className="text-xl text-ink-600 mb-10 leading-relaxed font-medium">
+        {item.description}
+      </p>
+
+      {/* Stats Grid */}
+      <div className="grid grid-cols-3 gap-4 mb-10">
+        {item.stats.map((stat, statIdx) => (
+          <div
+            key={statIdx}
+            className="bg-surface-50/50 p-4 rounded-[1.5rem] border border-surface-100 text-center hover:bg-white hover:shadow-premium-sm transition-all"
+          >
+            <div className="text-2xl font-black text-brown-700 mb-1">
+              {stat.value}
+            </div>
+            <div className="text-[10px] text-ink-400 font-extrabold uppercase tracking-widest">
+              {stat.label}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Results List */}
+      <div className="bg-white p-8 rounded-[2.5rem] border border-surface-100 shadow-premium-sm mb-8">
+        <div className="space-y-4">
+          {item.results.map((result, idx) => (
+            <div key={idx} className="flex items-start gap-4">
+              <result.icon className="w-5 h-5 text-teal-600 mt-0.5 shrink-0" />
+              <span className="text-base text-ink-700 font-bold leading-tight">
+                {result.text}
+              </span>
             </div>
           ))}
         </div>
+      </div>
 
-        {/* HASIL NYATA - Responsive padding */}
-        <div className="bg-gradient-to-br from-[var(--color-teal-50)] to-[var(--color-teal-100)] rounded-lg sm:rounded-xl p-2.5 sm:p-3 border border-[var(--color-teal-200)] mb-2.5 sm:mb-3">
-          <div className="flex items-center gap-1.5 sm:gap-2 mb-2">
-            <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[var(--color-teal-600)]" />
-            <span className="text-[10px] xs:text-xs sm:text-xs font-black text-[var(--color-teal-900)]">
-              HASIL NYATA SANTRI KAMI:
-            </span>
-          </div>
-          <div className="space-y-1 sm:space-y-1.5">
-            {item.results.map((result, idx) => (
-              <div key={idx} className="flex items-start gap-1.5 sm:gap-2">
-                <result.icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[var(--color-teal-600)] mt-0.5 flex-shrink-0" />
-                <span className="text-[10px] xs:text-xs sm:text-xs text-[var(--color-text-700)] leading-relaxed font-medium">
-                  {result.text}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Parent Testimonial - Responsive padding */}
-        <div className="bg-white dark:bg-[var(--color-cream-300)] rounded-lg p-2.5 sm:p-3 border border-[var(--color-cream-200)] dark:border-[var(--color-cream-400)] shadow-sm hover:shadow-md transition-shadow">
-          <div className="flex gap-0.5 mb-1 sm:mb-1.5">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-[var(--color-gold-400)] text-[var(--color-gold-400)]"
-              />
-            ))}
-          </div>
-          <p className="text-[10px] xs:text-xs sm:text-xs italic text-[var(--color-text-600)] mb-1 sm:mb-1.5 leading-relaxed">
-            "{item.testimonial.quote}"
-          </p>
-          <span className="text-[10px] xs:text-xs sm:text-xs font-bold text-[var(--color-text-800)]">
-            — {item.testimonial.parent}
+      {/* Testimonial */}
+      <div className="pl-6 border-l-4 border-gold-400">
+        <p className="text-lg italic text-ink-600 mb-3 font-medium">
+          "{item.testimonial.quote}"
+        </p>
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-gold-400" />
+          <span className="text-sm font-black text-ink-950 uppercase tracking-tight">
+            {item.testimonial.parent}
           </span>
         </div>
       </div>
     </div>
-  </ScrollAnimation>
+  </motion.div>
 );
 
 const StatsCard = ({ icon: Icon, value, label, sublabel }: HeroStat) => (
-  <div className="group bg-white/10 backdrop-blur-md px-4 xs:px-5 sm:px-6 py-3 xs:py-3.5 sm:py-4 rounded-lg sm:rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer">
-    <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white/80 mx-auto mb-1 group-hover:scale-110 transition-transform" />
-    <div className="text-xl xs:text-2xl sm:text-2xl font-black text-white group-hover:scale-110 transition-transform">
+  <motion.div
+    whileHover={{ y: -5 }}
+    className="bg-white p-6 rounded-[2.5rem] border border-surface-100 shadow-premium-sm text-center min-w-[160px] flex flex-col items-center"
+  >
+    <div className="w-12 h-12 rounded-2xl bg-brown-50 flex items-center justify-center text-brown-600 mb-4">
+      <Icon className="w-6 h-6" />
+    </div>
+    <div className="text-3xl font-black text-ink-950 mb-1">
       {value}
     </div>
-    <div className="text-xs xs:text-sm sm:text-sm text-white/80">{label}</div>
-    <div className="text-[10px] xs:text-xs sm:text-xs text-white/70 mt-0.5 sm:mt-1">
-      {sublabel}
-    </div>
-  </div>
+    <div className="text-xs font-black text-ink-400 uppercase tracking-widest mb-1">{label}</div>
+    <div className="text-[10px] text-ink-400 font-bold">{sublabel}</div>
+  </motion.div>
 );
 
 const ScheduleCard = ({
@@ -243,37 +225,39 @@ const ScheduleCard = ({
   schedule: JadwalHarian;
   index: number;
 }) => (
-  <ScrollAnimation
-    delay={index * 0.1}
-    className={`group p-4 xs:p-5 sm:p-6 xl:p-8 rounded-xl sm:rounded-2xl ${schedule.bgColor} dark:bg-[var(--color-cream-200)] border border-white/20 dark:border-[var(--color-cream-300)] shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 sm:hover:-translate-y-2`}
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay: index * 0.1 }}
+    className={`group p-10 rounded-[3rem] ${schedule.bgColor} border border-surface-100 shadow-premium-sm hover:shadow-premium-lg transition-all duration-500 hover:-translate-y-2`}
   >
-    <div className="flex items-start gap-3 xs:gap-4 sm:gap-5">
-      <div className="w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 bg-white dark:bg-[var(--color-cream-300)] rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300 flex-shrink-0">
-        <schedule.icon
-          className={`${schedule.iconColor} w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8`}
-        />
-      </div>
-      <div className="flex-1 min-w-0">
-        <div className="text-xs xs:text-sm sm:text-base xl:text-base font-bold text-[var(--color-brown-700)] mb-1.5 sm:mb-2">
+    <div className="flex flex-col h-full">
+      <div className="flex items-center justify-between mb-8">
+        <div className="w-16 h-16 bg-white rounded-3xl flex items-center justify-center shadow-premium-sm group-hover:scale-110 transition-transform">
+          <schedule.icon className={`${schedule.iconColor} w-8 h-8`} />
+        </div>
+        <div className="text-lg font-black text-brown-700 bg-white/50 px-4 py-1.5 rounded-full border border-white">
           {schedule.time}
         </div>
-        <h3 className="text-base xs:text-lg sm:text-xl xl:text-xl font-black text-[var(--color-brown-900)] mb-2 sm:mb-3 leading-tight font-display">
-          {schedule.activity}
-        </h3>
-        <p className="text-xs xs:text-sm sm:text-base xl:text-base text-[var(--color-text-600)] mb-3 sm:mb-4 leading-relaxed">
-          {schedule.detail}
-        </p>
+      </div>
 
-        {/* Benefit Badge - Responsive */}
-        <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-white/90 px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl border border-[var(--color-teal-200)] shadow-sm">
-          <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[var(--color-teal-600)] flex-shrink-0" />
-          <span className="text-[10px] xs:text-xs sm:text-sm xl:text-sm font-bold text-[var(--color-teal-900)]">
-            {schedule.benefit}
-          </span>
-        </div>
+      <h3 className="text-2xl font-display font-black text-ink-950 mb-4 leading-tight">
+        {schedule.activity}
+      </h3>
+
+      <p className="text-lg text-ink-600 mb-8 font-medium leading-relaxed">
+        {schedule.detail}
+      </p>
+
+      <div className="mt-auto inline-flex items-center gap-3 bg-white/60 p-4 rounded-2xl border border-white shadow-premium-xs">
+        <Zap className="w-5 h-5 text-teal-600 flex-shrink-0" />
+        <span className="text-sm font-black text-teal-900 uppercase tracking-tight">
+          {schedule.benefit}
+        </span>
       </div>
     </div>
-  </ScrollAnimation>
+  </motion.div>
 );
 
 const WeeklyActivityCard = ({
@@ -283,34 +267,37 @@ const WeeklyActivityCard = ({
   activity: KegiatanMingguan;
   index: number;
 }) => (
-  <ScrollAnimation
-    delay={index * 0.1}
-    className={`group p-4 xs:p-5 sm:p-6 xl:p-7 rounded-xl sm:rounded-2xl ${activity.bg} dark:bg-[var(--color-cream-200)] border-2 ${activity.border} shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 sm:hover:-translate-y-2 text-center`}
+  <motion.div
+    initial={{ opacity: 0, scale: 0.95 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ delay: index * 0.05 }}
+    className={`group p-8 rounded-[2.5rem] bg-white border border-surface-100 shadow-premium-sm hover:shadow-premium-md transition-all hover:-translate-y-2 text-center`}
   >
-    <div className="flex justify-center mb-3 xs:mb-4 sm:mb-5">
-      <activity.icon
-        className={`${activity.color} w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}
-      />
+    <div className={`w-14 h-14 ${activity.bg} rounded-2xl flex items-center justify-center ${activity.color} mx-auto mb-6 group-hover:scale-110 transition-transform`}>
+      <activity.icon className="w-8 h-8" />
     </div>
-    <h4 className="font-black text-sm xs:text-base sm:text-lg xl:text-lg text-[var(--color-brown-900)] mb-1.5 sm:mb-2 font-display">
+
+    <h4 className="font-display font-black text-xl text-ink-950 mb-2">
       {activity.title}
     </h4>
-    <p className="text-xs xs:text-sm sm:text-base xl:text-base text-[var(--color-text-600)] font-semibold mb-2 sm:mb-3">
+
+    <p className="text-sm text-ink-400 font-extrabold uppercase tracking-widest mb-4">
       {activity.desc}
     </p>
-    <div className="pt-2 sm:pt-3 border-t-2 border-current/10 mb-3 sm:mb-4">
-      <p className="text-[10px] xs:text-xs sm:text-sm xl:text-sm text-[var(--color-text-500)] font-medium">
+
+    <div className="pt-6 border-t border-surface-50 mb-6">
+      <p className="text-base text-ink-600 font-medium">
         {activity.detail}
       </p>
     </div>
 
-    {/* Benefit - Responsive */}
-    <div className="bg-white/70 rounded-lg sm:rounded-xl px-3 py-2 sm:px-4 sm:py-2.5 border border-[var(--color-teal-200)] shadow-sm">
-      <p className="text-[10px] xs:text-xs sm:text-sm xl:text-sm font-bold text-[var(--color-teal-800)] leading-tight">
+    <div className="bg-teal-50 rounded-xl px-4 py-3 border border-teal-100">
+      <p className="text-xs font-black text-teal-800 uppercase tracking-tight">
         {activity.benefit}
       </p>
     </div>
-  </ScrollAnimation>
+  </motion.div>
 );
 
 const EkskulCard = ({
@@ -320,20 +307,31 @@ const EkskulCard = ({
   ekskul: Ekstrakurikuler;
   index: number;
 }) => (
-  <ScrollAnimation delay={index * 0.05} className="group p-4 xs:p-5 sm:p-5 xl:p-6 rounded-xl sm:rounded-2xl bg-white dark:bg-[var(--color-cream-200)] border border-[var(--color-cream-300)] dark:border-[var(--color-cream-400)] shadow-lg hover:shadow-2xl hover:border-[var(--color-teal-300)] transition-all duration-500 hover:-translate-y-1 sm:hover:-translate-y-2 text-center">
-    <ekskul.icon className="w-9 h-9 xs:w-10 xs:h-10 sm:w-11 sm:h-11 text-[var(--color-teal-600)] dark:text-[var(--color-teal-400)] mx-auto mb-3 xs:mb-3.5 sm:mb-4 group-hover:scale-125 group-hover:rotate-12 transition-all duration-300" />
-    <h4 className="font-black text-xs xs:text-sm sm:text-base xl:text-base text-[var(--color-brown-900)] mb-1.5 sm:mb-2 font-display">
+  <motion.div
+    initial={{ opacity: 0, y: 10 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay: index * 0.05 }}
+    className="group p-8 rounded-[2.5rem] bg-white border border-surface-100 shadow-premium-sm hover:shadow-premium-md hover:border-teal-200 transition-all hover:-translate-y-2 text-center"
+  >
+    <div className="w-16 h-16 bg-brown-50 rounded-2xl flex items-center justify-center text-brown-600 mx-auto mb-6 group-hover:scale-110 transition-all duration-300">
+      <ekskul.icon className="w-8 h-8" />
+    </div>
+
+    <h4 className="font-display font-black text-xl text-ink-950 mb-3">
       {ekskul.name}
     </h4>
-    <p className="text-[10px] xs:text-xs sm:text-sm xl:text-sm text-[var(--color-text-600)] mb-2 sm:mb-3 leading-relaxed">
+
+    <p className="text-base text-ink-500 font-medium mb-6 leading-relaxed">
       {ekskul.desc}
     </p>
-    <div className="pt-2 sm:pt-3 border-t border-[var(--color-cream-200)]">
-      <p className="text-[10px] xs:text-xs sm:text-sm xl:text-sm font-bold text-[var(--color-teal-700)]">
+
+    <div className="pt-4 border-t border-surface-50">
+      <p className="text-xs font-black text-teal-700 uppercase tracking-widest">
         {ekskul.benefit}
       </p>
     </div>
-  </ScrollAnimation>
+  </motion.div>
 );
 
 // ========================================
@@ -343,359 +341,288 @@ const EkskulCard = ({
 export default function KegiatanPage() {
   const kegiatanUtama: KegiatanUtama[] = [
     {
-      image:
-        "/images/santri-pembelajaran-kitab.png",
-      title: "Pembelajaran Kitab Kuning",
-      description:
-        "Bukan sekadar hafalan! Santri kami PAHAM isi kitab, bisa berdiskusi ilmiah, dan siap jadi ulama muda yang membanggakan keluarga",
+      image: "/images/pembelajaran-kitab-turotz.png",
+      title: "Pembelajaran Kitab Turats",
+      description: "Bukan sekadar hafalan! Santri kami PAHAM isi kitab, mampu berdiskusi ilmiah, dan disiapkan menjadi ilmuwan muda.",
       icon: BookOpen,
-      gradient: "from-[var(--color-brown-900)]/90 via-[var(--color-brown-800)]/70 to-[var(--color-gold-700)]/50",
-      bgColor: "bg-[var(--color-brown-800)]",
+      accentColor: "bg-brown-500",
+      bgColor: "bg-brown-600",
       stats: [
         { label: "Kitab Dikuasai", value: "15+" },
         { label: "Ustadz Expert", value: "20+" },
         { label: "Jam/Hari", value: "4+" },
       ],
       results: [
-        {
-          icon: TrendingUp,
-          text: "Mampu membaca kitab gundul (Nahwu-Shorof Applied)",
-        },
+        { icon: TrendingUp, text: "Mampu membaca kitab gundul (Nahwu-Shorof Applied)" },
         { icon: Award, text: "Aktif dalam Bahtsul Masail & Muhadoroh" },
-        {
-          icon: CheckCircle2,
-          text: "Alumni tersebar di PTN & Timur Tengah",
-        },
+        { icon: GraduationCap, text: "Alumni tersebar di PTN & Timur Tengah" },
       ],
       testimonial: {
-        quote:
-          "Anak saya sekarang bisa membaca kitab gundul sendiri! Dulu saya pikir itu mustahil untuk anak SMP",
-        parent: "Ibu Siti Aminah, Wali Santri MTs",
+        quote: "Prioritas utama kami adalah pendidikan agama. Di sini, kami melihat langsung bagaimana anak dididik menjaga adab dan shalat berjamaah tepat waktu. Investasi akhirat yang luar biasa.",
+        parent: "Bapak Surwanto (Wali Santri)",
       },
     },
     {
-      image:
-        "/images/tahfidz.JPG",
-      title: "Program Tahfidz Al-Qur'an",
-      description:
-        "Metode menghafal yang terukur disesuaikan dengan kemampuan santri dan target jenjang pendidikan (bisa mencapai 30 juz bagi yang takhasus/lanjut).",
+      image: "/images/tahfidz.JPG",
+      title: "Tahfidz Al-Qur'an Intensif",
+      description: "Metode menghafal terukur sesuai kemampuan santri dengan target yang jelas setiap jenjang pendidikan.",
       icon: BookMarked,
-      gradient: "from-[var(--color-gold-700)]/90 via-[var(--color-gold-600)]/70 to-[var(--color-teal-600)]/50",
-      bgColor: "bg-[var(--color-gold-600)]",
+      accentColor: "bg-gold-500",
+      bgColor: "bg-gold-500",
       stats: [
-        { label: "Target Hafalan", value: "3 - 30 Juz" },
+        { label: "Target Utama", value: "30 Juz" },
         { label: "Metode Proven", value: "Talaqqi" },
         { label: "Setoran", value: "Harian" },
       ],
       results: [
-        {
-          icon: TrendingUp,
-          text: "Mencapai Target Hafalan Sesuai Jenjang (Min. 3 Juz/Thn)",
-        },
-        { icon: Award, text: "Memiliki Bacaan Standar Sanad/Talaqqi" },
-        { icon: CheckCircle2, text: "Mampu Membaca Al-Qur'an Tartil & Tajwid" },
+        { icon: TrendingUp, text: "Capaian Hafalan Terukur (Min. 3 Juz/Tahun)" },
+        { icon: Award, text: "Standar Bacaan Bersanad & Tartil" },
+        { icon: CheckCircle2, text: "Mampu Menjadi Imam Shalat Berjamaah" },
       ],
       testimonial: {
-        quote:
-          "Dari 0 juz jadi 12 juz dalam 18 bulan! Ini bukan keajaiban, tapi sistem Al-Imam yang luar biasa",
-        parent: "Bapak Ahmad Rifa'i, Wali Santri MA",
+        quote: "Sinergi kurikulum nasional dan tahfidznya sangat menenangkan. Anak kami tidak hanya mengejar target hafalan, tapi juga PAHAM maknanya melalui bimbingan asatidz yang kompeten.",
+        parent: "Ibu Siti Aminah (Wali Santri)",
       },
     },
     {
-      image:
-        "/images/ekstra-atau-ekskul.jpg",
-      title: "Ekstrakurikuler Prestasi",
-      description:
-        "Anak Anda TIDAK HANYA pintar ngaji! Mereka juga juara olimpiade, atlet berprestasi, dan public speaker handal. Komplit!",
+      image: "/images/extra-karate.jpg",
+      title: "Pengembangan Bakat & Prestasi",
+      description: "Menyiapkan santri multitalenta yang juara di bidang olimpiade, olahraga, hingga public speaking.",
       icon: Target,
-      gradient: "from-[var(--color-teal-600)]/90 via-[var(--color-teal-700)]/70 to-[var(--color-brown-900)]/50",
-      bgColor: "bg-[var(--color-teal-600)]",
+      accentColor: "bg-teal-500",
+      bgColor: "bg-teal-600",
       stats: [
         { label: "Pilihan Ekskul", value: "10+" },
-        { label: "Pelatih Expert", value: "15+" },
+        { label: "Pelatih Ahli", value: "15+" },
         { label: "Jam/Minggu", value: "6+" },
       ],
       results: [
-        { icon: Trophy, text: "Memiliki Kemampuan Bela Diri (Silat/Karate)" },
-        { icon: Award, text: "Berprestasi dalam Minat Bakat (Sains & Bahasa)" },
-        {
-          icon: CheckCircle2,
-          text: "Berjiwa Kepemimpinan & Siap Berorganisasi",
-        },
+        { icon: Trophy, text: "Juara Kompetisi Sains & Ketangkasan Fisik" },
+        { icon: Award, text: "Public Speaker Handal dalam 3 Bahasa" },
+        { icon: Users, text: "Berjiwa Kepemimpinan & Mandiri" },
       ],
       testimonial: {
-        quote:
-          "Anak saya dulu pemalu, sekarang berani pidato di depan ratusan orang. Confidence-nya meningkat drastis!",
-        parent: "Ibu Fatimah Zahra, Wali Santri Tahfidz",
+        quote: "Fondasi ilmu syar'i dan disiplin bahasa Arab yang saya dapatkan menjadi modal utama saya saat melanjutkan studi. Lingkungan di sini sangat mendukung pembentukan karakter saya.",
+        parent: "Muhammad Razan (Alumni)",
       },
     },
   ];
 
   const heroStats: HeroStat[] = [
-    {
-      icon: BookOpen,
-      value: "15+",
-      label: "Kitab Kuning",
-      sublabel: "Dikuasai dalam 4 tahun",
-    },
-    {
-      icon: BookMarked,
-      value: "30 Juz",
-      label: "Target Hafalan",
-      sublabel: "Dengan metode proven",
-    },
-    {
-      icon: Target,
-      value: "10+",
-      label: "Ekstrakurikuler",
-      sublabel: "Untuk bakat tersembunyi",
-    },
+    { icon: BookOpen, value: "15+", label: "Kitab Turats", sublabel: "Dikuasai mendalam" },
+    { icon: BookMarked, value: "30 Juz", label: "Target Tahfidz", sublabel: "Metode Talaqqi" },
+    { icon: Target, value: "10+", label: "Ekstrakurikuler", sublabel: "Asah bakat santri" },
   ];
 
   const jadwalHarian: JadwalHarian[] = [
     {
       icon: Sun,
       time: "04:30 - 07:00",
-      activity: "Tahajud, Subuh & Tahfidz Pagi",
-      detail:
-        "Mulai hari dengan spiritualitas tinggi dan setoran hafalan segar",
-      benefit: "Anak jadi disiplin bangun pagi seumur hidup",
-      bgColor: "bg-gradient-to-br from-[var(--color-gold-50)] to-[var(--color-cream-100)]",
-      iconColor: "text-[var(--color-gold-600)]",
+      activity: "Tahajud & Tahfidz",
+      detail: "Mulai hari dengan spiritualitas tinggi dan setoran hafalan segar di waktu terbaik.",
+      benefit: "Membangun disiplin bangun pagi seumur hidup.",
+      bgColor: "bg-gold-50/50",
+      iconColor: "text-gold-600",
     },
     {
       icon: Book,
       time: "07:30 - 14:00",
-      activity: "KBM Formal & Kajian Kitab",
-      detail: "Sekolah formal (MTs/MA) + pembelajaran kitab kuning intensif",
-      benefit: "Nilai rapor bagus + ilmu agama mendalam",
-      bgColor: "bg-gradient-to-br from-[var(--color-cream-50)] to-[var(--color-brown-50)]",
-      iconColor: "text-[var(--color-brown-800)]",
+      activity: "KBM & Kajian Kitab",
+      detail: "Sekolah formal (MTs/MA) dipadu dengan pembelajaran kitab turats intensif.",
+      benefit: "Akademik unggul & ilmu agama mendalam.",
+      bgColor: "bg-brown-50/50",
+      iconColor: "text-brown-700",
     },
     {
       icon: Target,
       time: "15:30 - 17:00",
-      activity: "Ekstrakurikuler & Olahraga",
-      detail: "Pengembangan bakat terpendam dan kesehatan fisik",
-      benefit: "Anak jadi multitalenta & percaya diri",
-      bgColor: "bg-gradient-to-br from-[var(--color-teal-50)] to-[var(--color-teal-100)]",
-      iconColor: "text-[var(--color-teal-600)]",
+      activity: "Minat & Bakat",
+      detail: "Waktu khusus untuk eksplorasi bakat seni, olahraga, dan organisasi santri.",
+      benefit: "Menjadi santri multitalenta & adaptif.",
+      bgColor: "bg-teal-50/50",
+      iconColor: "text-teal-600",
     },
     {
       icon: Moon,
       time: "19:30 - 21:00",
-      activity: "Kajian Malam & Muhadharah",
-      detail: "Pendalaman ilmu agama dan latihan public speaking",
-      benefit: "Anak berani tampil & jadi pemimpin masa depan",
-      bgColor: "bg-gradient-to-br from-[var(--color-brown-50)] to-[var(--color-gold-50)]",
-      iconColor: "text-[var(--color-brown-800)]",
+      activity: "Muhadharah & Kajian",
+      detail: "Latihan public speaking dan pendalaman etika serta kajian keislaman malam.",
+      benefit: "Mental pemimpin & komunikator handal.",
+      bgColor: "bg-surface-50/50",
+      iconColor: "text-ink-600",
     },
   ];
 
   const kegiatanMingguan: KegiatanMingguan[] = [
     {
       title: "Sholat Berjama'ah",
-      desc: "5 Waktu Setiap Hari",
-      detail: "Fardhu & Sunnah Rawatib",
-      benefit: "Anak jadi taat beribadah seumur hidup",
+      desc: "5 Waktu Disiplin",
+      detail: "Fardhu & Sunnah Rawatib berjamaah di masjid.",
+      benefit: "Kebiasaan Ibadah Kokoh",
       icon: Home,
-      color: "text-[var(--color-brown-800)]",
-      bg: "bg-gradient-to-br from-[var(--color-cream-50)] to-[var(--color-brown-50)]",
-      border: "border-[var(--color-brown-200)]",
+      color: "text-brown-700",
+      bg: "bg-brown-50",
     },
     {
       title: "Kajian Jum'at",
-      desc: "Setiap Hari Jum'at",
-      detail: "Tafsir & Hadits Mendalam",
-      benefit: "Paham agama, bukan asal ikut-ikutan",
+      desc: "Wawasan Luas",
+      detail: "Tafsir, Hadits & Isu Kontemporer.",
+      benefit: "Literasi Agama Matang",
       icon: BookText,
-      color: "text-[var(--color-gold-700)]",
-      bg: "bg-gradient-to-br from-[var(--color-gold-50)] to-[var(--color-cream-50)]",
-      border: "border-[var(--color-gold-200)]",
+      color: "text-gold-600",
+      bg: "bg-gold-50",
     },
     {
       title: "Muhadharah",
-      desc: "Kamis Malam",
-      detail: "Latihan Pidato & Khutbah",
-      benefit: "Jadi public speaker handal sejak muda",
+      desc: "Public Speaking",
+      detail: "Latihan pidato 3 bahasa setiap Kamis Malam.",
+      benefit: "Siap Jadi Khatib & Orator",
       icon: Users,
-      color: "text-[var(--color-teal-700)]",
-      bg: "bg-gradient-to-br from-[var(--color-teal-50)] to-[var(--color-teal-100)]",
-      border: "border-[var(--color-teal-200)]",
+      color: "text-teal-600",
+      bg: "bg-teal-50",
     },
     {
       title: "Rihlah Ilmiyyah",
-      desc: "Setiap Bulan",
-      detail: "Kunjungan Edukatif",
-      benefit: "Wawasan luas, tidak kuper",
+      desc: "Refreshing Edukatif",
+      detail: "Kunjungan rutin ke destinasi bermanfaat.",
+      benefit: "Wawasan Global Santri",
       icon: Calendar,
-      color: "text-[var(--color-brown-700)]",
-      bg: "bg-gradient-to-br from-[var(--color-brown-50)] to-[var(--color-cream-100)]",
-      border: "border-[var(--color-brown-200)]",
+      color: "text-ink-600",
+      bg: "bg-surface-50",
     },
   ];
 
   const ekstrakurikuler: Ekstrakurikuler[] = [
-    {
-      name: "Pramuka",
-      icon: Tent,
-      desc: "Leadership & survival",
-      benefit: "Jadi pemimpin tangguh",
-    },
-    {
-      name: "Pencak Silat",
-      icon: Swords,
-      desc: "Bela diri tradisional",
-      benefit: "Percaya diri & disiplin",
-    },
-    {
-      name: "Tilawah",
-      icon: BookOpen,
-      desc: "Seni baca Qur'an",
-      benefit: "Suara merdu & tartil",
-    },
-    {
-      name: "Kaligrafi",
-      icon: PenTool,
-      desc: "Seni tulis Arab",
-      benefit: "Kreativitas & kesabaran",
-    },
-    {
-      name: "Nasyid",
-      icon: Music,
-      desc: "Vokal Islami",
-      benefit: "Bakat seni tersalurkan",
-    },
-    {
-      name: "Sepak Bola",
-      icon: Dribbble,
-      desc: "Olahraga tim",
-      benefit: "Teamwork & sportivitas",
-    },
-    {
-      name: "Bahasa Arab",
-      icon: MessageCircle,
-      desc: "Muhadatsah aktif",
-      benefit: "Siap kuliah Timur Tengah",
-    },
-    {
-      name: "Bahasa Inggris",
-      icon: Globe,
-      desc: "English club",
-      benefit: "Global communication skill",
-    },
+    // Baris 1: Establised & Populer
+    { name: "Karate", icon: Shield, desc: "Bela diri untuk ketahanan fisik dan disiplin diri.", benefit: "Mentalitas Tangguh" },
+    { name: "Pramuka", icon: Tent, desc: "Pembentukan karakter, leadership & kemandirian.", benefit: "Jiwa Pemimpin" },
+    { name: "Panahan", icon: Target, desc: "Olahraga sunnah untuk melatih fokus & ketenangan.", benefit: "Fokus & Konsentrasi" },
+    { name: "Futsal", icon: Dribbble, desc: "Olahraga tim untuk kesehatan dan sportivitas.", benefit: "Kerjasama Tim" },
+    { name: "Volly", icon: Trophy, desc: "Melatih koordinasi mata-tangan dan kerjasama regu.", benefit: "Ketangkasan Sosial" },
+
+    // Baris 2: Kompetensi & Soft Skills
+    { name: "Komputer", icon: Globe, desc: "Penguasaan software perkantoran & literasi digital.", benefit: "Kecakapan Teknologi" },
+    { name: "Design Grafis", icon: PenTool, desc: "Seni kreativitas digital dan pengolahan visual.", benefit: "Kreativitas Modern" },
+    { name: "Kaligrafi", icon: PenTool, desc: "Seni menulis indah ayat-ayat Al-Qur'an.", benefit: "Ketekunan Seni" },
+    { name: "Jurnalistik", icon: BookText, desc: "Melatih kemampuan menulis dan analisis informasi.", benefit: "Komunikasi Publik" },
+    { name: "Konten Kreator", icon: Camera, desc: "Edukasi pembuatan konten positif & beradab.", benefit: "Dakwah Digital" },
+
+    // Baris 3: Pengembangan & Masa Depan
+    { name: "Basket", icon: Trophy, desc: "Olahraga dinamis untuk stamina dan tinggi badan.", benefit: "Stamina & Endurance" },
+    { name: "Bulutangkis", icon: Zap, desc: "Melatih ketangkasan dan koordinasi motorik.", benefit: "Kelincahan Fisik" },
+    { name: "Pertanian", icon: Home, desc: "Edukasi kemandirian pangan dan cinta alam.", benefit: "Kemandirian Hidup" },
+    { name: "Periklanan", icon: MessageCircle, desc: "Belajar strategi komunikasi visual dan pemasaran.", benefit: "Jiwa Entrepreneur" },
+    { name: "Web Programming", icon: Zap, desc: "Dasar-dasar pengembangan website (Coming Soon).", benefit: "Skill Masa Depan" },
   ];
 
   return (
-    <>
-      {/* Hero Section - Fully Responsive */}
-      <section className="relative overflow-hidden bg-brown-900 flex items-center min-h-[400px] md:min-h-[500px] py-12 md:py-16">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 bg-[url('/images/pattern.svg')] bg-repeat opacity-5 mix-blend-overlay" />
-        {/* Decorative Elements - Hidden on mobile */}
-        <div className="hidden sm:block absolute top-20 left-10 w-48 h-48 sm:w-72 sm:h-72 bg-[var(--color-gold-500)] rounded-full blur-3xl opacity-10 animate-float" />
-        <div className="hidden sm:block absolute bottom-20 right-10 w-64 h-64 sm:w-96 sm:h-96 bg-[var(--color-brown-700)] rounded-full blur-3xl opacity-10 animate-float delay-500" />
+    <main className="bg-white min-h-screen">
+      {/* 1. Hero Section */}
+      <section className="relative py-24 md:py-32 overflow-hidden bg-white">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brown-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <div className="mb-4 sm:mb-6">
-            <span className="inline-flex items-center gap-1.5 sm:gap-2.5 bg-white/15 backdrop-blur-md text-white px-4 xs:px-5 sm:px-6 py-2 xs:py-2.5 sm:py-3 rounded-full text-xs xs:text-sm sm:text-sm font-bold shadow-xl border border-white/20">
-              <Shield className="w-4 h-4 sm:w-5 sm:h-5" />
-              PENDIDIKAN BERKARAKTER & BERKUALITAS
-            </span>
-          </div>
+        <Container className="relative z-10 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-surface-200 text-brown-700 text-xs font-bold uppercase tracking-widest mb-10 shadow-premium-sm"
+          >
+            <Award className="w-3.5 h-3.5" />
+            <span>Program Pendidikan & Kegiatan</span>
+          </motion.div>
 
-          {/* Hero Title - Responsive */}
-          <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-tight px-4 sm:px-0 font-display">
-            Membangun Generasi
-            <br />
-            <span className="text-white">
-              Qur'ani & Berwawasan Luas
-            </span>
-          </h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-5xl md:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
+          >
+            Membangun <br />
+            <span className="text-brown-600">Generasi Qur'ani</span>
+          </motion.h1>
 
-          <p className="text-base xs:text-lg sm:text-xl md:text-2xl text-[var(--color-cream-100)] max-w-4xl mx-auto mb-3 sm:mb-4 leading-relaxed font-bold px-4 sm:px-0">
-            Memadukan kurikulum pesantren salaf dengan pendidikan modern untuk mencetak santri yang berilmu dan berakhlak.
-          </p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-xl md:text-2xl text-ink-600 max-w-3xl mx-auto leading-relaxed font-medium mb-16"
+          >
+            Sinergi Kurikulum Nasional & Pesantren yang terintegrasi secara komprehensif untuk mencetak generasi yang berilmu, beradab, dan adaptif.
+          </motion.p>
 
-          <p className="text-xs xs:text-sm sm:text-base md:text-lg text-white/80 max-w-3xl mx-auto mb-6 sm:mb-10 leading-relaxed px-4 sm:px-0">
-            Program pendidikan 24 jam yang dirancang untuk memaksimalkan potensi santri dalam bidang agama dan umum.
-          </p>
-
-          <div className="flex flex-wrap gap-3 xs:gap-4 sm:gap-5 justify-center mb-6 sm:mb-10 px-4 sm:px-0">
+          <div className="flex flex-wrap gap-4 sm:gap-6 justify-center">
             {heroStats.map((stat, idx) => (
               <StatsCard key={idx} {...stat} />
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* 2. Hasil Nyata - Real Data */}
-      <section className="py-12 md:py-16 relative">
-        <Container>
-          <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-clay-lg relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brown-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-
-            <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-50 text-gold-700 text-xs font-bold uppercase tracking-widest mb-4">
-                  <Star className="w-3.5 h-3.5" />
-                  <span>Output Santri</span>
-                </div>
-                <h2 className="text-3xl md:text-5xl font-black text-ink-900 mb-6 font-display">
-                  Hasil Nyata <br />
-                  <span className="text-brown-600">Pendidikan Kami</span>
-                </h2>
-                <p className="text-lg text-ink-600 leading-relaxed mb-8">
-                  Kami tidak sekadar berjanji, tapi bukti. Alhamdulillah, dengan izin Allah, santri kami telah menunjukkan prestasi nyata dalam akademik dan akhlak.
-                </p>
-                <div className="flex gap-4">
-                  <Link href="/ppdb" className="btn-primary">
-                    Daftar Sekarang
-                  </Link>
-                </div>
-              </div>
-
-              <div className="grid gap-4">
-                {[
-                  { text: "Bahasa Arab sebagai Bahasa Pengantar Harian", icon: MessagesSquare },
-                  { text: "Hafalan Al-Qur'an Lancar & Berstandar Sanad", icon: BadgeCheck },
-                  { text: "Juara Musabaqah Hifdzil Qur'an (MHQ) & Pidato", icon: Trophy },
-                  { text: "Alumni Diterima di Timur Tengah, LIPIA & PTN", icon: GraduationCap },
-                ].map((item, idx) => (
-                  <div key={idx} className="bg-surface-50 p-4 rounded-xl flex items-center gap-4 border border-surface-100 hover:border-gold-300 transition-colors">
-                    <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-gold-600 shrink-0">
-                      <item.icon className="w-5 h-5" />
-                    </div>
-                    <span className="font-bold text-ink-800">{item.text}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
         </Container>
       </section>
 
-      {/* Kegiatan Utama Section - Responsive */}
-      {/* Kegiatan Utama Section - Responsive */}
-      <section className="bg-gradient-to-br from-[var(--color-cream-50)] via-[var(--color-cream-100)] to-[var(--color-brown-50)] dark:from-[var(--color-cream-50)] dark:to-[var(--color-cream-100)] py-10 xs:py-12 sm:py-16 lg:py-20">
+      {/* 2. Output Section */}
+      <section className="py-24 relative bg-surface-50/30">
         <Container>
-          <ScrollAnimation direction="up" className="text-center mb-8 sm:mb-12">
-            <span className="inline-flex items-center gap-1.5 sm:gap-2 bg-gradient-to-r from-[var(--color-teal-600)] to-[var(--color-teal-700)] text-white px-4 xs:px-5 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs xs:text-sm sm:text-sm font-bold shadow-xl mb-3 sm:mb-4">
-              <Trophy className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              PROGRAM PENDIDIKAN
-            </span>
-            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black mb-4 sm:mb-6 leading-tight max-w-4xl mx-auto px-4 sm:px-0 text-[var(--color-brown-900)] dark:text-[var(--color-brown-900)] font-display">
-              Kurikulum{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-gold-600)] to-[var(--color-gold-700)]">
-                Terpadu & Komprehensif
-              </span>
-            </h2>
-            <p className="text-sm xs:text-base sm:text-lg lg:text-xl text-[var(--color-text-700)] dark:text-[var(--color-text-700)] max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
-              Kami menyelenggarakan pendidikan yang seimbang antara ilmu din (agama) dan ilmu dunia.
-            </p>
-          </ScrollAnimation>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-white p-12 lg:p-20 rounded-[4rem] shadow-premium-xl border border-surface-100 grid lg:grid-cols-2 gap-16 items-center overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brown-50/50 rounded-full blur-[100px] translate-x-1/3 -translate-y-1/3" />
 
-          <div className="space-y-8 sm:space-y-12">
+            <div className="relative z-10">
+              <span className="text-gold-600 font-extrabold tracking-widest uppercase text-xs mb-6 block">Output Santri</span>
+              <h2 className="text-4xl lg:text-6xl font-display font-black text-ink-950 mb-8 leading-none">
+                Hasil Nyata <br />
+                <span className="text-brown-600">Pendidikan Kita</span>
+              </h2>
+              <p className="text-xl text-ink-600 font-medium leading-relaxed mb-10">
+                Alhamdulillah, dengan izin Allah, santri kami telah menunjukkan perkembangan nyata baik dari sisi hafidz, pemahaman kitab, hingga mentalitas juara.
+              </p>
+              <Link href="/kontak">
+                <button className="px-10 py-4 rounded-pill bg-brown-900 text-white font-black text-lg hover:bg-gold-500 shadow-premium-lg transition-all flex items-center gap-3">
+                  Lihat Portofolio Santri
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              </Link>
+            </div>
+
+            <div className="relative z-10 grid gap-6">
+              {[
+                { text: "Bahasa Arab sebagai Bahasa Pengantar", icon: MessageCircle },
+                { text: "Hafalan Berstandar Sanad (Min. 3 Juz/Thn)", icon: BadgeCheck },
+                { text: "Lulusan Diterima di LIPIA, PTN & Timur Tengah", icon: GraduationCap },
+                { text: "Juara Musabaqah Nasional & Prestasi Sains", icon: Trophy },
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-surface-50/80 p-6 rounded-[2rem] flex items-center gap-5 border border-surface-100 group transition-all"
+                >
+                  <div className="w-14 h-14 rounded-2xl bg-white shadow-premium-sm flex items-center justify-center text-brown-600 shrink-0 group-hover:bg-brown-600 group-hover:text-white transition-colors">
+                    <item.icon className="w-6 h-6" />
+                  </div>
+                  <span className="font-black text-ink-900 text-lg leading-tight">{item.text}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </Container>
+      </section>
+
+      {/* 3. Program Utama */}
+      <section className="py-24 md:py-32">
+        <Container>
+          <div className="text-center max-w-3xl mx-auto mb-24">
+            <motion.h2 className="text-4xl md:text-6xl font-display font-black text-ink-950 mb-8">
+              Kurikulum Unggulan
+            </motion.h2>
+            <p className="text-xl text-ink-600 font-medium leading-relaxed">
+              Memberikan fondasi ilmu syar'i yang kokoh sekaligus mempersiapkan santri menghadapi tantangan global.
+            </p>
+          </div>
+
+          <div className="space-y-32">
             {kegiatanUtama.map((item, idx) => (
               <FeatureCard key={idx} item={item} index={idx} />
             ))}
@@ -703,153 +630,101 @@ export default function KegiatanPage() {
         </Container>
       </section>
 
-      {/* Jadwal Harian Section - Responsive */}
-      <section className="bg-[var(--color-brown-900)] dark:bg-[var(--color-cream-100)] py-10 xs:py-12 sm:py-16 lg:py-20 relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')]"></div>
-
-        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-8 sm:mb-12">
-            <span className="inline-flex items-center gap-1.5 sm:gap-2 bg-white/10 backdrop-blur-md text-[var(--color-gold-400)] dark:text-[var(--color-brown-900)] px-4 xs:px-5 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs xs:text-sm sm:text-sm font-bold shadow-xl border border-white/20 dark:border-[var(--color-brown-200)] mb-3 sm:mb-4">
-              <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              KEDISIPLINAN ADALAH KUNCI
-            </span>
-            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black text-white dark:text-[var(--color-brown-900)] mb-4 sm:mb-6 leading-tight max-w-4xl mx-auto px-4 sm:px-0 font-display">
-              Rutinitas Harian <span className="text-[var(--color-gold-400)]">Santri</span>
+      {/* 4. Jadwal Harian */}
+      <section className="py-24 md:py-32 bg-surface-50/50">
+        <Container>
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <h2 className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-8">
+              Produktivitas 24 Jam
             </h2>
-            <p className="text-sm xs:text-base sm:text-lg lg:text-xl text-[var(--color-cream-200)] dark:text-[var(--color-text-700)] max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
-              Membangun kebiasaan positif melalui jadwal yang teratur, mulai dari
-              bangun tidur hingga istirahat malam.
+            <p className="text-xl text-ink-600 font-medium leading-relaxed">
+              Kami membentuk karakter disiplin melalui jadwal yang terstandar dengan pendampingan penuh dari para murabbi.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4 xs:gap-5 sm:gap-6 mb-8 sm:mb-12">
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-10">
             {jadwalHarian.map((schedule, idx) => (
               <ScheduleCard key={idx} schedule={schedule} index={idx} />
             ))}
           </div>
-
-          {/* Success Rate - Responsive */}
-          <div className="bg-gradient-to-r from-[var(--color-teal-700)] to-[var(--color-teal-900)] rounded-2xl sm:rounded-3xl p-6 xs:p-7 sm:p-8 lg:p-10 text-center text-white shadow-2xl border border-[var(--color-teal-600)]">
-            <div className="flex flex-col xs:flex-row items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-              <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-[var(--color-gold-300)]" />
-              <h3 className="text-xl xs:text-2xl sm:text-2xl lg:text-3xl font-black font-display">
-                92% Orang Tua Melaporkan:
-              </h3>
-            </div>
-            <p className="text-base xs:text-lg sm:text-xl lg:text-xl font-bold mb-1.5 sm:mb-2 leading-tight px-4 sm:px-0 text-[var(--color-cream-100)]">
-              "Anak saya LEBIH DISIPLIN & MANDIRI dalam 6 bulan pertama mondok"
-            </p>
-            <p className="text-xs xs:text-sm sm:text-sm text-white/80 px-4 sm:px-0">
-              Berdasarkan survei kepuasan 2024 dari 500+ responden
-            </p>
-          </div>
-        </div>
+        </Container>
       </section>
 
-      {/* Kegiatan Mingguan Section - Responsive */}
-      <section className="bg-gradient-to-br from-[var(--color-cream-50)] via-[var(--color-cream-100)] to-[var(--color-brown-50)] py-10 xs:py-12 sm:py-16 lg:py-20">
-        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12">
-            <span className="inline-flex items-center gap-1.5 sm:gap-2 bg-gradient-to-r from-[var(--color-teal-600)] to-[var(--color-teal-700)] text-white px-4 xs:px-5 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs xs:text-sm sm:text-sm font-bold shadow-xl mb-3 sm:mb-4">
-              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              KEGIATAN PENUNJANG
-            </span>
-            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black mb-4 sm:mb-6 leading-tight max-w-4xl mx-auto px-4 sm:px-0 text-[var(--color-brown-900)] font-display">
-              Program{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-gold-600)] to-[var(--color-gold-700)]">
-                Pengembangan Diri
-              </span>
+      {/* 5. Weekly Program */}
+      <section className="py-24 md:py-32">
+        <Container>
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <h2 className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-6">
+              Kegiatan Penunjang
             </h2>
-            <p className="text-sm xs:text-base sm:text-lg lg:text-xl text-[var(--color-text-700)] max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
-              Program rutin mingguan dan bulanan untuk memperkaya pengalaman spiritual dan sosial santri.
+            <p className="text-xl text-ink-600 font-medium leading-relaxed">
+              Aktivitas rutin mingguan dan bulanan yang dirancang untuk mematangkan *soft skills* dan pengalaman santri.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-5 sm:gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {kegiatanMingguan.map((activity, idx) => (
               <WeeklyActivityCard key={idx} activity={activity} index={idx} />
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
-      {/* Ekstrakurikuler Section - Responsive */}
-      <section className="bg-gradient-to-br from-[var(--color-cream-100)] via-[var(--color-brown-50)] to-[var(--color-cream-50)] py-10 xs:py-12 sm:py-16 lg:py-20">
-        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12">
-            <span className="inline-flex items-center gap-1.5 sm:gap-2 bg-gradient-to-r from-[var(--color-brown-600)] to-[var(--color-brown-800)] text-white px-4 xs:px-5 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs xs:text-sm sm:text-sm font-bold shadow-xl mb-3 sm:mb-4">
-              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              EKSTRAKURIKULER
-            </span>
-            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black mb-4 sm:mb-6 leading-tight max-w-4xl mx-auto px-4 sm:px-0 text-[var(--color-brown-900)] font-display">
-              Mengasah{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-gold-600)] to-[var(--color-gold-700)]">
-                Minat & Bakat
-              </span>
+      {/* 6. Extracurriculars */}
+      <section className="py-24 md:py-32 bg-surface-50">
+        <Container>
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <h2 className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-6">
+              Minat & Bakat
             </h2>
-            <p className="text-sm xs:text-base sm:text-lg lg:text-xl text-[var(--color-text-700)] max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
-              Kami mendukung santri untuk mengembangkan potensi mereka di bidang olahraga, seni, dan keterampilan lainnya.
+            <p className="text-xl text-ink-600 font-medium leading-relaxed">
+              Wadah eksplorasi potensi santri di luar disiplin ilmu syar'i agar menjadi individu yang seimbang dan tangguh.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 xs:gap-4 sm:gap-5 mb-8 sm:mb-12">
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-8">
             {ekstrakurikuler.map((ekskul, idx) => (
               <EkskulCard key={idx} ekskul={ekskul} index={idx} />
             ))}
           </div>
-
-          {/* Achievement Showcase - Responsive */}
-          <div className="bg-gradient-to-br from-[var(--color-gold-50)] via-[var(--color-cream-50)] to-[var(--color-gold-100)] rounded-2xl sm:rounded-3xl p-6 xs:p-7 sm:p-8 lg:p-10 border border-[var(--color-gold-200)] shadow-2xl">
-            <div className="text-center mb-6 sm:mb-8">
-              <h3 className="text-xl xs:text-2xl sm:text-2xl lg:text-3xl font-black text-[var(--color-brown-900)] mb-1.5 sm:mb-2 font-display">
-                Pencapaian Santri
-              </h3>
-              <p className="text-xs xs:text-sm sm:text-base lg:text-base text-[var(--color-text-600)] font-semibold px-4 sm:px-0">
-                Hasil dari dedikasi dan bimbingan yang konsisten
-              </p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 xs:gap-6 sm:gap-6 lg:gap-8">
-              <div className="text-center">
-                <Trophy className="w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 text-[var(--color-gold-600)] mx-auto mb-2.5 sm:mb-3" />
-                <p className="text-2xl xs:text-3xl sm:text-3xl lg:text-4xl font-black text-[var(--color-brown-900)] mb-1.5 sm:mb-2 font-display">
-                  15+
-                </p>
-                <p className="text-xs xs:text-sm sm:text-base lg:text-base font-bold text-[var(--color-text-800)] mb-1">
-                  Juara Kompetisi 2024
-                </p>
-                <p className="text-[10px] xs:text-xs sm:text-sm lg:text-sm text-[var(--color-text-600)]">
-                  Olimpiade & Lomba Regional
-                </p>
-              </div>
-              <div className="text-center">
-                <Award className="w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 text-[var(--color-teal-600)] mx-auto mb-2.5 sm:mb-3" />
-                <p className="text-2xl xs:text-3xl sm:text-3xl lg:text-4xl font-black text-[var(--color-teal-800)] mb-1.5 sm:mb-2 font-display">
-                  Juara 1
-                </p>
-                <p className="text-xs xs:text-sm sm:text-base lg:text-base font-bold text-[var(--color-text-800)] mb-1">
-                  Pencak Silat Popda
-                </p>
-                <p className="text-[10px] xs:text-xs sm:text-sm lg:text-sm text-[var(--color-text-600)]">
-                  Kabupaten Sukabumi
-                </p>
-              </div>
-              <div className="text-center">
-                <Shield className="w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 text-[var(--color-brown-600)] mx-auto mb-2.5 sm:mb-3" />
-                <p className="text-2xl xs:text-3xl sm:text-3xl lg:text-4xl font-black text-[var(--color-brown-900)] mb-1.5 sm:mb-2 font-display">
-                  100%
-                </p>
-                <p className="text-xs xs:text-sm sm:text-base lg:text-base font-bold text-[var(--color-text-800)] mb-1">
-                  Lulus Ujian Tahfidz
-                </p>
-                <p className="text-[10px] xs:text-xs sm:text-sm lg:text-sm text-[var(--color-text-600)]">
-                  Standar minimal 5 Juz
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        </Container>
       </section>
-    </>
+
+      {/* 7. Impactful CTA */}
+      <section className="py-24 md:py-32 bg-white">
+        <Container>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="bg-brown-800 rounded-[4rem] p-12 md:p-24 text-center text-white relative overflow-hidden shadow-premium-2xl"
+          >
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
+
+            <div className="relative z-10">
+              <h2 className="text-4xl md:text-6xl font-display font-black mb-8 text-white leading-tight">
+                Mulai Perjalanan <br /> <span className="text-gold-400">Terbaik</span> Mereka
+              </h2>
+              <p className="text-xl text-brown-100 max-w-2xl mx-auto mb-12 font-medium">
+                Pendidikan adalah investasi terbaik. Masuklah ke lingkungan yang menjaga iman, memacu ilmu, dan membangun karakter mereka.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                <Link href="/ppdb">
+                  <button className="px-12 py-5 rounded-pill bg-white text-brown-900 font-black text-lg hover:bg-gold-400 hover:text-white shadow-premium-xl transition-all">
+                    Daftar Sekarang
+                  </button>
+                </Link>
+                <Link href="/kontak">
+                  <button className="px-12 py-5 rounded-pill bg-white/10 text-white font-bold border border-white/20 hover:bg-white/20 transition-all">
+                    Hubungi Admin
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        </Container>
+      </section>
+    </main>
   );
 }

@@ -11,34 +11,38 @@ import {
     Clock,
     Calendar,
     ArrowRight,
-    Star
+    Star,
+    Sparkles,
+    CheckCircle2,
+    Trophy,
+    Globe
 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 
-// Program Data with Updated Colors
+// Program Data with Refined Info
 const PROGRAMS = [
     {
         id: "mts",
         name: "Madrasah Tsanawiyah",
         buttonLabel: "Daftar MTs",
-        fullName: "Program Madrasah Tsanawiyah (Setara SMP)",
-        description: "Program pendidikan tingkat menengah pertama yang memadukan Kurikulum Nasional (Kemenag) dengan Kurikulum Pesantren (Diniyah) untuk membentuk santri yang berakhlak mulia, kokoh dalam aqidah, dan unggul dalam prestasi.",
+        fullName: "Program Madrasah Tsanawiyah (SMP)",
+        description: "Pendidikan tingkat menengah dengan Sinergi Kurikulum Nasional & Pesantren yang terintegrasi secara komprehensif untuk mencetak santri yang berakhlak mulia dan unggul dalam prestasi.",
         stats: [
-            { label: "Masa Studi", value: "3 Tahun" },
-            { label: "Target Hafalan", value: "Min. 3 Juz/Thn" },
-            { label: "Bahasa", value: "Arab & Inggris" },
+            { label: "Durasi", value: "3 Tahun", icon: Clock },
+            { label: "Target", value: "3 Juz/Thn", icon: Trophy },
+            { label: "Bahasa", value: "Dwi-Bahasa", icon: Globe },
         ],
         curriculum: [
-            "Tahfidz Al-Qur'an (Target Minimal 3 Juz/Tahun)",
-            "Bahasa Arab Aktif (Muhadatsah & Yaumiyah)",
-            "Kajian Kitab Kuning (Aqidah, Fiqih, Akhlaq)",
-            "Kurikulum Nasional (Matematika, IPA, B.Inggris)",
-            "Ekstrakurikuler (Bela Diri, Panahan, Futsal)",
+            "Tahfidz Al-Qur'an Intensif",
+            "Bahasa Arab (Muhadatsah & Yaumiyah)",
+            "Kajian Kitab Turats (Aqidah, Fiqih, Akhlaq)",
+            "Kurikulum Nasional Lengkap",
+            "Life Skills & Ekstrakurikuler"
         ],
-        image: "/images/mts.png", // New MTs image
+        image: "/images/mts.png",
         theme: "brown",
-        gradient: "from-brown-800 to-brown-600",
         accent: "text-brown-600",
         bg: "bg-brown-50"
     },
@@ -46,37 +50,33 @@ const PROGRAMS = [
         id: "il",
         name: "I'dad Lughowi",
         buttonLabel: "Daftar IL",
-        fullName: "Program I'dad Lughowi (Setara SMA)",
-        description: "Program pendidikan 4 tahun yang diawali dengan 1 tahun intensif Bahasa Arab & Syariah (I'dad), dilanjutkan dengan 3 tahun jenjang Madrasah Aliyah (MA). Lulusan mendapatkan ijazah negara (Setara SMA) dan ijazah pesantren.",
+        fullName: "Program I'dad Lughowi (SMA)",
+        description: "Program intensif 4 tahun dengan Kurikulum Terintegrasi Komprehensif; diawali 1 tahun penguatan Bahasa Arab & Syariah (I'dad), dilanjutkan 3 tahun jenjang Madrasah Aliyah (MA) yang resmi.",
         stats: [
-            { label: "Masa Studi", value: "4 Tahun (1+3)" },
-            { label: "Jenjang", value: "Setara SMA/MA" },
-            { label: "Target", value: "Lancar Bhs Arab" },
+            { label: "Durasi", value: "4 Tahun", icon: Clock },
+            { label: "Jenjang", value: "Setara SMA", icon: GraduationCap },
+            { label: "Fokus", value: "Kajian Syar'i", icon: BookOpen },
         ],
         curriculum: [
-            "Tahun 1: Intensif Bahasa Arab (Nahwu, Shorof, Balaghah)",
-            "Tahun 2-4: Kurikulum MA (Kepesantrenan & Umum)",
-            "Tahfidz Al-Qur'an (Lanjutan & Muroja'ah)",
-            "Kajian Kitab Turats & TICE (Adopsi Al-Andalus)",
-            "Persiapan Kuliah Timur Tengah & PTN",
+            "Tahun I'dad: Intensif Bahasa Arab & Syariah",
+            "Tahfidz Lanjutan & Muroja'ah",
+            "Kurikulum MA Terakreditasi",
+            "Kajian Kitab Turats Mendalam",
+            "Pembinaan Dakwah & Organisasi"
         ],
-        image: "/images/il.png", // New IL image
-        theme: "gold",
-        gradient: "from-gold-600 to-gold-400",
-        accent: "text-gold-600",
-        bg: "bg-gold-50"
+        image: "/images/il.png",
+        theme: "teal",
+        accent: "text-teal-600",
+        bg: "bg-teal-50"
     },
-
 ];
 
 export default function ProgramPage() {
-    const [activeSection, setActiveSection] = useState<string>("");
+    const [activeSection, setActiveSection] = useState<string>("mts");
 
     useEffect(() => {
         const handleScroll = () => {
             const viewportMiddle = window.scrollY + (window.innerHeight / 2);
-
-            // Find which section is currently in the middle of the viewport
             for (const program of PROGRAMS) {
                 const element = document.getElementById(program.id);
                 if (element) {
@@ -95,171 +95,193 @@ export default function ProgramPage() {
     }, []);
 
     return (
-        <main className="bg-surface-50 min-h-screen">
-            {/* 1. Hero Section - Brown Aesthetic */}
-            <section className="relative py-12 md:py-16 overflow-hidden bg-brown-900">
-                <div className="absolute inset-0 bg-[url('/images/pattern.svg')] bg-repeat opacity-5 mix-blend-overlay" />
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold-500/10 rounded-full blur-[100px] pointer-events-none" />
+        <main className="bg-white min-h-screen">
+            {/* 1. Hero Section - Airy & Clean */}
+            <section className="relative py-24 md:py-32 overflow-hidden bg-white">
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brown-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
 
                 <Container className="relative z-10 text-center">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-gold-400 text-xs font-bold uppercase tracking-widest mb-4 animate-in fade-in slide-in-from-bottom-4">
-                        <GraduationCap className="w-4 h-4" />
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-surface-200 text-brown-700 text-xs font-bold uppercase tracking-widest mb-8 shadow-premium-sm"
+                    >
+                        <GraduationCap className="w-3.5 h-3.5" />
                         <span>Jenjang Pendidikan</span>
-                    </div>
+                    </motion.div>
 
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-black mb-6 text-white tracking-tight animate-in fade-in slide-in-from-bottom-6 duration-700">
-                        Program Pendidikan <br />
-                        <span className="text-white">Al-Imam Al-Islami</span>
-                    </h1>
+                    <motion.h1
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
+                        className="text-5xl md:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
+                    >
+                        Program <br />
+                        <span className="text-brown-600">Terbaik Kita</span>
+                    </motion.h1>
 
-                    <p className="text-lg md:text-xl text-brown-100 max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
-                        Membangun generasi unggul dengan kurikulum terpadu yang menyeimbangkan ilmu dunia dan akhirat untuk masa depan yang gemilang.
-                    </p>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        className="text-lg md:text-xl text-ink-600 max-w-2xl mx-auto leading-relaxed font-medium"
+                    >
+                        Kurikulum terintegrasi komprehensif yang menyelaraskan standar Nasional dengan kekhasan Pesantren.
+                    </motion.p>
                 </Container>
             </section>
 
-            {/* 2. Navigation Tabs (Sticky) */}
-            <div className="sticky top-20 z-40 bg-white/80 backdrop-blur-xl border-b border-brown-100 shadow-sm transition-all">
+            {/* 2. Navigation Tabs (Sticky) - Refined */}
+            <div className="sticky top-[72px] z-40 bg-white/60 backdrop-blur-xl border-y border-surface-100 py-4">
                 <Container>
-                    <div className="flex justify-center gap-2 md:gap-4 py-4 overflow-x-auto no-scrollbar">
+                    <div className="flex justify-center gap-3">
                         {PROGRAMS.map((program) => (
-                            <a
+                            <button
                                 key={program.id}
-                                href={`#${program.id}`}
-                                className={`px-5 py-2.5 rounded-full font-bold text-sm transition-all whitespace-nowrap border
+                                onClick={() => {
+                                    document.getElementById(program.id)?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                                className={`px-8 py-3 rounded-full font-black text-sm transition-all border shadow-premium-sm
                                 ${activeSection === program.id
-                                        ? program.theme === 'brown' ? 'bg-brown-600 text-white border-brown-600 shadow-lg shadow-brown-600/20' :
-                                            program.theme === 'gold' ? 'bg-gold-500 text-white border-gold-500 shadow-lg shadow-gold-500/20' :
-                                                'bg-teal-600 text-white border-teal-600 shadow-lg shadow-teal-600/20'
-                                        : 'bg-white text-ink-500 border-ink-100 hover:border-brown-300 hover:text-brown-700'
+                                        ? program.theme === 'brown'
+                                            ? 'bg-brown-600 text-white border-brown-600'
+                                            : 'bg-teal-600 text-white border-teal-600'
+                                        : 'bg-white text-ink-500 border-surface-200 hover:border-brown-200 hover:text-brown-700'
                                     }`}
                             >
                                 {program.name}
-                            </a>
+                            </button>
                         ))}
                     </div>
                 </Container>
             </div>
 
-            {/* 3. Program Sections */}
-            <div className="space-y-10 py-10">
+            {/* 3. Program Content Sections */}
+            <div className="py-12">
                 {PROGRAMS.map((program, idx) => (
-                    <section key={program.id} id={program.id} className="scroll-mt-36">
+                    <section key={program.id} id={program.id} className="py-24 md:py-32 scroll-mt-32 overflow-hidden">
                         <Container>
-                            <div className={`grid lg:grid-cols-2 gap-8 lg:gap-12 items-center group ${idx % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
+                            <div className={`grid lg:grid-cols-2 gap-16 lg:gap-24 items-center ${idx % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
 
-                                {/* Text Content */}
-                                <div className={idx % 2 === 1 ? 'lg:col-start-2' : ''}>
-                                    <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-lg mb-4 font-bold text-[10px] uppercase tracking-widest
-                                        ${program.theme === 'brown' ? 'bg-brown-100 text-brown-700' :
-                                            program.theme === 'gold' ? 'bg-gold-100 text-gold-700' :
-                                                'bg-teal-100 text-teal-700'}
-                                    `}>
-                                        <Star className="w-3.5 h-3.5" />
-                                        <span>Program Unggulan</span>
-                                    </div>
+                                {/* Image Side */}
+                                <motion.div
+                                    initial={{ opacity: 0, x: idx % 2 === 0 ? -40 : 40 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    className={`relative ${idx % 2 === 1 ? 'lg:col-start-2' : ''}`}
+                                >
+                                    <div className="aspect-[4/5] rounded-[3.5rem] overflow-hidden shadow-premium-xl relative z-10 p-3 bg-white border border-surface-200">
+                                        <div className="relative w-full h-full rounded-[2.8rem] overflow-hidden">
+                                            <Image
+                                                src={program.image}
+                                                alt={program.fullName}
+                                                fill
+                                                className="object-cover transition-transform duration-700 hover:scale-110"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-                                    <h2 className="text-2xl md:text-4xl font-black text-brown-900 mb-4 font-display">
-                                        {program.fullName}
-                                    </h2>
-                                    <p className="text-ink-600 text-base leading-relaxed mb-6 text-justify">
-                                        {program.description}
-                                    </p>
-
-                                    {/* Stats Grid */}
-                                    <div className="grid grid-cols-3 gap-3 mb-6">
-                                        {program.stats.map((stat, statIdx) => (
-                                            <div key={statIdx} className="bg-white p-3 rounded-xl border border-surface-200 text-center shadow-clay-sm hover:shadow-clay-md transition-shadow">
-                                                <p className="text-[9px] text-ink-400 uppercase font-extrabold tracking-widest mb-1">{stat.label}</p>
-                                                <p className={`text-base font-bold
-                                                    ${program.theme === 'brown' ? 'text-brown-700' :
-                                                        program.theme === 'gold' ? 'text-gold-600' :
-                                                            'text-teal-600'}
-                                                `}>{stat.value}</p>
-                                            </div>
-                                        ))}
-                                    </div>
-
-                                    {/* Curriculum */}
-                                    <div className={`rounded-2xl p-5 mb-6 border ${program.bg} ${program.theme === 'brown' ? 'border-brown-200' : program.theme === 'gold' ? 'border-gold-200' : 'border-teal-200'}`}>
-                                        <h3 className="text-base font-bold text-brown-900 mb-4 flex items-center gap-2">
-                                            <BookOpen className={`w-5 h-5 ${program.accent}`} />
-                                            Kurikulum & Materi
-                                        </h3>
-                                        <ul className="space-y-2.5">
-                                            {program.curriculum.map((item, cIdx) => (
-                                                <li key={cIdx} className="flex items-start gap-3">
-                                                    <div className={`w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5
-                                                        ${program.theme === 'brown' ? 'bg-brown-200 text-brown-700' :
-                                                            program.theme === 'gold' ? 'bg-gold-200 text-gold-700' :
-                                                                'bg-teal-200 text-teal-700'}
-                                                    `}>
-                                                        <CheckCircle className="w-3 h-3" />
-                                                    </div>
-                                                    <span className="text-ink-700 text-sm font-medium">{item}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-
-                                    <Button
-                                        size="lg"
-                                        className={`w-full sm:w-auto text-white rounded-xl h-11 px-6 text-sm shadow-lg transition-all hover:scale-105
-                                            ${program.theme === 'brown' ? 'bg-brown-600 hover:bg-brown-700 shadow-brown-500/20' :
-                                                program.theme === 'gold' ? 'bg-gold-500 hover:bg-gold-600 shadow-gold-500/20' :
-                                                    'bg-teal-600 hover:bg-teal-700 shadow-teal-500/20'}
-                                        `}
-                                        asChild
-                                    >
-                                        <Link href={`/ppdb?jenjang=${program.id.toUpperCase()}`}>
-                                            <span className="mr-2">{program.buttonLabel}</span>
-                                            <ArrowRight className="w-4 h-4" />
-                                        </Link>
-                                    </Button>
-                                </div>
-
-                                {/* Image Card - FIXED */}
-                                <div className={`relative ${idx % 2 === 1 ? 'lg:col-start-1' : ''}`}>
-                                    <div className="relative aspect-[4/5] lg:aspect-square rounded-[2rem] overflow-hidden shadow-clay-lg group-hover:rotate-1 transition-transform duration-700">
-                                        {/* Gambar program */}
-                                        <Image
-                                            src={program.image}
-                                            alt={program.fullName}
-                                            fill
-                                            className="object-cover"
-                                            sizes="(max-width: 1024px) 100vw, 50vw"
-                                            priority={idx === 0}
-                                        />
-                                        {/* Overlay: lebih terang agar gambar terlihat jelas */}
-                                        <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10`} />
-                                        <div className={`absolute inset-0 bg-gradient-to-br ${program.gradient} opacity-20 z-10 mix-blend-multiply`} />
-                                        <div className="absolute inset-0 bg-[url('/images/pattern.svg')] bg-repeat opacity-10 z-10 mix-blend-overlay" />
-
-                                        <div className="absolute inset-0 z-20 p-6 lg:p-8 flex flex-col justify-end text-white">
-                                            <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center mb-auto border border-white/30">
-                                                <GraduationCap className="w-8 h-8 lg:w-10 lg:h-10 text-white" />
-                                            </div>
-
-                                            {/* FIXED: Tambah text shadow dan outline untuk visibility lebih baik */}
-                                            <div className="bg-black/40 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
-                                                <h3 className="text-2xl lg:text-3xl font-display font-black mb-1 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
-                                                    style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.5)' }}>
-                                                    {program.name}
+                                            <div className="absolute bottom-10 left-10 right-10 z-20">
+                                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-white/20 backdrop-blur-md border border-white/30 text-white text-[10px] font-black uppercase tracking-widest mb-3">
+                                                    <Star className="w-3.5 h-3.5 fill-gold-400 text-gold-400" />
+                                                    <span>Program Unggulan</span>
+                                                </div>
+                                                <h3 className="text-3 font-display font-black text-white text-4xl leading-none">
+                                                    Best Experience
                                                 </h3>
-                                                <p className="text-white/90 text-sm lg:text-base font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]"
-                                                    style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.9)' }}>
-                                                    Mencetak Generasi Rabbani
-                                                </p>
                                             </div>
                                         </div>
                                     </div>
 
-                                    {/* Decorative Blob specific to section - FIXED: Added to parent with relative */}
-                                    <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full blur-3xl -z-10 opacity-40
-                                         ${program.theme === 'brown' ? 'bg-brown-300' :
-                                            program.theme === 'gold' ? 'bg-gold-300' :
-                                                'bg-teal-300'}
+                                    {/* Decorative Blob */}
+                                    <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full blur-[120px] -z-10 opacity-30
+                                        ${program.theme === 'brown' ? 'bg-brown-200' : 'bg-teal-200'}
                                     `} />
+                                </motion.div>
+
+                                {/* Content Side */}
+                                <div className={idx % 2 === 1 ? 'lg:col-start-1' : ''}>
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                    >
+                                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-black text-ink-950 leading-[0.95] mb-8">
+                                            {program.fullName}
+                                        </h2>
+                                        <p className="text-xl text-ink-600 font-medium leading-relaxed mb-10">
+                                            {program.description}
+                                        </p>
+                                    </motion.div>
+
+                                    {/* Stats Grid - Modern Design */}
+                                    <div className="grid grid-cols-3 gap-4 mb-10">
+                                        {program.stats.map((stat, sIdx) => (
+                                            <motion.div
+                                                key={sIdx}
+                                                initial={{ opacity: 0, scale: 0.9 }}
+                                                whileInView={{ opacity: 1, scale: 1 }}
+                                                viewport={{ once: true }}
+                                                transition={{ delay: sIdx * 0.1 }}
+                                                className="bg-white p-5 rounded-[2rem] border border-surface-100 shadow-premium-sm hover:shadow-premium-md transition-all text-center group"
+                                            >
+                                                <div className={`w-10 h-10 rounded-xl mx-auto mb-3 flex items-center justify-center transition-transform group-hover:scale-110
+                                                    ${program.theme === 'brown' ? 'bg-brown-50 text-brown-600' : 'bg-teal-50 text-teal-600'}
+                                                `}>
+                                                    <stat.icon className="w-5 h-5" />
+                                                </div>
+                                                <p className="text-[10px] text-ink-400 font-black uppercase tracking-widest mb-1">{stat.label}</p>
+                                                <p className="text-sm font-black text-ink-950">{stat.value}</p>
+                                            </motion.div>
+                                        ))}
+                                    </div>
+
+                                    {/* Curriculum Card - Refined */}
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        className={`rounded-[3rem] p-10 mb-10 border ${program.bg} ${program.theme === 'brown' ? 'border-brown-100' : 'border-teal-100'} shadow-premium-sm relative overflow-hidden`}
+                                    >
+                                        <div className="absolute top-0 right-0 p-8 opacity-5">
+                                            <BookOpen className="w-32 h-32" />
+                                        </div>
+
+                                        <h3 className="text-2xl font-black text-ink-950 mb-8 flex items-center gap-3">
+                                            <div className={`w-3 h-10 rounded-full ${program.theme === 'brown' ? 'bg-brown-600' : 'bg-teal-600'}`} />
+                                            Kurikulum & Fokus
+                                        </h3>
+
+                                        <ul className="space-y-5 relative z-10">
+                                            {program.curriculum.map((item, cIdx) => (
+                                                <li key={cIdx} className="flex items-start gap-4 group/item">
+                                                    <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow-premium-sm
+                                                        ${program.theme === 'brown' ? 'bg-brown-600 text-white' : 'bg-teal-600 text-white'}
+                                                    `}>
+                                                        <CheckCircle2 className="w-4 h-4" />
+                                                    </div>
+                                                    <span className="text-ink-800 font-bold text-lg leading-tight uppercase tracking-tight group-hover/item:text-ink-950 transition-colors">
+                                                        {item}
+                                                    </span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </motion.div>
+
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                    >
+                                        <Link href={`/daftar?program=${program.id}`}>
+                                            <button className={`w-full sm:w-auto px-12 py-5 rounded-pill font-black text-white text-lg shadow-premium-xl transition-all hover:-translate-y-1
+                                                ${program.theme === 'brown' ? 'bg-brown-700 hover:bg-brown-800' : 'bg-teal-700 hover:bg-teal-800'}
+                                            `}>
+                                                Daftarkan Sekarang
+                                                <ArrowRight className="inline-block ml-3 w-5 h-5" />
+                                            </button>
+                                        </Link>
+                                    </motion.div>
                                 </div>
 
                             </div>
@@ -267,6 +289,42 @@ export default function ProgramPage() {
                     </section>
                 ))}
             </div>
+
+            {/* Bottom CTA - Impactful */}
+            <section className="py-24 md:py-32 bg-surface-50">
+                <Container>
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        className="bg-brown-800 rounded-[4rem] p-12 md:p-24 text-center text-white relative overflow-hidden"
+                    >
+                        <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+                        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
+
+                        <div className="relative z-10">
+                            <h2 className="text-4xl md:text-6xl font-display font-black mb-8 text-white leading-tight">
+                                Mulai Perjalanan <br /> <span className="text-gold-400">Terbaik</span> Mereka
+                            </h2>
+                            <p className="text-xl text-brown-100 max-w-2xl mx-auto mb-12 font-medium">
+                                Konsultasikan rencana pendidikan putra-putri Anda dengan tim kami untuk mendapatkan pilihan program yang paling tepat.
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                                <Link href="/daftar">
+                                    <button className="px-12 py-5 rounded-pill bg-white text-brown-900 font-black text-lg hover:bg-gold-400 hover:text-white shadow-premium-xl transition-all">
+                                        Pendaftaran Online
+                                    </button>
+                                </Link>
+                                <Link href="/kontak">
+                                    <button className="px-12 py-5 rounded-pill bg-white/10 text-white font-bold border border-white/20 hover:bg-white/20 transition-all">
+                                        Hubungi Admissions
+                                    </button>
+                                </Link>
+                            </div>
+                        </div>
+                    </motion.div>
+                </Container>
+            </section>
         </main>
     );
 }

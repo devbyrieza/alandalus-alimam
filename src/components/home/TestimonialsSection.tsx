@@ -1,37 +1,38 @@
 "use client";
 
 import Link from "next/link";
-import { MessageCircle, Star, ArrowRight, Quote } from "lucide-react";
+import { MessageCircle, Star, ArrowRight, Quote, Send } from "lucide-react";
 import { Container } from "@/components/layout/Container";
+import { motion } from "framer-motion";
 
 const TESTIMONIALS = [
   {
-    name: "Uki Kautsar (Ex-Noah)",
-    role: "Public Figure & Pemerhati Pendidikan",
-    initial: "U",
+    name: "Bpk. Surwanto",
+    role: "Wali Santri",
+    initial: "S",
     quote:
-      "Melihat konsep pendidikan yang diterapkan, saya optimis lembaga ini mampu melahirkan generasi yang tidak hanya cerdas secara akademik, tapi juga memiliki adab dan pemahaman agama yang lurus.",
+      "Tujuan kami menyekolahkan anak ke sini agar mereka paham agama. Di sini, pembiasaan ibadah dan adab benar-benar menjadi prioritas harian.",
   },
   {
-    name: "Ust. Dr. Muhammad Arifin Badri, M.A.",
-    role: "Pembina & Doktor Universitas Islam Madinah",
+    name: "Ibu Endah Wulandari",
+    role: "Wali Santri",
+    initial: "E",
+    quote:
+      "Kurikulum tahfidznya sangat sistematis. Tidak hanya mengejar target hafalan, tapi juga sangat ditekankan pada makhraj dan tajwid yang benar.",
+  },
+  {
+    name: "Muhammad Razan",
+    role: "Alumni Al-Imam",
+    initial: "R",
+    quote:
+      "Disiplin bahasa Arab dan hafalan Al-Qur'an yang saya dapatkan sangat membantu saat saya melanjutkan pendidikan ke jenjang yang lebih tinggi.",
+  },
+  {
+    name: "Faisal Ahmad",
+    role: "Alumni Al-Imam",
     initial: "A",
     quote:
-      "Kurikulum yang memadukan hafalan Al-Qur'an, bahasa Arab, dan ilmu umum adalah kunci melahirkan pemimpin masa depan. Sistem pendidikan ini berada di jalur yang tepat untuk mewujudkan visi tersebut.",
-  },
-  {
-    name: "Bpk. Welli Kosasih",
-    role: "Wali Santri MTs",
-    initial: "W",
-    quote:
-      "Alhamdulillah, perubahan karakter anak saya sangat positif. Para asatidz sangat perhatian, tidak hanya pada hafalan, tapi juga pada kemandirian dan sopan santun sehari-hari.",
-  },
-  {
-    name: "Muhammad Fatih",
-    role: "Mahasiswa Universitas Islam Madinah",
-    initial: "A",
-    quote:
-      "Bekal bahasa Arab dan dasar-dasar ilmu syar'i yang saya dapatkan sangat kuat. Alhamdulillah, memudahkan saya saat melanjutkan studi di Universitas Islam Madinah.",
+      "Alhamdulillah, berkat bimbingan intensif asatidz di sini, saya bisa lulus seleksi masuk universitas di Timur Tengah. Fondasi bahasa Arabnya benar-benar mantap.",
   },
 ] as const;
 
@@ -40,80 +41,117 @@ function TestimonialCard({
   role,
   initial,
   quote,
-}: (typeof TESTIMONIALS)[number]) {
+  idx
+}: (typeof TESTIMONIALS)[number] & { idx: number }) {
   return (
-    <div className="card-wablas bg-surface-50 p-8 h-full flex flex-col relative group hover:bg-white transition-colors">
-      <Quote className="absolute top-6 right-6 w-8 h-8 text-brown-100 group-hover:text-brown-200 transition-colors" />
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: idx * 0.1 }}
+      className="bg-white p-8 rounded-[2.5rem] h-full flex flex-col relative group border border-surface-100 shadow-premium-lg hover:shadow-premium-xl transition-all duration-500"
+    >
+      <Quote className="absolute top-8 right-8 w-10 h-10 text-brown-50 group-hover:text-brown-100 transition-colors" />
 
-      <div className="flex gap-1 mb-4">
+      <div className="flex gap-1 mb-6">
         {[...Array(5)].map((_, i) => (
-          <Star key={i} className="w-4 h-4 text-gold-400 fill-gold-400" />
+          <Star key={i} className="w-4 h-4 text-gold-500 fill-gold-500" />
         ))}
       </div>
 
-      <p className="text-ink-600 leading-relaxed mb-6 flex-grow italic font-medium">
+      <p className="text-ink-600 leading-relaxed mb-8 flex-grow italic font-medium relative z-10">
         "{quote}"
       </p>
 
       <div className="flex items-center gap-4 mt-auto">
-        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brown-700 to-brown-900 flex items-center justify-center text-white font-bold text-sm shadow-md">
+        <div className="w-12 h-12 rounded-2xl bg-brown-700 flex items-center justify-center text-white font-display font-black text-lg shadow-premium-sm group-hover:scale-110 transition-transform duration-500">
           {initial}
         </div>
         <div>
-          <p className="text-sm font-bold text-ink-900">{name}</p>
-          <p className="text-xs text-ink-400 font-medium">{role}</p>
+          <p className="text-base font-bold text-ink-950 leading-none mb-1">{name}</p>
+          <p className="text-xs text-ink-500 font-bold uppercase tracking-wider">{role}</p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 export default function TestimonialsSection() {
   return (
-    <section id="testimonials" className="py-12 md:py-16 bg-white">
-      <Container>
+    <section id="testimonials" className="py-24 md:py-32 bg-surface-50 relative overflow-hidden">
+      {/* Background patterns */}
+      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-brown-50 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/2 opacity-50" />
+
+      <Container className="relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brown-50 text-brown-700 text-xs font-bold uppercase tracking-widest mb-4">
+        <div className="text-center mb-20 max-w-2xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-surface-200 text-brown-700 text-xs font-bold uppercase tracking-widest mb-6 shadow-premium-sm"
+          >
             <MessageCircle className="w-3.5 h-3.5" />
-            <span>Kata Mereka</span>
-          </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-ink-900 mb-6 tracking-tight">
-            Kepercayaan <span className="text-gradient-brown">Wali Santri</span>
-          </h2>
-          <p className="text-lg text-ink-500">
-            Kami bangga menjadi mitra orang tua dalam mendidik generasi penerus yang sholeh dan sholehah.
-          </p>
+            <span>Testimoni</span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-8 tracking-tight"
+          >
+            Apa Kata <span className="text-brown-600">Mereka?</span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-lg text-ink-600 font-medium leading-relaxed"
+          >
+            Kepercayaan wali santri dan tokoh pendidikan adalah amanah bagi kami untuk terus memberikan yang terbaik.
+          </motion.p>
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
           {TESTIMONIALS.map((testimonial, idx) => (
-            <TestimonialCard key={idx} {...testimonial} />
+            <TestimonialCard key={idx} {...testimonial} idx={idx} />
           ))}
         </div>
 
-        {/* Stats CTA */}
-        <div className="bg-brown-900 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden text-center shadow-clay-lg">
-          {/* Decorative */}
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/pattern.svg')] opacity-5 mix-blend-overlay" />
-          <div className="absolute -top-20 -right-20 w-80 h-80 bg-brown-600/30 rounded-full blur-3xl" />
+        {/* Call to Action Card */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="bg-ink-950 rounded-[3rem] p-10 md:p-16 relative overflow-hidden text-center shadow-premium-xl"
+        >
+          <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.05] mix-blend-overlay" />
+          <div className="absolute -top-24 -right-24 w-96 h-96 bg-brown-600/20 rounded-full blur-[100px]" />
+          <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-brown-400/10 rounded-full blur-[100px]" />
 
-          <div className="relative z-10 max-w-2xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Bergabunglah dengan 70+ Keluarga Lainnya</h3>
-            <p className="text-brown-100 mb-8 leading-relaxed">
-              Berikan pendidikan terbaik dunia akhirat untuk putra-putri tercinta. Pendaftaran tahun ajaran 2026/2027 telah dibuka.
+          <div className="relative z-10 max-w-3xl mx-auto">
+            <h3 className="text-3xl md:text-5xl font-display font-black text-white mb-6">Mulai Langkah Pertama <br /> Masa Depan Qur'ani</h3>
+            <p className="text-xl text-ink-200 mb-10 leading-relaxed font-medium">
+              Telah dibuka Pendaftaran Santri Baru (PPDB) Tahun Ajaran 2026/2027. Kuota terbatas untuk kualitas pendidikan optimal.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/ppdb" className="px-8 py-4 rounded-pill bg-gold-500 text-brown-900 font-bold hover:bg-gold-400 transition-colors shadow-lg text-lg">
+            <div className="flex flex-col sm:flex-row gap-5 justify-center">
+              <Link href="/ppdb" className="px-12 py-5 rounded-pill bg-brown-600 text-white font-black hover:bg-brown-500 transition-all duration-300 shadow-premium-lg hover:-translate-y-1 text-lg flex items-center justify-center gap-2">
                 Daftar Sekarang
+                <ArrowRight className="w-6 h-6" />
               </Link>
-              <Link href="/kontak" className="px-8 py-4 rounded-pill text-white font-bold border-2 border-white/40 hover:bg-white/10 transition-colors text-lg">
-                Hubungi Kami
+              <Link href="/kontak" className="px-12 py-5 rounded-pill text-white font-black border-2 border-ink-800 hover:bg-white/5 transition-all duration-300 text-lg flex items-center justify-center gap-2">
+                Konsultasi WhatsApp
+                <Send className="w-5 h-5" />
               </Link>
             </div>
           </div>
-        </div>
+        </motion.div>
 
       </Container>
     </section>

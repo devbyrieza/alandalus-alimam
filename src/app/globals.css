@@ -15,97 +15,64 @@
   --font-display: "Plus Jakarta Sans", "Poppins", sans-serif;
   --font-arabic: "Amiri", serif;
 
-  /* Colors - Authentic Al-Imam Palette (Wablas Style Refinement) */
-
-  /* Base: Pure Clean White */
+  /* Colors - Professional & Airy Palette */
   --color-white: #ffffff;
-  --color-surface-50: #f8fafc; /* Very subtle cool gray for section bg */
-  --color-surface-100: #f1f5f9;
-  --color-surface-200: #e2e8f0;
-  --color-surface-300: #cbd5e1;
+  --color-surface-50: #f9fafb;
+  --color-surface-100: #f3f4f6;
+  --color-surface-200: #e5e7eb;
 
-  /* Brand Core: Al-Imam Iconic Brown (High Contrast) */
-  --color-brown-50: #fdf8f6;
-  --color-brown-100: #f2e8e5;
+  /* Brand Core: Professional Brown (Refined) */
+  --color-brown-50: #faf7f5;
+  --color-brown-100: #f5eeea;
   --color-brown-200: #eaddd7;
-  --color-brown-300: #e0cec7;
-  --color-brown-400: #d2bab0;
-  --color-brown-500: #a18072;
-  --color-brown-600: #8d6e63;
-  --color-brown-700: #5d4037; /* Primary Action */
-  --color-brown-800: #4e342e;
-  --color-brown-900: #3e2723; /* Dark Text */
-  --color-brown-950: #2b1b18; /* Nearly Black */
+  --color-brown-300: #d2bba0;
+  --color-brown-400: #c6a682;
+  --color-brown-500: #a6815b;
+  --color-brown-600: #8c6a4a;
+  --color-brown-700: #735438;
+  /* Primary Action */
+  --color-brown-800: #5c432d;
+  --color-brown-900: #453221;
 
-  /* Secondary: Cream & Gold Accents (Subtle) */
-  --color-cream-50: #fffcf5;
-  --color-cream-100: #fdf8f3;
-  --color-cream-200: #f5ebe0;
-  --color-cream-300: #ebe0d1;
-  --color-cream-400: #d4b06e;
-
-  /* Gold: Excellence/Tahfidz */
-  --color-gold-50: #fffbeb;
-  --color-gold-100: #fef3c7;
+  /* Accents */
   --color-gold-400: #fbbf24;
   --color-gold-500: #f59e0b;
   --color-gold-600: #d97706;
   --color-gold-700: #b45309;
+  --color-teal-500: #0ea5e9;
+  /* Professional Blue/Teal */
+  --color-teal-600: #0284c7;
+  --color-teal-700: #0369a1;
 
-  /* Teal: Functionality/Success (Wablas Green-ish vibe) */
-  --color-teal-50: #f0fdfa;
-  --color-teal-100: #ccfbf1;
-  --color-teal-400: #2dd4bf;
-  --color-teal-500: #14b8a6;
-  --color-teal-600: #0d9488;
-  --color-teal-700: #0f766e;
-  --color-teal-900: #134e4a;
+  /* High Readability Ink */
+  --color-ink-950: #030712;
+  --color-ink-900: #111827;
+  --color-ink-800: #1f2937;
+  --color-ink-700: #374151;
+  --color-ink-600: #4b5563;
+  --color-ink-500: #6b7280;
+  --color-ink-400: #9ca3af;
+  --color-ink-300: #d1d5db;
+  --color-ink-200: #e5e7eb;
+  --color-ink-100: #f3f4f6;
+  --color-ink-50: #f9fafb;
 
-  /* Text colors (High Readability) */
-  --color-ink-900: #0f172a; /* Slate 900 - Crisp Black */
-  --color-ink-800: #1e293b;
-  --color-ink-700: #334155;
-  --color-ink-600: #475569; /* Body Text */
-  --color-ink-500: #64748b;
-  --color-ink-400: #94a3b8;
-  --color-ink-300: #cbd5e1;
-  --color-ink-200: #e2e8f0;
-  --color-ink-100: #f1f5f9;
+  /* Premium Shadows */
+  --shadow-premium-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-premium-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-premium-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+  --shadow-premium-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.08);
 
-  /* Shadows - The "Wablas/Clay" Magic */
-  /* Soft, diffused shadows for white cards on white/gray bg */
-  --shadow-clay-sm:
-    0 1px 2px rgba(0, 0, 0, 0.04),
-    0 1px 1px rgba(0, 0, 0, 0.02),
-    0 0 0 1px rgba(0, 0, 0, 0.02);
+  /* Clay Shadows - More Stylized/Soft */
+  --shadow-clay-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.02), 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --shadow-clay-md: 0 12px 24px -12px rgba(0, 0, 0, 0.08), 0 4px 12px -4px rgba(0, 0, 0, 0.04);
+  --shadow-clay-lg: 0 24px 48px -12px rgba(0, 0, 0, 0.1), 0 8px 24px -8px rgba(0, 0, 0, 0.06);
+  --shadow-clay-xl: 0 32px 64px -12px rgba(0, 0, 0, 0.12), 0 16px 32px -10px rgba(0, 0, 0, 0.08);
 
-  --shadow-clay-md:
-    0 4px 6px -1px rgba(0, 0, 0, 0.05),
-    0 2px 4px -1px rgba(0, 0, 0, 0.03),
-    0 0 0 1px rgba(0, 0, 0, 0.03);
-
-  --shadow-clay-lg:
-    0 10px 15px -3px rgba(0, 0, 0, 0.08),
-    0 4px 6px -2px rgba(0, 0, 0, 0.04),
-    0 0 0 1px rgba(0, 0, 0, 0.03),
-    0 20px 25px -5px rgba(0, 0, 0, 0.05);
-    
-  --shadow-clay-xl:
-    0 20px 25px -5px rgba(0, 0, 0, 0.08),
-    0 10px 10px -5px rgba(0, 0, 0, 0.03),
-    0 0 0 1px rgba(0, 0, 0, 0.03);
-
-  --shadow-glass:
-    0 8px 32px 0 rgba(78, 52, 46, 0.08);
-
-  --shadow-glow-teal: 0 0 20px rgba(20, 184, 166, 0.2);
-  --shadow-glow-gold: 0 0 20px rgba(245, 158, 11, 0.2);
-  --shadow-glow-brown: 0 0 20px rgba(78, 52, 46, 0.2);
-
-  /* Radius - Pill Shape Dominance */
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
-  --radius-3xl: 2rem;
+  /* Radius */
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 2rem;
   --radius-full: 9999px;
   --radius-pill: 9999px;
 }
@@ -124,7 +91,8 @@
   body {
     /* Wablas Style: Clean White/Slate Background */
     @apply bg-white text-ink-900 font-sans antialiased;
-    background-image: none; /* Removed mesh gradient for cleaner look */
+    background-image: none;
+    /* Removed mesh gradient for cleaner look */
   }
 
   /* Global Button Cursor Override - Ensure all buttons have pointer cursor */
@@ -137,7 +105,12 @@
   }
 
   /* Typography Scale */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-display font-bold tracking-tight text-ink-900;
   }
 
@@ -191,7 +164,7 @@
   .card-wablas:hover {
     @apply shadow-clay-lg -translate-y-1;
   }
-  
+
   /* 2. Glass Card - For overlays */
   .card-glass {
     @apply bg-white/80 backdrop-blur-xl border border-white/60 shadow-clay-md rounded-2xl transition-all duration-300;
@@ -206,7 +179,7 @@
   /* Primary Button - Brown Gradient */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-pill font-bold text-white bg-brown-700 shadow-lg shadow-brown-900/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300;
-    
+
     background: linear-gradient(135deg, var(--color-brown-700) 0%, var(--color-brown-800) 100%);
 
     &:hover {
@@ -226,13 +199,13 @@
       @apply bg-surface-50 border-brown-300 text-brown-700 shadow-clay-sm;
     }
   }
-  
+
   /* Accent Button - Teal/Wablas Style */
   .btn-accent {
     @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-pill font-bold text-white bg-teal-500 shadow-lg shadow-teal-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300;
-    
+
     background: linear-gradient(135deg, var(--color-teal-500) 0%, var(--color-teal-600) 100%);
-    
+
     &:hover {
       @apply -translate-y-0.5 shadow-xl shadow-teal-500/30 brightness-110;
     }
@@ -253,7 +226,7 @@
   }
 
   .form-input-with-icon {
-     @apply w-full px-5 py-3.5 rounded-xl bg-surface-50 border border-transparent text-ink-900 placeholder-ink-400 focus:bg-white focus:border-brown-400/50 focus:ring-4 focus:ring-brown-400/10 focus:outline-none transition-all duration-300 pl-12 font-medium;
+    @apply w-full px-5 py-3.5 rounded-xl bg-surface-50 border border-transparent text-ink-900 placeholder-ink-400 focus:bg-white focus:border-brown-400/50 focus:ring-4 focus:ring-brown-400/10 focus:outline-none transition-all duration-300 pl-12 font-medium;
   }
 
   /* 5. Navigation Link */
@@ -277,7 +250,7 @@
   .section-std {
     @apply py-20 md:py-24 bg-white relative overflow-hidden;
   }
-  
+
   .section-alt {
     @apply py-20 md:py-24 bg-surface-50 relative overflow-hidden;
   }
@@ -297,25 +270,25 @@
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .glass {
     @apply bg-white/70 backdrop-blur-xl border border-white/50;
   }
-  
+
   .text-glow {
-    text-shadow: 0 0 20px rgba(255,255,255,0.5);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
   }
 
   /* Text Gradients */
   .text-gradient-brown {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-brown-600 to-brown-900;
   }
-  
+
   .text-gradient-teal {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-teal-500 to-teal-700;
   }
-  
+
   .text-gradient-gold {
-     @apply bg-clip-text text-transparent bg-gradient-to-r from-gold-500 to-gold-700;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-gold-500 to-gold-700;
   }
 }

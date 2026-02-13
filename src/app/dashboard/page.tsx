@@ -13,23 +13,25 @@ import {
   AlertCircle,
   Loader2,
   ChevronRight,
-  Home,
   MessageCircle,
   Phone,
   Heart,
   Star,
   Sparkles,
   Trophy,
-  Target,
-  Zap,
   Calendar,
-  PartyPopper,
   ClipboardList,
   UserCheck,
+  ArrowRight,
+  RefreshCw,
+  LayoutDashboard,
+  IdCard,
 } from "lucide-react";
 import BackToHomeButton from "@/components/common/BackToHomeButton";
 import { logoutUser } from "@/lib/auth";
 import { hasReachedStatus, StatusProses } from "@/lib/access-control";
+import { motion, AnimatePresence } from "framer-motion";
+import { Container } from "@/components/layout/Container";
 
 interface PendaftarData {
   id: string;
@@ -43,85 +45,184 @@ interface PendaftarData {
 
 const STATUS_LABELS: Record<
   string,
-  { label: string; color: string; icon: any; message: string }
+  { label: string; color: string; bg: string; border: string; text: string; icon: any; message: string }
 > = {
   draft: {
     label: "Belum Lengkap",
-    color: "gray",
+    color: "amber",
+    bg: "bg-amber-50",
+    border: "border-amber-200",
+    text: "text-amber-700",
     icon: Clock,
     message: "Mari lengkapi data untuk melanjutkan ke tahap berikutnya!",
   },
   waiting_payment: {
     label: "Menunggu Pembayaran",
-    color: "yellow",
+    color: "amber",
+    bg: "bg-amber-50",
+    border: "border-amber-200",
+    text: "text-amber-700",
     icon: Clock,
-    message:
-      "Tinggal satu langkah lagi! Silakan lakukan pembayaran untuk melanjutkan.",
+    message: "Tinggal satu langkah lagi! Silakan lakukan pembayaran untuk melanjutkan.",
   },
   payment_verification: {
     label: "Verifikasi Pembayaran",
     color: "blue",
-    icon: Clock,
-    message:
-      "Pembayaran Anda sedang kami verifikasi. Harap menunggu dengan sabar ya!",
+    bg: "bg-blue-50",
+    border: "border-blue-200",
+    text: "text-blue-700",
+    icon: Loader2,
+    message: "Pembayaran Anda sedang kami verifikasi. Harap menunggu dengan sabar ya!",
   },
   data_lengkap: {
     label: "Data Lengkap",
     color: "teal",
+    bg: "bg-teal-50",
+    border: "border-teal-200",
+    text: "text-teal-700",
     icon: CheckCircle,
     message: "Luar biasa! Semua data sudah lengkap. Menunggu verifikasi admin.",
   },
   verified: {
     label: "Terverifikasi",
     color: "green",
+    bg: "bg-green-50",
+    border: "border-green-200",
+    text: "text-green-700",
     icon: CheckCircle,
     message: "Alhamdulillah! Pendaftaran Anda telah diverifikasi.",
   },
   tes_tertulis: {
     label: "Tes Tertulis",
     color: "purple",
+    bg: "bg-purple-50",
+    border: "border-purple-200",
+    text: "text-purple-700",
     icon: FileText,
     message: "Persiapkan diri untuk tes tertulis. Semangat!",
   },
   lulus_tes_tertulis: {
     label: "Lulus Tes Tertulis",
     color: "green",
+    bg: "bg-green-50",
+    border: "border-green-200",
+    text: "text-green-700",
     icon: CheckCircle,
     message: "Selamat! Anda lulus tes tertulis. Lanjutkan ke tahap berikutnya!",
   },
   tidak_lulus_tes_tertulis: {
     label: "Tidak Lulus",
     color: "red",
+    bg: "bg-red-50",
+    border: "border-red-200",
+    text: "text-red-700",
     icon: AlertCircle,
-    message:
-      "Jangan berkecil hati. Tetap semangat untuk kesempatan berikutnya!",
+    message: "Jangan berkecil hati. Tetap semangat untuk kesempatan berikutnya!",
   },
   scheduled: {
     label: "Dijadwalkan Ujian",
     color: "blue",
+    bg: "bg-blue-50",
+    border: "border-blue-200",
+    text: "text-blue-700",
     icon: Calendar,
     message: "Ujian Anda telah dijadwalkan. Cek detail jadwal ya!",
   },
   tested: {
     label: "Selesai Ujian",
     color: "teal",
+    bg: "bg-teal-50",
+    border: "border-teal-200",
+    text: "text-teal-700",
     icon: CheckCircle,
     message: "Ujian selesai! Menunggu hasil pengumuman. Do'akan yang terbaik!",
   },
   accepted: {
     label: "Diterima",
     color: "green",
+    bg: "bg-green-50",
+    border: "border-green-200",
+    text: "text-green-700",
     icon: Trophy,
-    message:
-      "Alhamdulillah! Selamat, putra/putri Anda diterima di Ponpes Al-Imam!",
+    message: "Alhamdulillah! Selamat, putra/putri Anda diterima di Ponpes Al-Imam!",
   },
   rejected: {
     label: "Tidak Diterima",
     color: "red",
+    bg: "bg-red-50",
+    border: "border-red-200",
+    text: "text-red-700",
     icon: AlertCircle,
     message: "Tetap semangat! Masih ada banyak jalan menuju kesuksesan.",
   },
 };
+
+// ========================================
+// SUB-COMPONENTS
+// ========================================
+
+const ActionCard = ({
+  href,
+  icon: Icon,
+  title,
+  description,
+  step,
+  color,
+  disabled,
+  delay = 0
+}: {
+  href: string,
+  icon: any,
+  title: string,
+  description: string,
+  step: string,
+  color: string,
+  disabled: boolean,
+  delay?: number
+}) => {
+  const CardContent = (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.5 }}
+      whileHover={!disabled ? { y: -8, scale: 1.02 } : {}}
+      className={`group h-full flex flex-col p-8 rounded-[2.5rem] border-2 transition-all duration-300 ${disabled
+        ? "bg-surface-50 border-surface-100 opacity-60 grayscale cursor-not-allowed"
+        : `bg-white border-surface-100 hover:border-${color}-500 hover:shadow-premium-xl`
+        }`}
+    >
+      <div className="flex items-start justify-between mb-8">
+        <div className={`w-14 h-14 rounded-2xl bg-${color}-50 flex items-center justify-center text-${color}-600 group-hover:scale-110 transition-transform shadow-premium-xs`}>
+          <Icon className="w-7 h-7" />
+        </div>
+        <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-${color}-50 text-${color}-700 border border-${color}-100`}>
+          {step}
+        </span>
+      </div>
+
+      <h3 className="text-xl font-display font-black text-ink-950 mb-3 group-hover:text-brown-700 transition-colors">
+        {title}
+      </h3>
+      <p className="text-sm text-ink-500 font-medium leading-relaxed mb-6 flex-grow">
+        {description}
+      </p>
+
+      {!disabled && (
+        <div className={`flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-${color}-600`}>
+          <Sparkles className="w-4 h-4" />
+          <span>Go to section</span>
+          <ArrowRight className="w-3.5 h-3.5 ml-auto opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+        </div>
+      )}
+    </motion.div>
+  );
+
+  return disabled ? CardContent : <Link href={href}>{CardContent}</Link>;
+};
+
+// ========================================
+// MAIN PAGE
+// ========================================
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -135,35 +236,16 @@ export default function DashboardPage() {
 
   const checkAuthAndFetchData = async () => {
     try {
-      // 1. Fetch data from our new API route
-      // This will check session automatically and return 401 if not logged in
       const response = await fetch("/api/dashboard/pendaftar-data");
-
       if (response.status === 401) {
-        console.log("❌ No session or unauthorized");
         router.push("/login");
-        setIsLoading(false);
         return;
       }
-
       if (!response.ok) {
-        console.error("Failed to fetch dashboard data:", response.status);
-        alert("Gagal memuat data dashboard. Silakan coba lagi.");
-        setIsLoading(false);
-        return;
+        throw new Error("Failed to fetch data");
       }
-
       const result = await response.json();
-
-      if (!result.data) {
-        console.error("No pendaftar data in response");
-        router.push("/login");
-        return;
-      }
-
-      console.log("✅ Pendaftar data loaded:", result.data.nama_lengkap);
       setPendaftar(result.data);
-
     } catch (error) {
       console.error("Error loading dashboard:", error);
       router.push("/login");
@@ -173,13 +255,9 @@ export default function DashboardPage() {
   };
 
   const handleLogout = async () => {
-    if (!confirm("Apakah Anda yakin ingin keluar?")) {
-      return;
-    }
-
+    if (!confirm("Apakah Anda yakin ingin keluar?")) return;
     setIsLoggingOut(true);
     const result = await logoutUser();
-
     if (result.success) {
       router.push("/login");
       router.refresh();
@@ -189,443 +267,307 @@ export default function DashboardPage() {
     }
   };
 
-  // Loading state - Fully Responsive
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-surface-50 via-white to-brown-50 flex items-center justify-center pt-16 sm:pt-20 px-4">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className="w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 animate-spin text-[var(--color-brown-700)] mx-auto mb-3 sm:mb-4" />
-          <p className="text-base xs:text-lg sm:text-lg text-ink-600 font-semibold px-4">
-            Memuat data Anda...
-          </p>
-          <p className="text-xs xs:text-sm sm:text-sm text-ink-500 mt-2 flex items-center justify-center gap-2">
-            <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-            <span>Mohon tunggu sebentar</span>
-          </p>
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+            className="w-16 h-16 border-4 border-brown-50 border-t-brown-600 rounded-full mx-auto mb-6"
+          />
+          <p className="text-xl font-display font-black text-ink-950">Memuat Dashboard...</p>
         </div>
       </div>
     );
   }
 
-  if (!pendaftar) {
-    return null;
-  }
+  if (!pendaftar) return null;
 
   const statusInfo = STATUS_LABELS[pendaftar.status_pendaftaran] || {
     label: pendaftar.status_pendaftaran,
     color: "gray",
+    bg: "bg-gray-50",
+    border: "border-gray-200",
+    text: "text-gray-700",
     icon: Clock,
     message: "Status pendaftaran Anda sedang diproses.",
   };
   const StatusIcon = statusInfo.icon;
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-surface-50 via-white to-brown-50 pt-14 sm:pt-16 md:pt-20">
+    <main className="min-h-screen bg-white relative overflow-hidden pb-24">
       <BackToHomeButton position="top-left" />
+
+      {/* Background Decor */}
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brown-50/50 rounded-full blur-[140px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
+
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          HEADER - CELEBRATORY & WELCOMING ✨ - Fully Responsive
+          HEADER - PREMIUM & WELCOMING
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <div className="bg-gradient-to-r from-[var(--color-brown-700)] to-[var(--color-brown-800)] text-white py-6 xs:py-7 sm:py-8 md:py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          {/* Breadcrumb - Responsive */}
-          <div className="flex items-center gap-1.5 sm:gap-2 text-xs xs:text-sm sm:text-sm mb-3 sm:mb-4 text-white/90">
-            <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-            <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-            <span>Dashboard Pendaftaran</span>
-          </div>
-
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 sm:gap-4">
-            <div className="min-w-0">
-              {/* TITLE - PERSONAL & WARM - Responsive */}
-              <h1 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-2 text-white flex items-center gap-2 sm:gap-3 leading-tight">
-                <Heart className="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-red-400 flex-shrink-0" />
-                <span>Selamat Datang Kembali!</span>
-              </h1>
-
-              {/* PERSONALIZED GREETING - Responsive */}
-              <p
-                className="text-sm xs:text-base sm:text-lg font-semibold mb-1 leading-tight"
-                style={{
-                  color: "#FDF6EC",
-                  textShadow: "0 2px 4px rgba(0,0,0,0.3)",
-                }}
+      <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 border-b border-surface-100 overflow-hidden">
+        <Container>
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12">
+            <div className="max-w-3xl">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="flex items-center gap-3 mb-6"
               >
-                Assalamu'alaikum,{" "}
-                <strong className="text-yellow-300">
-                  {pendaftar.nama_lengkap.split(" ")[0]}
-                </strong>
-              </p>
+                <div className="w-10 h-10 rounded-xl bg-brown-50 flex items-center justify-center text-brown-600 shadow-premium-xs">
+                  <LayoutDashboard className="w-6 h-6" />
+                </div>
+                <div className="h-0.5 w-12 bg-brown-100 rounded-full" />
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-brown-600">Santri Portal</span>
+              </motion.div>
 
-              <p
-                className="text-xs xs:text-sm sm:text-base font-semibold flex items-center gap-1.5 sm:gap-2 leading-tight"
-                style={{
-                  color: "#FFF9E6",
-                  textShadow: "0 2px 4px rgba(0,0,0,0.3)",
-                }}
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="text-4xl md:text-5xl lg:text-6xl font-display font-black text-ink-950 mb-6 leading-tight tracking-tight"
               >
-                <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                <span>
-                  Kami senang melihat progres Anda! Terus semangat ya!
-                </span>
-              </p>
+                Ahlan wa Sahlan, <br />
+                <span className="text-brown-600">{pendaftar.nama_lengkap.split(" ")[0]}!</span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-xl text-ink-500 font-medium max-w-2xl leading-relaxed"
+              >
+                Pusat kendali pendaftaran santri baru T.A 2026/2027. Pantau progres dan lengkapi administrasi dengan mudah di sini.
+              </motion.p>
             </div>
 
-            {/* Logout Button - Responsive */}
-            <button
-              onClick={handleLogout}
-              disabled={isLoggingOut}
-              className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 xs:px-5 sm:px-4 py-2.5 xs:py-3 sm:py-2 bg-white/10 hover:bg-white/20 border border-white/30 rounded-lg text-xs xs:text-sm sm:text-sm font-semibold transition-all duration-300 text-white w-full md:w-auto active:scale-95"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3 }}
+              className="flex items-center gap-4"
             >
-              <LogOut className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-              <span>{isLoggingOut ? "Keluar..." : "Keluar"}</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content - Fully Responsive */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 xs:py-7 sm:py-8 md:py-12">
-        {/* Motivational Banner - DYNAMIC BASED ON STATUS - Responsive */}
-        {statusInfo.color !== "green" && statusInfo.color !== "red" && (
-          <div className="bg-gradient-to-r from-teal-50 to-surface-100 border-2 border-teal-200 rounded-xl sm:rounded-2xl p-4 xs:p-5 sm:p-6 mb-5 sm:mb-6 shadow-lg">
-            <div className="flex items-start gap-3 xs:gap-3.5 sm:gap-4">
-              <div className="w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[var(--color-teal-600)] flex items-center justify-center flex-shrink-0">
-                <Target className="w-5 h-5 xs:w-5.5 xs:h-5.5 sm:w-6 sm:h-6 text-white" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-base xs:text-lg sm:text-lg font-bold text-ink-900 mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2 leading-tight">
-                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500 flex-shrink-0" />
-                  <span>Anda Hampir Sampai Tujuan!</span>
-                </h3>
-                <p className="text-xs xs:text-sm sm:text-sm text-ink-600 leading-relaxed">
-                  {statusInfo.message}
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Success Banner - IF ACCEPTED - Responsive */}
-        {statusInfo.color === "green" &&
-          pendaftar.status_pendaftaran === "accepted" && (
-            <div className="bg-gradient-to-r from-green-50 to-[var(--color-teal-50)] border-2 border-green-300 rounded-xl sm:rounded-2xl p-5 xs:p-6 sm:p-6 mb-5 sm:mb-6 shadow-xl">
-              <div className="text-center">
-                <div className="mb-3 sm:mb-4">
-                  <Trophy className="w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 text-yellow-500 mx-auto animate-bounce" />
-                </div>
-                <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-green-800 mb-2 sm:mb-3 flex items-center justify-center gap-2 flex-wrap leading-tight">
-                  <PartyPopper className="w-6 h-6 sm:w-7 sm:h-7 flex-shrink-0" />
-                  <span>Alhamdulillah! Selamat!</span>
-                  <PartyPopper className="w-6 h-6 sm:w-7 sm:h-7 flex-shrink-0" />
-                </h2>
-                <p className="text-sm xs:text-base sm:text-lg text-green-700 mb-3 sm:mb-4 leading-relaxed px-4 sm:px-0">
-                  {statusInfo.message}
-                </p>
-                <div className="bg-white rounded-lg sm:rounded-xl p-3 xs:p-3.5 sm:p-4 inline-block">
-                  <p className="text-xs xs:text-sm sm:text-sm text-ink-600">
-                    <strong className="text-green-700">
-                      Langkah selanjutnya:
-                    </strong>{" "}
-                    Kami akan menghubungi Anda segera untuk informasi lebih
-                    lanjut.
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-        {/* Info Card - Nomor Pendaftaran & Status - Fully Responsive */}
-        <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl border border-surface-200 p-4 xs:p-5 sm:p-6 md:p-8 mb-5 sm:mb-6">
-          <div className="grid md:grid-cols-2 gap-5 xs:gap-6 sm:gap-6">
-            {/* Nomor Pendaftaran - Responsive */}
-            <div>
-              <p className="text-xs xs:text-sm sm:text-sm text-ink-500 mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2">
-                <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                <span>Nomor Pendaftaran Anda</span>
-              </p>
-              <p className="text-xl xs:text-2xl sm:text-3xl font-bold text-[var(--color-brown-800)] break-all">
-                {pendaftar.nomor_pendaftaran}
-              </p>
-              <p className="text-[10px] xs:text-xs sm:text-xs text-ink-400 mt-1.5 sm:mt-2 flex items-start gap-1.5">
-                <Star className="w-3 h-3 sm:w-3 sm:h-3 text-yellow-500 flex-shrink-0 mt-0.5" />
-                <span>
-                  Jenjang:{" "}
-                  <strong>
-                    {pendaftar.jenjang === "MTs"
-                      ? "MTs (Setara SMP)"
-                      : pendaftar.jenjang === "IL"
-                        ? "I'dad Lughowi (Persiapan Bahasa)"
-                        : "MA (Setara SMA)"}
-                  </strong>
-                </span>
-              </p>
-            </div>
-
-            {/* Status - Responsive */}
-            <div>
-              <p className="text-xs xs:text-sm sm:text-sm text-ink-500 mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2">
-                <Target className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                <span>Status Pendaftaran Saat Ini</span>
-              </p>
-              <div
-                className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 xs:px-3.5 sm:px-4 py-2 xs:py-2.5 sm:py-2 rounded-lg font-bold text-xs xs:text-sm sm:text-sm border-2 ${statusInfo.color === "green"
-                  ? "bg-green-50 border-green-500 text-green-700"
-                  : statusInfo.color === "red"
-                    ? "bg-red-50 border-red-500 text-red-700"
-                    : statusInfo.color === "blue"
-                      ? "bg-blue-50 border-blue-500 text-blue-700"
-                      : statusInfo.color === "yellow"
-                        ? "bg-yellow-50 border-yellow-500 text-yellow-700"
-                        : statusInfo.color === "teal"
-                          ? "bg-teal-50 border-teal-500 text-teal-700"
-                          : statusInfo.color === "purple"
-                            ? "bg-purple-50 border-purple-500 text-purple-700"
-                            : "bg-gray-50 border-gray-500 text-gray-700"
-                  }`}
+              <button
+                onClick={handleLogout}
+                disabled={isLoggingOut}
+                className="group flex items-center gap-3 px-8 py-4 bg-white border border-surface-200 rounded-2xl font-black text-xs uppercase tracking-widest text-ink-600 hover:bg-red-50 hover:text-red-600 hover:border-red-100 transition-all shadow-premium-sm active:scale-95 disabled:opacity-50"
               >
-                <StatusIcon className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-                <span>{statusInfo.label}</span>
+                <LogOut className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                <span>{isLoggingOut ? "Processing..." : "Logout"}</span>
+              </button>
+            </motion.div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+          MAIN CONTENT
+          ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+      <Container className="pt-16 md:pt-24 relative z-10">
+        <div className="grid lg:grid-cols-12 gap-12 items-start">
+
+          {/* LEFT SIDE: FLOW & ACTIONS */}
+          <div className="lg:col-span-8 space-y-12">
+
+            {/* STATUS HIGHLIGHT (Airy Banner) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className={`p-10 md:p-12 rounded-[3.5rem] border-2 shadow-premium-lg relative overflow-hidden ${statusInfo.bg} ${statusInfo.border}`}
+            >
+              {/* Animated pulses depending on status */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+
+              <div className="relative z-10">
+                <div className="flex flex-col md:flex-row md:items-center gap-8 mb-8">
+                  <div className={`w-20 h-20 rounded-[2rem] bg-white flex items-center justify-center ${statusInfo.text} shadow-premium-sm border border-surface-100/50`}>
+                    <StatusIcon className={`w-10 h-10 ${pendaftar.status_pendaftaran === 'payment_verification' ? 'animate-spin' : ''}`} />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-60 mb-2 block">Current Status</span>
+                    <h2 className={`text-3xl md:text-4xl font-display font-black ${statusInfo.text} leading-none`}>
+                      {statusInfo.label}
+                    </h2>
+                  </div>
+                </div>
+
+                <p className={`text-lg md:text-xl font-medium ${statusInfo.text} opacity-80 leading-relaxed max-w-2xl`}>
+                  {statusInfo.message}
+                </p>
+
+                <div className="mt-10 flex flex-wrap gap-4">
+                  <div className="px-6 py-2 rounded-full bg-white/50 backdrop-blur-sm border border-black/5 text-[10px] font-black uppercase tracking-widest text-ink-600">
+                    ID: {pendaftar.id.substring(0, 8).toUpperCase()}
+                  </div>
+                  <div className="px-6 py-2 rounded-full bg-white/50 backdrop-blur-sm border border-black/5 text-[10px] font-black uppercase tracking-widest text-ink-600">
+                    Registered: {new Date(pendaftar.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  </div>
+                </div>
               </div>
-              <p className="text-[10px] xs:text-xs sm:text-xs text-ink-400 mt-2 sm:mt-3 flex items-start gap-1.5">
-                <Clock className="w-3 h-3 sm:w-3 sm:h-3 flex-shrink-0 mt-0.5" />
-                <span>
-                  Terdaftar sejak:{" "}
-                  <strong>
-                    {new Date(pendaftar.created_at).toLocaleDateString(
-                      "id-ID",
-                      {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      },
-                    )}
-                  </strong>
+            </motion.div>
+
+            {/* ACTION GRID */}
+            <div>
+              <div className="flex items-center justify-between mb-8 px-4">
+                <h3 className="text-2xl font-display font-black text-ink-950">Langkah Pendaftaran</h3>
+                <div className="h-0.5 flex-1 mx-8 bg-surface-50 rounded-full" />
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                <ActionCard
+                  href="/dashboard/pendaftar/pembayaran-pendaftaran"
+                  icon={CreditCard}
+                  title="Biaya Pendaftaran"
+                  description="Selesaikan pembayaran biaya pendaftaran santri baru T.A 2026/2027 sebesar Rp 200.000."
+                  step="Step 01"
+                  color="gold"
+                  disabled={false}
+                  delay={0.5}
+                />
+                <ActionCard
+                  href="/dashboard/pendaftar"
+                  icon={User}
+                  title="Lengkapi Biodata"
+                  description="Isi formulir data diri, kartu keluarga, asatidz rekomendasi, dan riwayat kesehatan santri."
+                  step="Step 02"
+                  color="teal"
+                  disabled={!hasReachedStatus(pendaftar.status_pendaftaran, "verified")}
+                  delay={0.6}
+                />
+                <ActionCard
+                  href="/dashboard/pendaftar/upload-berkas"
+                  icon={FileText}
+                  title="Upload Dokumen"
+                  description="Unggah berkas persyaratan seperti Akta Kelahiran, Kartu Keluarga, dan KTP Orang Tua (PNG/JPG/PDF)."
+                  step="Step 03"
+                  color="brown"
+                  disabled={!hasReachedStatus(pendaftar.status_pendaftaran, "data_completed")}
+                  delay={0.7}
+                />
+                <ActionCard
+                  href="/dashboard/pendaftar/undangan-seleksi"
+                  icon={ClipboardList}
+                  title="Undangan Seleksi"
+                  description="Tinjau jadwal ujian Al-Qur'an, tes akademik, dan sesi wawancara setelah berkas terverifikasi."
+                  step="Step 04"
+                  color="purple"
+                  disabled={!hasReachedStatus(pendaftar.status_pendaftaran, "docs_verified")}
+                  delay={0.8}
+                />
+                <ActionCard
+                  href="/dashboard/pendaftar/pengumuman"
+                  icon={Trophy}
+                  title="Hasil Kelulusan"
+                  description="Cek status akhir seleksi penerimaan santri baru Pondok Pesantren Al-Imam di sini."
+                  step="Step 05"
+                  color="blue"
+                  disabled={!hasReachedStatus(pendaftar.status_pendaftaran, "tested")}
+                  delay={0.9}
+                />
+                <ActionCard
+                  href="/dashboard/pendaftar/daftar-ulang"
+                  icon={UserCheck}
+                  title="Daftar Ulang"
+                  description="Selesaikan proses registrasi akhir dan administrasi biaya pendidikan bagi santri yang diterima."
+                  step="Step 06"
+                  color="green"
+                  disabled={!hasReachedStatus(pendaftar.status_pendaftaran, "accepted")}
+                  delay={1.0}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT SIDE: SIDEBAR INFO */}
+          <aside className="lg:col-span-4 space-y-8">
+
+            {/* CARD: NOMOR PENDAFTARAN */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.6 }}
+              className="bg-white p-10 rounded-[3rem] shadow-premium-lg border border-surface-100 flex flex-col items-center text-center relative overflow-hidden"
+            >
+              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brown-400 to-gold-500" />
+              <div className="w-16 h-16 rounded-2xl bg-brown-50 flex items-center justify-center text-brown-600 mb-6 shadow-premium-xs">
+                <IdCard className="w-8 h-8" />
+              </div>
+              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-ink-400 mb-2">No. Registrasi</p>
+              <h4 className="text-3xl font-display font-black text-ink-950 mb-6">
+                {pendaftar.nomor_pendaftaran}
+              </h4>
+              <div className="w-full h-px bg-surface-50 mb-6" />
+              <div className="flex items-center gap-3 text-ink-600">
+                <Star className="w-5 h-5 text-gold-500 fill-gold-500" />
+                <span className="font-bold text-sm">
+                  {pendaftar.jenjang === "MTs" ? "Madrasah Tsanawiyah" : "I'dad Lughowi"}
                 </span>
-              </p>
-            </div>
-          </div>
+              </div>
+            </motion.div>
+
+            {/* CARD: HELP & SUPPORT */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.8 }}
+              className="bg-brown-950 p-10 rounded-[3.5rem] shadow-premium-xl text-white relative overflow-hidden group"
+            >
+              <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+
+              <div className="relative z-10">
+                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-white mb-8 border border-white/10">
+                  <MessageCircle className="w-6 h-6" />
+                </div>
+                <h4 className="text-2xl font-display font-black mb-4">Butuh Bantuan?</h4>
+                <p className="text-sm text-brown-100/70 font-medium leading-relaxed mb-8">
+                  Ada kendala saat pengisian data atau pembayaran? Tim panitia kami siap membantu Anda setiap hari pukul 08:00 - 16:00 WIB.
+                </p>
+
+                <div className="space-y-4">
+                  <a
+                    href="https://wa.me/6285111524441"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white hover:text-brown-950 transition-all group/btn"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-green-500 text-white flex items-center justify-center shadow-lg group-hover/btn:scale-110 transition-transform">
+                      <Phone className="w-5 h-5" />
+                    </div>
+                    <div className="text-left">
+                      <p className="text-[10px] font-black uppercase tracking-widest opacity-60 leading-none mb-1">WhatsApp CS</p>
+                      <p className="font-bold text-sm">0851-1152-4441</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* QUICK LINKS / TOOLS */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.0 }}
+              className="bg-surface-50 p-10 rounded-[3rem] border border-surface-100"
+            >
+              <h5 className="text-[10px] font-black uppercase tracking-[0.2em] text-ink-400 mb-6 px-2">Sistem Akses</h5>
+              <div className="space-y-2">
+                <Link href="/kalender" className="flex items-center justify-between p-4 rounded-2xl hover:bg-white hover:shadow-premium-sm transition-all group">
+                  <span className="text-sm font-bold text-ink-600 group-hover:text-ink-950">Kalender Akademik</span>
+                  <ChevronRight className="w-4 h-4 text-ink-300 group-hover:text-brown-500" />
+                </Link>
+                <div className="h-px bg-surface-100 mx-4" />
+                <button onClick={() => window.location.reload()} className="w-full flex items-center justify-between p-4 rounded-2xl hover:bg-white hover:shadow-premium-sm transition-all group text-left">
+                  <span className="text-sm font-bold text-ink-600 group-hover:text-ink-950">Refresh Server</span>
+                  <RefreshCw className="w-4 h-4 text-ink-300 group-hover:text-brown-500" />
+                </button>
+              </div>
+            </motion.div>
+
+          </aside>
         </div>
-
-        {/* Action Cards - Flow PPDB: Pembayaran → Data Pribadi → Upload Dokumen */}
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 xs:gap-5 sm:gap-6">
-          {/* Step 1: Pembayaran */}
-          <Link
-            href="/dashboard/pendaftar/pembayaran-pendaftaran"
-            className="group bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-surface-200 hover:border-gold-500 p-4 xs:p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl active:scale-95"
-          >
-            <div className="flex items-start justify-between mb-3 sm:mb-4">
-              <div className="w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[var(--color-gold-100)] flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-                <CreditCard className="w-5 h-5 xs:w-5.5 xs:h-5.5 sm:w-6 sm:h-6 text-[var(--color-gold-700)]" />
-              </div>
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] xs:text-xs font-bold bg-[var(--color-gold-100)] text-[var(--color-gold-700)]">
-                Step 1 - Wajib
-              </span>
-            </div>
-            <h3 className="text-base xs:text-lg sm:text-lg font-bold text-ink-900 mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2 leading-tight">
-              <CreditCard className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-              <span>Pembayaran</span>
-            </h3>
-            <p className="text-xs xs:text-sm sm:text-sm text-ink-500 leading-relaxed mb-2 sm:mb-3">
-              Bayar biaya pendaftaran Rp 200.000 (Uang Pendaftaran)
-            </p>
-            <div className="text-[10px] xs:text-xs sm:text-xs text-[var(--color-gold-600)] font-semibold flex items-center gap-1">
-              <Sparkles className="w-3 h-3 sm:w-3 sm:h-3 flex-shrink-0" />
-              <span>Transfer mudah & aman</span>
-            </div>
-          </Link>
-
-          {/* Step 2: Data Pribadi */}
-          <Link
-            href="/dashboard/pendaftar"
-            className={`group bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-surface-200 p-4 xs:p-5 sm:p-6 transition-all duration-300 active:scale-95 ${!hasReachedStatus(pendaftar.status_pendaftaran, "verified")
-              ? "opacity-50 pointer-events-none grayscale cursor-not-allowed"
-              : "hover:border-teal-500 hover:-translate-y-1 hover:shadow-xl"
-              }`}
-            aria-disabled={!hasReachedStatus(pendaftar.status_pendaftaran, "verified")}
-          >
-            <div className="flex items-start justify-between mb-3 sm:mb-4">
-              <div className="w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[var(--color-teal-100)] flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-                <User className="w-5 h-5 xs:w-5.5 xs:h-5.5 sm:w-6 sm:h-6 text-[var(--color-teal-700)]" />
-              </div>
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] xs:text-xs font-bold bg-[var(--color-teal-100)] text-[var(--color-teal-700)]">
-                Step 2
-              </span>
-            </div>
-            <h3 className="text-base xs:text-lg sm:text-lg font-bold text-ink-900 mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2 leading-tight">
-              <FileText className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-              <span>Data Pribadi</span>
-            </h3>
-            <p className="text-xs xs:text-sm sm:text-sm text-ink-500 leading-relaxed mb-2 sm:mb-3">
-              Lengkapi profil diri, keluarga, dan riwayat pendidikan
-            </p>
-            <div className="text-[10px] xs:text-xs sm:text-xs text-[var(--color-teal-600)] font-semibold flex items-center gap-1">
-              <Sparkles className="w-3 h-3 sm:w-3 sm:h-3 flex-shrink-0" />
-              <span>Mudah & cepat diisi</span>
-            </div>
-          </Link>
-
-          {/* Step 3: Upload Dokumen */}
-          <Link
-            href="/dashboard/pendaftar/upload-berkas"
-            className={`group bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-surface-200 p-4 xs:p-5 sm:p-6 transition-all duration-300 sm:col-span-2 md:col-span-1 active:scale-95 ${!hasReachedStatus(pendaftar.status_pendaftaran, "data_completed")
-              ? "opacity-50 pointer-events-none grayscale cursor-not-allowed"
-              : "hover:border-brown-500 hover:-translate-y-1 hover:shadow-xl"
-              }`}
-            aria-disabled={!hasReachedStatus(pendaftar.status_pendaftaran, "data_completed")}
-          >
-            <div className="flex items-start justify-between mb-3 sm:mb-4">
-              <div className="w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[var(--color-brown-100)] flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-                <FileText className="w-5 h-5 xs:w-5.5 xs:h-5.5 sm:w-6 sm:h-6 text-[var(--color-brown-700)]" />
-              </div>
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] xs:text-xs font-bold bg-[var(--color-brown-100)] text-[var(--color-brown-700)]">
-                Step 3
-              </span>
-            </div>
-            <h3 className="text-base xs:text-lg sm:text-lg font-bold text-ink-900 mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2 leading-tight">
-              <FileText className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-              <span>Upload Dokumen</span>
-            </h3>
-            <p className="text-xs xs:text-sm sm:text-sm text-ink-500 leading-relaxed mb-2 sm:mb-3">
-              Upload berkas persyaratan dengan mudah
-            </p>
-            <div className="text-[10px] xs:text-xs sm:text-xs text-[var(--color-brown-600)] font-semibold flex items-center gap-1">
-              <Sparkles className="w-3 h-3 sm:w-3 sm:h-3 flex-shrink-0" />
-              <span>Terima file foto/PDF</span>
-            </div>
-          </Link>
-
-          {/* Step 4: Ujian & Seleksi - Disabled until docs verified */}
-          <Link
-            href="/dashboard/pendaftar/undangan-seleksi"
-            className={`group bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-surface-200 p-4 xs:p-5 sm:p-6 transition-all duration-300 active:scale-95 ${!hasReachedStatus(pendaftar.status_pendaftaran, "docs_verified")
-              ? "opacity-50 pointer-events-none grayscale cursor-not-allowed"
-              : "hover:border-purple-500 hover:-translate-y-1 hover:shadow-xl"
-              }`}
-            aria-disabled={!hasReachedStatus(pendaftar.status_pendaftaran, "docs_verified")}
-          >
-            <div className="flex items-start justify-between mb-3 sm:mb-4">
-              <div className="w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-purple-100 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-                <ClipboardList className="w-5 h-5 xs:w-5.5 xs:h-5.5 sm:w-6 sm:h-6 text-purple-700" />
-              </div>
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] xs:text-xs font-bold bg-purple-100 text-purple-700">
-                Step 4
-              </span>
-            </div>
-            <h3 className="text-base xs:text-lg sm:text-lg font-bold text-ink-900 mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2 leading-tight">
-              <ClipboardList className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-              <span>Seleksi</span>
-            </h3>
-            <p className="text-xs xs:text-sm sm:text-sm text-ink-500 leading-relaxed mb-2 sm:mb-3">
-              Cek jadwal & ikuti rangkaian tes: Al-Qur'an, Akademik, & Wawancara
-            </p>
-            <div className="text-[10px] xs:text-xs sm:text-xs text-purple-600 font-semibold flex items-center gap-1">
-              <Calendar className="w-3 h-3 sm:w-3 sm:h-3 flex-shrink-0" />
-              <span>Lihat Jadwal & Tes</span>
-            </div>
-          </Link>
-
-          {/* Step 5: Pengumuman - Disabled until tested */}
-          <Link
-            href="/dashboard/pendaftar/pengumuman"
-            className={`group bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-surface-200 p-4 xs:p-5 sm:p-6 transition-all duration-300 active:scale-95 sm:col-span-2 md:col-span-1 ${!hasReachedStatus(pendaftar.status_pendaftaran, "tested")
-              ? "opacity-50 pointer-events-none grayscale cursor-not-allowed"
-              : "hover:border-blue-500 hover:-translate-y-1 hover:shadow-xl"
-              }`}
-            aria-disabled={!hasReachedStatus(pendaftar.status_pendaftaran, "tested")}
-          >
-            <div className="flex items-start justify-between mb-3 sm:mb-4">
-              <div className="w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-blue-100 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-                <Trophy className="w-5 h-5 xs:w-5.5 xs:h-5.5 sm:w-6 sm:h-6 text-blue-700" />
-              </div>
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] xs:text-xs font-bold bg-blue-100 text-blue-700">
-                Step 5
-              </span>
-            </div>
-            <h3 className="text-base xs:text-lg sm:text-lg font-bold text-ink-900 mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2 leading-tight">
-              <Trophy className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-              <span>Pengumuman</span>
-            </h3>
-            <p className="text-xs xs:text-sm sm:text-sm text-ink-500 leading-relaxed mb-2 sm:mb-3">
-              Lihat hasil seleksi penerimaan santri baru
-            </p>
-            <div className="text-[10px] xs:text-xs sm:text-xs text-blue-600 font-semibold flex items-center gap-1">
-              <Sparkles className="w-3 h-3 sm:w-3 sm:h-3 flex-shrink-0" />
-              <span>Semoga mendapat hasil terbaik!</span>
-            </div>
-          </Link>
-
-          {/* Step 6: Daftar Ulang - Disabled until accepted */}
-          <Link
-            href="/dashboard/pendaftar/daftar-ulang"
-            className={`group bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-surface-200 p-4 xs:p-5 sm:p-6 transition-all duration-300 active:scale-95 ${!hasReachedStatus(pendaftar.status_pendaftaran, "accepted")
-              ? "opacity-50 pointer-events-none grayscale cursor-not-allowed"
-              : "hover:border-green-500 hover:-translate-y-1 hover:shadow-xl"
-              }`}
-            aria-disabled={!hasReachedStatus(pendaftar.status_pendaftaran, "accepted")}
-          >
-            <div className="flex items-start justify-between mb-3 sm:mb-4">
-              <div className="w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-green-100 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-                <UserCheck className="w-5 h-5 xs:w-5.5 xs:h-5.5 sm:w-6 sm:h-6 text-green-700" />
-              </div>
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] xs:text-xs font-bold bg-green-100 text-green-700">
-                Step 6
-              </span>
-            </div>
-            <h3 className="text-base xs:text-lg sm:text-lg font-bold text-ink-900 mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2 leading-tight">
-              <UserCheck className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-              <span>Daftar Ulang</span>
-            </h3>
-            <p className="text-xs xs:text-sm sm:text-sm text-ink-500 leading-relaxed mb-2 sm:mb-3">
-              Lakukan registrasi ulang bagi santri yang diterima
-            </p>
-            <div className="text-[10px] xs:text-xs sm:text-xs text-green-600 font-semibold flex items-center gap-1">
-              <CheckCircle className="w-3 h-3 sm:w-3 sm:h-3 flex-shrink-0" />
-              <span>Tahap Akhir</span>
-            </div>
-          </Link>
-        </div>
-
-        {/* Help Card - WARM & SUPPORTIVE - Fully Responsive */}
-        <div className="mt-5 sm:mt-6 bg-gradient-to-r from-teal-50 to-surface-100 border-2 border-teal-200 rounded-xl sm:rounded-2xl p-4 xs:p-5 sm:p-6 shadow-lg">
-          <div className="flex items-start gap-3 xs:gap-3.5 sm:gap-4">
-            <div className="w-9 h-9 xs:w-10 xs:h-10 sm:w-10 sm:h-10 rounded-lg bg-[var(--color-teal-600)] flex items-center justify-center flex-shrink-0">
-              <Heart className="w-4 h-4 xs:w-4.5 xs:h-4.5 sm:w-5 sm:h-5 text-white" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <h3 className="text-base xs:text-lg sm:text-lg font-bold text-ink-900 mb-1.5 sm:mb-2 leading-tight">
-                💬 Kami Selalu Siap Membantu Anda!
-              </h3>
-              <p className="text-xs xs:text-sm sm:text-sm text-ink-600 mb-2.5 sm:mb-3 leading-relaxed">
-                Jangan ragu untuk menghubungi kami kapan saja jika ada kendala
-                atau pertanyaan. Tim kami siap membantu dengan sepenuh hati!
-              </p>
-              <div className="flex flex-col sm:flex-row gap-2.5 xs:gap-3 sm:gap-3">
-                {/* WhatsApp Button - Responsive */}
-
-                <a
-                  href="https://wa.me/6285888871997"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 xs:px-5 sm:px-4 py-2.5 xs:py-3 sm:py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold text-xs xs:text-sm sm:text-sm transition-all duration-300 transform hover:scale-105 active:scale-95"
-                >
-                  <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                  <span>Chat WhatsApp Admin</span>
-                </a>
-
-                {/* Phone Button - Responsive */}
-
-                <a
-                  href="tel:+6285888871997"
-                  className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 xs:px-5 sm:px-4 py-2.5 xs:py-3 sm:py-2 bg-[var(--color-teal-600)] hover:bg-[var(--color-teal-700)] text-white rounded-lg font-semibold text-xs xs:text-sm sm:text-sm transition-all duration-300 transform hover:scale-105 active:scale-95"
-                >
-                  <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                  <span>+62 858-8887-1997</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </Container>
     </main>
   );
 }

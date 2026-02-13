@@ -1,0 +1,8 @@
+src/app/dashboard/page.tsx(4,27): error TS2792: Cannot find module 'next/navigation'. Did you mean to set the 'moduleResolution' option to 'nodenext', or to add aliases to the 'paths' option?
+src/app/dashboard/page.tsx(5,18): error TS2792: Cannot find module 'next/link'. Did you mean to set the 'moduleResolution' option to 'nodenext', or to add aliases to the 'paths' option?
+src/app/dashboard/page.tsx(29,8): error TS2792: Cannot find module 'lucide-react'. Did you mean to set the 'moduleResolution' option to 'nodenext', or to add aliases to the 'paths' option?
+src/app/dashboard/page.tsx(30,30): error TS2792: Cannot find module '@/components/common/BackToHomeButton'. Did you mean to set the 'moduleResolution' option to 'nodenext', or to add aliases to the 'paths' option?
+src/app/dashboard/page.tsx(31,28): error TS2792: Cannot find module '@/lib/auth'. Did you mean to set the 'moduleResolution' option to 'nodenext', or to add aliases to the 'paths' option?
+src/app/dashboard/page.tsx(32,48): error TS2792: Cannot find module '@/lib/access-control'. Did you mean to set the 'moduleResolution' option to 'nodenext', or to add aliases to the 'paths' option?
+src/app/dashboard/page.tsx(33,41): error TS2792: Cannot find module 'framer-motion'. Did you mean to set the 'moduleResolution' option to 'nodenext', or to add aliases to the 'paths' option?
+src/app/dashboard/page.tsx(34,27): error TS2792: Cannot find module '@/components/layout/Container'. Did you mean to set the 'moduleResolution' option to 'nodenext', or to add aliases to the 'paths' option?
