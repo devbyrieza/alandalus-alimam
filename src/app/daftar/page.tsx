@@ -43,7 +43,7 @@ const InputField = ({
   children: React.ReactNode
 }) => (
   <div className="space-y-3">
-    <label className="text-xs font-black text-ink-400 uppercase tracking-widest ml-1">{label}</label>
+    <label className="text-xs font-black text-ink-600 uppercase tracking-widest ml-1">{label}</label>
     {children}
     {error && (
       <motion.p
@@ -258,7 +258,7 @@ export default function DaftarPage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-ink-500 font-medium"
+            className="text-lg md:text-xl text-ink-700 font-medium"
           >
             Tahap Awal Penerimaan Santri Baru T.A 2026/2027
           </motion.p>
@@ -355,7 +355,7 @@ export default function DaftarPage() {
                         </div>
                         <div>
                           <p className="font-display font-black text-xl text-ink-950 leading-none mb-1">{option.title}</p>
-                          <p className="text-xs text-ink-400 font-black uppercase tracking-widest">{option.subtitle}</p>
+                          <p className="text-xs text-ink-600 font-black uppercase tracking-widest">{option.subtitle}</p>
                         </div>
                       </div>
                     </motion.div>
@@ -390,7 +390,7 @@ export default function DaftarPage() {
                         value={formData.nama_lengkap}
                         onChange={(e) => setFormData((prev) => ({ ...prev, nama_lengkap: e.target.value }))}
                         placeholder="Sesuai Akta Kelahiran santri"
-                        className="w-full px-8 py-5 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900 placeholder:text-ink-300"
+                        className="w-full px-8 py-5 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900 placeholder:text-ink-500"
                       />
                     </InputField>
                   </div>
@@ -403,7 +403,7 @@ export default function DaftarPage() {
                       value={formData.nik}
                       onChange={(e) => setFormData((prev) => ({ ...prev, nik: e.target.value.replace(/\D/g, "") }))}
                       placeholder="16 Digit NIK"
-                      className="w-full px-8 py-5 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900 placeholder:text-ink-300"
+                      className="w-full px-8 py-5 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900 placeholder:text-ink-500"
                     />
                   </InputField>
 
@@ -425,7 +425,7 @@ export default function DaftarPage() {
                             whileTap={{ scale: 0.98 }}
                             className={`flex-1 flex items-center justify-center px-6 py-4 rounded-3xl border-2 cursor-pointer transition-all duration-300 ${formData.jenis_kelamin === jk.val
                               ? "bg-brown-900 border-brown-900 text-white font-black shadow-premium-md"
-                              : "bg-surface-50 border-transparent text-ink-500 hover:border-surface-200"
+                              : "bg-surface-50 border-transparent text-ink-600 hover:border-surface-200"
                               }`}>
                             <input
                               type="radio"
@@ -472,7 +472,7 @@ export default function DaftarPage() {
                           </option>
                         ))}
                       </select>
-                      <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-400 pointer-events-none" />
+                      <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-600 pointer-events-none" />
                     </div>
                     <input
                       type="tel"
@@ -483,10 +483,10 @@ export default function DaftarPage() {
                         setFormData((prev) => ({ ...prev, no_hp: val }))
                       }}
                       placeholder={countryCode === "+62" ? "812 3456 7890" : "Phone Number"}
-                      className="flex-1 px-8 py-5 bg-surface-50 border-none focus:bg-white focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-950 placeholder:text-ink-300"
+                      className="flex-1 px-8 py-5 bg-surface-50 border-none focus:bg-white focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-950 placeholder:text-ink-500"
                     />
                   </div>
-                  <p className="text-xs text-ink-400 font-bold uppercase tracking-widest mt-3 ml-1">
+                  <p className="text-xs text-ink-600 font-bold uppercase tracking-widest mt-3 ml-1">
                     Kami akan mengirimkan kode OTP via WhatsApp ke nomor tersebut.
                   </p>
                 </InputField>
@@ -518,7 +518,7 @@ export default function DaftarPage() {
                   )}
                 </motion.button>
 
-                <p className="text-center text-sm text-ink-400 font-bold uppercase tracking-widest mt-8">
+                <p className="text-center text-sm text-ink-600 font-bold uppercase tracking-widest mt-8">
                   Punya Akun? <Link href="/login" className="text-brown-700 hover:text-gold-600 transition-colors">Masuk di sini</Link>
                 </p>
               </motion.div>
@@ -534,7 +534,7 @@ export default function DaftarPage() {
           transition={{ delay: 0.8 }}
           className="mt-12 text-center"
         >
-          <Link href="/" className="inline-flex items-center gap-2 text-ink-400 hover:text-brown-700 text-xs font-black uppercase tracking-widest transition-colors">
+          <Link href="/" className="inline-flex items-center gap-2 text-ink-600 hover:text-brown-700 text-xs font-black uppercase tracking-widest transition-colors">
             <RefreshCw className="w-3.5 h-3.5" /> Kembali Ke Beranda
           </Link>
         </motion.div>

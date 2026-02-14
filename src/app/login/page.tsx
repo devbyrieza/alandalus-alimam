@@ -38,9 +38,9 @@ const AuthInput = ({
   children: React.ReactNode
 }) => (
   <div className="space-y-3">
-    <label className="text-[10px] font-black text-ink-400 uppercase tracking-[0.2em] ml-1">{label}</label>
+    <label className="text-[10px] font-black text-ink-600 uppercase tracking-[0.2em] ml-1">{label}</label>
     <div className="relative group">
-      <div className="absolute left-6 top-1/2 -translate-y-1/2 text-ink-300 group-focus-within:text-brown-600 transition-colors duration-300">
+      <div className="absolute left-6 top-1/2 -translate-y-1/2 text-ink-500 group-focus-within:text-brown-600 transition-colors duration-300">
         <Icon className="w-5 h-5" />
       </div>
       {children}
@@ -190,7 +190,7 @@ export default function LoginPage() {
           <h1 className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-3 tracking-tight">
             Portal <span className="text-brown-600">Al-Imam</span>
           </h1>
-          <p className="text-lg text-ink-500 font-medium">
+          <p className="text-lg text-ink-700 font-medium">
             Masuk ke Sistem Administrasi & Pendaftaran
           </p>
         </motion.div>
@@ -217,13 +217,13 @@ export default function LoginPage() {
 
             <button
               onClick={() => { setActiveTab("pendaftar"); setError(""); }}
-              className={`flex-1 relative z-10 py-3.5 text-xs font-black uppercase tracking-widest text-center rounded-2xl transition-colors duration-300 ${activeTab === "pendaftar" ? "text-brown-700" : "text-ink-400 hover:text-ink-600"}`}
+              className={`flex-1 relative z-10 py-3.5 text-xs font-black uppercase tracking-widest text-center rounded-2xl transition-colors duration-300 ${activeTab === "pendaftar" ? "text-brown-700" : "text-ink-600 hover:text-ink-800"}`}
             >
               Pendaftar
             </button>
             <button
               onClick={() => { setActiveTab("admin"); setError(""); }}
-              className={`flex-1 relative z-10 py-3.5 text-xs font-black uppercase tracking-widest text-center rounded-2xl transition-colors duration-300 ${activeTab === "admin" ? "text-brown-700" : "text-ink-400 hover:text-ink-600"}`}
+              className={`flex-1 relative z-10 py-3.5 text-xs font-black uppercase tracking-widest text-center rounded-2xl transition-colors duration-300 ${activeTab === "admin" ? "text-brown-700" : "text-ink-600 hover:text-ink-800"}`}
             >
               Staff Portal
             </button>
@@ -264,7 +264,7 @@ export default function LoginPage() {
                       value={nomorPendaftaran}
                       onChange={(e) => setNomorPendaftaran(e.target.value.toUpperCase())}
                       placeholder="Contoh: MTI2600001"
-                      className="w-full px-8 py-5 pl-16 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-950 uppercase placeholder:normal-case placeholder:font-medium placeholder:text-ink-300"
+                      className="w-full px-8 py-5 pl-16 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-950 uppercase placeholder:normal-case placeholder:font-medium placeholder:text-ink-500"
                       disabled={isLoading}
                     />
                   </AuthInput>
@@ -277,7 +277,7 @@ export default function LoginPage() {
                       value={nikPendaftar}
                       onChange={(e) => setNikPendaftar(e.target.value.replace(/\D/g, ""))}
                       placeholder="16 Digit NIK Sesuai KK"
-                      className="w-full px-8 py-5 pl-16 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-300"
+                      className="w-full px-8 py-5 pl-16 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-500"
                       disabled={isLoading}
                     />
                   </AuthInput>
@@ -300,7 +300,7 @@ export default function LoginPage() {
                   </motion.button>
 
                   <div className="text-center pt-4">
-                    <p className="text-sm text-ink-400 font-bold uppercase tracking-widest mb-4">Belum Punya Akun?</p>
+                    <p className="text-sm text-ink-600 font-bold uppercase tracking-widest mb-4">Belum Punya Akun?</p>
                     <Link
                       href="/daftar"
                       className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-surface-50 text-brown-700 font-black text-sm border border-surface-100 hover:bg-white hover:shadow-premium-sm transition-all"
@@ -325,7 +325,7 @@ export default function LoginPage() {
                       value={emailAdmin}
                       onChange={(e) => setEmailAdmin(e.target.value)}
                       placeholder="admin@alimam.sch.id"
-                      className="w-full px-8 py-5 pl-16 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-gold-300 focus:ring-4 focus:ring-gold-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-300"
+                      className="w-full px-8 py-5 pl-16 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-gold-300 focus:ring-4 focus:ring-gold-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-500"
                       disabled={isLoading}
                     />
                   </AuthInput>
@@ -337,13 +337,13 @@ export default function LoginPage() {
                         value={passwordAdmin}
                         onChange={(e) => setPasswordAdmin(e.target.value)}
                         placeholder="••••••••"
-                        className="w-full px-8 py-5 pl-16 pr-16 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-gold-300 focus:ring-4 focus:ring-gold-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-300"
+                        className="w-full px-8 py-5 pl-16 pr-16 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-gold-300 focus:ring-4 focus:ring-gold-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-500"
                         disabled={isLoading}
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-6 top-1/2 -translate-y-1/2 text-ink-300 hover:text-ink-600 transition-colors duration-300"
+                        className="absolute right-6 top-1/2 -translate-y-1/2 text-ink-500 hover:text-ink-800 transition-colors duration-300"
                       >
                         {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                       </button>
@@ -390,7 +390,7 @@ export default function LoginPage() {
         >
           <Link
             href="/"
-            className="group flex items-center gap-3 text-ink-400 hover:text-brown-700 font-black uppercase tracking-[0.2em] text-[10px] transition-all"
+            className="group flex items-center gap-3 text-ink-600 hover:text-brown-700 font-black uppercase tracking-[0.2em] text-[10px] transition-all"
           >
             <div className="w-8 h-8 rounded-full bg-surface-50 border border-surface-100 flex items-center justify-center group-hover:scale-110 transition-transform">
               <ArrowLeft className="w-4 h-4" />
