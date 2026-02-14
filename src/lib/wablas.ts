@@ -164,9 +164,9 @@ Alhamdulillah, pendaftaran Anda di Pesantren Al-Imam Al-Islami telah berhasil!
 
 📝 *Langkah Selanjutnya:*
 1. Login ke dashboard: {{dashboard_url}}
-2. Lengkapi data diri
-3. Upload dokumen persyaratan
-4. Lakukan pembayaran
+   *(Gunakan Nomor Pendaftaran & NIK untuk Login)*
+2. Lengkap biodata & upload dokumen
+3. Segera lakukan pembayaran pendaftaran
 
 💡 *Butuh Bantuan?*
 Hubungi kami di {{kontak}}

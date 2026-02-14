@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { generateNomorPendaftaran } from "@/lib/utils/nomor-pendaftaran";
+import { notifyRegistrationSuccess } from "@/lib/wablas";
 import crypto from "crypto";
 
 function hashOTP(otp: string): string {
@@ -109,6 +110,20 @@ export async function POST(request: NextRequest) {
 
     // Delete used OTP
     await prisma.otpVerification.delete({ where: { id: otpRecord.id } });
+
+    // Send WhatsApp Notification (Non-blocking)
+    try {
+      console.log(`📱 Sending registration success notification to ${registrationData.no_hp}`);
+      await notifyRegistrationSuccess({
+        phone: registrationData.no_hp,
+        nama: registrationData.nama_lengkap,
+        nomor_pendaftaran: nomorPendaftaran,
+        jenjang: registrationData.jenjang,
+      });
+    } catch (waError) {
+      console.error("❌ WhatsApp registration notification error:", waError);
+      // We don't throw here to ensure the user still sees their registration was successful
+    }
 
     return NextResponse.json({
       success: true,
