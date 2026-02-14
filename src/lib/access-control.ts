@@ -186,7 +186,7 @@ export function formatStatusDisplay(status: StatusProses): { label: string; colo
     'verified': { label: 'Pembayaran Lunas', color: 'bg-blue-100 text-blue-700' },
     'paid': { label: 'Pembayaran Lunas', color: 'bg-blue-100 text-blue-700' },
     'payment_rejected': { label: 'Pembayaran Bermasalah', color: 'bg-red-100 text-red-700' },
-    'rejected': { label: 'Tidak Diterima', color: 'bg-red-100 text-red-700' },
+    'rejected': { label: 'Perlu Perbaikan', color: 'bg-red-100 text-red-700' },
     'data_completed': { label: 'Data Lengkap', color: 'bg-teal-100 text-teal-700' },
     'docs_uploaded': { label: 'Dokumen Berhasil Diupload', color: 'bg-indigo-100 text-indigo-700' },
     'docs_verified': { label: 'Dokumen Terverifikasi', color: 'bg-green-100 text-green-700' },

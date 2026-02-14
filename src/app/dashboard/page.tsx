@@ -153,16 +153,16 @@ const STATUS_LABELS: Record<
     border: "border-red-200",
     text: "text-red-700",
     icon: AlertCircle,
-    message: "Bukti pembayaran Anda ditolak. Silakan cek catatan admin dan upload ulang bukti yang benar.",
+    message: "Bukti pembayaran Anda ditolak. Silakan cek catatan admin di bagian bawah atau hubungi panitia untuk informasi lebih lanjut.",
   },
   rejected: {
-    label: "Tidak Diterima",
+    label: "Perlu Perbaikan",
     color: "red",
     bg: "bg-red-50",
     border: "border-red-200",
     text: "text-red-700",
     icon: AlertCircle,
-    message: "Tetap semangat! Masih ada banyak jalan menuju kesuksesan.",
+    message: "Mohon maaf, ada kendala pada berkas atau pembayaran Anda. Silakan hubungi panitia atau perbaiki data yang diperlukan.",
   },
 };
 
