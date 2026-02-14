@@ -90,7 +90,7 @@ export default function FeaturesSection() {
               className="relative z-10 grid grid-cols-2 gap-4 lg:gap-6"
             >
               <div className="space-y-4 lg:space-y-6 mt-12">
-                <div className="bg-white p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-premium-lg min-h-[14rem] md:h-56 flex flex-col justify-end items-start border border-surface-100 group hover:shadow-premium-xl transition-all duration-500">
+                <div className="bg-white p-6 sm:p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-premium-lg min-h-[12rem] sm:min-h-[14rem] md:h-56 flex flex-col justify-end items-start border border-surface-100 group hover:shadow-premium-xl transition-all duration-500">
                   <p className="text-5xl font-display font-black text-ink-950 mb-2">30+</p>
                   <div className="space-y-1">
                     <p className="text-sm font-bold text-ink-600">Tahun Mengabdi</p>
@@ -100,20 +100,20 @@ export default function FeaturesSection() {
                     </p>
                   </div>
                 </div>
-                <div className="bg-brown-800 p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-premium-xl min-h-[18rem] md:h-72 flex flex-col justify-center items-center text-center relative overflow-hidden group">
+                <div className="bg-brown-800 p-6 sm:p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-premium-xl min-h-[14rem] sm:min-h-[18rem] md:h-72 flex flex-col justify-center items-center text-center relative overflow-hidden group">
                   <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 mix-blend-overlay" />
                   <BookOpenCheck className="w-16 h-16 mb-6 text-white group-hover:scale-110 transition-transform duration-500" />
                   <p className="font-display font-black text-2xl text-white">Tahfidz<br />Intensif</p>
                 </div>
               </div>
               <div className="space-y-4 lg:space-y-6">
-                <div className="bg-white p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-premium-xl min-h-[18rem] md:h-72 flex flex-col justify-center items-center text-center relative overflow-hidden border border-surface-100 group hover:shadow-premium-xl transition-all duration-500">
+                <div className="bg-white p-6 sm:p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-premium-xl min-h-[14rem] sm:min-h-[18rem] md:h-72 flex flex-col justify-center items-center text-center relative overflow-hidden border border-surface-100 group hover:shadow-premium-xl transition-all duration-500">
                   <div className="w-24 h-24 bg-teal-50 rounded-full flex items-center justify-center mb-6 shadow-premium-sm group-hover:scale-110 transition-transform duration-500">
                     <ShieldCheck className="w-12 h-12 text-teal-600" />
                   </div>
                   <p className="font-display font-black text-2xl text-ink-950">Lingkungan<br />Islami</p>
                 </div>
-                <div className="bg-brown-100/30 backdrop-blur-sm p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-premium-lg min-h-[14rem] md:h-56 flex flex-col justify-end items-start border border-brown-100/50">
+                <div className="bg-brown-100/30 backdrop-blur-sm p-6 sm:p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-premium-lg min-h-[12rem] sm:min-h-[14rem] md:h-56 flex flex-col justify-end items-start border border-brown-100/50">
                   <p className="text-3xl font-display font-black mb-1 text-brown-950">RESMI</p>
                   <div className="space-y-0.5">
                     <p className="text-sm font-bold text-brown-800">Ijazah Diakui Negara</p>

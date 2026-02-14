@@ -186,7 +186,7 @@ const ActionCard = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.5 }}
       whileHover={!disabled ? { y: -8, scale: 1.02 } : {}}
-      className={`group h-full flex flex-col p-8 rounded-[2.5rem] border-2 transition-all duration-300 ${disabled
+      className={`group h-full flex flex-col p-6 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] border-2 transition-all duration-300 ${disabled
         ? "bg-surface-50 border-surface-100 opacity-60 grayscale cursor-not-allowed"
         : `bg-white border-surface-100 hover:border-${color}-500 hover:shadow-premium-xl`
         }`}
@@ -306,7 +306,7 @@ export default function DashboardPage() {
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
           HEADER - PREMIUM & WELCOMING
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 border-b border-surface-100 overflow-hidden">
+      <section className="relative pt-20 pb-12 md:pt-32 md:pb-24 border-b border-surface-100 overflow-hidden">
         <Container>
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12">
             <div className="max-w-3xl">
@@ -326,7 +326,7 @@ export default function DashboardPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-display font-black text-ink-950 mb-6 leading-tight tracking-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black text-ink-950 mb-6 leading-tight tracking-tight"
               >
                 Ahlan wa Sahlan, <br />
                 <span className="text-brown-600">{pendaftar.nama_lengkap.split(" ")[0]}!</span>
@@ -375,7 +375,7 @@ export default function DashboardPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className={`p-10 md:p-12 rounded-[3.5rem] border-2 shadow-premium-lg relative overflow-hidden ${statusInfo.bg} ${statusInfo.border}`}
+              className={`p-6 sm:p-10 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] border-2 shadow-premium-lg relative overflow-hidden ${statusInfo.bg} ${statusInfo.border}`}
             >
               {/* Animated pulses depending on status */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
@@ -387,7 +387,7 @@ export default function DashboardPage() {
                   </div>
                   <div>
                     <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-60 mb-2 block">Current Status</span>
-                    <h2 className={`text-3xl md:text-4xl font-display font-black ${statusInfo.text} leading-none`}>
+                    <h2 className={`text-2xl sm:text-3xl md:text-4xl font-display font-black ${statusInfo.text} leading-none`}>
                       {statusInfo.label}
                     </h2>
                   </div>

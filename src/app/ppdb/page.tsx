@@ -39,7 +39,7 @@ const StatCard = ({ icon: Icon, value, label, delay = 0 }: { icon: any, value: s
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ delay, duration: 0.5 }}
-    className="bg-white p-6 md:p-8 rounded-[2rem] border border-surface-100 shadow-premium-sm hover:shadow-premium-md transition-all text-center group"
+    className="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-[2rem] border border-surface-100 shadow-premium-sm hover:shadow-premium-md transition-all text-center group"
   >
     <div className="w-14 h-14 mx-auto bg-surface-50 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-premium-xs">
       <Icon className="w-7 h-7 text-brown-600" />
@@ -61,7 +61,7 @@ const TimelineItem = ({ item, index }: { item: any, index: number }) => (
     <div className="absolute left-[23px] md:left-[31px] top-0 bottom-0 w-0.5 bg-surface-100" />
 
     {/* Dot */}
-    <div className={`absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-3xl border-4 flex items-center justify-center bg-white z-10 shadow-premium-sm transition-all duration-500
+    <div className={`absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-2xl md:rounded-3xl border-4 flex items-center justify-center bg-white z-10 shadow-premium-sm transition-all duration-500
       ${item.status === 'active' ? 'border-brown-600 text-brown-600' : 'border-surface-100 text-ink-300'}`}>
       <span className="text-xl md:text-2xl font-display font-black">{index + 1}</span>
       {item.status === 'active' && (
@@ -74,7 +74,7 @@ const TimelineItem = ({ item, index }: { item: any, index: number }) => (
     </div>
 
     {/* Card */}
-    <div className="bg-white p-6 md:p-8 rounded-[2.5rem] border border-surface-100 shadow-premium-sm hover:shadow-premium-md transition-all">
+    <div className="bg-white p-5 sm:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-surface-100 shadow-premium-sm hover:shadow-premium-md transition-all">
       <div className="flex flex-wrap items-center gap-4 mb-3">
         <h3 className="text-xl md:text-2xl font-display font-black text-ink-950">{item.phase}</h3>
         <span className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${item.status === 'active' ? 'bg-brown-50 text-brown-700' : 'bg-surface-50 text-ink-400'
@@ -194,7 +194,7 @@ function PPDBContent() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-4xl sm:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
+              className="text-4xl sm:text-6xl lg:text-8xl font-display font-black mb-8 md:mb-10 tracking-tight leading-[0.9] text-ink-950"
             >
               Siapkan Generasi <br />
               <span className="text-brown-600">Terbaik Kita</span>
@@ -256,7 +256,7 @@ function PPDBContent() {
                 Kami memastikan setiap proses pendaftaran berlangsung dengan adil dan informatif bagi calon santri dan orang tua.
               </p>
 
-              <div className="bg-white p-8 rounded-[3rem] border border-surface-100 shadow-premium-lg relative overflow-hidden">
+              <div className="bg-white p-6 sm:p-8 rounded-[2rem] md:rounded-[3rem] border border-surface-100 shadow-premium-lg relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-teal-50 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
                 <div className="relative z-10 flex items-center gap-5">
                   <div className="w-14 h-14 bg-teal-500 rounded-2xl flex items-center justify-center text-white shadow-premium-md">
@@ -300,7 +300,7 @@ function PPDBContent() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
-                  className="bg-white p-10 md:p-12 rounded-[3.5rem] border border-surface-100 shadow-premium-lg flex flex-col items-center text-center group hover:bg-brown-900 transition-all duration-500"
+                  className="bg-white p-8 sm:p-12 rounded-[2rem] md:rounded-[3.5rem] border border-surface-100 shadow-premium-lg flex flex-col items-center text-center group hover:bg-brown-900 transition-all duration-500"
                 >
                   <div className="w-20 h-20 bg-surface-50 rounded-[2rem] flex items-center justify-center text-brown-600 mb-8 group-hover:bg-white/10 group-hover:text-white transition-all shadow-premium-sm">
                     <Icon className="w-10 h-10" />
@@ -346,7 +346,7 @@ function PPDBContent() {
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      className="bg-white p-8 md:p-10 rounded-[3rem] border border-surface-100 shadow-premium-md"
+                      className="bg-white p-6 sm:p-10 rounded-[2rem] md:rounded-[3rem] border border-surface-100 shadow-premium-md"
                     >
                       <div className="flex items-center gap-5 mb-8">
                         <div className="w-14 h-14 bg-brown-50 rounded-2xl flex items-center justify-center text-brown-600 shadow-premium-sm">
@@ -385,7 +385,7 @@ function PPDBContent() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="bg-brown-900 rounded-[4rem] p-10 md:p-16 text-white relative overflow-hidden shadow-premium-2xl"
+                className="bg-brown-900 rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-16 text-white relative overflow-hidden shadow-premium-2xl"
               >
                 <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
                 <div className="relative z-10">
@@ -459,7 +459,7 @@ function PPDBContent() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-brown-800 rounded-[4rem] p-12 md:p-24 text-center text-white relative overflow-hidden shadow-premium-2xl"
+            className="bg-brown-800 rounded-[2.5rem] md:rounded-[4rem] p-8 sm:p-24 text-center text-white relative overflow-hidden shadow-premium-2xl"
           >
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />

@@ -46,7 +46,7 @@ const ContactInfoCard = ({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay, duration: 0.5 }}
-        className="bg-white p-8 rounded-[2.5rem] border border-surface-100 shadow-premium-sm hover:shadow-premium-md transition-all group flex flex-col items-center text-center"
+        className="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-[2.5rem] border border-surface-100 shadow-premium-sm hover:shadow-premium-md transition-all group flex flex-col items-center text-center"
     >
         <div className="w-16 h-16 rounded-3xl bg-surface-50 flex items-center justify-center text-brown-600 mb-6 group-hover:scale-110 transition-transform shadow-premium-xs">
             <Icon className="w-8 h-8" />
@@ -76,7 +76,7 @@ const SocialCard = ({ social, delay = 0 }: { social: any, delay?: number }) => (
         href={social.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`group flex items-center gap-5 p-5 rounded-[2rem] bg-white border border-surface-100 shadow-premium-sm hover:shadow-premium-md transition-all`}
+        className={`group flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-2xl sm:rounded-[2rem] bg-white border border-surface-100 shadow-premium-sm hover:shadow-premium-md transition-all`}
     >
         <div className={`w-14 h-14 rounded-2xl ${social.bgLight} flex items-center justify-center ${social.textColor} group-hover:scale-110 transition-transform shadow-premium-xs`}>
             <social.icon className="w-7 h-7" />
@@ -172,7 +172,7 @@ export default function ContactPage() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-5xl md:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
+                            className="text-4xl sm:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
                         >
                             Kami Siap <br />
                             <span className="text-brown-600">Membantu Anda</span>
@@ -230,7 +230,7 @@ export default function ContactPage() {
                             initial={{ opacity: 0, x: -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="lg:col-span-3 bg-white p-10 md:p-16 rounded-[4rem] shadow-premium-xl border border-surface-100 relative overflow-hidden"
+                            className="lg:col-span-3 bg-white p-8 md:p-16 rounded-[2.5rem] md:rounded-[4rem] shadow-premium-xl border border-surface-100 relative overflow-hidden"
                         >
                             <div className="absolute top-0 right-0 w-96 h-96 bg-brown-50/50 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2" />
 
@@ -357,7 +357,7 @@ export default function ContactPage() {
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                className="bg-white p-4 rounded-[3rem] border border-surface-100 shadow-premium-lg"
+                                className="bg-white p-4 rounded-[2rem] md:rounded-[3rem] border border-surface-100 shadow-premium-lg"
                             >
                                 <div className="rounded-[2.5rem] overflow-hidden h-[400px] relative border border-surface-50">
                                     <iframe
@@ -389,13 +389,13 @@ export default function ContactPage() {
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="bg-brown-800 rounded-[4rem] p-12 md:p-24 text-center text-white relative overflow-hidden shadow-premium-2xl"
+                        className="bg-brown-800 rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-24 text-center text-white relative overflow-hidden shadow-premium-2xl"
                     >
                         <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
                         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
 
                         <div className="relative z-10">
-                            <h2 className="text-4xl md:text-6xl font-display font-black mb-8 text-white leading-tight">
+                            <h2 className="text-3xl md:text-6xl font-display font-black mb-8 text-white leading-tight">
                                 Mari Bergabung <br /> <span className="text-gold-400">Menjadi Keluarga</span>
                             </h2>
                             <p className="text-xl text-brown-100 max-w-2xl mx-auto mb-12 font-medium">

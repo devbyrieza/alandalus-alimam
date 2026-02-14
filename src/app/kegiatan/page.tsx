@@ -147,11 +147,11 @@ const FeatureCard = ({
         <item.icon className="w-8 h-8 text-white" />
       </div>
 
-      <h3 className="text-4xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-tight">
+      <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-black text-ink-950 mb-4 md:mb-6 leading-tight">
         {item.title}
       </h3>
 
-      <p className="text-xl text-ink-600 mb-10 leading-relaxed font-medium">
+      <p className="text-lg md:text-xl text-ink-600 mb-8 md:mb-10 leading-relaxed font-medium">
         {item.description}
       </p>
 
@@ -205,16 +205,16 @@ const FeatureCard = ({
 const StatsCard = ({ icon: Icon, value, label, sublabel }: HeroStat) => (
   <motion.div
     whileHover={{ y: -5 }}
-    className="bg-white p-6 rounded-[2.5rem] border border-surface-100 shadow-premium-sm text-center min-w-[160px] flex flex-col items-center"
+    className="bg-white p-4 md:p-6 rounded-[2rem] md:rounded-[2.5rem] border border-surface-100 shadow-premium-sm text-center min-w-[140px] md:min-w-[160px] flex flex-col items-center"
   >
-    <div className="w-12 h-12 rounded-2xl bg-brown-50 flex items-center justify-center text-brown-600 mb-4">
-      <Icon className="w-6 h-6" />
+    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-brown-50 flex items-center justify-center text-brown-600 mb-3 md:mb-4">
+      <Icon className="w-5 h-5 md:w-6 md:h-6" />
     </div>
-    <div className="text-3xl font-black text-ink-950 mb-1">
+    <div className="text-2xl md:text-3xl font-black text-ink-950 mb-1">
       {value}
     </div>
-    <div className="text-xs font-black text-ink-400 uppercase tracking-widest mb-1">{label}</div>
-    <div className="text-[10px] text-ink-400 font-bold">{sublabel}</div>
+    <div className="text-[10px] md:text-xs font-black text-ink-400 uppercase tracking-widest mb-1">{label}</div>
+    <div className="text-[9px] md:text-[10px] text-ink-400 font-bold">{sublabel}</div>
   </motion.div>
 );
 
@@ -242,11 +242,11 @@ const ScheduleCard = ({
         </div>
       </div>
 
-      <h3 className="text-2xl font-display font-black text-ink-950 mb-4 leading-tight">
+      <h3 className="text-xl md:text-2xl font-display font-black text-ink-950 mb-3 md:mb-4 leading-tight">
         {schedule.activity}
       </h3>
 
-      <p className="text-lg text-ink-600 mb-8 font-medium leading-relaxed">
+      <p className="text-base md:text-lg text-ink-600 mb-6 md:mb-8 font-medium leading-relaxed">
         {schedule.detail}
       </p>
 
@@ -428,7 +428,7 @@ export default function KegiatanPage() {
       icon: Book,
       time: "07:30 - 14:00",
       activity: "KBM & Kajian Kitab",
-      detail: "Sekolah formal (MTs/MA) dipadu dengan pembelajaran kitab turats intensif.",
+      detail: "Sekolah formal (MTs/IL) dipadu dengan pembelajaran kitab turats intensif.",
       benefit: "Akademik unggul & ilmu agama mendalam.",
       bgColor: "bg-brown-50/50",
       iconColor: "text-brown-700",
@@ -546,7 +546,7 @@ export default function KegiatanPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-xl md:text-2xl text-ink-600 max-w-3xl mx-auto leading-relaxed font-medium mb-16"
+            className="text-lg md:text-xl lg:text-2xl text-ink-600 max-w-3xl mx-auto leading-relaxed font-medium mb-12 md:mb-16"
           >
             Sinergi Kurikulum Nasional & Pesantren yang terintegrasi secara komprehensif untuk mencetak generasi yang berilmu, beradab, dan adaptif.
           </motion.p>

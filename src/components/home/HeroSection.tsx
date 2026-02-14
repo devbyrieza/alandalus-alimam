@@ -83,7 +83,7 @@ export default function HeroSection() {
                 <span>Terakreditasi Pendasmen • Sejak 1995</span>
               </motion.div>
 
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold text-ink-950 leading-[1.1] tracking-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold text-ink-950 leading-[1.1] tracking-tight">
                 Generasi Rabbani, <br />
                 <span className="text-brown-600 relative inline-block">
                   Cendekia & Mandiri
@@ -122,7 +122,7 @@ export default function HeroSection() {
             className="relative"
           >
             {/* Main Image Container */}
-            <div className="relative z-10 rounded-[2.5rem] overflow-hidden shadow-premium-xl border-[12px] border-white ring-1 ring-surface-200">
+            <div className="relative z-10 rounded-3xl sm:rounded-[2.5rem] overflow-hidden shadow-premium-xl border-[8px] sm:border-[12px] border-white ring-1 ring-surface-200">
               <Image
                 src="/images/hero.png"
                 alt="Pesantren Al-Imam"

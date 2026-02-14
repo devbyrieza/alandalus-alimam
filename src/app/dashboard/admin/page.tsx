@@ -265,7 +265,7 @@ export default function AdminDashboardPage() {
 
         {/* TOTAL PENDAFTAR - Default / Super Admin / Berkas */}
         {(!isKeuanganOnly && !isPengujiOnly) && (
-          <div className="card-glass p-6 md:p-8 relative overflow-hidden group">
+          <div className="card-glass p-5 md:p-8 relative overflow-hidden group">
             <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
               <Users className="w-24 h-24 text-teal-600" />
             </div>
@@ -289,7 +289,7 @@ export default function AdminDashboardPage() {
 
         {/* KEUANGAN HERO - Admin Keuangan gets a bigger card or first slot */}
         {canViewKeuangan && (
-          <div className={`card-glass p-6 relative overflow-hidden group hover:border-teal-200 ${isKeuanganOnly ? 'col-span-2 bg-gradient-to-br from-teal-50 to-white' : ''}`}>
+          <div className={`card-glass p-5 md:p-6 relative overflow-hidden group hover:border-teal-200 ${isKeuanganOnly ? 'col-span-2 bg-gradient-to-br from-teal-50 to-white' : ''}`}>
             <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
               <Wallet className="w-32 h-32 text-teal-600" />
             </div>
@@ -313,7 +313,7 @@ export default function AdminDashboardPage() {
 
         {/* BERKAS HERO - Admin Berkas Focus */}
         {canViewBerkas && (
-          <div className={`card-glass p-6 relative overflow-hidden group hover:border-gold-200 ${isBerkasOnly ? 'col-span-2 bg-gold-50/30' : ''}`}>
+          <div className={`card-glass p-5 md:p-6 relative overflow-hidden group hover:border-gold-200 ${isBerkasOnly ? 'col-span-2 bg-gold-50/30' : ''}`}>
             <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
               <FileCheck className="w-32 h-32 text-gold-600" />
             </div>
@@ -342,7 +342,7 @@ export default function AdminDashboardPage() {
 
         {/* SELEKSI CARD - Penguji Focus */}
         {canViewSeleksi && (
-          <div className="card-glass p-6 relative overflow-hidden group hover:border-blue-200">
+          <div className="card-glass p-5 md:p-6 relative overflow-hidden group hover:border-blue-200">
             <div className="flex justify-between items-start mb-4">
               <div className="p-3 bg-blue-50 rounded-2xl text-blue-600">
                 <GraduationCap className="w-6 h-6" />
@@ -373,54 +373,56 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="card-glass p-0 overflow-hidden">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-ink-100 bg-surface-50/50">
-                  <th className="px-6 py-4 text-xs font-bold text-ink-500 uppercase tracking-wider">Jenjang Pendidikan</th>
-                  <th className="px-6 py-4 text-xs font-bold text-ink-500 uppercase tracking-wider text-center">Kuota</th>
-                  <th className="px-6 py-4 text-xs font-bold text-ink-500 uppercase tracking-wider text-center">Pendaftar</th>
-                  <th className="px-6 py-4 text-xs font-bold text-ink-500 uppercase tracking-wider text-center">Diterima</th>
-                  <th className="px-6 py-4 text-xs font-bold text-ink-500 uppercase tracking-wider text-right">Status</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-ink-50">
-                {(stats.stats_per_jenjang || []).map((item, idx) => (
-                  <tr key={idx} className="group hover:bg-surface-50 transition-colors">
-                    <td className="px-6 py-5">
-                      <div className="flex items-center gap-3">
-                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-md
-                                   ${item.jenjang === 'MTs' ? 'bg-gradient-to-br from-teal-400 to-teal-600' :
-                            'bg-gradient-to-br from-gold-400 to-gold-600'}
-                                `}>
-                          {item.jenjang.substring(0, 2)}
-                        </div>
-                        <div>
-                          <p className="font-bold text-ink-900">{JENJANG_LABELS[item.jenjang]}</p>
-                          <p className="text-xs text-ink-400 font-medium">Reguler • Putra</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-5 text-center text-ink-500 font-medium">-</td>
-                    <td className="px-6 py-5 text-center">
-                      <span className="text-ink-900 font-bold bg-surface-200 px-3 py-1 rounded-lg">
-                        {item.pendaftar}
-                      </span>
-                    </td>
-                    <td className="px-6 py-5 text-center">
-                      <span className="text-teal-700 font-bold bg-teal-50 px-3 py-1 rounded-lg border border-teal-100">
-                        {item.diterima}
-                      </span>
-                    </td>
-                    <td className="px-6 py-5 text-right">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-700 text-xs font-bold rounded-full border border-green-100">
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                        Buka
-                      </span>
-                    </td>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse min-w-[600px]">
+                <thead>
+                  <tr className="border-b border-ink-100 bg-surface-50/50">
+                    <th className="px-6 py-4 text-xs font-bold text-ink-500 uppercase tracking-wider">Jenjang Pendidikan</th>
+                    <th className="px-6 py-4 text-xs font-bold text-ink-500 uppercase tracking-wider text-center">Kuota</th>
+                    <th className="px-6 py-4 text-xs font-bold text-ink-500 uppercase tracking-wider text-center">Pendaftar</th>
+                    <th className="px-6 py-4 text-xs font-bold text-ink-500 uppercase tracking-wider text-center">Diterima</th>
+                    <th className="px-6 py-4 text-xs font-bold text-ink-500 uppercase tracking-wider text-right">Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-ink-50">
+                  {(stats.stats_per_jenjang || []).map((item, idx) => (
+                    <tr key={idx} className="group hover:bg-surface-50 transition-colors">
+                      <td className="px-6 py-5">
+                        <div className="flex items-center gap-3">
+                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-md
+                                   ${item.jenjang === 'MTs' ? 'bg-gradient-to-br from-teal-400 to-teal-600' :
+                              'bg-gradient-to-br from-gold-400 to-gold-600'}
+                                `}>
+                            {item.jenjang.substring(0, 2)}
+                          </div>
+                          <div>
+                            <p className="font-bold text-ink-900">{JENJANG_LABELS[item.jenjang]}</p>
+                            <p className="text-xs text-ink-400 font-medium">Reguler • Putra</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-5 text-center text-ink-500 font-medium">-</td>
+                      <td className="px-6 py-5 text-center">
+                        <span className="text-ink-900 font-bold bg-surface-200 px-3 py-1 rounded-lg">
+                          {item.pendaftar}
+                        </span>
+                      </td>
+                      <td className="px-6 py-5 text-center">
+                        <span className="text-teal-700 font-bold bg-teal-50 px-3 py-1 rounded-lg border border-teal-100">
+                          {item.diterima}
+                        </span>
+                      </td>
+                      <td className="px-6 py-5 text-right">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-700 text-xs font-bold rounded-full border border-green-100">
+                          <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                          Buka
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
 
           {/* Registration Funnel - NEW ENHANCEMENT */}

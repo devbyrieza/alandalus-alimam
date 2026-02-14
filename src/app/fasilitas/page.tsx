@@ -717,7 +717,7 @@ export default function FasilitasPage() {
 
           {/* Enhanced Gallery Grid with Better Layout */}
           <div className="max-w-7xl mx-auto">
-            {/* Hero Row - Large Featured Images */}
+            {/* Hero Row - Large Featured Images - REARRANGED: Masjid + Ruang Kelas Raksasa */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
               {/* Masjid - Large Featured */}
               <motion.div
@@ -734,35 +734,35 @@ export default function FasilitasPage() {
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <span className="text-white font-black text-2xl drop-shadow-lg">Masjid Jami' Al-Imam</span>
-                  <p className="text-white/90 text-sm mt-1">Pusat peribadatan</p>
+                <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 right-4 md:right-8">
+                  <span className="text-white font-black text-xl md:text-3xl drop-shadow-lg">Masjid Jami' Al-Imam</span>
+                  <p className="text-white/90 text-sm md:text-lg mt-1 md:mt-2">Pusat peribadatan</p>
                 </div>
               </motion.div>
 
-              {/* Gedung Utama - Vertical */}
+              {/* RUANG KELAS - SMALLER VIEW */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="relative rounded-3xl overflow-hidden group aspect-[3/4] shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
+                className="lg:col-span-1 row-span-2 relative rounded-3xl overflow-hidden group aspect-[4/3] lg:aspect-[2/3] shadow-premium-xl hover:shadow-premium-2xl transition-all duration-500"
               >
                 <Image
-                  src="/images/gedung-utama-dan-lapangan-basket.jpeg"
-                  alt="Gedung Utama & Lapangan Basket"
+                  src="/images/kelas-dari-dalam.png"
+                  alt="Ruang Kelas dari Dalam - View Lengkap"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <span className="text-white font-black text-lg drop-shadow-lg">Gedung Utama</span>
-                  <p className="text-white/90 text-xs mt-1">Lapangan Basket</p>
+                <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 right-4 md:right-8">
+                  <span className="text-white font-black text-xl md:text-2xl drop-shadow-lg leading-tight">Ruang Kelas dari Dalam</span>
+                  <p className="text-white/90 text-xs md:text-sm mt-1 md:mt-2 line-clamp-2 md:line-clamp-none">Fasilitas pembelajaran modern dengan ruang yang luas and nyaman</p>
                 </div>
               </motion.div>
             </div>
 
-            {/* Second Row - Academic Buildings with Better Layout */}
+            {/* Second Row - Academic & Residential */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -791,6 +791,25 @@ export default function FasilitasPage() {
                 className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
               >
                 <Image
+                  src="/images/luar-kelas.png"
+                  alt="Area Luar Kelas"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-white font-black text-sm drop-shadow-lg">Area Luar Kelas</span>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+                className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
+              >
+                <Image
                   src="/images/asrama.png"
                   alt="Asrama Santri"
                   fill
@@ -806,7 +825,30 @@ export default function FasilitasPage() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
+                transition={{ delay: 0.6 }}
+                className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
+              >
+                <Image
+                  src="/images/gedung-utama-dan-lapangan-basket.jpeg"
+                  alt="Gedung Utama & Lapangan Basket"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-white font-black text-sm drop-shadow-lg">Gedung Utama</span>
+                  <p className="text-white/90 text-xs mt-1">Lapangan Basket</p>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Third Row - Open Areas & Support */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.7 }}
                 className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
               >
                 <Image
@@ -825,30 +867,7 @@ export default function FasilitasPage() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.6 }}
-                className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
-              >
-                <Image
-                  src="/images/kelas-dari-dalam.png"
-                  alt="Ruang Kelas dari Dalam"
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <span className="text-white font-black text-sm drop-shadow-lg">Ruang Kelas</span>
-                  <p className="text-white/90 text-xs mt-1">Dari Dalam</p>
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Third Row - Sports & Support Facilities with Proper Layout */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.7 }}
+                transition={{ delay: 0.8 }}
                 className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
               >
                 <Image
@@ -861,26 +880,6 @@ export default function FasilitasPage() {
                 <div className="absolute bottom-4 left-4 right-4">
                   <span className="text-white font-black text-sm drop-shadow-lg">Lapangan</span>
                   <p className="text-white/90 text-xs mt-1">Mini Soccer</p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.8 }}
-                className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
-              >
-                <Image
-                  src="/images/luar-kelas.png"
-                  alt="Area Luar Kelas"
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <span className="text-white font-black text-sm drop-shadow-lg">Area Luar</span>
-                  <p className="text-white/90 text-xs mt-1">Kelas</p>
                 </div>
               </motion.div>
 
@@ -925,28 +924,6 @@ export default function FasilitasPage() {
               </motion.div>
             </div>
 
-            {/* Fourth Row - Extended Ruang Kelas Section */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 1.1 }}
-                className="relative rounded-3xl overflow-hidden group aspect-[4/3] shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500 lg:col-span-2"
-              >
-                <Image
-                  src="/images/kelas-dari-dalam.png"
-                  alt="Ruang Kelas dari Dalam - Extended View"
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <span className="text-white font-black text-xl drop-shadow-lg">Ruang Kelas dari Dalam</span>
-                  <p className="text-white/90 text-sm mt-1">View lengkap fasilitas pembelajaran modern</p>
-                </div>
-              </motion.div>
-            </div>
           </div>
         </Container>
       </section>
