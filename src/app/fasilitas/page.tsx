@@ -501,7 +501,7 @@ export default function FasilitasPage() {
         </Container>
       </section>
 
-      {/* 3. Supporting Facilities - Grid */}
+      {/* 3. Supporting Facilities - Enhanced Grid */}
       <section className="py-24 md:py-32 bg-white">
         <Container>
           <div className="text-center max-w-3xl mx-auto mb-20">
@@ -511,7 +511,7 @@ export default function FasilitasPage() {
               viewport={{ once: true }}
               className="text-3xl md:text-5xl font-display font-black text-ink-950 mb-6"
             >
-              Fasilitas Penunjang
+              Fasilitas <span className="text-brown-600">Penunjang</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
@@ -523,38 +523,168 @@ export default function FasilitasPage() {
             </motion.p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-            {[
-              { icon: BookOpen, title: "Perpustakaan", desc: "Ribuan koleksi kitab & buku" },
-              { icon: FlaskConical, title: "Laboratorium", desc: "Sains & Komputer" },
-              { icon: Utensils, title: "Dapur Sehat", desc: "Menu bergizi 3x sehari" },
-              { icon: Heart, title: "Klinik Santri", desc: "Layanan medis internal" },
-              { icon: Shield, title: "Security", desc: "Keamanan CCTV 24 Jam" },
-              { icon: Building2, title: "Aula Besar", desc: "Kapasitas 500 orang" },
-              { icon: Wifi, title: "Internet", desc: "Akses WiFi Terfilter" },
-              { icon: Trophy, title: "Area Olahraga", desc: "Outdoor activity lengkap" },
-              { icon: Droplet, title: "Depot Galon Gratis", desc: "Air minum higienis gratis" },
-            ].map((item, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.05 }}
-                className="bg-white p-8 rounded-[2.5rem] shadow-premium-sm border border-surface-100 hover:shadow-premium-md transition-all hover:-translate-y-2 group"
-              >
-                <div className="w-16 h-16 bg-brown-50 rounded-2xl flex items-center justify-center text-brown-600 mb-6 group-hover:scale-110 transition-transform">
-                  <item.icon className="w-8 h-8" />
-                </div>
-                <h3 className="font-black text-xl text-ink-950 mb-3 uppercase tracking-tight">{item.title}</h3>
-                <p className="text-base text-ink-500 font-medium">{item.desc}</p>
-              </motion.div>
-            ))}
+          {/* Enhanced 3x3 Grid Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* Row 1 - Academic Facilities */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-3xl border border-blue-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+            >
+              <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                <BookOpen className="w-8 h-8" />
+              </div>
+              <h3 className="font-black text-2xl text-ink-950 mb-3">Perpustakaan</h3>
+              <p className="text-lg text-ink-600 font-medium">Ribuan koleksi kitab & buku</p>
+              <div className="mt-4 pt-4 border-t border-blue-100">
+                <span className="text-sm text-blue-600 font-semibold">📚 Akademik</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-3xl border border-purple-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+            >
+              <div className="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                <FlaskConical className="w-8 h-8" />
+              </div>
+              <h3 className="font-black text-2xl text-ink-950 mb-3">Laboratorium</h3>
+              <p className="text-lg text-ink-600 font-medium">Sains & Komputer</p>
+              <div className="mt-4 pt-4 border-t border-purple-100">
+                <span className="text-sm text-purple-600 font-semibold">🔬 Praktikum</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-3xl border border-green-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+            >
+              <div className="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                <Utensils className="w-8 h-8" />
+              </div>
+              <h3 className="font-black text-2xl text-ink-950 mb-3">Dapur Sehat</h3>
+              <p className="text-lg text-ink-600 font-medium">Menu bergizi 3x sehari</p>
+              <div className="mt-4 pt-4 border-t border-green-100">
+                <span className="text-sm text-green-600 font-semibold">🍽️ Nutrisi</span>
+              </div>
+            </motion.div>
+
+            {/* Row 2 - Health & Safety */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="bg-gradient-to-br from-red-50 to-rose-50 p-8 rounded-3xl border border-red-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+            >
+              <div className="w-16 h-16 bg-red-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                <Heart className="w-8 h-8" />
+              </div>
+              <h3 className="font-black text-2xl text-ink-950 mb-3">Klinik Santri</h3>
+              <p className="text-lg text-ink-600 font-medium">Layanan medis internal</p>
+              <div className="mt-4 pt-4 border-t border-red-100">
+                <span className="text-sm text-red-600 font-semibold">🏥 Kesehatan</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+              className="bg-gradient-to-br from-amber-50 to-yellow-50 p-8 rounded-3xl border border-amber-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+            >
+              <div className="w-16 h-16 bg-amber-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                <Shield className="w-8 h-8" />
+              </div>
+              <h3 className="font-black text-2xl text-ink-950 mb-3">Security</h3>
+              <p className="text-lg text-ink-600 font-medium">Keamanan CCTV 24 Jam</p>
+              <div className="mt-4 pt-4 border-t border-amber-100">
+                <span className="text-sm text-amber-600 font-semibold">🛡️ Keamanan</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6 }}
+              className="bg-gradient-to-br from-indigo-50 to-blue-50 p-8 rounded-3xl border border-indigo-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+            >
+              <div className="w-16 h-16 bg-indigo-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                <Building2 className="w-8 h-8" />
+              </div>
+              <h3 className="font-black text-2xl text-ink-950 mb-3">Aula Besar</h3>
+              <p className="text-lg text-ink-600 font-medium">Kapasitas 500 orang</p>
+              <div className="mt-4 pt-4 border-t border-indigo-100">
+                <span className="text-sm text-indigo-600 font-semibold">🏛️ Event</span>
+              </div>
+            </motion.div>
+
+            {/* Row 3 - Modern Facilities */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.7 }}
+              className="bg-gradient-to-br from-cyan-50 to-sky-50 p-8 rounded-3xl border border-cyan-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+            >
+              <div className="w-16 h-16 bg-cyan-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                <Wifi className="w-8 h-8" />
+              </div>
+              <h3 className="font-black text-2xl text-ink-950 mb-3">Internet</h3>
+              <p className="text-lg text-ink-600 font-medium">Akses WiFi Terfilter</p>
+              <div className="mt-4 pt-4 border-t border-cyan-100">
+                <span className="text-sm text-cyan-600 font-semibold">📶 Teknologi</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.8 }}
+              className="bg-gradient-to-br from-emerald-50 to-green-50 p-8 rounded-3xl border border-emerald-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+            >
+              <div className="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                <Trophy className="w-8 h-8" />
+              </div>
+              <h3 className="font-black text-2xl text-ink-950 mb-3">Area Olahraga</h3>
+              <p className="text-lg text-ink-600 font-medium">Outdoor activity lengkap</p>
+              <div className="mt-4 pt-4 border-t border-emerald-100">
+                <span className="text-sm text-emerald-600 font-semibold">⚽ Olahraga</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.9 }}
+              className="bg-gradient-to-br from-blue-50 to-cyan-50 p-8 rounded-3xl border border-blue-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+            >
+              <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                <Droplet className="w-8 h-8" />
+              </div>
+              <h3 className="font-black text-2xl text-ink-950 mb-3">Depot Galon Gratis</h3>
+              <p className="text-lg text-ink-600 font-medium">Air minum higienis gratis</p>
+              <div className="mt-4 pt-4 border-t border-blue-100">
+                <span className="text-sm text-blue-600 font-semibold">💧 Minuman</span>
+              </div>
+            </motion.div>
           </div>
         </Container>
       </section>
 
-      {/* 4. Photo Gallery */}
+      {/* 4. Photo Gallery - Enhanced Layout */}
       <section id="gallery" className="py-24 md:py-32 bg-surface-50/30">
         <Container>
           <div className="text-center max-w-3xl mx-auto mb-20">
@@ -585,39 +715,215 @@ export default function FasilitasPage() {
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-            {[ 
-              { src: "/images/masjid.png", label: "Masjid Jami' Al-Imam", span: "col-span-2 row-span-2" },
-              { src: "/images/gedung-utama-dan-lapangan-basket.jpeg", label: "Gedung Utama & Lapangan Basket", span: "col-span-1" },
-              { src: "/images/gedung-kelas.jpeg", label: "Gedung Kelas", span: "col-span-1" },
-              { src: "/images/asrama.png", label: "Asrama Santri", span: "col-span-1" },
-              { src: "/images/halaman-dekat-masjid.jpeg", label: "Halaman Pesantren", span: "col-span-1" },
-              { src: "/images/kelas-dari-dalam.png", label: "Ruang Kelas dari Dalam", span: "col-span-2" },
-              { src: "/images/lapangan-minisoccer.jpeg", label: "Lapangan Mini Soccer", span: "col-span-1" },
-              { src: "/images/luar-kelas.png", label: "Area Luar Kelas", span: "col-span-1" },
-              { src: "/images/kantor-ppdb-tamu.png", label: "Kantor PPDB & Tamu", span: "col-span-1" },
-              { src: "/images/depot-galon-gratis.png", label: "Depot Galon Gratis", span: "col-span-1" },
-            ].map((img, idx) => (
+          {/* Enhanced Gallery Grid with Better Layout */}
+          <div className="max-w-7xl mx-auto">
+            {/* Hero Row - Large Featured Images */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+              {/* Masjid - Large Featured */}
               <motion.div
-                key={idx}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: idx * 0.05 }}
-                className={`${img.span} relative rounded-3xl overflow-hidden group aspect-[4/3] shadow-premium-md hover:shadow-premium-xl transition-all duration-500`}
+                transition={{ delay: 0.1 }}
+                className="lg:col-span-2 row-span-2 relative rounded-3xl overflow-hidden group aspect-[4/3] shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
               >
                 <Image
-                  src={img.src}
-                  alt={img.label}
+                  src="/images/masjid.png"
+                  alt="Masjid Jami' Al-Imam"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <span className="text-white font-bold text-sm drop-shadow-lg">{img.label}</span>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute bottom-6 left-6 right-6">
+                  <span className="text-white font-black text-2xl drop-shadow-lg">Masjid Jami' Al-Imam</span>
+                  <p className="text-white/90 text-sm mt-1">Pusat peribadatan</p>
                 </div>
               </motion.div>
-            ))}
+
+              {/* Gedung Utama - Vertical */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="relative rounded-3xl overflow-hidden group aspect-[3/4] shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
+              >
+                <Image
+                  src="/images/gedung-utama-dan-lapangan-basket.jpeg"
+                  alt="Gedung Utama & Lapangan Basket"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-white font-black text-lg drop-shadow-lg">Gedung Utama</span>
+                  <p className="text-white/90 text-xs mt-1">Lapangan Basket</p>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Second Row - Academic Buildings */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
+              >
+                <Image
+                  src="/images/gedung-kelas.jpeg"
+                  alt="Gedung Kelas"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-white font-black text-sm drop-shadow-lg">Gedung Kelas</span>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
+              >
+                <Image
+                  src="/images/asrama.png"
+                  alt="Asrama Santri"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-white font-black text-sm drop-shadow-lg">Asrama Santri</span>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+                className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
+              >
+                <Image
+                  src="/images/halaman-dekat-masjid.jpeg"
+                  alt="Halaman Pesantren"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-white font-black text-sm drop-shadow-lg">Halaman Pesantren</span>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6 }}
+                className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
+              >
+                <Image
+                  src="/images/kelas-dari-dalam.png"
+                  alt="Ruang Kelas dari Dalam"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-white font-black text-sm drop-shadow-lg">Ruang Kelas</span>
+                  <p className="text-white/90 text-xs mt-1">Dari Dalam</p>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Third Row - Sports & Support Facilities */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.7 }}
+                className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
+              >
+                <Image
+                  src="/images/lapangan-minisoccer.jpeg"
+                  alt="Lapangan Mini Soccer"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-white font-black text-sm drop-shadow-lg">Lapangan</span>
+                  <p className="text-white/90 text-xs mt-1">Mini Soccer</p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.8 }}
+                className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
+              >
+                <Image
+                  src="/images/luar-kelas.png"
+                  alt="Area Luar Kelas"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-white font-black text-sm drop-shadow-lg">Area Luar</span>
+                  <p className="text-white/90 text-xs mt-1">Kelas</p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.9 }}
+                className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
+              >
+                <Image
+                  src="/images/kantor-ppdb-tamu.png"
+                  alt="Kantor PPDB & Tamu"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-white font-black text-sm drop-shadow-lg">Kantor PPDB</span>
+                  <p className="text-white/90 text-xs mt-1">& Tamu</p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 1.0 }}
+                className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
+              >
+                <Image
+                  src="/images/depot-galon-gratis.png"
+                  alt="Depot Galon Gratis"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-white font-black text-sm drop-shadow-lg">Depot Galon</span>
+                  <p className="text-white/90 text-xs mt-1">Gratis</p>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </Container>
       </section>
