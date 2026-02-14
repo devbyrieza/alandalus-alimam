@@ -398,10 +398,10 @@ export default function DashboardPage() {
                 </p>
 
                 <div className="mt-10 flex flex-wrap gap-4">
-                  <div className="px-6 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-black/10 text-[10px] font-black uppercase tracking-widest text-ink-950">
+                  <div className="px-6 py-2 rounded-full bg-white/95 backdrop-blur-sm border border-black/20 text-[10px] font-black uppercase tracking-widest text-[#030712] shadow-sm">
                     ID: {pendaftar.id.substring(0, 8).toUpperCase()}
                   </div>
-                  <div className="px-6 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-black/10 text-[10px] font-black uppercase tracking-widest text-ink-950">
+                  <div className="px-6 py-2 rounded-full bg-white/95 backdrop-blur-sm border border-black/20 text-[10px] font-black uppercase tracking-widest text-[#030712] shadow-sm">
                     Registered: {new Date(pendaftar.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
                   </div>
                 </div>
