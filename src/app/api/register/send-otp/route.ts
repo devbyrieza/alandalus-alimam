@@ -148,9 +148,18 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(response);
   } catch (error: any) {
-    console.error("Error in send-otp API:", error);
+    console.error("❌ ERROR in send-otp API:", {
+      message: error.message,
+      stack: error.stack,
+      cause: error.cause,
+      code: error.code // Prisma or Node error code
+    });
     return NextResponse.json(
-      { success: false, error: "Terjadi kesalahan internal server" },
+      {
+        success: false,
+        error: "Terjadi kesalahan internal server",
+        debug: process.env.NODE_ENV === "development" ? error.message : undefined
+      },
       { status: 500 },
     );
   }

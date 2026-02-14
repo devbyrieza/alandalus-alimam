@@ -4,10 +4,10 @@ import { prisma } from "@/lib/prisma";
 
 export async function PATCH(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    props: { params: Promise<{ id: string }> }
 ) {
     try {
-        const id = params.id;
+        const { id } = await props.params;
 
         // 1. Validasi session manual
         const cookieStore = await cookies();

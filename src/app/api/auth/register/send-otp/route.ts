@@ -105,7 +105,12 @@ export async function POST(request: NextRequest) {
           : undefined,
     });
   } catch (error: any) {
-    console.error("Send OTP error:", error);
+    console.error("❌ ERROR in auth-send-otp API:", {
+      message: error.message,
+      stack: error.stack,
+      cause: error.cause,
+      code: error.code
+    });
     return NextResponse.json(
       { success: false, error: error.message || "Terjadi kesalahan server" },
       { status: 500 },
