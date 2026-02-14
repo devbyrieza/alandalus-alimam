@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, School, Sparkles, Phone, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu, X, School, Sparkles, Phone } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -86,11 +85,9 @@ export default function Navbar() {
               <Link href="/login" className="text-sm font-bold text-ink-600 hover:text-brown-700 transition-colors">
                 Login
               </Link>
-              <Link href="/ppdb">
-                <Button className="rounded-xl px-6 py-5 bg-brown-700 hover:bg-brown-800 text-white font-bold shadow-premium-md transition-all duration-300 group">
-                  Daftar PPDB
-                  <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </Button>
+              <Link href="/ppdb" className="rounded-xl px-6 py-5 bg-brown-700 hover:bg-brown-800 text-white font-bold shadow-premium-md transition-all duration-300 group inline-flex items-center">
+                Daftar PPDB
+                <span className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1">→</span>
               </Link>
             </div>
 
@@ -130,10 +127,8 @@ export default function Navbar() {
                   </Link>
                 ))}
                 <div className="mt-6 pt-6 border-t border-surface-100 flex flex-col gap-4">
-                  <Link href="/ppdb">
-                    <Button className="w-full py-7 text-lg font-bold rounded-2xl bg-brown-700 hover:bg-brown-800">
-                      Daftar Sekarang
-                    </Button>
+                  <Link href="/ppdb" className="w-full py-7 text-lg font-bold rounded-2xl bg-brown-700 hover:bg-brown-800 text-white text-center block transition-colors">
+                    Daftar Sekarang
                   </Link>
                   <Link href="/login" className="text-center py-2 text-ink-500 font-bold hover:text-brown-700 transition-colors">
                     Login Sistem

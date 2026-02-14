@@ -12,8 +12,24 @@ import {
     ChevronUp,
 } from "lucide-react";
 
+// Type definitions for the statistics data
+interface CityData {
+    name: string;
+    total: number;
+}
+
+interface ProvinceData {
+    total: number;
+    cities: CityData[];
+}
+
+interface StatisticsData {
+    santri: Record<string, ProvinceData>;
+    wali: Record<string, ProvinceData>;
+}
+
 export default function StatistikWilayahPage() {
-    const [data, setData] = useState<any>(null);
+    const [data, setData] = useState<StatisticsData | null>(null);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState<"santri" | "wali">("santri");
     const [expandedProv, setExpandedProv] = useState<string | null>(null);
@@ -47,7 +63,9 @@ export default function StatistikWilayahPage() {
     }
 
     const currentData = activeTab === "santri" ? data?.santri : data?.wali;
-    const sortedProvinces = currentData ? Object.entries(currentData).sort((a: any, b: any) => b[1].total - a[1].total) : [];
+    const sortedProvinces = currentData 
+        ? Object.entries(currentData).sort(([, a], [, b]) => b.total - a.total)
+        : [];
 
     return (
         <div className="space-y-6 max-w-7xl mx-auto">
@@ -106,7 +124,7 @@ export default function StatistikWilayahPage() {
                                 <div className="hidden md:flex flex-col items-end">
                                     <span className="text-xs font-bold text-ink-400 uppercase">Presentase</span>
                                     <span className="text-sm font-black text-indigo-600">
-                                        {((provData.total / Object.values(currentData as any).reduce((a: any, b: any) => a + b.total, 0)) * 100).toFixed(1)}%
+                                        {currentData ? ((provData.total / Object.values(currentData).reduce((sum, province) => sum + province.total, 0)) * 100).toFixed(1) : '0.0'}%
                                     </span>
                                 </div>
                                 {expandedProv === provName ? <ChevronUp className="w-5 h-5 text-ink-300" /> : <ChevronDown className="w-5 h-5 text-ink-300" />}
