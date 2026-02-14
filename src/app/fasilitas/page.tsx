@@ -762,7 +762,7 @@ export default function FasilitasPage() {
               </motion.div>
             </div>
 
-            {/* Second Row - Academic Buildings */}
+            {/* Second Row - Academic Buildings with Better Layout */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -842,7 +842,7 @@ export default function FasilitasPage() {
               </motion.div>
             </div>
 
-            {/* Third Row - Sports & Support Facilities */}
+            {/* Third Row - Sports & Support Facilities with Proper Layout */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -921,6 +921,29 @@ export default function FasilitasPage() {
                 <div className="absolute bottom-4 left-4 right-4">
                   <span className="text-white font-black text-sm drop-shadow-lg">Depot Galon</span>
                   <p className="text-white/90 text-xs mt-1">Gratis</p>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Fourth Row - Extended Ruang Kelas Section */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 1.1 }}
+                className="relative rounded-3xl overflow-hidden group aspect-[4/3] shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500 lg:col-span-2"
+              >
+                <Image
+                  src="/images/kelas-dari-dalam.png"
+                  alt="Ruang Kelas dari Dalam - Extended View"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute bottom-6 left-6 right-6">
+                  <span className="text-white font-black text-xl drop-shadow-lg">Ruang Kelas dari Dalam</span>
+                  <p className="text-white/90 text-sm mt-1">View lengkap fasilitas pembelajaran modern</p>
                 </div>
               </motion.div>
             </div>
