@@ -512,7 +512,7 @@ export default function DashboardPage() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.8 }}
-              className="bg-brown-950 p-10 rounded-[3.5rem] shadow-premium-xl text-white relative overflow-hidden group"
+              className="bg-[#20150d] p-10 rounded-[3.5rem] shadow-premium-xl text-white relative overflow-hidden group"
             >
               <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
@@ -530,14 +530,14 @@ export default function DashboardPage() {
                     href="https://wa.me/6285111524441"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white hover:text-brown-950 transition-all group/btn"
+                    className="flex items-center gap-4 p-4 rounded-2xl bg-white/10 border border-white/10 hover:bg-white hover:text-[#20150d] transition-all group/btn"
                   >
                     <div className="w-10 h-10 rounded-xl bg-green-500 text-white flex items-center justify-center shadow-lg group-hover/btn:scale-110 transition-transform">
                       <Phone className="w-5 h-5" />
                     </div>
                     <div className="text-left">
-                      <p className="text-[10px] font-black uppercase tracking-widest opacity-60 leading-none mb-1">WhatsApp CS</p>
-                      <p className="font-bold text-sm">0851-1152-4441</p>
+                      <p className="text-[10px] font-black uppercase tracking-widest opacity-80 text-white leading-none mb-1">WhatsApp CS</p>
+                      <p className="font-bold text-sm text-white group-hover/btn:text-[#20150d]">0851-1152-4441</p>
                     </div>
                   </a>
                 </div>
