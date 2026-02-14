@@ -271,27 +271,13 @@ export const ROLE_PERMISSIONS: Record<UserRole, string[]> = {
     'manage_settings',
   ],
   admin_super: [
-    // Admin Super has ALL permissions EXCEPT manage_users
+    // Admin Super focus on monitoring and management
     'view_pendaftar_list',
     'view_pendaftar_detail',
-    'edit_pendaftar_data',
-    'delete_pendaftar',
-    'verify_documents',
-    'view_document_status',
-    'view_payment_list',
-    'verify_payment',
-    'view_financial_reports',
-    'view_exam_schedule',
-    'manage_exam_schedule',
-    'input_exam_scores',
-    'view_exam_results',
     'publish_announcement',
-    // 'manage_users', // REMOVED
     'manage_settings',
     'export_all_data',
     'view_dashboard_stats',
-    'view_broadcast',
-    'send_broadcast',
     'view_regional_stats',
   ],
   admin: [
@@ -342,17 +328,17 @@ export function isAdminRole(role: UserRole): boolean {
 
 // Check if role can verify documents
 export function canVerifyDocuments(role: UserRole): boolean {
-  return hasPermission(role, 'verify_documents') || role === 'admin_super';
+  return hasPermission(role, 'verify_documents');
 }
 
 // Check if role can verify payments
 export function canVerifyPayments(role: UserRole): boolean {
-  return hasPermission(role, 'verify_payment') || role === 'admin_super';
+  return hasPermission(role, 'verify_payment');
 }
 
 // Check if role can input exam scores
 export function canInputScores(role: UserRole): boolean {
-  return hasPermission(role, 'input_exam_scores') || role === 'admin_super';
+  return hasPermission(role, 'input_exam_scores');
 }
 
 // Get menu items based on role
@@ -383,15 +369,8 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
     admin_super: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
       { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
-      { name: 'Permintaan Edit', href: '/dashboard/admin/perubahan-data', icon: 'Edit3' },
-      { name: 'Verifikasi Pembayaran', href: '/dashboard/admin/verifikasi-pembayaran', icon: 'CreditCard' },
-      { name: 'Verifikasi Dokumen', href: '/dashboard/admin/verifikasi-dokumen', icon: 'FileCheck' },
-      { name: 'Jadwal Ujian', href: '/dashboard/admin/jadwal-ujian', icon: 'Calendar' },
       { name: 'Pengumuman', href: '/dashboard/admin/pengumuman', icon: 'Trophy' },
-      { name: 'Daftar Ulang', href: '/dashboard/admin/daftar-ulang', icon: 'BarChart' },
-      { name: 'Broadcast WA', href: '/dashboard/admin/broadcast', icon: 'Bell' },
       { name: 'Statistik Wilayah', href: '/dashboard/admin/statistik-wilayah', icon: 'BarChart' },
-      // { name: 'Manajemen User', href: '/dashboard/admin/users', icon: 'UserCog' }, // REMOVED
       { name: 'Pengaturan', href: '/dashboard/admin/pengaturan', icon: 'Settings' },
     ],
     admin: [
