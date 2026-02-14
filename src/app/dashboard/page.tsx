@@ -375,7 +375,7 @@ export default function DashboardPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className={`p-6 sm:p-10 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] border-2 shadow-premium-lg relative overflow-hidden ${statusInfo.bg} ${statusInfo.border}`}
+              className={`p-8 sm:p-10 md:p-14 rounded-[3rem] border shadow-premium-lg relative overflow-hidden bg-gradient-to-br ${statusInfo.bg.replace('bg-', 'from-')} to-white ${statusInfo.border}`}
             >
               {/* Animated pulses depending on status */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
@@ -398,10 +398,10 @@ export default function DashboardPage() {
                 </p>
 
                 <div className="mt-10 flex flex-wrap gap-4">
-                  <div className="px-6 py-2 rounded-full bg-white/95 backdrop-blur-sm border border-black/20 text-[10px] font-black uppercase tracking-widest text-[#030712] shadow-sm">
+                  <div className="px-6 py-2 rounded-full bg-white/40 backdrop-blur-md border border-black/5 text-[10px] font-black uppercase tracking-widest text-ink-700 shadow-sm">
                     ID: {pendaftar.id.substring(0, 8).toUpperCase()}
                   </div>
-                  <div className="px-6 py-2 rounded-full bg-white/95 backdrop-blur-sm border border-black/20 text-[10px] font-black uppercase tracking-widest text-[#030712] shadow-sm">
+                  <div className="px-6 py-2 rounded-full bg-white/40 backdrop-blur-md border border-black/5 text-[10px] font-black uppercase tracking-widest text-ink-700 shadow-sm">
                     Registered: {new Date(pendaftar.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
                   </div>
                 </div>
@@ -512,16 +512,16 @@ export default function DashboardPage() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.8 }}
-              className="bg-[#20150d] p-10 rounded-[3.5rem] shadow-premium-xl text-white relative overflow-hidden group"
+              className="bg-white p-10 rounded-[3rem] shadow-premium-lg border border-surface-100 relative overflow-hidden group"
             >
-              <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-teal-400 to-green-500" />
 
               <div className="relative z-10">
-                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-white mb-8 border border-white/10">
-                  <MessageCircle className="w-6 h-6" />
+                <div className="w-14 h-14 rounded-2xl bg-teal-50 flex items-center justify-center text-teal-600 mb-8 border border-teal-100 shadow-premium-xs">
+                  <MessageCircle className="w-7 h-7" />
                 </div>
-                <h4 className="text-2xl font-display font-black mb-4 text-white">Butuh Bantuan?</h4>
-                <p className="text-sm text-white font-medium leading-relaxed mb-8">
+                <h4 className="text-2xl font-display font-black mb-4 text-ink-950">Butuh Bantuan?</h4>
+                <p className="text-sm text-ink-600 font-medium leading-relaxed mb-8">
                   Ada kendala saat pengisian data atau pembayaran? Tim panitia kami siap membantu Anda setiap hari pukul 08:00 - 16:00 WIB.
                 </p>
 
@@ -530,14 +530,14 @@ export default function DashboardPage() {
                     href="https://wa.me/6285111524441"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-4 rounded-2xl bg-white/10 border border-white/10 hover:bg-white hover:text-[#20150d] transition-all group/btn"
+                    className="flex items-center gap-4 p-5 rounded-[1.5rem] bg-teal-50 border border-teal-100 hover:bg-teal-600 hover:text-white transition-all group/btn shadow-premium-xs"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-green-500 text-white flex items-center justify-center shadow-lg group-hover/btn:scale-110 transition-transform">
-                      <Phone className="w-5 h-5" />
+                    <div className="w-12 h-12 rounded-xl bg-teal-600 text-white flex items-center justify-center shadow-lg group-hover/btn:scale-110 group-hover/btn:bg-white group-hover/btn:text-teal-600 transition-all">
+                      <Phone className="w-6 h-6" />
                     </div>
                     <div className="text-left">
-                      <p className="text-[10px] font-black uppercase tracking-widest opacity-80 text-white leading-none mb-1">WhatsApp CS</p>
-                      <p className="font-bold text-sm text-white group-hover/btn:text-[#20150d]">0851-1152-4441</p>
+                      <p className="text-[10px] font-black uppercase tracking-widest text-teal-600 group-hover/btn:text-white/80 leading-none mb-1">WhatsApp CS</p>
+                      <p className="font-bold text-base text-teal-900 group-hover/btn:text-white transition-colors">0851-1152-4441</p>
                     </div>
                   </a>
                 </div>
