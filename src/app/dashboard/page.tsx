@@ -336,7 +336,7 @@ export default function DashboardPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-xl text-ink-500 font-medium max-w-2xl leading-relaxed"
+                className="text-xl text-ink-700 font-medium max-w-2xl leading-relaxed"
               >
                 Pusat kendali pendaftaran santri baru T.A 2026/2027. Pantau progres dan lengkapi administrasi dengan mudah di sini.
               </motion.p>
@@ -398,7 +398,7 @@ export default function DashboardPage() {
                 </p>
 
                 <div className="mt-10 flex flex-wrap gap-4">
-                  <div className="px-6 py-2 rounded-full bg-white/50 backdrop-blur-sm border border-black/5 text-[10px] font-black uppercase tracking-widest text-ink-600">
+                  <div className="px-6 py-2 rounded-full bg-white/50 backdrop-blur-sm border border-black/5 text-[10px] font-black uppercase tracking-widest text-ink-800">
                     ID: {pendaftar.id.substring(0, 8).toUpperCase()}
                   </div>
                   <div className="px-6 py-2 rounded-full bg-white/50 backdrop-blur-sm border border-black/5 text-[10px] font-black uppercase tracking-widest text-ink-600">
@@ -494,7 +494,7 @@ export default function DashboardPage() {
               <div className="w-16 h-16 rounded-2xl bg-brown-50 flex items-center justify-center text-brown-600 mb-6 shadow-premium-xs">
                 <IdCard className="w-8 h-8" />
               </div>
-              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-ink-400 mb-2">No. Registrasi</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-ink-600 mb-2">No. Registrasi</p>
               <h4 className="text-3xl font-display font-black text-ink-950 mb-6">
                 {pendaftar.nomor_pendaftaran}
               </h4>
@@ -521,7 +521,7 @@ export default function DashboardPage() {
                   <MessageCircle className="w-6 h-6" />
                 </div>
                 <h4 className="text-2xl font-display font-black mb-4">Butuh Bantuan?</h4>
-                <p className="text-sm text-brown-100/70 font-medium leading-relaxed mb-8">
+                <p className="text-sm text-brown-50 font-medium leading-relaxed mb-8">
                   Ada kendala saat pengisian data atau pembayaran? Tim panitia kami siap membantu Anda setiap hari pukul 08:00 - 16:00 WIB.
                 </p>
 
@@ -551,7 +551,7 @@ export default function DashboardPage() {
               transition={{ delay: 1.0 }}
               className="bg-surface-50 p-10 rounded-[3rem] border border-surface-100"
             >
-              <h5 className="text-[10px] font-black uppercase tracking-[0.2em] text-ink-400 mb-6 px-2">Sistem Akses</h5>
+              <h5 className="text-[10px] font-black uppercase tracking-[0.2em] text-ink-600 mb-6 px-2">Sistem Akses</h5>
               <div className="space-y-2">
                 <Link href="/kalender" className="flex items-center justify-between p-4 rounded-2xl hover:bg-white hover:shadow-premium-sm transition-all group">
                   <span className="text-sm font-bold text-ink-600 group-hover:text-ink-950">Kalender Akademik</span>
