@@ -13,6 +13,7 @@ import {
   FileText
 } from "lucide-react";
 import Link from "next/link";
+import ProgressStepper from "@/components/dashboard/ProgressStepper";
 import {
   getNextStep,
   formatStatusDisplay,
@@ -73,7 +74,10 @@ export default function DashboardPendaftarPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
+      {/* Progress Stepper Tracking */}
+      <ProgressStepper currentStatus={data.status} />
+
       {/* Welcome Banner */}
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-teal-600 to-emerald-800 text-white shadow-xl">
         <div className="absolute top-0 right-0 p-12 opacity-10">

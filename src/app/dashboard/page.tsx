@@ -205,7 +205,7 @@ const ActionCard = ({
           <Icon className="w-7 h-7" />
         </div>
         <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-${color}-50 text-${color}-700 border border-${color}-100`}>
-          {step}
+          Tahap {step.replace('Step ', '')}
         </span>
       </div>
 
@@ -219,7 +219,7 @@ const ActionCard = ({
       {!disabled && (
         <div className={`flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-${color}-600`}>
           <Sparkles className="w-4 h-4" />
-          <span>Go to section</span>
+          <span>Buka Bagian Ini</span>
           <ArrowRight className="w-3.5 h-3.5 ml-auto opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
         </div>
       )}
@@ -363,7 +363,7 @@ export default function DashboardPage() {
                 className="group flex items-center gap-3 px-8 py-4 bg-white border border-surface-200 rounded-2xl font-black text-xs uppercase tracking-widest text-ink-600 hover:bg-red-50 hover:text-red-600 hover:border-red-100 transition-all shadow-premium-sm active:scale-95 disabled:opacity-50"
               >
                 <LogOut className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                <span>{isLoggingOut ? "Processing..." : "Logout"}</span>
+                <span>{isLoggingOut ? "Memproses..." : "Logout"}</span>
               </button>
             </motion.div>
           </div>
@@ -395,7 +395,7 @@ export default function DashboardPage() {
                     <StatusIcon className={`w-10 h-10 ${pendaftar.status_pendaftaran === 'payment_verification' ? 'animate-spin' : ''}`} />
                   </div>
                   <div>
-                    <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-60 mb-2 block">Current Status</span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-60 mb-2 block">Status Saat Ini</span>
                     <h2 className={`text-2xl sm:text-3xl md:text-4xl font-display font-black ${statusInfo.text} leading-none`}>
                       {statusInfo.label}
                     </h2>

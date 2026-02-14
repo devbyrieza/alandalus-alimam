@@ -59,18 +59,18 @@ export default function Navbar() {
                   Al-Imam
                 </h1>
                 <p className="text-[11px] font-bold text-ink-500 uppercase tracking-widest mt-1">
-                  Managed by Al-Andalus
+                  Dikelola oleh Al-Andalus
                 </p>
               </div>
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-1 bg-surface-50/50 p-1.5 rounded-2xl border border-surface-200">
+            <nav className="hidden lg:flex items-center gap-0 xl:gap-1 bg-surface-50/50 p-1 rounded-2xl border border-surface-200">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-5 py-2.5 text-sm font-bold rounded-xl transition-all duration-300 ${isActive(link.href)
+                  className={`px-3 xl:px-5 py-2 text-sm xl:py-2.5 font-bold rounded-xl transition-all duration-300 ${isActive(link.href)
                     ? "bg-white text-brown-700 shadow-premium-sm"
                     : "text-ink-600 hover:text-ink-950 hover:bg-white/50"
                     }`}
@@ -81,13 +81,13 @@ export default function Navbar() {
             </nav>
 
             {/* CTA Buttons */}
-            <div className="hidden lg:flex items-center gap-4">
+            <div className="hidden lg:flex items-center gap-3 xl:gap-4">
               <Link href="/login" className="text-sm font-bold text-ink-600 hover:text-brown-700 transition-colors">
-                Login
+                Masuk
               </Link>
-              <Link href="/ppdb" className="rounded-xl px-6 py-5 bg-brown-700 hover:bg-brown-800 text-white font-bold shadow-premium-md transition-all duration-300 group inline-flex items-center">
+              <Link href="/ppdb" className="rounded-xl px-4 xl:px-6 py-4 xl:py-5 bg-brown-700 hover:bg-brown-800 text-white font-bold shadow-premium-md transition-all duration-300 group inline-flex items-center">
                 Daftar PPDB
-                <span className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1">→</span>
+                <span className="ml-1.5 xl:ml-2 w-4 h-4 transition-transform group-hover:translate-x-1">→</span>
               </Link>
             </div>
 
@@ -131,7 +131,7 @@ export default function Navbar() {
                     Daftar Sekarang
                   </Link>
                   <Link href="/login" className="text-center py-2 text-ink-500 font-bold hover:text-brown-700 transition-colors">
-                    Login Sistem
+                    Masuk ke Sistem
                   </Link>
                 </div>
               </div>

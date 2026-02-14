@@ -85,8 +85,9 @@ export default function HeroSection() {
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold text-ink-950 leading-[1.1] tracking-tight">
                 Generasi Rabbani, <br />
+                <span className="text-brown-600">Cendekia</span> <br className="hidden lg:block" />
                 <span className="text-brown-600 relative inline-block">
-                  Cendekia & Mandiri
+                  & Mandiri
                   <svg className="absolute -bottom-2 left-0 w-full h-2 text-brown-200" viewBox="0 0 100 10" preserveAspectRatio="none">
                     <path d="M0 5 Q 50 10 100 5" fill="none" stroke="currentColor" strokeWidth="4" />
                   </svg>

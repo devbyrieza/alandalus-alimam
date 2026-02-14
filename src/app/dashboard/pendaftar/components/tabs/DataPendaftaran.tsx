@@ -156,7 +156,7 @@ export default function DataPendaftaranTab() {
             </div>
             <div>
               <p className="text-sm text-stone-600">Pembayaran</p>
-              <p className="text-lg font-bold text-stone-900">Pending</p>
+              <p className="text-lg font-bold text-stone-900">Menunggu</p>
             </div>
           </div>
         </div>
@@ -254,7 +254,7 @@ export default function DataPendaftaranTab() {
                 <CreditCard className="w-6 h-6 text-amber-600" />
               </div>
               <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700">
-                Step 1 - Wajib
+                Tahap 1 - Wajib
               </span>
             </div>
             <div className="flex items-center justify-between">
@@ -280,7 +280,7 @@ export default function DataPendaftaranTab() {
                 <User className="w-6 h-6 text-teal-600" />
               </div>
               <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-bold bg-teal-100 text-teal-700">
-                Step 2
+                Tahap 2
               </span>
             </div>
             <div className="flex items-center justify-between">
@@ -306,7 +306,7 @@ export default function DataPendaftaranTab() {
                 <FileText className="w-6 h-6 text-green-600" />
               </div>
               <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700">
-                Step 3
+                Tahap 3
               </span>
             </div>
             <div className="flex items-center justify-between">

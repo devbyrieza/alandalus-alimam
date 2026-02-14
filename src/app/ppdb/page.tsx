@@ -82,7 +82,7 @@ const TimelineItem = ({ item, index }: { item: any, index: number }) => (
           {item.date}
         </span>
       </div>
-      <p className="text-lg text-ink-600 leading-relaxed font-medium text-justify">{item.desc}</p>
+      <p className="text-lg text-ink-600 leading-relaxed font-medium text-left">{item.desc}</p>
     </div>
   </motion.div>
 );
@@ -252,7 +252,7 @@ function PPDBContent() {
               <h2 className="text-3xl md:text-5xl font-display font-black text-ink-950 mb-8 leading-tight">
                 Alur Seleksi <br /> <span className="text-brown-600">Lengkap & Transparan</span>
               </h2>
-              <p className="text-xl text-ink-600 leading-relaxed font-medium mb-10 text-justify">
+              <p className="text-xl text-ink-600 leading-relaxed font-medium mb-10 text-left">
                 Kami memastikan setiap proses pendaftaran berlangsung dengan adil dan informatif bagi calon santri dan orang tua.
               </p>
 
@@ -368,7 +368,7 @@ function PPDBContent() {
                       </ul>
                       {(req as any).note && (
                         <div className="mt-8 pt-8 border-t border-surface-100">
-                          <p className="text-sm text-ink-500 font-medium leading-relaxed italic text-justify">
+                          <p className="text-sm text-ink-500 font-medium leading-relaxed italic text-left">
                             {(req as any).note}
                           </p>
                         </div>
@@ -440,7 +440,7 @@ function PPDBContent() {
                           <ChevronRight className="w-5 h-5 text-surface-200 group-open:rotate-90 transition-transform duration-300" />
                         </summary>
                         <div className="px-6 pb-6 pt-2 pl-20">
-                          <p className="text-ink-600 font-medium leading-relaxed text-justify">{faq.a}</p>
+                          <p className="text-ink-600 font-medium leading-relaxed text-left">{faq.a}</p>
                         </div>
                       </details>
                     </motion.div>

@@ -31,7 +31,7 @@ export default function Footer() {
               </div>
               <div>
                 <h3 className="text-xl font-extrabold text-ink-950 tracking-tight leading-none">Al-Imam</h3>
-                <p className="text-[10px] font-bold text-ink-500 uppercase tracking-[0.2em] mt-2">Managed by Al-Andalus</p>
+                <p className="text-[10px] font-bold text-ink-500 uppercase tracking-[0.2em] mt-2">Dikelola oleh Al-Andalus</p>
               </div>
             </Link>
             <p className="text-ink-600 font-medium leading-relaxed max-w-xs">
@@ -110,11 +110,11 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-surface-100 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-sm font-bold text-ink-400">
-            &copy; {currentYear} Pesantren Al-Imam Al-Islami. All rights reserved.
+            &copy; {currentYear} Pesantren Al-Imam Al-Islami. Hak cipta dilindungi undang-undang.
           </p>
           <div className="flex items-center gap-6 text-sm font-bold text-ink-400">
-            <Link href="#" className="hover:text-ink-950 transition-colors">Privacy Policy</Link>
-            <Link href="#" className="hover:text-ink-950 transition-colors">Terms of Service</Link>
+            <Link href="#" className="hover:text-ink-950 transition-colors">Kebijakan Privasi</Link>
+            <Link href="#" className="hover:text-ink-950 transition-colors">Syarat & Ketentuan</Link>
             <div className="flex items-center gap-2">
               <Globe className="w-4 h-4" />
               <span>ID / AR</span>

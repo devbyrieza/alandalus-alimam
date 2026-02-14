@@ -311,7 +311,7 @@ export default function DaftarPage() {
                       }}
                       className="mt-3 flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-teal-800 hover:text-teal-950 transition-colors"
                     >
-                      <RefreshCw className="w-3 h-3" /> Start Over
+                      <RefreshCw className="w-3 h-3" /> Mulai dari Awal
                     </button>
                   </div>
                 </motion.div>
@@ -482,7 +482,7 @@ export default function DaftarPage() {
                         const val = e.target.value.replace(/\D/g, "");
                         setFormData((prev) => ({ ...prev, no_hp: val }))
                       }}
-                      placeholder={countryCode === "+62" ? "812 3456 7890" : "Phone Number"}
+                      placeholder={countryCode === "+62" ? "812 3456 7890" : "Nomor Telepon"}
                       className="flex-1 px-8 py-5 bg-surface-50 border-none focus:bg-white focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-950 placeholder:text-ink-500"
                     />
                   </div>

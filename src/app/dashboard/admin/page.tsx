@@ -429,7 +429,7 @@ export default function AdminDashboardPage() {
           <div className="pt-4">
             <h3 className="text-xl font-bold text-ink-900 mb-6 flex items-center gap-2">
               <TrendingUp className="w-5 h-5 text-teal-600" />
-              Progress Pendaftaran (Registration Funnel)
+              Tingkat Konversi Pendaftaran (Funnel Pendaftaran)
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-5 gap-2 relative">
               {stats.funnel_data?.map((item, idx) => {
@@ -456,7 +456,7 @@ export default function AdminDashboardPage() {
                     )}
                     {idx > 0 && dropOff > 0 && (
                       <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-rose-50 text-rose-600 text-[8px] px-1.5 py-0.5 rounded-full font-black border border-rose-100 opacity-0 group-hover:opacity-100 transition-opacity">
-                        -{dropOff}% DROP
+                        -{dropOff}% GUGUR
                       </div>
                     )}
                   </div>
@@ -464,8 +464,72 @@ export default function AdminDashboardPage() {
               })}
             </div>
             <p className="text-[10px] text-ink-400 mt-4 font-medium italic text-center">
-              * Persentase dihitung berdasarkan total pendaftar yang masuk. Hover untuk melihat tingkat drop-off.
+              * Persentase dihitung berdasarkan total pendaftar yang masuk. Arahkan kursor untuk melihat tingkat pembatalan (drop-off).
             </p>
+          </div>
+
+          {/* Stats Distribution - NEW ENHANCEMENT */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+            {/* Status Distribution */}
+            <div className="card-glass p-6">
+              <h4 className="text-lg font-bold text-ink-950 mb-6 flex items-center gap-2">
+                <BarChart3 className="w-5 h-5 text-teal-600" />
+                Distribusi Status
+              </h4>
+              <div className="space-y-4">
+                {[
+                  { label: "Diterima", count: stats.pie_chart_status.diterima, color: "bg-green-500", total: stats.total_pendaftar },
+                  { label: "Menunggu Seleksi", count: stats.pie_chart_status.menunggu, color: "bg-blue-500", total: stats.total_pendaftar },
+                  { label: "Dalam Proses", count: stats.pie_chart_status.proses, color: "bg-amber-500", total: stats.total_pendaftar },
+                  { label: "Ditolak/Batal", count: stats.pie_chart_status.ditolak, color: "bg-rose-500", total: stats.total_pendaftar },
+                ].map((item, idx) => {
+                  const percentage = item.total > 0 ? Math.round((item.count / item.total) * 100) : 0;
+                  return (
+                    <div key={idx} className="space-y-1.5">
+                      <div className="flex justify-between text-sm font-medium">
+                        <span className="text-ink-600">{item.label}</span>
+                        <span className="text-ink-900 font-bold">{item.count} ({percentage}%)</span>
+                      </div>
+                      <div className="h-2 bg-ink-50 rounded-full overflow-hidden">
+                        <div
+                          className={`h-full ${item.color} rounded-full transition-all duration-1000`}
+                          style={{ width: `${percentage}%` }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Gender Distribution */}
+            <div className="card-glass p-6">
+              <h4 className="text-lg font-bold text-ink-950 mb-6 flex items-center gap-2">
+                <Users className="w-5 h-5 text-teal-600" />
+                Komposisi Gender
+              </h4>
+              <div className="flex items-center justify-center py-4">
+                <div className="flex w-full max-w-sm gap-2">
+                  <div className="flex-1 space-y-2">
+                    <div className="h-28 bg-blue-50 rounded-2xl flex flex-col items-center justify-center border-2 border-blue-100 hover:border-blue-300 transition-colors">
+                      <p className="text-3xl font-black text-blue-600">{stats.stats_gender["Laki-laki"]}</p>
+                      <p className="text-[10px] font-bold text-blue-400 uppercase tracking-widest">Putra</p>
+                    </div>
+                  </div>
+                  <div className="flex-1 space-y-2">
+                    <div className="h-28 bg-rose-50 rounded-2xl flex flex-col items-center justify-center border-2 border-rose-100 hover:border-rose-300 transition-colors">
+                      <p className="text-3xl font-black text-rose-600">{stats.stats_gender["Perempuan"]}</p>
+                      <p className="text-[10px] font-bold text-rose-400 uppercase tracking-widest">Putri</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-4 px-2">
+                <p className="text-xs text-ink-500 text-center italic">
+                  Perbandingan santri putra dan putri yang terdaftar tahun ini.
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Regional Stats - Minimalist Map Representation */}
@@ -492,7 +556,7 @@ export default function AdminDashboardPage() {
         <div className="space-y-6">
           {/* Quick Action Stack */}
           <div className="card-glass p-6">
-            <h3 className="text-lg font-bold text-ink-900 mb-4">Aksi Cepat</h3>
+            <h3 className="text-lg font-bold text-ink-950 mb-4">Aksi Cepat</h3>
             <div className="space-y-3">
               {canViewKeuangan && (
                 <Link href="/dashboard/admin/verifikasi-pembayaran"
@@ -503,7 +567,7 @@ export default function AdminDashboardPage() {
                     </div>
                     <div className="text-left">
                       <p className="text-sm font-bold text-ink-900">Verifikasi Pembayaran</p>
-                      <p className="text-xs text-ink-400">{stats.menunggu_verifikasi_pembayaran} pending</p>
+                      <p className="text-xs text-ink-400">{stats.menunggu_verifikasi_pembayaran} menunggu</p>
                     </div>
                   </div>
                   <ArrowUpRight className="w-4 h-4 text-ink-300 group-hover:text-amber-500" />
@@ -519,7 +583,7 @@ export default function AdminDashboardPage() {
                     </div>
                     <div className="text-left">
                       <p className="text-sm font-bold text-ink-900">Verifikasi Dokumen</p>
-                      <p className="text-xs text-ink-400">{stats.menunggu_verifikasi_dokumen} pending</p>
+                      <p className="text-xs text-ink-400">{stats.menunggu_verifikasi_dokumen} menunggu</p>
                     </div>
                   </div>
                   <ArrowUpRight className="w-4 h-4 text-ink-300 group-hover:text-blue-500" />

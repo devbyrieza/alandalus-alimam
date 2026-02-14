@@ -187,7 +187,7 @@ export default function FasilitasPage() {
                 viewport={{ once: true }}
                 className="order-2 lg:order-1"
               >
-                <div className="bg-white p-12 lg:p-16 rounded-[3.5rem] shadow-premium-lg border border-surface-100 relative overflow-hidden group">
+                <div className="bg-white p-6 sm:p-12 lg:p-16 rounded-[3.5rem] shadow-premium-lg border border-surface-100 relative overflow-hidden group">
                   <div className="absolute top-0 right-0 p-12 opacity-5 -rotate-12 transition-transform group-hover:rotate-0 duration-700">
                     <Home className="w-48 h-48" />
                   </div>
@@ -196,12 +196,12 @@ export default function FasilitasPage() {
                     <Home className="w-10 h-10" />
                   </div>
 
-                  <h3 className="text-3xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Masjid Jami' <br /> Al-Imam</h3>
-                  <p className="text-xl text-ink-600 mb-10 leading-relaxed font-medium">
+                  <h3 className="text-2xl sm:text-3xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Masjid Jami' <br /> Al-Imam</h3>
+                  <p className="text-base sm:text-xl text-ink-600 mb-10 leading-relaxed font-medium">
                     Pusat peribadatan santri yang mampu menampung 1000 jamaah. Dilengkapi pendingin ruangan, karpet premium, dan sistem audio berkualitas tinggi.
                   </p>
 
-                  <div className="grid grid-cols-2 gap-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     <div className="flex items-start gap-4 group/item">
                       <div className="w-8 h-8 rounded-full bg-gold-500 text-white flex items-center justify-center shrink-0 shadow-premium-sm">
                         <CheckCircle2 className="w-5 h-5" />
@@ -269,7 +269,7 @@ export default function FasilitasPage() {
                 viewport={{ once: true }}
                 className="order-2"
               >
-                <div className="bg-white p-12 lg:p-16 rounded-[3.5rem] shadow-premium-lg border border-surface-100 relative overflow-hidden group">
+                <div className="bg-white p-6 sm:p-12 lg:p-16 rounded-[3.5rem] shadow-premium-lg border border-surface-100 relative overflow-hidden group">
                   <div className="absolute top-0 right-0 p-12 opacity-5 rotate-12 transition-transform group-hover:rotate-0 duration-700">
                     <Building className="w-48 h-48" />
                   </div>
@@ -278,12 +278,12 @@ export default function FasilitasPage() {
                     <Building className="w-10 h-10" />
                   </div>
 
-                  <h3 className="text-3xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Asrama <br /> Berkualitas</h3>
-                  <p className="text-xl text-ink-600 mb-10 leading-relaxed font-medium">
+                  <h3 className="text-2xl sm:text-3xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Asrama <br /> Berkualitas</h3>
+                  <p className="text-base sm:text-xl text-ink-600 mb-10 leading-relaxed font-medium">
                     Hunian nyaman dengan sirkulasi udara optimal. Setiap kamar didesain dengan konsep kekeluargaan dan dilengkapi fasilitas penyimpanan pribadi.
                   </p>
 
-                  <div className="grid grid-cols-2 gap-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     <div className="flex items-start gap-4 group/item">
                       <div className="w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center shrink-0 shadow-premium-sm">
                         <CheckCircle2 className="w-5 h-5" />
@@ -314,7 +314,7 @@ export default function FasilitasPage() {
                 viewport={{ once: true }}
                 className="order-2 lg:order-1"
               >
-                <div className="bg-white p-12 lg:p-16 rounded-[3.5rem] shadow-premium-lg border border-surface-100 relative overflow-hidden group">
+                <div className="bg-white p-6 sm:p-12 lg:p-16 rounded-[3.5rem] shadow-premium-lg border border-surface-100 relative overflow-hidden group">
                   <div className="absolute top-0 right-0 p-12 opacity-5 -rotate-12 transition-transform group-hover:rotate-0 duration-700">
                     <School className="w-48 h-48" />
                   </div>
@@ -323,12 +323,12 @@ export default function FasilitasPage() {
                     <School className="w-10 h-10" />
                   </div>
 
-                  <h3 className="text-3xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Ruang Kelas <br /> Modern</h3>
-                  <p className="text-xl text-ink-600 mb-10 leading-relaxed font-medium">
+                  <h3 className="text-2xl sm:text-3xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Ruang Kelas <br /> Modern</h3>
+                  <p className="text-base sm:text-xl text-ink-600 mb-10 leading-relaxed font-medium">
                     Ruang kelas yang didesain ergonomis dan modern untuk konsentrasi belajar maksimal. Setiap kelas dilengkapi alat peraga edukatif dan sirkulasi udara yang baik.
                   </p>
 
-                  <div className="grid grid-cols-2 gap-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     <div className="flex items-start gap-4 group/item">
                       <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center shrink-0 shadow-premium-sm">
                         <CheckCircle2 className="w-5 h-5" />
@@ -396,7 +396,7 @@ export default function FasilitasPage() {
                 viewport={{ once: true }}
                 className="order-2"
               >
-                <div className="bg-white p-12 lg:p-16 rounded-[3.5rem] shadow-premium-lg border border-surface-100 relative overflow-hidden group">
+                <div className="bg-white p-6 sm:p-12 lg:p-16 rounded-[3.5rem] shadow-premium-lg border border-surface-100 relative overflow-hidden group">
                   <div className="absolute top-0 right-0 p-12 opacity-5 rotate-12 transition-transform group-hover:rotate-0 duration-700">
                     <Trophy className="w-48 h-48" />
                   </div>
@@ -405,12 +405,12 @@ export default function FasilitasPage() {
                     <Trophy className="w-10 h-10" />
                   </div>
 
-                  <h3 className="text-3xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Lapangan <br /> Minisoccer</h3>
-                  <p className="text-xl text-ink-600 mb-10 leading-relaxed font-medium">
+                  <h3 className="text-2xl sm:text-3xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Lapangan <br /> Minisoccer</h3>
+                  <p className="text-base sm:text-xl text-ink-600 mb-10 leading-relaxed font-medium">
                     Sarana olahraga outdoor berkualitas untuk mendukung kesehatan fisik dan bakat atletik santri. Lapangan rumput sintetis standar yang aman dan nyaman.
                   </p>
 
-                  <div className="grid grid-cols-2 gap-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     <div className="flex items-start gap-4 group/item">
                       <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center shrink-0 shadow-premium-sm">
                         <CheckCircle2 className="w-5 h-5" />
@@ -460,7 +460,7 @@ export default function FasilitasPage() {
                 viewport={{ once: true }}
                 className="order-2"
               >
-                <div className="bg-white p-12 lg:p-16 rounded-[3.5rem] shadow-premium-lg border border-surface-100 relative overflow-hidden group">
+                <div className="bg-white p-6 sm:p-12 lg:p-16 rounded-[3.5rem] shadow-premium-lg border border-surface-100 relative overflow-hidden group">
                   <div className="absolute top-0 right-0 p-12 opacity-5 rotate-12 transition-transform group-hover:rotate-0 duration-700">
                     <Building className="w-48 h-48" />
                   </div>
@@ -469,12 +469,12 @@ export default function FasilitasPage() {
                     <Building className="w-10 h-10" />
                   </div>
 
-                  <h3 className="text-3xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Kantor PPDB <br /> & Tamu</h3>
-                  <p className="text-xl text-ink-600 mb-10 leading-relaxed font-medium">
+                  <h3 className="text-2xl sm:text-3xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Kantor PPDB <br /> & Tamu</h3>
+                  <p className="text-base sm:text-xl text-ink-600 mb-10 leading-relaxed font-medium">
                     Pusat informasi dan pendaftaran santri baru. Dilengkapi dengan ruang tunggu yang nyaman dan staf yang siap membantu proses pendaftaran.
                   </p>
 
-                  <div className="grid grid-cols-2 gap-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     <div className="flex items-start gap-4 group/item">
                       <div className="w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center shrink-0 shadow-premium-sm">
                         <CheckCircle2 className="w-5 h-5" />

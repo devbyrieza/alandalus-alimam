@@ -208,7 +208,7 @@ export default function DashboardLayout({
                 style={{ width: `${progressToUnlock}%` }}
               />
             </div>
-            <p className="text-right text-[10px] text-ink-400 mt-1">{progressToUnlock}% Completed</p>
+            <p className="text-right text-[10px] text-ink-400 mt-1">{progressToUnlock}% Selesai</p>
           </div>
         </div>
       );

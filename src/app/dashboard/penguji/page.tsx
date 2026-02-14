@@ -103,7 +103,7 @@ export default function PengujiDashboardPage() {
           </div>
           <div>
             <h2 className="text-2xl font-black text-stone-900">
-              Dashboard Overview
+              Ikhtisar Dashboard
             </h2>
             <p className="text-stone-600">
               Ringkasan tugas penilaian ujian seleksi
@@ -137,7 +137,7 @@ export default function PengujiDashboardPage() {
       {/* Quick Actions */}
       <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-violet-100">
         <h3 className="text-lg font-bold text-stone-900 mb-4">
-          Quick Actions
+          Aksi Cepat
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Link

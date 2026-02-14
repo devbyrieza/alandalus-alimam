@@ -9,7 +9,9 @@ import {
   Loader2,
   Calendar,
   FileText,
+  Download,
 } from "lucide-react";
+import { generateSuratKelulusan } from "@/lib/utils/pdf-generator";
 
 interface Pengumuman {
   id: string;
@@ -20,7 +22,9 @@ interface Pengumuman {
 
 export default function PengumumanTab() {
   const [pengumuman, setPengumuman] = useState<Pengumuman | null>(null);
+  const [docData, setDocData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   useEffect(() => {
     fetchPengumuman();
@@ -38,6 +42,34 @@ export default function PengumumanTab() {
       console.error("Error fetching pengumuman:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDownloadSurat = async () => {
+    try {
+      setIsGenerating(true);
+
+      // If docData not yet fetched, fetch it now
+      let currentDocData = docData;
+      if (!currentDocData) {
+        const sessionRes = await fetch("/api/auth/session");
+        const session = await sessionRes.json();
+
+        if (session.pendaftar_id) {
+          const res = await fetch(`/api/pendaftar/document-data?pendaftar_id=${session.pendaftar_id}`);
+          const result = await res.json();
+          currentDocData = result.data;
+          setDocData(currentDocData);
+        }
+      }
+
+      if (currentDocData) {
+        generateSuratKelulusan(currentDocData);
+      }
+    } catch (error) {
+      console.error("Error generating surat kelulusan:", error);
+    } finally {
+      setIsGenerating(false);
     }
   };
 
@@ -95,20 +127,34 @@ export default function PengumumanTab() {
       ) : pengumuman.status_kelulusan === "diterima" ? (
         <div className="space-y-6">
           {/* Success Card */}
-          <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl p-8 text-white shadow-2xl">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="p-4 bg-white bg-opacity-20 rounded-2xl">
-                <CheckCircle className="w-12 h-12" />
-              </div>
-              <div>
-                <p className="text-green-100 text-sm mb-1">Selamat!</p>
-                <h2 className="text-3xl font-black">ANDA DITERIMA</h2>
-              </div>
+          <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl p-8 text-white shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-8 opacity-10">
+              <Trophy className="w-32 h-32" />
             </div>
-            <p className="text-green-100">
-              Berdasarkan hasil seleksi, Anda dinyatakan LULUS dan diterima
-              sebagai santri baru Ponpes Al-Imam Al-Islami Sukabumi.
-            </p>
+            <div className="relative z-10">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-4 bg-white bg-opacity-20 rounded-2xl">
+                  <CheckCircle className="w-12 h-12" />
+                </div>
+                <div>
+                  <p className="text-green-100 text-sm mb-1">Selamat!</p>
+                  <h2 className="text-3xl font-black">ANDA DITERIMA</h2>
+                </div>
+              </div>
+              <p className="text-green-100 mb-8 max-w-xl">
+                Berdasarkan hasil seleksi, Anda dinyatakan LULUS dan diterima
+                sebagai santri baru Ponpes Al-Imam Al-Islami Sukabumi.
+              </p>
+
+              <button
+                onClick={handleDownloadSurat}
+                disabled={isGenerating}
+                className="flex items-center gap-2 px-6 py-3 bg-white text-green-700 rounded-xl font-bold hover:bg-green-50 transition-all shadow-lg disabled:opacity-50"
+              >
+                {isGenerating ? <Loader2 className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
+                Download Surat Kelulusan
+              </button>
+            </div>
           </div>
 
           {/* Info Card */}

@@ -15,15 +15,33 @@ async function checkAdmin() {
   return null;
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const tahunAjaranId = searchParams.get("tahun_ajaran_id");
+
     const session = await checkAdmin();
     if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    // Build where clause
+    const where: any = {};
+    if (tahunAjaranId) {
+      where.tahun_ajaran_id = tahunAjaranId;
+    } else {
+      // Default to active tahun ajaran if none specified
+      const activeTA = await prisma.tahunAjaran.findFirst({
+        where: { is_active: true }
+      });
+      if (activeTA) {
+        where.tahun_ajaran_id = activeTA.id;
+      }
+    }
+
     // Fetch pendaftar data with status, jenjang, and location
     const pendaftarData = await prisma.pendaftar.findMany({
+      where,
       select: {
         id: true,
         status_pendaftaran: true,
@@ -33,8 +51,11 @@ export async function GET() {
       },
     });
 
-    // Fetch pembayaran data
+    // Fetch pembayaran data for the same year
     const pembayaranData = await prisma.pembayaran.findMany({
+      where: {
+        tahun_ajaran_id: where.tahun_ajaran_id
+      },
       select: {
         pendaftar_id: true,
         status_pembayaran: true,
@@ -95,9 +116,10 @@ export async function GET() {
       total_pendaftar,
 
       // === PEMBAYARAN ===
-      belum_bayar: statusCounts.draft || 0,
+      belum_bayar: (statusCounts.draft || 0) + (statusCounts.waiting_payment || 0) + (statusCounts.awaiting_payment || 0),
       menunggu_verifikasi_pembayaran: statusCounts.payment_verification || 0,
       sudah_bayar:
+        (statusCounts.paid || 0) +
         (statusCounts.verified || 0) +
         (statusCounts.data_completed || 0) +
         (statusCounts.docs_uploaded || 0) +
@@ -107,7 +129,7 @@ export async function GET() {
         (statusCounts.announced || 0) +
         (statusCounts.accepted || 0) +
         (statusCounts.enrolled || 0),
-      pembayaran_ditolak: statusCounts.rejected || 0,
+      pembayaran_ditolak: (statusCounts.rejected || 0) + (statusCounts.payment_rejected || 0),
 
       // === DATA LENGKAP ===
       belum_isi_data: statusCounts.verified || 0,
@@ -154,10 +176,10 @@ export async function GET() {
       // === LEGACY (for backward compatibility) ===
       pending_verification: statusCounts.docs_uploaded || 0,
       verified: statusCounts.docs_verified || 0,
-      rejected: statusCounts.rejected || 0,
+      rejected: (statusCounts.rejected || 0) + (statusCounts.payment_rejected || 0),
       pending_payment:
-        (statusCounts.draft || 0) + (statusCounts.payment_verification || 0),
-      paid: statusCounts.verified || 0,
+        (statusCounts.draft || 0) + (statusCounts.waiting_payment || 0) + (statusCounts.awaiting_payment || 0) + (statusCounts.payment_verification || 0),
+      paid: (statusCounts.paid || 0) + (statusCounts.verified || 0),
       scheduled_exams: statusCounts.scheduled || 0,
       announced: statusCounts.announced || 0,
       accepted: statusCounts.accepted || 0,
@@ -201,7 +223,7 @@ export async function GET() {
         { label: "Pendaftar", count: total_pendaftar, color: "bg-ink-100" },
         {
           label: "Lunas",
-          count: (statusCounts.verified || 0) + (statusCounts.data_completed || 0) +
+          count: (statusCounts.paid || 0) + (statusCounts.verified || 0) + (statusCounts.data_completed || 0) +
             (statusCounts.docs_uploaded || 0) + (statusCounts.docs_verified || 0) +
             (statusCounts.scheduled || 0) + (statusCounts.tested || 0) +
             (statusCounts.announced || 0) + (statusCounts.accepted || 0) + (statusCounts.enrolled || 0),

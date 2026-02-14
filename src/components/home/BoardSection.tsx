@@ -3,14 +3,33 @@
 import { Users, User } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const BOARD_MEMBERS = [
-    { name: "Ustadz Nurdin Apud Sabrini, Lc, M.A" },
-    { name: "Ustadz Dr Muhammad Arifin Badri, Lc, M.A" },
-    { name: "Ustadz Wahab Rajasam, M.Pd" },
-    { name: "KH Dudun Abdul Gofar" },
-    { name: "Bpk. Tasmen Tascha, SE" },
-    { name: "Ustadz Dwi Wahyu Iskandar, M.Pd" },
+    {
+        name: "Ustadz Nurdin Apud Sabrini, Lc, M.A",
+        image: "/images/Ustadz Nurdin Apud Sabrini, Lc, M.A.png"
+    },
+    {
+        name: "Ustadz Dr Muhammad Arifin Badri, Lc, M.A",
+        image: "/images/Ustadz Dr Muhammad Arifin Badri, Lc, M.A.jpg"
+    },
+    {
+        name: "Ustadz Wahab Rajasam, M.Pd",
+        image: "/images/Ustadz Wahab Rajasam, M.Pd.png"
+    },
+    {
+        name: "KH Dudun Abdul Gofar",
+        image: null
+    },
+    {
+        name: "Bpk. Tasmen Tascha, SE",
+        image: "/images/Bpk. Tasmen Tascha, SE.png"
+    },
+    {
+        name: "Ustadz Dwi Wahyu Iskandar, M.Pd",
+        image: "/images/Ustadz Dwi Wahyu Iskandar, M.Pd.png"
+    },
 ] as const;
 
 export default function BoardSection() {
@@ -52,21 +71,38 @@ export default function BoardSection() {
                     </motion.p>
                 </div>
 
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+                <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
                     {BOARD_MEMBERS.map((member, idx) => (
                         <motion.div
                             key={idx}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.05 }}
-                            className="bg-surface-50 p-8 rounded-3xl border border-surface-200/60 flex items-center gap-6 group hover:bg-white hover:shadow-premium-lg hover:border-brown-100 transition-all duration-500"
+                            className="bg-surface-50 p-5 rounded-[2rem] border border-surface-200/60 flex items-center gap-6 group hover:bg-white hover:shadow-premium-xl hover:border-brown-100 transition-all duration-500"
                         >
-                            <div className="w-16 h-16 rounded-2xl bg-white border border-surface-200 flex items-center justify-center shrink-0 group-hover:bg-brown-700 group-hover:border-brown-700 transition-all duration-500 shadow-premium-sm">
-                                <User className="w-8 h-8 text-brown-600 group-hover:text-white transition-colors" />
+                            <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-3xl bg-white border border-surface-200 overflow-hidden shrink-0 group-hover:border-brown-200 transition-all duration-500 shadow-premium-sm">
+                                {member.image ? (
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src={member.image}
+                                            alt={member.name}
+                                            fill
+                                            sizes="(max-width: 768px) 112px, 128px"
+                                            priority={idx < 4}
+                                        />
+                                        <div className="absolute inset-0 bg-brown-900/0 group-hover:bg-brown-900/5 transition-colors duration-500" />
+                                    </div>
+                                ) : (
+                                    <div className="w-full h-full flex flex-col items-center justify-center bg-surface-100 group-hover:bg-brown-700 transition-all duration-500">
+                                        <User className="w-10 h-10 text-brown-600 group-hover:text-white transition-colors" />
+                                    </div>
+                                )}
+
                             </div>
-                            <div className="min-w-0">
-                                <h4 className="font-bold text-ink-950 text-lg leading-tight group-hover:text-brown-700 transition-colors" title={member.name}>
+
+                            <div className="min-w-0 pr-4 py-2">
+                                <h4 className="font-display font-bold text-ink-950 text-lg md:text-xl leading-snug group-hover:text-brown-700 transition-colors">
                                     {member.name}
                                 </h4>
                             </div>

@@ -81,8 +81,8 @@ export default function PengujiDashboardLayout({
         <Link
           href={item.href}
           className={`group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 ${item.active
-              ? "bg-violet-600 text-white shadow-lg shadow-violet-200"
-              : "text-stone-600 hover:bg-violet-50 hover:text-violet-700"
+            ? "bg-violet-600 text-white shadow-lg shadow-violet-200"
+            : "text-stone-600 hover:bg-violet-50 hover:text-violet-700"
             }`}
         >
           <item.icon className={`w-5 h-5 mr-3 flex-shrink-0 transition-colors ${item.active ? 'text-white' : 'text-stone-400 group-hover:text-violet-600'}`} />
@@ -151,8 +151,8 @@ export default function PengujiDashboardLayout({
                     <Shield className="w-6 h-6" />
                   </div>
                   <div>
-                    <h1 className="font-black text-xl text-stone-900 leading-none tracking-tight">Penguji <span className="text-violet-600">Panel</span></h1>
-                    <p className="text-xs text-stone-500 font-medium mt-1">PPDB Selection</p>
+                    <h1 className="font-black text-xl text-stone-900 leading-none tracking-tight">Panel <span className="text-violet-600">Penguji</span></h1>
+                    <p className="text-xs text-stone-500 font-medium mt-1">Seleksi PPDB</p>
                   </div>
                 </div>
 
@@ -161,11 +161,11 @@ export default function PengujiDashboardLayout({
                   <div className="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
                     <UserCheck className="w-16 h-16 text-violet-600" />
                   </div>
-                  <p className="text-xs font-semibold text-stone-500 mb-1">Logged in as,</p>
+                  <p className="text-xs font-semibold text-stone-500 mb-1">Masuk sebagai,</p>
                   <p className="font-bold text-stone-900 truncate mb-2">{pengujiName}</p>
                   <div className="flex items-center gap-1 text-xs text-violet-600 bg-violet-50 px-2 py-1 rounded-lg inline-flex border border-violet-100">
                     <Shield className="w-3 h-3" />
-                    <span className="font-bold">Examiner</span>
+                    <span className="font-bold">Penguji</span>
                   </div>
                 </div>
               </div>
@@ -173,7 +173,7 @@ export default function PengujiDashboardLayout({
               {/* Navigation */}
               <nav className="flex-1 overflow-y-auto px-3 pb-6 space-y-1 scrollbar-hide">
                 <div className="px-3 mb-2">
-                  <p className="text-xs font-bold text-stone-400 uppercase tracking-wider">Main Menu</p>
+                  <p className="text-xs font-bold text-stone-400 uppercase tracking-wider">Menu Utama</p>
                 </div>
                 {menuItems.map((item) => (
                   <NavLink key={item.name} item={item} />
@@ -187,7 +187,7 @@ export default function PengujiDashboardLayout({
                   className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium text-red-600 bg-white border border-red-100 hover:bg-red-50 hover:border-red-200 rounded-xl transition-all shadow-sm"
                 >
                   <LogOut className="w-4 h-4" />
-                  <span>Logout</span>
+                  <span>Keluar</span>
                 </button>
               </div>
             </div>
@@ -203,7 +203,7 @@ export default function PengujiDashboardLayout({
                     <div className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center text-white">
                       <Shield className="w-5 h-5" />
                     </div>
-                    <span className="font-bold text-lg text-stone-900">Penguji Panel</span>
+                    <span className="font-bold text-lg text-stone-900">Panel Penguji</span>
                   </div>
                   <button onClick={() => setSidebarOpen(false)} className="p-2 text-stone-400 hover:text-stone-900">
                     <X className="w-5 h-5" />
@@ -235,12 +235,12 @@ export default function PengujiDashboardLayout({
             {/* Desktop Topbar */}
             <header className="hidden lg:flex sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-stone-200 px-8 py-4 items-center justify-between">
               <div>
-                <h2 className="text-xl font-bold text-stone-900">Penguji Dashboard</h2>
-                <p className="text-sm text-stone-500">Student Assessment Panel</p>
+                <h2 className="text-xl font-bold text-stone-900">Dashboard Penguji</h2>
+                <p className="text-sm text-stone-500">Panel Penilaian Santri</p>
               </div>
 
               <div className="flex items-center gap-4">
-                <Link href="/" className="p-2 text-stone-400 hover:text-violet-600 transition-colors" title="View Site">
+                <Link href="/" className="p-2 text-stone-400 hover:text-violet-600 transition-colors" title="Lihat Website">
                   <Home className="w-5 h-5" />
                 </Link>
 
@@ -248,7 +248,7 @@ export default function PengujiDashboardLayout({
 
                 <div className="flex items-center gap-3 px-4 py-2 rounded-full bg-violet-50 border border-violet-100 text-violet-700">
                   <div className="w-2 h-2 rounded-full bg-violet-500" />
-                  <span className="text-sm font-bold">Examiner Access</span>
+                  <span className="text-sm font-bold">Akses Penguji</span>
                 </div>
               </div>
             </header>

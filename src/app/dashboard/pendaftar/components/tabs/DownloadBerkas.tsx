@@ -1,26 +1,63 @@
 "use client";
 
-import { Download, FileText, AlertCircle, CheckCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Download, FileText, AlertCircle, CheckCircle, Loader2 } from "lucide-react";
+import {
+  generateBuktiPendaftaran,
+  generateKartuUjian
+} from "@/lib/utils/pdf-generator";
 
 export default function DownloadBerkasTab() {
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDocData = async () => {
+      try {
+        const sessionRes = await fetch("/api/auth/session");
+        const session = await sessionRes.json();
+
+        if (session.pendaftar_id) {
+          const res = await fetch(`/api/pendaftar/document-data?pendaftar_id=${session.pendaftar_id}`);
+          const result = await res.json();
+          setData(result.data);
+        }
+      } catch (e) {
+        console.error("Error fetching doc data", e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDocData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <Loader2 className="w-12 h-12 animate-spin text-indigo-600 mx-auto mb-4" />
+          <p className="text-stone-600">Menyiapkan dokumen...</p>
+        </div>
+      </div>
+    );
+  }
+
+  const status = data?.status_proses || "draft";
+  const isDataCompleted = ["data_completed", "docs_uploaded", "docs_verified", "scheduled", "tested", "announced", "accepted", "enrolled"].includes(status);
+  const isScheduled = ["scheduled", "tested", "announced", "accepted", "enrolled"].includes(status);
+
   const documents = [
-    {
-      name: "Kartu Ujian",
-      description: "Kartu identitas ujian seleksi",
-      status: "available",
-      url: "#",
-    },
-    {
-      name: "Surat Panggilan Ujian",
-      description: "Surat resmi panggilan ujian",
-      status: "pending",
-      url: null,
-    },
     {
       name: "Bukti Pendaftaran",
       description: "Bukti sudah terdaftar di sistem",
-      status: "available",
-      url: "#",
+      status: isDataCompleted ? "available" : "pending",
+      action: () => generateBuktiPendaftaran(data),
+    },
+    {
+      name: "Kartu Ujian",
+      description: "Kartu identitas ujian seleksi",
+      status: isScheduled ? "available" : "pending",
+      action: () => generateKartuUjian(data),
     },
   ];
 
@@ -59,19 +96,20 @@ export default function DownloadBerkasTab() {
             </div>
 
             {doc.status === "available" ? (
-              <a
-                href={doc.url || "#"}
+              <button
+                onClick={doc.action}
                 className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-medium transition-colors"
               >
                 <Download className="w-5 h-5" />
-                Download
-              </a>
+                Download PDF
+              </button>
             ) : (
               <button
                 disabled
-                className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-stone-200 text-stone-500 rounded-lg font-medium cursor-not-allowed"
+                className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-stone-200 text-stone-500 rounded-lg font-medium cursor-not-allowed text-xs lg:text-sm"
               >
-                Belum Tersedia
+                <AlertCircle className="w-4 h-4" />
+                Disediakan Sesuai Tahapan
               </button>
             )}
           </div>
@@ -89,9 +127,10 @@ export default function DownloadBerkasTab() {
           <div>
             <h4 className="font-bold text-blue-900 mb-2">Informasi</h4>
             <ul className="text-sm text-blue-800 space-y-1">
-              <li>• Dokumen akan tersedia setelah status Anda mencapai tahap tertentu</li>
-              <li>• Simpan semua dokumen yang diunduh dengan baik</li>
-              <li>• Cetak dokumen jika diperlukan untuk keperluan ujian</li>
+              <li>• Bukti pendaftaran tersedia setelah data diri santri dilengkapi.</li>
+              <li>• Kartu Peserta Ujian akan muncul otomatis setelah jadwal ujian dikonfirmasi panitia.</li>
+              <li>• Pastikan browser Anda mengizinkan pop-up untuk mengunduh file PDF.</li>
+              <li>• Simpan semua dokumen yang diunduh dengan baik atau segera cetak.</li>
             </ul>
           </div>
         </div>

@@ -56,16 +56,16 @@ export async function GET(request: NextRequest) {
     // Status filter
     if (status) {
       const filterMapping: Record<string, string[]> = {
-        belum_bayar: ["draft"],
+        belum_bayar: ["draft", "waiting_payment", "awaiting_payment"],
         menunggu_verifikasi_pembayaran: ["payment_verification"],
-        sudah_bayar: ["verified", "data_completed", "docs_uploaded", "docs_verified", "scheduled", "tested", "announced", "accepted", "enrolled"],
-        pembayaran_ditolak: ["rejected"],
-        belum_isi_data: ["verified"],
+        sudah_bayar: ["paid", "verified", "data_completed", "docs_uploaded", "docs_verified", "scheduled", "tested", "announced", "accepted", "enrolled"],
+        pembayaran_ditolak: ["rejected", "payment_rejected"],
+        belum_isi_data: ["verified", "paid"],
         sudah_isi_data: ["data_completed", "docs_uploaded", "docs_verified", "scheduled", "tested", "announced", "accepted", "enrolled"],
         belum_upload_dokumen: ["data_completed"],
         menunggu_verifikasi_dokumen: ["docs_uploaded"],
         dokumen_terverifikasi: ["docs_verified", "scheduled", "tested", "announced", "accepted", "enrolled"],
-        dokumen_ditolak: [], // Usually handled by specific flag, but strictly status-wise it might stay in docs_uploaded or revert to data_completed
+        dokumen_ditolak: ["docs_rejected"],
         terjadwal_ujian: ["scheduled"],
         belum_ujian: ["scheduled"],
         sudah_ujian: ["tested", "announced", "accepted", "enrolled"],

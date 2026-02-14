@@ -225,7 +225,7 @@ export default function LoginPage() {
               onClick={() => { setActiveTab("admin"); setError(""); }}
               className={`flex-1 relative z-10 py-3.5 text-xs font-black uppercase tracking-widest text-center rounded-2xl transition-colors duration-300 ${activeTab === "admin" ? "text-brown-700" : "text-ink-600 hover:text-ink-800"}`}
             >
-              Staff Portal
+              Portal Staf
             </button>
           </div>
 
@@ -330,7 +330,7 @@ export default function LoginPage() {
                     />
                   </AuthInput>
 
-                  <AuthInput label="Password" icon={Lock}>
+                  <AuthInput label="Kata Sandi" icon={Lock}>
                     <div className="relative">
                       <input
                         type={showPassword ? "text" : "password"}
@@ -361,7 +361,7 @@ export default function LoginPage() {
                       <Loader2 className="w-6 h-6 animate-spin" />
                     ) : (
                       <>
-                        <span>Login Staff</span>
+                        <span>Masuk Staf</span>
                         <ShieldCheck className="w-6 h-6" />
                       </>
                     )}

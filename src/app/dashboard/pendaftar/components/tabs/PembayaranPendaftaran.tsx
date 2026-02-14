@@ -516,7 +516,7 @@ function UploadArea({
                     ? "Ganti Bukti Transfer"
                     : "Klik atau Seret File ke Sini"}
               </p>
-              <p className="text-sm text-ink-500 mt-2 font-medium max-w-xs mx-auto leading-relaxed text-justify">
+              <p className="text-sm text-ink-500 mt-2 font-medium max-w-xs mx-auto leading-relaxed text-center">
                 Pastikan foto bukti transfer terlihat jelas dan terbaca. Format: JPG, PNG, PDF (Max 5MB)
               </p>
             </div>
@@ -978,7 +978,7 @@ export default function PembayaranPendaftaranTab({
                             <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
                               <AlertCircle className="w-5 h-5 text-amber-600" />
                             </div>
-                            <p className="text-sm text-ink-600 leading-relaxed font-medium text-justify w-full">
+                            <p className="text-sm text-ink-600 leading-relaxed font-medium text-left w-full">
                               <strong>Penting:</strong> Pastikan nominal transfer tepat <strong>{formatRupiah(biayaPendaftaran)}</strong> agar proses verifikasi berjalan lancar.
                             </p>
                           </div>

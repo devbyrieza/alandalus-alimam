@@ -28,7 +28,7 @@ const PROGRAMS = [
         name: "Madrasah Tsanawiyah",
         buttonLabel: "Daftar MTs",
         fullName: "Program Madrasah Tsanawiyah (SMP)",
-        description: "Pendidikan tingkat menengah dengan Sinergi Kurikulum Nasional & Pesantren yang terintegrasi secara komprehensif untuk mencetak santri yang berakhlak mulia dan unggul dalam prestasi.",
+        description: "Kami menerapkan Kurikulum Terpadu yang menggabungkan kurikulum Nasional dengan kurikulum khas Al-Andalus yang berfokus pada penguasaan Bahasa Arab, Tahfidz Al-Qur'an, dan Kitab Turats secara komprehensif.",
         stats: [
             { label: "Durasi", value: "3 Tahun", icon: Clock },
             { label: "Target", value: "12 Juz", icon: Trophy },
@@ -51,7 +51,7 @@ const PROGRAMS = [
         name: "I'dad Lughowi",
         buttonLabel: "Daftar IL",
         fullName: "Program I'dad Lughowi (SMA)",
-        description: "Program intensif 4 tahun dengan Kurikulum Terintegrasi Komprehensif; diawali 1 tahun penguatan Bahasa Arab & Syariah (I'dad), dilanjutkan 3 tahun jenjang Madrasah Aliyah (MA) yang resmi.",
+        description: "Program intensif yang menggunakan Kurikulum Terpadu (Nasional & khas Al-Andalus), berfokus pada pemantapan Bahasa Arab & Tahfidz di tahun I'dad, dilanjutkan jenjang Madrasah Aliyah yang resmi.",
         stats: [
             { label: "Durasi", value: "4 Tahun", icon: Clock },
             { label: "Target", value: "16 Juz", icon: Trophy },
@@ -210,7 +210,7 @@ export default function ProgramPage() {
                                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-black text-ink-950 leading-[0.95] mb-8">
                                             {program.fullName}
                                         </h2>
-                                        <p className="text-xl text-ink-600 font-medium leading-relaxed mb-10 text-center lg:text-justify">
+                                        <p className="text-xl text-ink-600 font-medium leading-relaxed mb-10 text-center lg:text-left">
                                             {program.description}
                                         </p>
                                     </motion.div>
