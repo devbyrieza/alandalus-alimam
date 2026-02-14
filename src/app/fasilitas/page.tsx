@@ -434,47 +434,22 @@ export default function FasilitasPage() {
               </motion.div>
             </div>
 
-            {/* Depot Air Minum */}
+            {/* Kantor PPDB & Tamu */}
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -40 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="order-2 lg:order-1"
+                className="order-1"
               >
-                <div className="bg-white p-12 lg:p-16 rounded-[3.5rem] shadow-premium-lg border border-surface-100 relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 p-12 opacity-5 -rotate-12 transition-transform group-hover:rotate-0 duration-700">
-                    <Droplet className="w-48 h-48" />
-                  </div>
-
-                  <div className="w-20 h-20 bg-blue-50 rounded-3xl flex items-center justify-center text-blue-600 mb-10 shadow-premium-sm transition-transform group-hover:scale-110">
-                    <Droplet className="w-10 h-10" />
-                  </div>
-
-                  <h3 className="text-3xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Depot Air Minum <br /> Isi Ulang</h3>
-                  <p className="text-xl text-ink-600 mb-10 leading-relaxed font-medium">
-                    Fasilitas air minum higienis gratis bagi seluruh santri. Menggunakan sistem filtrasi terstandar untuk menjamin kemurnian dan kesehatan air konsumsi harian.
-                  </p>
-
-                  <div className="grid grid-cols-2 gap-8">
-                    <div className="flex items-start gap-4 group/item">
-                      <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center shrink-0 shadow-premium-sm">
-                        <CheckCircle2 className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <h4 className="font-black text-ink-950 text-lg uppercase tracking-tight">Gratis</h4>
-                        <p className="text-sm text-ink-500 font-medium">Untuk Seluruh Santri</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-4 group/item">
-                      <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center shrink-0 shadow-premium-sm">
-                        <CheckCircle2 className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <h4 className="font-black text-ink-950 text-lg uppercase tracking-tight">Higienis</h4>
-                        <p className="text-sm text-ink-500 font-medium">Sistem Filtrasi Modern</p>
-                      </div>
-                    </div>
+                <div className="aspect-square rounded-[4rem] bg-white p-4 shadow-premium-2xl relative -rotate-2 hover:rotate-0 transition-transform duration-700 border border-surface-100">
+                  <div className="relative w-full h-full rounded-[3.2rem] overflow-hidden">
+                    <Image
+                      src="/images/kantor-ppdb-tamu.png"
+                      alt="Kantor PPDB & Tamu"
+                      fill
+                      className="object-cover transition-transform duration-700 hover:scale-110"
+                    />
                   </div>
                 </div>
               </motion.div>
@@ -483,16 +458,41 @@ export default function FasilitasPage() {
                 initial={{ opacity: 0, x: 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="order-1 lg:order-2"
+                className="order-2"
               >
-                <div className="aspect-square rounded-[4rem] bg-white p-4 shadow-premium-2xl relative rotate-2 hover:rotate-0 transition-transform duration-700 border border-surface-100">
-                  <div className="relative w-full h-full rounded-[3.2rem] overflow-hidden">
-                    <Image
-                      src="/images/depot-galon-gratis.png"
-                      alt="Depot Air Minum"
-                      fill
-                      className="object-cover transition-transform duration-700 hover:scale-110"
-                    />
+                <div className="bg-white p-12 lg:p-16 rounded-[3.5rem] shadow-premium-lg border border-surface-100 relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 p-12 opacity-5 rotate-12 transition-transform group-hover:rotate-0 duration-700">
+                    <Building className="w-48 h-48" />
+                  </div>
+
+                  <div className="w-20 h-20 bg-purple-50 rounded-3xl flex items-center justify-center text-purple-600 mb-10 shadow-premium-sm transition-transform group-hover:scale-110">
+                    <Building className="w-10 h-10" />
+                  </div>
+
+                  <h3 className="text-3xl lg:text-5xl font-display font-black text-ink-950 mb-6 leading-none">Kantor PPDB <br /> & Tamu</h3>
+                  <p className="text-xl text-ink-600 mb-10 leading-relaxed font-medium">
+                    Pusat informasi dan pendaftaran santri baru. Dilengkapi dengan ruang tunggu yang nyaman dan staf yang siap membantu proses pendaftaran.
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-8">
+                    <div className="flex items-start gap-4 group/item">
+                      <div className="w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center shrink-0 shadow-premium-sm">
+                        <CheckCircle2 className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h4 className="font-black text-ink-950 text-lg uppercase tracking-tight">Informasi</h4>
+                        <p className="text-sm text-ink-500 font-medium">Layanan 24 Jam</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4 group/item">
+                      <div className="w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center shrink-0 shadow-premium-sm">
+                        <CheckCircle2 className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h4 className="font-black text-ink-950 text-lg uppercase tracking-tight">Kenyamanan</h4>
+                        <p className="text-sm text-ink-500 font-medium">Ruang Tunggu AC</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -533,6 +533,7 @@ export default function FasilitasPage() {
               { icon: Building2, title: "Aula Besar", desc: "Kapasitas 500 orang" },
               { icon: Wifi, title: "Internet", desc: "Akses WiFi Terfilter" },
               { icon: Trophy, title: "Area Olahraga", desc: "Outdoor activity lengkap" },
+              { icon: Droplet, title: "Depot Galon Gratis", desc: "Air minum higienis gratis" },
             ].map((item, idx) => (
               <motion.div
                 key={idx}
@@ -585,7 +586,7 @@ export default function FasilitasPage() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-            {[
+            {[ 
               { src: "/images/masjid.png", label: "Masjid Jami' Al-Imam", span: "col-span-2 row-span-2" },
               { src: "/images/gedung-utama-dan-lapangan-basket.jpeg", label: "Gedung Utama & Lapangan Basket", span: "col-span-1" },
               { src: "/images/gedung-kelas.jpeg", label: "Gedung Kelas", span: "col-span-1" },
