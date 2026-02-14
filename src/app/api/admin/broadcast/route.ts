@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sendMessage } from "@/lib/wablas";
-import { getServerSession } from "@/lib/auth";
+import { getServerSession } from "@/lib/session";
 
 export async function POST(req: NextRequest) {
     try {

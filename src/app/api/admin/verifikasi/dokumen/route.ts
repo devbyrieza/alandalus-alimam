@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
 import { notifyDocumentVerified } from "@/lib/wablas";
-import { getServerSession } from "@/lib/auth";
+import { getServerSession } from "@/lib/session";
 import { logAdminAction } from "@/lib/audit";
 
 // GET: List dokumen yang perlu diverifikasi

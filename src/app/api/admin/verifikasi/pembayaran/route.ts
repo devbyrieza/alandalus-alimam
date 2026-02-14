@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { notifyPaymentVerified } from "@/lib/wablas";
-import { getServerSession } from "@/lib/auth";
+import { getServerSession } from "@/lib/session";
 import { logAdminAction } from "@/lib/audit";
 
 // GET: List pembayaran yang perlu diverifikasi
