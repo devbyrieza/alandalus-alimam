@@ -398,10 +398,10 @@ export default function DashboardPage() {
                 </p>
 
                 <div className="mt-10 flex flex-wrap gap-4">
-                  <div className="px-6 py-2 rounded-full bg-white/50 backdrop-blur-sm border border-black/5 text-[10px] font-black uppercase tracking-widest text-ink-800">
+                  <div className="px-6 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-black/10 text-[10px] font-black uppercase tracking-widest text-ink-950">
                     ID: {pendaftar.id.substring(0, 8).toUpperCase()}
                   </div>
-                  <div className="px-6 py-2 rounded-full bg-white/50 backdrop-blur-sm border border-black/5 text-[10px] font-black uppercase tracking-widest text-ink-600">
+                  <div className="px-6 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-black/10 text-[10px] font-black uppercase tracking-widest text-ink-950">
                     Registered: {new Date(pendaftar.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
                   </div>
                 </div>
@@ -520,8 +520,8 @@ export default function DashboardPage() {
                 <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-white mb-8 border border-white/10">
                   <MessageCircle className="w-6 h-6" />
                 </div>
-                <h4 className="text-2xl font-display font-black mb-4">Butuh Bantuan?</h4>
-                <p className="text-sm text-brown-50 font-medium leading-relaxed mb-8">
+                <h4 className="text-2xl font-display font-black mb-4 text-white">Butuh Bantuan?</h4>
+                <p className="text-sm text-white font-medium leading-relaxed mb-8">
                   Ada kendala saat pengisian data atau pembayaran? Tim panitia kami siap membantu Anda setiap hari pukul 08:00 - 16:00 WIB.
                 </p>
 

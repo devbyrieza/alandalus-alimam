@@ -33,6 +33,7 @@
   /* Primary Action */
   --color-brown-800: #5c432d;
   --color-brown-900: #453221;
+  --color-brown-950: #2a1e14;
 
   /* Accents */
   --color-gold-400: #fbbf24;
@@ -51,8 +52,8 @@
   --color-ink-700: #374151;
   --color-ink-600: #4b5563;
   --color-ink-500: #6b7280;
-  --color-ink-400: #9ca3af;
-  --color-ink-300: #d1d5db;
+  --color-ink-400: #6b7280; /* Darkened from 9ca3af */
+  --color-ink-300: #9ca3af; /* Darkened from d1d5db */
   --color-ink-200: #e5e7eb;
   --color-ink-100: #f3f4f6;
   --color-ink-50: #f9fafb;
