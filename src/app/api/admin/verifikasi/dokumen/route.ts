@@ -2,30 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
 import { notifyDocumentVerified } from "@/lib/wablas";
+import { getServerSession } from "@/lib/auth";
+import { logAdminAction } from "@/lib/audit";
 
 // GET: List dokumen yang perlu diverifikasi
 export async function GET(request: NextRequest) {
   try {
-    // 1. Validasi session manual
-    const cookieStore = await cookies();
-    const sessionCookie = cookieStore.get("app_session");
-
-    if (!sessionCookie) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    let session;
-    try {
-      session = JSON.parse(sessionCookie.value);
-    } catch {
-      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
-    }
-
-    // Check custom role
-    const allowedRoles = ["admin", "admin_super", "admin_berkas", "admin_keuangan", "penguji"];
-    if (!allowedRoles.includes(session.role)) {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
+    const session = await getServerSession();
+    if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     // Get query params
     const searchParams = request.nextUrl.searchParams;
@@ -95,20 +79,8 @@ export async function GET(request: NextRequest) {
 // PATCH: Verify or reject dokumen
 export async function PATCH(request: NextRequest) {
   try {
-    // 1. Validasi session manual
-    const cookieStore = await cookies();
-    const sessionCookie = cookieStore.get("app_session");
-
-    if (!sessionCookie) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    let session;
-    try {
-      session = JSON.parse(sessionCookie.value);
-    } catch {
-      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
-    }
+    const session = await getServerSession();
+    if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     // Check custom role
     const allowedRoles = ["admin", "admin_berkas", "admin_keuangan", "penguji", "admin_super"];
@@ -154,6 +126,16 @@ export async function PATCH(request: NextRequest) {
           },
         },
       },
+    });
+
+    // Logging audit action
+    logAdminAction({
+      action: 'VERIFY_DOCUMENT',
+      adminId: session.id || 'system',
+      adminName: session.full_name || session.name || 'Admin',
+      targetId: dokumen.pendaftar_id,
+      targetName: dokumen.pendaftar.nama_lengkap,
+      details: { jenis_dokumen: dokumen.jenis_dokumen, status_verifikasi, dokumen_id }
     });
 
     // Send WhatsApp notification

@@ -196,6 +196,37 @@ export async function GET() {
       }),
       permintaan_edit_total: await prisma.dataPerubahanRequest.count(),
 
+      // === FUNNEL DATA (NEW) ===
+      funnel_data: [
+        { label: "Pendaftar", count: total_pendaftar, color: "bg-ink-100" },
+        {
+          label: "Lunas",
+          count: (statusCounts.verified || 0) + (statusCounts.data_completed || 0) +
+            (statusCounts.docs_uploaded || 0) + (statusCounts.docs_verified || 0) +
+            (statusCounts.scheduled || 0) + (statusCounts.tested || 0) +
+            (statusCounts.announced || 0) + (statusCounts.accepted || 0) + (statusCounts.enrolled || 0),
+          color: "bg-teal-100"
+        },
+        {
+          label: "Veritifikasi Berkas",
+          count: (statusCounts.docs_verified || 0) + (statusCounts.scheduled || 0) +
+            (statusCounts.tested || 0) + (statusCounts.announced || 0) +
+            (statusCounts.accepted || 0) + (statusCounts.enrolled || 0),
+          color: "bg-gold-100"
+        },
+        {
+          label: "Terjadwal Ujian",
+          count: (statusCounts.scheduled || 0) + (statusCounts.tested || 0) +
+            (statusCounts.announced || 0) + (statusCounts.accepted || 0) + (statusCounts.enrolled || 0),
+          color: "bg-purple-100"
+        },
+        {
+          label: "Diterima",
+          count: (statusCounts.accepted || 0) + (statusCounts.enrolled || 0),
+          color: "bg-green-100"
+        },
+      ],
+
       // Raw counts for debugging
       _raw_status_counts: statusCounts,
       _raw_pembayaran_counts: pembayaranCounts,

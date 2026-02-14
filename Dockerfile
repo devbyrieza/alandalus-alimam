@@ -51,10 +51,9 @@ RUN mkdir -p /app/.next && chown -R nextjs:nodejs /app
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
-COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
 COPY --from=builder --chown=nextjs:nodejs /app/.buildinfo ./.buildinfo
-COPY --chown=nextjs:nodejs docker-entrypoint.sh ./
+COPY --from=builder --chown=nextjs:nodejs /app/docker-entrypoint.sh ./
 
 RUN chmod +x docker-entrypoint.sh
 

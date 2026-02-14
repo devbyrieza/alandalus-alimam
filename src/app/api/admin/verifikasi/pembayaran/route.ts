@@ -1,25 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
 import { notifyPaymentVerified } from "@/lib/wablas";
+import { getServerSession } from "@/lib/auth";
+import { logAdminAction } from "@/lib/audit";
 
 // GET: List pembayaran yang perlu diverifikasi
 export async function GET(request: NextRequest) {
   try {
-    // 1. Validasi session manual
-    const cookieStore = await cookies();
-    const sessionCookie = cookieStore.get("app_session");
-
-    if (!sessionCookie) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    let session;
-    try {
-      session = JSON.parse(sessionCookie.value);
-    } catch {
-      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
-    }
+    const session = await getServerSession();
+    if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     // Check custom role
     const allowedRoles = ["admin", "admin_super", "admin_berkas", "admin_keuangan", "penguji"];
@@ -104,20 +93,8 @@ export async function GET(request: NextRequest) {
 // PATCH: Verify or reject pembayaran
 export async function PATCH(request: NextRequest) {
   try {
-    // 1. Validasi session manual
-    const cookieStore = await cookies();
-    const sessionCookie = cookieStore.get("app_session");
-
-    if (!sessionCookie) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    let session;
-    try {
-      session = JSON.parse(sessionCookie.value);
-    } catch {
-      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
-    }
+    const session = await getServerSession();
+    if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     // Check custom role
     const allowedRoles = ["admin", "admin_super", "admin_berkas", "admin_keuangan", "penguji"];
@@ -174,6 +151,16 @@ export async function PATCH(request: NextRequest) {
         status_pendaftaran: newPendaftarStatus,
         updated_at: new Date()
       }
+    });
+
+    // Logging audit action
+    logAdminAction({
+      action: 'VERIFY_PAYMENT',
+      adminId: session.id || 'system',
+      adminName: session.full_name || session.name || 'Admin',
+      targetId: pembayaran.pendaftar_id,
+      targetName: pembayaran.pendaftar.nama_lengkap,
+      details: { status_pembayaran, payment_id: pembayaran_id }
     });
 
     // Send WhatsApp notification

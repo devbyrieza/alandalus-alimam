@@ -288,6 +288,9 @@ export const ROLE_PERMISSIONS: Record<UserRole, string[]> = {
     'manage_settings',
     'export_all_data',
     'view_dashboard_stats',
+    'view_broadcast',
+    'send_broadcast',
+    'view_regional_stats',
   ],
   admin: [
     'view_pendaftar_list',
@@ -308,6 +311,9 @@ export const ROLE_PERMISSIONS: Record<UserRole, string[]> = {
     'manage_settings',
     'export_all_data',
     'view_dashboard_stats',
+    'view_broadcast',
+    'send_broadcast',
+    'view_regional_stats',
   ],
 };
 
@@ -381,6 +387,8 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
       { name: 'Jadwal Ujian', href: '/dashboard/admin/jadwal-ujian', icon: 'Calendar' },
       { name: 'Pengumuman', href: '/dashboard/admin/pengumuman', icon: 'Trophy' },
       { name: 'Daftar Ulang', href: '/dashboard/admin/daftar-ulang', icon: 'BarChart' },
+      { name: 'Broadcast WA', href: '/dashboard/admin/broadcast', icon: 'Bell' },
+      { name: 'Statistik Wilayah', href: '/dashboard/admin/statistik-wilayah', icon: 'BarChart' },
       // { name: 'Manajemen User', href: '/dashboard/admin/users', icon: 'UserCog' }, // REMOVED
       { name: 'Pengaturan', href: '/dashboard/admin/pengaturan', icon: 'Settings' },
     ],
@@ -391,6 +399,8 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
       { name: 'Verifikasi Dokumen', href: '/dashboard/admin/verifikasi-dokumen', icon: 'FileCheck' },
       { name: 'Jadwal Ujian', href: '/dashboard/admin/jadwal-ujian', icon: 'Calendar' },
       { name: 'Pengumuman', href: '/dashboard/admin/pengumuman', icon: 'Trophy' },
+      { name: 'Broadcast WA', href: '/dashboard/admin/broadcast', icon: 'Bell' },
+      { name: 'Statistik Wilayah', href: '/dashboard/admin/statistik-wilayah', icon: 'BarChart' },
       // { name: 'Manajemen User', href: '/dashboard/admin/users', icon: 'UserCog' }, // REMOVED
       { name: 'Pengaturan', href: '/dashboard/admin/pengaturan', icon: 'Settings' },
     ],

@@ -342,6 +342,33 @@ export default function PendaftarDetailPage() {
 
           {/* Quick Actions */}
           <div className="flex items-center gap-2">
+            <button
+              onClick={async () => {
+                if (confirm("Buka kunci formulir? Pendaftar akan bisa mengedit data kembali.")) {
+                  setSavingStatus(true);
+                  try {
+                    const res = await fetch(`/api/admin/pendaftar/${params.id}`, {
+                      method: "PATCH",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ status_proses: "draft" }),
+                    });
+                    if (res.ok) {
+                      await fetchPendaftarDetail();
+                      alert("Formulir berhasil dibuka kuncinya.");
+                    }
+                  } catch (e) {
+                    alert("Gagal membuka kunci.");
+                  } finally {
+                    setSavingStatus(false);
+                  }
+                }
+              }}
+              disabled={savingStatus || pendaftar.status_proses === "draft"}
+              className="px-3 py-1.5 bg-rose-500 hover:bg-rose-600 rounded-lg text-sm font-medium transition-colors flex items-center gap-1 disabled:opacity-50"
+            >
+              <X className="w-3 h-3" />
+              Buka Kunci
+            </button>
             {pendaftar.no_hp && (
               <a
                 href={`https://wa.me/${pendaftar.no_hp.replace(/\D/g, "")}`}

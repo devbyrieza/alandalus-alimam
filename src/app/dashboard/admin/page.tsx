@@ -66,6 +66,7 @@ interface DashboardStats {
   };
   permintaan_edit_pending: number;
   permintaan_edit_total: number;
+  funnel_data?: { label: string; count: number; color: string }[];
 }
 
 const JENJANG_LABELS: Record<string, string> = {
@@ -420,6 +421,49 @@ export default function AdminDashboardPage() {
                 ))}
               </tbody>
             </table>
+          </div>
+
+          {/* Registration Funnel - NEW ENHANCEMENT */}
+          <div className="pt-4">
+            <h3 className="text-xl font-bold text-ink-900 mb-6 flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-teal-600" />
+              Progress Pendaftaran (Registration Funnel)
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-2 relative">
+              {stats.funnel_data?.map((item, idx) => {
+                const percentage = stats.funnel_data ? Math.round((item.count / stats.funnel_data[0].count) * 100) : 0;
+                const dropOff = idx > 0 && stats.funnel_data ?
+                  Math.round(((stats.funnel_data[idx - 1].count - item.count) / stats.funnel_data[idx - 1].count) * 100) : 0;
+
+                return (
+                  <div key={idx} className="relative group">
+                    <div className={`h-32 rounded-2xl ${item.color.replace('bg-', 'bg-opacity-40 bg-')} border-2 border-white shadow-clay-sm p-4 flex flex-col justify-between transition-all hover:-translate-y-1 hover:shadow-clay-md group-hover:bg-opacity-100`}>
+                      <div>
+                        <p className="text-[10px] font-black uppercase tracking-widest text-ink-400 leading-none mb-1">{item.label}</p>
+                        <h4 className="text-2xl font-black text-ink-900">{item.count}</h4>
+                      </div>
+                      <div className="flex items-end justify-between">
+                        <span className="text-xs font-bold text-ink-500">{percentage}%</span>
+                        <BarChart3 className="w-4 h-4 text-ink-200" />
+                      </div>
+                    </div>
+                    {idx < 4 && (
+                      <div className="hidden md:flex absolute top-1/2 -right-3 -translate-y-1/2 z-10 w-6 h-6 bg-white rounded-full items-center justify-center shadow-md border border-ink-50">
+                        <ArrowUpRight className="w-3 h-3 text-ink-300 rotate-45" />
+                      </div>
+                    )}
+                    {idx > 0 && dropOff > 0 && (
+                      <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-rose-50 text-rose-600 text-[8px] px-1.5 py-0.5 rounded-full font-black border border-rose-100 opacity-0 group-hover:opacity-100 transition-opacity">
+                        -{dropOff}% DROP
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+            <p className="text-[10px] text-ink-400 mt-4 font-medium italic text-center">
+              * Persentase dihitung berdasarkan total pendaftar yang masuk. Hover untuk melihat tingkat drop-off.
+            </p>
           </div>
 
           {/* Regional Stats - Minimalist Map Representation */}

@@ -29,6 +29,12 @@ services:
       WABLAS_API_KEY: ${WABLAS_API_KEY}
     depends_on:
       - postgres
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:3000/api/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
     volumes:
       - storage_data:/app/storage_data
 

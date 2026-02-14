@@ -1,21 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
-import { notifyStatusChange } from "@/lib/wablas"; // We'll need to check if this exists or create it
+import { notifyStatusChange } from "@/lib/wablas";
+import { getServerSession } from "@/lib/auth";
+import { logAdminAction } from "@/lib/audit";
 
 export async function POST(request: NextRequest) {
     try {
-        // 1. Validate Session
-        const cookieStore = await cookies();
-        const sessionCookie = cookieStore.get("app_session");
-        if (!sessionCookie) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-
-        let session;
-        try {
-            session = JSON.parse(sessionCookie.value);
-        } catch {
-            return NextResponse.json({ error: "Invalid session" }, { status: 401 });
-        }
+        const session = await getServerSession();
+        if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
         // 2. Check Role: Only Super Admin (and maybe Head of IT/Admin) can publish
         const allowedRoles = ["admin_super", "head_of_it", "admin"];
@@ -46,19 +39,31 @@ export async function POST(request: NextRequest) {
             },
         });
 
-        // 5. Send Notifications (Async)
-        // We fetch phone numbers of updated users
-        const updatedUsers = await prisma.pendaftar.findMany({
-            where: { id: { in: pendaftar_ids } },
-            select: { id: true, nama_lengkap: true, no_hp: true }
+        // Logging audit action
+        logAdminAction({
+            action: 'PUBLISH_ANNOUNCEMENT',
+            adminId: session.id || 'system',
+            adminName: session.full_name || session.name || 'Admin',
+            targetId: 'multiple',
+            details: { count: result.count, new_status, pendaftar_ids }
         });
 
-        // Mock notification sending for now, or use wablas if available
+        // 5. Send Notifications (Async)
+        const updatedUsers = await prisma.pendaftar.findMany({
+            where: { id: { in: pendaftar_ids } },
+            select: { id: true, nama_lengkap: true, no_hp: true, jenjang: true }
+        });
+
+        // Trigger notifications
         updatedUsers.forEach(async (user) => {
             if (user.no_hp) {
                 try {
-                    // TODO: Implement actual WA sending here
-                    console.log(`Sending announcement to ${user.nama_lengkap} (${user.no_hp}): ${new_status}`);
+                    await notifyStatusChange({
+                        phone: user.no_hp,
+                        nama: user.nama_lengkap,
+                        status: new_status as 'accepted' | 'rejected',
+                        jenjang: user.jenjang,
+                    });
                 } catch (e) {
                     console.error(`Failed to send to ${user.no_hp}`, e);
                 }

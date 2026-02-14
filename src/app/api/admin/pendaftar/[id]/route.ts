@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "@/lib/auth";
+import { logAdminAction } from "@/lib/audit";
 
 export async function GET(
   request: NextRequest,
@@ -8,19 +9,10 @@ export async function GET(
 ) {
   const params = await props.params;
   try {
-    // 1. Validasi session manual
-    const cookieStore = await cookies();
-    const sessionCookie = cookieStore.get("app_session");
+    const session = await getServerSession();
 
-    if (!sessionCookie) {
+    if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    let session;
-    try {
-      session = JSON.parse(sessionCookie.value);
-    } catch {
-      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
     }
 
     // Check custom role
@@ -81,19 +73,10 @@ export async function PATCH(
 ) {
   const params = await props.params;
   try {
-    // 1. Validasi session manual
-    const cookieStore = await cookies();
-    const sessionCookie = cookieStore.get("app_session");
+    const session = await getServerSession();
 
-    if (!sessionCookie) {
+    if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    let session;
-    try {
-      session = JSON.parse(sessionCookie.value);
-    } catch {
-      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
     }
 
     // Check custom role
@@ -120,6 +103,16 @@ export async function PATCH(
         status_pendaftaran: status_proses,
         updated_at: new Date(),
       },
+    });
+
+    // Logging audit action
+    logAdminAction({
+      action: status_proses === 'draft' ? 'FORCE_UNLOCK_FORM' : 'VERIFY_DOCUMENT',
+      adminId: session.id || 'system',
+      adminName: session.full_name || session.name || 'Admin',
+      targetId: params.id,
+      targetName: data.nama_lengkap,
+      details: { previous_status: 'unknown', new_status: status_proses }
     });
 
     return NextResponse.json({
