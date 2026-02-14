@@ -362,7 +362,6 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
     ],
     head_of_it: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
-      { name: 'Permintaan Edit', href: '/dashboard/admin/perubahan-data', icon: 'Edit3' },
       { name: 'Manajemen User', href: '/dashboard/admin/users', icon: 'UserCog' },
       { name: 'Pengaturan', href: '/dashboard/admin/pengaturan', icon: 'Settings' },
     ],
@@ -404,7 +403,6 @@ export function canAccessRoute(role: UserRole, route: string): boolean {
       '/dashboard/admin',
       '/dashboard/admin/users',
       '/dashboard/admin/pengaturan',
-      '/dashboard/admin/perubahan-data',
     ];
     // Allow strict matches or sub-paths for users
     return allowed.some(r => route === r || route.startsWith(r + '/'));
