@@ -140,7 +140,7 @@ export async function PATCH(request: NextRequest) {
     });
 
     // Also update pendaftar status
-    const newPendaftarStatus = status_pembayaran === "verified" ? "verified" : "rejected";
+    const newPendaftarStatus = status_pembayaran === "verified" ? "verified" : "payment_rejected";
 
     // Only update pendaftar if payment is verified (move to verified) or rejected (back to rejected)
     // Avoid overwriting if they are already in a later stage? 

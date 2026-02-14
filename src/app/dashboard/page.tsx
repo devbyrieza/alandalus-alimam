@@ -146,6 +146,15 @@ const STATUS_LABELS: Record<
     icon: Trophy,
     message: "Alhamdulillah! Selamat, putra/putri Anda diterima di Ponpes Al-Imam!",
   },
+  payment_rejected: {
+    label: "Pembayaran Bermasalah",
+    color: "red",
+    bg: "bg-red-50",
+    border: "border-red-200",
+    text: "text-red-700",
+    icon: AlertCircle,
+    message: "Bukti pembayaran Anda ditolak. Silakan cek catatan admin dan upload ulang bukti yang benar.",
+  },
   rejected: {
     label: "Tidak Diterima",
     color: "red",

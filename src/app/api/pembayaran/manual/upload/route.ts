@@ -157,7 +157,7 @@ export async function POST(request: NextRequest) {
     }
 
     // 13. Update status pendaftar
-    const allowedStatusForUpload = ["draft", "waiting_payment", "rejected"];
+    const allowedStatusForUpload = ["draft", "waiting_payment", "rejected", "payment_rejected"];
     if (allowedStatusForUpload.includes(pendaftar.status_pendaftaran)) {
       await prisma.pendaftar.update({
         where: { id: session.id },
