@@ -15,6 +15,11 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', '@headlessui/react'],
   },
 
+  // Disable image optimization to prevent sharp memory corruption (502 errors)
+  images: {
+    unoptimized: true,
+  },
+
   // Cache optimization
   onDemandEntries: {
     maxInactiveAge: 25 * 1000,
