@@ -131,7 +131,7 @@ export default function Navbar() {
                     Daftar Sekarang
                   </Link>
                   <Link href="/login" className="w-full py-4 text-lg font-bold rounded-2xl border-2 border-surface-200 text-ink-600 hover:text-brown-700 hover:border-brown-700 hover:bg-surface-50 text-center block transition-all">
-                    Masuk ke Sistem
+                    Masuk
                   </Link>
                 </div>
               </div>
