@@ -8,7 +8,7 @@ import FeaturesSection from "@/components/home/FeaturesSection";
 import TeachersSection from "@/components/home/TeachersSection";
 import FacilitiesSection from "@/components/home/FacilitiesSection";
 import ActivitiesSection from "@/components/home/ActivitiesSection";
-import ProcessSection from "@/components/home/ProcessSection";
+
 import ExtraSection from "@/components/home/ExtraSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import FaqSection from "@/components/home/FaqSection";
@@ -46,9 +46,7 @@ export default function HomePage() {
           <FeaturesSection />
         </ScrollAnimation>
 
-        <ScrollAnimation delay={0.1}>
-          <ProcessSection />
-        </ScrollAnimation>
+
 
         <ScrollAnimation delay={0.1}>
           <FacilitiesSection />
