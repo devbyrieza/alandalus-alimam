@@ -109,10 +109,10 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 lg:hidden overflow-hidden"
+            className="fixed inset-0 z-40 lg:hidden overflow-y-auto"
           >
-            <div className="absolute inset-0 bg-ink-950/20 backdrop-blur-sm" onClick={() => setIsMenuOpen(false)} />
-            <div className="absolute top-0 inset-x-0 bg-white shadow-premium-xl pt-24 pb-8 px-6 rounded-b-[2rem]">
+            <div className="absolute inset-0 bg-ink-950/20 backdrop-blur-sm min-h-full" onClick={() => setIsMenuOpen(false)} />
+            <div className="relative top-0 inset-x-0 bg-white shadow-premium-xl pt-24 pb-8 px-6 rounded-b-[2rem]">
               <div className="flex flex-col gap-2">
                 {navLinks.map((link) => (
                   <Link
@@ -127,10 +127,10 @@ export default function Navbar() {
                   </Link>
                 ))}
                 <div className="mt-6 pt-6 border-t border-surface-100 flex flex-col gap-4">
-                  <Link href="/ppdb" className="w-full py-7 text-lg font-bold rounded-2xl bg-brown-700 hover:bg-brown-800 text-white text-center block transition-colors">
+                  <Link href="/ppdb" className="w-full py-4 text-lg font-bold rounded-2xl bg-brown-700 hover:bg-brown-800 text-white text-center block transition-colors shadow-lg shadow-brown-700/20">
                     Daftar Sekarang
                   </Link>
-                  <Link href="/login" className="text-center py-2 text-ink-500 font-bold hover:text-brown-700 transition-colors">
+                  <Link href="/login" className="w-full py-4 text-lg font-bold rounded-2xl border-2 border-surface-200 text-ink-600 hover:text-brown-700 hover:border-brown-700 hover:bg-surface-50 text-center block transition-all">
                     Masuk ke Sistem
                   </Link>
                 </div>
