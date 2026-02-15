@@ -61,7 +61,7 @@ export default function TeachersSection() {
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="lg:w-[40%] text-center lg:text-left sticky top-32"
+                        className="lg:w-[40%] text-center lg:text-left lg:sticky lg:top-32"
                     >
                         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-surface-200 text-brown-700 text-xs font-bold uppercase tracking-widest mb-6 shadow-premium-sm">
                             <GraduationCap className="w-3.5 h-3.5" />
