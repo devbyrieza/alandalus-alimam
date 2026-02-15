@@ -80,12 +80,14 @@ export default function TeachersSection() {
                             {[
                                 { icon: Globe, label: "Lulusan Luar Negeri", sub: "Timur Tengah, Mesir & Maroko", color: "brown" },
                                 { icon: Users, label: "Native Speakers", sub: "Timur Tengah", color: "teal" },
-                                { icon: Award, label: "Dosen & Pakar", sub: "Tenaga Pendidik Profesional", color: "gold" }
+                                { icon: Award, label: "Dosen & Pakar", sub: "Tenaga Pendidik Profesional", color: "gold" },
+                                { icon: BookOpen, label: "Lulusan Terbaik", sub: "Dalam Negeri & Pondok Unggulan", color: "blue" }
                             ].map((feature, i) => (
                                 <div key={i} className="flex items-center gap-5 p-4 rounded-2xl bg-surface-50 border border-surface-100/50">
                                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-premium-sm ${feature.color === 'brown' ? 'bg-brown-50 text-brown-600' :
                                         feature.color === 'gold' ? 'bg-gold-50 text-gold-600' :
-                                            'bg-teal-50 text-teal-600'
+                                            feature.color === 'blue' ? 'bg-blue-50 text-blue-600' :
+                                                'bg-teal-50 text-teal-600'
                                         }`}>
                                         <feature.icon className="w-6 h-6" />
                                     </div>
