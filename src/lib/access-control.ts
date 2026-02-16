@@ -210,6 +210,7 @@ export type UserRole =
   | 'admin_keuangan'  // Dashboard Keuangan - verifikasi pembayaran & keuangan
   | 'penguji'         // Dashboard Penguji - input nilai ujian
   | 'head_of_it'      // Kepala IT / Root Admin - Manages users only
+  | 'tim_it'          // Tim IT - anggota tim IT, akses sama dengan head_of_it
   | 'admin_super'     // Dashboard Admin Super - akses penuh ke semua fitur KECUALI user management
   | 'admin';          // Legacy Admin Role
 
@@ -220,6 +221,7 @@ export const ROLE_LABELS: Record<UserRole, string> = {
   admin_keuangan: 'Admin Keuangan',
   penguji: 'Penguji',
   head_of_it: 'Kepala IT (Root)',
+  tim_it: 'Tim IT',
   admin_super: 'Admin Super (Mudir)',
   admin: 'Administrator (Legacy)',
 };
@@ -231,6 +233,7 @@ export const ROLE_DESCRIPTIONS: Record<UserRole, string> = {
   admin_keuangan: 'Mengelola verifikasi pembayaran dan keuangan',
   penguji: 'Melakukan penilaian ujian seleksi santri',
   head_of_it: 'Super Admin yang hanya mengelola user. Tidak ada akses operasional.',
+  tim_it: 'Anggota Tim IT, akses dashboard dan pengaturan.',
   admin_super: 'Akses penuh operasional PPDB (Tanpa manajemen user)',
   admin: 'Administrator (Legacy - Full Access)',
 };
@@ -266,6 +269,11 @@ export const ROLE_PERMISSIONS: Record<UserRole, string[]> = {
     'view_exam_results',
   ],
   head_of_it: [
+    'manage_users',
+    'view_dashboard_stats',
+    'manage_settings',
+  ],
+  tim_it: [
     'manage_users',
     'view_dashboard_stats',
     'manage_settings',
@@ -312,6 +320,7 @@ export const DASHBOARD_ROUTES: Record<UserRole, string> = {
   admin_keuangan: '/dashboard/admin',
   penguji: '/dashboard/penguji',
   head_of_it: '/dashboard/admin',
+  tim_it: '/dashboard/admin',
   admin_super: '/dashboard/admin',
   admin: '/dashboard/admin',
 };
@@ -323,7 +332,7 @@ export function hasPermission(role: UserRole, permission: string): boolean {
 
 // Check if role is admin type (can access admin dashboard)
 export function isAdminRole(role: UserRole): boolean {
-  return ['admin_berkas', 'admin_keuangan', 'head_of_it', 'admin_super', 'admin'].includes(role);
+  return ['admin_berkas', 'admin_keuangan', 'head_of_it', 'tim_it', 'admin_super', 'admin'].includes(role);
 }
 
 // Check if role can verify documents
@@ -365,6 +374,11 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
       { name: 'Manajemen User', href: '/dashboard/admin/users', icon: 'UserCog' },
       { name: 'Pengaturan', href: '/dashboard/admin/pengaturan', icon: 'Settings' },
     ],
+    tim_it: [
+      { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
+      { name: 'Manajemen User', href: '/dashboard/admin/users', icon: 'UserCog' },
+      { name: 'Pengaturan', href: '/dashboard/admin/pengaturan', icon: 'Settings' },
+    ],
     admin_super: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
       { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
@@ -397,8 +411,8 @@ export function canAccessRoute(role: UserRole, route: string): boolean {
     return route !== '/dashboard/admin/users';
   }
 
-  // Head of IT can only access users, settings, and dashboard
-  if (role === 'head_of_it') {
+  // Head of IT / Tim IT can only access users, settings, and dashboard
+  if (role === 'head_of_it' || role === 'tim_it') {
     const allowed = [
       '/dashboard/admin',
       '/dashboard/admin/users',

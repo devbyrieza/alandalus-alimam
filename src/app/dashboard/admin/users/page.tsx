@@ -28,7 +28,7 @@ interface AdminUser {
 
 // Role display names
 const ROLE_OPTIONS = [
-    { value: "head_of_it", label: "Kepala IT (Root Admin)" },
+    { value: "tim_it", label: "Tim IT" },
     { value: "admin_super", label: "Admin Super (Mudir/Ketua)" },
     { value: "admin_berkas", label: "Admin Berkas" },
     { value: "admin_keuangan", label: "Admin Keuangan" },

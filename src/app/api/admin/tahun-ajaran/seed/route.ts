@@ -20,7 +20,7 @@ export async function POST() {
     }
 
     // Check custom role
-    const allowedRoles = ["admin", "admin_super"];
+    const allowedRoles = ["admin", "admin_super", "head_of_it"];
     if (!allowedRoles.includes(session.role)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
@@ -123,7 +123,7 @@ export async function GET() {
     }
 
     // Check custom role
-    const allowedRoles = ["admin", "admin_super"];
+    const allowedRoles = ["admin", "admin_super", "head_of_it"];
     if (!allowedRoles.includes(session.role)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
