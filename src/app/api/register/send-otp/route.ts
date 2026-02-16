@@ -157,8 +157,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        error: "Terjadi kesalahan internal server",
-        debug: process.env.NODE_ENV === "development" ? error.message : undefined
+        error: `Server Error: ${error.message}`,
+        debug: error.stack
       },
       { status: 500 },
     );
