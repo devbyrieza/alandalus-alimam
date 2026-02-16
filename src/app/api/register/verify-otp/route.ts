@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const registrationData = JSON.parse(otpRecord.registration_data || "{}");
+    const registrationData = (otpRecord.registration_data as any) || {};
 
     if (!registrationData) {
       return NextResponse.json(

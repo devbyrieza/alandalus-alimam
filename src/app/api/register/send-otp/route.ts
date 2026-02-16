@@ -113,7 +113,7 @@ export async function POST(request: NextRequest) {
         expires_at: expiresAt,
         attempts: 0,
         otp_channel: otp_channel,
-        registration_data: JSON.stringify({
+        registration_data: {
           nik,
           nama_lengkap,
           tanggal_lahir,
@@ -121,7 +121,7 @@ export async function POST(request: NextRequest) {
           jenis_kelamin,
           jenjang,
           email,
-        }),
+        },
       },
     });
 
