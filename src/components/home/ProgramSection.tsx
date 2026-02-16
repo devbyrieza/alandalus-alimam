@@ -15,7 +15,7 @@ const PROGRAMS = [
     {
         title: "Madrasah Tsanawiyah",
         subtitle: "Tingkat Menengah (Setara SMP)",
-        desc: "Pendidikan 3 tahun dengan kurikulum terpadu Tahfidz dan Akademik Nasional. Fokus pada pembentukan adab dan dasar ilmu syar'i.",
+        desc: "Pendidikan 3 tahun yang mencakup Tahfidz, Dasar Ilmu Syar'i, dan Akademik Nasional, serta pembentukan Adab sebagai fondasi utama.",
         features: [
             "Target Hafalan 12 Juz",
             "Sinergi Kurikulum Nasional & Al-Andalus",
@@ -30,12 +30,12 @@ const PROGRAMS = [
     {
         title: "I'dad Lughowi",
         subtitle: "Persiapan & Menengah Atas (Setara SMA)",
-        desc: "Program intensif bahasa dan Syari'at untuk mencetak kader ulama masa depan. Persiapan matang studi ke Univ. Islam Timur Tengah.",
+        desc: "Program intensif Bahasa dan Syari'at untuk mencetak kader ulama masa depan. Persiapan matang studi ke Universitas Timur Tengah maupun Perguruan Tinggi Favorit Dalam Negeri.",
         features: [
             "Target Hafalan 16 Juz",
             "Penguasaan Kitab Turats",
             "Bahasa Arab Aktif & Formal",
-            "Persiapan LIPIA & Univ. Madinah",
+            "Persiapan Universitas Timur Tengah & Dalam Negeri",
             "Ziarah Ilmiah & Pengabdian"
         ],
         quota: "25 Kursi",

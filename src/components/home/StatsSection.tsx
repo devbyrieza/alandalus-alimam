@@ -119,6 +119,13 @@ export default function StatsSection() {
                   {stat.label}
                 </p>
 
+                {/* Specific context for years */}
+                {stat.id === 'years' && (
+                  <p className="text-[10px] font-bold text-brown-600 mt-2 bg-brown-50 px-2 py-0.5 rounded-full border border-brown-100">
+                    Dikelola Al-Andalus Sejak 2026
+                  </p>
+                )}
+
                 {/* Subtle underline decoration */}
                 <div className="mt-4 w-8 h-1 bg-surface-200 rounded-full group-hover:w-16 group-hover:bg-brown-500 transition-all duration-500" />
               </motion.div>
