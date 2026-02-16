@@ -200,7 +200,7 @@ export default function LoginPage() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1 }}
-          className="w-full max-w-[480px] bg-white rounded-[4rem] shadow-premium-2xl p-10 md:p-14 border border-surface-100 relative overflow-hidden"
+          className="w-full max-w-[480px] bg-white rounded-[4rem] shadow-premium-2xl p-6 md:p-14 border border-surface-100 relative overflow-hidden"
         >
           {/* Subtle inside gradient */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-brown-50/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />

@@ -94,7 +94,7 @@ export default function HeroSection() {
                 </span>
               </h1>
 
-              <p className="text-lg lg:text-xl text-ink-600 leading-relaxed max-w-xl mx-auto lg:mx-0 font-medium font-sans">
+              <p className="text-lg lg:text-xl text-ink-600 leading-relaxed max-w-xl mx-auto lg:mx-0 font-medium font-sans text-justify lg:text-left">
                 Pendidikan Islam unggul berbasis Kurikulum TICE untuk melahirkan kader Qur'ani yang beradab, berilmu, dan siap menghadapi tantangan zaman.
               </p>
             </div>

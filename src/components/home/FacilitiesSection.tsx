@@ -114,8 +114,8 @@ export default function FacilitiesSection() {
                                 className="object-cover transition-transform duration-700 group-hover:scale-110"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
-                            <div className="absolute bottom-4 left-4">
-                                <span className="text-white font-bold text-sm drop-shadow-lg">{img.label}</span>
+                            <div className="absolute bottom-2 left-2 md:bottom-4 md:left-4 right-2 md:right-4">
+                                <span className="text-white font-bold text-[10px] sm:text-xs md:text-sm drop-shadow-lg leading-tight block">{img.label}</span>
                             </div>
                         </div>
                     ))}

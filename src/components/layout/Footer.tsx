@@ -19,7 +19,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-white border-t border-surface-200 pt-24 pb-12 overflow-hidden">
+    <footer className="bg-white border-t border-surface-200 pt-24 pb-32 md:pb-12 overflow-hidden">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20">
 
@@ -34,7 +34,7 @@ export default function Footer() {
                 <p className="text-[10px] font-bold text-ink-500 uppercase tracking-[0.2em] mt-2">Dikelola oleh Al-Andalus</p>
               </div>
             </Link>
-            <p className="text-ink-600 font-medium leading-relaxed max-w-xs">
+            <p className="text-ink-600 font-medium leading-relaxed max-w-xs text-justify">
               Membangun generasi Qur'ani yang cerdas & berakhlak mulia sesuai pemahaman salafush shalih.
             </p>
             <div className="flex gap-4">
@@ -98,7 +98,7 @@ export default function Footer() {
                 <div className="w-10 h-10 rounded-xl bg-surface-100 flex items-center justify-center text-ink-500 flex-shrink-0">
                   <Mail className="w-5 h-5" />
                 </div>
-                <div className="text-sm font-bold text-ink-950 text-left">
+                <div className="text-sm font-bold text-ink-950 text-left break-all">
                   pesantrenalimamsukabumi@gmail.com
                 </div>
               </div>
@@ -109,10 +109,10 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-surface-100 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-sm font-bold text-ink-400">
+          <p className="text-sm font-bold text-ink-400 order-2 md:order-1 text-center md:text-left">
             &copy; {currentYear} Pesantren Al-Imam Al-Islami. Hak cipta dilindungi undang-undang.
           </p>
-          <div className="flex items-center gap-6 text-sm font-bold text-ink-400">
+          <div className="flex flex-wrap justify-center items-center gap-6 text-sm font-bold text-ink-400 order-1 md:order-2">
             <Link href="#" className="hover:text-ink-950 transition-colors">Kebijakan Privasi</Link>
             <Link href="#" className="hover:text-ink-950 transition-colors">Syarat & Ketentuan</Link>
             <div className="flex items-center gap-2">

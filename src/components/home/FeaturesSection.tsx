@@ -51,7 +51,7 @@ export default function FeaturesSection() {
                   Kenapa Memilih <br />
                   <span className="text-brown-600">Al-Imam Al-Islami?</span>
                 </h2>
-                <p className="text-lg text-ink-600 leading-relaxed font-medium">
+                <p className="text-lg text-ink-600 leading-relaxed font-medium text-justify lg:text-left">
                   Kami tidak hanya mengajarkan ilmu, tetapi juga mendidik karakter. Lingkungan yang kondusif untuk tumbuh kembang spiritual, intelektual, dan emosional santri.
                 </p>
               </div>

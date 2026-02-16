@@ -72,7 +72,7 @@ export default function TeachersSection() {
                             Dibimbing Oleh <span className="text-brown-600">Asatidz Kompeten</span>
                         </h2>
 
-                        <p className="text-lg text-ink-600 mb-10 leading-relaxed font-medium">
+                        <p className="text-lg text-ink-600 mb-10 leading-relaxed font-medium text-justify lg:text-left">
                             Pesantren Al-Imam didukung oleh asatidzah profesional lulusan universitas terbaik dunia Islam serta pakar pendidikan nasional.
                         </p>
 

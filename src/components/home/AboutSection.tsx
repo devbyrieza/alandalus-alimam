@@ -46,7 +46,7 @@ export default function AboutSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-lg text-ink-600 max-w-2xl mx-auto leading-relaxed font-medium"
+              className="text-lg text-ink-600 max-w-2xl mx-auto leading-relaxed font-medium text-justify md:text-center"
             >
               Kami menggabungkan nilai-nilai Salafush Shalih dengan metodologi pengajaran modern untuk mencetak santri yang siap menghadapi tantangan zaman.
             </motion.p>

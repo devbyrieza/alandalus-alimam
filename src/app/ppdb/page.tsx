@@ -44,8 +44,8 @@ const StatCard = ({ icon: Icon, value, label, delay = 0 }: { icon: any, value: s
     <div className="w-14 h-14 mx-auto bg-surface-50 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-premium-xs">
       <Icon className="w-7 h-7 text-brown-600" />
     </div>
-    <div className="font-display font-black text-2xl md:text-3xl text-ink-950 mb-1 leading-none">{value}</div>
-    <div className="text-[10px] font-black text-ink-400 uppercase tracking-widest">{label}</div>
+    <div className="font-display font-black text-lg sm:text-2xl md:text-3xl text-ink-950 mb-1 leading-tight break-words">{value}</div>
+    <div className="text-[10px] font-black text-ink-400 uppercase tracking-widest leading-tight">{label}</div>
   </motion.div>
 );
 
@@ -124,7 +124,7 @@ function PPDBContent() {
     {
       phase: "Ujian Seleksi",
       date: "Jadwal Dipilih",
-      desc: "Tes Al-Qur'an (Tahfidz/Tajwid), Kemampuan Dasar Akademik, Identifikasi Kepribadian, Tes Kesiapan & Wawancara (Santri & Orang Tua/Wali).",
+      desc: "Tes Lisan (Tahfidz/Bacaan Al-Qur'an), Tes Tertulis (Pengetahuan Dasar Agama & Akademik), serta Wawancara Santri & Orang Tua.",
       status: "upcoming",
     },
     {
@@ -244,7 +244,7 @@ function PPDBContent() {
         <Container>
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
             {/* Sticky Content */}
-            <div className="lg:w-2/5 lg:sticky lg:top-32 h-fit">
+            <div className="lg:w-2/5 lg:sticky lg:top-32 h-fit flex flex-col items-center text-center lg:items-start lg:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-surface-200 text-brown-700 text-xs font-black uppercase tracking-widest mb-8 shadow-premium-sm">
                 <Clock className="w-3.5 h-3.5" />
                 <span>Tahapan Pendaftaran</span>
@@ -252,7 +252,7 @@ function PPDBContent() {
               <h2 className="text-3xl md:text-5xl font-display font-black text-ink-950 mb-8 leading-tight">
                 Alur Seleksi <br /> <span className="text-brown-600">Lengkap & Transparan</span>
               </h2>
-              <p className="text-xl text-ink-600 leading-relaxed font-medium mb-10 text-left">
+              <p className="text-xl text-ink-600 leading-relaxed font-medium mb-10 text-center lg:text-left">
                 Kami memastikan setiap proses pendaftaran berlangsung dengan adil dan informatif bagi calon santri dan orang tua.
               </p>
 
@@ -263,8 +263,8 @@ function PPDBContent() {
                     <CheckCircle className="w-7 h-7" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-display font-black text-ink-950 mb-0.5">Sudah Menyiapkan Berkas?</h4>
-                    <p className="text-ink-500 font-medium">Lanjut ke pendaftaran online.</p>
+                    <h4 className="text-xl font-display font-black text-ink-950 mb-0.5">Siap Menjadi Santri?</h4>
+                    <p className="text-ink-500 font-medium">Yuk, segera daftarkan ananda sekarang juga.</p>
                   </div>
                 </div>
               </div>
@@ -333,11 +333,11 @@ function PPDBContent() {
       {/* 4. Requirements & FAQ */}
       <section className="py-24 md:py-32 bg-surface-50/50">
         <Container>
-          <div className="grid lg:grid-cols-2 gap-16 md:gap-24 items-start">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
             {/* Requirements */}
             <div className="space-y-12">
-              <h2 className="text-4xl font-display font-black text-ink-950">Persyaratan <span className="text-brown-600">Administrasi</span></h2>
-              <div className="space-y-8">
+              <h2 className="text-3xl md:text-4xl font-display font-black text-ink-950 text-center lg:text-left">Persyaratan <span className="text-brown-600">Administrasi</span></h2>
+              <div className="space-y-6 md:space-y-8">
                 {requirements.map((req, idx) => {
                   const ReqIcon = req.icon;
                   return (
@@ -348,26 +348,26 @@ function PPDBContent() {
                       viewport={{ once: true }}
                       className="bg-white p-6 sm:p-10 rounded-[2rem] md:rounded-[3rem] border border-surface-100 shadow-premium-md"
                     >
-                      <div className="flex items-center gap-5 mb-8">
-                        <div className="w-14 h-14 bg-brown-50 rounded-2xl flex items-center justify-center text-brown-600 shadow-premium-sm">
-                          <ReqIcon className="w-7 h-7" />
+                      <div className="flex items-center gap-4 md:gap-5 mb-6 md:mb-8">
+                        <div className="w-12 h-12 md:w-14 md:h-14 bg-brown-50 rounded-2xl flex items-center justify-center text-brown-600 shadow-premium-sm shrink-0">
+                          <ReqIcon className="w-6 h-6 md:w-7 md:h-7" />
                         </div>
-                        <h3 className="text-2xl font-display font-black text-ink-950">{req.title}</h3>
+                        <h3 className="text-xl md:text-2xl font-display font-black text-ink-950 leading-tight">{req.title}</h3>
                       </div>
-                      <ul className="space-y-5">
+                      <ul className="space-y-3 md:space-y-5">
                         {req.items.map((item, i) => (
-                          <li key={i} className="flex items-center gap-4 bg-surface-50/50 p-4 rounded-2xl border border-surface-100 group hover:bg-white transition-all">
+                          <li key={i} className="flex items-center gap-3 md:gap-4 bg-surface-50/50 p-3 md:p-4 rounded-xl md:rounded-2xl border border-surface-100 group hover:bg-white transition-all">
                             <div className={`w-8 h-8 rounded-xl flex items-center justify-center shadow-premium-xs ${item.type === 'Wajib' || item.type === 'Required' ? 'bg-teal-500 text-white' : 'bg-surface-200 text-ink-400'
-                              }`}>
+                              } shrink-0`}>
                               <Check className="w-5 h-5" />
                             </div>
-                            <span className="flex-1 font-bold text-ink-700 leading-tight">{item.name}</span>
+                            <span className="flex-1 font-bold text-ink-700 text-sm md:text-base leading-tight">{item.name}</span>
                             <span className="text-[10px] font-black uppercase tracking-widest text-ink-300 group-hover:text-brown-600 shrink-0">{item.type}</span>
                           </li>
                         ))}
                       </ul>
                       {(req as any).note && (
-                        <div className="mt-8 pt-8 border-t border-surface-100">
+                        <div className="mt-6 md:mt-8 pt-6 md:pt-8 border-t border-surface-100">
                           <p className="text-sm text-ink-500 font-medium leading-relaxed italic text-left">
                             {(req as any).note}
                           </p>
@@ -380,17 +380,17 @@ function PPDBContent() {
             </div>
 
             {/* Why Al-Imam & FAQ */}
-            <div className="space-y-16">
+            <div className="space-y-12 md:space-y-16">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="bg-brown-900 rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-16 text-white relative overflow-hidden shadow-premium-2xl"
+                className="bg-brown-900 rounded-[2rem] md:rounded-[4rem] p-6 md:p-16 text-white relative overflow-hidden shadow-premium-2xl"
               >
                 <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
                 <div className="relative z-10">
-                  <h3 className="text-3xl font-display font-black mb-10 text-white tracking-tight">Kenapa Pilih Kami?</h3>
-                  <div className="grid gap-6">
+                  <h3 className="text-2xl md:text-3xl font-display font-black mb-8 md:mb-10 text-white tracking-tight text-center lg:text-left">Kenapa Pilih Kami?</h3>
+                  <div className="grid gap-4 md:gap-6">
                     {[
                       { icon: BookOpen, title: "Kurikulum Mutakhir", desc: "Perpaduan kurikulum Nasional & kurikulum khas Al-Andalus." },
                       { icon: GraduationCap, title: "Guru Berkompeten", desc: "Alumni Perguruan Tinggi Terbaik Dalam & Luar Negeri serta Pondok Pesantren Unggulan." },
@@ -398,13 +398,13 @@ function PPDBContent() {
                     ].map((feat, i) => {
                       const FeatIcon = feat.icon;
                       return (
-                        <div key={i} className="flex gap-5 items-start bg-white/5 p-6 rounded-[2rem] border border-white/5 backdrop-blur-sm group transition-all duration-300">
-                          <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0">
-                            <FeatIcon className="w-6 h-6 text-gold-400" />
+                        <div key={i} className="flex gap-4 md:gap-5 items-start bg-white/5 p-5 md:p-6 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 backdrop-blur-sm group transition-all duration-300">
+                          <div className="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0">
+                            <FeatIcon className="w-5 h-5 md:w-6 md:h-6 text-gold-400" />
                           </div>
                           <div>
-                            <h4 className="font-display font-black text-xl mb-1 text-white">{feat.title}</h4>
-                            <p className="text-white/80 font-medium leading-relaxed">{feat.desc}</p>
+                            <h4 className="font-display font-black text-lg md:text-xl mb-1 text-white">{feat.title}</h4>
+                            <p className="text-sm md:text-base text-white/80 font-medium leading-relaxed">{feat.desc}</p>
                           </div>
                         </div>
                       )
@@ -413,9 +413,9 @@ function PPDBContent() {
                 </div>
               </motion.div>
 
-              <div className="space-y-8">
-                <h3 className="text-3xl font-display font-black text-ink-950 px-2">Pertanyaan Populer</h3>
-                <div className="space-y-4">
+              <div className="space-y-6 md:space-y-8">
+                <h3 className="text-2xl md:text-3xl font-display font-black text-ink-950 px-2 text-center lg:text-left">Pertanyaan Populer</h3>
+                <div className="space-y-3 md:space-y-4">
                   {[
                     {
                       q: "Apakah santri wajib asrama?",
@@ -432,15 +432,15 @@ function PPDBContent() {
                   ].map((faq, i) => (
                     <motion.div key={i} className="group">
                       <details className="bg-white rounded-2xl border border-surface-100 shadow-premium-sm transition-all duration-300 open:shadow-premium-lg">
-                        <summary className="p-6 flex items-center gap-5 cursor-pointer list-none">
-                          <div className="w-10 h-10 bg-surface-50 rounded-xl flex items-center justify-center text-brown-600 group-hover:bg-brown-600 group-hover:text-white transition-all">
-                            <HelpCircle className="w-5 h-5" />
+                        <summary className="p-5 md:p-6 flex items-center gap-4 md:gap-5 cursor-pointer list-none">
+                          <div className="w-8 h-8 md:w-10 md:h-10 bg-surface-50 rounded-xl flex items-center justify-center text-brown-600 group-hover:bg-brown-600 group-hover:text-white transition-all shrink-0">
+                            <HelpCircle className="w-4 h-4 md:w-5 md:h-5" />
                           </div>
-                          <span className="flex-1 font-black text-ink-950 tracking-tight">{faq.q}</span>
-                          <ChevronRight className="w-5 h-5 text-surface-200 group-open:rotate-90 transition-transform duration-300" />
+                          <span className="flex-1 font-black text-ink-950 tracking-tight text-sm md:text-base">{faq.q}</span>
+                          <ChevronRight className="w-5 h-5 text-surface-200 group-open:rotate-90 transition-transform duration-300 shrink-0" />
                         </summary>
-                        <div className="px-6 pb-6 pt-2 pl-20">
-                          <p className="text-ink-600 font-medium leading-relaxed text-left">{faq.a}</p>
+                        <div className="px-5 md:px-6 pb-5 md:pb-6 pt-0 md:pt-2 pl-5 md:pl-20">
+                          <p className="text-sm md:text-base text-ink-600 font-medium leading-relaxed text-left">{faq.a}</p>
                         </div>
                       </details>
                     </motion.div>
@@ -459,25 +459,25 @@ function PPDBContent() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-brown-800 rounded-[2.5rem] md:rounded-[4rem] p-8 sm:p-24 text-center text-white relative overflow-hidden shadow-premium-2xl"
+            className="bg-brown-800 rounded-[2rem] md:rounded-[4rem] p-6 md:p-24 text-center text-white relative overflow-hidden shadow-premium-2xl"
           >
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
 
             <div className="relative z-10">
-              <h2 className="text-3xl md:text-6xl font-display font-black mb-8 text-white leading-tight">
+              <h2 className="text-2xl md:text-6xl font-display font-black mb-6 md:mb-8 text-white leading-tight">
                 Mulai Perjalanan <br /> <span className="text-gold-400">Ananda Di Sini</span>
               </h2>
-              <p className="text-xl text-brown-100 max-w-2xl mx-auto mb-12 font-medium leading-relaxed">
+              <p className="text-base md:text-xl text-brown-100 max-w-2xl mx-auto mb-8 md:mb-12 font-medium leading-relaxed">
                 Pendaftaran santri baru terbatas hanya untuk 50 santri pilihan. Segera daftarkan ananda sebelum kuota terpenuhi.
               </p>
-              <div className="flex flex-col md:flex-row gap-6 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
                 <Link href="/daftar">
-                  <span className="px-12 py-5 rounded-pill bg-white text-brown-900 font-black text-xl hover:bg-gold-400 hover:text-white shadow-premium-xl transition-all cursor-pointer inline-block">
+                  <span className="w-full sm:w-auto px-8 py-4 rounded-pill bg-white text-brown-900 font-black text-base md:text-xl hover:bg-gold-400 hover:text-white shadow-premium-xl transition-all cursor-pointer inline-block">
                     Daftar Sekarang
                   </span>
                 </Link>
-                <a href="https://wa.me/6285111524441" className="inline-flex items-center justify-center gap-3 px-10 py-5 rounded-pill bg-white/10 text-white font-bold border border-white/20 hover:bg-white/20 transition-all">
+                <a href="https://wa.me/6285111524441" className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-pill bg-white/10 text-white font-bold border border-white/20 hover:bg-white/20 transition-all">
                   <Phone className="w-5 h-5" />
                   Hubungi Admin PPDB
                 </a>

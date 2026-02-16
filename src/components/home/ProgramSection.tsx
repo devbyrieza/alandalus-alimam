@@ -110,7 +110,7 @@ export default function ProgramSection() {
                                 <div className="flex-grow">
                                     <h3 className="text-2xl font-bold text-ink-950 mb-2">{program.title}</h3>
                                     <p className="text-sm font-bold text-brown-600/80 mb-6 tracking-wide">{program.subtitle}</p>
-                                    <p className="text-ink-600 leading-relaxed mb-8 font-medium">
+                                    <p className="text-ink-600 leading-relaxed mb-8 font-medium text-justify">
                                         {program.desc}
                                     </p>
 

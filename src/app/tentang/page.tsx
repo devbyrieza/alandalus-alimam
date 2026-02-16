@@ -129,15 +129,18 @@ export default function TentangPage() {
                                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.4 }}
-                                className="absolute -bottom-10 -right-6 md:-right-10 z-20 bg-white p-8 rounded-[2.5rem] shadow-premium-xl border border-surface-200"
+                                className="absolute -bottom-12 right-0 md:-bottom-10 md:-right-10 z-20 bg-white p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-premium-xl border border-surface-200 max-w-[90vw] md:max-w-none"
                             >
-                                <div className="flex items-center gap-5">
-                                    <div className="w-16 h-16 bg-brown-700 rounded-3xl flex items-center justify-center text-white shadow-premium-md">
-                                        <Award className="w-8 h-8" />
+                                <div className="flex items-center gap-4 md:gap-5">
+                                    <div className="w-14 h-14 md:w-16 md:h-16 bg-brown-700 rounded-2xl md:rounded-3xl flex items-center justify-center text-white shadow-premium-md shrink-0">
+                                        <Award className="w-7 h-7 md:w-8 md:h-8" />
                                     </div>
                                     <div>
-                                        <p className="text-4xl font-black text-ink-950 tracking-tight">1995</p>
-                                        <p className="text-ink-500 font-bold text-xs uppercase tracking-widest">Tahun Berdiri</p>
+                                        <p className="text-3xl md:text-4xl font-black text-ink-950 tracking-tight leading-none mb-1">1995</p>
+                                        <p className="text-ink-500 font-bold text-[10px] md:text-xs uppercase tracking-widest mb-2">Tahun Berdiri</p>
+                                        <div className="text-[10px] font-bold text-brown-700 bg-brown-50 px-2.5 py-1.5 rounded-lg border border-brown-100/50 leading-tight">
+                                            Mulai 2026 dikelola <br className="block sm:hidden" /> oleh Al-Andalus
+                                        </div>
                                     </div>
                                 </div>
                             </motion.div>
@@ -165,7 +168,7 @@ export default function TentangPage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.1 }}
-                                className="space-y-6 text-lg text-ink-700 font-medium leading-[1.8]"
+                                className="space-y-6 text-lg text-ink-700 font-medium leading-[1.8] text-justify"
                             >
                                 <p>
                                     <span className="text-ink-950 font-black">Pesantren Al-Imam Al-Islami</span> berlokasi di Cikembar, Sukabumi. Didirikan pada tahun 1995 oleh <span className="text-brown-700 italic font-bold">Al-Ustadz KH. Bukhori Muslim Rahimahullah</span> dengan visi mencetak kader ulama.
@@ -319,28 +322,28 @@ export default function TentangPage() {
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="bg-brown-800 rounded-[4rem] p-12 md:p-24 relative overflow-hidden text-center"
+                        className="bg-brown-800 rounded-[2rem] md:rounded-[4rem] p-6 md:p-24 relative overflow-hidden text-center"
                     >
                         {/* Decorative background */}
                         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
                         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5 pointer-events-none" />
 
                         <div className="relative z-10">
-                            <h2 className="text-3xl md:text-6xl font-display font-black mb-8 text-white tracking-tight leading-tight">
+                            <h2 className="text-2xl md:text-6xl font-display font-black mb-6 md:mb-8 text-white tracking-tight leading-tight">
                                 Mari Menjadi Bagian <br />
                                 Keluarga <span className="text-gold-400">Al-Imam</span>
                             </h2>
-                            <p className="text-xl text-brown-100 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
+                            <p className="text-base md:text-xl text-brown-100 mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
                                 Daftarkan putra Anda sekarang dan persiapkan masa depan gemilang bersama kami.
                             </p>
-                            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                                <Link href="/daftar">
-                                    <button className="px-10 py-5 rounded-pill bg-white text-brown-900 font-black text-lg shadow-premium-xl hover:bg-gold-400 hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center">
+                                <Link href="/daftar" className="w-full sm:w-auto">
+                                    <button className="w-full px-8 py-4 rounded-pill bg-white text-brown-900 font-black text-base md:text-lg shadow-premium-xl hover:bg-gold-400 hover:text-white transition-all duration-300 transform hover:-translate-y-1">
                                         Daftar Sekarang
                                     </button>
                                 </Link>
-                                <Link href="/kontak">
-                                    <button className="flex items-center gap-3 px-8 py-5 rounded-pill bg-white/10 text-white font-bold border border-white/20 hover:bg-white/20 transition-all duration-300">
+                                <Link href="/kontak" className="w-full sm:w-auto">
+                                    <button className="w-full flex items-center justify-center gap-3 px-8 py-4 rounded-pill bg-white/10 text-white font-bold border border-white/20 hover:bg-white/20 transition-all duration-300">
                                         Hubungi Kami
                                         <Send className="w-5 h-5 text-gold-400" />
                                     </button>

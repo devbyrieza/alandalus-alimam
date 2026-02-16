@@ -53,14 +53,14 @@ const PROGRAMS = [
         fullName: "Program I'dad Lughowi (SMA)",
         description: "Program intensif yang menggunakan Kurikulum Terpadu (Nasional & khas Al-Andalus), berfokus pada pemantapan Bahasa Arab & Tahfidz di tahun I'dad, dilanjutkan jenjang Madrasah Aliyah yang resmi.",
         stats: [
-            { label: "Durasi", value: "4 Tahun", icon: Clock },
+            { label: "Durasi", value: "1 Tahun Pendalaman Bahasa Arab + 3 Tahun Aliyah", icon: Clock },
             { label: "Target", value: "16 Juz", icon: Trophy },
-            { label: "Fokus", value: "Kajian Syar'i", icon: BookOpen },
+            { label: "Fokus", value: "Bahasa & Syar'i", icon: BookOpen },
         ],
         curriculum: [
             "Tahun I'dad: Intensif Bahasa Arab & Syariah",
             "Target Hafalan 16 Juz",
-            "Kurikulum MA Terakreditasi",
+            "Kurikulum Pesantren Terpadu",
             "Kajian Kitab Turats Mendalam",
             "Pembinaan Dakwah & Organisasi"
         ],
@@ -216,7 +216,7 @@ export default function ProgramPage() {
                                     </motion.div>
 
                                     {/* Stats Grid - Modern Design */}
-                                    <div className="grid grid-cols-3 gap-4 mb-10">
+                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
                                         {program.stats.map((stat, sIdx) => (
                                             <motion.div
                                                 key={sIdx}
@@ -232,7 +232,9 @@ export default function ProgramPage() {
                                                     <stat.icon className="w-5 h-5" />
                                                 </div>
                                                 <p className="text-[10px] text-ink-400 font-black uppercase tracking-widest mb-1">{stat.label}</p>
-                                                <p className="text-sm font-black text-ink-950">{stat.value}</p>
+                                                <p className={`font-black text-ink-950 ${stat.value.length > 20 ? 'text-sm leading-tight' : 'text-lg'}`}>
+                                                    {stat.value}
+                                                </p>
                                             </motion.div>
                                         ))}
                                     </div>

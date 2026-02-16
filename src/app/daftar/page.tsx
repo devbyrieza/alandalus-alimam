@@ -269,7 +269,7 @@ export default function DaftarPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3 }}
-            className="bg-white rounded-[3.5rem] shadow-premium-2xl p-8 md:p-16 border border-surface-100 relative overflow-hidden"
+            className="bg-white rounded-[3.5rem] shadow-premium-2xl p-6 md:p-16 border border-surface-100 relative overflow-hidden"
           >
             {/* Soft decorative blur inside card */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-brown-50/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
@@ -464,7 +464,7 @@ export default function DaftarPage() {
                       <select
                         value={countryCode}
                         onChange={(e) => setCountryCode(e.target.value)}
-                        className="appearance-none h-full pl-6 pr-10 py-5 bg-surface-100/50 border-r border-surface-200 text-ink-950 font-black focus:bg-white transition-all cursor-pointer text-sm"
+                        className="appearance-none h-full pl-4 pr-8 py-4 md:pl-6 md:pr-10 md:py-5 bg-surface-100/50 border-r border-surface-200 text-ink-950 font-black focus:bg-white transition-all cursor-pointer text-sm"
                       >
                         {countries.map((c) => (
                           <option key={c.name} value={c.code}>
@@ -472,7 +472,7 @@ export default function DaftarPage() {
                           </option>
                         ))}
                       </select>
-                      <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-600 pointer-events-none" />
+                      <ChevronDown className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-600 pointer-events-none" />
                     </div>
                     <input
                       type="tel"
@@ -483,7 +483,7 @@ export default function DaftarPage() {
                         setFormData((prev) => ({ ...prev, no_hp: val }))
                       }}
                       placeholder={countryCode === "+62" ? "812 3456 7890" : "Nomor Telepon"}
-                      className="flex-1 px-8 py-5 bg-surface-50 border-none focus:bg-white focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-950 placeholder:text-ink-500"
+                      className="flex-1 px-4 py-4 md:px-8 md:py-5 bg-surface-50 border-none focus:bg-white focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-950 placeholder:text-ink-500 min-w-0"
                     />
                   </div>
                   <p className="text-xs text-ink-600 font-bold uppercase tracking-widest mt-3 ml-1">

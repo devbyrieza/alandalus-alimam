@@ -1017,8 +1017,8 @@ function AdminPendaftarContent() {
 
             {/* Pagination */}
             <div className="bg-stone-50 px-6 py-4 border-t-2 border-blue-200">
-              <div className="flex items-center justify-between">
-                <div className="text-sm text-stone-600">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="text-sm text-stone-600 text-center md:text-left">
                   Menampilkan{" "}
                   <span className="font-bold text-stone-900">
                     {(pagination.page - 1) * pagination.limit + 1}
@@ -1041,12 +1041,12 @@ function AdminPendaftarContent() {
                   <button
                     onClick={() => handlePageChange(pagination.page - 1)}
                     disabled={pagination.page === 1}
-                    className="px-4 py-2 bg-white border-2 border-stone-200 rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-50 hover:border-blue-300 transition-colors"
+                    className="px-3 md:px-4 py-2 bg-white border-2 border-stone-200 rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-50 hover:border-blue-300 transition-colors"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1 md:gap-2 overflow-x-auto max-w-[200px] md:max-w-none px-1 hide-scrollbar">
                     {Array.from({ length: pagination.totalPages }, (_, i) => i + 1)
                       .filter((page) => {
                         // Show first, last, current, and adjacent pages
@@ -1057,13 +1057,13 @@ function AdminPendaftarContent() {
                         );
                       })
                       .map((page, idx, arr) => (
-                        <div key={page} className="flex items-center gap-2">
+                        <div key={page} className="flex items-center gap-2 shrink-0">
                           {idx > 0 && arr[idx - 1] !== page - 1 && (
                             <span className="text-stone-500">...</span>
                           )}
                           <button
                             onClick={() => handlePageChange(page)}
-                            className={`w-10 h-10 rounded-lg font-medium transition-colors ${page === pagination.page
+                            className={`w-8 h-8 md:w-10 md:h-10 rounded-lg font-medium transition-colors text-sm md:text-base ${page === pagination.page
                               ? "bg-blue-600 text-white"
                               : "bg-white border-2 border-stone-200 hover:bg-blue-50 hover:border-blue-300"
                               }`}
@@ -1077,7 +1077,7 @@ function AdminPendaftarContent() {
                   <button
                     onClick={() => handlePageChange(pagination.page + 1)}
                     disabled={pagination.page === pagination.totalPages}
-                    className="px-4 py-2 bg-white border-2 border-stone-200 rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-50 hover:border-blue-300 transition-colors"
+                    className="px-3 md:px-4 py-2 bg-white border-2 border-stone-200 rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-50 hover:border-blue-300 transition-colors"
                   >
                     <ChevronRight className="w-5 h-5" />
                   </button>

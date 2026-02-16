@@ -83,9 +83,9 @@ const SocialCard = ({ social, delay = 0 }: { social: any, delay?: number }) => (
         </div>
         <div>
             <p className="text-[10px] font-black text-ink-400 uppercase tracking-widest mb-1">{social.name}</p>
-            <p className={`font-black text-ink-900 group-hover:${social.textColor} transition-colors`}>{social.username}</p>
+            <p className={`font-black text-ink-900 group-hover:${social.textColor} transition-colors text-sm md:text-base break-all`}>{social.username}</p>
         </div>
-        <ArrowRight className="w-5 h-5 ml-auto text-surface-200 group-hover:text-ink-950 transition-colors" />
+        <ArrowRight className="w-5 h-5 ml-auto text-surface-200 group-hover:text-ink-950 transition-colors shrink-0" />
     </motion.a>
 );
 
@@ -151,7 +151,7 @@ export default function ContactPage() {
     ];
 
     return (
-        <main className="bg-white min-h-screen">
+        <main className="bg-white min-h-screen pb-32 md:pb-0">
             {/* 1. Hero Section - Airy & Clean */}
             <section className="relative py-24 md:py-32 overflow-hidden bg-white">
                 <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brown-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
@@ -224,24 +224,24 @@ export default function ContactPage() {
             {/* 3. Form & Social Media Section */}
             <section className="py-24 md:py-32 bg-surface-50/50">
                 <Container>
-                    <div className="grid lg:grid-cols-5 gap-16 lg:gap-24 items-start">
+                    <div className="grid lg:grid-cols-5 gap-10 lg:gap-24 items-start">
                         {/* Form Column */}
                         <motion.div
                             initial={{ opacity: 0, x: -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="lg:col-span-3 bg-white p-8 md:p-16 rounded-[2.5rem] md:rounded-[4rem] shadow-premium-xl border border-surface-100 relative overflow-hidden"
+                            className="lg:col-span-3 bg-white p-6 md:p-16 rounded-[2.5rem] md:rounded-[4rem] shadow-premium-xl border border-surface-100 relative overflow-hidden"
                         >
                             <div className="absolute top-0 right-0 w-96 h-96 bg-brown-50/50 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2" />
 
                             <div className="relative z-10">
-                                <div className="flex items-center gap-5 mb-12">
-                                    <div className="w-16 h-16 bg-brown-900 rounded-3xl flex items-center justify-center text-white shadow-premium-md">
-                                        <Send className="w-8 h-8" />
+                                <div className="flex items-center gap-4 md:gap-5 mb-8 md:mb-12">
+                                    <div className="w-12 h-12 md:w-16 md:h-16 bg-brown-900 rounded-2xl md:rounded-3xl flex items-center justify-center text-white shadow-premium-md shrink-0">
+                                        <Send className="w-6 h-6 md:w-8 md:h-8" />
                                     </div>
                                     <div>
-                                        <h2 className="text-3xl font-display font-black text-ink-950 mb-1">Kirim Pesan</h2>
-                                        <p className="text-ink-500 font-medium">Tim kami akan membalas segera.</p>
+                                        <h2 className="text-2xl md:text-3xl font-display font-black text-ink-950 mb-1">Kirim Pesan</h2>
+                                        <p className="text-sm md:text-base text-ink-500 font-medium">Tim kami akan membalas segera.</p>
                                     </div>
                                 </div>
 
@@ -263,56 +263,56 @@ export default function ContactPage() {
                                     )}
                                 </AnimatePresence>
 
-                                <form onSubmit={handleSubmit} className="space-y-8">
-                                    <div className="grid md:grid-cols-2 gap-8">
-                                        <div className="space-y-3">
-                                            <label className="text-xs font-black text-ink-400 uppercase tracking-widest ml-1">Nama Lengkap</label>
+                                <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
+                                    <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+                                        <div className="space-y-2 md:space-y-3">
+                                            <label className="text-[10px] md:text-xs font-black text-ink-400 uppercase tracking-widest ml-1">Nama Lengkap</label>
                                             <input
                                                 type="text"
                                                 name="nama"
                                                 value={formData.nama}
                                                 onChange={handleChange}
                                                 required
-                                                className="w-full px-8 py-5 rounded-2xl bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900 placeholder:text-ink-300"
+                                                className="w-full px-5 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900 placeholder:text-ink-300 text-sm md:text-base"
                                                 placeholder="Nama lengkap Anda"
                                             />
                                         </div>
-                                        <div className="space-y-3">
-                                            <label className="text-xs font-black text-ink-400 uppercase tracking-widest ml-1">Email Aktif</label>
+                                        <div className="space-y-2 md:space-y-3">
+                                            <label className="text-[10px] md:text-xs font-black text-ink-400 uppercase tracking-widest ml-1">Email Aktif</label>
                                             <input
                                                 type="email"
                                                 name="email"
                                                 value={formData.email}
                                                 onChange={handleChange}
                                                 required
-                                                className="w-full px-8 py-5 rounded-2xl bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900 placeholder:text-ink-300"
+                                                className="w-full px-5 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900 placeholder:text-ink-300 text-sm md:text-base"
                                                 placeholder="email@anda.com"
                                             />
                                         </div>
                                     </div>
 
-                                    <div className="space-y-3">
-                                        <label className="text-xs font-black text-ink-400 uppercase tracking-widest ml-1">Nomor WhatsApp</label>
+                                    <div className="space-y-2 md:space-y-3">
+                                        <label className="text-[10px] md:text-xs font-black text-ink-400 uppercase tracking-widest ml-1">Nomor WhatsApp</label>
                                         <input
                                             type="tel"
                                             name="telepon"
                                             value={formData.telepon}
                                             onChange={handleChange}
                                             required
-                                            className="w-full px-8 py-5 rounded-2xl bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900 placeholder:text-ink-300"
+                                            className="w-full px-5 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900 placeholder:text-ink-300 text-sm md:text-base"
                                             placeholder="08xx-xxxx-xxxx"
                                         />
                                     </div>
 
-                                    <div className="space-y-3">
-                                        <label className="text-xs font-black text-ink-400 uppercase tracking-widest ml-1">Kebutuhan / Pesan</label>
+                                    <div className="space-y-2 md:space-y-3">
+                                        <label className="text-[10px] md:text-xs font-black text-ink-400 uppercase tracking-widest ml-1">Kebutuhan / Pesan</label>
                                         <textarea
                                             name="pesan"
                                             value={formData.pesan}
                                             onChange={handleChange}
                                             required
                                             rows={5}
-                                            className="w-full px-8 py-5 rounded-2xl bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900 placeholder:text-ink-300 resize-none"
+                                            className="w-full px-5 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900 placeholder:text-ink-300 text-sm md:text-base resize-none"
                                             placeholder="Apa yang bisa kami bantu?"
                                         />
                                     </div>
@@ -322,12 +322,12 @@ export default function ContactPage() {
                                         whileTap={{ scale: 0.98 }}
                                         type="submit"
                                         disabled={isSubmitting}
-                                        className="w-full py-6 rounded-[2rem] bg-brown-900 text-white font-black text-xl hover:bg-gold-500 shadow-premium-lg transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                                        className="w-full py-4 md:py-6 rounded-[1.5rem] md:rounded-[2rem] bg-brown-900 text-white font-black text-lg md:text-xl hover:bg-gold-500 shadow-premium-lg transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                                     >
                                         {isSubmitting ? "Sedang Mengirim..." : (
                                             <>
                                                 Kirim Sekarang
-                                                <ArrowRight className="w-6 h-6" />
+                                                <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
                                             </>
                                         )}
                                     </motion.button>
@@ -336,17 +336,17 @@ export default function ContactPage() {
                         </motion.div>
 
                         {/* Social & Map Column */}
-                        <div className="lg:col-span-2 space-y-12">
-                            <div className="space-y-6">
+                        <div className="lg:col-span-2 space-y-8 md:space-y-12">
+                            <div className="space-y-4 md:space-y-6">
                                 <motion.h2
                                     initial={{ opacity: 0, x: 20 }}
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true }}
-                                    className="text-3xl font-display font-black text-ink-950 px-2"
+                                    className="text-2xl md:text-3xl font-display font-black text-ink-950 px-2"
                                 >
                                     Ikuti <span className="text-brown-600">Media Sosial</span>
                                 </motion.h2>
-                                <div className="grid gap-5">
+                                <div className="grid gap-3 md:gap-5">
                                     {SOCIAL_MEDIA.map((social, idx) => (
                                         <SocialCard key={idx} social={social} delay={idx * 0.1} />
                                     ))}
@@ -357,9 +357,9 @@ export default function ContactPage() {
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                className="bg-white p-4 rounded-[2rem] md:rounded-[3rem] border border-surface-100 shadow-premium-lg"
+                                className="bg-white p-3 md:p-4 rounded-[2rem] md:rounded-[3rem] border border-surface-100 shadow-premium-lg"
                             >
-                                <div className="rounded-[2.5rem] overflow-hidden h-[400px] relative border border-surface-50">
+                                <div className="rounded-[2rem] md:rounded-[2.5rem] overflow-hidden h-[300px] md:h-[400px] relative border border-surface-50">
                                     <iframe
                                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.368565261314!2d106.84061807584104!3d-6.965749468199589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e683a0a194b4ff1%3A0x9a57be7a985db27a!2sPondok+Pesantren+Al-Imam+Al-Islami!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
                                         width="100%"
@@ -371,9 +371,9 @@ export default function ContactPage() {
                                         title="Lokasi Pesantren Al-Imam Al-Islami"
                                         className="grayscale hover:grayscale-0 transition-all duration-700"
                                     />
-                                    <div className="absolute bottom-6 left-6 bg-white px-6 py-3 rounded-2xl shadow-premium-lg border border-surface-50 flex items-center gap-3">
-                                        <MapIcon className="w-5 h-5 text-brown-600" />
-                                        <span className="text-sm font-black text-ink-950 uppercase tracking-widest">Buka di Maps</span>
+                                    <div className="absolute bottom-3 left-3 md:bottom-6 md:left-6 bg-white/90 backdrop-blur-sm px-3 py-1.5 md:px-6 md:py-3 rounded-lg md:rounded-2xl shadow-premium-lg border border-surface-50 flex items-center gap-1.5 md:gap-3 z-10">
+                                        <MapIcon className="w-3.5 h-3.5 md:w-5 md:h-5 text-brown-600" />
+                                        <span className="text-[10px] md:text-sm font-black text-ink-950 uppercase tracking-widest">Buka di Maps</span>
                                     </div>
                                 </div>
                             </motion.div>

@@ -312,22 +312,22 @@ const EkskulCard = ({
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ delay: index * 0.05 }}
-    className="group p-8 rounded-[2.5rem] bg-white border border-surface-100 shadow-premium-sm hover:shadow-premium-md hover:border-teal-200 transition-all hover:-translate-y-2 text-center"
+    className="group p-4 md:p-8 rounded-[2rem] md:rounded-[2.5rem] bg-white border border-surface-100 shadow-premium-sm hover:shadow-premium-md hover:border-teal-200 transition-all hover:-translate-y-2 text-center h-full flex flex-col justify-between"
   >
-    <div className="w-16 h-16 bg-brown-50 rounded-2xl flex items-center justify-center text-brown-600 mx-auto mb-6 group-hover:scale-110 transition-all duration-300">
-      <ekskul.icon className="w-8 h-8" />
+    <div className="w-12 h-12 md:w-16 md:h-16 bg-brown-50 rounded-xl md:rounded-2xl flex items-center justify-center text-brown-600 mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-all duration-300">
+      <ekskul.icon className="w-6 h-6 md:w-8 md:h-8" />
     </div>
 
-    <h4 className="font-display font-black text-xl text-ink-950 mb-3">
+    <h4 className="font-display font-black text-sm md:text-xl text-ink-950 mb-2 md:mb-3 leading-tight">
       {ekskul.name}
     </h4>
 
-    <p className="text-base text-ink-500 font-medium mb-6 leading-relaxed">
+    <p className="text-xs md:text-base text-ink-500 font-medium mb-4 md:mb-6 leading-relaxed">
       {ekskul.desc}
     </p>
 
-    <div className="pt-4 border-t border-surface-50">
-      <p className="text-xs font-black text-teal-700 uppercase tracking-widest">
+    <div className="pt-3 md:pt-4 border-t border-surface-50 mt-auto">
+      <p className="text-[10px] md:text-xs font-black text-teal-700 uppercase tracking-widest break-words">
         {ekskul.benefit}
       </p>
     </div>
@@ -418,7 +418,7 @@ export default function KegiatanPage() {
     {
       icon: Sun,
       time: "04:30 - 07:00",
-      activity: "Tahajud & Tahfidz",
+      activity: "Subuh Berjamaah & Tahfidz",
       detail: "Mulai hari dengan spiritualitas tinggi dan setoran hafalan segar di waktu terbaik.",
       benefit: "Membangun disiplin bangun pagi seumur hidup.",
       bgColor: "bg-gold-50/50",
@@ -473,20 +473,20 @@ export default function KegiatanPage() {
       bg: "bg-gold-50",
     },
     {
-      title: "Muhadharah",
-      desc: "Public Speaking",
-      detail: "Latihan pidato 3 bahasa setiap Kamis Malam.",
-      benefit: "Siap Jadi Khatib & Orator",
-      icon: Users,
+      title: "Bela Diri",
+      desc: "Fisik Tangguh",
+      detail: "Latihan rutin untuk kebugaran dan pertahanan diri.",
+      benefit: "Mental & Fisik Kuat",
+      icon: Shield,
       color: "text-teal-600",
       bg: "bg-teal-50",
     },
     {
-      title: "Rihlah Ilmiyyah",
-      desc: "Refreshing Edukatif",
-      detail: "Kunjungan rutin ke destinasi bermanfaat.",
-      benefit: "Wawasan Global Santri",
-      icon: Calendar,
+      title: "Pramuka",
+      desc: "Kepanduan",
+      detail: "Latihan kemandirian, leadership, dan survival skill.",
+      benefit: "Jiwa Pemimpin",
+      icon: Tent,
       color: "text-ink-600",
       bg: "bg-surface-50",
     },
@@ -566,28 +566,30 @@ export default function KegiatanPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-white p-12 lg:p-20 rounded-[4rem] shadow-premium-xl border border-surface-100 grid lg:grid-cols-2 gap-16 items-center overflow-hidden"
+            className="bg-white p-8 md:p-12 lg:p-20 rounded-[3rem] md:rounded-[4rem] shadow-premium-xl border border-surface-100 flex flex-col gap-12 items-center overflow-hidden relative text-center"
           >
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brown-50/50 rounded-full blur-[100px] translate-x-1/3 -translate-y-1/3" />
+            <div className="absolute top-0 right-0 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-brown-50/50 rounded-full blur-[100px] translate-x-1/3 -translate-y-1/3 pointer-events-none" />
 
-            <div className="relative z-10">
-              <span className="text-gold-600 font-extrabold tracking-widest uppercase text-xs mb-6 block">Output Santri</span>
-              <h2 className="text-3xl lg:text-6xl font-display font-black text-ink-950 mb-8 leading-none">
+            <div className="relative z-10 max-w-4xl mx-auto">
+              <span className="text-gold-600 font-extrabold tracking-widest uppercase text-xs mb-4 md:mb-6 block">Output Santri</span>
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-ink-950 mb-6 md:mb-8 leading-tight">
                 Hasil Nyata <br />
                 <span className="text-brown-600">Pendidikan Kita</span>
               </h2>
-              <p className="text-xl text-ink-600 font-medium leading-relaxed mb-10">
+              <p className="text-lg md:text-xl text-ink-600 font-medium leading-relaxed mb-8 md:mb-10 text-center max-w-2xl mx-auto">
                 Alhamdulillah, dengan izin Allah, santri kami telah menunjukkan perkembangan nyata baik dari sisi hafidz, pemahaman kitab, hingga mentalitas juara.
               </p>
-              <Link href="/kontak">
-                <button className="px-10 py-4 rounded-pill bg-brown-900 text-white font-black text-lg hover:bg-gold-500 shadow-premium-lg transition-all flex items-center gap-3">
-                  Lihat Portofolio Santri
-                  <ArrowRight className="w-5 h-5" />
-                </button>
-              </Link>
+              <div className="flex justify-center">
+                <Link href="/kontak">
+                  <button className="px-8 py-3 md:px-10 md:py-4 rounded-pill bg-brown-900 text-white font-black text-base md:text-lg hover:bg-gold-500 shadow-premium-lg transition-all flex items-center gap-3">
+                    Lihat Portofolio Santri
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
+                </Link>
+              </div>
             </div>
 
-            <div className="relative z-10 grid gap-6">
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 w-full">
               {[
                 { text: "Bahasa Arab sebagai Bahasa Pengantar", icon: MessageCircle },
                 { text: "Target Hafalan Berstandar Sanad (± 4 Juz/Thn)", icon: BadgeCheck },
@@ -597,12 +599,12 @@ export default function KegiatanPage() {
                 <motion.div
                   key={idx}
                   whileHover={{ scale: 1.02 }}
-                  className="bg-surface-50/80 p-6 rounded-[2rem] flex items-center gap-5 border border-surface-100 group transition-all"
+                  className="bg-surface-50/80 p-5 md:p-6 rounded-[2rem] flex items-center gap-4 border border-surface-100 group transition-all h-full text-left"
                 >
-                  <div className="w-14 h-14 rounded-2xl bg-white shadow-premium-sm flex items-center justify-center text-brown-600 shrink-0 group-hover:bg-brown-600 group-hover:text-white transition-colors">
-                    <item.icon className="w-6 h-6" />
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white shadow-premium-sm flex items-center justify-center text-brown-600 shrink-0 group-hover:bg-brown-600 group-hover:text-white transition-colors">
+                    <item.icon className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
-                  <span className="font-black text-ink-900 text-lg leading-tight">{item.text}</span>
+                  <span className="font-black text-ink-900 text-sm md:text-lg leading-tight">{item.text}</span>
                 </motion.div>
               ))}
             </div>
@@ -682,7 +684,7 @@ export default function KegiatanPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 lg:gap-8">
             {ekstrakurikuler.map((ekskul, idx) => (
               <EkskulCard key={idx} ekskul={ekskul} index={idx} />
             ))}
@@ -697,26 +699,26 @@ export default function KegiatanPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-brown-800 rounded-[4rem] p-12 md:p-24 text-center text-white relative overflow-hidden shadow-premium-2xl"
+            className="bg-brown-800 rounded-[2rem] md:rounded-[4rem] p-6 md:p-24 text-center text-white relative overflow-hidden shadow-premium-2xl"
           >
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
 
             <div className="relative z-10">
-              <h2 className="text-3xl md:text-6xl font-display font-black mb-8 text-white leading-tight">
+              <h2 className="text-2xl md:text-6xl font-display font-black mb-6 md:mb-8 text-white leading-tight">
                 Mulai Perjalanan <br /> <span className="text-gold-400">Terbaik</span> Mereka
               </h2>
-              <p className="text-xl text-brown-100 max-w-2xl mx-auto mb-12 font-medium">
+              <p className="text-base md:text-xl text-brown-100 max-w-2xl mx-auto mb-8 md:mb-12 font-medium">
                 Pendidikan adalah investasi terbaik. Masuklah ke lingkungan yang menjaga iman, memacu ilmu, dan membangun karakter mereka.
               </p>
-              <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
                 <Link href="/ppdb">
-                  <button className="px-12 py-5 rounded-pill bg-white text-brown-900 font-black text-lg hover:bg-gold-400 hover:text-white shadow-premium-xl transition-all">
+                  <button className="w-full sm:w-auto px-8 py-4 rounded-pill bg-white text-brown-900 font-black text-base md:text-lg hover:bg-gold-400 hover:text-white shadow-premium-xl transition-all">
                     Daftar Sekarang
                   </button>
                 </Link>
                 <Link href="/kontak">
-                  <button className="px-12 py-5 rounded-pill bg-white/10 text-white font-bold border border-white/20 hover:bg-white/20 transition-all">
+                  <button className="w-full sm:w-auto px-8 py-4 rounded-pill bg-white/10 text-white font-bold border border-white/20 hover:bg-white/20 transition-all">
                     Hubungi Admin
                   </button>
                 </Link>
