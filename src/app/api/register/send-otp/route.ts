@@ -121,7 +121,7 @@ export async function POST(request: NextRequest) {
           jenis_kelamin,
           jenjang,
           email,
-        },
+        } as any,
       },
     });
 
