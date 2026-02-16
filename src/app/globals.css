@@ -11,9 +11,9 @@
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 @theme {
   /* Typography - Clean, Geometric, Airy */
-  --font-sans: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
-  --font-display: "Plus Jakarta Sans", "Poppins", sans-serif;
-  --font-arabic: "Amiri", serif;
+  --font-sans: var(--font-sans), "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --font-display: var(--font-display), "Poppins", sans-serif;
+  --font-arabic: var(--font-arabic), "Amiri", serif;
 
   /* Colors - Professional & Airy Palette */
   --color-white: #ffffff;
