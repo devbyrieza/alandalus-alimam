@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, ClipboardList, CreditCard, FileText, Calendar, GraduationCap } from "lucide-react";
+import { Check, ClipboardList, CreditCard, FileText, Calendar, GraduationCap, UserCheck } from "lucide-react";
 import { type StatusProses } from "@/lib/access-control";
 
 interface ProgressStepperProps {
@@ -13,7 +13,8 @@ const STEPS = [
     { id: "data", label: "Isi Data", icon: FileText, statuses: ["paid", "verified", "data_completed"] },
     { id: "docs", label: "Berkas", icon: FileText, statuses: ["docs_uploaded", "docs_verified", "docs_rejected"] },
     { id: "test", label: "Tes Seleksi", icon: Calendar, statuses: ["scheduled", "tested"] },
-    { id: "result", label: "Hasil", icon: GraduationCap, statuses: ["announced", "accepted", "enrolled"] },
+    { id: "result", label: "Hasil", icon: GraduationCap, statuses: ["announced", "accepted"] },
+    { id: "re_register", label: "Daftar Ulang", icon: UserCheck, statuses: ["enrolled", "re_registered"] },
 ];
 
 export default function ProgressStepper({ currentStatus }: ProgressStepperProps) {
@@ -24,7 +25,7 @@ export default function ProgressStepper({ currentStatus }: ProgressStepperProps)
 
     return (
         <div className="w-full py-6 px-4 mb-8 bg-white/50 backdrop-blur-sm rounded-[2rem] border border-stone-100 shadow-sm overflow-x-auto scrollbar-hide">
-            <div className="flex items-center justify-between min-w-[600px] lg:min-w-0 px-4">
+            <div className="flex items-center justify-between min-w-[700px] lg:min-w-0 px-4">
                 {STEPS.map((step, idx) => {
                     const isCompleted = idx < activeIndex;
                     const isActive = idx === activeIndex;
@@ -44,10 +45,10 @@ export default function ProgressStepper({ currentStatus }: ProgressStepperProps)
                             {/* Icon Circle */}
                             <div
                                 className={`w-10 h-10 rounded-full flex items-center justify-center relative z-10 transition-all duration-500 border-2 ${isCompleted
-                                        ? "bg-teal-500 border-teal-500 text-white shadow-teal-200 shadow-lg"
-                                        : isActive
-                                            ? "bg-white border-teal-500 text-teal-600 shadow-teal-100 shadow-lg scale-110"
-                                            : "bg-white border-stone-200 text-stone-300"
+                                    ? "bg-teal-500 border-teal-500 text-white shadow-teal-200 shadow-lg"
+                                    : isActive
+                                        ? "bg-white border-teal-500 text-teal-600 shadow-teal-100 shadow-lg scale-110"
+                                        : "bg-white border-stone-200 text-stone-300"
                                     }`}
                             >
                                 {isCompleted ? <Check className="w-5 h-5 stroke-[3]" /> : <Icon className="w-5 h-5" />}
