@@ -99,16 +99,28 @@ interface PendaftarDetail {
     status_pembayaran: string;
     tanggal_pembayaran: string | null;
   }>;
+  nilai_ujian: {
+    nilai_total: number;
+    catatan?: string;
+  } | null;
 }
+
+import { useSession } from "next-auth/react";
 
 export default function PendaftarDetailPage() {
   const params = useParams();
   const router = useRouter();
+  const { data: session } = useSession();
   const [pendaftar, setPendaftar] = useState<PendaftarDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [editingStatus, setEditingStatus] = useState(false);
   const [newStatus, setNewStatus] = useState("");
   const [savingStatus, setSavingStatus] = useState(false);
+
+  // Helper for role checks
+  const isKeuangan = session?.user?.role === "admin_keuangan";
+  const isBerkas = session?.user?.role === "admin_berkas";
+  const isPenguji = session?.user?.role === "penguji" || session?.user?.role === "penguji_a" || session?.user?.role === "penguji_b";
 
   useEffect(() => {
     fetchPendaftarDetail();
@@ -396,7 +408,153 @@ export default function PendaftarDetailPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Info - 2 columns */}
         <div className="lg:col-span-2 space-y-6">
-          {/* Data Pribadi */}
+          {/* Untuk Admin Berkas: Dokumen pindah ke kolom utama paling atas */}
+          {isBerkas && (
+            <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-teal-100">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-teal-100 rounded-lg">
+                  <FileText className="w-6 h-6 text-teal-600" />
+                </div>
+                <h3 className="text-lg font-bold text-stone-900">Dokumen (Prioritas Verifikasi)</h3>
+              </div>
+              {pendaftar.dokumen.length === 0 ? (
+                <p className="text-sm text-stone-500">Belum ada dokumen terupload</p>
+              ) : (
+                <div className="space-y-4">
+                  {pendaftar.dokumen.map((doc) => (
+                    <div
+                      key={doc.id}
+                      className="flex items-center justify-between p-4 bg-stone-50 rounded-lg border border-stone-200"
+                    >
+                      <div className="flex items-center gap-3">
+                        <FileText className="w-5 h-5 text-stone-400" />
+                        <div>
+                          <span className="block font-medium text-stone-900">
+                            {doc.jenis_dokumen}
+                          </span>
+                          {doc.file_url && (
+                            <a
+                              href={doc.file_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs text-blue-600 hover:underline"
+                            >
+                              Lihat File
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                      <span
+                        className={`px-3 py-1 rounded-full text-xs font-bold ${doc.status_verifikasi === "verified"
+                          ? "bg-green-100 text-green-700"
+                          : doc.status_verifikasi === "rejected"
+                            ? "bg-red-100 text-red-700"
+                            : "bg-amber-100 text-amber-700"
+                          }`}
+                      >
+                        {doc.status_verifikasi === "verified"
+                          ? "Terverifikasi"
+                          : doc.status_verifikasi === "rejected"
+                            ? "Ditolak"
+                            : "Pending"}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Untuk Admin Penguji: Hasil Seleksi pindah ke kolom utama paling atas */}
+          {isPenguji && (
+            <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-purple-100">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-purple-100 rounded-lg">
+                  <div className="w-6 h-6 text-purple-600 font-bold flex items-center justify-center border-2 border-purple-600 rounded-md">
+                    A+
+                  </div>
+                </div>
+                <h3 className="text-lg font-bold text-stone-900">Hasil Seleksi & Ujian</h3>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="bg-purple-50 p-4 rounded-lg border border-purple-200 text-center">
+                  <span className="block text-sm text-purple-600 font-medium mb-1">Nilai Total</span>
+                  <span className="text-4xl font-extrabold text-purple-900">
+                    {pendaftar.nilai_ujian?.nilai_total || "0"}
+                  </span>
+                </div>
+
+                <div className="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                  <span className="block text-sm text-stone-500 font-medium mb-1">Catatan Penguji</span>
+                  <p className="text-stone-800 italic">
+                    {pendaftar.nilai_ujian?.catatan || "Belum ada catatan penguji."}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-4 flex justify-end">
+                <button className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
+                  <Edit className="w-4 h-4" />
+                  Input / Edit Nilai
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Untuk Admin Keuangan: Pembayaran pindah ke kolom utama paling atas */}
+          {/* TODO: Ganti logic check permission dengan session role yang sebenarnya */}
+          {isKeuangan && (
+            <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-emerald-100">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-emerald-100 rounded-lg">
+                  <CreditCard className="w-6 h-6 text-emerald-600" />
+                </div>
+                <h3 className="text-lg font-bold text-stone-900">Pembayaran (Prioritas Keuangan)</h3>
+              </div>
+              {pendaftar.pembayaran.length === 0 ? (
+                <p className="text-sm text-stone-500">Belum ada pembayaran</p>
+              ) : (
+                <div className="space-y-3">
+                  {pendaftar.pembayaran.map((payment) => (
+                    <div key={payment.id} className="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-lg font-bold text-stone-900">
+                          {formatRupiah(payment.jumlah)}
+                        </span>
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-bold ${payment.status_pembayaran === "verified"
+                            ? "bg-green-100 text-green-700"
+                            : payment.status_pembayaran === "rejected"
+                              ? "bg-red-100 text-red-700"
+                              : "bg-amber-100 text-amber-700"
+                            }`}
+                        >
+                          {payment.status_pembayaran === "verified"
+                            ? "Terverifikasi"
+                            : payment.status_pembayaran === "rejected"
+                              ? "Ditolak"
+                              : "Pending"}
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-sm text-stone-600">
+                        <div>
+                          <span className="block text-xs text-stone-400">Metode</span>
+                          <span className="font-medium">{payment.metode_pembayaran}</span>
+                        </div>
+                        <div>
+                          <span className="block text-xs text-stone-400">Tanggal</span>
+                          <span className="font-medium">{formatDate(payment.tanggal_pembayaran)}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Data Pribadi (Selalu tampil, tapi mungkin disederhanakan) */}
           <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-blue-100">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 bg-blue-100 rounded-lg">
@@ -413,18 +571,23 @@ export default function PendaftarDetailPage() {
                 value={pendaftar.jenis_kelamin === "L" ? "Laki-laki" : "Perempuan"}
               />
               <InfoItem label="Jenjang" value={pendaftar.jenjang} />
-              <InfoItem label="Tempat Lahir" value={pendaftar.tempat_lahir} />
-              <InfoItem label="Tanggal Lahir" value={formatDate(pendaftar.tanggal_lahir)} />
-              <InfoItem label="Golongan Darah" value={pendaftar.golongan_darah} />
-              <InfoItem label="NISN" value={pendaftar.nisn} />
-              <InfoItem label="Anak Ke" value={pendaftar.anak_ke?.toString()} />
-              <InfoItem label="Jumlah Saudara" value={pendaftar.jumlah_saudara?.toString()} />
-              <InfoItem label="Hobi" value={pendaftar.hobi} />
-              <InfoItem label="Cita-cita" value={pendaftar.cita_cita} />
+              {/* Hide extensive personal details for Finance/Berkas/Penguji to reduce noise */}
+              {!isKeuangan && !isBerkas && !isPenguji && (
+                <>
+                  <InfoItem label="Tempat Lahir" value={pendaftar.tempat_lahir} />
+                  <InfoItem label="Tanggal Lahir" value={formatDate(pendaftar.tanggal_lahir)} />
+                  <InfoItem label="Golongan Darah" value={pendaftar.golongan_darah} />
+                  <InfoItem label="NISN" value={pendaftar.nisn} />
+                  <InfoItem label="Anak Ke" value={pendaftar.anak_ke?.toString()} />
+                  <InfoItem label="Jumlah Saudara" value={pendaftar.jumlah_saudara?.toString()} />
+                  <InfoItem label="Hobi" value={pendaftar.hobi} />
+                  <InfoItem label="Cita-cita" value={pendaftar.cita_cita} />
+                </>
+              )}
             </div>
           </div>
 
-          {/* Kontak & Alamat */}
+          {/* Kontak & Alamat (Penting untuk Penagihan) */}
           <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-blue-100">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 bg-green-100 rounded-lg">
@@ -439,34 +602,41 @@ export default function PendaftarDetailPage() {
               <div className="md:col-span-2">
                 <InfoItem label="Alamat Lengkap" value={pendaftar.alamat} />
               </div>
-              <InfoItem label="RT/RW" value={`${pendaftar.rt || "-"}/${pendaftar.rw || "-"}`} />
-              <InfoItem label="Kelurahan" value={pendaftar.kelurahan} />
-              <InfoItem label="Kecamatan" value={pendaftar.kecamatan} />
-              <InfoItem label="Kabupaten" value={pendaftar.kabupaten} />
-              <InfoItem label="Provinsi" value={pendaftar.provinsi} />
-              <InfoItem label="Kode Pos" value={pendaftar.kode_pos} />
+              {/* Simplified address details for Finance */}
+              {!isKeuangan && (
+                <>
+                  <InfoItem label="RT/RW" value={`${pendaftar.rt || "-"}/${pendaftar.rw || "-"}`} />
+                  <InfoItem label="Kelurahan" value={pendaftar.kelurahan} />
+                  <InfoItem label="Kecamatan" value={pendaftar.kecamatan} />
+                  <InfoItem label="Kabupaten" value={pendaftar.kabupaten} />
+                  <InfoItem label="Provinsi" value={pendaftar.provinsi} />
+                  <InfoItem label="Kode Pos" value={pendaftar.kode_pos} />
+                </>
+              )}
             </div>
           </div>
 
-          {/* Asal Sekolah */}
-          <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-blue-100">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-purple-100 rounded-lg">
-                <School className="w-6 h-6 text-purple-600" />
+          {/* Asal Sekolah (Sembunyikan untuk Keuangan) */}
+          {!isKeuangan && (
+            <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-blue-100">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-purple-100 rounded-lg">
+                  <School className="w-6 h-6 text-purple-600" />
+                </div>
+                <h3 className="text-lg font-bold text-stone-900">Asal Sekolah</h3>
               </div>
-              <h3 className="text-lg font-bold text-stone-900">Asal Sekolah</h3>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <InfoItem label="Nama Sekolah" value={pendaftar.asal_sekolah} />
-              <InfoItem label="Tahun Lulus" value={pendaftar.tahun_lulus?.toString()} />
-              <div className="md:col-span-2">
-                <InfoItem label="Alamat Sekolah" value={pendaftar.alamat_sekolah} />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <InfoItem label="Nama Sekolah" value={pendaftar.asal_sekolah} />
+                <InfoItem label="Tahun Lulus" value={pendaftar.tahun_lulus?.toString()} />
+                <div className="md:col-span-2">
+                  <InfoItem label="Alamat Sekolah" value={pendaftar.alamat_sekolah} />
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
-          {/* Data Orang Tua */}
+          {/* Data Orang Tua (Penting untuk Penagihan) */}
           {pendaftar.orang_tua && (
             <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-blue-100">
               <div className="flex items-center gap-3 mb-4">
@@ -485,15 +655,19 @@ export default function PendaftarDetailPage() {
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
                     <InfoItem label="Nama Lengkap" value={pendaftar.orang_tua.nama_ayah} />
-                    <InfoItem label="NIK" value={pendaftar.orang_tua.nik_ayah} />
-                    <InfoItem label="Tempat, Tgl Lahir" value={`${pendaftar.orang_tua.tempat_lahir_ayah || ""}, ${formatDate(pendaftar.orang_tua.tanggal_lahir_ayah)}`} />
                     <InfoItem label="No. HP / WA" value={pendaftar.orang_tua.no_hp_ayah} />
-                    <InfoItem label="Pendidikan Terakhir" value={pendaftar.orang_tua.pendidikan_ayah} />
                     <InfoItem label="Pekerjaan" value={pendaftar.orang_tua.pekerjaan_ayah} />
                     <InfoItem label="Penghasilan" value={pendaftar.orang_tua.penghasilan_ayah} />
-                    <div className="md:col-span-2">
-                      <InfoItem label="Alamat Ayah" value={pendaftar.orang_tua.alamat_ayah || pendaftar.alamat} />
-                    </div>
+                    {!isKeuangan && (
+                      <>
+                        <InfoItem label="NIK" value={pendaftar.orang_tua.nik_ayah} />
+                        <InfoItem label="Tempat, Tgl Lahir" value={`${pendaftar.orang_tua.tempat_lahir_ayah || ""}, ${formatDate(pendaftar.orang_tua.tanggal_lahir_ayah)}`} />
+                        <InfoItem label="Pendidikan Terakhir" value={pendaftar.orang_tua.pendidikan_ayah} />
+                        <div className="md:col-span-2">
+                          <InfoItem label="Alamat Ayah" value={pendaftar.orang_tua.alamat_ayah || pendaftar.alamat} />
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
 
@@ -505,63 +679,52 @@ export default function PendaftarDetailPage() {
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
                     <InfoItem label="Nama Lengkap" value={pendaftar.orang_tua.nama_ibu} />
-                    <InfoItem label="NIK" value={pendaftar.orang_tua.nik_ibu} />
-                    <InfoItem label="Tempat, Tgl Lahir" value={`${pendaftar.orang_tua.tempat_lahir_ibu || ""}, ${formatDate(pendaftar.orang_tua.tanggal_lahir_ibu)}`} />
                     <InfoItem label="No. HP / WA" value={pendaftar.orang_tua.no_hp_ibu} />
-                    <InfoItem label="Pendidikan Terakhir" value={pendaftar.orang_tua.pendidikan_ibu} />
-                    <InfoItem label="Pekerjaan" value={pendaftar.orang_tua.pekerjaan_ibu} />
-                    <InfoItem label="Penghasilan" value={pendaftar.orang_tua.penghasilan_ibu} />
-                    <div className="md:col-span-2">
-                      <InfoItem label="Alamat Ibu" value={pendaftar.orang_tua.alamat_ibu || pendaftar.alamat} />
-                    </div>
+                    {!isKeuangan && (
+                      <>
+                        <InfoItem label="NIK" value={pendaftar.orang_tua.nik_ibu} />
+                        <InfoItem label="Tempat, Tgl Lahir" value={`${pendaftar.orang_tua.tempat_lahir_ibu || ""}, ${formatDate(pendaftar.orang_tua.tanggal_lahir_ibu)}`} />
+                        <InfoItem label="Pendidikan Terakhir" value={pendaftar.orang_tua.pendidikan_ibu} />
+                        <InfoItem label="Pekerjaan" value={pendaftar.orang_tua.pekerjaan_ibu} />
+                        <InfoItem label="Penghasilan" value={pendaftar.orang_tua.penghasilan_ibu} />
+                        <div className="md:col-span-2">
+                          <InfoItem label="Alamat Ibu" value={pendaftar.orang_tua.alamat_ibu || pendaftar.alamat} />
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
-
-                {/* Data Wali (Jika Ada) */}
-                {pendaftar.orang_tua.nama_wali && (
-                  <div className="p-4 bg-blue-50/50 rounded-xl border border-blue-100">
-                    <h4 className="font-bold text-blue-900 mb-4 flex items-center gap-2 border-b border-blue-200 pb-2">
-                      <Briefcase className="w-5 h-5 text-blue-600" />
-                      Data Wali
-                    </h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
-                      <InfoItem label="Nama Wali" value={pendaftar.orang_tua.nama_wali} />
-                      <InfoItem label="Hubungan" value={pendaftar.orang_tua.hubungan_wali} />
-                      <InfoItem label="No. HP" value={pendaftar.orang_tua.no_hp_wali} />
-                      <InfoItem label="Pekerjaan" value={pendaftar.orang_tua.pekerjaan_wali} />
-                      <div className="md:col-span-2">
-                        <InfoItem label="Alamat Wali" value={pendaftar.orang_tua.alamat_wali} />
-                      </div>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
           )}
 
-          {/* Riwayat Penyakit & Catatan */}
-          <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-red-100">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-red-100 rounded-lg">
-                <Heart className="w-6 h-6 text-red-600" />
+          {/* Riwayat Penyakit (Sembunyikan untuk Keuangan) */}
+          {!isKeuangan && (
+            <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-red-100">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-red-100 rounded-lg">
+                  <Heart className="w-6 h-6 text-red-600" />
+                </div>
+                <h3 className="text-lg font-bold text-stone-900">Data Kesehatan & Catatan</h3>
               </div>
-              <h3 className="text-lg font-bold text-stone-900">Data Kesehatan & Catatan</h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <InfoItem label="Golongan Darah" value={pendaftar.golongan_darah} />
-              <div className="md:col-span-2">
-                <p className="text-xs text-stone-500 mb-1">Riwayat Penyakit</p>
-                <div className="p-3 bg-red-50 text-red-900 rounded-lg border border-red-100 min-h-[60px]">
-                  {pendaftar.hobi || "Tidak ada riwayat penyakit yang dilaporkan"}
-                  {/* Note: I'm using hobi as placeholder if riwayat_penyakit column is not directly available on pendaftar model but it is in data_kesehatan */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <InfoItem label="Golongan Darah" value={pendaftar.golongan_darah} />
+                <div className="md:col-span-2">
+                  <p className="text-xs text-stone-500 mb-1">Riwayat Penyakit</p>
+                  <div className="p-3 bg-red-50 text-red-900 rounded-lg border border-red-100 min-h-[60px]">
+                    {pendaftar.hobi || "Tidak ada riwayat penyakit yang dilaporkan"}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Sidebar - 1 column */}
         <div className="space-y-6">
+          {/* Sidebar Component for Documents & Payments (existing sidebar logic adapted) */}
+          {/* If Keuangan, Sidebar Pembayaran di-hide atau ditampilkan sebagai Secondary info (karena sudah ada di header) */}
+
           {/* Status Dokumen */}
           <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-blue-100">
             <div className="flex items-center gap-3 mb-4">
@@ -602,50 +765,53 @@ export default function PendaftarDetailPage() {
             )}
           </div>
 
-          {/* Status Pembayaran */}
-          <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-blue-100">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-emerald-100 rounded-lg">
-                <CreditCard className="w-6 h-6 text-emerald-600" />
+          {/* Status Pembayaran (Sidebar View - Hide IF Keuangan because it's already on top, OR keep as consistent view) */}
+          {/* Hide IF Berkas as well, unless we want them to see it. User request implies focus on relevant data. */}
+          {!isKeuangan && !isBerkas && !isPenguji && (
+            <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-blue-100">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-emerald-100 rounded-lg">
+                  <CreditCard className="w-6 h-6 text-emerald-600" />
+                </div>
+                <h3 className="text-lg font-bold text-stone-900">Pembayaran</h3>
               </div>
-              <h3 className="text-lg font-bold text-stone-900">Pembayaran</h3>
-            </div>
-            {pendaftar.pembayaran.length === 0 ? (
-              <p className="text-sm text-stone-500">Belum ada pembayaran</p>
-            ) : (
-              <div className="space-y-3">
-                {pendaftar.pembayaran.map((payment) => (
-                  <div key={payment.id} className="p-3 bg-stone-50 rounded-lg">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-bold text-stone-900">
-                        {formatRupiah(payment.jumlah)}
-                      </span>
-                      <span
-                        className={`px-2 py-1 rounded text-xs font-bold ${payment.status_pembayaran === "verified"
-                          ? "bg-green-100 text-green-700"
-                          : payment.status_pembayaran === "rejected"
-                            ? "bg-red-100 text-red-700"
-                            : "bg-amber-100 text-amber-700"
-                          }`}
-                      >
-                        {payment.status_pembayaran === "verified"
-                          ? "Terverifikasi"
-                          : payment.status_pembayaran === "rejected"
-                            ? "Ditolak"
-                            : "Pending"}
-                      </span>
-                    </div>
-                    <div className="text-xs text-stone-600">
-                      <div>Metode: {payment.metode_pembayaran}</div>
-                      <div>
-                        Tanggal: {formatDate(payment.tanggal_pembayaran)}
+              {pendaftar.pembayaran.length === 0 ? (
+                <p className="text-sm text-stone-500">Belum ada pembayaran</p>
+              ) : (
+                <div className="space-y-3">
+                  {pendaftar.pembayaran.map((payment) => (
+                    <div key={payment.id} className="p-3 bg-stone-50 rounded-lg">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm font-bold text-stone-900">
+                          {formatRupiah(payment.jumlah)}
+                        </span>
+                        <span
+                          className={`px-2 py-1 rounded text-xs font-bold ${payment.status_pembayaran === "verified"
+                            ? "bg-green-100 text-green-700"
+                            : payment.status_pembayaran === "rejected"
+                              ? "bg-red-100 text-red-700"
+                              : "bg-amber-100 text-amber-700"
+                            }`}
+                        >
+                          {payment.status_pembayaran === "verified"
+                            ? "Terverifikasi"
+                            : payment.status_pembayaran === "rejected"
+                              ? "Ditolak"
+                              : "Pending"}
+                        </span>
+                      </div>
+                      <div className="text-xs text-stone-600">
+                        <div>Metode: {payment.metode_pembayaran}</div>
+                        <div>
+                          Tanggal: {formatDate(payment.tanggal_pembayaran)}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Timestamps */}
           <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-blue-100">

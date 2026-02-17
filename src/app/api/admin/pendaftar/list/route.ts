@@ -115,7 +115,7 @@ export async function GET(request: NextRequest) {
             select: { status_pembayaran: true }
           },
           dokumen: {
-            select: { jenis_dokumen: true, is_verified: true }
+            select: { jenis_dokumen: true, status_verifikasi: true } as any
           },
           nilai_ujian: {
             select: { nilai_total: true }

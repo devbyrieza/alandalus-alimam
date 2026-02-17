@@ -2,6 +2,7 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 import {
   Users,
   Search,
@@ -57,6 +58,8 @@ interface Pendaftar {
   jenjang: string;
   tanggal_lahir: string | null;
   no_hp: string | null;
+  dokumen?: Array<{ status_verifikasi: string }>;
+  nilai_ujian?: { nilai_total: number };
   email: string | null;
   status_pendaftaran: string;
   created_at: string;
@@ -82,13 +85,39 @@ interface TahunAjaran {
 
 function AdminPendaftarContent() {
   const searchParams = useSearchParams();
+  const { data: session } = useSession();
   const urlFilter = searchParams.get("filter") || "";
 
   const [pendaftar, setPendaftar] = useState<Pendaftar[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadingStats, setLoadingStats] = useState(true);
+
+  // Role helpers
+  const userRole = session?.user?.role;
+  const canViewKeuangan = userRole === "admin_super" || userRole === "admin_keuangan" || userRole === "head_of_it" || userRole === "admin";
+  const canViewBerkas = userRole === "admin_super" || userRole === "admin_berkas" || userRole === "admin";
+  const canViewSeleksi = userRole === "admin_super" || userRole === "penguji" || userRole === "penguji_a" || userRole === "penguji_b" || userRole === "admin";
+  // We already have canViewKeuangan logic, but let's make it robust with session
+  // Let's ensure we use the session-based one if available, or fallback.
+
+  const isKeuangan = userRole === "admin_keuangan";
+  const isBerkas = userRole === "admin_berkas";
+  const isPenguji = userRole === "penguji_a" || userRole === "penguji_b" || userRole === "penguji";
   const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const [statusFilter, setStatusFilter] = useState(urlFilter);
+
+  // Set default filter for Admin Berkas/Penguji if no filter provided
+  useEffect(() => {
+    if (!urlFilter && !statusFilter) {
+      if (isBerkas) {
+        setStatusFilter("menunggu_verifikasi_dokumen");
+      } else if (isPenguji) {
+        setStatusFilter("terjadwal_ujian");
+      }
+    }
+  }, [isBerkas, isPenguji, urlFilter, statusFilter]);
+
   const [jenjangFilter, setJenjangFilter] = useState("");
   const [tahunAjaranFilter, setTahunAjaranFilter] = useState("");
   const [tahunAjaranList, setTahunAjaranList] = useState<TahunAjaran[]>([]);
@@ -409,11 +438,8 @@ function AdminPendaftarContent() {
   };
 
   // Role Helpers
-  // Default to false if loading or no role found, to prevent unauthorized view
-  const canViewKeuangan = !isRoleLoading && role !== null && (role === 'admin_keuangan' || role === 'admin_super' || role === 'admin');
-  const canViewBerkas = !isRoleLoading && role !== null && (role === 'admin_berkas' || role === 'admin_super' || role === 'admin');
-  const canViewSeleksi = !isRoleLoading && role !== null && (role === 'admin_super' || role === 'admin' || role === 'penguji');
-  // Note: If role is null after loading, user shouldn't see sensitive columns.
+  // We use the variables defined at the top of the component (canViewKeuangan, isBerkas, isPenguji)
+  // which are derived from the session.
 
   const formatStatus = (status: string) => {
     const statusMap: Record<string, { label: string; color: string }> = {
@@ -582,7 +608,9 @@ function AdminPendaftarContent() {
                   </optgroup>
                   <optgroup label="--- Dokumen ---">
                     <option value="belum_upload_dokumen">Belum Upload Dokumen</option>
-                    <option value="menunggu_verifikasi_dokumen">Menunggu Verifikasi Dokumen</option>
+                    <option value="menunggu_verifikasi_dokumen" className="font-bold bg-yellow-50">
+                      Menunggu Verifikasi Dokumen (PRIORITAS)
+                    </option>
                     <option value="dokumen_terverifikasi">Dokumen Terverifikasi</option>
                     <option value="dokumen_ditolak">Dokumen Ditolak</option>
                   </optgroup>
@@ -592,7 +620,9 @@ function AdminPendaftarContent() {
               {canViewSeleksi && (
                 <>
                   <optgroup label="--- Ujian & Wawancara ---">
-                    <option value="terjadwal_ujian">Terjadwal Ujian</option>
+                    <option value="terjadwal_ujian" className={isPenguji ? "font-bold bg-purple-50" : ""}>
+                      Terjadwal Ujian {isPenguji ? "(PRIORITAS)" : ""}
+                    </option>
                     <option value="belum_ujian">Belum Ujian</option>
                     <option value="sudah_ujian">Sudah Ujian</option>
                     <option value="hasil_ujian">Hasil Ujian</option>
@@ -878,26 +908,37 @@ function AdminPendaftarContent() {
                     <th className="px-4 py-3 text-left text-xs font-bold text-blue-900 uppercase tracking-wider">
                       Nama Lengkap
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-bold text-blue-900 uppercase tracking-wider">
-                      NIK
-                    </th>
-                    <th className="px-4 py-3 text-left text-xs font-bold text-blue-900 uppercase tracking-wider">
-                      Jenjang
-                    </th>
-                    <th className="px-4 py-3 text-left text-xs font-bold text-blue-900 uppercase tracking-wider">
-                      Status
-                    </th>
-                    {canViewKeuangan && (
-                      <th className="px-4 py-3 text-left text-xs font-bold text-blue-900 uppercase tracking-wider">
-                        Pembayaran
-                      </th>
+                    {!canViewKeuangan && (
+                      <>
+                        <th className="px-4 py-3 text-left text-xs font-bold text-blue-900 uppercase tracking-wider">
+                          NIK
+                        </th>
+                        {/* Custom Column for Penguji */}
+                        {isPenguji && (
+                          <th className="px-4 py-3 text-left text-xs font-bold text-blue-900 uppercase tracking-wider">
+                            Hasil Seleksi
+                          </th>
+                        )}
+                        {/* Custom Column for Admin Berkas */}
+                        {isBerkas && (
+                          <th className="px-4 py-3 text-left text-xs font-bold text-blue-900 uppercase tracking-wider">
+                            Status Berkas
+                          </th>
+                        )}
+
+                        {/* Hide extraneous columns for Admin Berkas to focus view */}
+                        {!isBerkas && (
+                          <>
+                            <th className="px-4 py-3 text-left text-xs font-bold text-blue-900 uppercase tracking-wider">
+                              Kontak
+                            </th>
+                            <th className="px-4 py-3 text-left text-xs font-bold text-blue-900 uppercase tracking-wider">
+                              Tanggal Daftar
+                            </th>
+                          </>
+                        )}
+                      </>
                     )}
-                    <th className="px-4 py-3 text-left text-xs font-bold text-blue-900 uppercase tracking-wider">
-                      Kontak
-                    </th>
-                    <th className="px-4 py-3 text-left text-xs font-bold text-blue-900 uppercase tracking-wider">
-                      Tanggal Daftar
-                    </th>
                     <th className="px-4 py-3 text-left text-xs font-bold text-blue-900 uppercase tracking-wider">
                       Aksi
                     </th>
@@ -940,11 +981,76 @@ function AdminPendaftarContent() {
                           </div>
                         </div>
                       </td>
-                      <td className="px-4 py-3">
-                        <span className="font-mono text-sm text-stone-700">
-                          {item.nik}
-                        </span>
-                      </td>
+                      {/* Admin Penguji Specific Column */}
+                      {isPenguji && (
+                        <td className="px-4 py-4 whitespace-nowrap">
+                          <span className={`px-2 py-1 inline-flex text-xs leading-5 font-bold rounded-full ${item.nilai_ujian && item.nilai_ujian.nilai_total > 0
+                              ? "bg-purple-100 text-purple-800"
+                              : "bg-stone-100 text-stone-500"
+                            }`}>
+                            {item.nilai_ujian && item.nilai_ujian.nilai_total > 0
+                              ? `Nilai: ${item.nilai_ujian.nilai_total}`
+                              : "Belum Ujian"}
+                          </span>
+                        </td>
+                      )}
+                      {/* Admin Berkas Specific Column */}
+                      {isBerkas && (
+                        <td className="px-4 py-4 whitespace-nowrap">
+                          <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${item.dokumen && item.dokumen.every((d: any) => d.status_verifikasi === 'verified') && item.dokumen.length > 0
+                            ? "bg-green-100 text-green-800"
+                            : item.dokumen && item.dokumen.some((d: any) => d.status_verifikasi === 'rejected')
+                              ? "bg-red-100 text-red-800"
+                              : "bg-yellow-100 text-yellow-800"
+                            }`}>
+                            {item.dokumen && item.dokumen.every((d: any) => d.status_verifikasi === 'verified') && item.dokumen.length > 0
+                              ? "Lengkap"
+                              : item.dokumen && item.dokumen.length > 0
+                                ? "Perlu Cek"
+                                : "Belum Upload"}
+                          </span>
+                          <div className="text-xs text-stone-500 mt-1">
+                            {item.dokumen?.length || 0} Dokumen
+                          </div>
+                        </td>
+                      )}
+
+                      {/* Hide extraneous columns for Admin Berkas to focus view */}
+                      {!isBerkas && (
+                        <>
+                          <td className="px-4 py-3">
+                            <span className="font-mono text-sm text-stone-700">
+                              {item.nik}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3">
+                            <div className="text-sm space-y-1">
+                              {item.no_hp && (
+                                <div className="flex items-center gap-1 text-stone-600">
+                                  <Phone className="w-3 h-3" />
+                                  <span className="text-xs">{item.no_hp}</span>
+                                </div>
+                              )}
+                              {item.email && (
+                                <div className="flex items-center gap-1 text-stone-600">
+                                  <Mail className="w-3 h-3" />
+                                  <span className="text-xs truncate max-w-[150px]">
+                                    {item.email}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                          </td>
+                          <td className="px-4 py-3 whitespace-nowrap">
+                            <div className="flex items-center gap-1 text-stone-600">
+                              <Calendar className="w-4 h-4" />
+                              <span className="text-sm">
+                                {formatDate(item.created_at)}
+                              </span>
+                            </div>
+                          </td>
+                        </>
+                      )}
                       <td className="px-4 py-3">
                         <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-bold">
                           {item.jenjang}
@@ -953,7 +1059,7 @@ function AdminPendaftarContent() {
                       <td className="px-4 py-3">
                         {formatStatus(item.status_pendaftaran)}
                       </td>
-                      {canViewKeuangan && (
+                      {canViewKeuangan ? (
                         <td className="px-4 py-3">
                           {/* @ts-ignore */}
                           {item.pembayaran?.length > 0 ? (
@@ -973,33 +1079,41 @@ function AdminPendaftarContent() {
                             <span className="text-stone-400 text-xs">-</span>
                           )}
                         </td>
-                      )}
-                      <td className="px-4 py-3">
-                        <div className="text-sm space-y-1">
-                          {item.no_hp && (
-                            <div className="flex items-center gap-1 text-stone-600">
-                              <Phone className="w-3 h-3" />
-                              <span className="text-xs">{item.no_hp}</span>
+                      ) : (
+                        <>
+                          <td className="px-4 py-3">
+                            <span className="font-mono text-sm text-stone-700">
+                              {item.nik}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3">
+                            <div className="text-sm space-y-1">
+                              {item.no_hp && (
+                                <div className="flex items-center gap-1 text-stone-600">
+                                  <Phone className="w-3 h-3" />
+                                  <span className="text-xs">{item.no_hp}</span>
+                                </div>
+                              )}
+                              {item.email && (
+                                <div className="flex items-center gap-1 text-stone-600">
+                                  <Mail className="w-3 h-3" />
+                                  <span className="text-xs truncate max-w-[150px]">
+                                    {item.email}
+                                  </span>
+                                </div>
+                              )}
                             </div>
-                          )}
-                          {item.email && (
+                          </td>
+                          <td className="px-4 py-3 whitespace-nowrap">
                             <div className="flex items-center gap-1 text-stone-600">
-                              <Mail className="w-3 h-3" />
-                              <span className="text-xs truncate max-w-[150px]">
-                                {item.email}
+                              <Calendar className="w-4 h-4" />
+                              <span className="text-sm">
+                                {formatDate(item.created_at)}
                               </span>
                             </div>
-                          )}
-                        </div>
-                      </td>
-                      <td className="px-4 py-3 whitespace-nowrap">
-                        <div className="flex items-center gap-1 text-stone-600">
-                          <Calendar className="w-4 h-4" />
-                          <span className="text-sm">
-                            {formatDate(item.created_at)}
-                          </span>
-                        </div>
-                      </td>
+                          </td>
+                        </>
+                      )}
                       <td className="px-4 py-3 whitespace-nowrap">
                         <Link
                           href={`/dashboard/admin/pendaftar/${item.id}`}
