@@ -47,9 +47,12 @@ export async function GET(request: NextRequest, props: { params: Promise<{ path:
         }
 
         // 3. Get File
+        console.log(`[File Serve] Requesting: ${relativePath}`);
         const fileData = getFileLocal(relativePath);
 
         if (!fileData) {
+            console.error(`[File Serve] Not Found: ${relativePath}`);
+            // Logs from getFileLocal should help, but let's log here too if needed
             return NextResponse.json({ error: "File not found" }, { status: 404 });
         }
 

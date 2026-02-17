@@ -63,6 +63,7 @@ export function getFileLocal(relativePath: string): { buffer: Buffer; mimeType: 
 
         return { buffer, mimeType };
     }
+    console.log(`[Storage] Check failed. Path: ${fullPath}, Exists: ${fs.existsSync(fullPath)}, CWD: ${process.cwd()}, StorageDir: ${STORAGE_DIR}`);
     return null;
 }
 
