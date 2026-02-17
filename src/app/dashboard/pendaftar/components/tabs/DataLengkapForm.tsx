@@ -508,7 +508,8 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
   const eitherParentAlive = !isAyahDeceased || !isIbuDeceased;
   const isTinggalBersamaWali = formData.santri.tinggal_bersama === "Wali";
   const isWaliRequired = bothParentsDeceased || isTinggalBersamaWali;
-  const canFillWali = !eitherParentAlive || isTinggalBersamaWali;
+  // Always allowed to fill now, as per user request
+  const canFillWali = true;
 
   useEffect(() => {
     if (isWaliRequired && formData.wali_sama_dengan_ortu) {
@@ -1107,19 +1108,17 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
             icon={Users}
             title="Data Wali"
             subtitle={
-              isTinggalBersamaWali
-                ? "Wajib diisi karena tinggal bersama wali"
-                : eitherParentAlive
-                  ? "Data Wali Dinonaktifkan (Karena Ayah/Ibu masih hidup)"
-                  : "Diisi jika ayah dan ibu sudah meninggal"
+              isWaliRequired
+                ? "Wajib diisi (Karena kondisi khusus)"
+                : "Opsional (Boleh diisi atau dikosongkan)"
             }
             isOpen={openSections.wali}
-            onToggle={() => canFillWali && toggleSection("wali")}
+            onToggle={() => toggleSection("wali")}
             isCompleted={false}
-            disabled={!canFillWali}
+            disabled={false}
           />
 
-          {openSections.wali && canFillWali && (
+          {openSections.wali && (
             <div className="glass-panel p-6 md:p-8 rounded-[2rem] animate-in slide-in-from-top-4 duration-300 space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <InputField label="Hubungan" name="hubungan_wali" value={formData.wali.hubungan} onChange={(v) => updateWali("hubungan", v)} placeholder="Paman, Kakek, dll" required={isWaliRequired} />
@@ -1148,11 +1147,11 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                 <h5 className="font-bold text-ink-800 mb-4 bg-surface-100 inline-block px-3 py-1 rounded-lg text-sm">Alamat Wali</h5>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="md:col-span-2">
-                    <InputField label="Alamat" name="alamat_wali" value={formData.wali.alamat} onChange={(v) => updateWali("alamat", v)} type="textarea" placeholder="Nama Jalan/Gang/Desa beserta Nomor Rumah" required />
+                    <InputField label="Alamat" name="alamat_wali" value={formData.wali.alamat} onChange={(v) => updateWali("alamat", v)} type="textarea" placeholder="Nama Jalan/Gang/Desa beserta Nomor Rumah" required={isWaliRequired} />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
-                    <InputField label="RT" name="rt_wali" value={formData.wali.rt} onChange={(v) => updateWali("rt", v)} placeholder="001" maxLength={3} required />
-                    <InputField label="RW" name="rw_wali" value={formData.wali.rw} onChange={(v) => updateWali("rw", v)} placeholder="002" maxLength={3} required />
+                    <InputField label="RT" name="rt_wali" value={formData.wali.rt} onChange={(v) => updateWali("rt", v)} placeholder="001" maxLength={3} required={isWaliRequired} />
+                    <InputField label="RW" name="rw_wali" value={formData.wali.rw} onChange={(v) => updateWali("rw", v)} placeholder="002" maxLength={3} required={isWaliRequired} />
                   </div>
                   <div className="md:col-span-2">
                     <WilayahSelector
