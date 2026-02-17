@@ -411,7 +411,7 @@ export async function getStudentsByFilter(
                         tipe_cicilan: true,
                         jumlah: true,
                         status_pembayaran: true,
-                    },
+                    } as any,
                 },
                 dokumen: {
                     select: {
@@ -434,8 +434,8 @@ export async function getStudentsByFilter(
                         nilai_akhir: true,
                         catatan_admin: true,
                     },
-                },
-            },
+                } as any,
+            } as any,
             orderBy,
             skip,
             take: limit,
