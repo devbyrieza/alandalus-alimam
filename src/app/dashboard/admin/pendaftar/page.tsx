@@ -126,6 +126,9 @@ function AdminPendaftarContent() {
   const [statusFilter, setStatusFilter] = useState(urlFilter);
 
   // Set default filter for Admin Berkas/Penguji/Keuangan if no filter provided
+  // REMOVED: This causes data to "disappear" for admins once they are processed.
+  // Specialized roles should use the specialized menus for task-focused views.
+  /* 
   useEffect(() => {
     if (userRole && !urlFilter && !statusFilter) {
       if (isBerkas) {
@@ -137,6 +140,7 @@ function AdminPendaftarContent() {
       }
     }
   }, [userRole, isBerkas, isPenguji, isKeuangan, urlFilter, statusFilter]);
+  */
 
   const [jenjangFilter, setJenjangFilter] = useState("");
   const [tahunAjaranFilter, setTahunAjaranFilter] = useState("");
