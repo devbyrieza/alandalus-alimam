@@ -91,6 +91,7 @@ interface DataOrangTua {
 
 interface DataWali {
   hubungan: string;
+  hubungan_lainnya?: string;
   nama_lengkap: string;
   nik: string;
   tempat_lahir: string;
@@ -246,6 +247,7 @@ const INITIAL_ORTU: DataOrangTua = {
 
 const INITIAL_WALI: DataWali = {
   hubungan: "",
+  hubungan_lainnya: "",
   nama_lengkap: "",
   nik: "",
   tempat_lahir: "",
@@ -1140,6 +1142,16 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                   options={HUBUNGAN_WALI_OPTIONS}
                   required={isWaliRequired}
                 />
+                {formData.wali.hubungan === "Lainnya" && (
+                  <InputField
+                    label="Sebutkan Hubungan Wali"
+                    name="hubungan_lainnya_wali"
+                    value={formData.wali.hubungan_lainnya || ""}
+                    onChange={(v) => updateWali("hubungan_lainnya", v)}
+                    placeholder="Contoh: Ibu Angkat"
+                    required={isWaliRequired}
+                  />
+                )}
                 <InputField label="Nama Lengkap" name="nama_lengkap_wali" value={formData.wali.nama_lengkap} onChange={(v) => updateWali("nama_lengkap", v)} placeholder="Sesuai KTP" required={isWaliRequired} />
                 <InputField label="NIK" name="nik_wali" value={formData.wali.nik} onChange={(v) => updateWali("nik", v)} placeholder="16 digit NIK" maxLength={16} required={isWaliRequired} />
 
