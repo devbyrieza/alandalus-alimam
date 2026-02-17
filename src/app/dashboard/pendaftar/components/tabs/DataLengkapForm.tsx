@@ -181,6 +181,17 @@ const TINGGAL_BERSAMA_OPTIONS = [
   "Lainnya",
 ];
 
+const HUBUNGAN_WALI_OPTIONS = [
+  "Kakek",
+  "Nenek",
+  "Paman",
+  "Bibi",
+  "Kakak Kandung",
+  "Kakak Ipar",
+  "Saudara Sepupu",
+  "Lainnya",
+];
+
 const INITIAL_SANTRI: DataDiriSantri = {
   nik: "",
   nama_lengkap: "",
@@ -1121,7 +1132,14 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
           {openSections.wali && (
             <div className="glass-panel p-6 md:p-8 rounded-[2rem] animate-in slide-in-from-top-4 duration-300 space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <InputField label="Hubungan" name="hubungan_wali" value={formData.wali.hubungan} onChange={(v) => updateWali("hubungan", v)} placeholder="Paman, Kakek, dll" required={isWaliRequired} />
+                <InputField
+                  label="Hubungan"
+                  name="hubungan_wali"
+                  value={formData.wali.hubungan}
+                  onChange={(v) => updateWali("hubungan", v)}
+                  options={HUBUNGAN_WALI_OPTIONS}
+                  required={isWaliRequired}
+                />
                 <InputField label="Nama Lengkap" name="nama_lengkap_wali" value={formData.wali.nama_lengkap} onChange={(v) => updateWali("nama_lengkap", v)} placeholder="Sesuai KTP" required={isWaliRequired} />
                 <InputField label="NIK" name="nik_wali" value={formData.wali.nik} onChange={(v) => updateWali("nik", v)} placeholder="16 digit NIK" maxLength={16} required={isWaliRequired} />
 
