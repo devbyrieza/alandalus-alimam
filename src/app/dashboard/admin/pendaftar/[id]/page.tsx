@@ -105,22 +105,43 @@ interface PendaftarDetail {
   } | null;
 }
 
-import { useSession } from "next-auth/react";
+/* import { useSession } from "next-auth/react"; -- Removed */
 
 export default function PendaftarDetailPage() {
   const params = useParams();
   const router = useRouter();
-  const { data: session } = useSession();
+  /* const { data: session } = useSession(); -- Removed */
+  const [userRole, setUserRole] = useState<string | null>(null);
+
   const [pendaftar, setPendaftar] = useState<PendaftarDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [editingStatus, setEditingStatus] = useState(false);
   const [newStatus, setNewStatus] = useState("");
   const [savingStatus, setSavingStatus] = useState(false);
 
+  useEffect(() => {
+    const fetchSession = async () => {
+      try {
+        const res = await fetch("/api/auth/session");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.session?.role) {
+            setUserRole(data.session.role);
+          } else if (data.user?.user_metadata?.role) {
+            setUserRole(data.user.user_metadata.role);
+          }
+        }
+      } catch (e) {
+        console.error("Failed to fetch session", e);
+      }
+    }
+    fetchSession();
+  }, []);
+
   // Helper for role checks
-  const isKeuangan = session?.user?.role === "admin_keuangan";
-  const isBerkas = session?.user?.role === "admin_berkas";
-  const isPenguji = session?.user?.role === "penguji" || session?.user?.role === "penguji_a" || session?.user?.role === "penguji_b";
+  const isKeuangan = userRole === "admin_keuangan";
+  const isBerkas = userRole === "admin_berkas";
+  const isPenguji = userRole === "penguji" || userRole === "penguji_a" || userRole === "penguji_b";
 
   useEffect(() => {
     fetchPendaftarDetail();

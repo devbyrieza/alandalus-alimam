@@ -2,7 +2,7 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { useSession } from "next-auth/react";
+
 import {
   Users,
   Search,
@@ -85,20 +85,38 @@ interface TahunAjaran {
 
 function AdminPendaftarContent() {
   const searchParams = useSearchParams();
-  const { data: session } = useSession();
+  /* const { data: session } = useSession();  -- Removed to fix build error */
   const urlFilter = searchParams.get("filter") || "";
 
   const [pendaftar, setPendaftar] = useState<Pendaftar[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadingStats, setLoadingStats] = useState(true);
+  const [userRole, setUserRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchSession = async () => {
+      try {
+        const res = await fetch("/api/auth/session");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.session?.role) {
+            setUserRole(data.session.role);
+          } else if (data.user?.user_metadata?.role) {
+            setUserRole(data.user.user_metadata.role);
+          }
+        }
+      } catch (e) {
+        console.error("Failed to fetch session", e);
+      }
+    }
+    fetchSession();
+  }, []);
 
   // Role helpers
-  const userRole = session?.user?.role;
+  // const userRole = session?.user?.role; -- Handled by state above
   const canViewKeuangan = userRole === "admin_super" || userRole === "admin_keuangan" || userRole === "head_of_it" || userRole === "admin";
   const canViewBerkas = userRole === "admin_super" || userRole === "admin_berkas" || userRole === "admin";
   const canViewSeleksi = userRole === "admin_super" || userRole === "penguji" || userRole === "penguji_a" || userRole === "penguji_b" || userRole === "admin";
-  // We already have canViewKeuangan logic, but let's make it robust with session
-  // Let's ensure we use the session-based one if available, or fallback.
 
   const isKeuangan = userRole === "admin_keuangan";
   const isBerkas = userRole === "admin_berkas";
@@ -109,14 +127,14 @@ function AdminPendaftarContent() {
 
   // Set default filter for Admin Berkas/Penguji if no filter provided
   useEffect(() => {
-    if (!urlFilter && !statusFilter) {
+    if (userRole && !urlFilter && !statusFilter) {
       if (isBerkas) {
         setStatusFilter("menunggu_verifikasi_dokumen");
       } else if (isPenguji) {
         setStatusFilter("terjadwal_ujian");
       }
     }
-  }, [isBerkas, isPenguji, urlFilter, statusFilter]);
+  }, [userRole, isBerkas, isPenguji, urlFilter, statusFilter]);
 
   const [jenjangFilter, setJenjangFilter] = useState("");
   const [tahunAjaranFilter, setTahunAjaranFilter] = useState("");
@@ -985,8 +1003,8 @@ function AdminPendaftarContent() {
                       {isPenguji && (
                         <td className="px-4 py-4 whitespace-nowrap">
                           <span className={`px-2 py-1 inline-flex text-xs leading-5 font-bold rounded-full ${item.nilai_ujian && item.nilai_ujian.nilai_total > 0
-                              ? "bg-purple-100 text-purple-800"
-                              : "bg-stone-100 text-stone-500"
+                            ? "bg-purple-100 text-purple-800"
+                            : "bg-stone-100 text-stone-500"
                             }`}>
                             {item.nilai_ujian && item.nilai_ujian.nilai_total > 0
                               ? `Nilai: ${item.nilai_ujian.nilai_total}`
