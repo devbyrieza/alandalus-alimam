@@ -285,17 +285,20 @@ export async function getStudentsByFilter(
     }
 
     // ── Hasil Seleksi (Nested Filter) ─────────────────────────────
+    // Logic untuk Status Seleksi
     if (criteria.status_seleksi) {
-        andConditions.push({
+        const statusSeleksiCondition: any = {
             hasil_seleksi: {
                 is: {
-                    status_seleksi: criteria.status_seleksi as any,
+                    status_seleksi: criteria.status_seleksi,
                 },
             },
-        });
+        };
+        andConditions.push(statusSeleksiCondition);
         appliedFilters.push(`Status Seleksi: ${criteria.status_seleksi}`);
     }
 
+    // Logic untuk Nilai Seleksi
     if (criteria.nilai_min !== undefined || criteria.nilai_max !== undefined) {
         const nilaiFilter: any = {};
         if (criteria.nilai_min !== undefined) {
@@ -306,9 +309,14 @@ export async function getStudentsByFilter(
             nilaiFilter.lte = criteria.nilai_max;
             appliedFilters.push(`Nilai Max: ${criteria.nilai_max}`);
         }
-        andConditions.push({
-            hasil_seleksi: { is: { nilai_akhir: nilaiFilter } },
-        });
+        const nilaiCondition: any = {
+            hasil_seleksi: {
+                is: {
+                    nilai_akhir: nilaiFilter
+                }
+            }
+        };
+        andConditions.push(nilaiCondition);
     }
 
     // ── Pembayaran (Nested Filter) ────────────────────────────────
@@ -322,11 +330,12 @@ export async function getStudentsByFilter(
     }
 
     if (criteria.jenis_pembayaran) {
-        andConditions.push({
+        const pembayaranCondition: any = {
             pembayaran: {
-                some: { jenis_pembayaran: criteria.jenis_pembayaran as any },
+                some: { jenis_pembayaran: criteria.jenis_pembayaran },
             },
-        });
+        };
+        andConditions.push(pembayaranCondition);
         appliedFilters.push(`Jenis Pembayaran: ${criteria.jenis_pembayaran}`);
     }
 
@@ -436,7 +445,8 @@ export async function getStudentsByFilter(
     // ── Post-process: Filter penghasilan (karena disimpan string) ──
     let filteredData = data;
     if (needsIncomeFilter) {
-        filteredData = data.filter((student) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        filteredData = data.filter((student: any) => {
             if (!student.orang_tua) return false;
 
             const incomeAyah = parseIncomeToNumber(
