@@ -506,16 +506,19 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
   const isIbuDeceased = formData.ibu.status_hidup === "Sudah Meninggal";
   const bothParentsDeceased = isAyahDeceased && isIbuDeceased;
   const eitherParentAlive = !isAyahDeceased || !isIbuDeceased;
+  const isTinggalBersamaWali = formData.santri.tinggal_bersama === "Wali";
+  const isWaliRequired = bothParentsDeceased || isTinggalBersamaWali;
+  const canFillWali = !eitherParentAlive || isTinggalBersamaWali;
 
   useEffect(() => {
-    if (bothParentsDeceased && formData.wali_sama_dengan_ortu) {
+    if (isWaliRequired && formData.wali_sama_dengan_ortu) {
       setFormData((prev) => ({
         ...prev,
         wali_sama_dengan_ortu: false,
       }));
       setOpenSections((prev) => ({ ...prev, wali: true }));
     }
-  }, [bothParentsDeceased, formData.wali_sama_dengan_ortu]);
+  }, [isWaliRequired, formData.wali_sama_dengan_ortu]);
 
   const [toastMessage, setToast] = useState<{
     type: "success" | "error";
@@ -1103,19 +1106,25 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
           <SectionHeader
             icon={Users}
             title="Data Wali"
-            subtitle={eitherParentAlive ? "Data Wali Dinonaktifkan (Karena Ayah/Ibu masih hidup)" : "Diisi jika ayah dan ibu sudah meninggal"}
+            subtitle={
+              isTinggalBersamaWali
+                ? "Wajib diisi karena tinggal bersama wali"
+                : eitherParentAlive
+                  ? "Data Wali Dinonaktifkan (Karena Ayah/Ibu masih hidup)"
+                  : "Diisi jika ayah dan ibu sudah meninggal"
+            }
             isOpen={openSections.wali}
-            onToggle={() => !eitherParentAlive && toggleSection("wali")}
+            onToggle={() => canFillWali && toggleSection("wali")}
             isCompleted={false}
-            disabled={eitherParentAlive}
+            disabled={!canFillWali}
           />
 
-          {openSections.wali && !eitherParentAlive && (
+          {openSections.wali && canFillWali && (
             <div className="glass-panel p-6 md:p-8 rounded-[2rem] animate-in slide-in-from-top-4 duration-300 space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <InputField label="Hubungan" name="hubungan_wali" value={formData.wali.hubungan} onChange={(v) => updateWali("hubungan", v)} placeholder="Paman, Kakek, dll" required={bothParentsDeceased} />
-                <InputField label="Nama Lengkap" name="nama_lengkap_wali" value={formData.wali.nama_lengkap} onChange={(v) => updateWali("nama_lengkap", v)} placeholder="Sesuai KTP" required={bothParentsDeceased} />
-                <InputField label="NIK" name="nik_wali" value={formData.wali.nik} onChange={(v) => updateWali("nik", v)} placeholder="16 digit NIK" maxLength={16} required={bothParentsDeceased} />
+                <InputField label="Hubungan" name="hubungan_wali" value={formData.wali.hubungan} onChange={(v) => updateWali("hubungan", v)} placeholder="Paman, Kakek, dll" required={isWaliRequired} />
+                <InputField label="Nama Lengkap" name="nama_lengkap_wali" value={formData.wali.nama_lengkap} onChange={(v) => updateWali("nama_lengkap", v)} placeholder="Sesuai KTP" required={isWaliRequired} />
+                <InputField label="NIK" name="nik_wali" value={formData.wali.nik} onChange={(v) => updateWali("nik", v)} placeholder="16 digit NIK" maxLength={16} required={isWaliRequired} />
 
                 <SearchableSelect
                   label="Tempat Lahir"
@@ -1124,14 +1133,14 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                   optionsUrl="/api/wilayah/all-kabupaten"
                   placeholder="Pilih Kota/Kabupaten"
                 />
-                <InputField label="Tanggal Lahir" name="tanggal_lahir_wali" value={formData.wali.tanggal_lahir} onChange={(v) => updateWali("tanggal_lahir", v)} type="date" required={bothParentsDeceased} />
-                <InputField label="Pendidikan Terakhir" name="pendidikan_wali" value={formData.wali.pendidikan_terakhir} onChange={(v) => updateWali("pendidikan_terakhir", v)} options={PENDIDIKAN_OPTIONS} required={bothParentsDeceased} />
+                <InputField label="Tanggal Lahir" name="tanggal_lahir_wali" value={formData.wali.tanggal_lahir} onChange={(v) => updateWali("tanggal_lahir", v)} type="date" required={isWaliRequired} />
+                <InputField label="Pendidikan Terakhir" name="pendidikan_wali" value={formData.wali.pendidikan_terakhir} onChange={(v) => updateWali("pendidikan_terakhir", v)} options={PENDIDIKAN_OPTIONS} required={isWaliRequired} />
 
-                <InputField label="Pekerjaan" name="pekerjaan_wali" value={formData.wali.pekerjaan} onChange={(v) => updateWali("pekerjaan", v)} options={PEKERJAAN_OPTIONS} required={bothParentsDeceased} />
-                <InputField label="Penghasilan" name="penghasilan_wali" value={formData.wali.penghasilan} onChange={(v) => updateWali("penghasilan", v)} options={PENGHASILAN_OPTIONS} required={bothParentsDeceased} />
+                <InputField label="Pekerjaan" name="pekerjaan_wali" value={formData.wali.pekerjaan} onChange={(v) => updateWali("pekerjaan", v)} options={PEKERJAAN_OPTIONS} required={isWaliRequired} />
+                <InputField label="Penghasilan" name="penghasilan_wali" value={formData.wali.penghasilan} onChange={(v) => updateWali("penghasilan", v)} options={PENGHASILAN_OPTIONS} required={isWaliRequired} />
 
-                <InputField label="Nomor HP" name="no_hp_wali" value={formData.wali.no_hp} onChange={(v) => updateWali("no_hp", v)} placeholder="08xxxxxxxxxx" required={bothParentsDeceased} />
-                <InputField label="Nomor WhatsApp" name="no_wa_wali" value={formData.wali.no_wa || ""} onChange={(v) => updateWali("no_wa", v)} placeholder="08xxxxxxxxxx" required={bothParentsDeceased} />
+                <InputField label="Nomor HP" name="no_hp_wali" value={formData.wali.no_hp} onChange={(v) => updateWali("no_hp", v)} placeholder="08xxxxxxxxxx" required={isWaliRequired} />
+                <InputField label="Nomor WhatsApp" name="no_wa_wali" value={formData.wali.no_wa || ""} onChange={(v) => updateWali("no_wa", v)} placeholder="08xxxxxxxxxx" required={isWaliRequired} />
                 <InputField label="Email" name="email_wali" value={formData.wali.email} onChange={(v) => updateWali("email", v)} type="email" placeholder="email@example.com" />
               </div>
 
