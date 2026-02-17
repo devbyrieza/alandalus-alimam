@@ -115,7 +115,7 @@ export async function GET(request: NextRequest) {
             select: { status_pembayaran: true }
           },
           dokumen: {
-            select: { jenis_dokumen: true, status_verifikasi: true } as any
+            select: { jenis_dokumen: true, is_verified: true, catatan: true }
           },
           nilai_ujian: {
             select: { nilai_total: true }
@@ -127,10 +127,19 @@ export async function GET(request: NextRequest) {
       }),
     ]);
 
+    // Transform data to match frontend expectations
+    const transformedData = data.map(item => ({
+      ...item,
+      dokumen: item.dokumen.map(doc => ({
+        jenis_dokumen: doc.jenis_dokumen,
+        status_verifikasi: doc.is_verified ? "verified" : (doc.catatan ? "rejected" : "pending")
+      }))
+    }));
+
     console.log(`[API] Pendaftar List: Role=${session.role}, Count=${total}, Limit=${limit}, Where=${JSON.stringify(where)}`);
 
     return NextResponse.json({
-      data: data || [],
+      data: transformedData || [],
       pagination: {
         page,
         limit,
