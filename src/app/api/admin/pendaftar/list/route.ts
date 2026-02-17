@@ -127,6 +127,8 @@ export async function GET(request: NextRequest) {
       }),
     ]);
 
+    console.log(`[API] Pendaftar List: Role=${session.role}, Count=${total}, Limit=${limit}, Where=${JSON.stringify(where)}`);
+
     return NextResponse.json({
       data: data || [],
       pagination: {
