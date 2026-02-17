@@ -279,14 +279,23 @@ export const ROLE_PERMISSIONS: Record<UserRole, string[]> = {
     'manage_settings',
   ],
   admin_super: [
-    // Admin Super focus on monitoring and management
+    // Monitoring & Data
     'view_pendaftar_list',
     'view_pendaftar_detail',
-    'publish_announcement',
-    'manage_settings',
-    'export_all_data',
     'view_dashboard_stats',
     'view_regional_stats',
+    'advanced_filter',
+    'view_charts',
+    'export_all_data',
+    // Seleksi & Keputusan
+    'input_selection_result',
+    'publish_announcement',
+    // WhatsApp Blast
+    'view_broadcast',
+    'send_wa_blast',
+    'send_google_form',
+    // Settings
+    'manage_settings',
   ],
   admin: [
     'view_pendaftar_list',
@@ -382,7 +391,9 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
     admin_super: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
       { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
+      { name: 'Hasil Seleksi', href: '/dashboard/admin/hasil-seleksi', icon: 'ClipboardCheck' },
       { name: 'Pengumuman', href: '/dashboard/admin/pengumuman', icon: 'Trophy' },
+      { name: 'Broadcast WA', href: '/dashboard/admin/broadcast', icon: 'Bell' },
       { name: 'Statistik Wilayah', href: '/dashboard/admin/statistik-wilayah', icon: 'BarChart' },
       { name: 'Pengaturan', href: '/dashboard/admin/pengaturan', icon: 'Settings' },
     ],

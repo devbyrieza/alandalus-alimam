@@ -14,6 +14,33 @@ datasource db {
 }
 
 // ============================================================================
+// ENUMS
+// ============================================================================
+
+enum JenisPembayaran {
+  PENDAFTARAN
+  DAFTAR_ULANG
+  SPP
+}
+
+enum TipeCicilan {
+  LUNAS
+  CICIL_50
+  CICIL_25
+}
+
+enum TipeSPP {
+  BULANAN
+  TAHUNAN
+}
+
+enum StatusSeleksi {
+  DITERIMA
+  CADANGAN
+  DITOLAK
+}
+
+// ============================================================================
 // AUTHENTICATION & USER MANAGEMENT
 // ============================================================================
 
@@ -41,6 +68,8 @@ model Profile {
   jadwal_penguji_quran  JadwalUjian[]   @relation("PengujiQuran")
   nilai_input_quran     NilaiUjian[]    @relation("NilaiInputByQuran")
   sessions_created      ExamSession[]   @relation("SessionCreatedBy")
+  ketersediaan          KetersediaanPenguji[] @relation("KetersediaanPenguji")
+  hasil_seleksi_admin   HasilSeleksi[]  @relation("HasilSeleksiBy")
 
   @@map("profiles")
 }
@@ -64,11 +93,12 @@ model TahunAjaran {
   updated_at                DateTime @default(now()) @db.Timestamptz(6)
 
   // Relations
-  pendaftar    Pendaftar[]
-  pembayaran   Pembayaran[]
-  pengumuman   Pengumuman[]
-  jadwal_ujian JadwalUjian[]
-  reservasi    ReservasiPSB[]
+  pendaftar      Pendaftar[]
+  pembayaran     Pembayaran[]
+  pengumuman     Pengumuman[]
+  jadwal_ujian   JadwalUjian[]
+  reservasi      ReservasiPSB[]
+  hasil_seleksi  HasilSeleksi[]
 
   @@map("tahun_ajaran")
 }
@@ -139,6 +169,7 @@ model Pendaftar {
   asrama               DataAsrama?
   reservasi            ReservasiPSB[]
   DataPerubahanRequest DataPerubahanRequest[]
+  hasil_seleksi        HasilSeleksi?
 
   @@map("pendaftar")
 }
@@ -238,25 +269,30 @@ model Dokumen {
 // ============================================================================
 
 model Pembayaran {
-  id                          String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  pendaftar_id                String    @db.Uuid
-  tahun_ajaran_id             String    @db.Uuid
+  id                          String            @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  pendaftar_id                String            @db.Uuid
+  tahun_ajaran_id             String            @db.Uuid
   metode_pembayaran           String
-  jumlah                      Decimal   @db.Decimal
+  jumlah                      Decimal           @db.Decimal
+  jenis_pembayaran            JenisPembayaran   @default(PENDAFTARAN)
+  tipe_cicilan                TipeCicilan       @default(LUNAS)
+  tipe_spp                    TipeSPP?
+  cicilan_ke                  Int?
+  total_tagihan               Decimal?          @db.Decimal
   midtrans_order_id           String?
   midtrans_transaction_id     String?
   midtrans_transaction_status String?
   midtrans_payment_type       String?
-  midtrans_response_json      Json?     @db.JsonB
+  midtrans_response_json      Json?             @db.JsonB
   bukti_transfer_path         String?
   bukti_transfer_filename     String?
-  status_pembayaran           String    @default("pending")
-  verified_by                 String?   @db.Uuid
-  verified_at                 DateTime? @db.Timestamptz(6)
+  status_pembayaran           String            @default("pending")
+  verified_by                 String?           @db.Uuid
+  verified_at                 DateTime?         @db.Timestamptz(6)
   catatan_verifikasi          String?
-  expired_at                  DateTime? @db.Timestamptz(6)
-  created_at                  DateTime  @default(now()) @db.Timestamptz(6)
-  updated_at                  DateTime  @default(now()) @db.Timestamptz(6)
+  expired_at                  DateTime?         @db.Timestamptz(6)
+  created_at                  DateTime          @default(now()) @db.Timestamptz(6)
+  updated_at                  DateTime          @default(now()) @db.Timestamptz(6)
 
   // Relations
   pendaftar    Pendaftar   @relation(fields: [pendaftar_id], references: [id], onDelete: Cascade)
@@ -279,6 +315,9 @@ model JadwalUjian {
   metode_ujian         String   @default("offline")
   google_meet_link     String?
   google_meet_password String?
+  zoom_link_santri     String?
+  zoom_link_ortu       String?
+  zoom_link_quran      String?
 
   // Jadwal Santri
   waktu_mulai_santri   DateTime @db.Time(6)
@@ -400,18 +439,22 @@ model NilaiUjian {
 // ============================================================================
 
 model Pengumuman {
-  id                    String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  pendaftar_id          String    @unique @db.Uuid
-  tahun_ajaran_id       String    @db.Uuid
-  status_kelulusan      String
-  ranking               Int?
-  catatan               String?
-  surat_pengumuman_path String?
-  is_published          Boolean   @default(false)
-  published_at          DateTime? @db.Timestamptz(6)
-  published_by          String?   @db.Uuid
-  created_at            DateTime  @default(now()) @db.Timestamptz(6)
-  updated_at            DateTime  @default(now()) @db.Timestamptz(6)
+  id                      String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  pendaftar_id            String    @unique @db.Uuid
+  tahun_ajaran_id         String    @db.Uuid
+  status_kelulusan        String
+  ranking                 Int?
+  catatan                 String?
+  surat_pengumuman_path   String?
+  google_form_link        String?
+  surat_keputusan_url     String?
+  wa_blast_sent           Boolean   @default(false)
+  wa_blast_sent_at        DateTime? @db.Timestamptz(6)
+  is_published            Boolean   @default(false)
+  published_at            DateTime? @db.Timestamptz(6)
+  published_by            String?   @db.Uuid
+  created_at              DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at              DateTime  @default(now()) @db.Timestamptz(6)
 
   // Relations
   pendaftar    Pendaftar   @relation(fields: [pendaftar_id], references: [id], onDelete: Cascade)
@@ -419,6 +462,54 @@ model Pengumuman {
   publisher    Profile?    @relation("PengumumanPublishedBy", fields: [published_by], references: [id])
 
   @@map("pengumuman")
+}
+
+// ============================================================================
+// SELECTION RESULTS (HASIL SELEKSI)
+// ============================================================================
+
+model HasilSeleksi {
+  id                     String        @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  pendaftar_id           String        @unique @db.Uuid
+  tahun_ajaran_id        String        @db.Uuid
+  status_seleksi         StatusSeleksi
+  nilai_akhir            Decimal?      @db.Decimal
+  catatan_admin          String?
+  google_form_link       String?
+  surat_keputusan_path   String?
+  ditentukan_oleh        String?       @db.Uuid
+  ditentukan_pada        DateTime?     @db.Timestamptz(6)
+  created_at             DateTime      @default(now()) @db.Timestamptz(6)
+  updated_at             DateTime      @default(now()) @db.Timestamptz(6)
+
+  // Relations
+  pendaftar    Pendaftar   @relation(fields: [pendaftar_id], references: [id], onDelete: Cascade)
+  tahun_ajaran TahunAjaran @relation(fields: [tahun_ajaran_id], references: [id])
+  admin        Profile?    @relation("HasilSeleksiBy", fields: [ditentukan_oleh], references: [id])
+
+  @@map("hasil_seleksi")
+}
+
+// ============================================================================
+// EXAMINER AVAILABILITY (KETERSEDIAAN PENGUJI)
+// ============================================================================
+
+model KetersediaanPenguji {
+  id            String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  penguji_id    String   @db.Uuid
+  tanggal       DateTime @db.Date
+  waktu_mulai   DateTime @db.Time(6)
+  waktu_selesai DateTime @db.Time(6)
+  jenis_ujian   String   // "quran" | "wawancara_santri" | "wawancara_ortu"
+  is_available  Boolean  @default(true)
+  catatan       String?
+  created_at    DateTime @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime @default(now()) @db.Timestamptz(6)
+
+  // Relations
+  penguji Profile @relation("KetersediaanPenguji", fields: [penguji_id], references: [id])
+
+  @@map("ketersediaan_penguji")
 }
 
 // ============================================================================

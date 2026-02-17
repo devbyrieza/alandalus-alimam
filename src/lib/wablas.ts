@@ -325,6 +325,83 @@ Selamat bergabung di keluarga besar Al-Imam! 🎓
 
 Jazakumullahu khairan,
 Panitia PPDB Al-Imam`,
+
+    // Pengumuman kelulusan - Cadangan
+    'announcement_reserve': `📋 *PENGUMUMAN HASIL SELEKSI*
+
+Assalamu'alaikum {{nama}},
+
+Berdasarkan hasil seleksi PPDB Pesantren Al-Imam Al-Islami, kami informasikan bahwa Anda dinyatakan *CADANGAN*.
+
+📋 *Detail:*
+• Jenjang: {{jenjang}}
+• Tahun Ajaran: {{tahun_ajaran}}
+
+📝 *Informasi Selanjutnya:*
+Anda berada dalam daftar cadangan. Kami akan menghubungi Anda jika ada kuota yang tersedia.
+Pantau terus dashboard Anda untuk update terbaru.
+
+Dashboard: {{dashboard_url}}
+
+Jazakumullahu khairan,
+Panitia PPDB Al-Imam`,
+
+    // Pengumuman kelulusan - Ditolak
+    'announcement_rejected': `📋 *PENGUMUMAN HASIL SELEKSI*
+
+Assalamu'alaikum {{nama}},
+
+Berdasarkan hasil seleksi PPDB Pesantren Al-Imam Al-Islami, kami informasikan bahwa Anda *BELUM DITERIMA* pada periode ini.
+
+📋 *Detail:*
+• Jenjang: {{jenjang}}
+• Tahun Ajaran: {{tahun_ajaran}}
+
+Kami mengapresiasi semangat dan usaha Anda. Semoga dimudahkan jalannya untuk menuntut ilmu di manapun.
+
+Jazakumullahu khairan,
+Panitia PPDB Al-Imam`,
+
+    // Google Form Link
+    'google_form_link': `📝 *LINK FORMULIR TAMBAHAN*
+
+Assalamu'alaikum {{nama}},
+
+Silakan lengkapi formulir berikut sebagai kelengkapan data {{keterangan}}:
+
+🔗 *Link Formulir:*
+{{form_link}}
+
+⏰ *Batas Waktu:* {{batas_waktu}}
+
+Pastikan mengisi dengan data yang benar dan lengkap.
+
+Dashboard: {{dashboard_url}}
+
+Jazakumullahu khairan,
+Panitia PPDB Al-Imam`,
+
+    // Zoom/Online Meeting Link
+    'zoom_meeting': `🎥 *UNDANGAN TES ONLINE*
+
+Assalamu'alaikum {{nama}},
+
+Berikut jadwal {{jenis_ujian}} secara online:
+
+📅 *Tanggal:* {{tanggal}}
+🕐 *Waktu:* {{waktu}}
+🔗 *Link Zoom:* {{zoom_link}}
+
+📝 *Persiapan:*
+• Pastikan koneksi internet stabil
+• Gunakan perangkat dengan kamera dan mikrofon
+• Bergabung 10 menit sebelum waktu tes
+• Berpakaian sopan dan rapi
+
+Dashboard: {{dashboard_url}}
+
+Jazakumullahu khairan,
+Panitia PPDB Al-Imam`,
 };
 
 // ============================================
@@ -446,27 +523,328 @@ export async function notifyTestSchedule(data: {
 }
 
 /**
- * Send announcement notification
+ * Send announcement notification (supports all 3 statuses)
  */
 export async function notifyStatusChange(data: {
     phone: string;
     nama: string;
-    status: 'accepted' | 'rejected';
+    status: 'accepted' | 'reserve' | 'rejected';
     jenjang?: string;
     tahun_ajaran?: string;
     dashboard_url?: string;
 }) {
-    // Only accepted template exists for now
-    if (data.status !== 'accepted') return { status: false, message: 'Template not found' };
+    const templateMap: Record<string, string> = {
+        accepted: 'announcement_accepted',
+        reserve: 'announcement_reserve',
+        rejected: 'announcement_rejected',
+    };
+
+    const templateId = templateMap[data.status];
+    if (!templateId) return { status: false, message: 'Template not found' };
 
     return sendTemplate({
         phone: data.phone,
-        templateId: 'announcement_accepted',
+        templateId,
         variables: {
             nama: data.nama,
             jenjang: data.jenjang || '-',
             tahun_ajaran: data.tahun_ajaran || '2025/2026',
             dashboard_url: data.dashboard_url || `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
+        },
+    });
+}
+
+// ============================================
+// DOCUMENT & LINK MESSAGE FUNCTIONS
+// ============================================
+
+/**
+ * Kirim pesan WhatsApp dengan attachment dokumen (PDF/gambar)
+ * Menggunakan Wablas send-document API
+ */
+export async function sendDocumentMessage(params: {
+    phone: string;
+    message: string;
+    documentUrl: string;
+}): Promise<WablasResponse> {
+    if (!WABLAS_DOMAIN || !WABLAS_TOKEN) {
+        console.error('Wablas not configured');
+        return { status: false, message: 'Wablas not configured' };
+    }
+
+    try {
+        const formattedPhone = formatPhoneNumber(params.phone);
+        const domain = WABLAS_DOMAIN.startsWith('http') ? WABLAS_DOMAIN : `https://${WABLAS_DOMAIN}`;
+        const url = `${domain}/api/send-document`;
+        const authToken = WABLAS_SECRET_KEY
+            ? `${WABLAS_TOKEN}.${WABLAS_SECRET_KEY}`
+            : WABLAS_TOKEN;
+
+        const formData = new URLSearchParams();
+        formData.append('phone', formattedPhone);
+        formData.append('document', params.documentUrl);
+        formData.append('caption', params.message);
+
+        console.log(`📎 Sending document to ${formattedPhone} via Wablas`);
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': authToken,
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formData.toString(),
+        });
+
+        const rawText = await response.text();
+        let data;
+        try {
+            data = JSON.parse(rawText);
+        } catch {
+            console.error('❌ Wablas Non-JSON Response:', rawText);
+            return { status: false, message: `Wablas Error: ${response.status}` };
+        }
+
+        if (!response.ok || !data.status) {
+            console.error('❌ Wablas send-document Error:', data);
+            return { status: false, message: data.message || 'Failed to send document' };
+        }
+
+        return { status: true, message: 'Document sent successfully', data };
+    } catch (error: any) {
+        console.error('❌ Wablas send-document Network Error:', error);
+        return { status: false, message: `Network Error: ${error.message}` };
+    }
+}
+
+/**
+ * Kirim pesan WhatsApp dengan link/URL (misal Google Form)
+ * Wablas akan auto-generate preview link
+ */
+export async function sendButtonMessage(params: {
+    phone: string;
+    message: string;
+    buttonText: string;
+    buttonUrl: string;
+}): Promise<WablasResponse> {
+    // Wablas tidak support button secara native di semua device,
+    // jadi kita append link ke message sebagai fallback universal
+    const fullMessage = `${params.message}\n\n🔗 *${params.buttonText}:*\n${params.buttonUrl}`;
+
+    return sendMessage({
+        phone: params.phone,
+        message: fullMessage,
+    });
+}
+
+// ============================================
+// BLAST WITH QUEUE (Rate Limited)
+// ============================================
+
+export interface BlastRecipient {
+    phone: string;
+    nama: string;
+}
+
+export interface BlastResult {
+    total: number;
+    success: number;
+    failed: number;
+    errors: Array<{ phone: string; error: string }>;
+}
+
+/**
+ * Blast pesan ke banyak penerima dengan rate limiter.
+ * Delay default 2 detik antar pesan untuk menghindari ban.
+ * 
+ * @param params.recipients - Daftar penerima
+ * @param params.messageBuilder - Function untuk build pesan per penerima
+ * @param params.documentUrl - Opsional: URL dokumen lampiran (PDF surat keputusan)
+ * @param params.buttonUrl - Opsional: URL link (Google Form)
+ * @param params.buttonText - Opsional: Label untuk link
+ * @param params.delayMs - Delay antar pesan (default: 2000ms)
+ * @param params.onProgress - Callback progress
+ */
+export async function blastWithQueue(params: {
+    recipients: BlastRecipient[];
+    messageBuilder: (recipient: BlastRecipient) => string;
+    documentUrl?: string;
+    buttonUrl?: string;
+    buttonText?: string;
+    delayMs?: number;
+    onProgress?: (sent: number, total: number) => void;
+}): Promise<BlastResult> {
+    const {
+        recipients,
+        messageBuilder,
+        documentUrl,
+        buttonUrl,
+        buttonText,
+        delayMs = 2000,
+        onProgress,
+    } = params;
+
+    const result: BlastResult = {
+        total: recipients.length,
+        success: 0,
+        failed: 0,
+        errors: [],
+    };
+
+    console.log(`📢 Starting blast to ${recipients.length} recipients (delay: ${delayMs}ms)`);
+
+    for (let i = 0; i < recipients.length; i++) {
+        const recipient = recipients[i];
+
+        try {
+            const message = messageBuilder(recipient);
+            let response: WablasResponse;
+
+            if (documentUrl) {
+                // Kirim dokumen + pesan
+                response = await sendDocumentMessage({
+                    phone: recipient.phone,
+                    message,
+                    documentUrl,
+                });
+            } else if (buttonUrl && buttonText) {
+                // Kirim pesan dengan link
+                response = await sendButtonMessage({
+                    phone: recipient.phone,
+                    message,
+                    buttonText,
+                    buttonUrl,
+                });
+            } else {
+                // Kirim pesan teks biasa
+                response = await sendMessage({
+                    phone: recipient.phone,
+                    message,
+                });
+            }
+
+            if (response.status) {
+                result.success++;
+            } else {
+                result.failed++;
+                result.errors.push({
+                    phone: recipient.phone,
+                    error: response.message,
+                });
+            }
+        } catch (error: any) {
+            result.failed++;
+            result.errors.push({
+                phone: recipient.phone,
+                error: error.message || 'Unknown error',
+            });
+        }
+
+        // Progress callback
+        if (onProgress) {
+            onProgress(i + 1, recipients.length);
+        }
+
+        // Delay antar pesan (kecuali pesan terakhir)
+        if (i < recipients.length - 1) {
+            await new Promise((resolve) => setTimeout(resolve, delayMs));
+        }
+    }
+
+    console.log(`📢 Blast completed: ${result.success} success, ${result.failed} failed out of ${result.total}`);
+    return result;
+}
+
+// ============================================
+// SELECTION ANNOUNCEMENT HELPERS
+// ============================================
+
+/**
+ * Kirim notifikasi pengumuman seleksi per santri
+ */
+export async function notifySelectionResult(data: {
+    phone: string;
+    nama: string;
+    status: 'DITERIMA' | 'CADANGAN' | 'DITOLAK';
+    jenjang?: string;
+    tahun_ajaran?: string;
+    suratPath?: string;
+}) {
+    const statusMap: Record<string, 'accepted' | 'reserve' | 'rejected'> = {
+        DITERIMA: 'accepted',
+        CADANGAN: 'reserve',
+        DITOLAK: 'rejected',
+    };
+
+    const dashboardUrl = `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar`;
+
+    // Kirim pesan notifikasi
+    const notifResult = await notifyStatusChange({
+        phone: data.phone,
+        nama: data.nama,
+        status: statusMap[data.status] || 'rejected',
+        jenjang: data.jenjang,
+        tahun_ajaran: data.tahun_ajaran,
+        dashboard_url: dashboardUrl,
+    });
+
+    // Jika ada surat keputusan, kirim juga sebagai dokumen
+    if (data.suratPath) {
+        const suratUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/files/${data.suratPath}`;
+        await sendDocumentMessage({
+            phone: data.phone,
+            message: `📄 Surat Keputusan Hasil Seleksi — ${data.nama}`,
+            documentUrl: suratUrl,
+        });
+    }
+
+    return notifResult;
+}
+
+/**
+ * Kirim link Google Form ke santri
+ */
+export async function notifyGoogleFormLink(data: {
+    phone: string;
+    nama: string;
+    formLink: string;
+    keterangan?: string; // misal: "Tes Online", "Survey Tambahan"
+    batasWaktu?: string;
+}) {
+    return sendTemplate({
+        phone: data.phone,
+        templateId: 'google_form_link',
+        variables: {
+            nama: data.nama,
+            form_link: data.formLink,
+            keterangan: data.keterangan || 'pendaftaran',
+            batas_waktu: data.batasWaktu || 'Sesuai instruksi panitia',
+            dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar`,
+        },
+    });
+}
+
+/**
+ * Kirim link Zoom meeting ke santri (untuk tes online)
+ */
+export async function notifyZoomMeeting(data: {
+    phone: string;
+    nama: string;
+    jenisUjian: string;   // "Tes Al-Qur'an", "Wawancara Santri", "Wawancara Wali"
+    tanggal: string;
+    waktu: string;
+    zoomLink: string;
+}) {
+    return sendTemplate({
+        phone: data.phone,
+        templateId: 'zoom_meeting',
+        variables: {
+            nama: data.nama,
+            jenis_ujian: data.jenisUjian,
+            tanggal: data.tanggal,
+            waktu: data.waktu,
+            zoom_link: data.zoomLink,
+            dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar`,
         },
     });
 }
