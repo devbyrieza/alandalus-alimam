@@ -125,16 +125,18 @@ function AdminPendaftarContent() {
   const [searchInput, setSearchInput] = useState("");
   const [statusFilter, setStatusFilter] = useState(urlFilter);
 
-  // Set default filter for Admin Berkas/Penguji if no filter provided
+  // Set default filter for Admin Berkas/Penguji/Keuangan if no filter provided
   useEffect(() => {
     if (userRole && !urlFilter && !statusFilter) {
       if (isBerkas) {
         setStatusFilter("menunggu_verifikasi_dokumen");
       } else if (isPenguji) {
         setStatusFilter("terjadwal_ujian");
+      } else if (isKeuangan) {
+        setStatusFilter("menunggu_verifikasi_pembayaran");
       }
     }
-  }, [userRole, isBerkas, isPenguji, urlFilter, statusFilter]);
+  }, [userRole, isBerkas, isPenguji, isKeuangan, urlFilter, statusFilter]);
 
   const [jenjangFilter, setJenjangFilter] = useState("");
   const [tahunAjaranFilter, setTahunAjaranFilter] = useState("");
