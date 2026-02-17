@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get active tahun ajaran
+    // Get active tahun ajaran (Robust logic)
     const activeTahunAjaran = await prisma.tahunAjaran.findFirst({
       where: { is_active: true },
       select: { id: true },
@@ -59,14 +59,18 @@ export async function POST(request: NextRequest) {
     if (activeTahunAjaran) {
       tahunAjaranId = activeTahunAjaran.id;
     } else {
-      const anyTahunAjaran = await prisma.tahunAjaran.findFirst({
+      // Fallback: Get the latest created tahun ajaran
+      console.warn("⚠️ No active Tahun Ajaran found, falling back to latest created.");
+      const latestTahunAjaran = await prisma.tahunAjaran.findFirst({
+        orderBy: { created_at: "desc" },
         select: { id: true },
       });
-      if (anyTahunAjaran) {
-        tahunAjaranId = anyTahunAjaran.id;
+
+      if (latestTahunAjaran) {
+        tahunAjaranId = latestTahunAjaran.id;
       } else {
         return NextResponse.json(
-          { success: false, error: "Tidak ada data Tahun Ajaran aktif. Hubungi admin." },
+          { success: false, error: "Sistem belum siap: Data Tahun Ajaran tidak ditemukan. Hubungi admin." },
           { status: 500 },
         );
       }

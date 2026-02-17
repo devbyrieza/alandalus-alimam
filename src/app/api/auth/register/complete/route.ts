@@ -51,15 +51,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get active tahun ajaran
+    // Get active tahun ajaran (Robust logic)
     const tahunAjaran = await prisma.tahunAjaran.findFirst({
       where: { is_active: true },
+      select: { id: true },
+    }) || await prisma.tahunAjaran.findFirst({
+      orderBy: { created_at: "desc" },
       select: { id: true },
     });
 
     if (!tahunAjaran) {
+      console.error("❌ Registration error: No academic year found in database.");
       return NextResponse.json(
-        { success: false, error: "Tahun ajaran aktif tidak ditemukan" },
+        { success: false, error: "Tahun ajaran tidak ditemukan. Hubungi admin." },
         { status: 500 },
       );
     }

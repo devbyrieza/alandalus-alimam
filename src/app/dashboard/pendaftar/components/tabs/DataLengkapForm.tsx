@@ -712,6 +712,18 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
     ))
   ));
 
+  const isWaliComplete = Boolean((!isWaliRequired && !formData.wali.nama_lengkap) || (
+    formData.wali.hubungan &&
+    formData.wali.nama_lengkap &&
+    formData.wali.nik &&
+    formData.wali.no_hp &&
+    formData.wali.provinsi &&
+    formData.wali.kabupaten &&
+    formData.wali.kecamatan &&
+    formData.wali.kelurahan &&
+    formData.wali.kode_pos
+  ));
+
   const isLocked = !['draft', 'awaiting_payment', 'verified', 'rejected'].includes(statusPendaftaran);
   const isEditMode = requestStatus?.status === 'approved_to_edit';
   const canEdit = !isLocked || isEditMode;
@@ -1127,7 +1139,7 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
             }
             isOpen={openSections.wali}
             onToggle={() => toggleSection("wali")}
-            isCompleted={false}
+            isCompleted={isWaliComplete}
             disabled={false}
           />
 

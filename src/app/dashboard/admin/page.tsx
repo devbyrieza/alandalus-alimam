@@ -105,10 +105,11 @@ export default function AdminDashboardPage() {
     permintaan_edit_total: 0,
   });
 
-  const [activeTahunAjaran, setActiveTahunAjaran] = useState<{ nama: string } | null>(null);
+  const [tahunAjaranList, setTahunAjaranList] = useState<{ id: string; nama: string; is_active: boolean }[]>([]);
+  const [selectedTahunAjaranId, setSelectedTahunAjaranId] = useState<string>("");
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchInitialData = async () => {
       try {
         setLoading(true);
 
@@ -116,7 +117,6 @@ export default function AdminDashboardPage() {
         const sessionRes = await fetch("/api/auth/session");
         if (sessionRes.ok) {
           const sessionData = await sessionRes.json();
-          // Fix: Read from session.role for accuracy
           if (sessionData.session?.role) {
             setRole(sessionData.session.role as UserRole);
           } else if (sessionData.user?.user_metadata?.role) {
@@ -124,19 +124,42 @@ export default function AdminDashboardPage() {
           }
         }
 
-        const response = await fetch("/api/admin/stats");
+        // 2. Fetch All Tahun Ajaran
+        const taResponse = await fetch("/api/admin/tahun-ajaran");
+        if (taResponse.ok) {
+          const taData = await taResponse.json();
+          const list = taData.data || [];
+          setTahunAjaranList(list);
+
+          const active = list.find((t: any) => t.is_active);
+          if (active) {
+            setSelectedTahunAjaranId(active.id);
+          } else if (list.length > 0) {
+            setSelectedTahunAjaranId(list[0].id);
+          }
+        }
+
+      } catch (error) {
+        console.error("Error fetching initial data:", error);
+      } finally {
+        // Stats will be fetched by the second useEffect
+      }
+    };
+
+    fetchInitialData();
+  }, []);
+
+  useEffect(() => {
+    if (!selectedTahunAjaranId) return;
+
+    const fetchStats = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`/api/admin/stats?tahun_ajaran_id=${selectedTahunAjaranId}`);
         if (response.ok) {
           const data = await response.json();
           setStats(data);
         }
-
-        const taResponse = await fetch("/api/admin/tahun-ajaran?active=true");
-        if (taResponse.ok) {
-          const taData = await taResponse.json();
-          const active = Array.isArray(taData.data) ? taData.data.find((t: any) => t.is_active) : taData.data;
-          if (active) setActiveTahunAjaran(active);
-        }
-
       } catch (error) {
         console.error("Error fetching stats:", error);
       } finally {
@@ -144,8 +167,8 @@ export default function AdminDashboardPage() {
       }
     };
 
-    fetchData();
-  }, []);
+    fetchStats();
+  }, [selectedTahunAjaranId]);
 
   const handleExportPembayaran = async (type: "all" | "lunas" | "pending") => {
     try {
@@ -223,14 +246,33 @@ export default function AdminDashboardPage() {
       {/* 1. Ultra-Clean Header Section */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="badge badge-success bg-teal-50 text-teal-600 border-teal-200 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase">
-              Tahun Ajaran {activeTahunAjaran?.nama || "2025/2026"}
-            </span>
-            <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
-            </span>
+          <div className="flex items-center gap-3 mb-3">
+            <div className="flex items-center gap-2">
+              <span className="badge badge-success bg-teal-50 text-teal-600 border-teal-200 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase">
+                Tahun Ajaran {tahunAjaranList.find(t => t.id === selectedTahunAjaranId)?.nama || "..."}
+              </span>
+              <span className="flex h-2 w-2 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
+              </span>
+            </div>
+
+            <div className="h-4 w-px bg-stone-200"></div>
+
+            <div className="flex items-center gap-2">
+              <Calendar className="w-4 h-4 text-stone-400" />
+              <select
+                value={selectedTahunAjaranId}
+                onChange={(e) => setSelectedTahunAjaranId(e.target.value)}
+                className="bg-stone-50 border border-stone-200 rounded-lg px-3 py-1 text-sm font-bold text-stone-600 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all cursor-pointer hover:bg-white"
+              >
+                {tahunAjaranList.map((ta) => (
+                  <option key={ta.id} value={ta.id}>
+                    Pilih TA: {ta.nama} {ta.is_active ? "(Aktif)" : ""}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-ink-900 whitespace-nowrap">
             {role === 'admin_keuangan' ? 'Dashboard Keuangan' :
