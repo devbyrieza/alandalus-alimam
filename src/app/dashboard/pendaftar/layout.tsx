@@ -115,10 +115,10 @@ export default function DashboardLayout({
 
   const menuItems = [
     {
-      name: "Data Pribadi",
+      name: "Dashboard Utama",
       href: "/dashboard/pendaftar",
-      tabName: "data-pribadi" as TabName,
-      icon: User,
+      tabName: "data-pribadi" as TabName, // Tetap gunakan key internal yang sama jika diperlukan oleh access control
+      icon: Home, // Ganti icon menjadi Home agar lebih sesuai
       active: pathname === "/dashboard/pendaftar",
     },
     {
