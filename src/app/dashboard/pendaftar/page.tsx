@@ -26,7 +26,12 @@ export default function DashboardPendaftarPage() {
     nama: "",
     nomorPendaftaran: "",
     status: "draft" as StatusProses,
-    lastUpdate: new Date().toISOString()
+    lastUpdate: new Date().toISOString(),
+    pengumuman: null as {
+      status_kelulusan: string;
+      catatan?: string;
+      surat_keputusan_url?: string;
+    } | null
   });
 
   useEffect(() => {
@@ -46,7 +51,8 @@ export default function DashboardPendaftarPage() {
             nama: firstName,
             nomorPendaftaran: statusData.nomor_pendaftaran || "-",
             status: statusData.status_proses || "draft",
-            lastUpdate: statusData.updated_at || new Date().toISOString()
+            lastUpdate: statusData.updated_at || new Date().toISOString(),
+            pengumuman: statusData.pengumuman || null
           });
         }
       } catch (e) {
@@ -169,15 +175,33 @@ export default function DashboardPendaftarPage() {
 
         {/* Card 4: Hasil */}
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 hover:shadow-md transition-shadow">
-          <div className="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center mb-4">
+          <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${data.pengumuman?.status_kelulusan === "Lulus" ? "bg-green-100 text-green-600" :
+            data.pengumuman?.status_kelulusan === "Cadangan" ? "bg-yellow-100 text-yellow-600" :
+              data.pengumuman?.status_kelulusan === "Tidak Lulus" ? "bg-red-100 text-red-600" :
+                "bg-purple-100 text-purple-600"
+            }`}>
             <CheckCircle className="w-6 h-6" />
           </div>
           <p className="text-stone-500 text-sm font-medium mb-1">Hasil Seleksi</p>
-          <p className="text-lg font-bold text-stone-800">
-            {data.status === 'accepted' ? "Diterima" :
-              data.status === 'announced' ? "Diumumkan" :
-                "Menunggu"}
-          </p>
+          <div className="flex flex-col">
+            <p className="text-lg font-bold text-stone-800">
+              {data.pengumuman ? data.pengumuman.status_kelulusan :
+                data.status === 'accepted' ? "Diterima" :
+                  data.status === 'announced' ? "Diumumkan" :
+                    "Menunggu"}
+            </p>
+            {data.pengumuman?.surat_keputusan_url && (
+              <a
+                href={data.pengumuman.surat_keputusan_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-blue-600 hover:underline mt-1 font-bold inline-flex items-center gap-1"
+              >
+                <FileText className="w-3 h-3" />
+                Download SK
+              </a>
+            )}
+          </div>
         </div>
       </div>
 

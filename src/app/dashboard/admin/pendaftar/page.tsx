@@ -23,6 +23,9 @@ import {
   Edit,
   ArrowLeft,
   FileSpreadsheet,
+  X,
+  Save,
+  FileCheck,
 } from "lucide-react";
 import Link from "next/link";
 import { UserRole } from "@/lib/access-control";
@@ -66,6 +69,9 @@ interface Pendaftar {
   tahun_ajaran: {
     nama: string;
   } | null;
+  pengumuman?: {
+    status_kelulusan: string;
+  };
 }
 
 interface PaginationInfo {
@@ -173,6 +179,57 @@ function AdminPendaftarContent() {
   const [exporting, setExporting] = useState(false);
   const [role, setRole] = useState<UserRole | null>(null);
   const [isRoleLoading, setIsRoleLoading] = useState(true);
+
+  // Announcement State
+  const [isAnnouncementModalOpen, setIsAnnouncementModalOpen] = useState(false);
+  const [selectedPendaftar, setSelectedPendaftar] = useState<Pendaftar | null>(null);
+  const [announcementForm, setAnnouncementForm] = useState({
+    status_kelulusan: "Lulus",
+    catatan: "",
+    surat_keputusan_url: ""
+  });
+  const [isSubmittingAnnouncement, setIsSubmittingAnnouncement] = useState(false);
+
+  const handleOpenAnnouncement = (pendaftar: Pendaftar) => {
+    setSelectedPendaftar(pendaftar);
+    setAnnouncementForm({
+      status_kelulusan: pendaftar.pengumuman?.status_kelulusan || "Lulus",
+      catatan: "", // Reset notes for new input or fetch if needed
+      surat_keputusan_url: "" // Reset URL
+    });
+    setIsAnnouncementModalOpen(true);
+  };
+
+  const handleSubmitAnnouncement = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedPendaftar) return;
+
+    try {
+      setIsSubmittingAnnouncement(true);
+      const response = await fetch("/api/admin/announcements", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          pendaftar_id: selectedPendaftar.id,
+          ...announcementForm
+        })
+      });
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.error || "Gagal menyimpan pengumuman");
+      }
+
+      alert("Berhasil menyimpan hasil seleksi!");
+      setIsAnnouncementModalOpen(false);
+      fetchPendaftar(); // Refresh list
+    } catch (error: any) {
+      console.error("Error submitting announcement:", error);
+      alert(error.message);
+    } finally {
+      setIsSubmittingAnnouncement(false);
+    }
+  };
 
   const [pagination, setPagination] = useState<PaginationInfo>({
     page: 1,
@@ -1146,6 +1203,16 @@ function AdminPendaftarContent() {
                           <Eye className="w-4 h-4" />
                           <span>Buka Detail</span>
                         </Link>
+                        {/* Super Admin Action: Input Hasil Seleksi */}
+                        {userRole === 'admin_super' && (
+                          <button
+                            onClick={() => handleOpenAnnouncement(item)}
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-bold transition-all shadow-sm hover:shadow-md ml-2"
+                          >
+                            <FileCheck className="w-4 h-4" />
+                            <span>Input Hasil</span>
+                          </button>
+                        )}
                       </td>
                     </tr>
                   ))}
@@ -1225,6 +1292,110 @@ function AdminPendaftarContent() {
           </>
         )}
       </div>
+      {/* Announcement Modal */}
+      {isAnnouncementModalOpen && selectedPendaftar && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg border-2 border-stone-100 animate-in fade-in zoom-in duration-200">
+            <div className="flex justify-between items-center p-6 border-b border-stone-100">
+              <div>
+                <h3 className="text-xl font-bold text-stone-900">Input Hasil Seleksi</h3>
+                <p className="text-sm text-stone-500 mt-1">{selectedPendaftar.nama_lengkap}</p>
+              </div>
+              <button
+                onClick={() => setIsAnnouncementModalOpen(false)}
+                className="p-2 hover:bg-stone-100 rounded-full transition-colors text-stone-400 hover:text-stone-600"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            <form onSubmit={handleSubmitAnnouncement} className="p-6 space-y-4">
+              {/* Status Kelulusan */}
+              <div>
+                <label className="block text-sm font-bold text-stone-700 mb-2">Status Kelulusan</label>
+                <div className="grid grid-cols-3 gap-3">
+                  {["Lulus", "Cadangan", "Tidak Lulus"].map((status) => (
+                    <button
+                      key={status}
+                      type="button"
+                      onClick={() => setAnnouncementForm({ ...announcementForm, status_kelulusan: status })}
+                      className={`py-3 px-4 rounded-xl border-2 font-bold transition-all ${announcementForm.status_kelulusan === status
+                        ? status === "Lulus"
+                          ? "border-green-500 bg-green-50 text-green-700"
+                          : status === "Cadangan"
+                            ? "border-yellow-500 bg-yellow-50 text-yellow-700"
+                            : "border-red-500 bg-red-50 text-red-700"
+                        : "border-stone-200 bg-white text-stone-500 hover:border-stone-300"
+                        }`}
+                    >
+                      {status}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Catatan (Opsional) */}
+              <div>
+                <label className="block text-sm font-bold text-stone-700 mb-2">Catatan (Opsional)</label>
+                <textarea
+                  rows={3}
+                  value={announcementForm.catatan}
+                  onChange={(e) => setAnnouncementForm({ ...announcementForm, catatan: e.target.value })}
+                  placeholder="Tambahkan catatan khusus jika ada..."
+                  className="w-full px-4 py-3 border-2 border-stone-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors"
+                />
+              </div>
+
+              {/* Link SK (Surat Keputusan) */}
+              <div>
+                <label className="block text-sm font-bold text-stone-700 mb-2">Link SK (Google Drive / PDF)</label>
+                <div className="relative">
+                  <FileText className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400" />
+                  <input
+                    type="url"
+                    value={announcementForm.surat_keputusan_url}
+                    onChange={(e) => setAnnouncementForm({ ...announcementForm, surat_keputusan_url: e.target.value })}
+                    placeholder="https://docs.google.com/..."
+                    className="w-full pl-12 pr-4 py-3 border-2 border-stone-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors"
+                  />
+                </div>
+                <p className="text-xs text-stone-500 mt-2">
+                  Masukkan link file Surat Keputusan (SK) atau Surat Pengumuman yang bisa diunduh oleh pendaftar.
+                </p>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex justify-end gap-3 pt-4 mt-4 border-t border-stone-100">
+                <button
+                  type="button"
+                  onClick={() => setIsAnnouncementModalOpen(false)}
+                  className="px-6 py-2.5 font-bold text-stone-500 hover:bg-stone-100 rounded-xl transition-colors"
+                  disabled={isSubmittingAnnouncement}
+                >
+                  Batal
+                </button>
+                <button
+                  type="submit"
+                  disabled={isSubmittingAnnouncement}
+                  className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-200 hover:shadow-blue-300 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmittingAnnouncement ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Menyimpan...
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-5 h-5" />
+                      Simpan Hasil
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div >
   );
 }

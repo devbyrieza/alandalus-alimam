@@ -119,6 +119,9 @@ export async function GET(request: NextRequest) {
           },
           nilai_ujian: {
             select: { nilai_total: true }
+          },
+          pengumuman: {
+            select: { status_kelulusan: true }
           }
         },
         orderBy: { created_at: "desc" },

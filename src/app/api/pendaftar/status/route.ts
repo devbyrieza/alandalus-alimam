@@ -44,6 +44,13 @@ export async function GET(request: NextRequest) {
         nomor_pendaftaran: true,
         status_pendaftaran: true,
         updated_at: true,
+        pengumuman: {
+          select: {
+            status_kelulusan: true,
+            catatan: true,
+            surat_keputusan_url: true
+          }
+        }
       },
     });
 
