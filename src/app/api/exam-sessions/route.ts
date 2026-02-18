@@ -62,7 +62,7 @@ export async function GET(request: Request) {
         const sessions = await prisma.examSession.findMany({
             where: whereClause,
             include: {
-                creator: { select: { full_name: true } },
+                creator: isPendaftar ? false : { select: { full_name: true } },
                 _count: { select: { bookings: true } }
             },
             orderBy: { start_time: 'asc' }

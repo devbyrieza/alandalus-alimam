@@ -62,7 +62,10 @@ export default function UndanganSeleksiTab() {
           const sessionsResponse = await fetch("/api/exam-sessions?is_active=true");
           if (sessionsResponse.ok) {
             const sessionsResult = await sessionsResponse.json();
-            setAvailableSlots(sessionsResult.data || []);
+            // Filter only available slots (not full)
+            const allSlots = sessionsResult.data || [];
+            const openSlots = allSlots.filter((s: ExamSession) => s._count.bookings < s.quota);
+            setAvailableSlots(openSlots);
           }
         }
       }

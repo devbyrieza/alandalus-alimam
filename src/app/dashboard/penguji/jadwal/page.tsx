@@ -126,8 +126,8 @@ export default function JadwalPengujiPage() {
         title: slotForm.title,
         start_time: startDateTime.toISOString(),
         end_time: endDateTime.toISOString(),
-        quota: Number(slotForm.quota),
-        location: slotForm.location,
+        quota: 1, // Fixed quota to 1 as per requirement (Private/1-on-1)
+        location: "Online", // Fixed ("Online") as per requirement
         notes: slotForm.notes,
       };
 
@@ -369,14 +369,18 @@ export default function JadwalPengujiPage() {
             </div>
             <form onSubmit={handleCreateSlot} className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-bold text-stone-700 mb-1">Judul (Opsional)</label>
-                <input
-                  type="text"
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-violet-500 outline-none"
-                  placeholder="Contoh: Sesi Pagi Senin"
+                <label className="block text-sm font-bold text-stone-700 mb-1">Jenis Ujian</label>
+                <select
+                  required
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-violet-500 outline-none bg-white"
                   value={slotForm.title}
                   onChange={e => setSlotForm({ ...slotForm, title: e.target.value })}
-                />
+                >
+                  <option value="" disabled>Pilih Jenis Ujian</option>
+                  <option value="Tes Al-Quran">Tes Al-Quran</option>
+                  <option value="Wawancara Santri">Wawancara Santri</option>
+                  <option value="Wawancara Orangtua/Wali">Wawancara Orangtua/Wali</option>
+                </select>
               </div>
               <div>
                 <label className="block text-sm font-bold text-stone-700 mb-1">Tanggal</label>
@@ -410,27 +414,16 @@ export default function JadwalPengujiPage() {
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-bold text-stone-700 mb-1">Kuota</label>
-                  <input
-                    type="number"
-                    min="1"
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-violet-500 outline-none"
-                    value={slotForm.quota}
-                    onChange={e => setSlotForm({ ...slotForm, quota: Number(e.target.value) })}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-stone-700 mb-1">Lokasi</label>
-                  <input
-                    type="text"
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-violet-500 outline-none"
-                    value={slotForm.location}
-                    onChange={e => setSlotForm({ ...slotForm, location: e.target.value })}
-                  />
-                </div>
+
+
+              {/* Hidden/Fixed Quota Note */}
+              <div className="bg-blue-50 px-4 py-3 rounded-lg border border-blue-100 flex gap-2 items-start">
+                <div className="mt-0.5 min-w-[16px]">ℹ️</div>
+                <p className="text-xs text-blue-800">
+                  Setiap slot waktu yang dibuat otomatis memiliki <strong>Kuota 1 Pendaftar</strong> (Private/1-on-1).
+                </p>
               </div>
+
               <button
                 type="submit"
                 disabled={submittingSlot}
