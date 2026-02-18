@@ -106,10 +106,13 @@ export default function PengumumanPage() {
             }));
 
             try {
-              await fetch("/api/admin/notifications/send-status", {
+              await fetch("/api/admin/notifications/send", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(item)
+                body: JSON.stringify({
+                  type: "status",
+                  ...item
+                })
               });
               successParams++;
             } catch (e) { console.error(e); }

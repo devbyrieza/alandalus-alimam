@@ -173,10 +173,13 @@ export default function JadwalUjianPage() {
             }));
 
             try {
-              await fetch("/api/admin/notifications/send-schedule", {
+              await fetch("/api/admin/notifications/send", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(item)
+                body: JSON.stringify({
+                  type: "schedule",
+                  ...item
+                })
               });
               success++;
             } catch (err) {
