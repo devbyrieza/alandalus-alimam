@@ -63,17 +63,7 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: "Session ID required" }, { status: 400 });
         }
 
-        // Check if already has a schedule? 
-        // Usually only 1 schedule per pendaftar.
-        const existing = await prisma.jadwalUjian.findFirst({
-            where: { pendaftar_id: session.id }
-        });
-
-        if (existing) {
-            return NextResponse.json({ error: "Anda sudah memiliki jadwal ujian." }, { status: 400 });
-        }
-
-        // Check session validity
+        // 1. Validate Session First
         const examSession = await prisma.examSession.findUnique({
             where: { id: exam_session_id },
             include: { _count: { select: { bookings: true } } }
@@ -83,6 +73,30 @@ export async function POST(request: Request) {
         if (!examSession.is_active) return NextResponse.json({ error: "Sesi tidak aktif" }, { status: 400 });
         if (examSession._count.bookings >= examSession.quota) {
             return NextResponse.json({ error: "Kuota penuh" }, { status: 400 });
+        }
+
+        // 2. Check for reduced duplication (Same Exam Type)
+        const existingBookings = await prisma.jadwalUjian.findMany({
+            where: { pendaftar_id: session.id },
+            include: { exam_session: true }
+        });
+
+        // Check if any existing booking has the same title/type
+        const duplicateType = existingBookings.find(booking => {
+            // If booking has a session, compare titles
+            if (booking.exam_session?.title && examSession.title) {
+                return booking.exam_session.title === examSession.title;
+            }
+            // If legacy booking (no session) or untitled, maybe block to be safe? 
+            // Or assume manual schedule covers everything?
+            // For now, let's assume if titles match, it's a duplicate.
+            return false;
+        });
+
+        if (duplicateType) {
+            return NextResponse.json({
+                error: `Anda sudah memiliki jadwal untuk ${examSession.title || 'Ujian ini'}.`
+            }, { status: 400 });
         }
 
         // Transaction to book

@@ -298,10 +298,7 @@ export default function UndanganSeleksiTab() {
                         <MapPin className="w-4 h-4 text-purple-500" />
                         <span className="line-clamp-1">{slot.location}</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <User className="w-4 h-4 text-purple-500" />
-                        <span>Sisa Kuota: {Math.max(0, slot.quota - slot._count.bookings)}</span>
-                      </div>
+
                     </div>
 
                     <button
