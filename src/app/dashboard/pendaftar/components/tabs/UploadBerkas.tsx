@@ -556,6 +556,7 @@ export default function UploadBerkasTab() {
   }, [fetchDokumenStatus]);
 
   const isLocked = ['docs_uploaded', 'docs_verified', 'scheduled', 'tested', 'announced', 'accepted', 'enrolled'].includes(pendaftarStatus);
+  const isVerified = ['docs_verified', 'scheduled', 'tested', 'announced', 'accepted', 'enrolled'].includes(pendaftarStatus);
 
   // Show toast
   const showToast = (type: "success" | "error", message: string) => {
@@ -890,10 +891,29 @@ export default function UploadBerkasTab() {
                   <span className="text-red-800 font-bold text-sm">Menunggu Perbaikan Anda</span>
                 </div>
               </>
+            ) : isVerified ? (
+              // Case: Documents APPROVED/VERIFIED
+              <>
+                <div className="w-16 h-16 rounded-2xl bg-teal-100 text-teal-600 flex items-center justify-center mx-auto transition-colors">
+                  <CheckCircle className="w-8 h-8" />
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-black text-teal-800 mb-2">Dokumen Telah Diverifikasi</h3>
+                  <p className="text-teal-600 font-medium leading-relaxed">
+                    Selamat! Semua berkas wajib Anda telah disetujui oleh admin. Silakan lanjutkan ke tahap berikutnya dengan membuka menu <strong>Undangan Seleksi</strong>.
+                  </p>
+                </div>
+
+                <div className="p-4 bg-teal-50 border border-teal-100 rounded-xl flex gap-3 items-center justify-center">
+                  <FileCheck className="w-5 h-5 text-teal-600" />
+                  <span className="text-teal-800 font-bold text-sm">Verifikasi Selesai</span>
+                </div>
+              </>
             ) : (
               // Case: Locked and waiting verification (Normal)
               <>
-                <div className="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto transition-colors">
+                <div className="w-16 h-16 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center mx-auto transition-colors">
                   <ShieldCheck className="w-8 h-8" />
                 </div>
 
@@ -904,9 +924,9 @@ export default function UploadBerkasTab() {
                   </p>
                 </div>
 
-                <div className="p-4 bg-emerald-50 border border-emerald-100 rounded-xl flex gap-3 items-center justify-center">
-                  <CheckCircle className="w-5 h-5 text-emerald-600" />
-                  <span className="text-emerald-800 font-bold text-sm">Sedang Diverifikasi Admin</span>
+                <div className="p-4 bg-amber-50 border border-amber-100 rounded-xl flex gap-3 items-center justify-center">
+                  <Clock className="w-5 h-5 text-amber-600" />
+                  <span className="text-amber-800 font-bold text-sm">Sedang Diverifikasi Admin</span>
                 </div>
               </>
             )
