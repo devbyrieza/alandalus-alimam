@@ -13,6 +13,7 @@ import {
   Download,
   Link as LinkIcon,
 } from "lucide-react";
+import Swal from "sweetalert2";
 
 interface JadwalUjian {
   id: string;
@@ -77,7 +78,19 @@ export default function UndanganSeleksiTab() {
   };
 
   const handleBooking = async (sessionId: string) => {
-    if (!confirm("Apakah Anda yakin ingin memilih jadwal ini? Jadwal tidak dapat diubah setelah dipilih.")) return;
+    const result = await Swal.fire({
+      title: 'Konfirmasi Jadwal',
+      text: "Apakah Anda yakin ingin memilih jadwal ini? Jadwal tidak dapat diubah setelah dipilih.",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#7c3aed', // violet-600
+      cancelButtonColor: '#ef4444', // red-500
+      confirmButtonText: 'Ya, Pilih Jadwal',
+      cancelButtonText: 'Batal',
+      reverseButtons: true
+    });
+
+    if (!result.isConfirmed) return;
 
     try {
       setBookingId(sessionId);
@@ -89,17 +102,26 @@ export default function UndanganSeleksiTab() {
         body: JSON.stringify({ exam_session_id: sessionId })
       });
 
-      const result = await response.json();
+      const data = await response.json();
 
       if (response.ok) {
-        setMessage({ type: "success", text: "Jadwal berhasil dipilih!" });
-        // Refresh data to show assigned schedule
+        await Swal.fire({
+          icon: 'success',
+          title: 'Berhasil!',
+          text: 'Jadwal ujian Anda telah tersimpan.',
+          confirmButtonColor: '#7c3aed'
+        });
         fetchData();
       } else {
-        throw new Error(result.error || "Gagal memilih jadwal");
+        throw new Error(data.error || "Gagal memilih jadwal");
       }
     } catch (error: any) {
-      setMessage({ type: "error", text: error.message });
+      Swal.fire({
+        icon: 'error',
+        title: 'Gagal',
+        text: error.message,
+        confirmButtonColor: '#ef4444'
+      });
     } finally {
       setBookingId(null);
     }
