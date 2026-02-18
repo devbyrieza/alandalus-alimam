@@ -23,6 +23,20 @@ interface JadwalAssignment {
     nomor_pendaftaran: string;
     jenjang: string;
     jenis_kelamin: string;
+    nik?: string;
+    tempat_lahir?: string;
+    tanggal_lahir?: string;
+    alamat?: string;
+    no_hp?: string;
+    asal_sekolah?: string;
+    orang_tua?: {
+      nama_ayah?: string;
+      nama_ibu?: string;
+      no_hp_ayah?: string;
+      no_hp_ibu?: string;
+      pekerjaan_ayah?: string;
+      pekerjaan_ibu?: string;
+    };
   };
   tanggal_ujian: string;
   waktu_mulai: string;
@@ -31,6 +45,14 @@ interface JadwalAssignment {
   jenis_tugas: string;
   status: string;
   session_title?: string;
+  // Granular Statuses
+  status_santri?: string;
+  status_quran?: string;
+  status_ortu?: string;
+  // Assignee IDs
+  penguji_santri_id?: string;
+  penguji_quran_id?: string;
+  penguji_ortu_id?: string;
 }
 
 interface ExamSession {
@@ -48,6 +70,7 @@ interface ExamSession {
 
 export default function JadwalPengujiPage() {
   const [activeTab, setActiveTab] = useState<'assigned' | 'slots'>('assigned');
+  const [userId, setUserId] = useState<string | null>(null);
 
   // State for Assignments
   const [assignments, setAssignments] = useState<JadwalAssignment[]>([]);
@@ -56,7 +79,12 @@ export default function JadwalPengujiPage() {
   // State for Slots
   const [slots, setSlots] = useState<ExamSession[]>([]);
   const [loadingSlots, setLoadingSlots] = useState(true);
+
   const [isSlotModalOpen, setIsSlotModalOpen] = useState(false);
+
+  // Detail Modal State
+  const [selectedPendaftar, setSelectedPendaftar] = useState<JadwalAssignment['pendaftar'] | null>(null);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
   // Common State
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
@@ -106,6 +134,20 @@ export default function JadwalPengujiPage() {
   };
 
   useEffect(() => {
+    // Fetch User Session ID
+    const fetchSession = async () => {
+      try {
+        const res = await fetch("/api/auth/session");
+        if (res.ok) {
+          const data = await res.json();
+          setUserId(data.user_id || data.id);
+        }
+      } catch (e) {
+        console.error("Failed to fetch session", e);
+      }
+    };
+    fetchSession();
+
     if (activeTab === 'assigned') fetchAssignments();
     if (activeTab === 'slots') fetchSlots();
   }, [activeTab]);
@@ -170,6 +212,30 @@ export default function JadwalPengujiPage() {
       } else {
         const res = await response.json();
         throw new Error(res.error || "Gagal menghapus");
+      }
+    } catch (error: any) {
+    }
+  };
+
+  const handleCompleteExam = async (jadwalId: string) => {
+    if (!confirm("Apakah Anda yakin ingin menandai ujian ini selesai? Status akan diperbarui.")) return;
+
+    try {
+      const response = await fetch("/api/penguji/jadwal/complete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ jadwal_id: jadwalId }),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        setMessage({ type: "success", text: result.message });
+        if (result.isAllDone) {
+          alert("Semua rangkaian ujian santri ini telah SELESAI! Notifikasi telah dikirim.");
+        }
+        fetchAssignments(); // Refresh data
+      } else {
+        throw new Error(result.error || "Gagal update status");
       }
     } catch (error: any) {
       setMessage({ type: "error", text: error.message });
@@ -277,7 +343,66 @@ export default function JadwalPengujiPage() {
                         <div className="flex items-center gap-2 text-sm text-stone-600 mt-1">
                           <FileText className="w-4 h-4" />
                           Assignments: <span className="font-semibold text-violet-700">{item.jenis_tugas}</span>
+                          Assignments: <span className="font-semibold text-violet-700">{item.jenis_tugas}</span>
                         </div>
+
+                        {/* Action Buttons: Status Completion */}
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {userId && item.penguji_santri_id === userId && (
+                            item.status_santri === 'completed' ? (
+                              <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
+                                <CheckCircle className="w-3 h-3" /> Wawancara Santri Selesai
+                              </span>
+                            ) : (
+                              <button
+                                onClick={() => handleCompleteExam(item.id)}
+                                className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
+                              >
+                                Tandai Wawancara Selesai
+                              </button>
+                            )
+                          )}
+
+                          {userId && item.penguji_quran_id === userId && (
+                            item.status_quran === 'completed' ? (
+                              <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
+                                <CheckCircle className="w-3 h-3" /> Tes Al-Qur'an Selesai
+                              </span>
+                            ) : (
+                              <button
+                                onClick={() => handleCompleteExam(item.id)}
+                                className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
+                              >
+                                Tandai Tes Al-Qur'an Selesai
+                              </button>
+                            )
+                          )}
+
+                          {userId && item.penguji_ortu_id === userId && (
+                            item.status_ortu === 'completed' ? (
+                              <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
+                                <CheckCircle className="w-3 h-3" /> Wawancara Wali Selesai
+                              </span>
+                            ) : (
+                              <button
+                                onClick={() => handleCompleteExam(item.id)}
+                                className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
+                              >
+                                Tandai Wawancara Wali Selesai
+                              </button>
+                            )
+                          )}
+                        </div>
+
+                        <button
+                          onClick={() => {
+                            setSelectedPendaftar(item.pendaftar);
+                            setIsDetailModalOpen(true);
+                          }}
+                          className="mt-2 text-xs font-bold text-violet-600 hover:text-violet-800 underline"
+                        >
+                          Lihat Data Pendaftar
+                        </button>
                       </div>
                     </div>
                     <div className="flex flex-col gap-2 min-w-[200px] border-l pl-0 md:pl-6 border-stone-100">
@@ -413,10 +538,10 @@ export default function JadwalPengujiPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-stone-700 mb-1">Link Meeting Online (Zoom/GMeet/dll)</label>
+                <label className="block text-sm font-bold text-stone-700 mb-1">Link Google Meet / Lokasi</label>
                 <input
                   type="text"
-                  placeholder="Contoh: https://zoom.us/j/123456789 atau https://meet.google.com/abc-defg-hij"
+                  placeholder="Paste Link Google Meet di sini (Contoh: https://meet.google.com/abc-xyz-123)"
                   className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-violet-500 outline-none"
                   value={slotForm.location}
                   onChange={e => setSlotForm({ ...slotForm, location: e.target.value })}
@@ -441,6 +566,100 @@ export default function JadwalPengujiPage() {
                 Simpan Slot
               </button>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL DETAIL PENDAFTAR */}
+      {isDetailModalOpen && selectedPendaftar && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm overflow-y-auto">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg my-8">
+            <div className="p-4 border-b border-stone-100 flex justify-between items-center bg-stone-50 rounded-t-2xl">
+              <h3 className="font-bold text-stone-900">Data Pendaftar</h3>
+              <button onClick={() => setIsDetailModalOpen(false)}><XCircle className="w-6 h-6 text-stone-400 hover:text-stone-600" /></button>
+            </div>
+            <div className="p-6 space-y-6">
+              {/* Data Diri */}
+              <div>
+                <h4 className="text-sm font-bold text-stone-400 uppercase tracking-wider mb-3">Identitas Santri</h4>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <label className="block text-stone-500 text-xs">Nama Lengkap</label>
+                    <p className="font-bold text-stone-900">{selectedPendaftar.nama_lengkap}</p>
+                  </div>
+                  <div>
+                    <label className="block text-stone-500 text-xs">Nomor Pendaftaran</label>
+                    <p className="font-mono font-bold text-stone-900">{selectedPendaftar.nomor_pendaftaran}</p>
+                  </div>
+                  <div>
+                    <label className="block text-stone-500 text-xs">NIK</label>
+                    <p className="font-mono text-stone-700">{selectedPendaftar.nik || "-"}</p>
+                  </div>
+                  <div>
+                    <label className="block text-stone-500 text-xs">Jenis Kelamin</label>
+                    <p className="text-stone-700">{selectedPendaftar.jenis_kelamin}</p>
+                  </div>
+                  <div>
+                    <label className="block text-stone-500 text-xs">Tempat, Tanggal Lahir</label>
+                    <p className="text-stone-700">
+                      {selectedPendaftar.tempat_lahir}, {selectedPendaftar.tanggal_lahir ? new Date(selectedPendaftar.tanggal_lahir).toLocaleDateString('id-ID') : '-'}
+                    </p>
+                  </div>
+                  <div>
+                    <label className="block text-stone-500 text-xs">Jenjang</label>
+                    <p className="text-stone-700">{selectedPendaftar.jenjang}</p>
+                  </div>
+                  <div className="col-span-2">
+                    <label className="block text-stone-500 text-xs">Alamat</label>
+                    <p className="text-stone-700">{selectedPendaftar.alamat || "-"}</p>
+                  </div>
+                  <div className="col-span-2">
+                    <label className="block text-stone-500 text-xs">Asal Sekolah</label>
+                    <p className="text-stone-700 font-medium">{selectedPendaftar.asal_sekolah || "-"}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="h-px bg-stone-100" />
+
+              {/* Data Orang Tua */}
+              <div>
+                <h4 className="text-sm font-bold text-stone-400 uppercase tracking-wider mb-3">Data Orang Tua</h4>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <label className="block text-stone-500 text-xs">Nama Ayah</label>
+                    <p className="font-bold text-stone-900">{selectedPendaftar.orang_tua?.nama_ayah || "-"}</p>
+                  </div>
+                  <div>
+                    <label className="block text-stone-500 text-xs">No. HP Ayah</label>
+                    <p className="font-mono text-stone-700">{selectedPendaftar.orang_tua?.no_hp_ayah || "-"}</p>
+                  </div>
+                  <div>
+                    <label className="block text-stone-500 text-xs">Pekerjaan Ayah</label>
+                    <p className="text-stone-700">{selectedPendaftar.orang_tua?.pekerjaan_ayah || "-"}</p>
+                  </div>
+                  <div>
+                    {/* Empty spacer or Mother info */}
+                  </div>
+                  <div>
+                    <label className="block text-stone-500 text-xs">Nama Ibu</label>
+                    <p className="font-bold text-stone-900">{selectedPendaftar.orang_tua?.nama_ibu || "-"}</p>
+                  </div>
+                  <div>
+                    <label className="block text-stone-500 text-xs">No. HP Ibu</label>
+                    <p className="font-mono text-stone-700">{selectedPendaftar.orang_tua?.no_hp_ibu || "-"}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="p-4 border-t border-stone-100 bg-stone-50 rounded-b-2xl">
+              <button
+                onClick={() => setIsDetailModalOpen(false)}
+                className="w-full py-2.5 bg-stone-200 hover:bg-stone-300 text-stone-800 font-bold rounded-xl transition-colors"
+              >
+                Tutup
+              </button>
+            </div>
           </div>
         </div>
       )}

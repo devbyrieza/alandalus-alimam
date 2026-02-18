@@ -16,6 +16,7 @@ import {
   CheckSquare,
   Square,
   ArrowRight,
+  Send,
 } from "lucide-react";
 
 interface ExamSession {
@@ -58,6 +59,17 @@ export default function JadwalUjianPage() {
   const [search, setSearch] = useState("");
   const [selectedPendaftarId, setSelectedPendaftarId] = useState<string | null>(null);
   const [assigning, setAssigning] = useState(false);
+  const [sendingProgress, setSendingProgress] = useState<{
+    active: boolean;
+    curr: number;
+    total: number;
+    logs: string[];
+  }>({
+    active: false,
+    curr: 0,
+    total: 0,
+    logs: []
+  });
 
   useEffect(() => {
     fetchData();
@@ -130,6 +142,65 @@ export default function JadwalUjianPage() {
     } catch (e) {
       console.error(e);
       alert("Gagal menetapkan jadwal");
+    } finally {
+      setAssigning(false);
+    }
+  };
+
+  const handleBulkAssign = async (sessionId: string, sessionTitle: string) => {
+    if (!confirm(`Yakin ingin Assign Massal ke sesi "${sessionTitle}"?\n\nLink ujian akan dikirim via WhatsApp ke semua pendaftar yang belum punya jadwal.`)) return;
+
+    try {
+      setAssigning(true);
+      const res = await fetch("/api/admin/jadwal-ujian/bulk-assign", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ exam_session_id: sessionId }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        if (data.queue && data.queue.length > 0) {
+          // Start batch sending
+          setSendingProgress({ active: true, curr: 0, total: data.queue.length, logs: ["Mulai antrian pengiriman..."] });
+
+          let success = 0;
+          for (let i = 0; i < data.queue.length; i++) {
+            const item = data.queue[i];
+            setSendingProgress(prev => ({
+              ...prev,
+              curr: i + 1,
+              logs: [`Mengirim ke ${item.nama}...`, ...prev.logs.slice(0, 3)]
+            }));
+
+            try {
+              await fetch("/api/admin/notifications/send-schedule", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(item)
+              });
+              success++;
+            } catch (err) {
+              console.error("Gagal kirim ke", item.nama, err);
+            }
+
+            // Delay 4 detik untuk mencegah ban
+            if (i < data.queue.length - 1) {
+              await new Promise(r => setTimeout(r, 4000));
+            }
+          }
+
+          alert(`Selesai! ${success} notifikasi terkirim.`);
+          setSendingProgress({ active: false, curr: 0, total: 0, logs: [] });
+        } else {
+          alert(data.message);
+        }
+        fetchData();
+      } else {
+        alert(data.error || "Gagal broadcast");
+      }
+    } catch (e) {
+      console.error(e);
+      alert("Terjadi kesalahan sistem");
     } finally {
       setAssigning(false);
     }
@@ -223,11 +294,21 @@ export default function JadwalUjianPage() {
                         Terapkan ke Sesi Ini
                       </button>
                     ) : (
-                      <div className="w-full md:w-64 bg-surface-100 h-2.5 rounded-full overflow-hidden border border-white">
-                        <div
-                          className="h-full bg-gradient-to-r from-purple-500 to-indigo-600"
-                          style={{ width: `${(s.booked_count / s.quota) * 100}%` }}
-                        ></div>
+                      <div className="flex flex-col gap-3 w-full md:w-64 items-end">
+                        <div className="w-full bg-surface-100 h-2.5 rounded-full overflow-hidden border border-white">
+                          <div
+                            className="h-full bg-gradient-to-r from-purple-500 to-indigo-600"
+                            style={{ width: `${(s.booked_count / s.quota) * 100}%` }}
+                          ></div>
+                        </div>
+                        <button
+                          onClick={() => handleBulkAssign(s.id, s.title || "Sesi Ini")}
+                          disabled={assigning}
+                          className="text-xs font-bold text-purple-600 hover:text-purple-800 hover:bg-purple-50 px-3 py-1.5 rounded-lg transition-all flex items-center gap-2"
+                        >
+                          <Send className="w-3.5 h-3.5" />
+                          Broadcast Link (Massal)
+                        </button>
                       </div>
                     )}
                   </div>
@@ -269,8 +350,8 @@ export default function JadwalUjianPage() {
                     key={p.id}
                     onClick={() => setSelectedPendaftarId(selectedPendaftarId === p.id ? null : p.id)}
                     className={`p-4 rounded-xl border transition-all cursor-pointer flex items-center justify-between group ${selectedPendaftarId === p.id
-                        ? "bg-indigo-50 border-indigo-200 shadow-inner"
-                        : "bg-white border-transparent hover:bg-surface-50"
+                      ? "bg-indigo-50 border-indigo-200 shadow-inner"
+                      : "bg-white border-transparent hover:bg-surface-50"
                       }`}
                   >
                     <div className="min-w-0">
@@ -384,6 +465,32 @@ export default function JadwalUjianPage() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Sending Progress Modal */}
+      {sendingProgress.active && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-ink-900/80 backdrop-blur-sm">
+          <div className="bg-white rounded-3xl w-full max-w-md shadow-2xl border border-white p-8 text-center animate-pulse">
+            <Loader2 className="w-12 h-12 text-purple-600 animate-spin mx-auto mb-4" />
+            <h2 className="text-2xl font-black text-ink-900 mb-2">Mengirim Notifikasi...</h2>
+            <p className="font-bold text-red-500 mb-6 uppercase tracking-widest text-xs">JANGAN TUTUP HALAMAN INI!</p>
+
+            <div className="w-full bg-surface-100 h-4 rounded-full overflow-hidden mb-4 border border-ink-100">
+              <div
+                className="h-full bg-gradient-to-r from-purple-500 to-indigo-600 transition-all duration-500 ease-out"
+                style={{ width: `${(sendingProgress.curr / sendingProgress.total) * 100}%` }}
+              ></div>
+            </div>
+
+            <p className="font-mono font-bold text-ink-500 mb-4">{sendingProgress.curr} / {sendingProgress.total}</p>
+
+            <div className="bg-surface-50 rounded-xl p-4 text-left h-32 overflow-hidden flex flex-col-reverse gap-1 border border-ink-100">
+              {sendingProgress.logs.map((log, idx) => (
+                <p key={idx} className="text-xs font-mono text-ink-400 truncate">{log}</p>
+              ))}
+            </div>
           </div>
         </div>
       )}

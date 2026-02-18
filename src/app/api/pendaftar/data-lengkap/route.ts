@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
+import { notifyDataComplete } from "@/lib/wablas";
 
 /**
  * GET /api/pendaftar/data-lengkap
@@ -201,6 +202,37 @@ export async function POST(request: NextRequest) {
           hubungan_wali: wali?.hubungan_status,
         }
       });
+    }
+
+    // CHECK PROGRESSION & NOTIFY
+    if (!is_draft) {
+      // Logic: If status is 'registered', move to 'data_completed'
+      // This unlocks Document Upload step
+      const currentPendaftar = await prisma.pendaftar.findUnique({
+        where: { id: pendaftarId },
+        select: { status_pendaftaran: true, no_hp: true, nama_lengkap: true }
+      });
+
+      if (currentPendaftar?.status_pendaftaran === 'registered') {
+        const newStatus = 'data_completed';
+
+        await prisma.pendaftar.update({
+          where: { id: pendaftarId },
+          data: { status_pendaftaran: newStatus }
+        });
+
+        // Send Data Complete Notification
+        if (currentPendaftar.no_hp) {
+          try {
+            await notifyDataComplete({
+              phone: currentPendaftar.no_hp,
+              nama: currentPendaftar.nama_lengkap
+            });
+          } catch (e) {
+            console.error("Failed to send data complete notification", e);
+          }
+        }
+      }
     }
 
     return NextResponse.json({

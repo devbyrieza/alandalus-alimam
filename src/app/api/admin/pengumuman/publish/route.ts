@@ -47,29 +47,26 @@ export async function POST(request: NextRequest) {
             details: { count: result.count, new_status, pendaftar_ids }
         });
 
-        // 5. Send Notifications (Async)
+        // 5. Build Notification Queue (For Frontend Processing)
         const updatedUsers = await prisma.pendaftar.findMany({
             where: { id: { in: pendaftar_ids } },
             select: { id: true, nama_lengkap: true, no_hp: true, jenjang: true }
         });
 
-        // Trigger notifications
-        updatedUsers.forEach(async (user) => {
-            if (user.no_hp) {
-                try {
-                    await notifyStatusChange({
-                        phone: user.no_hp,
-                        nama: user.nama_lengkap,
-                        status: new_status as 'accepted' | 'rejected',
-                        jenjang: user.jenjang,
-                    });
-                } catch (e) {
-                    console.error(`Failed to send to ${user.no_hp}`, e);
-                }
-            }
-        });
+        const queue = updatedUsers
+            .filter(u => u.no_hp)
+            .map(u => ({
+                phone: u.no_hp,
+                nama: u.nama_lengkap,
+                status: new_status,
+                jenjang: u.jenjang
+            }));
 
-        return NextResponse.json({ success: true, updated: result.count });
+        return NextResponse.json({
+            success: true,
+            updated: result.count,
+            queue: queue
+        });
 
     } catch (error: any) {
         console.error("Error publishing announcement:", error);

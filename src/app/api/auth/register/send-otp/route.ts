@@ -50,10 +50,29 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const normalizedPhone = normalizePhone(no_hp);
+
+    // RATE LIMIT CHECK (Max 3 OTPs per hour per phone number)
+    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+    const recentOtps = await prisma.otpVerification.count({
+      where: {
+        phone: normalizedPhone,
+        created_at: {
+          gte: oneHourAgo,
+        },
+      },
+    });
+
+    if (recentOtps >= 3) {
+      return NextResponse.json(
+        { success: false, error: "Terlalu banyak permintaan OTP. Coba lagi dalam 1 jam." },
+        { status: 429 },
+      );
+    }
+
     const otp = generateOTP();
     const hashedOTP = hashOTP(otp);
     const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
-    const normalizedPhone = normalizePhone(no_hp);
 
     const otpResult = await sendOTP({
       channel: otp_channel as OTPChannel,
@@ -90,7 +109,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    updateRateLimit(normalizedPhone);
+    // No need for updateRateLimit() anymore
 
     return NextResponse.json({
       success: true,

@@ -214,9 +214,20 @@ export default function UndanganSeleksiTab() {
                         <p className="font-bold text-stone-900">{item.lokasi}</p>
                         {/* Detection of Zoom/Meet Link */}
                         {(item.lokasi.includes('http') || item.lokasi.includes('zoom') || item.lokasi.includes('meet')) && (
-                          <a href={item.lokasi.match(/https?:\/\/[^\s]+/)?.[0] || '#'} target="_blank" rel="noopener noreferrer" className="ml-1 text-xs text-blue-600 underline hover:text-blue-800">
-                            Buka Link
-                          </a>
+                          <div className="mt-2">
+                            <a
+                              href={item.lokasi.match(/https?:\/\/[^\s]+/)?.[0] || '#'}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-lg transition-colors shadow-md"
+                            >
+                              <LinkIcon className="w-4 h-4" />
+                              GABUNG TES (GOOGLE MEET)
+                            </a>
+                            <p className="text-[10px] text-stone-500 mt-1 italic">
+                              *Pastikan akun Google Anda sudah login
+                            </p>
+                          </div>
                         )}
                       </div>
                     </div>

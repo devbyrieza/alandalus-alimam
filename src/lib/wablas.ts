@@ -165,8 +165,8 @@ Alhamdulillah, pendaftaran Anda di Pesantren Al-Imam Al-Islami telah berhasil!
 📝 *Langkah Selanjutnya:*
 1. Login ke dashboard: {{dashboard_url}}
    *(Gunakan Nomor Pendaftaran & NIK untuk Login)*
-2. Lengkap biodata & upload dokumen
-3. Segera lakukan pembayaran pendaftaran
+2. Lakukan Pembayaran Pendaftaran (Transfer)
+3. Lengkapi biodata & upload dokumen (setelah pembayaran diverifikasi)
 
 💡 *Butuh Bantuan?*
 Hubungi kami di {{kontak}}
@@ -185,7 +185,7 @@ Alhamdulillah, dokumen Anda telah diverifikasi dan *DITERIMA*.
 {{dokumen_list}}
 
 📝 *Langkah Selanjutnya:*
-Silakan lakukan pembayaran pendaftaran melalui dashboard Anda.
+Silakan pilih jadwal tes masuk melalui dashboard Anda (Menu Jadwal Ujian).
 
 Dashboard: {{dashboard_url}}
 
@@ -229,7 +229,8 @@ Alhamdulillah, pembayaran Anda telah kami terima dan verifikasi.
 * Tanggal: {{tanggal}}
 
 📝 *Langkah Selanjutnya:*
-Anda akan dihubungi untuk jadwal tes masuk. Pantau terus dashboard Anda.
+Silakan login ke dashboard untuk melengkapi Data Santri & Upload Berkas.
+Setelah data lengkap, Anda bisa memilih jadwal tes.
 
 Dashboard: {{dashboard_url}}
 
@@ -288,10 +289,9 @@ Berikut jadwal tes masuk Anda:
 🕐 *Waktu:* {{waktu}}
 📍 *Tempat:* {{tempat}}
 
-📝 *Yang Perlu Dibawa:*
+📝 *Persiapan:*
 • Kartu peserta (download di dashboard)
 • Alat tulis
-• Fotocopy dokumen
 
 ⚠️ *Penting:*
 • Hadir 30 menit sebelum tes
@@ -402,6 +402,41 @@ Dashboard: {{dashboard_url}}
 
 Jazakumullahu khairan,
 Panitia PPDB Al-Imam`,
+
+    // Data Lengkap -> Unlock Upload Berkas
+    'data_complete': `✅ *DATA LENGKAP*
+
+Assalamu'alaikum {{nama}},
+
+Alhamdulillah, data diri Anda sudah lengkap.
+
+🔓 *Tahap Selanjutnya Terbuka:*
+Anda sekarang bisa melanjutkan ke tahap *Upload Berkas*.
+
+Silakan login ke dashboard dan unggah dokumen yang diperlukan (KK, Akta, dll).
+
+Dashboard: {{dashboard_url}}
+
+Jazakumullahu khairan,
+Panitia PPDB Al-Imam`,
+
+    // Semua Ujian Selesai
+    'all_exams_complete': `🎉 *RANGKAIAN SELEKSI SELESAI*
+
+Assalamu'alaikum {{nama}},
+
+Alhamdulillah, Anda telah menyelesaikan seluruh rangkaian ujian/seleksi masuk Pesantren Al-Imam Al-Islami.
+
+🔐 *Status Terkini:*
+Halaman Pengumuman Hasil Seleksi kini telah terbuka di dashboard Anda.
+
+⚠️ *Catatan:*
+Pengumuman kelulusan belum tersedia saat ini. Mohon menunggu update selanjutnya dari panitia. Kami akan mengirimkan notifikasi saat hasil seleksi diumumkan.
+
+Dashboard: {{dashboard_url}}
+
+Jazakumullahu khairan,
+Panitia PPDB Al-Imam`,
 };
 
 // ============================================
@@ -424,7 +459,7 @@ export async function notifyRegistrationSuccess(data: {
             nama: data.nama,
             nomor_pendaftaran: data.nomor_pendaftaran,
             jenjang: data.jenjang === 'MTs' ? 'Madrasah Tsanawiyah (MTs)' : "I'dad Lughowi (Setara SMA)",
-            dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
+            dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar`,
             kontak: '0851-1152-4441',
         },
     });
@@ -449,7 +484,7 @@ export async function notifyDocumentVerified(data: {
             nama: data.nama,
             dokumen_list: data.dokumen_list,
             catatan: data.catatan || '',
-            dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
+            dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar/${data.status === 'verified' ? 'undangan-seleksi' : 'upload-berkas'}`,
             kontak: '0851-1152-4441',
         },
     });
@@ -478,7 +513,7 @@ export async function notifyPaymentVerified(data: {
             metode: data.metode,
             tanggal: data.tanggal,
             catatan: data.catatan || '',
-            dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
+            dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar/${data.status === 'verified' ? 'kelengkapan-berkas' : 'pembayaran-pendaftaran'}`,
             kontak: '0851-1152-4441',
         },
     });
@@ -517,7 +552,7 @@ export async function notifyTestSchedule(data: {
         templateId: 'test_schedule',
         variables: {
             ...data,
-            dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
+            dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar/undangan-seleksi`,
         },
     });
 }
@@ -549,7 +584,7 @@ export async function notifyStatusChange(data: {
             nama: data.nama,
             jenjang: data.jenjang || '-',
             tahun_ajaran: data.tahun_ajaran || '2025/2026',
-            dashboard_url: data.dashboard_url || `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
+            dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar/${data.status === 'accepted' ? 'daftar-ulang' : 'pengumuman'}`,
         },
     });
 }
@@ -776,7 +811,7 @@ export async function notifySelectionResult(data: {
         DITOLAK: 'rejected',
     };
 
-    const dashboardUrl = `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar`;
+    const dashboardUrl = `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar/${data.status === 'DITERIMA' ? 'daftar-ulang' : 'pengumuman'}`;
 
     // Kirim pesan notifikasi
     const notifResult = await notifyStatusChange({
@@ -845,6 +880,40 @@ export async function notifyZoomMeeting(data: {
             waktu: data.waktu,
             zoom_link: data.zoomLink,
             dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar`,
+        },
+    });
+}
+
+/**
+ * Send Data Complete Notification
+ */
+export async function notifyDataComplete(data: {
+    phone: string;
+    nama: string;
+}) {
+    return sendTemplate({
+        phone: data.phone,
+        templateId: 'data_complete',
+        variables: {
+            nama: data.nama,
+            dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar/upload-berkas`,
+        },
+    });
+}
+
+/**
+ * Send All Exams Complete Notification
+ */
+export async function notifyAllExamsComplete(data: {
+    phone: string;
+    nama: string;
+}) {
+    return sendTemplate({
+        phone: data.phone,
+        templateId: 'all_exams_complete',
+        variables: {
+            nama: data.nama,
+            dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar/pengumuman`,
         },
     });
 }

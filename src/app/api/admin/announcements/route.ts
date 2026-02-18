@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
+import { notifySelectionResult } from "@/lib/wablas";
 
 async function checkSuperAdmin() {
     const cookieStore = await cookies();
@@ -35,10 +36,16 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: "Data pendaftar_id dan status_kelulusan wajib diisi." }, { status: 400 });
         }
 
-        // 1. Get Pendaftar to find Tahun Ajaran
+        // 1. Get Pendaftar to find Tahun Ajaran and details for notification
         const pendaftar = await prisma.pendaftar.findUnique({
             where: { id: pendaftar_id },
-            select: { id: true, tahun_ajaran_id: true }
+            select: {
+                id: true,
+                tahun_ajaran_id: true,
+                nama_lengkap: true,
+                no_hp: true,
+                jenjang: true
+            }
         });
 
         if (!pendaftar) {
@@ -46,17 +53,15 @@ export async function POST(request: Request) {
         }
 
         // 2. Upsert Pengumuman
-        // We strive for 1-to-1 relation
         const pengumuman = await prisma.pengumuman.upsert({
             where: { pendaftar_id: pendaftar_id },
             update: {
                 status_kelulusan,
                 catatan,
+                // @ts-ignore: Prisma types lag
                 surat_keputusan_url,
                 published_by: admin.id,
                 updated_at: new Date(),
-                // Note: is_published defaults to false in schema? We might want to set true or handle publishing separately.
-                // For now, let's assume inputting it implies publishing or readiness.
                 is_published: true,
                 published_at: new Date()
             },
@@ -65,7 +70,7 @@ export async function POST(request: Request) {
                 tahun_ajaran_id: pendaftar.tahun_ajaran_id,
                 status_kelulusan,
                 catatan,
-                // @ts-ignore
+                // @ts-ignore: Prisma types lag
                 surat_keputusan_url,
                 published_by: admin.id,
                 is_published: true,
@@ -83,6 +88,36 @@ export async function POST(request: Request) {
             where: { id: pendaftar_id },
             data: { status_pendaftaran: newStatus }
         });
+
+        // 4. Send Notification
+        if (pendaftar.no_hp) {
+            try {
+                // Map status to what notifySelectionResult expects
+                let statusParam: "DITERIMA" | "CADANGAN" | "DITOLAK" | undefined;
+                if (status_kelulusan === "Lulus") statusParam = "DITERIMA";
+                else if (status_kelulusan === "Cadangan") statusParam = "CADANGAN";
+                else if (status_kelulusan === "Tidak Lulus") statusParam = "DITOLAK";
+
+                if (statusParam) {
+                    await notifySelectionResult({
+                        phone: pendaftar.no_hp,
+                        nama: pendaftar.nama_lengkap,
+                        status: statusParam,
+                        jenjang: pendaftar.jenjang,
+                        suratPath: surat_keputusan_url // Ensure this is just the path (filename), not full URL if logic appends prefix
+                    });
+
+                    // Mark as sent
+                    await prisma.pengumuman.update({
+                        where: { id: pengumuman.id },
+                        // @ts-ignore: Prisma types lag
+                        data: { wa_blast_sent: true, wa_blast_sent_at: new Date() }
+                    });
+                }
+            } catch (e) {
+                console.error("Failed to send announcement notification", e);
+            }
+        }
 
         return NextResponse.json({ success: true, data: pengumuman });
 

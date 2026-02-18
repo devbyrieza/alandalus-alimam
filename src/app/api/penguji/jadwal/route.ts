@@ -38,10 +38,27 @@ export async function GET() {
             include: {
                 pendaftar: {
                     select: {
+                        id: true,
                         nama_lengkap: true,
                         nomor_pendaftaran: true,
                         jenjang: true,
                         jenis_kelamin: true,
+                        nik: true,
+                        tempat_lahir: true,
+                        tanggal_lahir: true,
+                        alamat: true,
+                        no_hp: true,
+                        asal_sekolah: true,
+                        orang_tua: {
+                            select: {
+                                nama_ayah: true,
+                                nama_ibu: true,
+                                no_hp_ayah: true,
+                                no_hp_ibu: true,
+                                pekerjaan_ayah: true,
+                                pekerjaan_ibu: true,
+                            }
+                        }
                     }
                 },
                 tahun_ajaran: {
@@ -74,8 +91,16 @@ export async function GET() {
                 waktu_selesai: item.exam_session?.end_time || item.waktu_selesai_santri,
                 lokasi: item.exam_session?.location || item.tempat_santri,
                 jenis_tugas: jenis_tugas.join(", "),
-                status: "scheduled", // Derive from status_santri/quran etc if needed
+                status: "scheduled",
                 session_title: item.exam_session?.title,
+                // Granular Statuses
+                status_santri: item.status_santri,
+                status_quran: item.status_quran,
+                status_ortu: item.status_ortu,
+                // Assignee IDs for frontend logic
+                penguji_santri_id: item.penguji_santri_id,
+                penguji_quran_id: item.penguji_quran_id,
+                penguji_ortu_id: item.penguji_ortu_id,
             };
         });
 

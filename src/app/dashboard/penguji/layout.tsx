@@ -62,12 +62,6 @@ export default function PengujiDashboardLayout({
       icon: Calendar,
       active: pathname === "/dashboard/penguji/jadwal",
     },
-    {
-      name: "Input Nilai",
-      href: "/dashboard/penguji/input-nilai",
-      icon: ClipboardCheck,
-      active: pathname === "/dashboard/penguji/input-nilai",
-    },
   ];
 
   const handleLogout = async () => {
