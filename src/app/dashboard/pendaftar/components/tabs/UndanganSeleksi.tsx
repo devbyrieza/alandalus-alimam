@@ -130,7 +130,7 @@ export default function UndanganSeleksiTab() {
     <div className="space-y-6">
       {/* Header */}
       <div className="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-6 text-white shadow-lg">
-        <h1 className="text-2xl font-black mb-2">Undangan Seleksi</h1>
+        <h1 className="text-2xl font-black mb-2 text-white">Undangan Seleksi</h1>
         <p className="text-purple-100">
           Jadwal ujian seleksi calon santri baru
         </p>
