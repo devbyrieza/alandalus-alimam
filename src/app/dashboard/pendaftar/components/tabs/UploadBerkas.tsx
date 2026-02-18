@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import Link from "next/link";
 import Swal from "sweetalert2";
 import {
   Upload,
@@ -900,14 +901,16 @@ export default function UploadBerkasTab() {
 
                 <div>
                   <h3 className="text-xl font-black text-teal-800 mb-2">Dokumen Telah Diverifikasi</h3>
-                  <p className="text-teal-600 font-medium leading-relaxed">
-                    Selamat! Semua berkas wajib Anda telah disetujui oleh admin. Silakan lanjutkan ke tahap berikutnya dengan membuka menu <strong>Undangan Seleksi</strong>.
+                  <p className="text-teal-600 font-medium leading-relaxed mb-4">
+                    Selamat! Semua berkas wajib Anda telah disetujui oleh admin.
                   </p>
-                </div>
-
-                <div className="p-4 bg-teal-50 border border-teal-100 rounded-xl flex gap-3 items-center justify-center">
-                  <FileCheck className="w-5 h-5 text-teal-600" />
-                  <span className="text-teal-800 font-bold text-sm">Verifikasi Selesai</span>
+                  <Link
+                    href="/dashboard/pendaftar?tab=seleksi"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-teal-600 text-white font-bold rounded-xl hover:bg-teal-700 transition-all shadow-lg shadow-teal-600/20 hover:-translate-y-1"
+                  >
+                    Buka Undangan Seleksi
+                    <FileCheck className="w-5 h-5" />
+                  </Link>
                 </div>
               </>
             ) : (
