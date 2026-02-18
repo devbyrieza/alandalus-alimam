@@ -102,7 +102,7 @@ export default function VerifikasiDokumenPage() {
         "Jenis Dokumen": item.jenis_dokumen || "-",
         "Status": item.is_verified ? "Terverifikasi" : (item.catatan ? "Ditolak" : "Belum Verifikasi"),
         "Catatan": item.catatan || "-",
-        "Tanggal Upload": new Date(item.created_at).toLocaleDateString("id-ID")
+        "Tanggal Unggah": new Date(item.created_at).toLocaleDateString("id-ID")
       }));
 
       const filename = `data-dokumen-${new Date().toISOString().split("T")[0]}`;
@@ -161,7 +161,7 @@ export default function VerifikasiDokumenPage() {
             <button
               onClick={fetchData}
               className="p-2 bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white rounded-xl transition-all"
-              title="Refresh Data"
+              title="Muat Ulang Data"
             >
               <RefreshCw className="w-5 h-5" />
             </button>
@@ -181,16 +181,20 @@ export default function VerifikasiDokumenPage() {
             />
           </div>
           <div className="flex gap-2">
-            {["pending", "verified", "rejected"].map((s) => (
+            {[
+              { id: "pending", label: "Menunggu" },
+              { id: "verified", label: "Diterima" },
+              { id: "rejected", label: "Ditolak" }
+            ].map((s) => (
               <button
-                key={s}
-                onClick={() => setStatusFilter(s)}
-                className={`px-6 py-3 rounded-2xl font-bold transition-all capitalize ${statusFilter === s
-                    ? "bg-amber-500 text-white shadow-lg shadow-amber-500/30 active:scale-95"
-                    : "bg-white border-2 border-stone-100 text-stone-500 hover:bg-stone-50"
+                key={s.id}
+                onClick={() => setStatusFilter(s.id)}
+                className={`px-6 py-3 rounded-2xl font-bold transition-all ${statusFilter === s.id
+                  ? "bg-amber-500 text-white shadow-lg shadow-amber-500/30 active:scale-95"
+                  : "bg-white border-2 border-stone-100 text-stone-500 hover:bg-stone-50"
                   }`}
               >
-                {s === "pending" ? "Menunggu" : s}
+                {s.label}
               </button>
             ))}
           </div>
@@ -265,7 +269,7 @@ export default function VerifikasiDokumenPage() {
                       </div>
                       <div className="flex items-center gap-1.5">
                         <div className="w-2 h-2 rounded-full bg-amber-400 shadow-sm shadow-amber-400/50" />
-                        <span className="text-xs font-bold text-stone-600">{totalCount - verifiedCount} Pending</span>
+                        <span className="text-xs font-bold text-stone-600">{totalCount - verifiedCount} Menunggu</span>
                       </div>
                     </div>
                   </div>

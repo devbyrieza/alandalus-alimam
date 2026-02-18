@@ -833,7 +833,7 @@ export default function UploadBerkasTab() {
                 uploadProgress={uploadProgress[dokumen.key] || 0}
                 onUpload={(file) => handleUpload(dokumen.key, file)}
                 onPreview={() => handlePreview(dokumen)}
-                isLocked={isLocked}
+                isLocked={isLocked && dokumen.status !== 'rejected'}
               />
             ))}
         </div>
@@ -871,23 +871,45 @@ export default function UploadBerkasTab() {
       <div className="bg-white border text-center border-ink-200 rounded-3xl p-8 shadow-sm">
         <div className="max-w-xl mx-auto space-y-6">
           {isLocked ? (
-            <>
-              <div className="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto transition-colors">
-                <ShieldCheck className="w-8 h-8" />
-              </div>
+            dokumenList.some(d => d.status === 'rejected') ? (
+              // Case: Locked but REJECTED docs exist
+              <>
+                <div className="w-16 h-16 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center mx-auto transition-colors animate-pulse">
+                  <AlertCircle className="w-8 h-8" />
+                </div>
 
-              <div>
-                <h3 className="text-xl font-black text-ink-900 mb-2">Dokumen Telah Dikunci</h3>
-                <p className="text-ink-500 font-medium leading-relaxed">
-                  Sistem mendeteksi dokumen Anda sedang dalam tahap verifikasi admin. Halaman <strong>Undangan Seleksi</strong> akan otomatis terbuka setelah admin menyetujui semua berkas wajib Anda.
-                </p>
-              </div>
+                <div>
+                  <h3 className="text-xl font-black text-red-700 mb-2">Dokumen Perlu Diperbaiki</h3>
+                  <p className="text-red-600 font-medium leading-relaxed">
+                    Admin telah menolak beberapa dokumen Anda. Silakan cek catatan penolakan pada dokumen yang berwarna merah di atas, lalu upload ulang dokumen yang sesuai.
+                  </p>
+                </div>
 
-              <div className="p-4 bg-emerald-50 border border-emerald-100 rounded-xl flex gap-3 items-center justify-center">
-                <CheckCircle className="w-5 h-5 text-emerald-600" />
-                <span className="text-emerald-800 font-bold text-sm">Sedang Diverifikasi Admin</span>
-              </div>
-            </>
+                <div className="p-4 bg-red-50 border border-red-100 rounded-xl flex gap-3 items-center justify-center">
+                  <XCircle className="w-5 h-5 text-red-600" />
+                  <span className="text-red-800 font-bold text-sm">Menunggu Perbaikan Anda</span>
+                </div>
+              </>
+            ) : (
+              // Case: Locked and waiting verification (Normal)
+              <>
+                <div className="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto transition-colors">
+                  <ShieldCheck className="w-8 h-8" />
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-black text-ink-900 mb-2">Dokumen Telah Dikunci</h3>
+                  <p className="text-ink-500 font-medium leading-relaxed">
+                    Sistem mendeteksi dokumen Anda sedang dalam tahap verifikasi admin. Halaman <strong>Undangan Seleksi</strong> akan otomatis terbuka setelah admin menyetujui semua berkas wajib Anda.
+                  </p>
+                </div>
+
+                <div className="p-4 bg-emerald-50 border border-emerald-100 rounded-xl flex gap-3 items-center justify-center">
+                  <CheckCircle className="w-5 h-5 text-emerald-600" />
+                  <span className="text-emerald-800 font-bold text-sm">Sedang Diverifikasi Admin</span>
+                </div>
+              </>
+            )
           ) : (
             <>
               <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto transition-colors ${summary && summary.progress.required.percentage === 100

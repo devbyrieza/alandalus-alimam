@@ -235,7 +235,7 @@ export default function VerifikasiDokumenDetailPage() {
                         className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
                     >
                         <RefreshCw className="w-4 h-4" />
-                        Refresh
+                        Muat Ulang
                     </button>
                 </div>
             </div>
@@ -310,22 +310,22 @@ export default function VerifikasiDokumenDetailPage() {
                                 {dok.status_verifikasi === "verified" ? (
                                     <div className="flex items-center gap-1 text-emerald-600 bg-emerald-50 px-2 py-1 rounded-lg text-[10px] font-black uppercase">
                                         <CheckCircle className="w-3 h-3" />
-                                        Verified
+                                        Diterima
                                     </div>
                                 ) : dok.status_verifikasi === "rejected" ? (
                                     <div className="flex items-center gap-1 text-rose-600 bg-rose-50 px-2 py-1 rounded-lg text-[10px] font-black uppercase">
                                         <XCircle className="w-3 h-3" />
-                                        Rejected
+                                        Ditolak
                                     </div>
                                 ) : (
                                     <div className="flex items-center gap-1 text-amber-600 bg-amber-50 px-2 py-1 rounded-lg text-[10px] font-black uppercase">
                                         <RefreshCw className="w-3 h-3" />
-                                        Pending
+                                        Menunggu
                                     </div>
                                 )}
                             </div>
                             <p className="text-xs text-stone-500 mb-4">
-                                Diupload: {formatDate(dok.created_at)}
+                                Diunggah: {formatDate(dok.created_at)}
                             </p>
 
                             {/* Actions */}
