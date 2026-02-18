@@ -360,7 +360,7 @@ export default function UserManagementPage() {
                                     <input
                                         type="email"
                                         required
-                                        disabled={isEditing}
+
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                         className="w-full pl-10 pr-4 py-3 border-2 border-stone-200 rounded-xl focus:border-indigo-500 focus:outline-none disabled:bg-stone-100 disabled:text-stone-500"

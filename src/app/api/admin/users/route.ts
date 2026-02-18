@@ -98,7 +98,7 @@ export async function PUT(request: Request) {
   }
 
   try {
-    const { id, password, role, full_name } = await request.json();
+    const { id, password, role, full_name, email } = await request.json();
 
     if (!id) {
       return NextResponse.json({ error: "ID User diperlukan" }, { status: 400 });
@@ -108,6 +108,22 @@ export async function PUT(request: Request) {
     if (password) data.password_hash = await hashPassword(password);
     if (role) data.role = role;
     if (full_name) data.full_name = full_name;
+
+    // Email update logic
+    if (email) {
+      const existing = await prisma.profile.findFirst({
+        where: {
+          email: email,
+          NOT: { id: id }
+        }
+      });
+
+      if (existing) {
+        return NextResponse.json({ error: "Email sudah digunakan oleh user lain" }, { status: 400 });
+      }
+
+      data.email = email;
+    }
 
     await prisma.profile.update({
       where: { id },
