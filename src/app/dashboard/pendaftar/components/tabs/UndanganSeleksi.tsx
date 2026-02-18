@@ -59,7 +59,7 @@ export default function UndanganSeleksiTab() {
         setJadwal(existing);
 
         // 2. If no schedule, fetch available slots
-        if (existing.length === 0) {
+        if (true) {
           const sessionsResponse = await fetch("/api/exam-sessions?is_active=true");
           if (sessionsResponse.ok) {
             const sessionsResult = await sessionsResponse.json();
@@ -168,146 +168,120 @@ export default function UndanganSeleksiTab() {
         </div>
       )}
 
-      {/* Logic: Show Schedule OR Show Slot Selection */}
-      {jadwal.length > 0 ? (
-        // View Assigned Schedule
-        <div className="space-y-4">
+      {/* 1. View Assigned Schedule */}
+      {jadwal.length > 0 && (
+        <div className="space-y-4 mb-8">
           <div className="bg-green-50 border border-green-200 p-4 rounded-xl flex items-center gap-3">
             <CheckCircle className="w-6 h-6 text-green-600" />
             <div>
-              <h3 className="font-bold text-green-900">Anda Sudah Terjadwal</h3>
-              <p className="text-sm text-green-700">Silakan hadir sesuai waktu dan lokasi yang ditentukan.</p>
+              <h3 className="font-bold text-green-900">Jadwal Terkonfirmasi</h3>
+              <p className="text-sm text-green-700">Berikut adalah sesi ujian yang telah Anda pilih.</p>
             </div>
           </div>
 
-          {jadwal.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white rounded-xl shadow-lg p-6 border-2 border-purple-100"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="p-3 bg-purple-100 rounded-xl">
-                    <FileText className="w-6 h-6 text-purple-600" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-stone-900">
-                      {item.jenis_ujian}
-                    </h3>
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex items-center gap-3">
-                  <Calendar className="w-5 h-5 text-purple-600" />
-                  <div>
-                    <p className="text-xs text-stone-500">Tanggal</p>
-                    <p className="font-bold text-stone-900">
-                      {formatDate(item.tanggal_ujian)}
-                    </p>
-                  </div>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {jadwal.map((item) => (
+              <div
+                key={item.id}
+                className="bg-white rounded-xl shadow-lg p-6 border-2 border-purple-100 relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 p-2 bg-purple-100 rounded-bl-xl">
+                  <CheckCircle className="w-5 h-5 text-purple-600" />
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <Clock className="w-5 h-5 text-purple-600" />
-                  <div>
-                    <p className="text-xs text-stone-500">Waktu</p>
-                    <p className="font-bold text-stone-900">
+                <div className="mb-4">
+                  <h3 className="text-lg font-bold text-stone-900 mb-1">
+                    {item.jenis_ujian}
+                  </h3>
+                  <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs font-bold rounded-full">Terjadwal</span>
+                </div>
+
+                <div className="space-y-3 text-sm">
+                  <div className="flex items-center gap-3">
+                    <Calendar className="w-4 h-4 text-purple-600" />
+                    <span className="font-semibold text-stone-900">{formatDate(item.tanggal_ujian)}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Clock className="w-4 h-4 text-purple-600" />
+                    <span className="font-semibold text-stone-900">
                       {formatTime(item.waktu_mulai)} - {item.waktu_selesai ? formatTime(item.waktu_selesai) : '?'} WIB
-                    </p>
+                    </span>
                   </div>
-                </div>
-
-                {item.lokasi && (
-                  <div className="flex items-center gap-3 md:col-span-2">
-                    <MapPin className="w-5 h-5 text-purple-600" />
-                    <div>
-                      <p className="text-xs text-stone-500">Lokasi</p>
-                      <p className="font-bold text-stone-900">{item.lokasi}</p>
-                    </div>
-                  </div>
-                )}
-
-                {/* Online Test Link */}
-                {item.online_test_link && (
-                  <div className="md:col-span-2 mt-2">
-                    <a
-                      href={item.online_test_link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block w-full p-4 bg-indigo-50 border-2 border-indigo-200 rounded-xl hover:bg-indigo-100 transition-colors group"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className="p-2 bg-indigo-200 rounded-lg group-hover:bg-indigo-300 transition-colors">
-                            <LinkIcon className="w-5 h-5 text-indigo-700" />
-                          </div>
-                          <div>
-                            <h4 className="font-bold text-indigo-900">Link Ujian Online</h4>
-                            <p className="text-sm text-indigo-700">Klik di sini untuk mengerjakan tes online</p>
-                          </div>
-                        </div>
-                        <div className="px-3 py-1 bg-indigo-600 text-white text-xs font-bold rounded-full">
-                          Wajib
-                        </div>
+                  {item.lokasi && (
+                    <div className="flex items-center gap-3">
+                      <MapPin className="w-4 h-4 text-purple-600" />
+                      <div>
+                        <p className="font-bold text-stone-900">{item.lokasi}</p>
+                        {/* Detection of Zoom/Meet Link */}
+                        {(item.lokasi.includes('http') || item.lokasi.includes('zoom') || item.lokasi.includes('meet')) && (
+                          <a href={item.lokasi.match(/https?:\/\/[^\s]+/)?.[0] || '#'} target="_blank" rel="noopener noreferrer" className="ml-1 text-xs text-blue-600 underline hover:text-blue-800">
+                            Buka Link
+                          </a>
+                        )}
                       </div>
-                    </a>
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
+                    </div>
+                  )}
 
-          {/* Info Box */}
-          <div className="bg-amber-50 border-2 border-amber-200 rounded-xl p-6">
-            <div className="flex gap-4">
-              <div className="flex-shrink-0">
-                <div className="p-2 bg-amber-200 rounded-lg">
-                  <AlertCircle className="w-6 h-6 text-amber-700" />
+                  {/* Explicit Online Test Link if available */}
+                  {item.online_test_link && (
+                    <div className="pt-2 border-t border-dashed border-stone-200 mt-2">
+                      <a
+                        href={item.online_test_link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-indigo-600 font-bold hover:underline"
+                      >
+                        <LinkIcon className="w-4 h-4" />
+                        Link Ujian Online
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
-              <div>
-                <h4 className="font-bold text-amber-900 mb-2">
-                  Persiapan Ujian
-                </h4>
-                <ul className="text-sm text-amber-800 space-y-1">
-                  <li>• Hadir 30 menit sebelum ujian dimulai</li>
-                  <li>• Bawa kartu ujian dan identitas diri (KTP/Kartu Pelajar)</li>
-                  <li>• Kenakan pakaian yang rapi dan sopan</li>
-                  <li>• Bawa alat tulis (pulpen, pensil, penghapus)</li>
-                  <li>• Jaga kesehatan dan istirahat yang cukup</li>
-                </ul>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
-      ) : (
-        // View Available Slots
-        <div className="space-y-6">
-          <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl">
-            <h3 className="font-bold text-blue-900">Silakan Pilih Jadwal Ujian</h3>
-            <p className="text-sm text-blue-700">Pilih salah satu sesi ujian yang tersedia di bawah ini. Pastikan Anda dapat hadir pada waktu yang dipilih.</p>
-          </div>
+      )}
 
-          {availableSlots.length === 0 ? (
-            <div className="text-center py-12 bg-white rounded-xl border border-stone-200">
-              <Calendar className="w-12 h-12 text-stone-300 mx-auto mb-3" />
-              <p className="text-stone-500">Belum ada jadwal ujian yang tersedia.</p>
-              <p className="text-sm text-stone-400">Silakan cek kembali secara berkala.</p>
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 gap-4">
-              {availableSlots.map(slot => {
+      {/* 2. View Available Slots */}
+      <div className="space-y-6">
+        <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl">
+          <h3 className="font-bold text-blue-900">Pilih Jadwal Ujian</h3>
+          <p className="text-sm text-blue-700">
+            Silakan pilih sesi ujian untuk jenis ujian yang <strong>belum Anda ambil</strong>.
+          </p>
+        </div>
+
+        {(() => {
+          // Logic: Filter out slots where the type (title) is already in booked schedule
+          const bookedTypes = jadwal.map(j => j.jenis_ujian);
+          const filteredSlots = availableSlots.filter(slot => !bookedTypes.includes(slot.title));
+
+          if (filteredSlots.length === 0) {
+            return (
+              <div className="text-center py-12 bg-white rounded-xl border border-stone-200">
+                <Calendar className="w-12 h-12 text-stone-300 mx-auto mb-3" />
+                <p className="text-stone-500">
+                  {jadwal.length > 0
+                    ? "Anda sudah memilih semua jenis ujian yang tersedia."
+                    : "Belum ada jadwal ujian yang tersedia."}
+                </p>
+              </div>
+            );
+          }
+
+          return (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filteredSlots.map(slot => {
                 const isFull = slot._count.bookings >= slot.quota;
                 return (
-                  <div key={slot.id} className={`bg-white rounded-xl shadow p-5 border-2 transition-all ${isFull ? 'opacity-75 border-stone-100' : 'border-stone-100 hover:border-purple-300 hover:shadow-md'}`}>
+                  <div key={slot.id} className={`bg-white rounded-xl shadow p-5 border-2 transition-all ${isFull ? 'opacity-75 border-stone-100 bg-stone-50' : 'border-stone-100 hover:border-purple-300 hover:shadow-md'}`}>
                     <div className="flex justify-between items-start mb-3">
-                      <h4 className="font-bold text-stone-900 text-lg">{slot.title}</h4>
+                      <h4 className="font-bold text-stone-900 text-lg line-clamp-1" title={slot.title}>{slot.title}</h4>
                       {isFull ? (
-                        <span className="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-bold">Penuh</span>
+                        <span className="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-bold whitespace-nowrap">Penuh</span>
                       ) : (
-                        <span className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-bold">Tersedia</span>
+                        <span className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-bold whitespace-nowrap">Tersedia</span>
                       )}
                     </div>
 
@@ -322,11 +296,11 @@ export default function UndanganSeleksiTab() {
                       </div>
                       <div className="flex items-center gap-2">
                         <MapPin className="w-4 h-4 text-purple-500" />
-                        {slot.location}
+                        <span className="line-clamp-1">{slot.location}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <User className="w-4 h-4 text-purple-500" />
-                        <span>Sisa Kuota: {Math.max(0, slot.quota - slot._count.bookings)} / {slot.quota}</span>
+                        <span>Sisa Kuota: {Math.max(0, slot.quota - slot._count.bookings)}</span>
                       </div>
                     </div>
 
@@ -336,15 +310,15 @@ export default function UndanganSeleksiTab() {
                       className="w-full py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg disabled:bg-stone-300 disabled:cursor-not-allowed transition-colors flex justify-center items-center gap-2"
                     >
                       {bookingId === slot.id && <Loader2 className="animate-spin w-4 h-4" />}
-                      {isFull ? "Kuota Penuh" : "Pilih Jadwal Ini"}
+                      {isFull ? "Penuh" : "Pilih Jadwal"}
                     </button>
                   </div>
                 );
               })}
             </div>
-          )}
-        </div>
-      )}
+          );
+        })()}
+      </div>
     </div>
   );
 }

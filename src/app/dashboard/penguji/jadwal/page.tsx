@@ -67,8 +67,8 @@ export default function JadwalPengujiPage() {
     date: "",
     start_time: "08:00",
     end_time: "10:00",
-    quota: 10,
-    location: "Ruang Ujian 1",
+    quota: 1,
+    location: "", // Default empty, falls back to "Online" on submit if empty
     notes: "",
   });
   const [submittingSlot, setSubmittingSlot] = useState(false);
@@ -127,7 +127,7 @@ export default function JadwalPengujiPage() {
         start_time: startDateTime.toISOString(),
         end_time: endDateTime.toISOString(),
         quota: 1, // Fixed quota to 1 as per requirement (Private/1-on-1)
-        location: "Online", // Fixed ("Online") as per requirement
+        location: slotForm.location || "Online",
         notes: slotForm.notes,
       };
 
@@ -347,10 +347,7 @@ export default function JadwalPengujiPage() {
                       <MapPin className="w-4 h-4 text-violet-500" />
                       {slot.location || "-"}
                     </div>
-                    <div className="flex items-center gap-2 text-stone-600">
-                      <Users className="w-4 h-4 text-violet-500" />
-                      <span>Kuota: {slot._count?.bookings || 0} / {slot.quota}</span>
-                    </div>
+
                   </div>
                 </div>
               ))}
@@ -413,6 +410,17 @@ export default function JadwalPengujiPage() {
                     onChange={e => setSlotForm({ ...slotForm, end_time: e.target.value })}
                   />
                 </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-bold text-stone-700 mb-1">Link Meeting Online (Zoom/GMeet/dll)</label>
+                <input
+                  type="text"
+                  placeholder="Contoh: https://zoom.us/j/123456789 atau https://meet.google.com/abc-defg-hij"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-violet-500 outline-none"
+                  value={slotForm.location}
+                  onChange={e => setSlotForm({ ...slotForm, location: e.target.value })}
+                />
               </div>
 
 
