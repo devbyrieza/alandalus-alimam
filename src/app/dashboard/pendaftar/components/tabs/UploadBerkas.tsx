@@ -905,7 +905,7 @@ export default function UploadBerkasTab() {
                     Selamat! Semua berkas wajib Anda telah disetujui oleh admin.
                   </p>
                   <Link
-                    href="/dashboard/pendaftar?tab=seleksi"
+                    href="/dashboard/pendaftar/undangan-seleksi"
                     className="inline-flex items-center gap-2 px-6 py-3 bg-teal-600 text-white font-bold rounded-xl hover:bg-teal-700 transition-all shadow-lg shadow-teal-600/20 hover:-translate-y-1"
                   >
                     Buka Undangan Seleksi
