@@ -12,8 +12,8 @@ const DOKUMEN_CONFIG: Record<string, {
 }> = {
   kartu_keluarga: { label: "Scan Kartu Keluarga", maxSize: 5 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
   akta_kelahiran: { label: "Scan Akte Kelahiran", maxSize: 5 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
-  rapor_sem1: { label: "Scan Rapor Semester 1 Terakhir", maxSize: 5 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
-  rapor_sem2: { label: "Scan Rapor Semester 2 Terakhir", maxSize: 5 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
+  rapor_sem1: { label: "Scan Rapor 2 Semester Terakhir (1)", maxSize: 5 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
+  rapor_sem2: { label: "Scan Rapor 2 Semester Terakhir (2)", maxSize: 5 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
   nisn: { label: "Scan NISN", maxSize: 5 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },
   foto_setengah_badan: { label: "Foto Setengah Badan", maxSize: 5 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png"], required: true },
   surat_kesehatan: { label: "Surat Keterangan Sehat", maxSize: 5 * 1024 * 1024, allowedTypes: ["image/jpeg", "image/png", "application/pdf"], required: true },

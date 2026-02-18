@@ -41,14 +41,15 @@ interface PendaftarInfo {
 }
 
 const JENIS_DOKUMEN_ORDER = [
-    "Foto",
-    "KTP Wali",
-    "KK",
-    "Akta Kelahiran",
-    "Rapor",
-    "Ijazah",
-    "SKHUN",
-    "Surat Keterangan Lulus",
+    "Foto Setengah Badan",
+    "Scan Kartu Keluarga",
+    "Scan Akte Kelahiran",
+    "Scan Rapor 2 Semester Terakhir (1)",
+    "Scan Rapor 2 Semester Terakhir (2)",
+    "Scan NISN",
+    "Surat Keterangan Sehat",
+    "Scan Pakta Integritas",
+    "Scan Pernyataan Bebas Perilaku Negatif",
 ];
 
 export default function VerifikasiDokumenDetailPage() {
@@ -86,24 +87,48 @@ export default function VerifikasiDokumenDetailPage() {
                 const firstDoc = result.data[0];
                 setPendaftar(firstDoc.pendaftar);
 
-                const docs = result.data.map((d: any) => ({
-                    id: d.id,
-                    jenis_dokumen: d.jenis_dokumen,
-                    status_verifikasi: d.is_verified ? "verified" : (d.catatan ? "rejected" : "pending"),
-                    is_verified: d.is_verified,
-                    catatan: d.catatan,
-                    file_url: d.file_url,
-                    file_type: d.file_type,
-                    created_at: d.created_at,
-                    updated_at: d.updated_at,
-                    pendaftar_id: id,
-                }));
+                const docs = result.data.map((d: any) => {
+                    let label = d.jenis_dokumen;
+
+                    // Simple manual mapping if needed, otherwise backend config should be used ideally
+                    // But for now we map manually based on what we know
+                    switch (d.jenis_dokumen) {
+                        case 'foto_setengah_badan': label = "Foto Setengah Badan"; break;
+                        case 'kartu_keluarga': label = "Scan Kartu Keluarga"; break;
+                        case 'akta_kelahiran': label = "Scan Akte Kelahiran"; break;
+                        case 'rapor_sem1': label = "Scan Rapor 2 Semester Terakhir (1)"; break;
+                        case 'rapor_sem2': label = "Scan Rapor 2 Semester Terakhir (2)"; break;
+                        case 'nisn': label = "Scan NISN"; break;
+                        case 'surat_kesehatan': label = "Surat Keterangan Sehat"; break;
+                        case 'pakta_integritas': label = "Scan Pakta Integritas"; break;
+                        case 'pernyataan_bebas_negatif': label = "Scan Pernyataan Bebas Perilaku Negatif"; break;
+                        default: label = d.jenis_dokumen.replace(/_/g, " ");
+                    }
+
+                    return {
+                        id: d.id,
+                        jenis_dokumen: label, // Use the label for display
+                        raw_jenis: d.jenis_dokumen, // Keep raw for logic if needed
+                        status_verifikasi: d.is_verified ? "verified" : (d.catatan ? "rejected" : "pending"),
+                        is_verified: d.is_verified,
+                        catatan: d.catatan,
+                        file_url: d.file_url,
+                        file_type: d.file_type,
+                        created_at: d.created_at,
+                        updated_at: d.updated_at,
+                        pendaftar_id: id,
+                    };
+                });
 
                 // Sort documents
                 docs.sort((a: any, b: any) => {
                     const aIndex = JENIS_DOKUMEN_ORDER.indexOf(a.jenis_dokumen);
                     const bIndex = JENIS_DOKUMEN_ORDER.indexOf(b.jenis_dokumen);
-                    return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
+                    // If not found in order list, push to bottom
+                    if (aIndex === -1 && bIndex === -1) return a.jenis_dokumen.localeCompare(b.jenis_dokumen);
+                    if (aIndex === -1) return 1;
+                    if (bIndex === -1) return -1;
+                    return aIndex - bIndex;
                 });
 
                 setDokumenList(docs);
