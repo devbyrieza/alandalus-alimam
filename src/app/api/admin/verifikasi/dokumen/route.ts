@@ -138,19 +138,44 @@ export async function PATCH(request: NextRequest) {
     });
 
     // Send WhatsApp notification
-    try {
-      if (dokumen.pendaftar?.no_hp) {
-        await notifyDocumentVerified({
-          phone: dokumen.pendaftar.no_hp,
-          nama: dokumen.pendaftar.nama_lengkap,
-          dokumen_list: `• ${dokumen.jenis_dokumen}`,
-          status: status_verifikasi,
-          catatan: catatan || undefined,
-        });
+    // BATCH NOTIFICATION LOGIC
+    // Check if ALL documents for this pendaftar have been processed (verified or rejected)
+    if (dokumen.pendaftar_id) {
+      const allDocs = await prisma.dokumen.findMany({
+        where: { pendaftar_id: dokumen.pendaftar_id }
+      });
+
+      // Pending = Not Verified AND No Note (Rejected usually implies Note)
+      // Adjust logic if "Rejected" state is defined differently.
+      // Based on GET implementation: blocked if is_verified=false & catatan=null
+      const pendingDocs = allDocs.filter(d => !d.is_verified && !d.catatan);
+
+      if (pendingDocs.length === 0) {
+        // All documents processed! Send Summary Notification.
+        try {
+          const rejectedDocs = allDocs.filter(d => !d.is_verified && d.catatan);
+          const isAllVerified = rejectedDocs.length === 0;
+
+          if (dokumen.pendaftar?.no_hp) {
+            let docListStr = "";
+            if (isAllVerified) {
+              docListStr = "Semua Dokumen Lengkap";
+            } else {
+              docListStr = rejectedDocs.map(d => `• ${d.jenis_dokumen}`).join("\n");
+            }
+
+            await notifyDocumentVerified({
+              phone: dokumen.pendaftar.no_hp,
+              nama: dokumen.pendaftar.nama_lengkap,
+              dokumen_list: docListStr,
+              status: isAllVerified ? "verified" : "rejected",
+              catatan: isAllVerified ? undefined : "Terdapat dokumen yang perlu diperbaiki. Silakan cek dashboard.",
+            });
+          }
+        } catch (error) {
+          console.error("WhatsApp batch notification error:", error);
+        }
       }
-    } catch (error) {
-      console.error("WhatsApp notification error:", error);
-      // Don't fail verification if notification fails
     }
 
     // CHECK STATUS PROGRESSION / REVERSION
