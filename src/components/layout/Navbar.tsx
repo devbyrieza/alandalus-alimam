@@ -50,7 +50,7 @@ export default function Navbar() {
             <Link href="/" className="flex items-center gap-3 group">
               <div className="relative">
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-brown-700 text-white shadow-premium-md transition-transform duration-500 group-hover:scale-105 group-hover:rotate-3">
-                  <School className="w-5 h-5" />
+                  <img src="/images/logo.png" alt="Logo Al-Imam" className="w-8 h-8 object-contain" />
                 </div>
                 <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border-2 border-white rounded-full" />
               </div>

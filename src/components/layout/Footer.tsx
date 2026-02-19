@@ -27,7 +27,7 @@ export default function Footer() {
           <div className="lg:col-span-1 space-y-8">
             <Link href="/" className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-brown-700 text-white shadow-premium-md">
-                <School className="w-6 h-6" />
+                <img src="/images/logo.png" alt="Logo Al-Imam" className="w-8 h-8 object-contain" />
               </div>
               <div>
                 <h3 className="text-xl font-extrabold text-ink-950 tracking-tight leading-none">Al-Imam</h3>
