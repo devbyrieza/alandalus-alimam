@@ -444,7 +444,8 @@ export default function PendaftarDetailPage() {
               ) : (
                 <div className="space-y-4">
                   {pendaftar.dokumen.map((doc) => {
-                    const isVerified = doc.is_verified;
+                    const isGlobalVerified = ["docs_verified", "scheduled", "tested", "announced", "accepted", "enrolled", "verified"].includes(pendaftar.status_proses);
+                    const isVerified = doc.is_verified || (isGlobalVerified && !doc.catatan);
                     const isRejected = !doc.is_verified && doc.catatan;
 
                     return (
@@ -769,7 +770,8 @@ export default function PendaftarDetailPage() {
               ) : (
                 <div className="space-y-2">
                   {pendaftar.dokumen.map((doc) => {
-                    const isVerified = doc.is_verified;
+                    const isGlobalVerified = ["docs_verified", "scheduled", "tested", "announced", "accepted", "enrolled", "verified"].includes(pendaftar.status_proses);
+                    const isVerified = doc.is_verified || (isGlobalVerified && !doc.catatan);
                     const isRejected = !doc.is_verified && doc.catatan;
 
                     return (
