@@ -183,8 +183,8 @@ export default function LoginPage() {
           className="text-center mb-12"
         >
           <Link href="/">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-white rounded-3xl shadow-premium-sm border border-surface-100 mb-8 hover:scale-110 transition-transform group">
-              <img src="/images/logo.jpg" alt="Logo Al-Imam" className="w-12 h-12 object-contain group-hover:scale-110 transition-transform duration-500" />
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-white rounded-3xl shadow-premium-sm border border-surface-100 mb-8 hover:scale-110 transition-transform group overflow-hidden">
+              <img src="/images/logo.jpg" alt="Logo Al-Imam" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
             </div>
           </Link>
           <h1 className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-3 tracking-tight">
