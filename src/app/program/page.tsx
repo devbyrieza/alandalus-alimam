@@ -28,7 +28,7 @@ const PROGRAMS = [
         name: "Madrasah Tsanawiyah",
         buttonLabel: "Daftar MTs",
         fullName: "Program Madrasah Tsanawiyah (SMP)",
-        description: "Kami menerapkan Kurikulum Terpadu yang menggabungkan kurikulum Nasional dengan kurikulum khas Al-Andalus yang berfokus pada penguasaan Bahasa Arab, Tahfidz Al-Qur'an, dan Kitab Turats secara komprehensif.",
+        description: "Kami menerapkan Kurikulum Terpadu yang menggabungkan kurikulum Nasional dengan kurikulum khas Al-Andalus yang berfokus pada penguasaan Bahasa Arab, Tahfidz Al-Qur'an, dan Kitab Turots secara komprehensif.",
         stats: [
             { label: "Durasi", value: "3 Tahun", icon: Clock },
             { label: "Target", value: "12 Juz", icon: Trophy },
@@ -37,7 +37,7 @@ const PROGRAMS = [
         curriculum: [
             "Target Hafalan 12 Juz",
             "Bahasa Arab (Muhadatsah & Yaumiyah)",
-            "Kajian Kitab Turats (Aqidah, Fiqih, Akhlaq)",
+            "Kajian Kitab Turots (Aqidah, Fiqih, Akhlaq)",
             "Kurikulum Nasional Lengkap",
             "Life Skills & Ekstrakurikuler"
         ],
@@ -61,7 +61,7 @@ const PROGRAMS = [
             "Tahun I'dad: Intensif Bahasa Arab & Syariah",
             "Target Hafalan 16 Juz",
             "Kurikulum Pesantren Terpadu",
-            "Kajian Kitab Turats Mendalam",
+            "Kajian Kitab Turots Mendalam",
             "Pembinaan Dakwah & Organisasi"
         ],
         image: "/images/il.png",
@@ -135,7 +135,7 @@ export default function ProgramPage() {
             {/* 2. Navigation Tabs (Sticky) - Refined */}
             <div className="sticky top-[72px] z-40 bg-white/60 backdrop-blur-xl border-y border-surface-100 py-4">
                 <Container>
-                    <div className="flex justify-center gap-3">
+                    <div className="flex flex-wrap justify-center gap-3">
                         {PROGRAMS.map((program) => (
                             <button
                                 key={program.id}

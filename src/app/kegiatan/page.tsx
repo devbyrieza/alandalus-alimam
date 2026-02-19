@@ -342,7 +342,7 @@ export default function KegiatanPage() {
   const kegiatanUtama: KegiatanUtama[] = [
     {
       image: "/images/pembelajaran-kitab-turotz.png",
-      title: "Pembelajaran Kitab Turats",
+      title: "Pembelajaran Kitab Turots",
       description: "Bukan sekadar hafalan! Santri kami PAHAM isi kitab, mampu berdiskusi ilmiah, dan disiapkan menjadi ilmuwan muda.",
       icon: BookOpen,
       accentColor: "bg-brown-500",
@@ -409,7 +409,7 @@ export default function KegiatanPage() {
   ];
 
   const heroStats: HeroStat[] = [
-    { icon: BookOpen, value: "30+", label: "Kitab Turats", sublabel: "Kajian Mendalam" },
+    { icon: BookOpen, value: "30+", label: "Kitab Turots", sublabel: "Kajian Mendalam" },
     { icon: BookMarked, value: "28 Juz", label: "Target Tahfidz", sublabel: "Metode Talaqqi" },
     { icon: Target, value: "10+", label: "Ekstrakurikuler", sublabel: "Asah bakat santri" },
   ];
@@ -428,7 +428,7 @@ export default function KegiatanPage() {
       icon: Book,
       time: "07:30 - 14:00",
       activity: "KBM & Kajian Kitab",
-      detail: "Sekolah formal (MTs/IL) dipadu dengan pembelajaran kitab turats intensif.",
+      detail: "Sekolah formal (MTs/IL) dipadu dengan pembelajaran kitab turots intensif.",
       benefit: "Akademik unggul & ilmu agama mendalam.",
       bgColor: "bg-brown-50/50",
       iconColor: "text-brown-700",

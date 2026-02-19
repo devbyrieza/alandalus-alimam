@@ -25,7 +25,7 @@ const GALLERY_CATEGORIES = [
   {
     title: "Kegiatan Santri",
     items: [
-      { src: "/images/pembelajaran-kitab-turotz.png", label: "Pembelajaran Kitab Turats" },
+      { src: "/images/pembelajaran-kitab-turotz.png", label: "Pembelajaran Kitab Turots" },
       { src: "/images/tahfidz.JPG", label: "Halaqoh Tahfidz Al-Qur'an" },
       { src: "/images/extra-karate.jpg", label: "Ekstrakurikuler Karate" },
     ],

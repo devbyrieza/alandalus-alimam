@@ -47,8 +47,8 @@ export default function TentangPage() {
                         transition={{ delay: 0.1 }}
                         className="text-4xl sm:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
                     >
-                        Dedikasi Untuk <br />
-                        <span className="text-brown-600">Generasi Qur'ani</span>
+                        Bimbingan & <br />
+                        <span className="text-brown-600">Pengawasan Melekat</span>
                     </motion.h1>
 
                     <motion.p
@@ -57,7 +57,7 @@ export default function TentangPage() {
                         transition={{ delay: 0.2 }}
                         className="text-lg md:text-xl text-ink-600 max-w-3xl mx-auto leading-relaxed font-medium mb-12"
                     >
-                        Lembaga pendidikan Islam yang berkomitmen mencetak santri berakhlak mulia, berilmu luas, dan mandiri dengan manhaj salafush shalih.
+                        Membangkitkan kesadaran santri melalui keteladanan pendidik, agar tumbuh menjadi muslim yang dewasa dalam berpikir dan bertindak tanpa kekerasan dan luka pengasuhan.
                     </motion.p>
                 </Container>
             </section>
@@ -139,7 +139,7 @@ export default function TentangPage() {
                                         <p className="text-3xl md:text-4xl font-black text-ink-950 tracking-tight leading-none mb-1">1995</p>
                                         <p className="text-ink-500 font-bold text-[10px] md:text-xs uppercase tracking-widest mb-2">Tahun Berdiri</p>
                                         <div className="text-[10px] font-bold text-brown-700 bg-brown-50 px-2.5 py-1.5 rounded-lg border border-brown-100/50 leading-tight">
-                                            Mulai 2026 dikelola <br className="block sm:hidden" /> oleh Al-Andalus
+                                            Mulai Januari 2026 dikelola <br className="block sm:hidden" /> sepenuhnya oleh Al-Andalus
                                         </div>
                                     </div>
                                 </div>
@@ -176,6 +176,9 @@ export default function TentangPage() {
                                 <p>
                                     Kami berkomitmen penuh untuk berkhidmah kepada umat melalui jalur pendidikan dan dakwah, dengan menjaga biaya pendidikan tetap terjangkau tanpa mengurangi kualitas layanan dan fasilitas.
                                 </p>
+                                <p>
+                                    Sejak Januari 2026, Al Imam dikelola sepenuhnya oleh Al Andalus International Boarding School, mencakup seluruh aspek kelembagaan secara terintegrasi. Pengelolaan ini meliputi hirarki kepengurusan di tingkat yayasan, pengelolaan sumber daya manusia, sistem pendidikan dan kurikulum, sistem pelayanan beserta sarana dan prasarana, sistem manajemen lembaga berbasis ISO 9001:2015, serta sistem keuangan yang terstandar akuntansi publik dengan pelaksanaan audit eksternal.
+                                </p>
                             </motion.div>
 
                             <motion.div
@@ -197,7 +200,7 @@ export default function TentangPage() {
                                         <Award className="w-6 h-6" />
                                     </div>
                                     <h4 className="font-black text-ink-950 text-xl tracking-tighter">RESMI</h4>
-                                    <p className="text-[10px] font-bold text-ink-400 uppercase tracking-widest">Akreditasi Pendasmen</p>
+                                    <p className="text-[10px] font-bold text-ink-400 uppercase tracking-widest">Akreditasi BAN-PDM</p>
                                 </div>
                             </motion.div>
                         </div>
@@ -237,66 +240,36 @@ export default function TentangPage() {
                         </motion.p>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8">
+                    <div className="grid md:grid-cols-2 gap-8">
                         {/* Visi */}
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="bg-white p-10 rounded-[3rem] shadow-premium-lg border border-surface-100 hover:shadow-premium-xl transition-all duration-500 group"
+                            className="bg-white p-10 rounded-[3rem] shadow-premium-lg border border-surface-100 hover:shadow-premium-xl transition-all duration-500 group h-full flex flex-col"
                         >
                             <div className="w-16 h-16 bg-brown-50 rounded-3xl flex items-center justify-center mb-8 text-brown-700 group-hover:scale-110 transition-transform duration-500 shadow-premium-sm">
                                 <Target className="w-8 h-8" />
                             </div>
                             <h3 className="text-2xl font-black text-ink-950 mb-6">Visi</h3>
-                            <p className="text-xl font-display font-black text-ink-900 italic leading-[1.4]">
-                                "Terwujudnya Lembaga Pendidikan Islam Unggul dalam Melahirkan Generasi Rabbani, Cendekia, dan Mandiri."
+                            <p className="text-xl font-display font-black text-ink-900 italic leading-[1.4] flex-1">
+                                "Kaderisasi Muslim Bertakwa, Berdikari, dan Berkontribusi."
                             </p>
                         </motion.div>
 
-                        {/* Misi */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
-                            className="bg-surface-50 p-10 rounded-[3rem] shadow-premium-md border border-surface-200 hover:shadow-premium-lg transition-all duration-500 group"
-                        >
-                            <div className="w-16 h-16 bg-teal-50 rounded-3xl flex items-center justify-center mb-8 text-teal-700 group-hover:scale-110 transition-transform duration-500 shadow-premium-sm">
-                                <BookOpen className="w-8 h-8" />
-                            </div>
-                            <h3 className="text-2xl font-black text-ink-950 mb-8">Misi Utama</h3>
-                            <ul className="space-y-6">
-                                {[
-                                    { text: "Menyelenggarakan Pendidikan Berbasis ", highlight: "TICE (Technology, Islamic, Character, Entrepreneurship)" },
-                                    { text: "Membentuk ", highlight: "Hamalatul Qur'an" },
-                                    { text: "Menanamkan Jiwa ", highlight: "Entrepreneurship Muslim" }
-                                ].map((item, idx) => (
-                                    <li key={idx} className="flex gap-4 items-start group/item">
-                                        <div className="w-6 h-6 rounded-full bg-teal-600 text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-1 shadow-premium-sm">
-                                            <CheckCircle2 className="w-3.5 h-3.5" />
-                                        </div>
-                                        <span className="text-ink-700 font-bold text-sm tracking-tight group-hover/item:text-teal-700 transition-colors uppercase">
-                                            {item.text}<span className="text-teal-600">{item.highlight}</span>
-                                        </span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </motion.div>
-
-                        {/* Tujuan */}
+                        {/* Tujuan - Moved to occupy 2nd slot */}
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.2 }}
-                            className="bg-white p-10 rounded-[3rem] shadow-premium-lg border border-surface-100 hover:shadow-premium-xl transition-all duration-500 group"
+                            className="bg-white p-10 rounded-[3rem] shadow-premium-lg border border-surface-100 hover:shadow-premium-xl transition-all duration-500 group h-full flex flex-col"
                         >
                             <div className="w-16 h-16 bg-gold-50 rounded-3xl flex items-center justify-center mb-8 text-gold-600 group-hover:scale-110 transition-transform duration-500 shadow-premium-sm">
                                 <Compass className="w-8 h-8" />
                             </div>
                             <h3 className="text-2xl font-black text-ink-950 mb-8">Tujuan</h3>
-                            <ul className="space-y-6">
+                            <ul className="space-y-6 flex-1">
                                 {[
                                     "Mewujudkan Lingkungan Rabbani.",
                                     "Mencapai Keunggulan Akademik.",
@@ -307,6 +280,40 @@ export default function TentangPage() {
                                             <CheckCircle2 className="w-3.5 h-3.5" />
                                         </div>
                                         <span className="text-ink-700 font-bold text-sm tracking-tight group-hover/item:text-gold-700 transition-colors uppercase">{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </motion.div>
+
+                        {/* Misi - Moved to Bottom, Full Width */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                            className="md:col-span-2 bg-surface-50 p-10 rounded-[3rem] shadow-premium-md border border-surface-200 hover:shadow-premium-lg transition-all duration-500 group"
+                        >
+                            <div className="flex items-center gap-6 mb-8">
+                                <div className="w-16 h-16 bg-teal-50 rounded-3xl flex items-center justify-center text-teal-700 group-hover:scale-110 transition-transform duration-500 shadow-premium-sm shrink-0">
+                                    <BookOpen className="w-8 h-8" />
+                                </div>
+                                <h3 className="text-2xl font-black text-ink-950">Misi Utama</h3>
+                            </div>
+
+                            <ul className="grid md:grid-cols-2 gap-x-12 gap-y-6">
+                                {[
+                                    "Menguatkan akidah shahihah dan membiasakan beribadah sesuai sunnah dalam kehidupan sehari-hari melalui pembelajaran bahasa arab, ulumu syar'i, halaqoh tahfizh, dan adab islami.",
+                                    "Membimbing Soft Skill Santri melalui sistem pengasuhan berbasis fitrah dengan pendekatan kesadaran.",
+                                    "Membekali Hard Skill melalui pembelajaran kewirausahaan dan ekstrakurikuler sebagai bekal hidup mandiri.",
+                                    "Menanamkan jiwa dakwah santri melalui metode hikmah dan mauidzoh hasanah."
+                                ].map((item, idx) => (
+                                    <li key={idx} className="flex gap-4 items-start group/item">
+                                        <div className="w-6 h-6 rounded-full bg-teal-600 text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-1.5 shadow-premium-sm">
+                                            <CheckCircle2 className="w-3.5 h-3.5" />
+                                        </div>
+                                        <span className="text-ink-700 font-bold text-sm tracking-tight group-hover/item:text-teal-700 transition-colors leading-relaxed">
+                                            {item}
+                                        </span>
                                     </li>
                                 ))}
                             </ul>

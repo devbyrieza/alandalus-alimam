@@ -419,7 +419,7 @@ function PPDBContent() {
                   {[
                     {
                       q: "Apakah santri wajib asrama?",
-                      a: "Ya, seluruh santri di Pesantren Al-Imam wajib tinggal di asrama untuk mengikuti seluruh rangkaian kegiatan tarbiyah, halaqah tahfidz, dan pembelajaran kitab turats secara maksimal."
+                      a: "Ya, seluruh santri di Pesantren Al-Imam wajib tinggal di asrama untuk mengikuti seluruh rangkaian kegiatan tarbiyah, halaqah tahfidz, dan pembelajaran kitab turots secara maksimal."
                     },
                     {
                       q: "Kapan batas akhir pendaftaran?",
@@ -427,7 +427,7 @@ function PPDBContent() {
                     },
                     {
                       q: "Bagaimana sistem kurikulumnya?",
-                      a: "Kami menerapkan Kurikulum Terpadu yang menggabungkan kurikulum Nasional dengan kurikulum khas Al-Andalus yang berfokus pada penguasaan Bahasa Arab, Tahfidz Al-Qur'an, dan Kitab Turats."
+                      a: "Kami menerapkan Kurikulum Terpadu yang menggabungkan kurikulum Nasional dengan kurikulum khas Al-Andalus yang berfokus pada penguasaan Bahasa Arab, Tahfidz Al-Qur'an, dan Kitab Turots."
                     }
                   ].map((faq, i) => (
                     <motion.div key={i} className="group">

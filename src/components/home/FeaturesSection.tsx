@@ -1,30 +1,35 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, Award, Users, BookOpenCheck, ArrowRight, ShieldCheck, Zap, CheckCircle2 } from "lucide-react";
+import { BookOpen, Award, Users, BookOpenCheck, ArrowRight, ShieldCheck, Zap, CheckCircle2, Building2 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
 
 const FEATURES = [
   {
     icon: BookOpen,
-    title: "Kitab Turats & Bahasa Arab",
-    description: "Pendidikan Islam berbasis Kitab Turats dengan Bahasa Arab sebagai bahasa pengantar harian.",
+    title: "Kitab Turots & Bahasa Arab",
+    description: "Pendidikan Islam berbasis Kitab Turots dengan Bahasa Arab sebagai bahasa pengantar harian.",
   },
   {
     icon: Zap,
-    title: "Aktif & Inovatif",
-    description: "Metode pembelajaran kreatif untuk mengoptimalkan potensi setiap santri secara holistik.",
+    title: "Aktif, Inovatif & Kreatif",
+    description: "Pembelajaran yang Aktif, Inovatif, Kreatif, dan Menyenangkan untuk santri.",
   },
   {
     icon: Users,
     title: "Guru Kompeten & Ahli",
-    description: "Dibimbing oleh lulusan universitas ternama (Timur Tengah, Mesir, Maroko, LIPIA) serta asatidz dari pondok terkemuka.",
+    description: "Guru yang Kompeten dan Ahli di Bidangnya membimbing santri secara intensif.",
   },
   {
     icon: ShieldCheck,
     title: "Karakter & Ibadah",
-    description: "Pembiasaan adab dan penanaman karakter Islami yang kuat berbasis kesadaran diri.",
+    description: "Pembiasaan Ibadah & Penanaman Karakter Islami berbasis Kesadaran.",
+  },
+  {
+    icon: Building2,
+    title: "Fasilitas Lengkap",
+    description: "Fasilitas yang Lengkap & Memadai untuk menunjang kegiatan santri.",
   },
 ] as const;
 
@@ -32,10 +37,10 @@ export default function FeaturesSection() {
   return (
     <section id="keunggulan" className="py-24 md:py-32 bg-white relative overflow-hidden">
       <Container>
-        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+        <div className="flex flex-col lg:flex-row items-start gap-16 lg:gap-24">
 
           {/* TEXT SIDE */}
-          <div className="lg:w-1/2">
+          <div className="lg:w-1/2 lg:sticky lg:top-32">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -47,24 +52,27 @@ export default function FeaturesSection() {
                   <Award className="w-3.5 h-3.5" />
                   <span>Keunggulan Utama</span>
                 </div>
-                <h2 className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-8 tracking-tight leading-none">
-                  Kenapa Memilih <br />
-                  <span className="text-brown-600">Al-Imam Al-Islami?</span>
+                <h2 className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-3 tracking-tight leading-none uppercase">
+                  Kenapa Harus <br />
+                  <span className="text-brown-600">Al-Imam Sukabumi?</span>
                 </h2>
+                <p className="text-sm font-bold text-brown-600 uppercase tracking-widest mb-8">
+                  Managed by Al-Andalus International Boarding School
+                </p>
                 <p className="text-lg text-ink-600 leading-relaxed font-medium text-justify lg:text-left">
-                  Kami tidak hanya mengajarkan ilmu, tetapi juga mendidik karakter. Lingkungan yang kondusif untuk tumbuh kembang spiritual, intelektual, dan emosional santri.
+                  Pendidikan Islam unggulan yang memadukan kurikulum terbaik untuk mencetak generasi Rabbani.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-4">
+              <div className="flex flex-col gap-6 pt-4">
                 {FEATURES.map((feature, idx) => (
-                  <div key={idx} className="flex gap-5 group">
-                    <div className="w-12 h-12 rounded-xl bg-surface-50 flex items-center justify-center border border-surface-100 shrink-0 shadow-premium-sm group-hover:bg-white group-hover:border-brown-100 transition-all duration-300">
-                      <feature.icon className="w-6 h-6 text-brown-600" />
+                  <div key={idx} className="flex gap-5 group items-start">
+                    <div className="w-14 h-14 rounded-2xl bg-surface-50 flex items-center justify-center border border-surface-100 shrink-0 shadow-premium-sm group-hover:bg-brown-600 group-hover:text-white transition-all duration-300">
+                      <feature.icon className="w-7 h-7 text-brown-600 group-hover:text-white transition-colors" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-ink-950 text-base mb-1 group-hover:text-brown-700 transition-colors">{feature.title}</h4>
-                      <p className="text-sm text-ink-500 leading-relaxed font-medium">{feature.description}</p>
+                      <h4 className="font-bold text-ink-950 text-lg mb-1 group-hover:text-brown-700 transition-colors">{feature.title}</h4>
+                      <p className="text-base text-ink-500 leading-relaxed font-medium">{feature.description}</p>
                     </div>
                   </div>
                 ))}
@@ -96,7 +104,7 @@ export default function FeaturesSection() {
                     <p className="text-sm font-bold text-ink-600">Tahun Mengabdi</p>
                     <p className="text-[11px] leading-tight text-ink-400 italic">
                       Sejak 1995 <br />
-                      <span className="text-brown-600 font-bold">(Mulai 2026 dikelola oleh Al-Andalus)</span>
+                      <span className="text-brown-600 font-bold">(Mulai Januari 2026 dikelola sepenuhnya oleh Al-Andalus)</span>
                     </p>
                   </div>
                 </div>

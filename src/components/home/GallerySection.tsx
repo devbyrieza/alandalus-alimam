@@ -18,8 +18,8 @@ import { Container } from "@/components/layout/Container";
 const GALLERY_ITEMS = [
   {
     image: "/images/pembelajaran-kitab-turotz.png",
-    title: "Kajian Kitab Turats",
-    description: "Mengkaji Kitab Turats & Ulama Salaf",
+    title: "Kajian Kitab Turots",
+    description: "Mengkaji Kitab Turots & Ulama Salaf",
     icon: BookOpen,
   },
   {

@@ -122,7 +122,7 @@ export default function StatsSection() {
                 {/* Specific context for years */}
                 {stat.id === 'years' && (
                   <p className="text-[10px] font-bold text-brown-600 mt-2 bg-brown-50 px-2 py-0.5 rounded-full border border-brown-100">
-                    Dikelola Al-Andalus Sejak 2026
+                    Dikelola Sepenuhnya oleh Al-Andalus Sejak Januari 2026
                   </p>
                 )}
 

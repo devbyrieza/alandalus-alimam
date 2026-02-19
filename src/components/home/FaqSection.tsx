@@ -12,11 +12,11 @@ const FAQS = [
     },
     {
         question: "Apakah santri diwajibkan untuk tinggal di asrama?",
-        answer: "Ya, seluruh santri di Pesantren Al-Imam wajib tinggal di asrama untuk mengikuti seluruh rangkaian kegiatan tarbiyah, halaqah tahfidz, dan pembelajaran kitab turats secara maksimal.",
+        answer: "Ya, seluruh santri di Pesantren Al-Imam wajib tinggal di asrama untuk mengikuti seluruh rangkaian kegiatan tarbiyah, halaqah tahfidz, dan pembelajaran kitab turots secara maksimal.",
     },
     {
         question: "Kurikulum apa yang diterapkan di Pesantren Al-Imam?",
-        answer: "Kami menerapkan Kurikulum Terpadu yang menggabungkan kurikulum Nasional dengan kurikulum khas Al-Andalus yang berfokus pada penguasaan Bahasa Arab, Tahfidz Al-Qur'an, dan Kitab Turats.",
+        answer: "Kami menerapkan Kurikulum Terpadu yang menggabungkan kurikulum Nasional dengan kurikulum khas Al-Andalus yang berfokus pada penguasaan Bahasa Arab, Tahfidz Al-Qur'an, dan Kitab Turots.",
     },
     {
         question: "Apa saja berkas persyaratan yang harus disiapkan?",

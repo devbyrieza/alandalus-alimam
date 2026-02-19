@@ -19,7 +19,7 @@ const PROGRAMS = [
         features: [
             "Target Hafalan 12 Juz",
             "Sinergi Kurikulum Nasional & Al-Andalus",
-            "Bahasa Arab & Kitab Turats",
+            "Bahasa Arab & Kitab Turots",
             "Sanad Al-Qur'an & Hadith",
             "Program TICE & Global"
         ],
@@ -33,7 +33,7 @@ const PROGRAMS = [
         desc: "Program intensif Bahasa dan Syari'at untuk mencetak kader ulama masa depan. Persiapan matang studi ke Universitas Timur Tengah maupun Perguruan Tinggi Favorit Dalam Negeri.",
         features: [
             "Target Hafalan 16 Juz",
-            "Penguasaan Kitab Turats",
+            "Penguasaan Kitab Turots",
             "Bahasa Arab Aktif & Formal",
             "Persiapan Universitas Timur Tengah & Dalam Negeri",
             "Ziarah Ilmiah & Pengabdian"

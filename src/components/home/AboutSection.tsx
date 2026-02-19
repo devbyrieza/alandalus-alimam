@@ -38,7 +38,7 @@ export default function AboutSection() {
               transition={{ delay: 0.1 }}
               className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-8 tracking-tight leading-none"
             >
-              Pendidikan Terbaik untuk <span className="text-brown-600">Buah Hati Anda</span>
+              Mengedepankan <br /><span className="text-brown-600">Bimbingan & Pengawasan Melekat</span>
             </motion.h2>
 
             <motion.p
@@ -48,64 +48,70 @@ export default function AboutSection() {
               transition={{ delay: 0.2 }}
               className="text-lg text-ink-600 max-w-2xl mx-auto leading-relaxed font-medium text-justify md:text-center"
             >
-              Kami menggabungkan nilai-nilai Salafush Shalih dengan metodologi pengajaran modern untuk mencetak santri yang siap menghadapi tantangan zaman.
+              <span className="font-bold text-ink-950">Tanpa kekerasan dan luka pengasuhan.</span> Kami membangkitkan kesadaran santri melalui keteladanan pendidik, agar tumbuh menjadi pribadi yang dewasa dalam berpikir dan bertindak.
             </motion.p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-10 lg:gap-16 mb-24">
-            {/* Card Visi */}
+          <div className="flex flex-col gap-8 mb-24">
+            {/* Card Visi - Full Width Centered */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="relative group"
             >
-              <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] p-6 sm:p-10 md:p-12 relative z-10 h-full flex flex-col shadow-premium-lg border border-surface-100 hover:shadow-premium-xl transition-all duration-500 overflow-hidden">
-                <div className="w-16 h-16 rounded-2xl bg-brown-50 flex items-center justify-center mb-8 shadow-premium-sm group-hover:scale-110 transition-transform duration-500">
+              <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] p-8 md:p-12 relative z-10 h-full flex flex-col items-center text-center shadow-premium-lg border border-surface-100 hover:shadow-premium-xl transition-all duration-500 overflow-hidden">
+                <div className="w-16 h-16 rounded-2xl bg-brown-50 flex items-center justify-center mb-6 shadow-premium-sm group-hover:scale-110 transition-transform duration-500">
                   <Target className="w-8 h-8 text-brown-600" />
                 </div>
 
-                <h3 className="text-2xl md:text-3xl font-display font-bold text-ink-950 mb-4 tracking-tight">Visi Kami</h3>
-                <p className="text-[11px] font-extrabold text-brown-600 uppercase tracking-[0.2em] mb-8 bg-brown-50 px-3 py-1 rounded-lg w-fit">Visi Utama</p>
+                <p className="text-[11px] font-extrabold text-brown-600 uppercase tracking-[0.2em] mb-4 bg-brown-50 px-3 py-1 rounded-lg">Visi Utama</p>
 
-                <div className="flex-1">
-                  <blockquote className="relative">
-                    <p className="text-ink-950 leading-snug font-black text-xl md:text-2xl italic">
-                      "Terwujudnya Lembaga Pendidikan Islam Unggul dalam Melahirkan Generasi Rabbani, Cendekia, dan Mandiri."
-                    </p>
-                    <div className="mt-8 w-12 h-1.5 bg-brown-200 rounded-full" />
-                  </blockquote>
-                </div>
+                <h3 className="text-2xl md:text-3xl font-display font-bold text-ink-950 mb-6 tracking-tight">Visi Kami</h3>
+
+                <blockquote className="relative max-w-3xl mx-auto">
+                  <p className="text-ink-950 leading-snug font-black text-2xl md:text-4xl italic">
+                    "Kaderisasi Muslim Bertakwa, Berdikari, dan Berkontribusi."
+                  </p>
+                  <div className="mt-8 w-12 h-1.5 bg-brown-200 rounded-full mx-auto" />
+                </blockquote>
               </div>
             </motion.div>
 
-            {/* Card Misi */}
+            {/* Card Misi - Full Width Grid */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
               className="relative group"
             >
-              <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] p-6 sm:p-10 md:p-12 relative z-10 h-full flex flex-col shadow-premium-lg border border-surface-100 hover:shadow-premium-xl transition-all duration-500 overflow-hidden">
-                <div className="w-16 h-16 rounded-2xl bg-teal-50 flex items-center justify-center mb-8 shadow-premium-sm group-hover:scale-110 transition-transform duration-500">
-                  <Rocket className="w-8 h-8 text-teal-600" />
+              <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] p-8 md:p-12 relative z-10 h-full flex flex-col shadow-premium-lg border border-surface-100 hover:shadow-premium-xl transition-all duration-500 overflow-hidden">
+                <div className="flex flex-col md:flex-row gap-6 md:items-center md:justify-between mb-10">
+                  <div className="flex items-center gap-6">
+                    <div className="w-16 h-16 rounded-2xl bg-teal-50 flex items-center justify-center shadow-premium-sm group-hover:scale-110 transition-transform duration-500 shrink-0">
+                      <Rocket className="w-8 h-8 text-teal-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-3xl font-display font-bold text-ink-950 tracking-tight mb-2">Misi Kami</h3>
+                      <p className="text-[11px] font-extrabold text-teal-600 uppercase tracking-[0.2em] bg-teal-50 px-3 py-1 rounded-lg w-fit">Langkah Strategis</p>
+                    </div>
+                  </div>
                 </div>
 
-                <h3 className="text-3xl font-display font-bold text-ink-950 mb-4 tracking-tight">Misi Kami</h3>
-                <p className="text-[11px] font-extrabold text-teal-600 uppercase tracking-[0.2em] mb-8 bg-teal-50 px-3 py-1 rounded-lg w-fit">Langkah Strategis</p>
-
-                <ul className="space-y-6 flex-1">
+                <ul className="grid md:grid-cols-2 gap-x-12 gap-y-8">
                   {[
-                    { text: "Menyelenggarakan Pendidikan Berbasis ", highlight: "TICE", suffix: " (Technology, Islamic, Character, Entrepreneurship)" },
-                    { text: "Membentuk ", highlight: "Hamalatul Qur'an", suffix: "" },
-                    { text: "Menanamkan Jiwa ", highlight: "Entrepreneurship Muslim", suffix: "" }
+                    "Menguatkan akidah shahihah dan membiasakan beribadah sesuai sunnah dalam kehidupan sehari-hari melalui pembelajaran bahasa arab, ulumu syar'i, halaqoh tahfizh, dan adab islami.",
+                    "Membimbing Soft Skill Santri melalui sistem pengasuhan berbasis fitrah dengan pendekatan kesadaran.",
+                    "Membekali Hard Skill melalui pembelajaran kewirausahaan dan ekstrakurikuler sebagai bekal hidup mandiri.",
+                    "Menanamkan jiwa dakwah santri melalui metode hikmah dan mauidzoh hasanah."
                   ].map((misi, i) => (
                     <li key={i} className="flex gap-4 items-start">
-                      <div className="mt-1.5 w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center shrink-0 border border-teal-100 group-hover:bg-teal-100 transition-colors">
+                      <div className="mt-1 w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center shrink-0 border border-teal-100 group-hover:bg-teal-100 transition-colors">
                         <CheckCircle className="w-3.5 h-3.5 text-teal-600" />
                       </div>
                       <p className="text-base font-medium text-ink-700 leading-relaxed">
-                        {misi.text}<span className="text-ink-950 font-bold">{misi.highlight}</span>{misi.suffix}
+                        {misi}
                       </p>
                     </li>
                   ))}
