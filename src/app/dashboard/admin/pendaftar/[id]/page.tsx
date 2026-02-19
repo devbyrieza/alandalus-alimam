@@ -89,8 +89,9 @@ interface PendaftarDetail {
   dokumen: Array<{
     id: string;
     jenis_dokumen: string;
-    status_verifikasi: string;
-    file_url: string | null;
+    is_verified: boolean;
+    catatan: string | null;
+    file_path: string | null;
   }>;
   pembayaran: Array<{
     id: string;
@@ -255,7 +256,7 @@ export default function PendaftarDetailPage() {
 
   // Calculate document and payment progress
   const totalDocs = pendaftar.dokumen.length;
-  const verifiedDocs = pendaftar.dokumen.filter(d => d.status_verifikasi === "verified").length;
+  const verifiedDocs = pendaftar.dokumen.filter(d => d.is_verified).length;
   const hasPaid = pendaftar.pembayaran.some(p => p.status_pembayaran === "verified");
 
   return (
@@ -442,45 +443,53 @@ export default function PendaftarDetailPage() {
                 <p className="text-sm text-stone-500">Belum ada dokumen terupload</p>
               ) : (
                 <div className="space-y-4">
-                  {pendaftar.dokumen.map((doc) => (
-                    <div
-                      key={doc.id}
-                      className="flex items-center justify-between p-4 bg-stone-50 rounded-lg border border-stone-200"
-                    >
-                      <div className="flex items-center gap-3">
-                        <FileText className="w-5 h-5 text-stone-400" />
-                        <div>
-                          <span className="block font-medium text-stone-900">
-                            {doc.jenis_dokumen}
-                          </span>
-                          {doc.file_url && (
-                            <a
-                              href={doc.file_url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-xs text-blue-600 hover:underline"
-                            >
-                              Lihat File
-                            </a>
-                          )}
-                        </div>
-                      </div>
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-bold ${doc.status_verifikasi === "verified"
-                          ? "bg-green-100 text-green-700"
-                          : doc.status_verifikasi === "rejected"
-                            ? "bg-red-100 text-red-700"
-                            : "bg-amber-100 text-amber-700"
-                          }`}
+                  {pendaftar.dokumen.map((doc) => {
+                    const isVerified = doc.is_verified;
+                    const isRejected = !doc.is_verified && doc.catatan;
+
+                    return (
+                      <div
+                        key={doc.id}
+                        className="flex items-center justify-between p-4 bg-stone-50 rounded-lg border border-stone-200"
                       >
-                        {doc.status_verifikasi === "verified"
-                          ? "Terverifikasi"
-                          : doc.status_verifikasi === "rejected"
-                            ? "Ditolak"
-                            : "Pending"}
-                      </span>
-                    </div>
-                  ))}
+                        <div className="flex items-center gap-3">
+                          <FileText className="w-5 h-5 text-stone-400" />
+                          <div>
+                            <span className="block font-medium text-stone-900">
+                              {doc.jenis_dokumen}
+                            </span>
+                            {((doc as any).file_url || (doc as any).file_path) && (
+                              <a
+                                href={(doc as any).file_url || `/api/files/${(doc as any).file_path}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-xs text-blue-600 hover:underline"
+                              >
+                                Lihat File
+                              </a>
+                            )}
+                            {isRejected && (
+                              <p className="text-xs text-red-600 mt-1">Catatan: {doc.catatan}</p>
+                            )}
+                          </div>
+                        </div>
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-bold ${isVerified
+                            ? "bg-green-100 text-green-700"
+                            : isRejected
+                              ? "bg-red-100 text-red-700"
+                              : "bg-amber-100 text-amber-700"
+                            }`}
+                        >
+                          {isVerified
+                            ? "Terverifikasi"
+                            : isRejected
+                              ? "Ditolak"
+                              : "Pending"}
+                        </span>
+                      </div>
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -747,44 +756,51 @@ export default function PendaftarDetailPage() {
           {/* If Keuangan, Sidebar Pembayaran di-hide atau ditampilkan sebagai Secondary info (karena sudah ada di header) */}
 
           {/* Status Dokumen */}
-          <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-blue-100">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-teal-100 rounded-lg">
-                <FileText className="w-6 h-6 text-teal-600" />
+          {!isKeuangan && (
+            <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-blue-100">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-teal-100 rounded-lg">
+                  <FileText className="w-6 h-6 text-teal-600" />
+                </div>
+                <h3 className="text-lg font-bold text-stone-900">Dokumen</h3>
               </div>
-              <h3 className="text-lg font-bold text-stone-900">Dokumen</h3>
+              {pendaftar.dokumen.length === 0 ? (
+                <p className="text-sm text-stone-500">Belum ada dokumen terupload</p>
+              ) : (
+                <div className="space-y-2">
+                  {pendaftar.dokumen.map((doc) => {
+                    const isVerified = doc.is_verified;
+                    const isRejected = !doc.is_verified && doc.catatan;
+
+                    return (
+                      <div
+                        key={doc.id}
+                        className="flex items-center justify-between p-3 bg-stone-50 rounded-lg"
+                      >
+                        <span className="text-sm font-medium text-stone-700">
+                          {doc.jenis_dokumen}
+                        </span>
+                        <span
+                          className={`px-2 py-1 rounded text-xs font-bold ${isVerified
+                            ? "bg-green-100 text-green-700"
+                            : isRejected
+                              ? "bg-red-100 text-red-700"
+                              : "bg-amber-100 text-amber-700"
+                            }`}
+                        >
+                          {isVerified
+                            ? "Terverifikasi"
+                            : isRejected
+                              ? "Ditolak"
+                              : "Pending"}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
-            {pendaftar.dokumen.length === 0 ? (
-              <p className="text-sm text-stone-500">Belum ada dokumen terupload</p>
-            ) : (
-              <div className="space-y-2">
-                {pendaftar.dokumen.map((doc) => (
-                  <div
-                    key={doc.id}
-                    className="flex items-center justify-between p-3 bg-stone-50 rounded-lg"
-                  >
-                    <span className="text-sm font-medium text-stone-700">
-                      {doc.jenis_dokumen}
-                    </span>
-                    <span
-                      className={`px-2 py-1 rounded text-xs font-bold ${doc.status_verifikasi === "verified"
-                        ? "bg-green-100 text-green-700"
-                        : doc.status_verifikasi === "rejected"
-                          ? "bg-red-100 text-red-700"
-                          : "bg-amber-100 text-amber-700"
-                        }`}
-                    >
-                      {doc.status_verifikasi === "verified"
-                        ? "Terverifikasi"
-                        : doc.status_verifikasi === "rejected"
-                          ? "Ditolak"
-                          : "Pending"}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          )}
 
           {/* Status Pembayaran (Sidebar View - Hide IF Keuangan because it's already on top, OR keep as consistent view) */}
           {/* Hide IF Berkas as well, unless we want them to see it. User request implies focus on relevant data. */}

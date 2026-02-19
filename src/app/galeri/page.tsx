@@ -12,7 +12,7 @@ const GALLERY_CATEGORIES = [
     items: [
       { src: "/images/masjid.png", label: "Masjid Jami' Al-Imam" },
       { src: "/images/asrama.png", label: "Asrama Santri" },
-      { src: "/images/tentang.png.png", label: "Gedung Utama" },
+      { src: "/images/tentang.png", label: "Gedung Utama" },
       { src: "/images/gedung-utama-dan-lapangan-basket.jpeg", label: "Gedung Utama & Lapangan Basket" },
       { src: "/images/gedung-kelas.jpeg", label: "Gedung Kelas" },
       { src: "/images/kelas-dari-dalam.png", label: "Ruang Kelas dari Dalam" },
