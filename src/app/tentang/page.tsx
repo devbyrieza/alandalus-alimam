@@ -114,7 +114,7 @@ export default function TentangPage() {
                             <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-premium-xl relative z-10 bg-white p-3 border border-surface-200">
                                 <div className="relative w-full h-full rounded-[2.2rem] overflow-hidden">
                                     <Image
-                                        src="/images/tentang.png.png"
+                                        src="/images/tentang.png"
                                         alt="Pesantren Al-Imam Al-Islami"
                                         fill
                                         className="object-cover"
