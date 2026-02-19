@@ -546,14 +546,38 @@ export async function notifyTestSchedule(data: {
     tanggal: string;
     waktu: string;
     tempat: string;
+    meeting_link?: string;
 }) {
-    return sendTemplate({
+    let message = TEMPLATES['test_schedule'];
+
+    // Replace standard variables
+    const variables = {
+        nama: data.nama,
+        tanggal: data.tanggal,
+        waktu: data.waktu,
+        tempat: data.tempat,
+        dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar/undangan-seleksi`,
+    };
+
+    Object.entries(variables).forEach(([key, value]) => {
+        message = message.replace(new RegExp(`{{${key}}}`, 'g'), value);
+    });
+
+    // Append meeting link if available
+    if (data.meeting_link) {
+        message = message.replace(
+            /📍 \*Tempat:\* .*/,
+            `📍 *Tempat:* ${data.tempat}\n🔗 *Link Meeting:* ${data.meeting_link}`
+        );
+        // Fallback if regex fails or just append
+        if (!message.includes(data.meeting_link)) {
+            message += `\n\n🔗 *Link Meeting:* ${data.meeting_link}`;
+        }
+    }
+
+    return sendMessage({
         phone: data.phone,
-        templateId: 'test_schedule',
-        variables: {
-            ...data,
-            dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar/undangan-seleksi`,
-        },
+        message,
     });
 }
 
