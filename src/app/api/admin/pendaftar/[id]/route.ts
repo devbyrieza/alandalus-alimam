@@ -104,7 +104,8 @@ export async function GET(
         pendidikan_ayah: pendaftar.orang_tua.pendidikan_ayah || ayah.pendidikan_terakhir || null,
         penghasilan_ayah: pendaftar.orang_tua.penghasilan_ayah || ayah.penghasilan || null,
         no_hp_ayah: pendaftar.orang_tua.no_hp_ayah || ayah.no_hp || null,
-        alamat_ayah: pendaftar.orang_tua.alamat_ayah || ayah.alamat || null, // Fix missing address
+        alamat_ayah: pendaftar.orang_tua.alamat_ayah || ayah.alamat || null,
+        status_ayah: pendaftar.orang_tua.status_ayah || ayah.status_hidup || "Masih Hidup",
         // Ibu
         nama_ibu: pendaftar.orang_tua.nama_ibu || ibu.nama_lengkap || null,
         nik_ibu: pendaftar.orang_tua.nik_ibu || ibu.nik || null,
@@ -114,7 +115,8 @@ export async function GET(
         pendidikan_ibu: pendaftar.orang_tua.pendidikan_ibu || ibu.pendidikan_terakhir || null,
         penghasilan_ibu: pendaftar.orang_tua.penghasilan_ibu || ibu.penghasilan || null,
         no_hp_ibu: pendaftar.orang_tua.no_hp_ibu || ibu.no_hp || null,
-        alamat_ibu: pendaftar.orang_tua.alamat_ibu || ibu.alamat || null, // Fix missing address
+        alamat_ibu: pendaftar.orang_tua.alamat_ibu || ibu.alamat || null,
+        status_ibu: pendaftar.orang_tua.status_ibu || ibu.status_hidup || "Masih Hidup",
       } : null
     };
 

@@ -80,6 +80,8 @@ interface PendaftarDetail {
     penghasilan_ibu: string | null;
     no_hp_ibu: string | null;
     alamat_ibu: string | null;
+    status_ayah: string | null;
+    status_ibu: string | null;
     nama_wali: string | null;
     hubungan_wali: string | null;
     no_hp_wali: string | null;
@@ -271,7 +273,7 @@ export default function PendaftarDetailPage() {
       </Link>
 
       {/* Summary Card */}
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl shadow-xl p-6 text-white">
+      <div className="bg-linear-to-r from-blue-600 to-indigo-700 rounded-2xl shadow-xl p-6 text-white">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           {/* Main Info */}
           <div className="flex items-center gap-4">
@@ -680,9 +682,19 @@ export default function PendaftarDetailPage() {
               <div className="space-y-8">
                 {/* Data Ayah */}
                 <div className="p-4 bg-stone-50 rounded-xl border border-stone-100">
-                  <h4 className="font-bold text-stone-900 mb-4 flex items-center gap-2 border-b border-stone-200 pb-2">
-                    <User className="w-5 h-5 text-blue-600" />
-                    Data Ayah / Wali Laki-laki
+                  <h4 className="font-bold text-stone-900 mb-4 flex items-center justify-between border-b border-stone-200 pb-2">
+                    <div className="flex items-center gap-2">
+                      <User className="w-5 h-5 text-blue-600" />
+                      Data Ayah / Wali Laki-laki
+                    </div>
+                    {pendaftar.orang_tua.status_ayah && (
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${pendaftar.orang_tua.status_ayah === "Sudah Meninggal"
+                        ? "bg-red-100 text-red-600 border border-red-200"
+                        : "bg-emerald-100 text-emerald-600 border border-emerald-200"
+                        }`}>
+                        {pendaftar.orang_tua.status_ayah}
+                      </span>
+                    )}
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
                     <InfoItem label="Nama Lengkap" value={pendaftar.orang_tua.nama_ayah} />
@@ -695,7 +707,7 @@ export default function PendaftarDetailPage() {
                         <InfoItem label="Tempat, Tgl Lahir" value={`${pendaftar.orang_tua.tempat_lahir_ayah || ""}, ${formatDate(pendaftar.orang_tua.tanggal_lahir_ayah)}`} />
                         <InfoItem label="Pendidikan Terakhir" value={pendaftar.orang_tua.pendidikan_ayah} />
                         <div className="md:col-span-2">
-                          <InfoItem label="Alamat Ayah" value={pendaftar.orang_tua.alamat_ayah || pendaftar.alamat} />
+                          <InfoItem label="Alamat Ayah" value={pendaftar.orang_tua.alamat_ayah || (pendaftar.orang_tua.status_ayah === "Masih Hidup" ? pendaftar.alamat : "-")} />
                         </div>
                       </>
                     )}
@@ -704,9 +716,19 @@ export default function PendaftarDetailPage() {
 
                 {/* Data Ibu */}
                 <div className="p-4 bg-stone-50 rounded-xl border border-stone-100">
-                  <h4 className="font-bold text-stone-900 mb-4 flex items-center gap-2 border-b border-stone-200 pb-2">
-                    <User className="w-5 h-5 text-rose-600" />
-                    Data Ibu / Wali Perempuan
+                  <h4 className="font-bold text-stone-900 mb-4 flex items-center justify-between border-b border-stone-200 pb-2">
+                    <div className="flex items-center gap-2">
+                      <User className="w-5 h-5 text-rose-600" />
+                      Data Ibu / Wali Perempuan
+                    </div>
+                    {pendaftar.orang_tua.status_ibu && (
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${pendaftar.orang_tua.status_ibu === "Sudah Meninggal"
+                        ? "bg-red-100 text-red-600 border border-red-200"
+                        : "bg-emerald-100 text-emerald-600 border border-emerald-200"
+                        }`}>
+                        {pendaftar.orang_tua.status_ibu}
+                      </span>
+                    )}
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
                     <InfoItem label="Nama Lengkap" value={pendaftar.orang_tua.nama_ibu} />
@@ -719,7 +741,7 @@ export default function PendaftarDetailPage() {
                         <InfoItem label="Pekerjaan" value={pendaftar.orang_tua.pekerjaan_ibu} />
                         <InfoItem label="Penghasilan" value={pendaftar.orang_tua.penghasilan_ibu} />
                         <div className="md:col-span-2">
-                          <InfoItem label="Alamat Ibu" value={pendaftar.orang_tua.alamat_ibu || pendaftar.alamat} />
+                          <InfoItem label="Alamat Ibu" value={pendaftar.orang_tua.alamat_ibu || (pendaftar.orang_tua.status_ibu === "Masih Hidup" ? pendaftar.alamat : "-")} />
                         </div>
                       </>
                     )}
