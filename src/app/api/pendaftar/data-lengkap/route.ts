@@ -144,6 +144,14 @@ export async function POST(request: NextRequest) {
       if (santri.nisn) updateData.nisn = santri.nisn;
       if (santri.anak_ke) updateData.anak_ke = parseInt(santri.anak_ke.toString());
       if (santri.berapa_bersaudara) updateData.jumlah_saudara = parseInt(santri.berapa_bersaudara.toString());
+
+      // Sync Additional Fields (Previously Missing)
+      if (santri.tempat_lahir) updateData.tempat_lahir = santri.tempat_lahir;
+      if (santri.golongan_darah) updateData.golongan_darah = santri.golongan_darah;
+      if (santri.hobi) updateData.hobi = santri.hobi;
+      if (santri.cita_cita) updateData.cita_cita = santri.cita_cita;
+      if (santri.alamat_sekolah) updateData.alamat_sekolah = santri.alamat_sekolah; // Note: schema might not have this, checking...
+      if (santri.tahun_lulus) updateData.tahun_lulus = parseInt(santri.tahun_lulus.toString());
     }
 
     // UPDATE PENDAFTAR
@@ -178,6 +186,7 @@ export async function POST(request: NextRequest) {
           nama_wali: wali?.nama_lengkap,
           no_hp_wali: wali?.no_hp,
           hubungan_wali: wali?.hubungan_status,
+          alamat_wali: wali?.alamat,
         },
         update: {
           // Ayah
@@ -188,6 +197,7 @@ export async function POST(request: NextRequest) {
           pekerjaan_ayah: ayah?.pekerjaan,
           penghasilan_ayah: ayah?.penghasilan_rata_rata,
           no_hp_ayah: ayah?.no_hp,
+          alamat_ayah: ayah?.alamat, // Added Address
           // Ibu
           nama_ibu: ibu?.nama_lengkap,
           nik_ibu: ibu?.nik,
@@ -196,10 +206,12 @@ export async function POST(request: NextRequest) {
           pekerjaan_ibu: ibu?.pekerjaan,
           penghasilan_ibu: ibu?.penghasilan_rata_rata,
           no_hp_ibu: ibu?.no_hp,
+          alamat_ibu: ibu?.alamat, // Added Address
           // Wali
           nama_wali: wali?.nama_lengkap,
           no_hp_wali: wali?.no_hp,
           hubungan_wali: wali?.hubungan_status,
+          alamat_wali: wali?.alamat,
         }
       });
     }

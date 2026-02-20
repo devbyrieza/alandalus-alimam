@@ -56,7 +56,65 @@ export async function GET(
       );
     }
 
-    return NextResponse.json({ data: pendaftar });
+    // -- DATA SYNC BACKUP LOGIC --
+    // If flattened columns are null, try to fill them from data_lengkap JSON
+    // This fixes the issue where data exists in JSON but not in columns
+    const dataLengkap: any = pendaftar.data_lengkap || {};
+    const santri = dataLengkap.santri || {};
+    const ayah = dataLengkap.ayah || {};
+    const ibu = dataLengkap.ibu || {};
+    const wali = dataLengkap.wali || {};
+
+    const mergedPendaftar = {
+      ...pendaftar,
+      // Identity
+      tempat_lahir: pendaftar.tempat_lahir || santri.tempat_lahir || null,
+      tanggal_lahir: pendaftar.tanggal_lahir || (santri.tanggal_lahir ? new Date(santri.tanggal_lahir) : null),
+      golongan_darah: pendaftar.golongan_darah || santri.golongan_darah || null,
+      hobi: pendaftar.hobi || santri.hobi || null,
+      cita_cita: pendaftar.cita_cita || santri.cita_cita || null,
+
+      // Address - Main
+      alamat: pendaftar.alamat || santri.alamat || null,
+      rt: pendaftar.rt || santri.rt || null,
+      rw: pendaftar.rw || santri.rw || null,
+      kelurahan: pendaftar.kelurahan || santri.kelurahan || null,
+      kecamatan: pendaftar.kecamatan || santri.kecamatan || null,
+      kabupaten: pendaftar.kabupaten || santri.kabupaten || null,
+      provinsi: pendaftar.provinsi || santri.provinsi || null,
+      kode_pos: pendaftar.kode_pos || santri.kode_pos || null,
+
+      // School
+      asal_sekolah: pendaftar.asal_sekolah || santri.asal_sekolah || null,
+      alamat_sekolah: pendaftar.alamat_sekolah || santri.alamat_sekolah || null,
+      tahun_lulus: pendaftar.tahun_lulus || (santri.tahun_lulus ? parseInt(santri.tahun_lulus) : null),
+      nisn: pendaftar.nisn || santri.nisn || null,
+      anak_ke: pendaftar.anak_ke || (santri.anak_ke ? parseInt(santri.anak_ke) : null),
+      jumlah_saudara: pendaftar.jumlah_saudara || (santri.berapa_bersaudara ? parseInt(santri.berapa_bersaudara) : null),
+
+      // Parents (Nested object override)
+      orang_tua: pendaftar.orang_tua ? {
+        ...pendaftar.orang_tua,
+        // Ayah
+        nama_ayah: pendaftar.orang_tua.nama_ayah || ayah.nama_lengkap || null,
+        nik_ayah: pendaftar.orang_tua.nik_ayah || ayah.nik || null,
+        pekerjaan_ayah: pendaftar.orang_tua.pekerjaan_ayah || ayah.pekerjaan || null,
+        pendidikan_ayah: pendaftar.orang_tua.pendidikan_ayah || ayah.pendidikan_terakhir || null,
+        penghasilan_ayah: pendaftar.orang_tua.penghasilan_ayah || ayah.penghasilan_rata_rata || null,
+        no_hp_ayah: pendaftar.orang_tua.no_hp_ayah || ayah.no_hp || null,
+        alamat_ayah: pendaftar.orang_tua.alamat_ayah || ayah.alamat || null, // Fix missing address
+        // Ibu
+        nama_ibu: pendaftar.orang_tua.nama_ibu || ibu.nama_lengkap || null,
+        nik_ibu: pendaftar.orang_tua.nik_ibu || ibu.nik || null,
+        pekerjaan_ibu: pendaftar.orang_tua.pekerjaan_ibu || ibu.pekerjaan || null,
+        pendidikan_ibu: pendaftar.orang_tua.pendidikan_ibu || ibu.pendidikan_terakhir || null,
+        penghasilan_ibu: pendaftar.orang_tua.penghasilan_ibu || ibu.penghasilan_rata_rata || null,
+        no_hp_ibu: pendaftar.orang_tua.no_hp_ibu || ibu.no_hp || null,
+        alamat_ibu: pendaftar.orang_tua.alamat_ibu || ibu.alamat || null, // Fix missing address
+      } : null
+    };
+
+    return NextResponse.json({ data: mergedPendaftar });
   } catch (error) {
     console.error("Error in admin pendaftar detail API:", error);
     return NextResponse.json(
