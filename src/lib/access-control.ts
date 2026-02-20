@@ -392,6 +392,7 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
       { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
       { name: 'Hasil Seleksi', href: '/dashboard/admin/hasil-seleksi', icon: 'ClipboardCheck' },
+      { name: 'Penilaian', href: '/dashboard/admin/penilaian', icon: 'ClipboardEdit' }, // NEW
       { name: 'Pengumuman', href: '/dashboard/admin/pengumuman', icon: 'Trophy' },
       { name: 'Broadcast WA', href: '/dashboard/admin/broadcast', icon: 'Bell' },
       { name: 'Statistik Wilayah', href: '/dashboard/admin/statistik-wilayah', icon: 'BarChart' },
@@ -403,6 +404,7 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
       { name: 'Verifikasi Pembayaran', href: '/dashboard/admin/verifikasi-pembayaran', icon: 'CreditCard' },
       { name: 'Verifikasi Dokumen', href: '/dashboard/admin/verifikasi-dokumen', icon: 'FileCheck' },
       { name: 'Jadwal Ujian', href: '/dashboard/admin/jadwal-ujian', icon: 'Calendar' },
+      { name: 'Penilaian', href: '/dashboard/admin/penilaian', icon: 'ClipboardEdit' }, // NEW
       { name: 'Pengumuman', href: '/dashboard/admin/pengumuman', icon: 'Trophy' },
       { name: 'Broadcast WA', href: '/dashboard/admin/broadcast', icon: 'Bell' },
       { name: 'Statistik Wilayah', href: '/dashboard/admin/statistik-wilayah', icon: 'BarChart' },

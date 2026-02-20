@@ -154,11 +154,17 @@ export default function UndanganSeleksiTab() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-6 text-white shadow-lg">
-        <h1 className="text-2xl font-black mb-2 text-white">Undangan Seleksi</h1>
-        <p className="text-purple-100">
-          Jadwal ujian seleksi calon santri baru
-        </p>
+      <div className="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-6 text-white shadow-lg flex justify-between items-center">
+        <div>
+          <h1 className="text-2xl font-black mb-2 text-white">Undangan Seleksi</h1>
+          <p className="text-purple-100">
+            Jadwal ujian seleksi calon santri baru
+          </p>
+        </div>
+        <a href="/dashboard/pendaftar/kartu-ujian" target="_blank" className="bg-white/20 hover:bg-white/30 text-white border border-white/50 px-4 py-2 rounded-xl flex items-center gap-2 transition-all font-bold backdrop-blur-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Cetak Jadwal
+        </a>
       </div>
 
       {message && (

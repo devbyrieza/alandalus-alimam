@@ -398,6 +398,24 @@ model NilaiUjian {
   nilai_tes_tertulis_total Decimal? @db.Decimal
   catatan_tes_tertulis     String?
 
+  // NEW: Detailed Assessment Data
+  detail_akademik    Json? @db.JsonB
+  detail_kepribadian Json? @db.JsonB
+  detail_kesiapan    Json? @db.JsonB
+  detail_wawancara   Json? @db.JsonB 
+
+  // NEW: Scores (Float for precision)
+  score_akademik    Float?
+  score_kepribadian Float?
+  score_kesiapan    Float?
+  score_wawancara   Float?
+  score_quran       Float?
+  total_score       Float?
+
+  // NEW: Final Status
+  status_kelulusan  String? // LULUS, CADANGAN, TIDAK LULUS
+  catatan_kelulusan String?
+
   // Tes Santri (Wawancara + Quran)
   nilai_wawancara_santri Decimal?  @db.Decimal
   nilai_santri_total     Decimal?  @db.Decimal

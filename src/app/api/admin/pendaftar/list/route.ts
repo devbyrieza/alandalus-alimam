@@ -118,7 +118,13 @@ export async function GET(request: NextRequest) {
             select: { jenis_dokumen: true, is_verified: true, catatan: true }
           },
           nilai_ujian: {
-            select: { nilai_total: true }
+            select: {
+              nilai_total: true,
+              score_akademik: true,
+              score_quran: true,
+              score_wawancara: true,
+              status_kelulusan: true
+            }
           },
           pengumuman: {
             select: { status_kelulusan: true }
