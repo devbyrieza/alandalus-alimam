@@ -372,6 +372,7 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
       { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
       { name: 'Verifikasi Pembayaran', href: '/dashboard/admin/verifikasi-pembayaran', icon: 'CreditCard' },
+      { name: 'Rekap Keuangan', href: '/dashboard/admin/keuangan', icon: 'BarChart' },
     ],
     penguji: [
       { name: 'Dasbor', href: '/dashboard/penguji', icon: 'LayoutDashboard' },
@@ -392,7 +393,8 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
       { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
       { name: 'Hasil Seleksi', href: '/dashboard/admin/hasil-seleksi', icon: 'ClipboardCheck' },
-      { name: 'Penilaian', href: '/dashboard/admin/penilaian', icon: 'ClipboardEdit' }, // NEW
+      { name: 'Penilaian', href: '/dashboard/admin/penilaian', icon: 'ClipboardEdit' },
+      { name: 'Keuangan', href: '/dashboard/admin/keuangan', icon: 'BarChart' }, // NEW
       { name: 'Pengumuman', href: '/dashboard/admin/pengumuman', icon: 'Trophy' },
       { name: 'Broadcast WA', href: '/dashboard/admin/broadcast', icon: 'Bell' },
       { name: 'Statistik Wilayah', href: '/dashboard/admin/statistik-wilayah', icon: 'BarChart' },
@@ -404,7 +406,8 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
       { name: 'Verifikasi Pembayaran', href: '/dashboard/admin/verifikasi-pembayaran', icon: 'CreditCard' },
       { name: 'Verifikasi Dokumen', href: '/dashboard/admin/verifikasi-dokumen', icon: 'FileCheck' },
       { name: 'Jadwal Ujian', href: '/dashboard/admin/jadwal-ujian', icon: 'Calendar' },
-      { name: 'Penilaian', href: '/dashboard/admin/penilaian', icon: 'ClipboardEdit' }, // NEW
+      { name: 'Penilaian', href: '/dashboard/admin/penilaian', icon: 'ClipboardEdit' },
+      { name: 'Keuangan', href: '/dashboard/admin/keuangan', icon: 'BarChart' }, // NEW
       { name: 'Pengumuman', href: '/dashboard/admin/pengumuman', icon: 'Trophy' },
       { name: 'Broadcast WA', href: '/dashboard/admin/broadcast', icon: 'Bell' },
       { name: 'Statistik Wilayah', href: '/dashboard/admin/statistik-wilayah', icon: 'BarChart' },
@@ -457,7 +460,7 @@ export function canAccessRoute(role: UserRole, route: string): boolean {
       '/dashboard/admin',
       '/dashboard/admin/pendaftar',
       '/dashboard/admin/verifikasi-pembayaran',
-      '/dashboard/admin/laporan-keuangan',
+      '/dashboard/admin/keuangan', // UPDATED
     ];
     return allowedRoutes.some(r => route.startsWith(r));
   }

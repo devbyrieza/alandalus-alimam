@@ -61,6 +61,16 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    // select nilai_ujian status
+    const dataWithNilai = await prisma.pendaftar.findUnique({
+      where: { id: pendaftarId },
+      include: {
+        nilai_ujian: true
+      }
+    });
+
+    const nilai = dataWithNilai?.nilai_ujian[0];
+
     // status_proses = status_pendaftaran (kompatibel dengan access-control)
     return NextResponse.json({
       id: data.id,
@@ -68,6 +78,10 @@ export async function GET(request: NextRequest) {
       nomor_pendaftaran: data.nomor_pendaftaran,
       status_proses: data.status_pendaftaran || "draft",
       updated_at: data.updated_at,
+      hasil_kelulusan: {
+        status: (nilai as any)?.status_kelulusan || null,
+        catatan: (nilai as any)?.catatan_kelulusan || null
+      }
     });
   } catch (error) {
     console.error("Error in status API:", error);
