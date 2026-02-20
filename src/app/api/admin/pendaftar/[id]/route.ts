@@ -98,17 +98,21 @@ export async function GET(
         // Ayah
         nama_ayah: pendaftar.orang_tua.nama_ayah || ayah.nama_lengkap || null,
         nik_ayah: pendaftar.orang_tua.nik_ayah || ayah.nik || null,
+        tempat_lahir_ayah: pendaftar.orang_tua.tempat_lahir_ayah || ayah.tempat_lahir || null,
+        tanggal_lahir_ayah: pendaftar.orang_tua.tanggal_lahir_ayah || (ayah.tanggal_lahir ? new Date(ayah.tanggal_lahir) : null),
         pekerjaan_ayah: pendaftar.orang_tua.pekerjaan_ayah || ayah.pekerjaan || null,
         pendidikan_ayah: pendaftar.orang_tua.pendidikan_ayah || ayah.pendidikan_terakhir || null,
-        penghasilan_ayah: pendaftar.orang_tua.penghasilan_ayah || ayah.penghasilan_rata_rata || null,
+        penghasilan_ayah: pendaftar.orang_tua.penghasilan_ayah || ayah.penghasilan || null,
         no_hp_ayah: pendaftar.orang_tua.no_hp_ayah || ayah.no_hp || null,
         alamat_ayah: pendaftar.orang_tua.alamat_ayah || ayah.alamat || null, // Fix missing address
         // Ibu
         nama_ibu: pendaftar.orang_tua.nama_ibu || ibu.nama_lengkap || null,
         nik_ibu: pendaftar.orang_tua.nik_ibu || ibu.nik || null,
+        tempat_lahir_ibu: pendaftar.orang_tua.tempat_lahir_ibu || ibu.tempat_lahir || null,
+        tanggal_lahir_ibu: pendaftar.orang_tua.tanggal_lahir_ibu || (ibu.tanggal_lahir ? new Date(ibu.tanggal_lahir) : null),
         pekerjaan_ibu: pendaftar.orang_tua.pekerjaan_ibu || ibu.pekerjaan || null,
         pendidikan_ibu: pendaftar.orang_tua.pendidikan_ibu || ibu.pendidikan_terakhir || null,
-        penghasilan_ibu: pendaftar.orang_tua.penghasilan_ibu || ibu.penghasilan_rata_rata || null,
+        penghasilan_ibu: pendaftar.orang_tua.penghasilan_ibu || ibu.penghasilan || null,
         no_hp_ibu: pendaftar.orang_tua.no_hp_ibu || ibu.no_hp || null,
         alamat_ibu: pendaftar.orang_tua.alamat_ibu || ibu.alamat || null, // Fix missing address
       } : null

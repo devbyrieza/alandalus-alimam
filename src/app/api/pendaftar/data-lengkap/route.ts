@@ -169,19 +169,23 @@ export async function POST(request: NextRequest) {
           // Ayah
           nama_ayah: ayah?.nama_lengkap,
           nik_ayah: ayah?.nik,
+          tempat_lahir_ayah: ayah?.tempat_lahir,
           tanggal_lahir_ayah: ayah?.tanggal_lahir ? new Date(ayah.tanggal_lahir) : null,
           pendidikan_ayah: ayah?.pendidikan_terakhir,
           pekerjaan_ayah: ayah?.pekerjaan,
-          penghasilan_ayah: ayah?.penghasilan_rata_rata,
+          penghasilan_ayah: ayah?.penghasilan,
           no_hp_ayah: ayah?.no_hp,
+          alamat_ayah: ayah?.alamat, // Added Address
           // Ibu
           nama_ibu: ibu?.nama_lengkap,
           nik_ibu: ibu?.nik,
+          tempat_lahir_ibu: ibu?.tempat_lahir,
           tanggal_lahir_ibu: ibu?.tanggal_lahir ? new Date(ibu.tanggal_lahir) : null,
           pendidikan_ibu: ibu?.pendidikan_terakhir,
           pekerjaan_ibu: ibu?.pekerjaan,
-          penghasilan_ibu: ibu?.penghasilan_rata_rata,
+          penghasilan_ibu: ibu?.penghasilan,
           no_hp_ibu: ibu?.no_hp,
+          alamat_ibu: ibu?.alamat, // Added Address
           // Wali
           nama_wali: wali?.nama_lengkap,
           no_hp_wali: wali?.no_hp,
@@ -192,19 +196,21 @@ export async function POST(request: NextRequest) {
           // Ayah
           nama_ayah: ayah?.nama_lengkap,
           nik_ayah: ayah?.nik,
+          tempat_lahir_ayah: ayah?.tempat_lahir,
           tanggal_lahir_ayah: ayah?.tanggal_lahir ? new Date(ayah.tanggal_lahir) : null,
           pendidikan_ayah: ayah?.pendidikan_terakhir,
           pekerjaan_ayah: ayah?.pekerjaan,
-          penghasilan_ayah: ayah?.penghasilan_rata_rata,
+          penghasilan_ayah: ayah?.penghasilan,
           no_hp_ayah: ayah?.no_hp,
           alamat_ayah: ayah?.alamat, // Added Address
           // Ibu
           nama_ibu: ibu?.nama_lengkap,
           nik_ibu: ibu?.nik,
+          tempat_lahir_ibu: ibu?.tempat_lahir,
           tanggal_lahir_ibu: ibu?.tanggal_lahir ? new Date(ibu.tanggal_lahir) : null,
           pendidikan_ibu: ibu?.pendidikan_terakhir,
           pekerjaan_ibu: ibu?.pekerjaan,
-          penghasilan_ibu: ibu?.penghasilan_rata_rata,
+          penghasilan_ibu: ibu?.penghasilan,
           no_hp_ibu: ibu?.no_hp,
           alamat_ibu: ibu?.alamat, // Added Address
           // Wali
