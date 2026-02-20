@@ -10,7 +10,7 @@ import {
   Lock,
   History
 } from "lucide-react";
-import Alert from "@/components/ui/Alert";
+import { Alert } from "@/components/ui";
 import { formatCurrency } from "@/lib/utils"; // Ensure this utils exists or use Intl locally
 
 export default function DaftarUlangTab() {
@@ -130,7 +130,7 @@ export default function DaftarUlangTab() {
   return (
     <div className="space-y-8 max-w-4xl mx-auto pb-12">
       {/* Header */}
-      <div className="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-8 text-white shadow-lg relative overflow-hidden">
+      <div className="bg-linear-to-r from-emerald-600 to-teal-700 rounded-2xl p-8 text-white shadow-lg relative overflow-hidden">
         <div className="absolute top-0 right-0 p-4 opacity-10">
           <CheckCircle className="w-32 h-32" />
         </div>
@@ -203,8 +203,8 @@ export default function DaftarUlangTab() {
               <div className="mt-3 flex items-center gap-2 animate-in fade-in slide-in-from-top-1">
                 <span className="text-xs text-slate-500">Status Pembayaran Anda akan tercatat sebagai:</span>
                 <span className={`px-3 py-1 rounded-full text-xs font-bold border ${tipeBayar === 'LUNAS' ? 'bg-green-100 text-green-700 border-green-200' :
-                    tipeBayar.includes('50% ATAU LEBIH') ? 'bg-blue-100 text-blue-700 border-blue-200' :
-                      'bg-orange-100 text-orange-700 border-orange-200'
+                  tipeBayar.includes('50% ATAU LEBIH') ? 'bg-blue-100 text-blue-700 border-blue-200' :
+                    'bg-orange-100 text-orange-700 border-orange-200'
                   }`}>
                   {tipeBayar}
                 </span>

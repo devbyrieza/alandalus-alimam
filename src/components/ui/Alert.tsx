@@ -42,7 +42,7 @@ export default function Alert({
 
     return (
         <div className={cn("p-4 rounded-xl border flex gap-3", variant.container, className)}>
-            <div className="flex-shrink-0 mt-0.5">
+            <div className="shrink-0 mt-0.5">
                 {variant.icon}
             </div>
             <div>

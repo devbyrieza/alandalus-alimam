@@ -154,7 +154,7 @@ export default function UndanganSeleksiTab() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-6 text-white shadow-lg flex justify-between items-center">
+      <div className="bg-linear-to-r from-emerald-600 to-teal-700 rounded-2xl p-8 text-white shadow-lg relative overflow-hidden">
         <div>
           <h1 className="text-2xl font-black mb-2 text-white">Undangan Seleksi</h1>
           <p className="text-purple-100">
