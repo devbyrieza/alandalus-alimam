@@ -96,7 +96,7 @@ export default function HeroSection() {
 
             {/* CTA Group */}
             <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center lg:justify-start w-full sm:w-auto">
-              <Link href="/daftar" className="w-full sm:w-auto">
+              <Link href="/ppdb" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full px-8 lg:px-10 py-6 lg:py-7 text-sm lg:text-base font-bold rounded-2xl bg-brown-700 hover:bg-brown-800 text-white shadow-premium-lg transition-all duration-300 group min-h-[56px]">
                   Daftar PPDB Sekarang
                 </Button>
