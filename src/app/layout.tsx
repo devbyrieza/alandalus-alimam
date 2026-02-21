@@ -12,12 +12,12 @@ import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // FONT CONFIGURATIONS
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
   weight: ["400", "500", "600", "700"],
+  adjustFontFallback: false,
 });
 
 const poppins = Poppins({
@@ -25,6 +25,7 @@ const poppins = Poppins({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
+  adjustFontFallback: false,
 });
 
 const amiri = Amiri({
@@ -32,9 +33,9 @@ const amiri = Amiri({
   subsets: ["arabic"],
   variable: "--font-arabic",
   display: "swap",
+  adjustFontFallback: false,
 });
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // METADATA CONFIGURATION
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 export const metadata: Metadata = {
