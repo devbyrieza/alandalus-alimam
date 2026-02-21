@@ -248,7 +248,7 @@ export default function PengujiDashboardLayout({
             </header>
 
             {/* Content Wrapper */}
-            <div className="p-4 lg:p-8 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="pt-16 lg:pt-0 p-4 lg:p-8 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
               {children}
             </div>
           </main>
