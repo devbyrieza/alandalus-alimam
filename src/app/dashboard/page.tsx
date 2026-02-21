@@ -220,7 +220,6 @@ const ActionCard = ({
         <div className={`flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-${color}-600`}>
           <Sparkles className="w-4 h-4" />
           <span>Buka Bagian Ini</span>
-          <ArrowRight className="w-3.5 h-3.5 ml-auto opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
         </div>
       )}
     </motion.div>

@@ -303,10 +303,9 @@ export default function LoginPage() {
                     <p className="text-sm text-ink-600 font-bold uppercase tracking-widest mb-4">Belum Punya Akun?</p>
                     <Link
                       href="/daftar"
-                      className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-surface-50 text-brown-700 font-black text-sm border border-surface-100 hover:bg-white hover:shadow-premium-sm transition-all"
+                      className="inline-flex items-center gap-2 px-10 py-3 rounded-full bg-surface-50 text-brown-700 font-black text-sm border border-surface-100 hover:bg-white hover:shadow-premium-sm transition-all"
                     >
                       Daftar Baru Di Sini
-                      <ArrowRight className="w-4 h-4" />
                     </Link>
                   </div>
                 </motion.form>

@@ -129,9 +129,8 @@ export default function ProgramSection() {
                                 </div>
 
                                 <Link href="/program" onClick={() => navigateToDetail('/program', '#program')}>
-                                    <button className="w-full py-4 px-6 rounded-2xl bg-surface-50 border-2 border-surface-100 text-ink-950 font-bold transition-all duration-300 hover:bg-brown-700 hover:border-brown-700 hover:text-white flex items-center justify-center gap-2 group/btn">
+                                    <button className="w-full py-4 px-8 rounded-2xl bg-surface-50 border-2 border-surface-100 text-ink-950 font-bold transition-all duration-300 hover:bg-brown-700 hover:border-brown-700 hover:text-white flex items-center justify-center gap-2 group/btn">
                                         Detail Program
-                                        <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                                     </button>
                                 </Link>
                             </div>

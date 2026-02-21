@@ -8,6 +8,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import LayoutWrapper from "@/components/layout/LayoutWrapper";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // FONT CONFIGURATIONS
@@ -143,7 +144,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className="scroll-smooth" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="id" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -163,17 +164,19 @@ export default function RootLayout({
         className={`${plusJakartaSans.variable} ${poppins.variable} ${amiri.variable} font-sans antialiased bg-[var(--color-cream-50)] text-[var(--color-text-900)] overflow-x-hidden`}
         suppressHydrationWarning
       >
-        <LayoutWrapper>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem={false}
-            forcedTheme="light"
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-        </LayoutWrapper>
+        <SmoothScrollProvider>
+          <LayoutWrapper>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem={false}
+              forcedTheme="light"
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+          </LayoutWrapper>
+        </SmoothScrollProvider>
       </body>
     </html>
   );

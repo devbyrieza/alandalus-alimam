@@ -2,7 +2,7 @@
 
 export type JenisKelamin = "L" | "P";
 export type Jenjang = "MTs" | "IL" | "MA"; // UPDATED: Tambah IL (I'dad Lughowi)
-export type Role = "pendaftar" | "admin" | "penguji";
+export type Role = "pendaftar" | "admin" | "admin_super" | "admin_berkas" | "admin_keuangan" | "penguji" | "penguji_santri" | "penguji_umum" | "pewawancara_ortu" | "tim_it" | "head_of_it";
 
 export interface RegisterFormData {
   nik: string;

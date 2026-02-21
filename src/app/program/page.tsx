@@ -277,11 +277,10 @@ export default function ProgramPage() {
                                         viewport={{ once: true }}
                                     >
                                         <Link href={`/daftar?program=${program.id}`}>
-                                            <button className={`w-full sm:w-auto px-12 py-5 rounded-pill font-black text-white text-lg shadow-premium-xl transition-all hover:-translate-y-1
+                                            <button className={`w-full sm:w-auto px-14 py-5 rounded-pill font-black text-white text-lg shadow-premium-xl transition-all hover:-translate-y-1
                                                 ${program.theme === 'brown' ? 'bg-brown-700 hover:bg-brown-800' : 'bg-teal-700 hover:bg-teal-800'}
                                             `}>
                                                 Daftarkan Sekarang
-                                                <ArrowRight className="inline-block ml-3 w-5 h-5" />
                                             </button>
                                         </Link>
                                     </motion.div>
@@ -294,32 +293,32 @@ export default function ProgramPage() {
             </div>
 
             {/* Bottom CTA - Impactful */}
-            <section className="py-24 md:py-32 bg-surface-50">
+            <section className="py-16 md:py-24 lg:py-32 bg-surface-50">
                 <Container>
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="bg-brown-800 rounded-[4rem] p-12 md:p-24 text-center text-white relative overflow-hidden"
+                        className="bg-brown-800 rounded-[2rem] md:rounded-[3rem] lg:rounded-[4rem] p-6 sm:p-8 md:p-16 lg:p-24 text-center text-white relative overflow-hidden"
                     >
-                        <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+                        <div className="absolute top-0 right-0 w-32 h-32 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-white/5 rounded-full blur-[60px] md:blur-[100px] -translate-y-1/2 translate-x-1/2" />
                         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
 
                         <div className="relative z-10">
-                            <h2 className="text-4xl md:text-6xl font-display font-black mb-8 text-white leading-tight">
+                            <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-black mb-4 sm:mb-6 md:mb-8 text-white leading-tight">
                                 Mulai Perjalanan <br /> <span className="text-gold-400">Terbaik</span> Mereka
                             </h2>
-                            <p className="text-xl text-brown-100 max-w-2xl mx-auto mb-12 font-medium">
+                            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-brown-100 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 lg:mb-12 font-medium px-2">
                                 Konsultasikan rencana pendidikan putra-putri Anda dengan tim kami untuk mendapatkan pilihan program yang paling tepat.
                             </p>
-                            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center px-4">
                                 <Link href="/daftar">
-                                    <button className="px-12 py-5 rounded-pill bg-white text-brown-900 font-black text-lg hover:bg-gold-400 hover:text-white shadow-premium-xl transition-all">
+                                    <button className="w-full sm:w-auto px-6 sm:px-10 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white text-brown-900 font-black text-sm sm:text-base md:text-lg hover:bg-gold-400 hover:text-white shadow-premium-xl transition-all min-h-[48px] sm:min-h-[52px]">
                                         Pendaftaran Online
                                     </button>
                                 </Link>
                                 <Link href="/kontak">
-                                    <button className="px-12 py-5 rounded-pill bg-white/10 text-white font-bold border border-white/20 hover:bg-white/20 transition-all">
+                                    <button className="w-full sm:w-auto px-6 sm:px-10 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white/10 text-white font-bold border border-white/20 hover:bg-white/20 transition-all text-sm sm:text-base md:text-lg min-h-[48px] sm:min-h-[52px]">
                                         Hubungi Admissions
                                     </button>
                                 </Link>

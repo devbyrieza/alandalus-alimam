@@ -220,7 +220,6 @@ function PPDBContent() {
                 className="inline-flex items-center justify-center gap-3 px-10 py-5 rounded-pill bg-brown-900 text-white font-black text-xl hover:bg-gold-500 shadow-premium-lg transition-all"
               >
                 Daftar PPDB Baru
-                <ArrowRight className="w-6 h-6" />
               </Link>
               <a
                 href="#alur"

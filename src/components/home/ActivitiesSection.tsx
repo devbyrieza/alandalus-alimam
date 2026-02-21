@@ -89,9 +89,8 @@ export default function ActivitiesSection() {
                     className="text-center"
                 >
                     <Link href="/kegiatan">
-                        <button className="px-10 py-5 rounded-pill bg-brown-700 text-white font-bold shadow-premium-lg hover:shadow-premium-xl hover:bg-brown-800 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2 mx-auto">
+                        <button className="px-14 py-5 rounded-pill bg-brown-700 text-white font-bold shadow-premium-lg hover:shadow-premium-xl hover:bg-brown-800 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2 mx-auto">
                             Lihat Semua Kegiatan
-                            <ArrowRight className="w-5 h-5" />
                         </button>
                     </Link>
                 </motion.div>

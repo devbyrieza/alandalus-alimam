@@ -197,12 +197,12 @@ export default function AdminDashboardPage() {
   // Helper to check if user can view section
   const canViewKeuangan = !role || role === 'admin_keuangan' || role === 'admin_super' || role === 'admin';
   const canViewBerkas = !role || role === 'admin_berkas' || role === 'admin_super' || role === 'admin';
-  const canViewSeleksi = !role || role === 'admin_super' || role === 'admin' || role === 'penguji';
+  const canViewSeleksi = !role || role === 'admin_super' || role === 'admin' || role === 'penguji_santri' || role === 'penguji_umum';
 
   // Specific role checks for exclusive views
   const isKeuanganOnly = role === 'admin_keuangan';
   const isBerkasOnly = role === 'admin_berkas';
-  const isPengujiOnly = role === 'penguji';
+  const isPengujiOnly = role === 'penguji_santri' || role === 'penguji_umum';
 
   if (loading) {
     return (

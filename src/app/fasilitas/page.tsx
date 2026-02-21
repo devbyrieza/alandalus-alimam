@@ -501,15 +501,15 @@ export default function FasilitasPage() {
         </Container>
       </section>
 
-      {/* 3. Supporting Facilities - Enhanced Grid */}
+      {/* 3. Supporting Facilities - Enhanced Grid (TEXT-ONLY - Secondary List) */}
       <section className="py-24 md:py-32 bg-white">
         <Container>
-          <div className="text-center max-w-3xl mx-auto mb-20">
+          <div className="text-center max-w-3xl mx-auto mb-16">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-3xl md:text-5xl font-display font-black text-ink-950 mb-6"
+              className="text-2xl md:text-4xl font-display font-black text-ink-950 mb-4"
             >
               Fasilitas <span className="text-brown-600">Penunjang</span>
             </motion.h2>
@@ -517,29 +517,29 @@ export default function FasilitasPage() {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-xl text-ink-600 font-medium leading-relaxed"
+              className="text-base md:text-lg text-ink-600 font-medium leading-relaxed"
             >
               Lengkap dengan sarana pendukung untuk mengembangkan <br className="hidden md:block" /> minat, bakat, dan kesehatan santri.
             </motion.p>
           </div>
 
-          {/* Enhanced 3x3 Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {/* Enhanced 3x3 Grid Layout - Smaller Typography for Text-Only Items */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {/* Row 1 - Academic Facilities */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-3xl border border-blue-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+              className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl border border-blue-100 shadow-md hover:shadow-lg transition-all hover:-translate-y-1 group"
             >
-              <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
-                <BookOpen className="w-8 h-8" />
+              <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
+                <BookOpen className="w-6 h-6" />
               </div>
-              <h3 className="font-black text-2xl text-ink-950 mb-3">Perpustakaan</h3>
-              <p className="text-lg text-ink-600 font-medium">Ribuan koleksi kitab & buku</p>
-              <div className="mt-4 pt-4 border-t border-blue-100">
-                <span className="text-sm text-blue-600 font-semibold">📚 Akademik</span>
+              <h3 className="font-black text-lg text-ink-950 mb-2">Perpustakaan</h3>
+              <p className="text-sm text-ink-600 font-medium">Ribuan koleksi kitab & buku</p>
+              <div className="mt-3 pt-3 border-t border-blue-100">
+                <span className="text-xs text-blue-600 font-semibold">📚 Akademik</span>
               </div>
             </motion.div>
 
@@ -548,15 +548,15 @@ export default function FasilitasPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-3xl border border-purple-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+              className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-2xl border border-purple-100 shadow-md hover:shadow-lg transition-all hover:-translate-y-1 group"
             >
-              <div className="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
-                <FlaskConical className="w-8 h-8" />
+              <div className="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
+                <FlaskConical className="w-6 h-6" />
               </div>
-              <h3 className="font-black text-2xl text-ink-950 mb-3">Laboratorium</h3>
-              <p className="text-lg text-ink-600 font-medium">Sains & Komputer</p>
-              <div className="mt-4 pt-4 border-t border-purple-100">
-                <span className="text-sm text-purple-600 font-semibold">🔬 Praktikum</span>
+              <h3 className="font-black text-lg text-ink-950 mb-2">Laboratorium</h3>
+              <p className="text-sm text-ink-600 font-medium">Sains & Komputer</p>
+              <div className="mt-3 pt-3 border-t border-purple-100">
+                <span className="text-xs text-purple-600 font-semibold">🔬 Praktikum</span>
               </div>
             </motion.div>
 
@@ -565,15 +565,15 @@ export default function FasilitasPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-3xl border border-green-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+              className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-2xl border border-green-100 shadow-md hover:shadow-lg transition-all hover:-translate-y-1 group"
             >
-              <div className="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
-                <Utensils className="w-8 h-8" />
+              <div className="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
+                <Utensils className="w-6 h-6" />
               </div>
-              <h3 className="font-black text-2xl text-ink-950 mb-3">Dapur Sehat</h3>
-              <p className="text-lg text-ink-600 font-medium">Menu bergizi 3x sehari</p>
-              <div className="mt-4 pt-4 border-t border-green-100">
-                <span className="text-sm text-green-600 font-semibold">🍽️ Nutrisi</span>
+              <h3 className="font-black text-lg text-ink-950 mb-2">Dapur Sehat</h3>
+              <p className="text-sm text-ink-600 font-medium">Menu bergizi 3x sehari</p>
+              <div className="mt-3 pt-3 border-t border-green-100">
+                <span className="text-xs text-green-600 font-semibold">🍽️ Nutrisi</span>
               </div>
             </motion.div>
 
@@ -583,15 +583,15 @@ export default function FasilitasPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
-              className="bg-gradient-to-br from-red-50 to-rose-50 p-8 rounded-3xl border border-red-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+              className="bg-gradient-to-br from-red-50 to-rose-50 p-6 rounded-2xl border border-red-100 shadow-md hover:shadow-lg transition-all hover:-translate-y-1 group"
             >
-              <div className="w-16 h-16 bg-red-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
-                <Heart className="w-8 h-8" />
+              <div className="w-12 h-12 bg-red-500 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
+                <Heart className="w-6 h-6" />
               </div>
-              <h3 className="font-black text-2xl text-ink-950 mb-3">Klinik Santri</h3>
-              <p className="text-lg text-ink-600 font-medium">Layanan medis internal</p>
-              <div className="mt-4 pt-4 border-t border-red-100">
-                <span className="text-sm text-red-600 font-semibold">🏥 Kesehatan</span>
+              <h3 className="font-black text-lg text-ink-950 mb-2">Klinik Santri</h3>
+              <p className="text-sm text-ink-600 font-medium">Layanan medis internal</p>
+              <div className="mt-3 pt-3 border-t border-red-100">
+                <span className="text-xs text-red-600 font-semibold">🏥 Kesehatan</span>
               </div>
             </motion.div>
 
@@ -600,15 +600,15 @@ export default function FasilitasPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5 }}
-              className="bg-gradient-to-br from-amber-50 to-yellow-50 p-8 rounded-3xl border border-amber-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+              className="bg-gradient-to-br from-amber-50 to-yellow-50 p-6 rounded-2xl border border-amber-100 shadow-md hover:shadow-lg transition-all hover:-translate-y-1 group"
             >
-              <div className="w-16 h-16 bg-amber-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
-                <Shield className="w-8 h-8" />
+              <div className="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
+                <Shield className="w-6 h-6" />
               </div>
-              <h3 className="font-black text-2xl text-ink-950 mb-3">Security</h3>
-              <p className="text-lg text-ink-600 font-medium">Keamanan CCTV 24 Jam</p>
-              <div className="mt-4 pt-4 border-t border-amber-100">
-                <span className="text-sm text-amber-600 font-semibold">🛡️ Keamanan</span>
+              <h3 className="font-black text-lg text-ink-950 mb-2">Security</h3>
+              <p className="text-sm text-ink-600 font-medium">Keamanan CCTV 24 Jam</p>
+              <div className="mt-3 pt-3 border-t border-amber-100">
+                <span className="text-xs text-amber-600 font-semibold">🛡️ Keamanan</span>
               </div>
             </motion.div>
 
@@ -617,15 +617,15 @@ export default function FasilitasPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.6 }}
-              className="bg-gradient-to-br from-indigo-50 to-blue-50 p-8 rounded-3xl border border-indigo-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+              className="bg-gradient-to-br from-indigo-50 to-blue-50 p-6 rounded-2xl border border-indigo-100 shadow-md hover:shadow-lg transition-all hover:-translate-y-1 group"
             >
-              <div className="w-16 h-16 bg-indigo-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
-                <Building2 className="w-8 h-8" />
+              <div className="w-12 h-12 bg-indigo-500 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
+                <Building2 className="w-6 h-6" />
               </div>
-              <h3 className="font-black text-2xl text-ink-950 mb-3">Aula Besar</h3>
-              <p className="text-lg text-ink-600 font-medium">Kapasitas 500 orang</p>
-              <div className="mt-4 pt-4 border-t border-indigo-100">
-                <span className="text-sm text-indigo-600 font-semibold">🏛️ Event</span>
+              <h3 className="font-black text-lg text-ink-950 mb-2">Aula Besar</h3>
+              <p className="text-sm text-ink-600 font-medium">Kapasitas 500 orang</p>
+              <div className="mt-3 pt-3 border-t border-indigo-100">
+                <span className="text-xs text-indigo-600 font-semibold">🏛️ Event</span>
               </div>
             </motion.div>
 
@@ -635,15 +635,15 @@ export default function FasilitasPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.7 }}
-              className="bg-gradient-to-br from-cyan-50 to-sky-50 p-8 rounded-3xl border border-cyan-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+              className="bg-gradient-to-br from-cyan-50 to-sky-50 p-6 rounded-2xl border border-cyan-100 shadow-md hover:shadow-lg transition-all hover:-translate-y-1 group"
             >
-              <div className="w-16 h-16 bg-cyan-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
-                <Wifi className="w-8 h-8" />
+              <div className="w-12 h-12 bg-cyan-500 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
+                <Wifi className="w-6 h-6" />
               </div>
-              <h3 className="font-black text-2xl text-ink-950 mb-3">Internet</h3>
-              <p className="text-lg text-ink-600 font-medium">Akses WiFi Terfilter</p>
-              <div className="mt-4 pt-4 border-t border-cyan-100">
-                <span className="text-sm text-cyan-600 font-semibold">📶 Teknologi</span>
+              <h3 className="font-black text-lg text-ink-950 mb-2">Internet</h3>
+              <p className="text-sm text-ink-600 font-medium">Akses WiFi Terfilter</p>
+              <div className="mt-3 pt-3 border-t border-cyan-100">
+                <span className="text-xs text-cyan-600 font-semibold">📶 Teknologi</span>
               </div>
             </motion.div>
 
@@ -652,15 +652,15 @@ export default function FasilitasPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.8 }}
-              className="bg-gradient-to-br from-emerald-50 to-green-50 p-8 rounded-3xl border border-emerald-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+              className="bg-gradient-to-br from-emerald-50 to-green-50 p-6 rounded-2xl border border-emerald-100 shadow-md hover:shadow-lg transition-all hover:-translate-y-1 group"
             >
-              <div className="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
-                <Trophy className="w-8 h-8" />
+              <div className="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
+                <Trophy className="w-6 h-6" />
               </div>
-              <h3 className="font-black text-2xl text-ink-950 mb-3">Area Olahraga</h3>
-              <p className="text-lg text-ink-600 font-medium">Outdoor activity lengkap</p>
-              <div className="mt-4 pt-4 border-t border-emerald-100">
-                <span className="text-sm text-emerald-600 font-semibold">⚽ Olahraga</span>
+              <h3 className="font-black text-lg text-ink-950 mb-2">Area Olahraga</h3>
+              <p className="text-sm text-ink-600 font-medium">Outdoor activity lengkap</p>
+              <div className="mt-3 pt-3 border-t border-emerald-100">
+                <span className="text-xs text-emerald-600 font-semibold">⚽ Olahraga</span>
               </div>
             </motion.div>
 
@@ -669,15 +669,15 @@ export default function FasilitasPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.9 }}
-              className="bg-gradient-to-br from-blue-50 to-cyan-50 p-8 rounded-3xl border border-blue-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+              className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-2xl border border-blue-100 shadow-md hover:shadow-lg transition-all hover:-translate-y-1 group"
             >
-              <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
-                <Droplet className="w-8 h-8" />
+              <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
+                <Droplet className="w-6 h-6" />
               </div>
-              <h3 className="font-black text-2xl text-ink-950 mb-3">Depot Galon Gratis</h3>
-              <p className="text-lg text-ink-600 font-medium">Air minum higienis gratis</p>
-              <div className="mt-4 pt-4 border-t border-blue-100">
-                <span className="text-sm text-blue-600 font-semibold">💧 Minuman</span>
+              <h3 className="font-black text-lg text-ink-950 mb-2">Depot Galon Gratis</h3>
+              <p className="text-sm text-ink-600 font-medium">Air minum higienis gratis</p>
+              <div className="mt-3 pt-3 border-t border-blue-100">
+                <span className="text-xs text-blue-600 font-semibold">💧 Minuman</span>
               </div>
             </motion.div>
           </div>
@@ -929,32 +929,32 @@ export default function FasilitasPage() {
       </section>
 
       {/* 5. Impactful CTA */}
-      <section className="py-24 md:py-32 bg-surface-50">
+      <section className="py-16 md:py-24 lg:py-32 bg-surface-50">
         <Container>
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-brown-800 rounded-[4rem] p-12 md:p-24 text-center text-white relative overflow-hidden shadow-premium-2xl"
+            className="bg-brown-800 rounded-[2rem] md:rounded-[3rem] lg:rounded-[4rem] p-6 sm:p-8 md:p-16 lg:p-24 text-center text-white relative overflow-hidden shadow-premium-2xl"
           >
-            <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute top-0 right-0 w-32 h-32 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-white/5 rounded-full blur-[60px] md:blur-[100px] -translate-y-1/2 translate-x-1/2" />
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
 
             <div className="relative z-10">
-              <h2 className="text-3xl md:text-6xl font-display font-black mb-8 text-white leading-tight">
+              <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-black mb-4 sm:mb-6 md:mb-8 text-white leading-tight">
                 Ingin Melihat <br /> <span className="text-gold-400">Langsung?</span>
               </h2>
-              <p className="text-xl text-brown-100 max-w-2xl mx-auto mb-12 font-medium">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-brown-100 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 lg:mb-12 font-medium px-2">
                 Kami mengundang Anda untuk berkeliling melihat suasana dan fasilitas pondok secara langsung. Jadwalkan kunjungan Anda sekarang bersama anak-anak.
               </p>
-              <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center px-4">
                 <Link href="/kontak">
-                  <button className="px-12 py-5 rounded-pill bg-white text-brown-900 font-black text-lg hover:bg-gold-400 hover:text-white shadow-premium-xl transition-all">
+                  <button className="w-full sm:w-auto px-6 sm:px-10 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white text-brown-900 font-black text-sm sm:text-base md:text-lg hover:bg-gold-400 hover:text-white shadow-premium-xl transition-all min-h-[48px] sm:min-h-[52px]">
                     Jadwalkan Survey
                   </button>
                 </Link>
                 <Link href="/fasilitas#gallery">
-                  <button className="px-12 py-5 rounded-pill bg-white/10 text-white font-bold border border-white/20 hover:bg-white/20 transition-all">
+                  <button className="w-full sm:w-auto px-6 sm:px-10 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white/10 text-white font-bold border border-white/20 hover:bg-white/20 transition-all text-sm sm:text-base md:text-lg min-h-[48px] sm:min-h-[52px]">
                     Lihat Dokumentasi
                   </button>
                 </Link>

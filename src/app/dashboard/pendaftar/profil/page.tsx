@@ -108,7 +108,7 @@ export default function ProfilPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-teal-200 border-t-teal-500 rounded-full animate-spin mx-auto mb-4" />
+          <div className="w-12 h-12 border-4 border-pine-200 border-t-pine-500 rounded-full animate-spin mx-auto mb-4" />
           <p className="text-ink-500 font-medium">Memuat profil...</p>
         </div>
       </div>
@@ -127,15 +127,15 @@ export default function ProfilPage() {
         {/* Request Status Banner */}
         {requestStatus && (
           <div className={`px-5 py-4 rounded-2xl flex items-center gap-4 transition-all hover:scale-[1.02] shadow-sm ${requestStatus.status === 'pending' ? 'bg-amber-50 border border-amber-200 text-amber-800' :
-            requestStatus.status === 'approved_to_edit' ? 'bg-gradient-to-r from-emerald-50 to-teal-50 border border-teal-200 text-teal-800' :
+            requestStatus.status === 'approved_to_edit' ? 'bg-gradient-to-r from-emerald-50 to-pine-50 border border-pine-200 text-pine-800' :
               requestStatus.status === 'submitted' ? 'bg-blue-50 border border-blue-200 text-blue-800' :
                 requestStatus.status === 'rejected' ? 'bg-red-50 border border-red-200 text-red-800' :
                   'bg-surface-100 border border-ink-200 text-ink-800'
             }`}>
             <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${requestStatus.status === 'pending' ? 'bg-amber-100 text-amber-600' :
-                requestStatus.status === 'approved_to_edit' ? 'bg-teal-100 text-teal-600' :
-                  requestStatus.status === 'submitted' ? 'bg-blue-100 text-blue-600' :
-                    requestStatus.status === 'rejected' ? 'bg-red-100 text-red-600' : 'bg-surface-200'
+              requestStatus.status === 'approved_to_edit' ? 'bg-pine-100 text-pine-600' :
+                requestStatus.status === 'submitted' ? 'bg-blue-100 text-blue-600' :
+                  requestStatus.status === 'rejected' ? 'bg-red-100 text-red-600' : 'bg-surface-200'
               }`}>
               {requestStatus.status === 'pending' && <Clock className="w-5 h-5 animate-pulse" />}
               {requestStatus.status === 'approved_to_edit' && <CheckCircle className="w-5 h-5" />}
@@ -155,7 +155,7 @@ export default function ProfilPage() {
             </div>
 
             {requestStatus.status === 'approved_to_edit' && (
-              <Link href="/dashboard/pendaftar/kelengkapan-berkas" className="ml-auto px-4 py-2 bg-teal-600 text-white text-xs font-bold rounded-xl hover:bg-teal-700 shadow-teal-500/20 shadow-lg transition-all">
+              <Link href="/dashboard/pendaftar/kelengkapan-berkas" className="ml-auto px-4 py-2 bg-pine-600 text-white text-xs font-bold rounded-xl hover:bg-pine-700 shadow-pine-500/20 shadow-lg transition-all">
                 Edit Sekarang
               </Link>
             )}
@@ -169,7 +169,7 @@ export default function ProfilPage() {
           {/* Identity Card */}
           <div className="glass-panel p-6 md:p-8 rounded-[2rem] shadow-clay-md">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 rounded-2xl bg-teal-100 flex items-center justify-center text-teal-600 shadow-sm">
+              <div className="w-12 h-12 rounded-2xl bg-pine-100 flex items-center justify-center text-pine-600 shadow-sm">
                 <User className="w-6 h-6" />
               </div>
               <div>
@@ -299,7 +299,7 @@ export default function ProfilPage() {
                     <div>
                       <label className="text-xs font-bold text-ink-400 uppercase tracking-widest mb-2 block">Alasan Perubahan</label>
                       <textarea
-                        className="input-clean min-h-[100px] text-sm resize-none"
+                        className="ft-input min-h-[100px] text-sm resize-none"
                         placeholder="Contoh: Salah input tanggal lahir..."
                         value={reason}
                         onChange={(e) => setReason(e.target.value)}
@@ -315,7 +315,7 @@ export default function ProfilPage() {
                       <button
                         onClick={handleRequestEdit}
                         disabled={submittingRequest}
-                        className="py-3 text-sm font-bold text-white bg-teal-600 hover:bg-teal-700 rounded-xl shadow-lg shadow-teal-500/20 disabled:opacity-50"
+                        className="py-3 text-sm font-bold text-white bg-pine-600 hover:bg-pine-700 rounded-xl shadow-lg shadow-pine-500/20 disabled:opacity-50"
                       >
                         {submittingRequest ? "Mengirim..." : "Kirim Pengajuan"}
                       </button>

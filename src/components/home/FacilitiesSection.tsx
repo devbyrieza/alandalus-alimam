@@ -6,6 +6,7 @@ import { Home, School, Building2, Dumbbell, Beaker, HeartPulse, ShoppingCart, Mo
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { navigateToDetail } from "@/lib/navigation-scroll";
 
 const FACILITIES = [
     { name: "Masjid Kapasitas 1000 Jamaah", icon: Home, color: "brown" },
@@ -37,7 +38,7 @@ export default function FacilitiesSection() {
             <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-surface-50 rounded-full blur-[100px] translate-y-1/2 translate-x-1/2 opacity-50" />
 
             <Container className="relative z-10">
-                <div className="text-center mb-20 max-w-3xl mx-auto">
+                <div className="text-center mb-16 max-w-3xl mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -53,7 +54,7 @@ export default function FacilitiesSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-8 tracking-tight"
+                        className="text-3xl md:text-5xl font-display font-black text-ink-950 mb-6 tracking-tight"
                     >
                         Fasilitas <span className="text-brown-600">Terpadu & Lengkap</span>
                     </motion.h2>
@@ -63,42 +64,13 @@ export default function FacilitiesSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
-                        className="text-lg text-ink-600 font-medium leading-relaxed"
+                        className="text-base md:text-lg text-ink-600 font-medium leading-relaxed"
                     >
                         Sarana dan prasarana yang memadai untuk menunjang kenyamanan belajar, beribadah, dan aktivitas harian seluruh santri.
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
-                    {FACILITIES.map((facility, idx) => (
-                        <motion.div
-                            key={idx}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: idx * 0.05 }}
-                            className="flex items-center gap-5 p-6 rounded-2xl bg-surface-50/50 border border-surface-200/60 group hover:bg-white hover:border-brown-100 hover:shadow-premium-lg transition-all duration-500"
-                        >
-                            <div className={`w-14 h-14 rounded-xl flex items-center justify-center shrink-0 shadow-premium-sm group-hover:scale-110 transition-transform duration-500 ${facility.color === 'brown' ? 'bg-brown-50 text-brown-600' :
-                                facility.color === 'blue' ? 'bg-blue-50 text-blue-600' :
-                                    facility.color === 'gold' ? 'bg-gold-50 text-gold-600' :
-                                        facility.color === 'teal' ? 'bg-teal-50 text-teal-600' :
-                                            facility.color === 'red' ? 'bg-red-50 text-red-600' :
-                                                facility.color === 'orange' ? 'bg-orange-50 text-orange-600' :
-                                                    facility.color === 'indigo' ? 'bg-indigo-50 text-indigo-600' :
-                                                        facility.color === 'amber' ? 'bg-amber-50 text-amber-600' :
-                                                            facility.color === 'emerald' ? 'bg-emerald-50 text-emerald-600' :
-                                                                facility.color === 'cyan' ? 'bg-cyan-50 text-cyan-600' :
-                                                                    'bg-white text-ink-600'
-                                }`}>
-                                <facility.icon className="w-7 h-7" />
-                            </div>
-                            <span className="font-bold text-ink-950 text-sm leading-tight leading-snug group-hover:text-brown-700 transition-colors">{facility.name}</span>
-                        </motion.div>
-                    ))}
-                </div>
-
-                {/* Photo Gallery Preview */}
+                {/* PHOTO GALLERY - FACILITIES WITH IMAGES (MOVED TO TOP) */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -121,13 +93,43 @@ export default function FacilitiesSection() {
                     ))}
                 </motion.div>
 
+                {/* TEXT-ONLY FACILITIES LIST (MOVED TO BOTTOM - SMALLER TYPOGRAPHY) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-12">
+                    {FACILITIES.map((facility, idx) => (
+                        <motion.div
+                            key={idx}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: idx * 0.05 }}
+                            className="flex items-center gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl bg-surface-50/50 border border-surface-200/60 group hover:bg-white hover:border-brown-100 hover:shadow-premium-md transition-all duration-500"
+                        >
+                            <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 shadow-premium-sm group-hover:scale-110 transition-transform duration-500 ${facility.color === 'brown' ? 'bg-brown-50 text-brown-600' :
+                                facility.color === 'blue' ? 'bg-blue-50 text-blue-600' :
+                                    facility.color === 'gold' ? 'bg-gold-50 text-gold-600' :
+                                        facility.color === 'teal' ? 'bg-teal-50 text-teal-600' :
+                                            facility.color === 'red' ? 'bg-red-50 text-red-600' :
+                                                facility.color === 'orange' ? 'bg-orange-50 text-orange-600' :
+                                                    facility.color === 'indigo' ? 'bg-indigo-50 text-indigo-600' :
+                                                        facility.color === 'amber' ? 'bg-amber-50 text-amber-600' :
+                                                            facility.color === 'emerald' ? 'bg-emerald-50 text-emerald-600' :
+                                                                facility.color === 'cyan' ? 'bg-cyan-50 text-cyan-600' :
+                                                                    'bg-white text-ink-600'
+                                }`}>
+                                <facility.icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                            </div>
+                            <span className="font-bold text-ink-950 text-xs sm:text-sm leading-tight group-hover:text-brown-700 transition-colors">{facility.name}</span>
+                        </motion.div>
+                    ))}
+                </div>
+
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="text-center"
                 >
-                    <Link href="/fasilitas">
+                    <Link href="/fasilitas" onClick={() => navigateToDetail('/fasilitas', '#fasilitas')}>
                         <button className="px-10 py-5 rounded-pill bg-white border-2 border-surface-200 text-ink-950 font-bold shadow-premium-sm hover:border-brown-700 hover:text-brown-700 hover:shadow-premium-md transition-all duration-300 flex items-center gap-2 mx-auto">
                             Lihat Semua Fasilitas
                             <ArrowUpRight className="w-5 h-5" />

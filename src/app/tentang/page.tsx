@@ -17,7 +17,8 @@ import {
     CheckCircle2,
     Calendar,
     ChevronRight,
-    Send
+    Send,
+    ArrowLeft
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -27,8 +28,8 @@ export default function TentangPage() {
             {/* 1. Hero Section - Professional Airy Design */}
             <section className="relative py-24 md:py-32 overflow-hidden bg-white">
                 {/* Sophisticated Background Elements */}
-                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brown-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-teal-50/40 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-pine-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gold-50/40 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
                 <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
 
                 <Container className="relative z-10 text-center">
@@ -37,7 +38,7 @@ export default function TentangPage() {
                         animate={{ opacity: 1, y: 0 }}
                         className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-surface-200 text-brown-700 text-xs font-bold uppercase tracking-widest mb-8 shadow-premium-sm"
                     >
-                        <Sparkles className="w-3.5 h-3.5" />
+                        <Sparkles className="w-3.5 h-3.5 text-pine-600" />
                         <span>Mengenal Al-Imam</span>
                     </motion.div>
 
@@ -48,7 +49,7 @@ export default function TentangPage() {
                         className="text-4xl sm:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
                     >
                         Bimbingan & <br />
-                        <span className="text-brown-600">Pengawasan Melekat</span>
+                        <span className="text-pine-600">Pengawasan Melekat</span>
                     </motion.h1>
 
                     <motion.p
@@ -72,9 +73,9 @@ export default function TentangPage() {
                             viewport={{ once: true }}
                             className="inline-flex items-center gap-3 text-brown-600 mb-4"
                         >
-                            <div className="w-8 h-0.5 bg-brown-600/30 rounded-full" />
-                            <span className="text-xs font-black uppercase tracking-[0.3em]">Ahlan Wa Sahlan</span>
-                            <div className="w-8 h-0.5 bg-brown-600/30 rounded-full" />
+                            <div className="w-8 h-0.5 bg-pine-600/30 rounded-full" />
+                            <span className="text-xs font-black uppercase tracking-[0.3em] text-pine-600">Ahlan Wa Sahlan</span>
+                            <div className="w-8 h-0.5 bg-pine-600/30 rounded-full" />
                         </motion.div>
                         <h2 className="text-3xl md:text-6xl font-display font-black text-ink-950 tracking-tight leading-tight">
                             Masa Depan Qur'ani <br className="hidden md:block" />
@@ -87,7 +88,7 @@ export default function TentangPage() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
-                        className="relative aspect-[21/9] md:aspect-[25/9] rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-premium-2xl border border-surface-200 group"
+                        className="relative aspect-[21/9] md:aspect-21/9 rounded-3xl md:rounded-4xl overflow-hidden shadow-premium-2xl border border-surface-200 group"
                     >
                         <Image
                             src="/images/welcome-selamat-datang.png"
@@ -323,36 +324,36 @@ export default function TentangPage() {
             </section>
 
             {/* 4. CTA Section - Direct and impactful */}
-            <section className="py-24 md:py-32 relative overflow-hidden bg-white">
+            <section className="py-16 md:py-24 lg:py-32 relative overflow-hidden bg-white">
                 <Container>
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="bg-brown-800 rounded-[2rem] md:rounded-[4rem] p-6 md:p-24 relative overflow-hidden text-center"
+                        className="bg-brown-800 rounded-[2rem] md:rounded-[3rem] lg:rounded-[4rem] p-6 sm:p-8 md:p-16 lg:p-24 relative overflow-hidden text-center"
                     >
                         {/* Decorative background */}
-                        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+                        <div className="absolute top-0 right-0 w-32 h-32 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-white/5 rounded-full blur-[60px] md:blur-[100px] -translate-y-1/2 translate-x-1/2" />
                         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5 pointer-events-none" />
 
                         <div className="relative z-10">
-                            <h2 className="text-2xl md:text-6xl font-display font-black mb-6 md:mb-8 text-white tracking-tight leading-tight">
+                            <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-black mb-4 sm:mb-6 md:mb-8 text-white tracking-tight leading-tight">
                                 Mari Menjadi Bagian <br />
                                 Keluarga <span className="text-gold-400">Al-Imam</span>
                             </h2>
-                            <p className="text-base md:text-xl text-brown-100 mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
+                            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-brown-100 mb-6 sm:mb-8 md:mb-10 lg:mb-12 max-w-2xl mx-auto leading-relaxed font-medium px-2">
                                 Daftarkan putra Anda sekarang dan persiapkan masa depan gemilang bersama kami.
                             </p>
-                            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center">
+                            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center items-center px-4">
                                 <Link href="/daftar" className="w-full sm:w-auto">
-                                    <button className="w-full px-8 py-4 rounded-pill bg-white text-brown-900 font-black text-base md:text-lg shadow-premium-xl hover:bg-gold-400 hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                                    <button className="w-full px-6 sm:px-10 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white text-brown-900 font-black text-sm sm:text-base md:text-lg shadow-premium-xl hover:bg-gold-400 hover:text-white transition-all duration-300 transform hover:-translate-y-1 min-h-[48px] sm:min-h-[52px]">
                                         Daftar Sekarang
                                     </button>
                                 </Link>
                                 <Link href="/kontak" className="w-full sm:w-auto">
-                                    <button className="w-full flex items-center justify-center gap-3 px-8 py-4 rounded-pill bg-white/10 text-white font-bold border border-white/20 hover:bg-white/20 transition-all duration-300">
+                                    <button className="w-full flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-10 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white/10 text-white font-bold border border-white/20 hover:bg-white/20 transition-all duration-300 min-h-[48px] sm:min-h-[52px]">
                                         Hubungi Kami
-                                        <Send className="w-5 h-5 text-gold-400" />
+                                        <Send className="w-4 h-4 sm:w-5 sm:h-5 text-gold-400" />
                                     </button>
                                 </Link>
                             </div>

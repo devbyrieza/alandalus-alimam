@@ -32,7 +32,9 @@ const ROLE_OPTIONS = [
     { value: "admin_super", label: "Admin Super (Mudir/Ketua)" },
     { value: "admin_berkas", label: "Admin Berkas" },
     { value: "admin_keuangan", label: "Admin Keuangan" },
-    { value: "penguji", label: "Penguji" },
+    { value: "penguji_santri", label: "Penguji Santri (Al-Quran & Wawancara)" },
+    { value: "pewawancara_ortu", label: "Pewawancara Ortu" },
+    { value: "penguji_umum", label: "Penguji Umum (Semua)" },
 ];
 
 export default function UserManagementPage() {
@@ -181,7 +183,7 @@ export default function UserManagementPage() {
             <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-indigo-100">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
-                        <div className="p-3 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl">
+                        <div className="p-3 bg-linear-to-br from-indigo-500 to-purple-600 rounded-xl">
                             <Users className="w-8 h-8 text-white" />
                         </div>
                         <div>
@@ -280,8 +282,10 @@ export default function UserManagementPage() {
                                             <span className={`px-3 py-1 rounded-full text-xs font-bold ${user.role === 'admin_super' ? 'bg-purple-100 text-purple-700 border border-purple-200' :
                                                 user.role === 'admin_keuangan' ? 'bg-teal-100 text-teal-700 border border-teal-200' :
                                                     user.role === 'admin_berkas' ? 'bg-blue-100 text-blue-700 border border-blue-200' :
-                                                        user.role === 'penguji' ? 'bg-amber-100 text-amber-700 border border-amber-200' :
-                                                            'bg-stone-100 text-stone-700'
+                                                        user.role === 'penguji_santri' ? 'bg-emerald-100 text-emerald-700 border border-emerald-200' :
+                                                            user.role === 'pewawancara_ortu' ? 'bg-orange-100 text-orange-700 border border-orange-200' :
+                                                                user.role === 'penguji_umum' ? 'bg-indigo-100 text-indigo-700 border border-indigo-200' :
+                                                                    'bg-stone-100 text-stone-700'
                                                 }`}>
                                                 {ROLE_OPTIONS.find(r => r.value === user.role)?.label || user.role}
                                             </span>

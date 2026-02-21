@@ -15,15 +15,21 @@ export default function ScrollToTop() {
             }
         };
 
-        window.addEventListener("scroll", toggleVisibility);
+        window.addEventListener("scroll", toggleVisibility, { passive: true });
         return () => window.removeEventListener("scroll", toggleVisibility);
     }, []);
 
     const scrollToTop = () => {
+        // Smooth scroll to top using native API (works with Lenis)
         window.scrollTo({
             top: 0,
             behavior: "smooth",
         });
+        
+        // Alternative: If using Lenis directly
+        // if (typeof window !== 'undefined' && (window as any).lenis) {
+        //     (window as any).lenis.scrollTo(0, { offset: 0 });
+        // }
     };
 
     return (

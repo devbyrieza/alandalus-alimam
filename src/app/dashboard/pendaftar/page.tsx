@@ -123,7 +123,6 @@ export default function DashboardPendaftarPage() {
                     <p className="text-xs font-bold text-stone-500 group-hover:text-emerald-700 transition-colors">Langkah Selanjutnya:</p>
                     <p className="font-bold text-lg text-emerald-950 group-hover:text-emerald-700 transition-colors underline decoration-emerald-500/30 underline-offset-4">{nextStep.action}</p>
                   </div>
-                  <ArrowRight className="w-5 h-5 text-emerald-600 group-hover:translate-x-1 transition-transform" />
                 </Link>
               )}
             </div>

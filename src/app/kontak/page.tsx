@@ -85,7 +85,6 @@ const SocialCard = ({ social, delay = 0 }: { social: any, delay?: number }) => (
             <p className="text-[10px] font-black text-ink-400 uppercase tracking-widest mb-1">{social.name}</p>
             <p className={`font-black text-ink-900 group-hover:${social.textColor} transition-colors text-sm md:text-base break-all`}>{social.username}</p>
         </div>
-        <ArrowRight className="w-5 h-5 ml-auto text-surface-200 group-hover:text-ink-950 transition-colors shrink-0" />
     </motion.a>
 );
 
@@ -324,12 +323,7 @@ export default function ContactPage() {
                                         disabled={isSubmitting}
                                         className="w-full py-4 md:py-6 rounded-[1.5rem] md:rounded-[2rem] bg-brown-900 text-white font-black text-lg md:text-xl hover:bg-gold-500 shadow-premium-lg transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                                     >
-                                        {isSubmitting ? "Sedang Mengirim..." : (
-                                            <>
-                                                Kirim Sekarang
-                                                <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
-                                            </>
-                                        )}
+                                        {isSubmitting ? "Sedang Mengirim..." : "Kirim Sekarang"}
                                     </motion.button>
                                 </form>
                             </div>

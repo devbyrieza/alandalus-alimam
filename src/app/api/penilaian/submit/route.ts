@@ -3,17 +3,43 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { calculateFinalScore, determineStatus, gradeToScore } from '@/lib/grading';
 
+async function getSession() {
+    const { cookies } = await import('next/headers');
+    const cookieStore = await cookies();
+    const sessionCookie = cookieStore.get("app_session");
+    if (!sessionCookie) return null;
+    try {
+        return JSON.parse(sessionCookie.value);
+    } catch {
+        return null;
+    }
+}
+
 export async function POST(req: Request) {
     try {
         // 1. Auth Check (Admins/Examiners only)
-        // const session = await getServerSession(authOptions);
-        // if (!isAdmin(session)) return 401...
+        const session = await getSession();
+        if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+        const userRole = session.role;
+        const isSuper = userRole === 'admin_super' || userRole === 'tim_it';
 
         const body = await req.json();
-        const { pendaftar_id, type, score, details, examiner_id, grade } = body;
-        // type: 'quran' | 'wawancara_santri' | 'wawancara_ortu'
-        // score: numeric 0-100 (Optional if 'grade' provided)
-        // grade: 'A', 'B', etc. (Optional if 'score' provided)
+        const { pendaftar_id, type } = body;
+        const { score, details, examiner_id, grade } = body;
+
+        // RBAC Validation
+        if (!isSuper) {
+            if (type === 'quran' || type === 'wawancara_santri') {
+                if (userRole !== 'penguji_santri' && userRole !== 'penguji_umum') {
+                    return NextResponse.json({ error: 'Forbidden: Role restricted' }, { status: 403 });
+                }
+            } else if (type === 'wawancara_ortu') {
+                if (userRole !== 'pewawancara_ortu' && userRole !== 'penguji_umum') {
+                    return NextResponse.json({ error: 'Forbidden: Role restricted' }, { status: 403 });
+                }
+            }
+        }
 
         if (!pendaftar_id || !type) {
             return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
@@ -70,10 +96,11 @@ export async function POST(req: Request) {
         const current = await prisma.nilaiUjian.findUnique({ where: { id: nilai.id } });
 
         if (current) {
-            const ak = current.score_akademik || 0;
-            const quran = current.score_quran || 0;
-            const kp = current.score_kepribadian || 0;
-            const ks = current.score_kesiapan || 0;
+            const data = current as any;
+            const ak = data.score_akademik || 0;
+            const quran = data.score_quran || 0;
+            const kp = data.score_kepribadian || 0;
+            const ks = data.score_kesiapan || 0;
 
             // Wawancara total = (Santri + Ortu) / 2
             const ws = Number(current.nilai_wawancara_santri) || 0;
@@ -94,7 +121,7 @@ export async function POST(req: Request) {
                     total_score: totalScore,
                     status_kelulusan: status,
                     score_wawancara: wawancaraTotal // Save computed logic
-                }
+                } as any
             });
         }
 

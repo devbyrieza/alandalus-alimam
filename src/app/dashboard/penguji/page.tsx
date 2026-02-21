@@ -51,8 +51,8 @@ export default function PengujiDashboardPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <Loader2 className="w-12 h-12 animate-spin text-violet-600 mx-auto mb-4" />
-          <p className="text-stone-600">Memuat statistik dashboard...</p>
+          <Loader2 className="w-12 h-12 animate-spin text-brown-600 mx-auto mb-4" />
+          <p className="text-ink-600 font-medium">Memuat statistik dashboard...</p>
         </div>
       </div>
     );
@@ -63,49 +63,49 @@ export default function PengujiDashboardPage() {
       title: "Total Jadwal Ujian",
       value: stats.total_jadwal,
       icon: Calendar,
-      color: "violet",
-      bgColor: "bg-violet-100",
-      iconColor: "text-violet-600",
+      color: "brown",
+      bgColor: "bg-brown-50",
+      iconColor: "text-brown-600",
     },
     {
       title: "Jadwal Hari Ini",
       value: stats.jadwal_hari_ini,
       icon: Clock,
-      color: "blue",
-      bgColor: "bg-blue-100",
-      iconColor: "text-blue-600",
+      color: "teal",
+      bgColor: "bg-teal-50",
+      iconColor: "text-teal-600",
     },
     {
       title: "Selesai Dinilai",
       value: stats.selesai_dinilai,
       icon: CheckCircle,
       color: "green",
-      bgColor: "bg-green-100",
+      bgColor: "bg-green-50",
       iconColor: "text-green-600",
     },
     {
       title: "Belum Dinilai",
       value: stats.belum_dinilai,
       icon: ClipboardCheck,
-      color: "amber",
-      bgColor: "bg-amber-100",
-      iconColor: "text-amber-600",
+      color: "gold",
+      bgColor: "bg-gold-50",
+      iconColor: "text-gold-600",
     },
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Page Title */}
-      <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-violet-100">
-        <div className="flex items-center gap-4">
-          <div className="p-3 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl">
+      <div className="bg-white rounded-[2rem] shadow-premium-lg p-8 border border-surface-100">
+        <div className="flex items-center gap-5">
+          <div className="p-3 bg-gradient-to-br from-brown-600 to-brown-700 rounded-xl shadow-lg">
             <TrendingUp className="w-8 h-8 text-white" />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-stone-900">
+            <h2 className="text-2xl md:text-3xl font-display font-black text-ink-950">
               Ikhtisar Dashboard
             </h2>
-            <p className="text-stone-600">
+            <p className="text-ink-600 font-medium">
               Ringkasan tugas penilaian ujian seleksi
             </p>
           </div>
@@ -117,16 +117,16 @@ export default function PengujiDashboardPage() {
         {statCards.map((card, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl shadow-lg p-6 border-2 border-violet-100 hover:border-violet-300 transition-all"
+            className="bg-white rounded-[1.5rem] shadow-premium-md p-6 border border-surface-100 hover:shadow-premium-lg hover:-translate-y-1 transition-all duration-300"
           >
             <div className="flex items-center justify-between mb-4">
-              <div className={`p-3 ${card.bgColor} rounded-lg`}>
+              <div className={`p-3 ${card.bgColor} rounded-xl`}>
                 <card.icon className={`w-6 h-6 ${card.iconColor}`} />
               </div>
             </div>
             <div>
-              <p className="text-sm text-stone-600 mb-1">{card.title}</p>
-              <p className="text-3xl font-black text-violet-600">
+              <p className="text-xs font-bold text-ink-500 mb-2 uppercase tracking-wide">{card.title}</p>
+              <p className={`text-3xl font-display font-black text-${card.color}-600`}>
                 {card.value}
               </p>
             </div>
@@ -135,19 +135,21 @@ export default function PengujiDashboardPage() {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-violet-100">
-        <h3 className="text-lg font-bold text-stone-900 mb-4">
+      <div className="bg-white rounded-[2rem] shadow-premium-lg p-8 border border-surface-100">
+        <h3 className="text-xl font-display font-black text-ink-950 mb-6">
           Aksi Cepat
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <Link
             href="/dashboard/penguji/jadwal"
-            className="flex items-center gap-3 p-4 bg-violet-50 hover:bg-violet-100 rounded-xl transition-colors border border-violet-200"
+            className="flex items-center gap-4 p-6 bg-brown-50 hover:bg-brown-100 rounded-2xl transition-all duration-300 border border-brown-100 hover:shadow-premium-md group"
           >
-            <Calendar className="w-6 h-6 text-violet-600" />
+            <div className="p-3 bg-brown-600 rounded-xl group-hover:scale-110 transition-transform">
+              <Calendar className="w-6 h-6 text-white" />
+            </div>
             <div>
-              <p className="font-bold text-violet-900">Lihat Jadwal</p>
-              <p className="text-xs text-violet-600">
+              <p className="font-display font-black text-brown-900">Lihat Jadwal</p>
+              <p className="text-xs font-bold text-brown-600">
                 Jadwal ujian yang ditugaskan
               </p>
             </div>
@@ -155,12 +157,14 @@ export default function PengujiDashboardPage() {
 
           <Link
             href="/dashboard/penguji/input-nilai"
-            className="flex items-center gap-3 p-4 bg-green-50 hover:bg-green-100 rounded-xl transition-colors border border-green-200"
+            className="flex items-center gap-4 p-6 bg-teal-50 hover:bg-teal-100 rounded-2xl transition-all duration-300 border border-teal-100 hover:shadow-premium-md group"
           >
-            <ClipboardCheck className="w-6 h-6 text-green-600" />
+            <div className="p-3 bg-teal-600 rounded-xl group-hover:scale-110 transition-transform">
+              <ClipboardCheck className="w-6 h-6 text-white" />
+            </div>
             <div>
-              <p className="font-bold text-green-900">Input Nilai</p>
-              <p className="text-xs text-green-600">
+              <p className="font-display font-black text-teal-900">Input Nilai</p>
+              <p className="text-xs font-bold text-teal-600">
                 {stats.belum_dinilai} santri belum dinilai
               </p>
             </div>
@@ -169,18 +173,18 @@ export default function PengujiDashboardPage() {
       </div>
 
       {/* Info Box */}
-      <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6">
-        <div className="flex gap-4">
+      <div className="bg-blue-50 border-2 border-blue-200 rounded-[1.5rem] p-8">
+        <div className="flex gap-5">
           <div className="flex-shrink-0">
-            <div className="p-2 bg-blue-200 rounded-lg">
+            <div className="p-3 bg-blue-200 rounded-xl">
               <Users className="w-6 h-6 text-blue-700" />
             </div>
           </div>
           <div>
-            <h4 className="font-bold text-blue-900 mb-2">
+            <h4 className="font-display font-black text-blue-900 mb-3 text-lg">
               Panduan Penilaian
             </h4>
-            <ul className="text-sm text-blue-800 space-y-1">
+            <ul className="text-sm text-blue-800 font-medium space-y-2">
               <li>• Nilai harus objektif dan sesuai rubrik penilaian</li>
               <li>• Pastikan semua aspek dinilai dengan lengkap</li>
               <li>• Berikan catatan jika diperlukan untuk referensi</li>

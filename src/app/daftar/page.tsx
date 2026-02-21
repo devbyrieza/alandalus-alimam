@@ -511,10 +511,7 @@ export default function DaftarPage() {
                       <span>Sedang Memproses...</span>
                     </>
                   ) : (
-                    <>
-                      <span>Lanjutkan Registrasi</span>
-                      <ArrowRight className="w-6 h-6" />
-                    </>
+                    <span>Lanjutkan Registrasi</span>
                   )}
                 </motion.button>
 

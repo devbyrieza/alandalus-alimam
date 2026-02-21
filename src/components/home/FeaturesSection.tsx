@@ -80,9 +80,8 @@ export default function FeaturesSection() {
 
               <div className="pt-6">
                 <Link href="/ppdb">
-                  <button className="px-10 py-5 rounded-pill bg-brown-700 text-white font-bold shadow-premium-lg hover:shadow-premium-xl hover:bg-brown-800 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2">
+                  <button className="px-14 py-5 rounded-pill bg-brown-700 text-white font-bold shadow-premium-lg hover:shadow-premium-xl hover:bg-brown-800 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2">
                     Daftar Sekarang
-                    <ArrowRight className="w-5 h-5" />
                   </button>
                 </Link>
               </div>

@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 import { navigateToDetail } from "@/lib/navigation-scroll";
 
 export default function AboutSection() {
-  
+
   const handleNavigateToDetail = () => {
     navigateToDetail('/tentang', '#about');
   };
@@ -135,9 +135,8 @@ export default function AboutSection() {
 
 
             <Link href="/tentang" onClick={handleNavigateToDetail} className="group flex items-center gap-3">
-              <button className="px-10 py-5 rounded-pill bg-brown-700 text-white font-bold shadow-premium-lg hover:shadow-premium-xl hover:bg-brown-800 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2">
+              <button className="px-14 py-5 rounded-pill bg-brown-700 text-white font-bold shadow-premium-lg hover:shadow-premium-xl hover:bg-brown-800 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2">
                 Profil Lengkap
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </Link>
           </motion.div>

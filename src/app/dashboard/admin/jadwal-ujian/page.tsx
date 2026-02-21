@@ -293,7 +293,7 @@ export default function JadwalUjianPage() {
                         disabled={assigning || s.booked_count >= s.quota}
                         className="w-full md:w-auto px-6 py-3 bg-gradient-to-br from-teal-500 to-emerald-600 text-white rounded-xl font-black shadow-lg shadow-teal-500/20 hover:scale-105 transition-all flex items-center justify-center gap-2 "
                       >
-                        {assigning ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowRight className="w-4 h-4" />}
+                        {assigning ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
                         Terapkan ke Sesi Ini
                       </button>
                     ) : (

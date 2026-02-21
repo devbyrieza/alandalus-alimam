@@ -3,25 +3,26 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg font-bold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         primary:
-          "bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg hover:from-green-700 hover:to-emerald-700 hover:shadow-xl hover:scale-105 active:scale-95",
+          "bg-gradient-to-r from-brown-600 to-brown-700 text-white shadow-lg shadow-brown-900/10 hover:from-brown-700 hover:to-brown-800 hover:shadow-xl hover:shadow-brown-900/20 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]",
         secondary:
-          "bg-gradient-to-r from-emerald-500 to-green-500 text-white shadow-md hover:from-emerald-600 hover:to-green-600 hover:shadow-lg hover:scale-105 active:scale-95",
+          "bg-gradient-to-r from-teal-500 to-teal-600 text-white shadow-md hover:from-teal-600 hover:to-teal-700 hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98]",
         accent:
-          "bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md hover:from-amber-600 hover:to-orange-600 hover:shadow-lg hover:scale-105 active:scale-95",
+          "bg-gradient-to-r from-gold-500 to-gold-600 text-white shadow-md hover:from-gold-600 hover:to-gold-700 hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98]",
         outline:
-          "border-2 border-green-600 text-green-600 bg-white hover:bg-green-50 hover:scale-105 active:scale-95",
-        ghost: "text-gray-700 hover:bg-gray-100 hover:text-gray-900",
-        link: "text-green-600 underline-offset-4 hover:underline",
+          "border-2 border-brown-600 text-brown-600 bg-white hover:bg-brown-50 hover:border-brown-700 hover:text-brown-700 hover:-translate-y-0.5 active:scale-[0.98]",
+        ghost: "text-ink-600 hover:bg-surface-100 hover:text-ink-900",
+        link: "text-brown-600 underline-offset-4 hover:underline",
       },
       size: {
-        sm: "h-9 px-4 text-sm",
-        md: "h-11 px-6",
+        sm: "h-9 px-4 text-xs",
+        md: "h-11 px-6 text-sm",
         lg: "h-12 px-8 text-base",
+        xl: "h-14 px-10 text-lg",
         icon: "h-10 w-10",
       },
     },

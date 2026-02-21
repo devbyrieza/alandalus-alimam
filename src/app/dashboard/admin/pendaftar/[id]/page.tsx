@@ -144,7 +144,7 @@ export default function PendaftarDetailPage() {
   // Helper for role checks
   const isKeuangan = userRole === "admin_keuangan";
   const isBerkas = userRole === "admin_berkas";
-  const isPenguji = userRole === "penguji" || userRole === "penguji_a" || userRole === "penguji_b";
+  const isPenguji = userRole === "penguji_santri" || userRole === "penguji_umum";
 
   useEffect(() => {
     fetchPendaftarDetail();

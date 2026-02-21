@@ -9,13 +9,13 @@ export default function CalendarPage() {
     <main className="bg-surface-50 min-h-screen flex items-center justify-center">
       <Container>
         <div className="max-w-2xl mx-auto text-center">
-          <div className="w-24 h-24 bg-brown-100 rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse">
-            <Construction className="w-12 h-12 text-brown-600" />
+          <div className="w-24 h-24 bg-gold-100 rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse">
+            <Construction className="w-12 h-12 text-gold-700" />
           </div>
 
           <h1 className="text-4xl md:text-5xl font-bold text-ink-900 mb-4 tracking-tight">
             Sedang Dalam <br />
-            <span className="text-gradient-brown">Pengembangan</span>
+            <span className="text-gradient-pine">Pengembangan</span>
           </h1>
 
           <p className="text-lg text-ink-500 mb-10 leading-relaxed">
@@ -27,7 +27,7 @@ export default function CalendarPage() {
             <Link href="/" className="btn-primary">
               Kembali ke Beranda
             </Link>
-            <Link href="/kontak" className="btn-secondary">
+            <Link href="/kontak" className="btn-secondary" >
               Hubungi Kami
             </Link>
           </div>

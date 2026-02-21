@@ -1028,7 +1028,6 @@ export default function PembayaranPendaftaranTab({
                   className="px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold shadow-lg shadow-emerald-600/20 transition-all hover:scale-105 flex items-center gap-2"
                 >
                   <span>Lanjut Isi Data Diri</span>
-                  <ArrowRight className="w-5 h-5" />
                 </a>
               </div>
             </div>
@@ -1048,7 +1047,6 @@ export default function PembayaranPendaftaranTab({
                 className="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-xl font-bold shadow-lg shadow-teal-600/20 transition-all hover:scale-105 flex items-center gap-2"
               >
                 <span>Ke Halaman Pembayaran</span>
-                <ArrowRight className="w-5 h-5" />
               </a>
             </div>
           )}

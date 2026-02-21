@@ -175,7 +175,6 @@ function DaftarSuksesContent() {
           className="btn-primary w-full py-4 text-base"
         >
           <span>Lanjut ke Halaman Login</span>
-          <ArrowRight className="w-5 h-5" />
         </button>
       </div>
 

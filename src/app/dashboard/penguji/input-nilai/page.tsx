@@ -40,13 +40,28 @@ export default function InputNilaiPage() {
 
   // Dynamic form data
   const [formData, setFormData] = useState<Partial<Peserta>>({});
+  const [userRole, setUserRole] = useState<string | null>(null);
 
   const [exporting, setExporting] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   useEffect(() => {
+    fetchSession();
     fetchPeserta();
   }, []);
+
+  const fetchSession = async () => {
+    try {
+      const res = await fetch("/api/auth/session");
+      if (res.ok) {
+        const data = await res.json();
+        const role = data.session?.role || data.user?.user_metadata?.role;
+        setUserRole(role);
+      }
+    } catch (e) {
+      console.error("Failed to fetch session", e);
+    }
+  };
 
   const fetchPeserta = async () => {
     try {
@@ -104,22 +119,22 @@ export default function InputNilaiPage() {
     setMessage(null);
   };
 
-  const handleSave = async (id: string, roles: string[]) => {
+  const handleSave = async (id: string, canEdit: { wawancara: boolean; quran: boolean; ortu: boolean }) => {
     try {
       setSaving(id);
 
       // Filter payload to only send what user is authorized to edit + generic notes
       const payload: any = {};
-      if (roles.includes('wawancara')) {
+      if (canEdit.wawancara) {
         if (formData.nilai_wawancara_santri !== undefined) payload.nilai_wawancara_santri = formData.nilai_wawancara_santri;
         if (formData.catatan_santri !== undefined) payload.catatan_santri = formData.catatan_santri;
       }
-      if (roles.includes('quran')) {
+      if (canEdit.quran) {
         if (formData.nilai_tes_quran !== undefined) payload.nilai_tes_quran = formData.nilai_tes_quran;
         // If both roles exist, last one wins for note. Ideally separate.
-        if (formData.catatan_santri !== undefined && !roles.includes('wawancara')) payload.catatan_santri = formData.catatan_santri;
+        if (formData.catatan_santri !== undefined && !canEdit.wawancara) payload.catatan_santri = formData.catatan_santri;
       }
-      if (roles.includes('ortu')) {
+      if (canEdit.ortu) {
         if (formData.nilai_wawancara_ortu !== undefined) payload.nilai_wawancara_ortu = formData.nilai_wawancara_ortu;
         if (formData.catatan_ortu !== undefined) payload.catatan_ortu = formData.catatan_ortu;
       }
@@ -155,7 +170,7 @@ export default function InputNilaiPage() {
     <div className="space-y-6">
       <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-violet-100 flex justify-between items-center">
         <div className="flex items-center gap-4">
-          <div className="p-3 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl">
+          <div className="p-3 bg-linear-to-br from-violet-500 to-purple-600 rounded-xl">
             <ClipboardCheck className="w-8 h-8 text-white" />
           </div>
           <div>
@@ -182,9 +197,24 @@ export default function InputNilaiPage() {
           filteredPeserta.length === 0 ? <p className="text-center text-stone-500 py-10">Tidak ada data.</p> :
             filteredPeserta.map((item) => {
               const isEditing = editingId === item.id;
-              const canEditWawancara = item.roles.includes('wawancara');
-              const canEditQuran = item.roles.includes('quran');
-              const canEditOrtu = item.roles.includes('ortu');
+
+              // RBAC Logic: 
+              // 1. Roles from Schedule (item.roles)
+              // 2. Roles from Session (userRole)
+              const isSuper = userRole === 'admin_super' || userRole === 'tim_it';
+              const canDoQuran = item.roles.includes('quran') || (isSuper) || (userRole === 'penguji_santri') || (userRole === 'penguji_umum');
+              const canDoWawancaraSantri = item.roles.includes('wawancara') || (isSuper) || (userRole === 'penguji_santri') || (userRole === 'penguji_umum');
+              const canDoWawancaraOrtu = item.roles.includes('ortu') || (isSuper) || (userRole === 'pewawancara_ortu') || (userRole === 'penguji_umum');
+
+              // Determine visibility
+              const showQuran = canDoQuran || item.nilai_tes_quran;
+              const showWawancaraSantri = canDoWawancaraSantri || item.nilai_wawancara_santri;
+              const showWawancaraOrtu = canDoWawancaraOrtu || item.nilai_wawancara_ortu;
+
+              // Determine editability
+              const editQuran = isEditing && canDoQuran;
+              const editWawancaraSantri = isEditing && canDoWawancaraSantri;
+              const editWawancaraOrtu = isEditing && canDoWawancaraOrtu;
 
               return (
                 <div key={item.id} className="bg-white rounded-xl shadow-lg p-6 border-2 border-violet-100">
@@ -209,10 +239,10 @@ export default function InputNilaiPage() {
                   {/* Form / View */}
                   <div className="grid md:grid-cols-3 gap-6">
                     {/* Wawancara Santri */}
-                    {(canEditWawancara || item.nilai_wawancara_santri) && (
-                      <div className={`p-4 rounded-lg border content-section ${canEditWawancara ? 'bg-blue-50 border-blue-100' : 'bg-gray-50'}`}>
+                    {showWawancaraSantri && (
+                      <div className={`p-4 rounded-lg border content-section ${canDoWawancaraSantri ? 'bg-blue-50 border-blue-100' : 'bg-gray-50'}`}>
                         <h4 className="font-bold text-blue-900 mb-2">Wawancara Santri</h4>
-                        {isEditing && canEditWawancara ? (
+                        {editWawancaraSantri ? (
                           <div className="space-y-2">
                             <label className="text-xs font-bold">Nilai (0-100)</label>
                             <input
@@ -239,10 +269,10 @@ export default function InputNilaiPage() {
                     )}
 
                     {/* Al-Qur'an */}
-                    {(canEditQuran || item.nilai_tes_quran) && (
-                      <div className={`p-4 rounded-lg border content-section ${canEditQuran ? 'bg-emerald-50 border-emerald-100' : 'bg-gray-50'}`}>
+                    {showQuran && (
+                      <div className={`p-4 rounded-lg border content-section ${canDoQuran ? 'bg-emerald-50 border-emerald-100' : 'bg-gray-50'}`}>
                         <h4 className="font-bold text-emerald-900 mb-2">Tes Al-Qur'an</h4>
-                        {isEditing && canEditQuran ? (
+                        {editQuran ? (
                           <div className="space-y-2">
                             <label className="text-xs font-bold">Nilai (0-100)</label>
                             <input
@@ -251,7 +281,7 @@ export default function InputNilaiPage() {
                               value={formData.nilai_tes_quran ?? ''}
                               onChange={e => setFormData({ ...formData, nilai_tes_quran: Number(e.target.value) })}
                             />
-                            {!canEditWawancara && (
+                            {!editWawancaraSantri && (
                               <>
                                 <label className="text-xs font-bold">Catatan</label>
                                 <textarea
@@ -272,10 +302,10 @@ export default function InputNilaiPage() {
                     )}
 
                     {/* Wawancara Ortu */}
-                    {(canEditOrtu || item.nilai_wawancara_ortu) && (
-                      <div className={`p-4 rounded-lg border content-section ${canEditOrtu ? 'bg-amber-50 border-amber-100' : 'bg-gray-50'}`}>
+                    {showWawancaraOrtu && (
+                      <div className={`p-4 rounded-lg border content-section ${canDoWawancaraOrtu ? 'bg-amber-50 border-amber-100' : 'bg-gray-50'}`}>
                         <h4 className="font-bold text-amber-900 mb-2">Wawancara Wali</h4>
-                        {isEditing && canEditOrtu ? (
+                        {editWawancaraOrtu ? (
                           <div className="space-y-2">
                             <label className="text-xs font-bold">Nilai (0-100)</label>
                             <input
@@ -306,7 +336,11 @@ export default function InputNilaiPage() {
                     <div className="flex gap-2 mt-4 justify-end">
                       <button onClick={() => setEditingId(null)} className="px-4 py-2 border rounded-lg hover:bg-stone-50">Batal</button>
                       <button
-                        onClick={() => handleSave(item.id, item.roles)}
+                        onClick={() => handleSave(item.id, {
+                          wawancara: canDoWawancaraSantri,
+                          quran: canDoQuran,
+                          ortu: canDoWawancaraOrtu
+                        })}
                         disabled={saving === item.id}
                         className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center gap-2"
                       >

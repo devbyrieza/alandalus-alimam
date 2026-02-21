@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect } from "react";
+import { restoreScrollPosition } from "@/lib/navigation-scroll";
 import HeroSection from "@/components/home/HeroSection";
 import StatsSection from "@/components/home/StatsSection";
 import ScrollAnimation from "@/components/ui/ScrollAnimation";
@@ -17,6 +21,11 @@ import ContactSection from "@/components/home/ContactSection";
 import CtaSection from "@/components/home/CtaSection";
 
 export default function HomePage() {
+  // Restore scroll position on page load (for back navigation)
+  useEffect(() => {
+    restoreScrollPosition();
+  }, []);
+
   return (
     <>
       <main>
