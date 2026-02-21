@@ -22,6 +22,7 @@ import {
 
 export default function DashboardPendaftarPage() {
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState({
     nama: "",
     nomorPendaftaran: "",
@@ -37,26 +38,42 @@ export default function DashboardPendaftarPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setError(null);
+        
         const sessionRes = await fetch("/api/auth/session");
+        if (!sessionRes.ok) {
+          throw new Error(`Gagal mengambil sesi: ${sessionRes.status}`);
+        }
+        
         const session = await sessionRes.json();
 
-        if (session.pendaftar_id) {
-          const statusRes = await fetch(`/api/pendaftar/status?pendaftar_id=${session.pendaftar_id}`);
-          const statusData = await statusRes.json();
-
-          const fullName = statusData.nama_lengkap || session.full_name || session.name || "Pendaftar";
-          const firstName = fullName.split(' ')[0]; // Ambil kata pertama saja
-
-          setData({
-            nama: firstName,
-            nomorPendaftaran: statusData.nomor_pendaftaran || "-",
-            status: statusData.status_proses || "draft",
-            lastUpdate: statusData.updated_at || new Date().toISOString(),
-            pengumuman: statusData.pengumuman || null
-          });
+        if (!session.pendaftar_id) {
+          setError("Sesi tidak valid. Silakan login ulang.");
+          setLoading(false);
+          return;
         }
-      } catch (e) {
+
+        const statusRes = await fetch(`/api/pendaftar/status?pendaftar_id=${session.pendaftar_id}`);
+        if (!statusRes.ok) {
+          const errorText = await statusRes.text();
+          throw new Error(`Gagal mengambil status: ${statusRes.status} - ${errorText}`);
+        }
+        
+        const statusData = await statusRes.json();
+
+        const fullName = statusData.nama_lengkap || session.full_name || session.name || "Pendaftar";
+        const firstName = fullName.split(' ')[0]; // Ambil kata pertama saja
+
+        setData({
+          nama: firstName,
+          nomorPendaftaran: statusData.nomor_pendaftaran || "-",
+          status: statusData.status_proses || "draft",
+          lastUpdate: statusData.updated_at || new Date().toISOString(),
+          pengumuman: statusData.pengumuman || null
+        });
+      } catch (e: any) {
         console.error("Failed to fetch dashboard data", e);
+        setError(e?.message || "Terjadi kesalahan saat memuat data");
       } finally {
         setLoading(false);
       }
@@ -77,6 +94,30 @@ export default function DashboardPendaftarPage() {
         <div className="h-32 bg-stone-200 rounded-2xl"></div>
       </div>
     </div>;
+  }
+
+  if (error) {
+    return (
+      <div className="bg-red-50 border border-red-200 rounded-3xl p-8 text-center max-w-lg mx-auto">
+        <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
+        <h3 className="text-lg font-bold text-red-900 mb-2">Gagal Memuat Data</h3>
+        <p className="text-red-600 mb-6">{error}</p>
+        <div className="flex gap-3 justify-center">
+          <button 
+            onClick={() => window.location.reload()} 
+            className="px-6 py-3 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700 transition-colors"
+          >
+            Muat Ulang
+          </button>
+          <Link 
+            href="/login"
+            className="px-6 py-3 bg-stone-200 text-stone-700 font-bold rounded-xl hover:bg-stone-300 transition-colors"
+          >
+            Login Ulang
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   return (

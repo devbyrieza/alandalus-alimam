@@ -65,11 +65,17 @@ export default function DashboardLayout({
 
         // 1. Get session
         const sessionRes = await fetch("/api/auth/session");
-        if (!sessionRes.ok) throw new Error("Failed to get session");
+        if (!sessionRes.ok) {
+          const errorText = await sessionRes.text();
+          throw new Error(`Failed to get session: ${sessionRes.status} - ${errorText}`);
+        }
 
         const sessionData = await sessionRes.json();
         if (!sessionData.pendaftar_id) {
           console.warn("No pendaftar_id in session");
+          // Still set basic info from session
+          const fallbackName = sessionData.session?.full_name || sessionData.session?.name || sessionData.session?.email || "Pendaftar";
+          setNamaLengkap(fallbackName);
           setLoading(false);
           return;
         }
@@ -81,30 +87,24 @@ export default function DashboardLayout({
           `/api/pendaftar/status?pendaftar_id=${sessionData.pendaftar_id}`,
         );
 
+        const statusText = await statusRes.text();
+        
         if (!statusRes.ok) {
-          // Fallback
-          const fallbackRes = await fetch("/api/pendaftar/current-status");
-          if (fallbackRes.ok) {
-            const fallbackData = await fallbackRes.json();
-            setStatusProses(fallbackData.status_proses || "draft");
-            setNomorPendaftaran(fallbackData.nomor_pendaftaran || "MTI20260006");
-            setNamaLengkap(fallbackData.nama_lengkap || fallbackName);
-            setLoading(false);
-            return;
-          }
-          throw new Error("All status endpoints failed");
+          console.error(`Status API failed: ${statusRes.status} - ${statusText}`);
+          // Set what we have from session
+          setNamaLengkap(fallbackName);
+          setLoading(false);
+          return;
         }
 
-        const userData = await statusRes.json();
+        const userData = JSON.parse(statusText);
         setStatusProses((userData.status_proses || "draft") as StatusProses);
-        setNomorPendaftaran(userData.nomor_pendaftaran || "MTI20260006");
+        setNomorPendaftaran(userData.nomor_pendaftaran || "-");
         setNamaLengkap(userData.nama_lengkap || fallbackName);
 
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-        setStatusProses("draft");
-        setNomorPendaftaran("MTI20260006");
-        setNamaLengkap("Pendaftar");
+      } catch (error: any) {
+        console.error("Error fetching user data:", error?.message || error);
+        // Keep default values on error
       } finally {
         setLoading(false);
       }
