@@ -18,6 +18,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   display: "swap",
   weight: ["400", "500", "600", "700"],
   adjustFontFallback: false,
+  preload: false,
 });
 
 const poppins = Poppins({
@@ -26,6 +27,7 @@ const poppins = Poppins({
   variable: "--font-display",
   display: "swap",
   adjustFontFallback: false,
+  preload: false,
 });
 
 const amiri = Amiri({
@@ -34,6 +36,7 @@ const amiri = Amiri({
   variable: "--font-arabic",
   display: "swap",
   adjustFontFallback: false,
+  preload: false,
 });
 
 // METADATA CONFIGURATION
