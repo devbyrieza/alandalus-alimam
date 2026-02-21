@@ -580,51 +580,49 @@ function AdminPendaftarContent() {
       )}
 
       {/* Header */}
-      <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-blue-100">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl">
-              <Users className="w-8 h-8 text-white" />
+      <div className="bg-white rounded-xl shadow-lg p-4 md:p-6 border-2 border-blue-100">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-3 md:gap-4 min-w-0">
+            <div className="p-2.5 md:p-3 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex-shrink-0">
+              <Users className="w-6 h-6 md:w-8 md:h-8 text-white" />
             </div>
-            <div>
-              <h2 className="text-2xl font-black text-stone-900">
-                {activeFilterLabel || "Data Pendaftar"}
+            <div className="min-w-0">
+              <h2 className="text-lg md:text-2xl font-black text-stone-900 truncate">
+                {activeFilterLabel || "Pendaftar"}
               </h2>
-              <p className="text-stone-600">
+              <p className="text-sm text-stone-600">
                 Total: {pagination.total} pendaftar
                 {activeFilterLabel && " (difilter)"}
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => handleExport("excel")}
-                disabled={exporting}
-                className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors disabled:opacity-50"
-                title="Download Excel"
-              >
-                {exporting ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
-                  <FileSpreadsheet className="w-4 h-4" />
-                )}
-                Excel
-              </button>
-              <button
-                onClick={() => handleExport("pdf")}
-                disabled={exporting}
-                className="flex items-center gap-2 px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg transition-colors disabled:opacity-50"
-                title="Download PDF"
-              >
-                {exporting ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
-                  <FileText className="w-4 h-4" />
-                )}
-                PDF
-              </button>
-            </div>
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <button
+              onClick={() => handleExport("excel")}
+              disabled={exporting}
+              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors disabled:opacity-50 text-sm"
+              title="Download Excel"
+            >
+              {exporting ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <FileSpreadsheet className="w-4 h-4" />
+              )}
+              <span className="hidden sm:inline">Excel</span>
+            </button>
+            <button
+              onClick={() => handleExport("pdf")}
+              disabled={exporting}
+              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg transition-colors disabled:opacity-50 text-sm"
+              title="Download PDF"
+            >
+              {exporting ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <FileText className="w-4 h-4" />
+              )}
+              <span className="hidden sm:inline">PDF</span>
+            </button>
           </div>
         </div>
       </div>
@@ -644,12 +642,12 @@ function AdminPendaftarContent() {
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 onKeyPress={(e) => e.key === "Enter" && handleSearch()}
-                placeholder="Cari nama, NIK, atau nomor pendaftaran..."
-                className="flex-1 px-4 py-2 border-2 border-stone-200 rounded-lg focus:border-blue-500 focus:outline-none"
+                placeholder="Cari nama, NIK, atau nomor per..."
+                className="flex-1 min-w-0 px-3 md:px-4 py-2 border-2 border-stone-200 rounded-lg focus:border-blue-500 focus:outline-none text-sm md:text-base"
               />
               <button
                 onClick={handleSearch}
-                className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+                className="px-4 md:px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors flex-shrink-0 text-sm md:text-base"
               >
                 Cari
               </button>

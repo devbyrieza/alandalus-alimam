@@ -130,22 +130,22 @@ export default function VerifikasiDokumenPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-amber-100 mb-8">
-        <div className="flex items-center justify-between flex-wrap gap-4 mb-6">
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl shadow-lg shadow-amber-500/20">
-              <FileCheck className="w-8 h-8 text-white" />
+      <div className="bg-white rounded-xl shadow-lg p-4 md:p-6 border-2 border-amber-100 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div className="flex items-center gap-3 md:gap-4">
+            <div className="p-2.5 md:p-3 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl shadow-lg shadow-amber-500/20 flex-shrink-0">
+              <FileCheck className="w-6 h-6 md:w-8 md:h-8 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-black text-stone-900 tracking-tight">Verifikasi Dokumen</h1>
-              <p className="text-stone-500 font-medium">Kelola dan verifikasi berkas pendaftaran santri</p>
+              <h1 className="text-lg md:text-2xl font-black text-stone-900 tracking-tight">Verifikasi Dokumen</h1>
+              <p className="text-sm text-stone-500 font-medium">Kelola dan verifikasi berkas pendaftaran santri</p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-shrink-0">
             <button
               onClick={() => handleExport("excel")}
               disabled={exporting}
-              className="flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-all disabled:opacity-50"
+              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-all disabled:opacity-50 text-sm"
             >
               <FileSpreadsheet className="w-4 h-4" />
               Excel
@@ -153,7 +153,7 @@ export default function VerifikasiDokumenPage() {
             <button
               onClick={() => handleExport("pdf")}
               disabled={exporting}
-              className="flex items-center gap-2 px-4 py-2 bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white rounded-xl font-bold transition-all disabled:opacity-50"
+              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white rounded-xl font-bold transition-all disabled:opacity-50 text-sm"
             >
               <FileText className="w-4 h-4" />
               PDF
@@ -169,7 +169,7 @@ export default function VerifikasiDokumenPage() {
         </div>
 
         {/* Global Filter Bar */}
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col gap-3 md:gap-4">
           <div className="relative flex-1 group">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400 group-focus-within:text-amber-500 transition-colors" />
             <input
@@ -177,10 +177,10 @@ export default function VerifikasiDokumenPage() {
               placeholder="Cari nama atau nomor pendaftaran..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-stone-50 border-2 border-stone-100 rounded-2xl focus:border-amber-500 focus:bg-white focus:outline-none transition-all"
+              className="w-full pl-12 pr-4 py-3 bg-stone-50 border-2 border-stone-100 rounded-2xl focus:border-amber-500 focus:bg-white focus:outline-none transition-all text-sm md:text-base"
             />
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {[
               { id: "pending", label: "Menunggu" },
               { id: "verified", label: "Diterima" },
@@ -189,7 +189,7 @@ export default function VerifikasiDokumenPage() {
               <button
                 key={s.id}
                 onClick={() => setStatusFilter(s.id)}
-                className={`px-6 py-3 rounded-2xl font-bold transition-all ${statusFilter === s.id
+                className={`px-4 md:px-6 py-2.5 md:py-3 rounded-2xl font-bold transition-all text-sm md:text-base whitespace-nowrap ${statusFilter === s.id
                   ? "bg-amber-500 text-white shadow-lg shadow-amber-500/30 active:scale-95"
                   : "bg-white border-2 border-stone-100 text-stone-500 hover:bg-stone-50"
                   }`}
