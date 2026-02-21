@@ -83,7 +83,9 @@ export default function FacilitiesSection() {
                                 src={img.src}
                                 alt={img.label}
                                 fill
-                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                priority={idx < 2} // Preload top 2 images 
+                                className="object-cover transition-transform duration-700 group-hover:scale-110 bg-surface-200 animate-pulse"
+                                onLoadingComplete={(img) => img.classList.remove('animate-pulse')}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
                             <div className="absolute bottom-2 left-2 md:bottom-4 md:left-4 right-2 md:right-4">

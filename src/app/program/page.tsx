@@ -177,7 +177,9 @@ export default function ProgramPage() {
                                                 src={program.image}
                                                 alt={program.fullName}
                                                 fill
-                                                className="object-cover transition-transform duration-700 hover:scale-110"
+                                                priority={idx === 0}
+                                                className="object-cover transition-transform duration-700 hover:scale-110 bg-surface-200 animate-pulse"
+                                                onLoadingComplete={(img) => img.classList.remove('animate-pulse')}
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 

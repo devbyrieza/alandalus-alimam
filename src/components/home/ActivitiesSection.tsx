@@ -68,7 +68,9 @@ export default function ActivitiesSection() {
                                     src={activity.image}
                                     alt={activity.name}
                                     fill
-                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                    priority={idx < 2}
+                                    className="object-cover transition-transform duration-700 group-hover:scale-110 bg-surface-200 animate-pulse"
+                                    onLoadingComplete={(img) => img.classList.remove('animate-pulse')}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                             </div>
