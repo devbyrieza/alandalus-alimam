@@ -55,7 +55,7 @@ export const PPDB_CONFIG = {
       name: "MTs",
       fullName: "Madrasah Tsanawiyah",
       description: "Program pendidikan formal setara SMP dengan kurikulum integrasi pesantren.",
-      image: "/images/mts.png",
+      image: "/images/mts.webp",
       theme: "brown"
     },
     {
@@ -63,7 +63,7 @@ export const PPDB_CONFIG = {
       name: "I'dad Lughowi",
       fullName: "Program Persiapan Bahasa Arab",
       description: "Program intensif persiapan bahasa Arab untuk jenjang lebih tinggi.",
-      image: "/images/il.png",
+      image: "/images/il.webp",
       theme: "gold"
     }
   ],

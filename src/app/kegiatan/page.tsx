@@ -341,7 +341,7 @@ const EkskulCard = ({
 export default function KegiatanPage() {
   const kegiatanUtama: KegiatanUtama[] = [
     {
-      image: "/images/pembelajaran-kitab-turotz.png",
+      image: "/images/pembelajaran-kitab-turotz.webp",
       title: "Pembelajaran Kitab Turots",
       description: "Bukan sekadar hafalan! Santri kami PAHAM isi kitab, mampu berdiskusi ilmiah, dan disiapkan menjadi ilmuwan muda.",
       icon: BookOpen,
@@ -363,7 +363,7 @@ export default function KegiatanPage() {
       },
     },
     {
-      image: "/images/tahfidz.JPG",
+      image: "/images/tahfidz.webp",
       title: "Tahfidz Al-Qur'an Intensif",
       description: "Metode menghafal terukur sesuai kemampuan santri dengan target yang jelas setiap jenjang pendidikan.",
       icon: BookMarked,
@@ -385,7 +385,7 @@ export default function KegiatanPage() {
       },
     },
     {
-      image: "/images/extra-karate.jpg",
+      image: "/images/extra-karate.webp",
       title: "Pengembangan Bakat & Prestasi",
       description: "Menyiapkan santri multitalenta yang juara di bidang olimpiade, olahraga, hingga public speaking.",
       icon: Target,

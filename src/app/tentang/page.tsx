@@ -91,7 +91,7 @@ export default function TentangPage() {
                         className="relative aspect-[21/9] md:aspect-21/9 rounded-3xl md:rounded-4xl overflow-hidden shadow-premium-2xl border border-surface-200 group"
                     >
                         <Image
-                            src="/images/welcome-selamat-datang.png"
+                            src="/images/welcome-selamat-datang.webp"
                             alt="Selamat Datang di Al-Imam Al-Islami"
                             fill
                             className="object-cover transition-transform duration-1000 group-hover:scale-105"
@@ -115,7 +115,7 @@ export default function TentangPage() {
                             <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-premium-xl relative z-10 bg-white p-3 border border-surface-200">
                                 <div className="relative w-full h-full rounded-[2.2rem] overflow-hidden">
                                     <Image
-                                        src="/images/tentang.png"
+                                        src="/images/tentang.webp"
                                         alt="Pesantren Al-Imam Al-Islami"
                                         fill
                                         className="object-cover"

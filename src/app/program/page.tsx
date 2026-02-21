@@ -41,7 +41,7 @@ const PROGRAMS = [
             "Kurikulum Nasional Lengkap",
             "Life Skills & Ekstrakurikuler"
         ],
-        image: "/images/mts.png",
+        image: "/images/mts.webp",
         theme: "brown",
         accent: "text-brown-600",
         bg: "bg-brown-50"
@@ -64,7 +64,7 @@ const PROGRAMS = [
             "Kajian Kitab Turots Mendalam",
             "Pembinaan Dakwah & Organisasi"
         ],
-        image: "/images/il.png",
+        image: "/images/il.webp",
         theme: "teal",
         accent: "text-teal-600",
         bg: "bg-teal-50"

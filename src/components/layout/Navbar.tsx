@@ -97,7 +97,7 @@ export default function Navbar() {
             <Link href="/" onClick={handleBerandaClick} className="flex items-center gap-2 sm:gap-3 group min-h-[44px]">
               <div className="relative">
                 <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center bg-brown-700 text-white shadow-premium-md transition-transform duration-500 group-hover:scale-105 group-hover:rotate-3 overflow-hidden">
-                  <img src="/images/logo.jpg" alt="Logo Al-Imam" className="w-full h-full object-cover" />
+                  <img src="/images/logo.webp" alt="Logo Al-Imam" className="w-full h-full object-cover" />
                 </div>
                 <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-500 border-2 border-white rounded-full" />
               </div>

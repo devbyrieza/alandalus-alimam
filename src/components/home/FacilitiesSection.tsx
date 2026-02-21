@@ -24,11 +24,11 @@ const FACILITIES = [
 ] as const;
 
 const FACILITY_IMAGES = [
-    { src: "/images/masjid.png", label: "Masjid Jami'", span: "col-span-2 row-span-2" },
-    { src: "/images/gedung-utama-dan-lapangan-basket.jpeg", label: "Gedung Utama & Lapangan", span: "col-span-1" },
-    { src: "/images/gedung-kelas.jpeg", label: "Gedung Kelas", span: "col-span-1" },
-    { src: "/images/asrama.png", label: "Asrama Santri", span: "col-span-1" },
-    { src: "/images/kelas-dari-dalam.png", label: "Ruang Kelas", span: "col-span-1" },
+    { src: "/images/masjid.webp", label: "Masjid Jami'", span: "col-span-2 row-span-2" },
+    { src: "/images/gedung-utama-dan-lapangan-basket.webp", label: "Gedung Utama & Lapangan", span: "col-span-1" },
+    { src: "/images/gedung-kelas.webp", label: "Gedung Kelas", span: "col-span-1" },
+    { src: "/images/asrama.webp", label: "Asrama Santri", span: "col-span-1" },
+    { src: "/images/kelas-dari-dalam.webp", label: "Ruang Kelas", span: "col-span-1" },
 ] as const;
 
 export default function FacilitiesSection() {

@@ -119,7 +119,7 @@ export default function HeroSection() {
             {/* Main Image Container */}
             <div className="relative z-10 rounded-3xl sm:rounded-[2.5rem] overflow-hidden shadow-premium-xl border-[6px] sm:border-[10px] lg:border-[12px] border-white ring-1 ring-surface-200">
               <Image
-                src="/images/hero.png"
+                src="/images/hero.webp?v=2"
                 alt="Pesantren Al-Imam"
                 width={800}
                 height={600}

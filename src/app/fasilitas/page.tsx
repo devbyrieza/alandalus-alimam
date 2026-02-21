@@ -110,13 +110,13 @@ export default function FasilitasPage() {
             >
               <div className="space-y-6 pt-12">
                 <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-premium-xl relative group">
-                  <Image src="/images/masjid.png" alt="Masjid" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <Image src="/images/masjid.webp" alt="Masjid" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
                     <span className="text-white font-bold text-xl">Masjid Jami'</span>
                   </div>
                 </div>
                 <div className="aspect-square rounded-[3rem] overflow-hidden shadow-premium-lg relative group">
-                  <Image src="/images/lapangan-minisoccer.jpeg" alt="Lapangan" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <Image src="/images/lapangan-minisoccer.webp" alt="Lapangan" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
                     <span className="text-white font-bold text-lg">Area Olahraga</span>
                   </div>
@@ -124,13 +124,13 @@ export default function FasilitasPage() {
               </div>
               <div className="space-y-6">
                 <div className="aspect-square rounded-[3rem] overflow-hidden shadow-premium-lg relative group">
-                  <Image src="/images/asrama.png" alt="Asrama" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <Image src="/images/asrama.webp" alt="Asrama" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
                     <span className="text-white font-bold text-lg">Asrama Nyaman</span>
                   </div>
                 </div>
                 <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-premium-xl relative group">
-                  <Image src="/images/kelas-dari-dalam.png" alt="Kelas" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <Image src="/images/kelas-dari-dalam.webp" alt="Kelas" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
                     <span className="text-white font-bold text-xl">Kelas Modern</span>
                   </div>
@@ -233,7 +233,7 @@ export default function FasilitasPage() {
                 <div className="aspect-square rounded-[4rem] bg-white p-4 shadow-premium-2xl relative rotate-2 hover:rotate-0 transition-transform duration-700 border border-surface-100">
                   <div className="relative w-full h-full rounded-[3.2rem] overflow-hidden">
                     <Image
-                      src="/images/masjid.png"
+                      src="/images/masjid.webp"
                       alt="Masjid Jami' Al-Imam"
                       fill
                       className="object-cover transition-transform duration-700 hover:scale-110"
@@ -254,7 +254,7 @@ export default function FasilitasPage() {
                 <div className="aspect-square rounded-[4rem] bg-white p-4 shadow-premium-2xl relative -rotate-2 hover:rotate-0 transition-transform duration-700 border border-surface-100">
                   <div className="relative w-full h-full rounded-[3.2rem] overflow-hidden">
                     <Image
-                      src="/images/asrama.png"
+                      src="/images/asrama.webp"
                       alt="Asrama Santri"
                       fill
                       className="object-cover transition-transform duration-700 hover:scale-110"
@@ -360,7 +360,7 @@ export default function FasilitasPage() {
                 <div className="aspect-square rounded-[4rem] bg-white p-4 shadow-premium-2xl relative rotate-2 hover:rotate-0 transition-transform duration-700 border border-surface-100">
                   <div className="relative w-full h-full rounded-[3.2rem] overflow-hidden">
                     <Image
-                      src="/images/kelas-dari-dalam.png"
+                      src="/images/kelas-dari-dalam.webp"
                       alt="Ruang Kelas Modern"
                       fill
                       className="object-cover transition-transform duration-700 hover:scale-110"
@@ -381,7 +381,7 @@ export default function FasilitasPage() {
                 <div className="aspect-square rounded-[4rem] bg-white p-4 shadow-premium-2xl relative -rotate-2 hover:rotate-0 transition-transform duration-700 border border-surface-100">
                   <div className="relative w-full h-full rounded-[3.2rem] overflow-hidden">
                     <Image
-                      src="/images/lapangan-minisoccer.jpeg"
+                      src="/images/lapangan-minisoccer.webp"
                       alt="Lapangan Minisoccer"
                       fill
                       className="object-cover transition-transform duration-700 hover:scale-110"
@@ -445,7 +445,7 @@ export default function FasilitasPage() {
                 <div className="aspect-square rounded-[4rem] bg-white p-4 shadow-premium-2xl relative -rotate-2 hover:rotate-0 transition-transform duration-700 border border-surface-100">
                   <div className="relative w-full h-full rounded-[3.2rem] overflow-hidden">
                     <Image
-                      src="/images/kantor-ppdb-tamu.png"
+                      src="/images/kantor-ppdb-tamu.webp"
                       alt="Kantor PPDB & Tamu"
                       fill
                       className="object-cover transition-transform duration-700 hover:scale-110"
@@ -728,7 +728,7 @@ export default function FasilitasPage() {
                 className="lg:col-span-2 row-span-2 relative rounded-3xl overflow-hidden group aspect-[4/3] shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
               >
                 <Image
-                  src="/images/masjid.png"
+                  src="/images/masjid.webp"
                   alt="Masjid Jami' Al-Imam"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -749,7 +749,7 @@ export default function FasilitasPage() {
                 className="lg:col-span-1 row-span-2 relative rounded-3xl overflow-hidden group aspect-[4/3] lg:aspect-[2/3] shadow-premium-xl hover:shadow-premium-2xl transition-all duration-500"
               >
                 <Image
-                  src="/images/kelas-dari-dalam.png"
+                  src="/images/kelas-dari-dalam.webp"
                   alt="Ruang Kelas dari Dalam - View Lengkap"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -772,7 +772,7 @@ export default function FasilitasPage() {
                 className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
               >
                 <Image
-                  src="/images/gedung-kelas.jpeg"
+                  src="/images/gedung-kelas.webp"
                   alt="Gedung Kelas"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -791,7 +791,7 @@ export default function FasilitasPage() {
                 className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
               >
                 <Image
-                  src="/images/luar-kelas.png"
+                  src="/images/luar-kelas.webp"
                   alt="Area Luar Kelas"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -810,7 +810,7 @@ export default function FasilitasPage() {
                 className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
               >
                 <Image
-                  src="/images/asrama.png"
+                  src="/images/asrama.webp"
                   alt="Asrama Santri"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -829,7 +829,7 @@ export default function FasilitasPage() {
                 className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
               >
                 <Image
-                  src="/images/gedung-utama-dan-lapangan-basket.jpeg"
+                  src="/images/gedung-utama-dan-lapangan-basket.webp"
                   alt="Gedung Utama & Lapangan Basket"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -852,7 +852,7 @@ export default function FasilitasPage() {
                 className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
               >
                 <Image
-                  src="/images/halaman-dekat-masjid.jpeg"
+                  src="/images/halaman-dekat-masjid.webp"
                   alt="Halaman Pesantren"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -871,7 +871,7 @@ export default function FasilitasPage() {
                 className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
               >
                 <Image
-                  src="/images/lapangan-minisoccer.jpeg"
+                  src="/images/lapangan-minisoccer.webp"
                   alt="Lapangan Mini Soccer"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -891,7 +891,7 @@ export default function FasilitasPage() {
                 className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
               >
                 <Image
-                  src="/images/kantor-ppdb-tamu.png"
+                  src="/images/kantor-ppdb-tamu.webp"
                   alt="Kantor PPDB & Tamu"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -911,7 +911,7 @@ export default function FasilitasPage() {
                 className="relative rounded-3xl overflow-hidden group aspect-square shadow-premium-lg hover:shadow-premium-2xl transition-all duration-500"
               >
                 <Image
-                  src="/images/depot-galon-gratis.png"
+                  src="/images/depot-galon-gratis.webp"
                   alt="Depot Galon Gratis"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"

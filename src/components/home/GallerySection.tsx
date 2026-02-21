@@ -17,25 +17,25 @@ import { Container } from "@/components/layout/Container";
 
 const GALLERY_ITEMS = [
   {
-    image: "/images/pembelajaran-kitab-turotz.png",
+    image: "/images/pembelajaran-kitab-turotz.webp",
     title: "Kajian Kitab Turots",
     description: "Mengkaji Kitab Turots & Ulama Salaf",
     icon: BookOpen,
   },
   {
-    image: "/images/tahfidz.JPG",
+    image: "/images/tahfidz.webp",
     title: "Halaqoh Tahfidz",
     description: "Setoran Hafalan & Muroja'ah",
     icon: BookMarked,
   },
   {
-    image: "/images/extra-karate.jpg",
+    image: "/images/extra-karate.webp",
     title: "Ekstrakurikuler",
     description: "Bela Diri, Panahan & Lifeskill",
     icon: Target,
   },
   {
-    image: "/images/masjid.png",
+    image: "/images/masjid.webp",
     title: "Masjid Jami'",
     description: "Pusat Ibadah & Tarbiyah Santri",
     icon: School,

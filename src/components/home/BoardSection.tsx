@@ -8,15 +8,15 @@ import Image from "next/image";
 const BOARD_MEMBERS = [
     {
         name: "Ustadz Dr. Muhammad Arifin Badri, Lc, M.A",
-        image: "/images/muhammad-arifin-badri.jpg"
+        image: "/images/muhammad-arifin-badri.webp"
     },
     {
         name: "Ustadz Nurdin Apud Sarbini, Lc, M.Pd",
-        image: "/images/nurdin-apud-sabrini.png"
+        image: "/images/nurdin-apud-sabrini.webp"
     },
     {
         name: "H. Tarmen Tascha, SE",
-        image: "/images/tarmen-tascha.png"
+        image: "/images/tarmen-tascha.webp"
     },
     {
         name: "Ustadz Aminullah Yasin, Lc, M.Pd",
@@ -24,11 +24,11 @@ const BOARD_MEMBERS = [
     },
     {
         name: "Ustadz Wahab Rajasam, M.Pd",
-        image: "/images/wahab-rajasam.png"
+        image: "/images/wahab-rajasam.webp"
     },
     {
         name: "Ustadz Thoriq Ziyad, Lc",
-        image: "/images/thoriq-ziyad.jpg"
+        image: "/images/thoriq-ziyad.webp"
     },
 ] as const;
 

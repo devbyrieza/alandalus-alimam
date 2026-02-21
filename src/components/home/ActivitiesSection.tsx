@@ -7,10 +7,10 @@ import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
 
 const ACTIVITIES = [
-    { name: "Pembelajaran Aktif", color: "ink", description: "Metode interaktif yang memadukan teori dan praktik syar'i guna mengoptimalkan potensi akademik santri secara mendalam.", image: "/images/pembelajaran-kitab-turotz.png" },
-    { name: "Kegiatan Rutin Harian", color: "brown", description: "Pembiasaan ibadah melalui sholat berjamaah tepat waktu dan halaqah tahfidz Al-Qur'an setiap hari secara konsisten.", image: "/images/tahfidz.JPG" },
-    { name: "Ekstrakurikuler Unggulan", color: "blue", description: "Tersedia 10+ pilihan kegiatan mulai dari beladiri hingga Desain Grafis untuk mengasah minat dan bakat santri.", image: "/images/extra-karate.jpg" },
-    { name: "Kemandirian & Skill", color: "teal", description: "Program pelatihan entrepreneurship dan keterampilan hidup mandiri guna mencetak santri yang siap berdikari di masa depan.", image: "/images/luar-kelas.png" },
+    { name: "Pembelajaran Aktif", color: "ink", description: "Metode interaktif yang memadukan teori dan praktik syar'i guna mengoptimalkan potensi akademik santri secara mendalam.", image: "/images/pembelajaran-kitab-turotz.webp" },
+    { name: "Kegiatan Rutin Harian", color: "brown", description: "Pembiasaan ibadah melalui sholat berjamaah tepat waktu dan halaqah tahfidz Al-Qur'an setiap hari secara konsisten.", image: "/images/tahfidz.webp" },
+    { name: "Ekstrakurikuler Unggulan", color: "blue", description: "Tersedia 10+ pilihan kegiatan mulai dari beladiri hingga Desain Grafis untuk mengasah minat dan bakat santri.", image: "/images/extra-karate.webp" },
+    { name: "Kemandirian & Skill", color: "teal", description: "Program pelatihan entrepreneurship dan keterampilan hidup mandiri guna mencetak santri yang siap berdikari di masa depan.", image: "/images/luar-kelas.webp" },
 ] as const;
 
 export default function ActivitiesSection() {
