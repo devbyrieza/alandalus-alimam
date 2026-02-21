@@ -3,8 +3,10 @@
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import FloatingWhatsApp from "@/components/ui/widgets/FloatingWhatsApp";
+import ChatSystem from "@/components/ui/widgets/ChatSystem";
+import TawkToScript from "@/components/ui/widgets/TawkToScript";
 import ScrollToTop from "@/components/ui/widgets/ScrollToTop";
+import PageTransition from "@/components/ui/PageTransition";
 
 export default function LayoutWrapper({
   children,
@@ -27,7 +29,9 @@ export default function LayoutWrapper({
       {/* ✅ MAIN CONTENT - Page content dengan conditional offset */}
       <main className={hideNavbarFooter ? "flex-1" : "flex-1 pt-20 md:pt-24"}>
         {/* pt-20 md:pt-24 only for navbar offset on main pages */}
-        {children}
+        <PageTransition>
+          {children}
+        </PageTransition>
       </main>
 
       {/* ✅ FOOTER - Hanya tampil di halaman utama (tidak di login/dashboard) */}
@@ -36,7 +40,8 @@ export default function LayoutWrapper({
       {/* ✅ FLOATING WIDGETS - Always visible on public pages */}
       {!hideNavbarFooter && (
         <>
-          <FloatingWhatsApp />
+          <TawkToScript />
+          <ChatSystem />
           <ScrollToTop />
         </>
       )}

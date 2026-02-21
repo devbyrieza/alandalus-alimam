@@ -453,32 +453,32 @@ function PPDBContent() {
       </section>
 
       {/* 5. Final CTA */}
-      <section className="py-24 md:py-32 bg-white">
+      <section className="py-16 md:py-24 lg:py-32 bg-white">
         <Container>
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-brown-800 rounded-[2rem] md:rounded-[4rem] p-6 md:p-24 text-center text-white relative overflow-hidden shadow-premium-2xl"
+            className="bg-brown-800 rounded-[2rem] md:rounded-[3rem] lg:rounded-[4rem] p-6 sm:p-8 md:p-16 lg:p-24 text-center text-white relative overflow-hidden shadow-premium-2xl"
           >
-            <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute top-0 right-0 w-32 h-32 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-white/5 rounded-full blur-[60px] md:blur-[100px] -translate-y-1/2 translate-x-1/2" />
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
 
             <div className="relative z-10">
-              <h2 className="text-2xl md:text-6xl font-display font-black mb-6 md:mb-8 text-white leading-tight">
+              <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-black mb-4 sm:mb-6 md:mb-8 text-white leading-tight">
                 Mulai Perjalanan <br /> <span className="text-gold-400">Ananda Di Sini</span>
               </h2>
-              <p className="text-base md:text-xl text-brown-100 max-w-2xl mx-auto mb-8 md:mb-12 font-medium leading-relaxed">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-brown-100 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 lg:mb-12 font-medium leading-relaxed px-2">
                 Pendaftaran santri baru terbatas hanya untuk 50 santri pilihan. Segera daftarkan ananda sebelum kuota terpenuhi.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center px-4">
                 <Link href="/daftar">
-                  <span className="w-full sm:w-auto px-8 py-4 rounded-pill bg-white text-brown-900 font-black text-base md:text-xl hover:bg-gold-400 hover:text-white shadow-premium-xl transition-all cursor-pointer inline-block">
+                  <span className="w-full sm:w-auto inline-block px-6 sm:px-8 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white text-brown-900 font-black text-sm sm:text-base md:text-lg xl:text-xl hover:bg-gold-400 hover:text-white shadow-premium-xl transition-all cursor-pointer min-h-[48px] sm:min-h-[52px]">
                     Daftar Sekarang
                   </span>
                 </Link>
-                <a href="https://wa.me/6285111524441" className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-pill bg-white/10 text-white font-bold border border-white/20 hover:bg-white/20 transition-all">
-                  <Phone className="w-5 h-5" />
+                <a href="https://wa.me/6285111524441" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white/10 text-white font-bold border border-white/20 hover:bg-white/20 transition-all text-sm sm:text-base md:text-lg min-h-[48px] sm:min-h-[52px]">
+                  <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
                   Hubungi Admin PPDB
                 </a>
               </div>

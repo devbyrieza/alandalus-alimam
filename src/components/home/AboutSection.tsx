@@ -9,8 +9,13 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
+import { navigateToDetail } from "@/lib/navigation-scroll";
 
 export default function AboutSection() {
+  
+  const handleNavigateToDetail = () => {
+    navigateToDetail('/tentang', '#about');
+  };
   return (
     <section id="about" className="py-24 md:py-32 bg-surface-50 relative overflow-hidden">
       {/* Background decoration */}
@@ -129,7 +134,7 @@ export default function AboutSection() {
           >
 
 
-            <Link href="/tentang" className="group flex items-center gap-3">
+            <Link href="/tentang" onClick={handleNavigateToDetail} className="group flex items-center gap-3">
               <button className="px-10 py-5 rounded-pill bg-brown-700 text-white font-bold shadow-premium-lg hover:shadow-premium-xl hover:bg-brown-800 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2">
                 Profil Lengkap
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -141,5 +146,4 @@ export default function AboutSection() {
     </section>
   );
 }
-
 
