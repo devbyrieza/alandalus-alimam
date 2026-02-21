@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Poppins, Amiri } from "next/font/google";
 import "./globals.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -11,33 +10,9 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// FONT CONFIGURATIONS
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-  adjustFontFallback: false,
-  preload: false,
-});
-
-const poppins = Poppins({
-  weight: ["400", "500", "600", "700", "800", "900"],
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-  adjustFontFallback: false,
-  preload: false,
-});
-
-const amiri = Amiri({
-  weight: ["400", "700"],
-  subsets: ["arabic"],
-  variable: "--font-arabic",
-  display: "swap",
-  adjustFontFallback: false,
-  preload: false,
-});
+// FONT CONFIGURATIONS - Using system fonts for reliability
+// Using local font display via CSS (see globals.css)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 // METADATA CONFIGURATION
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -150,12 +125,6 @@ export default function RootLayout({
   return (
     <html lang="id" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#8b5a3c" />
         <meta name="msapplication-navbutton-color" content="#8b5a3c" />
@@ -165,7 +134,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${plusJakartaSans.variable} ${poppins.variable} ${amiri.variable} font-sans antialiased bg-[var(--color-cream-50)] text-[var(--color-text-900)] overflow-x-hidden`}
+        className="font-sans antialiased bg-[var(--color-cream-50)] text-[var(--color-text-900)] overflow-x-hidden"
         suppressHydrationWarning
       >
         <SmoothScrollProvider>

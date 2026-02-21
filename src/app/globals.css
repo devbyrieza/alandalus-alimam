@@ -10,10 +10,10 @@
    1. CUSTOM THEME CONFIGURATION (@theme)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 @theme {
-  /* Typography - Clean, Geometric, Airy */
-  --font-sans: var(--font-sans), "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
-  --font-display: var(--font-display), "Poppins", sans-serif;
-  --font-arabic: var(--font-arabic), "Amiri", serif;
+  /* Typography - System fonts for reliability (no Google Fonts dependency) */
+  --font-sans: "Plus Jakarta Sans", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-arabic: "Amiri", "Traditional Arabic", "Arabic Typesetting", serif;
 
   /* Colors - Professional & Airy Palette */
   --color-white: #ffffff;
