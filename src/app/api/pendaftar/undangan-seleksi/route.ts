@@ -14,7 +14,7 @@ import { prisma } from "@/lib/prisma";
 import {
     enqueueWhatsapp,
     buildMessageJadwalBelum,
-    buildMessageJadwalTersedia,
+    buildMessageJadwalLangsungTersedia,
 } from "@/lib/whatsapp-queue";
 
 async function getSession() {
@@ -140,15 +140,15 @@ export async function GET() {
                 hasGrupBSessions &&
                 !pendaftar.notif_jadwal_tersedia_terkirim
             ) {
-                // Kondisi 2: Sessions available, send "jadwal tersedia"
-                const message = buildMessageJadwalTersedia(pendaftar.nama_lengkap);
+                // Kondisi 2: Sessions available from the start (or passively), send "jadwal langsung tersedia"
+                const message = buildMessageJadwalLangsungTersedia(pendaftar.nama_lengkap);
                 enqueueWhatsapp({
                     pendaftarId: pendaftar.id,
                     phone: pendaftar.no_hp,
-                    jenisNotif: "jadwal_tersedia",
+                    jenisNotif: "jadwal_langsung_tersedia",
                     messageContent: message,
                 }).catch((err) =>
-                    console.error("Enqueue jadwal_tersedia error:", err)
+                    console.error("Enqueue jadwal_langsung_tersedia error:", err)
                 );
             }
         }

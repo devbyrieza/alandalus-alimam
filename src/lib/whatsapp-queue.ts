@@ -21,6 +21,7 @@ import { sendMessage } from "@/lib/wablas";
 export type NotifType =
     | "jadwal_belum"
     | "jadwal_tersedia"
+    | "jadwal_langsung_tersedia"
     | "konfirmasi_jadwal"
     | "reminder_h1"
     | "hasil_tes";
@@ -506,9 +507,11 @@ async function updateNotifFlag(
     pendaftarId: string,
     jenisNotif: NotifType
 ): Promise<void> {
+    // Map Both types to the same DB column to prevent duplicate sending (if they got one, don't send the other)
     const flagMap: Partial<Record<NotifType, string>> = {
         jadwal_belum: "notif_belum_jadwal_terkirim",
         jadwal_tersedia: "notif_jadwal_tersedia_terkirim",
+        jadwal_langsung_tersedia: "notif_jadwal_tersedia_terkirim",
         hasil_tes: "notif_hasil_tes_terkirim",
     };
 
@@ -568,9 +571,29 @@ Alhamdulillah, jadwal tes lanjutan sudah tersedia!
 Silakan login ke dashboard dan pilih jadwal yang sesuai untuk:
 - Tes Al-Qur'an
 - Wawancara Calsan
-- Wawancara Cawalsan Santri
+- Wawancara Cawalsan
 
 Segera pilih jadwal sebelum kuota penuh.
+
+Dashboard: ${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar/undangan-seleksi
+
+Jazakumullahu khairan,
+Panitia PPDB Al-Imam`;
+}
+
+export function buildMessageJadwalLangsungTersedia(nama: string): string {
+    return `${pickOpening()} ${nama},
+
+Terima kasih telah mencapai tahap Seleksi Pesantren Al-Imam Al-Islami.
+
+Saat ini **jadwal tes lanjutan sudah tersedia dan bisa langsung Anda pilih**.
+
+Silakan login ke dashboard dan pilih sesi jadwal untuk:
+- Tes Al-Qur'an
+- Wawancara Calsan
+- Wawancara Cawalsan
+
+Harap segera memilih jadwal sebelum rentang waktu habis atau kuota penuh. Jangan lupa juga untuk menyelesaikan Tes Online (Akademik & Kepribadian).
 
 Dashboard: ${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar/undangan-seleksi
 
