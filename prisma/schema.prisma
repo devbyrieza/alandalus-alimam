@@ -154,6 +154,11 @@ model Pendaftar {
   notifikasi_whatsapp_id String?   @db.VarChar(100)
   notifikasi_sms_id      String?   @db.VarChar(100)
 
+  // ===== NOTIFICATION FLAGS (Anti-Duplicate WhatsApp) =====
+  notif_belum_jadwal_terkirim    Boolean @default(false)
+  notif_jadwal_tersedia_terkirim Boolean @default(false)
+  notif_hasil_tes_terkirim       Boolean @default(false)
+
   // Relations
   user                 Profile?               @relation(fields: [user_id], references: [id])
   tahun_ajaran         TahunAjaran            @relation(fields: [tahun_ajaran_id], references: [id])
@@ -170,6 +175,8 @@ model Pendaftar {
   reservasi            ReservasiPSB[]
   DataPerubahanRequest DataPerubahanRequest[]
   hasil_seleksi        HasilSeleksi?
+  whatsapp_logs        WhatsappLog[]
+  jadwal_reminders     JadwalNotifReminder[]
 
   @@map("pendaftar")
 }
@@ -355,6 +362,7 @@ model JadwalUjian {
   penguji_quran  Profile?     @relation("PengujiQuran", fields: [penguji_quran_id], references: [id])
   exam_session   ExamSession? @relation(fields: [exam_session_id], references: [id])
   nilai_ujian    NilaiUjian[]
+  notif_reminders JadwalNotifReminder[]
 
   @@map("jadwal_ujian")
 }
@@ -718,6 +726,64 @@ model PendingSms {
   updated_at DateTime @default(now()) @db.Timestamptz(6)
 
   @@map("pending_sms")
+}
+
+// ============================================================================
+// WHATSAPP NOTIFICATION QUEUE & PROTECTION
+// ============================================================================
+
+model WhatsappLog {
+  id              String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  pendaftar_id    String?   @db.Uuid
+  phone           String
+  jenis_notif     String    // jadwal_belum, jadwal_tersedia, konfirmasi_jadwal, reminder_h1, hasil_tes
+  status          String    @default("pending") // pending, processing, sent, failed, blocked
+  response_data   String?
+  attempt_count   Int       @default(0)
+  max_attempts    Int       @default(3)
+  scheduled_at    DateTime  @default(now()) @db.Timestamptz(6)
+  sent_at         DateTime? @db.Timestamptz(6)
+  failed_at       DateTime? @db.Timestamptz(6)
+  error_message   String?
+  message_content String?   @db.Text
+  created_at      DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime  @default(now()) @db.Timestamptz(6)
+
+  // Relations
+  pendaftar Pendaftar? @relation(fields: [pendaftar_id], references: [id], onDelete: SetNull)
+
+  @@index([status, scheduled_at])
+  @@index([pendaftar_id, jenis_notif])
+  @@index([phone])
+  @@map("whatsapp_log")
+}
+
+model WhatsappCooldown {
+  id             String    @id @default("global")
+  last_sent_at   DateTime? @db.Timestamptz(6)
+  sent_count_10m Int       @default(0)
+  cooldown_until DateTime? @db.Timestamptz(6)
+  hourly_count   Int       @default(0)
+  hourly_reset   DateTime? @db.Timestamptz(6)
+  updated_at     DateTime  @default(now()) @db.Timestamptz(6)
+
+  @@map("whatsapp_cooldown")
+}
+
+model JadwalNotifReminder {
+  id              String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  jadwal_ujian_id String    @db.Uuid
+  pendaftar_id    String    @db.Uuid
+  reminder_sent   Boolean   @default(false)
+  sent_at         DateTime? @db.Timestamptz(6)
+  created_at      DateTime  @default(now()) @db.Timestamptz(6)
+
+  // Relations
+  jadwal_ujian JadwalUjian @relation(fields: [jadwal_ujian_id], references: [id], onDelete: Cascade)
+  pendaftar    Pendaftar   @relation(fields: [pendaftar_id], references: [id], onDelete: Cascade)
+
+  @@unique([jadwal_ujian_id, pendaftar_id])
+  @@map("jadwal_notif_reminder")
 }
 
 // ============================================================================

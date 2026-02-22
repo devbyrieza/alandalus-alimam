@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
-import { notifyTestSchedule } from "@/lib/wablas";
+import { enqueueWhatsapp, buildMessageKonfirmasiJadwal } from "@/lib/whatsapp-queue";
 
 async function getSession() {
     const cookieStore = await cookies();
@@ -153,15 +153,7 @@ export async function POST(request: Request) {
             return jadwal;
         });
 
-        // Send WhatsApp Notification (Async, don't block response)
-        // Check for pendaftar details (phone, name)
-        // We need to fetch pendaftar again or return it from transaction
-        // But transaction return value is just 'jadwal'.
-        // We can fetch quickly or assume success.
-        // Actually, best to fetch pendaftar info before transaction or assume we have it.
-        // We fetched pendaftar INSIDE transaction, but we can't easily get it out without modifying return.
-
-        // Let's just fetch simplified info for notification
+        // Send WhatsApp via Queue (Layer 2: Non-blocking, through queue)
         const pendaftarInfo = await prisma.pendaftar.findUnique({
             where: { id: session.id },
             select: { nama_lengkap: true, no_hp: true }
@@ -171,19 +163,24 @@ export async function POST(request: Request) {
             const startTime = new Date(examSession.start_time);
             const dateStr = startTime.toLocaleDateString("id-ID", { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
             const timeStr = startTime.toLocaleTimeString("id-ID", { hour: '2-digit', minute: '2-digit' }) + ' WIB';
+            const lokasi = examSession.location || "Pesantren Al-Imam";
+            const jenisUjian = examSession.title || "Seleksi Santri Baru";
 
-            // Extract URL from location if exists
-            const urlMatch = (examSession.location || "").match(/https?:\/\/[^\s]+/);
-            const meetingLink = urlMatch ? urlMatch[0] : undefined;
+            const message = buildMessageKonfirmasiJadwal(
+                pendaftarInfo.nama_lengkap,
+                dateStr,
+                timeStr,
+                lokasi,
+                jenisUjian
+            );
 
-            notifyTestSchedule({
+            // Enqueue via WhatsApp queue (all 6 layers applied)
+            enqueueWhatsapp({
+                pendaftarId: session.id,
                 phone: pendaftarInfo.no_hp,
-                nama: pendaftarInfo.nama_lengkap,
-                tanggal: dateStr,
-                waktu: timeStr,
-                tempat: examSession.location || "Pesantren Al-Imam",
-                meeting_link: meetingLink
-            }).catch(err => console.error("Failed to send scheduled notification:", err));
+                jenisNotif: "konfirmasi_jadwal",
+                messageContent: message,
+            }).catch((err: any) => console.error("Failed to enqueue jadwal confirmation:", err));
         }
 
         return NextResponse.json({ success: true, data: result });
