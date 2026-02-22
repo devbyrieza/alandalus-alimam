@@ -889,7 +889,7 @@ export async function notifyGoogleFormLink(data: {
 export async function notifyZoomMeeting(data: {
     phone: string;
     nama: string;
-    jenisUjian: string;   // "Tes Al-Qur'an", "Wawancara Santri", "Wawancara Wali"
+    jenisUjian: string;   // "Tes Al-Qur'an", "Wawancara Calon Santri", "Wawancara Wali"
     tanggal: string;
     waktu: string;
     zoomLink: string;

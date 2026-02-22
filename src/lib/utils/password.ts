@@ -23,6 +23,7 @@ export function generatePasswordDefault(nik: string, jenjang: string): string {
     case "IL":
       jenjangCode = "IL";
       break;
+    case "SMA":
     case "MA":
       jenjangCode = "MA";
       break;

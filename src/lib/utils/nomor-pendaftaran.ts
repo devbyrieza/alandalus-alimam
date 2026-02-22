@@ -9,16 +9,16 @@ import { prisma } from "@/lib/prisma";
  * Format: [PREFIX][YY][NNNNN]
  *
  * Prefixes:
- * - MTI = MTs Ikhwan (Laki-laki)
- * - MTA = MTs Akhwat (Perempuan)
- * - ILI = I'dad Lughowi Ikhwan
- * - ILA = I'dad Lughowi Akhwat
- * - MAI = MA Ikhwan
- * - MAA = MA Akhwat
+ * - MTI = MTs Putra (Laki-laki)
+ * - MTA = MTs Putri (Perempuan)
+ * - ILI = I'dad Lughowi Putra
+ * - ILA = I'dad Lughowi Putri
+ * - MAI = SMA Putra (Laki-laki)
+ * - MAA = SMA Putri (Perempuan)
  *
  * Example: MTI2600001, MTA2600045, ILI2600123
  *
- * @param jenjang - MTs, IL, or MA
+ * @param jenjang - MTs, IL, or SMA
  * @param jenis_kelamin - L (Laki-laki) or P (Perempuan)
  * @param tahunAjaranId - ID tahun ajaran (optional, akan dicari aktif jika tidak diisi)
  * @returns Generated nomor pendaftaran
@@ -109,7 +109,7 @@ export async function generateNomorPendaftaran(
 /**
  * Generate prefix based on jenjang and gender
  *
- * @param jenjang - MTs, IL, or MA
+ * @param jenjang - MTs, IL, or SMA
  * @param jenis_kelamin - L (Laki-laki) or P (Perempuan)
  * @returns Prefix string (MTI, MTA, ILI, ILA, MAI, MAA)
  */
@@ -121,7 +121,7 @@ export function generatePrefix(jenjang: string, jenis_kelamin: string): string {
     prefix = "MT";
   } else if (jenjang === "IL") {
     prefix = "IL";
-  } else if (jenjang === "MA") {
+  } else if (jenjang === "SMA" || jenjang === "MA") {
     prefix = "MA";
   } else {
     throw new Error(`Jenjang tidak valid: ${jenjang}`);
@@ -129,9 +129,9 @@ export function generatePrefix(jenjang: string, jenis_kelamin: string): string {
 
   // Gender suffix
   if (jenis_kelamin === "L") {
-    prefix += "I"; // Ikhwan
+    prefix += "I"; // Putra
   } else if (jenis_kelamin === "P") {
-    prefix += "A"; // Akhwat
+    prefix += "A"; // Putri
   } else {
     throw new Error(`Jenis kelamin tidak valid: ${jenis_kelamin}`);
   }
@@ -192,13 +192,13 @@ export function parseNomorPendaftaran(nomorPendaftaran: string): {
   } else if (prefix.startsWith("IL")) {
     jenjang = "IL";
   } else if (prefix.startsWith("MA")) {
-    jenjang = "MA";
+    jenjang = "SMA";
   }
 
   if (prefix.endsWith("I")) {
-    jenis_kelamin = "L"; // Ikhwan
+    jenis_kelamin = "L"; // Putra
   } else if (prefix.endsWith("A")) {
-    jenis_kelamin = "P"; // Akhwat
+    jenis_kelamin = "P"; // Putri
   }
 
   // Convert 2-digit year to full year (assuming 2000s)
@@ -299,7 +299,7 @@ export async function getRegistrationStats(): Promise<{
 
     // By gender
     if (p.jenis_kelamin) {
-      const genderLabel = p.jenis_kelamin === "L" ? "Ikhwan" : "Akhwat";
+      const genderLabel = p.jenis_kelamin === "L" ? "Putra" : "Putri";
       byGender[genderLabel] = (byGender[genderLabel] || 0) + 1;
     }
 
@@ -325,12 +325,12 @@ export async function getRegistrationStats(): Promise<{
  */
 export function getPrefixLabel(prefix: string): string {
   const labels: Record<string, string> = {
-    MTI: "MTs Ikhwan (Laki-laki)",
-    MTA: "MTs Akhwat (Perempuan)",
-    ILI: "I'dad Lughowi Ikhwan (Laki-laki)",
-    ILA: "I'dad Lughowi Akhwat (Perempuan)",
-    MAI: "MA Ikhwan (Laki-laki)",
-    MAA: "MA Akhwat (Perempuan)",
+    MTI: "MTs Putra (Laki-laki)",
+    MTA: "MTs Putri (Perempuan)",
+    ILI: "I'dad Lughowi Putra (Laki-laki)",
+    ILA: "I'dad Lughowi Putri (Perempuan)",
+    MAI: "SMA Putra (Laki-laki)",
+    MAA: "SMA Putri (Perempuan)",
   };
 
   return labels[prefix] || prefix;
@@ -339,7 +339,7 @@ export function getPrefixLabel(prefix: string): string {
 /**
  * Get prefix from jenjang and jenis kelamin
  *
- * @param jenjang - MTs, IL, or MA
+ * @param jenjang - MTs, IL, or SMA
  * @param jenis_kelamin - L or P
  * @returns Prefix
  */

@@ -13,7 +13,7 @@ export default function AkademikTestPage() {
     const [checking, setChecking] = useState(true);
     const [alreadyDone, setAlreadyDone] = useState(false);
     const [answers, setAnswers] = useState<Record<number, string>>({});
-    const [jenjang, setJenjang] = useState<'MTs' | 'IL' | 'MA'>('MTs');
+    const [jenjang, setJenjang] = useState<'MTs' | 'IL' | 'SMA'>('MTs');
     const [questions, setQuestions] = useState<Question[]>(AKADEMIK_MTS);
     const [timeLeft, setTimeLeft] = useState(3600); // 60 minutes
     const [timerActive, setTimerActive] = useState(false);
@@ -31,7 +31,7 @@ export default function AkademikTestPage() {
                         setJenjang('IL');
                         setQuestions(AKADEMIK_IL);
                     } else if (j?.includes('MA') || j?.includes('SMA')) {
-                        setJenjang('MA');
+                        setJenjang('SMA');
                         setQuestions(AKADEMIK_MA);
                     } else {
                         setJenjang('MTs');

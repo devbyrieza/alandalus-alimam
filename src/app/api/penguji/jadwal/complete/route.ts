@@ -55,7 +55,7 @@ export async function POST(request: Request) {
 
         if (jadwal.penguji_santri_id === userId) {
             updates.status_santri = "completed";
-            updatedField = "Wawancara Santri";
+            updatedField = "Wawancara Calon Santri";
         } else if (jadwal.penguji_quran_id === userId) {
             updates.status_quran = "completed";
             updatedField = "Tes Al-Qur'an";

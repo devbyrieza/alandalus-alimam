@@ -170,7 +170,7 @@ export default function PengumumanPage() {
             >
               <option value="">Semua Jenjang</option>
               <option value="MTs">MTs</option>
-              <option value="MA">MA</option>
+              <option value="SMA">SMA</option>
             </select>
           </div>
 

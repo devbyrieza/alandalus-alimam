@@ -419,7 +419,7 @@ export default function DaftarPage() {
                   <div className="md:col-span-2">
                     <InputField label="Jenis Kelamin" error={fieldErrors.jenis_kelamin}>
                       <div className="flex gap-4">
-                        {[{ val: 'L', label: 'Santri Ikhwan' }, { val: 'P', label: 'Santri Akhwat' }].map((jk) => (
+                        {[{ val: 'L', label: 'Santri Putra' }, { val: 'P', label: 'Santri Putri' }].map((jk) => (
                           <motion.label
                             key={jk.val}
                             whileTap={{ scale: 0.98 }}

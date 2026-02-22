@@ -1,26 +1,26 @@
 
 export const ANSWER_KEYS = {
     MTs: {
-        1: 'B', 2: '6', 3: 'A', 4: 'B', 5: 'C',
-        6: 'A', 7: 'A', 8: 'B', 9: 'A', 10: 'D',
-        11: 'C', 12: 'B', 13: 'A', 14: 'A', 15: 'A',
-        16: 'D', 17: 'A', 18: 'C', 19: 'B', 20: 'C'
+        1: 'B', 2: 'D', 3: 'A', 4: 'B', 5: 'C', // PAI
+        6: 'A', 7: 'A', 8: 'B', 9: 'A', 10: 'D', // B.Indo
+        11: 'C', 12: 'B', 13: 'A', 14: 'A', 15: 'A', // IPA (q13 replaced)
+        16: 'D', 17: 'A', 18: 'C', 19: 'B', 20: 'B'  // Mat (q20 replaced)
     },
     IL: {
-        1: 'B', 2: 'B', 3: 'B', 4: 'D', 5: 'B',
-        6: 'D', 7: 'C', 8: 'B', 9: 'D', 10: 'B',
-        11: 'B', 12: 'C', 13: 'C', 14: 'D', 15: 'B',
-        16: 'A', 17: 'C', 18: 'D', 19: 'B', 20: 'B'
-    },
-    MA: {
-        1: 'A', 2: 'A', 3: 'C', 4: 'B', 5: 'B', // Nahwu
-        6: 'D', 7: 'C', 8: 'B', 9: 'D', 10: 'B', // Indo
+        1: 'B', 2: 'B', 3: 'B', 4: 'D', 5: 'B', // PAI
+        6: 'D', 7: 'C', 8: 'B', 9: 'D', 10: 'B', // B.Indo
         11: 'B', 12: 'C', 13: 'C', 14: 'D', 15: 'B', // IPA
-        16: 'A', 17: 'C', 18: 'D', 19: 'B', 20: 'B'  // Math
+        16: 'A', 17: 'C', 18: 'D', 19: 'B', 20: 'C'  // Mat (q20 replaced)
+    },
+    SMA: {
+        1: 'A', 2: 'A', 3: 'C', 4: 'B', 5: 'B', // Nahwu
+        6: 'D', 7: 'C', 8: 'B', 9: 'D', 10: 'B', // B.Indo
+        11: 'B', 12: 'C', 13: 'C', 14: 'D', 15: 'B', // IPA
+        16: 'A', 17: 'C', 18: 'D', 19: 'B', 20: 'C'  // Mat (q20 replaced)
     }
 };
 
-export function calculateAkademikScore(answers: Record<string, string>, jenjang: 'MTs' | 'IL' | 'MA'): number {
+export function calculateAkademikScore(answers: Record<string, string>, jenjang: 'MTs' | 'IL' | 'SMA'): number {
     const key = ANSWER_KEYS[jenjang];
     if (!key) return 0;
 

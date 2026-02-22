@@ -126,11 +126,11 @@ const SHARED_MAT: Question[] = [
         ]
     },
     {
-        id: 20, text: 'Data penjualan buku di Toko Andalus selama lima hari pada minggu pertama bulan Januari 2010 adalah sebagai berikut (gambar).\n\nJumlah buku yang terjual selama lima hari adalah … buah.',
+        id: 20, text: 'Rata-rata nilai ulangan Matematika dari sekelompok siswa adalah 72. Jika seorang siswa baru dengan nilai 82 bergabung sehingga rata-rata menjadi 73, maka banyak siswa semula adalah …',
         options: [
-            { value: 'A', label: '120' }, { value: 'B', label: '140' },
-            { value: 'C', label: '150' }, { value: 'D', label: '190' },
-            { value: 'E', label: '210' },
+            { value: 'A', label: '7' }, { value: 'B', label: '8' },
+            { value: 'C', label: '9' }, { value: 'D', label: '10' },
+            { value: 'E', label: '11' },
         ]
     },
 ];

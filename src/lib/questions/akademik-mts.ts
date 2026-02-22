@@ -93,10 +93,12 @@ export const AKADEMIK_MTS: Question[] = [
         ]
     },
     {
-        id: 13, text: 'Perhatikan gambar rantai makanan berikut!\n\nOrganisme yang dapat menduduki posisi X dan Y adalah …',
+        id: 13, text: 'Dalam ekosistem sawah, urutan rantai makanan yang benar adalah ….',
         options: [
-            { value: 'A', label: 'burung ketilang dan ulat' }, { value: 'B', label: 'pipit dan burung hantu' },
-            { value: 'C', label: 'belalang dan ular' }, { value: 'D', label: 'ulat dan kelinci' },
+            { value: 'A', label: 'Padi → Tikus → Ular → Elang' },
+            { value: 'B', label: 'Padi → Ular → Tikus → Elang' },
+            { value: 'C', label: 'Elang → Ular → Tikus → Padi' },
+            { value: 'D', label: 'Tikus → Padi → Ular → Elang' },
         ]
     },
     {
@@ -143,10 +145,10 @@ export const AKADEMIK_MTS: Question[] = [
         ]
     },
     {
-        id: 20, text: 'Berikut ini adalah diagram hasil panen kebun Pak Hasan pada tahun 2013. Selisih berat hasil panen singkong dan jagung adalah … kg.',
+        id: 20, text: 'Nilai ulangan Matematika dari 5 siswa adalah: 80, 70, 90, 60, dan 75. Rata-rata nilai ulangan mereka adalah ….',
         options: [
-            { value: 'A', label: '1.000' }, { value: 'B', label: '600' },
-            { value: 'C', label: '400' }, { value: 'D', label: '200' },
+            { value: 'A', label: '70' }, { value: 'B', label: '75' },
+            { value: 'C', label: '80' }, { value: 'D', label: '85' },
         ]
     },
 ];

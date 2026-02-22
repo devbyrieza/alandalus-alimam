@@ -235,7 +235,7 @@ export const ROLE_DESCRIPTIONS: Record<UserRole, string> = {
   pendaftar: 'Calon santri yang mendaftar ke Ponpes Al-Imam',
   admin_berkas: 'Memverifikasi berkas/dokumen dan data pendaftaran santri',
   admin_keuangan: 'Mengelola verifikasi pembayaran dan keuangan',
-  penguji_santri: 'Melakukan penilaian Al-Quran dan Wawancara Santri',
+  penguji_santri: 'Melakukan penilaian Al-Quran dan Wawancara Calon Santri',
   pewawancara_ortu: 'Melakukan wawancara orang tua santri',
   penguji_umum: 'Akses penuh ke semua instrumen penilaian (Santri & Ortu)',
   head_of_it: 'Super Admin yang hanya mengelola user. Tidak ada akses operasional.',
