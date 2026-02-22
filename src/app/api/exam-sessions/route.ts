@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
+import { enqueueWhatsapp, buildMessageJadwalTersedia } from "@/lib/whatsapp-queue";
 
 async function getSession() {
     const cookieStore = await cookies();
@@ -108,6 +109,30 @@ export async function POST(request: Request) {
                 created_by: session.user_id || session.id, // Ensure correct ID usage
             }
         });
+
+        // BACKGROUND TASK: Enqueue WA notifications to all Pendaftars who haven't received it yet
+        try {
+            const pendaftarsToNotify = await prisma.pendaftar.findMany({
+                where: {
+                    notif_jadwal_tersedia_terkirim: false,
+                    no_hp: { not: null, notIn: [""] }
+                },
+                select: { id: true, nama_lengkap: true, no_hp: true }
+            });
+
+            for (const p of pendaftarsToNotify) {
+                if (p.no_hp) {
+                    enqueueWhatsapp({
+                        pendaftarId: p.id,
+                        phone: p.no_hp,
+                        jenisNotif: "jadwal_tersedia",
+                        messageContent: buildMessageJadwalTersedia(p.nama_lengkap),
+                    }).catch(err => console.error("Failed to enqueue WA for", p.nama_lengkap, err));
+                }
+            }
+        } catch (error) {
+            console.error("Error batching WA notifications for exam session:", error);
+        }
 
         return NextResponse.json({ success: true, data: newSession });
     } catch (error: any) {

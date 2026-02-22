@@ -91,7 +91,7 @@ const GRUP_A_ICONS: Record<string, React.ElementType> = {
 const GRUP_B_ICONS: Record<string, React.ElementType> = {
   "Tes Al-Qur'an": BookOpenCheck,
   "Wawancara Calsan": Users,
-  "Wawancara Cawalsan Santri": UserCheck,
+  "Wawancara Cawalsan": UserCheck,
 };
 
 // ============================================================================
@@ -336,7 +336,7 @@ export default function UndanganSeleksiTab() {
               Tes Terjadwal
             </h2>
             <p className="text-sm text-stone-500">
-              Tes Al-Qur'an, Wawancara Calsan, Wawancara Cawalsan Santri
+              Tes Al-Qur'an, Wawancara Calsan, Wawancara Cawalsan
             </p>
           </div>
         </div>
