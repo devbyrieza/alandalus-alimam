@@ -501,7 +501,7 @@ export default function JadwalPengujiPage() {
                   <option value="" disabled>Pilih Jenis Ujian</option>
                   <option value="Tes Al-Quran">Tes Al-Quran</option>
                   <option value="Wawancara Calsan">Wawancara Calsan</option>
-                  <option value="Wawancara Orangtua/Wali">Wawancara Orangtua/Wali</option>
+                  <option value="Wawancara Cawalsan">Wawancara Cawalsan</option>
                 </select>
               </div>
               <div>
