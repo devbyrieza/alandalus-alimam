@@ -79,9 +79,9 @@ export async function GET() {
         // Transform data to be friendly
         const formattedJadwal = jadwal.map((item: any) => {
             let jenis_tugas = [];
-            if (item.penguji_santri_id === userId) jenis_tugas.push("Wawancara Calon Santri");
+            if (item.penguji_santri_id === userId) jenis_tugas.push("Wawancara Calsan");
             if (item.penguji_quran_id === userId) jenis_tugas.push("Tes Al-Qur'an");
-            if (item.penguji_ortu_id === userId) jenis_tugas.push("Wawancara Wali");
+            if (item.penguji_ortu_id === userId) jenis_tugas.push("Wawancara Cawalsan");
 
             return {
                 id: item.id,

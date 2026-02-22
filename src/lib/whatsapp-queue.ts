@@ -547,7 +547,7 @@ export function buildMessageJadwalBelum(nama: string): string {
 
 Terima kasih telah mendaftar di Pesantren Al-Imam Al-Islami.
 
-Saat ini jadwal tes lanjutan (Tes Al-Qur'an, Wawancara Calon Santri, dan Wawancara Calon Wali Santri) belum tersedia. Mohon bersabar, kami akan menginformasikan kembali begitu jadwal sudah siap.
+Saat ini jadwal tes lanjutan (Tes Al-Qur'an, Wawancara Calsan, dan Wawancara Cawalsan Santri) belum tersedia. Mohon bersabar, kami akan menginformasikan kembali begitu jadwal sudah siap.
 
 Untuk sementara, Anda sudah bisa mengerjakan tes online yang tersedia di dashboard:
 - Kemampuan Dasar Akademik
@@ -567,8 +567,8 @@ Alhamdulillah, jadwal tes lanjutan sudah tersedia!
 
 Silakan login ke dashboard dan pilih jadwal yang sesuai untuk:
 - Tes Al-Qur'an
-- Wawancara Calon Santri
-- Wawancara Calon Wali Santri
+- Wawancara Calsan
+- Wawancara Cawalsan Santri
 
 Segera pilih jadwal sebelum kuota penuh.
 

@@ -1,7 +1,14 @@
-
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { calculateFinalScore, determineStatus, gradeToScore } from '@/lib/grading';
+import {
+    calculateFinalScore,
+    determineStatus,
+    gradeToScore,
+    evaluateAkademikGrade,
+    evaluateKepribadianGrade,
+    evaluateStatusGrade,
+    determineFinalDecision
+} from '@/lib/grading';
 
 async function getSession() {
     const { cookies } = await import('next/headers');
@@ -113,7 +120,25 @@ export async function POST(req: Request) {
             // Or calculate running score.
 
             const totalScore = calculateFinalScore(ak, quran, wawancaraTotal, kp, ks);
-            const status = determineStatus(totalScore, quran);
+
+            // Evaluasi dengan Matrix Grade Lulus/Cadangan/Tidak Lulus
+            const grdQuran = evaluateAkademikGrade(quran);
+            const grdAk = evaluateAkademikGrade(ak);
+            const grdKp = evaluateKepribadianGrade(kp);
+            const grdWs = evaluateAkademikGrade(ws); // Wawancara Calsan
+            const grdWo = evaluateAkademikGrade(wo); // Wawancara Cawalsan
+
+            // Jika belum lengkap wawancara, anggap B biar tidak langsung gagal false-positive
+            const wawancaraCalsanFinal = ws > 0 ? grdWs : 'B';
+            const wawancaraCawalsanFinal = wo > 0 ? grdWo : 'B';
+
+            const status = determineFinalDecision({
+                quran: grdQuran,
+                akademik: grdAk,
+                kepribadian: grdKp,
+                wawancaraCalsan: wawancaraCalsanFinal as 'A' | 'B' | 'C',
+                wawancaraCawalsan: wawancaraCawalsanFinal as 'A' | 'B' | 'C'
+            });
 
             await prisma.nilaiUjian.update({
                 where: { id: nilai.id },

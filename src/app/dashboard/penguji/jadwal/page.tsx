@@ -351,7 +351,7 @@ export default function JadwalPengujiPage() {
                           {userId && item.penguji_santri_id === userId && (
                             item.status_santri === 'completed' ? (
                               <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
-                                <CheckCircle className="w-3 h-3" /> Wawancara Calon Santri Selesai
+                                <CheckCircle className="w-3 h-3" /> Wawancara Calsan Selesai
                               </span>
                             ) : (
                               <button
@@ -381,14 +381,14 @@ export default function JadwalPengujiPage() {
                           {userId && item.penguji_ortu_id === userId && (
                             item.status_ortu === 'completed' ? (
                               <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
-                                <CheckCircle className="w-3 h-3" /> Wawancara Wali Selesai
+                                <CheckCircle className="w-3 h-3" /> Wawancara Cawalsan Selesai
                               </span>
                             ) : (
                               <button
                                 onClick={() => handleCompleteExam(item.id)}
                                 className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
                               >
-                                Tandai Wawancara Wali Selesai
+                                Tandai Wawancara Cawalsan Selesai
                               </button>
                             )
                           )}
@@ -500,7 +500,7 @@ export default function JadwalPengujiPage() {
                 >
                   <option value="" disabled>Pilih Jenis Ujian</option>
                   <option value="Tes Al-Quran">Tes Al-Quran</option>
-                  <option value="Wawancara Calon Santri">Wawancara Calon Santri</option>
+                  <option value="Wawancara Calsan">Wawancara Calsan</option>
                   <option value="Wawancara Orangtua/Wali">Wawancara Orangtua/Wali</option>
                 </select>
               </div>

@@ -1,0 +1,382 @@
+Headers and Formulas for R.H (Rekap Hasil):
+
+--- Row 2 ---
+[Nomor Pendaftaran]: =Kp!C5
+[Nama]: =Kp!B5
+[Jenjang]: =Kp!D5
+[Nilai Tajwid]: =IFERROR(VLOOKUP(A3, AQ!$B$2:$E$500, 3, FALSE),"-")
+[Nilai Kelancaran]: =IFERROR(VLOOKUP(A3, AQ!$B$2:$E$500, 4, FALSE),"-")
+[Al Quran]: =IFERROR(VLOOKUP(A3, AQ!$B$2:$F$500, 5, FALSE),"-")
+[Akademik MTs]: =IFERROR(VLOOKUP($A3,A.M!$C$3:$BC$500,53,0),"-")
+[Akademik IL]: =IFERROR(VLOOKUP($A3,A.IL!$C$3:$BC$500,53,0),"-")
+[Akademik SMA]: =IFERROR(VLOOKUP($A3,A.S!$C$3:$BC$500,53,0),"-")
+[Tes Kepribadian]: =IFERROR(vlookup($A3,Kp!$C4:$JF$500,264,0),"-")
+[Wawancara Calsan]: =IFERROR(vlookup($A3,W.S!$D$2:$X$500,21,0),"-")
+[Kesiapan]: =IFERROR(vlookup($A3,Ks!$C$2:$X$500,20,0),"-")
+[Wawancara Ortu]: Diterima
+[Col_13]: kecenderungan seksual
+[Keputusan Rapat]: TIDAK LULUS
+[NQ]: =IF(F3="A. Diterima","A",IF(F3="B. Cadangan","B",IF(F3="C. Ditolak","C","")))
+[NA]: =IF(MAX(G3:I3)>=75,"A",IF(MAX(G3:I3)>=60,"B","C"))
+[NKp]: =IF(OR(J3=0,J3=1),"A",IF(J3=2,"B",IF(J3>=3,"C","")))
+[NWc]: =IF(K3="Siap","A",IF(K3="Cukup Siap","B",IF(K3="Belum Siap","C","")))
+[NKs]: =IF(L3="Siap","A",IF(L3="Cukup Siap","B",IF(L3="Belum Siap","C","")))
+
+--- Row 3 ---
+[Nomor Pendaftaran]: =Kp!C6
+[Nama]: =Kp!B6
+[Jenjang]: =Kp!D6
+[Nilai Tajwid]: =IFERROR(VLOOKUP(A4, AQ!$B$2:$E$500, 3, FALSE),"-")
+[Nilai Kelancaran]: =IFERROR(VLOOKUP(A4, AQ!$B$2:$E$500, 4, FALSE),"-")
+[Al Quran]: =IFERROR(VLOOKUP(A4, AQ!$B$2:$F$500, 5, FALSE),"-")
+[Akademik MTs]: =IFERROR(VLOOKUP($A4,A.M!$C$3:$BC$500,53,0),"-")
+[Akademik IL]: =IFERROR(VLOOKUP($A4,A.IL!$C$3:$BC$500,53,0),"-")
+[Akademik SMA]: =IFERROR(VLOOKUP($A4,A.S!$C$3:$BC$500,53,0),"-")
+[Tes Kepribadian]: =IFERROR(vlookup($A4,Kp!$C5:$JF$500,264,0),"-")
+[Wawancara Calsan]: =IFERROR(vlookup($A4,W.S!$D$2:$X$500,21,0),"-")
+[Kesiapan]: =IFERROR(vlookup($A4,Ks!$C$2:$X$500,20,0),"-")
+[Wawancara Ortu]: =IFERROR(vlookup($A4,W.O!$E$2:$U$500,16,0),"-")
+[Keputusan Rapat]: LULUS
+[NQ]: =IF(F4="A. Diterima","A",IF(F4="B. Cadangan","B",IF(F4="C. Ditolak","C","")))
+[NA]: =IF(MAX(G4:I4)>=75,"A",IF(MAX(G4:I4)>=60,"B","C"))
+[NKp]: =IF(OR(J4=0,J4=1),"A",IF(J4=2,"B",IF(J4>=3,"C","")))
+[NWc]: =IF(K4="Siap","A",IF(K4="Cukup Siap","B",IF(K4="Belum Siap","C","")))
+[NKs]: =IF(L4="Siap","A",IF(L4="Cukup Siap","B",IF(L4="Belum Siap","C","")))
+
+--- Row 4 ---
+[Nomor Pendaftaran]: =Kp!C7
+[Nama]: =Kp!B7
+[Jenjang]: =Kp!D7
+[Nilai Tajwid]: =IFERROR(VLOOKUP(A5, AQ!$B$2:$E$500, 3, FALSE),"-")
+[Nilai Kelancaran]: =IFERROR(VLOOKUP(A5, AQ!$B$2:$E$500, 4, FALSE),"-")
+[Al Quran]: =IFERROR(VLOOKUP(A5, AQ!$B$2:$F$500, 5, FALSE),"-")
+[Akademik MTs]: =IFERROR(VLOOKUP($A5,A.M!$C$3:$BC$500,53,0),"-")
+[Akademik IL]: =IFERROR(VLOOKUP($A5,A.IL!$C$3:$BC$500,53,0),"-")
+[Akademik SMA]: =IFERROR(VLOOKUP($A5,A.S!$C$3:$BC$500,53,0),"-")
+[Tes Kepribadian]: =IFERROR(vlookup($A5,Kp!$C6:$JF$500,264,0),"-")
+[Wawancara Calsan]: =IFERROR(vlookup($A5,W.S!$D$2:$X$500,21,0),"-")
+[Kesiapan]: =IFERROR(vlookup($A5,Ks!$C$2:$X$500,20,0),"-")
+[Wawancara Ortu]: =IFERROR(vlookup($A5,W.O!$E$2:$U$500,16,0),"-")
+[Keputusan Rapat]: LULUS
+[NQ]: =IF(F5="A. Diterima","A",IF(F5="B. Cadangan","B",IF(F5="C. Ditolak","C","")))
+[NA]: =IF(MAX(G5:I5)>=75,"A",IF(MAX(G5:I5)>=60,"B","C"))
+[NKp]: =IF(OR(J5=0,J5=1),"A",IF(J5=2,"B",IF(J5>=3,"C","")))
+[NWc]: =IF(K5="Siap","A",IF(K5="Cukup Siap","B",IF(K5="Belum Siap","C","")))
+[NKs]: =IF(L5="Siap","A",IF(L5="Cukup Siap","B",IF(L5="Belum Siap","C","")))
+
+--- Row 5 ---
+[Nomor Pendaftaran]: =Kp!C8
+[Nama]: =Kp!B8
+[Jenjang]: =Kp!D8
+[Nilai Tajwid]: =IFERROR(VLOOKUP(A6, AQ!$B$2:$E$500, 3, FALSE),"-")
+[Nilai Kelancaran]: =IFERROR(VLOOKUP(A6, AQ!$B$2:$E$500, 4, FALSE),"-")
+[Al Quran]: =IFERROR(VLOOKUP(A6, AQ!$B$2:$F$500, 5, FALSE),"-")
+[Akademik MTs]: =IFERROR(VLOOKUP($A6,A.M!$C$3:$BC$500,53,0),"-")
+[Akademik IL]: =IFERROR(VLOOKUP($A6,A.IL!$C$3:$BC$500,53,0),"-")
+[Akademik SMA]: =IFERROR(VLOOKUP($A6,A.S!$C$3:$BC$500,53,0),"-")
+[Tes Kepribadian]: =IFERROR(vlookup($A6,Kp!$C7:$JF$500,264,0),"-")
+[Wawancara Calsan]: =IFERROR(vlookup($A6,W.S!$D$2:$X$500,21,0),"-")
+[Kesiapan]: =IFERROR(vlookup($A6,Ks!$C$2:$X$500,20,0),"-")
+[Wawancara Ortu]: =IFERROR(vlookup($A6,W.O!$E$2:$U$500,16,0),"-")
+[Keputusan Rapat]: LULUS
+[NQ]: =IF(F6="A. Diterima","A",IF(F6="B. Cadangan","B",IF(F6="C. Ditolak","C","")))
+[NA]: =IF(MAX(G6:I6)>=75,"A",IF(MAX(G6:I6)>=60,"B","C"))
+[NKp]: =IF(OR(J6=0,J6=1),"A",IF(J6=2,"B",IF(J6>=3,"C","")))
+[NWc]: =IF(K6="Siap","A",IF(K6="Cukup Siap","B",IF(K6="Belum Siap","C","")))
+[NKs]: =IF(L6="Siap","A",IF(L6="Cukup Siap","B",IF(L6="Belum Siap","C","")))
+
+--- Row 6 ---
+[Nomor Pendaftaran]: =Kp!C9
+[Nama]: =Kp!B9
+[Jenjang]: =Kp!D9
+[Nilai Tajwid]: =IFERROR(VLOOKUP(A7, AQ!$B$2:$E$500, 3, FALSE),"-")
+[Nilai Kelancaran]: =IFERROR(VLOOKUP(A7, AQ!$B$2:$E$500, 4, FALSE),"-")
+[Al Quran]: =IFERROR(VLOOKUP(A7, AQ!$B$2:$F$500, 5, FALSE),"-")
+[Akademik MTs]: =IFERROR(VLOOKUP($A7,A.M!$C$3:$BC$500,53,0),"-")
+[Akademik IL]: =IFERROR(VLOOKUP($A7,A.IL!$C$3:$BC$500,53,0),"-")
+[Akademik SMA]: =IFERROR(VLOOKUP($A7,A.S!$C$3:$BC$500,53,0),"-")
+[Tes Kepribadian]: =IFERROR(vlookup($A7,Kp!$C8:$JF$500,264,0),"-")
+[Wawancara Calsan]: =IFERROR(vlookup($A7,W.S!$D$2:$X$500,21,0),"-")
+[Kesiapan]: =IFERROR(vlookup($A7,Ks!$C$2:$X$500,20,0),"-")
+[Wawancara Ortu]: =IFERROR(vlookup($A7,W.O!$E$2:$U$500,16,0),"-")
+[Keputusan Rapat]: LULUS
+[NQ]: =IF(F7="A. Diterima","A",IF(F7="B. Cadangan","B",IF(F7="C. Ditolak","C","")))
+[NA]: =IF(MAX(G7:I7)>=75,"A",IF(MAX(G7:I7)>=60,"B","C"))
+[NKp]: =IF(OR(J7=0,J7=1),"A",IF(J7=2,"B",IF(J7>=3,"C","")))
+[NWc]: =IF(K7="Siap","A",IF(K7="Cukup Siap","B",IF(K7="Belum Siap","C","")))
+[NKs]: =IF(L7="Siap","A",IF(L7="Cukup Siap","B",IF(L7="Belum Siap","C","")))
+
+--- Row 7 ---
+[Nomor Pendaftaran]: =Kp!C10
+[Nama]: =Kp!B10
+[Jenjang]: =Kp!D10
+[Nilai Tajwid]: =IFERROR(VLOOKUP(A8, AQ!$B$2:$E$500, 3, FALSE),"-")
+[Nilai Kelancaran]: =IFERROR(VLOOKUP(A8, AQ!$B$2:$E$500, 4, FALSE),"-")
+[Al Quran]: =IFERROR(VLOOKUP(A8, AQ!$B$2:$F$500, 5, FALSE),"-")
+[Akademik MTs]: =IFERROR(VLOOKUP($A8,A.M!$C$3:$BC$500,53,0),"-")
+[Akademik IL]: =IFERROR(VLOOKUP($A8,A.IL!$C$3:$BC$500,53,0),"-")
+[Akademik SMA]: =IFERROR(VLOOKUP($A8,A.S!$C$3:$BC$500,53,0),"-")
+[Tes Kepribadian]: =IFERROR(vlookup($A8,Kp!$C9:$JF$500,264,0),"-")
+[Wawancara Calsan]: =IFERROR(vlookup($A8,W.S!$D$2:$X$500,21,0),"-")
+[Kesiapan]: =IFERROR(vlookup($A8,Ks!$C$2:$X$500,20,0),"-")
+[Wawancara Ortu]: =IFERROR(vlookup($A8,W.O!$E$2:$U$500,16,0),"-")
+[Keputusan Rapat]: LULUS
+[NQ]: =IF(F8="A. Diterima","A",IF(F8="B. Cadangan","B",IF(F8="C. Ditolak","C","")))
+[NA]: =IF(MAX(G8:I8)>=75,"A",IF(MAX(G8:I8)>=60,"B","C"))
+[NKp]: =IF(OR(J8=0,J8=1),"A",IF(J8=2,"B",IF(J8>=3,"C","")))
+[NWc]: =IF(K8="Siap","A",IF(K8="Cukup Siap","B",IF(K8="Belum Siap","C","")))
+[NKs]: =IF(L8="Siap","A",IF(L8="Cukup Siap","B",IF(L8="Belum Siap","C","")))
+
+--- Row 8 ---
+[Nomor Pendaftaran]: =Kp!C11
+[Nama]: =Kp!B11
+[Jenjang]: =Kp!D11
+[Nilai Tajwid]: =IFERROR(VLOOKUP(A9, AQ!$B$2:$E$500, 3, FALSE),"-")
+[Nilai Kelancaran]: =IFERROR(VLOOKUP(A9, AQ!$B$2:$E$500, 4, FALSE),"-")
+[Al Quran]: =IFERROR(VLOOKUP(A9, AQ!$B$2:$F$500, 5, FALSE),"-")
+[Akademik MTs]: =IFERROR(VLOOKUP($A9,A.M!$C$3:$BC$500,53,0),"-")
+[Akademik IL]: =IFERROR(VLOOKUP($A9,A.IL!$C$3:$BC$500,53,0),"-")
+[Akademik SMA]: =IFERROR(VLOOKUP($A9,A.S!$C$3:$BC$500,53,0),"-")
+[Tes Kepribadian]: =IFERROR(vlookup($A9,Kp!$C10:$JF$500,264,0),"-")
+[Wawancara Calsan]: =IFERROR(vlookup($A9,W.S!$D$2:$X$500,21,0),"-")
+[Kesiapan]: =IFERROR(vlookup($A9,Ks!$C$2:$X$500,20,0),"-")
+[Wawancara Ortu]: =IFERROR(vlookup($A9,W.O!$E$2:$U$500,16,0),"-")
+[Keputusan Rapat]: LULUS
+[NQ]: =IF(F9="A. Diterima","A",IF(F9="B. Cadangan","B",IF(F9="C. Ditolak","C","")))
+[NA]: =IF(MAX(G9:I9)>=75,"A",IF(MAX(G9:I9)>=60,"B","C"))
+[NKp]: =IF(OR(J9=0,J9=1),"A",IF(J9=2,"B",IF(J9>=3,"C","")))
+[NWc]: =IF(K9="Siap","A",IF(K9="Cukup Siap","B",IF(K9="Belum Siap","C","")))
+[NKs]: =IF(L9="Siap","A",IF(L9="Cukup Siap","B",IF(L9="Belum Siap","C","")))
+
+--- Row 9 ---
+[Nomor Pendaftaran]: =Kp!C12
+[Nama]: =Kp!B12
+[Jenjang]: =Kp!D12
+[Nilai Tajwid]: =IFERROR(VLOOKUP(A10, AQ!$B$2:$E$500, 3, FALSE),"-")
+[Nilai Kelancaran]: =IFERROR(VLOOKUP(A10, AQ!$B$2:$E$500, 4, FALSE),"-")
+[Al Quran]: =IFERROR(VLOOKUP(A10, AQ!$B$2:$F$500, 5, FALSE),"-")
+[Akademik MTs]: =IFERROR(VLOOKUP($A10,A.M!$C$3:$BC$500,53,0),"-")
+[Akademik IL]: =IFERROR(VLOOKUP($A10,A.IL!$C$3:$BC$500,53,0),"-")
+[Akademik SMA]: =IFERROR(VLOOKUP($A10,A.S!$C$3:$BC$500,53,0),"-")
+[Tes Kepribadian]: =IFERROR(vlookup($A10,Kp!$C11:$JF$500,264,0),"-")
+[Wawancara Calsan]: =IFERROR(vlookup($A10,W.S!$D$2:$X$500,21,0),"-")
+[Kesiapan]: =IFERROR(vlookup($A10,Ks!$C$2:$X$500,20,0),"-")
+[Wawancara Ortu]: =IFERROR(vlookup($A10,W.O!$E$2:$U$500,16,0),"-")
+[Keputusan Rapat]: LULUS
+[NQ]: =IF(F10="A. Diterima","A",IF(F10="B. Cadangan","B",IF(F10="C. Ditolak","C","")))
+[NA]: =IF(MAX(G10:I10)>=75,"A",IF(MAX(G10:I10)>=60,"B","C"))
+[NKp]: =IF(OR(J10=0,J10=1),"A",IF(J10=2,"B",IF(J10>=3,"C","")))
+[NWc]: =IF(K10="Siap","A",IF(K10="Cukup Siap","B",IF(K10="Belum Siap","C","")))
+[NKs]: =IF(L10="Siap","A",IF(L10="Cukup Siap","B",IF(L10="Belum Siap","C","")))
+
+--- Row 10 ---
+[Nomor Pendaftaran]: =Kp!C13
+[Nama]: =Kp!B13
+[Jenjang]: =Kp!D13
+[Nilai Tajwid]: =IFERROR(VLOOKUP(A11, AQ!$B$2:$E$500, 3, FALSE),"-")
+[Nilai Kelancaran]: =IFERROR(VLOOKUP(A11, AQ!$B$2:$E$500, 4, FALSE),"-")
+[Al Quran]: =IFERROR(VLOOKUP(A11, AQ!$B$2:$F$500, 5, FALSE),"-")
+[Akademik MTs]: =IFERROR(VLOOKUP($A11,A.M!$C$3:$BC$500,53,0),"-")
+[Akademik IL]: =IFERROR(VLOOKUP($A11,A.IL!$C$3:$BC$500,53,0),"-")
+[Akademik SMA]: =IFERROR(VLOOKUP($A11,A.S!$C$3:$BC$500,53,0),"-")
+[Tes Kepribadian]: =IFERROR(vlookup($A11,Kp!$C12:$JF$500,264,0),"-")
+[Wawancara Calsan]: =IFERROR(vlookup($A11,W.S!$D$2:$X$500,21,0),"-")
+[Kesiapan]: =IFERROR(vlookup($A11,Ks!$C$2:$X$500,20,0),"-")
+[Wawancara Ortu]: =IFERROR(vlookup($A11,W.O!$E$2:$U$500,16,0),"-")
+[Keputusan Rapat]: CADANGAN
+[NQ]: =IF(F11="A. Diterima","A",IF(F11="B. Cadangan","B",IF(F11="C. Ditolak","C","")))
+[NA]: =IF(MAX(G11:I11)>=75,"A",IF(MAX(G11:I11)>=60,"B","C"))
+[NKp]: =IF(OR(J11=0,J11=1),"A",IF(J11=2,"B",IF(J11>=3,"C","")))
+[NWc]: =IF(K11="Siap","A",IF(K11="Cukup Siap","B",IF(K11="Belum Siap","C","")))
+[NKs]: =IF(L11="Siap","A",IF(L11="Cukup Siap","B",IF(L11="Belum Siap","C","")))
+
+--- Row 11 ---
+[Nomor Pendaftaran]: =Kp!C14
+[Nama]: =Kp!B14
+[Jenjang]: =Kp!D14
+[Nilai Tajwid]: =IFERROR(VLOOKUP(A12, AQ!$B$2:$E$500, 3, FALSE),"-")
+[Nilai Kelancaran]: =IFERROR(VLOOKUP(A12, AQ!$B$2:$E$500, 4, FALSE),"-")
+[Al Quran]: =IFERROR(VLOOKUP(A12, AQ!$B$2:$F$500, 5, FALSE),"-")
+[Akademik MTs]: =IFERROR(VLOOKUP($A12,A.M!$C$3:$BC$500,53,0),"-")
+[Akademik IL]: =IFERROR(VLOOKUP($A12,A.IL!$C$3:$BC$500,53,0),"-")
+[Akademik SMA]: =IFERROR(VLOOKUP($A12,A.S!$C$3:$BC$500,53,0),"-")
+[Tes Kepribadian]: =IFERROR(vlookup($A12,Kp!$C13:$JF$500,264,0),"-")
+[Wawancara Calsan]: =IFERROR(vlookup($A12,W.S!$D$2:$X$500,21,0),"-")
+[Kesiapan]: =IFERROR(vlookup($A12,Ks!$C$2:$X$500,20,0),"-")
+[Wawancara Ortu]: =IFERROR(vlookup($A12,W.O!$E$2:$U$500,16,0),"-")
+[Keputusan Rapat]: LULUS
+[NQ]: =IF(F12="A. Diterima","A",IF(F12="B. Cadangan","B",IF(F12="C. Ditolak","C","")))
+[NA]: =IF(MAX(G12:I12)>=75,"A",IF(MAX(G12:I12)>=60,"B","C"))
+[NKp]: =IF(OR(J12=0,J12=1),"A",IF(J12=2,"B",IF(J12>=3,"C","")))
+[NWc]: =IF(K12="Siap","A",IF(K12="Cukup Siap","B",IF(K12="Belum Siap","C","")))
+[NKs]: =IF(L12="Siap","A",IF(L12="Cukup Siap","B",IF(L12="Belum Siap","C","")))
+
+--- Row 12 ---
+[Nomor Pendaftaran]: =Kp!C15
+[Nama]: =Kp!B15
+[Jenjang]: =Kp!D15
+[Nilai Tajwid]: =IFERROR(VLOOKUP(A13, AQ!$B$2:$E$500, 3, FALSE),"-")
+[Nilai Kelancaran]: =IFERROR(VLOOKUP(A13, AQ!$B$2:$E$500, 4, FALSE),"-")
+[Al Quran]: =IFERROR(VLOOKUP(A13, AQ!$B$2:$F$500, 5, FALSE),"-")
+[Akademik MTs]: =IFERROR(VLOOKUP($A13,A.M!$C$3:$BC$500,53,0),"-")
+[Akademik IL]: =IFERROR(VLOOKUP($A13,A.IL!$C$3:$BC$500,53,0),"-")
+[Akademik SMA]: =IFERROR(VLOOKUP($A13,A.S!$C$3:$BC$500,53,0),"-")
+[Tes Kepribadian]: =IFERROR(vlookup($A13,Kp!$C14:$JF$500,264,0),"-")
+[Wawancara Calsan]: =IFERROR(vlookup($A13,W.S!$D$2:$X$500,21,0),"-")
+[Kesiapan]: =IFERROR(vlookup($A13,Ks!$C$2:$X$500,20,0),"-")
+[Wawancara Ortu]: =IFERROR(vlookup($A13,W.O!$E$2:$U$500,16,0),"-")
+[Keputusan Rapat]: LULUS
+[NQ]: =IF(F13="A. Diterima","A",IF(F13="B. Cadangan","B",IF(F13="C. Ditolak","C","")))
+[NA]: =IF(MAX(G13:I13)>=75,"A",IF(MAX(G13:I13)>=60,"B","C"))
+[NKp]: =IF(OR(J13=0,J13=1),"A",IF(J13=2,"B",IF(J13>=3,"C","")))
+[NWc]: =IF(K13="Siap","A",IF(K13="Cukup Siap","B",IF(K13="Belum Siap","C","")))
+[NKs]: =IF(L13="Siap","A",IF(L13="Cukup Siap","B",IF(L13="Belum Siap","C","")))
+
+--- Row 13 ---
+[Nomor Pendaftaran]: =Kp!C16
+[Nama]: =Kp!B16
+[Jenjang]: =Kp!D16
+[Nilai Tajwid]: =IFERROR(VLOOKUP(A14, AQ!$B$2:$E$500, 3, FALSE),"-")
+[Nilai Kelancaran]: =IFERROR(VLOOKUP(A14, AQ!$B$2:$E$500, 4, FALSE),"-")
+[Al Quran]: =IFERROR(VLOOKUP(A14, AQ!$B$2:$F$500, 5, FALSE),"-")
+[Akademik MTs]: =IFERROR(VLOOKUP($A14,A.M!$C$3:$BC$500,53,0),"-")
+[Akademik IL]: =IFERROR(VLOOKUP($A14,A.IL!$C$3:$BC$500,53,0),"-")
+[Akademik SMA]: =IFERROR(VLOOKUP($A14,A.S!$C$3:$BC$500,53,0),"-")
+[Tes Kepribadian]: =IFERROR(vlookup($A14,Kp!$C15:$JF$500,264,0),"-")
+[Wawancara Calsan]: =IFERROR(vlookup($A14,W.S!$D$2:$X$500,21,0),"-")
+[Kesiapan]: =IFERROR(vlookup($A14,Ks!$C$2:$X$500,20,0),"-")
+[Wawancara Ortu]: =IFERROR(vlookup($A14,W.O!$E$2:$U$500,16,0),"-")
+[Keputusan Rapat]: LULUS
+[NQ]: =IF(F14="A. Diterima","A",IF(F14="B. Cadangan","B",IF(F14="C. Ditolak","C","")))
+[NA]: =IF(MAX(G14:I14)>=75,"A",IF(MAX(G14:I14)>=60,"B","C"))
+[NKp]: =IF(OR(J14=0,J14=1),"A",IF(J14=2,"B",IF(J14>=3,"C","")))
+[NWc]: =IF(K14="Siap","A",IF(K14="Cukup Siap","B",IF(K14="Belum Siap","C","")))
+[NKs]: =IF(L14="Siap","A",IF(L14="Cukup Siap","B",IF(L14="Belum Siap","C","")))
+
+--- Row 14 ---
+[Nomor Pendaftaran]: =Kp!C17
+[Nama]: =Kp!B17
+[Jenjang]: =Kp!D17
+[Nilai Tajwid]: =IFERROR(VLOOKUP(A15, AQ!$B$2:$E$500, 3, FALSE),"-")
+[Nilai Kelancaran]: =IFERROR(VLOOKUP(A15, AQ!$B$2:$E$500, 4, FALSE),"-")
+[Al Quran]: =IFERROR(VLOOKUP(A15, AQ!$B$2:$F$500, 5, FALSE),"-")
+[Akademik MTs]: =IFERROR(VLOOKUP($A15,A.M!$C$3:$BC$500,53,0),"-")
+[Akademik IL]: =IFERROR(VLOOKUP($A15,A.IL!$C$3:$BC$500,53,0),"-")
+[Akademik SMA]: =IFERROR(VLOOKUP($A15,A.S!$C$3:$BC$500,53,0),"-")
+[Tes Kepribadian]: =IFERROR(vlookup($A15,Kp!$C16:$JF$500,264,0),"-")
+[Wawancara Calsan]: =IFERROR(vlookup($A15,W.S!$D$2:$X$500,21,0),"-")
+[Kesiapan]: =IFERROR(vlookup($A15,Ks!$C$2:$X$500,20,0),"-")
+[Wawancara Ortu]: =IFERROR(vlookup($A15,W.O!$E$2:$U$500,16,0),"-")
+[Col_13]: kecenderungan seksual
+[Keputusan Rapat]: TIDAK LULUS
+[NQ]: =IF(F15="A. Diterima","A",IF(F15="B. Cadangan","B",IF(F15="C. Ditolak","C","")))
+[NA]: =IF(MAX(G15:I15)>=75,"A",IF(MAX(G15:I15)>=60,"B","C"))
+[NKp]: =IF(OR(J15=0,J15=1),"A",IF(J15=2,"B",IF(J15>=3,"C","")))
+[NWc]: =IF(K15="Siap","A",IF(K15="Cukup Siap","B",IF(K15="Belum Siap","C","")))
+[NKs]: =IF(L15="Siap","A",IF(L15="Cukup Siap","B",IF(L15="Belum Siap","C","")))
+
+--- Row 15 ---
+[Nomor Pendaftaran]: =Kp!C18
+[Nama]: =Kp!B18
+[Jenjang]: =Kp!D18
+[Nilai Tajwid]: =IFERROR(VLOOKUP(A16, AQ!$B$2:$E$500, 3, FALSE),"-")
+[Nilai Kelancaran]: =IFERROR(VLOOKUP(A16, AQ!$B$2:$E$500, 4, FALSE),"-")
+[Al Quran]: =IFERROR(VLOOKUP(A16, AQ!$B$2:$F$500, 5, FALSE),"-")
+[Akademik MTs]: =IFERROR(VLOOKUP($A16,A.M!$C$3:$BC$500,53,0),"-")
+[Akademik IL]: =IFERROR(VLOOKUP($A16,A.IL!$C$3:$BC$500,53,0),"-")
+[Akademik SMA]: =IFERROR(VLOOKUP($A16,A.S!$C$3:$BC$500,53,0),"-")
+[Tes Kepribadian]: =IFERROR(vlookup($A16,Kp!$C17:$JF$500,264,0),"-")
+[Wawancara Calsan]: =IFERROR(vlookup($A16,W.S!$D$2:$X$500,21,0),"-")
+[Kesiapan]: =IFERROR(vlookup($A16,Ks!$C$2:$X$500,20,0),"-")
+[Wawancara Ortu]: =M17
+[Keputusan Rapat]: LULUS
+[NQ]: =IF(F16="A. Diterima","A",IF(F16="B. Cadangan","B",IF(F16="C. Ditolak","C","")))
+[NA]: =IF(MAX(G16:I16)>=75,"A",IF(MAX(G16:I16)>=60,"B","C"))
+[NKp]: =IF(OR(J16=0,J16=1),"A",IF(J16=2,"B",IF(J16>=3,"C","")))
+[NWc]: =IF(K16="Siap","A",IF(K16="Cukup Siap","B",IF(K16="Belum Siap","C","")))
+[NKs]: =IF(L16="Siap","A",IF(L16="Cukup Siap","B",IF(L16="Belum Siap","C","")))
+
+--- Row 16 ---
+[Nomor Pendaftaran]: =Kp!C19
+[Nama]: =Kp!B19
+[Jenjang]: =Kp!D19
+[Nilai Tajwid]: =IFERROR(VLOOKUP(A17, AQ!$B$2:$E$500, 3, FALSE),"-")
+[Nilai Kelancaran]: =IFERROR(VLOOKUP(A17, AQ!$B$2:$E$500, 4, FALSE),"-")
+[Al Quran]: =IFERROR(VLOOKUP(A17, AQ!$B$2:$F$500, 5, FALSE),"-")
+[Akademik MTs]: =IFERROR(VLOOKUP($A17,A.M!$C$3:$BC$500,53,0),"-")
+[Akademik IL]: =IFERROR(VLOOKUP($A17,A.IL!$C$3:$BC$500,53,0),"-")
+[Akademik SMA]: =IFERROR(VLOOKUP($A17,A.S!$C$3:$BC$500,53,0),"-")
+[Tes Kepribadian]: =IFERROR(vlookup($A17,Kp!$C18:$JF$500,264,0),"-")
+[Wawancara Calsan]: =IFERROR(vlookup($A17,W.S!$D$2:$X$500,21,0),"-")
+[Kesiapan]: =IFERROR(vlookup($A17,Ks!$C$2:$X$500,20,0),"-")
+[Wawancara Ortu]: =IFERROR(vlookup($A17,W.O!$E$2:$U$500,16,0),"-")
+[Keputusan Rapat]: LULUS
+[NQ]: =IF(F17="A. Diterima","A",IF(F17="B. Cadangan","B",IF(F17="C. Ditolak","C","")))
+[NA]: =IF(MAX(G17:I17)>=75,"A",IF(MAX(G17:I17)>=60,"B","C"))
+[NKp]: =IF(OR(J17=0,J17=1),"A",IF(J17=2,"B",IF(J17>=3,"C","")))
+[NWc]: =IF(K17="Siap","A",IF(K17="Cukup Siap","B",IF(K17="Belum Siap","C","")))
+[NKs]: =IF(L17="Siap","A",IF(L17="Cukup Siap","B",IF(L17="Belum Siap","C","")))
+
+--- Row 17 ---
+[Nomor Pendaftaran]: =Kp!C20
+[Nama]: =Kp!B20
+[Jenjang]: =Kp!D20
+[Nilai Tajwid]: =IFERROR(VLOOKUP(A18, AQ!$B$2:$E$500, 3, FALSE),"-")
+[Nilai Kelancaran]: =IFERROR(VLOOKUP(A18, AQ!$B$2:$E$500, 4, FALSE),"-")
+[Al Quran]: =IFERROR(VLOOKUP(A18, AQ!$B$2:$F$500, 5, FALSE),"-")
+[Akademik MTs]: =IFERROR(VLOOKUP($A18,A.M!$C$3:$BC$500,53,0),"-")
+[Akademik IL]: =IFERROR(VLOOKUP($A18,A.IL!$C$3:$BC$500,53,0),"-")
+[Akademik SMA]: =IFERROR(VLOOKUP($A18,A.S!$C$3:$BC$500,53,0),"-")
+[Tes Kepribadian]: =IFERROR(vlookup($A18,Kp!$C19:$JF$500,264,0),"-")
+[Wawancara Calsan]: =IFERROR(vlookup($A18,W.S!$D$2:$X$500,21,0),"-")
+[Kesiapan]: =IFERROR(vlookup($A18,Ks!$C$2:$X$500,20,0),"-")
+[Wawancara Ortu]: =IFERROR(vlookup($A18,W.O!$E$2:$U$500,16,0),"-")
+[Keputusan Rapat]: LULUS
+[NQ]: =IF(F18="A. Diterima","A",IF(F18="B. Cadangan","B",IF(F18="C. Ditolak","C","")))
+[NA]: =IF(MAX(G18:I18)>=75,"A",IF(MAX(G18:I18)>=60,"B","C"))
+[NKp]: =IF(OR(J18=0,J18=1),"A",IF(J18=2,"B",IF(J18>=3,"C","")))
+[NWc]: =IF(K18="Siap","A",IF(K18="Cukup Siap","B",IF(K18="Belum Siap","C","")))
+[NKs]: =IF(L18="Siap","A",IF(L18="Cukup Siap","B",IF(L18="Belum Siap","C","")))
+
+--- Row 18 ---
+[Nomor Pendaftaran]: =Kp!C21
+[Nama]: =Kp!B21
+[Jenjang]: =Kp!D21
+[Nilai Tajwid]: =IFERROR(VLOOKUP(A19, AQ!$B$2:$E$500, 3, FALSE),"-")
+[Nilai Kelancaran]: =IFERROR(VLOOKUP(A19, AQ!$B$2:$E$500, 4, FALSE),"-")
+[Al Quran]: =IFERROR(VLOOKUP(A19, AQ!$B$2:$F$500, 5, FALSE),"-")
+[Akademik MTs]: =IFERROR(VLOOKUP($A19,A.M!$C$3:$BC$500,53,0),"-")
+[Akademik IL]: =IFERROR(VLOOKUP($A19,A.IL!$C$3:$BC$500,53,0),"-")
+[Akademik SMA]: =IFERROR(VLOOKUP($A19,A.S!$C$3:$BC$500,53,0),"-")
+[Tes Kepribadian]: =IFERROR(vlookup($A19,Kp!$C20:$JF$500,264,0),"-")
+[Wawancara Calsan]: =IFERROR(vlookup($A19,W.S!$D$2:$X$500,21,0),"-")
+[Kesiapan]: =IFERROR(vlookup($A19,Ks!$C$2:$X$500,20,0),"-")
+[Wawancara Ortu]: =IFERROR(vlookup($A19,W.O!$E$2:$U$500,16,0),"-")
+[Keputusan Rapat]: LULUS
+[NQ]: =IF(F19="A. Diterima","A",IF(F19="B. Cadangan","B",IF(F19="C. Ditolak","C","")))
+[NA]: =IF(MAX(G19:I19)>=75,"A",IF(MAX(G19:I19)>=60,"B","C"))
+[NKp]: =IF(OR(J19=0,J19=1),"A",IF(J19=2,"B",IF(J19>=3,"C","")))
+[NWc]: =IF(K19="Siap","A",IF(K19="Cukup Siap","B",IF(K19="Belum Siap","C","")))
+[NKs]: =IF(L19="Siap","A",IF(L19="Cukup Siap","B",IF(L19="Belum Siap","C","")))
+
+--- Row 19 ---
+[Nomor Pendaftaran]: =Kp!C22
+[Nama]: =Kp!B22
+[Jenjang]: =Kp!D22
+[Nilai Tajwid]: =IFERROR(VLOOKUP(A20, AQ!$B$2:$E$500, 3, FALSE),"-")
+[Nilai Kelancaran]: =IFERROR(VLOOKUP(A20, AQ!$B$2:$E$500, 4, FALSE),"-")
+[Al Quran]: =IFERROR(VLOOKUP(A20, AQ!$B$2:$F$500, 5, FALSE),"-")
+[Akademik MTs]: =IFERROR(VLOOKUP($A20,A.M!$C$3:$BC$500,53,0),"-")
+[Akademik IL]: =IFERROR(VLOOKUP($A20,A.IL!$C$3:$BC$500,53,0),"-")
+[Akademik SMA]: =IFERROR(VLOOKUP($A20,A.S!$C$3:$BC$500,53,0),"-")
+[Tes Kepribadian]: =IFERROR(vlookup($A20,Kp!$C21:$JF$500,264,0),"-")
+[Wawancara Calsan]: =IFERROR(vlookup($A20,W.S!$D$2:$X$500,21,0),"-")
+[Kesiapan]: =IFERROR(vlookup($A20,Ks!$C$2:$X$500,20,0),"-")
+[Wawancara Ortu]: =IFERROR(vlookup($A20,W.O!$E$2:$U$500,16,0),"-")
+[Keputusan Rapat]: LULUS
+[NQ]: =IF(F20="A. Diterima","A",IF(F20="B. Cadangan","B",IF(F20="C. Ditolak","C","")))
+[NA]: =IF(MAX(G20:I20)>=75,"A",IF(MAX(G20:I20)>=60,"B","C"))
+[NKp]: =IF(OR(J20=0,J20=1),"A",IF(J20=2,"B",IF(J20>=3,"C","")))
+[NWc]: =IF(K20="Siap","A",IF(K20="Cukup Siap","B",IF(K20="Belum Siap","C","")))
+[NKs]: =IF(L20="Siap","A",IF(L20="Cukup Siap","B",IF(L20="Belum Siap","C","")))
+

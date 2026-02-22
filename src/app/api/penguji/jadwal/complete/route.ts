@@ -55,13 +55,13 @@ export async function POST(request: Request) {
 
         if (jadwal.penguji_santri_id === userId) {
             updates.status_santri = "completed";
-            updatedField = "Wawancara Calon Santri";
+            updatedField = "Wawancara Calsan";
         } else if (jadwal.penguji_quran_id === userId) {
             updates.status_quran = "completed";
             updatedField = "Tes Al-Qur'an";
         } else if (jadwal.penguji_ortu_id === userId) {
             updates.status_ortu = "completed";
-            updatedField = "Wawancara Wali";
+            updatedField = "Wawancara Cawalsan";
         } else {
             return NextResponse.json({ error: "You are not assigned to this exam" }, { status: 403 });
         }

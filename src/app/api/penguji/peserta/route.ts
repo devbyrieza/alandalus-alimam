@@ -25,9 +25,9 @@ export async function GET() {
     try {
         const whereClause: any = {
             OR: [
-                { penguji_santri_id: userId }, // Wawancara Calon Santri (or general Interview)
+                { penguji_santri_id: userId }, // Wawancara Calsan (or general Interview)
                 { penguji_quran_id: userId },   // Tes Quran
-                { penguji_ortu_id: userId },    // Wawancara Wali
+                { penguji_ortu_id: userId },    // Wawancara Cawalsan
             ]
         };
 

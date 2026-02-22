@@ -88,7 +88,7 @@ export default function InputNilaiPage() {
       const data = dataToExport.map((item) => ({
         "Nama": item.nama_lengkap,
         "No. Daftar": item.nomor_pendaftaran,
-        "Wawancara Calon Santri": item.nilai_wawancara_santri || "-",
+        "Wawancara Calsan": item.nilai_wawancara_santri || "-",
         "Tes Al-Qur'an": item.nilai_tes_quran || "-",
         "Wawancara Ortu": item.nilai_wawancara_ortu || "-",
         "Catatan Santri": item.catatan_santri || "-",
@@ -238,10 +238,10 @@ export default function InputNilaiPage() {
 
                   {/* Form / View */}
                   <div className="grid md:grid-cols-3 gap-6">
-                    {/* Wawancara Calon Santri */}
+                    {/* Wawancara Calsan */}
                     {showWawancaraSantri && (
                       <div className={`p-4 rounded-lg border content-section ${canDoWawancaraSantri ? 'bg-blue-50 border-blue-100' : 'bg-gray-50'}`}>
-                        <h4 className="font-bold text-blue-900 mb-2">Wawancara Calon Santri</h4>
+                        <h4 className="font-bold text-blue-900 mb-2">Wawancara Calsan</h4>
                         {editWawancaraSantri ? (
                           <div className="space-y-2">
                             <label className="text-xs font-bold">Nilai (0-100)</label>
@@ -304,7 +304,7 @@ export default function InputNilaiPage() {
                     {/* Wawancara Ortu */}
                     {showWawancaraOrtu && (
                       <div className={`p-4 rounded-lg border content-section ${canDoWawancaraOrtu ? 'bg-amber-50 border-amber-100' : 'bg-gray-50'}`}>
-                        <h4 className="font-bold text-amber-900 mb-2">Wawancara Wali</h4>
+                        <h4 className="font-bold text-amber-900 mb-2">Wawancara Cawalsan</h4>
                         {editWawancaraOrtu ? (
                           <div className="space-y-2">
                             <label className="text-xs font-bold">Nilai (0-100)</label>

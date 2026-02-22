@@ -104,3 +104,58 @@ export function scoreToGrade(score: number): string {
     if (score >= 40) return 'D';
     return 'E';
 }
+
+// ============================================================================
+// NEW GRADING LOGIC (Based on Excel R.H Matrix)
+// ============================================================================
+
+export function evaluateKepribadianGrade(score: number): 'A' | 'B' | 'C' {
+    if (score >= 70) return 'A';
+    if (score >= 50) return 'B';
+    return 'C';
+}
+
+export function evaluateAkademikGrade(score: number): 'A' | 'B' | 'C' {
+    if (score >= 75) return 'A';
+    if (score >= 60) return 'B';
+    return 'C';
+}
+
+export function evaluateStatusGrade(status: string | null | undefined): 'A' | 'B' | 'C' {
+    const s = status?.toLowerCase() || '';
+    if (s.includes('sangat layak') || s === 'siap' || s.includes('diterima')) return 'A';
+    if (s.includes('layak') || s.includes('cukup') || s === 'cukup siap' || s.includes('cadangan')) return 'B';
+    return 'C'; // "Belum Siap", "Tidak Layak", "Ditolak", etc.
+}
+
+export function determineFinalDecision(grades: {
+    quran: 'A' | 'B' | 'C',
+    akademik: 'A' | 'B' | 'C',
+    kepribadian: 'A' | 'B' | 'C',
+    wawancaraCalsan: 'A' | 'B' | 'C',
+    wawancaraCawalsan: 'A' | 'B' | 'C'
+}): 'DITERIMA' | 'CADANGAN' | 'TIDAK LULUS' {
+    const vals = Object.values(grades);
+
+    // Kriteria TIDAK LULUS: Any 'C' in critical subjects (Quran, Wawancara Calsan, Kepribadian)
+    if (grades.quran === 'C' || grades.wawancaraCalsan === 'C' || grades.kepribadian === 'C') {
+        return 'TIDAK LULUS';
+    }
+
+    // If any 'C' remains (e.g. Akademik C or Cawalsan C), but criticals are safe -> CADANGAN
+    if (vals.includes('C')) {
+        return 'CADANGAN';
+    }
+
+    // At this point, all grades are 'A' or 'B'
+    // Kriteria DITERIMA: Quran and Wawancara Calsan must be 'A', and majority 'A' overall.
+    if (grades.quran === 'A' && grades.wawancaraCalsan === 'A') {
+        const countA = vals.filter(v => v === 'A').length;
+        if (countA >= 3) {
+            return 'DITERIMA';
+        }
+    }
+
+    // Otherwise (e.g., Quran B, or only two A's), it falls to CADANGAN
+    return 'CADANGAN';
+}

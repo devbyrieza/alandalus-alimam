@@ -56,20 +56,20 @@ model Profile {
 
   // Relations
   pendaftar             Pendaftar[]
-  dokumen_verified      Dokumen[]       @relation("DokumenVerifiedBy")
-  pembayaran_verified   Pembayaran[]    @relation("PembayaranVerifiedBy")
-  pengumuman_published  Pengumuman[]    @relation("PengumumanPublishedBy")
-  kesehatan_verified    DataKesehatan[] @relation("KesehatanVerifiedBy")
-  reservasi_approved    ReservasiPSB[]  @relation("ReservasiApprovedBy")
-  nilai_input_santri    NilaiUjian[]    @relation("NilaiInputBySantri")
-  nilai_input_ortu      NilaiUjian[]    @relation("NilaiInputByOrtu")
-  jadwal_penguji_santri JadwalUjian[]   @relation("PengujiSantri")
-  jadwal_penguji_ortu   JadwalUjian[]   @relation("PengujiOrtu")
-  jadwal_penguji_quran  JadwalUjian[]   @relation("PengujiQuran")
-  nilai_input_quran     NilaiUjian[]    @relation("NilaiInputByQuran")
-  sessions_created      ExamSession[]   @relation("SessionCreatedBy")
+  dokumen_verified      Dokumen[]             @relation("DokumenVerifiedBy")
+  pembayaran_verified   Pembayaran[]          @relation("PembayaranVerifiedBy")
+  pengumuman_published  Pengumuman[]          @relation("PengumumanPublishedBy")
+  kesehatan_verified    DataKesehatan[]       @relation("KesehatanVerifiedBy")
+  reservasi_approved    ReservasiPSB[]        @relation("ReservasiApprovedBy")
+  nilai_input_santri    NilaiUjian[]          @relation("NilaiInputBySantri")
+  nilai_input_ortu      NilaiUjian[]          @relation("NilaiInputByOrtu")
+  jadwal_penguji_santri JadwalUjian[]         @relation("PengujiSantri")
+  jadwal_penguji_ortu   JadwalUjian[]         @relation("PengujiOrtu")
+  jadwal_penguji_quran  JadwalUjian[]         @relation("PengujiQuran")
+  nilai_input_quran     NilaiUjian[]          @relation("NilaiInputByQuran")
+  sessions_created      ExamSession[]         @relation("SessionCreatedBy")
   ketersediaan          KetersediaanPenguji[] @relation("KetersediaanPenguji")
-  hasil_seleksi_admin   HasilSeleksi[]  @relation("HasilSeleksiBy")
+  hasil_seleksi_admin   HasilSeleksi[]        @relation("HasilSeleksiBy")
 
   @@map("profiles")
 }
@@ -93,12 +93,12 @@ model TahunAjaran {
   updated_at                DateTime @default(now()) @db.Timestamptz(6)
 
   // Relations
-  pendaftar      Pendaftar[]
-  pembayaran     Pembayaran[]
-  pengumuman     Pengumuman[]
-  jadwal_ujian   JadwalUjian[]
-  reservasi      ReservasiPSB[]
-  hasil_seleksi  HasilSeleksi[]
+  pendaftar     Pendaftar[]
+  pembayaran    Pembayaran[]
+  pengumuman    Pengumuman[]
+  jadwal_ujian  JadwalUjian[]
+  reservasi     ReservasiPSB[]
+  hasil_seleksi HasilSeleksi[]
 
   @@map("tahun_ajaran")
 }
@@ -141,7 +141,7 @@ model Pendaftar {
   sumber_informasi   String?
   jumlah_hafalan     String?
   status_pendaftaran String    @default("draft")
-  data_lengkap       Json?     @db.JsonB  // JSON column for extended registration data
+  data_lengkap       Json?     @db.JsonB // JSON column for extended registration data
   created_at         DateTime  @default(now()) @db.Timestamptz(6)
   updated_at         DateTime  @default(now()) @db.Timestamptz(6)
 
@@ -276,30 +276,30 @@ model Dokumen {
 // ============================================================================
 
 model Pembayaran {
-  id                          String            @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  pendaftar_id                String            @db.Uuid
-  tahun_ajaran_id             String            @db.Uuid
+  id                          String          @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  pendaftar_id                String          @db.Uuid
+  tahun_ajaran_id             String          @db.Uuid
   metode_pembayaran           String
-  jumlah                      Decimal           @db.Decimal
-  jenis_pembayaran            JenisPembayaran   @default(PENDAFTARAN)
-  tipe_cicilan                TipeCicilan       @default(LUNAS)
+  jumlah                      Decimal         @db.Decimal
+  jenis_pembayaran            JenisPembayaran @default(PENDAFTARAN)
+  tipe_cicilan                TipeCicilan     @default(LUNAS)
   tipe_spp                    TipeSPP?
   cicilan_ke                  Int?
-  total_tagihan               Decimal?          @db.Decimal
+  total_tagihan               Decimal?        @db.Decimal
   midtrans_order_id           String?
   midtrans_transaction_id     String?
   midtrans_transaction_status String?
   midtrans_payment_type       String?
-  midtrans_response_json      Json?             @db.JsonB
+  midtrans_response_json      Json?           @db.JsonB
   bukti_transfer_path         String?
   bukti_transfer_filename     String?
-  status_pembayaran           String            @default("pending")
-  verified_by                 String?           @db.Uuid
-  verified_at                 DateTime?         @db.Timestamptz(6)
+  status_pembayaran           String          @default("pending")
+  verified_by                 String?         @db.Uuid
+  verified_at                 DateTime?       @db.Timestamptz(6)
   catatan_verifikasi          String?
-  expired_at                  DateTime?         @db.Timestamptz(6)
-  created_at                  DateTime          @default(now()) @db.Timestamptz(6)
-  updated_at                  DateTime          @default(now()) @db.Timestamptz(6)
+  expired_at                  DateTime?       @db.Timestamptz(6)
+  created_at                  DateTime        @default(now()) @db.Timestamptz(6)
+  updated_at                  DateTime        @default(now()) @db.Timestamptz(6)
 
   // Relations
   pendaftar    Pendaftar   @relation(fields: [pendaftar_id], references: [id], onDelete: Cascade)
@@ -335,12 +335,12 @@ model JadwalUjian {
   status_santri        String?  @default("scheduled")
 
   // Jadwal Quran (New Station)
-  penguji_quran_id     String?  @db.Uuid
-  status_quran         String?  @default("scheduled")
-  
+  penguji_quran_id String? @db.Uuid
+  status_quran     String? @default("scheduled")
+
   // Online Test Status
-  status_online_test   String?  @default("pending")
-  online_test_link     String?
+  status_online_test String? @default("pending")
+  online_test_link   String?
 
   // Jadwal Orang Tua
   waktu_mulai_ortu   DateTime @db.Time(6)
@@ -355,13 +355,13 @@ model JadwalUjian {
   updated_at DateTime @default(now()) @db.Timestamptz(6)
 
   // Relations
-  tahun_ajaran   TahunAjaran  @relation(fields: [tahun_ajaran_id], references: [id])
-  pendaftar      Pendaftar    @relation(fields: [pendaftar_id], references: [id], onDelete: Cascade)
-  penguji_santri Profile?     @relation("PengujiSantri", fields: [penguji_santri_id], references: [id])
-  penguji_ortu   Profile?     @relation("PengujiOrtu", fields: [penguji_ortu_id], references: [id])
-  penguji_quran  Profile?     @relation("PengujiQuran", fields: [penguji_quran_id], references: [id])
-  exam_session   ExamSession? @relation(fields: [exam_session_id], references: [id])
-  nilai_ujian    NilaiUjian[]
+  tahun_ajaran    TahunAjaran           @relation(fields: [tahun_ajaran_id], references: [id])
+  pendaftar       Pendaftar             @relation(fields: [pendaftar_id], references: [id], onDelete: Cascade)
+  penguji_santri  Profile?              @relation("PengujiSantri", fields: [penguji_santri_id], references: [id])
+  penguji_ortu    Profile?              @relation("PengujiOrtu", fields: [penguji_ortu_id], references: [id])
+  penguji_quran   Profile?              @relation("PengujiQuran", fields: [penguji_quran_id], references: [id])
+  exam_session    ExamSession?          @relation(fields: [exam_session_id], references: [id])
+  nilai_ujian     NilaiUjian[]
   notif_reminders JadwalNotifReminder[]
 
   @@map("jadwal_ujian")
@@ -372,22 +372,22 @@ model JadwalUjian {
 // ============================================================================
 
 model ExamSession {
-  id              String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  title           String?
-  start_time      DateTime @db.Timestamptz(6)
-  end_time        DateTime @db.Timestamptz(6)
-  quota           Int      @default(10)
-  booked_count    Int      @default(0)
-  location        String?
-  notes           String?
-  is_active       Boolean  @default(true)
-  created_by      String?  @db.Uuid
-  created_at      DateTime @default(now()) @db.Timestamptz(6)
-  updated_at      DateTime @default(now()) @db.Timestamptz(6)
-  
+  id           String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  title        String?
+  start_time   DateTime @db.Timestamptz(6)
+  end_time     DateTime @db.Timestamptz(6)
+  quota        Int      @default(10)
+  booked_count Int      @default(0)
+  location     String?
+  notes        String?
+  is_active    Boolean  @default(true)
+  created_by   String?  @db.Uuid
+  created_at   DateTime @default(now()) @db.Timestamptz(6)
+  updated_at   DateTime @default(now()) @db.Timestamptz(6)
+
   // Relations
-  creator         Profile? @relation("SessionCreatedBy", fields: [created_by], references: [id])
-  bookings        JadwalUjian[]
+  creator  Profile?      @relation("SessionCreatedBy", fields: [created_by], references: [id])
+  bookings JadwalUjian[]
 
   @@map("exam_sessions")
 }
@@ -410,7 +410,7 @@ model NilaiUjian {
   detail_akademik    Json? @db.JsonB
   detail_kepribadian Json? @db.JsonB
   detail_kesiapan    Json? @db.JsonB
-  detail_wawancara   Json? @db.JsonB 
+  detail_wawancara   Json? @db.JsonB
 
   // NEW: Scores (Float for precision)
   score_akademik    Float?
@@ -432,10 +432,10 @@ model NilaiUjian {
   input_at_santri        DateTime? @db.Timestamptz(6)
 
   // Tes Quran (Split Input)
-  nilai_tes_quran        Decimal?  @db.Decimal // Moved here for logical grouping
-  catatan_quran          String?   // New field for separating notes
-  input_by_quran         String?   @db.Uuid
-  input_at_quran         DateTime? @db.Timestamptz(6)
+  nilai_tes_quran Decimal?  @db.Decimal // Moved here for logical grouping
+  catatan_quran   String? // New field for separating notes
+  input_by_quran  String?   @db.Uuid
+  input_at_quran  DateTime? @db.Timestamptz(6)
 
   // Tes Orang Tua
   nilai_wawancara_ortu Decimal?  @db.Decimal
@@ -456,7 +456,7 @@ model NilaiUjian {
   input_by_santri_profile Profile?     @relation("NilaiInputBySantri", fields: [input_by_santri], references: [id])
   input_by_ortu_profile   Profile?     @relation("NilaiInputByOrtu", fields: [input_by_ortu], references: [id])
   input_by_quran_profile  Profile?     @relation("NilaiInputByQuran", fields: [input_by_quran], references: [id])
-  
+
   @@map("nilai_ujian")
 }
 
@@ -465,22 +465,22 @@ model NilaiUjian {
 // ============================================================================
 
 model Pengumuman {
-  id                      String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  pendaftar_id            String    @unique @db.Uuid
-  tahun_ajaran_id         String    @db.Uuid
-  status_kelulusan        String
-  ranking                 Int?
-  catatan                 String?
-  surat_pengumuman_path   String?
-  google_form_link        String?
-  surat_keputusan_url     String?
-  wa_blast_sent           Boolean   @default(false)
-  wa_blast_sent_at        DateTime? @db.Timestamptz(6)
-  is_published            Boolean   @default(false)
-  published_at            DateTime? @db.Timestamptz(6)
-  published_by            String?   @db.Uuid
-  created_at              DateTime  @default(now()) @db.Timestamptz(6)
-  updated_at              DateTime  @default(now()) @db.Timestamptz(6)
+  id                    String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  pendaftar_id          String    @unique @db.Uuid
+  tahun_ajaran_id       String    @db.Uuid
+  status_kelulusan      String
+  ranking               Int?
+  catatan               String?
+  surat_pengumuman_path String?
+  google_form_link      String?
+  surat_keputusan_url   String?
+  wa_blast_sent         Boolean   @default(false)
+  wa_blast_sent_at      DateTime? @db.Timestamptz(6)
+  is_published          Boolean   @default(false)
+  published_at          DateTime? @db.Timestamptz(6)
+  published_by          String?   @db.Uuid
+  created_at            DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at            DateTime  @default(now()) @db.Timestamptz(6)
 
   // Relations
   pendaftar    Pendaftar   @relation(fields: [pendaftar_id], references: [id], onDelete: Cascade)
@@ -495,18 +495,18 @@ model Pengumuman {
 // ============================================================================
 
 model HasilSeleksi {
-  id                     String        @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  pendaftar_id           String        @unique @db.Uuid
-  tahun_ajaran_id        String        @db.Uuid
-  status_seleksi         StatusSeleksi
-  nilai_akhir            Decimal?      @db.Decimal
-  catatan_admin          String?
-  google_form_link       String?
-  surat_keputusan_path   String?
-  ditentukan_oleh        String?       @db.Uuid
-  ditentukan_pada        DateTime?     @db.Timestamptz(6)
-  created_at             DateTime      @default(now()) @db.Timestamptz(6)
-  updated_at             DateTime      @default(now()) @db.Timestamptz(6)
+  id                   String        @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  pendaftar_id         String        @unique @db.Uuid
+  tahun_ajaran_id      String        @db.Uuid
+  status_seleksi       StatusSeleksi
+  nilai_akhir          Decimal?      @db.Decimal
+  catatan_admin        String?
+  google_form_link     String?
+  surat_keputusan_path String?
+  ditentukan_oleh      String?       @db.Uuid
+  ditentukan_pada      DateTime?     @db.Timestamptz(6)
+  created_at           DateTime      @default(now()) @db.Timestamptz(6)
+  updated_at           DateTime      @default(now()) @db.Timestamptz(6)
 
   // Relations
   pendaftar    Pendaftar   @relation(fields: [pendaftar_id], references: [id], onDelete: Cascade)
@@ -526,7 +526,7 @@ model KetersediaanPenguji {
   tanggal       DateTime @db.Date
   waktu_mulai   DateTime @db.Time(6)
   waktu_selesai DateTime @db.Time(6)
-  jenis_ujian   String   // "quran" | "wawancara_santri" | "wawancara_ortu"
+  jenis_ujian   String // "quran" | "wawancara_santri" | "wawancara_ortu"
   is_available  Boolean  @default(true)
   catatan       String?
   created_at    DateTime @default(now()) @db.Timestamptz(6)
@@ -736,7 +736,7 @@ model WhatsappLog {
   id              String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   pendaftar_id    String?   @db.Uuid
   phone           String
-  jenis_notif     String    // jadwal_belum, jadwal_tersedia, konfirmasi_jadwal, reminder_h1, hasil_tes
+  jenis_notif     String // jadwal_belum, jadwal_tersedia, konfirmasi_jadwal, reminder_h1, hasil_tes
   status          String    @default("pending") // pending, processing, sent, failed, blocked
   response_data   String?
   attempt_count   Int       @default(0)
