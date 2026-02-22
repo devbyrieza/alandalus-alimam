@@ -77,13 +77,13 @@ export function calculateFinalScore(
     );
 }
 
-export function determineStatus(finalScore: number, quranScore: number): 'LULUS' | 'CADANGAN' | 'TIDAK LULUS' {
+export function determineStatus(finalScore: number, quranScore: number): 'LULUS' | 'CADANGAN' | 'DITOLAK' {
     // Critical Condition: Quran < 40 (Grade E) -> GAGAL
-    if (quranScore < 40) return 'TIDAK LULUS';
+    if (quranScore < 40) return 'DITOLAK';
 
     if (finalScore >= 70) return 'LULUS';
     if (finalScore >= 55) return 'CADANGAN';
-    return 'TIDAK LULUS';
+    return 'DITOLAK';
 }
 
 export function gradeToScore(grade: string): number {
@@ -155,12 +155,12 @@ export function determineFinalDecision(grades: {
     kepribadian: 'A' | 'B' | 'C',
     wawancaraCalsan: 'A' | 'B' | 'C',
     wawancaraCawalsan: 'A' | 'B' | 'C'
-}): 'DITERIMA' | 'CADANGAN' | 'TIDAK LULUS' {
+}): 'DITERIMA' | 'CADANGAN' | 'DITOLAK' {
     const vals = Object.values(grades);
 
-    // Kriteria TIDAK LULUS: Any 'C' in critical subjects (Quran, Wawancara Calsan, Kepribadian)
+    // Kriteria DITOLAK: Any 'C' in critical subjects (Quran, Wawancara Calsan, Kepribadian)
     if (grades.quran === 'C' || grades.wawancaraCalsan === 'C' || grades.kepribadian === 'C') {
-        return 'TIDAK LULUS';
+        return 'DITOLAK';
     }
 
     // If any 'C' remains (e.g. Akademik C or Cawalsan C), but criticals are safe -> CADANGAN

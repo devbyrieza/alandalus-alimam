@@ -163,9 +163,9 @@ export default function ExaminerDashboard() {
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{s.nama_lengkap}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{s.jenjang}</td>
                                         <td className="px-6 py-4 whitespace-nowrap">
-                                            <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${s.nilai_ujian?.status_kelulusan === 'LULUS' ? 'bg-green-100 text-green-800' :
+                                            <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${s.nilai_ujian?.status_kelulusan === 'LULUS' || s.nilai_ujian?.status_kelulusan === 'DITERIMA' ? 'bg-green-100 text-green-800' :
                                                 s.nilai_ujian?.status_kelulusan === 'CADANGAN' ? 'bg-yellow-100 text-yellow-800' :
-                                                    s.nilai_ujian?.status_kelulusan === 'TIDAK LULUS' ? 'bg-red-100 text-red-800' :
+                                                    s.nilai_ujian?.status_kelulusan === 'DITOLAK' ? 'bg-red-100 text-red-800' :
                                                         'bg-gray-100 text-gray-800'
                                                 }`}>
                                                 {s.nilai_ujian?.status_kelulusan || '-'}
