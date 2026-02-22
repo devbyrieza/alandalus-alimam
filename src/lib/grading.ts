@@ -111,12 +111,33 @@ export function scoreToGrade(score: number): string {
 
 export function evaluateKepribadianGrade(score: number): 'A' | 'B' | 'C' {
     if (score >= 70) return 'A';
+    // Kepribadian standard: > 50 is acceptable.
     if (score >= 50) return 'B';
     return 'C';
 }
 
 export function evaluateAkademikGrade(score: number): 'A' | 'B' | 'C' {
+    // Akademik Umum
     if (score >= 75) return 'A';
+    if (score >= 60) return 'B';
+    return 'C';
+}
+
+export function evaluateQuranGrade(score: number): 'A' | 'B' | 'C' {
+    // Al-Qur'an is vital in Pesantren Sunnah (Tahfidz focus).
+    // Grade A: Sangat Baik (Lancaran/Tajwid solid) -> >= 80
+    // Grade B: Cukup (Bisa dibina) -> >= 65
+    // Grade C: Kurang -> < 65  => Automatically falls to Ditolak / Cadangan strict.
+    if (score >= 80) return 'A';
+    if (score >= 65) return 'B';
+    return 'C';
+}
+
+export function evaluateWawancaraGrade(score: number): 'A' | 'B' | 'C' {
+    // Wawancara Calsan & Cawalsan (Kesiapan mental & komitmen ortu)
+    // Grade A: Sangat Siap -> >= 80
+    // Grade B: Cukup Siap -> >= 60
+    if (score >= 80) return 'A';
     if (score >= 60) return 'B';
     return 'C';
 }

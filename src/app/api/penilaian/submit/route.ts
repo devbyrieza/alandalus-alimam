@@ -6,6 +6,8 @@ import {
     gradeToScore,
     evaluateAkademikGrade,
     evaluateKepribadianGrade,
+    evaluateQuranGrade,
+    evaluateWawancaraGrade,
     evaluateStatusGrade,
     determineFinalDecision
 } from '@/lib/grading';
@@ -74,7 +76,7 @@ export async function POST(req: Request) {
             updateData.catatan_santri = details?.catatan;
             updateData.input_by_santri = examiner_id;
             updateData.input_at_santri = new Date();
-            // Logic: Update comprehensive 'score_wawancara'? 
+            // Logic: Update comprehensive 'score_wawancara'?
             // Maybe avg(santri + ortu)? Let's fetch existing to combine.
         } else if (type === 'wawancara_ortu') {
             updateData.nilai_wawancara_ortu = numericScore;
@@ -122,11 +124,11 @@ export async function POST(req: Request) {
             const totalScore = calculateFinalScore(ak, quran, wawancaraTotal, kp, ks);
 
             // Evaluasi dengan Matrix Grade Lulus/Cadangan/Tidak Lulus
-            const grdQuran = evaluateAkademikGrade(quran);
+            const grdQuran = evaluateQuranGrade(quran);
             const grdAk = evaluateAkademikGrade(ak);
             const grdKp = evaluateKepribadianGrade(kp);
-            const grdWs = evaluateAkademikGrade(ws); // Wawancara Calsan
-            const grdWo = evaluateAkademikGrade(wo); // Wawancara Cawalsan
+            const grdWs = evaluateWawancaraGrade(ws); // Wawancara Calsan
+            const grdWo = evaluateWawancaraGrade(wo); // Wawancara Cawalsan
 
             // Jika belum lengkap wawancara, anggap B biar tidak langsung gagal false-positive
             const wawancaraCalsanFinal = ws > 0 ? grdWs : 'B';
