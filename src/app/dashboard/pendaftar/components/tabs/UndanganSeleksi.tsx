@@ -282,8 +282,8 @@ export default function UndanganSeleksiTab() {
               <div
                 key={key}
                 className={`bg-white rounded-xl border-2 p-5 transition-all ${item.completed
-                    ? "border-emerald-200 bg-emerald-50/50"
-                    : "border-stone-100 hover:border-blue-200 hover:shadow-md"
+                  ? "border-emerald-200 bg-emerald-50/50"
+                  : "border-stone-100 hover:border-blue-200 hover:shadow-md"
                   }`}
               >
                 <div className="flex items-start justify-between mb-3">
@@ -313,10 +313,10 @@ export default function UndanganSeleksiTab() {
                   </p>
                 ) : (
                   <Link
-                    href="/dashboard/pendaftar/ujian"
+                    href={`/dashboard/pendaftar/ujian/${key}`}
                     className="inline-flex items-center gap-2 mt-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition-colors shadow-sm"
                   >
-                    Mulai Tes →
+                    Mulai Tes
                   </Link>
                 )}
               </div>
@@ -478,8 +478,8 @@ export default function UndanganSeleksiTab() {
                       <div
                         key={slot.id}
                         className={`bg-white rounded-xl shadow-sm p-5 border-2 transition-all ${slot.isFull
-                            ? "opacity-75 border-stone-100 bg-stone-50"
-                            : "border-stone-100 hover:border-purple-300 hover:shadow-md"
+                          ? "opacity-75 border-stone-100 bg-stone-50"
+                          : "border-stone-100 hover:border-purple-300 hover:shadow-md"
                           }`}
                       >
                         <div className="flex justify-between items-start mb-3">
