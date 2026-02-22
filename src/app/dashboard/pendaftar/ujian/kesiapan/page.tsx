@@ -16,6 +16,7 @@ export default function KesiapanTestPage() {
     const totalQuestions = KESIAPAN_QUESTIONS.reduce((acc, s) => acc + s.items.length, 0);
 
     useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         // Check if already completed
         fetch('/api/pendaftar/undangan-seleksi')
             .then(res => res.json())
@@ -89,8 +90,8 @@ export default function KesiapanTestPage() {
                 <ArrowLeft className="w-4 h-4" /> Kembali
             </button>
 
-            <div className="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-xl p-6 text-white mb-6">
-                <h1 className="text-xl font-bold">Tes Kesiapan Calon Santri/Wati</h1>
+            <div className="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-xl p-6 mb-6">
+                <h1 className="text-xl font-bold text-white">Tes Kesiapan Calon Santri/Wati</h1>
                 <p className="text-emerald-100 text-sm mt-1">15 pernyataan • Skala 1-5 • Durasi 45 menit</p>
             </div>
 

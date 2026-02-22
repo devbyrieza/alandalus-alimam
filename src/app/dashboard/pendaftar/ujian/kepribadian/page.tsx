@@ -19,6 +19,7 @@ export default function KepribadianTestPage() {
     const currentQuestions = KEPRIBADIAN_QUESTIONS.slice(page * ITEMS_PER_PAGE, (page + 1) * ITEMS_PER_PAGE);
 
     useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         fetch('/api/pendaftar/undangan-seleksi')
             .then(res => res.json())
             .then(data => {
@@ -35,7 +36,7 @@ export default function KepribadianTestPage() {
             return;
         }
         setPage(p => p + 1);
-        window.scrollTo(0, 0);
+        setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50);
     };
 
     const handleSubmit = async () => {
@@ -100,8 +101,8 @@ export default function KepribadianTestPage() {
                 <ArrowLeft className="w-4 h-4" /> Kembali
             </button>
 
-            <div className="bg-gradient-to-r from-violet-600 to-purple-700 rounded-xl p-6 text-white mb-6">
-                <h1 className="text-xl font-bold">Tes Identifikasi Kepribadian</h1>
+            <div className="bg-gradient-to-r from-violet-600 to-purple-700 rounded-xl p-6 mb-6">
+                <h1 className="text-xl font-bold text-white">Tes Identifikasi Kepribadian</h1>
                 <p className="text-violet-100 text-sm mt-1">100 pernyataan • Pilih A atau B • Durasi 75 menit</p>
                 <p className="text-violet-200 text-xs mt-2">Pilihlah pernyataan A atau B yang sesuai dengan kepribadianmu!</p>
             </div>
@@ -145,7 +146,7 @@ export default function KepribadianTestPage() {
             {/* Navigation */}
             <div className="sticky bottom-4 z-10 flex gap-3">
                 {page > 0 && (
-                    <button onClick={() => { setPage(p => p - 1); window.scrollTo(0, 0); }}
+                    <button onClick={() => { setPage(p => p - 1); setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50); }}
                         className="flex-1 py-4 bg-white border-2 border-stone-300 hover:bg-stone-50 text-stone-700 font-bold rounded-xl shadow-lg transition-colors">
                         Sebelumnya
                     </button>

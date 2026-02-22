@@ -20,6 +20,7 @@ export default function AkademikTestPage() {
     const [started, setStarted] = useState(false);
 
     useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         fetch('/api/pendaftar/undangan-seleksi')
             .then(res => res.json())
             .then(data => {
@@ -62,6 +63,7 @@ export default function AkademikTestPage() {
     const handleStart = () => {
         setStarted(true);
         setTimerActive(true);
+        setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50);
     };
 
     const handleSubmit = async (autoSubmit = false) => {
@@ -162,8 +164,8 @@ export default function AkademikTestPage() {
             </div>
 
             <div className="mt-2 space-y-6">
-                <div className="bg-gradient-to-r from-indigo-600 to-blue-700 rounded-xl p-6 text-white">
-                    <h2 className="text-xl font-bold">Tes Akademik — {jenjang}</h2>
+                <div className="bg-gradient-to-r from-indigo-600 to-blue-700 rounded-xl p-6">
+                    <h2 className="text-xl font-bold text-white">Tes Akademik — {jenjang}</h2>
                     <p className="text-indigo-100 text-sm mt-1">{Object.keys(answers).length}/{questions.length} soal terjawab</p>
                 </div>
 
