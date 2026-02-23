@@ -74,6 +74,8 @@ export async function PATCH(
         if (isAdmin || isQuran || isQuranFallback) {
             if (body.nilai_tes_quran !== undefined) updateData.nilai_tes_quran = body.nilai_tes_quran;
             if (body.catatan_quran !== undefined) updateData.catatan_quran = body.catatan_quran;
+            if (body.detail_quran !== undefined) updateData.detail_quran = body.detail_quran;
+            if (body.score_quran !== undefined) updateData.score_quran = body.score_quran;
             if (session.user_id) updateData.input_by_quran = session.user_id;
             updateData.input_at_quran = new Date();
         }
@@ -81,6 +83,8 @@ export async function PATCH(
         if (isAdmin || isWawancara || isWawancaraFallback) {
             if (body.nilai_wawancara_santri !== undefined) updateData.nilai_wawancara_santri = body.nilai_wawancara_santri;
             if (body.catatan_santri !== undefined) updateData.catatan_santri = body.catatan_santri;
+            if (body.detail_wawancara !== undefined) updateData.detail_wawancara = body.detail_wawancara;
+            if (body.score_wawancara !== undefined) updateData.score_wawancara = body.score_wawancara;
             if (session.user_id) updateData.input_by_santri = session.user_id;
             updateData.input_at_santri = new Date();
         }
@@ -88,6 +92,7 @@ export async function PATCH(
         if (isAdmin || isOrtu || isOrtuFallback) {
             if (body.nilai_wawancara_ortu !== undefined) updateData.nilai_wawancara_ortu = body.nilai_wawancara_ortu;
             if (body.catatan_ortu !== undefined) updateData.catatan_ortu = body.catatan_ortu;
+            if (body.detail_cawalsan !== undefined) updateData.detail_cawalsan = body.detail_cawalsan;
             if (session.user_id) updateData.input_by_ortu = session.user_id;
             updateData.input_at_ortu = new Date();
         }

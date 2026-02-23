@@ -82,6 +82,12 @@ export async function GET() {
                 catatan_santri: score.catatan_santri,
                 catatan_quran: score.catatan_quran,
                 catatan_ortu: score.catatan_ortu,
+                // Detail JSONB data for comprehensive forms
+                detail_quran: score.detail_quran,
+                detail_wawancara: score.detail_wawancara,
+                detail_cawalsan: score.detail_cawalsan,
+                score_quran: score.score_quran,
+                score_wawancara: score.score_wawancara,
                 // ID for updating score
                 nilai_id: score.id,
             };
