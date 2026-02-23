@@ -122,13 +122,16 @@ export async function POST(request: Request) {
             const pendaftar = await tx.pendaftar.findUnique({ where: { id: session.id } });
             if (!pendaftar) throw new Error("Data pendaftar tidak ditemukan");
 
-            let pengujiFields = {};
-            if (examSession.title === "Tes Al-Quran") {
-                pengujiFields = { penguji_quran_id: examSession.created_by };
-            } else if (examSession.title === "Wawancara Calsan" || examSession.title === "Wawancara Santri") {
-                pengujiFields = { penguji_santri_id: examSession.created_by };
-            } else if (examSession.title === "Wawancara Cawalsan" || examSession.title === "Wawancara Orangtua/Wali") {
-                pengujiFields = { penguji_ortu_id: examSession.created_by };
+            let pengujiFields: Record<string, string> = {};
+            const sessionTitle = (examSession.title || "").toLowerCase();
+            if (examSession.created_by) {
+                if (sessionTitle.includes("qur") || sessionTitle.includes("quran")) {
+                    pengujiFields = { penguji_quran_id: examSession.created_by };
+                } else if (sessionTitle.includes("calsan") || sessionTitle.includes("santri")) {
+                    pengujiFields = { penguji_santri_id: examSession.created_by };
+                } else if (sessionTitle.includes("cawalsan") || sessionTitle.includes("ortu") || sessionTitle.includes("orang")) {
+                    pengujiFields = { penguji_ortu_id: examSession.created_by };
+                }
             }
 
             const jadwal = await tx.jadwalUjian.create({
