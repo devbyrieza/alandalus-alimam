@@ -30,6 +30,7 @@ export async function GET() {
                 { penguji_santri_id: userId },
                 { penguji_quran_id: userId },
                 { penguji_ortu_id: userId },
+                { exam_session: { created_by: userId } },
             ]
         };
 
@@ -70,6 +71,7 @@ export async function GET() {
                         start_time: true,
                         end_time: true,
                         location: true,
+                        created_by: true,
                     }
                 }
             },
@@ -82,6 +84,15 @@ export async function GET() {
             if (item.penguji_santri_id === userId) jenis_tugas.push("Wawancara Calsan");
             if (item.penguji_quran_id === userId) jenis_tugas.push("Tes Al-Qur'an");
             if (item.penguji_ortu_id === userId) jenis_tugas.push("Wawancara Cawalsan");
+
+            // Fallback: if matched via exam_session.created_by, derive from session title
+            if (jenis_tugas.length === 0 && item.exam_session?.created_by === userId) {
+                const title = (item.exam_session.title || "").toLowerCase();
+                if (title.includes("qur") || title.includes("quran")) jenis_tugas.push("Tes Al-Qur'an");
+                else if (title.includes("calsan") || title.includes("santri")) jenis_tugas.push("Wawancara Calsan");
+                else if (title.includes("cawalsan") || title.includes("ortu") || title.includes("orang")) jenis_tugas.push("Wawancara Cawalsan");
+                else jenis_tugas.push(item.exam_session.title || "Ujian");
+            }
 
             return {
                 id: item.id,
@@ -101,6 +112,8 @@ export async function GET() {
                 penguji_santri_id: item.penguji_santri_id,
                 penguji_quran_id: item.penguji_quran_id,
                 penguji_ortu_id: item.penguji_ortu_id,
+                // Also pass created_by so frontend can check
+                session_created_by: item.exam_session?.created_by,
             };
         });
 

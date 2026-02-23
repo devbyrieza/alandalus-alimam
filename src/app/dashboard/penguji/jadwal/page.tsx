@@ -53,6 +53,7 @@ interface JadwalAssignment {
   penguji_santri_id?: string;
   penguji_quran_id?: string;
   penguji_ortu_id?: string;
+  session_created_by?: string;
 }
 
 interface ExamSession {
@@ -347,52 +348,73 @@ export default function JadwalPengujiPage() {
                         </div>
 
                         {/* Action Buttons: Status Completion */}
-                        <div className="mt-3 flex flex-wrap gap-2">
-                          {userId && item.penguji_santri_id === userId && (
-                            item.status_santri === 'completed' ? (
-                              <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
-                                <CheckCircle className="w-3 h-3" /> Wawancara Calsan Selesai
-                              </span>
-                            ) : (
-                              <button
-                                onClick={() => handleCompleteExam(item.id)}
-                                className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
-                              >
-                                Tandai Wawancara Selesai
-                              </button>
-                            )
-                          )}
+                        {(() => {
+                          // Determine which roles this penguji has for this jadwal
+                          const isSantri = item.penguji_santri_id === userId;
+                          const isQuran = item.penguji_quran_id === userId;
+                          const isOrtu = item.penguji_ortu_id === userId;
+                          const isCreator = item.session_created_by === userId;
 
-                          {userId && item.penguji_quran_id === userId && (
-                            item.status_quran === 'completed' ? (
-                              <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
-                                <CheckCircle className="w-3 h-3" /> Tes Al-Qur'an Selesai
-                              </span>
-                            ) : (
-                              <button
-                                onClick={() => handleCompleteExam(item.id)}
-                                className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
-                              >
-                                Tandai Tes Al-Qur'an Selesai
-                              </button>
-                            )
-                          )}
+                          // Fallback: if matched via session creator, derive from jenis_tugas
+                          let showSantri = isSantri;
+                          let showQuran = isQuran;
+                          let showOrtu = isOrtu;
+                          if (!isSantri && !isQuran && !isOrtu && isCreator) {
+                            const tugas = (item.jenis_tugas || "").toLowerCase();
+                            if (tugas.includes("calsan") || tugas.includes("santri")) showSantri = true;
+                            if (tugas.includes("qur")) showQuran = true;
+                            if (tugas.includes("cawalsan") || tugas.includes("ortu")) showOrtu = true;
+                          }
 
-                          {userId && item.penguji_ortu_id === userId && (
-                            item.status_ortu === 'completed' ? (
-                              <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
-                                <CheckCircle className="w-3 h-3" /> Wawancara Cawalsan Selesai
-                              </span>
-                            ) : (
-                              <button
-                                onClick={() => handleCompleteExam(item.id)}
-                                className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
-                              >
-                                Tandai Wawancara Cawalsan Selesai
-                              </button>
-                            )
-                          )}
-                        </div>
+                          return (
+                            <div className="mt-3 flex flex-wrap gap-2">
+                              {userId && showSantri && (
+                                item.status_santri === 'completed' ? (
+                                  <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
+                                    <CheckCircle className="w-3 h-3" /> Wawancara Calsan Selesai
+                                  </span>
+                                ) : (
+                                  <button
+                                    onClick={() => handleCompleteExam(item.id)}
+                                    className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
+                                  >
+                                    Tandai Wawancara Selesai
+                                  </button>
+                                )
+                              )}
+
+                              {userId && showQuran && (
+                                item.status_quran === 'completed' ? (
+                                  <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
+                                    <CheckCircle className="w-3 h-3" /> Tes Al-Qur'an Selesai
+                                  </span>
+                                ) : (
+                                  <button
+                                    onClick={() => handleCompleteExam(item.id)}
+                                    className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
+                                  >
+                                    Tandai Tes Al-Qur'an Selesai
+                                  </button>
+                                )
+                              )}
+
+                              {userId && showOrtu && (
+                                item.status_ortu === 'completed' ? (
+                                  <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
+                                    <CheckCircle className="w-3 h-3" /> Wawancara Cawalsan Selesai
+                                  </span>
+                                ) : (
+                                  <button
+                                    onClick={() => handleCompleteExam(item.id)}
+                                    className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
+                                  >
+                                    Tandai Wawancara Cawalsan Selesai
+                                  </button>
+                                )
+                              )}
+                            </div>
+                          );
+                        })()}
 
                         <button
                           onClick={() => {

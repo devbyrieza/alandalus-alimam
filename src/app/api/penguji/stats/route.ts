@@ -32,10 +32,12 @@ export async function GET() {
                     { penguji_santri_id: userId },
                     { penguji_quran_id: userId },
                     { penguji_ortu_id: userId },
+                    { exam_session: { created_by: userId } },
                 ]
             },
             include: {
-                nilai_ujian: true
+                nilai_ujian: true,
+                exam_session: { select: { title: true, created_by: true } },
             }
         });
 
@@ -49,18 +51,27 @@ export async function GET() {
         let belum_dinilai = 0;
 
         assigned.forEach(item => {
-            const roles = [];
+            const roles: string[] = [];
             if (item.penguji_santri_id === userId) roles.push('santri');
             if (item.penguji_quran_id === userId) roles.push('quran');
             if (item.penguji_ortu_id === userId) roles.push('ortu');
 
-            const score = item.nilai_ujian?.[0] || {};
+            // Fallback: if matched via exam_session.created_by
+            if (roles.length === 0 && item.exam_session && item.exam_session.created_by === userId) {
+                const title = (item.exam_session.title || "").toLowerCase();
+                if (title.includes("qur") || title.includes("quran")) roles.push('quran');
+                else if (title.includes("calsan") || title.includes("santri")) roles.push('santri');
+                else if (title.includes("cawalsan") || title.includes("ortu") || title.includes("orang")) roles.push('ortu');
+            }
+
+            const score = (item as any).nilai_ujian?.[0] || {};
 
             // Logic: Is it finished for THIS examiner?
             let isItemFinished = true;
             if (roles.includes('santri') && !score.nilai_wawancara_santri) isItemFinished = false;
             if (roles.includes('quran') && !score.nilai_tes_quran) isItemFinished = false;
             if (roles.includes('ortu') && !score.nilai_wawancara_ortu) isItemFinished = false;
+            if (roles.length === 0) isItemFinished = false; // unknown role = not finished
 
             if (isItemFinished) selesai_dinilai++;
             else belum_dinilai++;

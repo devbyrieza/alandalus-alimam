@@ -63,7 +63,30 @@ export async function POST(request: Request) {
             updates.status_ortu = "completed";
             updatedField = "Wawancara Cawalsan";
         } else {
-            return NextResponse.json({ error: "You are not assigned to this exam" }, { status: 403 });
+            // Fallback: check if user is the session creator and derive role from session title
+            const session = await prisma.examSession.findFirst({
+                where: { id: jadwal.exam_session_id ?? undefined },
+                select: { created_by: true, title: true }
+            });
+            if (session && session.created_by === userId) {
+                const title = (session.title || "").toLowerCase();
+                if (title.includes("qur") || title.includes("quran")) {
+                    updates.status_quran = "completed";
+                    updates.penguji_quran_id = userId; // Also fix the missing assignment
+                    updatedField = "Tes Al-Qur'an";
+                } else if (title.includes("calsan") || title.includes("santri")) {
+                    updates.status_santri = "completed";
+                    updates.penguji_santri_id = userId;
+                    updatedField = "Wawancara Calsan";
+                } else if (title.includes("cawalsan") || title.includes("ortu") || title.includes("orang")) {
+                    updates.status_ortu = "completed";
+                    updates.penguji_ortu_id = userId;
+                    updatedField = "Wawancara Cawalsan";
+                }
+            }
+            if (!updatedField) {
+                return NextResponse.json({ error: "You are not assigned to this exam" }, { status: 403 });
+            }
         }
 
         // 3. Update Status

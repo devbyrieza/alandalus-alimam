@@ -28,6 +28,7 @@ export async function GET() {
                 { penguji_santri_id: userId }, // Wawancara Calsan (or general Interview)
                 { penguji_quran_id: userId },   // Tes Quran
                 { penguji_ortu_id: userId },    // Wawancara Cawalsan
+                { exam_session: { created_by: userId } }, // Sessions created by this penguji
             ]
         };
 
@@ -43,6 +44,7 @@ export async function GET() {
                     }
                 },
                 nilai_ujian: true, // Fetch scores
+                exam_session: { select: { title: true, created_by: true } },
             },
             orderBy: { tanggal_ujian: 'asc' }
         });
@@ -54,8 +56,15 @@ export async function GET() {
             if (item.penguji_quran_id === userId) roles.push('quran');
             if (item.penguji_ortu_id === userId) roles.push('ortu');
 
+            // Fallback: if matched via exam_session.created_by, derive role from session title
+            if (roles.length === 0 && item.exam_session?.created_by === userId) {
+                const title = (item.exam_session.title || "").toLowerCase();
+                if (title.includes("qur") || title.includes("quran")) roles.push('quran');
+                else if (title.includes("calsan") || title.includes("santri")) roles.push('wawancara');
+                else if (title.includes("cawalsan") || title.includes("ortu") || title.includes("orang")) roles.push('ortu');
+            }
+
             // Find or create NilaiUjian entry (should exist if schedule exists, or created on demand)
-            // Usually NilaiUjian is linked by pendaftar_id or jadwal_ujian_id.
             // Prisma `nilai_ujian` is array (one-to-many), assume one valid entry or empty.
             const score = item.nilai_ujian?.[0] || {};
 

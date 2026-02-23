@@ -38,7 +38,11 @@ export async function PATCH(
                     { penguji_santri_id: userId },
                     { penguji_quran_id: userId },
                     { penguji_ortu_id: userId },
+                    { exam_session: { created_by: userId } },
                 ]
+            },
+            include: {
+                exam_session: { select: { title: true, created_by: true } }
             }
         });
 
@@ -54,23 +58,34 @@ export async function PATCH(
         const isOrtu = assignment?.penguji_ortu_id === userId;
         const isAdmin = ['admin_super', 'admin', 'head_of_it'].includes(session.role);
 
+        // Fallback: if matched via exam_session.created_by, derive role from session title
+        let isWawancaraFallback = false;
+        let isQuranFallback = false;
+        let isOrtuFallback = false;
+        if (!isWawancara && !isQuran && !isOrtu && assignment && assignment.exam_session && assignment.exam_session.created_by === userId) {
+            const title = (assignment.exam_session.title || "").toLowerCase();
+            if (title.includes("qur") || title.includes("quran")) isQuranFallback = true;
+            else if (title.includes("calsan") || title.includes("santri")) isWawancaraFallback = true;
+            else if (title.includes("cawalsan") || title.includes("ortu") || title.includes("orang")) isOrtuFallback = true;
+        }
+
         const updateData: any = {};
 
-        if (isAdmin || isQuran) {
+        if (isAdmin || isQuran || isQuranFallback) {
             if (body.nilai_tes_quran !== undefined) updateData.nilai_tes_quran = body.nilai_tes_quran;
             if (body.catatan_quran !== undefined) updateData.catatan_quran = body.catatan_quran;
             if (session.user_id) updateData.input_by_quran = session.user_id;
             updateData.input_at_quran = new Date();
         }
 
-        if (isAdmin || isWawancara) {
+        if (isAdmin || isWawancara || isWawancaraFallback) {
             if (body.nilai_wawancara_santri !== undefined) updateData.nilai_wawancara_santri = body.nilai_wawancara_santri;
             if (body.catatan_santri !== undefined) updateData.catatan_santri = body.catatan_santri;
             if (session.user_id) updateData.input_by_santri = session.user_id;
             updateData.input_at_santri = new Date();
         }
 
-        if (isAdmin || isOrtu) {
+        if (isAdmin || isOrtu || isOrtuFallback) {
             if (body.nilai_wawancara_ortu !== undefined) updateData.nilai_wawancara_ortu = body.nilai_wawancara_ortu;
             if (body.catatan_ortu !== undefined) updateData.catatan_ortu = body.catatan_ortu;
             if (session.user_id) updateData.input_by_ortu = session.user_id;
