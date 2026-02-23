@@ -323,7 +323,7 @@ export default function LoginPage() {
                       type="email"
                       value={emailAdmin}
                       onChange={(e) => setEmailAdmin(e.target.value)}
-                      placeholder="admin@alimam.sch.id"
+                      placeholder="admin@pesantren-alimam.com"
                       className="w-full px-8 py-5 pl-16 rounded-[1.5rem] bg-surface-50 border border-transparent focus:bg-white focus:border-gold-300 focus:ring-4 focus:ring-gold-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-500"
                       disabled={isLoading}
                     />
