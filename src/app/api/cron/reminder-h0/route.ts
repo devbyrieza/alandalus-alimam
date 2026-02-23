@@ -1,14 +1,15 @@
 /**
- * Cron endpoint for H-1 reminders.
- * Called daily at 08:00 WIB by external cron.
- * Finds all jadwal with tes tomorrow and enqueues reminder if not already sent.
+ * Cron endpoint for H-0 reminders (1 hour before exam).
+ * Called every 15 minutes by external cron.
+ * Finds all jadwal with exams starting within the next 60-75 minutes
+ * and enqueues reminder if not already sent.
  */
 
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import {
     enqueueWhatsapp,
-    buildMessageReminderH1,
+    buildMessageReminderH0,
 } from "@/lib/whatsapp-queue";
 
 const CRON_SECRET = process.env.CRON_SECRET || "ppdb-alimam-cron-2026";
@@ -24,23 +25,19 @@ export async function GET(request: Request) {
     }
 
     try {
-        // Calculate tomorrow's date range (in WIB = UTC+7)
+        // Find exams starting in the next 60-75 minutes
         const now = new Date();
-        // Tomorrow at 00:00 WIB
-        const tomorrowStart = new Date(now);
-        tomorrowStart.setDate(tomorrowStart.getDate() + 1);
-        tomorrowStart.setHours(0, 0, 0, 0);
+        const oneHourFromNow = new Date(now.getTime() + 60 * 60 * 1000);
+        const windowEnd = new Date(now.getTime() + 75 * 60 * 1000); // 15-min buffer for cron interval
 
-        // Tomorrow at 23:59 WIB
-        const tomorrowEnd = new Date(tomorrowStart);
-        tomorrowEnd.setHours(23, 59, 59, 999);
-
-        // Find all jadwal_ujian scheduled for tomorrow
-        const jadwalTomorrow = await prisma.jadwalUjian.findMany({
+        // Find all jadwal_ujian with exam sessions starting within the window
+        const jadwalSoon = await prisma.jadwalUjian.findMany({
             where: {
-                tanggal_ujian: {
-                    gte: tomorrowStart,
-                    lte: tomorrowEnd,
+                exam_session: {
+                    start_time: {
+                        gte: oneHourFromNow,
+                        lte: windowEnd,
+                    },
                 },
             },
             include: {
@@ -55,7 +52,6 @@ export async function GET(request: Request) {
                     select: {
                         title: true,
                         start_time: true,
-                        end_time: true,
                         location: true,
                     },
                 },
@@ -67,10 +63,10 @@ export async function GET(request: Request) {
         let skipped = 0;
         const errors: string[] = [];
 
-        for (const jadwal of jadwalTomorrow) {
-            // Check if H-1 reminder already sent for this jadwal+pendaftar
+        for (const jadwal of jadwalSoon) {
+            // Check if H-0 reminder already sent
             const existingReminder = jadwal.notif_reminders.find(
-                (r) => r.pendaftar_id === jadwal.pendaftar_id && r.reminder_type === "h1"
+                (r: any) => r.pendaftar_id === jadwal.pendaftar_id && r.reminder_type === "h0"
             );
 
             if (existingReminder?.reminder_sent) {
@@ -83,34 +79,21 @@ export async function GET(request: Request) {
                 continue;
             }
 
-            // Build reminder message
-            const tanggal = new Date(jadwal.tanggal_ujian).toLocaleDateString(
+            if (!jadwal.exam_session) {
+                skipped++;
+                continue;
+            }
+
+            const waktu = new Date(jadwal.exam_session.start_time).toLocaleTimeString(
                 "id-ID",
-                {
-                    weekday: "long",
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                }
+                { hour: "2-digit", minute: "2-digit" }
             );
 
-            const waktu = jadwal.exam_session
-                ? new Date(jadwal.exam_session.start_time).toLocaleTimeString(
-                    "id-ID",
-                    { hour: "2-digit", minute: "2-digit" }
-                )
-                : new Date(jadwal.waktu_mulai_santri).toLocaleTimeString("id-ID", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                });
+            const lokasi = jadwal.exam_session.location || "Pesantren Al-Imam";
+            const jenisUjian = jadwal.exam_session.title || "Seleksi Santri Baru";
 
-            const lokasi =
-                jadwal.exam_session?.location || jadwal.tempat_santri || "Pesantren Al-Imam";
-            const jenisUjian = jadwal.exam_session?.title || "Seleksi Santri Baru";
-
-            const message = buildMessageReminderH1(
+            const message = buildMessageReminderH0(
                 jadwal.pendaftar.nama_lengkap,
-                tanggal,
                 waktu,
                 lokasi,
                 jenisUjian
@@ -120,7 +103,7 @@ export async function GET(request: Request) {
             const result = await enqueueWhatsapp({
                 pendaftarId: jadwal.pendaftar_id,
                 phone: jadwal.pendaftar.no_hp,
-                jenisNotif: "reminder_h1",
+                jenisNotif: "reminder_h0",
                 messageContent: message,
             });
 
@@ -131,15 +114,15 @@ export async function GET(request: Request) {
                         jadwal_ujian_id_pendaftar_id_reminder_type: {
                             jadwal_ujian_id: jadwal.id,
                             pendaftar_id: jadwal.pendaftar_id,
-                            reminder_type: "h1",
+                            reminder_type: "h0",
                         },
                     },
                     update: {},
                     create: {
                         jadwal_ujian_id: jadwal.id,
                         pendaftar_id: jadwal.pendaftar_id,
-                        reminder_type: "h1",
-                        reminder_sent: false, // Will be set true after actually sent by queue
+                        reminder_type: "h0",
+                        reminder_sent: false,
                     },
                 });
                 enqueued++;
@@ -150,14 +133,14 @@ export async function GET(request: Request) {
 
         return NextResponse.json({
             success: true,
-            totalJadwalTomorrow: jadwalTomorrow.length,
+            totalJadwalSoon: jadwalSoon.length,
             enqueued,
             skipped,
             errors,
             timestamp: new Date().toISOString(),
         });
     } catch (error: any) {
-        console.error("❌ Cron Reminder error:", error);
+        console.error("❌ Cron H-0 Reminder error:", error);
         return NextResponse.json(
             { error: error.message },
             { status: 500 }

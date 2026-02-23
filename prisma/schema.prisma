@@ -774,6 +774,7 @@ model JadwalNotifReminder {
   id              String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   jadwal_ujian_id String    @db.Uuid
   pendaftar_id    String    @db.Uuid
+  reminder_type   String    @default("h1") // "h1" = H-1 day before, "h0" = 1 hour before
   reminder_sent   Boolean   @default(false)
   sent_at         DateTime? @db.Timestamptz(6)
   created_at      DateTime  @default(now()) @db.Timestamptz(6)
@@ -782,7 +783,7 @@ model JadwalNotifReminder {
   jadwal_ujian JadwalUjian @relation(fields: [jadwal_ujian_id], references: [id], onDelete: Cascade)
   pendaftar    Pendaftar   @relation(fields: [pendaftar_id], references: [id], onDelete: Cascade)
 
-  @@unique([jadwal_ujian_id, pendaftar_id])
+  @@unique([jadwal_ujian_id, pendaftar_id, reminder_type])
   @@map("jadwal_notif_reminder")
 }
 

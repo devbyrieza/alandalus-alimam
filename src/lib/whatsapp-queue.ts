@@ -24,6 +24,7 @@ export type NotifType =
     | "jadwal_langsung_tersedia"
     | "konfirmasi_jadwal"
     | "reminder_h1"
+    | "reminder_h0"
     | "hasil_tes";
 
 export interface EnqueueParams {
@@ -638,13 +639,35 @@ export function buildMessageReminderH1(
 
 Pengingat: ${jenisUjian} Anda dijadwalkan besok.
 
-Tanggal: ${tanggal}
-Waktu: ${waktu} WIB
-Tempat: ${lokasi}
+📋 *${jenisUjian}*
+📅 Tanggal: ${tanggal}
+⏰ Waktu: ${waktu} WIB
+📍 Tempat/Link: ${lokasi}
 
 Mohon hadir tepat waktu dan persiapkan diri dengan baik. Semoga dimudahkan dan diberkahi.
 
 Dashboard: ${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar/undangan-seleksi
+
+Jazakumullahu khairan,
+Panitia PPDB Al-Imam`;
+}
+
+export function buildMessageReminderH0(
+    nama: string,
+    waktu: string,
+    lokasi: string,
+    jenisUjian: string
+): string {
+    return `${pickOpening()} ${nama},
+
+⏰ *PENGINGAT: ${jenisUjian} dimulai 1 jam lagi!*
+
+🕐 Waktu: ${waktu} WIB
+📍 Tempat/Link: ${lokasi}
+
+Mohon segera bersiap. Pastikan koneksi internet stabil jika ujian dilakukan secara online.
+
+Semoga dimudahkan dan diberkahi.
 
 Jazakumullahu khairan,
 Panitia PPDB Al-Imam`;
