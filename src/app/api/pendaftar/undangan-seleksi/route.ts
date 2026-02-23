@@ -184,10 +184,22 @@ export async function GET() {
         }));
 
         // Calculate overall progress
-        const totalTests = 6; // 3 Grup A + 3 Grup B (potential)
+        // Grup B: only count as completed when status is "completed", not just "scheduled"
+        const totalTests = 6; // 3 Grup A + 3 Grup B
+        const grupBCompleted = bookedJadwal.filter((j) => {
+            const title = j.exam_session?.title || "";
+            if (title.includes("Qur'an") || title.includes("Quran")) {
+                return j.status_quran === "completed";
+            } else if (title.includes("Cawalsan") || title.includes("Orang Tua") || title.includes("Ortu")) {
+                return j.status_ortu === "completed";
+            } else {
+                // Wawancara Calsan / Wawancara Santri
+                return j.status_santri === "completed";
+            }
+        }).length;
         const completedTests =
             [hasAkademik, hasKepribadian, hasKesiapan].filter(Boolean).length +
-            bookedJadwal.length; // Booked counts as "in progress"
+            grupBCompleted;
         const progress = Math.round((completedTests / totalTests) * 100);
 
         return NextResponse.json({
