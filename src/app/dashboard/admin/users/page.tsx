@@ -319,7 +319,7 @@ export default function UserManagementPage() {
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                {['penguji_santri', 'pewawancara_ortu', 'penguji_umum'].includes(user.role) && (
+                                                {['penguji', 'penguji_santri', 'pewawancara_ortu', 'penguji_umum'].includes(user.role) && (
                                                     <button
                                                         onClick={() => handleGenerateMagicLink(user.id, user.full_name)}
                                                         className="p-2 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
