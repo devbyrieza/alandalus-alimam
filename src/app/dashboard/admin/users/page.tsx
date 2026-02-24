@@ -33,8 +33,8 @@ const ROLE_OPTIONS = [
     { value: "admin_super", label: "Admin Super (Mudir/Ketua)" },
     { value: "admin_berkas", label: "Admin Berkas" },
     { value: "admin_keuangan", label: "Admin Keuangan" },
-    { value: "penguji_santri", label: "Penguji Santri (Al-Quran & Wawancara)" },
-    { value: "pewawancara_ortu", label: "Pewawancara Ortu" },
+    { value: "penguji_santri", label: "Penguji Calsan (Al-Quran & Wawancara)" },
+    { value: "pewawancara_ortu", label: "Pewawancara Calsan" },
     { value: "penguji_umum", label: "Penguji Umum (Semua)" },
 ];
 
