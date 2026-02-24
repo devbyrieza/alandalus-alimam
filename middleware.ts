@@ -42,7 +42,7 @@ export async function middleware(request: NextRequest) {
   // PROTECT: /dashboard/admin
   // ═══════════════════════════════════════════
   if (pathname.startsWith("/dashboard/admin")) {
-    const allowedAdminRoles = ["admin_berkas", "admin_keuangan", "admin_super", "admin", "head_of_it"];
+    const allowedAdminRoles = ["admin_berkas", "admin_keuangan", "admin_super", "admin", "head_of_it", "tim_it"];
     if (!userRole || !allowedAdminRoles.includes(userRole)) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
@@ -52,7 +52,8 @@ export async function middleware(request: NextRequest) {
   // PROTECT: /dashboard/penguji
   // ═══════════════════════════════════════════
   if (pathname.startsWith("/dashboard/penguji")) {
-    if (!userRole || (userRole !== "penguji" && userRole !== "admin_super")) {
+    const allowedPengujiRoles = ["penguji", "penguji_calsan", "pewawancara_calsan", "pewawancara_cawalsan", "admin_super"];
+    if (!userRole || !allowedPengujiRoles.includes(userRole)) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
   }
@@ -67,9 +68,9 @@ export async function middleware(request: NextRequest) {
 
     if (userRole === "pendaftar") {
       return NextResponse.redirect(new URL("/dashboard/pendaftar", request.url));
-    } else if (["admin_berkas", "admin_keuangan", "admin_super", "admin", "head_of_it"].includes(userRole)) {
+    } else if (["admin_berkas", "admin_keuangan", "admin_super", "admin", "head_of_it", "tim_it"].includes(userRole)) {
       return NextResponse.redirect(new URL("/dashboard/admin", request.url));
-    } else if (userRole === "penguji") {
+    } else if (["penguji", "penguji_calsan", "pewawancara_calsan", "pewawancara_cawalsan"].includes(userRole)) {
       return NextResponse.redirect(new URL("/dashboard/penguji", request.url));
     }
 
@@ -82,9 +83,9 @@ export async function middleware(request: NextRequest) {
   if (pathname === "/login" && userRole) {
     if (userRole === "pendaftar") {
       return NextResponse.redirect(new URL("/dashboard/pendaftar", request.url));
-    } else if (["admin_berkas", "admin_keuangan", "admin_super", "admin", "head_of_it"].includes(userRole)) {
+    } else if (["admin_berkas", "admin_keuangan", "admin_super", "admin", "head_of_it", "tim_it"].includes(userRole)) {
       return NextResponse.redirect(new URL("/dashboard/admin", request.url));
-    } else if (userRole === "penguji") {
+    } else if (["penguji", "penguji_calsan", "pewawancara_calsan", "pewawancara_cawalsan"].includes(userRole)) {
       return NextResponse.redirect(new URL("/dashboard/penguji", request.url));
     }
   }

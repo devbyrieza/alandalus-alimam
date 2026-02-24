@@ -379,54 +379,62 @@ export function canInputScores(role: UserRole): boolean {
 
 // Get menu items based on role
 export function getMenuItemsForRole(role: UserRole): { name: string; href: string; icon: string }[] {
-  const baseMenuItems = {
+  const baseMenuItems: Record<string, { name: string; href: string; icon: string }[]> = {
     admin_berkas: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
       { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
       { name: 'Permintaan Edit', href: '/dashboard/admin/perubahan-data', icon: 'Edit3' },
       { name: 'Verifikasi Dokumen', href: '/dashboard/admin/verifikasi-dokumen', icon: 'FileCheck' },
+      { name: 'Profil Saya', href: '/dashboard/admin/profil', icon: 'UserCircle' },
     ],
     admin_keuangan: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
       { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
       { name: 'Verifikasi Pembayaran', href: '/dashboard/admin/verifikasi-pembayaran', icon: 'CreditCard' },
       { name: 'Rekap Keuangan', href: '/dashboard/admin/keuangan', icon: 'BarChart' },
+      { name: 'Profil Saya', href: '/dashboard/admin/profil', icon: 'UserCircle' },
     ],
     penguji_calsan: [
       { name: 'Dasbor', href: '/dashboard/penguji', icon: 'LayoutDashboard' },
       { name: 'Jadwal Ujian', href: '/dashboard/penguji/jadwal', icon: 'Calendar' },
       { name: 'Input Nilai', href: '/dashboard/penguji/input-nilai', icon: 'ClipboardEdit' },
+      { name: 'Profil Saya', href: '/dashboard/penguji/profil', icon: 'UserCircle' },
     ],
     pewawancara_calsan: [
       { name: 'Dasbor', href: '/dashboard/penguji', icon: 'LayoutDashboard' },
       { name: 'Jadwal Ujian', href: '/dashboard/penguji/jadwal', icon: 'Calendar' },
       { name: 'Input Nilai', href: '/dashboard/penguji/input-nilai', icon: 'ClipboardEdit' },
+      { name: 'Profil Saya', href: '/dashboard/penguji/profil', icon: 'UserCircle' },
     ],
     pewawancara_cawalsan: [
       { name: 'Dasbor', href: '/dashboard/penguji', icon: 'LayoutDashboard' },
       { name: 'Jadwal Ujian', href: '/dashboard/penguji/jadwal', icon: 'Calendar' },
       { name: 'Input Nilai', href: '/dashboard/penguji/input-nilai', icon: 'ClipboardEdit' },
+      { name: 'Profil Saya', href: '/dashboard/penguji/profil', icon: 'UserCircle' },
     ],
     head_of_it: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
       { name: 'Manajemen User', href: '/dashboard/admin/users', icon: 'UserCog' },
       { name: 'Pengaturan', href: '/dashboard/admin/pengaturan', icon: 'Settings' },
+      { name: 'Profil Saya', href: '/dashboard/admin/profil', icon: 'UserCircle' },
     ],
     tim_it: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
       { name: 'Manajemen User', href: '/dashboard/admin/users', icon: 'UserCog' },
       { name: 'Pengaturan', href: '/dashboard/admin/pengaturan', icon: 'Settings' },
+      { name: 'Profil Saya', href: '/dashboard/admin/profil', icon: 'UserCircle' },
     ],
     admin_super: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
       { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
       { name: 'Hasil Seleksi', href: '/dashboard/admin/hasil-seleksi', icon: 'ClipboardCheck' },
       { name: 'Penilaian', href: '/dashboard/admin/penilaian', icon: 'ClipboardEdit' },
-      { name: 'Keuangan', href: '/dashboard/admin/keuangan', icon: 'BarChart' }, // NEW
+      { name: 'Keuangan', href: '/dashboard/admin/keuangan', icon: 'BarChart' },
       { name: 'Pengumuman', href: '/dashboard/admin/pengumuman', icon: 'Trophy' },
       { name: 'Broadcast WA', href: '/dashboard/admin/broadcast', icon: 'Bell' },
       { name: 'Statistik Wilayah', href: '/dashboard/admin/statistik-wilayah', icon: 'BarChart' },
       { name: 'Pengaturan', href: '/dashboard/admin/pengaturan', icon: 'Settings' },
+      { name: 'Profil Saya', href: '/dashboard/admin/profil', icon: 'UserCircle' },
     ],
     admin: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
@@ -435,12 +443,12 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
       { name: 'Verifikasi Dokumen', href: '/dashboard/admin/verifikasi-dokumen', icon: 'FileCheck' },
       { name: 'Jadwal Ujian', href: '/dashboard/admin/jadwal-ujian', icon: 'Calendar' },
       { name: 'Penilaian', href: '/dashboard/admin/penilaian', icon: 'ClipboardEdit' },
-      { name: 'Keuangan', href: '/dashboard/admin/keuangan', icon: 'BarChart' }, // NEW
+      { name: 'Keuangan', href: '/dashboard/admin/keuangan', icon: 'BarChart' },
       { name: 'Pengumuman', href: '/dashboard/admin/pengumuman', icon: 'Trophy' },
       { name: 'Broadcast WA', href: '/dashboard/admin/broadcast', icon: 'Bell' },
       { name: 'Statistik Wilayah', href: '/dashboard/admin/statistik-wilayah', icon: 'BarChart' },
-      // { name: 'Manajemen User', href: '/dashboard/admin/users', icon: 'UserCog' }, // REMOVED
       { name: 'Pengaturan', href: '/dashboard/admin/pengaturan', icon: 'Settings' },
+      { name: 'Profil Saya', href: '/dashboard/admin/profil', icon: 'UserCircle' },
     ],
     pendaftar: [], // Pendaftar uses tab-based navigation
   };
