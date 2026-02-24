@@ -122,11 +122,11 @@ function AdminPendaftarContent() {
   // const userRole = session?.user?.role; -- Handled by state above
   const canViewKeuangan = userRole === "admin_super" || userRole === "admin_keuangan" || userRole === "head_of_it" || userRole === "admin";
   const canViewBerkas = userRole === "admin_super" || userRole === "admin_berkas" || userRole === "admin";
-  const canViewSeleksi = userRole === "admin_super" || userRole === "penguji_santri" || userRole === "penguji_umum" || userRole === "admin";
+  const canViewSeleksi = userRole === "admin_super" || userRole === "penguji_calsan" || userRole === "pewawancara_calsan" || userRole === "pewawancara_cawalsan" || userRole === "penguji_umum" || userRole === "admin";
 
   const isKeuangan = userRole === "admin_keuangan";
   const isBerkas = userRole === "admin_berkas";
-  const isPenguji = userRole === "penguji_santri" || userRole === "penguji_umum";
+  const isPenguji = userRole === "penguji_calsan" || userRole === "pewawancara_calsan" || userRole === "pewawancara_cawalsan" || userRole === "penguji_umum";
   const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const [statusFilter, setStatusFilter] = useState(urlFilter);

@@ -33,8 +33,9 @@ const ROLE_OPTIONS = [
     { value: "admin_super", label: "Admin Super (Mudir/Ketua)" },
     { value: "admin_berkas", label: "Admin Berkas" },
     { value: "admin_keuangan", label: "Admin Keuangan" },
-    { value: "penguji_santri", label: "Penguji Calsan (Al-Quran & Wawancara)" },
-    { value: "pewawancara_ortu", label: "Pewawancara Calsan" },
+    { value: "penguji_calsan", label: "Penguji Calsan (Al-Quran)" },
+    { value: "pewawancara_calsan", label: "Pewawancara Calsan" },
+    { value: "pewawancara_cawalsan", label: "Pewawancara Cawalsan" },
     { value: "penguji_umum", label: "Penguji Umum (Semua)" },
 ];
 
@@ -304,10 +305,11 @@ export default function UserManagementPage() {
                                             <span className={`px-3 py-1 rounded-full text-xs font-bold ${user.role === 'admin_super' ? 'bg-purple-100 text-purple-700 border border-purple-200' :
                                                 user.role === 'admin_keuangan' ? 'bg-teal-100 text-teal-700 border border-teal-200' :
                                                     user.role === 'admin_berkas' ? 'bg-blue-100 text-blue-700 border border-blue-200' :
-                                                        user.role === 'penguji_santri' ? 'bg-emerald-100 text-emerald-700 border border-emerald-200' :
-                                                            user.role === 'pewawancara_ortu' ? 'bg-orange-100 text-orange-700 border border-orange-200' :
-                                                                user.role === 'penguji_umum' ? 'bg-indigo-100 text-indigo-700 border border-indigo-200' :
-                                                                    'bg-stone-100 text-stone-700'
+                                                        user.role === 'penguji_calsan' ? 'bg-emerald-100 text-emerald-700 border border-emerald-200' :
+                                                            user.role === 'pewawancara_calsan' ? 'bg-indigo-100 text-indigo-700 border border-indigo-200' :
+                                                                user.role === 'pewawancara_cawalsan' ? 'bg-orange-100 text-orange-700 border border-orange-200' :
+                                                                    user.role === 'penguji_umum' ? 'bg-indigo-100 text-indigo-700 border border-indigo-200' :
+                                                                        'bg-stone-100 text-stone-700'
                                                 }`}>
                                                 {ROLE_OPTIONS.find(r => r.value === user.role)?.label || user.role}
                                             </span>
@@ -319,7 +321,8 @@ export default function UserManagementPage() {
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                {['penguji', 'penguji_santri', 'pewawancara_ortu', 'penguji_umum'].includes(user.role) && (
+                                                {/* Magic Link Generator ONLY for examiners */}
+                                                {['penguji_calsan', 'pewawancara_calsan', 'pewawancara_cawalsan', 'penguji_umum'].includes(user.role) && (
                                                     <button
                                                         onClick={() => handleGenerateMagicLink(user.id, user.full_name)}
                                                         className="p-2 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"

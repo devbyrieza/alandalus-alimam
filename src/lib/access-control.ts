@@ -208,8 +208,9 @@ export type UserRole =
   | 'pendaftar'       // Dashboard Pendaftar - calon santri
   | 'admin_berkas'    // Dashboard Admin Berkas dan Pendaftaran Umum - verifikasi dokumen & data pendaftaran
   | 'admin_keuangan'  // Dashboard Keuangan - verifikasi pembayaran & keuangan
-  | 'penguji_santri'   // Dashboard Penguji Santri (Quran & Wawancara)
-  | 'pewawancara_ortu' // Dashboard Pewawancara Orang Tua
+  | 'penguji_calsan'   // Dashboard Penguji Calsan (Quran)
+  | 'pewawancara_calsan' // Dashboard Pewawancara Calsan
+  | 'pewawancara_cawalsan' // Dashboard Pewawancara Orang Tua (Cawalsan)
   | 'penguji_umum'    // Dashboard Penguji Umum
   | 'head_of_it'      // Kepala IT / Root Admin - Manages users only
   | 'tim_it'          // Tim IT - anggota tim IT, akses sama dengan head_of_it
@@ -221,8 +222,9 @@ export const ROLE_LABELS: Record<UserRole, string> = {
   pendaftar: 'Pendaftar',
   admin_berkas: 'Admin Berkas',
   admin_keuangan: 'Admin Keuangan',
-  penguji_santri: 'Penguji Calsan',
-  pewawancara_ortu: 'Pewawancara Calsan',
+  penguji_calsan: 'Penguji Calsan',
+  pewawancara_calsan: 'Pewawancara Calsan',
+  pewawancara_cawalsan: 'Pewawancara Cawalsan',
   penguji_umum: 'Penguji Umum',
   head_of_it: 'Kepala IT (Root)',
   tim_it: 'Tim IT',
@@ -235,9 +237,10 @@ export const ROLE_DESCRIPTIONS: Record<UserRole, string> = {
   pendaftar: 'Calon santri yang mendaftar ke Ponpes Al-Imam',
   admin_berkas: 'Memverifikasi berkas/dokumen dan data pendaftaran santri',
   admin_keuangan: 'Mengelola verifikasi pembayaran dan keuangan',
-  penguji_santri: 'Melakukan penilaian Al-Quran dan Wawancara Calsan',
-  pewawancara_ortu: 'Melakukan wawancara orang tua santri',
-  penguji_umum: 'Akses penuh ke semua instrumen penilaian (Santri & Ortu)',
+  penguji_calsan: 'Melakukan penilaian tahsin/hafalan Al-Quran calon santri',
+  pewawancara_calsan: 'Melakukan wawancara calon santri',
+  pewawancara_cawalsan: 'Melakukan wawancara orang tua wali santri',
+  penguji_umum: 'Akses penuh ke semua instrumen penilaian (Calsan & Cawalsan)',
   head_of_it: 'Super Admin yang hanya mengelola user. Tidak ada akses operasional.',
   tim_it: 'Anggota Tim IT, akses dashboard dan pengaturan.',
   admin_super: 'Akses penuh operasional PPDB (Tanpa manajemen user)',
@@ -268,13 +271,19 @@ export const ROLE_PERMISSIONS: Record<UserRole, string[]> = {
     'view_financial_reports',
     'export_payment_data',
   ],
-  penguji_santri: [
+  penguji_calsan: [
     'view_exam_schedule',
     'view_pendaftar_for_exam',
     'input_exam_scores',
     'view_exam_results',
   ],
-  pewawancara_ortu: [
+  pewawancara_calsan: [
+    'view_exam_schedule',
+    'view_pendaftar_for_exam',
+    'input_exam_scores',
+    'view_exam_results',
+  ],
+  pewawancara_cawalsan: [
     'view_exam_schedule',
     'view_pendaftar_for_exam',
     'input_exam_scores',
@@ -343,8 +352,9 @@ export const DASHBOARD_ROUTES: Record<UserRole, string> = {
   pendaftar: '/dashboard/pendaftar',
   admin_berkas: '/dashboard/admin',
   admin_keuangan: '/dashboard/admin',
-  penguji_santri: '/dashboard/penguji',
-  pewawancara_ortu: '/dashboard/penguji',
+  penguji_calsan: '/dashboard/penguji',
+  pewawancara_calsan: '/dashboard/penguji',
+  pewawancara_cawalsan: '/dashboard/penguji',
   penguji_umum: '/dashboard/penguji',
   head_of_it: '/dashboard/admin/users',
   tim_it: '/dashboard/admin/users',
@@ -392,12 +402,17 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
       { name: 'Verifikasi Pembayaran', href: '/dashboard/admin/verifikasi-pembayaran', icon: 'CreditCard' },
       { name: 'Rekap Keuangan', href: '/dashboard/admin/keuangan', icon: 'BarChart' },
     ],
-    penguji_santri: [
+    penguji_calsan: [
       { name: 'Dasbor', href: '/dashboard/penguji', icon: 'LayoutDashboard' },
       { name: 'Jadwal Ujian', href: '/dashboard/penguji/jadwal', icon: 'Calendar' },
       { name: 'Input Nilai', href: '/dashboard/penguji/input-nilai', icon: 'ClipboardEdit' },
     ],
-    pewawancara_ortu: [
+    pewawancara_calsan: [
+      { name: 'Dasbor', href: '/dashboard/penguji', icon: 'LayoutDashboard' },
+      { name: 'Jadwal Ujian', href: '/dashboard/penguji/jadwal', icon: 'Calendar' },
+      { name: 'Input Nilai', href: '/dashboard/penguji/input-nilai', icon: 'ClipboardEdit' },
+    ],
+    pewawancara_cawalsan: [
       { name: 'Dasbor', href: '/dashboard/penguji', icon: 'LayoutDashboard' },
       { name: 'Jadwal Ujian', href: '/dashboard/penguji/jadwal', icon: 'Calendar' },
       { name: 'Input Nilai', href: '/dashboard/penguji/input-nilai', icon: 'ClipboardEdit' },
@@ -494,7 +509,7 @@ export function canAccessRoute(role: UserRole, route: string): boolean {
   }
 
   // Examiners can only access penguji routes
-  if (role === 'penguji_santri' || role === 'pewawancara_ortu' || role === 'penguji_umum') {
+  if (role === 'penguji_calsan' || role === 'pewawancara_calsan' || role === 'pewawancara_cawalsan' || role === 'penguji_umum') {
     return route.startsWith('/dashboard/penguji');
   }
 

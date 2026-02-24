@@ -39,13 +39,17 @@ export async function POST(req: Request) {
 
         // RBAC Validation
         if (!isSuper) {
-            if (type === 'quran' || type === 'wawancara_santri') {
-                if (userRole !== 'penguji_santri' && userRole !== 'penguji_umum') {
-                    return NextResponse.json({ error: 'Forbidden: Role restricted' }, { status: 403 });
+            if (type === 'quran') {
+                if (userRole !== 'penguji_calsan' && userRole !== 'penguji_umum') {
+                    return NextResponse.json({ error: 'Forbidden: Role restricted to Penguji Calsan (Quran)' }, { status: 403 });
+                }
+            } else if (type === 'wawancara_santri') {
+                if (userRole !== 'pewawancara_calsan' && userRole !== 'penguji_umum') {
+                    return NextResponse.json({ error: 'Forbidden: Role restricted to Pewawancara Calsan' }, { status: 403 });
                 }
             } else if (type === 'wawancara_ortu') {
-                if (userRole !== 'pewawancara_ortu' && userRole !== 'penguji_umum') {
-                    return NextResponse.json({ error: 'Forbidden: Role restricted' }, { status: 403 });
+                if (userRole !== 'pewawancara_cawalsan' && userRole !== 'penguji_umum') {
+                    return NextResponse.json({ error: 'Forbidden: Role restricted to Pewawancara Cawalsan' }, { status: 403 });
                 }
             }
         }
