@@ -149,7 +149,7 @@ const PENGUJI_QURAN_LIST_PUTRI = ["Andi Fatimah Azzahra Rahman"];
 const PEWAWANCARA_CALSAN_LIST_PUTRI = ["Halimah Fauziah", "Rima Maryani Putri Utami"];
 const PEWAWANCARA_CAWALSAN_LIST_PUTRI = ["Abah", "Teguh", "Maulidin Bachtiar", "Muhammad Adib Achsan"]; // Sama dengan Putra
 
-const JENJANG_OPTIONS = ["MTs Putra", "MTs Putri", "IL Putra", "IL Putri", "SMA Putra"];
+const JENJANG_OPTIONS = ["MTs Putra", "MTs Putri", "IL Putra", "IL Putri", "SMA Putra", "SMA Putri"];
 
 const KATEGORI_OPTIONS = ["Yatim/ah", "Memiliki keluarga/saudara/kerabat di Andalus", "Memiliki teman/rekan/tetangga di Andalus", "Baru"];
 

@@ -16,6 +16,7 @@ import {
     User,
     MoreHorizontal,
     RefreshCw,
+    Link as LinkIcon,
 } from "lucide-react";
 
 interface AdminUser {
@@ -137,6 +138,27 @@ export default function UserManagementPage() {
             } else {
                 const result = await response.json();
                 throw new Error(result.error || "Gagal menghapus user");
+            }
+        } catch (error: any) {
+            setMessage({ type: "error", text: error.message });
+        }
+    };
+
+    const handleGenerateMagicLink = async (id: string, nama: string) => {
+        try {
+            const response = await fetch("/api/admin/users/magic-link", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ userId: id }),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                await navigator.clipboard.writeText(result.link);
+                setMessage({ type: "success", text: `Magic Link untuk ${nama} berhasil disalin ke clipboard!` });
+            } else {
+                const result = await response.json();
+                throw new Error(result.error || "Gagal membuat magic link");
             }
         } catch (error: any) {
             setMessage({ type: "error", text: error.message });
@@ -297,6 +319,15 @@ export default function UserManagementPage() {
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                {['penguji_santri', 'pewawancara_ortu', 'penguji_umum'].includes(user.role) && (
+                                                    <button
+                                                        onClick={() => handleGenerateMagicLink(user.id, user.full_name)}
+                                                        className="p-2 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
+                                                        title="Copy Magic Link"
+                                                    >
+                                                        <LinkIcon className="w-4 h-4" />
+                                                    </button>
+                                                )}
                                                 <button
                                                     onClick={() => openEditModal(user)}
                                                     className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
