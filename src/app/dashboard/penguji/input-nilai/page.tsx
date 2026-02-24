@@ -141,9 +141,13 @@ const CAWALSAN_QUESTIONS = [
   { key: "q12", label: "12. Jika ananda terkena sanksi, apa reaksi  Abu/Ummu?", options: ["A. Menerima sebagai konsekuensi (selama bimbingan sudah maksimal)", "B. Menasehati anak", "C. Tidak terima"] },
 ];
 
-const PENGUJI_QURAN_LIST = ["Agus Cahyono", "Fuad Khomsatun", "Jusman"];
-const PEWAWANCARA_CALSAN_LIST = ["Muhajir", "Muhammad Syauqi Al Faruq", "Rizaldi"];
-const PEWAWANCARA_CAWALSAN_LIST = ["Abah", "Teguh", "Maulidin Bachtiar", "Muhammad Adib Achsan"];
+const PENGUJI_QURAN_LIST_PUTRA = ["Agus Cahyono", "Fuad Khomsatun", "Jusman"];
+const PEWAWANCARA_CALSAN_LIST_PUTRA = ["Muhajir", "Muhammad Syauqi Al Faruq", "Rizaldi"];
+const PEWAWANCARA_CAWALSAN_LIST_PUTRA = ["Abah", "Teguh", "Maulidin Bachtiar", "Muhammad Adib Achsan"];
+
+const PENGUJI_QURAN_LIST_PUTRI = ["Andi Fatimah Azzahra Rahman"];
+const PEWAWANCARA_CALSAN_LIST_PUTRI = ["Halimah Fauziah", "Rima Maryani Putri Utami"];
+const PEWAWANCARA_CAWALSAN_LIST_PUTRI = ["Abah", "Teguh", "Maulidin Bachtiar", "Muhammad Adib Achsan"]; // Sama dengan Putra
 
 const JENJANG_OPTIONS = ["MTs Putra", "MTs Putri", "IL Putra", "IL Putri", "SMA Putra"];
 
@@ -323,7 +327,7 @@ export default function InputNilaiPage() {
               <label className="block text-sm font-bold text-gray-700 mb-2">Nama Penguji *</label>
               <select value={quranForm.nama_penguji || ""} onChange={(e) => setQuranForm({ ...quranForm, nama_penguji: e.target.value })} className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-emerald-500 outline-none">
                 <option value="">Pilih Penguji</option>
-                {PENGUJI_QURAN_LIST.map((n) => <option key={n} value={n}>{n}</option>)}
+                {(p.jenjang?.toLowerCase().includes("putri") ? PENGUJI_QURAN_LIST_PUTRI : PENGUJI_QURAN_LIST_PUTRA).map((n) => <option key={n} value={n}>{n}</option>)}
               </select>
             </div>
 
@@ -412,7 +416,7 @@ export default function InputNilaiPage() {
               <label className="block text-sm font-bold text-gray-700 mb-2">Nama Pewawancara *</label>
               <select value={calsanForm.nama_pewawancara || ""} onChange={(e) => setCalsanForm({ ...calsanForm, nama_pewawancara: e.target.value })} className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-violet-500 outline-none">
                 <option value="">Pilih Pewawancara</option>
-                {PEWAWANCARA_CALSAN_LIST.map((n) => <option key={n} value={n}>{n}</option>)}
+                {(p.jenjang?.toLowerCase().includes("putri") ? PEWAWANCARA_CALSAN_LIST_PUTRI : PEWAWANCARA_CALSAN_LIST_PUTRA).map((n) => <option key={n} value={n}>{n}</option>)}
               </select>
             </div>
 
@@ -594,7 +598,7 @@ export default function InputNilaiPage() {
               <label className="block text-sm font-bold text-gray-700 mb-2">Nama Pewawancara *</label>
               <select value={cawalsanForm.nama_pewawancara || ""} onChange={(e) => setCawalsanForm({ ...cawalsanForm, nama_pewawancara: e.target.value })} className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 outline-none">
                 <option value="">Pilih Pewawancara</option>
-                {PEWAWANCARA_CAWALSAN_LIST.map((n) => <option key={n} value={n}>{n}</option>)}
+                {(p.jenjang?.toLowerCase().includes("putri") ? PEWAWANCARA_CAWALSAN_LIST_PUTRI : PEWAWANCARA_CAWALSAN_LIST_PUTRA).map((n) => <option key={n} value={n}>{n}</option>)}
               </select>
             </div>
 

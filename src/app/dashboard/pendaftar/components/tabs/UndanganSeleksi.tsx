@@ -417,8 +417,8 @@ export default function UndanganSeleksiTab() {
           </div>
         )}
 
-        {/* Condition 1: No sessions available */}
-        {!data.grupB.hasSchedules && (
+        {/* Condition 1: No sessions available AND haven't booked all 3 */}
+        {!data.grupB.hasSchedules && data.grupB.booked.length < 3 && (
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 text-center">
             <div className="w-14 h-14 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Info className="w-7 h-7 text-amber-600" />
@@ -427,7 +427,7 @@ export default function UndanganSeleksiTab() {
               Jadwal Belum Tersedia
             </h3>
             <p className="text-sm text-amber-700 max-w-md mx-auto">
-              Mohon bersabar, jadwal tes lanjutan belum ditentukan oleh penguji.
+              Mohon bersabar, jadwal tes lanjutan belum ditentukan oleh tim seleksi.
               Kami akan menginformasikan melalui WhatsApp begitu jadwal sudah siap.
             </p>
             <p className="text-xs text-amber-600 mt-3 font-medium">
