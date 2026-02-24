@@ -211,7 +211,6 @@ export type UserRole =
   | 'penguji_calsan'   // Dashboard Penguji Calsan (Quran)
   | 'pewawancara_calsan' // Dashboard Pewawancara Calsan
   | 'pewawancara_cawalsan' // Dashboard Pewawancara Orang Tua (Cawalsan)
-  | 'penguji_umum'    // Dashboard Penguji Umum
   | 'head_of_it'      // Kepala IT / Root Admin - Manages users only
   | 'tim_it'          // Tim IT - anggota tim IT, akses sama dengan head_of_it
   | 'admin_super'     // Dashboard Admin Super - akses penuh ke semua fitur KECUALI user management
@@ -225,7 +224,6 @@ export const ROLE_LABELS: Record<UserRole, string> = {
   penguji_calsan: 'Penguji Calsan',
   pewawancara_calsan: 'Pewawancara Calsan',
   pewawancara_cawalsan: 'Pewawancara Cawalsan',
-  penguji_umum: 'Penguji Umum',
   head_of_it: 'Kepala IT (Root)',
   tim_it: 'Tim IT',
   admin_super: 'Admin Super (Mudir)',
@@ -240,7 +238,6 @@ export const ROLE_DESCRIPTIONS: Record<UserRole, string> = {
   penguji_calsan: 'Melakukan penilaian tahsin/hafalan Al-Quran calon santri',
   pewawancara_calsan: 'Melakukan wawancara calon santri',
   pewawancara_cawalsan: 'Melakukan wawancara orang tua wali santri',
-  penguji_umum: 'Akses penuh ke semua instrumen penilaian (Calsan & Cawalsan)',
   head_of_it: 'Super Admin yang hanya mengelola user. Tidak ada akses operasional.',
   tim_it: 'Anggota Tim IT, akses dashboard dan pengaturan.',
   admin_super: 'Akses penuh operasional PPDB (Tanpa manajemen user)',
@@ -284,12 +281,6 @@ export const ROLE_PERMISSIONS: Record<UserRole, string[]> = {
     'view_exam_results',
   ],
   pewawancara_cawalsan: [
-    'view_exam_schedule',
-    'view_pendaftar_for_exam',
-    'input_exam_scores',
-    'view_exam_results',
-  ],
-  penguji_umum: [
     'view_exam_schedule',
     'view_pendaftar_for_exam',
     'input_exam_scores',
@@ -355,7 +346,6 @@ export const DASHBOARD_ROUTES: Record<UserRole, string> = {
   penguji_calsan: '/dashboard/penguji',
   pewawancara_calsan: '/dashboard/penguji',
   pewawancara_cawalsan: '/dashboard/penguji',
-  penguji_umum: '/dashboard/penguji',
   head_of_it: '/dashboard/admin/users',
   tim_it: '/dashboard/admin/users',
   admin_super: '/dashboard/admin',
@@ -413,11 +403,6 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
       { name: 'Input Nilai', href: '/dashboard/penguji/input-nilai', icon: 'ClipboardEdit' },
     ],
     pewawancara_cawalsan: [
-      { name: 'Dasbor', href: '/dashboard/penguji', icon: 'LayoutDashboard' },
-      { name: 'Jadwal Ujian', href: '/dashboard/penguji/jadwal', icon: 'Calendar' },
-      { name: 'Input Nilai', href: '/dashboard/penguji/input-nilai', icon: 'ClipboardEdit' },
-    ],
-    penguji_umum: [
       { name: 'Dasbor', href: '/dashboard/penguji', icon: 'LayoutDashboard' },
       { name: 'Jadwal Ujian', href: '/dashboard/penguji/jadwal', icon: 'Calendar' },
       { name: 'Input Nilai', href: '/dashboard/penguji/input-nilai', icon: 'ClipboardEdit' },
@@ -509,7 +494,7 @@ export function canAccessRoute(role: UserRole, route: string): boolean {
   }
 
   // Examiners can only access penguji routes
-  if (role === 'penguji_calsan' || role === 'pewawancara_calsan' || role === 'pewawancara_cawalsan' || role === 'penguji_umum') {
+  if (role === 'penguji_calsan' || role === 'pewawancara_calsan' || role === 'pewawancara_cawalsan') {
     return route.startsWith('/dashboard/penguji');
   }
 
