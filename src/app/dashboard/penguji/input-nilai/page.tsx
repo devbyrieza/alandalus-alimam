@@ -128,20 +128,22 @@ const CALSAN_CRITERIA = [
 
 const CAWALSAN_QUESTIONS = [
   { key: "q1", label: "1. Abu/Ummu ingin ananda menjadi seperti apa di masa depan?", options: ["A. Condong ke orientasi akhirat/agama", "B. Condong ke orientasi dunia/umum", "C. Hanya berorientasi dunia/umum"] },
-  { key: "q2", label: "2. Bagaimana pandangan Abu/Ummu tentang sistem pendidikan berbasis pesantren?", options: ["A. Pilihan utama untuk agama, akhlak, dan karakter", "B. Pilihan utama untuk akhlak", "C. Pesantren juga mengajarkan pelajaran umum"] },
+  { key: "q2", label: "2. Bagaimana pandangan  Abu/Ummu  tentang sistem pendidikan berbasis pesantren?", options: ["A. Pilihan utama untuk agama, akhlak, dan karakter", "B. Pilihan utama untuk akhlak", "C. Pesantren juga mengajarkan pelajaran umum"] },
   { key: "q3", label: "3. Ananda mau bersekolah di Pesantren Al-Andalus atas keinginan siapa?", options: ["A. Orang tua & anak", "B. Anak", "C. Orang tua / ikut teman"] },
-  { key: "q4", label: "4. Apa yang Abu/Ummu lakukan sehingga ananda mau bersekolah di pesantren?", options: ["A. Memberikan pengertian", "B. Memberikan hadiah/iming-iming", "C. Memaksa"] },
-  { key: "q5", label: "5. Sejauh apa pendidikan agama/Al-Qur'an ananda sebelumnya?", options: ["A. Intensif (tahfizh, sekolah Islam)", "B. Non intensif (swasta biasa)", "C. Seadanya (sekolah negeri)"] },
-  { key: "q6", label: "6. Menurut Bapak/Ibu, keberhasilan proses pendidikan anak merupakan tanggung jawab siapa?", options: ["A. Bersama", "B. Orang Tua", "C. Sekolah"] },
-  { key: "q7", label: "7. Sejauh apa kesiapan Abu/Ummu memenuhi kewajiban SPP?", options: ["A. Yakin", "B. Ragu-ragu", "C. Tidak tahu"] },
-  { key: "q8", label: "8. Bagaimana pandangan Abu/Ummu tentang pendidikan agama & tahfizh Al-Qur'an?", options: ["A. Sangat penting", "B. Cukup penting", "C. Penting"] },
-  { key: "q9", label: "9. Apa saja yang akan dilakukan oleh Bapak/Ibu untuk mendukung program pendidikan Pesantren?", options: ["A. Mendukung semua program dan memberikan masukan positif", "B. Menyerahkan semua urusan ke Pesantren", "C. Tidak Tahu"] },
-  { key: "q10", label: "10. Seberapa sering Abu/Ummu akan menjenguk ananda?", options: ["A. Berkala", "B. Tidak menjenguk karena jauh", "C. Sesempatnya saja"] },
-  { key: "q11", label: "11. Jika ananda diganggu teman (iseng/jail/bully), apa langkah Abu/Ummu?", options: ["A. Klarifikasi & beri semangat pada anak", "B. Serahkan ke pesantren", "C. Komplain ke pesantren"] },
-  { key: "q12", label: "12. Jika ananda terkena sanksi, apa reaksi Abu/Ummu?", options: ["A. Menerima sebagai konsekuensi (selama bimbingan sudah maksimal)", "B. Menasehati anak", "C. Tidak terima"] },
+  { key: "q4", label: "4. Apa yang  Abu/Ummu   lakukan sehingga ananda mau bersekolah di pesantren?", options: ["A. Memberikan pengertian", "B. Memberikan hadiah/iming-iming", "C. Memaksa"] },
+  { key: "q5", label: "5. Sejauh apa pendidikan agama/Al-Qur’an ananda sebelumnya?", options: ["A. Intensif (tahfizh, sekolah Islam)", "B. Non intensif (swasta biasa)", "C. Seadanya (sekolah negeri)"] },
+  { key: "q6", label: "6. Menurut Bapak/Ibu, keberhasilan proses pendidikan anak merupakan tanggung jawab siapa?", options: ["A. Bersama", "Orang Tua", "Sekolah"] },
+  { key: "q7", label: "7. Sejauh apa kesiapan  Abu/Ummu   memenuhi kewajiban SPP?", options: ["A. Yakin", "B. Ragu-ragu", "C. Tidak tahu"] },
+  { key: "q8", label: "8. Bagaimana pandangan  Abu/Ummu   tentang pendidikan agama & tahfizh Al-Qur’an?", options: ["A. Sangat penting", "B. Cukup penting", "C. Penting"] },
+  { key: "q9", label: "9. Apa saja yang akan dilakukan oleh Bapak/Ibu untuk mendukung program pendidikan Pesantren?", options: ["A. Mendukung semua program dan memberikan masukan positif/ memantau perkembangan anak", "B. Menyerahkan semua urusan ke Pesan", "C. Tidak Tahu"] },
+  { key: "q10", label: "10. Seberapa sering  Abu/Ummu   akan menjenguk ananda?", options: ["A. Berkala", "B. Tidak menjenguk karena jauh", "C. Sesempatnya saja"] },
+  { key: "q11", label: "11. Jika ananda diganggu teman (iseng/jail/bully), apa langkah  Abu/Ummu?", options: ["A. Klarifikasi & beri semangat pada anak", "B. Serahkan ke pesantren", "C. Komplain ke pesantren"] },
+  { key: "q12", label: "12. Jika ananda terkena sanksi, apa reaksi  Abu/Ummu?", options: ["A. Menerima sebagai konsekuensi (selama bimbingan sudah maksimal)", "B. Menasehati anak", "C. Tidak terima"] },
 ];
 
-const PENGUJI_QURAN_LIST = ["Fuad Khomsatun", "Jusman", "Agus Cahyono", "Andi Fatimah Azzahra Rahman"];
+const PENGUJI_QURAN_LIST = ["Agus Cahyono", "Fuad Khomsatun", "Jusman"];
+const PEWAWANCARA_CALSAN_LIST = ["Muhajir", "Muhammad Syauqi Al Faruq", "Rizaldi"];
+const PEWAWANCARA_CAWALSAN_LIST = ["Abah", "Teguh", "Maulidin Bachtiar", "Muhammad Adib Achsan"];
 
 const JENJANG_OPTIONS = ["MTs Putra", "MTs Putri", "IL Putra", "IL Putri", "SMA Putra"];
 
@@ -209,7 +211,9 @@ export default function InputNilaiPage() {
       let body: any = {};
 
       if (formType === "quran") {
-        const totalScore = ((quranForm.tajwid || 0) + (quranForm.kelancaran || 0)) / 2;
+        const tajwid = parseFloat(quranForm.tajwid) || 0;
+        const kelancaran = parseFloat(quranForm.kelancaran) || 0;
+        const totalScore = (tajwid + kelancaran) / 2;
         body = {
           detail_quran: quranForm,
           score_quran: totalScore,
@@ -291,28 +295,14 @@ export default function InputNilaiPage() {
           <div className="space-y-4">
             {/* Tajwid */}
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Nilai Kualitas Tajwid *</label>
-              <div className="flex gap-4">
-                {[1, 2, 3, 4, 5].map((v) => (
-                  <label key={v} className={`flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer border-2 transition-all ${quranForm.tajwid === v ? "border-emerald-500 bg-emerald-100" : "border-gray-200 hover:border-emerald-300"}`}>
-                    <input type="radio" name={`tajwid-${p.id}`} value={v} checked={quranForm.tajwid === v} onChange={() => setQuranForm({ ...quranForm, tajwid: v })} className="hidden" />
-                    <span className="font-bold">{v}</span>
-                  </label>
-                ))}
-              </div>
+              <label className="block text-sm font-bold text-gray-700 mb-2">Nilai Kualitas Tajwid (1-100) *</label>
+              <input type="number" min="1" max="100" value={quranForm.tajwid || ""} onChange={(e) => setQuranForm({ ...quranForm, tajwid: e.target.value })} className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-emerald-500 outline-none" placeholder="Masukkan nilai 1-100" />
             </div>
 
             {/* Kelancaran */}
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Nilai Kelancaran Bacaan *</label>
-              <div className="flex gap-4">
-                {[1, 2, 3, 4, 5].map((v) => (
-                  <label key={v} className={`flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer border-2 transition-all ${quranForm.kelancaran === v ? "border-emerald-500 bg-emerald-100" : "border-gray-200 hover:border-emerald-300"}`}>
-                    <input type="radio" name={`kelancaran-${p.id}`} value={v} checked={quranForm.kelancaran === v} onChange={() => setQuranForm({ ...quranForm, kelancaran: v })} className="hidden" />
-                    <span className="font-bold">{v}</span>
-                  </label>
-                ))}
-              </div>
+              <label className="block text-sm font-bold text-gray-700 mb-2">Nilai Kelancaran Bacaan (1-100) *</label>
+              <input type="number" min="1" max="100" value={quranForm.kelancaran || ""} onChange={(e) => setQuranForm({ ...quranForm, kelancaran: e.target.value })} className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-emerald-500 outline-none" placeholder="Masukkan nilai 1-100" />
             </div>
 
             {/* Rekomendasi */}
@@ -355,8 +345,8 @@ export default function InputNilaiPage() {
           <div>
             {isSaved ? (
               <div className="grid grid-cols-2 gap-3 text-sm">
-                <div><span className="text-gray-500">Tajwid:</span> <span className="font-bold">{data.tajwid}/5</span></div>
-                <div><span className="text-gray-500">Kelancaran:</span> <span className="font-bold">{data.kelancaran}/5</span></div>
+                <div><span className="text-gray-500">Tajwid:</span> <span className="font-bold">{data.tajwid}</span></div>
+                <div><span className="text-gray-500">Kelancaran:</span> <span className="font-bold">{data.kelancaran}</span></div>
                 <div><span className="text-gray-500">Rekomendasi:</span> <span className={`font-bold ${data.rekomendasi === "Diterima" ? "text-green-600" : data.rekomendasi === "Cadangan" ? "text-yellow-600" : "text-red-600"}`}>{data.rekomendasi}</span></div>
                 <div><span className="text-gray-500">Penguji:</span> <span className="font-bold">{data.nama_penguji}</span></div>
                 {data.catatan && <div className="col-span-2"><span className="text-gray-500">Catatan:</span> {data.catatan}</div>}
@@ -420,7 +410,10 @@ export default function InputNilaiPage() {
             {/* Nama Pewawancara */}
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-2">Nama Pewawancara *</label>
-              <input type="text" value={calsanForm.nama_pewawancara || ""} onChange={(e) => setCalsanForm({ ...calsanForm, nama_pewawancara: e.target.value })} className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-violet-500 outline-none" placeholder="Nama pewawancara" />
+              <select value={calsanForm.nama_pewawancara || ""} onChange={(e) => setCalsanForm({ ...calsanForm, nama_pewawancara: e.target.value })} className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-violet-500 outline-none">
+                <option value="">Pilih Pewawancara</option>
+                {PEWAWANCARA_CALSAN_LIST.map((n) => <option key={n} value={n}>{n}</option>)}
+              </select>
             </div>
 
             {/* Rekomendasi */}
@@ -599,7 +592,10 @@ export default function InputNilaiPage() {
             {/* Nama Pewawancara */}
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-2">Nama Pewawancara *</label>
-              <input type="text" value={cawalsanForm.nama_pewawancara || ""} onChange={(e) => setCawalsanForm({ ...cawalsanForm, nama_pewawancara: e.target.value })} className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 outline-none" placeholder="Nama pewawancara" />
+              <select value={cawalsanForm.nama_pewawancara || ""} onChange={(e) => setCawalsanForm({ ...cawalsanForm, nama_pewawancara: e.target.value })} className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 outline-none">
+                <option value="">Pilih Pewawancara</option>
+                {PEWAWANCARA_CAWALSAN_LIST.map((n) => <option key={n} value={n}>{n}</option>)}
+              </select>
             </div>
 
             {/* Catatan */}
@@ -611,7 +607,7 @@ export default function InputNilaiPage() {
             {/* Actions */}
             <div className="flex gap-3 pt-2">
               <button onClick={cancelEditing} className="px-5 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors">Batal</button>
-              <button onClick={() => saveForm(p, "ortu")} disabled={!cawalsanForm.nama_orangtua || !cawalsanForm.kategori || !cawalsanForm.rekomendasi || !cawalsanForm.nama_pewawancara || !CAWALSAN_QUESTIONS.every((q) => cawalsanForm[q.key]) || saving === p.id + "ortu"} className="px-5 py-2 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
+              <button onClick={() => saveForm(p, "ortu")} disabled={!cawalsanForm.nama_orangtua || !cawalsanForm.asal || !cawalsanForm.kategori || !cawalsanForm.sumber_info || !cawalsanForm.karakter || !cawalsanForm.tahu_spp || !cawalsanForm.rekomendasi || !cawalsanForm.nama_pewawancara || !CAWALSAN_QUESTIONS.every((q) => cawalsanForm[q.key]) || saving === p.id + "ortu"} className="px-5 py-2 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
                 {saving === p.id + "ortu" ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} Simpan
               </button>
             </div>

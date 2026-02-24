@@ -385,8 +385,7 @@ export default function UndanganSeleksiTab() {
                       <div className="flex items-center gap-2">
                         <Clock className="w-3.5 h-3.5 text-purple-500" />
                         <span className="font-semibold text-stone-800">
-                          {formatTime(item.waktu_mulai)} -{" "}
-                          {item.waktu_selesai ? formatTime(item.waktu_selesai) : "?"} WIB
+                          {formatTime(item.waktu_mulai)} WIB
                         </span>
                       </div>
                       {item.lokasi && (
@@ -510,8 +509,7 @@ export default function UndanganSeleksiTab() {
                           </div>
                           <div className="flex items-center gap-2">
                             <Clock className="w-3.5 h-3.5 text-purple-500" />
-                            {formatTime(slot.start_time)} -{" "}
-                            {formatTime(slot.end_time)} WIB
+                            {formatTime(slot.start_time)} WIB
                           </div>
                           <div className="flex items-center gap-2">
                             <MapPin className="w-3.5 h-3.5 text-purple-500" />

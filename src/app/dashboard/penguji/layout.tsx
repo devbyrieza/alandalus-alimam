@@ -26,7 +26,7 @@ export default function PengujiDashboardLayout({
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [pengujiName, setPengujiName] = useState("Penguji");
+  const [pengujiName, setPengujiName] = useState("Asatidz");
 
   useEffect(() => {
     const fetchPengujiData = async () => {
@@ -107,7 +107,7 @@ export default function PengujiDashboardLayout({
               <Shield className="w-6 h-6 text-violet-600" />
             </div>
           </div>
-          <h2 className="text-xl font-bold text-stone-900 mb-2">Memuat Dashboard Penguji</h2>
+          <h2 className="text-xl font-bold text-stone-900 mb-2">Memuat Panel Tim Seleksi</h2>
           <p className="text-stone-500 text-sm">Mohon tunggu sebentar...</p>
         </div>
       </div>
@@ -129,7 +129,7 @@ export default function PengujiDashboardLayout({
             </button>
             <div className="flex flex-col">
               <span className="text-xs font-semibold text-stone-500">Dashboard</span>
-              <span className="text-sm font-bold text-stone-900 leading-none">Penguji</span>
+              <span className="text-sm font-bold text-stone-900 leading-none">Tim Seleksi</span>
             </div>
           </div>
 
@@ -151,7 +151,7 @@ export default function PengujiDashboardLayout({
                     <Shield className="w-6 h-6" />
                   </div>
                   <div>
-                    <h1 className="font-black text-xl text-stone-900 leading-none tracking-tight">Panel <span className="text-violet-600">Penguji</span></h1>
+                    <h1 className="font-black text-xl text-stone-900 leading-none tracking-tight">Panel <span className="text-violet-600">Tim Seleksi</span></h1>
                     <p className="text-xs text-stone-500 font-medium mt-1">Seleksi PPDB</p>
                   </div>
                 </div>
@@ -165,7 +165,7 @@ export default function PengujiDashboardLayout({
                   <p className="font-bold text-stone-900 truncate mb-2">{pengujiName}</p>
                   <div className="flex items-center gap-1 text-xs text-violet-600 bg-violet-50 px-2 py-1 rounded-lg inline-flex border border-violet-100">
                     <Shield className="w-3 h-3" />
-                    <span className="font-bold">Penguji</span>
+                    <span className="font-bold">Tim Seleksi</span>
                   </div>
                 </div>
               </div>
@@ -203,7 +203,7 @@ export default function PengujiDashboardLayout({
                     <div className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center text-white">
                       <Shield className="w-5 h-5" />
                     </div>
-                    <span className="font-bold text-lg text-stone-900">Panel Penguji</span>
+                    <span className="font-bold text-lg text-stone-900">Panel Tim Seleksi</span>
                   </div>
                   <button onClick={() => setSidebarOpen(false)} className="p-2 text-stone-400 hover:text-stone-900">
                     <X className="w-5 h-5" />
@@ -235,8 +235,8 @@ export default function PengujiDashboardLayout({
             {/* Desktop Topbar */}
             <header className="hidden lg:flex sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-stone-200 px-8 py-4 items-center justify-between">
               <div>
-                <h2 className="text-xl font-bold text-stone-900">Dashboard Penguji</h2>
-                <p className="text-sm text-stone-500">Panel Penilaian Santri</p>
+                <h2 className="text-xl font-bold text-stone-900">Panel Tim Seleksi</h2>
+                <p className="text-sm text-stone-500">Penguji & Pewawancara</p>
               </div>
 
               <div className="flex items-center gap-4">
@@ -248,7 +248,7 @@ export default function PengujiDashboardLayout({
 
                 <div className="flex items-center gap-3 px-4 py-2 rounded-full bg-violet-50 border border-violet-100 text-violet-700">
                   <div className="w-2 h-2 rounded-full bg-violet-500" />
-                  <span className="text-sm font-bold">Akses Penguji</span>
+                  <span className="text-sm font-bold">Akses Penilai</span>
                 </div>
               </div>
             </header>

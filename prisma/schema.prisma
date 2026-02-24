@@ -410,9 +410,9 @@ model NilaiUjian {
   detail_akademik    Json? @db.JsonB
   detail_kepribadian Json? @db.JsonB
   detail_kesiapan    Json? @db.JsonB
-  detail_wawancara   Json? @db.JsonB  // Wawancara Calsan form data
-  detail_quran       Json? @db.JsonB  // Tes Al-Qur'an form data  
-  detail_cawalsan    Json? @db.JsonB  // Wawancara Cawalsan form data
+  detail_wawancara   Json? @db.JsonB // Wawancara Calsan form data
+  detail_quran       Json? @db.JsonB // Tes Al-Qur'an form data  
+  detail_cawalsan    Json? @db.JsonB // Wawancara Cawalsan form data
 
   // NEW: Scores (Float for precision)
   score_akademik    Float?

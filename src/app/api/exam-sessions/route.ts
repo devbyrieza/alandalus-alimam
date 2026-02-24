@@ -115,7 +115,8 @@ export async function POST(request: Request) {
             const pendaftarsToNotify = await prisma.pendaftar.findMany({
                 where: {
                     notif_jadwal_tersedia_terkirim: false,
-                    no_hp: { not: null, notIn: [""] }
+                    no_hp: { not: null, notIn: [""] },
+                    status_pendaftaran: { in: ['docs_verified', 'scheduled'] } // 👈 ONLY NOTIFY COMPLETED/ELIGIBLE APPLICANTS
                 },
                 select: { id: true, nama_lengkap: true, no_hp: true }
             });

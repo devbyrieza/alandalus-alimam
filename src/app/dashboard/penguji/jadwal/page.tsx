@@ -95,7 +95,6 @@ export default function JadwalPengujiPage() {
     title: "",
     date: "",
     start_time: "08:00",
-    end_time: "10:00",
     quota: 1,
     location: "", // Default empty, falls back to "Online" on submit if empty
     notes: "",
@@ -163,7 +162,8 @@ export default function JadwalPengujiPage() {
     try {
       // Combine date and time
       const startDateTime = new Date(`${slotForm.date}T${slotForm.start_time}:00`);
-      const endDateTime = new Date(`${slotForm.date}T${slotForm.end_time}:00`);
+      // Since end_time is removed from UI, automatically set it to 1 hour after start_time as a placeholder
+      const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000);
 
       const payload = {
         title: slotForm.title,
@@ -430,7 +430,7 @@ export default function JadwalPengujiPage() {
                     <div className="flex flex-col gap-2 min-w-[200px] border-l pl-0 md:pl-6 border-stone-100">
                       <div className="flex items-center gap-2 text-sm text-stone-600">
                         <Clock className="w-4 h-4 text-violet-500" />
-                        {formatTime(item.waktu_mulai)} - {item.waktu_selesai ? formatTime(item.waktu_selesai) : '?'}
+                        {formatTime(item.waktu_mulai)} WIB
                       </div>
                       <div className="flex items-center gap-2 text-sm text-stone-600">
                         <MapPin className="w-4 h-4 text-violet-500" />
@@ -488,7 +488,7 @@ export default function JadwalPengujiPage() {
                     </div>
                     <div className="flex items-center gap-2 text-stone-600">
                       <Clock className="w-4 h-4 text-violet-500" />
-                      {formatTime(slot.start_time)} - {formatTime(slot.end_time)}
+                      {formatTime(slot.start_time)} WIB
                     </div>
                     <div className="flex items-center gap-2 text-stone-600">
                       <MapPin className="w-4 h-4 text-violet-500" />
@@ -536,27 +536,15 @@ export default function JadwalPengujiPage() {
                   onChange={e => setSlotForm({ ...slotForm, date: e.target.value })}
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-bold text-stone-700 mb-1">Mulai</label>
-                  <input
-                    type="time"
-                    required
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-violet-500 outline-none"
-                    value={slotForm.start_time}
-                    onChange={e => setSlotForm({ ...slotForm, start_time: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-stone-700 mb-1">Selesai</label>
-                  <input
-                    type="time"
-                    required
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-violet-500 outline-none"
-                    value={slotForm.end_time}
-                    onChange={e => setSlotForm({ ...slotForm, end_time: e.target.value })}
-                  />
-                </div>
+              <div>
+                <label className="block text-sm font-bold text-stone-700 mb-1">Mulai Ujian</label>
+                <input
+                  type="time"
+                  required
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-violet-500 outline-none"
+                  value={slotForm.start_time}
+                  onChange={e => setSlotForm({ ...slotForm, start_time: e.target.value })}
+                />
               </div>
 
               <div>
