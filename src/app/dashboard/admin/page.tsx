@@ -118,9 +118,23 @@ export default function AdminDashboardPage() {
         if (sessionRes.ok) {
           const sessionData = await sessionRes.json();
           if (sessionData.session?.role) {
-            setRole(sessionData.session.role as UserRole);
+            const userRole = sessionData.session.role as UserRole;
+            setRole(userRole);
+
+            // Redirect IT roles directly to users management
+            if (userRole === 'head_of_it' || userRole === 'tim_it') {
+              window.location.href = '/dashboard/admin/users';
+              return;
+            }
           } else if (sessionData.user?.user_metadata?.role) {
-            setRole(sessionData.user.user_metadata.role as UserRole);
+            const userRole = sessionData.user.user_metadata.role as UserRole;
+            setRole(userRole);
+
+            // Redirect IT roles directly to users management
+            if (userRole === 'head_of_it' || userRole === 'tim_it') {
+              window.location.href = '/dashboard/admin/users';
+              return;
+            }
           }
         }
 

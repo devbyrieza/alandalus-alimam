@@ -288,12 +288,10 @@ export const ROLE_PERMISSIONS: Record<UserRole, string[]> = {
   ],
   head_of_it: [
     'manage_users',
-    'view_dashboard_stats',
     'manage_settings',
   ],
   tim_it: [
     'manage_users',
-    'view_dashboard_stats',
     'manage_settings',
   ],
   admin_super: [
@@ -348,8 +346,8 @@ export const DASHBOARD_ROUTES: Record<UserRole, string> = {
   penguji_santri: '/dashboard/penguji',
   pewawancara_ortu: '/dashboard/penguji',
   penguji_umum: '/dashboard/penguji',
-  head_of_it: '/dashboard/admin',
-  tim_it: '/dashboard/admin',
+  head_of_it: '/dashboard/admin/users',
+  tim_it: '/dashboard/admin/users',
   admin_super: '/dashboard/admin',
   admin: '/dashboard/admin',
 };
