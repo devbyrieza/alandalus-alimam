@@ -155,9 +155,9 @@ export default function LoginPage() {
       if (!response.ok) throw new Error(data.error || "Login gagal");
 
       setIsLoading(false);
-      if (["admin", "admin_super", "admin_berkas", "admin_keuangan", "head_of_it"].includes(data.role)) {
+      if (["admin", "admin_super", "admin_berkas", "admin_keuangan", "head_of_it", "tim_it"].includes(data.role)) {
         window.location.href = "/dashboard/admin";
-      } else if (data.role === "penguji") {
+      } else if (["penguji", "penguji_calsan", "pewawancara_calsan", "pewawancara_cawalsan"].includes(data.role)) {
         window.location.href = "/dashboard/penguji";
       } else {
         throw new Error(`Role tidak dikenali: ${data.role}`);
