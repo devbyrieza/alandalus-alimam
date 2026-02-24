@@ -64,9 +64,9 @@ export async function GET(request: Request) {
         const errors: string[] = [];
 
         for (const jadwal of jadwalSoon) {
-            // Check if H-0 reminder already sent
+            // Check if reminder already sent
             const existingReminder = jadwal.notif_reminders.find(
-                (r: any) => r.pendaftar_id === jadwal.pendaftar_id && r.reminder_type === "h0"
+                (r: any) => r.pendaftar_id === jadwal.pendaftar_id
             );
 
             if (existingReminder?.reminder_sent) {
@@ -111,17 +111,15 @@ export async function GET(request: Request) {
                 // Create/update reminder record
                 await prisma.jadwalNotifReminder.upsert({
                     where: {
-                        jadwal_ujian_id_pendaftar_id_reminder_type: {
+                        jadwal_ujian_id_pendaftar_id: {
                             jadwal_ujian_id: jadwal.id,
                             pendaftar_id: jadwal.pendaftar_id,
-                            reminder_type: "h0",
                         },
                     },
                     update: {},
                     create: {
                         jadwal_ujian_id: jadwal.id,
                         pendaftar_id: jadwal.pendaftar_id,
-                        reminder_type: "h0",
                         reminder_sent: false,
                     },
                 });
