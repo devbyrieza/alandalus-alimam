@@ -27,7 +27,7 @@ export default function ProfileSettings({ user }: { user: UserSession }) {
             admin_super: "Admin Super",
             admin_keuangan: "Admin Keuangan",
             admin_berkas: "Admin Berkas",
-            penguji_calsan: "Penguji Calsan (Al-Qur'an)",
+            penguji_calsan: "Penguji Calsan (A -Qur'an)",
             pewawancara_calsan: "Pewawancara Calsan",
             pewawancara_cawalsan: "Pewawancara Cawalsan",
             tim_it: "Tim IT",

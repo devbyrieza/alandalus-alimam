@@ -12,8 +12,8 @@ async function checkHeadOfIT() {
 
   try {
     const session = JSON.parse(sessionCookie.value);
-    // ONLY head_of_it can manage users. Admin Super cannot.
-    if (session.role === "head_of_it") {
+    // ONLY head_of_it and tim_it can manage users. Admin Super cannot.
+    if (session.role === "head_of_it" || session.role === "tim_it") {
       return session;
     }
   } catch {
