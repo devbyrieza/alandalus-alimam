@@ -125,6 +125,7 @@ export async function GET(request: NextRequest) {
               score_kesiapan: true,
               score_quran: true,
               score_wawancara: true,
+              nilai_wawancara_santri: true,
               nilai_wawancara_ortu: true,
               status_kelulusan: true,
               catatan_kelulusan: true,
@@ -143,6 +144,7 @@ export async function GET(request: NextRequest) {
     // Transform data to match frontend expectations
     const transformedData = data.map(item => ({
       ...item,
+      nilai_ujian: item.nilai_ujian && item.nilai_ujian.length > 0 ? item.nilai_ujian[0] : null,
       dokumen: item.dokumen.map(doc => ({
         jenis_dokumen: doc.jenis_dokumen,
         status_verifikasi: doc.is_verified ? "verified" : (doc.catatan ? "rejected" : "pending")

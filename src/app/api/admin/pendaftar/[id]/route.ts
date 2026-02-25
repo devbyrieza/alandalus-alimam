@@ -67,6 +67,7 @@ export async function GET(
 
     const mergedPendaftar = {
       ...pendaftar,
+      nilai_ujian: pendaftar.nilai_ujian && pendaftar.nilai_ujian.length > 0 ? pendaftar.nilai_ujian[0] : null,
       // Identity
       tempat_lahir: pendaftar.tempat_lahir || santri.tempat_lahir || null,
       tanggal_lahir: pendaftar.tanggal_lahir || (santri.tanggal_lahir ? new Date(santri.tanggal_lahir) : null),

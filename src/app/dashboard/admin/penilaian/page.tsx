@@ -17,6 +17,7 @@ type Student = {
         catatan_kelulusan: string;
         score_quran: number;
         score_wawancara: number;
+        nilai_wawancara_santri: number;
         score_akademik: number;
         score_kepribadian: number;
         score_kesiapan: number;
@@ -181,7 +182,7 @@ export default function ExaminerDashboard() {
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_kepribadian?.toFixed(1) || '-'}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_kesiapan?.toFixed(1) || '-'}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_quran?.toFixed(1) || '-'}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_wawancara?.toFixed(1) || '-'}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{(s.nilai_ujian?.score_wawancara ?? s.nilai_ujian?.nilai_wawancara_santri)?.toFixed(1) || '-'}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.nilai_wawancara_ortu?.toFixed(1) || '-'}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <div className="flex gap-2">
