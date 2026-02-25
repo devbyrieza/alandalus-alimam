@@ -111,7 +111,6 @@ export async function PATCH(
             if (session.user_id) updateData.input_by_ortu = session.user_id;
             updateData.input_at_ortu = new Date();
         }
-
         // Upsert
         // Check if exists
         const existing = await prisma.nilaiUjian.findFirst({ where: { pendaftar_id: pendaftarId } });
@@ -133,6 +132,10 @@ export async function PATCH(
                 }
             });
         }
+
+        // 4. Trigger Recalculation
+        const { recalculateNilaiUjian } = require("@/lib/scoring");
+        await recalculateNilaiUjian(pendaftarId);
 
         return NextResponse.json({ success: true });
     } catch (error: any) {

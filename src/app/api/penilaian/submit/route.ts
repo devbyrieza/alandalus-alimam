@@ -104,57 +104,9 @@ export async function POST(req: Request) {
             data: updateData
         });
 
-        // 4. Trigger Final Calculation IF all components are present
-        // Need to re-fetch to get latest state
-        const current = await prisma.nilaiUjian.findUnique({ where: { id: nilai.id } });
-
-        if (current) {
-            const data = current as any;
-            const ak = data.score_akademik || 0;
-            const quran = data.score_quran || 0;
-            const kp = data.score_kepribadian || 0;
-            const ks = data.score_kesiapan || 0;
-
-            // Wawancara total = (Santri + Ortu) / 2
-            const ws = Number(current.nilai_wawancara_santri) || 0;
-            const wo = Number(current.nilai_wawancara_ortu) || 0;
-            const wawancaraTotal = (ws + wo) / 2;
-
-            // Is Complete?
-            // We calculate score anyway, but status depends on completeness?
-            // Let's verify completeness before Final Status.
-            // Or calculate running score.
-
-            const totalScore = calculateFinalScore(ak, quran, wawancaraTotal, kp, ks);
-
-            // Evaluasi dengan Matrix Grade Lulus/Cadangan/Tidak Lulus
-            const grdQuran = evaluateQuranGrade(quran);
-            const grdAk = evaluateAkademikGrade(ak);
-            const grdKp = evaluateKepribadianGrade(kp);
-            const grdWs = evaluateWawancaraGrade(ws); // Wawancara Calsan
-            const grdWo = evaluateWawancaraGrade(wo); // Wawancara Cawalsan
-
-            // Jika belum lengkap wawancara, anggap B biar tidak langsung gagal false-positive
-            const wawancaraCalsanFinal = ws > 0 ? grdWs : 'B';
-            const wawancaraCawalsanFinal = wo > 0 ? grdWo : 'B';
-
-            const status = determineFinalDecision({
-                quran: grdQuran,
-                akademik: grdAk,
-                kepribadian: grdKp,
-                wawancaraCalsan: wawancaraCalsanFinal as 'A' | 'B' | 'C',
-                wawancaraCawalsan: wawancaraCawalsanFinal as 'A' | 'B' | 'C'
-            });
-
-            await prisma.nilaiUjian.update({
-                where: { id: nilai.id },
-                data: {
-                    total_score: totalScore,
-                    status_kelulusan: status,
-                    score_wawancara: wawancaraTotal // Save computed logic
-                } as any
-            });
-        }
+        // 4. Trigger Recalculation
+        const { recalculateNilaiUjian } = require("@/lib/scoring");
+        await recalculateNilaiUjian(pendaftar_id);
 
         return NextResponse.json({ success: true, updated });
 
