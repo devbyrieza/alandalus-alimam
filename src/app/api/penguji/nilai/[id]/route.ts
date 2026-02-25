@@ -62,11 +62,23 @@ export async function PATCH(
         let isWawancaraFallback = false;
         let isQuranFallback = false;
         let isOrtuFallback = false;
+
         if (!isWawancara && !isQuran && !isOrtu && assignment && assignment.exam_session && assignment.exam_session.created_by === userId) {
             const title = (assignment.exam_session.title || "").toLowerCase();
-            if (title.includes("qur") || title.includes("quran")) isQuranFallback = true;
-            else if (title.includes("calsan") || title.includes("santri")) isWawancaraFallback = true;
-            else if (title.includes("cawalsan") || title.includes("ortu") || title.includes("orang")) isOrtuFallback = true;
+            const hasQuranMatch = title.includes("qur") || title.includes("quran");
+            const hasWawancaraMatch = title.includes("calsan") || title.includes("santri") || title.includes("wawancara");
+            const hasOrtuMatch = title.includes("cawalsan") || title.includes("ortu") || title.includes("orang");
+
+            // If the title is generic (e.g. "Tes PPDB 1"), grant access to all forms (matches frontend behavior roles: [])
+            if (!hasQuranMatch && !hasWawancaraMatch && !hasOrtuMatch) {
+                isQuranFallback = true;
+                isWawancaraFallback = true;
+                isOrtuFallback = true;
+            } else {
+                isQuranFallback = hasQuranMatch;
+                isWawancaraFallback = hasWawancaraMatch;
+                isOrtuFallback = hasOrtuMatch;
+            }
         }
 
         const updateData: any = {};
