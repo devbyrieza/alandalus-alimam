@@ -289,7 +289,7 @@ export default function InputNilaiPage() {
         </div>
 
         {/* Read-only info */}
-        <div className="grid grid-cols-3 gap-3 text-sm">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
           <div><span className="text-gray-500">Nama:</span> <span className="font-semibold">{p.nama_lengkap}</span></div>
           <div><span className="text-gray-500">No. Daftar:</span> <span className="font-semibold">{p.nomor_pendaftaran}</span></div>
           <div><span className="text-gray-500">Jenjang:</span> <span className="font-semibold">{p.jenjang}</span></div>
@@ -312,9 +312,9 @@ export default function InputNilaiPage() {
             {/* Rekomendasi */}
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-2">Rekomendasi Penguji *</label>
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 {["Diterima", "Cadangan", "Ditolak"].map((opt) => (
-                  <label key={opt} className={`px-4 py-2 rounded-lg cursor-pointer border-2 transition-all text-sm font-semibold ${quranForm.rekomendasi === opt ? (opt === "Diterima" ? "border-green-500 bg-green-100 text-green-700" : opt === "Cadangan" ? "border-yellow-500 bg-yellow-100 text-yellow-700" : "border-red-500 bg-red-100 text-red-700") : "border-gray-200 hover:border-gray-400"}`}>
+                  <label key={opt} className={`px-4 py-2 rounded-lg cursor-pointer border-2 transition-all text-sm font-semibold text-center sm:text-left ${quranForm.rekomendasi === opt ? (opt === "Diterima" ? "border-green-500 bg-green-100 text-green-700" : opt === "Cadangan" ? "border-yellow-500 bg-yellow-100 text-yellow-700" : "border-red-500 bg-red-100 text-red-700") : "border-gray-200 hover:border-gray-400"}`}>
                     <input type="radio" name={`rekom-quran-${p.id}`} value={opt} checked={quranForm.rekomendasi === opt} onChange={() => setQuranForm({ ...quranForm, rekomendasi: opt })} className="hidden" />
                     {opt}
                   </label>
@@ -338,9 +338,9 @@ export default function InputNilaiPage() {
             </div>
 
             {/* Actions */}
-            <div className="flex gap-3 pt-2">
-              <button onClick={cancelEditing} className="px-5 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors">Batal</button>
-              <button onClick={() => saveForm(p, "quran")} disabled={!quranForm.tajwid || !quranForm.kelancaran || !quranForm.rekomendasi || !quranForm.nama_penguji || saving === p.id + "quran"} className="px-5 py-2 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <button onClick={cancelEditing} className="px-5 py-2 bg-gray-200 text-gray-700 rounded-lg justify-center font-semibold hover:bg-gray-300 transition-colors w-full sm:w-auto">Batal</button>
+              <button onClick={() => saveForm(p, "quran")} disabled={!quranForm.tajwid || !quranForm.kelancaran || !quranForm.rekomendasi || !quranForm.nama_penguji || saving === p.id + "quran"} className="w-full sm:w-auto px-5 py-2 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
                 {saving === p.id + "quran" ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} Simpan
               </button>
             </div>
@@ -348,12 +348,12 @@ export default function InputNilaiPage() {
         ) : (
           <div>
             {isSaved ? (
-              <div className="grid grid-cols-2 gap-3 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                 <div><span className="text-gray-500">Tajwid:</span> <span className="font-bold">{data.tajwid}</span></div>
                 <div><span className="text-gray-500">Kelancaran:</span> <span className="font-bold">{data.kelancaran}</span></div>
                 <div><span className="text-gray-500">Rekomendasi:</span> <span className={`font-bold ${data.rekomendasi === "Diterima" ? "text-green-600" : data.rekomendasi === "Cadangan" ? "text-yellow-600" : "text-red-600"}`}>{data.rekomendasi}</span></div>
                 <div><span className="text-gray-500">Penguji:</span> <span className="font-bold">{data.nama_penguji}</span></div>
-                {data.catatan && <div className="col-span-2"><span className="text-gray-500">Catatan:</span> {data.catatan}</div>}
+                {data.catatan && <div className="col-span-1 sm:col-span-2"><span className="text-gray-500">Catatan:</span> {data.catatan}</div>}
               </div>
             ) : (
               <p className="text-gray-400 text-sm italic">Belum dinilai</p>
@@ -388,7 +388,7 @@ export default function InputNilaiPage() {
         </div>
 
         {/* Read-only info */}
-        <div className="grid grid-cols-3 gap-3 text-sm">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
           <div><span className="text-gray-500">Nama:</span> <span className="font-semibold">{p.nama_lengkap}</span></div>
           <div><span className="text-gray-500">No. Daftar:</span> <span className="font-semibold">{p.nomor_pendaftaran}</span></div>
           <div><span className="text-gray-500">Jenjang:</span> <span className="font-semibold">{p.jenjang}</span></div>
@@ -446,9 +446,9 @@ export default function InputNilaiPage() {
             </div>
 
             {/* Actions */}
-            <div className="flex gap-3 pt-2">
-              <button onClick={cancelEditing} className="px-5 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors">Batal</button>
-              <button onClick={() => saveForm(p, "wawancara")} disabled={!CALSAN_CRITERIA.every((c) => calsanForm[c.key]) || !calsanForm.rekomendasi || !calsanForm.nama_pewawancara || saving === p.id + "wawancara"} className="px-5 py-2 bg-violet-600 text-white rounded-lg font-semibold hover:bg-violet-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <button onClick={cancelEditing} className="w-full sm:w-auto px-5 py-2 bg-gray-200 text-gray-700 rounded-lg justify-center font-semibold hover:bg-gray-300 transition-colors">Batal</button>
+              <button onClick={() => saveForm(p, "wawancara")} disabled={!CALSAN_CRITERIA.every((c) => calsanForm[c.key]) || !calsanForm.rekomendasi || !calsanForm.nama_pewawancara || saving === p.id + "wawancara"} className="w-full sm:w-auto px-5 py-2 bg-violet-600 text-white rounded-lg font-semibold hover:bg-violet-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
                 {saving === p.id + "wawancara" ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} Simpan
               </button>
             </div>
@@ -457,10 +457,10 @@ export default function InputNilaiPage() {
           <div>
             {isSaved ? (
               <div className="space-y-2 text-sm">
-                <div className="grid grid-cols-4 gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                   {CALSAN_CRITERIA.map((c) => (
                     <div key={c.key} className="bg-white rounded-lg p-2 text-center border">
-                      <div className="text-xs text-gray-500 truncate">{c.label.split(" ").slice(0, 2).join(" ")}</div>
+                      <div className="text-xs text-gray-500 truncate" title={c.label}>{c.label.split(" ").slice(0, 2).join(" ")}</div>
                       <div className="font-bold text-lg text-violet-700">{data[c.key] || "-"}<span className="text-xs text-gray-400">/5</span></div>
                     </div>
                   ))}
@@ -504,10 +504,10 @@ export default function InputNilaiPage() {
         </div>
 
         {/* Read-only info */}
-        <div className="grid grid-cols-3 gap-3 text-sm">
-          <div><span className="text-gray-500">Nama Calon Santri:</span> <span className="font-semibold">{p.nama_lengkap}</span></div>
-          <div><span className="text-gray-500">No. Daftar:</span> <span className="font-semibold">{p.nomor_pendaftaran}</span></div>
-          <div><span className="text-gray-500">Jenjang:</span> <span className="font-semibold">{p.jenjang}</span></div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
+          <div><span className="text-gray-500">Nama Calon Santri:</span> <span className="font-semibold block sm:inline">{p.nama_lengkap}</span></div>
+          <div><span className="text-gray-500">No. Daftar:</span> <span className="font-semibold block sm:inline">{p.nomor_pendaftaran}</span></div>
+          <div><span className="text-gray-500">Jenjang:</span> <span className="font-semibold block sm:inline">{p.jenjang}</span></div>
         </div>
 
         {isEditing ? (
@@ -570,9 +570,9 @@ export default function InputNilaiPage() {
             {/* SPP */}
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-2">Apakah sudah mengetahui biaya SPP satu tahun? *</label>
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 {["Sudah", "Belum"].map((opt) => (
-                  <label key={opt} className={`px-5 py-2 rounded-lg cursor-pointer border-2 transition-all text-sm font-semibold ${cawalsanForm.tahu_spp === opt ? "border-amber-500 bg-amber-100" : "border-gray-200 hover:border-amber-300"}`}>
+                  <label key={opt} className={`px-5 py-2 rounded-lg cursor-pointer border-2 transition-all text-sm font-semibold flex-1 text-center sm:flex-none ${cawalsanForm.tahu_spp === opt ? "border-amber-500 bg-amber-100" : "border-gray-200 hover:border-amber-300"}`}>
                     <input type="radio" name={`spp-${p.id}`} value={opt} checked={cawalsanForm.tahu_spp === opt} onChange={() => setCawalsanForm({ ...cawalsanForm, tahu_spp: opt })} className="hidden" />
                     {opt}
                   </label>
@@ -609,9 +609,9 @@ export default function InputNilaiPage() {
             </div>
 
             {/* Actions */}
-            <div className="flex gap-3 pt-2">
-              <button onClick={cancelEditing} className="px-5 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors">Batal</button>
-              <button onClick={() => saveForm(p, "ortu")} disabled={!cawalsanForm.nama_orangtua || !cawalsanForm.asal || !cawalsanForm.kategori || !cawalsanForm.sumber_info || !cawalsanForm.karakter || !cawalsanForm.tahu_spp || !cawalsanForm.rekomendasi || !cawalsanForm.nama_pewawancara || !CAWALSAN_QUESTIONS.every((q) => cawalsanForm[q.key]) || saving === p.id + "ortu"} className="px-5 py-2 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <button onClick={cancelEditing} className="w-full sm:w-auto px-5 py-2 bg-gray-200 text-gray-700 rounded-lg justify-center font-semibold hover:bg-gray-300 transition-colors">Batal</button>
+              <button onClick={() => saveForm(p, "ortu")} disabled={!cawalsanForm.nama_orangtua || !cawalsanForm.asal || !cawalsanForm.kategori || !cawalsanForm.sumber_info || !cawalsanForm.karakter || !cawalsanForm.tahu_spp || !cawalsanForm.rekomendasi || !cawalsanForm.nama_pewawancara || !CAWALSAN_QUESTIONS.every((q) => cawalsanForm[q.key]) || saving === p.id + "ortu"} className="w-full sm:w-auto px-5 py-2 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
                 {saving === p.id + "ortu" ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} Simpan
               </button>
             </div>
@@ -622,7 +622,7 @@ export default function InputNilaiPage() {
               <div className="space-y-2 text-sm">
                 <div><span className="text-gray-500">Orangtua:</span> <span className="font-bold">{data.nama_orangtua}</span></div>
                 <div><span className="text-gray-500">Kategori:</span> <span className="font-bold">{data.kategori}</span></div>
-                <div className="grid grid-cols-4 gap-1">
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
                   {CAWALSAN_QUESTIONS.map((q) => (
                     <div key={q.key} className="bg-white rounded p-1.5 text-center border text-xs">
                       <div className="text-gray-400">Q{q.key.replace("q", "")}</div>

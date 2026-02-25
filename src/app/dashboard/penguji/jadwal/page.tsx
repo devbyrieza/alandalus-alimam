@@ -548,10 +548,10 @@ export default function JadwalPengujiPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-stone-700 mb-1">Link Google Meet / Lokasi</label>
+                <label className="block text-sm font-bold text-stone-700 mb-1">Link Video Conference / Lokasi</label>
                 <input
                   type="text"
-                  placeholder="Paste Link Google Meet di sini (Contoh: https://meet.google.com/abc-xyz-123)"
+                  placeholder="Google Meet / Zoom / Lainnya (Contoh: https://meet.google.com/...)"
                   className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-violet-500 outline-none"
                   value={slotForm.location}
                   onChange={e => setSlotForm({ ...slotForm, location: e.target.value })}
@@ -592,7 +592,7 @@ export default function JadwalPengujiPage() {
               {/* Data Diri */}
               <div>
                 <h4 className="text-sm font-bold text-stone-400 uppercase tracking-wider mb-3">Identitas Santri</h4>
-                <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                   <div>
                     <label className="block text-stone-500 text-xs">Nama Lengkap</label>
                     <p className="font-bold text-stone-900">{selectedPendaftar.nama_lengkap}</p>
@@ -635,7 +635,7 @@ export default function JadwalPengujiPage() {
               {/* Data Orang Tua */}
               <div>
                 <h4 className="text-sm font-bold text-stone-400 uppercase tracking-wider mb-3">Data Orang Tua</h4>
-                <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                   <div>
                     <label className="block text-stone-500 text-xs">Nama Ayah</label>
                     <p className="font-bold text-stone-900">{selectedPendaftar.orang_tua?.nama_ayah || "-"}</p>
