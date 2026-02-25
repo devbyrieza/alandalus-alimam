@@ -419,7 +419,7 @@ export default function InputNilaiPage() {
                 <div className="space-y-2">
                   {criterion.options.map((opt) => (
                     <label key={opt.value} className={`flex items-start gap-3 p-3 rounded-lg cursor-pointer border-2 transition-all text-sm ${calsanForm[criterion.key] === opt.value ? "border-violet-500 bg-violet-50" : "border-gray-100 hover:border-violet-200"}`}>
-                      <input type="radio" name={`${criterion.key}-${p.id}`} value={opt.value} checked={calsanForm[criterion.key] === opt.value} onChange={() => setCalsanForm({ ...calsanForm, [criterion.key]: opt.value })} className="mt-0.5 accent-violet-600" />
+                      <input type="radio" name={`${criterion.key}-${p.id}`} value={opt.value} checked={calsanForm[criterion.key] === opt.value} onChange={() => setCalsanForm({ ...calsanForm, [criterion.key]: opt.value })} className="w-4 h-4 shrink-0 mt-0.5 accent-violet-600" />
                       <span>{opt.label}</span>
                     </label>
                   ))}
@@ -448,7 +448,7 @@ export default function InputNilaiPage() {
                   "E. Tidak layak diterima saat ini.",
                 ].map((opt) => (
                   <label key={opt} className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer border-2 transition-all text-sm ${calsanForm.rekomendasi === opt ? "border-violet-500 bg-violet-50" : "border-gray-100 hover:border-violet-200"}`}>
-                    <input type="radio" name={`rekom-calsan-${p.id}`} value={opt} checked={calsanForm.rekomendasi === opt} onChange={() => setCalsanForm({ ...calsanForm, rekomendasi: opt })} className="accent-violet-600" />
+                    <input type="radio" name={`rekom-calsan-${p.id}`} value={opt} checked={calsanForm.rekomendasi === opt} onChange={() => setCalsanForm({ ...calsanForm, rekomendasi: opt })} className="w-4 h-4 shrink-0 mt-1 accent-violet-600" />
                     <span>{opt}</span>
                   </label>
                 ))}
@@ -546,7 +546,7 @@ export default function InputNilaiPage() {
               <div className="space-y-2">
                 {KATEGORI_OPTIONS.map((opt) => (
                   <label key={opt} className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer border-2 transition-all text-sm ${cawalsanForm.kategori === opt ? "border-amber-500 bg-amber-50" : "border-gray-100 hover:border-amber-200"}`}>
-                    <input type="radio" name={`kategori-${p.id}`} value={opt} checked={cawalsanForm.kategori === opt} onChange={() => setCawalsanForm({ ...cawalsanForm, kategori: opt })} className="accent-amber-600" />
+                    <input type="radio" name={`kategori-${p.id}`} value={opt} checked={cawalsanForm.kategori === opt} onChange={() => setCawalsanForm({ ...cawalsanForm, kategori: opt })} className="w-4 h-4 shrink-0 mt-0.5 accent-amber-600" />
                     <span>{opt}</span>
                   </label>
                 ))}
@@ -569,7 +569,7 @@ export default function InputNilaiPage() {
                 <div className="space-y-2">
                   {q.options.map((opt) => (
                     <label key={opt} className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer border-2 transition-all text-sm ${cawalsanForm[q.key] === opt ? "border-amber-500 bg-amber-50" : "border-gray-100 hover:border-amber-200"}`}>
-                      <input type="radio" name={`${q.key}-${p.id}`} value={opt} checked={cawalsanForm[q.key] === opt} onChange={() => setCawalsanForm({ ...cawalsanForm, [q.key]: opt })} className="accent-amber-600" />
+                      <input type="radio" name={`${q.key}-${p.id}`} value={opt} checked={cawalsanForm[q.key] === opt} onChange={() => setCawalsanForm({ ...cawalsanForm, [q.key]: opt })} className="w-4 h-4 shrink-0 mt-0.5 accent-amber-600" />
                       <span>{opt}</span>
                     </label>
                   ))}
