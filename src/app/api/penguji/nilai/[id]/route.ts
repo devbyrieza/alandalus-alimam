@@ -71,7 +71,8 @@ export async function PATCH(
 
         const updateData: any = {};
 
-        if (isAdmin || isQuran || isQuranFallback) {
+        // Only update Quran if payload contains detail_quran
+        if ((isAdmin || isQuran || isQuranFallback) && body.detail_quran !== undefined) {
             if (body.nilai_tes_quran !== undefined) updateData.nilai_tes_quran = body.nilai_tes_quran;
             if (body.catatan_quran !== undefined) updateData.catatan_quran = body.catatan_quran;
             if (body.detail_quran !== undefined) updateData.detail_quran = body.detail_quran;
@@ -80,7 +81,8 @@ export async function PATCH(
             updateData.input_at_quran = new Date();
         }
 
-        if (isAdmin || isWawancara || isWawancaraFallback) {
+        // Only update Santri if payload contains detail_wawancara
+        if ((isAdmin || isWawancara || isWawancaraFallback) && body.detail_wawancara !== undefined) {
             if (body.nilai_wawancara_santri !== undefined) updateData.nilai_wawancara_santri = body.nilai_wawancara_santri;
             if (body.catatan_santri !== undefined) updateData.catatan_santri = body.catatan_santri;
             if (body.detail_wawancara !== undefined) updateData.detail_wawancara = body.detail_wawancara;
@@ -89,7 +91,8 @@ export async function PATCH(
             updateData.input_at_santri = new Date();
         }
 
-        if (isAdmin || isOrtu || isOrtuFallback) {
+        // Only update Ortu if payload contains detail_cawalsan
+        if ((isAdmin || isOrtu || isOrtuFallback) && body.detail_cawalsan !== undefined) {
             if (body.nilai_wawancara_ortu !== undefined) updateData.nilai_wawancara_ortu = body.nilai_wawancara_ortu;
             if (body.catatan_ortu !== undefined) updateData.catatan_ortu = body.catatan_ortu;
             if (body.detail_cawalsan !== undefined) updateData.detail_cawalsan = body.detail_cawalsan;
