@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 import {
   ClipboardCheck,
   Search,
@@ -248,15 +249,30 @@ export default function InputNilaiPage() {
       });
 
       if (res.ok) {
-        setMessage({ type: "success", text: "Data berhasil disimpan!" });
+        await Swal.fire({
+          icon: 'success',
+          title: 'Berhasil!',
+          text: 'Data penilaian berhasil disimpan.',
+          timer: 1500,
+          showConfirmButton: false
+        });
         setEditingId(null);
         fetchPeserta();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         const err = await res.json();
-        setMessage({ type: "error", text: err.error || "Gagal menyimpan" });
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal Menyimpan',
+          text: err.error || "Terjadi kesalahan sistem"
+        });
       }
     } catch (error: any) {
-      setMessage({ type: "error", text: error.message });
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: error.message
+      });
     } finally {
       setSaving(null);
     }

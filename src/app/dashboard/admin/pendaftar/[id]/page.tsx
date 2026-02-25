@@ -105,6 +105,18 @@ interface PendaftarDetail {
   nilai_ujian: {
     nilai_total: number;
     catatan?: string;
+    catatan_umum?: string;
+    score_akademik?: number;
+    score_kepribadian?: number;
+    score_kesiapan?: number;
+    score_quran?: number;
+    nilai_tes_quran?: number;
+    catatan_quran?: string;
+    score_wawancara?: number;
+    nilai_wawancara_santri?: number;
+    catatan_santri?: string;
+    nilai_wawancara_ortu?: number;
+    catatan_ortu?: string;
   } | null;
 }
 
@@ -498,40 +510,130 @@ export default function PendaftarDetailPage() {
             </div>
           )}
 
-          {/* Untuk Admin Penguji: Hasil Seleksi pindah ke kolom utama paling atas */}
-          {isPenguji && (
+          {/* Hasil Seleksi & Ujian (Tampil untuk Admin Super, Admin Umum, dan Penguji) */}
+          {(isPenguji || userRole === "admin_super" || userRole === "admin" || userRole === "head_of_it") && (
             <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-purple-100">
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-6">
                 <div className="p-2 bg-purple-100 rounded-lg">
                   <div className="w-6 h-6 text-purple-600 font-bold flex items-center justify-center border-2 border-purple-600 rounded-md">
                     A+
                   </div>
                 </div>
-                <h3 className="text-lg font-bold text-stone-900">Hasil Seleksi & Ujian</h3>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-purple-50 p-4 rounded-lg border border-purple-200 text-center">
-                  <span className="block text-sm text-purple-600 font-medium mb-1">Nilai Total</span>
-                  <span className="text-4xl font-extrabold text-purple-900">
-                    {pendaftar.nilai_ujian?.nilai_total || "0"}
-                  </span>
-                </div>
-
-                <div className="bg-stone-50 p-4 rounded-lg border border-stone-200">
-                  <span className="block text-sm text-stone-500 font-medium mb-1">Catatan Penguji</span>
-                  <p className="text-stone-800 italic">
-                    {pendaftar.nilai_ujian?.catatan || "Belum ada catatan penguji."}
-                  </p>
+                <div>
+                  <h3 className="text-lg font-bold text-stone-900">Hasil Seleksi & Ujian</h3>
+                  <p className="text-sm text-stone-500">Rincian nilai 6 komponen tes Calon Santri & Wali Santri</p>
                 </div>
               </div>
 
-              <div className="mt-4 flex justify-end">
-                <button className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
-                  <Edit className="w-4 h-4" />
-                  Input / Edit Nilai
-                </button>
+              {/* Grid 6 Test Results */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                {/* 1. Tes Kemampuan Akademik (CBT) */}
+                <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100 relative">
+                  <span className="block text-xs text-blue-600 font-bold uppercase tracking-wide mb-1">CBT: Akademik</span>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-3xl font-black text-blue-900">
+                      {pendaftar.nilai_ujian?.score_akademik ?? "-"}
+                    </span>
+                    <span className="text-sm text-blue-400 font-medium">/ 100</span>
+                  </div>
+                </div>
+
+                {/* 2. Tes Identifikasi Kepribadian (CBT) */}
+                <div className="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100">
+                  <span className="block text-xs text-indigo-600 font-bold uppercase tracking-wide mb-1">CBT: Kepribadian</span>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-3xl font-black text-indigo-900">
+                      {pendaftar.nilai_ujian?.score_kepribadian ?? "-"}
+                    </span>
+                    <span className="text-sm text-indigo-400 font-medium">/ 100</span>
+                  </div>
+                </div>
+
+                {/* 3. Tes Kesiapan (CBT) */}
+                <div className="bg-violet-50/50 p-4 rounded-xl border border-violet-100">
+                  <span className="block text-xs text-violet-600 font-bold uppercase tracking-wide mb-1">CBT: Kesiapan</span>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-3xl font-black text-violet-900">
+                      {pendaftar.nilai_ujian?.score_kesiapan ?? "-"}
+                    </span>
+                    <span className="text-sm text-violet-400 font-medium">/ 100</span>
+                  </div>
+                </div>
+
+                {/* 4. Tes Al-Qur'an (Offline) */}
+                <div className="bg-emerald-50/50 p-4 rounded-xl border border-emerald-100 flex flex-col justify-between">
+                  <div>
+                    <span className="block text-xs text-emerald-600 font-bold uppercase tracking-wide mb-1">Wawancara: Al-Qur'an</span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-3xl font-black text-emerald-900">
+                        {pendaftar.nilai_ujian?.score_quran ?? pendaftar.nilai_ujian?.nilai_tes_quran ?? "-"}
+                      </span>
+                      <span className="text-sm text-emerald-400 font-medium">/ 100</span>
+                    </div>
+                  </div>
+                  {pendaftar.nilai_ujian?.catatan_quran && (
+                    <div className="mt-2 text-xs text-stone-600 line-clamp-2 italic border-t border-emerald-200/50 pt-2">
+                      "{pendaftar.nilai_ujian.catatan_quran}"
+                    </div>
+                  )}
+                </div>
+
+                {/* 5. Wawancara Calsan (Offline) */}
+                <div className="bg-amber-50/50 p-4 rounded-xl border border-amber-100 flex flex-col justify-between">
+                  <div>
+                    <span className="block text-xs text-amber-600 font-bold uppercase tracking-wide mb-1">Wawancara: Calsan</span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-3xl font-black text-amber-900">
+                        {pendaftar.nilai_ujian?.score_wawancara ?? pendaftar.nilai_ujian?.nilai_wawancara_santri ?? "-"}
+                      </span>
+                      <span className="text-sm text-amber-400 font-medium">/ 5.0</span>
+                    </div>
+                  </div>
+                  {pendaftar.nilai_ujian?.catatan_santri && (
+                    <div className="mt-2 text-xs text-stone-600 line-clamp-2 italic border-t border-amber-200/50 pt-2">
+                      "{pendaftar.nilai_ujian.catatan_santri}"
+                    </div>
+                  )}
+                </div>
+
+                {/* 6. Wawancara Cawalsan (Offline) */}
+                <div className="bg-rose-50/50 p-4 rounded-xl border border-rose-100 flex flex-col justify-between">
+                  <div>
+                    <span className="block text-xs text-rose-600 font-bold uppercase tracking-wide mb-1">Wawancara: Cawalsan</span>
+                    <div className="flex items-center gap-2 mb-1">
+                      {pendaftar.nilai_ujian?.nilai_wawancara_ortu ? (
+                        <span className="px-2 py-0.5 bg-green-100 text-green-700 font-bold text-xs rounded uppercase tracking-wide">Sudah Diisi</span>
+                      ) : (
+                        <span className="px-2 py-0.5 bg-stone-100 text-stone-500 font-bold text-xs rounded uppercase tracking-wide">Belum Ada</span>
+                      )}
+                    </div>
+                  </div>
+                  {pendaftar.nilai_ujian?.catatan_ortu && (
+                    <div className="mt-2 text-xs text-stone-600 line-clamp-2 italic border-t border-rose-200/50 pt-2">
+                      "{pendaftar.nilai_ujian.catatan_ortu}"
+                    </div>
+                  )}
+                </div>
+
               </div>
+
+              <div className="bg-stone-50 p-4 rounded-lg border border-stone-200 mt-4">
+                <span className="block text-sm text-stone-500 font-medium mb-1">Catatan Total (Admin/Penguji Akhir)</span>
+                <p className="text-stone-800 italic">
+                  {pendaftar.nilai_ujian?.catatan_umum || pendaftar.nilai_ujian?.catatan || "Belum ada catatan umum/akhir."}
+                </p>
+              </div>
+
+              {/* Tampilkan tombol edit hanya jika itu penguji, biar admin super dkk cukup melihat hasil saja, jika mengedit lewat form khusus */}
+              {isPenguji && (
+                <div className="mt-4 flex justify-end">
+                  <Link href={`/dashboard/penguji/input-nilai?search=${pendaftar.nomor_pendaftaran}`} className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors shadow hover:shadow-md font-bold text-sm">
+                    <Edit className="w-4 h-4" />
+                    Input / Lengkapi Edit Nilai
+                  </Link>
+                </div>
+              )}
             </div>
           )}
 
