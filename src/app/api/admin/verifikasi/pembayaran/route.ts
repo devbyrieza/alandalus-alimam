@@ -43,14 +43,18 @@ export async function GET(request: NextRequest) {
         bukti_transfer_filename: true,
         created_at: true,
         updated_at: true,
-        pendaftar_id: true,
-        pendaftar: {
+        pendaftar: { // Corrected: pendaftar relation selected
           select: {
             id: true,
             nomor_pendaftaran: true,
             nama_lengkap: true,
             jenjang: true,
             no_hp: true,
+          }
+        },
+        verifier: { // Corrected: verifier relation selected
+          select: {
+            full_name: true,
           }
         }
       },
@@ -77,6 +81,7 @@ export async function GET(request: NextRequest) {
         created_at: pembayaran.created_at,
         updated_at: pembayaran.updated_at,
         pendaftar: pembayaran.pendaftar,
+        verifier_name: pembayaran.verifier?.full_name || null,
       };
     });
 
@@ -126,8 +131,8 @@ export async function PATCH(request: NextRequest) {
       data: {
         status_pembayaran,
         catatan_verifikasi: catatan,
-        // verified_by: session.id, // Only if column exists
-        // verified_at: new Date(), // Only if column exists
+        verified_by: session.id,
+        verified_at: new Date(),
       },
       include: {
         pendaftar: {

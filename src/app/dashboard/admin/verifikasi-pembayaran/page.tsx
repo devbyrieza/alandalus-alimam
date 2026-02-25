@@ -36,6 +36,7 @@ interface Pembayaran {
     jenjang: string;
     no_hp: string | null;
   } | null;
+  verifier_name: string | null;
 }
 
 export default function VerifikasiPembayaranPage() {
@@ -331,6 +332,14 @@ export default function VerifikasiPembayaranPage() {
                           <p className="text-xs text-stone-500">
                             <strong className="text-stone-700">Catatan:</strong> {pay.catatan}
                           </p>
+                        </div>
+                      )}
+                      {(statusFilter === "verified" || statusFilter === "rejected") && (
+                        <div className="col-span-1 sm:col-span-2 pt-2 border-t border-stone-200/50 mt-1 flex items-center gap-1.5 text-xs text-stone-500">
+                          <User className="w-3.5 h-3.5" />
+                          <span>
+                            {statusFilter === "verified" ? "Diverifikasi" : "Ditolak"} oleh: <strong className="text-stone-700">{pay.verifier_name || "Tanpa Nama"}</strong>
+                          </span>
                         </div>
                       )}
                     </div>
