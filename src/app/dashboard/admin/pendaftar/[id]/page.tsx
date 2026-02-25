@@ -23,6 +23,7 @@ import {
   Users,
   Briefcase,
   DollarSign,
+  Trophy,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -515,8 +516,8 @@ export default function PendaftarDetailPage() {
             <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-purple-100">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-2 bg-purple-100 rounded-lg">
-                  <div className="w-6 h-6 text-purple-600 font-bold flex items-center justify-center border-2 border-purple-600 rounded-md">
-                    A+
+                  <div className="w-6 h-6 text-purple-600 flex items-center justify-center">
+                    <Trophy className="w-5 h-5" />
                   </div>
                 </div>
                 <div>
@@ -531,46 +532,58 @@ export default function PendaftarDetailPage() {
                 {/* 1. Tes Kemampuan Akademik (CBT) */}
                 <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100 relative">
                   <span className="block text-xs text-blue-600 font-bold uppercase tracking-wide mb-1">CBT: Akademik</span>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-3xl font-black text-blue-900">
-                      {pendaftar.nilai_ujian?.score_akademik ?? "-"}
-                    </span>
-                    <span className="text-sm text-blue-400 font-medium">/ 100</span>
-                  </div>
+                  {!pendaftar.nilai_ujian ?
+                    <span className="text-sm font-bold text-stone-400 italic">Belum Ujian</span> :
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-3xl font-black text-blue-900">
+                        {pendaftar.nilai_ujian?.score_akademik ?? "-"}
+                      </span>
+                      <span className="text-sm text-blue-400 font-medium">/ 100</span>
+                    </div>
+                  }
                 </div>
 
                 {/* 2. Tes Identifikasi Kepribadian (CBT) */}
                 <div className="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100">
                   <span className="block text-xs text-indigo-600 font-bold uppercase tracking-wide mb-1">CBT: Kepribadian</span>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-3xl font-black text-indigo-900">
-                      {pendaftar.nilai_ujian?.score_kepribadian ?? "-"}
-                    </span>
-                    <span className="text-sm text-indigo-400 font-medium">/ 100</span>
-                  </div>
+                  {!pendaftar.nilai_ujian ?
+                    <span className="text-sm font-bold text-stone-400 italic">Belum Ujian</span> :
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-3xl font-black text-indigo-900">
+                        {pendaftar.nilai_ujian?.score_kepribadian ?? "-"}
+                      </span>
+                      <span className="text-sm text-indigo-400 font-medium">/ 100</span>
+                    </div>
+                  }
                 </div>
 
                 {/* 3. Tes Kesiapan (CBT) */}
                 <div className="bg-violet-50/50 p-4 rounded-xl border border-violet-100">
                   <span className="block text-xs text-violet-600 font-bold uppercase tracking-wide mb-1">CBT: Kesiapan</span>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-3xl font-black text-violet-900">
-                      {pendaftar.nilai_ujian?.score_kesiapan ?? "-"}
-                    </span>
-                    <span className="text-sm text-violet-400 font-medium">/ 100</span>
-                  </div>
+                  {!pendaftar.nilai_ujian ?
+                    <span className="text-sm font-bold text-stone-400 italic">Belum Ujian</span> :
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-3xl font-black text-violet-900">
+                        {pendaftar.nilai_ujian?.score_kesiapan ?? "-"}
+                      </span>
+                      <span className="text-sm text-violet-400 font-medium">/ 100</span>
+                    </div>
+                  }
                 </div>
 
                 {/* 4. Tes Al-Qur'an (Offline) */}
                 <div className="bg-emerald-50/50 p-4 rounded-xl border border-emerald-100 flex flex-col justify-between">
                   <div>
                     <span className="block text-xs text-emerald-600 font-bold uppercase tracking-wide mb-1">Wawancara: Al-Qur'an</span>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-3xl font-black text-emerald-900">
-                        {pendaftar.nilai_ujian?.score_quran ?? pendaftar.nilai_ujian?.nilai_tes_quran ?? "-"}
-                      </span>
-                      <span className="text-sm text-emerald-400 font-medium">/ 100</span>
-                    </div>
+                    {!pendaftar.nilai_ujian ?
+                      <span className="text-sm font-bold text-stone-400 italic">Belum Ujian</span> :
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-3xl font-black text-emerald-900">
+                          {pendaftar.nilai_ujian?.score_quran ?? pendaftar.nilai_ujian?.nilai_tes_quran ?? "-"}
+                        </span>
+                        <span className="text-sm text-emerald-400 font-medium">/ 100</span>
+                      </div>
+                    }
                   </div>
                   {pendaftar.nilai_ujian?.catatan_quran && (
                     <div className="mt-2 text-xs text-stone-600 line-clamp-2 italic border-t border-emerald-200/50 pt-2">
@@ -583,12 +596,15 @@ export default function PendaftarDetailPage() {
                 <div className="bg-amber-50/50 p-4 rounded-xl border border-amber-100 flex flex-col justify-between">
                   <div>
                     <span className="block text-xs text-amber-600 font-bold uppercase tracking-wide mb-1">Wawancara: Calsan</span>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-3xl font-black text-amber-900">
-                        {pendaftar.nilai_ujian?.score_wawancara ?? pendaftar.nilai_ujian?.nilai_wawancara_santri ?? "-"}
-                      </span>
-                      <span className="text-sm text-amber-400 font-medium">/ 5.0</span>
-                    </div>
+                    {!pendaftar.nilai_ujian ?
+                      <span className="text-sm font-bold text-stone-400 italic">Belum Ujian</span> :
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-3xl font-black text-amber-900">
+                          {pendaftar.nilai_ujian?.score_wawancara ?? pendaftar.nilai_ujian?.nilai_wawancara_santri ?? "-"}
+                        </span>
+                        <span className="text-sm text-amber-400 font-medium">/ 5.0</span>
+                      </div>
+                    }
                   </div>
                   {pendaftar.nilai_ujian?.catatan_santri && (
                     <div className="mt-2 text-xs text-stone-600 line-clamp-2 italic border-t border-amber-200/50 pt-2">
@@ -601,13 +617,18 @@ export default function PendaftarDetailPage() {
                 <div className="bg-rose-50/50 p-4 rounded-xl border border-rose-100 flex flex-col justify-between">
                   <div>
                     <span className="block text-xs text-rose-600 font-bold uppercase tracking-wide mb-1">Wawancara: Cawalsan</span>
-                    <div className="flex items-center gap-2 mb-1">
-                      {pendaftar.nilai_ujian?.nilai_wawancara_ortu ? (
-                        <span className="px-2 py-0.5 bg-green-100 text-green-700 font-bold text-xs rounded uppercase tracking-wide">Sudah Diisi</span>
+                    {!pendaftar.nilai_ujian ?
+                      <span className="text-sm font-bold text-stone-400 italic inline-block mt-2 px-2 py-0.5 bg-stone-100 rounded">BELUM ADA</span> :
+                      (pendaftar.nilai_ujian?.nilai_wawancara_ortu ? (
+                        <div className="flex flex-col mt-1">
+                          <span className="text-lg font-black text-rose-900 border border-rose-200 bg-white px-3 py-1 rounded inline-block w-max">
+                            {pendaftar.nilai_ujian.nilai_wawancara_ortu === 1 ? 'Diterima' : 'Tidak Diterima'}
+                          </span>
+                        </div>
                       ) : (
-                        <span className="px-2 py-0.5 bg-stone-100 text-stone-500 font-bold text-xs rounded uppercase tracking-wide">Belum Ada</span>
-                      )}
-                    </div>
+                        <span className="text-sm font-bold text-stone-400 italic inline-block mt-2 px-2 py-0.5 bg-stone-100 rounded">BELUM ADA</span>
+                      ))
+                    }
                   </div>
                   {pendaftar.nilai_ujian?.catatan_ortu && (
                     <div className="mt-2 text-xs text-stone-600 line-clamp-2 italic border-t border-rose-200/50 pt-2">

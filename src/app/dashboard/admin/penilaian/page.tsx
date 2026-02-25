@@ -39,10 +39,9 @@ export default function ExaminerDashboard() {
     const fetchStudents = async () => {
         try {
             setLoading(true);
-            const res = await fetch('/api/admin/pendaftar/list?limit=100&status=scheduled');
+            const res = await fetch('/api/admin/pendaftar/list?limit=100'); // Removed 'status=scheduled' to allow all applicants to populate
             // Using existing API which we modified to include scores.
-            // Filter status=scheduled or similar? Or just get all.
-            // For MVP just list.
+            // For MVP just list all applicants 
 
             if (!res.ok) throw new Error('Failed to fetch');
             const json = await res.json();
