@@ -582,13 +582,13 @@ export default function JadwalPengujiPage() {
 
       {/* MODAL DETAIL PENDAFTAR */}
       {isDetailModalOpen && selectedPendaftar && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm overflow-y-auto">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg my-8">
-            <div className="p-4 border-b border-stone-100 flex justify-between items-center bg-stone-50 rounded-t-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] flex flex-col">
+            <div className="p-4 border-b border-stone-100 flex justify-between items-center bg-stone-50 rounded-t-2xl shrink-0">
               <h3 className="font-bold text-stone-900">Data Pendaftar</h3>
               <button onClick={() => setIsDetailModalOpen(false)}><XCircle className="w-6 h-6 text-stone-400 hover:text-stone-600" /></button>
             </div>
-            <div className="p-6 space-y-6">
+            <div className="p-6 space-y-6 overflow-y-auto">
               {/* Data Diri */}
               <div>
                 <h4 className="text-sm font-bold text-stone-400 uppercase tracking-wider mb-3">Identitas Santri</h4>
@@ -618,6 +618,10 @@ export default function JadwalPengujiPage() {
                   <div>
                     <label className="block text-stone-500 text-xs">Jenjang</label>
                     <p className="text-stone-700">{selectedPendaftar.jenjang}</p>
+                  </div>
+                  <div className="col-span-1 sm:col-span-2">
+                    <label className="block text-stone-500 text-xs">No. WA / HP (Wali/Utama)</label>
+                    <p className="font-mono font-bold text-green-700">{selectedPendaftar.no_hp || "-"}</p>
                   </div>
                   <div className="col-span-2">
                     <label className="block text-stone-500 text-xs">Alamat</label>
@@ -662,7 +666,7 @@ export default function JadwalPengujiPage() {
                 </div>
               </div>
             </div>
-            <div className="p-4 border-t border-stone-100 bg-stone-50 rounded-b-2xl">
+            <div className="p-4 border-t border-stone-100 bg-stone-50 rounded-b-2xl shrink-0">
               <button
                 onClick={() => setIsDetailModalOpen(false)}
                 className="w-full py-2.5 bg-stone-200 hover:bg-stone-300 text-stone-800 font-bold rounded-xl transition-colors"
