@@ -320,6 +320,7 @@ model NilaiUjian {
   detail_akademik          Json?
   detail_kepribadian       Json?
   detail_kesiapan          Json?
+  detail_quran             Json?
   detail_wawancara         Json?
   detail_cawalsan          Json?
   score_akademik           Float?
