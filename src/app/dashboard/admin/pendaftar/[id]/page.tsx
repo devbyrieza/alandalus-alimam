@@ -618,15 +618,15 @@ export default function PendaftarDetailPage() {
                   <div>
                     <span className="block text-xs text-rose-600 font-bold uppercase tracking-wide mb-1">Wawancara: Cawalsan</span>
                     {!pendaftar.nilai_ujian ?
-                      <span className="text-sm font-bold text-stone-400 italic inline-block mt-2 px-2 py-0.5 bg-stone-100 rounded">BELUM ADA</span> :
+                      <span className="text-sm font-bold text-stone-400 italic inline-block mt-2 px-3 py-1 bg-stone-100 rounded">Belum Ada</span> :
                       (pendaftar.nilai_ujian?.nilai_wawancara_ortu ? (
-                        <div className="flex flex-col mt-1">
-                          <span className="text-lg font-black text-rose-900 border border-rose-200 bg-white px-3 py-1 rounded inline-block w-max">
+                        <div className="flex flex-col mt-2">
+                          <span className="text-lg font-black text-rose-900 border border-rose-200 bg-white px-3 py-1 rounded-lg inline-block w-max">
                             {pendaftar.nilai_ujian.nilai_wawancara_ortu === 1 ? 'Diterima' : 'Tidak Diterima'}
                           </span>
                         </div>
                       ) : (
-                        <span className="text-sm font-bold text-stone-400 italic inline-block mt-2 px-2 py-0.5 bg-stone-100 rounded">BELUM ADA</span>
+                        <span className="text-sm font-bold text-stone-400 italic inline-block mt-2 px-3 py-1 bg-stone-100 rounded">Belum Ada</span>
                       ))
                     }
                   </div>
