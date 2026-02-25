@@ -51,11 +51,6 @@ export async function GET(request: NextRequest) {
             jenjang: true,
             no_hp: true,
           }
-        },
-        verifier: { // Corrected: verifier relation selected
-          select: {
-            full_name: true,
-          }
         }
       },
       orderBy: { created_at: "desc" },
@@ -81,7 +76,6 @@ export async function GET(request: NextRequest) {
         created_at: pembayaran.created_at,
         updated_at: pembayaran.updated_at,
         pendaftar: pembayaran.pendaftar,
-        verifier_name: pembayaran.verifier?.full_name || null,
       };
     });
 
@@ -131,8 +125,6 @@ export async function PATCH(request: NextRequest) {
       data: {
         status_pembayaran,
         catatan_verifikasi: catatan,
-        verified_by: session.id,
-        verified_at: new Date(),
       },
       include: {
         pendaftar: {

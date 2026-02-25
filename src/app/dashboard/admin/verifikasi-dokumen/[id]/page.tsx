@@ -30,7 +30,6 @@ interface Dokumen {
     created_at: string;
     updated_at: string;
     pendaftar_id: string;
-    verifier_name: string | null;
 }
 
 interface PendaftarInfo {
@@ -118,7 +117,6 @@ export default function VerifikasiDokumenDetailPage() {
                         created_at: d.created_at,
                         updated_at: d.updated_at,
                         pendaftar_id: id,
-                        verifier_name: d.verifier?.full_name || null,
                     };
                 });
 
@@ -410,11 +408,9 @@ export default function VerifikasiDokumenDetailPage() {
 
                             {(dok.status_verifikasi === "verified" || dok.status_verifikasi === "rejected") && (
                                 <div className="mt-3 pt-3 border-t border-stone-100 flex items-center gap-1.5 text-[10px] text-stone-500 font-medium">
-                                    <User className="w-3 h-3" />
-                                    <span>
-                                        {dok.status_verifikasi === "verified" ? "Diverifikasi" : "Ditolak"} oleh: <strong className="text-stone-700">{dok.verifier_name || "Tanpa Nama"}</strong>
-                                    </span>
-                                </div>
+                                    {!dok.is_verified && dok.catatan && (
+                                        <p className="mt-1 flex items-center gap-1.5"><AlertCircle className="w-4 h-4" /> {dok.catatan}</p>
+                                    )}</div>
                             )}
                         </div>
                     </div>

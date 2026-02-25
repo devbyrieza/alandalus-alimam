@@ -52,11 +52,6 @@ export async function GET(request: NextRequest) {
             no_hp: true,
           },
         },
-        verifier: {
-          select: {
-            full_name: true,
-          },
-        },
       },
       orderBy: { created_at: "desc" },
     });
@@ -118,8 +113,6 @@ export async function PATCH(request: NextRequest) {
       data: {
         is_verified: isVerified,
         catatan: isVerified ? null : catatan,
-        verified_by: session.id,
-        verified_at: new Date(),
       },
       include: {
         pendaftar: {
