@@ -548,10 +548,10 @@ export default function JadwalPengujiPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-stone-700 mb-1">Link Video Conference / Lokasi</label>
+                <label className="block text-sm font-bold text-stone-700 mb-1">Link Google Meet / Lokasi</label>
                 <input
                   type="text"
-                  placeholder="Google Meet / Zoom / Lainnya (Contoh: https://meet.google.com/...)"
+                  placeholder="Paste Link Google Meet di sini (Contoh: https://meet.google.com/abc-xyz-123)"
                   className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-violet-500 outline-none"
                   value={slotForm.location}
                   onChange={e => setSlotForm({ ...slotForm, location: e.target.value })}
