@@ -1,30 +1,18 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { calculateAkademikScore, calculateKepribadianScore, calculateKesiapanScore } from '@/lib/grading';
-import { cookies } from 'next/headers';
+import { getCurrentSession } from '@/lib/auth';
 
 export async function POST(req: Request) {
     try {
-        // 1. Auth Check (Cookie-based)
-        const cookieStore = await cookies();
-        const sessionCookie = cookieStore.get("app_session");
+        // 1. Auth Check (Server Session)
+        const session = await getCurrentSession();
 
-        if (!sessionCookie) {
+        if (!session) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        let session;
-        try {
-            session = JSON.parse(sessionCookie.value);
-        } catch (e) {
-            return NextResponse.json({ error: 'Invalid Session' }, { status: 401 });
-        }
-
         const body = await req.json();
-        // Use pendaftar_id from body (if admin/system) or session (if pendaftar)
-        // But for 'ujian/submit' it's usually the pendaftar themselves.
-        // Let's verify session.id matches pendaftar_id if provided, or defaults to session.id
-
         const pendaftar_id = session.role === 'pendaftar' ? session.id : body.pendaftar_id;
         const { type, answers, jenjang } = body;
 

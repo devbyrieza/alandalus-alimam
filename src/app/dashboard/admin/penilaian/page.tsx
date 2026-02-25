@@ -14,9 +14,13 @@ type Student = {
     nilai_ujian?: {
         total_score: number;
         status_kelulusan: string;
+        catatan_kelulusan: string;
         score_quran: number;
         score_wawancara: number;
         score_akademik: number;
+        score_kepribadian: number;
+        score_kesiapan: number;
+        nilai_wawancara_ortu: number;
     }
 };
 
@@ -143,11 +147,14 @@ export default function ExaminerDashboard() {
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No. Daftar</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenjang</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Akademik</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quran</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Wawancara</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Status</th>
+                                <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Akademik</th>
+                                <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Kepribadian</th>
+                                <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Kesiapan</th>
+                                <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Quran</th>
+                                <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Waw. Calsan</th>
+                                <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Waw. Cawalsan</th>
+                                <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Aksi</th>
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
@@ -170,9 +177,12 @@ export default function ExaminerDashboard() {
                                                 {s.nilai_ujian?.status_kelulusan || '-'}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{s.nilai_ujian?.score_akademik?.toFixed(1) || '-'}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{s.nilai_ujian?.score_quran?.toFixed(1) || '-'}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{s.nilai_ujian?.score_wawancara?.toFixed(1) || '-'}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_akademik?.toFixed(1) || '-'}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_kepribadian?.toFixed(1) || '-'}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_kesiapan?.toFixed(1) || '-'}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_quran?.toFixed(1) || '-'}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_wawancara?.toFixed(1) || '-'}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.nilai_wawancara_ortu?.toFixed(1) || '-'}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <div className="flex gap-2">
                                                 <button onClick={() => handleOpenInput(s, 'quran')} className="text-indigo-600 hover:text-indigo-900 bg-indigo-50 px-2 py-1 rounded">Quran</button>

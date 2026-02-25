@@ -121,9 +121,13 @@ export async function GET(request: NextRequest) {
             select: {
               nilai_total: true,
               score_akademik: true,
+              score_kepribadian: true,
+              score_kesiapan: true,
               score_quran: true,
               score_wawancara: true,
-              status_kelulusan: true
+              nilai_wawancara_ortu: true,
+              status_kelulusan: true,
+              catatan_kelulusan: true,
             }
           },
           pengumuman: {
