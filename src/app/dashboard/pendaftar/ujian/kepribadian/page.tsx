@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { KEPRIBADIAN_QUESTIONS } from '@/lib/questions';
 import { CheckCircle, Loader2, ArrowLeft } from 'lucide-react';
@@ -13,6 +13,7 @@ export default function KepribadianTestPage() {
     const [alreadyDone, setAlreadyDone] = useState(false);
     const [answers, setAnswers] = useState<Record<number, string>>({});
     const [page, setPage] = useState(0);
+    const topRef = useRef<HTMLDivElement>(null);
 
     const ITEMS_PER_PAGE = 10;
     const totalPages = Math.ceil(KEPRIBADIAN_QUESTIONS.length / ITEMS_PER_PAGE);
@@ -36,7 +37,7 @@ export default function KepribadianTestPage() {
             return;
         }
         setPage(p => p + 1);
-        setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50);
+        setTimeout(() => topRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
     };
 
     const handleSubmit = async () => {
@@ -97,6 +98,7 @@ export default function KepribadianTestPage() {
 
     return (
         <div className="max-w-4xl mx-auto p-4 md:p-6 pb-24">
+            <div ref={topRef} />
             <button onClick={() => router.back()} className="flex items-center gap-2 text-stone-500 hover:text-stone-700 mb-4 text-sm font-medium">
                 <ArrowLeft className="w-4 h-4" /> Kembali
             </button>
@@ -146,7 +148,7 @@ export default function KepribadianTestPage() {
             {/* Navigation */}
             <div className="sticky bottom-4 z-10 flex gap-3">
                 {page > 0 && (
-                    <button onClick={() => { setPage(p => p - 1); setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50); }}
+                    <button onClick={() => { setPage(p => p - 1); setTimeout(() => topRef.current?.scrollIntoView({ behavior: 'smooth' }), 50); }}
                         className="flex-1 py-4 bg-white border-2 border-stone-300 hover:bg-stone-50 text-stone-700 font-bold rounded-xl shadow-lg transition-colors">
                         Sebelumnya
                     </button>
