@@ -1020,7 +1020,7 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                 {formData.ayah.pekerjaan === "Lainnya" && (
                   <InputField label="Sebutkan Pekerjaan" name="pekerjaan_lainnya_ayah" value={formData.ayah.pekerjaan_lainnya || ""} onChange={(v) => updateAyah("pekerjaan_lainnya", v)} placeholder="Sebutkan pekerjaan" required={!isAyahDeceased} disabled={isAyahDeceased} />
                 )}
-                <InputField label="Penghasilan" name="penghasilan_ayah" value={formData.ayah.penghasilan} onChange={(v) => updateAyah("penghasilan", v)} options={PENGHASILAN_OPTIONS} required={!isAyahDeceased} disabled={isAyahDeceased} />
+                <InputField label="Penghasilan (per bulan)" name="penghasilan_ayah" value={formData.ayah.penghasilan} onChange={(v) => updateAyah("penghasilan", v)} placeholder="Contoh: 3500000" required={!isAyahDeceased} disabled={isAyahDeceased} inputFilter="numbers" />
 
                 <InputField label="Nomor HP" name="no_hp_ayah" value={formData.ayah.no_hp} onChange={(v) => updateAyah("no_hp", v)} placeholder="08xxxxxxxxxx" required={!isAyahDeceased} disabled={isAyahDeceased} inputFilter="numbers" />
                 <InputField label="Nomor WhatsApp" name="no_wa_ayah" value={formData.ayah.no_wa || ""} onChange={(v) => updateAyah("no_wa", v)} placeholder="08xxxxxxxxxx" required={!isAyahDeceased} disabled={isAyahDeceased} inputFilter="numbers" />
@@ -1102,7 +1102,7 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                 {formData.ibu.pekerjaan === "Lainnya" && (
                   <InputField label="Sebutkan Pekerjaan" name="pekerjaan_lainnya_ibu" value={formData.ibu.pekerjaan_lainnya || ""} onChange={(v) => updateIbu("pekerjaan_lainnya", v)} placeholder="Sebutkan pekerjaan" required={!isIbuDeceased} disabled={isIbuDeceased} />
                 )}
-                <InputField label="Penghasilan" name="penghasilan_ibu" value={formData.ibu.penghasilan} onChange={(v) => updateIbu("penghasilan", v)} options={PENGHASILAN_OPTIONS} required={!isIbuDeceased} disabled={isIbuDeceased} />
+                <InputField label="Penghasilan (per bulan)" name="penghasilan_ibu" value={formData.ibu.penghasilan} onChange={(v) => updateIbu("penghasilan", v)} placeholder="Contoh: 3500000" required={!isIbuDeceased} disabled={isIbuDeceased} inputFilter="numbers" />
 
                 <InputField label="Nomor HP" name="no_hp_ibu" value={formData.ibu.no_hp} onChange={(v) => updateIbu("no_hp", v)} placeholder="08xxxxxxxxxx" required={!isIbuDeceased} disabled={isIbuDeceased} inputFilter="numbers" />
                 <InputField label="Nomor WhatsApp" name="no_wa_ibu" value={formData.ibu.no_wa || ""} onChange={(v) => updateIbu("no_wa", v)} placeholder="08xxxxxxxxxx" required={!isIbuDeceased} disabled={isIbuDeceased} inputFilter="numbers" />
@@ -1202,7 +1202,7 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                 <InputField label="Pendidikan Terakhir" name="pendidikan_wali" value={formData.wali.pendidikan_terakhir} onChange={(v) => updateWali("pendidikan_terakhir", v)} options={PENDIDIKAN_OPTIONS} required={isWaliRequired} />
 
                 <InputField label="Pekerjaan" name="pekerjaan_wali" value={formData.wali.pekerjaan} onChange={(v) => updateWali("pekerjaan", v)} options={PEKERJAAN_OPTIONS} required={isWaliRequired} />
-                <InputField label="Penghasilan" name="penghasilan_wali" value={formData.wali.penghasilan} onChange={(v) => updateWali("penghasilan", v)} options={PENGHASILAN_OPTIONS} required={isWaliRequired} />
+                <InputField label="Penghasilan (per bulan)" name="penghasilan_wali" value={formData.wali.penghasilan} onChange={(v) => updateWali("penghasilan", v)} placeholder="Contoh: 3500000" required={isWaliRequired} inputFilter="numbers" />
 
                 <InputField label="Nomor HP" name="no_hp_wali" value={formData.wali.no_hp} onChange={(v) => updateWali("no_hp", v)} placeholder="08xxxxxxxxxx" required={isWaliRequired} inputFilter="numbers" />
                 <InputField label="Nomor WhatsApp" name="no_wa_wali" value={formData.wali.no_wa || ""} onChange={(v) => updateWali("no_wa", v)} placeholder="08xxxxxxxxxx" required={isWaliRequired} inputFilter="numbers" />
