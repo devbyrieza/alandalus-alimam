@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
 
       const profile = await prisma.profile.findFirst({
         where: { email },
-      });
+      }) as any;
 
       if (!profile || !profile.password_hash) {
         return NextResponse.json(
@@ -121,6 +121,20 @@ export async function POST(request: NextRequest) {
         );
       }
 
+      // Check for multi-role: if secondary_roles exist, require role selection
+      const secondaryRoles: string[] = profile.secondary_roles || [];
+      if (secondaryRoles.length > 0) {
+        // Return role selection prompt — no cookie yet
+        return NextResponse.json({
+          success: true,
+          requires_role_selection: true,
+          profile_id: profile.id,
+          full_name: profile.full_name,
+          available_roles: [profile.role, ...secondaryRoles],
+        });
+      }
+
+      // Single role — login normally
       const responseJson = NextResponse.json({
         success: true,
         message: "Login berhasil",
@@ -145,7 +159,7 @@ export async function POST(request: NextRequest) {
           httpOnly: true,
           secure: process.env.NODE_ENV === "production",
           sameSite: "lax",
-          maxAge: 60 * 60 * 24 * 30, // 30 Days Persistent Session
+          maxAge: 60 * 60 * 24 * 30,
         }
       );
 

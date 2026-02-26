@@ -18,9 +18,24 @@ import {
   ShieldCheck,
   ArrowLeft,
   FileText,
+  ChevronRight,
+  Layers,
 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { motion, AnimatePresence } from "framer-motion";
+
+// Role label & icon map
+const ROLE_INFO: Record<string, { label: string; icon: string; desc: string; color: string }> = {
+  admin_super: { label: "Admin Super", icon: "👑", desc: "Akses penuh semua fitur", color: "from-amber-50 to-yellow-50 border-amber-200" },
+  admin_berkas: { label: "Admin Berkas", icon: "📂", desc: "Verifikasi dokumen pendaftar", color: "from-blue-50 to-indigo-50 border-blue-200" },
+  admin_keuangan: { label: "Admin Keuangan", icon: "💰", desc: "Verifikasi pembayaran", color: "from-emerald-50 to-teal-50 border-emerald-200" },
+  pewawancara_cawalsan: { label: "Pewawancara Cawalsan", icon: "🎙️", desc: "Wawancara calon wali santri", color: "from-purple-50 to-violet-50 border-purple-200" },
+  pewawancara_calsan: { label: "Pewawancara Calsan", icon: "🎙️", desc: "Wawancara calon santri", color: "from-rose-50 to-pink-50 border-rose-200" },
+  penguji_calsan: { label: "Penguji Al-Qur'an", icon: "📖", desc: "Penguji tes Al-Qur'an", color: "from-green-50 to-lime-50 border-green-200" },
+  head_of_it: { label: "Head of IT", icon: "💻", desc: "Manajemen sistem", color: "from-slate-50 to-gray-50 border-slate-200" },
+  tim_it: { label: "Tim IT", icon: "🛠️", desc: "Support teknis", color: "from-slate-50 to-gray-50 border-slate-200" },
+  admin: { label: "Admin", icon: "⚙️", desc: "Panel administrasi", color: "from-orange-50 to-amber-50 border-orange-200" },
+};
 
 // ========================================
 // REUSABLE COMPONENTS
@@ -65,9 +80,7 @@ export default function LoginPage() {
   const router = useRouter();
 
   // Tab state
-  const [activeTab, setActiveTab] = useState<"pendaftar" | "admin">(
-    "pendaftar"
-  );
+  const [activeTab, setActiveTab] = useState<"pendaftar" | "admin">("pendaftar");
 
   // Pendaftar login state
   const [nikPendaftar, setNikPendaftar] = useState("");
@@ -77,6 +90,14 @@ export default function LoginPage() {
   const [emailAdmin, setEmailAdmin] = useState("");
   const [passwordAdmin, setPasswordAdmin] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  // Multi-role selection state
+  const [roleSelectionData, setRoleSelectionData] = useState<{
+    profile_id: string;
+    full_name: string;
+    available_roles: string[];
+  } | null>(null);
+  const [selectingRole, setSelectingRole] = useState(false);
 
   // UI state
   const [isLoading, setIsLoading] = useState(false);
@@ -155,6 +176,18 @@ export default function LoginPage() {
       if (!response.ok) throw new Error(data.error || "Login gagal");
 
       setIsLoading(false);
+
+      // Multi-role: show role picker
+      if (data.requires_role_selection) {
+        setRoleSelectionData({
+          profile_id: data.profile_id,
+          full_name: data.full_name,
+          available_roles: data.available_roles,
+        });
+        return;
+      }
+
+      // Single role: redirect
       if (["admin", "admin_super", "admin_berkas", "admin_keuangan", "head_of_it", "tim_it"].includes(data.role)) {
         window.location.href = "/dashboard/admin";
       } else if (["penguji", "penguji_calsan", "pewawancara_calsan", "pewawancara_cawalsan"].includes(data.role)) {
@@ -165,6 +198,29 @@ export default function LoginPage() {
     } catch (error: any) {
       setError(error.message || "Terjadi kesalahan saat login");
       setIsLoading(false);
+    }
+  };
+
+  // Handle role selection
+  const handleSelectRole = async (chosenRole: string) => {
+    if (!roleSelectionData) return;
+    setSelectingRole(true);
+    setError("");
+    try {
+      const res = await fetch("/api/auth/select-role", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          profile_id: roleSelectionData.profile_id,
+          chosen_role: chosenRole,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Gagal memilih role");
+      window.location.href = data.redirectTo;
+    } catch (err: any) {
+      setError(err.message);
+      setSelectingRole(false);
     }
   };
 
@@ -206,28 +262,30 @@ export default function LoginPage() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-brown-50/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
           {/* Tab Switcher - Premium "Pill" style */}
-          <div className="bg-surface-50 p-2 rounded-[2rem] flex relative mb-12 border border-surface-100">
-            {/* Animated Background Pill */}
-            <motion.div
-              layoutId="auth-tab"
-              transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-              className={`absolute top-2 bottom-2 rounded-[1.5rem] bg-white shadow-premium-sm ${activeTab === 'pendaftar' ? 'left-2 w-[calc(50%-8px)]' : 'left-[calc(50%+4px)] w-[calc(50%-8px)]'
-                }`}
-            />
+          {!roleSelectionData && (
+            <div className="bg-surface-50 p-2 rounded-[2rem] flex relative mb-12 border border-surface-100">
+              {/* Animated Background Pill */}
+              <motion.div
+                layoutId="auth-tab"
+                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                className={`absolute top-2 bottom-2 rounded-[1.5rem] bg-white shadow-premium-sm ${activeTab === 'pendaftar' ? 'left-2 w-[calc(50%-8px)]' : 'left-[calc(50%+4px)] w-[calc(50%-8px)]'
+                  }`}
+              />
 
-            <button
-              onClick={() => { setActiveTab("pendaftar"); setError(""); }}
-              className={`flex-1 relative z-10 py-3.5 text-xs font-black uppercase tracking-widest text-center rounded-2xl transition-colors duration-300 ${activeTab === "pendaftar" ? "text-brown-700" : "text-ink-600 hover:text-ink-800"}`}
-            >
-              Pendaftar
-            </button>
-            <button
-              onClick={() => { setActiveTab("admin"); setError(""); }}
-              className={`flex-1 relative z-10 py-3.5 text-xs font-black uppercase tracking-widest text-center rounded-2xl transition-colors duration-300 ${activeTab === "admin" ? "text-brown-700" : "text-ink-600 hover:text-ink-800"}`}
-            >
-              Portal Staf
-            </button>
-          </div>
+              <button
+                onClick={() => { setActiveTab("pendaftar"); setError(""); }}
+                className={`flex-1 relative z-10 py-3.5 text-xs font-black uppercase tracking-widest text-center rounded-2xl transition-colors duration-300 ${activeTab === "pendaftar" ? "text-brown-700" : "text-ink-600 hover:text-ink-800"}`}
+              >
+                Pendaftar
+              </button>
+              <button
+                onClick={() => { setActiveTab("admin"); setError(""); }}
+                className={`flex-1 relative z-10 py-3.5 text-xs font-black uppercase tracking-widest text-center rounded-2xl transition-colors duration-300 ${activeTab === "admin" ? "text-brown-700" : "text-ink-600 hover:text-ink-800"}`}
+              >
+                Portal Staf
+              </button>
+            </div>
+          )}
 
           {/* Error Alert */}
           <AnimatePresence mode="wait">
@@ -249,7 +307,58 @@ export default function LoginPage() {
           {/* Forms with AnimatePresence for smooth transitions */}
           <div className="relative">
             <AnimatePresence mode="wait">
-              {activeTab === "pendaftar" ? (
+              {/* Role Selection Screen */}
+              {roleSelectionData ? (
+                <motion.div
+                  key="role-selector"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="space-y-5"
+                >
+                  <div className="text-center mb-6">
+                    <div className="w-14 h-14 bg-gold-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                      <Layers className="w-7 h-7 text-gold-700" />
+                    </div>
+                    <h2 className="text-xl font-black text-ink-950">Selamat datang, {roleSelectionData.full_name.split(' ')[0]}!</h2>
+                    <p className="text-sm text-ink-600 font-medium mt-1">Pilih dashboard yang ingin diakses</p>
+                  </div>
+
+                  <div className="space-y-3">
+                    {roleSelectionData.available_roles.map((role) => {
+                      const info = ROLE_INFO[role] || { label: role, icon: "🔑", desc: "", color: "from-slate-50 to-gray-50 border-slate-200" };
+                      return (
+                        <motion.button
+                          key={role}
+                          whileHover={{ scale: 1.02, y: -1 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => handleSelectRole(role)}
+                          disabled={selectingRole}
+                          className={`w-full p-4 rounded-2xl bg-gradient-to-r ${info.color} border text-left flex items-center gap-4 transition-all hover:shadow-md disabled:opacity-60`}
+                        >
+                          <div className="text-3xl">{info.icon}</div>
+                          <div className="flex-1">
+                            <p className="font-black text-ink-900 text-base">{info.label}</p>
+                            {info.desc && <p className="text-xs text-ink-600 font-medium mt-0.5">{info.desc}</p>}
+                          </div>
+                          {selectingRole ? (
+                            <Loader2 className="w-5 h-5 animate-spin text-ink-400" />
+                          ) : (
+                            <ChevronRight className="w-5 h-5 text-ink-400" />
+                          )}
+                        </motion.button>
+                      );
+                    })}
+                  </div>
+
+                  <button
+                    onClick={() => { setRoleSelectionData(null); setError(""); }}
+                    className="w-full text-center text-xs text-ink-500 hover:text-ink-800 font-bold mt-2 flex items-center justify-center gap-1.5"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5" /> Gunakan akun lain
+                  </button>
+                </motion.div>
+              ) : activeTab === "pendaftar" ? (
                 <motion.form
                   key="form-pendaftar"
                   initial={{ opacity: 0, x: -20 }}
