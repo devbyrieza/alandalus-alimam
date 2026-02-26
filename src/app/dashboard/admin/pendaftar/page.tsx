@@ -26,6 +26,8 @@ import {
   X,
   Save,
   FileCheck,
+  Trash2,
+  RotateCcw,
 } from "lucide-react";
 import Link from "next/link";
 import { UserRole } from "@/lib/access-control";
@@ -190,6 +192,13 @@ function AdminPendaftarContent() {
   });
   const [isSubmittingAnnouncement, setIsSubmittingAnnouncement] = useState(false);
 
+  // Soft Delete State
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deletingPendaftar, setDeletingPendaftar] = useState<Pendaftar | null>(null);
+  const [deleteConfirmName, setDeleteConfirmName] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [trashCount, setTrashCount] = useState(0);
+
   const handleOpenAnnouncement = (pendaftar: Pendaftar) => {
     setSelectedPendaftar(pendaftar);
     setAnnouncementForm({
@@ -198,6 +207,63 @@ function AdminPendaftarContent() {
       surat_keputusan_url: "" // Reset URL
     });
     setIsAnnouncementModalOpen(true);
+  };
+
+  // Fetch trash count
+  useEffect(() => {
+    if (userRole === "admin_super") {
+      const fetchTrashCount = async () => {
+        try {
+          const res = await fetch("/api/admin/pendaftar/trash?limit=1");
+          if (res.ok) {
+            const data = await res.json();
+            setTrashCount(data.pagination?.total || 0);
+          }
+        } catch (e) {
+          console.error("Error fetching trash count", e);
+        }
+      };
+      fetchTrashCount();
+    }
+  }, [userRole]);
+
+  const handleOpenDelete = (item: Pendaftar) => {
+    setDeletingPendaftar(item);
+    setDeleteConfirmName("");
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleSoftDelete = async () => {
+    if (!deletingPendaftar) return;
+    if (deleteConfirmName !== deletingPendaftar.nama_lengkap) {
+      alert("Nama tidak cocok. Silakan ketik nama lengkap pendaftar dengan benar.");
+      return;
+    }
+
+    try {
+      setIsDeleting(true);
+      const res = await fetch(`/api/admin/pendaftar/${deletingPendaftar.id}`, {
+        method: "DELETE",
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.error || "Gagal menghapus data");
+      }
+
+      alert(result.message || "Data berhasil dihapus");
+      setIsDeleteModalOpen(false);
+      setDeletingPendaftar(null);
+      setDeleteConfirmName("");
+      setTrashCount((prev) => prev + 1);
+      fetchPendaftar();
+    } catch (error: any) {
+      console.error("Error soft deleting:", error);
+      alert(error.message || "Gagal menghapus data");
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   const handleSubmitAnnouncement = async (e: React.FormEvent) => {
@@ -597,6 +663,21 @@ function AdminPendaftarContent() {
             </div>
           </div>
           <div className="flex items-center gap-2 flex-shrink-0">
+            {userRole === "admin_super" && (
+              <Link
+                href="/dashboard/admin/pendaftar/trash"
+                className="flex items-center gap-2 px-3 md:px-4 py-2 bg-stone-600 hover:bg-stone-700 text-white rounded-lg transition-colors text-sm"
+                title="Lihat data terhapus"
+              >
+                <Trash2 className="w-4 h-4" />
+                <span className="hidden sm:inline">Sampah</span>
+                {trashCount > 0 && (
+                  <span className="bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full min-w-[20px] text-center">
+                    {trashCount}
+                  </span>
+                )}
+              </Link>
+            )}
             <button
               onClick={() => handleExport("excel")}
               disabled={exporting}
@@ -1211,6 +1292,15 @@ function AdminPendaftarContent() {
                             <span>Input Hasil</span>
                           </button>
                         )}
+                        {userRole === 'admin_super' && (
+                          <button
+                            onClick={() => handleOpenDelete(item)}
+                            className="inline-flex items-center gap-1 px-3 py-2 bg-red-100 hover:bg-red-600 text-red-700 hover:text-white rounded-lg text-sm font-bold transition-all ml-2"
+                            title="Hapus data (soft delete)"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        )}
                       </td>
                     </tr>
                   ))}
@@ -1391,6 +1481,82 @@ function AdminPendaftarContent() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {isDeleteModalOpen && deletingPendaftar && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md border-2 border-red-100 animate-in fade-in zoom-in duration-200">
+            <div className="flex justify-between items-center p-6 border-b border-red-100">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-red-100 rounded-lg">
+                  <Trash2 className="w-6 h-6 text-red-600" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-stone-900">Hapus Data Pendaftar</h3>
+                  <p className="text-sm text-stone-500">Data akan dipindahkan ke Sampah</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setIsDeleteModalOpen(false)}
+                className="p-2 hover:bg-stone-100 rounded-full transition-colors text-stone-400 hover:text-stone-600"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="p-6 space-y-4">
+              <div className="bg-amber-50 border-2 border-amber-200 rounded-xl p-4">
+                <p className="text-sm text-amber-800 font-medium">
+                  ⚠️ Anda akan menghapus data <strong>{deletingPendaftar.nama_lengkap}</strong> ({deletingPendaftar.nomor_pendaftaran}).
+                  Data akan dipindahkan ke Sampah dan bisa di-restore kapan saja.
+                </p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-bold text-stone-700 mb-2">
+                  Ketik <span className="text-red-600">{deletingPendaftar.nama_lengkap}</span> untuk konfirmasi:
+                </label>
+                <input
+                  type="text"
+                  value={deleteConfirmName}
+                  onChange={(e) => setDeleteConfirmName(e.target.value)}
+                  placeholder="Ketik nama lengkap pendaftar..."
+                  className="w-full px-4 py-3 border-2 border-stone-200 rounded-xl focus:border-red-500 focus:outline-none transition-colors"
+                  autoFocus
+                />
+              </div>
+
+              <div className="flex justify-end gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setIsDeleteModalOpen(false)}
+                  className="px-5 py-2.5 font-bold text-stone-500 hover:bg-stone-100 rounded-xl transition-colors"
+                  disabled={isDeleting}
+                >
+                  Batal
+                </button>
+                <button
+                  onClick={handleSoftDelete}
+                  disabled={isDeleting || deleteConfirmName !== deletingPendaftar.nama_lengkap}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-lg shadow-red-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isDeleting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Menghapus...
+                    </>
+                  ) : (
+                    <>
+                      <Trash2 className="w-4 h-4" />
+                      Hapus Data
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}

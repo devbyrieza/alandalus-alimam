@@ -42,7 +42,9 @@ export async function GET(request: NextRequest) {
     const skip = (page - 1) * limit;
 
     // Build filter
-    const where: Prisma.PendaftarWhereInput = {};
+    const where: Prisma.PendaftarWhereInput = {
+      deleted_at: null, // Exclude soft-deleted records
+    };
 
     // Search filter
     if (search) {

@@ -345,6 +345,7 @@ interface InputFieldProps {
   disabled?: boolean;
   options?: string[];
   maxLength?: number;
+  inputFilter?: 'letters' | 'numbers';
 }
 
 function InputField({
@@ -358,8 +359,27 @@ function InputField({
   disabled,
   options,
   maxLength,
+  inputFilter,
 }: InputFieldProps) {
   const baseInputClass = "w-full px-4 py-3 bg-white border border-ink-200 rounded-xl text-ink-900 placeholder:text-ink-300 focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition-all outline-none disabled:bg-surface-100 disabled:text-ink-400 font-medium";
+
+  // Filter function for input validation
+  const handleFilteredChange = (rawValue: string) => {
+    if (inputFilter === 'letters') {
+      // Allow letters (including accented), spaces, apostrophes, hyphens, periods
+      const filtered = rawValue.replace(/[^a-zA-ZÀ-ÿ\s'.\-]/g, '');
+      onChange(filtered);
+    } else if (inputFilter === 'numbers') {
+      // Allow only digits
+      const filtered = rawValue.replace(/[^0-9]/g, '');
+      onChange(filtered);
+    } else {
+      onChange(rawValue);
+    }
+  };
+
+  const filterHint = inputFilter === 'letters' ? 'Hanya huruf' : inputFilter === 'numbers' ? 'Hanya angka' : null;
+  const inputMode = inputFilter === 'numbers' ? 'numeric' as const : undefined;
 
   if (options) {
     return (
@@ -399,12 +419,13 @@ function InputField({
         <textarea
           name={name}
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => handleFilteredChange(e.target.value)}
           placeholder={placeholder}
           disabled={disabled}
           rows={3}
           className={`${baseInputClass} resize-none`}
         />
+        {filterHint && <p className="text-xs text-ink-400 ml-1">{filterHint}</p>}
       </div>
     );
   }
@@ -419,12 +440,14 @@ function InputField({
         type={type}
         name={name}
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => handleFilteredChange(e.target.value)}
         placeholder={placeholder}
         disabled={disabled}
         maxLength={maxLength}
+        inputMode={inputMode}
         className={baseInputClass}
       />
+      {filterHint && <p className="text-xs text-ink-400 ml-1">{filterHint}</p>}
     </div>
   );
 }
@@ -852,7 +875,7 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   <InputField label="NIK" name="nik" value={formData.santri.nik} onChange={(v) => updateSantri("nik", v)} placeholder="16 digit NIK" maxLength={16} required disabled={!!formData.santri.nik} />
-                  <InputField label="Nama Lengkap" name="nama_lengkap" value={formData.santri.nama_lengkap} onChange={(v) => updateSantri("nama_lengkap", v)} placeholder="Sesuai akta kelahiran" required />
+                  <InputField label="Nama Lengkap" name="nama_lengkap" value={formData.santri.nama_lengkap} onChange={(v) => updateSantri("nama_lengkap", v)} placeholder="Sesuai akta kelahiran" required inputFilter="letters" />
                   <SearchableSelect
                     label="Tempat Lahir"
                     value={formData.santri.tempat_lahir}
@@ -890,6 +913,7 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                       onChange={(v) => updateSantri("tinggal_bersama_lainnya", v)}
                       placeholder="Contoh: Kakek/Nenek"
                       required
+                      inputFilter="letters"
                     />
                   )}
                 </div>
@@ -930,8 +954,8 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
-                    <InputField label="RT" name="rt" value={formData.santri.rt} onChange={(v) => updateSantri("rt", v)} placeholder="001" maxLength={3} required />
-                    <InputField label="RW" name="rw" value={formData.santri.rw} onChange={(v) => updateSantri("rw", v)} placeholder="002" maxLength={3} required />
+                    <InputField label="RT" name="rt" value={formData.santri.rt} onChange={(v) => updateSantri("rt", v)} placeholder="001" maxLength={3} required inputFilter="numbers" />
+                    <InputField label="RW" name="rw" value={formData.santri.rw} onChange={(v) => updateSantri("rw", v)} placeholder="002" maxLength={3} required inputFilter="numbers" />
                   </div>
                   <div className="md:col-span-2">
                     <WilayahSelector value={{
@@ -953,8 +977,8 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <InputField label="Nama Sekolah Asal" name="asal_sekolah" value={formData.santri.asal_sekolah} onChange={(v) => updateSantri("asal_sekolah", v)} placeholder="Nama Sekolah" required />
-                  <InputField label="NISN" name="nisn" value={formData.santri.nisn} onChange={(v) => updateSantri("nisn", v)} placeholder="10 digit NISN" maxLength={10} required />
-                  <InputField label="Tahun Lulus" name="tahun_lulus" value={formData.santri.tahun_lulus} onChange={(v) => updateSantri("tahun_lulus", v)} placeholder="2024" maxLength={4} required />
+                  <InputField label="NISN" name="nisn" value={formData.santri.nisn} onChange={(v) => updateSantri("nisn", v)} placeholder="10 digit NISN" maxLength={10} required inputFilter="numbers" />
+                  <InputField label="Tahun Lulus" name="tahun_lulus" value={formData.santri.tahun_lulus} onChange={(v) => updateSantri("tahun_lulus", v)} placeholder="2024" maxLength={4} required inputFilter="numbers" />
                   <InputField label="Alamat Sekolah" name="alamat_sekolah" value={formData.santri.alamat_sekolah} onChange={(v) => updateSantri("alamat_sekolah", v)} placeholder="Alamat lengkap sekolah" />
                 </div>
               </div>
@@ -977,9 +1001,9 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
           {openSections.ayah && (
             <div className="glass-panel p-6 md:p-8 rounded-[2rem] animate-in slide-in-from-top-4 duration-300 space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <InputField label="Nama Lengkap Ayah" name="nama_lengkap_ayah" value={formData.ayah.nama_lengkap} onChange={(v) => updateAyah("nama_lengkap", v)} placeholder="Sesuai KTP" required />
+                <InputField label="Nama Lengkap Ayah" name="nama_lengkap_ayah" value={formData.ayah.nama_lengkap} onChange={(v) => updateAyah("nama_lengkap", v)} placeholder="Sesuai KTP" required inputFilter="letters" />
                 <InputField label="Status Hidup" name="status_ayah" value={formData.ayah.status_hidup} onChange={(v) => updateAyah("status_hidup", v)} options={["Masih Hidup", "Sudah Meninggal"]} required />
-                <InputField label="NIK" name="nik_ayah" value={formData.ayah.nik} onChange={(v) => updateAyah("nik", v)} placeholder="16 digit NIK" maxLength={16} required={!isAyahDeceased} disabled={isAyahDeceased} />
+                <InputField label="NIK" name="nik_ayah" value={formData.ayah.nik} onChange={(v) => updateAyah("nik", v)} placeholder="16 digit NIK" maxLength={16} required={!isAyahDeceased} disabled={isAyahDeceased} inputFilter="numbers" />
 
                 <SearchableSelect
                   label="Tempat Lahir"
@@ -998,8 +1022,8 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                 )}
                 <InputField label="Penghasilan" name="penghasilan_ayah" value={formData.ayah.penghasilan} onChange={(v) => updateAyah("penghasilan", v)} options={PENGHASILAN_OPTIONS} required={!isAyahDeceased} disabled={isAyahDeceased} />
 
-                <InputField label="Nomor HP" name="no_hp_ayah" value={formData.ayah.no_hp} onChange={(v) => updateAyah("no_hp", v)} placeholder="08xxxxxxxxxx" required={!isAyahDeceased} disabled={isAyahDeceased} />
-                <InputField label="Nomor WhatsApp" name="no_wa_ayah" value={formData.ayah.no_wa || ""} onChange={(v) => updateAyah("no_wa", v)} placeholder="08xxxxxxxxxx" required={!isAyahDeceased} disabled={isAyahDeceased} />
+                <InputField label="Nomor HP" name="no_hp_ayah" value={formData.ayah.no_hp} onChange={(v) => updateAyah("no_hp", v)} placeholder="08xxxxxxxxxx" required={!isAyahDeceased} disabled={isAyahDeceased} inputFilter="numbers" />
+                <InputField label="Nomor WhatsApp" name="no_wa_ayah" value={formData.ayah.no_wa || ""} onChange={(v) => updateAyah("no_wa", v)} placeholder="08xxxxxxxxxx" required={!isAyahDeceased} disabled={isAyahDeceased} inputFilter="numbers" />
                 <InputField label="Email" name="email_ayah" value={formData.ayah.email} onChange={(v) => updateAyah("email", v)} type="email" placeholder="email@example.com" disabled={isAyahDeceased} />
               </div>
 
@@ -1011,8 +1035,8 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                       <InputField label="Alamat" name="alamat_ayah" value={formData.ayah.alamat || ""} onChange={(v) => updateAyah("alamat", v)} type="textarea" placeholder="Nama Jalan/Gang/Desa beserta Nomor Rumah" required />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
-                      <InputField label="RT" name="rt_ayah" value={formData.ayah.rt || ""} onChange={(v) => updateAyah("rt", v)} placeholder="001" maxLength={3} required />
-                      <InputField label="RW" name="rw_ayah" value={formData.ayah.rw || ""} onChange={(v) => updateAyah("rw", v)} placeholder="002" maxLength={3} required />
+                      <InputField label="RT" name="rt_ayah" value={formData.ayah.rt || ""} onChange={(v) => updateAyah("rt", v)} placeholder="001" maxLength={3} required inputFilter="numbers" />
+                      <InputField label="RW" name="rw_ayah" value={formData.ayah.rw || ""} onChange={(v) => updateAyah("rw", v)} placeholder="002" maxLength={3} required inputFilter="numbers" />
                     </div>
                     <div className="md:col-span-2">
                       <WilayahSelector
@@ -1059,9 +1083,9 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
           {openSections.ibu && (
             <div className="glass-panel p-6 md:p-8 rounded-[2rem] animate-in slide-in-from-top-4 duration-300 space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <InputField label="Nama Lengkap Ibu" name="nama_lengkap_ibu" value={formData.ibu.nama_lengkap} onChange={(v) => updateIbu("nama_lengkap", v)} placeholder="Sesuai KTP" required />
+                <InputField label="Nama Lengkap Ibu" name="nama_lengkap_ibu" value={formData.ibu.nama_lengkap} onChange={(v) => updateIbu("nama_lengkap", v)} placeholder="Sesuai KTP" required inputFilter="letters" />
                 <InputField label="Status Hidup" name="status_ibu" value={formData.ibu.status_hidup} onChange={(v) => updateIbu("status_hidup", v)} options={["Masih Hidup", "Sudah Meninggal"]} required />
-                <InputField label="NIK" name="nik_ibu" value={formData.ibu.nik} onChange={(v) => updateIbu("nik", v)} placeholder="16 digit NIK" maxLength={16} required={!isIbuDeceased} disabled={isIbuDeceased} />
+                <InputField label="NIK" name="nik_ibu" value={formData.ibu.nik} onChange={(v) => updateIbu("nik", v)} placeholder="16 digit NIK" maxLength={16} required={!isIbuDeceased} disabled={isIbuDeceased} inputFilter="numbers" />
 
                 <SearchableSelect
                   label="Tempat Lahir"
@@ -1080,8 +1104,8 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                 )}
                 <InputField label="Penghasilan" name="penghasilan_ibu" value={formData.ibu.penghasilan} onChange={(v) => updateIbu("penghasilan", v)} options={PENGHASILAN_OPTIONS} required={!isIbuDeceased} disabled={isIbuDeceased} />
 
-                <InputField label="Nomor HP" name="no_hp_ibu" value={formData.ibu.no_hp} onChange={(v) => updateIbu("no_hp", v)} placeholder="08xxxxxxxxxx" required={!isIbuDeceased} disabled={isIbuDeceased} />
-                <InputField label="Nomor WhatsApp" name="no_wa_ibu" value={formData.ibu.no_wa || ""} onChange={(v) => updateIbu("no_wa", v)} placeholder="08xxxxxxxxxx" required={!isIbuDeceased} disabled={isIbuDeceased} />
+                <InputField label="Nomor HP" name="no_hp_ibu" value={formData.ibu.no_hp} onChange={(v) => updateIbu("no_hp", v)} placeholder="08xxxxxxxxxx" required={!isIbuDeceased} disabled={isIbuDeceased} inputFilter="numbers" />
+                <InputField label="Nomor WhatsApp" name="no_wa_ibu" value={formData.ibu.no_wa || ""} onChange={(v) => updateIbu("no_wa", v)} placeholder="08xxxxxxxxxx" required={!isIbuDeceased} disabled={isIbuDeceased} inputFilter="numbers" />
                 <InputField label="Email" name="email_ibu" value={formData.ibu.email} onChange={(v) => updateIbu("email", v)} type="email" placeholder="email@example.com" disabled={isIbuDeceased} />
               </div>
 
@@ -1093,8 +1117,8 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                       <InputField label="Alamat" name="alamat_ibu" value={formData.ibu.alamat || ""} onChange={(v) => updateIbu("alamat", v)} type="textarea" placeholder="Nama Jalan/Gang/Desa beserta Nomor Rumah" required />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
-                      <InputField label="RT" name="rt_ibu" value={formData.ibu.rt || ""} onChange={(v) => updateIbu("rt", v)} placeholder="001" maxLength={3} required />
-                      <InputField label="RW" name="rw_ibu" value={formData.ibu.rw || ""} onChange={(v) => updateIbu("rw", v)} placeholder="002" maxLength={3} required />
+                      <InputField label="RT" name="rt_ibu" value={formData.ibu.rt || ""} onChange={(v) => updateIbu("rt", v)} placeholder="001" maxLength={3} required inputFilter="numbers" />
+                      <InputField label="RW" name="rw_ibu" value={formData.ibu.rw || ""} onChange={(v) => updateIbu("rw", v)} placeholder="002" maxLength={3} required inputFilter="numbers" />
                     </div>
                     <div className="md:col-span-2">
                       <WilayahSelector
@@ -1164,8 +1188,8 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                     required={isWaliRequired}
                   />
                 )}
-                <InputField label="Nama Lengkap" name="nama_lengkap_wali" value={formData.wali.nama_lengkap} onChange={(v) => updateWali("nama_lengkap", v)} placeholder="Sesuai KTP" required={isWaliRequired} />
-                <InputField label="NIK" name="nik_wali" value={formData.wali.nik} onChange={(v) => updateWali("nik", v)} placeholder="16 digit NIK" maxLength={16} required={isWaliRequired} />
+                <InputField label="Nama Lengkap" name="nama_lengkap_wali" value={formData.wali.nama_lengkap} onChange={(v) => updateWali("nama_lengkap", v)} placeholder="Sesuai KTP" required={isWaliRequired} inputFilter="letters" />
+                <InputField label="NIK" name="nik_wali" value={formData.wali.nik} onChange={(v) => updateWali("nik", v)} placeholder="16 digit NIK" maxLength={16} required={isWaliRequired} inputFilter="numbers" />
 
                 <SearchableSelect
                   label="Tempat Lahir"
@@ -1180,8 +1204,8 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                 <InputField label="Pekerjaan" name="pekerjaan_wali" value={formData.wali.pekerjaan} onChange={(v) => updateWali("pekerjaan", v)} options={PEKERJAAN_OPTIONS} required={isWaliRequired} />
                 <InputField label="Penghasilan" name="penghasilan_wali" value={formData.wali.penghasilan} onChange={(v) => updateWali("penghasilan", v)} options={PENGHASILAN_OPTIONS} required={isWaliRequired} />
 
-                <InputField label="Nomor HP" name="no_hp_wali" value={formData.wali.no_hp} onChange={(v) => updateWali("no_hp", v)} placeholder="08xxxxxxxxxx" required={isWaliRequired} />
-                <InputField label="Nomor WhatsApp" name="no_wa_wali" value={formData.wali.no_wa || ""} onChange={(v) => updateWali("no_wa", v)} placeholder="08xxxxxxxxxx" required={isWaliRequired} />
+                <InputField label="Nomor HP" name="no_hp_wali" value={formData.wali.no_hp} onChange={(v) => updateWali("no_hp", v)} placeholder="08xxxxxxxxxx" required={isWaliRequired} inputFilter="numbers" />
+                <InputField label="Nomor WhatsApp" name="no_wa_wali" value={formData.wali.no_wa || ""} onChange={(v) => updateWali("no_wa", v)} placeholder="08xxxxxxxxxx" required={isWaliRequired} inputFilter="numbers" />
                 <InputField label="Email" name="email_wali" value={formData.wali.email} onChange={(v) => updateWali("email", v)} type="email" placeholder="email@example.com" />
               </div>
 
@@ -1192,8 +1216,8 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                     <InputField label="Alamat" name="alamat_wali" value={formData.wali.alamat} onChange={(v) => updateWali("alamat", v)} type="textarea" placeholder="Nama Jalan/Gang/Desa beserta Nomor Rumah" required={isWaliRequired} />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
-                    <InputField label="RT" name="rt_wali" value={formData.wali.rt} onChange={(v) => updateWali("rt", v)} placeholder="001" maxLength={3} required={isWaliRequired} />
-                    <InputField label="RW" name="rw_wali" value={formData.wali.rw} onChange={(v) => updateWali("rw", v)} placeholder="002" maxLength={3} required={isWaliRequired} />
+                    <InputField label="RT" name="rt_wali" value={formData.wali.rt} onChange={(v) => updateWali("rt", v)} placeholder="001" maxLength={3} required={isWaliRequired} inputFilter="numbers" />
+                    <InputField label="RW" name="rw_wali" value={formData.wali.rw} onChange={(v) => updateWali("rw", v)} placeholder="002" maxLength={3} required={isWaliRequired} inputFilter="numbers" />
                   </div>
                   <div className="md:col-span-2">
                     <WilayahSelector

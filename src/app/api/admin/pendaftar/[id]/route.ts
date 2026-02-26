@@ -192,3 +192,109 @@ export async function PATCH(
     );
   }
 }
+
+// DELETE: Soft delete pendaftar (admin_super only)
+export async function DELETE(
+  request: NextRequest,
+  props: { params: Promise<{ id: string }> }
+) {
+  const params = await props.params;
+  try {
+    const session = await getServerSession();
+
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Only admin_super can delete
+    if (session.role !== "admin_super") {
+      return NextResponse.json(
+        { error: "Hanya Admin Super yang dapat menghapus data pendaftar" },
+        { status: 403 }
+      );
+    }
+
+    // Fetch full pendaftar data with ALL relations for backup
+    const pendaftar = await prisma.pendaftar.findUnique({
+      where: { id: params.id },
+      include: {
+        tahun_ajaran: true,
+        orang_tua: true,
+        dokumen: true,
+        pembayaran: true,
+        jadwal_ujian: true,
+        nilai_ujian: true,
+        pengumuman: true,
+        rapor: true,
+        prestasi: true,
+        kesehatan: true,
+        asrama: true,
+        hasil_seleksi: true,
+        reservasi: true,
+        whatsapp_logs: true,
+      },
+    });
+
+    if (!pendaftar) {
+      return NextResponse.json(
+        { error: "Pendaftar tidak ditemukan" },
+        { status: 404 }
+      );
+    }
+
+    if (pendaftar.deleted_at) {
+      return NextResponse.json(
+        { error: "Pendaftar sudah dihapus sebelumnya" },
+        { status: 400 }
+      );
+    }
+
+    // Create full backup snapshot and soft-delete in a transaction
+    await prisma.$transaction([
+      // 1. Save full backup snapshot
+      prisma.pendaftarBackup.create({
+        data: {
+          pendaftar_id: pendaftar.id,
+          nomor_pendaftaran: pendaftar.nomor_pendaftaran,
+          nama_lengkap: pendaftar.nama_lengkap,
+          backup_data: JSON.parse(JSON.stringify(pendaftar)),
+          deleted_by: session.id,
+          deleted_by_name: session.full_name || session.name || "Admin Super",
+        },
+      }),
+      // 2. Soft delete the pendaftar
+      prisma.pendaftar.update({
+        where: { id: params.id },
+        data: {
+          deleted_at: new Date(),
+          deleted_by: session.id,
+          updated_at: new Date(),
+        },
+      }),
+    ]);
+
+    // Audit log
+    logAdminAction({
+      action: "SOFT_DELETE_PENDAFTAR",
+      adminId: session.id || "system",
+      adminName: session.full_name || session.name || "Admin",
+      targetId: params.id,
+      targetName: pendaftar.nama_lengkap,
+      details: {
+        nomor_pendaftaran: pendaftar.nomor_pendaftaran,
+        status_sebelum: pendaftar.status_pendaftaran,
+      },
+    });
+
+    return NextResponse.json({
+      success: true,
+      message: `Data ${pendaftar.nama_lengkap} berhasil dihapus (soft delete). Data cadangan telah disimpan dan bisa direstore kapan saja.`,
+    });
+  } catch (error) {
+    console.error("Error in admin pendaftar soft delete API:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}

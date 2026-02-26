@@ -11,7 +11,9 @@ type AuditAction =
     | 'ASSIGN_EXAM'
     | 'PUBLISH_ANNOUNCEMENT'
     | 'FORCE_UNLOCK_FORM'
-    | 'BROADCAST_WA';
+    | 'BROADCAST_WA'
+    | 'SOFT_DELETE_PENDAFTAR'
+    | 'RESTORE_PENDAFTAR';
 
 interface AuditLogParams {
     action: AuditAction;
