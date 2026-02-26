@@ -95,17 +95,23 @@ export default function HeroSection() {
             </div>
 
             {/* CTA Group */}
-            <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center lg:justify-start w-full sm:w-auto">
-              <Link href="/ppdb" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full px-8 lg:px-10 py-6 lg:py-7 text-sm lg:text-base font-bold rounded-2xl bg-brown-700 hover:bg-brown-800 text-white shadow-premium-lg transition-all duration-300 group min-h-[56px]">
-                  Daftar PPDB Sekarang
-                </Button>
-              </Link>
-              <Link href="/program" className="w-full sm:w-auto">
-                <Button variant="outline" size="lg" className="w-full px-6 lg:px-8 py-6 lg:py-7 text-sm lg:text-base font-bold rounded-2xl border-2 border-surface-200 hover:bg-surface-50 hover:border-brown-200 text-ink-700 transition-all duration-300 min-h-[56px]">
-                  Lihat Program Studi
-                </Button>
-              </Link>
+            <div className="flex flex-col gap-3 lg:gap-4 justify-center lg:justify-start w-full">
+              <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center lg:justify-start w-full sm:w-auto">
+                <Link href="/ppdb" className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full px-8 lg:px-10 py-6 lg:py-7 text-sm lg:text-base font-bold rounded-2xl bg-brown-700 hover:bg-brown-800 text-white shadow-premium-lg transition-all duration-300 group min-h-[56px]">
+                    Daftar PPDB Sekarang
+                  </Button>
+                </Link>
+                <Link href="/program" className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="w-full px-6 lg:px-8 py-6 lg:py-7 text-sm lg:text-base font-bold rounded-2xl border-2 border-surface-200 hover:bg-surface-50 hover:border-brown-200 text-ink-700 transition-all duration-300 min-h-[56px]">
+                    Lihat Program Studi
+                  </Button>
+                </Link>
+              </div>
+              {/* Trust microcopy */}
+              <p className="text-[11px] text-ink-500 font-bold uppercase tracking-widest text-center lg:text-left">
+                ✦ Pendaftaran Gratis&nbsp;&nbsp;•&nbsp;&nbsp;Proses Mudah&nbsp;&nbsp;•&nbsp;&nbsp;Langsung Konfirmasi
+              </p>
             </div>
           </motion.div>
 

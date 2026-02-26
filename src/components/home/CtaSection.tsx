@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Send } from "lucide-react";
+import { ArrowRight, Send, ShieldCheck, Award, BookOpen } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
 
@@ -34,6 +34,27 @@ export default function CtaSection() {
                                 Konsultasi WhatsApp
                                 <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5" />
                             </Link>
+                        </div>
+
+                        {/* Trust microcopy */}
+                        <p className="mt-5 text-[11px] text-brown-400 font-bold uppercase tracking-widest">
+                            ✦ Pendaftaran Gratis&nbsp;&nbsp;•&nbsp;&nbsp;Proses Mudah&nbsp;&nbsp;•&nbsp;&nbsp;Langsung Konfirmasi
+                        </p>
+
+                        {/* Legalitas badges */}
+                        <div className="mt-10 pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-6">
+                            <div className="flex items-center gap-2 text-brown-300">
+                                <ShieldCheck className="w-4 h-4 text-green-400" />
+                                <span className="text-xs font-bold uppercase tracking-widest">Terakreditasi BAN-PDM</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-brown-300">
+                                <BookOpen className="w-4 h-4 text-gold-400" />
+                                <span className="text-xs font-bold uppercase tracking-widest">Sejak 1995 • 30 Tahun Melayani</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-brown-300">
+                                <Award className="w-4 h-4 text-blue-400" />
+                                <span className="text-xs font-bold uppercase tracking-widest">Resmi Kemendikdasmen</span>
+                            </div>
                         </div>
                     </div>
                 </motion.div>
