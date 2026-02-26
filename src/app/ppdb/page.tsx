@@ -481,8 +481,30 @@ function PPDBContent() {
                   Hubungi Admin PPDB
                 </a>
               </div>
+
+              {/* Trust microcopy */}
+              <p className="mt-6 text-[11px] text-brown-400 font-bold uppercase tracking-widest">
+                ✦ Pendaftaran Gratis&nbsp;&nbsp;•&nbsp;&nbsp;Proses Mudah&nbsp;&nbsp;•&nbsp;&nbsp;Langsung Konfirmasi
+              </p>
+
+              {/* Legalitas badges */}
+              <div className="mt-8 pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-6">
+                <div className="flex items-center gap-2 text-brown-300">
+                  <Shield className="w-4 h-4 text-green-400" />
+                  <span className="text-xs font-bold uppercase tracking-widest">Terakreditasi BAN-PDM</span>
+                </div>
+                <div className="flex items-center gap-2 text-brown-300">
+                  <Award className="w-4 h-4 text-gold-400" />
+                  <span className="text-xs font-bold uppercase tracking-widest">Sejak 1995 • 30 Tahun Melayani</span>
+                </div>
+                <div className="flex items-center gap-2 text-brown-300">
+                  <GraduationCap className="w-4 h-4 text-blue-400" />
+                  <span className="text-xs font-bold uppercase tracking-widest">Resmi Kemendikdasmen</span>
+                </div>
+              </div>
             </div>
           </motion.div>
+
         </Container>
       </section>
     </main>

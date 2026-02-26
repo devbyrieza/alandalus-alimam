@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { restoreScrollPosition } from "@/lib/navigation-scroll";
-import UrgencyBar from "@/components/ui/UrgencyBar";
 import HeroSection from "@/components/home/HeroSection";
 import StatsSection from "@/components/home/StatsSection";
 import ScrollAnimation from "@/components/ui/ScrollAnimation";
@@ -20,89 +19,75 @@ import FaqSection from "@/components/home/FaqSection";
 import CalendarSection from "@/components/home/CalendarSection";
 import ContactSection from "@/components/home/ContactSection";
 import CtaSection from "@/components/home/CtaSection";
-import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
-import LiveActivityToast from "@/components/ui/LiveActivityToast";
 
 export default function HomePage() {
-  // Restore scroll position on page load (for back navigation)
   useEffect(() => {
     restoreScrollPosition();
   }, []);
 
   return (
-    <>
-      {/* Urgency Bar — above everything */}
-      <UrgencyBar />
+    <main>
+      <HeroSection />
 
-      <main>
-        <HeroSection />
+      <ScrollAnimation delay={0.2} direction="up">
+        <StatsSection />
+      </ScrollAnimation>
 
-        <ScrollAnimation delay={0.2} direction="up">
-          <StatsSection />
-        </ScrollAnimation>
+      <ScrollAnimation delay={0.1}>
+        <AboutSection />
+      </ScrollAnimation>
 
-        <ScrollAnimation delay={0.1}>
-          <AboutSection />
-        </ScrollAnimation>
+      <ScrollAnimation delay={0.1}>
+        <BoardSection />
+      </ScrollAnimation>
 
-        <ScrollAnimation delay={0.1}>
-          <BoardSection />
-        </ScrollAnimation>
+      <ScrollAnimation delay={0.1}>
+        <TeachersSection />
+      </ScrollAnimation>
 
-        <ScrollAnimation delay={0.1}>
-          <TeachersSection />
-        </ScrollAnimation>
+      <ScrollAnimation delay={0.1}>
+        <ProgramSection />
+      </ScrollAnimation>
 
-        <ScrollAnimation delay={0.1}>
-          <ProgramSection />
-        </ScrollAnimation>
+      <ScrollAnimation delay={0.1}>
+        <FeaturesSection />
+      </ScrollAnimation>
 
-        <ScrollAnimation delay={0.1}>
-          <FeaturesSection />
-        </ScrollAnimation>
+      <ScrollAnimation delay={0.1}>
+        <ProcessSection />
+      </ScrollAnimation>
 
-        {/* Alur Pendaftaran — visual step-by-step guide */}
-        <ScrollAnimation delay={0.1}>
-          <ProcessSection />
-        </ScrollAnimation>
+      <ScrollAnimation delay={0.1}>
+        <FacilitiesSection />
+      </ScrollAnimation>
 
-        <ScrollAnimation delay={0.1}>
-          <FacilitiesSection />
-        </ScrollAnimation>
+      <ScrollAnimation delay={0.1}>
+        <ActivitiesSection />
+      </ScrollAnimation>
 
-        <ScrollAnimation delay={0.1}>
-          <ActivitiesSection />
-        </ScrollAnimation>
+      <ScrollAnimation delay={0.1}>
+        <ExtraSection />
+      </ScrollAnimation>
 
-        <ScrollAnimation delay={0.1}>
-          <ExtraSection />
-        </ScrollAnimation>
+      <ScrollAnimation delay={0.1}>
+        <TestimonialsSection />
+      </ScrollAnimation>
 
-        {/* Testimonials — improved with numbered cards */}
-        <ScrollAnimation delay={0.1}>
-          <TestimonialsSection />
-        </ScrollAnimation>
+      <ScrollAnimation delay={0.1}>
+        <FaqSection />
+      </ScrollAnimation>
 
-        <ScrollAnimation delay={0.1}>
-          <FaqSection />
-        </ScrollAnimation>
+      <ScrollAnimation delay={0.1}>
+        <CalendarSection />
+      </ScrollAnimation>
 
-        <ScrollAnimation delay={0.1}>
-          <CalendarSection />
-        </ScrollAnimation>
+      <ScrollAnimation delay={0.1}>
+        <ContactSection />
+      </ScrollAnimation>
 
-        <ScrollAnimation delay={0.1}>
-          <ContactSection />
-        </ScrollAnimation>
-
-        <ScrollAnimation delay={0.1}>
-          <CtaSection />
-        </ScrollAnimation>
-      </main>
-
-      {/* Floating elements */}
-      <FloatingWhatsApp />
-      <LiveActivityToast />
-    </>
+      <ScrollAnimation delay={0.1}>
+        <CtaSection />
+      </ScrollAnimation>
+    </main>
   );
 }

@@ -19,10 +19,22 @@ import {
   ArrowUpRight,
   MoreHorizontal,
   Wallet,
-  FileText
+  FileText,
+  Timer
 } from "lucide-react";
 import Link from "next/link";
 import { getMenuItemsForRole, UserRole } from "@/lib/access-control";
+
+// PPDB Deadline: 30 Mei 2026
+const PPDB_DEADLINE = new Date("2026-05-30T23:59:59+07:00");
+
+function getPPDBCountdown() {
+  const now = new Date();
+  const diff = PPDB_DEADLINE.getTime() - now.getTime();
+  if (diff <= 0) return null;
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  return days;
+}
 
 // Interfaces (Unchanged)
 interface JenjangStat {
@@ -233,6 +245,40 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="space-y-8 pb-12">
+
+      {/* PPDB Deadline Tracker */}
+      {(() => {
+        const daysLeft = getPPDBCountdown();
+        if (daysLeft === null) return null;
+        const urgency = daysLeft <= 7 ? "red" : daysLeft <= 30 ? "amber" : "teal";
+        const urgencyStyles = {
+          red: "bg-red-50 border-red-200 text-red-800",
+          amber: "bg-amber-50 border-amber-200 text-amber-800",
+          teal: "bg-teal-50 border-teal-200 text-teal-800",
+        }[urgency];
+        return (
+          <div className={`rounded-2xl border-2 px-6 py-4 flex flex-wrap items-center justify-between gap-4 ${urgencyStyles}`}>
+            <div className="flex items-center gap-3">
+              <Timer className="w-5 h-5 shrink-0" />
+              <div>
+                <span className="text-xs font-black uppercase tracking-widest opacity-60">Countdown PPDB</span>
+                <p className="font-black text-base leading-tight">
+                  {daysLeft <= 0 ? "Pendaftaran TELAH DITUTUP" : (
+                    <><span className="text-2xl">{daysLeft}</span> hari lagi • Penutupan 30 Mei 2026</>
+                  )}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: urgency === "teal" ? "#14b8a6" : urgency === "amber" ? "#f59e0b" : "#ef4444" }} />
+              <span className="text-xs font-bold uppercase tracking-wider">
+                {daysLeft > 30 ? "Berjalan Normal" : daysLeft > 7 ? "Segera Tutup" : "MENDESAK"}
+              </span>
+            </div>
+          </div>
+        );
+      })()}
+
       {/* 4. NOTIFICATION BANNER - For specific roles */}
       {(role === 'admin_super' || role === 'admin' || role === 'admin_berkas' || role === 'head_of_it') && stats.permintaan_edit_pending > 0 && (
         <div className="bg-amber-50 border-2 border-amber-200 rounded-[2rem] p-6 shadow-clay-sm animate-in fade-in slide-in-from-top-4 duration-500">
@@ -271,14 +317,14 @@ export default function AdminDashboardPage() {
               </span>
             </div>
 
-            <div className="h-4 w-px bg-stone-200"></div>
+            <div className="h-4 w-px bg-surface-200"></div>
 
             <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-stone-400" />
+              <Calendar className="w-4 h-4 text-ink-400" />
               <select
                 value={selectedTahunAjaranId}
                 onChange={(e) => setSelectedTahunAjaranId(e.target.value)}
-                className="bg-stone-50 border border-stone-200 rounded-lg px-3 py-1 text-sm font-bold text-stone-600 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all cursor-pointer hover:bg-white"
+                className="bg-surface-50 border border-surface-200 rounded-lg px-3 py-1 text-sm font-bold text-ink-600 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all cursor-pointer hover:bg-white"
               >
                 {tahunAjaranList.map((ta) => (
                   <option key={ta.id} value={ta.id}>
