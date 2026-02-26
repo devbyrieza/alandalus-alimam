@@ -31,45 +31,49 @@ export default function UrgencyBar() {
     if (!visible || !countdown) return null;
 
     return (
-        <div className="w-full bg-brown-900 text-white px-4 py-2 flex items-center justify-between gap-4 z-50 relative">
-            <div className="flex-1 flex items-center justify-center gap-3 flex-wrap text-center">
-                <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" />
-                    <span className="text-xs font-bold uppercase tracking-widest text-brown-200">
+        <div className="w-full bg-brown-900 text-white px-3 sm:px-4 py-2 flex items-center justify-between gap-2 sm:gap-4">
+            <div className="flex-1 flex items-center justify-center gap-2 sm:gap-3 min-w-0">
+                {/* Badge - hidden on xs to save space */}
+                <div className="hidden sm:flex items-center gap-2 shrink-0">
+                    <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                    <span className="text-xs font-bold uppercase tracking-widest text-brown-200 whitespace-nowrap">
                         PPDB 2026/2027 Dibuka
                     </span>
                 </div>
 
-                <div className="flex items-center gap-2">
+                {/* Countdown - always visible */}
+                <div className="flex items-center gap-1.5">
                     <Clock className="w-3.5 h-3.5 text-gold-400 shrink-0" />
-                    <div className="flex items-center gap-1 font-display font-black text-sm">
+                    <div className="flex items-center gap-0.5 font-display font-black text-xs sm:text-sm">
                         <span className="bg-white/10 rounded px-1.5 py-0.5 tabular-nums">{String(countdown.days).padStart(2, "0")}</span>
-                        <span className="text-brown-300 text-xs">h</span>
+                        <span className="text-brown-300 text-[10px]">h</span>
                         <span className="bg-white/10 rounded px-1.5 py-0.5 tabular-nums">{String(countdown.hours).padStart(2, "0")}</span>
-                        <span className="text-brown-300 text-xs">j</span>
+                        <span className="text-brown-300 text-[10px]">j</span>
                         <span className="bg-white/10 rounded px-1.5 py-0.5 tabular-nums">{String(countdown.minutes).padStart(2, "0")}</span>
-                        <span className="text-brown-300 text-xs">m</span>
+                        <span className="text-brown-300 text-[10px]">m</span>
                         <span className="bg-white/10 rounded px-1.5 py-0.5 tabular-nums">{String(countdown.seconds).padStart(2, "0")}</span>
-                        <span className="text-brown-300 text-xs">d</span>
+                        <span className="text-brown-300 text-[10px]">d</span>
                     </div>
-                    <span className="text-xs text-brown-300 hidden sm:inline">lagi • Kuota terbatas</span>
+                    <span className="text-xs text-brown-300 hidden md:inline whitespace-nowrap">lagi • Kuota terbatas</span>
                 </div>
 
+                {/* CTA Button */}
                 <Link
                     href="/ppdb"
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-500 text-brown-950 text-[11px] font-black uppercase tracking-widest hover:bg-gold-400 transition-colors"
+                    className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-gold-500 text-brown-950 text-[10px] sm:text-[11px] font-black uppercase tracking-widest hover:bg-gold-400 transition-colors whitespace-nowrap shrink-0"
                 >
-                    <Zap className="w-3 h-3" />
-                    Daftar Sekarang
+                    <Zap className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                    <span className="hidden xs:inline">Daftar </span>Sekarang
                 </Link>
             </div>
 
+            {/* Dismiss button */}
             <button
                 onClick={() => setVisible(false)}
-                className="text-brown-400 hover:text-white transition-colors shrink-0"
+                className="text-brown-400 hover:text-white transition-colors shrink-0 p-0.5"
                 aria-label="Tutup"
             >
-                <X className="w-4 h-4" />
+                <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
         </div>
     );

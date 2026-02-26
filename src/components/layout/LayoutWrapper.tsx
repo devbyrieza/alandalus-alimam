@@ -26,15 +26,13 @@ export default function LayoutWrapper({
 
   return (
     <div className="relative min-h-screen flex flex-col font-sans">
-      {/* ✅ URGENCY BAR - PPDB countdown, public pages only */}
-      {!hideNavbarFooter && <UrgencyBar />}
-
       {/* ✅ NAVBAR - Hanya tampil di halaman utama (tidak di login/dashboard) */}
       {!hideNavbarFooter && <Navbar />}
 
       {/* ✅ MAIN CONTENT - Page content dengan conditional offset */}
       <main className={hideNavbarFooter ? "flex-1" : "flex-1 pt-20 md:pt-24"}>
-        {/* pt-20 md:pt-24 only for navbar offset on main pages */}
+        {/* URGENCY BAR - Banner PPDB di bawah Navbar, scrolls naturally */}
+        {!hideNavbarFooter && <UrgencyBar />}
         <PageTransition>
           {children}
         </PageTransition>
