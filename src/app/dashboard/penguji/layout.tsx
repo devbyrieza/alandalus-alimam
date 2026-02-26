@@ -36,9 +36,14 @@ export default function PengujiDashboardLayout({
         if (!sessionRes.ok) throw new Error("Failed to get session");
 
         const sessionData = await sessionRes.json();
-        if (sessionData.user?.user_metadata?.nama) {
-          setPengujiName(sessionData.user.user_metadata.nama);
-        }
+        // Support both new session format (sessionData.session.full_name) and legacy format
+        const name =
+          sessionData.session?.full_name ||
+          sessionData.full_name ||
+          sessionData.user?.user_metadata?.nama ||
+          sessionData.user?.user_metadata?.full_name ||
+          "Asatidz";
+        setPengujiName(name);
       } catch (error) {
         console.error("Error fetching penguji data:", error);
       } finally {
