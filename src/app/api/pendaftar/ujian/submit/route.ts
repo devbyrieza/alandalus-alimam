@@ -1,14 +1,26 @@
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import { prisma } from '@/lib/prisma';
 import { calculateAkademikScore, calculateKepribadianScore, calculateKesiapanScore } from '@/lib/grading';
-import { getCurrentSession } from '@/lib/auth';
 
 export async function POST(req: Request) {
     try {
-        // 1. Auth Check (Server Session)
-        const session = await getCurrentSession();
+        // 1. Auth Check (Server Session via cookie)
+        const cookieStore = await cookies();
+        const sessionCookie = cookieStore.get('app_session');
 
-        if (!session) {
+        if (!sessionCookie) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
+        let session;
+        try {
+            session = JSON.parse(sessionCookie.value);
+        } catch {
+            return NextResponse.json({ error: 'Session tidak valid' }, { status: 401 });
+        }
+
+        if (!session || !session.id) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
