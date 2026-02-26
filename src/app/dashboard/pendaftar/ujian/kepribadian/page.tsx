@@ -30,6 +30,10 @@ export default function KepribadianTestPage() {
             .finally(() => setChecking(false));
     }, []);
 
+    useEffect(() => {
+        topRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [page]);
+
     const handleNext = () => {
         const unanswered = currentQuestions.filter(q => !answers[q.id]);
         if (unanswered.length > 0) {
@@ -37,7 +41,6 @@ export default function KepribadianTestPage() {
             return;
         }
         setPage(p => p + 1);
-        setTimeout(() => topRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
     };
 
     const handleSubmit = async () => {
@@ -148,7 +151,7 @@ export default function KepribadianTestPage() {
             {/* Navigation */}
             <div className="sticky bottom-4 z-10 flex gap-3">
                 {page > 0 && (
-                    <button onClick={() => { setPage(p => p - 1); setTimeout(() => topRef.current?.scrollIntoView({ behavior: 'smooth' }), 50); }}
+                    <button onClick={() => setPage(p => p - 1)}
                         className="flex-1 py-4 bg-white border-2 border-stone-300 hover:bg-stone-50 text-stone-700 font-bold rounded-xl shadow-lg transition-colors">
                         Sebelumnya
                     </button>
