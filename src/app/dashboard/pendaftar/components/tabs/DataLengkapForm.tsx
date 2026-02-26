@@ -735,16 +735,19 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
     ))
   ));
 
+  const isWaliAddressRequired = formData.santri.tinggal_bersama !== "Wali";
   const isWaliComplete = Boolean((!isWaliRequired && !formData.wali.nama_lengkap) || (
     formData.wali.hubungan &&
     formData.wali.nama_lengkap &&
     formData.wali.nik &&
     formData.wali.no_hp &&
-    formData.wali.provinsi &&
-    formData.wali.kabupaten &&
-    formData.wali.kecamatan &&
-    formData.wali.kelurahan &&
-    formData.wali.kode_pos
+    (!isWaliAddressRequired || (
+      formData.wali.provinsi &&
+      formData.wali.kabupaten &&
+      formData.wali.kecamatan &&
+      formData.wali.kelurahan &&
+      formData.wali.kode_pos
+    ))
   ));
 
   const isLocked = !['draft', 'awaiting_payment', 'verified', 'rejected'].includes(statusPendaftaran);
