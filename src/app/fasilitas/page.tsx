@@ -680,6 +680,26 @@ export default function FasilitasPage() {
                 <span className="text-xs text-blue-600 font-semibold">💧 Minuman</span>
               </div>
             </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 1.0 }}
+              className="bg-gradient-to-br from-orange-50 to-amber-50 p-6 rounded-2xl border border-orange-100 shadow-md hover:shadow-lg transition-all hover:-translate-y-1 group relative overflow-hidden"
+            >
+              <div className="absolute top-3 right-3 px-2 py-0.5 bg-amber-400 text-white text-[10px] font-black uppercase tracking-wider rounded-full">
+                Segera Hadir
+              </div>
+              <div className="w-12 h-12 bg-orange-400 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
+                <Award className="w-6 h-6" />
+              </div>
+              <h3 className="font-black text-lg text-ink-950 mb-2">Lap. Badminton & Tenis</h3>
+              <p className="text-sm text-ink-600 font-medium">Satu lapangan multifungsi badminton & tenis</p>
+              <div className="mt-3 pt-3 border-t border-orange-100">
+                <span className="text-xs text-orange-600 font-semibold">🏸 Olahraga Indoor</span>
+              </div>
+            </motion.div>
           </div>
         </Container>
       </section>
