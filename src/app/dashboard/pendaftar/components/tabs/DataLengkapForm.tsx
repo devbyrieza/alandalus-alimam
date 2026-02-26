@@ -699,7 +699,7 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
     formData.santri.tahun_lulus
   );
 
-  const isAyahAddressRequired = !isAyahDeceased && !["Kedua Orang Tua", "Ayah", "Ibu"].includes(formData.santri.tinggal_bersama);
+  const isAyahAddressRequired = !isAyahDeceased && !["Kedua Orang Tua", "Ayah"].includes(formData.santri.tinggal_bersama);
   const isAyahComplete = Boolean(isAyahDeceased || (
     formData.ayah.nama_lengkap &&
     formData.ayah.nik &&
@@ -717,7 +717,7 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
     ))
   ));
 
-  const isIbuAddressRequired = !isIbuDeceased && !["Kedua Orang Tua", "Ayah", "Ibu"].includes(formData.santri.tinggal_bersama);
+  const isIbuAddressRequired = !isIbuDeceased && !["Kedua Orang Tua", "Ibu"].includes(formData.santri.tinggal_bersama);
   const isIbuComplete = Boolean(isIbuDeceased || (
     formData.ibu.nama_lengkap &&
     formData.ibu.nik &&
@@ -1027,7 +1027,7 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                 <InputField label="Email" name="email_ayah" value={formData.ayah.email} onChange={(v) => updateAyah("email", v)} type="email" placeholder="email@example.com" disabled={isAyahDeceased} />
               </div>
 
-              {!isAyahDeceased && !["Kedua Orang Tua", "Ayah", "Ibu"].includes(formData.santri.tinggal_bersama) && (
+              {!isAyahDeceased && !["Kedua Orang Tua", "Ayah"].includes(formData.santri.tinggal_bersama) && (
                 <div className="pt-6 border-t border-ink-100">
                   <h5 className="font-bold text-ink-800 mb-4 bg-surface-100 inline-block px-3 py-1 rounded-lg text-sm">Alamat Ayah</h5>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1109,7 +1109,7 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                 <InputField label="Email" name="email_ibu" value={formData.ibu.email} onChange={(v) => updateIbu("email", v)} type="email" placeholder="email@example.com" disabled={isIbuDeceased} />
               </div>
 
-              {!isIbuDeceased && !["Kedua Orang Tua", "Ayah", "Ibu"].includes(formData.santri.tinggal_bersama) && (
+              {!isIbuDeceased && !["Kedua Orang Tua", "Ibu"].includes(formData.santri.tinggal_bersama) && (
                 <div className="pt-6 border-t border-ink-100">
                   <h5 className="font-bold text-ink-800 mb-4 bg-surface-100 inline-block px-3 py-1 rounded-lg text-sm">Alamat Ibu</h5>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1209,30 +1209,32 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
                 <InputField label="Email" name="email_wali" value={formData.wali.email} onChange={(v) => updateWali("email", v)} type="email" placeholder="email@example.com" />
               </div>
 
-              <div className="pt-6 border-t border-ink-100">
-                <h5 className="font-bold text-ink-800 mb-4 bg-surface-100 inline-block px-3 py-1 rounded-lg text-sm">Alamat Wali</h5>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="md:col-span-2">
-                    <InputField label="Alamat" name="alamat_wali" value={formData.wali.alamat} onChange={(v) => updateWali("alamat", v)} type="textarea" placeholder="Nama Jalan/Gang/Desa beserta Nomor Rumah" required={isWaliRequired} />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <InputField label="RT" name="rt_wali" value={formData.wali.rt} onChange={(v) => updateWali("rt", v)} placeholder="001" maxLength={3} required={isWaliRequired} inputFilter="numbers" />
-                    <InputField label="RW" name="rw_wali" value={formData.wali.rw} onChange={(v) => updateWali("rw", v)} placeholder="002" maxLength={3} required={isWaliRequired} inputFilter="numbers" />
-                  </div>
-                  <div className="md:col-span-2">
-                    <WilayahSelector
-                      value={{
-                        provinsi: formData.wali.provinsi,
-                        kabupaten: formData.wali.kabupaten,
-                        kecamatan: formData.wali.kecamatan,
-                        kelurahan: formData.wali.kelurahan,
-                        kode_pos: formData.wali.kode_pos
-                      }}
-                      onChange={handleWaliAddressChange}
-                    />
+              {formData.santri.tinggal_bersama !== "Wali" && (
+                <div className="pt-6 border-t border-ink-100">
+                  <h5 className="font-bold text-ink-800 mb-4 bg-surface-100 inline-block px-3 py-1 rounded-lg text-sm">Alamat Wali</h5>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="md:col-span-2">
+                      <InputField label="Alamat" name="alamat_wali" value={formData.wali.alamat} onChange={(v) => updateWali("alamat", v)} type="textarea" placeholder="Nama Jalan/Gang/Desa beserta Nomor Rumah" required={isWaliRequired} />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <InputField label="RT" name="rt_wali" value={formData.wali.rt} onChange={(v) => updateWali("rt", v)} placeholder="001" maxLength={3} required={isWaliRequired} inputFilter="numbers" />
+                      <InputField label="RW" name="rw_wali" value={formData.wali.rw} onChange={(v) => updateWali("rw", v)} placeholder="002" maxLength={3} required={isWaliRequired} inputFilter="numbers" />
+                    </div>
+                    <div className="md:col-span-2">
+                      <WilayahSelector
+                        value={{
+                          provinsi: formData.wali.provinsi,
+                          kabupaten: formData.wali.kabupaten,
+                          kecamatan: formData.wali.kecamatan,
+                          kelurahan: formData.wali.kelurahan,
+                          kode_pos: formData.wali.kode_pos
+                        }}
+                        onChange={handleWaliAddressChange}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           )}
         </div>
