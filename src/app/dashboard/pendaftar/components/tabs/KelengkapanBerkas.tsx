@@ -474,18 +474,20 @@ export default function KelengkapanBerkasTab() {
         const isIbuDeceased = ibu.status_hidup === "Sudah Meninggal";
 
         // Logic tinggal bersama
-        const isTinggalBersamaOrtu = ["Kedua Orang Tua", "Ayah", "Ibu"].includes(s.tinggal_bersama);
+        const isAyahAddressRequired = !isAyahDeceased && !["Kedua Orang Tua", "Ayah"].includes(s.tinggal_bersama);
+        const isIbuAddressRequired = !isIbuDeceased && !["Kedua Orang Tua", "Ibu"].includes(s.tinggal_bersama);
+        const isWaliAddressRequired = s.tinggal_bersama !== "Wali";
 
         if (!isAyahDeceased && (
           !ayah.nama_lengkap || !ayah.nik || !ayah.tanggal_lahir || !ayah.pendidikan_terakhir || !ayah.pekerjaan || !ayah.no_hp || !ayah.no_wa ||
-          (!isTinggalBersamaOrtu && (!ayah.alamat || !ayah.rt || !ayah.rw || !ayah.provinsi || !ayah.kabupaten))
+          (isAyahAddressRequired && (!ayah.alamat || !ayah.rt || !ayah.rw || !ayah.provinsi || !ayah.kabupaten))
         )) {
           missing.push("Data Ayah");
         }
 
         if (!isIbuDeceased && (
           !ibu.nama_lengkap || !ibu.nik || !ibu.tanggal_lahir || !ibu.pendidikan_terakhir || !ibu.pekerjaan || !ibu.no_hp || !ibu.no_wa ||
-          (!isTinggalBersamaOrtu && (!ibu.alamat || !ibu.rt || !ibu.rw || !ibu.provinsi || !ibu.kabupaten))
+          (isIbuAddressRequired && (!ibu.alamat || !ibu.rt || !ibu.rw || !ibu.provinsi || !ibu.kabupaten))
         )) {
           missing.push("Data Ibu");
         }
@@ -493,7 +495,9 @@ export default function KelengkapanBerkasTab() {
         // Check Wali if both parents deceased or lives with wali
         if ((isAyahDeceased && isIbuDeceased) || s.tinggal_bersama === "Wali") {
           const wali = d.wali || {};
-          if (!wali.nama_lengkap || !wali.nik || !wali.hubungan || !wali.no_hp || !wali.alamat || !wali.rt || !wali.rw || !wali.provinsi || !wali.kabupaten) {
+          if (!wali.nama_lengkap || !wali.nik || !wali.hubungan || !wali.no_hp ||
+            (isWaliAddressRequired && (!wali.alamat || !wali.rt || !wali.rw || !wali.provinsi || !wali.kabupaten))
+          ) {
             missing.push("Data Wali");
           }
         }
