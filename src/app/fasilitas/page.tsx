@@ -577,12 +577,30 @@ export default function FasilitasPage() {
               </div>
             </motion.div>
 
-            {/* Row 2 - Health & Safety */}
+            {/* 4. Depot Galon Gratis */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
+              className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-2xl border border-blue-100 shadow-md hover:shadow-lg transition-all hover:-translate-y-1 group"
+            >
+              <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
+                <Droplet className="w-6 h-6" />
+              </div>
+              <h3 className="font-black text-lg text-ink-950 mb-2">Depot Galon Gratis</h3>
+              <p className="text-sm text-ink-600 font-medium">Air minum higienis gratis</p>
+              <div className="mt-3 pt-3 border-t border-blue-100">
+                <span className="text-xs text-blue-600 font-semibold">💧 Minuman</span>
+              </div>
+            </motion.div>
+
+            {/* 5. Klinik Santri */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
               className="bg-gradient-to-br from-red-50 to-rose-50 p-6 rounded-2xl border border-red-100 shadow-md hover:shadow-lg transition-all hover:-translate-y-1 group"
             >
               <div className="w-12 h-12 bg-red-500 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
@@ -599,7 +617,7 @@ export default function FasilitasPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.6 }}
               className="bg-gradient-to-br from-amber-50 to-yellow-50 p-6 rounded-2xl border border-amber-100 shadow-md hover:shadow-lg transition-all hover:-translate-y-1 group"
             >
               <div className="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
@@ -616,7 +634,7 @@ export default function FasilitasPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.7 }}
               className="bg-gradient-to-br from-indigo-50 to-blue-50 p-6 rounded-2xl border border-indigo-100 shadow-md hover:shadow-lg transition-all hover:-translate-y-1 group"
             >
               <div className="w-12 h-12 bg-indigo-500 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
@@ -634,7 +652,7 @@ export default function FasilitasPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.7 }}
+              transition={{ delay: 0.8 }}
               className="bg-gradient-to-br from-cyan-50 to-sky-50 p-6 rounded-2xl border border-cyan-100 shadow-md hover:shadow-lg transition-all hover:-translate-y-1 group"
             >
               <div className="w-12 h-12 bg-cyan-500 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
@@ -651,7 +669,7 @@ export default function FasilitasPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.8 }}
+              transition={{ delay: 0.9 }}
               className="bg-gradient-to-br from-emerald-50 to-green-50 p-6 rounded-2xl border border-emerald-100 shadow-md hover:shadow-lg transition-all hover:-translate-y-1 group"
             >
               <div className="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
@@ -661,23 +679,6 @@ export default function FasilitasPage() {
               <p className="text-sm text-ink-600 font-medium">Lapangan basket standar untuk santri</p>
               <div className="mt-3 pt-3 border-t border-emerald-100">
                 <span className="text-xs text-emerald-600 font-semibold">🏀 Olahraga</span>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.9 }}
-              className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-2xl border border-blue-100 shadow-md hover:shadow-lg transition-all hover:-translate-y-1 group"
-            >
-              <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
-                <Droplet className="w-6 h-6" />
-              </div>
-              <h3 className="font-black text-lg text-ink-950 mb-2">Depot Galon Gratis</h3>
-              <p className="text-sm text-ink-600 font-medium">Air minum higienis gratis</p>
-              <div className="mt-3 pt-3 border-t border-blue-100">
-                <span className="text-xs text-blue-600 font-semibold">💧 Minuman</span>
               </div>
             </motion.div>
 
