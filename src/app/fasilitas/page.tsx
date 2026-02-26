@@ -657,10 +657,10 @@ export default function FasilitasPage() {
               <div className="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
                 <Trophy className="w-6 h-6" />
               </div>
-              <h3 className="font-black text-lg text-ink-950 mb-2">Area Olahraga</h3>
-              <p className="text-sm text-ink-600 font-medium">Outdoor activity lengkap</p>
+              <h3 className="font-black text-lg text-ink-950 mb-2">Lapangan Basket</h3>
+              <p className="text-sm text-ink-600 font-medium">Lapangan basket standar untuk santri</p>
               <div className="mt-3 pt-3 border-t border-emerald-100">
-                <span className="text-xs text-emerald-600 font-semibold">⚽ Olahraga</span>
+                <span className="text-xs text-emerald-600 font-semibold">🏀 Olahraga</span>
               </div>
             </motion.div>
 
