@@ -134,7 +134,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className="font-sans antialiased bg-white text-ink-900 overflow-x-hidden"
+        className="font-sans antialiased bg-white text-ink-900 overflow-x-hidden transition-colors duration-500"
         suppressHydrationWarning
       >
         <SmoothScrollProvider>
