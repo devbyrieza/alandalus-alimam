@@ -11,6 +11,9 @@ export async function GET() {
         const registrants = await prisma.pendaftar.findMany({
             where: {
                 deleted_at: null,
+                kabupaten: {
+                    not: null,
+                },
             },
             select: {
                 nama_lengkap: true,
@@ -22,8 +25,11 @@ export async function GET() {
             take: 20,
         });
 
+        // Filter out empty strings in memory if any
+        const validRegistrants = registrants.filter(r => r.kabupaten && r.kabupaten.trim() !== "");
+
         // Privacy: show "First Name L." format (e.g. "Raylan A.")
-        const safe = registrants.map((r) => {
+        const safe = validRegistrants.map((r) => {
             const parts = r.nama_lengkap.trim().split(/\s+/);
             const firstName = parts[0];
             const lastInitial = parts.length > 1 ? ` ${parts[parts.length - 1][0]}.` : "";
@@ -40,10 +46,11 @@ export async function GET() {
             const program = programMap[r.jenjang?.toLowerCase() || ""] || r.jenjang || "Madrasah Tsanawiyah";
 
             // City: use kabupaten, strip "Kab. " or "Kota " prefix for brevity
-            const city = (r.kabupaten || "Indonesia")
+            const city = (r.kabupaten || "")
                 .replace(/^Kab\.\s*/i, "")
                 .replace(/^Kabupaten\s*/i, "")
-                .replace(/^Kota\s*/i, "");
+                .replace(/^Kota\s*/i, "")
+                .trim();
 
             return { name: displayName, city, program };
         });
