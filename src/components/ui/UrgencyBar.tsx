@@ -32,14 +32,13 @@ export default function UrgencyBar() {
     if (!visible || !countdown) return null;
 
     return (
-        <div className="w-full bg-brown-900 text-white px-3 sm:px-4 py-2 flex items-center justify-between gap-2 sm:gap-4">
-            <div className="flex-1 flex items-center justify-center gap-2 sm:gap-3 min-w-0">
-                {/* Badge - visible on mobile but shorter */}
+        <div className="w-full bg-brown-900 text-white px-2 sm:px-4 py-1.5 sm:py-2 flex items-center justify-center sm:justify-between gap-2 sm:gap-4 overflow-hidden">
+            <div className="flex items-center justify-center gap-2 sm:gap-3 shrink min-w-0">
+                {/* Badge - visible and clear */}
                 <div className="flex items-center gap-1 sm:gap-2 shrink-0">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                    <span className="text-[9px] xs:text-[10px] sm:text-xs font-bold uppercase tracking-wide sm:tracking-widest text-brown-200 whitespace-nowrap">
-                        <span className="inline sm:hidden">PPDB Dibuka</span>
-                        <span className="hidden sm:inline">PPDB 2026/2027 Dibuka</span>
+                    <span className="text-[9px] xs:text-[10px] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest text-brown-200 whitespace-nowrap">
+                        PPDB 2026/2027 Dibuka
                     </span>
                 </div>
 
@@ -64,26 +63,25 @@ export default function UrgencyBar() {
                             <span className="text-brown-300 text-[8px] sm:text-[10px]">d</span>
                         </div>
                     </div>
-                    <span className="text-[8px] xs:text-[9px] sm:text-xs text-brown-300 inline whitespace-nowrap">
-                        <span className="inline sm:hidden">• Kuota Terbatas</span>
-                        <span className="hidden sm:inline">lagi • Kuota terbatas</span>
+                    <span className="text-[8px] xs:text-[9px] sm:text-xs text-brown-300 whitespace-nowrap">
+                        lagi • Kuota terbatas
                     </span>
                 </div>
 
                 {/* CTA Button */}
                 <Link
                     href="/ppdb"
-                    className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-gold-500 text-brown-950 text-[10px] sm:text-[11px] font-black uppercase tracking-widest hover:bg-gold-400 transition-colors whitespace-nowrap shrink-0"
+                    className="inline-flex items-center gap-1 sm:gap-1.5 px-2 xs:px-3 py-1 rounded-full bg-gold-500 text-brown-950 text-[9px] sm:text-[11px] font-black uppercase tracking-widest hover:bg-gold-400 transition-colors whitespace-nowrap shrink-0"
                 >
-                    <Zap className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
-                    <span className="hidden xs:inline">Daftar </span>Sekarang
+                    <Zap className="hidden xs:block w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                    Sekarang
                 </Link>
             </div>
 
-            {/* Dismiss button */}
+            {/* Dismiss button - Hidden on very small screens to save space, or kept absolute */}
             <button
                 onClick={() => setVisible(false)}
-                className="text-brown-400 hover:text-white transition-colors shrink-0 p-0.5"
+                className="hidden sm:block text-brown-400 hover:text-white transition-colors shrink-0 p-0.5"
                 aria-label="Tutup"
             >
                 <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
