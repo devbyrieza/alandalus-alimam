@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
         // Fetch profile
         const profile = await prisma.profile.findUnique({
             where: { id: profile_id },
-        });
+        }) as any;
 
         if (!profile) {
             return NextResponse.json({ error: "Profil tidak ditemukan" }, { status: 404 });
