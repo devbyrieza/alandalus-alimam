@@ -140,7 +140,10 @@ export default function JadwalPengujiPage() {
         const res = await fetch("/api/auth/session");
         if (res.ok) {
           const data = await res.json();
-          setUserId(data.user_id || data.id);
+          const session = data.session;
+          if (session) {
+            setUserId(session.id || session.user_id);
+          }
         }
       } catch (e) {
         console.error("Failed to fetch session", e);

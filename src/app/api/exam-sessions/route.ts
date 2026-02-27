@@ -26,7 +26,7 @@ export async function GET(request: Request) {
     const creator_id = searchParams.get("creator_id");
     const is_active = searchParams.get("is_active");
 
-    const allowedRoles = ['admin_super', 'admin', 'head_of_it', 'penguji', 'admin_berkas'];
+    const allowedRoles = ['admin_super', 'admin', 'head_of_it', 'penguji', 'admin_berkas', 'penguji_calsan', 'pewawancara_calsan', 'pewawancara_cawalsan'];
     const isAdminOrExaminer = allowedRoles.includes(session.role);
     const isPendaftar = session.role === 'pendaftar';
 
@@ -84,7 +84,7 @@ export async function POST(request: Request) {
     }
 
     // Check permission: Any admin or examiner can create slots
-    const allowedRoles = ['admin_super', 'admin', 'head_of_it', 'penguji', 'admin_berkas'];
+    const allowedRoles = ['admin_super', 'admin', 'head_of_it', 'penguji', 'admin_berkas', 'penguji_calsan', 'pewawancara_calsan', 'pewawancara_cawalsan'];
     if (!allowedRoles.includes(session.role)) {
         return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
@@ -164,7 +164,7 @@ export async function DELETE(request: Request) {
         if (!targetSession) return NextResponse.json({ error: "Session not found" }, { status: 404 });
 
         // Permission check
-        const isAdmin = ['admin_super', 'admin', 'head_of_it'].includes(session.role);
+        const isAdmin = ['admin_super', 'admin', 'head_of_it', 'penguji', 'admin_berkas', 'penguji_calsan', 'pewawancara_calsan', 'pewawancara_cawalsan'].includes(session.role);
         const isOwner = targetSession.created_by === (session.user_id || session.id);
 
         if (!isAdmin && !isOwner) {
