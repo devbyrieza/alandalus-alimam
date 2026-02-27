@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
 
       const profile = await prisma.profile.findFirst({
         where: { email },
-      }) as any;
+      });
 
       if (!profile || !profile.password_hash) {
         return NextResponse.json(

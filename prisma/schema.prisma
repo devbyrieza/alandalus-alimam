@@ -11,6 +11,7 @@ datasource db {
 model Profile {
   id                    String                @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   role                  String                @default("pendaftar")
+  secondary_roles       String[]              @default([])
   full_name             String
   email                 String?
   phone                 String

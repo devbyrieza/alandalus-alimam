@@ -53,7 +53,7 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
-    const { email, password, full_name, role } = body;
+    const { email, password, full_name, role, secondary_roles } = body;
 
     if (!email || !password || !full_name || !role) {
       return NextResponse.json({ error: "Data tidak lengkap" }, { status: 400 });
@@ -76,6 +76,7 @@ export async function POST(request: Request) {
         email,
         full_name,
         role,
+        secondary_roles: Array.isArray(secondary_roles) ? secondary_roles : [],
         phone: "-",
         password_hash,
       },
@@ -98,7 +99,7 @@ export async function PUT(request: Request) {
   }
 
   try {
-    const { id, password, role, full_name, email } = await request.json();
+    const { id, password, role, full_name, email, secondary_roles } = await request.json();
 
     if (!id) {
       return NextResponse.json({ error: "ID User diperlukan" }, { status: 400 });
@@ -108,6 +109,7 @@ export async function PUT(request: Request) {
     if (password) data.password_hash = await hashPassword(password);
     if (role) data.role = role;
     if (full_name) data.full_name = full_name;
+    if (Array.isArray(secondary_roles)) data.secondary_roles = secondary_roles;
 
     // Email update logic
     if (email) {
