@@ -52,9 +52,8 @@ export default function AiChatWidget({ onClose, onEscalate }: AiChatWidgetProps)
         setChatCount(prev => prev + 1);
 
         try {
-            // Only send the last few messages for context to save tokens, or send all. We'll send the conversation history.
-            // Map our messages to the format expected by our API route
-            const history = newMessages.map(msg => ({
+            // Map our existing messages (excluding the new one) to the format expected by our API route
+            const history = messages.map(msg => ({
                 role: msg.role === 'ai' ? 'model' : 'user',
                 parts: [{ text: msg.content }]
             }));
@@ -135,12 +134,6 @@ export default function AiChatWidget({ onClose, onEscalate }: AiChatWidgetProps)
 
             {/* Messages Area */}
             <div className="flex-1 overflow-y-auto p-4 md:p-5 bg-surface-50/50 flex flex-col gap-4">
-                {/* Date separator or context text */}
-                <div className="text-center mb-2">
-                    <span className="text-[10px] uppercase font-bold tracking-widest text-ink-400 bg-surface-100 px-3 py-1 rounded-full">
-                        AI dapat melakukan kesalahan
-                    </span>
-                </div>
 
                 {messages.map((msg) => (
                     <motion.div

@@ -47,7 +47,6 @@ export default function LayoutWrapper({
           <TawkToScript />
           <ChatSystem />
           <ScrollToTop />
-          <FloatingWhatsApp />
           <LiveActivityToast />
         </>
       )}
