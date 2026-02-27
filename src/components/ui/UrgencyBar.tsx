@@ -32,8 +32,8 @@ export default function UrgencyBar() {
     if (!visible || !countdown) return null;
 
     return (
-        <div className="w-full bg-brown-900 text-white px-2 sm:px-4 py-1.5 sm:py-2 flex items-center justify-center sm:justify-between gap-2 sm:gap-4 overflow-hidden">
-            <div className="flex items-center justify-center gap-2 sm:gap-3 shrink min-w-0">
+        <div className="relative w-full bg-brown-900 text-white px-2 sm:px-4 py-1.5 sm:py-2 flex items-center justify-center gap-2 sm:gap-4 overflow-hidden">
+            <div className="flex items-center justify-center gap-2 sm:gap-3 shrink min-w-0 sm:px-8">
                 {/* Badge - visible and clear */}
                 <div className="flex items-center gap-1 sm:gap-2 shrink-0">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
@@ -81,7 +81,7 @@ export default function UrgencyBar() {
             {/* Dismiss button - Hidden on very small screens to save space, or kept absolute */}
             <button
                 onClick={() => setVisible(false)}
-                className="hidden sm:block text-brown-400 hover:text-white transition-colors shrink-0 p-0.5"
+                className="hidden sm:block absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-brown-400 hover:text-white transition-colors p-1"
                 aria-label="Tutup"
             >
                 <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
