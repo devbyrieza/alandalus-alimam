@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { DASHBOARD_ROUTES, ROLE_LABELS } from "@/lib/access-control";
+import { DASHBOARD_ROUTES, ROLE_LABELS, UserRole } from "@/lib/access-control";
 
 export async function POST(request: NextRequest) {
     try {
@@ -26,14 +26,9 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "Role tidak valid untuk akun ini" }, { status: 403 });
         }
 
-        // Determine redirect based on chosen role
-        const adminRoles = ["admin", "admin_super", "admin_berkas", "admin_keuangan", "head_of_it", "tim_it"];
-        const pengujiRoles = ["penguji", "penguji_calsan", "pewawancara_calsan", "pewawancara_cawalsan"];
-
-        let redirectTo = "/dashboard/admin";
-        if (pengujiRoles.includes(chosen_role)) {
-            redirectTo = "/dashboard/penguji";
-        }
+        // Determine redirect based on chosen role using centralized config
+        const role = chosen_role as UserRole;
+        const redirectTo = DASHBOARD_ROUTES[role] || "/dashboard";
 
         // Set session cookie with chosen role
         const response = NextResponse.json({
