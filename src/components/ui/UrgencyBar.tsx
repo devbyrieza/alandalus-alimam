@@ -21,9 +21,10 @@ function getCountdown() {
 
 export default function UrgencyBar() {
     const [visible, setVisible] = useState(true);
-    const [countdown, setCountdown] = useState(getCountdown());
+    const [countdown, setCountdown] = useState<{ days: number, hours: number, minutes: number, seconds: number } | null>(null);
 
     useEffect(() => {
+        setCountdown(getCountdown());
         const t = setInterval(() => setCountdown(getCountdown()), 1000);
         return () => clearInterval(t);
     }, []);

@@ -138,16 +138,16 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <SmoothScrollProvider>
-          <LayoutWrapper>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem={true}
-              disableTransitionOnChange
-            >
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem={true}
+            disableTransitionOnChange
+          >
+            <LayoutWrapper>
               {children}
-            </ThemeProvider>
-          </LayoutWrapper>
+            </LayoutWrapper>
+          </ThemeProvider>
         </SmoothScrollProvider>
       </body>
     </html>
