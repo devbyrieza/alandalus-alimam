@@ -86,6 +86,49 @@
 }
 
 @layer base {
+  .dark {
+    color-scheme: dark;
+
+    /* Core Background Overrides - Black Coffee/Dark Brown */
+    --color-white: #1c1917;
+    --color-surface-50: #26211d;
+    --color-surface-100: #2e2621;
+    --color-surface-200: #3b302a;
+
+    /* Brown Overrides for Dark Mode */
+    --color-brown-50: #2a1e14;
+    --color-brown-100: #3b2a1c;
+    --color-brown-200: #4a3828;
+    --color-brown-300: #5c4533;
+    --color-brown-600: #c6a682;
+    --color-brown-700: #eaddd7;
+
+    /* Teal Accents for Admin Dashboard */
+    --color-teal-500: #38bdf8;
+    --color-teal-600: #7dd3fc;
+    --color-teal-700: #bae6fd;
+
+    /* Readability Injection - Inverse of light mode */
+    --color-ink-950: #fafaf9;
+    --color-ink-900: #f5f5f4;
+    --color-ink-800: #e7e5e4;
+    --color-ink-700: #d6d3d1;
+    --color-ink-600: #a8a29e;
+    --color-ink-500: #78716c;
+    --color-ink-400: #57534e;
+    --color-ink-300: #44403c;
+    --color-ink-200: #2e2621;
+    --color-ink-100: #26211d;
+    --color-ink-50: #1c1917;
+
+    /* Accent Shadows - Glowing effect */
+    --shadow-premium-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+    --shadow-clay-xl: 0 32px 64px -12px rgba(166, 129, 91, 0.15);
+  }
+}
+
+@layer base {
+
   html {
     -webkit-tap-highlight-color: transparent;
     scroll-behavior: smooth;
@@ -106,7 +149,7 @@
 
   body {
     /* Wablas Style: Clean White/Slate Background */
-    @apply bg-white text-ink-900 font-sans antialiased;
+    @apply bg-white text-ink-900 font-sans antialiased transition-colors duration-500;
     background-image: none;
     /* Removed mesh gradient for cleaner look */
     /* Performance optimization */
@@ -131,7 +174,7 @@
      FLUID TYPOGRAPHY SYSTEM
      Scales smoothly from mobile (320px) to desktop (1920px+)
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-  
+
   /* H1 - Hero/Page Titles */
   h1 {
     @apply font-display font-black tracking-tight text-ink-950;
@@ -178,14 +221,16 @@
   }
 
   /* Body Text - Base */
-  p, .text-body {
+  p,
+  .text-body {
     @apply text-ink-600 font-medium;
     font-size: clamp(0.9375rem, 1vw + 0.5rem, 1.125rem);
     line-height: 1.7;
   }
 
   /* Small Text - Captions, Labels */
-  small, .text-small {
+  small,
+  .text-small {
     font-size: clamp(0.8125rem, 0.5vw + 0.5rem, 0.9375rem);
     line-height: 1.6;
   }
@@ -199,7 +244,7 @@
   /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      RESPONSIVE UTILITIES
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-  
+
   /* Container padding that scales with viewport */
   .container-padding {
     padding-left: clamp(1rem, 5vw, 2rem);
@@ -218,10 +263,21 @@
   }
 
   /* Typography Scale - Override with fluid sizes */
-  .text-4xl { font-size: clamp(2rem, 4vw + 1rem, 2.25rem); }
-  .text-5xl { font-size: clamp(2.25rem, 5vw + 1rem, 3rem); }
-  .text-6xl { font-size: clamp(2.5rem, 6vw + 1rem, 3.75rem); }
-  .text-7xl { font-size: clamp(3rem, 7vw + 1rem, 4.5rem); }
+  .text-4xl {
+    font-size: clamp(2rem, 4vw + 1rem, 2.25rem);
+  }
+
+  .text-5xl {
+    font-size: clamp(2.25rem, 5vw + 1rem, 3rem);
+  }
+
+  .text-6xl {
+    font-size: clamp(2.5rem, 6vw + 1rem, 3.75rem);
+  }
+
+  .text-7xl {
+    font-size: clamp(3rem, 7vw + 1rem, 4.5rem);
+  }
 
   /* Custom scrollbar - Enhanced for smooth feel */
   ::-webkit-scrollbar {
@@ -260,6 +316,7 @@
 
   /* Ensure touch targets are at least 44x44px on mobile */
   @media (max-width: 768px) {
+
     button,
     a,
     input[type="button"],
@@ -271,7 +328,7 @@
       min-height: 44px;
       min-width: 44px;
     }
-    
+
     /* Increase tap targets for navigation */
     nav a,
     nav button {
@@ -281,6 +338,7 @@
 
   /* Mobile-specific optimizations */
   @media (max-width: 640px) {
+
     /* Reduce animations on mobile for performance */
     * {
       animation-duration: 0.01ms !important;
@@ -441,7 +499,7 @@
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .custom-fade-in-up.visible {
@@ -464,7 +522,7 @@
     opacity: 0;
     transform: scale(0.95);
     transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .scale-in.visible {
@@ -477,7 +535,7 @@
     opacity: 0;
     transform: translateX(-40px);
     transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .slide-in-left.visible {
@@ -490,7 +548,7 @@
     opacity: 0;
     transform: translateX(40px);
     transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .slide-in-right.visible {
@@ -499,14 +557,37 @@
   }
 
   /* Stagger delays for lists/grids */
-  .stagger-1 { transition-delay: 50ms; }
-  .stagger-2 { transition-delay: 100ms; }
-  .stagger-3 { transition-delay: 150ms; }
-  .stagger-4 { transition-delay: 200ms; }
-  .stagger-5 { transition-delay: 250ms; }
-  .stagger-6 { transition-delay: 300ms; }
-  .stagger-7 { transition-delay: 350ms; }
-  .stagger-8 { transition-delay: 400ms; }
+  .stagger-1 {
+    transition-delay: 50ms;
+  }
+
+  .stagger-2 {
+    transition-delay: 100ms;
+  }
+
+  .stagger-3 {
+    transition-delay: 150ms;
+  }
+
+  .stagger-4 {
+    transition-delay: 200ms;
+  }
+
+  .stagger-5 {
+    transition-delay: 250ms;
+  }
+
+  .stagger-6 {
+    transition-delay: 300ms;
+  }
+
+  .stagger-7 {
+    transition-delay: 350ms;
+  }
+
+  .stagger-8 {
+    transition-delay: 400ms;
+  }
 
   /* Parallax wrapper */
   .parallax-wrapper {
@@ -522,7 +603,7 @@
   /* Premium hover lift */
   .hover-lift {
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .hover-lift:hover {
@@ -537,9 +618,17 @@
   }
 
   @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
   }
 
   /* Floating animation for decorative elements */
@@ -548,8 +637,15 @@
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
   }
 
   /* Pulse glow */
@@ -558,8 +654,15 @@
   }
 
   @keyframes pulseGlow {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.6;
+    }
   }
 
   /* Performance optimizations */

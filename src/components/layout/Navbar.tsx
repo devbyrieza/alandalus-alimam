@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, School, Sparkles, Phone } from "lucide-react";
+import { Menu, X, School, Sparkles, Phone, Moon, Sun } from "lucide-react";
 import { scrollToSection, scrollToTop, navigateToDetail } from "@/lib/navigation-scroll";
+import ThemeSwitcher from "../ui/ThemeSwitcher";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -87,7 +88,7 @@ export default function Navbar() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-          ? "bg-white/80 backdrop-blur-xl border-b border-surface-200 py-2 shadow-premium-sm"
+          ? "bg-white/80 dark:bg-ink-950/80 backdrop-blur-xl border-b border-surface-200 dark:border-surface-200/20 py-2 shadow-premium-sm"
           : "bg-transparent py-3 lg:py-4"
           }`}
       >
@@ -129,7 +130,9 @@ export default function Navbar() {
             </nav>
 
             {/* CTA Buttons */}
-            <div className="hidden lg:flex items-center gap-3">
+            <div className="hidden lg:flex items-center gap-4">
+              <ThemeSwitcher />
+              <div className="w-px h-6 bg-surface-200 dark:bg-surface-200/20 mx-1" />
               <Link href="/login" className="text-xs lg:text-sm font-bold text-ink-600 hover:text-brown-700 transition-colors px-3 py-2 min-h-[40px]">
                 Masuk
               </Link>
@@ -162,8 +165,12 @@ export default function Navbar() {
             aria-modal="true"
           >
             <div className="absolute inset-0 bg-ink-950/20 backdrop-blur-sm min-h-full" onClick={() => setIsMenuOpen(false)} />
-            <div className="relative top-0 inset-x-0 bg-white shadow-premium-xl pt-20 sm:pt-24 pb-8 px-4 sm:px-6 rounded-b-[2rem]">
+            <div className="relative top-0 inset-x-0 bg-white dark:bg-ink-900 shadow-premium-xl pt-20 sm:pt-24 pb-8 px-4 sm:px-6 rounded-b-[2rem] border-b border-surface-200 dark:border-surface-200/10">
               <div className="flex flex-col gap-2">
+                <div className="flex items-center justify-between mb-4 px-4 py-2 bg-surface-50 dark:bg-white/5 rounded-2xl border border-surface-200 dark:border-white/10">
+                  <span className="text-sm font-bold text-ink-600">Pilih Tema</span>
+                  <ThemeSwitcher />
+                </div>
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}

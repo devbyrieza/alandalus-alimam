@@ -39,12 +39,12 @@ export default function DashboardPendaftarPage() {
     const fetchData = async () => {
       try {
         setError(null);
-        
+
         const sessionRes = await fetch("/api/auth/session");
         if (!sessionRes.ok) {
           throw new Error(`Gagal mengambil sesi: ${sessionRes.status}`);
         }
-        
+
         const session = await sessionRes.json();
 
         if (!session.pendaftar_id) {
@@ -58,7 +58,7 @@ export default function DashboardPendaftarPage() {
           const errorText = await statusRes.text();
           throw new Error(`Gagal mengambil status: ${statusRes.status} - ${errorText}`);
         }
-        
+
         const statusData = await statusRes.json();
 
         const fullName = statusData.nama_lengkap || session.full_name || session.name || "Pendaftar";
@@ -98,20 +98,20 @@ export default function DashboardPendaftarPage() {
 
   if (error) {
     return (
-      <div className="bg-red-50 border border-red-200 rounded-3xl p-8 text-center max-w-lg mx-auto">
+      <div className="bg-white dark:bg-white/5 border border-surface-200 dark:border-white/10 rounded-3xl p-8 text-center max-w-lg mx-auto">
         <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-        <h3 className="text-lg font-bold text-red-900 mb-2">Gagal Memuat Data</h3>
-        <p className="text-red-600 mb-6">{error}</p>
+        <h3 className="text-lg font-bold text-ink-950 mb-2">Gagal Memuat Data</h3>
+        <p className="text-ink-600 mb-6">{error}</p>
         <div className="flex gap-3 justify-center">
-          <button 
-            onClick={() => window.location.reload()} 
+          <button
+            onClick={() => window.location.reload()}
             className="px-6 py-3 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700 transition-colors"
           >
             Muat Ulang
           </button>
-          <Link 
+          <Link
             href="/login"
-            className="px-6 py-3 bg-stone-200 text-stone-700 font-bold rounded-xl hover:bg-stone-300 transition-colors"
+            className="px-6 py-3 bg-surface-100 text-ink-700 font-bold rounded-xl hover:bg-surface-200 transition-colors"
           >
             Login Ulang
           </Link>
@@ -126,7 +126,7 @@ export default function DashboardPendaftarPage() {
       <ProgressStepper currentStatus={data.status} />
 
       {/* Welcome Banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-teal-600 to-emerald-800 text-white shadow-xl">
+      <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-brown-700 to-brown-900 text-white shadow-xl">
         <div className="absolute top-0 right-0 p-12 opacity-10">
           <User className="w-64 h-64" />
         </div>
@@ -136,23 +136,23 @@ export default function DashboardPendaftarPage() {
               <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-lg text-xs font-bold border border-white/20">
                 Tahun Ajaran 2026/2027
               </span>
-              <span className="flex items-center gap-1 text-xs font-medium text-emerald-100">
+              <span className="flex items-center gap-1 text-xs font-medium text-emerald-100/80">
                 <Clock className="w-3 h-3" />
                 Pembaruan: {new Date(data.lastUpdate).toLocaleDateString('id-ID')}
               </span>
             </div>
             <h1 className="text-3xl md:text-4xl font-black mb-4 leading-tight text-white shadow-sm">
               Selamat Datang, <br />
-              <span className="text-emerald-200">{data.nama}</span>
+              <span className="text-gold-400">{data.nama}</span>
             </h1>
-            <p className="text-emerald-50 text-lg mb-8 max-w-lg">
+            <p className="text-white/90 text-lg mb-8 max-w-lg">
               Selamat datang di dashboard pendaftaran. Pantau status seleksi dan lengkapi berkas Anda di sini.
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <div className="bg-white px-6 py-3 rounded-xl shadow-lg border-2 border-emerald-100">
-                <p className="text-xs text-stone-500 font-bold mb-1">Nomor Pendaftaran</p>
-                <p className="font-mono text-xl font-black text-emerald-950 tracking-wider">{data.nomorPendaftaran}</p>
+              <div className="bg-white/10 backdrop-blur-md px-6 py-3 rounded-xl shadow-lg border border-white/20">
+                <p className="text-xs text-white/60 font-bold mb-1 uppercase tracking-wider">Nomor Pendaftaran</p>
+                <p className="font-mono text-xl font-black text-white tracking-wider">{data.nomorPendaftaran}</p>
               </div>
 
               {nextStep && (
@@ -161,8 +161,8 @@ export default function DashboardPendaftarPage() {
                   className="bg-white px-6 py-3 rounded-xl shadow-lg border-2 border-emerald-100 flex items-center gap-3 hover:bg-emerald-50 transition-colors cursor-pointer group"
                 >
                   <div>
-                    <p className="text-xs font-bold text-stone-500 group-hover:text-emerald-700 transition-colors">Langkah Selanjutnya:</p>
-                    <p className="font-bold text-lg text-emerald-950 group-hover:text-emerald-700 transition-colors underline decoration-emerald-500/30 underline-offset-4">{nextStep.action}</p>
+                    <p className="text-xs font-bold text-ink-500 group-hover:text-emerald-700 transition-colors">Langkah Selanjutnya:</p>
+                    <p className="font-bold text-lg text-ink-950 group-hover:text-emerald-700 transition-colors underline decoration-emerald-500/30 underline-offset-4">{nextStep.action}</p>
                   </div>
                 </Link>
               )}
@@ -172,28 +172,28 @@ export default function DashboardPendaftarPage() {
       </div>
 
       {/* Status Grid */}
-      <h2 className="text-xl font-bold text-stone-800 flex items-center gap-2">
-        <TrendingUp className="w-5 h-5 text-teal-600" />
+      <h2 className="text-xl font-bold text-ink-900 flex items-center gap-2">
+        <TrendingUp className="w-5 h-5 text-brown-600" />
         Status Pendaftaran
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Card 1: Status Utama */}
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 hover:shadow-md transition-shadow">
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-surface-100 hover:shadow-md transition-shadow">
           <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${statusInfo.color.replace('text-', 'bg-').replace('bg-', 'bg-opacity-20 ')}`}>
             <ShieldCheck className={`w-6 h-6 ${statusInfo.color}`} />
           </div>
-          <p className="text-stone-500 text-sm font-medium mb-1">Status Saat Ini</p>
+          <p className="text-ink-500 text-sm font-medium mb-1">Status Saat Ini</p>
           <p className={`text-lg font-bold ${statusInfo.color}`}>{statusInfo.label}</p>
         </div>
 
         {/* Card 2: Pembayaran */}
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 hover:shadow-md transition-shadow">
-          <div className="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-4">
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-surface-100 hover:shadow-md transition-shadow">
+          <div className="w-12 h-12 rounded-xl bg-amber-100/20 text-amber-600 flex items-center justify-center mb-4">
             <FileText className="w-6 h-6" />
           </div>
-          <p className="text-stone-500 text-sm font-medium mb-1">Verifikasi Berkas</p>
-          <p className="text-lg font-bold text-stone-800">
+          <p className="text-ink-500 text-sm font-medium mb-1">Verifikasi Berkas</p>
+          <p className="text-lg font-bold text-ink-900">
             {['docs_verified', 'scheduled', 'tested', 'announced', 'accepted'].includes(data.status)
               ? "Terverifikasi"
               : "Menunggu"}
@@ -201,12 +201,12 @@ export default function DashboardPendaftarPage() {
         </div>
 
         {/* Card 3: Jadwal */}
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 hover:shadow-md transition-shadow">
-          <div className="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-4">
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-surface-100 hover:shadow-md transition-shadow">
+          <div className="w-12 h-12 rounded-xl bg-blue-100/20 text-blue-600 flex items-center justify-center mb-4">
             <Calendar className="w-6 h-6" />
           </div>
-          <p className="text-stone-500 text-sm font-medium mb-1">Jadwal Ujian</p>
-          <p className="text-lg font-bold text-stone-800">
+          <p className="text-ink-500 text-sm font-medium mb-1">Jadwal Ujian</p>
+          <p className="text-lg font-bold text-ink-900">
             {['scheduled', 'tested', 'announced', 'accepted'].includes(data.status)
               ? "Sudah Terjadwal"
               : "Belum Ada"}
@@ -214,17 +214,17 @@ export default function DashboardPendaftarPage() {
         </div>
 
         {/* Card 4: Hasil */}
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 hover:shadow-md transition-shadow">
-          <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${data.pengumuman?.status_kelulusan === "Lulus" ? "bg-green-100 text-green-600" :
-            data.pengumuman?.status_kelulusan === "Cadangan" ? "bg-yellow-100 text-yellow-600" :
-              data.pengumuman?.status_kelulusan === "Tidak Lulus" ? "bg-red-100 text-red-600" :
-                "bg-purple-100 text-purple-600"
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-surface-100 hover:shadow-md transition-shadow">
+          <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${data.pengumuman?.status_kelulusan === "Lulus" ? "bg-green-100/20 text-green-600" :
+            data.pengumuman?.status_kelulusan === "Cadangan" ? "bg-yellow-100/20 text-yellow-600" :
+              data.pengumuman?.status_kelulusan === "Tidak Lulus" ? "bg-red-100/20 text-red-600" :
+                "bg-purple-100/20 text-purple-600"
             }`}>
             <CheckCircle className="w-6 h-6" />
           </div>
-          <p className="text-stone-500 text-sm font-medium mb-1">Hasil Seleksi</p>
+          <p className="text-ink-500 text-sm font-medium mb-1">Hasil Seleksi</p>
           <div className="flex flex-col">
-            <p className="text-lg font-bold text-stone-800">
+            <p className="text-lg font-bold text-ink-900">
               {data.pengumuman ? data.pengumuman.status_kelulusan :
                 data.status === 'accepted' ? "Diterima" :
                   data.status === 'announced' ? "Diumumkan" :
@@ -246,17 +246,17 @@ export default function DashboardPendaftarPage() {
       </div>
 
       {/* Next Action Callout */}
-      <div className="bg-stone-50 border border-stone-200 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="bg-surface-50 border border-surface-200 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-start gap-4">
-          <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center flex-shrink-0">
-            <AlertCircle className="w-5 h-5 text-teal-600" />
+          <div className="w-10 h-10 rounded-full bg-brown-50 flex items-center justify-center flex-shrink-0">
+            <AlertCircle className="w-5 h-5 text-brown-600" />
           </div>
           <div>
-            <h3 className="font-bold text-stone-900 text-lg">Perlu Bantuan?</h3>
-            <p className="text-stone-500">Jika Anda mengalami kendala saat pendaftaran, silakan hubungi panitia via WhatsApp.</p>
+            <h3 className="font-bold text-ink-950 text-lg">Perlu Bantuan?</h3>
+            <p className="text-ink-600">Jika Anda mengalami kendala saat pendaftaran, silakan hubungi panitia via WhatsApp.</p>
           </div>
         </div>
-        <a href="https://wa.me/6285111524441" target="_blank" className="px-6 py-3 bg-white border border-stone-200 text-stone-700 font-bold rounded-xl hover:bg-stone-50 transition-colors shadow-sm">
+        <a href="https://wa.me/6285111524441" target="_blank" className="px-6 py-3 bg-white border border-surface-200 text-ink-700 font-bold rounded-xl hover:bg-surface-50 transition-colors shadow-sm">
           Hubungi Panitia
         </a>
       </div>

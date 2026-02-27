@@ -134,16 +134,15 @@ export default function RootLayout({
         />
       </head>
       <body
-        className="font-sans antialiased bg-[var(--color-cream-50)] text-[var(--color-text-900)] overflow-x-hidden"
+        className="font-sans antialiased bg-white text-ink-900 overflow-x-hidden"
         suppressHydrationWarning
       >
         <SmoothScrollProvider>
           <LayoutWrapper>
             <ThemeProvider
               attribute="class"
-              defaultTheme="light"
-              enableSystem={false}
-              forcedTheme="light"
+              defaultTheme="system"
+              enableSystem={true}
               disableTransitionOnChange
             >
               {children}
