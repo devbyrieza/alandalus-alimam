@@ -268,7 +268,7 @@ export async function GET(request: NextRequest) {
     <div class="content">
       <div class="info-row">
         <div class="info-label">Telah Diterima Dari</div>
-        <div class="info-value">${pendaftar.nama_lengkap}</div>
+        <div class="info-value">${pendaftar.nama_lengkap.replace(/\w\S*/g, (txt: string) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}</div>
       </div>
       <div class="info-row">
         <div class="info-label">Nomor Pendaftaran</div>

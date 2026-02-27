@@ -21,6 +21,11 @@ const BRAND_NAME = "Pesantren Al-Imam Al-Islami";
 const BRAND_SUBTITLE = "Penerimaan Santri Baru (PPDB)";
 const BRAND_ADDRESS = "Jl. Karamat No. 123, Gunungpuyuh, Kota Sukabumi, Jawa Barat";
 
+const toTitleCase = (str: string) => {
+    if (!str) return "";
+    return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+};
+
 const drawHeader = (doc: jsPDF) => {
     const pageWidth = doc.internal.pageSize.getWidth();
 
@@ -68,7 +73,7 @@ export const generateBuktiPendaftaran = (data: PendaftarPdfData) => {
 
     const tableData = [
         ["Nomor Pendaftaran", `: ${data.nomor_pendaftaran}`],
-        ["Nama Lengkap", `: ${data.nama_lengkap}`],
+        ["Nama Lengkap", `: ${toTitleCase(data.nama_lengkap)}`],
         ["NIK", `: ${data.nik}`],
         ["Jenjang Pendidikan", `: ${data.jenjang}`],
         ["Tempat, Tgl Lahir", `: ${data.tempat_lahir || "-"}, ${data.tanggal_lahir || "-"}`],
@@ -127,7 +132,7 @@ export const generateKartuUjian = (data: PendaftarPdfData) => {
 
     const tableData = [
         ["No. Peserta", `: ${data.nomor_pendaftaran}`],
-        ["Nama Lengkap", `: ${data.nama_lengkap}`],
+        ["Nama Lengkap", `: ${toTitleCase(data.nama_lengkap)}`],
         ["NIK", `: ${data.nik}`],
         ["Jenjang", `: ${data.jenjang}`],
         ["Jadwal Ujian", `: ${data.jadwal_ujian || "Menunggu Konfirmasi"}`],
@@ -176,7 +181,7 @@ export const generateSuratKelulusan = (data: PendaftarPdfData) => {
 
     const tableData = [
         ["Nomor Pendaftaran", `: ${data.nomor_pendaftaran}`],
-        ["Nama Lengkap", `: ${data.nama_lengkap}`],
+        ["Nama Lengkap", `: ${toTitleCase(data.nama_lengkap)}`],
         ["NIK", `: ${data.nik}`],
         ["Jenjang Pendidikan", `: ${data.jenjang}`],
     ];

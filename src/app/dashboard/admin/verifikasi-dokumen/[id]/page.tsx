@@ -188,6 +188,11 @@ export default function VerifikasiDokumenDetailPage() {
         }
     };
 
+    const toTitleCase = (str: string) => {
+        if (!str) return "";
+        return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+    };
+
     const formatDate = (dateString: string) => {
         return new Date(dateString).toLocaleDateString("id-ID", {
             day: "numeric",
@@ -245,7 +250,7 @@ export default function VerifikasiDokumenDetailPage() {
                         </div>
                         <div>
                             <h2 className="text-2xl font-black text-stone-900">
-                                {pendaftar?.nama_lengkap}
+                                {toTitleCase(pendaftar?.nama_lengkap || "")}
                             </h2>
                             <div className="flex items-center gap-3 text-stone-600">
                                 <span className="font-mono bg-stone-100 px-2 py-0.5 rounded text-sm">{pendaftar?.nomor_pendaftaran}</span>

@@ -113,7 +113,7 @@ export default function ExaminerDashboard() {
                             headers.join(','),
                             ...students.map(s => [
                                 s.nomor_pendaftaran,
-                                s.nama_lengkap,
+                                s.nama_lengkap.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()),
                                 s.jenjang,
                                 s.nilai_ujian?.status_kelulusan || 'BELUM DINILAI',
                                 s.nilai_ujian?.score_akademik || 0,
@@ -167,7 +167,9 @@ export default function ExaminerDashboard() {
                                 students.map(s => (
                                     <tr key={s.id} className="hover:bg-gray-50">
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{s.nomor_pendaftaran}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{s.nama_lengkap}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                            {s.nama_lengkap.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}
+                                        </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{s.jenjang}</td>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${s.nilai_ujian?.status_kelulusan === 'LULUS' || s.nilai_ujian?.status_kelulusan === 'DITERIMA' ? 'bg-green-100 text-green-800' :
@@ -207,7 +209,7 @@ export default function ExaminerDashboard() {
                         <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                 <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                                    Input Nilai: {inputType === 'quran' ? 'Tes Al-Quran' : 'Wawancara'} - {selectedStudent.nama_lengkap}
+                                    Input Nilai: {inputType === 'quran' ? 'Tes Al-Quran' : 'Wawancara'} - {selectedStudent.nama_lengkap.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}
                                 </h3>
                                 <div className="mt-4 space-y-4">
                                     {inputType === 'quran' && (

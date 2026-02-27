@@ -209,6 +209,11 @@ export default function JadwalUjianPage() {
     }
   };
 
+  const toTitleCase = (str: string) => {
+    if (!str) return "";
+    return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  };
+
   const formatTimeRange = (start: string, end: string) => {
     const s = new Date(start);
     const e = new Date(end);
@@ -358,7 +363,7 @@ export default function JadwalUjianPage() {
                       }`}
                   >
                     <div className="min-w-0">
-                      <p className="font-bold text-ink-900 truncate text-sm leading-tight">{p.nama_lengkap}</p>
+                      <p className="font-bold text-ink-900 truncate text-sm leading-tight">{toTitleCase(p.nama_lengkap)}</p>
                       <p className="text-[10px] font-mono text-ink-400 mt-1">{p.nomor_pendaftaran}</p>
                     </div>
                     {selectedPendaftarId === p.id ? (

@@ -588,6 +588,11 @@ function AdminPendaftarContent() {
   // We use the variables defined at the top of the component (canViewKeuangan, isBerkas, isPenguji)
   // which are derived from the session.
 
+  const toTitleCase = (str: string) => {
+    if (!str) return "";
+    return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  };
+
   const formatStatus = (status: string) => {
     const statusMap: Record<string, { label: string; color: string }> = {
       draft: { label: "Draft", color: "bg-stone-100 text-stone-700" },
@@ -1134,7 +1139,7 @@ function AdminPendaftarContent() {
                       <td className="px-4 py-3">
                         <div>
                           <div className="font-bold text-stone-900">
-                            {item.nama_lengkap}
+                            {toTitleCase(item.nama_lengkap)}
                           </div>
                           <div className="text-xs text-stone-500">
                             {item.jenis_kelamin === "L" ? "Laki-laki" : "Perempuan"}
@@ -1387,7 +1392,7 @@ function AdminPendaftarContent() {
             <div className="flex justify-between items-center p-6 border-b border-stone-100">
               <div>
                 <h3 className="text-xl font-bold text-stone-900">Input Hasil Seleksi</h3>
-                <p className="text-sm text-stone-500 mt-1">{selectedPendaftar.nama_lengkap}</p>
+                <p className="text-sm text-stone-500 mt-1">{toTitleCase(selectedPendaftar.nama_lengkap)}</p>
               </div>
               <button
                 onClick={() => setIsAnnouncementModalOpen(false)}
@@ -1510,14 +1515,14 @@ function AdminPendaftarContent() {
             <div className="p-6 space-y-4">
               <div className="bg-amber-50 border-2 border-amber-200 rounded-xl p-4">
                 <p className="text-sm text-amber-800 font-medium">
-                  ⚠️ Anda akan menghapus data <strong>{deletingPendaftar.nama_lengkap}</strong> ({deletingPendaftar.nomor_pendaftaran}).
+                  ⚠️ Anda akan menghapus data <strong>{toTitleCase(deletingPendaftar.nama_lengkap)}</strong> ({deletingPendaftar.nomor_pendaftaran}).
                   Data akan dipindahkan ke Sampah dan bisa di-restore kapan saja.
                 </p>
               </div>
 
               <div>
                 <label className="block text-sm font-bold text-stone-700 mb-2">
-                  Ketik <span className="text-red-600">{deletingPendaftar.nama_lengkap}</span> untuk konfirmasi:
+                  Ketik <span className="text-red-600">{toTitleCase(deletingPendaftar.nama_lengkap)}</span> untuk konfirmasi:
                 </label>
                 <input
                   type="text"

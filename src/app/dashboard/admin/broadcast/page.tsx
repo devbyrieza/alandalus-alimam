@@ -108,9 +108,14 @@ export default function BroadcastPage() {
         }
     };
 
+    const toTitleCase = (str: string) => {
+        if (!str) return "";
+        return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+    };
+
     const previewMessage = (name: string) => {
         const h = header ? `${header}\n\n` : "";
-        const s = includeName ? `${name}, ` : "";
+        const s = includeName ? `${toTitleCase(name)}, ` : "";
         const f = footer ? `\n\n${footer}` : "";
         return `${h}${s}${message}${f}`;
     };
@@ -166,8 +171,8 @@ export default function BroadcastPage() {
                             ) : (
                                 filteredPendaftar.map((p) => (
                                     <label key={p.id} className={`flex items-center gap-4 p-4 rounded-2xl border transition-all cursor-pointer group ${selectedIds.includes(p.id)
-                                            ? "bg-teal-50 border-teal-200"
-                                            : "bg-white border-transparent hover:bg-surface-50"
+                                        ? "bg-teal-50 border-teal-200"
+                                        : "bg-white border-transparent hover:bg-surface-50"
                                         }`}>
                                         <input
                                             type="checkbox"
@@ -176,7 +181,7 @@ export default function BroadcastPage() {
                                             className="w-5 h-5 rounded-lg border-2 border-ink-200 text-teal-600 focus:ring-teal-500/20"
                                         />
                                         <div className="flex-1 min-w-0">
-                                            <p className="font-bold text-ink-900 truncate">{p.nama_lengkap}</p>
+                                            <p className="font-bold text-ink-900 truncate">{toTitleCase(p.nama_lengkap)}</p>
                                             <div className="flex items-center gap-2 text-xs font-medium text-ink-500">
                                                 <span className="font-mono">{p.nomor_pendaftaran}</span>
                                                 <span>•</span>

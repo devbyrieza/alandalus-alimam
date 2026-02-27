@@ -221,6 +221,11 @@ export default function PendaftarDetailPage() {
     return statusMap[status] || { label: status, color: "bg-stone-100 text-stone-700" };
   };
 
+  const toTitleCase = (str: string | null | undefined) => {
+    if (!str) return "";
+    return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  };
+
   const formatDate = (dateString: string | null) => {
     if (!dateString) return "-";
     return new Date(dateString).toLocaleDateString("id-ID", {
@@ -294,7 +299,7 @@ export default function PendaftarDetailPage() {
               <User className="w-8 h-8" />
             </div>
             <div>
-              <h1 className="text-2xl font-black text-white">{pendaftar.nama_lengkap}</h1>
+              <h1 className="text-2xl font-black text-white">{toTitleCase(pendaftar.nama_lengkap)}</h1>
               <div className="flex flex-wrap items-center gap-3 mt-1">
                 <span className="font-mono text-blue-100">{pendaftar.nomor_pendaftaran}</span>
                 <span className="px-2 py-0.5 bg-white/20 rounded text-xs font-bold text-white">
@@ -720,7 +725,7 @@ export default function PendaftarDetailPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <InfoItem label="Nama Lengkap" value={pendaftar.nama_lengkap} />
+              <InfoItem label="Nama Lengkap" value={toTitleCase(pendaftar.nama_lengkap)} />
               <InfoItem label="NIK" value={pendaftar.nik} />
               <InfoItem
                 label="Jenis Kelamin"
@@ -820,7 +825,7 @@ export default function PendaftarDetailPage() {
                     )}
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
-                    <InfoItem label="Nama Lengkap" value={pendaftar.orang_tua.nama_ayah} />
+                    <InfoItem label="Nama Lengkap" value={toTitleCase(pendaftar.orang_tua.nama_ayah)} />
                     <InfoItem label="No. HP / WA" value={pendaftar.orang_tua.no_hp_ayah} />
                     <InfoItem label="Pekerjaan" value={pendaftar.orang_tua.pekerjaan_ayah} />
                     <InfoItem label="Penghasilan" value={pendaftar.orang_tua.penghasilan_ayah} />
@@ -854,7 +859,7 @@ export default function PendaftarDetailPage() {
                     )}
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
-                    <InfoItem label="Nama Lengkap" value={pendaftar.orang_tua.nama_ibu} />
+                    <InfoItem label="Nama Lengkap" value={toTitleCase(pendaftar.orang_tua.nama_ibu)} />
                     <InfoItem label="No. HP / WA" value={pendaftar.orang_tua.no_hp_ibu} />
                     {!isKeuangan && (
                       <>

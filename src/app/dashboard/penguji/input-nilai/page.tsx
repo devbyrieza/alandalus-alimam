@@ -173,6 +173,11 @@ export default function InputNilaiPage() {
   const [calsanForm, setCalsanForm] = useState<any>({});
   const [cawalsanForm, setCawalsanForm] = useState<any>({});
 
+  const toTitleCase = (str: string) => {
+    if (!str) return "";
+    return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  };
+
   useEffect(() => {
     fetchPeserta();
   }, []);
@@ -306,7 +311,7 @@ export default function InputNilaiPage() {
 
         {/* Read-only info */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
-          <div><span className="text-gray-500">Nama:</span> <span className="font-semibold">{p.nama_lengkap}</span></div>
+          <div><span className="text-gray-500">Nama:</span> <span className="font-semibold">{toTitleCase(p.nama_lengkap)}</span></div>
           <div><span className="text-gray-500">No. Daftar:</span> <span className="font-semibold">{p.nomor_pendaftaran}</span></div>
           <div><span className="text-gray-500">Jenjang:</span> <span className="font-semibold">{p.jenjang}</span></div>
         </div>
@@ -405,7 +410,7 @@ export default function InputNilaiPage() {
 
         {/* Read-only info */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
-          <div><span className="text-gray-500">Nama:</span> <span className="font-semibold">{p.nama_lengkap}</span></div>
+          <div><span className="text-gray-500">Nama:</span> <span className="font-semibold">{toTitleCase(p.nama_lengkap)}</span></div>
           <div><span className="text-gray-500">No. Daftar:</span> <span className="font-semibold">{p.nomor_pendaftaran}</span></div>
           <div><span className="text-gray-500">Jenjang:</span> <span className="font-semibold">{p.jenjang}</span></div>
         </div>
@@ -521,7 +526,7 @@ export default function InputNilaiPage() {
 
         {/* Read-only info */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
-          <div><span className="text-gray-500">Nama Calon Santri:</span> <span className="font-semibold block sm:inline">{p.nama_lengkap}</span></div>
+          <div><span className="text-gray-500">Nama Calon Santri:</span> <span className="font-semibold block sm:inline">{toTitleCase(p.nama_lengkap)}</span></div>
           <div><span className="text-gray-500">No. Daftar:</span> <span className="font-semibold block sm:inline">{p.nomor_pendaftaran}</span></div>
           <div><span className="text-gray-500">Jenjang:</span> <span className="font-semibold block sm:inline">{p.jenjang}</span></div>
         </div>
@@ -716,7 +721,7 @@ export default function InputNilaiPage() {
                   <User className="w-5 h-5 text-gray-500" />
                 </div>
                 <div>
-                  <h2 className="font-bold text-gray-900">{p.nama_lengkap}</h2>
+                  <h2 className="font-bold text-gray-900">{toTitleCase(p.nama_lengkap)}</h2>
                   <div className="flex items-center gap-3 text-xs text-gray-500">
                     <span className="flex items-center gap-1"><Hash className="w-3 h-3" /> {p.nomor_pendaftaran}</span>
                     <span>{p.jenjang}</span>

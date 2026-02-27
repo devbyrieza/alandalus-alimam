@@ -68,7 +68,7 @@ export default function HasilSeleksiPage() {
             headers.join(','),
             ...candidates.map(s => [
                 s.nomor_pendaftaran,
-                s.nama_lengkap,
+                s.nama_lengkap.replace(/\w\S*/g, (txt: string) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()),
                 s.jenjang,
                 s.status_pendaftaran,
                 s.nilai_ujian?.nilai_total || '-'
@@ -194,7 +194,7 @@ export default function HasilSeleksiPage() {
                                 candidates.map((c) => (
                                     <tr key={c.id} className="hover:bg-stone-50/50 transition-colors">
                                         <td className="px-6 py-4">
-                                            <div className="font-bold text-stone-800 text-sm">{c.nama_lengkap}</div>
+                                            <div className="font-bold text-stone-800 text-sm">{c.nama_lengkap.replace(/\w\S*/g, (txt: string) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}</div>
                                             <div className="text-xs text-stone-500 mt-0.5">{c.nomor_pendaftaran}</div>
                                         </td>
                                         <td className="px-6 py-4">

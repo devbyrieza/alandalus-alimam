@@ -79,6 +79,11 @@ export default function PerubahanDataPage() {
         );
     }
 
+    const toTitleCase = (str: string) => {
+        if (!str) return "";
+        return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+    };
+
     return (
         <div className="space-y-8 pb-12">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -119,7 +124,7 @@ export default function PerubahanDataPage() {
                                     <User className="w-8 h-8" />
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <h4 className="font-bold text-ink-900 truncate uppercase tracking-tight">{req.pendaftar.nama_lengkap}</h4>
+                                    <h4 className="font-bold text-ink-900 truncate tracking-tight">{toTitleCase(req.pendaftar.nama_lengkap)}</h4>
                                     <p className="text-xs text-ink-400 font-bold uppercase">{req.pendaftar.no_hp}</p>
                                     <div className="mt-1">
                                         <span className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider shadow-sm

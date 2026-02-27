@@ -337,7 +337,7 @@ export default function DashboardPage() {
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black text-ink-950 mb-6 leading-tight tracking-tight"
               >
                 Ahlan wa Sahlan, <br />
-                <span className="text-brown-600">{pendaftar.nama_lengkap.split(" ")[0]}!</span>
+                <span className="text-brown-600">{pendaftar.nama_lengkap.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()).split(" ")[0]}!</span>
               </motion.h1>
 
               <motion.p

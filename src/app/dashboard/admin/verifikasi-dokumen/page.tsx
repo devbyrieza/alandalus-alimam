@@ -96,7 +96,7 @@ export default function VerifikasiDokumenPage() {
       const result = await response.json();
 
       const data = result.data.map((item: any) => ({
-        "Nama Pendaftar": item.pendaftar?.nama_lengkap || "-",
+        "Nama Pendaftar": item.pendaftar?.nama_lengkap ? toTitleCase(item.pendaftar.nama_lengkap) : "-",
         "No Pendaftaran": item.pendaftar?.nomor_pendaftaran || "-",
         "Jenjang": item.pendaftar?.jenjang || "-",
         "Jenis Dokumen": item.jenis_dokumen || "-",
@@ -126,6 +126,11 @@ export default function VerifikasiDokumenPage() {
     p.nama_lengkap.toLowerCase().includes(searchTerm.toLowerCase()) ||
     p.nomor_pendaftaran.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const toTitleCase = (str: string) => {
+    if (!str) return "";
+    return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  };
 
   return (
     <div className="space-y-6">
@@ -237,7 +242,7 @@ export default function VerifikasiDokumenPage() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="font-black text-stone-900 truncate group-hover:text-amber-600 transition-colors leading-tight mb-1">
-                        {pendaftar.nama_lengkap}
+                        {toTitleCase(pendaftar.nama_lengkap)}
                       </h3>
                       <div className="flex items-center gap-2">
                         <span className="text-xs font-mono font-bold text-stone-400 bg-stone-50 px-1.5 py-0.5 rounded">

@@ -81,7 +81,7 @@ export default function VerifikasiPembayaranPage() {
 
       // Format data for export
       const data = rawData.map((item: any) => ({
-        "Nama Lengkap": item.pendaftar?.nama_lengkap || "-",
+        "Nama Lengkap": item.pendaftar?.nama_lengkap ? toTitleCase(item.pendaftar.nama_lengkap) : "-",
         "Nomor Pendaftaran": item.pendaftar?.nomor_pendaftaran || "-",
         "Jenjang": item.pendaftar?.jenjang || "-",
         "Nominal": item.jumlah ? parseInt(item.jumlah).toLocaleString('id-ID') : "0",
@@ -136,6 +136,11 @@ export default function VerifikasiPembayaranPage() {
     } finally {
       setProcessing(false);
     }
+  };
+
+  const toTitleCase = (str: string) => {
+    if (!str) return "";
+    return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
   };
 
   const openModal = (pay: Pembayaran) => {
@@ -288,11 +293,11 @@ export default function VerifikasiPembayaranPage() {
                     {/* Header Row */}
                     <div className="flex items-start gap-4 mb-3">
                       <div className="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center text-teal-700 font-bold text-lg shrink-0">
-                        {pay.pendaftar?.nama_lengkap?.charAt(0) || "?"}
+                        {pay.pendaftar?.nama_lengkap ? pay.pendaftar.nama_lengkap.charAt(0).toUpperCase() : "?"}
                       </div>
                       <div>
                         <h3 className="text-lg font-bold text-stone-900 group-hover:text-teal-700 transition-colors">
-                          {pay.pendaftar?.nama_lengkap || "Tanpa Nama"}
+                          {pay.pendaftar?.nama_lengkap ? toTitleCase(pay.pendaftar.nama_lengkap) : "Tanpa Nama"}
                         </h3>
                         <div className="flex flex-wrap items-center gap-3 text-sm mt-1">
                           <span className="font-mono bg-stone-100 px-2 py-0.5 rounded text-stone-600 font-bold">
@@ -391,7 +396,7 @@ export default function VerifikasiPembayaranPage() {
                 <h3 className="text-xl font-black text-stone-900">
                   Verifikasi Pembayaran
                 </h3>
-                <p className="text-sm text-stone-500 font-medium">{selectedPembayaran.pendaftar?.nama_lengkap}</p>
+                <p className="text-sm text-stone-500 font-medium">{selectedPembayaran.pendaftar?.nama_lengkap ? toTitleCase(selectedPembayaran.pendaftar.nama_lengkap) : ""}</p>
               </div>
               <button
                 onClick={() => setShowModal(false)}

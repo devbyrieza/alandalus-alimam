@@ -106,6 +106,11 @@ export default function TrashPage() {
         }
     };
 
+    const toTitleCase = (str: string) => {
+        if (!str) return "";
+        return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+    };
+
     const formatDate = (dateString: string | null) => {
         if (!dateString) return "-";
         return new Date(dateString).toLocaleDateString("id-ID", {
@@ -211,7 +216,7 @@ export default function TrashPage() {
                                             <td className="px-4 py-3">
                                                 <div>
                                                     <div className="font-bold text-stone-900 line-through decoration-red-300">
-                                                        {item.nama_lengkap}
+                                                        {toTitleCase(item.nama_lengkap)}
                                                     </div>
                                                     <div className="text-xs text-stone-500">
                                                         {item.jenis_kelamin === "L" ? "Laki-laki" : "Perempuan"}
@@ -324,7 +329,7 @@ export default function TrashPage() {
                         <div className="p-6 space-y-4">
                             <div className="bg-green-50 border-2 border-green-200 rounded-xl p-4">
                                 <p className="text-sm text-green-800 font-medium">
-                                    ✅ Data <strong>{restoringItem.nama_lengkap}</strong> ({restoringItem.nomor_pendaftaran}) akan dipulihkan
+                                    ✅ Data <strong>{toTitleCase(restoringItem.nama_lengkap)}</strong> ({restoringItem.nomor_pendaftaran}) akan dipulihkan
                                     dan muncul kembali di daftar pendaftar aktif.
                                 </p>
                             </div>

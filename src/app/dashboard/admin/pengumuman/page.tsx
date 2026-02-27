@@ -26,6 +26,11 @@ export default function PengumumanPage() {
     logs: []
   });
 
+  const toTitleCase = (str: string) => {
+    if (!str) return "";
+    return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  };
+
   const fetchCandidates = async () => {
     try {
       setLoading(true);
@@ -241,7 +246,7 @@ export default function PengumumanPage() {
                       />
                     </td>
                     <td className="px-6 py-4">
-                      <div className="font-bold text-stone-800">{c.nama_lengkap}</div>
+                      <div className="font-bold text-stone-800">{toTitleCase(c.nama_lengkap)}</div>
                       <div className="text-xs text-stone-500">{c.nomor_pendaftaran}</div>
                     </td>
                     <td className="px-6 py-4">
