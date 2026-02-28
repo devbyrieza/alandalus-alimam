@@ -47,17 +47,23 @@ export async function PATCH(
             }
         });
 
-        if (!assignment && session.role !== 'admin_super' && session.role !== 'admin') {
-            return NextResponse.json({ error: "Forbidden: Not assigned to this student" }, { status: 403 });
-        }
-
-        // Determine allowed fields based on role
-        // If admin, everything allowed.
         // If examiner, only specific fields.
         const isWawancara = assignment?.penguji_santri_id === userId;
         const isQuran = assignment?.penguji_quran_id === userId;
         const isOrtu = assignment?.penguji_ortu_id === userId;
-        const isAdmin = ['admin_super', 'admin', 'head_of_it'].includes(session.role);
+
+        // Fetch user profile to see if they're actually an admin who switched roles
+        const userProfile = await prisma.profile.findUnique({
+            where: { id: userId },
+            select: { role: true, secondary_roles: true }
+        });
+        const allRoles = userProfile ? [userProfile.role, ...(userProfile.secondary_roles || [])] : [];
+        const isAdmin = allRoles.some(r => ['admin_super', 'admin', 'head_of_it'].includes(r));
+
+        // Let admins bypass the assignment check
+        if (!assignment && !isAdmin) {
+            return NextResponse.json({ error: "Forbidden: Not assigned to this student" }, { status: 403 });
+        }
 
         // Fallback: if matched via exam_session.created_by, derive role from session title
         let isWawancaraFallback = false;
@@ -84,6 +90,9 @@ export async function PATCH(
 
         const updateData: any = {};
 
+        // If user is Admin, they get access to completely bypass the assignment and update all fields provided.
+        // Otherwise, they only update the fields they're assigned to.
+
         // Only update Quran if payload contains detail_quran
         if ((isAdmin || isQuran || isQuranFallback) && body.detail_quran !== undefined) {
             if (body.nilai_tes_quran !== undefined) updateData.nilai_tes_quran = body.nilai_tes_quran;
@@ -94,7 +103,7 @@ export async function PATCH(
             updateData.input_at_quran = new Date();
         }
 
-        // Only update Santri if payload contains detail_wawancara
+        // Only update Santri (Calsan) if payload contains detail_wawancara
         if ((isAdmin || isWawancara || isWawancaraFallback) && body.detail_wawancara !== undefined) {
             if (body.nilai_wawancara_santri !== undefined) updateData.nilai_wawancara_santri = body.nilai_wawancara_santri;
             if (body.catatan_santri !== undefined) updateData.catatan_santri = body.catatan_santri;
@@ -104,7 +113,7 @@ export async function PATCH(
             updateData.input_at_santri = new Date();
         }
 
-        // Only update Ortu if payload contains detail_cawalsan
+        // Only update Ortu (Cawalsan) if payload contains detail_cawalsan
         if ((isAdmin || isOrtu || isOrtuFallback) && body.detail_cawalsan !== undefined) {
             if (body.nilai_wawancara_ortu !== undefined) updateData.nilai_wawancara_ortu = body.nilai_wawancara_ortu;
             if (body.catatan_ortu !== undefined) updateData.catatan_ortu = body.catatan_ortu;
