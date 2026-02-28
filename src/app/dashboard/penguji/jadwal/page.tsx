@@ -186,13 +186,13 @@ export default function JadwalPengujiPage() {
       const result = await response.json();
 
       if (response.ok) {
-        setMessage({ type: "success", text: "Slot waktu berhasil dibuat!" });
+        setMessage({ type: "success", text: "Sesi waktu berhasil dibuat!" });
         setIsSlotModalOpen(false);
         fetchSlots();
         // Reset form partial
         setSlotForm(prev => ({ ...prev, title: "", notes: "" }));
       } else {
-        throw new Error(result.error || "Gagal membuat slot");
+        throw new Error(result.error || "Gagal membuat sesi");
       }
     } catch (error: any) {
       setMessage({ type: "error", text: error.message });
@@ -203,15 +203,15 @@ export default function JadwalPengujiPage() {
 
   const handleDeleteSlot = async (id: string, count: number) => {
     if (count > 0) {
-      alert("Tidak dapat menghapus slot yang sudah ada pendaftar!");
+      alert("Tidak dapat menghapus sesi yang sudah ada pendaftar!");
       return;
     }
-    if (!confirm("Hapus slot waktu ini?")) return;
+    if (!confirm("Hapus sesi waktu ini?")) return;
 
     try {
       const response = await fetch(`/api/exam-sessions?id=${id}`, { method: "DELETE" });
       if (response.ok) {
-        setMessage({ type: "success", text: "Slot berhasil dihapus" });
+        setMessage({ type: "success", text: "Sesi berhasil dihapus" });
         fetchSlots();
       } else {
         const res = await response.json();
@@ -280,7 +280,7 @@ export default function JadwalPengujiPage() {
             </div>
             <div>
               <h2 className="text-2xl font-black text-stone-900">
-                Jadwal & Slot Ujian
+                Jadwal & Sesi Ujian
               </h2>
               <p className="text-stone-600">
                 Kelola jadwal menguji dan ketersediaan waktu
@@ -298,7 +298,7 @@ export default function JadwalPengujiPage() {
               onClick={() => setActiveTab('slots')}
               className={`px-4 py-2 rounded-lg font-bold text-sm transition-all ${activeTab === 'slots' ? 'bg-white shadow text-violet-700' : 'text-stone-500 hover:text-stone-700'}`}
             >
-              Kelola Slot Ketersediaan
+              Kelola Sesi Ketersediaan
             </button>
           </div>
         </div>
@@ -456,14 +456,14 @@ export default function JadwalPengujiPage() {
         <>
           <div className="flex justify-between items-center bg-white p-4 rounded-xl border border-stone-200">
             <div>
-              <h3 className="font-bold text-stone-900">Slot Ketersediaan Anda</h3>
-              <p className="text-sm text-stone-500">Buat slot waktu dimana Anda bersedia menguji.</p>
+              <h3 className="font-bold text-stone-900">Sesi Ketersediaan Anda</h3>
+              <p className="text-sm text-stone-500">Buat sesi waktu dimana Anda bersedia menguji.</p>
             </div>
             <button
               onClick={() => setIsSlotModalOpen(true)}
               className="flex items-center gap-2 px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg font-bold shadow-lg shadow-violet-200 transition-all"
             >
-              <Plus className="w-4 h-4" /> Buat Slot
+              <Plus className="w-4 h-4" /> Buat Sesi
             </button>
           </div>
 
@@ -471,7 +471,7 @@ export default function JadwalPengujiPage() {
             <div className="text-center py-12"><Loader2 className="w-8 h-8 animate-spin mx-auto text-violet-500" /></div>
           ) : slots.length === 0 ? (
             <div className="text-center py-12 text-stone-500">
-              <p>Belum ada slot waktu yang dibuat.</p>
+              <p>Belum ada sesi waktu yang dibuat.</p>
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -511,7 +511,7 @@ export default function JadwalPengujiPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden">
             <div className="p-4 border-b border-stone-100 flex justify-between items-center bg-stone-50">
-              <h3 className="font-bold text-stone-900">Buat Slot Ketersediaan</h3>
+              <h3 className="font-bold text-stone-900">Buat Sesi Ketersediaan</h3>
               <button onClick={() => setIsSlotModalOpen(false)}><XCircle className="w-6 h-6 text-stone-400 hover:text-stone-600" /></button>
             </div>
             <form onSubmit={handleCreateSlot} className="p-6 space-y-4">
@@ -566,7 +566,7 @@ export default function JadwalPengujiPage() {
               <div className="bg-blue-50 px-4 py-3 rounded-lg border border-blue-100 flex gap-2 items-start">
                 <div className="mt-0.5 min-w-[16px]">ℹ️</div>
                 <p className="text-xs text-blue-800">
-                  Setiap slot waktu yang dibuat otomatis memiliki <strong>Kuota 1 Pendaftar</strong> (Private/1-on-1).
+                  Setiap sesi waktu yang dibuat otomatis memiliki <strong>Kuota 1 Pendaftar</strong> (Private/1-on-1).
                 </p>
               </div>
 
@@ -576,7 +576,7 @@ export default function JadwalPengujiPage() {
                 className="w-full py-3 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-xl transition-colors flex justify-center gap-2"
               >
                 {submittingSlot && <Loader2 className="w-5 h-5 animate-spin" />}
-                Simpan Slot
+                Simpan Sesi
               </button>
             </form>
           </div>
