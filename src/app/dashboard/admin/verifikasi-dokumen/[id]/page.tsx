@@ -15,6 +15,10 @@ import {
     Image as ImageIcon,
     ExternalLink,
     ChevronLeft,
+    Download,
+    ZoomIn,
+    ZoomOut,
+    Maximize
 } from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
@@ -62,6 +66,7 @@ export default function VerifikasiDokumenDetailPage() {
     const [loading, setLoading] = useState(true);
     const [processingDocs, setProcessingDocs] = useState<Set<string>>(new Set());
     const [previewDoc, setPreviewDoc] = useState<{ url: string; type: string | null; label: string } | null>(null);
+    const [zoomLevel, setZoomLevel] = useState(1);
 
     // Reject Modal State
     const [rejectModal, setRejectModal] = useState<{ isOpen: boolean; docId: string; docName: string; initialReason: string }>({
@@ -207,6 +212,31 @@ export default function VerifikasiDokumenDetailPage() {
         return /\.(jpg|jpeg|png|gif|webp)$/i.test(dok.file_url);
     };
 
+    const handleDownload = async (url: string, filename: string) => {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error("Network response was not ok");
+            const blob = await response.blob();
+            const blobUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.style.display = "none";
+            a.href = blobUrl;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(blobUrl);
+            document.body.removeChild(a);
+        } catch (error) {
+            console.error("Download failed, opening in new tab", error);
+            window.open(url, "_blank");
+        }
+    };
+
+    const openPreview = (url: string, type: string | null, label: string) => {
+        setZoomLevel(1);
+        setPreviewDoc({ url, type, label });
+    };
+
     if (loading) {
         return (
             <div className="flex flex-col items-center justify-center min-h-[400px]">
@@ -290,7 +320,7 @@ export default function VerifikasiDokumenDetailPage() {
                                         src={dok.file_url}
                                         alt={dok.jenis_dokumen}
                                         className="absolute inset-0 w-full h-full object-cover cursor-pointer"
-                                        onClick={() => setPreviewDoc({ url: dok.file_url!, type: dok.file_type, label: dok.jenis_dokumen })}
+                                        onClick={() => openPreview(dok.file_url!, dok.file_type, dok.jenis_dokumen)}
                                     />
                                 ) : (
                                     <div className="absolute inset-0 flex flex-col items-center justify-center text-stone-400">
@@ -298,7 +328,7 @@ export default function VerifikasiDokumenDetailPage() {
                                         <span className="text-sm font-medium">Dokumen PDF</span>
                                         <div className="flex gap-2 mt-4">
                                             <button
-                                                onClick={() => setPreviewDoc({ url: dok.file_url!, type: dok.file_type, label: dok.jenis_dokumen })}
+                                                onClick={() => openPreview(dok.file_url!, dok.file_type, dok.jenis_dokumen)}
                                                 className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold transition-all"
                                             >
                                                 Pratinjau
@@ -430,9 +460,49 @@ export default function VerifikasiDokumenDetailPage() {
                 >
                     <div className="relative max-w-6xl max-h-[95vh] w-full h-full bg-white/5 overflow-hidden rounded-3xl flex flex-col shadow-2xl">
                         {/* Modal Header */}
-                        <div className="flex items-center justify-between p-4 bg-stone-900/50 backdrop-blur-sm border-b border-white/10 shrink-0">
+                        <div className="flex items-center justify-between p-4 bg-stone-900/80 backdrop-blur-md border-b border-white/10 shrink-0 z-10 sticky top-0">
                             <h3 className="text-white font-bold capitalize">{previewDoc.label.replace(/_/g, " ")}</h3>
-                            <div className="flex gap-2">
+                            <div className="flex items-center gap-2">
+                                {/* Zoom Controls for Images Only */}
+                                {previewDoc.type !== "application/pdf" && (
+                                    <div className="flex items-center gap-1 bg-white/10 rounded-xl p-1 mr-2">
+                                        <button
+                                            onClick={(e) => { e.stopPropagation(); setZoomLevel(prev => Math.max(0.5, prev - 0.25)); }}
+                                            className="p-1.5 hover:bg-white/20 rounded-lg text-white transition-all"
+                                            title="Zoom Out"
+                                        >
+                                            <ZoomOut className="w-4 h-4" />
+                                        </button>
+                                        <span className="text-white text-xs font-mono w-12 text-center select-none">
+                                            {Math.round(zoomLevel * 100)}%
+                                        </span>
+                                        <button
+                                            onClick={(e) => { e.stopPropagation(); setZoomLevel(prev => Math.min(4, prev + 0.25)); }}
+                                            className="p-1.5 hover:bg-white/20 rounded-lg text-white transition-all"
+                                            title="Zoom In"
+                                        >
+                                            <ZoomIn className="w-4 h-4" />
+                                        </button>
+                                        <button
+                                            onClick={(e) => { e.stopPropagation(); setZoomLevel(1); }}
+                                            className="p-1.5 hover:bg-white/20 rounded-lg text-white transition-all"
+                                            title="Reset Zoom"
+                                        >
+                                            <Maximize className="w-4 h-4" />
+                                        </button>
+                                    </div>
+                                )}
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDownload(previewDoc.url, `${pendaftar?.nama_lengkap}_${previewDoc.label.replace(/ /g, "_")}.${previewDoc.url.split('.').pop()?.split('?')[0] || 'file'}`);
+                                    }}
+                                    className="p-2.5 bg-emerald-600/20 hover:bg-emerald-600/40 rounded-xl text-emerald-400 backdrop-blur-md transition-all flex items-center gap-2 text-xs font-bold"
+                                    title="Unduh Dokumen"
+                                >
+                                    <Download className="w-4 h-4" />
+                                    Unduh
+                                </button>
                                 <a
                                     href={previewDoc.url}
                                     target="_blank"
@@ -444,7 +514,7 @@ export default function VerifikasiDokumenDetailPage() {
                                 </a>
                                 <button
                                     onClick={() => setPreviewDoc(null)}
-                                    className="p-2.5 bg-rose-600/20 hover:bg-rose-600/40 rounded-xl text-rose-400 backdrop-blur-md transition-all"
+                                    className="p-2.5 bg-rose-600/20 hover:bg-rose-600/40 rounded-xl text-rose-400 backdrop-blur-md transition-all ml-1"
                                 >
                                     <X className="w-5 h-5" />
                                 </button>
@@ -452,7 +522,7 @@ export default function VerifikasiDokumenDetailPage() {
                         </div>
 
                         {/* Modal Content */}
-                        <div className="flex-1 overflow-auto bg-stone-100 flex items-center justify-center p-2" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex-1 overflow-auto bg-stone-100 flex items-center justify-center p-2 relative" onClick={(e) => e.stopPropagation()}>
                             {previewDoc.type === "application/pdf" ? (
                                 <iframe
                                     src={`${previewDoc.url}#toolbar=0`}
@@ -460,11 +530,14 @@ export default function VerifikasiDokumenDetailPage() {
                                     title="PDF Preview"
                                 />
                             ) : (
-                                <img
-                                    src={previewDoc.url}
-                                    alt="Preview"
-                                    className="max-w-full max-h-full object-contain drop-shadow-2xl rounded-lg"
-                                />
+                                <div className="w-full h-full flex items-center justify-center overflow-auto absolute inset-0">
+                                    <img
+                                        src={previewDoc.url}
+                                        alt="Preview"
+                                        className="max-w-none origin-center drop-shadow-2xl rounded-lg transition-transform duration-200 ease-out"
+                                        style={{ transform: `scale(${zoomLevel})` }}
+                                    />
+                                </div>
                             )}
                         </div>
                     </div>
