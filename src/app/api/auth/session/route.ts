@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
 export async function GET(request: NextRequest) {
   try {
@@ -18,7 +19,19 @@ export async function GET(request: NextRequest) {
       console.log(`✅ [API /session] Session found - Role: ${session.role}`);
       // Untuk pendaftar: id = pendaftar_id (supaya layout & API bisa pakai pendaftar_id)
       const pendaftar_id = session.role === "pendaftar" ? session.id : undefined;
-      return NextResponse.json({ session, pendaftar_id });
+
+      let availableRoles: string[] = [];
+      if (session.role !== "pendaftar" && session.id) {
+        const profile = await prisma.profile.findUnique({
+          where: { id: session.id },
+          select: { role: true, secondary_roles: true }
+        });
+        if (profile) {
+          availableRoles = [profile.role, ...(profile.secondary_roles || [])];
+        }
+      }
+
+      return NextResponse.json({ session, pendaftar_id, availableRoles });
     } catch (e) {
       console.log("❌ [API /session] Failed to parse session cookie");
       return NextResponse.json(

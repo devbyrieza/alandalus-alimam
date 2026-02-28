@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import IdleTimeoutTracker from "@/components/auth/IdleTimeoutTracker";
+import { UserRole, ROLE_LABELS } from "@/lib/access-control";
 
 export default function PengujiDashboardLayout({
   children,
@@ -27,6 +28,9 @@ export default function PengujiDashboardLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [pengujiName, setPengujiName] = useState("Asatidz");
+  const [userId, setUserId] = useState("");
+  const [userRole, setUserRole] = useState("");
+  const [availableRoles, setAvailableRoles] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchPengujiData = async () => {
@@ -44,6 +48,9 @@ export default function PengujiDashboardLayout({
           sessionData.user?.user_metadata?.full_name ||
           "Asatidz";
         setPengujiName(name);
+        setUserId(sessionData.session?.id || "");
+        setUserRole(sessionData.session?.role || "");
+        setAvailableRoles(sessionData.availableRoles || []);
       } catch (error) {
         console.error("Error fetching penguji data:", error);
       } finally {
@@ -78,6 +85,26 @@ export default function PengujiDashboardLayout({
   const handleLogout = async () => {
     await fetch("/api/auth/logout", { method: "POST" });
     window.location.href = "/login";
+  };
+
+  const handleRoleSwitch = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newRole = e.target.value;
+    try {
+      const res = await fetch("/api/auth/select-role", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ profile_id: userId, chosen_role: newRole }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        window.location.href = data.redirectTo;
+      } else {
+        alert(data.error || "Gagal berpindah role");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Terjadi kesalahan sistem");
+    }
   };
 
   const NavLink = ({ item }: { item: (typeof menuItems)[0] }) => {
@@ -187,6 +214,20 @@ export default function PengujiDashboardLayout({
 
               {/* Footer */}
               <div className="p-4 border-t border-stone-100 bg-stone-50">
+                {availableRoles && availableRoles.length > 1 && (
+                  <div className="mb-4">
+                    <label className="text-xs font-bold text-stone-500 uppercase tracking-wider mb-2 block">Switch Role</label>
+                    <select
+                      value={userRole || ""}
+                      onChange={handleRoleSwitch}
+                      className="w-full bg-white border border-stone-200 text-sm text-stone-800 rounded-xl py-2 px-3 focus:ring-2 focus:ring-violet-500/20 shadow-sm"
+                    >
+                      {availableRoles.map((role) => (
+                        <option key={role} value={role}>{ROLE_LABELS[role as UserRole] || role}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
                 <button
                   onClick={handleLogout}
                   className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium text-red-600 bg-white border border-red-100 hover:bg-red-50 hover:border-red-200 rounded-xl transition-all shadow-sm"
@@ -224,6 +265,20 @@ export default function PengujiDashboardLayout({
                 </nav>
 
                 <div className="p-4 border-t border-stone-100">
+                  {availableRoles && availableRoles.length > 1 && (
+                    <div className="mb-4">
+                      <label className="text-xs font-bold text-stone-500 mb-2 block">Switch Role</label>
+                      <select
+                        value={userRole || ""}
+                        onChange={handleRoleSwitch}
+                        className="w-full bg-stone-50 border border-stone-200 text-sm text-stone-800 rounded-xl py-3 px-3 focus:ring-2 focus:ring-violet-500/20"
+                      >
+                        {availableRoles.map((role) => (
+                          <option key={role} value={role}>{ROLE_LABELS[role as UserRole] || role}</option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
                   <button
                     onClick={handleLogout}
                     className="w-full py-3 bg-red-50 text-red-600 font-bold rounded-xl flex items-center justify-center gap-2"

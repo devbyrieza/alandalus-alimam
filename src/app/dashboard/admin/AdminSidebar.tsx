@@ -24,7 +24,7 @@ import {
     UserCog
 } from "lucide-react";
 import Link from "next/link";
-import { getMenuItemsForRole, UserRole } from "@/lib/access-control";
+import { getMenuItemsForRole, UserRole, ROLE_LABELS } from "@/lib/access-control";
 
 // Map icon strings to components
 const ICON_MAP: Record<string, any> = {
@@ -45,9 +45,11 @@ interface AdminSidebarProps {
     children: React.ReactNode;
     userRole: UserRole | null;
     adminName: string;
+    userId?: string;
+    availableRoles?: string[];
 }
 
-export default function AdminSidebar({ children, userRole, adminName }: AdminSidebarProps) {
+export default function AdminSidebar({ children, userRole, adminName, userId, availableRoles }: AdminSidebarProps) {
     const pathname = usePathname();
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -83,6 +85,26 @@ export default function AdminSidebar({ children, userRole, adminName }: AdminSid
             window.location.href = "/login";
         } catch (error) {
             console.error("Logout failed", error);
+        }
+    };
+
+    const handleRoleSwitch = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newRole = e.target.value;
+        try {
+            const res = await fetch("/api/auth/select-role", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ profile_id: userId, chosen_role: newRole }),
+            });
+            const data = await res.json();
+            if (data.success) {
+                window.location.href = data.redirectTo;
+            } else {
+                alert(data.error || "Gagal berpindah role");
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Terjadi kesalahan sistem");
         }
     };
 
@@ -141,6 +163,20 @@ export default function AdminSidebar({ children, userRole, adminName }: AdminSid
 
                         {/* User Profile / Footer */}
                         <div className="p-4 border-t border-ink-100/50 bg-white/50 backdrop-blur-sm">
+                            {availableRoles && availableRoles.length > 1 && (
+                                <div className="mb-3 px-2">
+                                    <label className="text-[10px] font-bold text-ink-400 uppercase tracking-wider mb-1 block">Switch Role</label>
+                                    <select
+                                        value={userRole || ""}
+                                        onChange={handleRoleSwitch}
+                                        className="w-full bg-surface-100 border-none text-xs text-ink-700 rounded-lg py-1.5 focus:ring-2 focus:ring-teal-500/20 cursor-pointer"
+                                    >
+                                        {availableRoles.map(role => (
+                                            <option key={role} value={role}>{ROLE_LABELS[role as UserRole] || role}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                            )}
                             <div className="flex items-center gap-3 p-3 rounded-2xl hover:bg-white transition-colors cursor-pointer group">
                                 <div className="w-10 h-10 rounded-full bg-surface-200 flex items-center justify-center text-ink-600 font-bold group-hover:bg-teal-50 group-hover:text-teal-600 transition-colors">
                                     {adminName.charAt(0)}
@@ -148,7 +184,7 @@ export default function AdminSidebar({ children, userRole, adminName }: AdminSid
                                 <div className="flex-1 min-w-0">
                                     <p className="text-sm font-bold text-ink-900 truncate">{adminName}</p>
                                     <p className="text-xs text-ink-500 truncate capitalize">
-                                        {userRole?.replace('_', ' ')}
+                                        {userRole ? ROLE_LABELS[userRole] : ""}
                                     </p>
                                 </div>
                                 <button onClick={handleLogout} className="p-2 text-ink-400 hover:text-red-600 transition-colors" title="Logout">
@@ -178,6 +214,20 @@ export default function AdminSidebar({ children, userRole, adminName }: AdminSid
                                 ))}
                             </nav>
                             <div className="p-4 border-t border-surface-100">
+                                {availableRoles && availableRoles.length > 1 && (
+                                    <div className="mb-4">
+                                        <label className="text-xs font-bold text-ink-500 mb-2 block">Switch Role</label>
+                                        <select
+                                            value={userRole || ""}
+                                            onChange={handleRoleSwitch}
+                                            className="w-full bg-surface-50 border border-surface-200 text-sm text-ink-800 rounded-xl py-2 px-3 focus:ring-2 focus:ring-teal-500/20"
+                                        >
+                                            {availableRoles.map(role => (
+                                                <option key={role} value={role}>{ROLE_LABELS[role as UserRole] || role}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                )}
                                 <button onClick={handleLogout} className="w-full btn-secondary text-red-600 bg-red-50 border-red-100 hover:bg-red-100 py-2.5 rounded-xl font-bold flex items-center justify-center gap-2">
                                     <LogOut className="w-4 h-4" /> Keluar
                                 </button>
