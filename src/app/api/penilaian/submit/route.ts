@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { recalculateNilaiUjian } from '@/lib/scoring';
 import {
     calculateFinalScore,
     determineStatus,
@@ -105,7 +106,6 @@ export async function POST(req: Request) {
         });
 
         // 4. Trigger Recalculation
-        const { recalculateNilaiUjian } = require("@/lib/scoring");
         await recalculateNilaiUjian(pendaftar_id);
 
         return NextResponse.json({ success: true, updated });

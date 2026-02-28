@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
+import { recalculateNilaiUjian } from "@/lib/scoring";
 
 async function getSession() {
     const cookieStore = await cookies();
@@ -134,7 +135,6 @@ export async function PATCH(
         }
 
         // 4. Trigger Recalculation
-        const { recalculateNilaiUjian } = require("@/lib/scoring");
         await recalculateNilaiUjian(pendaftarId);
 
         return NextResponse.json({ success: true });
