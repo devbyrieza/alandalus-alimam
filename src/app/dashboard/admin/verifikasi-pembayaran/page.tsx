@@ -15,9 +15,11 @@ import {
   DollarSign,
   FileSpreadsheet,
   FileText,
+  UploadCloud
 } from "lucide-react";
 import Link from "next/link";
 import { exportToExcel, exportToPDF } from "@/lib/utils/export";
+import { useRef } from "react";
 
 interface Pembayaran {
   id: string;
@@ -47,6 +49,9 @@ export default function VerifikasiPembayaranPage() {
   const [catatan, setCatatan] = useState("");
   const [processing, setProcessing] = useState(false);
   const [exporting, setExporting] = useState(false);
+  const [uploadingProof, setUploadingProof] = useState<string | null>(null);
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetchPembayaran();
@@ -138,6 +143,46 @@ export default function VerifikasiPembayaranPage() {
     }
   };
 
+  const handleUploadClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !selectedPembayaran) return;
+
+    try {
+      setUploadingProof(selectedPembayaran.id);
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("pembayaran_id", selectedPembayaran.id);
+
+      const response = await fetch("/api/admin/verifikasi/pembayaran/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert("Bukti pembayaran berhasil diganti dan otomatis diverifikasi");
+        fetchPembayaran(); // Refresh the list
+        setShowModal(false); // Close modal
+      } else {
+        alert(data.error || "Gagal mengunggah bukti pembayaran");
+      }
+    } catch (error) {
+      console.error("Error replacing payment proof:", error);
+      alert("Terjadi kesalahan saat mengunggah");
+    } finally {
+      setUploadingProof(null);
+      if (fileInputRef.current) fileInputRef.current.value = ""; // Reset input
+    }
+  };
+
   const toTitleCase = (str: string) => {
     if (!str) return "";
     return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -170,6 +215,13 @@ export default function VerifikasiPembayaranPage() {
 
   return (
     <div className="space-y-6">
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleFileChange}
+        className="hidden"
+        accept="image/jpeg, image/png, application/pdf"
+      />
       {/* Header */}
       <div className="bg-white rounded-[2rem] shadow-sm p-8 border border-stone-100">
         <div className="flex items-center justify-between">
@@ -422,7 +474,17 @@ export default function VerifikasiPembayaranPage() {
 
               {selectedPembayaran.bukti_transfer_url ? (
                 <div className="space-y-2">
-                  <p className="text-sm font-bold text-stone-700">Bukti Transfer:</p>
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm font-bold text-stone-700">Bukti Transfer:</p>
+                    <button
+                      onClick={handleUploadClick}
+                      disabled={uploadingProof === selectedPembayaran.id}
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-lg text-xs font-bold transition-colors disabled:opacity-50"
+                    >
+                      {uploadingProof === selectedPembayaran.id ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <UploadCloud className="w-3.5 h-3.5" />}
+                      Ubah Bukti
+                    </button>
+                  </div>
                   <div className="border-2 border-stone-100 rounded-2xl overflow-hidden bg-stone-50 relative group">
                     <img
                       src={selectedPembayaran.bukti_transfer_url}
@@ -443,8 +505,16 @@ export default function VerifikasiPembayaranPage() {
                   </div>
                 </div>
               ) : (
-                <div className="p-8 border-2 border-dashed border-stone-200 rounded-2xl text-center">
+                <div className="p-8 border-2 border-dashed border-stone-200 rounded-2xl text-center space-y-4">
                   <p className="text-stone-500 font-medium">Tidak ada bukti transfer yang diupload.</p>
+                  <button
+                    onClick={handleUploadClick}
+                    disabled={uploadingProof === selectedPembayaran.id}
+                    className="mx-auto flex items-center justify-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-xl text-sm font-bold transition-colors disabled:opacity-50"
+                  >
+                    {uploadingProof === selectedPembayaran.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <UploadCloud className="w-4 h-4" />}
+                    Upload Bukti
+                  </button>
                 </div>
               )}
 

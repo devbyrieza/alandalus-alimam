@@ -18,10 +18,12 @@ import {
     Download,
     ZoomIn,
     ZoomOut,
-    Maximize
+    Maximize,
+    UploadCloud
 } from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import { useRef } from "react";
 
 interface Dokumen {
     id: string;
@@ -65,8 +67,12 @@ export default function VerifikasiDokumenDetailPage() {
     const [dokumenList, setDokumenList] = useState<Dokumen[]>([]);
     const [loading, setLoading] = useState(true);
     const [processingDocs, setProcessingDocs] = useState<Set<string>>(new Set());
+    const [uploadingDoc, setUploadingDoc] = useState<string | null>(null);
     const [previewDoc, setPreviewDoc] = useState<{ url: string; type: string | null; label: string } | null>(null);
     const [zoomLevel, setZoomLevel] = useState(1);
+
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [selectedUploadDoc, setSelectedUploadDoc] = useState<{ id: string; jenis: string } | null>(null);
 
     // Reject Modal State
     const [rejectModal, setRejectModal] = useState<{ isOpen: boolean; docId: string; docName: string; initialReason: string }>({
@@ -237,6 +243,54 @@ export default function VerifikasiDokumenDetailPage() {
         setPreviewDoc({ url, type, label });
     };
 
+    const handleReplaceClick = (dokId: string, jenis: string) => {
+        setSelectedUploadDoc({ id: dokId, jenis });
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
+    };
+
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file || !selectedUploadDoc) return;
+
+        try {
+            setUploadingDoc(selectedUploadDoc.id);
+
+            const formData = new FormData();
+            formData.append("file", file);
+
+            // Revert label mapping to raw key, or if `raw_jenis` exists in state use it
+            // Assuming `raw_jenis` is attached inside `fetchData`
+            const docObj = dokumenList.find(d => d.id === selectedUploadDoc.id);
+            const rawJenis = (docObj as any)?.raw_jenis || selectedUploadDoc.jenis.toLowerCase().replace(/ /g, "_");
+
+            formData.append("jenis_dokumen", rawJenis);
+            formData.append("pendaftar_id", id);
+
+            const response = await fetch("/api/admin/verifikasi/dokumen/upload", {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                alert("Dokumen berhasil diganti dan otomatis diverifikasi");
+                fetchData(); // Reload all data to see the new document
+            } else {
+                alert(data.error || "Gagal mengunggah dokumen");
+            }
+        } catch (error) {
+            console.error("Error replacing dokumen:", error);
+            alert("Terjadi kesalahan saat mengunggah");
+        } finally {
+            setUploadingDoc(null);
+            setSelectedUploadDoc(null);
+            if (fileInputRef.current) fileInputRef.current.value = ""; // Reset input
+        }
+    };
+
     if (loading) {
         return (
             <div className="flex flex-col items-center justify-center min-h-[400px]">
@@ -264,6 +318,13 @@ export default function VerifikasiDokumenDetailPage() {
 
     return (
         <div className="space-y-6">
+            <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                className="hidden"
+                accept="image/jpeg, image/png, application/pdf"
+            />
             {/* Header */}
             <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-amber-100">
                 <div className="flex items-center justify-between flex-wrap gap-4">
@@ -384,9 +445,19 @@ export default function VerifikasiDokumenDetailPage() {
                                     </div>
                                 )}
                             </div>
-                            <p className="text-xs text-stone-500 mb-4">
-                                Diunggah: {formatDate(dok.created_at)}
-                            </p>
+                            <div className="flex items-center justify-between mb-4">
+                                <p className="text-[10px] text-stone-500 font-bold uppercase tracking-widest">
+                                    {formatDate(dok.created_at)}
+                                </p>
+                                <button
+                                    onClick={() => handleReplaceClick(dok.id, dok.jenis_dokumen)}
+                                    disabled={uploadingDoc === dok.id}
+                                    className="flex items-center gap-1 text-[10px] font-bold text-blue-600 hover:text-blue-800 transition-colors uppercase disabled:opacity-50"
+                                >
+                                    {uploadingDoc === dok.id ? <Loader2 className="w-3 h-3 animate-spin" /> : <UploadCloud className="w-3 h-3" />}
+                                    Ubah Data
+                                </button>
+                            </div>
 
                             {/* Actions */}
                             <div className="flex gap-2">
