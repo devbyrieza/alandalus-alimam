@@ -247,11 +247,17 @@ export default function InputNilaiPage() {
         };
       }
 
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 seconds timeout
+
       const res = await fetch(`/api/penguji/nilai/${p.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       if (res.ok) {
         await Swal.fire({
@@ -273,11 +279,19 @@ export default function InputNilaiPage() {
         });
       }
     } catch (error: any) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: error.message
-      });
+      if (error.name === "AbortError") {
+        Swal.fire({
+          icon: 'error',
+          title: 'Timeout',
+          text: 'Koneksi terputus atau server terlalu lama merespon. Silakan coba lagi.'
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: error.message
+        });
+      }
     } finally {
       setSaving(null);
     }
