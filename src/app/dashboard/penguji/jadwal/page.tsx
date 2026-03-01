@@ -69,9 +69,21 @@ interface ExamSession {
 
 // --- Component ---
 
+// Map session role to which jenis_tugas types are visible
+const ROLE_TO_JADWAL_TYPES: Record<string, string[]> = {
+  penguji_calsan: ["Tes Al-Qur'an"],
+  pewawancara_calsan: ["Wawancara Calsan"],
+  pewawancara_cawalsan: ["Wawancara Cawalsan"],
+  // Admin roles see all
+  admin: ["Tes Al-Qur'an", "Wawancara Calsan", "Wawancara Cawalsan"],
+  admin_super: ["Tes Al-Qur'an", "Wawancara Calsan", "Wawancara Cawalsan"],
+  head_of_it: ["Tes Al-Qur'an", "Wawancara Calsan", "Wawancara Cawalsan"],
+};
+
 export default function JadwalPengujiPage() {
   const [activeTab, setActiveTab] = useState<'assigned' | 'slots'>('assigned');
   const [userId, setUserId] = useState<string | null>(null);
+  const [activeRole, setActiveRole] = useState<string>("");
 
   // State for Assignments
   const [assignments, setAssignments] = useState<JadwalAssignment[]>([]);
@@ -134,7 +146,7 @@ export default function JadwalPengujiPage() {
   };
 
   useEffect(() => {
-    // Fetch User Session ID
+    // Fetch User Session ID and active role
     const fetchSession = async () => {
       try {
         const res = await fetch("/api/auth/session");
@@ -143,6 +155,7 @@ export default function JadwalPengujiPage() {
           const session = data.session;
           if (session) {
             setUserId(session.id || session.user_id);
+            setActiveRole(session.role || "");
           }
         }
       } catch (e) {
@@ -328,126 +341,147 @@ export default function JadwalPengujiPage() {
               <h3 className="font-bold text-stone-900">Belum Ada Jadwal</h3>
               <p className="text-stone-500">Anda belum memiliki jadwal ujian yang ditugaskan.</p>
             </div>
-          ) : (
-            <div className="grid gap-4">
-              {assignments.map(item => (
-                <div key={item.id} className={`bg-white rounded-xl shadow-lg p-6 border-2 transition-all ${isToday(item.tanggal_ujian) ? "border-green-300 bg-green-50" : "border-violet-100"}`}>
-                  <div className="flex md:items-center justify-between flex-col md:flex-row gap-4">
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 bg-violet-100 rounded-xl text-violet-600 font-bold text-center min-w-[60px]">
-                        <div className="text-xs uppercase">{new Date(item.tanggal_ujian).toLocaleDateString('id-ID', { month: 'short' })}</div>
-                        <div className="text-2xl">{new Date(item.tanggal_ujian).getDate()}</div>
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="px-2 py-0.5 bg-violet-100 text-violet-700 rounded text-xs font-bold uppercase">{item.pendaftar.jenjang}</span>
-                          <span className="text-xs text-stone-500">{item.pendaftar.nomor_pendaftaran}</span>
+          ) : (() => {
+            // Filter assignments based on active role
+            const visibleTypes = ROLE_TO_JADWAL_TYPES[activeRole] || ["Tes Al-Qur'an", "Wawancara Calsan", "Wawancara Cawalsan"];
+            const filteredAssignments = assignments.filter(item => {
+              // Check if any of the item's jenis_tugas matches the visible types
+              return visibleTypes.some(type => item.jenis_tugas.includes(type));
+            });
+
+            if (filteredAssignments.length === 0) {
+              return (
+                <div className="bg-white rounded-xl p-12 border-2 border-stone-200 text-center">
+                  <div className="w-16 h-16 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Calendar className="w-8 h-8 text-stone-400" />
+                  </div>
+                  <h3 className="font-bold text-stone-900">Belum Ada Jadwal</h3>
+                  <p className="text-stone-500">Tidak ada jadwal ujian untuk role yang dipilih saat ini.</p>
+                </div>
+              );
+            }
+
+            return (
+              <div className="grid gap-4">
+                {filteredAssignments.map(item => (
+                  <div key={item.id} className={`bg-white rounded-xl shadow-lg p-6 border-2 transition-all ${isToday(item.tanggal_ujian) ? "border-green-300 bg-green-50" : "border-violet-100"}`}>
+                    <div className="flex md:items-center justify-between flex-col md:flex-row gap-4">
+                      <div className="flex items-start gap-4">
+                        <div className="p-3 bg-violet-100 rounded-xl text-violet-600 font-bold text-center min-w-[60px]">
+                          <div className="text-xs uppercase">{new Date(item.tanggal_ujian).toLocaleDateString('id-ID', { month: 'short' })}</div>
+                          <div className="text-2xl">{new Date(item.tanggal_ujian).getDate()}</div>
                         </div>
-                        <h3 className="text-lg font-bold text-stone-900">{item.pendaftar.nama_lengkap}</h3>
-                        <div className="flex items-center gap-2 text-sm text-stone-600 mt-1">
-                          <FileText className="w-4 h-4" />
-                          Assignments: <span className="font-semibold text-violet-700">{item.jenis_tugas}</span>
-                          Assignments: <span className="font-semibold text-violet-700">{item.jenis_tugas}</span>
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="px-2 py-0.5 bg-violet-100 text-violet-700 rounded text-xs font-bold uppercase">{item.pendaftar.jenjang}</span>
+                            <span className="text-xs text-stone-500">{item.pendaftar.nomor_pendaftaran}</span>
+                          </div>
+                          <h3 className="text-lg font-bold text-stone-900">{item.pendaftar.nama_lengkap}</h3>
+                          <div className="flex items-center gap-2 text-sm text-stone-600 mt-1">
+                            <FileText className="w-4 h-4" />
+                            Assignments: <span className="font-semibold text-violet-700">{item.jenis_tugas}</span>
+                            Assignments: <span className="font-semibold text-violet-700">{item.jenis_tugas}</span>
+                          </div>
+
+                          {/* Action Buttons: Status Completion */}
+                          {(() => {
+                            // Determine which roles this penguji has for this jadwal
+                            const isSantri = item.penguji_santri_id === userId;
+                            const isQuran = item.penguji_quran_id === userId;
+                            const isOrtu = item.penguji_ortu_id === userId;
+                            const isCreator = item.session_created_by === userId;
+
+                            // Fallback: if matched via session creator, derive from jenis_tugas
+                            let showSantri = isSantri;
+                            let showQuran = isQuran;
+                            let showOrtu = isOrtu;
+                            if (!isSantri && !isQuran && !isOrtu && isCreator) {
+                              const tugas = (item.jenis_tugas || "").toLowerCase();
+                              if (tugas.includes("calsan") || tugas.includes("santri")) showSantri = true;
+                              if (tugas.includes("qur")) showQuran = true;
+                              if (tugas.includes("cawalsan") || tugas.includes("ortu")) showOrtu = true;
+                            }
+
+                            return (
+                              <div className="mt-3 flex flex-wrap gap-2">
+                                {userId && showSantri && (
+                                  item.status_santri === 'completed' ? (
+                                    <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
+                                      <CheckCircle className="w-3 h-3" /> Wawancara Calsan Selesai
+                                    </span>
+                                  ) : (
+                                    <button
+                                      onClick={() => handleCompleteExam(item.id)}
+                                      className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
+                                    >
+                                      Tandai Wawancara Selesai
+                                    </button>
+                                  )
+                                )}
+
+                                {userId && showQuran && (
+                                  item.status_quran === 'completed' ? (
+                                    <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
+                                      <CheckCircle className="w-3 h-3" /> Tes Al-Qur'an Selesai
+                                    </span>
+                                  ) : (
+                                    <button
+                                      onClick={() => handleCompleteExam(item.id)}
+                                      className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
+                                    >
+                                      Tandai Tes Al-Qur'an Selesai
+                                    </button>
+                                  )
+                                )}
+
+                                {userId && showOrtu && (
+                                  item.status_ortu === 'completed' ? (
+                                    <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
+                                      <CheckCircle className="w-3 h-3" /> Wawancara Cawalsan Selesai
+                                    </span>
+                                  ) : (
+                                    <button
+                                      onClick={() => handleCompleteExam(item.id)}
+                                      className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
+                                    >
+                                      Tandai Wawancara Cawalsan Selesai
+                                    </button>
+                                  )
+                                )}
+                              </div>
+                            );
+                          })()}
+
+                          <button
+                            onClick={() => {
+                              setSelectedPendaftar(item.pendaftar);
+                              setIsDetailModalOpen(true);
+                            }}
+                            className="mt-2 text-xs font-bold text-violet-600 hover:text-violet-800 underline"
+                          >
+                            Lihat Data Pendaftar
+                          </button>
                         </div>
-
-                        {/* Action Buttons: Status Completion */}
-                        {(() => {
-                          // Determine which roles this penguji has for this jadwal
-                          const isSantri = item.penguji_santri_id === userId;
-                          const isQuran = item.penguji_quran_id === userId;
-                          const isOrtu = item.penguji_ortu_id === userId;
-                          const isCreator = item.session_created_by === userId;
-
-                          // Fallback: if matched via session creator, derive from jenis_tugas
-                          let showSantri = isSantri;
-                          let showQuran = isQuran;
-                          let showOrtu = isOrtu;
-                          if (!isSantri && !isQuran && !isOrtu && isCreator) {
-                            const tugas = (item.jenis_tugas || "").toLowerCase();
-                            if (tugas.includes("calsan") || tugas.includes("santri")) showSantri = true;
-                            if (tugas.includes("qur")) showQuran = true;
-                            if (tugas.includes("cawalsan") || tugas.includes("ortu")) showOrtu = true;
-                          }
-
-                          return (
-                            <div className="mt-3 flex flex-wrap gap-2">
-                              {userId && showSantri && (
-                                item.status_santri === 'completed' ? (
-                                  <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
-                                    <CheckCircle className="w-3 h-3" /> Wawancara Calsan Selesai
-                                  </span>
-                                ) : (
-                                  <button
-                                    onClick={() => handleCompleteExam(item.id)}
-                                    className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
-                                  >
-                                    Tandai Wawancara Selesai
-                                  </button>
-                                )
-                              )}
-
-                              {userId && showQuran && (
-                                item.status_quran === 'completed' ? (
-                                  <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
-                                    <CheckCircle className="w-3 h-3" /> Tes Al-Qur'an Selesai
-                                  </span>
-                                ) : (
-                                  <button
-                                    onClick={() => handleCompleteExam(item.id)}
-                                    className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
-                                  >
-                                    Tandai Tes Al-Qur'an Selesai
-                                  </button>
-                                )
-                              )}
-
-                              {userId && showOrtu && (
-                                item.status_ortu === 'completed' ? (
-                                  <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
-                                    <CheckCircle className="w-3 h-3" /> Wawancara Cawalsan Selesai
-                                  </span>
-                                ) : (
-                                  <button
-                                    onClick={() => handleCompleteExam(item.id)}
-                                    className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
-                                  >
-                                    Tandai Wawancara Cawalsan Selesai
-                                  </button>
-                                )
-                              )}
-                            </div>
-                          );
-                        })()}
-
-                        <button
-                          onClick={() => {
-                            setSelectedPendaftar(item.pendaftar);
-                            setIsDetailModalOpen(true);
-                          }}
-                          className="mt-2 text-xs font-bold text-violet-600 hover:text-violet-800 underline"
-                        >
-                          Lihat Data Pendaftar
-                        </button>
                       </div>
-                    </div>
-                    <div className="flex flex-col gap-2 min-w-[200px] border-l pl-0 md:pl-6 border-stone-100">
-                      <div className="flex items-center gap-2 text-sm text-stone-600">
-                        <Clock className="w-4 h-4 text-violet-500" />
-                        {formatTime(item.waktu_mulai)} WIB
+                      <div className="flex flex-col gap-2 min-w-[200px] border-l pl-0 md:pl-6 border-stone-100">
+                        <div className="flex items-center gap-2 text-sm text-stone-600">
+                          <Clock className="w-4 h-4 text-violet-500" />
+                          {formatTime(item.waktu_mulai)} WIB
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-stone-600">
+                          <MapPin className="w-4 h-4 text-violet-500" />
+                          {item.lokasi || "Lokasi belum ditentukan"}
+                        </div>
+                        {item.session_title && (
+                          <div className="text-xs text-stone-400 mt-1">Sesi: {item.session_title}</div>
+                        )}
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-stone-600">
-                        <MapPin className="w-4 h-4 text-violet-500" />
-                        {item.lokasi || "Lokasi belum ditentukan"}
-                      </div>
-                      {item.session_title && (
-                        <div className="text-xs text-stone-400 mt-1">Sesi: {item.session_title}</div>
-                      )}
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            );
+          })()}
         </>
       )}
 
