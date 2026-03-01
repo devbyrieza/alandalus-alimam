@@ -160,6 +160,17 @@ const SUMBER_INFO_OPTIONS = ["Searching umum", "IG", "FB", "YouTube", "TikTok", 
 // MAIN COMPONENT
 // ============================================================================
 
+// Map session role to which form types are visible
+const ROLE_TO_FORM_TYPES: Record<string, string[]> = {
+  penguji_calsan: ['quran'],
+  pewawancara_calsan: ['wawancara'],
+  pewawancara_cawalsan: ['ortu'],
+  // Admin roles see all forms
+  admin: ['quran', 'wawancara', 'ortu'],
+  admin_super: ['quran', 'wawancara', 'ortu'],
+  head_of_it: ['quran', 'wawancara', 'ortu'],
+};
+
 export default function InputNilaiPage() {
   const [peserta, setPeserta] = useState<Peserta[]>([]);
   const [loading, setLoading] = useState(true);
@@ -167,11 +178,15 @@ export default function InputNilaiPage() {
   const [saving, setSaving] = useState<string | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [activeRole, setActiveRole] = useState<string>("");
 
   // Form states for each type
   const [quranForm, setQuranForm] = useState<any>({});
   const [calsanForm, setCalsanForm] = useState<any>({});
   const [cawalsanForm, setCawalsanForm] = useState<any>({});
+
+  // Determine which form types are visible based on the active session role
+  const visibleFormTypes = ROLE_TO_FORM_TYPES[activeRole] || ['quran', 'wawancara', 'ortu'];
 
   const toTitleCase = (str: string) => {
     if (!str) return "";
@@ -179,6 +194,15 @@ export default function InputNilaiPage() {
   };
 
   useEffect(() => {
+    // Fetch session to get active role
+    fetch("/api/auth/session")
+      .then((res) => res.json())
+      .then((data) => {
+        const role = data.session?.role || "";
+        setActiveRole(role);
+      })
+      .catch((err) => console.error("Error fetching session:", err));
+
     fetchPeserta();
   }, []);
 
@@ -762,11 +786,11 @@ export default function InputNilaiPage() {
                 </div>
               </div>
 
-              {/* Forms based on roles */}
+              {/* Forms based on roles AND active session role */}
               <div className="space-y-4">
-                {p.roles.includes("quran") && renderQuranForm(p)}
-                {p.roles.includes("wawancara") && renderCalsanForm(p)}
-                {p.roles.includes("ortu") && renderCawalsanForm(p)}
+                {p.roles.includes("quran") && visibleFormTypes.includes("quran") && renderQuranForm(p)}
+                {p.roles.includes("wawancara") && visibleFormTypes.includes("wawancara") && renderCalsanForm(p)}
+                {p.roles.includes("ortu") && visibleFormTypes.includes("ortu") && renderCawalsanForm(p)}
               </div>
             </div>
           ))}
