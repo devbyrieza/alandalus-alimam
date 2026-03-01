@@ -51,6 +51,7 @@ fi
 cat > /tmp/pesantren-alimam.com.conf << EOF
 server {
     listen 80;
+    listen [::]:80;
     server_name pesantren-alimam.com www.pesantren-alimam.com;
     
     # Redirect to HTTPS
@@ -59,6 +60,7 @@ server {
 
 server {
     listen 443 ssl http2;
+    listen [::]:443 ssl http2;
     server_name pesantren-alimam.com www.pesantren-alimam.com;
     
     # SSL Configuration (Let's Encrypt)

@@ -66,12 +66,14 @@ sudo cp /etc/nginx/sites-available/pesantren-alimam.com /root/nginx-backup.conf
 sudo bash -c 'cat > /etc/nginx/sites-available/pesantren-alimam.com << EOF
 server {
     listen 80;
+    listen [::]:80;
     server_name pesantren-alimam.com www.pesantren-alimam.com;
     return 301 https://\$server_name\$request_uri;
 }
 
 server {
     listen 443 ssl http2;
+    listen [::]:443 ssl http2;
     server_name pesantren-alimam.com www.pesantren-alimam.com;
     
     ssl_certificate /etc/letsencrypt/live/pesantren-alimam.com/fullchain.pem;

@@ -23,14 +23,25 @@ export async function GET() {
     const userId = session.user_id || session.id;
 
     try {
-        const whereClause: any = {
-            OR: [
-                { penguji_santri_id: userId }, // Wawancara Calsan (or general Interview)
-                { penguji_quran_id: userId },   // Tes Quran
-                { penguji_ortu_id: userId },    // Wawancara Cawalsan
-                { exam_session: { created_by: userId } }, // Sessions created by this penguji
-            ]
-        };
+        // Fetch user profile to see if they're an admin
+        const userProfile = await prisma.profile.findUnique({
+            where: { id: userId },
+            select: { role: true, secondary_roles: true }
+        });
+        const allRoles = userProfile ? [userProfile.role, ...(userProfile.secondary_roles || [])] : [];
+        const isAdmin = allRoles.some(r => ['admin_super', 'admin', 'head_of_it'].includes(r));
+
+        let whereClause: any = {};
+        if (!isAdmin) {
+            whereClause = {
+                OR: [
+                    { penguji_santri_id: userId }, // Wawancara Calsan (or general Interview)
+                    { penguji_quran_id: userId },   // Tes Quran
+                    { penguji_ortu_id: userId },    // Wawancara Cawalsan
+                    { exam_session: { created_by: userId } }, // Sessions created by this penguji
+                ]
+            };
+        }
 
         const assigned = await prisma.jadwalUjian.findMany({
             where: whereClause,
@@ -52,16 +63,22 @@ export async function GET() {
         const data = assigned.map((item: any) => {
             // Determine role for this specific student
             const roles = [];
-            if (item.penguji_santri_id === userId) roles.push('wawancara');
-            if (item.penguji_quran_id === userId) roles.push('quran');
-            if (item.penguji_ortu_id === userId) roles.push('ortu');
 
-            // Fallback: if matched via exam_session.created_by, derive role from session title
-            if (roles.length === 0 && item.exam_session?.created_by === userId) {
-                const title = (item.exam_session.title || "").toLowerCase();
-                if (title.includes("qur") || title.includes("quran")) roles.push('quran');
-                else if (title.includes("calsan") || title.includes("santri")) roles.push('wawancara');
-                else if (title.includes("cawalsan") || title.includes("ortu") || title.includes("orang")) roles.push('ortu');
+            if (isAdmin) {
+                // Admin can access all forms
+                roles.push('wawancara', 'quran', 'ortu');
+            } else {
+                if (item.penguji_santri_id === userId) roles.push('wawancara');
+                if (item.penguji_quran_id === userId) roles.push('quran');
+                if (item.penguji_ortu_id === userId) roles.push('ortu');
+
+                // Fallback: if matched via exam_session.created_by, derive role from session title
+                if (roles.length === 0 && item.exam_session?.created_by === userId) {
+                    const title = (item.exam_session.title || "").toLowerCase();
+                    if (title.includes("qur") || title.includes("quran")) roles.push('quran');
+                    else if (title.includes("calsan") || title.includes("santri")) roles.push('wawancara');
+                    else if (title.includes("cawalsan") || title.includes("ortu") || title.includes("orang")) roles.push('ortu');
+                }
             }
 
             // Find or create NilaiUjian entry (should exist if schedule exists, or created on demand)
