@@ -77,7 +77,7 @@ export async function GET() {
 
                 // Fallback: if matched via exam_session.created_by, derive role from session title
                 if (roles.length === 0 && item.exam_session?.created_by === userId) {
-                    const title = (item.exam_session.title || "").toLowerCase();
+                    const title = (item.exam_session?.title || "").toLowerCase();
                     if (title.includes("qur") || title.includes("quran")) roles.push('quran');
                     else if (title.includes("calsan") || title.includes("santri")) roles.push('wawancara');
                     else if (title.includes("cawalsan") || title.includes("ortu") || title.includes("orang")) roles.push('ortu');
