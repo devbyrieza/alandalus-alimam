@@ -60,12 +60,15 @@ export async function GET() {
             orderBy: { tanggal_ujian: 'asc' }
         });
 
-        const data = assigned.map((item: any) => {
-            // Determine role for this specific student
-            const roles = [];
+        // Build a map to deduplicate by pendaftar.id
+        const pesertaMap = new Map<string, any>();
 
+        for (const item of assigned) {
+            const pendaftarId = item.pendaftar.id;
+
+            // Determine roles for this jadwal record
+            const roles: string[] = [];
             if (isAdmin) {
-                // Admin can access all forms
                 roles.push('wawancara', 'quran', 'ortu');
             } else {
                 if (item.penguji_santri_id === userId) roles.push('wawancara');
@@ -81,34 +84,54 @@ export async function GET() {
                 }
             }
 
-            // Find or create NilaiUjian entry (should exist if schedule exists, or created on demand)
-            // Prisma `nilai_ujian` is array (one-to-many), assume one valid entry or empty.
             const score = item.nilai_ujian?.[0] || {};
 
-            return {
-                id: item.pendaftar.id, // Use Pendaftar ID as primary reference
-                jadwal_id: item.id,
-                nomor_pendaftaran: item.pendaftar.nomor_pendaftaran,
-                nama_lengkap: item.pendaftar.nama_lengkap,
-                jenjang: item.pendaftar.jenjang,
-                roles: roles,
-                // Scores
-                nilai_wawancara_santri: score.nilai_wawancara_santri,
-                nilai_tes_quran: score.nilai_tes_quran,
-                nilai_wawancara_ortu: score.nilai_wawancara_ortu,
-                catatan_santri: score.catatan_santri,
-                catatan_quran: score.catatan_quran,
-                catatan_ortu: score.catatan_ortu,
-                // Detail JSONB data for comprehensive forms
-                detail_quran: score.detail_quran,
-                detail_wawancara: score.detail_wawancara,
-                detail_cawalsan: score.detail_cawalsan,
-                score_quran: score.score_quran,
-                score_wawancara: score.score_wawancara,
-                // ID for updating score
-                nilai_id: score.id,
-            };
-        });
+            if (pesertaMap.has(pendaftarId)) {
+                // Merge: add new roles (avoid duplicates) and update score if available
+                const existing = pesertaMap.get(pendaftarId);
+                for (const r of roles) {
+                    if (!existing.roles.includes(r)) existing.roles.push(r);
+                }
+                // If this record has score data, merge it in (prefer non-null values)
+                if (score.id) {
+                    existing.nilai_id = existing.nilai_id || score.id;
+                    existing.nilai_wawancara_santri = existing.nilai_wawancara_santri ?? score.nilai_wawancara_santri;
+                    existing.nilai_tes_quran = existing.nilai_tes_quran ?? score.nilai_tes_quran;
+                    existing.nilai_wawancara_ortu = existing.nilai_wawancara_ortu ?? score.nilai_wawancara_ortu;
+                    existing.catatan_santri = existing.catatan_santri ?? score.catatan_santri;
+                    existing.catatan_quran = existing.catatan_quran ?? score.catatan_quran;
+                    existing.catatan_ortu = existing.catatan_ortu ?? score.catatan_ortu;
+                    existing.detail_quran = existing.detail_quran ?? score.detail_quran;
+                    existing.detail_wawancara = existing.detail_wawancara ?? score.detail_wawancara;
+                    existing.detail_cawalsan = existing.detail_cawalsan ?? score.detail_cawalsan;
+                    existing.score_quran = existing.score_quran ?? score.score_quran;
+                    existing.score_wawancara = existing.score_wawancara ?? score.score_wawancara;
+                }
+            } else {
+                pesertaMap.set(pendaftarId, {
+                    id: pendaftarId,
+                    jadwal_id: item.id,
+                    nomor_pendaftaran: item.pendaftar.nomor_pendaftaran,
+                    nama_lengkap: item.pendaftar.nama_lengkap,
+                    jenjang: item.pendaftar.jenjang,
+                    roles: roles,
+                    nilai_wawancara_santri: score.nilai_wawancara_santri,
+                    nilai_tes_quran: score.nilai_tes_quran,
+                    nilai_wawancara_ortu: score.nilai_wawancara_ortu,
+                    catatan_santri: score.catatan_santri,
+                    catatan_quran: score.catatan_quran,
+                    catatan_ortu: score.catatan_ortu,
+                    detail_quran: score.detail_quran,
+                    detail_wawancara: score.detail_wawancara,
+                    detail_cawalsan: score.detail_cawalsan,
+                    score_quran: score.score_quran,
+                    score_wawancara: score.score_wawancara,
+                    nilai_id: score.id,
+                });
+            }
+        }
+
+        const data = Array.from(pesertaMap.values());
 
         return NextResponse.json({ data });
     } catch (error: any) {
