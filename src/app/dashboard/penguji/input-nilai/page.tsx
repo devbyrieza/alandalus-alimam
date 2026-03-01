@@ -182,9 +182,9 @@ export default function InputNilaiPage() {
     fetchPeserta();
   }, []);
 
-  const fetchPeserta = async () => {
+  const fetchPeserta = async (showLoading = true) => {
     try {
-      setLoading(true);
+      if (showLoading) setLoading(true);
       const response = await fetch("/api/penguji/peserta");
       if (response.ok) {
         const result = await response.json();
@@ -248,7 +248,9 @@ export default function InputNilaiPage() {
       }
 
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 seconds timeout
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 seconds timeout
+
+      console.log("[saveForm] Sending PATCH to /api/penguji/nilai/" + p.id, body);
 
       const res = await fetch(`/api/penguji/nilai/${p.id}`, {
         method: "PATCH",
@@ -259,7 +261,12 @@ export default function InputNilaiPage() {
 
       clearTimeout(timeoutId);
 
+      console.log("[saveForm] Response status:", res.status);
+
       if (res.ok) {
+        setSaving(null); // Clear saving state BEFORE showing popup
+        setEditingId(null); // Clear editing state BEFORE showing popup
+
         await Swal.fire({
           icon: 'success',
           title: 'Berhasil!',
@@ -267,29 +274,41 @@ export default function InputNilaiPage() {
           timer: 1500,
           showConfirmButton: false
         });
-        setEditingId(null);
-        fetchPeserta();
+
+        // Silently refresh data without showing full-page loading spinner
+        try {
+          await fetchPeserta(false);
+        } catch (e) {
+          console.error("[saveForm] Error refreshing data:", e);
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        const err = await res.json();
-        Swal.fire({
+        let errMsg = "Terjadi kesalahan sistem";
+        try {
+          const err = await res.json();
+          errMsg = err.error || errMsg;
+        } catch (e) {
+          console.error("[saveForm] Error parsing error response:", e);
+        }
+        await Swal.fire({
           icon: 'error',
           title: 'Gagal Menyimpan',
-          text: err.error || "Terjadi kesalahan sistem"
+          text: errMsg
         });
       }
     } catch (error: any) {
+      console.error("[saveForm] Catch error:", error);
       if (error.name === "AbortError") {
-        Swal.fire({
+        await Swal.fire({
           icon: 'error',
           title: 'Timeout',
           text: 'Koneksi terputus atau server terlalu lama merespon. Silakan coba lagi.'
         });
       } else {
-        Swal.fire({
+        await Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: error.message
+          text: error.message || 'Terjadi kesalahan yang tidak terduga'
         });
       }
     } finally {
