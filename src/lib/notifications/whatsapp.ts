@@ -4,6 +4,7 @@
  */
 
 import { sendMessage } from "@/lib/wablas";
+import { prisma } from "@/lib/prisma";
 
 export async function sendWhatsAppOTP(
   phone: string,
@@ -31,6 +32,23 @@ Panitia PPDB Al-Imam`;
 
     const result = await sendMessage({ phone, message });
 
+    // Log success or error to database for auditing
+    try {
+      await prisma.whatsappLog.create({
+        data: {
+          phone,
+          jenis_notif: "otp_verification",
+          status: result.status ? "sent" : "failed",
+          message_content: `Assalamu'alaikum ${nama}, Kode OTP Anda adalah: ${otp}`,
+          sent_at: result.status ? new Date() : null,
+          error_message: result.status ? null : result.message,
+          response_data: JSON.stringify(result),
+        },
+      });
+    } catch (dbError) {
+      console.error("❌ Failed to log WhatsApp OTP to DB:", dbError);
+    }
+
     if (result.status) {
       return {
         success: true,
@@ -53,6 +71,19 @@ Panitia PPDB Al-Imam`;
     };
   } catch (error: any) {
     console.error("❌ WhatsApp error:", error.message);
+
+    // Also log exception to DB
+    try {
+      await prisma.whatsappLog.create({
+        data: {
+          phone,
+          jenis_notif: "otp_verification",
+          status: "failed",
+          message_content: `Assalamu'alaikum ${nama}, Kode OTP Anda adalah: ${otp}`,
+          error_message: error.message,
+        },
+      });
+    } catch (dbError) { }
 
     // Fallback simulation only if explicitly requested
     if (process.env.SKIP_WHATSAPP_OTP === "true") {

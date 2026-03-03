@@ -558,7 +558,7 @@ Untuk sementara, Anda sudah bisa mengerjakan tes online yang tersedia di dashboa
 - Identifikasi Kepribadian
 - Tes Kesiapan
 
-Dashboard: ${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar/undangan-seleksi
+Dashboard: ${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/dashboard/pendaftar/undangan-seleksi
 
 Jazakumullahu khairan,
 Panitia PPDB Al-Imam`;
@@ -576,7 +576,7 @@ Silakan login ke dashboard dan pilih jadwal yang sesuai untuk:
 
 Segera pilih jadwal sebelum kuota penuh.
 
-Dashboard: ${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar/undangan-seleksi
+Dashboard: ${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/dashboard/pendaftar/undangan-seleksi
 
 Jazakumullahu khairan,
 Panitia PPDB Al-Imam`;
@@ -596,7 +596,7 @@ Silakan login ke dashboard dan pilih sesi jadwal untuk:
 
 Harap segera memilih jadwal sebelum rentang waktu habis atau kuota penuh. Jangan lupa juga untuk menyelesaikan Tes Online (Akademik & Kepribadian).
 
-Dashboard: ${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar/undangan-seleksi
+Dashboard: ${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/dashboard/pendaftar/undangan-seleksi
 
 Jazakumullahu khairan,
 Panitia PPDB Al-Imam`;
@@ -622,7 +622,7 @@ Persiapan:
 - Berpakaian sopan dan rapi
 - Bawa alat tulis
 
-Dashboard: ${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar/undangan-seleksi
+Dashboard: ${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/dashboard/pendaftar/undangan-seleksi
 
 Jazakumullahu khairan,
 Panitia PPDB Al-Imam`;
@@ -646,7 +646,7 @@ Pengingat: ${jenisUjian} Anda dijadwalkan besok.
 
 Mohon hadir tepat waktu dan persiapkan diri dengan baik. Semoga dimudahkan dan diberkahi.
 
-Dashboard: ${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar/undangan-seleksi
+Dashboard: ${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/dashboard/pendaftar/undangan-seleksi
 
 Jazakumullahu khairan,
 Panitia PPDB Al-Imam`;
@@ -680,7 +680,7 @@ Alhamdulillah, hasil tes seleksi Anda sudah tersedia.
 
 Silakan login ke dashboard untuk melihat hasil lengkap Anda.
 
-Dashboard: ${process.env.NEXT_PUBLIC_APP_URL}/dashboard/pendaftar/pengumuman
+Dashboard: ${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/dashboard/pendaftar/pengumuman
 
 Jazakumullahu khairan,
 Panitia PPDB Al-Imam`;
