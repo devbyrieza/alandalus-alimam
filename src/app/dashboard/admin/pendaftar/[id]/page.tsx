@@ -605,7 +605,7 @@ export default function PendaftarDetailPage() {
                       <span className="text-sm font-bold text-stone-400 italic">Belum Ujian</span> :
                       <div className="flex items-baseline gap-2">
                         <span className="text-3xl font-black text-amber-900">
-                          {pendaftar.nilai_ujian?.score_wawancara ?? pendaftar.nilai_ujian?.nilai_wawancara_santri ?? "-"}
+                          {pendaftar.nilai_ujian?.score_wawancara != null ? Number(pendaftar.nilai_ujian.score_wawancara).toFixed(1) : (pendaftar.nilai_ujian?.nilai_wawancara_santri != null ? Number(pendaftar.nilai_ujian.nilai_wawancara_santri).toFixed(1) : "-")}
                         </span>
                         <span className="text-sm text-amber-400 font-medium">/ 100</span>
                       </div>

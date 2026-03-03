@@ -426,12 +426,9 @@ export default function InputNilaiPage() {
         ) : (
           <div>
             {isSaved ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                <div><span className="text-gray-500">Tajwid:</span> <span className="font-bold">{data.tajwid}</span></div>
-                <div><span className="text-gray-500">Kelancaran:</span> <span className="font-bold">{data.kelancaran}</span></div>
-                <div><span className="text-gray-500">Rekomendasi:</span> <span className={`font-bold ${data.rekomendasi === "Diterima" ? "text-green-600" : data.rekomendasi === "Cadangan" ? "text-yellow-600" : "text-red-600"}`}>{data.rekomendasi}</span></div>
-                <div><span className="text-gray-500">Penguji:</span> <span className="font-bold">{data.nama_penguji}</span></div>
-                {data.catatan && <div className="col-span-1 sm:col-span-2"><span className="text-gray-500">Catatan:</span> {data.catatan}</div>}
+              <div className="flex items-center gap-2 py-3">
+                <CheckCircle className="w-5 h-5 text-emerald-600" />
+                <span className="text-emerald-700 font-semibold">Nilai sudah tersimpan. Hasil dapat dilihat di Dashboard Admin.</span>
               </div>
             ) : (
               <p className="text-gray-400 text-sm italic">Belum dinilai</p>
@@ -534,20 +531,9 @@ export default function InputNilaiPage() {
         ) : (
           <div>
             {isSaved ? (
-              <div className="space-y-2 text-sm">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                  {CALSAN_CRITERIA.map((c) => (
-                    <div key={c.key} className="bg-white rounded-lg p-2 text-center border">
-                      <div className="text-xs text-gray-500 truncate" title={c.label}>{c.label.split(" ").slice(0, 2).join(" ")}</div>
-                      <div className="font-bold text-lg text-violet-700">{data[c.key] || "-"}<span className="text-xs text-gray-400">/5</span></div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-2">
-                  <span className="text-gray-500">Rekomendasi:</span> <span className="font-bold text-violet-700">{data.rekomendasi?.split(".")[0]}</span>
-                </div>
-                <div><span className="text-gray-500">Pewawancara:</span> <span className="font-bold">{data.nama_pewawancara}</span></div>
-                {data.catatan && <div><span className="text-gray-500">Catatan:</span> {data.catatan}</div>}
+              <div className="flex items-center gap-2 py-3">
+                <CheckCircle className="w-5 h-5 text-violet-600" />
+                <span className="text-violet-700 font-semibold">Nilai sudah tersimpan. Hasil dapat dilihat di Dashboard Admin.</span>
               </div>
             ) : (
               <p className="text-gray-400 text-sm italic">Belum dinilai</p>
@@ -697,19 +683,9 @@ export default function InputNilaiPage() {
         ) : (
           <div>
             {isSaved ? (
-              <div className="space-y-2 text-sm">
-                <div><span className="text-gray-500">Orangtua:</span> <span className="font-bold">{data.nama_orangtua}</span></div>
-                <div><span className="text-gray-500">Kategori:</span> <span className="font-bold">{data.kategori}</span></div>
-                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
-                  {CAWALSAN_QUESTIONS.map((q) => (
-                    <div key={q.key} className="bg-white rounded p-1.5 text-center border text-xs">
-                      <div className="text-gray-400">Q{q.key.replace("q", "")}</div>
-                      <div className="font-bold text-amber-700">{data[q.key]?.charAt(0) || "-"}</div>
-                    </div>
-                  ))}
-                </div>
-                <div><span className="text-gray-500">Rekomendasi:</span> <span className={`font-bold ${data.rekomendasi === "Diterima" ? "text-green-600" : data.rekomendasi?.includes("catatan") ? "text-yellow-600" : "text-red-600"}`}>{data.rekomendasi}</span></div>
-                <div><span className="text-gray-500">Pewawancara:</span> <span className="font-bold">{data.nama_pewawancara}</span></div>
+              <div className="flex items-center gap-2 py-3">
+                <CheckCircle className="w-5 h-5 text-amber-600" />
+                <span className="text-amber-700 font-semibold">Nilai sudah tersimpan. Hasil dapat dilihat di Dashboard Admin.</span>
               </div>
             ) : (
               <p className="text-gray-400 text-sm italic">Belum dinilai</p>

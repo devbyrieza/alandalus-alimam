@@ -133,6 +133,17 @@ export default function ExaminerDashboard() {
                     }} variant="outline" className="border-green-600 text-green-700 hover:bg-green-50">
                         Export Excel (CSV)
                     </Button>
+                    <Button onClick={async () => {
+                        try {
+                            const res = await fetch('/api/penilaian/recalculate', { method: 'POST' });
+                            if (!res.ok) throw new Error('Failed');
+                            const result = await res.json();
+                            Swal.fire('Sukses', `${result.recalculated} data berhasil dihitung ulang`, 'success');
+                            fetchStudents();
+                        } catch {
+                            Swal.fire('Error', 'Gagal menghitung ulang', 'error');
+                        }
+                    }} variant="outline" className="border-purple-600 text-purple-700 hover:bg-purple-50">Hitung Ulang Semua</Button>
                     <Button onClick={fetchStudents} variant="outline" className="border-gray-300">Refresh Data</Button>
                 </div>
             </div>
