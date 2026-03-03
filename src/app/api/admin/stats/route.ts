@@ -26,7 +26,9 @@ export async function GET(request: Request) {
     }
 
     // Build where clause
-    const where: any = {};
+    const where: any = {
+      deleted_at: null
+    };
     if (tahunAjaranId) {
       where.tahun_ajaran_id = tahunAjaranId;
     } else {
