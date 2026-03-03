@@ -27,7 +27,7 @@ export default function ProfileSettings({ user }: { user: UserSession }) {
             admin_super: "Admin Super",
             admin_keuangan: "Admin Keuangan",
             admin_berkas: "Admin Berkas",
-            penguji_calsan: "Penguji Calsan (A -Qur'an)",
+            penguji_calsan: "Penguji",
             pewawancara_calsan: "Pewawancara Calsan",
             pewawancara_cawalsan: "Pewawancara Cawalsan",
             tim_it: "Tim IT",
@@ -140,7 +140,7 @@ export default function ProfileSettings({ user }: { user: UserSession }) {
                     {/* Error Alert */}
                     {error && (
                         <div className="mb-6 p-4 rounded-xl bg-red-50 text-red-700 border border-red-100 flex items-start gap-3">
-                            <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                            <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
                             <p className="text-sm font-medium">{error}</p>
                         </div>
                     )}
@@ -153,7 +153,7 @@ export default function ProfileSettings({ user }: { user: UserSession }) {
                                 <CheckCircle2 className="w-16 h-16 transform translate-x-4 -translate-y-4" />
                             </div>
 
-                            <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5 text-emerald-600 relative z-10" />
+                            <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5 text-emerald-600 relative z-10" />
                             <div className="relative z-10">
                                 <p className="text-sm font-bold">Password Berhasil Diperbarui!</p>
                                 <p className="text-xs text-emerald-700/80 mt-0.5">Mulai saat ini, gunakan password baru Anda untuk login.</p>

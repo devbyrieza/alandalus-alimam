@@ -42,7 +42,7 @@ export async function POST(req: Request) {
         if (!isSuper) {
             if (type === 'quran') {
                 if (userRole !== 'penguji_calsan') {
-                    return NextResponse.json({ error: 'Forbidden: Role restricted to Penguji Calsan (Quran)' }, { status: 403 });
+                    return NextResponse.json({ error: 'Forbidden: Role restricted to Penguji' }, { status: 403 });
                 }
             } else if (type === 'wawancara_santri') {
                 if (userRole !== 'pewawancara_calsan') {

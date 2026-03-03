@@ -208,7 +208,7 @@ export type UserRole =
   | 'pendaftar'       // Dashboard Pendaftar - calon santri
   | 'admin_berkas'    // Dashboard Admin Berkas dan Pendaftaran Umum - verifikasi dokumen & data pendaftaran
   | 'admin_keuangan'  // Dashboard Keuangan - verifikasi pembayaran & keuangan
-  | 'penguji_calsan'   // Dashboard Penguji Calsan (Quran)
+  | 'penguji_calsan'   // Dashboard Penguji (Quran)
   | 'pewawancara_calsan' // Dashboard Pewawancara Calsan
   | 'pewawancara_cawalsan' // Dashboard Pewawancara Orang Tua (Cawalsan)
   | 'head_of_it'      // Kepala IT / Root Admin - Manages users only
@@ -221,7 +221,7 @@ export const ROLE_LABELS: Record<UserRole, string> = {
   pendaftar: 'Pendaftar',
   admin_berkas: 'Admin Berkas',
   admin_keuangan: 'Admin Keuangan',
-  penguji_calsan: 'Penguji Calsan',
+  penguji_calsan: 'Penguji',
   pewawancara_calsan: 'Pewawancara Calsan',
   pewawancara_cawalsan: 'Pewawancara Cawalsan',
   head_of_it: 'Kepala IT (Root)',
