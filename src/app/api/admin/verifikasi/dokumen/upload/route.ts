@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
 import { saveFileLocal } from "@/lib/storage/local";
+import { notifyDocumentVerified } from "@/lib/wablas";
+
 
 // Konfigurasi dokumen
 const DOKUMEN_CONFIG: Record<string, {
@@ -130,10 +132,57 @@ export async function POST(request: NextRequest) {
             });
         }
 
+        const updatedFilePath = filePath;
+
+        // ============================================================
+        // AUTO-UNLOCK: Check if all required documents are now verified
+        // ============================================================
+        const REQUIRED_DOCS = [
+            'kartu_keluarga', 'akta_kelahiran', 'rapor_sem1', 'rapor_sem2',
+            'nisn', 'foto_setengah_badan', 'surat_kesehatan', 'pakta_integritas', 'pernyataan_bebas_negatif'
+        ];
+
+        const allDocs = await prisma.dokumen.findMany({
+            where: { pendaftar_id: pendaftarId }
+        });
+
+        const verifiedTypes = new Set(allDocs.filter(d => d.is_verified).map(d => d.jenis_dokumen));
+        const allRequiredVerified = REQUIRED_DOCS.every(type => verifiedTypes.has(type));
+
+        if (allRequiredVerified) {
+            const currentPendaftar = await prisma.pendaftar.findUnique({
+                where: { id: pendaftarId },
+                select: { status_pendaftaran: true, no_hp: true, nama_lengkap: true }
+            });
+
+            // Update status only if still in docs_uploaded (not yet advanced)
+            if (currentPendaftar?.status_pendaftaran === 'docs_uploaded') {
+                await prisma.pendaftar.update({
+                    where: { id: pendaftarId },
+                    data: { status_pendaftaran: 'docs_verified' }
+                });
+                console.log(`✅ [Admin Upload] Auto-unlocked pendaftar ${pendaftarId} to docs_verified`);
+
+                // Send WhatsApp notification
+                if (currentPendaftar.no_hp) {
+                    try {
+                        await notifyDocumentVerified({
+                            phone: currentPendaftar.no_hp,
+                            nama: currentPendaftar.nama_lengkap,
+                            dokumen_list: "Semua Dokumen Lengkap",
+                            status: "verified",
+                        });
+                    } catch (waError) {
+                        console.error("WhatsApp notification error after admin upload:", waError);
+                    }
+                }
+            }
+        }
+
         return NextResponse.json({
             success: true,
             message: `${config.label} berhasil diubah oleh Admin`,
-            data: { file_path: filePath },
+            data: { file_path: updatedFilePath },
         });
 
     } catch (error: any) {
