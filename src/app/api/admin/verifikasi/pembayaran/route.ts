@@ -21,9 +21,16 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get("status") || "pending";
 
     // Build filter
-    const where: any = {};
+    const where: any = {
+      // Exclude payments from soft-deleted applicants
+      pendaftar: {
+        is: {
+          deleted_at: null,
+        },
+      },
+    };
     if (status === "all") {
-      // No filter
+      // No additional filter
     } else if (status === "pending") {
       where.status_pembayaran = { notIn: ["verified", "rejected"] };
     } else {

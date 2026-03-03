@@ -23,6 +23,7 @@ export async function GET(request: NextRequest) {
         // Using any to bypass local type issues
         const students = await prisma.pendaftar.findMany({
             where: {
+                deleted_at: null, // Exclude soft-deleted applicants
                 nilai_ujian: {
                     some: {
                         status_kelulusan: "LULUS"
