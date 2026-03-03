@@ -226,7 +226,7 @@ export const ROLE_LABELS: Record<UserRole, string> = {
   pewawancara_cawalsan: 'Pewawancara Cawalsan',
   head_of_it: 'Kepala IT (Root)',
   tim_it: 'Tim IT',
-  admin_super: 'Admin Super (Mudir)',
+  admin_super: 'Admin Super',
   admin: 'Administrator (Legacy)',
 };
 
