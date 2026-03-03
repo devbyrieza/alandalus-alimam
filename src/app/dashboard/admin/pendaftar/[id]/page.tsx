@@ -607,7 +607,7 @@ export default function PendaftarDetailPage() {
                         <span className="text-3xl font-black text-amber-900">
                           {pendaftar.nilai_ujian?.score_wawancara ?? pendaftar.nilai_ujian?.nilai_wawancara_santri ?? "-"}
                         </span>
-                        <span className="text-sm text-amber-400 font-medium">/ 5.0</span>
+                        <span className="text-sm text-amber-400 font-medium">/ 100</span>
                       </div>
                     }
                   </div>
@@ -624,10 +624,10 @@ export default function PendaftarDetailPage() {
                     <span className="block text-xs text-rose-600 font-bold uppercase tracking-wide mb-1">Wawancara: Cawalsan</span>
                     {!pendaftar.nilai_ujian ?
                       <span className="text-sm font-bold text-stone-400 italic inline-block mt-2 px-3 py-1 bg-stone-100 rounded">Belum Ada</span> :
-                      (pendaftar.nilai_ujian?.nilai_wawancara_ortu ? (
+                      (pendaftar.nilai_ujian?.nilai_wawancara_ortu || (pendaftar.nilai_ujian as any)?.detail_cawalsan ? (
                         <div className="flex flex-col mt-2">
                           <span className="text-lg font-black text-rose-900 border border-rose-200 bg-white px-3 py-1 rounded-lg inline-block w-max">
-                            {pendaftar.nilai_ujian.nilai_wawancara_ortu === 1 ? 'Diterima' : 'Tidak Diterima'}
+                            {(pendaftar.nilai_ujian as any)?.detail_cawalsan?.rekomendasi || (pendaftar.nilai_ujian?.nilai_wawancara_ortu != null && Number(pendaftar.nilai_ujian.nilai_wawancara_ortu) > 0 ? `${Number(pendaftar.nilai_ujian.nilai_wawancara_ortu).toFixed(1)} / 100` : 'Belum Dinilai')}
                           </span>
                         </div>
                       ) : (

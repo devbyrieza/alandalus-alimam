@@ -83,23 +83,33 @@ export async function recalculateNilaiUjian(pendaftarId: string) {
     }
 
     // 2. Calculate Final Score (Weights in grading.ts)
+    // Use only components that have actual scores for a partial total
     const totalScore = calculateFinalScore(ak, quran, wawancaraTotal, kp, ks);
 
     // 3. Evaluate Status using Matrix Grade
-    const grdQuran = evaluateQuranGrade(quran);
-    const grdAk = evaluateAkademikGrade(ak);
-    const grdKp = evaluateKepribadianGrade(kp);
-    const grdWs = evaluateWawancaraGrade(ws); // Wawancara Calsan
-    const grdWo = evaluateWawancaraGrade(wo); // Wawancara Cawalsan
+    // CRITICAL: Only evaluate grades for components that have been actually scored.
+    // A score of 0 means "not yet graded", NOT "failed with 0".
+    const grdQuran = quran > 0 ? evaluateQuranGrade(quran) : null;
+    const grdAk = ak > 0 ? evaluateAkademikGrade(ak) : null;
+    const grdKp = kp > 0 ? evaluateKepribadianGrade(kp) : null;
+    const grdWs = ws > 0 ? evaluateWawancaraGrade(ws) : null; // Wawancara Calsan
+    const grdWo = wo > 0 ? evaluateWawancaraGrade(wo) : null; // Wawancara Cawalsan
 
-    // Matrix decision logic
-    const status = determineFinalDecision({
-        quran: grdQuran,
-        akademik: grdAk,
-        kepribadian: grdKp,
-        wawancaraCalsan: grdWs,
-        wawancaraCawalsan: grdWo
-    });
+    // Only determine final decision if ALL 5 components are graded
+    const allGraded = grdQuran !== null && grdAk !== null && grdKp !== null && grdWs !== null && grdWo !== null;
+
+    let status: string;
+    if (allGraded) {
+        status = determineFinalDecision({
+            quran: grdQuran,
+            akademik: grdAk,
+            kepribadian: grdKp,
+            wawancaraCalsan: grdWs,
+            wawancaraCawalsan: grdWo
+        });
+    } else {
+        status = 'BELUM LENGKAP';
+    }
 
     // 4. Update Database
     return await prisma.nilaiUjian.update({

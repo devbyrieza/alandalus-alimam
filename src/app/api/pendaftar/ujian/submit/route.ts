@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { prisma } from '@/lib/prisma';
 import { calculateAkademikScore, calculateKepribadianScore, calculateKesiapanScore } from '@/lib/grading';
+import { recalculateNilaiUjian } from '@/lib/scoring';
 
 export async function POST(req: Request) {
     try {
@@ -75,6 +76,9 @@ export async function POST(req: Request) {
                 updated_at: new Date()
             }
         });
+
+        // 4. Trigger recalculation so total_score and status_kelulusan update
+        await recalculateNilaiUjian(pendaftar_id);
 
         return NextResponse.json({ success: true, score, type });
 
