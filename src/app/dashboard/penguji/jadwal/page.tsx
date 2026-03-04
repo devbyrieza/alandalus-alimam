@@ -80,6 +80,16 @@ const ROLE_TO_JADWAL_TYPES: Record<string, string[]> = {
   head_of_it: ["Tes Al-Qur'an", "Wawancara Calsan", "Wawancara Cawalsan"],
 };
 
+// Auto-map role to session title (for specific examiner roles)
+const ROLE_TO_SESSION_TITLE: Record<string, string> = {
+  penguji_calsan: "Tes Al-Quran",
+  pewawancara_calsan: "Wawancara Calsan",
+  pewawancara_cawalsan: "Wawancara Cawalsan",
+};
+
+// Roles that can choose any session type (need dropdown)
+const ADMIN_ROLES = ["admin", "admin_super", "head_of_it", "tim_it"];
+
 export default function JadwalPengujiPage() {
   const [activeTab, setActiveTab] = useState<'assigned' | 'slots'>('assigned');
   const [userId, setUserId] = useState<string | null>(null);
@@ -168,6 +178,14 @@ export default function JadwalPengujiPage() {
     if (activeTab === 'assigned') fetchAssignments();
     if (activeTab === 'slots') fetchSlots();
   }, [activeTab]);
+
+  // Auto-set session title from role when role is known
+  useEffect(() => {
+    const autoTitle = ROLE_TO_SESSION_TITLE[activeRole];
+    if (autoTitle) {
+      setSlotForm(prev => ({ ...prev, title: autoTitle }));
+    }
+  }, [activeRole]);
 
   // --- Handlers ---
 
@@ -562,20 +580,32 @@ export default function JadwalPengujiPage() {
               <button onClick={() => setIsSlotModalOpen(false)}><XCircle className="w-6 h-6 text-stone-400 hover:text-stone-600" /></button>
             </div>
             <form onSubmit={handleCreateSlot} className="p-6 space-y-4">
-              <div>
-                <label className="block text-sm font-bold text-stone-700 mb-1">Jenis Ujian</label>
-                <select
-                  required
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-violet-500 outline-none bg-white"
-                  value={slotForm.title}
-                  onChange={e => setSlotForm({ ...slotForm, title: e.target.value })}
-                >
-                  <option value="" disabled>Pilih Jenis Ujian</option>
-                  <option value="Tes Al-Quran">Tes Al-Quran</option>
-                  <option value="Wawancara Calsan">Wawancara Calsan</option>
-                  <option value="Wawancara Cawalsan">Wawancara Cawalsan</option>
-                </select>
-              </div>
+              {/* Jenis Ujian: auto dari role, dropdown hanya untuk admin */}
+              {ADMIN_ROLES.includes(activeRole) ? (
+                <div>
+                  <label className="block text-sm font-bold text-stone-700 mb-1">Jenis Ujian</label>
+                  <select
+                    required
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-violet-500 outline-none bg-white"
+                    value={slotForm.title}
+                    onChange={e => setSlotForm({ ...slotForm, title: e.target.value })}
+                  >
+                    <option value="" disabled>Pilih Jenis Ujian</option>
+                    <option value="Tes Al-Quran">Tes Al-Quran</option>
+                    <option value="Wawancara Calsan">Wawancara Calsan</option>
+                    <option value="Wawancara Cawalsan">Wawancara Cawalsan</option>
+                  </select>
+                </div>
+              ) : (
+                <div>
+                  <label className="block text-sm font-bold text-stone-700 mb-1">Jenis Ujian</label>
+                  <div className="w-full px-3 py-2 border border-violet-200 bg-violet-50 rounded-lg text-violet-800 font-bold flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-violet-500 inline-block"></span>
+                    {slotForm.title || "—"}
+                  </div>
+                  <p className="text-xs text-stone-400 mt-1">Jenis ujian otomatis sesuai role akun Anda.</p>
+                </div>
+              )}
               <div>
                 <label className="block text-sm font-bold text-stone-700 mb-1">Tanggal</label>
                 <input
