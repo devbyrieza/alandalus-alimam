@@ -64,27 +64,39 @@ export default function AiChatWidget({ onClose, onEscalate }: AiChatWidgetProps)
                 body: JSON.stringify({ history, message: userMsg }),
             });
 
-            if (!response.ok) {
-                throw new Error("Gagal mengambil respon");
-            }
-
             const data = await response.json();
+
+            if (!response.ok) {
+                // Show the friendly reply from API (e.g. rate limit message) instead of hardcoded error
+                const errorReply = data?.reply || "Maaf, terjadi kesalahan. Silakan coba lagi nanti atau hubungi CS kami.";
+                setMessages(prev => [
+                    ...prev,
+                    { id: "error-" + Date.now(), role: "ai", content: errorReply }
+                ]);
+                // Auto-show escalation button if it's a server error
+                setChatCount(prev => Math.max(prev, 3));
+                return;
+            }
 
             setMessages(prev => [
                 ...prev,
                 { id: (Date.now() + 1).toString(), role: "ai", content: data.reply }
             ]);
 
-            // If the response contains specific phrases suggesting to contact CS, we can show escalation immediately
-            if (data.reply.toLowerCase().includes("live chat cs") || data.reply.toLowerCase().includes("hubungi tim kami")) {
-                setChatCount(3); // Force show escalation button
+            // If the response contains specific phrases suggesting to contact CS, show escalation immediately
+            if (
+                data.reply.toLowerCase().includes("live chat cs") ||
+                data.reply.toLowerCase().includes("live chat") ||
+                data.reply.toLowerCase().includes("hubungi tim kami")
+            ) {
+                setChatCount(prev => Math.max(prev, 3)); // Force show escalation button
             }
 
         } catch (error) {
             console.error("Chat error:", error);
             setMessages(prev => [
                 ...prev,
-                { id: "error", role: "ai", content: "Maaf, terjadi kesalahan atau koneksi terputus. Silakan coba lagi nanti atau hubungi CS kami." }
+                { id: "error-" + Date.now(), role: "ai", content: "Maaf, koneksi terputus. Silakan coba lagi atau hubungi CS kami." }
             ]);
         } finally {
             setIsLoading(false);
