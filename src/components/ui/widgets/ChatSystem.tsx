@@ -43,13 +43,28 @@ export default function ChatSystem() {
     }, [isMenuOpen]);
 
     const openTawkTo = () => {
-        if (window.Tawk_API) {
-            window.Tawk_API.maximize();
-        } else {
-            // Fallback if Tawk.to fails to load
-            window.open("https://tawk.to/chat/69997c299d60291c30387e88/default", "_blank");
-        }
         setIsMenuOpen(false);
+
+        // Retry mechanism: wait up to 3s for Tawk_API to be ready
+        const tryOpenTawk = (attempts = 0) => {
+            if (
+                window.Tawk_API &&
+                typeof window.Tawk_API.maximize === "function"
+            ) {
+                window.Tawk_API.showWidget();
+                window.Tawk_API.maximize();
+            } else if (attempts < 10) {
+                setTimeout(() => tryOpenTawk(attempts + 1), 300);
+            } else {
+                // Fallback after 3s: open in new tab
+                window.open(
+                    "https://tawk.to/chat/69997c299d60291c30387e88/default",
+                    "_blank"
+                );
+            }
+        };
+
+        tryOpenTawk();
     };
 
     const openWhatsApp = () => {

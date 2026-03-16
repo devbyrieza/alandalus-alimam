@@ -81,10 +81,18 @@ export async function POST(req: Request) {
 
         return NextResponse.json({ reply: text });
 
-    } catch (error) {
-        console.error("Gemini API Error:", error);
+    } catch (error: any) {
+        const errMsg = error?.message || String(error);
+        console.error("Gemini API Error:", errMsg);
+
+        // Handle rate limit (429) gracefully
+        const isRateLimit = errMsg.includes("429") || errMsg.includes("RESOURCE_EXHAUSTED") || errMsg.includes("retryDelay");
+        const reply = isRateLimit
+            ? "Asisten AI sedang ramai sebentar. Silakan coba lagi dalam beberapa detik, atau klik 'Live Chat CS' untuk langsung bicara dengan panitia kami ya. 😊"
+            : "Maaf, terjadi kesalahan. Silakan coba lagi atau hubungi Live Chat CS kami.";
+
         return NextResponse.json(
-            { error: "Terjadi kesalahan pada server", reply: "Maaf, sistem AI sedang sibuk. Silakan coba beberapa saat lagi atau hubungi Live Chat CS." },
+            { error: "server_error", reply },
             { status: 500 }
         );
     }
