@@ -112,8 +112,8 @@ export default function Navbar() {
               </div>
             </Link>
 
-            {/* Desktop Nav - visible from xl (1280px+) */}
-            <nav className="hidden xl:flex items-center gap-0.5 bg-surface-50/50 p-1 rounded-xl border border-surface-200">
+            {/* Desktop Nav - visible from lg (1024px+) */}
+            <nav className="hidden lg:flex items-center gap-0.5 bg-surface-50/50 p-1 rounded-xl border border-surface-200">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -129,11 +129,11 @@ export default function Navbar() {
               ))}
             </nav>
 
-            {/* CTA Buttons - visible from xl (1280px+) */}
-            <div className="hidden xl:flex items-center gap-3">
+            {/* CTA Buttons - visible from lg (1024px+) */}
+            <div className="hidden lg:flex items-center gap-2 xl:gap-3">
               <ThemeSwitcher />
               <div className="w-px h-6 bg-surface-200 dark:bg-surface-200/20 mx-1" />
-              <Link href="/login" className="text-xs xl:text-sm font-bold text-ink-600 hover:text-brown-700 transition-colors px-3 py-2 min-h-[40px]">
+              <Link href="/login" className="text-xs font-bold text-ink-600 hover:text-brown-700 transition-colors px-2 xl:px-3 py-2 min-h-[40px]">
                 Masuk
               </Link>
               <Link href="/ppdb" className="rounded-lg px-5 py-2 bg-brown-700 hover:bg-brown-800 text-white text-xs xl:text-sm font-bold shadow-premium-md transition-all duration-300 group inline-flex items-center min-h-[40px] whitespace-nowrap">
@@ -141,10 +141,10 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* Mobile/Tablet Toggle - shows on < xl (below 1280px) */}
+            {/* Hamburger - visible below lg (up to 1023px) */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="xl:hidden p-3 sm:p-3.5 rounded-xl bg-surface-50 border border-surface-200 text-ink-700 hover:bg-surface-100 transition-all duration-300 min-h-[44px] min-w-[44px] flex items-center justify-center"
+              className="lg:hidden p-3 sm:p-3.5 rounded-xl bg-surface-50 border border-surface-200 text-ink-700 hover:bg-surface-100 transition-all duration-300 min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label={isMenuOpen ? "Tutup menu" : "Buka menu"}
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
