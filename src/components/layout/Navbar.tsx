@@ -106,8 +106,8 @@ export default function Navbar() {
                 <h1 className="text-sm sm:text-base font-extrabold text-ink-950 leading-none tracking-tight">
                   Al-Imam
                 </h1>
-                <p className="hidden xl:block text-[9px] sm:text-[10px] font-bold text-ink-500 uppercase tracking-wide mt-0.5 leading-tight max-w-[150px] sm:max-w-none truncate sm:truncate-none">
-                  Managed by Al-Andalus International Boarding School
+                <p className="text-[7px] xl:text-[8px] font-bold text-ink-500 uppercase tracking-wide mt-0.5 leading-tight max-w-[80px] xl:max-w-[210px] truncate">
+                  Managed by Al-Andalus International Islamic Boarding School
                 </p>
               </div>
             </Link>

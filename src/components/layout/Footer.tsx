@@ -31,7 +31,7 @@ export default function Footer() {
               </div>
               <div>
                 <h3 className="text-xl font-extrabold text-ink-950 tracking-tight leading-none">Al-Imam</h3>
-                <p className="text-[10px] font-bold text-ink-500 uppercase tracking-[0.2em] mt-2">Managed by Al-Andalus International Boarding School</p>
+                <p className="text-[10px] font-bold text-ink-500 uppercase tracking-[0.2em] mt-2">Managed by Al-Andalus International Islamic Boarding School</p>
               </div>
             </Link>
             <p className="text-ink-600 font-medium leading-relaxed max-w-xs text-justify">

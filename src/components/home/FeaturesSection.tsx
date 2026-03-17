@@ -57,7 +57,7 @@ export default function FeaturesSection() {
                   <span className="text-brown-600">Al-Imam Sukabumi?</span>
                 </h2>
                 <p className="text-sm font-bold text-brown-600 uppercase tracking-widest mb-8">
-                  Managed by Al-Andalus International Boarding School
+                  Managed by Al-Andalus International Islamic Boarding School
                 </p>
                 <p className="text-lg text-ink-600 leading-relaxed font-medium text-justify lg:text-left">
                   Pendidikan Islam unggulan yang memadukan kurikulum terbaik untuk mencetak generasi Rabbani.
