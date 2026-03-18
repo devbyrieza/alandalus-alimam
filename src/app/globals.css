@@ -738,8 +738,18 @@
   }
 
   /* Keep legacy aliases */
-  .text-gradient-brown { @apply text-gradient-maroon; }
-  .text-gradient-gold  { @apply text-gradient-cream; }
+  .text-gradient-brown {
+    background: linear-gradient(135deg, var(--color-maroon-500) 0%, var(--color-maroon-800) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .text-gradient-gold  {
+    background: linear-gradient(135deg, var(--color-cream-400) 0%, var(--color-cream-600) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
   /* Backgrounds */
   .bg-cream-gradient {
