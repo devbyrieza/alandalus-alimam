@@ -125,7 +125,7 @@ export default function AiChatWidget({ onClose, onEscalate }: AiChatWidgetProps)
             <div className="bg-maroon-800 text-white p-4 md:p-5 flex items-center justify-between shrink-0 shadow-sm relative z-10">
                 <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 border border-white/20">
-                        <Bot className="w-6 h-6 text-gold-400" />
+                        <Bot className="w-6 h-6 text-cream-300" />
                     </div>
                     <div>
                         <h3 className="font-bold text-[15px] leading-tight flex items-center gap-2">
