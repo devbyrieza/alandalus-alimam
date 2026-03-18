@@ -129,13 +129,13 @@ export default function ChatSystem() {
                                         setIsMenuOpen(false);
                                         setIsAiOpen(true);
                                     }}
-                                    className="w-full flex items-center gap-3 p-3 hover:bg-brown-50 rounded-xl transition-colors group text-left"
+                                    className="w-full flex items-center gap-3 p-3 hover:bg-maroon-50 rounded-xl transition-colors group text-left"
                                 >
-                                    <div className="w-10 h-10 rounded-full bg-brown-100 flex items-center justify-center shrink-0 group-hover:bg-brown-600 transition-colors">
-                                        <Bot className="w-5 h-5 text-brown-600 group-hover:text-white transition-colors" />
+                                    <div className="w-10 h-10 rounded-full bg-maroon-100 flex items-center justify-center shrink-0 group-hover:bg-maroon-600 transition-colors">
+                                        <Bot className="w-5 h-5 text-maroon-600 group-hover:text-white transition-colors" />
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-ink-900 group-hover:text-brown-800 text-sm mb-0.5">💬 Tanya AI Assistant</h4>
+                                        <h4 className="font-bold text-ink-900 group-hover:text-maroon-800 text-sm mb-0.5">💬 Tanya AI Assistant</h4>
                                         <p className="text-[11px] text-ink-500 font-medium">Bantuan cepat informasi PPDB 24/7</p>
                                     </div>
                                 </button>
@@ -208,12 +208,12 @@ export default function ChatSystem() {
                                 animate={{ opacity: 1, scale: 1 }}
                                 whileHover={{ scale: 1.05, y: -2 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="w-[60px] h-[60px] md:w-16 md:h-16 bg-brown-700 text-white rounded-[1.2rem] md:rounded-[1.3rem] flex items-center justify-center shadow-[0_10px_30px_rgba(115,84,56,0.5)] relative transition-all duration-300"
+                                className="w-[60px] h-[60px] md:w-16 md:h-16 bg-maroon-700 text-white rounded-[1.2rem] md:rounded-[1.3rem] flex items-center justify-center shadow-[0_10px_30px_rgba(115,84,56,0.5)] relative transition-all duration-300"
                             >
                                 {/* Pulse Effect */}
-                                <span className="absolute inset-0 rounded-[1.2rem] md:rounded-[1.3rem] bg-brown-700/40 animate-ping" style={{ animationDuration: '3s' }} />
+                                <span className="absolute inset-0 rounded-[1.2rem] md:rounded-[1.3rem] bg-maroon-700/40 animate-ping" style={{ animationDuration: '3s' }} />
 
-                                <div className="relative z-10 w-full h-full flex items-center justify-center bg-brown-700 rounded-[1.2rem] md:rounded-[1.3rem] border-2 border-brown-600/50">
+                                <div className="relative z-10 w-full h-full flex items-center justify-center bg-maroon-700 rounded-[1.2rem] md:rounded-[1.3rem] border-2 border-maroon-600/50">
                                     {isMenuOpen ? (
                                         <X className="w-8 h-8 md:w-9 md:h-9" />
                                     ) : (
