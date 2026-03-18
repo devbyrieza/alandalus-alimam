@@ -42,7 +42,7 @@ const StatCard = ({ icon: Icon, value, label, delay = 0 }: { icon: any, value: s
     className="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-[2rem] border border-surface-100 shadow-premium-sm hover:shadow-premium-md transition-all text-center group"
   >
     <div className="w-14 h-14 mx-auto bg-surface-50 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-premium-xs">
-      <Icon className="w-7 h-7 text-brown-600" />
+      <Icon className="w-7 h-7 text-maroon-600" />
     </div>
     <div className="font-display font-black text-lg sm:text-2xl md:text-3xl text-ink-950 mb-1 leading-tight break-words">{value}</div>
     <div className="text-[10px] font-black text-ink-400 uppercase tracking-widest leading-tight">{label}</div>
@@ -62,7 +62,7 @@ const TimelineItem = ({ item, index }: { item: any, index: number }) => (
 
     {/* Dot */}
     <div className={`absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-2xl md:rounded-3xl border-4 flex items-center justify-center bg-white z-10 shadow-premium-sm transition-all duration-500
-      ${item.status === 'active' ? 'border-brown-600 text-brown-600' : 'border-surface-100 text-ink-300'}`}>
+      ${item.status === 'active' ? 'border-maroon-600 text-maroon-600' : 'border-surface-100 text-ink-300'}`}>
       <span className="text-xl md:text-2xl font-display font-black">{index + 1}</span>
       {item.status === 'active' && (
         <motion.span
@@ -77,7 +77,7 @@ const TimelineItem = ({ item, index }: { item: any, index: number }) => (
     <div className="bg-white p-5 sm:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-surface-100 shadow-premium-sm hover:shadow-premium-md transition-all">
       <div className="flex flex-wrap items-center gap-4 mb-3">
         <h3 className="text-xl md:text-2xl font-display font-black text-ink-950">{item.phase}</h3>
-        <span className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${item.status === 'active' ? 'bg-brown-50 text-brown-700' : 'bg-surface-50 text-ink-400'
+        <span className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${item.status === 'active' ? 'bg-maroon-50 text-maroon-700' : 'bg-surface-50 text-ink-400'
           }`}>
           {item.date}
         </span>
@@ -175,8 +175,8 @@ function PPDBContent() {
     <main className="bg-white min-h-screen">
       {/* 1. Hero Section - Airy & Impactful */}
       <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden bg-white">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brown-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gold-50/30 rounded-full blur-[100px] -translate-x-1/2 translate-y-1/2 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-maroon-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-cream-50/30 rounded-full blur-[100px] -translate-x-1/2 translate-y-1/2 pointer-events-none" />
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
 
         <Container className="relative z-10">
@@ -184,7 +184,7 @@ function PPDBContent() {
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-surface-200 text-brown-700 text-xs font-black uppercase tracking-widest mb-10 shadow-premium-sm"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-surface-200 text-maroon-700 text-xs font-black uppercase tracking-widest mb-10 shadow-premium-sm"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>Penerimaan Santri Baru T.A 2026/2027</span>
@@ -197,7 +197,7 @@ function PPDBContent() {
               className="text-4xl sm:text-6xl lg:text-8xl font-display font-black mb-8 md:mb-10 tracking-tight leading-[0.9] text-ink-950"
             >
               Siapkan Generasi <br />
-              <span className="text-brown-600">Terbaik Kita</span>
+              <span className="text-maroon-600">Terbaik Kita</span>
             </motion.h1>
 
             <motion.p
@@ -217,7 +217,7 @@ function PPDBContent() {
             >
               <Link
                 href={`/daftar${jenjang ? `?jenjang=${jenjang}` : ''}`}
-                className="inline-flex items-center justify-center gap-3 px-10 py-5 rounded-pill bg-brown-900 text-white font-black text-xl hover:bg-gold-500 shadow-premium-lg transition-all"
+                className="inline-flex items-center justify-center gap-3 px-10 py-5 rounded-pill bg-maroon-900 text-white font-black text-xl hover:bg-maroon-800 shadow-premium-lg transition-all"
               >
                 Daftar PPDB Baru
               </Link>
@@ -244,12 +244,12 @@ function PPDBContent() {
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
             {/* Sticky Content */}
             <div className="lg:w-2/5 lg:sticky lg:top-32 h-fit flex flex-col items-center text-center lg:items-start lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-surface-200 text-brown-700 text-xs font-black uppercase tracking-widest mb-8 shadow-premium-sm">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-surface-200 text-maroon-700 text-xs font-black uppercase tracking-widest mb-8 shadow-premium-sm">
                 <Clock className="w-3.5 h-3.5" />
                 <span>Tahapan Pendaftaran</span>
               </div>
               <h2 className="text-3xl md:text-5xl font-display font-black text-ink-950 mb-8 leading-tight">
-                Alur Seleksi <br /> <span className="text-brown-600">Lengkap & Transparan</span>
+                Alur Seleksi <br /> <span className="text-maroon-600">Lengkap & Transparan</span>
               </h2>
               <p className="text-xl text-ink-600 leading-relaxed font-medium mb-10 text-center lg:text-left">
                 Kami memastikan setiap proses pendaftaran berlangsung dengan adil dan informatif bagi calon santri dan orang tua.
@@ -285,7 +285,7 @@ function PPDBContent() {
       <section className="py-24 md:py-32 bg-white">
         <Container>
           <div className="text-center mb-16 md:mb-24">
-            <h2 className="text-3xl md:text-6xl font-display font-black text-ink-950 mb-6">Informasi Investasi <br /><span className="text-brown-600">Pendidikan</span></h2>
+            <h2 className="text-3xl md:text-6xl font-display font-black text-ink-950 mb-6">Informasi Investasi <br /><span className="text-maroon-600">Pendidikan</span></h2>
             <p className="text-xl text-ink-600 max-w-2xl mx-auto font-medium">Bentuk ikhtiar orang tua dalam memfasilitasi masa depan terbaik ananda.</p>
           </div>
 
@@ -299,9 +299,9 @@ function PPDBContent() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
-                  className="bg-white p-8 sm:p-12 rounded-[2rem] md:rounded-[3.5rem] border border-surface-100 shadow-premium-lg flex flex-col items-center text-center group hover:bg-brown-900 transition-all duration-500"
+                  className="bg-white p-8 sm:p-12 rounded-[2rem] md:rounded-[3.5rem] border border-surface-100 shadow-premium-lg flex flex-col items-center text-center group hover:bg-maroon-900 transition-all duration-500"
                 >
-                  <div className="w-20 h-20 bg-surface-50 rounded-[2rem] flex items-center justify-center text-brown-600 mb-8 group-hover:bg-white/10 group-hover:text-white transition-all shadow-premium-sm">
+                  <div className="w-20 h-20 bg-surface-50 rounded-[2rem] flex items-center justify-center text-maroon-600 mb-8 group-hover:bg-white/10 group-hover:text-white transition-all shadow-premium-sm">
                     <Icon className="w-10 h-10" />
                   </div>
                   <h3 className="text-xl text-ink-400 font-black uppercase tracking-widest mb-3 group-hover:text-white/60 transition-colors">{item.label}</h3>
@@ -315,13 +315,13 @@ function PPDBContent() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="mt-16 max-w-4xl mx-auto bg-brown-50 border border-brown-100 rounded-[2.5rem] p-8 md:p-10 flex flex-col md:flex-row items-center gap-8 text-center md:text-left"
+            className="mt-16 max-w-4xl mx-auto bg-maroon-50 border border-maroon-100 rounded-[2.5rem] p-8 md:p-10 flex flex-col md:flex-row items-center gap-8 text-center md:text-left"
           >
-            <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-brown-600 shadow-premium-sm shrink-0">
+            <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-maroon-600 shadow-premium-sm shrink-0">
               <HelpCircle className="w-8 h-8" />
             </div>
             <div>
-              <p className="text-lg text-brown-900 font-bold leading-relaxed">
+              <p className="text-lg text-maroon-900 font-bold leading-relaxed">
                 Catatan Penting: Biaya pendaftaran dan uang pangkal bersifat non-refundable (tidak dapat dikembalikan). Silakan hubungi admin untuk skema cicilan resmi.
               </p>
             </div>
@@ -335,7 +335,7 @@ function PPDBContent() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
             {/* Requirements */}
             <div className="space-y-12">
-              <h2 className="text-3xl md:text-4xl font-display font-black text-ink-950 text-center lg:text-left">Persyaratan <span className="text-brown-600">Administrasi</span></h2>
+              <h2 className="text-3xl md:text-4xl font-display font-black text-ink-950 text-center lg:text-left">Persyaratan <span className="text-maroon-600">Administrasi</span></h2>
               <div className="space-y-6 md:space-y-8">
                 {requirements.map((req, idx) => {
                   const ReqIcon = req.icon;
@@ -348,7 +348,7 @@ function PPDBContent() {
                       className="bg-white p-6 sm:p-10 rounded-[2rem] md:rounded-[3rem] border border-surface-100 shadow-premium-md"
                     >
                       <div className="flex items-center gap-4 md:gap-5 mb-6 md:mb-8">
-                        <div className="w-12 h-12 md:w-14 md:h-14 bg-brown-50 rounded-2xl flex items-center justify-center text-brown-600 shadow-premium-sm shrink-0">
+                        <div className="w-12 h-12 md:w-14 md:h-14 bg-maroon-50 rounded-2xl flex items-center justify-center text-maroon-600 shadow-premium-sm shrink-0">
                           <ReqIcon className="w-6 h-6 md:w-7 md:h-7" />
                         </div>
                         <h3 className="text-xl md:text-2xl font-display font-black text-ink-950 leading-tight">{req.title}</h3>
@@ -361,7 +361,7 @@ function PPDBContent() {
                               <Check className="w-5 h-5" />
                             </div>
                             <span className="flex-1 font-bold text-ink-700 text-sm md:text-base leading-tight">{item.name}</span>
-                            <span className="text-[10px] font-black uppercase tracking-widest text-ink-300 group-hover:text-brown-600 shrink-0">{item.type}</span>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-ink-300 group-hover:text-maroon-600 shrink-0">{item.type}</span>
                           </li>
                         ))}
                       </ul>
@@ -384,7 +384,7 @@ function PPDBContent() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="bg-brown-900 rounded-[2rem] md:rounded-[4rem] p-6 md:p-16 text-white relative overflow-hidden shadow-premium-2xl"
+                className="bg-maroon-900 rounded-[2rem] md:rounded-[4rem] p-6 md:p-16 text-white relative overflow-hidden shadow-premium-2xl"
               >
                 <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
                 <div className="relative z-10">

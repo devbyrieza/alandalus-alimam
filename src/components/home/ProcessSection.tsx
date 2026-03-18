@@ -1,6 +1,6 @@
 "use client";
 
-import { UserPlus, FileText, CreditCard, ClipboardCheck, GraduationCap, CheckCircle } from "lucide-react";
+import { UserPlus, FileText, CreditCard, ClipboardCheck, GraduationCap, CheckCircle, BellRing } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
 
@@ -21,12 +21,18 @@ const STEPS = [
         icon: FileText,
         title: "Lengkapi Berkas",
         description: "Isi form biodata lengkap dan unggah dokumen persyaratan digital.",
-        color: "gold",
+        color: "maroon",
     },
     {
         icon: ClipboardCheck,
         title: "Tes Seleksi",
         description: "Hadiri dan ikuti ujian seleksi Al-Qur'an, wawancara, dan tes tulis.",
+        color: "cream",
+    },
+    {
+        icon: BellRing,
+        title: "Pengumuman",
+        description: "Lihat hasil kelulusan seleksi melalui dashboard pendaftar & WhatsApp.",
         color: "maroon",
     },
     {
@@ -79,7 +85,7 @@ export default function ProcessSection() {
                     {/* Connector Line (Desktop) */}
                     <div className="hidden lg:block absolute top-[60px] left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cream-200 to-transparent z-0" />
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-4 overflow-x-hidden md:overflow-visible">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-4 overflow-x-hidden md:overflow-visible">
                         {STEPS.map((step, idx) => (
                             <motion.div
                                 key={idx}
