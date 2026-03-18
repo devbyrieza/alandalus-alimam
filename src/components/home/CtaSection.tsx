@@ -13,7 +13,7 @@ export default function CtaSection() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    className="bg-gradient-to-br from-maroon-800 to-maroon-950 rounded-[2.5rem] md:rounded-[3rem] lg:rounded-[4rem] p-8 sm:p-12 md:p-16 lg:p-24 relative overflow-hidden text-center shadow-lg border border-maroon-700"
+                    className="bg-maroon-900 bg-linear-to-br from-maroon-800 to-maroon-950 rounded-[2.5rem] md:rounded-[3rem] lg:rounded-[4rem] p-8 sm:p-12 md:p-16 lg:p-24 relative overflow-hidden text-center shadow-lg border border-maroon-700"
                 >
                     <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.05] mix-blend-overlay" />
                     <div className="absolute -top-32 -right-32 w-64 h-64 sm:w-80 sm:h-80 md:w-[400px] md:h-[400px] bg-cream-100/10 rounded-full blur-[80px] md:blur-[100px]" />

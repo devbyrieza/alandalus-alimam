@@ -109,7 +109,7 @@ export default function FeaturesSection() {
                   </div>
                 </div>
                 
-                <div className="bg-gradient-to-br from-maroon-700 to-maroon-950 border border-maroon-600 p-6 sm:p-8 rounded-[2rem] shadow-lg min-h-[16rem] md:h-72 flex flex-col justify-center items-center text-center relative overflow-hidden group hover:shadow-xl transition-all duration-300">
+                <div className="bg-maroon-900 bg-linear-to-br from-maroon-700 to-maroon-950 border border-maroon-600 p-6 sm:p-8 rounded-[2rem] shadow-lg min-h-[16rem] md:h-72 flex flex-col justify-center items-center text-center relative overflow-hidden group hover:shadow-xl transition-all duration-300">
                   <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 mix-blend-overlay" />
                   <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mb-6 backdrop-blur-sm group-hover:scale-110 transition-transform duration-500">
                     <BookOpenCheck className="w-10 h-10 text-cream-200" />
