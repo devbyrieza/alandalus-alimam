@@ -291,7 +291,7 @@ export default function PengumumanPage() {
               <h2 className="text-2xl font-black text-ink-900 mb-2">Mengirim Pengumuman...</h2>
               <p className="font-bold text-red-500 mb-6 uppercase tracking-widest text-xs">JANGAN TUTUP HALAMAN INI!</p>
 
-              <div className="w-full bg-surface-100 h-4 rounded-full overflow-hidden mb-4 border border-ink-100">
+              <div className="w-full bg-cream-100 h-4 rounded-full overflow-hidden mb-4 border border-ink-100">
                 <div
                   className="h-full bg-gradient-to-r from-green-500 to-emerald-600 transition-all duration-500 ease-out"
                   style={{ width: `${(sendingProgress.curr / sendingProgress.total) * 100}%` }}
@@ -300,7 +300,7 @@ export default function PengumumanPage() {
 
               <p className="font-mono font-bold text-ink-500 mb-4">{sendingProgress.curr} / {sendingProgress.total}</p>
 
-              <div className="bg-surface-50 rounded-xl p-4 text-left h-32 overflow-hidden flex flex-col-reverse gap-1 border border-ink-100">
+              <div className="bg-cream-50 rounded-xl p-4 text-left h-32 overflow-hidden flex flex-col-reverse gap-1 border border-ink-100">
                 {sendingProgress.logs.map((log, idx) => (
                   <p key={idx} className="text-xs font-mono text-ink-400 truncate">{log}</p>
                 ))}

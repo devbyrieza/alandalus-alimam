@@ -51,7 +51,7 @@ export default function GaleriPage() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-surface-200 text-brown-700 text-xs font-bold uppercase tracking-widest mb-10 shadow-premium-sm"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-cream-50 border border-cream-200 text-maroon-700 text-xs font-bold uppercase tracking-widest mb-10 shadow-sm"
           >
             <Camera className="w-3.5 h-3.5" />
             <span>Dokumentasi Pesantren</span>
@@ -64,7 +64,7 @@ export default function GaleriPage() {
             className="text-5xl md:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
           >
             Galeri <br />
-            <span className="text-brown-600">Al-Imam</span>
+            <span className="text-gradient-maroon">Al-Imam</span>
           </motion.h1>
 
           <motion.p
@@ -92,14 +92,14 @@ export default function GaleriPage() {
               className="mb-12"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-brown-50 flex items-center justify-center text-brown-600">
+                <div className="w-10 h-10 rounded-xl bg-cream-100 flex items-center justify-center text-maroon-700 border border-cream-200">
                   <Images className="w-5 h-5" />
                 </div>
                 <h2 className="text-3xl md:text-4xl font-display font-black text-ink-950 tracking-tight">
                   {category.title}
                 </h2>
               </div>
-              <div className="w-20 h-1.5 bg-brown-200 rounded-full" />
+              <div className="w-20 h-1.5 bg-maroon-300 rounded-pill" />
             </motion.div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
@@ -138,21 +138,21 @@ export default function GaleriPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-brown-800 rounded-[2rem] md:rounded-[3rem] lg:rounded-[4rem] p-6 sm:p-8 md:p-16 lg:p-24 text-center text-white relative overflow-hidden shadow-premium-2xl"
+            className="bg-maroon-800 rounded-[2rem] md:rounded-[3rem] lg:rounded-[4rem] p-6 sm:p-8 md:p-16 lg:p-24 text-center text-white relative overflow-hidden shadow-lg"
           >
             <div className="absolute top-0 right-0 w-32 h-32 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-white/5 rounded-full blur-[60px] md:blur-[100px] -translate-y-1/2 translate-x-1/2" />
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
 
             <div className="relative z-10">
               <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-black mb-4 sm:mb-6 md:mb-8 text-white leading-tight">
-                Tertarik? <br /> <span className="text-gold-400">Kunjungi Langsung!</span>
+                Tertarik? <br /> <span className="text-cream-100">Kunjungi Langsung!</span>
               </h2>
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-brown-100 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 lg:mb-12 font-medium px-2">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-maroon-100 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 lg:mb-12 font-medium px-2">
                 Foto tidak cukup menggambarkan suasana sesungguhnya. Jadwalkan kunjungan ke pesantren dan rasakan sendiri.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center px-4">
                 <Link href="/kontak">
-                  <button className="w-full sm:w-auto px-6 sm:px-10 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white text-brown-900 font-black text-sm sm:text-base md:text-lg hover:bg-gold-400 hover:text-white shadow-premium-xl transition-all min-h-[48px] sm:min-h-[52px]">
+                  <button className="w-full sm:w-auto px-6 sm:px-10 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white text-maroon-900 font-black text-sm sm:text-base md:text-lg hover:bg-cream-100 shadow-md transition-all min-h-[48px] sm:min-h-[52px]">
                     Jadwalkan Kunjungan
                   </button>
                 </Link>

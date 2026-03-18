@@ -4,9 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, School, Sparkles, Phone, Moon, Sun } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { scrollToSection, scrollToTop, navigateToDetail } from "@/lib/navigation-scroll";
-import ThemeSwitcher from "../ui/ThemeSwitcher";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,7 +37,6 @@ export default function Navbar() {
     return pathname.startsWith(href);
   };
 
-  // Handle smooth scroll for anchor links on homepage
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     // Handle anchor links on homepage
     if (href.startsWith("#") && pathname === "/") {
@@ -47,7 +45,7 @@ export default function Navbar() {
       return;
     }
 
-    // Handle section links from other pages - navigate to home and scroll to section
+    // Handle section links from other pages
     if (href.startsWith("#") && pathname !== "/") {
       e.preventDefault();
       sessionStorage.setItem('scroll_to_section', href);
@@ -55,7 +53,7 @@ export default function Navbar() {
       return;
     }
 
-    // Handle detail page navigation - save scroll position
+    // Handle detail page navigation
     if (['/tentang', '/program', '/fasilitas', '/kegiatan', '/galeri', '/kontak'].includes(href)) {
       e.preventDefault();
       const sectionMap: Record<string, string> = {
@@ -70,14 +68,11 @@ export default function Navbar() {
     }
   };
 
-  // Handle Beranda click - always scroll to top
   const handleBerandaClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     if (pathname === "/") {
-      // Already on homepage, scroll to top
       scrollToTop();
     } else {
-      // Navigate to homepage and scroll to top
       sessionStorage.removeItem('scroll_to_section');
       sessionStorage.removeItem('scroll_to_position');
       window.location.href = '/';
@@ -88,40 +83,40 @@ export default function Navbar() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-          ? "bg-white/80 dark:bg-ink-950/80 backdrop-blur-xl border-b border-surface-200 dark:border-surface-200/20 py-2 shadow-premium-sm"
-          : "bg-transparent py-3 lg:py-4"
+          ? "glass border-b border-cream-200/50 py-2 shadow-sm"
+          : "bg-transparent py-4 lg:py-5"
           }`}
       >
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" onClick={handleBerandaClick} className="flex items-center gap-2 sm:gap-3 group min-h-[44px]">
+            <Link href="/" onClick={handleBerandaClick} className="flex items-center gap-3 group min-h-[44px]">
               <div className="relative">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center bg-brown-700 text-white shadow-premium-md transition-transform duration-500 group-hover:scale-105 group-hover:rotate-3 overflow-hidden">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-[14px] flex items-center justify-center bg-maroon-700 shadow-maroon transition-transform duration-500 group-hover:scale-105 group-hover:-rotate-3 overflow-hidden">
                   <img src="/images/logo.webp" alt="Logo Al-Imam" className="w-full h-full object-cover" />
                 </div>
-                <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-500 border-2 border-white rounded-full" />
+                <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full z-10" />
               </div>
               <div className="block">
-                <h1 className="text-sm sm:text-base font-extrabold text-ink-950 leading-none tracking-tight">
+                <h1 className="text-base sm:text-lg font-black text-maroon-900 leading-none tracking-tight">
                   Al-Imam
                 </h1>
-                <p className="text-[7px] xl:text-[8px] font-bold text-ink-500 uppercase tracking-wide mt-0.5 leading-tight max-w-[80px] xl:max-w-[210px] truncate">
-                  Managed by Al-Andalus International Islamic Boarding School
+                <p className="text-[9px] sm:text-[10px] font-bold text-maroon-600/70 uppercase tracking-widest mt-0.5 leading-tight max-w-[120px] sm:max-w-[200px] truncate">
+                  Islamic Boarding School
                 </p>
               </div>
             </Link>
 
             {/* Desktop Nav - visible from lg (1024px+) */}
-            <nav className="hidden lg:flex items-center gap-0.5 bg-surface-50/50 p-1 rounded-xl border border-surface-200">
+            <nav className="hidden lg:flex items-center gap-1 bg-white/60 backdrop-blur-md p-1.5 rounded-pill border border-cream-200">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`px-3 xl:px-4 py-2 text-xs xl:text-sm font-bold rounded-lg transition-all duration-300 min-h-[40px] ${isActive(link.href)
-                    ? "bg-white text-brown-700 shadow-premium-sm"
-                    : "text-ink-600 hover:text-ink-950 hover:bg-white/50"
+                  className={`px-4 py-2 text-sm font-bold rounded-pill transition-all duration-300 min-h-[40px] flex items-center ${isActive(link.href)
+                    ? "bg-maroon-50 text-maroon-700 shadow-sm"
+                    : "text-ink-600 hover:text-maroon-800 hover:bg-cream-100/50"
                     }`}
                 >
                   {link.label}
@@ -129,71 +124,102 @@ export default function Navbar() {
               ))}
             </nav>
 
-            {/* CTA Buttons - visible from lg (1024px+) */}
-            <div className="hidden lg:flex items-center gap-2 xl:gap-3">
-              <ThemeSwitcher />
-              <div className="w-px h-6 bg-surface-200 dark:bg-surface-200/20 mx-1" />
-              <Link href="/login" className="text-xs font-bold text-ink-600 hover:text-brown-700 transition-colors px-2 xl:px-3 py-2 min-h-[40px]">
+            {/* CTA Buttons - visible from lg */}
+            <div className="hidden lg:flex items-center gap-3 xl:gap-4 px-1">
+              <Link href="/login" className="text-sm font-bold text-maroon-700 hover:text-maroon-900 transition-colors px-4 py-2 min-h-[40px] flex items-center">
                 Masuk
               </Link>
-              <Link href="/ppdb" className="rounded-lg px-5 py-2 bg-brown-700 hover:bg-brown-800 text-white text-xs xl:text-sm font-bold shadow-premium-md transition-all duration-300 group inline-flex items-center min-h-[40px] whitespace-nowrap">
-                Daftar PPDB
+              <Link href="/ppdb" className="btn-primary flex items-center gap-2 group">
+                PPDB 2025
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
 
-            {/* Hamburger - visible below lg (up to 1023px) */}
+            {/* Hamburger - visible below lg */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-3 sm:p-3.5 rounded-xl bg-surface-50 border border-surface-200 text-ink-700 hover:bg-surface-100 transition-all duration-300 min-h-[44px] min-w-[44px] flex items-center justify-center"
+              className="lg:hidden p-3 rounded-2xl bg-white border border-cream-200 text-maroon-800 hover:bg-cream-50 transition-all duration-300 min-h-[48px] min-w-[48px] flex items-center justify-center shadow-sm"
               aria-label={isMenuOpen ? "Tutup menu" : "Buka menu"}
             >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMenuOpen ? <X className="w-6 h-6 stroke-[2.5]" /> : <Menu className="w-6 h-6 stroke-[2.5]" />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Bottom Sheet Style */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 lg:hidden overflow-y-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 lg:hidden"
             role="dialog"
             aria-modal="true"
           >
-            <div className="absolute inset-0 bg-ink-950/20 backdrop-blur-sm min-h-full" onClick={() => setIsMenuOpen(false)} />
-            <div className="relative top-0 inset-x-0 bg-white dark:bg-ink-900 shadow-premium-xl pt-20 sm:pt-24 pb-8 px-4 sm:px-6 rounded-b-[2rem] border-b border-surface-200 dark:border-surface-200/10">
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center justify-between mb-4 px-4 py-2 bg-surface-50 dark:bg-white/5 rounded-2xl border border-surface-200 dark:border-white/10">
-                  <span className="text-sm font-bold text-ink-600">Pilih Tema</span>
-                  <ThemeSwitcher />
-                </div>
-                {navLinks.map((link) => (
+            {/* Backdrop */}
+            <div
+              className="absolute inset-0 bg-maroon-950/20 backdrop-blur-sm"
+              onClick={() => setIsMenuOpen(false)}
+            />
+
+            {/* Sheet */}
+            <motion.div
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: "100%", opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="absolute bottom-0 inset-x-0 bg-white shadow-xl rounded-t-[2rem] border-t border-cream-200 overflow-hidden max-h-[85vh] flex flex-col"
+            >
+              {/* Drag Handle Area */}
+              <div className="w-full flex justify-center py-4 bg-white sticky top-0 z-10" onClick={() => setIsMenuOpen(false)}>
+                <div className="w-12 h-1.5 bg-cream-200 rounded-full" />
+              </div>
+
+              {/* Scrollable Content */}
+              <div className="overflow-y-auto px-6 pb-8 pt-2">
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-xs font-black text-maroon-800 uppercase tracking-widest pl-4 mb-2 mt-2">Menu</h3>
+
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={(e) => {
+                        handleNavClick(e, link.href);
+                        setIsMenuOpen(false);
+                      }}
+                      className={`px-5 py-4 rounded-2xl text-base font-bold transition-all min-h-[56px] flex items-center ${isActive(link.href)
+                        ? "bg-maroon-50 text-maroon-700"
+                        : "text-ink-700 hover:bg-cream-50"
+                        }`}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+
+                  <div className="h-px bg-cream-200 my-4" />
+
                   <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className={`p-4 sm:p-5 rounded-xl text-base sm:text-lg font-bold transition-all min-h-[56px] flex items-center ${isActive(link.href)
-                      ? "bg-brown-50 text-brown-700"
-                      : "text-ink-700 hover:bg-surface-50"
-                      }`}
+                    href="/login"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="w-full py-4 text-base font-bold rounded-2xl bg-cream-100 text-maroon-800 hover:bg-cream-200 text-center transition-all min-h-[56px] flex items-center justify-center mb-3"
                   >
-                    {link.label}
+                    Masuk ke Dashboard
                   </Link>
-                ))}
-                <div className="mt-6 pt-6 border-t border-surface-100 flex flex-col gap-4">
-                  <Link href="/ppdb" className="w-full py-4 sm:py-5 text-base sm:text-lg font-bold rounded-2xl bg-brown-700 hover:bg-brown-800 text-white text-center block transition-colors shadow-lg shadow-brown-700/20 min-h-[56px] flex items-center justify-center">
-                    Daftar Sekarang
+                  <Link
+                    href="/ppdb"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="w-full py-4 text-base font-bold rounded-2xl bg-maroon-700 text-white hover:bg-maroon-800 text-center transition-all min-h-[56px] flex items-center justify-center shadow-lg shadow-maroon-700/20"
+                  >
+                    Daftar PPDB 2025
                   </Link>
-                  <Link href="/login" className="w-full py-4 sm:py-5 text-base sm:text-lg font-bold rounded-2xl border-2 border-surface-200 text-ink-600 hover:text-brown-700 hover:border-brown-700 hover:bg-surface-50 text-center block transition-all min-h-[56px] flex items-center justify-center">
-                    Masuk
-                  </Link>
+
+                  <div className="h-6" /> {/* Safe padding */}
                 </div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

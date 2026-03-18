@@ -1,46 +1,46 @@
 "use client";
 
-import { Rocket, Shield, Target, Compass, Monitor, Zap, TreePine, Waves, FileText, PenTool, Trophy, Dumbbell, Play, Palette, Sparkles, ArrowUpRight } from "lucide-react";
+import { Rocket, Shield, Target, Compass, Monitor, Zap, TreePine, Waves, FileText, PenTool, Trophy, Dumbbell, Play, Palette, Sparkles } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
 
 const EXTRA_ACTIVITIES = [
     // Olahraga & Seni (Established)
-    { name: "Karate", icon: Trophy, color: "red" },
-    { name: "Pramuka", icon: Shield, color: "brown" },
-    { name: "Panahan", icon: Target, color: "emerald" },
-    { name: "Futsal", icon: Trophy, color: "indigo" },
-    { name: "Volly", icon: Trophy, color: "gold" },
+    { name: "Karate", icon: Trophy, color: "maroon" },
+    { name: "Pramuka", icon: Shield, color: "cream" },
+    { name: "Panahan", icon: Target, color: "maroon" },
+    { name: "Futsal", icon: Trophy, color: "gold" },
+    { name: "Volly", icon: Trophy, color: "maroon" },
 
     // Kompetensi & IT
-    { name: "Komputer", icon: Monitor, color: "blue" },
-    { name: "Design Grafis", icon: Palette, color: "pink" },
-    { name: "Kaligrafi", icon: PenTool, color: "amber" },
-    { name: "Jurnalistik", icon: FileText, color: "ink" },
-    { name: "Konten Kreator", icon: Play, color: "purple" },
+    { name: "Komputer", icon: Monitor, color: "cream" },
+    { name: "Design Grafis", icon: Palette, color: "maroon" },
+    { name: "Kaligrafi", icon: PenTool, color: "gold" },
+    { name: "Jurnalistik", icon: FileText, color: "maroon" },
+    { name: "Konten Kreator", icon: Play, color: "cream" },
 
     // Kemandirian & Pengembangan
-    { name: "Basket", icon: Dumbbell, color: "orange" },
-    { name: "Bulutangkis", icon: Zap, color: "orange" },
-    { name: "Pertanian", icon: TreePine, color: "emerald" },
-    { name: "Periklanan", icon: Waves, color: "cyan" },
-    { name: "Web Programming", icon: Rocket, color: "indigo" },
+    { name: "Basket", icon: Dumbbell, color: "maroon" },
+    { name: "Bulutangkis", icon: Zap, color: "gold" },
+    { name: "Pertanian", icon: TreePine, color: "cream" },
+    { name: "Periklanan", icon: Waves, color: "maroon" },
+    { name: "Web Programming", icon: Rocket, color: "gold" },
 ] as const;
 
 export default function ExtraSection() {
     return (
-        <section id="ekstrakurikuler" className="py-24 md:py-32 bg-white relative overflow-hidden">
+        <section id="ekstrakurikuler" className="section-std border-b border-cream-200/50">
             {/* Background pattern */}
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-teal-50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 opacity-50" />
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cream-100 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 opacity-50 pointer-events-none" />
 
             <Container className="relative z-10">
-                <div className="text-center mb-20 max-w-3xl mx-auto">
+                <div className="text-center mb-16 max-w-3xl mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-surface-200 text-teal-700 text-xs font-bold uppercase tracking-widest mb-6 shadow-premium-sm"
+                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-cream-50 border border-cream-200 text-maroon-700 text-xs font-bold uppercase tracking-widest mb-6 shadow-sm"
                     >
                         <Sparkles className="w-3.5 h-3.5" />
                         <span>Minat & Bakat</span>
@@ -51,9 +51,9 @@ export default function ExtraSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-8 tracking-tight"
+                        className="section-title mb-6"
                     >
-                        Ekstrakurikuler <span className="text-teal-600">Terpadu</span>
+                        Ekstrakurikuler <span className="text-gradient-maroon">Terpadu</span>
                     </motion.h2>
 
                     <motion.p
@@ -61,13 +61,13 @@ export default function ExtraSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
-                        className="text-lg text-ink-600 font-medium leading-relaxed"
+                        className="section-subtitle"
                     >
                         Mengembangkan potensi santri secara holistik melalui berbagai pilihan kegiatan yang mendukung kemandirian, kreativitas, dan fisik yang kuat.
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-5">
                     {EXTRA_ACTIVITIES.map((item, idx) => (
                         <motion.div
                             key={idx}
@@ -75,24 +75,16 @@ export default function ExtraSection() {
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.03 }}
-                            className="bg-surface-50/50 p-6 rounded-3xl border border-surface-200/60 flex flex-col items-center justify-center text-center group hover:bg-white hover:border-teal-100 hover:shadow-premium-lg transition-all duration-500 cursor-default"
+                            className="bg-white p-5 md:p-6 rounded-[1.5rem] border border-cream-200 flex flex-col items-center justify-center text-center group hover:bg-cream-50 hover:border-maroon-200 hover:shadow-md transition-all duration-500 cursor-default"
                         >
-                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 shadow-premium-sm group-hover:scale-110 transition-transform duration-500 ${item.color === 'red' ? 'bg-red-50 text-red-600' :
-                                item.color === 'brown' ? 'bg-brown-50 text-brown-600' :
-                                    item.color === 'blue' ? 'bg-blue-50 text-blue-600' :
-                                        item.color === 'gold' ? 'bg-gold-50 text-gold-600' :
-                                            item.color === 'emerald' ? 'bg-emerald-50 text-emerald-600' :
-                                                item.color === 'purple' ? 'bg-purple-50 text-purple-600' :
-                                                    item.color === 'cyan' ? 'bg-cyan-50 text-cyan-600' :
-                                                        item.color === 'amber' ? 'bg-amber-50 text-amber-600' :
-                                                            item.color === 'indigo' ? 'bg-indigo-50 text-indigo-600' :
-                                                                item.color === 'orange' ? 'bg-orange-50 text-orange-600' :
-                                                                    item.color === 'pink' ? 'bg-pink-50 text-pink-600' :
-                                                                        'bg-white text-ink-600'
+                            <div className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center mb-3 md:mb-4 shadow-sm group-hover:scale-110 transition-transform duration-500 ${
+                                item.color === 'maroon' ? 'bg-maroon-50 text-maroon-600' :
+                                item.color === 'cream' ? 'bg-cream-100 text-maroon-700' :
+                                'bg-yellow-50 text-yellow-600'
                                 }`}>
-                                <item.icon className="w-7 h-7" />
+                                <item.icon className="w-6 h-6 md:w-7 md:h-7" />
                             </div>
-                            <p className="text-[10px] font-extrabold tracking-[0.1em] text-ink-950 uppercase group-hover:text-teal-700 transition-colors leading-tight">
+                            <p className="text-[9px] md:text-[10px] font-bold tracking-[0.1em] text-ink-950 uppercase group-hover:text-maroon-800 transition-colors leading-tight">
                                 {item.name}
                             </p>
                         </motion.div>

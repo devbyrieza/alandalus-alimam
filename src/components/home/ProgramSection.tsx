@@ -26,7 +26,7 @@ const PROGRAMS = [
         ],
         quota: "25 Kursi",
         icon: School,
-        color: "brown"
+        color: "maroon"
     },
     {
         title: "I'dad Lughowi",
@@ -41,24 +41,24 @@ const PROGRAMS = [
         ],
         quota: "25 Kursi",
         icon: BookOpen,
-        color: "teal"
+        color: "cream"
     },
 ] as const;
 
 export default function ProgramSection() {
     return (
-        <section id="program" className="py-24 md:py-32 bg-surface-50 relative overflow-hidden">
+        <section id="program" className="section-std">
             {/* Subtle Patterns */}
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
 
             <Container className="relative z-10">
                 {/* Header */}
-                <div className="max-w-3xl mx-auto text-center mb-20">
+                <div className="max-w-3xl mx-auto text-center mb-16 lg:mb-20">
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-surface-200 text-brown-700 text-xs font-bold uppercase tracking-widest mb-6 shadow-premium-sm"
+                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-cream-50 border border-cream-200 text-maroon-700 text-xs font-bold uppercase tracking-widest mb-6 shadow-sm"
                     >
                         <GraduationCap className="w-3.5 h-3.5" />
                         <span>Jenjang Pendidikan</span>
@@ -69,9 +69,9 @@ export default function ProgramSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-5xl font-display font-extrabold text-ink-950 mb-6 tracking-tight"
+                        className="section-title mb-6"
                     >
-                        Program Studi <span className="text-brown-600">Unggulan</span>
+                        Program Studi <span className="text-gradient-maroon">Unggulan</span>
                     </motion.h2>
 
                     <motion.p
@@ -79,14 +79,14 @@ export default function ProgramSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
-                        className="text-lg text-ink-600 font-medium leading-relaxed"
+                        className="section-subtitle"
                     >
                         Kami berkomitmen memberikan pendidikan berkualitas tinggi yang menggabungkan keunggulan spiritual, intelektual, dan karakter.
                     </motion.p>
                 </div>
 
                 {/* Grid */}
-                <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
+                <div className="grid md:grid-cols-2 gap-6 lg:gap-10 max-w-6xl mx-auto">
                     {PROGRAMS.map((program, idx) => (
                         <motion.div
                             key={idx}
@@ -94,24 +94,25 @@ export default function ProgramSection() {
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1 }}
-                            className="relative group h-full"
+                            className="h-full"
                         >
-                            <div className="h-full bg-white rounded-[2rem] p-8 md:p-10 shadow-premium-lg border border-surface-100 transition-all duration-500 hover:shadow-premium-xl group-hover:-translate-y-2 flex flex-col">
+                            <div className="app-card bg-white p-8 md:p-10 h-full flex flex-col group">
                                 {/* Top Accents */}
                                 <div className="flex items-start justify-between mb-8">
-                                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-premium-md ${program.color === 'brown' ? 'bg-brown-50 text-brown-600' : 'bg-teal-50 text-teal-600'
+                                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm ${
+                                        program.color === 'maroon' ? 'bg-maroon-50 text-maroon-600' : 'bg-cream-100 text-maroon-800'
                                         }`}>
                                         <program.icon className="w-7 h-7" />
                                     </div>
-                                    <div className="px-3 py-1 rounded-lg bg-surface-50 border border-surface-200 text-[11px] font-extrabold text-ink-500 uppercase tracking-widest">
+                                    <div className="status-pill status-pill-pending bg-cream-100 py-1.5 px-3">
                                         Kuota: {program.quota}
                                     </div>
                                 </div>
 
                                 <div className="flex-grow">
                                     <h3 className="text-2xl font-bold text-ink-950 mb-2">{program.title}</h3>
-                                    <p className="text-sm font-bold text-brown-600/80 mb-6 tracking-wide">{program.subtitle}</p>
-                                    <p className="text-ink-600 leading-relaxed mb-8 font-medium text-justify">
+                                    <p className="text-xs font-bold text-maroon-600/80 mb-6 tracking-wide uppercase">{program.subtitle}</p>
+                                    <p className="text-[15px] text-ink-600 leading-relaxed mb-8 font-medium text-justify">
                                         {program.desc}
                                     </p>
 
@@ -119,8 +120,8 @@ export default function ProgramSection() {
                                     <ul className="space-y-4 mb-10">
                                         {program.features.map((feature, fIdx) => (
                                             <li key={fIdx} className="flex items-start gap-3">
-                                                <div className="mt-1 w-5 h-5 rounded-full bg-brown-50 flex items-center justify-center flex-shrink-0">
-                                                    <CheckCircle className="w-3.5 h-3.5 text-brown-600" />
+                                                <div className="mt-1 w-5 h-5 rounded-full bg-cream-100 flex items-center justify-center flex-shrink-0">
+                                                    <CheckCircle className="w-3.5 h-3.5 text-maroon-700" />
                                                 </div>
                                                 <span className="text-sm font-bold text-ink-700">{feature}</span>
                                             </li>
@@ -129,7 +130,7 @@ export default function ProgramSection() {
                                 </div>
 
                                 <Link href="/program" onClick={() => navigateToDetail('/program', '#program')}>
-                                    <button className="w-full py-4 px-8 rounded-2xl bg-surface-50 border-2 border-surface-100 text-ink-950 font-bold transition-all duration-300 hover:bg-brown-700 hover:border-brown-700 hover:text-white flex items-center justify-center gap-2 group/btn">
+                                    <button className="btn-secondary w-full py-3.5 justify-center mt-auto group-hover:bg-cream-50">
                                         Detail Program
                                     </button>
                                 </Link>

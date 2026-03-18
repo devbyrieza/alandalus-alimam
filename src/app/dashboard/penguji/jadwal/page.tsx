@@ -12,6 +12,7 @@ import {
   Trash2,
   CheckCircle,
   XCircle,
+  Hash,
 } from "lucide-react";
 
 // --- Types ---
@@ -316,31 +317,31 @@ export default function JadwalPengujiPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-violet-100">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white rounded-3xl p-6 md:p-8 border border-cream-200 shadow-sm app-card">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <div className="p-3 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl">
-              <Calendar className="w-8 h-8 text-white" />
+            <div className="w-14 h-14 bg-maroon-50 rounded-2xl flex items-center justify-center border border-maroon-100 shrink-0">
+              <Calendar className="w-7 h-7 text-maroon-600" />
             </div>
             <div>
-              <h2 className="text-2xl font-black text-stone-900">
+              <h2 className="text-2xl font-black text-ink-950 font-display tracking-tight">
                 Jadwal & Sesi Ujian
               </h2>
-              <p className="text-stone-600">
+              <p className="text-sm font-bold text-ink-500 mt-1">
                 Kelola jadwal menguji dan ketersediaan waktu
               </p>
             </div>
           </div>
-          <div className="flex bg-stone-100 p-1 rounded-xl">
+          <div className="flex bg-cream-50 p-1.5 rounded-2xl border border-cream-200">
             <button
               onClick={() => setActiveTab('assigned')}
-              className={`px-4 py-2 rounded-lg font-bold text-sm transition-all ${activeTab === 'assigned' ? 'bg-white shadow text-violet-700' : 'text-stone-500 hover:text-stone-700'}`}
+              className={`flex-1 px-5 py-2.5 rounded-xl font-black text-sm transition-all text-center ${activeTab === 'assigned' ? 'bg-white shadow-sm text-maroon-700 border border-cream-100' : 'text-ink-400 hover:text-ink-700 hover:bg-cream-100/50'}`}
             >
               Jadwal Saya
             </button>
             <button
               onClick={() => setActiveTab('slots')}
-              className={`px-4 py-2 rounded-lg font-bold text-sm transition-all ${activeTab === 'slots' ? 'bg-white shadow text-violet-700' : 'text-stone-500 hover:text-stone-700'}`}
+              className={`flex-1 px-5 py-2.5 rounded-xl font-black text-sm transition-all text-center ${activeTab === 'slots' ? 'bg-white shadow-sm text-maroon-700 border border-cream-100' : 'text-ink-400 hover:text-ink-700 hover:bg-cream-100/50'}`}
             >
               Kelola Sesi Ketersediaan
             </button>
@@ -363,14 +364,14 @@ export default function JadwalPengujiPage() {
       {activeTab === 'assigned' && (
         <>
           {loadingAssignments ? (
-            <div className="text-center py-12"><Loader2 className="w-8 h-8 animate-spin mx-auto text-violet-500" /></div>
+            <div className="text-center py-12"><Loader2 className="w-8 h-8 animate-spin mx-auto text-maroon-500" /></div>
           ) : assignments.length === 0 ? (
-            <div className="bg-white rounded-xl p-12 border-2 border-stone-200 text-center">
-              <div className="w-16 h-16 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Calendar className="w-8 h-8 text-stone-400" />
+            <div className="bg-white rounded-xl p-12 border-2 border-cream-200 text-center">
+              <div className="w-16 h-16 bg-cream-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Calendar className="w-8 h-8 text-ink-400" />
               </div>
-              <h3 className="font-bold text-stone-900">Belum Ada Jadwal</h3>
-              <p className="text-stone-500">Anda belum memiliki jadwal ujian yang ditugaskan.</p>
+              <h3 className="font-bold text-ink-950">Belum Ada Jadwal</h3>
+              <p className="text-cream-500">Anda belum memiliki jadwal ujian yang ditugaskan.</p>
             </div>
           ) : (() => {
             // Filter assignments based on active role
@@ -382,36 +383,38 @@ export default function JadwalPengujiPage() {
 
             if (filteredAssignments.length === 0) {
               return (
-                <div className="bg-white rounded-xl p-12 border-2 border-stone-200 text-center">
-                  <div className="w-16 h-16 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Calendar className="w-8 h-8 text-stone-400" />
+                <div className="bg-white rounded-xl p-12 border-2 border-cream-200 text-center">
+                  <div className="w-16 h-16 bg-cream-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Calendar className="w-8 h-8 text-ink-400" />
                   </div>
-                  <h3 className="font-bold text-stone-900">Belum Ada Jadwal</h3>
-                  <p className="text-stone-500">Tidak ada jadwal ujian untuk role yang dipilih saat ini.</p>
+                  <h3 className="font-bold text-ink-950">Belum Ada Jadwal</h3>
+                  <p className="text-cream-500">Tidak ada jadwal ujian untuk role yang dipilih saat ini.</p>
                 </div>
               );
             }
 
             return (
-              <div className="grid gap-4">
+              <div className="grid gap-5">
                 {filteredAssignments.map(item => (
-                  <div key={item.id} className={`bg-white rounded-xl shadow-lg p-6 border-2 transition-all ${isToday(item.tanggal_ujian) ? "border-green-300 bg-green-50" : "border-violet-100"}`}>
-                    <div className="flex md:items-center justify-between flex-col md:flex-row gap-4">
-                      <div className="flex items-start gap-4">
-                        <div className="p-3 bg-violet-100 rounded-xl text-violet-600 font-bold text-center min-w-[60px]">
-                          <div className="text-xs uppercase">{new Date(item.tanggal_ujian).toLocaleDateString('id-ID', { month: 'short' })}</div>
-                          <div className="text-2xl">{new Date(item.tanggal_ujian).getDate()}</div>
+                  <div key={item.id} className={`bg-white rounded-3xl p-6 md:p-8 border transition-all app-card ${isToday(item.tanggal_ujian) ? "border-emerald-200 shadow-md ring-4 ring-emerald-50" : "border-cream-200 shadow-sm hover:border-maroon-200 hover:shadow-md"}`}>
+                    <div className="flex md:items-center justify-between flex-col md:flex-row gap-6">
+                      <div className="flex items-start gap-5">
+                        <div className={`p-4 rounded-2xl font-bold text-center min-w-[70px] shrink-0 border ${isToday(item.tanggal_ujian) ? 'bg-emerald-50 border-emerald-100 text-emerald-700' : 'bg-maroon-50 border-maroon-100 text-maroon-700'}`}>
+                          <div className="text-xs uppercase tracking-wider">{new Date(item.tanggal_ujian).toLocaleDateString('id-ID', { month: 'short' })}</div>
+                          <div className="text-3xl font-display mt-0.5">{new Date(item.tanggal_ujian).getDate()}</div>
                         </div>
                         <div>
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="px-2 py-0.5 bg-violet-100 text-violet-700 rounded text-xs font-bold uppercase">{item.pendaftar.jenjang}</span>
-                            <span className="text-xs text-stone-500">{item.pendaftar.nomor_pendaftaran}</span>
+                          <div className="flex flex-wrap items-center gap-2 mb-2">
+                            <span className="px-2.5 py-1 bg-surface-100 text-ink-600 border border-surface-200 rounded-lg text-[10px] font-black uppercase tracking-widest">{item.pendaftar.jenjang}</span>
+                            <span className="px-2.5 py-1 bg-maroon-50 text-maroon-700 border border-maroon-100 rounded-lg text-[10px] font-black uppercase tracking-widest flex items-center gap-1.5"><Hash className="w-3 h-3" /> {item.pendaftar.nomor_pendaftaran}</span>
                           </div>
-                          <h3 className="text-lg font-bold text-stone-900">{item.pendaftar.nama_lengkap}</h3>
-                          <div className="flex items-center gap-2 text-sm text-stone-600 mt-1">
-                            <FileText className="w-4 h-4" />
-                            Assignments: <span className="font-semibold text-violet-700">{item.jenis_tugas}</span>
-                            Assignments: <span className="font-semibold text-violet-700">{item.jenis_tugas}</span>
+                          <h3 className="text-xl font-black text-ink-950 font-display">{item.pendaftar.nama_lengkap}</h3>
+                          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-sm text-ink-500 mt-1.5 font-bold">
+                            <div className="flex items-center gap-1.5">
+                              <FileText className="w-4 h-4 text-ink-400" />
+                              Tugas:
+                            </div>
+                            <span className="text-maroon-700 uppercase tracking-wide text-xs">{item.jenis_tugas}</span>
                           </div>
 
                           {/* Action Buttons: Status Completion */}
@@ -443,7 +446,7 @@ export default function JadwalPengujiPage() {
                                   ) : (
                                     <button
                                       onClick={() => handleCompleteExam(item.id)}
-                                      className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
+                                      className="px-3 py-1 bg-maroon-600 hover:bg-maroon-700 text-white text-xs font-bold rounded-lg transition-colors"
                                     >
                                       Tandai Wawancara Selesai
                                     </button>
@@ -458,7 +461,7 @@ export default function JadwalPengujiPage() {
                                   ) : (
                                     <button
                                       onClick={() => handleCompleteExam(item.id)}
-                                      className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
+                                      className="px-3 py-1 bg-maroon-600 hover:bg-maroon-700 text-white text-xs font-bold rounded-lg transition-colors"
                                     >
                                       Tandai Tes Al-Qur'an Selesai
                                     </button>
@@ -473,7 +476,7 @@ export default function JadwalPengujiPage() {
                                   ) : (
                                     <button
                                       onClick={() => handleCompleteExam(item.id)}
-                                      className="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-lg transition-colors"
+                                      className="px-3 py-1 bg-maroon-600 hover:bg-maroon-700 text-white text-xs font-bold rounded-lg transition-colors"
                                     >
                                       Tandai Wawancara Cawalsan Selesai
                                     </button>
@@ -488,23 +491,23 @@ export default function JadwalPengujiPage() {
                               setSelectedPendaftar(item.pendaftar);
                               setIsDetailModalOpen(true);
                             }}
-                            className="mt-2 text-xs font-bold text-violet-600 hover:text-violet-800 underline"
+                            className="mt-2 text-xs font-bold text-maroon-600 hover:text-maroon-800 underline"
                           >
                             Lihat Data Pendaftar
                           </button>
                         </div>
                       </div>
-                      <div className="flex flex-col gap-2 min-w-[200px] border-l pl-0 md:pl-6 border-stone-100">
-                        <div className="flex items-center gap-2 text-sm text-stone-600">
-                          <Clock className="w-4 h-4 text-violet-500" />
+                      <div className="flex flex-col gap-2 min-w-[200px] border-l pl-0 md:pl-6 border-cream-100">
+                        <div className="flex items-center gap-2 text-sm text-ink-600">
+                          <Clock className="w-4 h-4 text-maroon-500" />
                           {formatTime(item.waktu_mulai)} WIB
                         </div>
-                        <div className="flex items-center gap-2 text-sm text-stone-600">
-                          <MapPin className="w-4 h-4 text-violet-500" />
+                        <div className="flex items-center gap-2 text-sm text-ink-600">
+                          <MapPin className="w-4 h-4 text-maroon-500" />
                           {item.lokasi || "Lokasi belum ditentukan"}
                         </div>
                         {item.session_title && (
-                          <div className="text-xs text-stone-400 mt-1">Sesi: {item.session_title}</div>
+                          <div className="text-xs text-ink-400 mt-1">Sesi: {item.session_title}</div>
                         )}
                       </div>
                     </div>
@@ -519,50 +522,52 @@ export default function JadwalPengujiPage() {
       {/* TAB CONTENT: SLOTS */}
       {activeTab === 'slots' && (
         <>
-          <div className="flex justify-between items-center bg-white p-4 rounded-xl border border-stone-200">
+          <div className="flex justify-between items-center bg-white p-4 rounded-xl border border-cream-200">
             <div>
-              <h3 className="font-bold text-stone-900">Sesi Ketersediaan Anda</h3>
-              <p className="text-sm text-stone-500">Buat sesi waktu dimana Anda bersedia menguji.</p>
+              <h3 className="font-bold text-ink-950">Sesi Ketersediaan Anda</h3>
+              <p className="text-sm text-cream-500">Buat sesi waktu dimana Anda bersedia menguji.</p>
             </div>
             <button
               onClick={() => setIsSlotModalOpen(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg font-bold shadow-lg shadow-violet-200 transition-all"
+              className="flex items-center gap-2 px-4 py-2 bg-maroon-600 hover:bg-maroon-700 text-white rounded-lg font-bold shadow-lg shadow-maroon-200 transition-all"
             >
               <Plus className="w-4 h-4" /> Buat Sesi
             </button>
           </div>
 
           {loadingSlots ? (
-            <div className="text-center py-12"><Loader2 className="w-8 h-8 animate-spin mx-auto text-violet-500" /></div>
+            <div className="text-center py-12"><Loader2 className="w-8 h-8 animate-spin mx-auto text-maroon-500" /></div>
           ) : slots.length === 0 ? (
-            <div className="text-center py-12 text-stone-500">
+            <div className="text-center py-12 text-cream-500">
               <p>Belum ada sesi waktu yang dibuat.</p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
               {slots.map(slot => (
-                <div key={slot.id} className="bg-white rounded-xl shadow-sm p-5 border-2 border-stone-100 hover:border-violet-200 transition-all group relative">
+                <div key={slot.id} className="bg-white rounded-3xl p-6 border border-cream-200 shadow-sm hover:shadow-md transition-all group relative app-card">
                   <button
                     onClick={() => handleDeleteSlot(slot.id, slot._count?.bookings || 0)}
-                    className="absolute top-4 right-4 text-stone-300 hover:text-red-500 transition-colors"
+                    className="absolute top-4 right-4 p-2 text-ink-300 hover:text-red-600 hover:bg-red-50 rounded-full transition-colors"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="w-5 h-5" />
                   </button>
-                  <h4 className="font-bold text-stone-900 mb-1">{slot.title || "Sesi Tanpa Judul"}</h4>
-                  <div className="space-y-2 mt-3 text-sm">
-                    <div className="flex items-center gap-2 text-stone-600">
-                      <Calendar className="w-4 h-4 text-violet-500" />
+                  <div className="w-12 h-12 bg-cream-50 rounded-2xl flex items-center justify-center border border-cream-100 mb-4 text-ink-400 font-black">
+                    {slot.title?.charAt(0) || "S"}
+                  </div>
+                  <h4 className="font-black text-lg text-ink-950 mb-1 font-display">{slot.title || "Sesi Tanpa Judul"}</h4>
+                  <div className="space-y-3 mt-4 text-sm font-bold">
+                    <div className="flex items-center gap-3 text-ink-600 bg-cream-50/50 p-2 rounded-xl">
+                      <Calendar className="w-4 h-4 text-maroon-600 shrink-0" />
                       {formatDate(slot.start_time)}
                     </div>
-                    <div className="flex items-center gap-2 text-stone-600">
-                      <Clock className="w-4 h-4 text-violet-500" />
+                    <div className="flex items-center gap-3 text-ink-600 bg-cream-50/50 p-2 rounded-xl">
+                      <Clock className="w-4 h-4 text-maroon-600 shrink-0" />
                       {formatTime(slot.start_time)}{slot.end_time ? ` – ${formatTime(slot.end_time)}` : ''} WIB
                     </div>
-                    <div className="flex items-center gap-2 text-stone-600">
-                      <MapPin className="w-4 h-4 text-violet-500" />
-                      {slot.location || "-"}
+                    <div className="flex items-center gap-3 text-ink-600 bg-cream-50/50 p-2 rounded-xl">
+                      <MapPin className="w-4 h-4 text-maroon-600 shrink-0" />
+                      <span className="truncate">{slot.location || "-"}</span>
                     </div>
-
                   </div>
                 </div>
               ))}
@@ -575,18 +580,18 @@ export default function JadwalPengujiPage() {
       {isSlotModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden">
-            <div className="p-4 border-b border-stone-100 flex justify-between items-center bg-stone-50">
-              <h3 className="font-bold text-stone-900">Buat Sesi Ketersediaan</h3>
-              <button onClick={() => setIsSlotModalOpen(false)}><XCircle className="w-6 h-6 text-stone-400 hover:text-stone-600" /></button>
+            <div className="p-4 border-b border-cream-100 flex justify-between items-center bg-cream-50">
+              <h3 className="font-bold text-ink-950">Buat Sesi Ketersediaan</h3>
+              <button onClick={() => setIsSlotModalOpen(false)}><XCircle className="w-6 h-6 text-ink-400 hover:text-ink-600" /></button>
             </div>
             <form onSubmit={handleCreateSlot} className="p-6 space-y-4">
               {/* Jenis Ujian: auto dari role, dropdown hanya untuk admin */}
               {ADMIN_ROLES.includes(activeRole) ? (
                 <div>
-                  <label className="block text-sm font-bold text-stone-700 mb-1">Jenis Ujian</label>
+                  <label className="block text-sm font-bold text-ink-700 mb-1">Jenis Ujian</label>
                   <select
                     required
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-violet-500 outline-none bg-white"
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-maroon-500 outline-none bg-white"
                     value={slotForm.title}
                     onChange={e => setSlotForm({ ...slotForm, title: e.target.value })}
                   >
@@ -598,54 +603,54 @@ export default function JadwalPengujiPage() {
                 </div>
               ) : (
                 <div>
-                  <label className="block text-sm font-bold text-stone-700 mb-1">Jenis Ujian</label>
-                  <div className="w-full px-3 py-2 border border-violet-200 bg-violet-50 rounded-lg text-violet-800 font-bold flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-violet-500 inline-block"></span>
+                  <label className="block text-sm font-bold text-ink-700 mb-1">Jenis Ujian</label>
+                  <div className="w-full px-3 py-2 border border-maroon-200 bg-maroon-50 rounded-lg text-maroon-800 font-bold flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-maroon-500 inline-block"></span>
                     {slotForm.title || "—"}
                   </div>
-                  <p className="text-xs text-stone-400 mt-1">Jenis ujian otomatis sesuai role akun Anda.</p>
+                  <p className="text-xs text-ink-400 mt-1">Jenis ujian otomatis sesuai role akun Anda.</p>
                 </div>
               )}
               <div>
-                <label className="block text-sm font-bold text-stone-700 mb-1">Tanggal</label>
+                <label className="block text-sm font-bold text-ink-700 mb-1">Tanggal</label>
                 <input
                   type="date"
                   required
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-violet-500 outline-none"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-maroon-500 outline-none"
                   value={slotForm.date}
                   onChange={e => setSlotForm({ ...slotForm, date: e.target.value })}
                 />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-sm font-bold text-stone-700 mb-1">Mulai Ujian</label>
+                  <label className="block text-sm font-bold text-ink-700 mb-1">Mulai Ujian</label>
                   <input
                     type="time"
                     required
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-violet-500 outline-none"
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-maroon-500 outline-none"
                     value={slotForm.start_time}
                     onChange={e => setSlotForm({ ...slotForm, start_time: e.target.value })}
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-stone-700 mb-1">Selesai Ujian</label>
+                  <label className="block text-sm font-bold text-ink-700 mb-1">Selesai Ujian</label>
                   <input
                     type="time"
                     required
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-violet-500 outline-none"
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-maroon-500 outline-none"
                     value={slotForm.end_time}
                     onChange={e => setSlotForm({ ...slotForm, end_time: e.target.value })}
                   />
                 </div>
               </div>
-              <p className="text-xs text-stone-400 -mt-2">⏱ Maksimal durasi sesi adalah <strong>1 jam</strong>.</p>
+              <p className="text-xs text-ink-400 -mt-2">⏱ Maksimal durasi sesi adalah <strong>1 jam</strong>.</p>
 
               <div>
-                <label className="block text-sm font-bold text-stone-700 mb-1">Link Google Meet / Lokasi</label>
+                <label className="block text-sm font-bold text-ink-700 mb-1">Link Google Meet / Lokasi</label>
                 <input
                   type="text"
                   placeholder="Paste Link Google Meet di sini (Contoh: https://meet.google.com/abc-xyz-123)"
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-violet-500 outline-none"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-maroon-500 outline-none"
                   value={slotForm.location}
                   onChange={e => setSlotForm({ ...slotForm, location: e.target.value })}
                 />
@@ -663,7 +668,7 @@ export default function JadwalPengujiPage() {
               <button
                 type="submit"
                 disabled={submittingSlot}
-                className="w-full py-3 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-xl transition-colors flex justify-center gap-2"
+                className="w-full py-3 bg-maroon-600 hover:bg-maroon-700 text-white font-bold rounded-xl transition-colors flex justify-center gap-2"
               >
                 {submittingSlot && <Loader2 className="w-5 h-5 animate-spin" />}
                 Simpan Sesi
@@ -677,92 +682,92 @@ export default function JadwalPengujiPage() {
       {isDetailModalOpen && selectedPendaftar && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm overflow-hidden">
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] flex flex-col">
-            <div className="p-4 border-b border-stone-100 flex justify-between items-center bg-stone-50 rounded-t-2xl shrink-0">
-              <h3 className="font-bold text-stone-900">Data Pendaftar</h3>
-              <button onClick={() => setIsDetailModalOpen(false)}><XCircle className="w-6 h-6 text-stone-400 hover:text-stone-600" /></button>
+            <div className="p-4 border-b border-cream-100 flex justify-between items-center bg-cream-50 rounded-t-2xl shrink-0">
+              <h3 className="font-bold text-ink-950">Data Pendaftar</h3>
+              <button onClick={() => setIsDetailModalOpen(false)}><XCircle className="w-6 h-6 text-ink-400 hover:text-ink-600" /></button>
             </div>
             <div className="p-6 space-y-6 overflow-y-auto">
               {/* Data Diri */}
               <div>
-                <h4 className="text-sm font-bold text-stone-400 uppercase tracking-wider mb-3">Identitas Santri</h4>
+                <h4 className="text-sm font-bold text-ink-400 uppercase tracking-wider mb-3">Identitas Santri</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                   <div>
-                    <label className="block text-stone-500 text-xs">Nama Lengkap</label>
-                    <p className="font-bold text-stone-900">{selectedPendaftar.nama_lengkap}</p>
+                    <label className="block text-cream-500 text-xs">Nama Lengkap</label>
+                    <p className="font-bold text-ink-950">{selectedPendaftar.nama_lengkap}</p>
                   </div>
                   <div>
-                    <label className="block text-stone-500 text-xs">Nomor Pendaftaran</label>
-                    <p className="font-mono font-bold text-stone-900">{selectedPendaftar.nomor_pendaftaran}</p>
+                    <label className="block text-cream-500 text-xs">Nomor Pendaftaran</label>
+                    <p className="font-mono font-bold text-ink-950">{selectedPendaftar.nomor_pendaftaran}</p>
                   </div>
                   <div>
-                    <label className="block text-stone-500 text-xs">NIK</label>
-                    <p className="font-mono text-stone-700">{selectedPendaftar.nik || "-"}</p>
+                    <label className="block text-cream-500 text-xs">NIK</label>
+                    <p className="font-mono text-ink-700">{selectedPendaftar.nik || "-"}</p>
                   </div>
                   <div>
-                    <label className="block text-stone-500 text-xs">Jenis Kelamin</label>
-                    <p className="text-stone-700">{selectedPendaftar.jenis_kelamin}</p>
+                    <label className="block text-cream-500 text-xs">Jenis Kelamin</label>
+                    <p className="text-ink-700">{selectedPendaftar.jenis_kelamin}</p>
                   </div>
                   <div>
-                    <label className="block text-stone-500 text-xs">Tempat, Tanggal Lahir</label>
-                    <p className="text-stone-700">
+                    <label className="block text-cream-500 text-xs">Tempat, Tanggal Lahir</label>
+                    <p className="text-ink-700">
                       {selectedPendaftar.tempat_lahir}, {selectedPendaftar.tanggal_lahir ? new Date(selectedPendaftar.tanggal_lahir).toLocaleDateString('id-ID') : '-'}
                     </p>
                   </div>
                   <div>
-                    <label className="block text-stone-500 text-xs">Jenjang</label>
-                    <p className="text-stone-700">{selectedPendaftar.jenjang}</p>
+                    <label className="block text-cream-500 text-xs">Jenjang</label>
+                    <p className="text-ink-700">{selectedPendaftar.jenjang}</p>
                   </div>
                   <div className="col-span-1 sm:col-span-2">
-                    <label className="block text-stone-500 text-xs">No. WA / HP (Wali/Utama)</label>
+                    <label className="block text-cream-500 text-xs">No. WA / HP (Wali/Utama)</label>
                     <p className="font-mono font-bold text-green-700">{selectedPendaftar.no_hp || "-"}</p>
                   </div>
                   <div className="col-span-2">
-                    <label className="block text-stone-500 text-xs">Alamat</label>
-                    <p className="text-stone-700">{selectedPendaftar.alamat || "-"}</p>
+                    <label className="block text-cream-500 text-xs">Alamat</label>
+                    <p className="text-ink-700">{selectedPendaftar.alamat || "-"}</p>
                   </div>
                   <div className="col-span-2">
-                    <label className="block text-stone-500 text-xs">Asal Sekolah</label>
-                    <p className="text-stone-700 font-medium">{selectedPendaftar.asal_sekolah || "-"}</p>
+                    <label className="block text-cream-500 text-xs">Asal Sekolah</label>
+                    <p className="text-ink-700 font-medium">{selectedPendaftar.asal_sekolah || "-"}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="h-px bg-stone-100" />
+              <div className="h-px bg-cream-100" />
 
               {/* Data Orang Tua */}
               <div>
-                <h4 className="text-sm font-bold text-stone-400 uppercase tracking-wider mb-3">Data Orang Tua</h4>
+                <h4 className="text-sm font-bold text-ink-400 uppercase tracking-wider mb-3">Data Orang Tua</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                   <div>
-                    <label className="block text-stone-500 text-xs">Nama Ayah</label>
-                    <p className="font-bold text-stone-900">{selectedPendaftar.orang_tua?.nama_ayah || "-"}</p>
+                    <label className="block text-cream-500 text-xs">Nama Ayah</label>
+                    <p className="font-bold text-ink-950">{selectedPendaftar.orang_tua?.nama_ayah || "-"}</p>
                   </div>
                   <div>
-                    <label className="block text-stone-500 text-xs">No. HP Ayah</label>
-                    <p className="font-mono text-stone-700">{selectedPendaftar.orang_tua?.no_hp_ayah || "-"}</p>
+                    <label className="block text-cream-500 text-xs">No. HP Ayah</label>
+                    <p className="font-mono text-ink-700">{selectedPendaftar.orang_tua?.no_hp_ayah || "-"}</p>
                   </div>
                   <div>
-                    <label className="block text-stone-500 text-xs">Pekerjaan Ayah</label>
-                    <p className="text-stone-700">{selectedPendaftar.orang_tua?.pekerjaan_ayah || "-"}</p>
+                    <label className="block text-cream-500 text-xs">Pekerjaan Ayah</label>
+                    <p className="text-ink-700">{selectedPendaftar.orang_tua?.pekerjaan_ayah || "-"}</p>
                   </div>
                   <div>
                     {/* Empty spacer or Mother info */}
                   </div>
                   <div>
-                    <label className="block text-stone-500 text-xs">Nama Ibu</label>
-                    <p className="font-bold text-stone-900">{selectedPendaftar.orang_tua?.nama_ibu || "-"}</p>
+                    <label className="block text-cream-500 text-xs">Nama Ibu</label>
+                    <p className="font-bold text-ink-950">{selectedPendaftar.orang_tua?.nama_ibu || "-"}</p>
                   </div>
                   <div>
-                    <label className="block text-stone-500 text-xs">No. HP Ibu</label>
-                    <p className="font-mono text-stone-700">{selectedPendaftar.orang_tua?.no_hp_ibu || "-"}</p>
+                    <label className="block text-cream-500 text-xs">No. HP Ibu</label>
+                    <p className="font-mono text-ink-700">{selectedPendaftar.orang_tua?.no_hp_ibu || "-"}</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="p-4 border-t border-stone-100 bg-stone-50 rounded-b-2xl shrink-0">
+            <div className="p-4 border-t border-cream-100 bg-cream-50 rounded-b-2xl shrink-0">
               <button
                 onClick={() => setIsDetailModalOpen(false)}
-                className="w-full py-2.5 bg-stone-200 hover:bg-stone-300 text-stone-800 font-bold rounded-xl transition-colors"
+                className="w-full py-2.5 bg-cream-200 hover:bg-cream-200 text-ink-900 font-bold rounded-xl transition-colors"
               >
                 Tutup
               </button>

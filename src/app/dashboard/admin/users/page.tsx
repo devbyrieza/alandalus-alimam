@@ -318,7 +318,7 @@ export default function UserManagementPage() {
                                         </td>
                                         <td className="px-6 py-4">
                                             <span className={`px-3 py-1 rounded-full text-xs font-bold ${user.role === 'admin_super' ? 'bg-purple-100 text-purple-700 border border-purple-200' :
-                                                user.role === 'admin_keuangan' ? 'bg-teal-100 text-teal-700 border border-teal-200' :
+                                                user.role === 'admin_keuangan' ? 'bg-maroon-100 text-maroon-800 border border-maroon-200' :
                                                     user.role === 'admin_berkas' ? 'bg-blue-100 text-blue-700 border border-blue-200' :
                                                         user.role === 'penguji_calsan' ? 'bg-emerald-100 text-emerald-700 border border-emerald-200' :
                                                             user.role === 'pewawancara_calsan' ? 'bg-indigo-100 text-indigo-700 border border-indigo-200' :

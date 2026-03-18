@@ -205,7 +205,7 @@ export default function PendaftarDetailPage() {
       draft: { label: "Draft", color: "bg-stone-100 text-stone-700" },
       awaiting_payment: { label: "Menunggu Pembayaran", color: "bg-amber-100 text-amber-700" },
       paid: { label: "Sudah Bayar", color: "bg-blue-100 text-blue-700" },
-      data_completed: { label: "Data Lengkap", color: "bg-teal-100 text-teal-700" },
+      data_completed: { label: "Data Lengkap", color: "bg-maroon-100 text-maroon-800" },
       docs_uploaded: { label: "Dokumen Terupload", color: "bg-indigo-100 text-indigo-700" },
       docs_verified: { label: "Dokumen Terverifikasi", color: "bg-green-100 text-green-700" },
       scheduled: { label: "Terjadwal Ujian", color: "bg-purple-100 text-purple-700" },
@@ -452,10 +452,10 @@ export default function PendaftarDetailPage() {
         <div className="lg:col-span-2 space-y-6">
           {/* Untuk Admin Berkas: Dokumen pindah ke kolom utama paling atas */}
           {isBerkas && (
-            <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-teal-100">
+            <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-maroon-100">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-teal-100 rounded-lg">
-                  <FileText className="w-6 h-6 text-teal-600" />
+                <div className="p-2 bg-maroon-100 rounded-lg">
+                  <FileText className="w-6 h-6 text-maroon-700" />
                 </div>
                 <h3 className="text-lg font-bold text-stone-900">Dokumen (Prioritas Verifikasi)</h3>
               </div>
@@ -910,8 +910,8 @@ export default function PendaftarDetailPage() {
           {!isKeuangan && (
             <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-blue-100">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-teal-100 rounded-lg">
-                  <FileText className="w-6 h-6 text-teal-600" />
+                <div className="p-2 bg-maroon-100 rounded-lg">
+                  <FileText className="w-6 h-6 text-maroon-700" />
                 </div>
                 <h3 className="text-lg font-bold text-stone-900">Dokumen</h3>
               </div>

@@ -56,7 +56,7 @@ export default function StatistikWilayahPage() {
     if (loading) {
         return (
             <div className="flex flex-col items-center justify-center min-h-[400px] text-ink-400">
-                <Loader2 className="w-12 h-12 animate-spin mb-4 text-teal-500" />
+                <Loader2 className="w-12 h-12 animate-spin mb-4 text-maroon-600" />
                 <p className="font-bold">Menganalisis data wilayah...</p>
             </div>
         );
@@ -84,7 +84,7 @@ export default function StatistikWilayahPage() {
             </div>
 
             {/* Tabs */}
-            <div className="flex gap-2 p-1.5 bg-surface-100 rounded-2xl w-fit">
+            <div className="flex gap-2 p-1.5 bg-cream-100 rounded-2xl w-fit">
                 <button
                     onClick={() => setActiveTab("santri")}
                     className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold transition-all sm:text-sm ${activeTab === "santri" ? "bg-white text-indigo-600 shadow-clay-sm" : "text-ink-500 hover:text-ink-800"
@@ -109,7 +109,7 @@ export default function StatistikWilayahPage() {
                     <div key={provName} className="bg-white rounded-2xl shadow-clay-md border border-white/40 overflow-hidden group">
                         <div
                             onClick={() => setExpandedProv(expandedProv === provName ? null : provName)}
-                            className="p-6 flex items-center justify-between cursor-pointer hover:bg-surface-50/50 transition-colors"
+                            className="p-6 flex items-center justify-between cursor-pointer hover:bg-cream-50/50 transition-colors"
                         >
                             <div className="flex items-center gap-4">
                                 <div className="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-black text-lg shadow-inner">
@@ -136,7 +136,7 @@ export default function StatistikWilayahPage() {
                                 <div className="h-px bg-ink-100 mb-6"></div>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                                     {provData.cities.sort((a: any, b: any) => b.count - a.count).map((city: any) => (
-                                        <div key={city.name} className="flex items-center justify-between p-4 bg-surface-50 rounded-xl border border-white">
+                                        <div key={city.name} className="flex items-center justify-between p-4 bg-cream-50 rounded-xl border border-white">
                                             <span className="text-sm font-bold text-ink-700 truncate mr-2">{city.name}</span>
                                             <span className="px-3 py-1 bg-white rounded-lg text-xs font-black text-indigo-600 shadow-sm border border-indigo-100">{city.count}</span>
                                         </div>

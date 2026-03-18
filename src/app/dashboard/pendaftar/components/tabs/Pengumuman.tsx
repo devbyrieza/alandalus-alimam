@@ -86,7 +86,7 @@ export default function PengumumanTab() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <Loader2 className="w-12 h-12 animate-spin text-teal-600 mx-auto mb-4" />
+          <Loader2 className="w-12 h-12 animate-spin text-maroon-700 mx-auto mb-4" />
           <p className="text-stone-600">Memuat pengumuman...</p>
         </div>
       </div>
@@ -96,30 +96,40 @@ export default function PengumumanTab() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl p-6 text-white">
-        <h1 className="text-2xl font-black mb-2">Pengumuman</h1>
-        <p className="text-cyan-100">
-          Hasil seleksi penerimaan santri baru
-        </p>
+      <div className="relative overflow-hidden rounded-[2rem] bg-linear-to-br from-maroon-700 to-maroon-900 border border-maroon-600 p-8 md:p-10 text-white shadow-lg app-card">
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-cream-50/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="flex items-center gap-5">
+            <div className="w-16 h-16 rounded-[1.5rem] bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-sm shrink-0">
+              <Trophy className="w-8 h-8 text-cream-100" />
+            </div>
+            <div>
+              <h1 className="text-2xl md:text-3xl font-black mb-2 tracking-tight text-white font-display">Pengumuman</h1>
+              <p className="text-cream-100/90 font-medium max-w-xl text-sm md:text-base">
+                Hasil seleksi penerimaan santri baru
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       {!pengumuman ? (
-        <div className="bg-white rounded-xl p-12 border-2 border-stone-200 shadow-sm">
+        <div className="bg-white rounded-[2rem] p-12 shadow-sm border border-cream-200 app-card">
           <div className="text-center">
-            <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Trophy className="w-10 h-10 text-blue-600" />
+            <div className="w-20 h-20 bg-cream-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Trophy className="w-10 h-10 text-maroon-700" />
             </div>
-            <h3 className="text-xl font-bold text-stone-900 mb-3">
+            <h3 className="text-xl font-bold text-ink-900 mb-3 font-display">
               Pengumuman Belum Tersedia
             </h3>
-            <p className="text-stone-600 max-w-md mx-auto mb-6">
-              Hasil seleksi akan diumumkan setelah proses ujian selesai.
+            <p className="text-ink-600 max-w-md mx-auto mb-6 leading-relaxed">
+              Hasil seleksi akan diumumkan setelah seluruh proses ujian selesai dilakukan oleh panitia.
               Silakan cek kembali halaman ini secara berkala.
             </p>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-lg">
-              <Calendar className="w-4 h-4" />
-              <span className="text-sm font-medium">
-                Estimasi pengumuman: setelah ujian selesai
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-cream-50 text-maroon-800 rounded-pill font-bold border border-cream-200 shadow-sm">
+              <Calendar className="w-4 h-4 text-maroon-600" />
+              <span className="text-sm">
+                Estimasi update: setelah ujian selesai
               </span>
             </div>
           </div>
@@ -127,29 +137,28 @@ export default function PengumumanTab() {
       ) : pengumuman.status_kelulusan === "diterima" ? (
         <div className="space-y-6">
           {/* Success Card */}
-          <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl p-8 text-white shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-8 opacity-10">
-              <Trophy className="w-32 h-32" />
+          <div className="bg-linear-to-r from-emerald-500 to-emerald-700 rounded-[2rem] p-8 md:p-10 text-white shadow-xl shadow-emerald-500/20 relative overflow-hidden app-card">
+            <div className="absolute -top-10 -right-10 p-8 opacity-10 transform rotate-12">
+              <Trophy className="w-64 h-64" />
             </div>
             <div className="relative z-10">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="p-4 bg-white bg-opacity-20 rounded-2xl">
-                  <CheckCircle className="w-12 h-12" />
+              <div className="flex items-center gap-5 mb-8">
+                <div className="p-4 bg-white/20 backdrop-blur-md rounded-[1.5rem] shadow-sm border border-white/20">
+                  <CheckCircle className="w-10 h-10 text-emerald-50" />
                 </div>
                 <div>
-                  <p className="text-green-100 text-sm mb-1">Selamat!</p>
-                  <h2 className="text-3xl font-black">ANDA DITERIMA</h2>
+                  <p className="text-emerald-100 font-bold tracking-widest uppercase text-sm mb-1">Alhamdulillah</p>
+                  <h2 className="text-3xl md:text-4xl font-black font-display tracking-tight text-white">LULUS SELEKSI</h2>
                 </div>
               </div>
-              <p className="text-green-100 mb-8 max-w-xl">
-                Berdasarkan hasil seleksi, Anda dinyatakan LULUS dan diterima
-                sebagai santri baru Ponpes Al-Imam Al-Islami Sukabumi.
+              <p className="text-emerald-50/90 mb-10 max-w-xl text-lg leading-relaxed">
+                Berdasarkan hasil seleksi, Anda dinyatakan <strong>LULUS DITERIMA</strong> sebagai santri baru PP Al-Imam Al-Islami.
               </p>
-
+ 
               <button
                 onClick={handleDownloadSurat}
                 disabled={isGenerating}
-                className="flex items-center gap-2 px-6 py-3 bg-white text-green-700 rounded-xl font-bold hover:bg-green-50 transition-all shadow-lg disabled:opacity-50"
+                className="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-white text-emerald-700 rounded-pill font-bold hover:bg-emerald-50 transition-all shadow-lg active:scale-95 disabled:opacity-50"
               >
                 {isGenerating ? <Loader2 className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
                 Download Surat Kelulusan
@@ -213,17 +222,20 @@ export default function PengumumanTab() {
       ) : (
         <div className="space-y-6">
           {/* Failed Card */}
-          <div className="bg-gradient-to-r from-red-500 to-rose-600 rounded-2xl p-8 text-white shadow-2xl">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="p-4 bg-white bg-opacity-20 rounded-2xl">
-                <XCircle className="w-12 h-12" />
+          <div className="bg-linear-to-r from-red-600 to-rose-700 rounded-[2rem] p-8 md:p-10 text-white shadow-xl shadow-red-600/20 app-card overflow-hidden relative">
+            <div className="absolute -top-10 -right-10 p-8 opacity-10 transform rotate-12">
+              <XCircle className="w-64 h-64" />
+            </div>
+            <div className="flex items-center gap-5 mb-8 relative z-10">
+              <div className="p-4 bg-white/20 backdrop-blur-md rounded-[1.5rem] shadow-sm border border-white/20">
+                <XCircle className="w-10 h-10 text-red-50" />
               </div>
               <div>
-                <p className="text-red-100 text-sm mb-1">Mohon Maaf</p>
-                <h2 className="text-3xl font-black">BELUM BERHASIL</h2>
+                <p className="text-red-100 font-bold tracking-widest uppercase text-sm mb-1">Mohon Maaf</p>
+                <h2 className="text-3xl md:text-4xl font-black font-display tracking-tight text-white">BELUM BERHASIL</h2>
               </div>
             </div>
-            <p className="text-red-100">
+            <p className="text-red-50/90 leading-relaxed max-w-xl text-lg relative z-10">
               Berdasarkan hasil seleksi, Anda belum dapat diterima pada periode
               ini. Tetap semangat dan jangan berkecil hati.
             </p>

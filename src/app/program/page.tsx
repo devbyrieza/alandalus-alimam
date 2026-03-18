@@ -42,9 +42,9 @@ const PROGRAMS = [
             "Life Skills & Ekstrakurikuler"
         ],
         image: "/images/mts.webp",
-        theme: "brown",
-        accent: "text-brown-600",
-        bg: "bg-brown-50"
+        theme: "maroon",
+        accent: "text-maroon-600",
+        bg: "bg-maroon-50"
     },
     {
         id: "il",
@@ -65,9 +65,9 @@ const PROGRAMS = [
             "Pembinaan Dakwah & Organisasi"
         ],
         image: "/images/il.webp",
-        theme: "teal",
-        accent: "text-teal-600",
-        bg: "bg-teal-50"
+        theme: "cream",
+        accent: "text-cream-600",
+        bg: "bg-cream-50"
     },
 ];
 
@@ -105,7 +105,7 @@ export default function ProgramPage() {
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-surface-200 text-brown-700 text-xs font-bold uppercase tracking-widest mb-8 shadow-premium-sm"
+                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-cream-50 border border-cream-200 text-maroon-700 text-xs font-bold uppercase tracking-widest mb-8 shadow-sm"
                     >
                         <GraduationCap className="w-3.5 h-3.5" />
                         <span>Jenjang Pendidikan</span>
@@ -118,7 +118,7 @@ export default function ProgramPage() {
                         className="text-5xl md:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
                     >
                         Program <br />
-                        <span className="text-brown-600">Terbaik Kita</span>
+                        <span className="text-gradient-maroon">Terbaik Kita</span>
                     </motion.h1>
 
                     <motion.p
@@ -142,12 +142,12 @@ export default function ProgramPage() {
                                 onClick={() => {
                                     document.getElementById(program.id)?.scrollIntoView({ behavior: 'smooth' });
                                 }}
-                                className={`px-8 py-3 rounded-full font-black text-sm transition-all border shadow-premium-sm
+                                className={`px-8 py-3 rounded-pill font-black text-sm transition-all border shadow-sm
                                 ${activeSection === program.id
-                                        ? program.theme === 'brown'
-                                            ? 'bg-brown-600 text-white border-brown-600'
-                                            : 'bg-teal-600 text-white border-teal-600'
-                                        : 'bg-white text-ink-500 border-surface-200 hover:border-brown-200 hover:text-brown-700'
+                                        ? program.theme === 'maroon'
+                                            ? 'bg-maroon-600 text-white border-maroon-600'
+                                            : 'bg-brown-600 text-white border-brown-600'
+                                        : 'bg-white text-ink-500 border-cream-200 hover:border-maroon-200 hover:text-maroon-700'
                                     }`}
                             >
                                 {program.name}
@@ -171,7 +171,7 @@ export default function ProgramPage() {
                                     viewport={{ once: true }}
                                     className={`relative ${idx % 2 === 1 ? 'lg:col-start-2' : ''}`}
                                 >
-                                    <div className="aspect-[4/5] rounded-[3.5rem] overflow-hidden shadow-premium-xl relative z-10 p-3 bg-white border border-surface-200">
+                                    <div className="aspect-[4/5] rounded-[3.5rem] overflow-hidden shadow-lg relative z-10 p-3 bg-white border border-cream-200">
                                         <div className="relative w-full h-full rounded-[2.8rem] overflow-hidden">
                                             <Image
                                                 src={program.image}
@@ -197,7 +197,7 @@ export default function ProgramPage() {
 
                                     {/* Decorative Blob */}
                                     <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full blur-[120px] -z-10 opacity-30
-                                        ${program.theme === 'brown' ? 'bg-brown-200' : 'bg-teal-200'}
+                                        ${program.theme === 'maroon' ? 'bg-maroon-200' : 'bg-cream-200'}
                                     `} />
                                 </motion.div>
 
@@ -226,10 +226,10 @@ export default function ProgramPage() {
                                                 whileInView={{ opacity: 1, scale: 1 }}
                                                 viewport={{ once: true }}
                                                 transition={{ delay: sIdx * 0.1 }}
-                                                className="bg-white p-5 rounded-[2rem] border border-surface-100 shadow-premium-sm hover:shadow-premium-md transition-all text-center group"
+                                                className="app-card bg-white p-5 rounded-[2rem] border border-cream-100 shadow-sm hover:shadow-md transition-all text-center group"
                                             >
-                                                <div className={`w-10 h-10 rounded-xl mx-auto mb-3 flex items-center justify-center transition-transform group-hover:scale-110
-                                                    ${program.theme === 'brown' ? 'bg-brown-50 text-brown-600' : 'bg-teal-50 text-teal-600'}
+                                                <div className={`w-10 h-10 rounded-xl mx-auto mb-3 flex items-center justify-center transition-transform group-hover:scale-110 border border-cream-200
+                                                    ${program.theme === 'maroon' ? 'bg-cream-50 text-maroon-600' : 'bg-white text-brown-600'}
                                                 `}>
                                                     <stat.icon className="w-5 h-5" />
                                                 </div>
@@ -246,22 +246,22 @@ export default function ProgramPage() {
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
-                                        className={`rounded-[3rem] p-10 mb-10 border ${program.bg} ${program.theme === 'brown' ? 'border-brown-100' : 'border-teal-100'} shadow-premium-sm relative overflow-hidden`}
+                                        className={`app-card rounded-[3rem] p-10 mb-10 border ${program.bg} ${program.theme === 'maroon' ? 'border-cream-200' : 'border-cream-200'} shadow-sm relative overflow-hidden`}
                                     >
                                         <div className="absolute top-0 right-0 p-8 opacity-5">
                                             <BookOpen className="w-32 h-32" />
                                         </div>
 
                                         <h3 className="text-2xl font-black text-ink-950 mb-8 flex items-center gap-3">
-                                            <div className={`w-3 h-10 rounded-full ${program.theme === 'brown' ? 'bg-brown-600' : 'bg-teal-600'}`} />
+                                            <div className={`w-3 h-10 rounded-full ${program.theme === 'maroon' ? 'bg-maroon-600' : 'bg-brown-600'}`} />
                                             Kurikulum & Fokus
                                         </h3>
 
                                         <ul className="space-y-5 relative z-10">
                                             {program.curriculum.map((item, cIdx) => (
                                                 <li key={cIdx} className="flex items-start gap-4 group/item">
-                                                    <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow-premium-sm
-                                                        ${program.theme === 'brown' ? 'bg-brown-600 text-white' : 'bg-teal-600 text-white'}
+                                                    <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow-sm
+                                                        ${program.theme === 'maroon' ? 'bg-maroon-600 text-white' : 'bg-brown-600 text-white'}
                                                     `}>
                                                         <CheckCircle2 className="w-4 h-4" />
                                                     </div>
@@ -279,8 +279,8 @@ export default function ProgramPage() {
                                         viewport={{ once: true }}
                                     >
                                         <Link href={`/daftar?program=${program.id}`}>
-                                            <button className={`w-full sm:w-auto px-14 py-5 rounded-pill font-black text-white text-lg shadow-premium-xl transition-all hover:-translate-y-1
-                                                ${program.theme === 'brown' ? 'bg-brown-700 hover:bg-brown-800' : 'bg-teal-700 hover:bg-teal-800'}
+                                            <button className={`w-full sm:w-auto px-14 py-5 rounded-pill font-black text-white text-lg shadow-md transition-all hover:-translate-y-1
+                                                ${program.theme === 'maroon' ? 'bg-maroon-700 hover:bg-maroon-800' : 'bg-brown-700 hover:bg-brown-800'}
                                             `}>
                                                 Daftarkan Sekarang
                                             </button>
@@ -301,7 +301,7 @@ export default function ProgramPage() {
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="bg-brown-800 rounded-[2rem] md:rounded-[3rem] lg:rounded-[4rem] p-6 sm:p-8 md:p-16 lg:p-24 text-center text-white relative overflow-hidden"
+                        className="bg-maroon-800 rounded-[2rem] md:rounded-[3rem] lg:rounded-[4rem] p-6 sm:p-8 md:p-16 lg:p-24 text-center text-white relative overflow-hidden"
                     >
                         <div className="absolute top-0 right-0 w-32 h-32 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-white/5 rounded-full blur-[60px] md:blur-[100px] -translate-y-1/2 translate-x-1/2" />
                         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
@@ -315,7 +315,7 @@ export default function ProgramPage() {
                             </p>
                             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center px-4">
                                 <Link href="/daftar">
-                                    <button className="w-full sm:w-auto px-6 sm:px-10 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white text-brown-900 font-black text-sm sm:text-base md:text-lg hover:bg-gold-400 hover:text-white shadow-premium-xl transition-all min-h-[48px] sm:min-h-[52px]">
+                                    <button className="w-full sm:w-auto px-6 sm:px-10 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white text-maroon-900 font-black text-sm sm:text-base md:text-lg hover:bg-cream-100 shadow-md transition-all min-h-[48px] sm:min-h-[52px]">
                                         Pendaftaran Online
                                     </button>
                                 </Link>

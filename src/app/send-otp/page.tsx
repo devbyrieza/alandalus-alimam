@@ -102,73 +102,82 @@ export default function SendOtpPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-white flex items-center justify-center p-6 relative overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cream-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cream-100/30 rounded-full blur-[100px] -translate-x-1/2 translate-y-1/2 pointer-events-none" />
+      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
+
       <BackToHomeButton position="top-left" />
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 md:p-8">
+      <div className="app-card bg-white rounded-[2.5rem] shadow-lg border border-cream-200 w-full max-w-md p-6 md:p-8 relative z-10">
+        {/* Soft decorative blur inside card */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-cream-50/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-8 relative z-10">
           <div className="flex items-center justify-between mb-4">
             <button
               onClick={handleBack}
-              className="flex items-center text-gray-600 hover:text-gray-800 transition-colors"
+              className="flex items-center text-ink-600 hover:text-maroon-700 transition-colors"
             >
-              <ArrowLeft className="w-5 h-5 mr-2" />
-              <span className="text-sm font-medium">Kembali ke Form</span>
+              <div className="w-8 h-8 rounded-full bg-cream-50 border border-cream-200 flex items-center justify-center hover:scale-110 transition-transform mr-3">
+                <ArrowLeft className="w-4 h-4" />
+              </div>
+              <span className="text-sm font-bold">Kembali ke Form</span>
             </button>
           </div>
 
-          <h1 className="text-2xl font-bold text-gray-800 mb-2">
+          <h1 className="text-2xl font-black text-ink-950 mb-2">
             Kirim Kode Verifikasi
           </h1>
-          <p className="text-gray-600 text-sm">
+          <p className="text-ink-600 text-sm font-medium">
             Pilih salah satu channel untuk menerima kode OTP
           </p>
         </div>
 
         {/* Channel Selection */}
-        <div className="mb-8">
-          <h2 className="text-sm font-semibold text-gray-700 mb-4">
-            Pilih Channel Pengiriman:
+        <div className="mb-8 relative z-10">
+          <h2 className="text-sm font-bold text-ink-950 mb-4 tracking-wide">
+            PILIH CHANNEL PENGIRIMAN:
           </h2>
 
           <div className="space-y-3">
             {/* Telegram Option */}
             <div
-              className={`p-4 border-2 rounded-xl cursor-pointer transition-all ${selectedChannel === "telegram"
-                  ? "border-blue-500 bg-blue-50"
-                  : "border-gray-200 hover:border-gray-300"
+              className={`p-4 border-2 rounded-xl cursor-pointer transition-all app-card ${selectedChannel === "telegram"
+                  ? "border-maroon-600 bg-cream-50 shadow-md scale-[1.02]"
+                  : "border-cream-200 bg-white hover:border-maroon-200 hover:shadow-sm"
                 }`}
               onClick={() => setSelectedChannel("telegram")}
             >
               <div className="flex items-center">
                 <div
-                  className={`p-2 rounded-lg mr-3 ${selectedChannel === "telegram"
-                      ? "bg-blue-100"
-                      : "bg-gray-100"
+                  className={`p-2 rounded-lg mr-3 transition-colors ${selectedChannel === "telegram"
+                      ? "bg-maroon-600"
+                      : "bg-cream-100"
                     }`}
                 >
                   <MessageSquare
                     className={`w-5 h-5 ${selectedChannel === "telegram"
-                        ? "text-blue-600"
-                        : "text-gray-500"
+                        ? "text-white"
+                        : "text-maroon-700"
                       }`}
                   />
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-center">
-                    <span className="font-medium text-gray-800">Telegram</span>
+                    <span className={`font-black ${selectedChannel === "telegram" ? "text-maroon-900" : "text-ink-900"}`}>Telegram</span>
                     <div
-                      className={`w-4 h-4 rounded-full border-2 ${selectedChannel === "telegram"
-                          ? "border-blue-500 bg-blue-500"
-                          : "border-gray-300"
+                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${selectedChannel === "telegram"
+                          ? "border-maroon-600"
+                          : "border-cream-300"
                         }`}
                     >
                       {selectedChannel === "telegram" && (
-                        <div className="w-full h-full rounded-full bg-white m-0.5"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-maroon-600"></div>
                       )}
                     </div>
                   </div>
-                  <p className="text-sm text-gray-600 mt-1">
+                  <p className="text-xs text-ink-600 font-medium mt-1">
                     Kode dikirim ke akun Telegram (Real-time)
                   </p>
                 </div>
@@ -177,49 +186,49 @@ export default function SendOtpPage() {
 
             {/* Email Option */}
             <div
-              className={`p-4 border-2 rounded-xl cursor-pointer transition-all ${selectedChannel === "email"
-                  ? "border-green-500 bg-green-50"
-                  : "border-gray-200 hover:border-gray-300"
+              className={`p-4 border-2 rounded-xl cursor-pointer transition-all app-card ${selectedChannel === "email"
+                  ? "border-maroon-600 bg-cream-50 shadow-md scale-[1.02]"
+                  : "border-cream-200 bg-white hover:border-maroon-200 hover:shadow-sm"
                 }`}
               onClick={() => setSelectedChannel("email")}
             >
               <div className="flex items-center">
                 <div
-                  className={`p-2 rounded-lg mr-3 ${selectedChannel === "email" ? "bg-green-100" : "bg-gray-100"
+                  className={`p-2 rounded-lg mr-3 transition-colors ${selectedChannel === "email" ? "bg-maroon-600" : "bg-cream-100"
                     }`}
                 >
                   <Mail
                     className={`w-5 h-5 ${selectedChannel === "email"
-                        ? "text-green-600"
-                        : "text-gray-500"
+                        ? "text-white"
+                        : "text-maroon-700"
                       }`}
                   />
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-center">
-                    <span className="font-medium text-gray-800">
+                    <span className={`font-black ${selectedChannel === "email" ? "text-maroon-900" : "text-ink-900"}`}>
                       Email{" "}
-                      <span className="text-green-600 text-xs font-normal">
+                      <span className="text-maroon-600 bg-maroon-100 px-2 py-0.5 rounded text-[10px] font-bold ml-1">
                         GRATIS
                       </span>
                     </span>
                     <div
-                      className={`w-4 h-4 rounded-full border-2 ${selectedChannel === "email"
-                          ? "border-green-500 bg-green-500"
-                          : "border-gray-300"
+                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${selectedChannel === "email"
+                          ? "border-maroon-600"
+                          : "border-cream-300"
                         }`}
                     >
                       {selectedChannel === "email" && (
-                        <div className="w-full h-full rounded-full bg-white m-0.5"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-maroon-600"></div>
                       )}
                     </div>
                   </div>
-                  <p className="text-sm text-gray-600 mt-1">
+                  <p className="text-xs text-ink-600 font-medium mt-1">
                     Kode dikirim ke email orang tua
                   </p>
                   {selectedChannel === "email" && (
-                    <div className="mt-2 p-2 bg-green-100 rounded-lg">
-                      <p className="text-xs text-green-800 font-medium">
+                    <div className="mt-2 p-2 bg-cream-100 border border-cream-200 rounded-lg">
+                      <p className="text-[11px] text-maroon-800 font-bold">
                         ✓ Akan dikirim ke: {email}
                       </p>
                     </div>
@@ -230,39 +239,39 @@ export default function SendOtpPage() {
 
             {/* SMS Option */}
             <div
-              className={`p-4 border-2 rounded-xl cursor-pointer transition-all ${selectedChannel === "sms"
-                  ? "border-purple-500 bg-purple-50"
-                  : "border-gray-200 hover:border-gray-300"
+              className={`p-4 border-2 rounded-xl cursor-pointer transition-all app-card ${selectedChannel === "sms"
+                  ? "border-maroon-600 bg-cream-50 shadow-md scale-[1.02]"
+                  : "border-cream-200 bg-white hover:border-maroon-200 hover:shadow-sm"
                 }`}
               onClick={() => setSelectedChannel("sms")}
             >
               <div className="flex items-center">
                 <div
-                  className={`p-2 rounded-lg mr-3 ${selectedChannel === "sms" ? "bg-purple-100" : "bg-gray-100"
+                  className={`p-2 rounded-lg mr-3 transition-colors ${selectedChannel === "sms" ? "bg-maroon-600" : "bg-cream-100"
                     }`}
                 >
                   <Smartphone
                     className={`w-5 h-5 ${selectedChannel === "sms"
-                        ? "text-purple-600"
-                        : "text-gray-500"
+                        ? "text-white"
+                        : "text-maroon-700"
                       }`}
                   />
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-center">
-                    <span className="font-medium text-gray-800">SMS</span>
+                    <span className={`font-black ${selectedChannel === "sms" ? "text-maroon-900" : "text-ink-900"}`}>SMS</span>
                     <div
-                      className={`w-4 h-4 rounded-full border-2 ${selectedChannel === "sms"
-                          ? "border-purple-500 bg-purple-500"
-                          : "border-gray-300"
+                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${selectedChannel === "sms"
+                          ? "border-maroon-600"
+                          : "border-cream-300"
                         }`}
                     >
                       {selectedChannel === "sms" && (
-                        <div className="w-full h-full rounded-full bg-white m-0.5"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-maroon-600"></div>
                       )}
                     </div>
                   </div>
-                  <p className="text-sm text-gray-600 mt-1">
+                  <p className="text-xs text-ink-600 font-medium mt-1">
                     Pilihan tepat jika internet terbatas
                   </p>
                 </div>
@@ -272,10 +281,10 @@ export default function SendOtpPage() {
         </div>
 
         {/* Input Fields */}
-        <div className="mb-8">
+        <div className="mb-8 relative z-10">
           {selectedChannel === "telegram" && (
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-xs font-black text-ink-600 uppercase tracking-widest pl-1">
                 Telegram Username/ID
               </label>
               <input
@@ -283,7 +292,7 @@ export default function SendOtpPage() {
                 value={telegram}
                 onChange={(e) => setTelegram(e.target.value)}
                 placeholder="@username atau ID Telegram"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                className="w-full px-5 py-3 md:px-6 md:py-4 rounded-xl bg-cream-50 border border-transparent focus:bg-white focus:border-maroon-200 focus:ring-4 focus:ring-cream-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-500 text-sm md:text-base"
                 disabled={loading}
               />
             </div>
@@ -291,7 +300,7 @@ export default function SendOtpPage() {
 
           {selectedChannel === "email" && (
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-xs font-black text-ink-600 uppercase tracking-widest pl-1">
                 Email Orang Tua
               </label>
               <input
@@ -299,7 +308,7 @@ export default function SendOtpPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="nama@email.com"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition"
+                className="w-full px-5 py-3 md:px-6 md:py-4 rounded-xl bg-cream-50 border border-transparent focus:bg-white focus:border-maroon-200 focus:ring-4 focus:ring-cream-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-500 text-sm md:text-base"
                 disabled={loading}
               />
             </div>
@@ -307,7 +316,7 @@ export default function SendOtpPage() {
 
           {selectedChannel === "sms" && (
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-xs font-black text-ink-600 uppercase tracking-widest pl-1">
                 Nomor Telepon
               </label>
               <input
@@ -315,7 +324,7 @@ export default function SendOtpPage() {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="081234567890"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition"
+                className="w-full px-5 py-3 md:px-6 md:py-4 rounded-xl bg-cream-50 border border-transparent focus:bg-white focus:border-maroon-200 focus:ring-4 focus:ring-cream-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-500 text-sm md:text-base"
                 disabled={loading}
               />
             </div>
@@ -323,38 +332,35 @@ export default function SendOtpPage() {
         </div>
 
         {/* Messages */}
-        {successMessage && (
-          <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
-            <div className="flex items-center">
-              <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center mr-2">
-                <span className="text-white text-xs">✓</span>
+        <div className="relative z-10">
+          {successMessage && (
+            <div className="mb-4 p-4 bg-teal-50 border border-teal-200 text-teal-800 rounded-[1rem] shadow-sm">
+              <div className="flex items-center">
+                <div className="w-5 h-5 rounded-full bg-teal-500 flex items-center justify-center mr-2">
+                  <span className="text-white text-xs">✓</span>
+                </div>
+                <span className="font-bold text-sm">{successMessage}</span>
               </div>
-              <span className="font-medium">{successMessage}</span>
             </div>
-          </div>
-        )}
+          )}
 
-        {errorMessage && (
-          <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
-            <div className="flex items-center">
-              <div className="w-5 h-5 rounded-full bg-red-500 flex items-center justify-center mr-2">
-                <span className="text-white text-xs">!</span>
+          {errorMessage && (
+            <div className="mb-4 p-4 bg-red-50 border border-red-200 text-red-800 rounded-[1rem] shadow-sm">
+              <div className="flex items-center">
+                <div className="w-5 h-5 rounded-full bg-red-500 flex items-center justify-center mr-2">
+                  <span className="text-white text-xs">!</span>
+                </div>
+                <span className="font-bold text-sm">{errorMessage}</span>
               </div>
-              <span className="font-medium">{errorMessage}</span>
             </div>
-          </div>
-        )}
+          )}
+        </div>
 
         {/* Submit Button */}
         <button
           onClick={handleSendOtp}
           disabled={loading}
-          className={`w-full py-3 px-4 rounded-lg font-medium text-white flex items-center justify-center transition ${selectedChannel === "telegram"
-              ? "bg-blue-600 hover:bg-blue-700"
-              : selectedChannel === "email"
-                ? "bg-green-600 hover:bg-green-700"
-                : "bg-purple-600 hover:bg-purple-700"
-            } ${loading ? "opacity-70 cursor-not-allowed" : ""}`}
+          className={`relative z-10 w-full py-4 md:py-5 rounded-pill font-black text-lg text-white flex items-center justify-center shadow-md transition-all active:scale-95 border border-transparent disabled:opacity-50 hover:bg-cream-100 hover:text-maroon-900 border-maroon-900 bg-maroon-900`}
         >
           {loading ? (
             <>
@@ -389,25 +395,25 @@ export default function SendOtpPage() {
         </button>
 
         {/* Tips */}
-        <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-          <h3 className="text-sm font-semibold text-gray-700 mb-2">
+        <div className="mt-6 p-4 bg-cream-50 rounded-[1.5rem] border border-cream-200 relative z-10">
+          <h3 className="text-xs font-black text-ink-950 mb-2 uppercase tracking-widest pl-1">
             Tips Pemilihan Channel
           </h3>
-          <ul className="text-xs text-gray-600 space-y-1">
+          <ul className="text-xs text-ink-600 space-y-2 font-medium">
             <li className="flex items-start">
-              <span className="text-blue-500 mr-2">•</span>
+              <span className="text-maroon-500 mr-2 flex-shrink-0 mt-0.5">•</span>
               <span>
                 <strong>Telegram</strong> jika ingin notifikasi real-time gratis
               </span>
             </li>
             <li className="flex items-start">
-              <span className="text-green-500 mr-2">•</span>
+              <span className="text-maroon-500 mr-2 flex-shrink-0 mt-0.5">•</span>
               <span>
                 <strong>Email</strong> untuk dokumentasi resmi
               </span>
             </li>
             <li className="flex items-start">
-              <span className="text-purple-500 mr-2">•</span>
+              <span className="text-maroon-500 mr-2 flex-shrink-0 mt-0.5">•</span>
               <span>
                 <strong>SMS</strong> jika internet terbatas
               </span>

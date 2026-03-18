@@ -74,7 +74,7 @@ export default function DataPendaftaranTab() {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center h-64 space-y-4">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-maroon-700"></div>
         <p className="text-stone-600">Memuat data pendaftaran...</p>
       </div>
     );
@@ -99,18 +99,18 @@ export default function DataPendaftaranTab() {
       )}
 
       {/* Header */}
-      <div className="bg-gradient-to-r from-teal-500 to-teal-600 rounded-2xl p-6 text-white">
+      <div className="bg-gradient-to-r from-maroon-600 to-maroon-700 rounded-2xl p-6 text-white">
         <div className="flex flex-col md:flex-row md:items-center justify-between">
           <div>
             <h1 className="text-2xl font-black">Data Pendaftaran</h1>
-            <p className="text-teal-100">
+            <p className="text-cream-100">
               Kelola data dan dokumen pendaftaran Anda
             </p>
           </div>
           <div className="mt-4 md:mt-0">
             <button
               onClick={() => alert("Fitur lengkapi data akan tersedia segera!")}
-              className="inline-flex items-center gap-2 px-5 py-3 bg-white text-teal-700 font-bold rounded-xl hover:bg-teal-50 transition-all"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-white text-maroon-800 font-bold rounded-xl hover:bg-maroon-50 transition-all"
             >
               <Edit className="w-4 h-4" />
               Lengkapi Data
@@ -178,7 +178,7 @@ export default function DataPendaftaranTab() {
       <div className="bg-white rounded-xl p-6 border-2 border-stone-200 shadow-sm">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold text-stone-900">📋 Data Pribadi</h2>
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-teal-100 text-teal-800">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-cream-100 text-maroon-900">
             <Clock className="w-3 h-3 mr-1" />
             Perlu dilengkapi
           </span>
@@ -225,7 +225,7 @@ export default function DataPendaftaranTab() {
               <label className="block text-sm font-medium text-stone-600 mb-1">
                 Nomor Pendaftaran
               </label>
-              <p className="text-stone-900 font-medium font-mono text-xl text-teal-600">
+              <p className="text-stone-900 font-medium font-mono text-xl text-maroon-700">
                 {pendaftarData?.nomor_pendaftaran}
               </p>
             </div>
@@ -272,14 +272,14 @@ export default function DataPendaftaranTab() {
         {/* Step 2: Isi Data Lengkap */}
         <Link
           href="/dashboard/pendaftar/kelengkapan-berkas"
-          className="group bg-white rounded-xl p-6 border-2 border-stone-200 hover:border-teal-300 hover:shadow-lg transition-all duration-300"
+          className="group bg-white rounded-xl p-6 border-2 border-stone-200 hover:border-maroon-300 hover:shadow-lg transition-all duration-300"
         >
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
-              <div className="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center group-hover:bg-teal-200 transition-colors">
-                <User className="w-6 h-6 text-teal-600" />
+              <div className="w-12 h-12 bg-cream-100 rounded-xl flex items-center justify-center group-hover:bg-cream-200 transition-colors">
+                <User className="w-6 h-6 text-maroon-700" />
               </div>
-              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-bold bg-teal-100 text-teal-700">
+              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-bold bg-cream-100 text-maroon-800">
                 Tahap 2
               </span>
             </div>
@@ -290,7 +290,7 @@ export default function DataPendaftaranTab() {
                   Lengkapi data diri calon santri
                 </p>
               </div>
-              <ChevronRight className="w-5 h-5 text-stone-400 group-hover:text-teal-500" />
+              <ChevronRight className="w-5 h-5 text-stone-400 group-hover:text-maroon-500" />
             </div>
           </div>
         </Link>
@@ -330,7 +330,7 @@ export default function DataPendaftaranTab() {
         <div className="space-y-4">
           {[
             { label: "1. Pembayaran", progress: 0, color: "bg-amber-500" },
-            { label: "2. Isi Data Lengkap", progress: 60, color: "bg-teal-500" },
+            { label: "2. Isi Data Lengkap", progress: 60, color: "bg-maroon-500" },
             { label: "3. Upload Dokumen", progress: 0, color: "bg-green-500" },
             { label: "4. Verifikasi", progress: 0, color: "bg-purple-500" },
           ].map((item, index) => (

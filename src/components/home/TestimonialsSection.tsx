@@ -13,7 +13,8 @@ const TESTIMONIALS = [
     initial: "S",
     date: "Oktober 2024",
     quote:
-      "Tujuan kami menyekolahkan anak ke sini adalah agar mereka benar-benar paham agama, bukan sekadar hafal pelajaran. Alhamdulillah, sejak semester pertama sudah terlihat perubahan nyata pada anak kami — cara bicara, cara bersikap kepada orang tua, dan keseriusannya dalam ibadah. Di sini, pembiasaan ibadah dan adab benar-benar menjadi prioritas harian yang dikerjakan dengan ikhlas, bukan sekadar aturan.",
+      "Tujuan kami menyekolahkan anak ke sini adalah agar mereka benar-benar paham agama, bukan sekadar hafal pelajaran. Alhamdulillah, sejak semester pertama sudah terlihat perubahan nyata pada anak kami — cara bicara, cara bersikap kepada orang tua, dan keseriusannya dalam ibadah.",
+    color: "maroon"
   },
   {
     no: "002",
@@ -23,7 +24,8 @@ const TESTIMONIALS = [
     initial: "E",
     date: "Januari 2025",
     quote:
-      "Awalnya saya khawatir dengan sistem boarding, takut anak susah adaptasi. Ternyata kekhawatiran itu berlebihan. Kurikulum tahfidznya sangat sistematis — tidak hanya mengejar target hafalan, tapi sangat ditekankan pada makhraj dan tajwid yang benar. Dalam 6 bulan, anak saya sudah mampu memimpin shalat berjamaah di rumah saat liburan. Itu yang membuat saya terharu.",
+      "Awalnya saya khawatir dengan sistem boarding, takut anak susah adaptasi. Ternyata kekhawatiran itu berlebihan. Kurikulum tahfidznya sangat sistematis — tidak hanya mengejar target hafalan, tapi sangat ditekankan pada makhraj dan tajwid yang benar. Dalam 6 bulan, anak saya sudah mampu memimpin shalat berjamaah di rumah.",
+    color: "cream"
   },
   {
     no: "003",
@@ -33,7 +35,8 @@ const TESTIMONIALS = [
     initial: "R",
     date: "Maret 2025",
     quote:
-      "Disiplin bahasa Arab dan hafalan Al-Qur'an yang saya dapatkan selama di Al-Imam sangat membantu saat saya melanjutkan pendidikan ke jenjang lebih tinggi. Saat teman-teman lain masih belajar dasar-dasar nahwu, saya sudah bisa langsung membaca kitab. Lingkungannya juga kondusif — semua teman berlomba dalam kebaikan, bukan dalam hal-hal yang sia-sia.",
+      "Disiplin bahasa Arab dan hafalan Al-Qur'an yang saya dapatkan selama di Al-Imam sangat membantu saat saya melanjutkan pendidikan ke jenjang lebih tinggi. Saat teman-teman lain masih belajar dasar-dasar nahwu, saya sudah bisa langsung membaca kitab. Lingkungannya juga kondusif.",
+    color: "gold"
   },
   {
     no: "004",
@@ -43,7 +46,8 @@ const TESTIMONIALS = [
     initial: "A",
     date: "Agustus 2024",
     quote:
-      "Alhamdulillah, berkat bimbingan intensif para asatidz selama di Al-Imam, saya berhasil lulus seleksi masuk universitas di Timur Tengah. Fondasi bahasa Arab aktif yang ditanamkan sejak awal benar-benar menjadi kunci. Para guru di sini tidak hanya mengajar, mereka benar-benar membimbing dan mendoakan santrinya. Saya tidak akan bisa sampai sejauh ini tanpa mereka.",
+      "Alhamdulillah, berkat bimbingan intensif para asatidz selama di Al-Imam, saya berhasil lulus seleksi masuk universitas di Timur Tengah. Fondasi bahasa Arab aktif yang ditanamkan sejak awal benar-benar menjadi kunci. Para guru di sini tidak hanya mengajar, mereka benar-benar membimbing dan mendoakan santrinya.",
+    color: "teal"
   },
 ] as const;
 
@@ -55,6 +59,7 @@ function TestimonialCard({
   initial,
   date,
   quote,
+  color,
   idx
 }: (typeof TESTIMONIALS)[number] & { idx: number }) {
   return (
@@ -63,37 +68,37 @@ function TestimonialCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: idx * 0.1 }}
-      className="bg-white p-8 rounded-[2.5rem] h-full flex flex-col relative group border border-surface-100 shadow-premium-lg hover:shadow-premium-xl transition-all duration-500"
+      className="app-card bg-white p-8 h-full flex flex-col relative group transition-all duration-500 hover:-translate-y-1"
     >
       {/* Number badge */}
-      <div className="absolute top-8 left-8 w-9 h-9 rounded-xl bg-brown-50 border border-brown-100 flex items-center justify-center">
-        <span className="text-[10px] font-black text-brown-600 tracking-wider">#{no}</span>
+      <div className="absolute top-8 left-8 w-10 h-10 rounded-[12px] bg-cream-50 border border-cream-200 flex items-center justify-center shadow-sm">
+        <span className="text-xs font-black text-maroon-700 tracking-wider">#{no}</span>
       </div>
 
-      <Quote className="absolute top-8 right-8 w-8 h-8 text-brown-50 group-hover:text-brown-100 transition-colors" />
+      <Quote className="absolute top-8 right-8 w-10 h-10 text-cream-100 group-hover:text-cream-200 transition-colors" />
 
       {/* Stars */}
-      <div className="flex gap-1 mb-5 mt-10">
+      <div className="flex gap-1 mb-6 mt-14">
         {[...Array(5)].map((_, i) => (
-          <Star key={i} className="w-3.5 h-3.5 text-gold-500 fill-gold-500" />
+          <Star key={i} className="w-4 h-4 text-yellow-500 fill-yellow-500" />
         ))}
       </div>
 
-      <p className="text-ink-600 leading-relaxed mb-6 flex-grow font-medium relative z-10 text-sm">
+      <p className="text-ink-700 leading-relaxed mb-8 flex-grow font-medium relative z-10 text-[15px]">
         "{quote}"
       </p>
 
-      <div className="flex items-center justify-between mt-auto pt-5 border-t border-surface-100">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-brown-700 flex items-center justify-center text-white font-display font-black shadow-premium-sm group-hover:scale-110 transition-transform duration-500">
+      <div className="flex items-center justify-between mt-auto pt-6 border-t border-cream-200/60">
+        <div className="flex items-center gap-4">
+          <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-maroon-600 to-maroon-900 flex items-center justify-center text-white font-display font-black shadow-sm group-hover:scale-110 transition-transform duration-500">
             {initial}
           </div>
           <div>
-            <p className="text-sm font-bold text-ink-950 leading-none mb-1">{name}</p>
-            <p className="text-[11px] text-ink-500 font-bold uppercase tracking-wider">{role} · {city}</p>
+            <p className="text-[15px] font-bold text-ink-950 leading-tight mb-1">{name}</p>
+            <p className="text-[10px] text-maroon-700 font-bold uppercase tracking-widest">{role} · {city}</p>
           </div>
         </div>
-        <span className="text-[11px] text-ink-400 font-bold shrink-0">{date}</span>
+        <span className="text-[10px] text-ink-400 font-bold shrink-0 bg-surface-50 px-2 py-1 rounded-md">{date}</span>
       </div>
     </motion.div>
   );
@@ -101,18 +106,18 @@ function TestimonialCard({
 
 export default function TestimonialsSection() {
   return (
-    <section id="testimonials" className="py-24 md:py-32 bg-surface-50 relative overflow-hidden">
+    <section id="testimonials" className="section-alt border-y border-cream-200">
       <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-brown-50 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/2 opacity-50" />
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cream-100/60 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/2 opacity-50" />
 
       <Container className="relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16 max-w-2xl mx-auto">
+        <div className="text-center mb-16 lg:mb-20 max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-surface-200 text-brown-700 text-xs font-bold uppercase tracking-widest mb-6 shadow-premium-sm"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-white border border-cream-200 text-maroon-700 text-xs font-bold uppercase tracking-widest mb-6 shadow-sm"
           >
             <MessageCircle className="w-3.5 h-3.5" />
             <span>Cerita Nyata Wali Santri & Alumni</span>
@@ -123,9 +128,9 @@ export default function TestimonialsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-6 tracking-tight"
+            className="section-title mb-6"
           >
-            Apa Kata <span className="text-brown-600">Mereka?</span>
+            Apa Kata <span className="text-gradient-maroon">Mereka?</span>
           </motion.h2>
 
           <motion.p
@@ -133,14 +138,14 @@ export default function TestimonialsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-ink-600 font-medium leading-relaxed"
+            className="section-subtitle"
           >
             Kepercayaan wali santri dan alumni adalah amanah bagi kami untuk terus memberikan yang terbaik.
           </motion.p>
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12">
           {TESTIMONIALS.map((testimonial, idx) => (
             <TestimonialCard key={idx} {...testimonial} idx={idx} />
           ))}
@@ -151,7 +156,7 @@ export default function TestimonialsSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center text-xs text-ink-400 font-bold uppercase tracking-widest"
+          className="text-center text-[10px] text-ink-500 font-bold uppercase tracking-widest"
         >
           Testimoni asli dari wali santri & alumni · Nama ditampilkan dengan persetujuan
         </motion.p>

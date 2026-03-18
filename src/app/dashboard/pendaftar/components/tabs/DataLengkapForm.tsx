@@ -300,8 +300,8 @@ function SectionHeader({
       className={`w-full flex items-center justify-between p-5 rounded-2xl transition-all duration-300 border ${disabled
         ? "bg-slate-50 border-slate-200 opacity-60 cursor-not-allowed"
         : isOpen
-          ? "bg-white border-teal-200 shadow-clay-md"
-          : "bg-surface-50 border-white/50 hover:bg-white hover:border-teal-100"
+          ? "bg-white border-cream-200 shadow-sm border border-cream-200 app-card"
+          : "bg-surface-50 border-white/50 hover:bg-white hover:border-cream-100"
         }`}
     >
       <div className="flex items-center gap-4">
@@ -309,7 +309,7 @@ function SectionHeader({
           className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${isCompleted
             ? "bg-emerald-100 text-emerald-600"
             : isOpen
-              ? "bg-teal-100 text-teal-600"
+              ? "bg-cream-100 text-maroon-700"
               : "bg-surface-200 text-ink-400"
             }`}
         >
@@ -361,7 +361,7 @@ function InputField({
   maxLength,
   inputFilter,
 }: InputFieldProps) {
-  const baseInputClass = "w-full px-4 py-3 bg-white border border-ink-200 rounded-xl text-ink-900 placeholder:text-ink-300 focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition-all outline-none disabled:bg-surface-100 disabled:text-ink-400 font-medium";
+  const baseInputClass = "w-full px-4 py-3 bg-white border border-ink-200 rounded-xl text-ink-900 placeholder:text-ink-300 focus:border-maroon-600 focus:ring-4 focus:ring-maroon-600/10 transition-all outline-none disabled:bg-surface-100 disabled:text-ink-400 font-medium";
 
   // Filter function for input validation
   const handleFilteredChange = (rawValue: string) => {
@@ -757,7 +757,7 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center h-64 space-y-4">
-        <Loader2 className="w-10 h-10 text-teal-600 animate-spin" />
+        <Loader2 className="w-10 h-10 text-maroon-700 animate-spin" />
         <p className="text-ink-500 font-medium">Memuat data...</p>
       </div>
     );
@@ -873,7 +873,7 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
               {/* Identitas */}
               <div>
                 <h4 className="flex items-center gap-2 text-lg font-bold text-ink-900 mb-6 pb-2 border-b border-ink-100">
-                  <span className="w-8 h-8 rounded-lg bg-teal-100 text-teal-600 flex items-center justify-center text-sm">1</span>
+                  <span className="w-8 h-8 rounded-lg bg-cream-100 text-maroon-700 flex items-center justify-center text-sm">1</span>
                   Identitas Utama
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -925,7 +925,7 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
               {/* Fisik */}
               <div>
                 <h4 className="flex items-center gap-2 text-lg font-bold text-ink-900 mb-6 pb-2 border-b border-ink-100">
-                  <span className="w-8 h-8 rounded-lg bg-teal-100 text-teal-600 flex items-center justify-center text-sm">2</span>
+                  <span className="w-8 h-8 rounded-lg bg-cream-100 text-maroon-700 flex items-center justify-center text-sm">2</span>
                   Fisik & Kesehatan
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -941,7 +941,7 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
               {/* Alamat */}
               <div>
                 <h4 className="flex items-center gap-2 text-lg font-bold text-ink-900 mb-6 pb-2 border-b border-ink-100">
-                  <span className="w-8 h-8 rounded-lg bg-teal-100 text-teal-600 flex items-center justify-center text-sm">3</span>
+                  <span className="w-8 h-8 rounded-lg bg-cream-100 text-maroon-700 flex items-center justify-center text-sm">3</span>
                   Alamat Tempat Tinggal
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -975,7 +975,7 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
               {/* Sekolah Asal */}
               <div>
                 <h4 className="flex items-center gap-2 text-lg font-bold text-ink-900 mb-6 pb-2 border-b border-ink-100">
-                  <span className="w-8 h-8 rounded-lg bg-teal-100 text-teal-600 flex items-center justify-center text-sm">4</span>
+                  <span className="w-8 h-8 rounded-lg bg-cream-100 text-maroon-700 flex items-center justify-center text-sm">4</span>
                   Sekolah Asal
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1256,7 +1256,7 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
           <button
             type="submit"
             disabled={saving}
-            className="flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 text-white font-bold text-lg shadow-lg shadow-teal-500/30 hover:shadow-teal-500/40 hover:-translate-y-1 transition-all disabled:opacity-50 disabled:transform-none"
+            className="flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-maroon-600 to-maroon-700 text-white font-bold text-lg shadow-lg shadow-maroon-600/30 hover:shadow-maroon-600/40 hover:-translate-y-1 transition-all disabled:opacity-50 disabled:transform-none"
           >
             {saving ? <Loader2 className="w-6 h-6 animate-spin" /> : isEditMode ? <Send className="w-6 h-6" /> : <Save className="w-6 h-6" />}
             <span>{saving ? "Menyimpan..." : isEditMode ? "Simpan & Ajukan Verifikasi" : "Simpan Data"}</span>

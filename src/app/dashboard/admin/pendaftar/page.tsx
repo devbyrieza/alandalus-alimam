@@ -601,7 +601,7 @@ function AdminPendaftarContent() {
       payment_verification: { label: "Verifikasi Pembayaran", color: "bg-orange-100 text-orange-700" },
       payment_rejected: { label: "Pembayaran Ditolak", color: "bg-red-100 text-red-700" },
       paid: { label: "Sudah Bayar", color: "bg-blue-100 text-blue-700" },
-      data_completed: { label: "Data Lengkap", color: "bg-teal-100 text-teal-700" },
+      data_completed: { label: "Data Lengkap", color: "bg-maroon-100 text-maroon-800" },
       docs_uploaded: { label: "Dokumen Terupload", color: "bg-indigo-100 text-indigo-700" },
       docs_verified: { label: "Dokumen Terverifikasi", color: "bg-green-100 text-green-700" },
       docs_rejected: { label: "Dokumen Ditolak", color: "bg-red-100 text-red-700" },

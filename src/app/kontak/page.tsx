@@ -48,14 +48,14 @@ const ContactInfoCard = ({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay, duration: 0.5 }}
-        className="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-[2.5rem] border border-surface-100 shadow-premium-sm hover:shadow-premium-md transition-all group flex flex-col items-center text-center"
+        className="app-card bg-white p-6 sm:p-8 rounded-2xl sm:rounded-[2.5rem] border border-cream-200 shadow-sm hover:shadow-md transition-all group flex flex-col items-center text-center"
     >
-        <div className="w-16 h-16 rounded-3xl bg-surface-50 flex items-center justify-center text-brown-600 mb-6 group-hover:scale-110 transition-transform shadow-premium-xs">
+        <div className="w-16 h-16 rounded-2xl bg-cream-50 flex items-center justify-center text-maroon-600 mb-6 group-hover:scale-110 transition-transform shadow-sm border border-cream-200">
             <Icon className="w-8 h-8" />
         </div>
         <h3 className="text-xl font-display font-black text-ink-950 mb-3">{title}</h3>
         {href ? (
-            <a href={href} className="text-lg font-bold text-brown-600 hover:text-brown-700 transition-colors break-all">
+            <a href={href} className="text-lg font-bold text-maroon-600 hover:text-maroon-700 transition-colors break-all">
                 {content}
             </a>
         ) : (
@@ -78,9 +78,9 @@ const SocialCard = ({ social, delay = 0 }: { social: any, delay?: number }) => (
         href={social.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`group flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-2xl sm:rounded-[2rem] bg-white border border-surface-100 shadow-premium-sm hover:shadow-premium-md transition-all`}
+        className={`app-card group flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-2xl sm:rounded-[2rem] bg-white border border-cream-200 shadow-sm hover:shadow-md transition-all`}
     >
-        <div className={`w-14 h-14 rounded-2xl ${social.bgLight} flex items-center justify-center ${social.textColor} group-hover:scale-110 transition-transform shadow-premium-xs`}>
+        <div className={`w-14 h-14 rounded-2xl ${social.bgLight} flex items-center justify-center ${social.textColor} group-hover:scale-110 transition-transform shadow-sm border border-cream-200`}>
             <social.icon className="w-7 h-7" />
         </div>
         <div>
@@ -163,7 +163,7 @@ export default function ContactPage() {
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-surface-200 text-brown-700 text-xs font-bold uppercase tracking-widest mb-10 shadow-premium-sm"
+                            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-cream-50 border border-cream-200 text-maroon-700 text-xs font-bold uppercase tracking-widest mb-10 shadow-sm"
                         >
                             <Phone className="w-3.5 h-3.5" />
                             <span>Layanan Informasi & Kontak</span>
@@ -176,7 +176,7 @@ export default function ContactPage() {
                             className="text-4xl sm:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
                         >
                             Kami Siap <br />
-                            <span className="text-brown-600">Membantu Anda</span>
+                            <span className="text-gradient-maroon">Membantu Anda</span>
                         </motion.h1>
 
                         <motion.p
@@ -231,13 +231,13 @@ export default function ContactPage() {
                             initial={{ opacity: 0, x: -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="lg:col-span-3 bg-white p-6 md:p-16 rounded-[2.5rem] md:rounded-[4rem] shadow-premium-xl border border-surface-100 relative overflow-hidden"
+                            className="lg:col-span-3 bg-white p-6 md:p-16 rounded-[2.5rem] md:rounded-[4rem] shadow-lg border border-cream-200 relative overflow-hidden"
                         >
-                            <div className="absolute top-0 right-0 w-96 h-96 bg-brown-50/50 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2" />
+                            <div className="absolute top-0 right-0 w-96 h-96 bg-cream-50/50 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2" />
 
                             <div className="relative z-10">
                                 <div className="flex items-center gap-4 md:gap-5 mb-8 md:mb-12">
-                                    <div className="w-12 h-12 md:w-16 md:h-16 bg-brown-900 rounded-2xl md:rounded-3xl flex items-center justify-center text-white shadow-premium-md shrink-0">
+                                    <div className="w-12 h-12 md:w-16 md:h-16 bg-maroon-900 rounded-2xl md:rounded-3xl flex items-center justify-center text-white shadow-md shrink-0">
                                         <Send className="w-6 h-6 md:w-8 md:h-8" />
                                     </div>
                                     <div>
@@ -274,7 +274,7 @@ export default function ContactPage() {
                                                 value={formData.nama}
                                                 onChange={handleChange}
                                                 required
-                                                className="w-full px-5 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900 placeholder:text-ink-300 text-sm md:text-base"
+                                                className="w-full px-5 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl bg-cream-50 border border-transparent focus:bg-white focus:border-maroon-200 focus:ring-4 focus:ring-cream-50 transition-all font-bold text-ink-900 placeholder:text-ink-300 text-sm md:text-base"
                                                 placeholder="Nama lengkap Anda"
                                             />
                                         </div>
@@ -286,7 +286,7 @@ export default function ContactPage() {
                                                 value={formData.email}
                                                 onChange={handleChange}
                                                 required
-                                                className="w-full px-5 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900 placeholder:text-ink-300 text-sm md:text-base"
+                                                className="w-full px-5 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl bg-cream-50 border border-transparent focus:bg-white focus:border-maroon-200 focus:ring-4 focus:ring-cream-50 transition-all font-bold text-ink-900 placeholder:text-ink-300 text-sm md:text-base"
                                                 placeholder="email@anda.com"
                                             />
                                         </div>
@@ -300,7 +300,7 @@ export default function ContactPage() {
                                             value={formData.telepon}
                                             onChange={handleChange}
                                             required
-                                            className="w-full px-5 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900 placeholder:text-ink-300 text-sm md:text-base"
+                                            className="w-full px-5 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl bg-cream-50 border border-transparent focus:bg-white focus:border-maroon-200 focus:ring-4 focus:ring-cream-50 transition-all font-bold text-ink-900 placeholder:text-ink-300 text-sm md:text-base"
                                             placeholder="08xx-xxxx-xxxx"
                                         />
                                     </div>
@@ -313,7 +313,7 @@ export default function ContactPage() {
                                             onChange={handleChange}
                                             required
                                             rows={5}
-                                            className="w-full px-5 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl bg-surface-50 border border-transparent focus:bg-white focus:border-brown-200 focus:ring-4 focus:ring-brown-50 transition-all font-bold text-ink-900 placeholder:text-ink-300 text-sm md:text-base resize-none"
+                                            className="w-full px-5 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl bg-cream-50 border border-transparent focus:bg-white focus:border-maroon-200 focus:ring-4 focus:ring-cream-50 transition-all font-bold text-ink-900 placeholder:text-ink-300 text-sm md:text-base resize-none"
                                             placeholder="Apa yang bisa kami bantu?"
                                         />
                                     </div>
@@ -323,7 +323,7 @@ export default function ContactPage() {
                                         whileTap={{ scale: 0.98 }}
                                         type="submit"
                                         disabled={isSubmitting}
-                                        className="w-full py-4 md:py-6 rounded-[1.5rem] md:rounded-[2rem] bg-brown-900 text-white font-black text-lg md:text-xl hover:bg-gold-500 shadow-premium-lg transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                                        className="w-full py-4 md:py-6 rounded-pill bg-maroon-900 text-white font-black text-lg md:text-xl hover:bg-cream-100 shadow-md transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                                     >
                                         {isSubmitting ? "Sedang Mengirim..." : "Kirim Sekarang"}
                                     </motion.button>
@@ -340,7 +340,7 @@ export default function ContactPage() {
                                     viewport={{ once: true }}
                                     className="text-2xl md:text-3xl font-display font-black text-ink-950 px-2"
                                 >
-                                    Ikuti <span className="text-brown-600">Media Sosial</span>
+                                    Ikuti <span className="text-maroon-600">Media Sosial</span>
                                 </motion.h2>
                                 <div className="grid gap-3 md:gap-5">
                                     {SOCIAL_MEDIA.map((social, idx) => (
@@ -367,8 +367,8 @@ export default function ContactPage() {
                                         title="Lokasi Pesantren Al-Imam Al-Islami"
                                         className="grayscale hover:grayscale-0 transition-all duration-700"
                                     />
-                                    <div className="absolute bottom-3 left-3 md:bottom-6 md:left-6 bg-white/90 backdrop-blur-sm px-3 py-1.5 md:px-6 md:py-3 rounded-lg md:rounded-2xl shadow-premium-lg border border-surface-50 flex items-center gap-1.5 md:gap-3 z-10">
-                                        <MapIcon className="w-3.5 h-3.5 md:w-5 md:h-5 text-brown-600" />
+                                    <div className="absolute bottom-3 left-3 md:bottom-6 md:left-6 bg-white/90 backdrop-blur-sm px-3 py-1.5 md:px-6 md:py-3 rounded-lg md:rounded-2xl shadow-md border border-cream-200 flex items-center gap-1.5 md:gap-3 z-10">
+                                        <MapIcon className="w-3.5 h-3.5 md:w-5 md:h-5 text-maroon-600" />
                                         <span className="text-[10px] md:text-sm font-black text-ink-950 uppercase tracking-widest">Buka di Maps</span>
                                     </div>
                                 </div>
@@ -392,14 +392,14 @@ export default function ContactPage() {
 
                         <div className="relative z-10">
                             <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-black mb-4 sm:mb-6 md:mb-8 text-white leading-tight">
-                                Mari Bergabung <br /> <span className="text-gold-400">Menjadi Keluarga</span>
+                                Mari Bergabung <br /> <span className="text-cream-100">Menjadi Keluarga</span>
                             </h2>
-                            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-brown-100 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 lg:mb-12 font-medium px-2">
+                            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-maroon-100 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 lg:mb-12 font-medium px-2">
                                 Kami menunggu kehadiran Anda di Pesantren Al-Imam. Pendaftaran santri baru telah dibuka!
                             </p>
                             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center px-4">
                                 <Link href="/ppdb">
-                                    <button className="w-full sm:w-auto px-6 sm:px-10 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white text-brown-900 font-black text-sm sm:text-base md:text-lg hover:bg-gold-400 hover:text-white shadow-premium-xl transition-all min-h-[48px] sm:min-h-[52px]">
+                                    <button className="w-full sm:w-auto px-6 sm:px-10 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white text-maroon-900 font-black text-sm sm:text-base md:text-lg hover:bg-cream-100 shadow-md transition-all min-h-[48px] sm:min-h-[52px]">
                                         Daftar PPDB Baru
                                     </button>
                                 </Link>

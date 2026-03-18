@@ -264,7 +264,7 @@ function PaymentTimeline({ paymentStatus }: { paymentStatus: PaymentStatus }) {
         {steps.map((step, index) => {
           let statusColor = "bg-surface-100 border-surface-300 text-ink-300"; // default upcoming
           if (step.status === "completed") statusColor = "bg-emerald-500 border-emerald-500 text-white shadow-emerald-500/30";
-          if (step.status === "current") statusColor = "bg-white border-teal-500 text-teal-600 shadow-lg shadow-teal-500/20";
+          if (step.status === "current") statusColor = "bg-white border-maroon-600 text-maroon-700 shadow-lg shadow-maroon-600/20";
 
           return (
             <div key={step.id} className="flex flex-col items-center">
@@ -399,12 +399,12 @@ function UploadArea({
       {/* Upload area */}
       <div
         className={`relative overflow-hidden group border-2 border-dashed rounded-[2rem] transition-all ${isDragging
-          ? "border-teal-500 bg-teal-50/50 scale-[1.01]"
+          ? "border-maroon-600 bg-maroon-50/50 scale-[1.01]"
           : isRejected && !selectedFile
             ? "border-red-300 bg-red-50 hover:border-red-400"
             : selectedFile
-              ? "border-teal-500 bg-white" // Solid border when file selected
-              : "border-ink-200 hover:border-teal-400 hover:bg-surface-50 cursor-pointer"
+              ? "border-maroon-600 bg-white" // Solid border when file selected
+              : "border-ink-200 hover:border-maroon-400 hover:bg-surface-50 cursor-pointer"
           } ${isUploading ? "pointer-events-none opacity-80" : ""}`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
@@ -467,7 +467,7 @@ function UploadArea({
                 <button
                   onClick={handleUploadClick}
                   disabled={isUploading}
-                  className="flex-1 sm:flex-none px-8 py-3 bg-teal-600 text-white font-bold rounded-xl hover:bg-teal-700 transition-colors shadow-lg shadow-teal-500/30 flex items-center justify-center gap-2"
+                  className="flex-1 sm:flex-none px-8 py-3 bg-maroon-700 text-white font-bold rounded-xl hover:bg-maroon-800 transition-colors shadow-lg shadow-maroon-600/30 flex items-center justify-center gap-2"
                 >
                   {isUploading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Upload className="w-5 h-5" />}
                   {isUploading ? "Mengirim..." : "Kirim Bukti"}
@@ -482,13 +482,13 @@ function UploadArea({
                   <div className="relative w-20 h-20 mx-auto mb-4">
                     <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
                       <path className="text-surface-200" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="4" />
-                      <path className="text-teal-500 transition-all duration-300 ease-out" strokeDasharray={`${uploadProgress}, 100`} d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="4" />
+                      <path className="text-maroon-500 transition-all duration-300 ease-out" strokeDasharray={`${uploadProgress}, 100`} d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="4" />
                     </svg>
-                    <div className="absolute inset-0 flex items-center justify-center font-bold text-teal-700 text-sm">
+                    <div className="absolute inset-0 flex items-center justify-center font-bold text-maroon-800 text-sm">
                       {uploadProgress}%
                     </div>
                   </div>
-                  <p className="font-bold text-teal-800">Mengupload...</p>
+                  <p className="font-bold text-maroon-900">Mengupload...</p>
                 </div>
               </div>
             )}
@@ -499,7 +499,7 @@ function UploadArea({
             <div
               className={`w-20 h-20 rounded-3xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shadow-sm ${isRejected && !currentFile
                 ? "bg-red-100 text-red-600"
-                : "bg-teal-50 text-teal-600"
+                : "bg-maroon-50 text-maroon-700"
                 }`}
             >
               <Upload className="w-10 h-10" />
@@ -659,7 +659,7 @@ export default function PembayaranPendaftaranTab({
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <Loader2 className="w-10 h-10 text-teal-500 animate-spin mb-4" />
+        <Loader2 className="w-10 h-10 text-maroon-500 animate-spin mb-4" />
         <p className="text-ink-500 font-medium">Memuat data pembayaran...</p>
       </div>
     );
@@ -712,15 +712,15 @@ export default function PembayaranPendaftaranTab({
       )}
 
       {/* Header Banner */}
-      <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-teal-600 to-emerald-800 p-8 md:p-10 text-white shadow-xl shadow-teal-900/10">
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+      <div className="relative overflow-hidden rounded-[2rem] bg-linear-to-br from-maroon-700 to-maroon-900 border border-maroon-600 p-8 md:p-10 text-white shadow-lg app-card">
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-cream-50/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-start gap-5">
-            <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/20 shrink-0">
+            <div className="w-16 h-16 rounded-[1.5rem] bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-sm shrink-0">
               {isStatusOnly ? (
-                <Shield className="w-8 h-8 text-white" />
+                <Shield className="w-8 h-8 text-cream-100" />
               ) : (
-                <CreditCard className="w-8 h-8 text-white" />
+                <CreditCard className="w-8 h-8 text-cream-100" />
               )}
             </div>
             <div>
@@ -749,7 +749,7 @@ export default function PembayaranPendaftaranTab({
         <div className="lg:col-span-2 space-y-8">
 
           {/* Status Card */}
-          <div className="glass-panel p-8 rounded-[2rem] shadow-clay-md relative overflow-hidden">
+          <div className="glass-panel p-8 rounded-[2rem] shadow-sm border border-cream-200 app-card relative overflow-hidden">
             <div className={`absolute top-0 left-0 w-2 h-full ${statusConfig.bgColor.replace("bg-", "bg-")}`} /> {/* Accent Bar */}
 
             <div className="flex flex-col md:flex-row gap-6 md:items-center justify-between mb-8">
@@ -875,34 +875,34 @@ export default function PembayaranPendaftaranTab({
                 <div
                   onClick={() => setActivePaymentMethod('manual')}
                   className={`relative group bg-white rounded-[2.5rem] p-8 border-2 transition-all cursor-pointer shadow-lg hover:-translate-y-1 hover:shadow-xl ${activePaymentMethod === 'manual'
-                    ? 'border-teal-500 ring-4 ring-teal-500/10 shadow-teal-500/10'
-                    : 'border-white hover:border-teal-300'
+                    ? 'border-maroon-600 ring-4 ring-maroon-600/10 shadow-maroon-600/10'
+                    : 'border-white hover:border-maroon-300'
                     }`}
                 >
                   {activePaymentMethod === 'manual' && (
                     <div className="absolute top-6 right-6 lg:right-8">
-                      <div className="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center animate-in zoom-in">
+                      <div className="w-8 h-8 bg-maroon-500 rounded-full flex items-center justify-center animate-in zoom-in">
                         <Check className="w-5 h-5 text-white" />
                       </div>
                     </div>
                   )}
 
                   {/* Recommendation Badge */}
-                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-teal-500 to-emerald-500 text-white text-sm font-bold px-6 py-2 rounded-full shadow-lg shadow-teal-500/30 z-20 flex items-center gap-2">
+                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-maroon-600 to-emerald-500 text-white text-sm font-bold px-6 py-2 rounded-full shadow-lg shadow-maroon-600/30 z-20 flex items-center gap-2">
                     <StarIcon className="w-4 h-4 fill-white" />
                     Rekomendasi
                   </div>
 
                   <div className="relative z-10 flex flex-col h-full pt-4">
                     <div className="mb-6">
-                      <div className="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center mb-6 shadow-sm text-teal-600">
+                      <div className="w-16 h-16 bg-maroon-50 rounded-2xl flex items-center justify-center mb-6 shadow-sm text-maroon-700">
                         <Building2 className="w-8 h-8" />
                       </div>
-                      <h4 className="font-bold text-teal-600 uppercase tracking-widest text-xs mb-2">Transfer Manual</h4>
+                      <h4 className="font-bold text-maroon-700 uppercase tracking-widest text-xs mb-2">Transfer Manual</h4>
                       <h3 className="font-black text-2xl text-ink-900 mb-2">Bank BSI</h3>
 
 
-                      <div className="inline-block bg-teal-100 text-teal-700 text-xs font-bold px-3 py-1 rounded-full mb-6">
+                      <div className="inline-block bg-cream-100 text-maroon-800 text-xs font-bold px-3 py-1 rounded-full mb-6">
                         Manual Check
                       </div>
 
@@ -914,8 +914,8 @@ export default function PembayaranPendaftaranTab({
                           "Upload Bukti Transfer"
                         ].map((item, idx) => (
                           <li key={idx} className="flex items-start gap-3 text-ink-600 text-sm font-medium">
-                            <div className="w-5 h-5 rounded-full bg-teal-100 flex items-center justify-center shrink-0 mt-0.5">
-                              <Check className="w-3 h-3 text-teal-600" />
+                            <div className="w-5 h-5 rounded-full bg-cream-100 flex items-center justify-center shrink-0 mt-0.5">
+                              <Check className="w-3 h-3 text-maroon-700" />
                             </div>
                             {item}
                           </li>
@@ -925,8 +925,8 @@ export default function PembayaranPendaftaranTab({
 
                     <div className="mt-auto">
                       <button className={`w-full py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-2 ${activePaymentMethod === 'manual'
-                        ? 'bg-teal-600 text-white hover:bg-teal-700 shadow-lg shadow-teal-600/20'
-                        : 'bg-teal-50 text-teal-700 hover:bg-teal-100'
+                        ? 'bg-maroon-700 text-white hover:bg-maroon-800 shadow-lg shadow-maroon-700/20'
+                        : 'bg-maroon-50 text-maroon-800 hover:bg-cream-100'
                         }`}>
                         {activePaymentMethod === 'manual' ? (
                           <>
@@ -951,15 +951,15 @@ export default function PembayaranPendaftaranTab({
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
                       {/* LEFT COLUMN: BANK INFO */}
-                      <div className="bg-gradient-to-br from-teal-50 to-white border border-teal-100 rounded-[2.5rem] p-8 shadow-sm relative overflow-hidden flex flex-col justify-between">
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-teal-100/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                      <div className="bg-gradient-to-br from-teal-50 to-white border border-cream-100 rounded-[2.5rem] p-8 shadow-sm relative overflow-hidden flex flex-col justify-between">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-cream-100/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
                         <div className="relative z-10">
                           <div className="flex justify-between items-start mb-8">
                             <div>
-                              <p className="text-xs font-bold text-teal-600 uppercase tracking-widest mb-2">Bank Syariah Indonesia (BSI)</p>
+                              <p className="text-xs font-bold text-maroon-700 uppercase tracking-widest mb-2">Bank Syariah Indonesia (BSI)</p>
                             </div>
-                            <div className="bg-white p-3 rounded-2xl shadow-sm border border-teal-100 flex items-center justify-center text-teal-600">
+                            <div className="bg-white p-3 rounded-2xl shadow-sm border border-cream-100 flex items-center justify-center text-maroon-700">
                               <Building2 className="w-8 h-8" />
                             </div>
                           </div>
@@ -974,7 +974,7 @@ export default function PembayaranPendaftaranTab({
                         </div>
 
                         <div className="mt-auto relative z-10">
-                          <div className="flex items-start gap-4 bg-white/80 p-5 rounded-2xl border border-teal-100 backdrop-blur-sm shadow-sm">
+                          <div className="flex items-start gap-4 bg-white/80 p-5 rounded-2xl border border-cream-100 backdrop-blur-sm shadow-sm">
                             <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
                               <AlertCircle className="w-5 h-5 text-amber-600" />
                             </div>
@@ -986,10 +986,10 @@ export default function PembayaranPendaftaranTab({
                       </div>
 
                       {/* RIGHT COLUMN: UPLOAD AREA */}
-                      <div className="bg-white rounded-[2.5rem] border-2 border-dashed border-ink-200 p-8 flex flex-col justify-center relative group hover:border-teal-300 transition-colors">
+                      <div className="bg-white rounded-[2.5rem] border-2 border-dashed border-ink-200 p-8 flex flex-col justify-center relative group hover:border-maroon-300 transition-colors">
                         <div className="text-center mb-8">
                           <h5 className="font-bold text-ink-900 text-lg flex items-center justify-center gap-2 mb-2">
-                            <Upload className="w-5 h-5 text-teal-600" />
+                            <Upload className="w-5 h-5 text-maroon-700" />
                             Upload Bukti Transfer
                           </h5>
                           <p className="text-sm text-ink-400">Format: JPG, PNG, PDF (Maks. 5MB)</p>
@@ -1044,7 +1044,7 @@ export default function PembayaranPendaftaranTab({
               </div>
               <a
                 href="/dashboard/pendaftar/pembayaran-pendaftaran"
-                className="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-xl font-bold shadow-lg shadow-teal-600/20 transition-all hover:scale-105 flex items-center gap-2"
+                className="px-6 py-3 bg-maroon-700 hover:bg-maroon-800 text-white rounded-xl font-bold shadow-lg shadow-maroon-700/20 transition-all hover:scale-105 flex items-center gap-2"
               >
                 <span>Ke Halaman Pembayaran</span>
               </a>
@@ -1054,9 +1054,9 @@ export default function PembayaranPendaftaranTab({
 
         {/* Sidebar Column */}
         <div className="space-y-6">
-          <div className="glass-panel p-6 rounded-[2rem] shadow-clay-sm border border-white/50">
+          <div className="glass-panel p-6 rounded-[2rem] shadow-sm border border-cream-200 app-card border border-white/50">
             <h3 className="text-lg font-bold text-ink-900 mb-4 flex items-center gap-2">
-              <Info className="w-5 h-5 text-teal-600" />
+              <Info className="w-5 h-5 text-maroon-700" />
               Rincian Biaya
             </h3>
             <div className="space-y-3">
@@ -1071,7 +1071,7 @@ export default function PembayaranPendaftaranTab({
               <div className="h-px bg-ink-100 my-2" />
               <div className="flex justify-between items-center">
                 <span className="text-ink-900 font-bold">Total Pembayaran</span>
-                <span className="text-xl font-black text-teal-600">{formatRupiah(biayaPendaftaran)}</span>
+                <span className="text-xl font-black text-maroon-700">{formatRupiah(biayaPendaftaran)}</span>
               </div>
             </div>
           </div>
@@ -1084,7 +1084,7 @@ export default function PembayaranPendaftaranTab({
             <p className="text-sm text-ink-500 mb-4 leading-relaxed">
               Mengalami kendala saat melakukan pembayaran? Hubungi tim support kami.
             </p>
-            <a href="https://wa.me/6285111524441" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 bg-white rounded-xl border border-ink-100 hover:border-teal-200 transition-colors group">
+            <a href="https://wa.me/6285111524441" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 bg-white rounded-xl border border-ink-100 hover:border-cream-200 transition-colors group">
               <div className="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center">
                 <MessageCircle className="w-5 h-5 text-green-600 group-hover:scale-110 transition-transform" />
               </div>

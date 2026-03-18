@@ -73,7 +73,7 @@ export default function ProfilTab() {
       draft: { label: "Draft", color: "bg-stone-100 text-stone-700" },
       awaiting_payment: { label: "Menunggu Pembayaran", color: "bg-amber-100 text-amber-700" },
       paid: { label: "Sudah Bayar", color: "bg-blue-100 text-blue-700" },
-      data_completed: { label: "Data Lengkap", color: "bg-teal-100 text-teal-700" },
+      data_completed: { label: "Data Lengkap", color: "bg-cream-100 text-maroon-800" },
       docs_uploaded: { label: "Dokumen Terupload", color: "bg-indigo-100 text-indigo-700" },
       docs_verified: { label: "Dokumen Terverifikasi", color: "bg-green-100 text-green-700" },
       scheduled: { label: "Terjadwal Ujian", color: "bg-purple-100 text-purple-700" },
@@ -95,7 +95,7 @@ export default function ProfilTab() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <Loader2 className="w-12 h-12 animate-spin text-teal-600 mx-auto mb-4" />
+          <Loader2 className="w-12 h-12 animate-spin text-maroon-700 mx-auto mb-4" />
           <p className="text-stone-600">Memuat profil...</p>
         </div>
       </div>
@@ -113,11 +113,11 @@ export default function ProfilTab() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-teal-500 to-teal-600 rounded-2xl p-6 text-white">
+      <div className="bg-gradient-to-r from-maroon-600 to-maroon-700 rounded-2xl p-6 text-white">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-black mb-2">Profil Saya</h1>
-            <p className="text-teal-100">
+            <p className="text-cream-100">
               Informasi pribadi dan status pendaftaran Anda
             </p>
           </div>
@@ -144,10 +144,10 @@ export default function ProfilTab() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Data Pribadi */}
-        <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-teal-100">
+        <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-cream-100">
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-teal-100 rounded-lg">
-              <User className="w-6 h-6 text-teal-600" />
+            <div className="p-2 bg-cream-100 rounded-lg">
+              <User className="w-6 h-6 text-maroon-700" />
             </div>
             <h3 className="text-lg font-bold text-stone-900">Data Pribadi</h3>
           </div>

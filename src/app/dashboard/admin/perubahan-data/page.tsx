@@ -73,7 +73,7 @@ export default function PerubahanDataPage() {
     if (loading) {
         return (
             <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
-                <Loader2 className="w-12 h-12 text-teal-600 animate-spin" />
+                <Loader2 className="w-12 h-12 text-maroon-700 animate-spin" />
                 <p className="text-ink-500 font-medium">Memuat permintaan perubahan data...</p>
             </div>
         );
@@ -92,22 +92,22 @@ export default function PerubahanDataPage() {
                     <p className="text-ink-500 mt-2 text-lg">Kelola izin perubahan data pendaftar yang sudah terkunci.</p>
                 </div>
 
-                <div className="flex bg-surface-100 p-1.5 rounded-2xl gap-1">
+                <div className="flex bg-cream-100 p-1.5 rounded-2xl gap-1">
                     <button
                         onClick={() => setFilter("pending")}
-                        className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${filter === 'pending' ? 'bg-white shadow-sm text-teal-600' : 'text-ink-500'}`}
+                        className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${filter === 'pending' ? 'bg-white shadow-sm text-maroon-700' : 'text-ink-500'}`}
                     >
                         Pending
                     </button>
                     <button
                         onClick={() => setFilter("submitted")}
-                        className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${filter === 'submitted' ? 'bg-white shadow-sm text-teal-600' : 'text-ink-500'}`}
+                        className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${filter === 'submitted' ? 'bg-white shadow-sm text-maroon-700' : 'text-ink-500'}`}
                     >
                         Butuh Verifikasi
                     </button>
                     <button
                         onClick={() => setFilter("all")}
-                        className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${filter === 'all' ? 'bg-white shadow-sm text-teal-600' : 'text-ink-500'}`}
+                        className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${filter === 'all' ? 'bg-white shadow-sm text-maroon-700' : 'text-ink-500'}`}
                     >
                         Semua
                     </button>
@@ -116,11 +116,11 @@ export default function PerubahanDataPage() {
 
             <div className="grid grid-cols-1 gap-4">
                 {filtreredRequests.length > 0 ? filtreredRequests.map((req) => (
-                    <div key={req.id} className="card-glass p-6 group hover:border-teal-200 transition-all">
+                    <div key={req.id} className="bg-white rounded-3xl border border-cream-200 shadow-sm app-card p-6 group hover:border-maroon-200 transition-all">
                         <div className="flex flex-col md:flex-row gap-6 items-start">
                             {/* Profile Info */}
                             <div className="flex items-center gap-4 min-w-[250px]">
-                                <div className="w-14 h-14 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600">
+                                <div className="w-14 h-14 bg-maroon-50 rounded-2xl flex items-center justify-center text-maroon-700">
                                     <User className="w-8 h-8" />
                                 </div>
                                 <div className="flex-1 min-w-0">
@@ -140,7 +140,7 @@ export default function PerubahanDataPage() {
                             </div>
 
                             {/* Reason */}
-                            <div className="flex-1 bg-surface-50 p-4 rounded-2xl border border-ink-100">
+                            <div className="flex-1 bg-cream-50 p-4 rounded-2xl border border-ink-100">
                                 <div className="flex items-center gap-2 mb-2 text-ink-400">
                                     <MessageSquare className="w-4 h-4" />
                                     <span className="text-xs font-bold uppercase tracking-widest">Alasan Perubahan:</span>
@@ -160,7 +160,7 @@ export default function PerubahanDataPage() {
                                         <button
                                             onClick={() => handleAction(req.id, 'approve')}
                                             disabled={processing === req.id}
-                                            className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-teal-600 text-white rounded-xl text-sm font-bold shadow-lg shadow-teal-500/20 hover:bg-teal-700 transition-all disabled:opacity-50"
+                                            className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-maroon-700 text-white rounded-xl text-sm font-bold shadow-lg shadow-maroon-600/20 hover:bg-maroon-800 transition-all disabled:opacity-50"
                                         >
                                             {processing === req.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
                                             Ijinkan Edit
@@ -205,8 +205,8 @@ export default function PerubahanDataPage() {
                         </div>
                     </div>
                 )) : (
-                    <div className="card-glass p-20 text-center">
-                        <div className="w-20 h-20 bg-surface-100 rounded-[2rem] flex items-center justify-center mx-auto mb-6">
+                    <div className="bg-white rounded-3xl border border-cream-200 shadow-sm app-card p-20 text-center">
+                        <div className="w-20 h-20 bg-cream-100 rounded-[2rem] flex items-center justify-center mx-auto mb-6">
                             <Clock className="w-10 h-10 text-ink-300" />
                         </div>
                         <h3 className="text-xl font-bold text-ink-900 mb-2">Tidak ada permintaan</h3>

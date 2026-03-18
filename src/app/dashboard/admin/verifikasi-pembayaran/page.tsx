@@ -226,8 +226,8 @@ export default function VerifikasiPembayaranPage() {
       <div className="bg-white rounded-[2rem] shadow-sm p-8 border border-stone-100">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-5">
-            <div className="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center border border-teal-100">
-              <CreditCard className="w-8 h-8 text-teal-600" />
+            <div className="w-16 h-16 bg-maroon-50 rounded-2xl flex items-center justify-center border border-maroon-100">
+              <CreditCard className="w-8 h-8 text-maroon-700" />
             </div>
             <div>
               <h2 className="text-3xl font-black text-stone-900 tracking-tight mb-1">
@@ -317,7 +317,7 @@ export default function VerifikasiPembayaranPage() {
         {loading ? (
           <div className="flex items-center justify-center h-[400px]">
             <div className="text-center">
-              <Loader2 className="w-10 h-10 animate-spin text-teal-600 mx-auto mb-4" />
+              <Loader2 className="w-10 h-10 animate-spin text-maroon-700 mx-auto mb-4" />
               <p className="text-stone-500 font-medium">Memuat data pembayaran...</p>
             </div>
           </div>
@@ -344,11 +344,11 @@ export default function VerifikasiPembayaranPage() {
                   <div className="flex-1">
                     {/* Header Row */}
                     <div className="flex items-start gap-4 mb-3">
-                      <div className="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center text-teal-700 font-bold text-lg shrink-0">
+                      <div className="w-12 h-12 rounded-xl bg-maroon-50 flex items-center justify-center text-maroon-800 font-bold text-lg shrink-0">
                         {pay.pendaftar?.nama_lengkap ? pay.pendaftar.nama_lengkap.charAt(0).toUpperCase() : "?"}
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold text-stone-900 group-hover:text-teal-700 transition-colors">
+                        <h3 className="text-lg font-bold text-stone-900 group-hover:text-maroon-800 transition-colors">
                           {pay.pendaftar?.nama_lengkap ? toTitleCase(pay.pendaftar.nama_lengkap) : "Tanpa Nama"}
                         </h3>
                         <div className="flex flex-wrap items-center gap-3 text-sm mt-1">
@@ -401,7 +401,7 @@ export default function VerifikasiPembayaranPage() {
                         href={pay.bukti_transfer_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 bg-white border-2 border-dashed border-stone-300 hover:border-teal-400 hover:bg-teal-50 text-stone-600 hover:text-teal-700 rounded-xl text-sm font-bold transition-all"
+                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 bg-white border-2 border-dashed border-stone-300 hover:border-maroon-500 hover:bg-maroon-50 text-stone-600 hover:text-maroon-800 rounded-xl text-sm font-bold transition-all"
                       >
                         <Eye className="w-4 h-4" />
                         Lihat Bukti
@@ -411,7 +411,7 @@ export default function VerifikasiPembayaranPage() {
                     {statusFilter === "pending" && (
                       <button
                         onClick={() => openModal(pay)}
-                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-xl text-sm font-bold shadow-lg shadow-teal-600/20 transition-all hover:-translate-y-0.5"
+                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-3 bg-maroon-700 hover:bg-maroon-800 text-white rounded-xl text-sm font-bold shadow-lg shadow-maroon-700/20 transition-all hover:-translate-y-0.5"
                       >
                         <CheckCircle className="w-4 h-4" />
                         Verifikasi
@@ -461,14 +461,14 @@ export default function VerifikasiPembayaranPage() {
             {/* Scrollable Content */}
             <div className="flex-1 overflow-y-auto p-6 space-y-6">
 
-              <div className="flex gap-4 p-4 bg-teal-50 rounded-2xl border border-teal-100">
+              <div className="flex gap-4 p-4 bg-maroon-50 rounded-2xl border border-maroon-100">
                 <div className="p-3 bg-white rounded-xl shadow-sm h-fit">
-                  <DollarSign className="w-6 h-6 text-teal-600" />
+                  <DollarSign className="w-6 h-6 text-maroon-700" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-teal-600 uppercase tracking-widest mb-1">Konfirmasi Nominal</p>
-                  <p className="text-2xl font-black text-teal-900">{formatRupiah(selectedPembayaran.jumlah)}</p>
-                  <p className="text-sm text-teal-700 mt-1">Pastikan bukti transfer sesuai dengan nominal ini.</p>
+                  <p className="text-xs font-bold text-maroon-700 uppercase tracking-widest mb-1">Konfirmasi Nominal</p>
+                  <p className="text-2xl font-black text-maroon-950">{formatRupiah(selectedPembayaran.jumlah)}</p>
+                  <p className="text-sm text-maroon-800 mt-1">Pastikan bukti transfer sesuai dengan nominal ini.</p>
                 </div>
               </div>
 
@@ -526,7 +526,7 @@ export default function VerifikasiPembayaranPage() {
                   value={catatan}
                   onChange={(e) => setCatatan(e.target.value)}
                   placeholder="Contoh: Bukti transfer buram, mohon upload ulang..."
-                  className="w-full px-4 py-3 border border-stone-200 rounded-xl focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 focus:outline-none resize-none transition-all"
+                  className="w-full px-4 py-3 border border-stone-200 rounded-xl focus:border-maroon-600 focus:ring-2 focus:ring-maroon-600/20 focus:outline-none resize-none transition-all"
                   rows={3}
                 />
               </div>

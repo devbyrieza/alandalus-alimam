@@ -192,7 +192,7 @@ export default function UndanganSeleksiTab() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <Loader2 className="w-12 h-12 animate-spin text-teal-600 mx-auto mb-4" />
+          <Loader2 className="w-12 h-12 animate-spin text-maroon-700 mx-auto mb-4" />
           <p className="text-stone-600">Memuat info seleksi...</p>
         </div>
       </div>
@@ -214,7 +214,7 @@ export default function UndanganSeleksiTab() {
   return (
     <div className="space-y-6">
       {/* ========== HEADER ========== */}
-      <div className="bg-linear-to-r from-emerald-600 to-teal-700 rounded-2xl p-6 md:p-8 text-white shadow-lg relative overflow-hidden">
+      <div className="bg-linear-to-r from-emerald-600 to-maroon-800 rounded-2xl p-6 md:p-8 text-white shadow-lg relative overflow-hidden">
         <div className="relative z-10">
           <h1 className="text-2xl font-black mb-2 text-white">
             Undangan Seleksi
@@ -250,7 +250,7 @@ export default function UndanganSeleksiTab() {
         </div>
         <div className="w-full h-3 bg-stone-100 rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transition-all duration-700"
+            className="h-full bg-gradient-to-r from-emerald-500 to-maroon-600 rounded-full transition-all duration-700"
             style={{ width: `${data.progress.percentage}%` }}
           />
         </div>

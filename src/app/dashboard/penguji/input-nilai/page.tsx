@@ -451,12 +451,12 @@ export default function InputNilaiPage() {
     const isSaved = !!p.detail_wawancara?.rekomendasi;
 
     return (
-      <div className="bg-violet-50 border border-violet-200 rounded-xl p-5 space-y-4">
+      <div className="bg-maroon-50 border border-maroon-200 rounded-xl p-5 space-y-4">
         <div className="flex items-center gap-2 mb-2">
-          <MessageSquare className="w-5 h-5 text-violet-700" />
-          <h3 className="text-lg font-bold text-violet-800">Wawancara Calon Santri</h3>
+          <MessageSquare className="w-5 h-5 text-maroon-700" />
+          <h3 className="text-lg font-bold text-maroon-800">Wawancara Calon Santri</h3>
           {isSaved && !isEditing && (
-            <span className="ml-auto px-3 py-1 bg-violet-100 text-violet-700 text-xs font-bold rounded-full flex items-center gap-1">
+            <span className="ml-auto px-3 py-1 bg-maroon-100 text-maroon-700 text-xs font-bold rounded-full flex items-center gap-1">
               <CheckCircle className="w-3 h-3" /> Sudah Dinilai
             </span>
           )}
@@ -473,12 +473,12 @@ export default function InputNilaiPage() {
           <div className="space-y-5">
             {/* 7 Criteria */}
             {CALSAN_CRITERIA.map((criterion) => (
-              <div key={criterion.key} className="bg-white rounded-lg p-4 border border-violet-100">
+              <div key={criterion.key} className="bg-white rounded-lg p-4 border border-maroon-100">
                 <label className="block text-sm font-bold text-gray-800 mb-3">{criterion.label} *</label>
                 <div className="space-y-2">
                   {criterion.options.map((opt) => (
-                    <label key={opt.value} className={`flex items-start gap-3 p-3 rounded-lg cursor-pointer border-2 transition-all text-sm ${calsanForm[criterion.key] === opt.value ? "border-violet-500 bg-violet-50" : "border-gray-100 hover:border-violet-200"}`}>
-                      <input type="radio" name={`${criterion.key}-${p.id}`} value={opt.value} checked={calsanForm[criterion.key] === opt.value} onChange={() => setCalsanForm({ ...calsanForm, [criterion.key]: opt.value })} className="w-4 h-4 shrink-0 mt-0.5 accent-violet-600" />
+                    <label key={opt.value} className={`flex items-start gap-3 p-3 rounded-lg cursor-pointer border-2 transition-all text-sm ${calsanForm[criterion.key] === opt.value ? "border-maroon-500 bg-maroon-50" : "border-gray-100 hover:border-maroon-200"}`}>
+                      <input type="radio" name={`${criterion.key}-${p.id}`} value={opt.value} checked={calsanForm[criterion.key] === opt.value} onChange={() => setCalsanForm({ ...calsanForm, [criterion.key]: opt.value })} className="w-4 h-4 shrink-0 mt-0.5 accent-maroon-600" />
                       <span>{opt.label}</span>
                     </label>
                   ))}
@@ -489,7 +489,7 @@ export default function InputNilaiPage() {
             {/* Nama Pewawancara */}
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-2">Nama Pewawancara *</label>
-              <select value={calsanForm.nama_pewawancara || ""} onChange={(e) => setCalsanForm({ ...calsanForm, nama_pewawancara: e.target.value })} className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-violet-500 outline-none">
+              <select value={calsanForm.nama_pewawancara || ""} onChange={(e) => setCalsanForm({ ...calsanForm, nama_pewawancara: e.target.value })} className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-maroon-500 outline-none">
                 <option value="">Pilih Pewawancara</option>
                 {(p.jenjang?.toLowerCase().includes("putri") ? PEWAWANCARA_CALSAN_LIST_PUTRI : PEWAWANCARA_CALSAN_LIST_PUTRA).map((n) => <option key={n} value={n}>{n}</option>)}
               </select>
@@ -506,8 +506,8 @@ export default function InputNilaiPage() {
                   "D. Tidak disarankan (risiko tinggi, banyak faktor negatif).",
                   "E. Tidak layak diterima saat ini.",
                 ].map((opt) => (
-                  <label key={opt} className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer border-2 transition-all text-sm ${calsanForm.rekomendasi === opt ? "border-violet-500 bg-violet-50" : "border-gray-100 hover:border-violet-200"}`}>
-                    <input type="radio" name={`rekom-calsan-${p.id}`} value={opt} checked={calsanForm.rekomendasi === opt} onChange={() => setCalsanForm({ ...calsanForm, rekomendasi: opt })} className="w-4 h-4 shrink-0 mt-1 accent-violet-600" />
+                  <label key={opt} className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer border-2 transition-all text-sm ${calsanForm.rekomendasi === opt ? "border-maroon-500 bg-maroon-50" : "border-gray-100 hover:border-maroon-200"}`}>
+                    <input type="radio" name={`rekom-calsan-${p.id}`} value={opt} checked={calsanForm.rekomendasi === opt} onChange={() => setCalsanForm({ ...calsanForm, rekomendasi: opt })} className="w-4 h-4 shrink-0 mt-1 accent-maroon-600" />
                     <span>{opt}</span>
                   </label>
                 ))}
@@ -517,13 +517,13 @@ export default function InputNilaiPage() {
             {/* Catatan */}
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-2">Catatan Pewawancara (opsional)</label>
-              <textarea value={calsanForm.catatan || ""} onChange={(e) => setCalsanForm({ ...calsanForm, catatan: e.target.value })} rows={3} className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-violet-500 outline-none resize-none" placeholder="Catatan pewawancara..." />
+              <textarea value={calsanForm.catatan || ""} onChange={(e) => setCalsanForm({ ...calsanForm, catatan: e.target.value })} rows={3} className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-maroon-500 outline-none resize-none" placeholder="Catatan pewawancara..." />
             </div>
 
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <button onClick={cancelEditing} className="w-full sm:w-auto px-5 py-2 bg-gray-200 text-gray-700 rounded-lg justify-center font-semibold hover:bg-gray-300 transition-colors">Batal</button>
-              <button onClick={() => saveForm(p, "wawancara")} disabled={!CALSAN_CRITERIA.every((c) => calsanForm[c.key]) || !calsanForm.rekomendasi || !calsanForm.nama_pewawancara || saving === p.id + "wawancara"} className="w-full sm:w-auto px-5 py-2 bg-violet-600 text-white rounded-lg font-semibold hover:bg-violet-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+              <button onClick={() => saveForm(p, "wawancara")} disabled={!CALSAN_CRITERIA.every((c) => calsanForm[c.key]) || !calsanForm.rekomendasi || !calsanForm.nama_pewawancara || saving === p.id + "wawancara"} className="w-full sm:w-auto px-5 py-2 bg-maroon-600 text-white rounded-lg font-semibold hover:bg-maroon-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
                 {saving === p.id + "wawancara" ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} Simpan
               </button>
             </div>
@@ -532,13 +532,13 @@ export default function InputNilaiPage() {
           <div>
             {isSaved ? (
               <div className="flex items-center gap-2 py-3">
-                <CheckCircle className="w-5 h-5 text-violet-600" />
-                <span className="text-violet-700 font-semibold">Nilai sudah tersimpan. Hasil dapat dilihat di Dashboard Admin.</span>
+                <CheckCircle className="w-5 h-5 text-maroon-600" />
+                <span className="text-maroon-700 font-semibold">Nilai sudah tersimpan. Hasil dapat dilihat di Dashboard Admin.</span>
               </div>
             ) : (
               <p className="text-gray-400 text-sm italic">Belum dinilai</p>
             )}
-            <button onClick={() => startEditing(p)} className="mt-3 px-4 py-2 bg-violet-600 text-white rounded-lg text-sm font-semibold hover:bg-violet-700 transition-colors">
+            <button onClick={() => startEditing(p)} className="mt-3 px-4 py-2 bg-maroon-600 text-white rounded-lg text-sm font-semibold hover:bg-maroon-700 transition-colors">
               {isSaved ? "Edit Nilai" : "Input Nilai"}
             </button>
           </div>
@@ -703,25 +703,25 @@ export default function InputNilaiPage() {
   // RENDER: Main Page
   // ============================================================================
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto space-y-6">
       {/* Header */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+      <div className="bg-white rounded-3xl p-6 md:p-8 border border-cream-200 shadow-sm app-card">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center">
-              <ClipboardCheck className="w-6 h-6 text-violet-600" />
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 bg-maroon-50 rounded-2xl flex items-center justify-center border border-maroon-100 shrink-0">
+              <ClipboardCheck className="w-7 h-7 text-maroon-600" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">Input Nilai Ujian</h1>
-              <p className="text-sm text-gray-500">Total: {peserta.length} peserta</p>
+              <h1 className="text-2xl font-black text-ink-950 font-display tracking-tight">Input Nilai Ujian</h1>
+              <p className="text-sm font-bold text-ink-500 mt-1">Total: <span className="text-maroon-700">{peserta.length} peserta</span></p>
             </div>
           </div>
         </div>
 
         {/* Search */}
-        <div className="mt-4 relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Cari nama atau nomor pendaftaran..." className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:border-violet-500 outline-none text-sm" />
+        <div className="mt-6 relative">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-400" />
+          <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Cari nama atau nomor pendaftaran..." className="w-full pl-12 pr-4 py-3.5 bg-cream-50 border border-cream-200 rounded-2xl focus:border-maroon-500 focus:ring-4 focus:ring-maroon-500/10 outline-none text-sm font-semibold transition-all" />
         </div>
       </div>
 
@@ -735,29 +735,34 @@ export default function InputNilaiPage() {
 
       {/* Loading */}
       {loading ? (
-        <div className="flex items-center justify-center py-20">
-          <Loader2 className="w-8 h-8 animate-spin text-violet-500" />
-          <span className="ml-3 text-gray-500">Memuat data peserta...</span>
+        <div className="flex flex-col items-center justify-center py-20 bg-white rounded-3xl border border-cream-200 shadow-sm app-card">
+          <Loader2 className="w-10 h-10 animate-spin text-maroon-600 mb-4" />
+          <span className="text-ink-600 font-bold">Memuat data peserta...</span>
         </div>
       ) : filteredPeserta.length === 0 ? (
-        <div className="text-center py-20 text-gray-400">
-          <User className="w-12 h-12 mx-auto mb-3 opacity-50" />
-          <p className="font-semibold">Tidak ada peserta ditemukan</p>
+        <div className="text-center py-20 bg-white rounded-3xl border border-cream-200 shadow-sm app-card">
+          <User className="w-16 h-16 mx-auto mb-4 text-ink-300" />
+          <p className="font-black text-ink-950 text-lg">Tidak ada peserta ditemukan</p>
+          <p className="text-sm font-medium text-ink-500 mt-1">Coba gunakan kata kunci pencarian yang lain.</p>
         </div>
       ) : (
         <div className="space-y-6">
           {filteredPeserta.map((p) => (
-            <div key={p.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <div key={p.id} className="bg-white rounded-3xl p-6 md:p-8 border border-cream-200 shadow-sm app-card">
               {/* Peserta Header */}
-              <div className="flex items-center gap-3 mb-4 pb-3 border-b">
-                <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
-                  <User className="w-5 h-5 text-gray-500" />
+              <div className="flex items-center gap-4 mb-6 pb-5 border-b border-cream-100">
+                <div className="w-14 h-14 bg-cream-50 rounded-2xl flex items-center justify-center border border-cream-200 shrink-0">
+                  <User className="w-7 h-7 text-ink-400" />
                 </div>
                 <div>
-                  <h2 className="font-bold text-gray-900">{toTitleCase(p.nama_lengkap)}</h2>
-                  <div className="flex items-center gap-3 text-xs text-gray-500">
-                    <span className="flex items-center gap-1"><Hash className="w-3 h-3" /> {p.nomor_pendaftaran}</span>
-                    <span>{p.jenjang}</span>
+                  <h2 className="text-xl font-black text-ink-950 font-display">{toTitleCase(p.nama_lengkap)}</h2>
+                  <div className="flex flex-wrap items-center gap-2 mt-1.5">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-maroon-50 text-maroon-700 text-[10px] font-black uppercase tracking-widest border border-maroon-100">
+                      <Hash className="w-3 h-3" /> {p.nomor_pendaftaran}
+                    </span>
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-lg bg-surface-100 text-ink-600 text-[10px] font-black uppercase tracking-widest border border-surface-200">
+                      {p.jenjang}
+                    </span>
                   </div>
                 </div>
               </div>

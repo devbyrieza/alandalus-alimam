@@ -189,7 +189,7 @@ export default function KeuanganPage() {
                 <button
                     onClick={() => { setActiveTab("pendaftaran"); setSearch(""); }}
                     className={`px-5 py-2 rounded-lg text-sm font-bold transition-all ${activeTab === "pendaftaran"
-                        ? "bg-white text-teal-700 shadow-sm"
+                        ? "bg-white text-maroon-800 shadow-sm"
                         : "text-slate-500 hover:text-slate-700"
                         }`}
                 >
@@ -198,7 +198,7 @@ export default function KeuanganPage() {
                 <button
                     onClick={() => { setActiveTab("daftar-ulang"); setSearch(""); }}
                     className={`px-5 py-2 rounded-lg text-sm font-bold transition-all ${activeTab === "daftar-ulang"
-                        ? "bg-white text-teal-700 shadow-sm"
+                        ? "bg-white text-maroon-800 shadow-sm"
                         : "text-slate-500 hover:text-slate-700"
                         }`}
                 >
@@ -239,12 +239,12 @@ export default function KeuanganPage() {
                                 </div>
                                 <p className="text-2xl font-black text-slate-600">{pendaftaranSummary.belum_upload}</p>
                             </div>
-                            <div className="bg-white rounded-xl p-4 border border-teal-100 shadow-sm col-span-2 md:col-span-1 lg:col-span-1">
+                            <div className="bg-white rounded-xl p-4 border border-maroon-100 shadow-sm col-span-2 md:col-span-1 lg:col-span-1">
                                 <div className="flex items-center gap-1.5 mb-1">
-                                    <TrendingUp className="w-3.5 h-3.5 text-teal-600" />
-                                    <p className="text-xs text-teal-700 font-medium">Total Terkumpul</p>
+                                    <TrendingUp className="w-3.5 h-3.5 text-maroon-700" />
+                                    <p className="text-xs text-maroon-800 font-medium">Total Terkumpul</p>
                                 </div>
-                                <p className="text-lg font-black text-teal-700">{formatCurrency(pendaftaranSummary.total_terkumpul)}</p>
+                                <p className="text-lg font-black text-maroon-800">{formatCurrency(pendaftaranSummary.total_terkumpul)}</p>
                                 <p className="text-[10px] text-slate-400 mt-0.5">Pembayaran terverifikasi</p>
                             </div>
                         </div>
@@ -259,7 +259,7 @@ export default function KeuanganPage() {
                                 placeholder="Cari nama santri atau nomor pendaftaran..."
                                 value={search}
                                 onChange={e => setSearch(e.target.value)}
-                                className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500"
+                                className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-maroon-600"
                             />
                         </div>
                     </div>
@@ -334,7 +334,7 @@ export default function KeuanganPage() {
                                 placeholder="Cari nama santri atau nomor pendaftaran..."
                                 value={search}
                                 onChange={e => setSearch(e.target.value)}
-                                className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500"
+                                className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-maroon-600"
                             />
                         </div>
                     </div>

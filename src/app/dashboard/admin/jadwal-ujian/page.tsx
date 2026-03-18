@@ -296,14 +296,14 @@ export default function JadwalUjianPage() {
                       <button
                         onClick={() => handleAssign(s.id)}
                         disabled={assigning || s.booked_count >= s.quota}
-                        className="w-full md:w-auto px-6 py-3 bg-gradient-to-br from-teal-500 to-emerald-600 text-white rounded-xl font-black shadow-lg shadow-teal-500/20 hover:scale-105 transition-all flex items-center justify-center gap-2 "
+                        className="w-full md:w-auto px-6 py-3 bg-gradient-to-br from-maroon-600 to-emerald-600 text-white rounded-xl font-black shadow-lg shadow-maroon-600/20 hover:scale-105 transition-all flex items-center justify-center gap-2 "
                       >
                         {assigning ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
                         Terapkan ke Sesi Ini
                       </button>
                     ) : (
                       <div className="flex flex-col gap-3 w-full md:w-64 items-end">
-                        <div className="w-full bg-surface-100 h-2.5 rounded-full overflow-hidden border border-white">
+                        <div className="w-full bg-cream-100 h-2.5 rounded-full overflow-hidden border border-white">
                           <div
                             className="h-full bg-gradient-to-r from-purple-500 to-indigo-600"
                             style={{ width: `${(s.booked_count / s.quota) * 100}%` }}
@@ -334,7 +334,7 @@ export default function JadwalUjianPage() {
           </h2>
 
           <div className="bg-white rounded-2xl shadow-clay-md border border-white/40 overflow-hidden flex flex-col h-[600px] sticky top-28">
-            <div className="p-4 border-b border-ink-100 bg-surface-50/50">
+            <div className="p-4 border-b border-ink-100 bg-cream-50/50">
               <div className="relative">
                 <Search className="absolute left-3 top-2.5 w-4 h-4 text-ink-400" />
                 <input
@@ -359,7 +359,7 @@ export default function JadwalUjianPage() {
                     onClick={() => setSelectedPendaftarId(selectedPendaftarId === p.id ? null : p.id)}
                     className={`p-4 rounded-xl border transition-all cursor-pointer flex items-center justify-between group ${selectedPendaftarId === p.id
                       ? "bg-indigo-50 border-indigo-200 shadow-inner"
-                      : "bg-white border-transparent hover:bg-surface-50"
+                      : "bg-white border-transparent hover:bg-cream-50"
                       }`}
                   >
                     <div className="min-w-0">
@@ -394,7 +394,7 @@ export default function JadwalUjianPage() {
               <div className="p-8 space-y-6">
                 <div className="flex items-center justify-between">
                   <h2 className="text-2xl font-black text-ink-900">Buat Sesi <span className="text-purple-600">Baru</span></h2>
-                  <button type="button" onClick={() => setShowAddSession(false)} className="p-2 hover:bg-surface-100 rounded-lg transition-colors">
+                  <button type="button" onClick={() => setShowAddSession(false)} className="p-2 hover:bg-cream-100 rounded-lg transition-colors">
                     <AlertCircle className="w-5 h-5 text-ink-400 rotate-45" />
                   </button>
                 </div>
@@ -407,7 +407,7 @@ export default function JadwalUjianPage() {
                       value={newSession.title}
                       onChange={(e) => setNewSession({ ...newSession, title: e.target.value })}
                       placeholder="Contoh: Gelombang 1 - Sesi Pagi"
-                      className="w-full bg-surface-50 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-purple-500/10 outline-none font-bold"
+                      className="w-full bg-cream-50 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-purple-500/10 outline-none font-bold"
                     />
                   </div>
 
@@ -419,7 +419,7 @@ export default function JadwalUjianPage() {
                         required
                         value={newSession.start_time}
                         onChange={(e) => setNewSession({ ...newSession, start_time: e.target.value })}
-                        className="w-full bg-surface-50 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-purple-500/10 outline-none font-bold"
+                        className="w-full bg-cream-50 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-purple-500/10 outline-none font-bold"
                       />
                     </div>
                     <div>
@@ -429,7 +429,7 @@ export default function JadwalUjianPage() {
                         required
                         value={newSession.end_time}
                         onChange={(e) => setNewSession({ ...newSession, end_time: e.target.value })}
-                        className="w-full bg-surface-50 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-purple-500/10 outline-none font-bold"
+                        className="w-full bg-cream-50 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-purple-500/10 outline-none font-bold"
                       />
                     </div>
                   </div>
@@ -442,7 +442,7 @@ export default function JadwalUjianPage() {
                         required
                         value={newSession.quota}
                         onChange={(e) => setNewSession({ ...newSession, quota: parseInt(e.target.value) })}
-                        className="w-full bg-surface-50 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-purple-500/10 outline-none font-bold"
+                        className="w-full bg-cream-50 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-purple-500/10 outline-none font-bold"
                       />
                     </div>
                     <div>
@@ -451,7 +451,7 @@ export default function JadwalUjianPage() {
                         type="text"
                         value={newSession.location}
                         onChange={(e) => setNewSession({ ...newSession, location: e.target.value })}
-                        className="w-full bg-surface-50 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-purple-500/10 outline-none font-bold"
+                        className="w-full bg-cream-50 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-purple-500/10 outline-none font-bold"
                       />
                     </div>
                   </div>
@@ -461,7 +461,7 @@ export default function JadwalUjianPage() {
                 <button
                   type="button"
                   onClick={() => setShowAddSession(false)}
-                  className="flex-1 py-4 bg-surface-100 hover:bg-surface-200 text-ink-600 rounded-2xl font-black transition-all"
+                  className="flex-1 py-4 bg-cream-100 hover:bg-cream-200 text-ink-600 rounded-2xl font-black transition-all"
                 >
                   Batal
                 </button>
@@ -485,7 +485,7 @@ export default function JadwalUjianPage() {
             <h2 className="text-2xl font-black text-ink-900 mb-2">Mengirim Notifikasi...</h2>
             <p className="font-bold text-red-500 mb-6 uppercase tracking-widest text-xs">JANGAN TUTUP HALAMAN INI!</p>
 
-            <div className="w-full bg-surface-100 h-4 rounded-full overflow-hidden mb-4 border border-ink-100">
+            <div className="w-full bg-cream-100 h-4 rounded-full overflow-hidden mb-4 border border-ink-100">
               <div
                 className="h-full bg-gradient-to-r from-purple-500 to-indigo-600 transition-all duration-500 ease-out"
                 style={{ width: `${(sendingProgress.curr / sendingProgress.total) * 100}%` }}
@@ -494,7 +494,7 @@ export default function JadwalUjianPage() {
 
             <p className="font-mono font-bold text-ink-500 mb-4">{sendingProgress.curr} / {sendingProgress.total}</p>
 
-            <div className="bg-surface-50 rounded-xl p-4 text-left h-32 overflow-hidden flex flex-col-reverse gap-1 border border-ink-100">
+            <div className="bg-cream-50 rounded-xl p-4 text-left h-32 overflow-hidden flex flex-col-reverse gap-1 border border-ink-100">
               {sendingProgress.logs.map((log, idx) => (
                 <p key={idx} className="text-xs font-mono text-ink-400 truncate">{log}</p>
               ))}
