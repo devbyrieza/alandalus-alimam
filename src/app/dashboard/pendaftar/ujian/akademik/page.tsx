@@ -147,6 +147,20 @@ export default function AkademikTestPage() {
                                 <li>• Jawaban otomatis dikirim jika waktu habis</li>
                             </ul>
                         </div>
+                        <div className="bg-maroon-50 border border-maroon-200 rounded-xl p-4">
+                            <div className="flex items-start gap-3">
+                                <span className="text-2xl">🕌</span>
+                                <div>
+                                    <h4 className="font-bold text-maroon-800 mb-1 text-sm">Pesan dari Mudir</h4>
+                                    <p className="text-sm text-maroon-700 leading-relaxed italic">
+                                        "Kejujuran anda saat mengerjakan ujian ini, adalah keberkahan selanjutnya dalam menuntut ilmu."
+                                    </p>
+                                    <p className="text-sm text-maroon-600 leading-relaxed mt-1">
+                                        Mengisi secara mandiri akan mengefektifkan waktu yang tersedia.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                         <button onClick={handleStart} className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-colors text-lg">
                             Mulai Tes
                         </button>

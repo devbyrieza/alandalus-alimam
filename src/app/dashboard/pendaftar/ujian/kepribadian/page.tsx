@@ -112,6 +112,21 @@ export default function KepribadianTestPage() {
                 <p className="text-violet-200 text-xs mt-2">Pilihlah pernyataan A atau B yang sesuai dengan kepribadianmu!</p>
             </div>
 
+            <div className="bg-maroon-50 border border-maroon-200 rounded-xl p-4 mb-6">
+                <div className="flex items-start gap-3">
+                    <span className="text-2xl">🕌</span>
+                    <div>
+                        <h4 className="font-bold text-maroon-800 mb-1 text-sm">Pesan dari Mudir</h4>
+                        <p className="text-sm text-maroon-700 leading-relaxed italic">
+                            "Kejujuran anda saat mengerjakan ujian ini, adalah keberkahan selanjutnya dalam menuntut ilmu."
+                        </p>
+                        <p className="text-sm text-maroon-600 leading-relaxed mt-1">
+                            Mengisi secara mandiri akan mengefektifkan waktu yang tersedia.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             {/* Progress */}
             <div className="bg-white rounded-xl border p-4 mb-6 shadow-sm">
                 <div className="flex justify-between items-center mb-2 text-sm">

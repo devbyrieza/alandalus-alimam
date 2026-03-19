@@ -95,6 +95,22 @@ export default function KesiapanTestPage() {
                 <p className="text-emerald-100 text-sm mt-1">15 pernyataan • Skala 1-5 • Durasi 45 menit</p>
             </div>
 
+            {/* Pesan Mudir */}
+            <div className="bg-maroon-50 border border-maroon-200 rounded-xl p-4 mb-6">
+                <div className="flex items-start gap-3">
+                    <span className="text-2xl">🕌</span>
+                    <div>
+                        <h4 className="font-bold text-maroon-800 mb-1 text-sm">Pesan dari Mudir</h4>
+                        <p className="text-sm text-maroon-700 leading-relaxed italic">
+                            "Kejujuran anda saat mengerjakan ujian ini, adalah keberkahan selanjutnya dalam menuntut ilmu."
+                        </p>
+                        <p className="text-sm text-maroon-600 leading-relaxed mt-1">
+                            Mengisi secara mandiri akan mengefektifkan waktu yang tersedia.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             {KESIAPAN_QUESTIONS.map((section, idx) => (
                 <div key={idx} className="bg-white rounded-xl shadow-sm border mb-6 overflow-hidden">
                     <div className="px-6 py-4 bg-stone-50 border-b font-bold text-stone-800">{section.section}</div>
