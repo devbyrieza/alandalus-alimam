@@ -49,13 +49,13 @@ export default function HeroSection() {
               </motion.div>
 
               <h1 className="leading-[1.15] tracking-tight mx-auto lg:mx-0 max-w-2xl lg:max-w-none text-maroon-900">
-                <span className="block">Kaderisasi Muslim</span>
-                <span className="block text-gradient-maroon">Bertakwa, Berdikari</span>
-                <span className="block text-gradient-maroon whitespace-nowrap">& Berkontribusi</span>
+                <span className="block">Mencetak Generasi</span>
+                <span className="block text-gradient-maroon">Hanif, Kontributif,</span>
+                <span className="block text-gradient-maroon">dan Adaptif</span>
               </h1>
 
               <p className="text-base lg:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium font-sans text-ink-600 text-center lg:text-left">
-                Menerapkan sistem <span className="font-bold text-maroon-800">Bimbingan & Pengawasan Melekat</span> disertai keteladanan untuk membangkitkan kesadaran santri. Tumbuh menjadi pribadi dewasa tanpa kekerasan dan luka pengasuhan.
+                Bukan sekadar tempat belajar agama — sistem pembentukan karakter berbasis <span className="font-bold text-maroon-800">Lingkungan, Kebiasaan, Komunitas, dan Spiritualitas</span> tanpa kekerasan dan luka pengasuhan.
               </p>
             </div>
 
@@ -74,13 +74,13 @@ export default function HeroSection() {
                   </button>
                 </Link>
               </div>
-              
+
               {/* Trust microcopy */}
               <div className="flex items-center justify-center lg:justify-start gap-3 mt-1">
                 <div className="flex -space-x-2">
                   {[1, 2, 3, 4].map((i) => (
                     <div key={i} className="w-7 h-7 rounded-full bg-cream-200 border-2 border-white flex items-center justify-center overflow-hidden">
-                       <div className="w-full h-full bg-maroon-100" />
+                      <div className="w-full h-full bg-maroon-100" />
                     </div>
                   ))}
                 </div>

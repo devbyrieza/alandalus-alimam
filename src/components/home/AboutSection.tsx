@@ -53,7 +53,7 @@ export default function AboutSection() {
               transition={{ delay: 0.2 }}
               className="section-subtitle text-justify md:text-center"
             >
-              <span className="font-bold text-maroon-900">Tanpa kekerasan dan luka pengasuhan.</span> Kami membangkitkan kesadaran santri melalui keteladanan pendidik, agar tumbuh menjadi pribadi yang dewasa dalam berpikir dan bertindak.
+              <span className="font-bold text-maroon-900">Bukan sekadar tempat belajar agama.</span> Sistem pembentukan karakter berbasis Lingkungan, Kebiasaan, Komunitas, dan Spiritualitas — untuk mencetak generasi yang memiliki pribadi Hanif, Kontributif, dan Adaptif.
             </motion.p>
           </div>
 
@@ -75,7 +75,7 @@ export default function AboutSection() {
 
                 <blockquote className="relative max-w-3xl mx-auto">
                   <p className="text-maroon-900 leading-snug font-black text-2xl md:text-4xl italic">
-                    "Kaderisasi Muslim Bertakwa, Berdikari, dan Berkontribusi."
+                    "Mencetak Generasi yang Memiliki Pribadi Hanif, Kontributif, dan Adaptif."
                   </p>
                   <div className="mt-8 w-12 h-1.5 bg-cream-300 rounded-full mx-auto" />
                 </blockquote>
@@ -104,10 +104,10 @@ export default function AboutSection() {
 
                 <ul className="grid md:grid-cols-2 gap-x-12 gap-y-8">
                   {[
-                    "Menguatkan akidah shahihah dan membiasakan beribadah sesuai sunnah dalam kehidupan sehari-hari melalui pembelajaran bahasa arab, ulumu syar'i, halaqoh tahfizh, dan adab islami.",
-                    "Membimbing Soft Skill Santri melalui sistem pengasuhan berbasis fitrah dengan pendekatan kesadaran.",
-                    "Membekali Hard Skill melalui pembelajaran kewirausahaan dan ekstrakurikuler sebagai bekal hidup mandiri.",
-                    "Menanamkan jiwa dakwah santri melalui metode hikmah dan mauidzoh hasanah."
+                    "Membentuk pribadi Hanif: lurus akidahnya, benar ibadahnya, dan baik akhlaqnya.",
+                    "Membentuk pribadi Kontributif: memiliki karya, gagasan, dan peran nyata bagi lingkungannya.",
+                    "Membentuk pribadi Adaptif: terbuka terhadap kritik, cerdas membaca realitas, kuat menjaga prinsip.",
+                    "Menanamkan jiwa dakwah melalui Bimbingan & Pengawasan Melekat tanpa kekerasan dan luka pengasuhan."
                   ].map((misi, i) => (
                     <li key={i} className="flex gap-4 items-start p-4 rounded-xl bg-cream-50/50 border border-cream-100">
                       <div className="mt-0.5 w-6 h-6 rounded-full bg-cream-200 flex items-center justify-center shrink-0 text-maroon-700">

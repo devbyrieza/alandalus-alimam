@@ -8,28 +8,33 @@ import { motion } from "framer-motion";
 const FEATURES = [
   {
     icon: BookOpen,
-    title: "Kitab Turots & Bahasa Arab",
-    description: "Pendidikan Islam berbasis Kitab Turots dengan Bahasa Arab sebagai bahasa pengantar harian.",
-  },
-  {
-    icon: Zap,
-    title: "Aktif, Inovatif & Kreatif",
-    description: "Pembelajaran yang Aktif, Inovatif, Kreatif, dan Menyenangkan untuk santri.",
-  },
-  {
-    icon: Users,
-    title: "Guru Kompeten & Ahli",
-    description: "Guru yang Kompeten dan Ahli di Bidangnya membimbing santri secara intensif.",
+    title: "Menghidupkan Fitrah Santri",
+    description: "Berupaya maksimal menghidupkan fitrah santri, diiringi adab Islami dalam setiap interaksi.",
   },
   {
     icon: ShieldCheck,
-    title: "Karakter & Ibadah",
-    description: "Pembiasaan Ibadah & Penanaman Karakter Islami berbasis Kesadaran.",
+    title: "Pengawasan di Setiap Aktivitas",
+    description: "Pengawasan menyeluruh di setiap aktivitas santri untuk memastikan perkembangan yang optimal.",
+  },
+  {
+    icon: Users,
+    title: "Musyrif Tinggal di Kamar Santri",
+    description: "Musyrif (Guru Asrama) tinggal langsung di kamar santri untuk pendampingan intensif 24 jam.",
+  },
+  {
+    icon: Zap,
+    title: "Pendekatan Penyadaran & Pendewasaan",
+    description: "Bimbingan dengan pendekatan penyadaran dan pendewasaan pada setiap kesalahan santri, bukan sekadar hukuman.",
+  },
+  {
+    icon: Award,
+    title: "Tidak Ada Hukuman Fisik",
+    description: "Tidak menerapkan hukuman yang membahayakan fisik dalam proses pembinaan santri.",
   },
   {
     icon: Building2,
-    title: "Fasilitas Lengkap",
-    description: "Fasilitas yang Lengkap & Memadai untuk menunjang kegiatan santri.",
+    title: "Tidak Ada Senioritas Menghukum",
+    description: "Tidak memberikan kewenangan pada santri senior untuk menghukum santri lain.",
   },
 ] as const;
 
@@ -60,7 +65,7 @@ export default function FeaturesSection() {
                   Managed by Al-Andalus International Islamic Boarding School
                 </p>
                 <p className="text-lg text-ink-600 leading-relaxed font-medium text-justify lg:text-left">
-                  Pendidikan Islam unggulan yang memadukan kurikulum terbaik untuk mencetak generasi Rabbani.
+                  Sistem pembentukan karakter berbasis <strong className="text-maroon-700">Lingkungan, Kebiasaan, Komunitas, dan Spiritualitas</strong> — bukan sekadar tempat belajar agama.
                 </p>
               </div>
 

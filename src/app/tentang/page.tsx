@@ -52,7 +52,7 @@ export default function TentangPage() {
                         transition={{ delay: 0.2 }}
                         className="text-base sm:text-lg md:text-xl text-ink-600 max-w-3xl mx-auto leading-relaxed font-medium mb-12 px-4"
                     >
-                        Membangkitkan kesadaran santri melalui keteladanan pendidik, agar tumbuh menjadi muslim yang dewasa dalam berpikir dan bertindak tanpa kekerasan dan luka pengasuhan.
+                        Bukan sekadar tempat belajar agama, tetapi sistem pembentukan karakter berbasis Lingkungan, Kebiasaan, Komunitas, dan Spiritualitas — untuk mencetak generasi yang memiliki pribadi Hanif, Kontributif, dan Adaptif.
                     </motion.p>
                 </Container>
             </section>
@@ -249,7 +249,7 @@ export default function TentangPage() {
                             </div>
                             <h3 className="text-xl md:text-2xl font-black text-ink-950 mb-5">Visi</h3>
                             <p className="text-lg md:text-xl font-black text-maroon-800 italic leading-[1.5] md:leading-[1.4] flex-1">
-                                "Kaderisasi Muslim Bertakwa, Berdikari, dan Berkontribusi."
+                                "Mencetak Generasi yang Memiliki Pribadi Hanif, Kontributif, dan Adaptif."
                             </p>
                         </motion.div>
 
@@ -267,9 +267,9 @@ export default function TentangPage() {
                             <h3 className="text-xl md:text-2xl font-black text-ink-950 mb-6">Tujuan</h3>
                             <ul className="space-y-4 md:space-y-6 flex-1">
                                 {[
-                                    "Mewujudkan Lingkungan Rabbani.",
-                                    "Mencapai Keunggulan Akademik.",
-                                    "Membentuk Karakter Mandiri."
+                                    "Membentuk pribadi Hanif: lurus akidah, benar ibadah, baik akhlaq.",
+                                    "Membentuk pribadi Kontributif: berkarya, berinovasi, dan berperan nyata.",
+                                    "Membentuk pribadi Adaptif: terbuka kritik, cerdas membaca realitas, teguh prinsip."
                                 ].map((item, idx) => (
                                     <li key={idx} className="flex gap-4 items-center group/item">
                                         <div className="w-6 h-6 rounded-full bg-yellow-500 text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0 shadow-sm">
@@ -299,9 +299,9 @@ export default function TentangPage() {
                             <ul className="grid md:grid-cols-2 gap-x-8 lg:gap-x-12 gap-y-6">
                                 {[
                                     "Menguatkan akidah shahihah dan membiasakan beribadah sesuai sunnah dalam kehidupan sehari-hari melalui pembelajaran bahasa arab, ulumu syar'i, halaqoh tahfizh, dan adab islami.",
-                                    "Membimbing Soft Skill Santri melalui sistem pengasuhan berbasis fitrah dengan pendekatan kesadaran.",
-                                    "Membekali Hard Skill melalui pembelajaran kewirausahaan dan ekstrakurikuler sebagai bekal hidup mandiri.",
-                                    "Menanamkan jiwa dakwah santri melalui metode hikmah dan mauidzoh hasanah."
+                                    "Membimbing pembentukan karakter melalui sistem pengasuhan berbasis fitrah dengan pendekatan penyadaran dan pendewasaan — bukan sekadar hukuman.",
+                                    "Membekali Hard Skill melalui pembelajaran kewirausahaan dan ekstrakurikuler sebagai bekal hidup mandiri dan kontributif.",
+                                    "Menanamkan jiwa dakwah santri melalui metode hikmah dan mauidzoh hasanah, serta pengawasan penuh di setiap aktivitas santri."
                                 ].map((item, idx) => (
                                     <li key={idx} className="flex gap-4 items-start group/item bg-white p-5 rounded-2xl border border-cream-200/60 shadow-sm">
                                         <div className="w-6 h-6 rounded-full bg-maroon-600 text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5 shadow-sm">
