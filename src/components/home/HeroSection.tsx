@@ -19,7 +19,7 @@ export default function HeroSection() {
   });
 
   return (
-    <section className="relative min-h-[95vh] flex items-center pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden bg-cream-gradient">
+    <section className="relative min-h-[95vh] flex items-center pt-20 pb-16 md:pt-24 lg:pt-28 lg:pb-24 overflow-hidden bg-cream-gradient">
       {/* Sophisticated Background Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-maroon-100/40 blur-[120px] rounded-full" />
