@@ -16,8 +16,8 @@ export default function CtaSection() {
                     className="bg-maroon-900 bg-linear-to-br from-maroon-800 to-maroon-950 rounded-[2.5rem] md:rounded-[3rem] lg:rounded-[4rem] p-8 sm:p-12 md:p-16 lg:p-24 relative overflow-hidden text-center shadow-lg border border-maroon-700"
                 >
                     <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.05] mix-blend-overlay" />
-                    <div className="absolute -top-32 -right-32 w-64 h-64 sm:w-80 sm:h-80 md:w-[400px] md:h-[400px] bg-cream-100/10 rounded-full blur-[80px] md:blur-[100px]" />
-                    <div className="absolute -bottom-32 -left-32 w-64 h-64 sm:w-80 sm:h-80 md:w-[400px] md:h-[400px] bg-maroon-500/20 rounded-full blur-[80px] md:blur-[100px]" />
+                    <div className="hidden sm:block absolute -top-32 -right-32 w-64 h-64 sm:w-80 sm:h-80 md:w-[400px] md:h-[400px] bg-cream-100/10 rounded-full blur-[80px] md:blur-[100px]" />
+                    <div className="hidden sm:block absolute -bottom-32 -left-32 w-64 h-64 sm:w-80 sm:h-80 md:w-[400px] md:h-[400px] bg-maroon-500/20 rounded-full blur-[80px] md:blur-[100px]" />
 
                     <div className="relative z-10 max-w-3xl mx-auto">
                         <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 md:mb-8 tracking-tight leading-[1.1]">
