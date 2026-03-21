@@ -108,6 +108,12 @@ export async function POST(request: Request) {
         const isAllDone = isSantriDone && isQuranDone && isOrtuDone;
 
         if (isAllDone) {
+            // Update pendaftar status to 'tested'
+            await prisma.pendaftar.update({
+                where: { id: jadwal.pendaftar_id },
+                data: { status_pendaftaran: 'tested' }
+            });
+
             // Send Notification
             const phone = jadwal.pendaftar.no_hp || jadwal.pendaftar.orang_tua?.no_hp_ayah || jadwal.pendaftar.orang_tua?.no_hp_ibu;
             if (phone) {

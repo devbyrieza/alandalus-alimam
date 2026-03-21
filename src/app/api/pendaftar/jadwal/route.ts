@@ -154,8 +154,13 @@ export async function POST(request: Request) {
                 }
             });
 
-            // Should we initialize NilaiUjian here?
-            // It's good practice.
+            // 1.5. Update pendaftar status to 'scheduled'
+            await tx.pendaftar.update({
+                where: { id: session.id },
+                data: { status_pendaftaran: 'scheduled' }
+            });
+
+            // 2. Initialize NilaiUjian
             await tx.nilaiUjian.create({
                 data: {
                     pendaftar_id: session.id,
