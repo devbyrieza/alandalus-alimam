@@ -132,6 +132,7 @@ export default function RootLayout({
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
         />
+        <meta name="color-scheme" content="light only" />
       </head>
       <body
         className="font-sans antialiased bg-white text-ink-900 overflow-x-hidden transition-colors duration-500"
@@ -140,8 +141,8 @@ export default function RootLayout({
         <SmoothScrollProvider>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
-            enableSystem={true}
+            defaultTheme="light"
+            enableSystem={false}
             disableTransitionOnChange
           >
             <LayoutWrapper>
