@@ -15,7 +15,11 @@ export function useScrollRestoration() {
     const handlePopState = () => {
       isPopState.current = true;
       const lenis = (window as any).lenis;
-      if (lenis) lenis.stop(); // Prevent visual jumps while navigating
+      if (lenis) {
+        // Langsung panggil stop dan kunci secara presisi di titik 0
+        lenis.stop();
+        lenis.scrollTo(0, { immediate: true, force: true, lock: true });
+      }
     };
 
     window.addEventListener("popstate", handlePopState);
@@ -25,33 +29,31 @@ export function useScrollRestoration() {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      sessionStorage.setItem(`scroll-pos-${pathname}`, window.scrollY.toString());
+    const handleScroll = (e: any) => {
+      // Gunakan posisi virtual langsung dari Lenis agar sinkron
+      sessionStorage.setItem(`scroll-pos-${pathname}`, e.scroll.toString());
     };
 
-    let ticking = false;
-    const scrollListener = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", scrollListener, { passive: true });
+    const lenis = (window as any).lenis;
+    if (lenis) {
+      lenis.on('scroll', handleScroll);
+    } else {
+      // Fallback
+      window.addEventListener("scroll", () => {
+         sessionStorage.setItem(`scroll-pos-${pathname}`, window.scrollY.toString());
+      }, { passive: true });
+    }
 
     if (isPopState.current) {
       const savedScroll = sessionStorage.getItem(`scroll-pos-${pathname}`);
       if (savedScroll !== null) {
         const restoreScroll = () => {
-          const lenis = (window as any).lenis;
+          const lenisInstance = (window as any).lenis;
           const pos = parseInt(savedScroll, 10);
           
-          if (lenis) {
-            lenis.start();
-            lenis.scrollTo(pos, { immediate: true, force: true, lock: true });
+          if (lenisInstance) {
+            lenisInstance.start();
+            lenisInstance.scrollTo(pos, { immediate: true, force: true, lock: true });
           } else {
             window.scrollTo({
               top: pos,
@@ -60,17 +62,26 @@ export function useScrollRestoration() {
           }
         };
         
-        // Multi-stage restoration to overcome Next.js potential auto-scroll
-        setTimeout(restoreScroll, 10);
-        setTimeout(restoreScroll, 50);
-        setTimeout(restoreScroll, 150);
-        setTimeout(restoreScroll, 300);
+        // Delay minimum 100ms menggunakan requestAnimationFrame persis sesuai instruksi
+        setTimeout(() => {
+          requestAnimationFrame(restoreScroll);
+        }, 100);
+        
+        // Safety net untuk DOM yang butuh waktu lebih lama merender images/assets
+        setTimeout(restoreScroll, 250);
+        setTimeout(restoreScroll, 500);
       }
       isPopState.current = false;
     }
 
     return () => {
-      window.removeEventListener("scroll", scrollListener);
+      if (lenis) {
+        lenis.off('scroll', handleScroll);
+      } else {
+         window.removeEventListener("scroll", () => {
+            sessionStorage.setItem(`scroll-pos-${pathname}`, window.scrollY.toString());
+         });
+      }
     };
   }, [pathname]);
 }

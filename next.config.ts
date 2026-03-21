@@ -12,6 +12,7 @@ const nextConfig: NextConfig = {
   },
 
   experimental: {
+    scrollRestoration: false,
     optimizePackageImports: ['lucide-react', '@headlessui/react'],
   },
 
