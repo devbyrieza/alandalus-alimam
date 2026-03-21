@@ -22,21 +22,21 @@ const STATS = [
   },
   {
     id: "students",
-    value: 750,
+    value: 150,
     label: "Santri Aktif",
     icon: Users,
     color: "cream"
   },
   {
     id: "graduates",
-    value: 2000,
+    value: 500,
     label: "Alumni Sukses",
     icon: GraduationCap,
     color: "gold"
   },
   {
     id: "programs",
-    value: 10,
+    value: 15,
     label: "Program Ekstra",
     icon: Award,
     color: "maroon-alt"

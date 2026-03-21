@@ -102,7 +102,7 @@ export default function Navbar() {
                   Al-Imam
                 </h1>
                 <p className="text-[9px] sm:text-[10px] font-bold text-maroon-600/70 uppercase tracking-widest mt-0.5 leading-tight max-w-[120px] sm:max-w-[200px] truncate">
-                  Islamic Boarding School
+                  Managed by Al-Andalus
                 </p>
               </div>
             </Link>

@@ -91,7 +91,7 @@ export default function HeroSection() {
                   ))}
                 </div>
                 <p className="text-xs font-semibold text-ink-500">
-                  <span className="text-maroon-700 font-bold">1,000+</span> Santri Bergabung
+                  <span className="text-maroon-700 font-bold">300+</span> Santri Bergabung
                 </p>
               </div>
             </div>
