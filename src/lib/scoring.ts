@@ -107,6 +107,23 @@ export async function recalculateNilaiUjian(pendaftarId: string) {
             wawancaraCalsan: grdWs,
             wawancaraCawalsan: grdWo
         });
+
+        // 3.5. Update Pendaftar Status to 'tested'
+        const pendaftar = await prisma.pendaftar.findUnique({
+            where: { id: pendaftarId },
+            select: { status_pendaftaran: true }
+        });
+
+        // Only update if current status is NOT 'tested' and NOT more advanced
+        const currentStatus = pendaftar?.status_pendaftaran;
+        const advancedStatuses = ['tested', 'passed', 'not_passed', 're_registered', 'withdrawn'];
+
+        if (currentStatus && !advancedStatuses.includes(currentStatus)) {
+            await prisma.pendaftar.update({
+                where: { id: pendaftarId },
+                data: { status_pendaftaran: 'tested' }
+            });
+        }
     } else {
         status = 'BELUM LENGKAP';
     }

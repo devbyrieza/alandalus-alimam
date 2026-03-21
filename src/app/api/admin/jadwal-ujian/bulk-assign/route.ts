@@ -55,26 +55,34 @@ export async function POST(request: Request) {
         // 4. Process each student (Database Creation Only - Fast)
         for (const student of students) {
             try {
-                // Create Jadwal Ujian
-                await prisma.jadwalUjian.create({
-                    data: {
-                        pendaftar_id: student.id,
-                        tahun_ajaran_id: student.tahun_ajaran_id,
-                        exam_session_id: examSession.id,
-                        tanggal_ujian: tanggalUjian,
-                        metode_ujian: "online",
-                        online_test_link: examSession.location || "", // Copy link from session location
-                        status_online_test: "pending",
-                        // Default times based on session
-                        waktu_mulai_santri: examSession.start_time,
-                        waktu_selesai_santri: examSession.end_time,
-                        tempat_santri: examSession.location || "Online",
-                        // Dummy for schema compat
-                        tempat_ortu: "Online",
-                        waktu_mulai_ortu: examSession.start_time,
-                        waktu_selesai_ortu: examSession.end_time,
-                    }
-                });
+                // 3.5. Update status in a transaction
+                await prisma.$transaction([
+                    // Create Jadwal Ujian
+                    prisma.jadwalUjian.create({
+                        data: {
+                            pendaftar_id: student.id,
+                            tahun_ajaran_id: student.tahun_ajaran_id,
+                            exam_session_id: examSession.id,
+                            tanggal_ujian: tanggalUjian,
+                            metode_ujian: "online",
+                            online_test_link: examSession.location || "", // Copy link from session location
+                            status_online_test: "pending",
+                            // Default times based on session
+                            waktu_mulai_santri: examSession.start_time,
+                            waktu_selesai_santri: examSession.end_time,
+                            tempat_santri: examSession.location || "Online",
+                            // Dummy for schema compat
+                            tempat_ortu: "Online",
+                            waktu_mulai_ortu: examSession.start_time,
+                            waktu_selesai_ortu: examSession.end_time,
+                        }
+                    }),
+                    // Update Pendaftar status to 'scheduled'
+                    prisma.pendaftar.update({
+                        where: { id: student.id },
+                        data: { status_pendaftaran: 'scheduled' }
+                    })
+                ]);
 
                 // Add to Notification Queue for Frontend Processing
                 if (student.no_hp) {
