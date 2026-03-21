@@ -93,7 +93,7 @@ export default function Footer() {
                 </div>
                 <div className="text-sm font-bold text-white text-left pt-1">
                   +62 851-1152-4441
-                  <p className="text-[10px] text-cream-400/80 font-medium tracking-wide mt-0.5">Customer Service</p>
+                  <p className="text-[10px] text-cream-400/80 font-medium tracking-wide mt-0.5">Layanan Pelanggan</p>
                 </div>
               </div>
               <div className="flex gap-4">

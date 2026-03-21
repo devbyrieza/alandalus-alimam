@@ -13,7 +13,7 @@ const TESTIMONIALS = [
     initial: "S",
     date: "Oktober 2024",
     quote:
-      "Tujuan kami menyekolahkan anak ke sini adalah agar mereka benar-benar paham agama, bukan sekadar hafal pelajaran. Alhamdulillah, sejak semester pertama sudah terlihat perubahan nyata pada anak kami — cara bicara, cara bersikap kepada orang tua, dan keseriusannya dalam ibadah.",
+      "Tujuan kami menyekolahkan anak ke pesantren adalah agar mereka benar-benar paham agama, bukan sekadar hafal pelajaran. Alhamdulillah, sistem Al-Andalus telah memberikan perubahan nyata pada anak kami — cara bicara, cara bersikap kepada orang tua, dan keseriusannya dalam ibadah.",
     color: "maroon"
   },
   {
@@ -24,29 +24,29 @@ const TESTIMONIALS = [
     initial: "E",
     date: "Januari 2025",
     quote:
-      "Awalnya saya khawatir dengan sistem boarding, takut anak susah adaptasi. Ternyata kekhawatiran itu berlebihan. Kurikulum tahfidznya sangat sistematis — tidak hanya mengejar target hafalan, tapi sangat ditekankan pada makhraj dan tajwid yang benar. Dalam 6 bulan, anak saya sudah mampu memimpin shalat berjamaah di rumah.",
+      "Awalnya saya khawatir dengan sistem boarding, takut anak susah adaptasi. Ternyata kurikulum tahfidznya sangat sistematis — sangat ditekankan pada makhraj dan tajwid yang benar. Dalam 6 bulan, anak saya sudah mampu memimpin shalat berjamaah di rumah.",
     color: "cream"
   },
   {
     no: "003",
     name: "Muhammad Razan",
-    role: "Alumni Al-Imam",
+    role: "Alumni Al-Andalus",
     city: "Purwokerto, Jawa Tengah",
     initial: "R",
     date: "Maret 2025",
     quote:
-      "Disiplin bahasa Arab dan hafalan Al-Qur'an yang saya dapatkan selama di Al-Imam sangat membantu saat saya melanjutkan pendidikan ke jenjang lebih tinggi. Saat teman-teman lain masih belajar dasar-dasar nahwu, saya sudah bisa langsung membaca kitab. Lingkungannya juga kondusif.",
+      "Disiplin bahasa Arab dan hafalan Al-Qur'an sangat membantu saat saya melanjutkan pendidikan ke jenjang lebih tinggi. Saat teman-teman lain masih belajar dasar-dasar nahwu, saya sudah bisa langsung membaca kitab.",
     color: "gold"
   },
   {
     no: "004",
     name: "Faisal Ahmad",
-    role: "Alumni Al-Imam",
+    role: "Alumni Al-Andalus",
     city: "Cilacap, Jawa Tengah",
     initial: "A",
     date: "Agustus 2024",
     quote:
-      "Alhamdulillah, berkat bimbingan intensif para asatidz selama di Al-Imam, saya berhasil lulus seleksi masuk universitas di Timur Tengah. Fondasi bahasa Arab aktif yang ditanamkan sejak awal benar-benar menjadi kunci. Para guru di sini tidak hanya mengajar, mereka benar-benar membimbing dan mendoakan santrinya.",
+      "Berkat bimbingan intensif para asatidz di Pesantren Al-Andalus, saya berhasil lulus seleksi masuk universitas di Timur Tengah. Fondasi bahasa Arab aktif yang ditanamkan sejak awal benar-benar menjadi kunci.",
     color: "teal"
   },
 ] as const;
@@ -138,10 +138,20 @@ export default function TestimonialsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="section-subtitle"
+            className="section-subtitle mb-6"
           >
             Kepercayaan wali santri dan alumni adalah amanah bagi kami untuk terus memberikan yang terbaik.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="inline-flex items-center gap-2 bg-maroon-50 text-maroon-800 px-4 py-2 rounded-xl border border-maroon-100 font-bold text-sm shadow-sm"
+          >
+            <span className="text-maroon-600">✦</span> Dari Keluarga Besar Al-Andalus
+          </motion.div>
         </div>
 
         {/* Testimonials Grid */}

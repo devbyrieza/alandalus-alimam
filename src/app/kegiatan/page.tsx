@@ -398,7 +398,7 @@ export default function KegiatanPage() {
       ],
       results: [
         { icon: Trophy, text: "Juara Kompetisi Sains & Ketangkasan Fisik" },
-        { icon: Award, text: "Public Speaker Handal dalam 3 Bahasa" },
+        { icon: Award, text: "Pembicara Publik Handal dalam 3 Bahasa" },
         { icon: Users, text: "Berjiwa Kepemimpinan & Mandiri" },
       ],
       testimonial: {
@@ -484,7 +484,7 @@ export default function KegiatanPage() {
     {
       title: "Pramuka",
       desc: "Kepanduan",
-      detail: "Latihan kemandirian, leadership, dan survival skill.",
+      detail: "Latihan kemandirian, kepemimpinan, dan keterampilan bertahan hidup.",
       benefit: "Jiwa Pemimpin",
       icon: Tent,
       color: "text-ink-600",
@@ -495,7 +495,7 @@ export default function KegiatanPage() {
   const ekstrakurikuler: Ekstrakurikuler[] = [
     // Baris 1: Establised & Populer
     { name: "Karate", icon: Shield, desc: "Bela diri untuk ketahanan fisik dan disiplin diri.", benefit: "Mentalitas Tangguh" },
-    { name: "Pramuka", icon: Tent, desc: "Pembentukan karakter, leadership & kemandirian.", benefit: "Jiwa Pemimpin" },
+    { name: "Pramuka", icon: Tent, desc: "Pembentukan karakter, kepemimpinan & kemandirian.", benefit: "Jiwa Pemimpin" },
     { name: "Panahan", icon: Target, desc: "Olahraga sunnah untuk melatih fokus & ketenangan.", benefit: "Fokus & Konsentrasi" },
     { name: "Futsal", icon: Dribbble, desc: "Olahraga tim untuk kesehatan dan sportivitas.", benefit: "Kerjasama Tim" },
     { name: "Volly", icon: Trophy, desc: "Melatih koordinasi mata-tangan dan kerjasama regu.", benefit: "Ketangkasan Sosial" },
@@ -659,7 +659,7 @@ export default function KegiatanPage() {
               Kegiatan Penunjang
             </h2>
             <p className="text-xl text-ink-600 font-medium leading-relaxed">
-              Aktivitas rutin mingguan dan bulanan yang dirancang untuk mematangkan <span className="text-brown-600 font-bold uppercase tracking-tight">soft skills</span> dan pengalaman santri.
+              Aktivitas rutin mingguan dan bulanan yang dirancang untuk mematangkan <span className="text-brown-600 font-bold uppercase tracking-tight">keterampilan non-teknis</span> dan pengalaman santri.
             </p>
           </div>
 

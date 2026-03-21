@@ -140,7 +140,7 @@ export default function StepGuard({
             className="inline-flex items-center gap-2 px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
-            Kembali ke Dashboard
+            Kembali ke Beranda
           </Link>
         </div>
       </div>

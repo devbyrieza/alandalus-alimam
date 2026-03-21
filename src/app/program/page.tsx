@@ -39,7 +39,7 @@ const PROGRAMS = [
             "Bahasa Arab (Muhadatsah & Yaumiyah)",
             "Kajian Kitab Turots (Aqidah, Fiqih, Akhlaq)",
             "Kurikulum Nasional Lengkap",
-            "Life Skills & Ekstrakurikuler"
+            "Kecakapan Hidup & Ekstrakurikuler"
         ],
         image: "/images/mts.webp",
         theme: "maroon",
@@ -189,7 +189,7 @@ export default function ProgramPage() {
                                                     <span>Program Unggulan</span>
                                                 </div>
                                                 <h3 className="text-3 font-display font-black text-white text-4xl leading-none">
-                                                    Best Experience
+                                                    Pengalaman Terbaik
                                                 </h3>
                                             </div>
                                         </div>

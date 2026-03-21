@@ -174,6 +174,9 @@ export default function TentangPage() {
                                 <p>
                                     Sejak Januari 2026, Al Imam dikelola sepenuhnya oleh Al Andalus International Boarding School, mencakup seluruh aspek kelembagaan secara terintegrasi. Pengelolaan ini meliputi hirarki kepengurusan di tingkat yayasan, pengelolaan sumber daya manusia, sistem pendidikan dan kurikulum, sistem pelayanan beserta sarana dan prasarana.
                                 </p>
+                                <p className="font-bold text-maroon-800 bg-maroon-50/50 p-4 rounded-xl border border-maroon-100 italic text-center text-lg mt-6">
+                                    "Warisan 30 tahun, diperkuat sistem Al-Andalus"
+                                </p>
                             </motion.div>
 
                             <motion.div

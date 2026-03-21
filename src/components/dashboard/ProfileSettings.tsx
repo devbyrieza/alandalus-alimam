@@ -31,7 +31,7 @@ export default function ProfileSettings({ user }: { user: UserSession }) {
             pewawancara_calsan: "Pewawancara Calsan",
             pewawancara_cawalsan: "Pewawancara Cawalsan",
             tim_it: "Tim IT",
-            head_of_it: "Head of IT",
+            head_of_it: "Kepala IT",
             admin: "Admin",
             penguji: "Penguji"
         };
