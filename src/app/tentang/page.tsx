@@ -190,7 +190,7 @@ export default function TentangPage() {
                                     <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-orange-50 flex items-center justify-center mb-4 text-orange-600 group-hover:scale-110 transition-transform shadow-sm">
                                         <Users className="w-5 h-5 md:w-6 md:h-6" />
                                     </div>
-                                    <h4 className="font-black text-ink-950 text-xl md:text-2xl mb-1">70+</h4>
+                                    <h4 className="font-black text-ink-950 text-xl md:text-2xl mb-1">150+</h4>
                                     <p className="text-[9px] md:text-[10px] font-bold text-ink-500 uppercase tracking-widest">Santri Aktif</p>
                                 </div>
                                 <div className="app-card bg-white p-5 md:p-6 flex flex-col items-start group">
