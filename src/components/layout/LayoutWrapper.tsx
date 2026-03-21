@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useScrollRestoration } from "@/hooks/useScrollRestoration";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ChatSystem from "@/components/ui/widgets/ChatSystem";
@@ -17,6 +18,7 @@ export default function LayoutWrapper({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  useScrollRestoration();
 
   // Tentukan apakah perlu tampilkan navbar dan footer
   const hideNavbarFooter =
