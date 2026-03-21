@@ -14,6 +14,8 @@ export function useScrollRestoration() {
 
     const handlePopState = () => {
       isPopState.current = true;
+      const lenis = (window as any).lenis;
+      if (lenis) lenis.stop(); // Prevent visual jumps while navigating
     };
 
     window.addEventListener("popstate", handlePopState);
@@ -44,10 +46,18 @@ export function useScrollRestoration() {
       const savedScroll = sessionStorage.getItem(`scroll-pos-${pathname}`);
       if (savedScroll !== null) {
         const restoreScroll = () => {
-          window.scrollTo({
-            top: parseInt(savedScroll, 10),
-            behavior: "instant"
-          });
+          const lenis = (window as any).lenis;
+          const pos = parseInt(savedScroll, 10);
+          
+          if (lenis) {
+            lenis.start();
+            lenis.scrollTo(pos, { immediate: true, force: true, lock: true });
+          } else {
+            window.scrollTo({
+              top: pos,
+              behavior: "instant"
+            });
+          }
         };
         
         // Multi-stage restoration to overcome Next.js potential auto-scroll

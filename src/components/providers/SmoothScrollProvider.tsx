@@ -25,6 +25,9 @@ export default function SmoothScrollProvider({
       infinite: false,
     });
 
+    // Expose lenis instance globally for custom hooks (like scrollRestoration)
+    (window as any).lenis = lenis;
+
     // Store reference
     lenisRef.current = lenis;
 
