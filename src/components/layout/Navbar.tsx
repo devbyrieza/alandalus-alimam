@@ -101,7 +101,7 @@ export default function Navbar() {
                 <h1 className="text-base sm:text-lg font-black text-maroon-900 leading-none tracking-tight">
                   Al-Imam
                 </h1>
-                <p className="text-[9px] sm:text-[10px] font-bold text-maroon-600/70 uppercase tracking-widest mt-0.5 leading-tight max-w-[120px] sm:max-w-[200px] truncate">
+                <p className="text-[9px] sm:text-[10px] font-bold text-maroon-600/70 uppercase tracking-widest mt-0.5 leading-tight">
                   Managed by Al-Andalus
                 </p>
               </div>
