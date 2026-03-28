@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -144,7 +144,7 @@ const STATUS_LABELS: Record<
     border: "border-green-200",
     text: "text-green-700",
     icon: Trophy,
-    message: "Alhamdulillah! Selamat, putra/putri Anda diterima di Ponpes Al-Imam!",
+    message: "Alhamdulillah! Selamat, putra/putri Anda diterima di Ponpes Al-Andalus Al-Imam!",
   },
   payment_rejected: {
     label: "Pembayaran Bermasalah",
@@ -468,7 +468,7 @@ export default function DashboardPage() {
                   href="/dashboard/pendaftar/pengumuman"
                   icon={Trophy}
                   title="Hasil Kelulusan"
-                  description="Cek status akhir seleksi penerimaan santri baru Pondok Pesantren Al-Imam di sini."
+                  description="Cek status akhir seleksi penerimaan santri baru Pondok Pesantren Al-Andalus Al-Imam di sini."
                   step="Step 05"
                   color="blue"
                   disabled={!hasReachedStatus(pendaftar.status_pendaftaran, "tested")}

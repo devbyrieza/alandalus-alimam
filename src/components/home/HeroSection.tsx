@@ -108,7 +108,7 @@ export default function HeroSection() {
             <div className="relative z-10 rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-xl border-8 sm:border-[12px] border-white ring-1 ring-cream-200 bg-white">
               <Image
                 src="/images/hero.webp"
-                alt="Pesantren Al-Imam"
+                alt="Pesantren Al-Andalus Al-Imam"
                 width={800}
                 height={600}
                 className="w-full h-auto object-cover aspect-[4/3] hover:scale-105 transition-transform duration-700"

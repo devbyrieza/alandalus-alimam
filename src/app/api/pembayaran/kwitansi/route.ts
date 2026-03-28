@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
 
@@ -255,7 +255,7 @@ export async function GET(request: NextRequest) {
 <body>
   <div class="container">
     <div class="header">
-      <h1>PONPES AL-IMAM AL-ISLAMI</h1>
+      <h1>Ponpes Al-Andalus Al-Imam</h1>
       <p>Jl. Pelabuhan Ratu II KM 18, Cikembar, Sukabumi, Jawa Barat 43157</p>
       <p>Telp: +62 851-1152-4441 | Email: ppdb.pesantrenalimam@gmail.com</p>
     </div>

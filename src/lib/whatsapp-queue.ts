@@ -1,4 +1,4 @@
-/**
+﻿/**
  * WhatsApp Queue Service — 6-Layer Anti-BAN Protection
  *
  * Layer 1: Database flag check (anti-duplicate)
@@ -549,7 +549,7 @@ function pickOpening(): string {
 export function buildMessageJadwalBelum(nama: string): string {
     return `${pickOpening()} ${nama},
 
-Terima kasih telah mendaftar di Pesantren Al-Imam Al-Islami.
+Terima kasih telah mendaftar di Pesantren Al-Andalus Al-Imam.
 
 Saat ini jadwal tes lanjutan (Tes Al-Qur'an, Wawancara Calsan, dan Wawancara Cawalsan Santri) belum tersedia. Mohon bersabar, kami akan menginformasikan kembali begitu jadwal sudah siap.
 
@@ -585,7 +585,7 @@ Panitia PPDB Al-Imam`;
 export function buildMessageJadwalLangsungTersedia(nama: string): string {
     return `${pickOpening()} ${nama},
 
-Terima kasih telah mencapai tahap Seleksi Pesantren Al-Imam Al-Islami.
+Terima kasih telah mencapai tahap Seleksi Pesantren Al-Andalus Al-Imam.
 
 Saat ini **jadwal tes lanjutan sudah tersedia dan bisa langsung Anda pilih**.
 

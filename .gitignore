@@ -93,3 +93,68 @@ $RECYCLE.BIN/
 
 # generated
 /src/generated/prisma
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# DATA SENSITIF - JANGAN PERNAH DI-COMMIT!
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Backup data real pendaftar (SQL dump, JSON, CSV export)
+/migration/backup/
+
+# Database dumps & sensitive SQL
+FULL_PENDAFTAR_DUMP.json
+pendaftars_dump.json
+cleanup_audit.json
+rekap_total.csv
+*.tar.gz
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# FILE SEMENTARA & DEBUG - TIDAK PERLU DI-COMMIT
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Script debug & tools sementara (root level)
+check-restored-users.ts
+check_prod_users.ts
+test-nilai.ts
+test-raylan.mjs
+testDb.js
+extract_formulas*.js
+search_bobot.js
+tmp_read_excel.js
+
+# Debug output files
+tmp_excel_output*.txt
+logic_formulas*.txt
+rules.txt
+rules_utf8.txt
+netstat_out.txt
+tsc_error.txt
+bobot_results.txt
+tracked.txt
+bobot_results.txt
+prisma-test.log
+build.log
+compile.log
+
+# Debug shell scripts (root level)
+diagnose-502.sh
+fix-nginx-502.sh
+
+# Troubleshooting docs (root level)
+README-502-FIX.md
+README-NGINX-FIX.md
+PERMANENT_FIX.md
+RESTORE-SIMPEL.md
+RESTORE_DATA.md
+SOLUSI-RESTORE-DATA.md
+coolify-troubleshoot.md
+diagnostic-commands.md
+nginx-config-check.md
+quick-nginx-fix.md
+fix-502-commands.md
+
+# Patch files
+*.patch
+
+# Temp folders
+/tmp/

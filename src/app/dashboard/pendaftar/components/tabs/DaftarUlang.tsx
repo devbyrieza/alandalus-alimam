@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import {
@@ -154,7 +154,7 @@ export default function DaftarUlangTab() {
           </h3>
           <ul className="text-sm text-blue-700 space-y-1 list-disc list-inside">
             <li>Transfer ke Rekening <strong>BSI 7171717171</strong></li>
-            <li>a.n <strong>PP Al-Imam Al-Islami</strong></li>
+            <li>a.n <strong>PP Al-Andalus Al-Imam</strong></li>
             <li>Wajib bayar cicilan pertama min. <strong>Rp 1.000.000</strong></li>
             <li>Pelunasan maksimal bulan <strong>Juli 2026</strong> (3x Cicilan)</li>
           </ul>

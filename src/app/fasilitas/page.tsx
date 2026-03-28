@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -174,7 +174,7 @@ export default function FasilitasPage() {
               transition={{ delay: 0.1 }}
               className="section-subtitle"
             >
-              Sarana vital yang menjadi jantung aktivitas harian di <br className="hidden md:block" /> Pesantren Al-Imam untuk kenyamanan dan kekhusyukan.
+              Sarana vital yang menjadi jantung aktivitas harian di <br className="hidden md:block" /> Pesantren Al-Andalus Al-Imam untuk kenyamanan dan kekhusyukan.
             </motion.p>
           </div>
 
@@ -712,7 +712,7 @@ export default function FasilitasPage() {
               viewport={{ once: true }}
               className="section-subtitle lg:ml-0"
             >
-              Lihat langsung suasana dan lingkungan Pesantren Al-Imam dari berbagai sudut.
+              Lihat langsung suasana dan lingkungan Pesantren Al-Andalus Al-Imam dari berbagai sudut.
             </motion.p>
           </div>
 
@@ -833,7 +833,7 @@ export default function FasilitasPage() {
                 <div className="w-10 h-10 rounded-full bg-cream-200 text-maroon-700 flex items-center justify-center shrink-0">
                    <Info className="w-5 h-5" />
                 </div>
-                 <p className="text-sm font-medium text-ink-700">Masih banyak fasilitas pendukung lainnya di dalam Pesantren Al-Imam. Silakan jadwalkan kunjungan untuk melihat langsung.</p>
+                 <p className="text-sm font-medium text-ink-700">Masih banyak fasilitas pendukung lainnya di dalam Pesantren Al-Andalus Al-Imam. Silakan jadwalkan kunjungan untuk melihat langsung.</p>
              </motion.div>
 
           </div>

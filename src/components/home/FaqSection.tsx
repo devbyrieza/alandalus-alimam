@@ -13,10 +13,10 @@ const FAQS = [
     },
     {
         question: "Apakah santri diwajibkan untuk tinggal di asrama?",
-        answer: "Ya, seluruh santri di Pesantren Al-Imam wajib tinggal di asrama untuk mengikuti seluruh rangkaian kegiatan tarbiyah, halaqah tahfidz, dan pembelajaran kitab turots secara maksimal.",
+        answer: "Ya, seluruh santri di Pesantren Al-Andalus Al-Imam wajib tinggal di asrama untuk mengikuti seluruh rangkaian kegiatan tarbiyah, halaqah tahfidz, dan pembelajaran kitab turots secara maksimal.",
     },
     {
-        question: "Kurikulum apa yang diterapkan di Pesantren Al-Imam?",
+        question: "Kurikulum apa yang diterapkan di Pesantren Al-Andalus Al-Imam?",
         answer: "Kami menerapkan Kurikulum Terpadu yang menggabungkan kurikulum Nasional dengan kurikulum khas Al-Andalus yang berfokus pada penguasaan Bahasa Arab, Tahfidz Al-Qur'an, dan Kitab Turots.",
     },
     {
@@ -29,7 +29,7 @@ const FAQS = [
     },
     {
         question: "Apakah tersedia program beasiswa?",
-        answer: "Ya, Al-Imam menyediakan program beasiswa bagi santri berprestasi (tahfidz 30 juz) dan santri dari keluarga yatim/piatu/dhuafa dengan syarat dan ketentuan yang berlaku.",
+        answer: "Ya, Al-Andalus Al-Imam menyediakan program beasiswa bagi santri berprestasi (tahfidz 30 juz) dan santri dari keluarga yatim/piatu/dhuafa dengan syarat dan ketentuan yang berlaku.",
     },
 ] as const;
 
@@ -103,7 +103,7 @@ export default function FaqSection() {
                         viewport={{ once: true }}
                         className="section-subtitle max-w-2xl mx-auto"
                     >
-                        Temukan jawaban cepat untuk pertanyaan umum seputar pendaftaran, biaya, dan sistem pendidikan di Al-Imam Al-Islami.
+                        Temukan jawaban cepat untuk pertanyaan umum seputar pendaftaran, biaya, dan sistem pendidikan di Al-Andalus Al-Imam.
                     </motion.p>
                 </div>
 

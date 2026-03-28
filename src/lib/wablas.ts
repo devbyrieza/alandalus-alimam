@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Wablas WhatsApp API Service
  * 
  * This service handles all WhatsApp notifications via Wablas API
@@ -155,7 +155,7 @@ const TEMPLATES: Record<string, string> = {
 
 Assalamu'alaikum {{nama}},
 
-Alhamdulillah, pendaftaran Anda di Pesantren Al-Imam Al-Islami telah berhasil!
+Alhamdulillah, pendaftaran Anda di Pesantren Al-Andalus Al-Imam telah berhasil!
 
 📋 *Detail Pendaftaran:*
 • Nomor Pendaftaran: {{nomor_pendaftaran}}
@@ -308,7 +308,7 @@ Panitia PPDB Al-Imam`,
 
 Assalamu'alaikum {{nama}},
 
-Alhamdulillah, kami dengan senang hati mengumumkan bahwa Anda *DITERIMA* di Pesantren Al-Imam Al-Islami!
+Alhamdulillah, kami dengan senang hati mengumumkan bahwa Anda *DITERIMA* di Pesantren Al-Andalus Al-Imam!
 
 📋 *Detail:*
 • Jenjang: {{jenjang}}
@@ -331,7 +331,7 @@ Panitia PPDB Al-Imam`,
 
 Assalamu'alaikum {{nama}},
 
-Berdasarkan hasil seleksi PPDB Pesantren Al-Imam Al-Islami, kami informasikan bahwa Anda dinyatakan *CADANGAN*.
+Berdasarkan hasil seleksi PPDB Pesantren Al-Andalus Al-Imam, kami informasikan bahwa Anda dinyatakan *CADANGAN*.
 
 📋 *Detail:*
 • Jenjang: {{jenjang}}
@@ -351,7 +351,7 @@ Panitia PPDB Al-Imam`,
 
 Assalamu'alaikum {{nama}},
 
-Berdasarkan hasil seleksi PPDB Pesantren Al-Imam Al-Islami, kami informasikan bahwa Anda *BELUM DITERIMA* pada periode ini.
+Berdasarkan hasil seleksi PPDB Pesantren Al-Andalus Al-Imam, kami informasikan bahwa Anda *BELUM DITERIMA* pada periode ini.
 
 📋 *Detail:*
 • Jenjang: {{jenjang}}
@@ -425,7 +425,7 @@ Panitia PPDB Al-Imam`,
 
 Assalamu'alaikum {{nama}},
 
-Alhamdulillah, Anda telah menyelesaikan seluruh rangkaian ujian/seleksi masuk Pesantren Al-Imam Al-Islami.
+Alhamdulillah, Anda telah menyelesaikan seluruh rangkaian ujian/seleksi masuk Pesantren Al-Andalus Al-Imam.
 
 🔐 *Status Terkini:*
 Halaman Pengumuman Hasil Seleksi kini telah terbuka di dashboard Anda.

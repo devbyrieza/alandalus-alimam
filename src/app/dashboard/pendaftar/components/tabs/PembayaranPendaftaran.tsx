@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import {
@@ -78,7 +78,7 @@ interface PaymentStatusResponse {
 const BANK_INFO = {
   nama_bank: "BSI (Bank Syariah Indonesia)",
   nomor_rekening: "4222224441",
-  atas_nama: "Ponpes Al-Imam Al-Islami",
+  atas_nama: "Ponpes Al-Andalus Al-Imam",
   kode_bank: "451",
 };
 

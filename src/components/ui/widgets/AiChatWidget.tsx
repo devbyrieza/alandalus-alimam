@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef, useEffect } from "react";
 import { Send, X, Bot, User, Loader2, MessageSquare, Headphones } from "lucide-react";
@@ -129,7 +129,7 @@ export default function AiChatWidget({ onClose, onEscalate }: AiChatWidgetProps)
                     </div>
                     <div>
                         <h3 className="font-bold text-[15px] leading-tight flex items-center gap-2">
-                            Al-Imam Assistant
+                            Al-Andalus Al-Imam Assistant
                             <span className="flex w-2 h-2 rounded-full bg-green-400"></span>
                         </h3>
                         <p className="text-[11px] text-maroon-200 mt-0.5 font-medium">Online • Bertenaga AI</p>

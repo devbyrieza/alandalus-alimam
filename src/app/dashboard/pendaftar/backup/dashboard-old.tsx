@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import { useRouter } from "next/navigation";
@@ -31,7 +31,7 @@ export default function DashboardPendaftarPage() {
               <h1 className="text-2xl font-black text-stone-900">
                 Dashboard Pendaftar
               </h1>
-              <p className="text-sm text-stone-600">Ponpes Al-Imam Al-Islami</p>
+              <p className="text-sm text-stone-600">Ponpes Al-Andalus Al-Imam</p>
             </div>
             <button
               onClick={handleLogout}

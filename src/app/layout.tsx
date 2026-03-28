@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import "./globals.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -25,13 +25,13 @@ export const metadata: Metadata = {
   ),
 
   title: {
-    default: "Pesantren Al-Imam Al-Islami | PPDB 2026/2027",
-    template: "%s | Pesantren Al-Imam Al-Islami",
+    default: "Pesantren Al-Andalus Al-Imam | PPDB 2026/2027",
+    template: "%s | Pesantren Al-Andalus Al-Imam",
   },
   description:
-    "Pendaftaran Santri Baru Pesantren Al-Imam Al-Islami. Pendidikan berbasis Al-Qur'an dan As-Sunnah sesuai pemahaman salafush shalih. Sukabumi, Jawa Barat.",
+    "Pendaftaran Santri Baru Pesantren Al-Andalus Al-Imam. Pendidikan berbasis Al-Qur'an dan As-Sunnah sesuai pemahaman salafush shalih. Sukabumi, Jawa Barat.",
   keywords: [
-    "ponpes al-imam",
+    "Ponpes Al-Andalus Al-Imam",
     "pesantren sukabumi",
     "ppdb 2026",
     "pendaftaran santri",
@@ -44,9 +44,9 @@ export const metadata: Metadata = {
     "pendidikan islam",
   ],
 
-  authors: [{ name: "Pesantren Al-Imam Al-Islami" }],
-  creator: "Pesantren Al-Imam Al-Islami",
-  publisher: "Pesantren Al-Imam Al-Islami",
+  authors: [{ name: "Pesantren Al-Andalus Al-Imam" }],
+  creator: "Pesantren Al-Andalus Al-Imam",
+  publisher: "Pesantren Al-Andalus Al-Imam",
 
   formatDetection: {
     email: false,
@@ -73,17 +73,17 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Pesantren Al-Imam Al-Islami | PPDB 2026/2027",
+    title: "Pesantren Al-Andalus Al-Imam | PPDB 2026/2027",
     description:
       "Pendidikan berbasis Al-Qur'an dan As-Sunnah sesuai pemahaman salafush shalih. Daftar sekarang untuk tahun ajaran 2026/2027.",
-    url: "https://www.alimamalislami.sch.id",
-    siteName: "Pesantren Al-Imam Al-Islami",
+    url: "https://www.pesantren-alimam.com",
+    siteName: "Pesantren Al-Andalus Al-Imam",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Pesantren Al-Imam Al-Islami",
+        alt: "Pesantren Al-Andalus Al-Imam",
       },
     ],
     locale: "id_ID",
@@ -92,7 +92,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Pesantren Al-Imam Al-Islami | PPDB 2026/2027",
+    title: "Pesantren Al-Andalus Al-Imam | PPDB 2026/2027",
     description:
       "Pendidikan berbasis Al-Qur'an dan As-Sunnah sesuai pemahaman salafush shalih.",
     images: ["/twitter-image.jpg"],

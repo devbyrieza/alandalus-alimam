@@ -6,8 +6,8 @@
 export const PPDB_CONFIG = {
   // 🏫 INFO PESANTREN (GANTI INI DULU!)
   pesantren: {
-    nama: "Pesantren Al-Imam Al-Islami",
-    singkatan: "Al-Imam",
+    nama: "Pesantren Al-Andalus Al-Imam",
+    singkatan: "Al-Andalus Al-Imam",
     alamat: "Jl. Pelabuhan Ratu II KM 18, Kp. Pupunjul, Desa Cikembar, Kec. Cikembar, Kab. Sukabumi, Jawa Barat 43157",
     telepon: "+62 851-1152-4441",
     email: "pesantrenalimamsukabumi@gmail.com",
@@ -104,13 +104,13 @@ export const PPDB_CONFIG = {
   contact: {
     whatsapp: "+6285111524441",
     instagram: "@pesantrenalimamsukabumi",
-    facebook: "Pesantren Al-Imam Al-Islami (Official Fanpage)",
-    youtube: "Al Imam Al Islami Cikembar Sukabumi"
+    facebook: "Pesantren Al-Andalus Al-Imam (Official Fanpage)",
+    youtube: "Al-Andalus Al-Imam Cikembar Sukabumi"
   },
 
   // ⚙️ SETTING TEKNIS (UMUMNYA TIDAK PERLU DIUBAH)
   technical: {
-    appName: "PPDB Al-Imam",
+    appName: "PPDB Al-Andalus Al-Imam",
     appDescription: "Sistem Penerimaan Peserta Didik Baru",
     version: "2.0.0",
     author: "Rieza Eka Tomara"

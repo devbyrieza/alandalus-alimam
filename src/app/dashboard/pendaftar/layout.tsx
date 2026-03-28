@@ -266,7 +266,7 @@ export default function DashboardLayout({
         {/* Mobile Header (Fintech Style) */}
         <div className="lg:hidden bg-white/90 backdrop-blur-xl sticky top-0 z-40 px-5 py-4 flex items-center justify-between border-b border-cream-200 shadow-sm">
           <div className="flex flex-col">
-            <span className="text-[10px] uppercase font-black tracking-widest text-ink-400 mb-0.5">PPDB Al-Imam</span>
+            <span className="text-[10px] uppercase font-black tracking-widest text-ink-400 mb-0.5">PPDB Al-Andalus Al-Imam</span>
             <span className="text-base font-black text-maroon-950 leading-none">Beranda</span>
           </div>
 
@@ -291,7 +291,7 @@ export default function DashboardLayout({
                     <School className="w-5 h-5" />
                   </div>
                   <div>
-                    <h1 className="font-black text-xl text-maroon-950 leading-none tracking-tight">PPDB <span className="text-maroon-700">Al-Imam</span></h1>
+                    <h1 className="font-black text-xl text-maroon-950 leading-none tracking-tight">PPDB <span className="text-maroon-700">Al-Andalus Al-Imam</span></h1>
                     <p className="text-[10px] text-ink-500 font-bold mt-1 uppercase tracking-widest">Tahun 2026/2027</p>
                   </div>
                 </div>
@@ -330,7 +330,7 @@ export default function DashboardLayout({
                   <span>Keluar Akun</span>
                 </button>
                 <p className="text-[10px] text-center text-ink-400 mt-4">
-                  &copy; 2026 Ponpes Al-Imam Al-Islami
+                  &copy; 2026 Ponpes Al-Andalus Al-Imam
                 </p>
               </div>
             </div>
@@ -347,7 +347,7 @@ export default function DashboardLayout({
                     <div className="w-10 h-10 rounded-xl bg-maroon-800 flex items-center justify-center text-white">
                       <School className="w-5 h-5" />
                     </div>
-                    <span className="font-black text-lg text-maroon-950 tracking-tight">PPDB Al-Imam</span>
+                    <span className="font-black text-lg text-maroon-950 tracking-tight">PPDB Al-Andalus Al-Imam</span>
                   </div>
                   <button onClick={() => setSidebarOpen(false)} className="p-2 text-ink-400 hover:text-maroon-700 bg-cream-50 rounded-full">
                     <X className="w-5 h-5" />

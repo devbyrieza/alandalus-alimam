@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { UserPlus, FileText, CreditCard, ClipboardCheck, GraduationCap, CheckCircle, BellRing } from "lucide-react";
 import { Container } from "@/components/layout/Container";
@@ -76,7 +76,7 @@ export default function ProcessSection() {
                         viewport={{ once: true }}
                         className="section-subtitle max-w-2xl mx-auto"
                     >
-                        Ikuti langkah-langkah mudah berikut untuk menjadi bagian dari keluarga besar Pesantren Al-Imam Al-Islami.
+                        Ikuti langkah-langkah mudah berikut untuk menjadi bagian dari keluarga besar Pesantren Al-Andalus Al-Imam.
                     </motion.p>
                 </div>
 

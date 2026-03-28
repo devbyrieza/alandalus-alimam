@@ -1,4 +1,4 @@
-import jsPDF from "jspdf";
+﻿import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 export interface PendaftarPdfData {
@@ -17,7 +17,7 @@ export interface PendaftarPdfData {
     lokasi_ujian?: string;
 }
 
-const BRAND_NAME = "Pesantren Al-Imam Al-Islami";
+const BRAND_NAME = "Pesantren Al-Andalus Al-Imam";
 const BRAND_SUBTITLE = "Penerimaan Santri Baru (PPDB)";
 const BRAND_ADDRESS = "Jl. Karamat No. 123, Gunungpuyuh, Kota Sukabumi, Jawa Barat";
 
@@ -153,7 +153,7 @@ export const generateKartuUjian = (data: PendaftarPdfData) => {
     // Admin Signature Space
     doc.setFontSize(10);
     doc.text("Panitia PPDB,", pageWidth - 60, finalY);
-    doc.text("Ponpes Al-Imam", pageWidth - 60, finalY + 5);
+    doc.text("Ponpes Al-Andalus Al-Imam", pageWidth - 60, finalY + 5);
     doc.text("(............................)", pageWidth - 60, finalY + 30);
 
     drawFooter(doc);
@@ -203,7 +203,7 @@ export const generateSuratKelulusan = (data: PendaftarPdfData) => {
 
     doc.setFont("helvetica", "normal");
     doc.setFontSize(11);
-    const closing = "Selamat bergabung menjadi keluarga besar Pesantren Al-Imam Al-Islami. Silakan segera melakukan proses daftar ulang sesuai jadwal yang ditentukan.";
+    const closing = "Selamat bergabung menjadi keluarga besar Pesantren Al-Andalus Al-Imam. Silakan segera melakukan proses daftar ulang sesuai jadwal yang ditentukan.";
     doc.text(doc.splitTextToSize(closing, pageWidth - 40), 20, finalY + 25);
 
     drawFooter(doc);

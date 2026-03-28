@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -86,7 +86,7 @@ export default function TentangPage() {
                     >
                         <Image
                             src="/images/welcome-selamat-datang.webp"
-                            alt="Selamat Datang di Al-Imam Al-Islami"
+                            alt="Selamat Datang di Al-Andalus Al-Imam"
                             fill
                             className="object-cover transition-transform duration-1000 group-hover:scale-105"
                         />
@@ -110,7 +110,7 @@ export default function TentangPage() {
                                 <div className="relative w-full h-full rounded-[2rem] md:rounded-[2.5rem] overflow-hidden">
                                     <Image
                                         src="/images/tentang.webp"
-                                        alt="Pesantren Al-Imam Al-Islami"
+                                        alt="Pesantren Al-Andalus Al-Imam"
                                         fill
                                         className="object-cover"
                                     />
@@ -166,7 +166,7 @@ export default function TentangPage() {
                                 className="space-y-4 md:space-y-6 text-base md:text-[17px] text-ink-700 font-medium leading-[1.8] text-justify"
                             >
                                 <p>
-                                    <span className="text-ink-950 font-black">Pesantren Al-Imam Al-Islami</span> berlokasi di Cikembar, Sukabumi. Didirikan pada tahun 1995 oleh <span className="text-maroon-700 italic font-bold">Al-Ustadz KH. Bukhori Muslim Rahimahullah</span> dengan visi mencetak kader ulama.
+                                    <span className="text-ink-950 font-black">Pesantren Al-Andalus Al-Imam</span> berlokasi di Cikembar, Sukabumi. Didirikan pada tahun 1995 oleh <span className="text-maroon-700 italic font-bold">Al-Ustadz KH. Bukhori Muslim Rahimahullah</span> dengan visi mencetak kader ulama.
                                 </p>
                                 <p>
                                     Kami berkomitmen penuh untuk berkhidmah kepada umat melalui jalur pendidikan dan dakwah, dengan menjaga biaya pendidikan tetap terjangkau tanpa mengurangi kualitas layanan dan fasilitas.
