@@ -340,7 +340,10 @@ export default function DaftarPage() {
                     { value: "SMA", title: "Madrasah Aliyah (SMA)", subtitle: "Lulusan SMP/Sederajat" },
                   ].map((option) => {
                     const isPutra = formData.jenis_kelamin === "L";
-                    const isClosedForPutra = isPutra && (option.value === "MTs" || option.value === "IL");
+                    const isPutri = formData.jenis_kelamin === "P";
+                    // Di Al-Imam, yang buka HANYA MTs Putra dan IL Putra.
+                    // Maka Putri (semua jenjang) otomatis tutup, dan SMA Putra otomatis tutup.
+                    const isClosedForPutra = isPutri || (isPutra && option.value === "SMA");
                     
                     return (
                       <motion.div
@@ -360,12 +363,12 @@ export default function DaftarPage() {
                         }`}
                       >
                         {isClosedForPutra && (
-                          <div className="absolute top-4 right-4 bg-red-600 text-white text-[10px] font-black px-2 py-1 rounded-full uppercase tracking-tighter">
+                          <div className="absolute top-4 right-4 bg-red-600 text-white text-[10px] font-black px-2 py-1 rounded-full uppercase tracking-tighter shadow-sm z-10">
                             Kuota Penuh / Tutup
                           </div>
                         )}
                         
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-4 relative z-0">
                           <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${
                             formData.jenjang === option.value ? "border-brand-blue-600" : "border-cream-200"
                           }`}>
@@ -377,15 +380,15 @@ export default function DaftarPage() {
                           </div>
                         </div>
 
-                        {/* Special Note for SMA Putri */}
-                        {option.value === "SMA" && formData.jenis_kelamin === "P" && (
+                        {/* Special Note for SMA */}
+                        {option.value === "SMA" && (
                           <motion.div 
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
-                            className="mt-4 p-3 bg-brand-yellow-100/30 rounded-xl border border-brand-yellow-200/50"
+                            className="mt-4 p-3 bg-brand-yellow-100/30 rounded-xl border border-brand-yellow-200/50 relative z-0"
                           >
                             <p className="text-[10px] leading-relaxed text-brand-blue-900 font-bold italic">
-                              * Khusus pendaftar SMA Putri langsung (tanpa I'dad): Wajib memiliki hafalan 5 Juz Mutqin & lancar berbahasa Arab.
+                              * Syarat pendaftar SMA langsung (tanpa I'dad): Wajib memiliki hafalan 5 Juz Mutqin & lancar berbahasa Arab.
                             </p>
                           </motion.div>
                         )}
