@@ -158,10 +158,14 @@ export default function DaftarPage() {
 
     if (!formData.jenis_kelamin) {
       errors.jenis_kelamin = "Pilih jenis kelamin santri";
+    } else if (formData.jenis_kelamin === "P") {
+      errors.jenis_kelamin = "Mohon maaf, kuota Santri Putri seluruh jenjang sudah ditutup untuk pesantren Al-Imam.";
     }
 
     if (!formData.jenjang) {
       errors.jenjang = "Pilih jenjang pendidikan";
+    } else if (formData.jenis_kelamin === "L" && formData.jenjang === "SMA") {
+      errors.jenjang = "Mohon maaf, pendaftaran SMA Reguler Putra telah ditutup.";
     }
 
     setFieldErrors(errors);
