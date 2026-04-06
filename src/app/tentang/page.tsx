@@ -33,7 +33,7 @@ export default function TentangPage() {
                         className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-brand-blue-50 border border-brand-blue-100 text-brand-blue-700 text-xs font-bold uppercase tracking-widest mb-8 shadow-sm"
                     >
                         <Sparkles className="w-3.5 h-3.5" />
-                        <span>Mengenal Ulul Albaab</span>
+                        <span>Mengenal Al-Imam</span>
                     </motion.div>
 
                     <motion.h1
@@ -86,7 +86,7 @@ export default function TentangPage() {
                     >
                         <Image
                             src="/images/welcome-selamat-datang.webp"
-                            alt="Selamat Datang di Al-Andalus Ulul Albaab"
+                            alt="Selamat Datang di Al-Andalus Al-Imam"
                             fill
                             className="object-cover transition-transform duration-1000 group-hover:scale-105"
                         />
@@ -110,7 +110,7 @@ export default function TentangPage() {
                                 <div className="relative w-full h-full rounded-[2rem] md:rounded-[2.5rem] overflow-hidden">
                                     <Image
                                         src="/images/tentang.webp"
-                                        alt="Pesantren Al-Andalus Ulul Albaab"
+                                        alt="Pesantren Al-Andalus Al-Imam"
                                         fill
                                         className="object-cover"
                                     />
@@ -166,13 +166,13 @@ export default function TentangPage() {
                                 className="space-y-4 md:space-y-6 text-base md:text-[17px] text-ink-700 font-medium leading-[1.8] text-justify"
                             >
                                 <p>
-                                    <span className="text-ink-950 font-black">Pesantren Al-Andalus Ulul Albaab</span> berlokasi di Cicantayan, Kabupaten Sukabumi. Sebagai cabang resmi dari <span className="text-brand-blue-700 italic font-bold">Pesantren Islam Internasional Al-Andalus</span>, kami hadir dengan visi mencetak kader ulama rabbani yang beraqidah lurus dan berwawasan luas.
+                                    <span className="text-ink-950 font-black">Pesantren Al-Andalus Al-Imam</span> berlokasi di Cicantayan, Kabupaten Sukabumi. Sebagai cabang resmi dari <span className="text-brand-blue-700 italic font-bold">Pesantren Islam Internasional Al-Andalus</span>, kami hadir dengan visi mencetak kader ulama rabbani yang beraqidah lurus dan berwawasan luas.
                                 </p>
                                 <p>
                                     Kami berkomitmen penuh untuk berkhidmah kepada umat melalui jalur pendidikan dan dakwah, dengan menjaga biaya pendidikan tetap terjangkau tanpa mengurangi kualitas layanan dan fasilitas.
                                 </p>
                                 <p>
-                                    Sejak Januari 2026, Ulul Albaab dikelola sepenuhnya oleh Al Andalus International Boarding School, mencakup seluruh aspek kelembagaan secara terintegrasi. Pengelolaan ini meliputi hirarki kepengurusan di tingkat yayasan, pengelolaan sumber daya manusia, sistem pendidikan dan kurikulum, sistem pelayanan beserta sarana dan prasarana.
+                                    Sejak Januari 2026, Al-Imam dikelola sepenuhnya oleh Al Andalus International Boarding School, mencakup seluruh aspek kelembagaan secara terintegrasi. Pengelolaan ini meliputi hirarki kepengurusan di tingkat yayasan, pengelolaan sumber daya manusia, sistem pendidikan dan kurikulum, sistem pelayanan beserta sarana dan prasarana.
                                 </p>
                                 <p className="font-bold text-brand-blue-800 bg-brand-blue-50/50 p-4 rounded-xl border border-brand-blue-100 italic text-center text-lg mt-6">
                                     "Warisan 30 tahun, diperkuat sistem Al-Andalus"
@@ -337,7 +337,7 @@ export default function TentangPage() {
                         <div className="relative z-10 max-w-3xl mx-auto">
                             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 md:mb-8 text-white tracking-tight leading-[1.1]">
                                 Mari Menjadi Bagian <br />
-                                Keluarga <span className="text-brand-yellow-300">Ulul Albaab</span>
+                                Keluarga <span className="text-brand-yellow-300">Al-Imam</span>
                             </h2>
                             <p className="text-base md:text-lg lg:text-xl text-white/90 mb-8 md:mb-10 lg:mb-12 max-w-2xl mx-auto leading-relaxed font-medium px-2">
                                 Daftarkan putra Anda sekarang dan persiapkan masa depan gemilang bersama kami.

@@ -425,7 +425,7 @@ export default function DaftarPage() {
                         value={formData.nama_lengkap}
                         onChange={(e) => setFormData((prev) => ({ ...prev, nama_lengkap: e.target.value }))}
                         placeholder="Sesuai Akta Kelahiran santri"
-                        className="w-full px-5 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl bg-cream-50 border border-transparent focus:bg-white focus:border-maroon-200 focus:ring-4 focus:ring-cream-50 transition-all font-bold text-ink-900 placeholder:text-ink-500 text-sm md:text-base"
+                        className="w-full px-5 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl bg-cream-50 border border-transparent focus:bg-white focus:border-maroon-200 focus:ring-4 focus:ring-cream-50 transition-all font-bold  placeholder:text-ink-500 text-sm md:text-base text-ink-950"
                       />
                     </InputField>
                   </div>
@@ -438,7 +438,7 @@ export default function DaftarPage() {
                       value={formData.nik}
                       onChange={(e) => setFormData((prev) => ({ ...prev, nik: e.target.value.replace(/\D/g, "") }))}
                       placeholder="16 Digit NIK"
-                      className="w-full px-5 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl bg-cream-50 border border-transparent focus:bg-white focus:border-maroon-200 focus:ring-4 focus:ring-cream-50 transition-all font-bold text-ink-900 placeholder:text-ink-500 text-sm md:text-base"
+                      className="w-full px-5 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl bg-cream-50 border border-transparent focus:bg-white focus:border-maroon-200 focus:ring-4 focus:ring-cream-50 transition-all font-bold  placeholder:text-ink-500 text-sm md:text-base text-ink-950"
                     />
                   </InputField>
 
@@ -447,7 +447,7 @@ export default function DaftarPage() {
                       type="date"
                       value={formData.tanggal_lahir}
                       onChange={(e) => setFormData((prev) => ({ ...prev, tanggal_lahir: e.target.value }))}
-                      className="w-full px-5 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl bg-cream-50 border border-transparent focus:bg-white focus:border-maroon-200 focus:ring-4 focus:ring-cream-50 transition-all font-bold text-ink-900 text-sm md:text-base"
+                      className="w-full px-5 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl bg-cream-50 border border-transparent focus:bg-white focus:border-maroon-200 focus:ring-4 focus:ring-cream-50 transition-all font-bold  text-sm md:text-base text-ink-950"
                     />
                   </InputField>
 
@@ -459,8 +459,8 @@ export default function DaftarPage() {
                             key={jk.val}
                             whileTap={{ scale: 0.98 }}
                             className={`flex-1 flex items-center justify-center px-4 md:px-6 py-3 md:py-4 rounded-[1.5rem] md:rounded-[2rem] border-2 cursor-pointer transition-all duration-300 text-sm md:text-base ${formData.jenis_kelamin === jk.val
-                              ? "bg-brand-blue-900 border-brand-blue-900 text-white font-black shadow-md"
-                              : "bg-cream-50 border-transparent text-ink-600 hover:border-maroon-200 hover:bg-white"
+                              ? "bg-maroon-700 border-maroon-700 text-white font-black shadow-md"
+                              : "bg-cream-50 border-cream-200 text-ink-800 hover:border-maroon-200 hover:bg-white font-bold"
                               }`}>
                             <input
                               type="radio"
@@ -518,7 +518,7 @@ export default function DaftarPage() {
                         setFormData((prev) => ({ ...prev, no_hp: val }))
                       }}
                       placeholder={countryCode === "+62" ? "812 3456 7890" : "Nomor Telepon"}
-                      className="flex-1 px-4 py-3 md:px-8 md:py-5 bg-transparent border-none focus:outline-none focus:ring-0 font-bold text-ink-950 placeholder:text-ink-500 min-w-0 text-sm md:text-base"
+                      className="flex-1 px-4 py-3 md:px-8 md:py-5 bg-transparent border-none focus:outline-none focus:ring-0 font-bold text-ink-950 placeholder:text-ink-400 min-w-0 text-sm md:text-base"
                     />
                   </div>
                   <p className="text-xs text-ink-600 font-bold uppercase tracking-widest mt-3 ml-1">
@@ -538,7 +538,7 @@ export default function DaftarPage() {
                   whileTap={{ scale: 0.98 }}
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-4 md:py-6 rounded-pill bg-brand-blue-900 text-white font-black text-lg md:text-xl hover:bg-brand-yellow-100 hover:text-brand-blue-900 shadow-md border border-brand-blue-900 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                  className="w-full py-4 md:py-6 rounded-pill bg-maroon-700 text-white font-black text-lg md:text-xl hover:bg-maroon-800 shadow-md transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                 >
                   {isLoading ? (
                     <>
@@ -551,7 +551,7 @@ export default function DaftarPage() {
                 </motion.button>
 
                 <p className="text-center text-sm text-ink-600 font-bold uppercase tracking-widest mt-8">
-                  Punya Akun? <Link href="/login" className="text-brand-blue-700 hover:text-brand-yellow-100 hover:bg-brand-blue-900 px-3 py-1 rounded-full transition-colors">Masuk di sini</Link>
+                  Punya Akun? <Link href="/login" className="text-maroon-700 hover:text-maroon-800 hover:bg-cream-50 px-3 py-1 rounded-full transition-colors ml-1 border border-transparent hover:border-cream-200">Masuk di sini</Link>
                 </p>
               </motion.div>
 

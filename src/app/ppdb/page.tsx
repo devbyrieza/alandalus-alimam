@@ -207,7 +207,7 @@ function PPDBContent() {
               transition={{ delay: 0.2 }}
               className="text-xl md:text-2xl text-ink-600 max-w-3xl mx-auto leading-relaxed font-medium mb-10"
             >
-              Bergabunglah dengan Pesantren Al-Andalus Ulul Albaab. Lingkungan yang kondusif untuk mencetak Hafidz Qur'an yang berwawasan luas dan berakhlak mulia.
+              Bergabunglah dengan Pesantren Al-Andalus Al-Imam. Lingkungan yang kondusif untuk mencetak Hafidz Qur'an yang berwawasan luas dan berakhlak mulia.
             </motion.p>
 
             <motion.div
@@ -225,7 +225,7 @@ function PPDBContent() {
                   ✨ Kesempatan Emas: Angkatan Pertama Era Al-Andalus
                 </h3>
                 <p className="text-brand-blue-800 font-medium leading-relaxed">
-                  Menjadi bagian dari angkatan 2026/2027 adalah sebuah keistimewaan. Ananda akan menjadi <strong>pionir dan tonggak sejarah pertama</strong> yang merasakan secara penuh perpaduan mantap antara sistem unggulan Al-Andalus dengan kekayaan warisan 30 tahun Ulul Albaab.
+                  Menjadi bagian dari angkatan 2026/2027 adalah sebuah keistimewaan. Ananda akan menjadi <strong>pionir dan tonggak sejarah pertama</strong> yang merasakan secara penuh perpaduan mantap antara sistem unggulan Al-Andalus dengan kekayaan warisan Al-Imam.
                 </p>
               </div>
             </motion.div>
@@ -439,7 +439,7 @@ function PPDBContent() {
                   {[
                     {
                       q: "Apakah santri wajib asrama?",
-                      a: "Ya, seluruh santri di Pesantren Al-Andalus Ulul Albaab wajib tinggal di asrama untuk mengikuti seluruh rangkaian kegiatan tarbiyah, halaqah tahfidz, dan pembelajaran kitab turots secara maksimal."
+                      a: "Ya, seluruh santri di Pesantren Al-Andalus Al-Imam wajib tinggal di asrama untuk mengikuti seluruh rangkaian kegiatan tarbiyah, halaqah tahfidz, dan pembelajaran kitab turots secara maksimal."
                     },
                     {
                       q: "Kapan batas akhir pendaftaran?",
