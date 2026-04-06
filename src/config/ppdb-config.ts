@@ -6,38 +6,38 @@
 export const PPDB_CONFIG = {
   // 🏫 INFO PESANTREN (GANTI INI DULU!)
   pesantren: {
-    nama: "Pesantren Al-Andalus Al-Imam",
-    singkatan: "Al-Andalus Al-Imam",
-    alamat: "Jl. Pelabuhan Ratu II KM 18, Kp. Pupunjul, Desa Cikembar, Kec. Cikembar, Kab. Sukabumi, Jawa Barat 43157",
-    telepon: "+62 851-1152-4441",
-    email: "pesantrenalimamsukabumi@gmail.com",
-    emailPpdb: "ppdb.pesantrenalimam@gmail.com",
-    website: "https://www.al-imam.sch.id",
+    nama: "Pesantren Al-Andalus Ulul Albaab",
+    singkatan: "Al-Andalus Ulul Albaab",
+    alamat: "Jl. KH Mama Oyon, Cihaur, Kec. Cicantayan, Kabupaten Sukabumi, Jawa Barat 43155",
+    telepon: "+62 888-0993-4970",
+    email: "alandalus.ululalbaab@gmail.com",
+    emailPpdb: "alandalus.ululalbaab@gmail.com",
+    website: "https://www.pesantren-ululalbaab.com",
   },
 
   // 🎨 BRAND COLORS (GANTI SESUAI LOGO)
   colors: {
-    // Primary Colors (Warna Utama)
+    // Primary Colors (Biru Muda / Sky)
     primary: {
-      50: "#fdf8f6",
-      100: "#f2e8e5",
-      200: "#eaddd7",
-      300: "#e0cec7",
-      400: "#d2bab0",
-      500: "#a18072",
-      600: "#8d6e63",  // Warna tombol & aksi utama
-      700: "#5d4037",  // Warna teks penting
-      800: "#4e342e",
-      900: "#3e2723",  // Warna teks gelap
+      50: "#f0f9ff",
+      100: "#e0f2fe",
+      200: "#bae6fd",
+      300: "#7dd3fc",
+      400: "#38bdf8",
+      500: "#0ea5e9",
+      600: "#0284c7",  // Warna tombol & aksi utama
+      700: "#0369a1",  // Warna teks penting
+      800: "#075985",
+      900: "#0c4a6e",  // Warna teks gelap
     },
 
-    // Secondary Colors (Warna Pelengkap)
+    // Secondary Colors (Kuning / Amber)
     secondary: {
-      50: "#fffcf5",
-      100: "#fdf8f3",
-      200: "#f5ebe0",
-      300: "#ebe0d1",
-      400: "#d4b06e",
+      50: "#fffbeb",
+      100: "#fef3c7",
+      200: "#fde68a",
+      300: "#fcd34d",
+      400: "#fbbf24",
     },
 
     // Accent Colors (Warna Aksen)
@@ -102,15 +102,15 @@ export const PPDB_CONFIG = {
 
   // 🔗 KONTAK & SOSMED (GANTI SESUAI!)
   contact: {
-    whatsapp: "+6285111524441",
-    instagram: "@pesantrenalimamsukabumi",
-    facebook: "Pesantren Al-Andalus Al-Imam (Official Fanpage)",
-    youtube: "Al-Andalus Al-Imam Cikembar Sukabumi"
+    whatsapp: "+6288809934970",
+    instagram: "@pesantrenululalbaab",
+    facebook: "Pesantren Al-Andalus Ulul Albaab (Official Fanpage)",
+    youtube: "Al-Andalus Ulul Albaab"
   },
 
   // ⚙️ SETTING TEKNIS (UMUMNYA TIDAK PERLU DIUBAH)
   technical: {
-    appName: "PPDB Al-Andalus Al-Imam",
+    appName: "PPDB Al-Andalus Ulul Albaab",
     appDescription: "Sistem Penerimaan Peserta Didik Baru",
     version: "2.0.0",
     author: "Rieza Eka Tomara"
