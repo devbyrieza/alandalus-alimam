@@ -343,7 +343,7 @@ function PPDBContent() {
             </div>
             <div>
               <p className="text-lg text-brand-blue-900 font-bold leading-relaxed">
-                Catatan Penting: Biaya pendaftaran dan uang pangkal bersifat non-refundable (tidak dapat dikembalikan). Silakan hubungi admin untuk skema cicilan resmi.
+                Catatan Penting: Biaya pendaftaran dan uang pangkal bersifat non-refundable. Uang pangkal (daftar ulang) dapat dicicil maksimal 3x pembayaran, dengan <strong>syarat pembayaran pertama minimal 50%</strong>, dan wajib dilunasi sebelum Juli 2026.
               </p>
             </div>
           </motion.div>
