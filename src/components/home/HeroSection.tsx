@@ -50,10 +50,10 @@ export default function HeroSection() {
                 <span>Terakreditasi BAN-PDM • {BRANDING.schoolName.includes("Al-Andalus") ? "Islamic Boarding School" : "Managed by Al-Andalus"}</span>
               </motion.div>
 
-              <h1 className="leading-[1.15] tracking-tight mx-auto lg:mx-0 max-w-2xl lg:max-w-none text-maroon-900">
+              <h1 className="leading-[1.15] tracking-tight mx-auto lg:mx-0 max-w-2xl lg:max-w-none text-maroon-900 font-black">
                 <span className="block">Mencetak Generasi</span>
-                <span className="block text-gradient-maroon">Hanif, Kontributif,</span>
-                <span className="block text-gradient-maroon">dan Adaptif</span>
+                <span className="block text-gradient-maroon drop-shadow-sm">Hanif, Kontributif,</span>
+                <span className="block text-gradient-maroon drop-shadow-sm">dan Adaptif</span>
               </h1>
 
               <p className="text-base lg:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium font-sans text-ink-600 text-center lg:text-left">
