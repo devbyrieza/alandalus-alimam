@@ -52,8 +52,8 @@ export default function HeroSection() {
 
               <h1 className="leading-[1.15] tracking-tight mx-auto lg:mx-0 max-w-2xl lg:max-w-none text-maroon-900 font-black">
                 <span className="block">Mencetak Generasi</span>
-                <span className="block text-[#C48C2B] drop-shadow-sm">Hanif, Kontributif,</span>
-                <span className="block text-[#C48C2B] drop-shadow-sm">dan Adaptif</span>
+                <span className="block text-[#A99275] drop-shadow-sm">Hanif, Kontributif,</span>
+                <span className="block text-[#A99275] drop-shadow-sm">dan Adaptif</span>
               </h1>
 
               <p className="text-base lg:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium font-sans text-ink-600 text-center lg:text-left">
