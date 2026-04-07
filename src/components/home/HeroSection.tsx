@@ -93,7 +93,7 @@ export default function HeroSection() {
                   ))}
                 </div>
                 <p className="text-xs font-semibold text-ink-500">
-                  <span className="text-brand-blue-700 font-bold">300+</span> Santri Bergabung
+                  <span className="text-brand-blue-700 font-bold uppercase tracking-wider">Angkatan Pertama</span> • Managed by Al-Andalus
                 </p>
               </div>
             </div>

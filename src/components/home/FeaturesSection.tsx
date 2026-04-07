@@ -103,18 +103,18 @@ export default function FeaturesSection() {
               className="relative z-10 grid grid-cols-2 gap-4 lg:gap-6"
             >
               <div className="space-y-4 lg:space-y-6 mt-12">
-                <div className="app-card p-6 sm:p-8 min-h-[14rem] md:h-64 flex flex-col justify-end items-start group">
-                  <p className="text-5xl lg:text-6xl font-black text-maroon-900 mb-2 tracking-tighter">30<span className="text-brand-blue-600">+</span></p>
+                <div className="app-card p-6 sm:p-8 min-h-56 md:h-64 flex flex-col justify-end items-start group">
+                  <p className="text-4xl lg:text-5xl font-black text-maroon-900 mb-2 tracking-tighter uppercase">TA 25/26</p>
                   <div className="space-y-1">
-                    <p className="text-sm font-bold text-ink-700">Tahun Mengabdi</p>
+                    <p className="text-sm font-bold text-ink-700 uppercase tracking-wider">Angkatan Pertama</p>
                     <p className="text-xs leading-tight text-ink-500 font-medium">
-                      Sejak 1995 <br />
-                      <span className="text-brand-blue-700 font-bold block mt-1">(Dikelola Al-Andalus)</span>
+                      Dimulainya Sejarah Baru <br />
+                      <span className="text-brand-blue-700 font-bold block mt-1">Managed by Al-Andalus</span>
                     </p>
                   </div>
                 </div>
 
-                <div className="bg-maroon-900 bg-linear-to-br from-brand-blue-700 to-maroon-950 border border-brand-blue-600 p-6 sm:p-8 rounded-[2rem] shadow-lg min-h-[16rem] md:h-72 flex flex-col justify-center items-center text-center relative overflow-hidden group hover:shadow-xl transition-all duration-300">
+                <div className="bg-maroon-900 bg-linear-to-br from-brand-blue-700 to-maroon-950 border border-brand-blue-600 p-6 sm:p-8 rounded-[2rem] shadow-lg min-h-64 md:h-72 flex flex-col justify-center items-center text-center relative overflow-hidden group hover:shadow-xl transition-all duration-300">
                   <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 mix-blend-overlay" />
                   <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mb-6 backdrop-blur-sm group-hover:scale-110 transition-transform duration-500">
                     <BookOpenCheck className="w-10 h-10 text-cream-200" />
@@ -124,14 +124,14 @@ export default function FeaturesSection() {
               </div>
 
               <div className="space-y-4 lg:space-y-6">
-                <div className="app-card p-6 sm:p-8 min-h-[16rem] md:h-72 flex flex-col justify-center items-center text-center group">
-                  <div className="w-20 h-20 bg-brand-yellow-100 rounded-[1.25rem] flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform duration-500">
+                <div className="app-card p-6 sm:p-8 min-h-64 md:h-72 flex flex-col justify-center items-center text-center group">
+                  <div className="w-20 h-20 bg-brand-yellow-100 rounded-xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform duration-500">
                     <ShieldCheck className="w-10 h-10 text-brand-blue-600" />
                   </div>
                   <p className="font-black text-2xl text-maroon-900">Lingkungan<br />Islami</p>
                 </div>
 
-                <div className="bg-cream-50/80 backdrop-blur-lg border border-cream-200 p-6 sm:p-8 rounded-[2rem] shadow-sm min-h-[14rem] md:h-64 flex flex-col justify-end items-start hover:shadow-md transition-all duration-300">
+                <div className="bg-cream-50/80 backdrop-blur-lg border border-cream-200 p-6 sm:p-8 rounded-[2rem] shadow-sm min-h-56 md:h-64 flex flex-col justify-end items-start hover:shadow-md transition-all duration-300">
                   <p className="text-4xl font-black mb-1 text-maroon-800 tracking-tighter">RESMI</p>
                   <div className="space-y-1 mt-2">
                     <p className="text-sm font-bold text-ink-800">Ijazah Diakui Negara</p>
@@ -144,7 +144,7 @@ export default function FeaturesSection() {
             </motion.div>
 
             {/* Subtle glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-cream-200/40 rounded-full blur-[100px] -z-0" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-cream-200/40 rounded-full blur-[100px] z-0" />
           </div>
 
         </div>

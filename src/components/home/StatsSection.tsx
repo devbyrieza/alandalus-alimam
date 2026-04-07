@@ -7,10 +7,10 @@ import { Container } from "@/components/layout/Container";
 import { Calendar, Users, GraduationCap, Award, TrendingUp, BookOpen } from 'lucide-react';
 
 const STATS = [
-  { id: 'years', label: 'Tahun Mengabdi', value: 30, icon: Calendar, color: 'brand-blue' as const },
-  { id: 'students', label: 'Pendaftar / Thn', value: 1200, icon: Users, color: 'brand-yellow' as const },
-  { id: 'graduates', label: 'Alumni Sukses', value: 500, icon: GraduationCap, color: 'gold' as const },
-  { id: 'programs', label: 'Program Unggulan', value: 12, icon: BookOpen, color: 'brand-blue' as const },
+  { id: 'batch', label: 'Angkatan Ke-1', value: 1, icon: Calendar, color: 'brand-blue' as const, suffix: '' },
+  { id: 'quality', label: 'Standar Global', value: 100, icon: Award, color: 'brand-yellow' as const, suffix: '%' },
+  { id: 'network', label: 'Cabang Al-Andalus', value: 3, icon: BookOpen, color: 'gold' as const, suffix: '' },
+  { id: 'quota', label: 'Kuota Terbatas', value: 80, icon: Users, color: 'brand-blue' as const, suffix: '' },
 ] as const;
 
 export default function StatsSection() {
@@ -81,7 +81,8 @@ export default function StatsSection() {
                   <motion.div
                     className="text-4xl md:text-5xl font-black text-brand-blue-700 mb-2 tracking-tighter"
                   >
-                    {counters[stat.id as keyof typeof counters]}<span className="text-brand-blue-600">+</span>
+                    {counters[stat.id as keyof typeof counters]}
+                    {stat.suffix && <span className="text-brand-blue-600 ml-0.5">{stat.suffix}</span>}
                   </motion.div>
                 </div>
 
