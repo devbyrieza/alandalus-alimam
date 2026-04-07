@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { motion, AnimatePresence } from "framer-motion";
+import { BRANDING } from "@/config/branding";
 
 // Role label & icon map
 const ROLE_INFO: Record<string, { label: string; icon: string; desc: string; color: string }> = {
@@ -240,11 +241,11 @@ export default function LoginPage() {
         >
           <Link href="/">
             <div className="app-card inline-flex items-center justify-center w-20 h-20 bg-white rounded-3xl shadow-sm border border-brand-blue-100 mb-8 hover:scale-110 transition-transform group overflow-hidden">
-              <img src="/images/logo.webp" alt="Logo Al-Imam" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+              <img src={BRANDING.logoPath} alt={"Logo " + BRANDING.schoolName} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
             </div>
           </Link>
           <h1 className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-3 tracking-tight">
-            Portal <span className="text-gradient-maroon font-black">Al-Imam</span>
+            Portal <span className="text-gradient-maroon font-black">{BRANDING.schoolShortName}</span>
           </h1>
           <p className="text-lg text-ink-700 font-medium">
             Masuk ke Sistem Administrasi & Pendaftaran
@@ -263,12 +264,12 @@ export default function LoginPage() {
 
           {/* Tab Switcher - Premium "Pill" style */}
           {!roleSelectionData && (
-            <div className="bg-cream-50 p-2 rounded-[2rem] flex relative mb-12 border border-cream-200">
+            <div className="bg-slate-100 p-2 rounded-[2rem] flex relative mb-12 border border-slate-200">
               {/* Animated Background Pill */}
               <motion.div
                 layoutId="auth-tab"
                 transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                className={`absolute top-2 bottom-2 rounded-2xl bg-white shadow-sm ${activeTab === 'pendaftar' ? 'left-2 w-[calc(50%-8px)]' : 'left-[calc(50%+4px)] w-[calc(50%-8px)]'
+                className={`absolute top-2 bottom-2 rounded-2xl bg-white shadow-sm border border-slate-200/50 ${activeTab === 'pendaftar' ? 'left-2 w-[calc(50%-8px)]' : 'left-[calc(50%+4px)] w-[calc(50%-8px)]'
                   }`}
               />
 
@@ -373,7 +374,7 @@ export default function LoginPage() {
                       value={nomorPendaftaran}
                       onChange={(e) => setNomorPendaftaran(e.target.value.toUpperCase())}
                       placeholder="Contoh: MTI2600001"
-                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-12 md:pl-16 rounded-xl md:rounded-2xl bg-cream-50 border border-transparent focus:bg-white focus:border-maroon-300 focus:ring-4 focus:ring-maroon-50 transition-all font-bold text-ink-950 uppercase placeholder:normal-case placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base"
+                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-12 md:pl-16 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-maroon-300 focus:ring-4 focus:ring-maroon-50 transition-all font-bold text-ink-950 uppercase placeholder:normal-case placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
                       disabled={isLoading}
                     />
                   </AuthInput>
@@ -386,7 +387,7 @@ export default function LoginPage() {
                       value={nikPendaftar}
                       onChange={(e) => setNikPendaftar(e.target.value.replace(/\D/g, ""))}
                       placeholder="16 Digit NIK Sesuai KK"
-                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-12 md:pl-16 rounded-xl md:rounded-2xl bg-cream-50 border border-transparent focus:bg-white focus:border-maroon-300 focus:ring-4 focus:ring-maroon-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base"
+                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-12 md:pl-16 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-maroon-300 focus:ring-4 focus:ring-maroon-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
                       disabled={isLoading}
                     />
                   </AuthInput>
@@ -433,7 +434,7 @@ export default function LoginPage() {
                       value={emailAdmin}
                       onChange={(e) => setEmailAdmin(e.target.value)}
                       placeholder="admin@andalus.sch.id"
-                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-12 md:pl-16 rounded-xl md:rounded-2xl bg-cream-50 border border-transparent focus:bg-white focus:border-maroon-300 focus:ring-4 focus:ring-maroon-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base"
+                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-12 md:pl-16 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-maroon-300 focus:ring-4 focus:ring-maroon-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
                       disabled={isLoading}
                     />
                   </AuthInput>
@@ -445,7 +446,7 @@ export default function LoginPage() {
                         value={passwordAdmin}
                         onChange={(e) => setPasswordAdmin(e.target.value)}
                         placeholder="••••••••"
-                        className="w-full px-5 py-3 md:px-8 md:py-5 pl-12 md:pl-16 pr-12 md:pr-16 rounded-xl md:rounded-2xl bg-cream-50 border border-transparent focus:bg-white focus:border-maroon-300 focus:ring-4 focus:ring-maroon-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base"
+                        className="w-full px-5 py-3 md:px-8 md:py-5 pl-12 md:pl-16 pr-12 md:pr-16 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-maroon-300 focus:ring-4 focus:ring-maroon-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
                         disabled={isLoading}
                       />
                       <button
