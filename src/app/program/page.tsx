@@ -181,7 +181,7 @@ export default function ProgramPage() {
                                                 className="object-cover transition-transform duration-700 hover:scale-110 bg-surface-200 animate-pulse"
                                                 onLoad={(e) => e.currentTarget.classList.remove('animate-pulse')}
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                                            <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
 
                                             <div className="absolute bottom-10 left-10 right-10 z-20">
                                                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-white/20 backdrop-blur-md border border-white/30 text-white text-[10px] font-black uppercase tracking-widest mb-3">
@@ -259,7 +259,7 @@ export default function ProgramPage() {
                                                     `}>
                                                         <CheckCircle2 className="w-4 h-4" />
                                                     </div>
-                                                    <span className="text-ink-800 font-bold text-lg leading-tight uppercase tracking-tight group-hover/item:text-ink-950 transition-colors">
+                                                    <span className="text-ink-800 font-bold text-lg leading-tight tracking-tight group-hover/item:text-ink-950 transition-colors">
                                                         {item}
                                                     </span>
                                                 </li>
