@@ -33,7 +33,7 @@ export default function TentangPage() {
                         className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-brand-blue-50 border border-brand-blue-100 text-brand-blue-700 text-xs font-bold uppercase tracking-widest mb-8 shadow-sm"
                     >
                         <Sparkles className="w-3.5 h-3.5" />
-                        <span>Mengenal Al-Imam</span>
+                        <span>Mengenal Al-Imam • Managed by Al-Andalus IIBS</span>
                     </motion.div>
 
                     <motion.h1
@@ -134,7 +134,7 @@ export default function TentangPage() {
                                         <p className="text-2xl sm:text-3xl md:text-4xl font-black text-ink-950 tracking-tight leading-none mb-1">2026</p>
                                         <p className="text-brand-blue-700 font-bold text-[9px] md:text-[10px] uppercase tracking-widest mb-1.5 md:mb-2">Era Baru</p>
                                         <div className="text-[9px] md:text-[10px] font-bold text-brand-blue-900 bg-brand-blue-50 px-2.5 py-1.5 rounded-lg border border-brand-blue-100 leading-tight">
-                                            Managed by Al-Andalus <br className="block sm:hidden" /> International
+                                            Managed by Al-Andalus IIBS
                                         </div>
                                     </div>
                                 </div>
@@ -166,7 +166,7 @@ export default function TentangPage() {
                                 className="space-y-4 md:space-y-6 text-base md:text-[17px] text-ink-700 font-medium leading-[1.8] text-justify"
                             >
                                 <p>
-                                    <span className="text-ink-950 font-black">Pesantren Al-Andalus Al-Imam</span> hadir sebagai babak baru dalam dunia pendidikan Islam di Sukabumi. Sebagai cabang resmi dari <span className="text-brand-blue-700 italic font-bold">Pesantren Islam Internasional Al-Andalus</span>, kami menerapkan standar operasional, kurikulum, dan pengasuhan yang identik dengan kampus pusat.
+                                    <span className="text-ink-950 font-black">Pesantren Al-Andalus Al-Imam</span> hadir sebagai babak baru dalam dunia pendidikan Islam di Sukabumi. Sebagai cabang resmi dari <span className="text-brand-blue-700 italic font-bold">Managed by Al-Andalus International Islamic Boarding School</span>, kami menerapkan standar operasional, kurikulum, dan pengasuhan yang identik dengan kampus pusat.
                                 </p>
                                 <p>
                                     Kami berkomitmen mencetak kader ulama rabbani yang beraqidah lurus dan berwawasan luas dengan dukungan fasilitas modern serta barisan asatidzah yang kompeten di bidangnya.
