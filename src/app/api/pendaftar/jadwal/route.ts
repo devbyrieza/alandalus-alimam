@@ -181,7 +181,7 @@ export async function POST(request: Request) {
             const startTime = new Date(examSession.start_time);
             const dateStr = startTime.toLocaleDateString("id-ID", { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
             const timeStr = startTime.toLocaleTimeString("id-ID", { hour: '2-digit', minute: '2-digit' }) + ' WIB';
-            const lokasi = examSession.location || "Pesantren Al-Andalus Ulul Albaab";
+            const lokasi = examSession.location || "Pesantren Al-Imam";
             const jenisUjian = examSession.title || "Seleksi Santri Baru";
 
             const message = buildMessageKonfirmasiJadwal(

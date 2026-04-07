@@ -1,10 +1,10 @@
 export const BRANDING = {
-  schoolName: process.env.NEXT_PUBLIC_SCHOOL_NAME || "Al-Andalus PPDB",
-  schoolShortName: process.env.NEXT_PUBLIC_SCHOOL_SHORT_NAME || "PPDB",
+  schoolName: process.env.NEXT_PUBLIC_SCHOOL_NAME || "Al-Andalus Al-Imam",
+  schoolShortName: process.env.NEXT_PUBLIC_SCHOOL_SHORT_NAME || "Al-Imam",
   primaryColor: process.env.NEXT_PUBLIC_PRIMARY_COLOR || "#800000", // Default Maroon
   secondaryColor: process.env.NEXT_PUBLIC_SECONDARY_COLOR || "#FDF5E6", // Default Cream
   logoPath: process.env.NEXT_PUBLIC_LOGO_PATH || "/images/logo.jpg",
   faviconPath: process.env.NEXT_PUBLIC_FAVICON_PATH || "/favicon.ico",
-  websiteUrl: process.env.NEXT_PUBLIC_WEBSITE_URL || "https://ppdb.alandalus.id",
+  websiteUrl: process.env.NEXT_PUBLIC_WEBSITE_URL || "https://pesantren-alimam.com",
   dashboardTitle: process.env.NEXT_PUBLIC_DASHBOARD_TITLE || "Panel Admin PPDB",
 };

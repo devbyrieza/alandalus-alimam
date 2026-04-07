@@ -52,7 +52,7 @@ export default function JadwalUjianPage() {
     start_time: "",
     end_time: "",
     quota: 10,
-    location: "Pesantren Al-Andalus Ulul Albaab",
+    location: "Pesantren Al-Andalus Al-Imam",
     notes: ""
   });
 
@@ -237,7 +237,7 @@ export default function JadwalUjianPage() {
             </div>
             <div>
               <h1 className="text-3xl font-black text-ink-900 tracking-tight">Manajemen <span className="text-purple-600">Jadwal Ujian</span></h1>
-              <p className="text-ink-500 font-medium">Atur sesi ujian dan tetapkan peserta ke dalam jadwal.</p>
+              <p className="text-emerald-900/60 font-medium">Panel Pengaturan Jadwal Seleksi PPDB Al-Imam</p>
             </div>
           </div>
           <button
@@ -281,7 +281,7 @@ export default function JadwalUjianPage() {
                       <div className="flex items-center gap-4 mt-2">
                         <span className="flex items-center gap-1.5 text-xs font-bold text-ink-400 uppercase tracking-wider">
                           <MapPin className="w-3.5 h-3.5" />
-                          {s.location || "Pesantren Al-Andalus Ulul Albaab"}
+                          {s.location || "Pesantren Al-Andalus Al-Imam"}
                         </span>
                         <span className="flex items-center gap-1.5 text-xs font-bold text-purple-600 uppercase tracking-wider">
                           <Users className="w-3.5 h-3.5" />

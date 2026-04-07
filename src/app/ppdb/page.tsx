@@ -399,7 +399,7 @@ function PPDBContent() {
               </div>
             </div>
 
-            {/* Why Ulul Albaab & FAQ */}
+            {/* Why Al-Imam & FAQ */}
             <div className="space-y-12 md:space-y-16">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}

@@ -105,7 +105,7 @@ export async function GET(request: Request) {
                 });
 
             const lokasi =
-                jadwal.exam_session?.location || jadwal.tempat_santri || "Pesantren Al-Andalus Ulul Albaab";
+                jadwal.exam_session?.location || jadwal.tempat_santri || "Pesantren Al-Andalus Al-Imam";
             const jenisUjian = jadwal.exam_session?.title || "Seleksi Santri Baru";
 
             const message = buildMessageReminderH1(

@@ -82,13 +82,14 @@ interface DashboardStats {
 }
 
 const JENJANG_LABELS: Record<string, string> = {
-  MTs: "MTs Ulul Albaab",
+  MTs: "MTs Al-Imam",
   IL: "I'dad Lughowi (Setara SMA)",
 };
 
 export default function AdminDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [exporting, setExporting] = useState<string | null>(null);
+  const [footer, setFooter] = useState("Panitia PPDB Al-Imam");
   const [role, setRole] = useState<UserRole | null>(null);
   const [stats, setStats] = useState<DashboardStats>({
     total_pendaftar: 0,
@@ -377,7 +378,7 @@ export default function AdminDashboardPage() {
                 {stats.total_pendaftar}
               </h2>
               <span className="text-sm font-black text-brand-blue-700 bg-brand-blue-50 px-2.5 py-1 rounded-full">
-                Calon Santri
+                Pesantren Al-Andalus Al-Imam
               </span>
             </div>
             <div className="mt-4 pt-4 border-t border-ink-100 flex items-center justify-between text-sm">
@@ -628,7 +629,7 @@ export default function AdminDashboardPage() {
               </div>
               <div className="mt-4 px-2">
                 <p className="text-xs text-ink-500 text-center italic">
-                Selamat datang kembali di panel kendali utama PPDB Ulul Albaab. Berikut adalah ikhtisar pendaftaran hari ini.
+                Selamat datang kembali di panel kendali utama PPDB Al-Imam. Berikut adalah ikhtisar pendaftaran hari ini.
                 </p>
               </div>
             </div>

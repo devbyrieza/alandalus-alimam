@@ -34,11 +34,11 @@ export default function Footer() {
               </div>
               <div>
                 <h3 className="text-xl font-black text-white tracking-tight leading-none">{BRANDING.schoolName}</h3>
-                <p className="text-[10px] font-bold text-white/80 uppercase tracking-widest mt-2">{BRANDING.schoolName.includes("Al-Andalus") ? "Al-Imam" : "Academic Center"}</p>
+                <p className="text-[10px] font-bold text-brand-yellow-100/80 uppercase tracking-widest mt-2">Islamic Boarding School</p>
               </div>
             </Link>
-            <p className="text-white/80 font-medium leading-relaxed max-w-xs text-justify">
-              Membangun generasi Qur'ani yang cerdas & berakhlak mulia melalui sistem terintegrasi Al-Andalus.
+            <p className="text-brand-yellow-100/80 font-medium leading-relaxed max-w-xs text-justify">
+              Membangun generasi Qur&apos;ani yang cerdas &amp; berakhlak mulia melalui sistem terintegrasi Al-Andalus.
             </p>
             <div className="flex gap-3">
               {[Instagram, Youtube, Facebook, Twitter].map((Icon, i) => (
@@ -55,7 +55,7 @@ export default function Footer() {
             <ul className="space-y-4">
               {['Tentang Kami', 'Program Studi', 'Fasilitas', 'Kegiatan Santri'].map((item) => (
                 <li key={item}>
-                  <Link href="#" className="text-white/80 font-bold hover:text-white flex items-center gap-2 group transition-colors">
+                  <Link href="#" className="text-brand-yellow-100/80 font-bold hover:text-white flex items-center gap-2 group transition-colors">
                     {item}
                     <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all text-brand-yellow-400" />
                   </Link>
@@ -70,7 +70,7 @@ export default function Footer() {
             <ul className="space-y-4">
               {['Pendaftaran PPDB', 'Biaya Pendidikan', 'Beasiswa Tahfidz', 'Kalender Akademik'].map((item) => (
                 <li key={item}>
-                  <Link href="#" className="text-white/80 font-bold hover:text-white transition-colors">{item}</Link>
+                  <Link href="#" className="text-brand-yellow-100/80 font-bold hover:text-white transition-colors">{item}</Link>
                 </li>
               ))}
             </ul>
@@ -81,28 +81,28 @@ export default function Footer() {
             <h4 className="text-sm font-black text-brand-yellow-400 uppercase tracking-widest">Kontak Kami</h4>
             <div className="space-y-5">
               <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-xl bg-brand-blue-900 flex items-center justify-center text-brand-yellow-400 flex-shrink-0 border border-brand-blue-800">
+                <div className="w-10 h-10 rounded-xl bg-brand-blue-900 flex items-center justify-center text-brand-yellow-400 shrink-0 border border-brand-blue-800">
                   <MapPin className="w-5 h-5" />
                 </div>
-                <div className="text-sm font-medium text-white/80 text-left pt-1">
+                <div className="text-sm font-medium text-brand-yellow-100/80 text-left pt-1">
                   Jl. KH Mama Oyon, Cihaur,<br />Kec. Cicantayan, Kabupaten Sukabumi,<br />Jawa Barat 43155
                 </div>
               </div>
               <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-xl bg-brand-blue-900 flex items-center justify-center text-brand-yellow-400 flex-shrink-0 border border-brand-blue-800">
+                <div className="w-10 h-10 rounded-xl bg-brand-blue-900 flex items-center justify-center text-brand-yellow-400 shrink-0 border border-brand-blue-800">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div className="text-sm font-bold text-white text-left pt-1">
                   +62 812-85-300800
-                  <p className="text-[10px] text-white/80 font-medium tracking-wide mt-0.5">Layanan Pelanggan</p>
+                  <p className="text-[10px] text-brand-yellow-100/80 font-medium tracking-wide mt-0.5">Layanan Pelanggan</p>
                 </div>
               </div>
               <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-xl bg-brand-blue-900 flex items-center justify-center text-brand-yellow-400 flex-shrink-0 border border-brand-blue-800">
+                <div className="w-10 h-10 rounded-xl bg-brand-blue-900 flex items-center justify-center text-brand-yellow-400 shrink-0 border border-brand-blue-800">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="text-sm font-bold text-white text-left pt-2.5 break-all">
-                  ululalbaab@andalus.sch.id
+                  alimam@andalus.sch.id
                 </div>
               </div>
             </div>
@@ -112,12 +112,12 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-brand-blue-900 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-sm font-medium text-white/50 order-2 md:order-1 text-center md:text-left">
+          <p className="text-sm font-medium text-brand-yellow-100/50 order-2 md:order-1 text-center md:text-left">
             &copy; {currentYear} {BRANDING.schoolName}. Hak cipta dilindungi undang-undang.
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-6 text-sm font-bold text-white/60 order-1 md:order-2">
+          <div className="flex flex-wrap justify-center items-center gap-6 text-sm font-bold text-brand-yellow-100/60 order-1 md:order-2">
             <Link href="#" className="hover:text-white transition-colors">Kebijakan Privasi</Link>
-            <Link href="#" className="hover:text-white transition-colors">Syarat & Ketentuan</Link>
+            <Link href="#" className="hover:text-white transition-colors">Syarat &amp; Ketentuan</Link>
             <div className="flex items-center gap-2 bg-brand-blue-900 px-3 py-1.5 rounded-lg border border-brand-blue-800 text-brand-yellow-100">
               <Globe className="w-4 h-4" />
               <span className="text-xs">ID / AR</span>

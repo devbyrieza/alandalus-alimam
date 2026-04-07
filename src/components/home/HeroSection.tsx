@@ -47,7 +47,7 @@ export default function HeroSection() {
                 className="inline-flex items-center gap-2 px-4 py-2 mt-4 lg:mt-0 rounded-pill bg-white border border-cream-200 shadow-sm text-brand-blue-700 text-[10px] lg:text-xs font-bold uppercase tracking-widest mx-auto lg:mx-0"
               >
                 <Sparkles className="w-3.5 h-3.5 text-cream-500" />
-                <span>Terakreditasi BAN-PDM • {BRANDING.schoolName.includes("Al-Andalus") ? "Dikelola oleh Al-Andalus International Islamic Boarding School" : "Managed by Al-Andalus"}</span>
+                <span>Terakreditasi BAN-PDM • {BRANDING.schoolName.includes("Al-Andalus") ? "Managed by Al-Andalus International Islamic Boarding School" : "Managed by Al-Andalus"}</span>
               </motion.div>
 
               <h1 className="leading-[1.15] tracking-tight mx-auto lg:mx-0 max-w-2xl lg:max-w-none text-maroon-900 font-black">
