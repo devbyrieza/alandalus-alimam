@@ -59,7 +59,7 @@ export default function HeroSection() {
               <p className="text-base lg:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium font-sans text-ink-600 text-center lg:text-left">
                 Bukan sekadar tempat belajar agama — sistem pembentukan karakter berbasis <span className="font-bold text-maroon-800">Lingkungan, Kebiasaan, Komunitas, dan Spiritualitas</span> tanpa kekerasan dan luka pengasuhan.
               </p>
-              
+
               <div className="mt-4 pt-4 border-t border-cream-200/50">
                 <p className="text-sm lg:text-base font-bold text-maroon-800 text-center lg:text-left italic">
                   "Pendidikan Berkualitas, Diperkuat Sistem {BRANDING.schoolName.includes("Al-Andalus") ? "Al-Andalus" : BRANDING.schoolShortName}"
