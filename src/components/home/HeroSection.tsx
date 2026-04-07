@@ -130,7 +130,7 @@ export default function HeroSection() {
               </div>
               <div>
                 <p className="text-[10px] lg:text-xs font-bold text-ink-400 uppercase tracking-widest">Tersedia</p>
-                <p className="text-xs lg:text-sm font-black text-maroon-900">MTs, IL &amp; SMA</p>
+                <p className="text-xs lg:text-sm font-black text-maroon-900">MTs &amp; IL</p>
               </div>
             </motion.div>
 
