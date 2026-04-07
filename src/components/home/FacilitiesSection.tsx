@@ -77,7 +77,7 @@ export default function FacilitiesSection() {
                     className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-16"
                 >
                     {FACILITY_IMAGES.map((img, idx) => (
-                        <div key={idx} className={`${img.span} relative rounded-3xl overflow-hidden group aspect-[4/3] shadow-md border-4 border-white ring-1 ring-cream-200`}>
+                        <div key={idx} className={`${img.span} relative rounded-3xl overflow-hidden group aspect-4/3 shadow-md border-4 border-white ring-1 ring-cream-200`}>
                             <Image
                                 src={img.src}
                                 alt={img.label}
@@ -86,7 +86,7 @@ export default function FacilitiesSection() {
                                 className="object-cover transition-transform duration-700 group-hover:scale-110 bg-brand-yellow-100 animate-pulse"
                                 onLoad={(e) => e.currentTarget.classList.remove('animate-pulse')}
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-brand-blue-500/60 via-transparent to-transparent opacity-80" />
+                            <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
                             <div className="absolute bottom-3 left-3 md:bottom-5 md:left-5 right-3">
                                 <span className="text-white font-bold text-xs sm:text-sm md:text-base drop-shadow-lg leading-tight block">{img.label}</span>
                             </div>
