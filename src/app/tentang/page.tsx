@@ -278,7 +278,7 @@ export default function TentangPage() {
                                         <div className="w-6 h-6 rounded-full bg-yellow-500 text-white flex items-center justify-center text-[10px] font-bold shrink-0 shadow-sm">
                                             <CheckCircle2 className="w-3.5 h-3.5" />
                                         </div>
-                                        <span className="text-ink-800 font-bold text-[13px] md:text-sm tracking-tight group-hover/item:text-yellow-700 transition-colors uppercase pt-0.5">{item}</span>
+                                        <span className="text-ink-800 font-bold text-[13px] md:text-sm tracking-tight group-hover/item:text-yellow-700 transition-colors pt-0.5">{item}</span>
                                     </li>
                                 ))}
                             </ul>
