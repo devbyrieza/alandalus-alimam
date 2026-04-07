@@ -34,7 +34,7 @@ export default function Footer() {
               </div>
               <div>
                 <h3 className="text-xl font-black text-white tracking-tight leading-none">{BRANDING.schoolName}</h3>
-                <p className="text-[10px] font-bold text-white/80 uppercase tracking-widest mt-2">{BRANDING.schoolName.includes("Al-Andalus") ? "Islamic Boarding School" : "Academic Center"}</p>
+                <p className="text-[10px] font-bold text-white/80 uppercase tracking-widest mt-2">{BRANDING.schoolName.includes("Al-Andalus") ? "Al-Imam" : "Academic Center"}</p>
               </div>
             </Link>
             <p className="text-white/80 font-medium leading-relaxed max-w-xs text-justify">
