@@ -7,10 +7,10 @@ import { Container } from "@/components/layout/Container";
 import { Calendar, Users, GraduationCap, Award, TrendingUp, BookOpen } from 'lucide-react';
 
 const STATS = [
-  { id: 'batch', label: 'Angkatan Ke-1', value: 1, icon: Calendar, color: 'brand-blue' as const, suffix: '' },
-  { id: 'quality', label: 'Standar Global', value: 100, icon: Award, color: 'brand-yellow' as const, suffix: '%' },
-  { id: 'network', label: 'Cabang Al-Andalus', value: 3, icon: BookOpen, color: 'gold' as const, suffix: '' },
-  { id: 'quota', label: 'Kuota Terbatas', value: 80, icon: Users, color: 'brand-blue' as const, suffix: '' },
+  { id: 'batch', label: 'Angkatan Ke-1', value: 1, icon: Calendar, color: 'brand-blue' as const, suffix: '', sublabel: 'TA 2025/2026' },
+  { id: 'quality', label: 'Standar Global', value: 100, icon: Award, color: 'brand-yellow' as const, suffix: '%', sublabel: 'Kurikulum Al-Andalus IIBS' },
+  { id: 'levels', label: 'Jenjang Tersedia', value: 3, icon: GraduationCap, color: 'gold' as const, suffix: '', sublabel: 'MTs · IL · SMA' },
+  { id: 'quota', label: 'Kuota Per Jenjang', value: 25, icon: Users, color: 'brand-blue' as const, suffix: '', sublabel: 'Santri (Terbatas)' },
 ] as const;
 
 export default function StatsSection() {
@@ -89,6 +89,11 @@ export default function StatsSection() {
                 <p className="text-[10px] md:text-xs font-bold text-ink-500 uppercase tracking-widest mt-1">
                   {stat.label}
                 </p>
+                {stat.sublabel && (
+                  <p className="text-[9px] md:text-[10px] font-semibold text-ink-400 tracking-wide mt-0.5">
+                    {stat.sublabel}
+                  </p>
+                )}
 
                 {/* Subtle underline decoration */}
                 <div className="mt-4 w-6 h-1 bg-cream-200 rounded-full group-hover:w-12 group-hover:bg-maroon-400 transition-all duration-500" />
