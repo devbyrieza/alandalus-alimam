@@ -37,7 +37,7 @@ const PROGRAMS = [
             "Penguasaan Kitab Turots",
             "Bahasa Arab Aktif & Formal",
             "Persiapan Universitas Timur Tengah & Dalam Negeri",
-            "Ziarah Ilmiah & Pengabdian"
+            "Ziarah Ilmiah"
         ],
         quota: "25 Kursi",
         icon: BookOpen,
