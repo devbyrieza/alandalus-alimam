@@ -7,7 +7,7 @@ import { Container } from "@/components/layout/Container";
 import { Calendar, Users, GraduationCap, Award, TrendingUp, BookOpen } from 'lucide-react';
 
 const STATS = [
-  { id: 'batch', label: 'Angkatan Ke-1', value: 1, icon: Calendar, color: 'brand-blue' as const, suffix: '', sublabel: 'TA 2025/2026' },
+  { id: 'batch', label: 'Angkatan Ke-1', value: 1, icon: Calendar, color: 'brand-blue' as const, suffix: '', sublabel: 'TA 2026/2027' },
   { id: 'quality', label: 'Standar Global', value: 100, icon: Award, color: 'brand-yellow' as const, suffix: '%', sublabel: 'Kurikulum Al-Andalus IIBS' },
   { id: 'levels', label: 'Jenjang Tersedia', value: 2, icon: GraduationCap, color: 'gold' as const, suffix: '', sublabel: 'MTs · IL' },
   { id: 'quota', label: 'Kuota Per Jenjang', value: 25, icon: Users, color: 'brand-blue' as const, suffix: '', sublabel: 'Santri (Terbatas)' },

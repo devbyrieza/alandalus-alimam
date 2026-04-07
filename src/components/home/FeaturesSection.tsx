@@ -58,8 +58,7 @@ export default function FeaturesSection() {
                   <span>Keunggulan Utama</span>
                 </div>
                 <h2 className="section-title mb-3">
-                  Kenapa Harus <br />
-                  <span className="text-gradient-maroon">Al-Imam</span>
+                  Kenapa Harus Al-Imam
                 </h2>
                 <p className="text-xs font-bold text-brand-blue-600 uppercase tracking-widest mb-6">
                   Managed by Al-Andalus IIBS
@@ -104,7 +103,7 @@ export default function FeaturesSection() {
             >
               <div className="space-y-4 lg:space-y-6 mt-12">
                 <div className="app-card p-6 sm:p-8 min-h-56 md:h-64 flex flex-col justify-end items-start group">
-                  <p className="text-4xl lg:text-5xl font-black text-maroon-900 mb-2 tracking-tighter uppercase">TA 25/26</p>
+                  <p className="text-4xl lg:text-5xl font-black text-maroon-900 mb-2 tracking-tighter uppercase">TA 26/27</p>
                   <div className="space-y-1">
                     <p className="text-sm font-bold text-ink-700 uppercase tracking-wider">Angkatan Pertama</p>
                     <p className="text-xs leading-tight text-ink-500 font-medium">
