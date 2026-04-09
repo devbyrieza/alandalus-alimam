@@ -122,7 +122,7 @@ export async function POST(request: Request) {
             const pendaftar = await tx.pendaftar.findUnique({ where: { id: session.id } });
             if (!pendaftar) throw new Error("Data pendaftar tidak ditemukan");
 
-            let pengujiFields: Record<string, string> = {};
+            let pengujiFields: Record<string, string | null> = {};
             const sessionTitle = (examSession.title || "").toLowerCase();
             if (examSession.created_by) {
                 const interviewer = await tx.profile.findUnique({
