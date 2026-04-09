@@ -221,9 +221,11 @@ export async function GET(request: Request) {
 
       // === PIE CHART DATA ===
       pie_chart_status: {
-        diterima: statusCounts.accepted || 0,
-        menunggu: (statusCounts.scheduled || 0) + (statusCounts.verified || 0),
-        proses: (statusCounts.draft || 0) + (statusCounts.payment_verification || 0),
+        diterima: (statusCounts.accepted || 0) + (statusCounts.enrolled || 0),
+        menunggu: (statusCounts.docs_verified || 0) + (statusCounts.scheduled || 0) + (statusCounts.tested || 0) + (statusCounts.announced || 0),
+        proses: (statusCounts.draft || 0) + (statusCounts.waiting_payment || 0) + (statusCounts.awaiting_payment || 0) + 
+                (statusCounts.paid || 0) + (statusCounts.payment_verification || 0) + (statusCounts.payment_rejected || 0) +
+                (statusCounts.verified || 0) + (statusCounts.data_completed || 0) + (statusCounts.docs_uploaded || 0),
         ditolak: statusCounts.rejected || 0,
       },
 
