@@ -446,13 +446,25 @@ export default function JadwalUjianPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-ink-400 uppercase tracking-widest mb-2">Lokasi</label>
+                      <label className="block text-xs font-bold text-ink-400 uppercase tracking-widest mb-2">Lokasi / Ruangan</label>
                       <input
                         type="text"
                         value={newSession.location}
                         onChange={(e) => setNewSession({ ...newSession, location: e.target.value })}
+                        placeholder="Contoh: Ruang CBT atau Online"
                         className="w-full bg-cream-50 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-purple-500/10 outline-none font-bold"
                       />
+                    </div>
+                  </div>
+
+                  <div className="bg-purple-50 rounded-xl p-4 border border-purple-100 flex items-start gap-3">
+                    <AlertCircle className="w-5 h-5 text-purple-600 shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-xs font-bold text-purple-900 uppercase tracking-wider mb-1">Informasi Otomatis</p>
+                      <p className="text-[11px] text-purple-700 leading-relaxed">
+                        Sistem akan otomatis menyertakan <b>Link Google Meet</b> dari profil Anda (pembuat sesi) 
+                        saat mengirim notifikasi ke pendaftar. Pastikan profil Anda sudah memiliki data link Meet yang benar.
+                      </p>
                     </div>
                   </div>
                 </div>
