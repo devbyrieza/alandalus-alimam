@@ -63,6 +63,9 @@ export async function GET() {
         // Helper to check if an object is effectively empty
         const isEmpty = (obj: any) => !obj || (Object.keys(obj).length === 0 && obj.constructor === Object);
 
+        // Build a map to deduplicate by pendaftar.id
+        const pesertaMap = new Map<string, any>();
+
         for (const item of assigned) {
             const pendaftarId = item.pendaftar.id;
 
