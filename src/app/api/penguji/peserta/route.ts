@@ -60,8 +60,8 @@ export async function GET() {
             orderBy: { tanggal_ujian: 'asc' }
         });
 
-        // Build a map to deduplicate by pendaftar.id
-        const pesertaMap = new Map<string, any>();
+        // Helper to check if an object is effectively empty
+        const isEmpty = (obj: any) => !obj || (Object.keys(obj).length === 0 && obj.constructor === Object);
 
         for (const item of assigned) {
             const pendaftarId = item.pendaftar.id;
@@ -111,7 +111,7 @@ export async function GET() {
                 for (const r of roles) {
                     if (!existing.roles.includes(r)) existing.roles.push(r);
                 }
-                // If this record has score data, merge it in (prefer non-null values)
+                // If this record has score data, merge it in (prefer non-empty values)
                 if (score.id) {
                     existing.nilai_id = existing.nilai_id || score.id;
                     existing.nilai_wawancara_santri = existing.nilai_wawancara_santri ?? score.nilai_wawancara_santri;
@@ -120,9 +120,12 @@ export async function GET() {
                     existing.catatan_santri = existing.catatan_santri ?? score.catatan_santri;
                     existing.catatan_quran = existing.catatan_quran ?? score.catatan_quran;
                     existing.catatan_ortu = existing.catatan_ortu ?? score.catatan_ortu;
-                    existing.detail_quran = existing.detail_quran ?? score.detail_quran;
-                    existing.detail_wawancara = existing.detail_wawancara ?? score.detail_wawancara;
-                    existing.detail_cawalsan = existing.detail_cawalsan ?? score.detail_cawalsan;
+                    
+                    // Aggressive merge for detail objects (overwrite if current is empty)
+                    if (isEmpty(existing.detail_quran)) existing.detail_quran = score.detail_quran;
+                    if (isEmpty(existing.detail_wawancara)) existing.detail_wawancara = score.detail_wawancara;
+                    if (isEmpty(existing.detail_cawalsan)) existing.detail_cawalsan = score.detail_cawalsan;
+                    
                     existing.score_quran = existing.score_quran ?? score.score_quran;
                     existing.score_wawancara = existing.score_wawancara ?? score.score_wawancara;
                 }

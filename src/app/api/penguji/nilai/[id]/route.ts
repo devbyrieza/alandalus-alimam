@@ -87,38 +87,41 @@ export async function PATCH(
                 isOrtuFallback = hasOrtuMatch;
             }
         }
+        
+        // Unified permission flags using session role as final fallback
+        const baseRole = session.role || "";
+        const canEditQuran = isAdmin || isQuran || isQuranFallback || (baseRole.includes("quran") || baseRole === "penguji" || baseRole === "penguji_calsan");
+        const canEditWawancara = isAdmin || isWawancara || isWawancaraFallback || baseRole.includes("calsan") || baseRole === "pewawancara_calsan";
+        const canEditOrtu = isAdmin || isOrtu || isOrtuFallback || baseRole.includes("cawalsan") || baseRole === "pewawancara_cawalsan";
 
         const updateData: any = {};
 
-        // If user is Admin, they get access to completely bypass the assignment and update all fields provided.
-        // Otherwise, they only update the fields they're assigned to.
-
-        // Only update Quran if payload contains detail_quran
-        if ((isAdmin || isQuran || isQuranFallback) && body.detail_quran !== undefined) {
+        // 1. Quran Update
+        if (canEditQuran && body.detail_quran !== undefined) {
             if (body.nilai_tes_quran !== undefined) updateData.nilai_tes_quran = body.nilai_tes_quran;
             if (body.catatan_quran !== undefined) updateData.catatan_quran = body.catatan_quran;
             if (body.detail_quran !== undefined) updateData.detail_quran = body.detail_quran;
             if (body.score_quran !== undefined) updateData.score_quran = body.score_quran;
-            if (session.user_id) updateData.input_by_quran = session.user_id;
+            updateData.input_by_quran = userId;
             updateData.input_at_quran = new Date();
         }
 
-        // Only update Santri (Calsan) if payload contains detail_wawancara
-        if ((isAdmin || isWawancara || isWawancaraFallback) && body.detail_wawancara !== undefined) {
+        // 2. Santri (Calsan) Update
+        if (canEditWawancara && body.detail_wawancara !== undefined) {
             if (body.nilai_wawancara_santri !== undefined) updateData.nilai_wawancara_santri = body.nilai_wawancara_santri;
             if (body.catatan_santri !== undefined) updateData.catatan_santri = body.catatan_santri;
             if (body.detail_wawancara !== undefined) updateData.detail_wawancara = body.detail_wawancara;
             if (body.score_wawancara !== undefined) updateData.score_wawancara = body.score_wawancara;
-            if (session.user_id) updateData.input_by_santri = session.user_id;
+            updateData.input_by_santri = userId;
             updateData.input_at_santri = new Date();
         }
 
-        // Only update Ortu (Cawalsan) if payload contains detail_cawalsan
-        if ((isAdmin || isOrtu || isOrtuFallback) && body.detail_cawalsan !== undefined) {
+        // 3. Ortu (Cawalsan) Update
+        if (canEditOrtu && body.detail_cawalsan !== undefined) {
             if (body.nilai_wawancara_ortu !== undefined) updateData.nilai_wawancara_ortu = body.nilai_wawancara_ortu;
             if (body.catatan_ortu !== undefined) updateData.catatan_ortu = body.catatan_ortu;
             if (body.detail_cawalsan !== undefined) updateData.detail_cawalsan = body.detail_cawalsan;
-            if (session.user_id) updateData.input_by_ortu = session.user_id;
+            updateData.input_by_ortu = userId;
             updateData.input_at_ortu = new Date();
         }
         // 3. Upsert Score - Link to the schedule being graded
