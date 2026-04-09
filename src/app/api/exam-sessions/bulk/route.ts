@@ -44,6 +44,21 @@ export async function POST(request: Request) {
         const end = new Date(endDate);
         const creatorId = session.user_id || session.id;
 
+        // Determine default title based on role if not provided
+        let finalTitle = title;
+        if (!finalTitle || finalTitle === "Sesi Ujian") {
+            const role = session.role;
+            if (role === 'pewawancara_cawalsan') {
+                finalTitle = "Wawancara Cawalsan";
+            } else if (role === 'pewawancara_calsan' || role === 'penguji_calsan') {
+                finalTitle = "Wawancara Calsan";
+            } else if (role === 'penguji_quran') {
+                finalTitle = "Tes Al-Qur'an";
+            } else {
+                finalTitle = title || "Sesi Ujian";
+            }
+        }
+
         const sessionsToCreate = [];
         let currentDate = new Date(start);
 
@@ -61,7 +76,7 @@ export async function POST(request: Request) {
                     const endISO = `${dateStr}T${slot.end}:00`;
 
                     sessionsToCreate.push({
-                        title: title || "Sesi Ujian",
+                        title: finalTitle,
                         start_time: new Date(startISO),
                         end_time: new Date(endISO),
                         quota: 1, // Default to 1 (Private/1-on-1)

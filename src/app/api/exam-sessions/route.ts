@@ -98,9 +98,24 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
         }
 
+        // Determine default title based on role if not provided
+        let finalTitle = title;
+        if (!finalTitle || finalTitle === "Sesi Ujian") {
+            const role = session.role;
+            if (role === 'pewawancara_cawalsan') {
+                finalTitle = "Wawancara Cawalsan";
+            } else if (role === 'pewawancara_calsan' || role === 'penguji_calsan') {
+                finalTitle = "Wawancara Calsan";
+            } else if (role === 'penguji_quran') {
+                finalTitle = "Tes Al-Qur'an";
+            } else {
+                finalTitle = title || "Sesi Ujian";
+            }
+        }
+
         const newSession = await prisma.examSession.create({
             data: {
-                title: title || "Sesi Ujian",
+                title: finalTitle,
                 start_time: new Date(start_time),
                 end_time: new Date(end_time),
                 quota: parseInt(quota),

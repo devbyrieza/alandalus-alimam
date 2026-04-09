@@ -707,7 +707,20 @@ export default function JadwalPengujiPage() {
                     required
                     className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-maroon-500 outline-none"
                     value={slotForm.start_time}
-                    onChange={e => setSlotForm({ ...slotForm, start_time: e.target.value })}
+                    onChange={e => {
+                      const newStart = e.target.value;
+                      let newEnd = slotForm.end_time;
+                      
+                      if (newStart) {
+                        const [hours, minutes] = newStart.split(':').map(Number);
+                        const date = new Date();
+                        date.setHours(hours + 1, minutes);
+                        newEnd = date.getHours().toString().padStart(2, '0') + ':' + 
+                                 date.getMinutes().toString().padStart(2, '0');
+                      }
+                      
+                      setSlotForm({ ...slotForm, start_time: newStart, end_time: newEnd });
+                    }}
                   />
                 </div>
                 <div>
@@ -935,8 +948,18 @@ export default function JadwalPengujiPage() {
                           className="bg-white border-none rounded-xl px-3 py-2 text-sm font-bold shadow-sm"
                           value={slot.start}
                           onChange={e => {
+                            const newStart = e.target.value;
                             const newSlots = [...bulkForm.timeSlots];
-                            newSlots[index].start = e.target.value;
+                            newSlots[index].start = newStart;
+                            
+                            if (newStart) {
+                              const [hours, minutes] = newStart.split(':').map(Number);
+                              const date = new Date();
+                              date.setHours(hours + 1, minutes);
+                              newSlots[index].end = date.getHours().toString().padStart(2, '0') + ':' + 
+                                                   date.getMinutes().toString().padStart(2, '0');
+                            }
+                            
                             setBulkForm({ ...bulkForm, timeSlots: newSlots });
                           }}
                         />
