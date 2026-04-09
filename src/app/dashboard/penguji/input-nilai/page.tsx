@@ -562,19 +562,19 @@ export default function InputNilaiPage() {
             {/* Dasar Informasi */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white rounded-2xl p-6 border border-brand-yellow-100 shadow-xs">
               <div>
-                <label className="block text-xs font-black text-ink-300 uppercase tracking-widest mb-3">Nama Audiens/Orangtua *</label>
-                <input type="text" value={cawalsanForm.nama_orangtua || ""} onChange={(e) => setCawalsanForm({ ...cawalsanForm, nama_orangtua: e.target.value })} className="w-full px-5 py-4 bg-ink-50/30 border-2 border-ink-100 rounded-2xl focus:border-brand-yellow-500 outline-none font-bold text-brand-blue-950 transition-all placeholder:text-ink-100" placeholder="Nama orangtua/wali" />
+                <label className="block text-xs font-black text-ink-600 uppercase tracking-widest mb-3">Nama Audiens/Orangtua *</label>
+                <input type="text" value={cawalsanForm.nama_orangtua || ""} onChange={(e) => setCawalsanForm({ ...cawalsanForm, nama_orangtua: e.target.value })} className="w-full px-5 py-4 bg-ink-50/30 border-2 border-ink-100 rounded-2xl focus:border-brand-yellow-500 outline-none font-bold text-brand-blue-950 transition-all placeholder:text-ink-400" placeholder="Nama orangtua/wali" />
               </div>
               <div>
-                <label className="block text-xs font-black text-ink-300 uppercase tracking-widest mb-3">Asal Daerah *</label>
-                <input type="text" value={cawalsanForm.asal || ""} onChange={(e) => setCawalsanForm({ ...cawalsanForm, asal: e.target.value })} className="w-full px-5 py-4 bg-ink-50/30 border-2 border-ink-100 rounded-2xl focus:border-brand-yellow-500 outline-none font-bold text-brand-blue-950 transition-all placeholder:text-ink-100" placeholder="Contoh: Sukabumi, Jakarta" />
+                <label className="block text-xs font-black text-ink-600 uppercase tracking-widest mb-3">Asal Daerah *</label>
+                <input type="text" value={cawalsanForm.asal || ""} onChange={(e) => setCawalsanForm({ ...cawalsanForm, asal: e.target.value })} className="w-full px-5 py-4 bg-ink-50/30 border-2 border-ink-100 rounded-2xl focus:border-brand-yellow-500 outline-none font-bold text-brand-blue-950 transition-all placeholder:text-ink-400" placeholder="Contoh: Sukabumi, Jakarta" />
               </div>
             </div>
 
             {/* Kategori & Sumber */}
             <div className="bg-white rounded-2xl p-6 border border-brand-yellow-100 shadow-xs space-y-6">
               <div>
-                <label className="block text-xs font-black text-ink-300 uppercase tracking-widest mb-4">Kategori Calon Santri *</label>
+                <label className="block text-xs font-black text-ink-600 uppercase tracking-widest mb-4">Kategori Calon Santri *</label>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {KATEGORI_OPTIONS.map((opt) => (
                     <label key={opt} className={`flex items-center gap-4 p-4 rounded-xl cursor-pointer border-2 transition-all text-sm font-bold ${cawalsanForm.kategori === opt ? "border-brand-yellow-400 bg-brand-yellow-50 text-brand-blue-950 shadow-sm" : "border-ink-50 hover:border-brand-yellow-200 bg-ink-50/30"}`}>
@@ -586,7 +586,7 @@ export default function InputNilaiPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-black text-ink-300 uppercase tracking-widest mb-3">Sumber Informasi *</label>
+                <label className="block text-xs font-black text-ink-600 uppercase tracking-widest mb-3">Sumber Informasi *</label>
                 <select value={cawalsanForm.sumber_info || ""} onChange={(e) => setCawalsanForm({ ...cawalsanForm, sumber_info: e.target.value })} className="w-full px-5 py-4 bg-ink-50/30 border-2 border-ink-100 rounded-2xl focus:border-brand-yellow-500 outline-none font-bold text-brand-blue-950 transition-all cursor-pointer">
                   <option value="">Pilih Sumber Informasi</option>
                   {SUMBER_INFO_OPTIONS.map((n) => <option key={n} value={n}>{n}</option>)}
@@ -727,13 +727,13 @@ export default function InputNilaiPage() {
       {loading ? (
         <div className="flex flex-col items-center justify-center py-24 bg-white rounded-4xl border border-brand-yellow-100 shadow-sm app-card">
           <Loader2 className="w-12 h-12 animate-spin text-brand-blue-600 mb-4" />
-          <span className="text-ink-300 font-black uppercase tracking-widest text-sm">Memuat data peserta...</span>
+          <span className="text-ink-600 font-black uppercase tracking-widest text-sm">Memuat data peserta...</span>
         </div>
       ) : filteredPeserta.length === 0 ? (
         <div className="text-center py-24 bg-white rounded-4xl border border-brand-yellow-100 shadow-sm app-card">
           <User className="w-20 h-20 mx-auto mb-6 text-ink-100" />
           <p className="font-black text-brand-blue-950 text-2xl tracking-tight">Tidak ada peserta ditemukan</p>
-          <p className="text-sm font-bold text-ink-300 mt-2">Coba gunakan kata kunci pencarian yang lain.</p>
+          <p className="text-sm font-bold text-ink-600 mt-2">Coba gunakan kata kunci pencarian yang lain.</p>
         </div>
       ) : (
         <div className="space-y-8">
