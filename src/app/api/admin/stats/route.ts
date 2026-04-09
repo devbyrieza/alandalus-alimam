@@ -211,7 +211,6 @@ export async function GET(request: Request) {
       // === STATISTIK PER PROVINSI (Top 10) ===
       stats_per_provinsi: Object.entries(provinsiCounts)
         .sort((a, b) => b[1] - a[1])
-        .slice(0, 10)
         .map(([provinsi, jumlah]) => ({
           provinsi,
           jumlah,

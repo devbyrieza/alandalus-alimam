@@ -658,7 +658,7 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {(stats.stats_per_provinsi || []).slice(0, 5).map((item, idx) => (
+            {(stats.stats_per_provinsi || []).map((item, idx) => (
               <div key={idx} className="bg-white rounded-3xl border border-brand-yellow-100 shadow-sm app-card p-4 flex items-center justify-between group hover:border-brand-blue-200 cursor-default transition-all">
                 <div className="flex items-center gap-3">
                   <div className="p-2.5 bg-brand-yellow-100 text-ink-500 rounded-xl group-hover:bg-brand-blue-50 group-hover:text-brand-blue-700 transition-colors border border-brand-yellow-200">
@@ -669,24 +669,6 @@ export default function AdminDashboardPage() {
                 <span className="text-lg font-bold text-ink-900">{item.jumlah}</span>
               </div>
             ))}
-            {(() => {
-              const displayedCount = (stats.stats_per_provinsi || []).slice(0, 5).reduce((acc, item) => acc + item.jumlah, 0);
-              const remaining = stats.total_pendaftar - displayedCount;
-              if (remaining > 0) {
-                return (
-                  <div className="bg-ink-50/50 rounded-3xl border border-ink-100 shadow-sm p-4 flex items-center justify-between group hover:border-ink-200 cursor-default transition-all border-dashed">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2.5 bg-ink-100 text-ink-400 rounded-xl border border-ink-200">
-                        <MoreHorizontal className="w-5 h-5" />
-                      </div>
-                      <span className="font-semibold text-ink-500 italic">Lainnya / Data Belum Lengkap</span>
-                    </div>
-                    <span className="text-lg font-bold text-ink-400">{remaining}</span>
-                  </div>
-                );
-              }
-              return null;
-            })()}
           </div>
         </div>
 
