@@ -276,12 +276,16 @@ export async function POST(request: Request) {
                         jenisNotif: "reminder_h1",
                         messageContent: remSantriMsg,
                         scheduledAt: reminderTime,
-                    }).then(() => {
-                         // Update flag
-                         prisma.jadwalUjian.update({
-                             where: { id: result.id },
-                             data: { notif_h1_pendaftar_terkirim: true }
-                         }).catch(e => console.error("Failed to update H1 santri flag:", e));
+                    }).then(async () => {
+                         // Update flag safely - using try catch to avoid crash if DB not pushed yet
+                         try {
+                            await prisma.jadwalUjian.update({
+                                where: { id: result.id },
+                                data: { notif_h1_pendaftar_terkirim: true }
+                            });
+                         } catch (e) {
+                            console.warn("Could not update H1 santri flag (DB sync might be pending)");
+                         }
                     }).catch(err => console.error("Failed to enqueue H1 santri reminder:", err));
 
                     // 3.2. Reminder for Interviewer
@@ -308,12 +312,16 @@ export async function POST(request: Request) {
                                 jenisNotif: "reminder_h1",
                                 messageContent: remIntMessage,
                                 scheduledAt: reminderTime,
-                            }).then(() => {
-                                 // Update flag
-                                 prisma.jadwalUjian.update({
-                                     where: { id: result.id },
-                                     data: { notif_h1_penguji_terkirim: true }
-                                 }).catch(e => console.error("Failed to update H1 interviewer flag:", e));
+                            }).then(async () => {
+                                 // Update flag safely
+                                 try {
+                                    await prisma.jadwalUjian.update({
+                                        where: { id: result.id },
+                                        data: { notif_h1_penguji_terkirim: true }
+                                    });
+                                 } catch (e) {
+                                    console.warn("Could not update H1 interviewer flag (DB sync might be pending)");
+                                 }
                             }).catch(err => console.error("Failed to enqueue H1 penguji reminder:", err));
                         }
                     }
