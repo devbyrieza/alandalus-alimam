@@ -78,9 +78,21 @@ export async function GET() {
                 // Fallback: if matched via exam_session.created_by, derive role from session title
                 if (roles.length === 0 && item.exam_session?.created_by === userId) {
                     const title = (item.exam_session?.title || "").toLowerCase();
-                    if (title.includes("qur") || title.includes("quran")) roles.push('quran');
-                    else if (title.includes("calsan") || title.includes("santri")) roles.push('wawancara');
-                    else if (title.includes("cawalsan") || title.includes("ortu") || title.includes("orang")) roles.push('ortu');
+                    const hasQuranMatch = title.includes("qur") || title.includes("quran");
+                    const hasWawancaraMatch = title.includes("calsan") || title.includes("santri") || title.includes("wawancara");
+                    const hasOrtuMatch = title.includes("cawalsan") || title.includes("ortu") || title.includes("orang");
+
+                    if (hasQuranMatch) roles.push('quran');
+                    if (hasWawancaraMatch) roles.push('wawancara');
+                    if (hasOrtuMatch) roles.push('ortu');
+
+                    // If still empty (generic title), fallback to the user's own base role
+                    if (roles.length === 0) {
+                        const baseRole = session.role || "";
+                        if (baseRole.includes("quran") || baseRole === "penguji" || baseRole === "penguji_calsan") roles.push('quran');
+                        if (baseRole.includes("calsan")) roles.push('wawancara');
+                        if (baseRole.includes("cawalsan")) roles.push('ortu');
+                    }
                 }
             }
 

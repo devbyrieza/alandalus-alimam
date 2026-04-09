@@ -162,6 +162,7 @@ const SUMBER_INFO_OPTIONS = ["Searching umum", "IG", "FB", "YouTube", "TikTok", 
 
 // Map session role to which form types are visible
 const ROLE_TO_FORM_TYPES: Record<string, string[]> = {
+  penguji: ['quran'],
   penguji_calsan: ['quran'],
   pewawancara_calsan: ['wawancara'],
   pewawancara_cawalsan: ['ortu'],
