@@ -209,7 +209,10 @@ export default function InputNilaiPage() {
   const fetchPeserta = async (showLoading = true) => {
     try {
       if (showLoading) setLoading(true);
-      const response = await fetch("/api/penguji/peserta");
+      // Use no-store and timestamp to prevent caching issues after saving
+      const response = await fetch(`/api/penguji/peserta?t=${Date.now()}`, {
+        cache: 'no-store'
+      });
       if (response.ok) {
         const result = await response.json();
         setPeserta(result.data || []);

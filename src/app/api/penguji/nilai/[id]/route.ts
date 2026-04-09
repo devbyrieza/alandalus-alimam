@@ -121,15 +121,18 @@ export async function PATCH(
             if (session.user_id) updateData.input_by_ortu = session.user_id;
             updateData.input_at_ortu = new Date();
         }
-        // Upsert
-        // Check if exists
-        const existing = await prisma.nilaiUjian.findFirst({ where: { pendaftar_id: pendaftarId } });
-
+        // 3. Upsert Score - Link to the schedule being graded
+        const existing = await prisma.nilaiUjian.findFirst({ 
+            where: { pendaftar_id: pendaftarId },
+            orderBy: { created_at: 'desc' } // Prioritize any existing record
+        });
+        
         if (existing) {
             await prisma.nilaiUjian.update({
                 where: { id: existing.id },
                 data: {
                     ...updateData,
+                    jadwal_ujian_id: assignment?.id, // Ensure the link is established/updated
                     updated_at: new Date(),
                 }
             });
@@ -137,7 +140,7 @@ export async function PATCH(
             await prisma.nilaiUjian.create({
                 data: {
                     pendaftar_id: pendaftarId,
-                    jadwal_ujian_id: assignment?.id, // Link if assignment exists
+                    jadwal_ujian_id: assignment?.id,
                     ...updateData,
                 }
             });

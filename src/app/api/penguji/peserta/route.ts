@@ -52,9 +52,9 @@ export async function GET() {
                         nama_lengkap: true,
                         nomor_pendaftaran: true,
                         jenjang: true,
+                        nilai_ujian: true, // Fetch scores directly from pendaftar
                     }
                 },
-                nilai_ujian: true, // Fetch scores
                 exam_session: { select: { title: true, created_by: true } },
             },
             orderBy: { tanggal_ujian: 'asc' }
@@ -84,7 +84,14 @@ export async function GET() {
                 }
             }
 
-            const score = item.nilai_ujian?.[0] || {};
+            // Pick the best score record (linked to this schedule, or simply the latest one)
+            const allScores = item.pendaftar.nilai_ujian || [];
+            const scoreByJadwal = allScores.find((s: any) => s.jadwal_ujian_id === item.id);
+            const latestScore = [...allScores].sort((a: any, b: any) => 
+                new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+            )[0];
+
+            const score = scoreByJadwal || latestScore || {};
 
             if (pesertaMap.has(pendaftarId)) {
                 // Merge: add new roles (avoid duplicates) and update score if available
