@@ -59,6 +59,10 @@ export default function JadwalUjianPage() {
   const [search, setSearch] = useState("");
   const [selectedPendaftarId, setSelectedPendaftarId] = useState<string | null>(null);
   const [assigning, setAssigning] = useState(false);
+  const [showBroadcastModal, setShowBroadcastModal] = useState(false);
+  const [resetFlags, setResetFlags] = useState(false);
+  const [availStats, setAvailStats] = useState({ eligibleCount: 0, totalAvailableSlots: 0 });
+  const [broadcasting, setBroadcasting] = useState(false);
   const [sendingProgress, setSendingProgress] = useState<{
     active: boolean;
     curr: number;
@@ -73,7 +77,20 @@ export default function JadwalUjianPage() {
 
   useEffect(() => {
     fetchData();
+    fetchAvailStats();
   }, []);
+
+  const fetchAvailStats = async () => {
+    try {
+      const res = await fetch("/api/admin/notifications/broadcast-availability");
+      if (res.ok) {
+        const data = await res.json();
+        setAvailStats(data.data);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -209,6 +226,30 @@ export default function JadwalUjianPage() {
     }
   };
 
+  const handleBroadcastAvailability = async () => {
+    try {
+      setBroadcasting(true);
+      const res = await fetch("/api/admin/notifications/broadcast-availability", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reset_flags: resetFlags }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert(data.message);
+        setShowBroadcastModal(false);
+        fetchAvailStats();
+      } else {
+        alert(data.error || "Gagal broadcast");
+      }
+    } catch (e) {
+      console.error(e);
+      alert("Terjadi kesalahan sistem");
+    } finally {
+      setBroadcasting(false);
+    }
+  };
+
   const toTitleCase = (str: string) => {
     if (!str) return "";
     return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -240,13 +281,51 @@ export default function JadwalUjianPage() {
               <p className="text-emerald-900/60 font-medium">Panel Pengaturan Jadwal Seleksi PPDB Al-Imam</p>
             </div>
           </div>
-          <button
-            onClick={() => setShowAddSession(true)}
-            className="flex items-center gap-3 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl font-black shadow-lg shadow-purple-600/20 transition-all hover:-translate-y-0.5"
-          >
-            <Plus className="w-5 h-5" />
-            Sesi Baru
-          </button>
+          <div className="flex flex-col md:flex-row gap-3">
+            <button
+              onClick={() => setShowBroadcastModal(true)}
+              className="flex items-center gap-3 px-6 py-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-2xl font-black border border-indigo-200 transition-all"
+            >
+              <Send className="w-5 h-5" />
+              Pulse Notifikasi
+            </button>
+            <button
+              onClick={() => setShowAddSession(true)}
+              className="flex items-center gap-3 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl font-black shadow-lg shadow-purple-600/20 transition-all hover:-translate-y-0.5"
+            >
+              <Plus className="w-5 h-5" />
+              Sesi Baru
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Broadcast Info Card */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-2xl p-6 text-white shadow-lg overflow-hidden relative">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-xl"></div>
+          <div className="relative flex items-center gap-6">
+            <div className="p-4 bg-white/20 rounded-2xl backdrop-blur-md">
+              <Users className="w-8 h-8" />
+            </div>
+            <div>
+              <p className="text-sm font-bold opacity-80 uppercase tracking-widest">Pendaftar Butuh Jadwal</p>
+              <h3 className="text-4xl font-black leading-none mt-1">{availStats.eligibleCount} <span className="text-lg opacity-60">Orang</span></h3>
+              <p className="text-xs mt-2 opacity-70 font-medium">Belum memiliki jadwal & belum mendapat notifikasi terbaru</p>
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-2xl p-6 border border-indigo-100 shadow-clay-md flex items-center gap-6">
+          <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
+            <Calendar className="w-8 h-8 text-emerald-600" />
+          </div>
+          <div>
+            <p className="text-sm font-bold text-ink-400 uppercase tracking-widest">Total Slot Tersedia</p>
+            <h3 className="text-4xl font-black text-ink-950 leading-none mt-1">{availStats.totalAvailableSlots} <span className="text-lg text-ink-400">Sesi</span></h3>
+            <p className="text-xs mt-2 text-emerald-600 font-bold flex items-center gap-1">
+              <CheckCircle2 className="w-3 h-3" /> Siap untuk diumumkan
+            </p>
+          </div>
         </div>
       </div>
 
@@ -514,6 +593,71 @@ export default function JadwalUjianPage() {
           </div>
         </div>
       )}
+
+      {/* Broadcast Pulse Modal */}
+      {showBroadcastModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink-900/60 backdrop-blur-md animate-in fade-in duration-300">
+          <div className="bg-white rounded-3xl w-full max-w-md shadow-clay-lg border border-white overflow-hidden animate-in zoom-in-95 duration-300">
+            <div className="p-8 space-y-6">
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-black text-ink-900">Pulse <span className="text-indigo-600">Notifikasi</span></h2>
+                <button onClick={() => setShowBroadcastModal(false)} className="p-2 hover:bg-cream-100 rounded-lg">
+                  <AlertCircle className="w-5 h-5 text-ink-400 rotate-45" />
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div className="p-4 bg-indigo-50 rounded-2xl border border-indigo-100">
+                  <p className="text-sm font-bold text-indigo-900 mb-1">Target Pengiriman</p>
+                  <p className="text-2xl font-black text-indigo-600">
+                    {resetFlags ? "Semua yang belum jadwal" : `${availStats.eligibleCount} Pendaftar`}
+                  </p>
+                  <p className="text-[11px] text-indigo-700/70 mt-1">
+                    {resetFlags 
+                      ? "Menghapus status 'pernah dikabari' dan mengirim ulang ke semua pendaftar tanpa jadwal."
+                      : "Hanya mengirim ke pendaftar yang belum pernah mendapatkan notifikasi jadwal tersedia."}
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-3 p-4 bg-cream-50 rounded-2xl cursor-pointer" onClick={() => setResetFlags(!resetFlags)}>
+                  <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${resetFlags ? "bg-indigo-600 border-indigo-600" : "bg-white border-ink-100"}`}>
+                    {resetFlags && <CheckSquare className="w-4 h-4 text-white" />}
+                  </div>
+                  <div>
+                    <p className="text-xs font-black text-ink-900 uppercase">Reset Status & Broadcast Ulang</p>
+                    <p className="text-[10px] text-ink-400 font-bold">Gunakan jika Anda menambah banyak slot baru.</p>
+                  </div>
+                </div>
+
+                <div className="bg-amber-50 rounded-xl p-4 border border-amber-100 flex items-start gap-3">
+                  <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                  <p className="text-[11px] text-amber-800 leading-relaxed font-bold">
+                    Pesan akan masuk antrean (Queue) untuk mencegah BAN. Pengiriman dilakukan secara perlahan oleh sistem.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowBroadcastModal(false)}
+                  className="flex-1 py-4 bg-cream-100 hover:bg-cream-200 text-ink-600 rounded-2xl font-black transition-all"
+                >
+                  Batal
+                </button>
+                <button
+                  onClick={handleBroadcastAvailability}
+                  disabled={broadcasting || (availStats.eligibleCount === 0 && !resetFlags)}
+                  className="flex-[2] py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-black shadow-lg shadow-indigo-600/20 transition-all flex items-center justify-center gap-2"
+                >
+                  {broadcasting && <Loader2 className="w-4 h-4 animate-spin" />}
+                  Kirim Sekarang
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+
