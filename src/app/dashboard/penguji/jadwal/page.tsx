@@ -218,7 +218,7 @@ export default function JadwalPengujiPage() {
         start_time: startDateTime.toISOString(),
         end_time: endDateTime.toISOString(),
         quota: 1, // Fixed quota to 1 as per requirement (Private/1-on-1)
-        location: slotForm.location || "Online",
+        location: "Online",
         notes: slotForm.notes,
       };
 
@@ -645,15 +645,14 @@ export default function JadwalPengujiPage() {
               </div>
               <p className="text-xs text-ink-400 -mt-2">⏱ Maksimal durasi sesi adalah <strong>1 jam</strong>.</p>
 
-              <div>
-                <label className="block text-sm font-bold text-ink-700 mb-1">Link Google Meet / Lokasi</label>
-                <input
-                  type="text"
-                  placeholder="Paste Link Google Meet di sini (Contoh: https://meet.google.com/abc-xyz-123)"
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-maroon-500 outline-none"
-                  value={slotForm.location}
-                  onChange={e => setSlotForm({ ...slotForm, location: e.target.value })}
-                />
+              <div className="bg-purple-50 rounded-xl p-4 border border-purple-100 flex items-start gap-3">
+                <div className="mt-0.5 text-lg">💡</div>
+                <div>
+                  <p className="text-xs font-bold text-purple-900 uppercase tracking-wider mb-1">Informasi Otomatis</p>
+                  <p className="text-[11px] text-purple-700 leading-relaxed">
+                    Sesi ini diatur sebagai <b>Full Online</b>. Sistem akan otomatis menyertakan <b>Link Google Meet</b> dari profil Anda saat pendaftar mengambil jadwal ini.
+                  </p>
+                </div>
               </div>
 
 
