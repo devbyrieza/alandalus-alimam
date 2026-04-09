@@ -86,6 +86,11 @@ const JENJANG_LABELS: Record<string, string> = {
   IL: "I'dad Lughowi (Setara SMA)",
 };
 
+const JENJANG_QUOTAS: Record<string, number> = {
+  MTs: 25,
+  IL: 25,
+};
+
 export default function AdminDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [exporting, setExporting] = useState<string | null>(null);
@@ -504,7 +509,9 @@ export default function AdminDashboardPage() {
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-5 text-center text-ink-500 font-medium">-</td>
+                      <td className="px-6 py-5 text-center text-ink-500 font-bold">
+                        {JENJANG_QUOTAS[item.jenjang] || "-"}
+                      </td>
                       <td className="px-6 py-5 text-center">
                         <span className="text-brand-blue-900 font-black bg-brand-yellow-100 px-3 py-1 rounded-lg border border-brand-yellow-200">
                           {item.pendaftar}
