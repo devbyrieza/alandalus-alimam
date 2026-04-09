@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   CreditCard,
   Filter,
@@ -19,7 +19,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { exportToExcel, exportToPDF } from "@/lib/utils/export";
-import { useRef } from "react";
 
 interface Pembayaran {
   id: string;
@@ -185,7 +184,7 @@ export default function VerifikasiPembayaranPage() {
 
   const toTitleCase = (str: string) => {
     if (!str) return "";
-    return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+    return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase());
   };
 
   const openModal = (pay: Pembayaran) => {
@@ -349,7 +348,7 @@ export default function VerifikasiPembayaranPage() {
                       </div>
                       <div>
                         <h3 className="text-lg font-black text-stone-900 group-hover:text-brand-blue-700 transition-colors">
-                          {pay.pendaftar?.nama_lengkap ? toTitleCase(pay.pendaftar.nama_lengkap) : "Tanpa Nama"}
+                          {pay.pendaftar?.nama_lengkap ? toTitleCase(pay.pendaftar.nama_lengkap || "") : "Tanpa Nama"}
                         </h3>
                         <div className="flex flex-wrap items-center gap-3 text-sm mt-1">
                           <span className="font-mono bg-stone-100 px-2 py-0.5 rounded text-stone-600 font-bold">
@@ -448,7 +447,7 @@ export default function VerifikasiPembayaranPage() {
                 <h3 className="text-xl font-black text-stone-900">
                   Verifikasi Pembayaran
                 </h3>
-                <p className="text-sm text-stone-500 font-medium">{selectedPembayaran.pendaftar?.nama_lengkap ? toTitleCase(selectedPembayaran.pendaftar.nama_lengkap) : ""}</p>
+                <p className="text-sm text-stone-500 font-medium">{selectedPembayaran.pendaftar?.nama_lengkap ? toTitleCase(selectedPembayaran.pendaftar.nama_lengkap || "") : ""}</p>
               </div>
               <button
                 onClick={() => setShowModal(false)}

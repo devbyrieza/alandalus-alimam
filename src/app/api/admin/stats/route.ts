@@ -71,13 +71,23 @@ export async function GET(request: Request) {
     const statusCounts: Record<string, number> = {};
     const jenjangCounts: Record<string, { total: number; diterima: number }> = {};
     const provinsiCounts: Record<string, number> = {};
-    const genderCounts: Record<string, number> = { "Laki-laki": 0, "Perempuan": 0 };
+    const genderCounts: Record<string, number> = { "Laki-laki": 0, "Perempuan": 0, "Belum Diisi": 0 };
 
     pendaftarData.forEach((item) => {
       const status = item.status_pendaftaran;
       const jenjang = item.jenjang || "Unknown";
-      const provinsi = item.provinsi || "Tidak Diketahui";
-      const gender = item.jenis_kelamin || "Unknown";
+      
+      // Normalize Provinsi
+      let provinsi = item.provinsi || "Belum Diisi";
+      if (provinsi && provinsi !== "Belum Diisi") {
+        // Normalize to Title Case (e.g., JAWA BARAT -> Jawa Barat)
+        provinsi = provinsi.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+      }
+      
+      // Normalize Gender mapping (L/P -> Laki-laki/Perempuan)
+      let gender = item.jenis_kelamin || "Unknown";
+      if (gender === "L") gender = "Laki-laki";
+      if (gender === "P") gender = "Perempuan";
 
       // Status counts
       statusCounts[status] = (statusCounts[status] || 0) + 1;
@@ -97,6 +107,8 @@ export async function GET(request: Request) {
       // Gender counts
       if (gender === "Laki-laki" || gender === "Perempuan") {
         genderCounts[gender] += 1;
+      } else {
+        genderCounts["Belum Diisi"] += 1;
       }
     });
 

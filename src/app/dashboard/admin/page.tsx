@@ -69,7 +69,7 @@ interface DashboardStats {
   sudah_daftar_ulang: number;
   stats_per_jenjang: JenjangStat[];
   stats_per_provinsi: ProvinsiStat[];
-  stats_gender: { "Laki-laki": number; "Perempuan": number };
+  stats_gender: { "Laki-laki": number; "Perempuan": number; "Belum Diisi"?: number };
   pie_chart_status: {
     diterima: number;
     menunggu: number;
@@ -112,7 +112,7 @@ export default function AdminDashboardPage() {
     sudah_daftar_ulang: 0,
     stats_per_jenjang: [],
     stats_per_provinsi: [],
-    stats_gender: { "Laki-laki": 0, "Perempuan": 0 },
+    stats_gender: { "Laki-laki": 0, "Perempuan": 0, "Belum Diisi": 0 },
     pie_chart_status: { diterima: 0, menunggu: 0, proses: 0, ditolak: 0 },
     permintaan_edit_pending: 0,
     permintaan_edit_total: 0,
@@ -536,9 +536,11 @@ export default function AdminDashboardPage() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-5 gap-2 relative">
               {stats.funnel_data?.map((item, idx) => {
-                const percentage = stats.funnel_data ? Math.round((item.count / stats.funnel_data[0].count) * 100) : 0;
-                const dropOff = idx > 0 && stats.funnel_data ?
-                  Math.round(((stats.funnel_data[idx - 1].count - item.count) / stats.funnel_data[idx - 1].count) * 100) : 0;
+                const baseCount = stats.funnel_data?.[0]?.count || 1;
+                const percentage = stats.funnel_data ? Math.round((item.count / baseCount) * 100) : 0;
+                const prevCount = idx > 0 ? stats.funnel_data?.[idx - 1]?.count : 0;
+                const dropOff = (idx > 0 && prevCount) ?
+                  Math.round(((prevCount - item.count) / prevCount) * 100) : 0;
 
                 return (
                   <div key={idx} className="relative group">
@@ -625,11 +627,19 @@ export default function AdminDashboardPage() {
                       <p className="text-[10px] font-bold text-rose-400 uppercase tracking-widest">Putri</p>
                     </div>
                   </div>
+                  {(stats.stats_gender["Belum Diisi"] || 0) > 0 && (
+                    <div className="flex-1 space-y-2">
+                      <div className="h-28 bg-ink-50 rounded-2xl flex flex-col items-center justify-center border-2 border-ink-100 hover:border-ink-200 transition-colors">
+                        <p className="text-3xl font-black text-ink-400">{stats.stats_gender["Belum Diisi"]}</p>
+                        <p className="text-[10px] font-bold text-ink-300 uppercase tracking-widest">Draft</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="mt-4 px-2">
                 <p className="text-xs text-ink-500 text-center italic">
-                Selamat datang kembali di panel kendali utama PPDB Al-Imam. Berikut adalah ikhtisar pendaftaran hari ini.
+                  Selamat datang kembali di panel kendali utama PPDB Al-Imam. Berikut adalah ikhtisar pendaftaran hari ini.
                 </p>
               </div>
             </div>
@@ -641,7 +651,7 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {(stats.stats_per_provinsi || []).slice(0, 4).map((item, idx) => (
+            {(stats.stats_per_provinsi || []).slice(0, 5).map((item, idx) => (
               <div key={idx} className="bg-white rounded-3xl border border-brand-yellow-100 shadow-sm app-card p-4 flex items-center justify-between group hover:border-brand-blue-200 cursor-default transition-all">
                 <div className="flex items-center gap-3">
                   <div className="p-2.5 bg-brand-yellow-100 text-ink-500 rounded-xl group-hover:bg-brand-blue-50 group-hover:text-brand-blue-700 transition-colors border border-brand-yellow-200">
@@ -652,6 +662,24 @@ export default function AdminDashboardPage() {
                 <span className="text-lg font-bold text-ink-900">{item.jumlah}</span>
               </div>
             ))}
+            {(() => {
+              const displayedCount = (stats.stats_per_provinsi || []).slice(0, 5).reduce((acc, item) => acc + item.jumlah, 0);
+              const remaining = stats.total_pendaftar - displayedCount;
+              if (remaining > 0) {
+                return (
+                  <div className="bg-ink-50/50 rounded-3xl border border-ink-100 shadow-sm p-4 flex items-center justify-between group hover:border-ink-200 cursor-default transition-all border-dashed">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2.5 bg-ink-100 text-ink-400 rounded-xl border border-ink-200">
+                        <MoreHorizontal className="w-5 h-5" />
+                      </div>
+                      <span className="font-semibold text-ink-500 italic">Lainnya / Data Belum Lengkap</span>
+                    </div>
+                    <span className="text-lg font-bold text-ink-400">{remaining}</span>
+                  </div>
+                );
+              }
+              return null;
+            })()}
           </div>
         </div>
 
