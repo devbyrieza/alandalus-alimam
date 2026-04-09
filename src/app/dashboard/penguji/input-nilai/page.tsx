@@ -371,17 +371,17 @@ export default function InputNilaiPage() {
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
               <div>
-                <label className="block text-xs font-black text-ink-300 uppercase tracking-widest mb-3">Nilai Tajwid (1-100) *</label>
-                <input type="number" min="1" max="100" value={quranForm.tajwid || ""} onChange={(e) => setQuranForm({ ...quranForm, tajwid: e.target.value })} className="w-full px-5 py-4 bg-white border-2 border-emerald-100 rounded-2xl focus:border-emerald-500 outline-none font-bold text-emerald-950 transition-all placeholder:text-ink-100" placeholder="0-100" />
+                <label className="block text-xs font-black text-ink-500 uppercase tracking-widest mb-3">Nilai Tajwid (1-100) *</label>
+                <input type="number" min="1" max="100" value={quranForm.tajwid || ""} onChange={(e) => setQuranForm({ ...quranForm, tajwid: e.target.value })} className="w-full px-5 py-4 bg-white border-2 border-emerald-100 rounded-2xl focus:border-emerald-500 outline-none font-bold text-emerald-950 transition-all placeholder:text-ink-400" placeholder="0-100" />
               </div>
               <div>
-                <label className="block text-xs font-black text-ink-300 uppercase tracking-widest mb-3">Nilai Kelancaran (1-100) *</label>
-                <input type="number" min="1" max="100" value={quranForm.kelancaran || ""} onChange={(e) => setQuranForm({ ...quranForm, kelancaran: e.target.value })} className="w-full px-5 py-4 bg-white border-2 border-emerald-100 rounded-2xl focus:border-emerald-500 outline-none font-bold text-emerald-950 transition-all placeholder:text-ink-100" placeholder="0-100" />
+                <label className="block text-xs font-black text-ink-500 uppercase tracking-widest mb-3">Nilai Kelancaran (1-100) *</label>
+                <input type="number" min="1" max="100" value={quranForm.kelancaran || ""} onChange={(e) => setQuranForm({ ...quranForm, kelancaran: e.target.value })} className="w-full px-5 py-4 bg-white border-2 border-emerald-100 rounded-2xl focus:border-emerald-500 outline-none font-bold text-emerald-950 transition-all placeholder:text-ink-400" placeholder="0-100" />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-black text-ink-300 uppercase tracking-widest mb-4">Rekomendasi Penguji *</label>
+              <label className="block text-xs font-black text-ink-500 uppercase tracking-widest mb-4">Rekomendasi Penguji *</label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {["Diterima", "Cadangan", "Ditolak"].map((opt) => (
                   <label key={opt} className={`px-5 py-4 rounded-xl cursor-pointer border-2 transition-all text-sm font-bold text-center ${quranForm.rekomendasi === opt ? (opt === "Diterima" ? "border-emerald-500 bg-emerald-50 text-emerald-700" : opt === "Cadangan" ? "border-brand-yellow-500 bg-brand-yellow-50 text-brand-yellow-700" : "border-red-500 bg-red-50 text-red-700") : "border-emerald-50 bg-white hover:border-emerald-200"}`}>
@@ -393,7 +393,7 @@ export default function InputNilaiPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-black text-ink-300 uppercase tracking-widest mb-3">Nama Penguji *</label>
+              <label className="block text-xs font-black text-ink-500 uppercase tracking-widest mb-3">Nama Penguji *</label>
               <select value={quranForm.nama_penguji || ""} onChange={(e) => setQuranForm({ ...quranForm, nama_penguji: e.target.value })} className="w-full px-5 py-4 bg-white border-2 border-emerald-100 rounded-2xl focus:border-emerald-500 outline-none font-bold text-emerald-950 transition-all">
                 <option value="">Pilih Penguji</option>
                 {(p.jenjang?.toLowerCase().includes("putri") ? PENGUJI_QURAN_LIST_PUTRI : PENGUJI_QURAN_LIST_PUTRA).map((n) => <option key={n} value={n}>{n}</option>)}
@@ -401,7 +401,7 @@ export default function InputNilaiPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-black text-ink-300 uppercase tracking-widest mb-3">Catatan Tambahan (opsional)</label>
+              <label className="block text-xs font-black text-ink-500 uppercase tracking-widest mb-3">Catatan Tambahan (opsional)</label>
               <textarea value={quranForm.catatan || ""} onChange={(e) => setQuranForm({ ...quranForm, catatan: e.target.value })} rows={3} className="w-full px-5 py-4 bg-white border-2 border-emerald-100 rounded-2xl focus:border-emerald-500 outline-none font-bold text-emerald-950 transition-all resize-none" placeholder="Catatan tambahan penguji..." />
             </div>
 
@@ -473,7 +473,7 @@ export default function InputNilaiPage() {
 
             <div className="bg-white rounded-2xl p-6 border border-brand-blue-100 shadow-xs space-y-6">
               <div>
-                <label className="block text-xs font-black text-ink-300 uppercase tracking-widest mb-3">Nama Pewawancara *</label>
+                <label className="block text-xs font-black text-ink-500 uppercase tracking-widest mb-3">Nama Pewawancara *</label>
                 <select value={calsanForm.nama_pewawancara || ""} onChange={(e) => setCalsanForm({ ...calsanForm, nama_pewawancara: e.target.value })} className="w-full px-5 py-4 bg-ink-50/50 border-2 border-ink-100 rounded-2xl focus:border-brand-blue-500 outline-none font-bold text-brand-blue-950 transition-all">
                   <option value="">Pilih Pewawancara</option>
                   {(p.jenjang?.toLowerCase().includes("putri") ? PEWAWANCARA_CALSAN_LIST_PUTRI : PEWAWANCARA_CALSAN_LIST_PUTRA).map((n) => <option key={n} value={n}>{n}</option>)}
@@ -481,7 +481,7 @@ export default function InputNilaiPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-black text-ink-300 uppercase tracking-widest mb-4">Rekomendasi Pewawancara *</label>
+                <label className="block text-xs font-black text-ink-500 uppercase tracking-widest mb-4">Rekomendasi Pewawancara *</label>
                 <div className="space-y-2.5">
                   {[
                     "A. Sangat Layak diterima (potensi besar berkembang di pesantren).",
@@ -499,7 +499,7 @@ export default function InputNilaiPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-black text-ink-300 uppercase tracking-widest mb-3">Catatan Pewawancara (opsional)</label>
+                <label className="block text-xs font-black text-ink-500 uppercase tracking-widest mb-3">Catatan Pewawancara (opsional)</label>
                 <textarea value={calsanForm.catatan || ""} onChange={(e) => setCalsanForm({ ...calsanForm, catatan: e.target.value })} rows={4} className="w-full px-5 py-4 bg-ink-50/50 border-2 border-ink-100 rounded-2xl focus:border-brand-blue-500 outline-none font-bold text-brand-blue-950 transition-all resize-none" placeholder="Catatan pewawancara..." />
               </div>
             </div>
@@ -614,15 +614,15 @@ export default function InputNilaiPage() {
             {/* Karakter & SPP & Rekomendasi */}
             <div className="bg-white rounded-2xl p-6 border border-brand-yellow-100 shadow-xs space-y-6">
               <div>
-                <label className="block text-xs font-black text-ink-300 uppercase tracking-widest mb-3">Karakter Santri (Positif & Negatif) *</label>
-                <textarea value={cawalsanForm.karakter || ""} onChange={(e) => setCawalsanForm({ ...cawalsanForm, karakter: e.target.value })} rows={3} className="w-full px-5 py-4 bg-ink-50/30 border-2 border-ink-100 rounded-2xl focus:border-brand-yellow-500 outline-none font-bold text-brand-blue-950 transition-all resize-none placeholder:text-ink-100" placeholder="Deskripsikan karakter santri yang menonjol..." />
+                <label className="block text-xs font-black text-ink-500 uppercase tracking-widest mb-3">Karakter Santri (Positif & Negatif) *</label>
+                <textarea value={cawalsanForm.karakter || ""} onChange={(e) => setCawalsanForm({ ...cawalsanForm, karakter: e.target.value })} rows={3} className="w-full px-5 py-4 bg-ink-50/30 border-2 border-ink-100 rounded-2xl focus:border-brand-yellow-500 outline-none font-bold text-brand-blue-950 transition-all resize-none placeholder:text-ink-400" placeholder="Deskripsikan karakter santri yang menonjol..." />
               </div>
 
               <div>
-                <label className="block text-xs font-black text-ink-300 uppercase tracking-widest mb-4">Sudah Tahu Biaya SPP? *</label>
+                <label className="block text-xs font-black text-ink-500 uppercase tracking-widest mb-4">Sudah Tahu Biaya SPP? *</label>
                 <div className="flex gap-4">
                   {["Sudah", "Belum"].map((opt) => (
-                    <label key={opt} className={`flex-1 px-5 py-4 rounded-xl cursor-pointer border-2 transition-all text-sm font-black shadow-sm text-center uppercase tracking-widest ${cawalsanForm.tahu_spp === opt ? "border-brand-yellow-400 bg-brand-yellow-50 text-brand-blue-950" : "border-ink-50 bg-ink-50/30 text-ink-300"}`}>
+                    <label key={opt} className={`flex-1 px-5 py-4 rounded-xl cursor-pointer border-2 transition-all text-sm font-black shadow-sm text-center uppercase tracking-widest ${cawalsanForm.tahu_spp === opt ? "border-brand-yellow-400 bg-brand-yellow-50 text-brand-blue-950" : "border-ink-200 bg-ink-50/30 text-ink-600"}`}>
                       <input type="radio" name={`spp-${p.id}`} value={opt} checked={cawalsanForm.tahu_spp === opt} onChange={() => setCawalsanForm({ ...cawalsanForm, tahu_spp: opt })} className="hidden" />
                       {opt}
                     </label>
@@ -631,10 +631,10 @@ export default function InputNilaiPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-black text-ink-300 uppercase tracking-widest mb-4">Rekomendasi Pewawancara *</label>
+                <label className="block text-xs font-black text-ink-500 uppercase tracking-widest mb-4">Rekomendasi Pewawancara *</label>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   {["Diterima", "Diterima dengan catatan", "Ditolak"].map((opt) => (
-                    <label key={opt} className={`px-5 py-4 rounded-xl cursor-pointer border-2 transition-all text-xs font-black uppercase tracking-widest text-center shadow-sm ${cawalsanForm.rekomendasi === opt ? (opt === "Diterima" ? "border-emerald-500 bg-emerald-50 text-emerald-700" : opt.includes("catatan") ? "border-brand-yellow-500 bg-brand-yellow-50 text-brand-yellow-700" : "border-red-500 bg-red-50 text-red-700") : "border-ink-50 bg-ink-50/30 text-ink-300"}`}>
+                    <label key={opt} className={`px-5 py-4 rounded-xl cursor-pointer border-2 transition-all text-xs font-black uppercase tracking-widest text-center shadow-sm ${cawalsanForm.rekomendasi === opt ? (opt === "Diterima" ? "border-emerald-500 bg-emerald-50 text-emerald-700" : opt.includes("catatan") ? "border-brand-yellow-500 bg-brand-yellow-50 text-brand-yellow-700" : "border-red-500 bg-red-50 text-red-700") : "border-ink-200 bg-ink-50/30 text-ink-600"}`}>
                       <input type="radio" name={`rekom-cawalsan-${p.id}`} value={opt} checked={cawalsanForm.rekomendasi === opt} onChange={() => setCawalsanForm({ ...cawalsanForm, rekomendasi: opt })} className="hidden" />
                       {opt}
                     </label>
@@ -643,7 +643,7 @@ export default function InputNilaiPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-black text-ink-300 uppercase tracking-widest mb-3">Nama Pewawancara *</label>
+                <label className="block text-xs font-black text-ink-500 uppercase tracking-widest mb-3">Nama Pewawancara *</label>
                 <select value={cawalsanForm.nama_pewawancara || ""} onChange={(e) => setCawalsanForm({ ...cawalsanForm, nama_pewawancara: e.target.value })} className="w-full px-5 py-4 bg-ink-50/30 border-2 border-ink-100 rounded-2xl focus:border-brand-yellow-500 outline-none font-bold text-brand-blue-950 transition-all cursor-pointer">
                   <option value="">Pilih Pewawancara</option>
                   {(p.jenjang?.toLowerCase().includes("putri") ? PEWAWANCARA_CAWALSAN_LIST_PUTRI : PEWAWANCARA_CAWALSAN_LIST_PUTRA).map((n) => <option key={n} value={n}>{n}</option>)}
@@ -651,8 +651,8 @@ export default function InputNilaiPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-black text-ink-300 uppercase tracking-widest mb-3">Catatan Tambahan (opsional)</label>
-                <textarea value={cawalsanForm.catatan || ""} onChange={(e) => setCawalsanForm({ ...cawalsanForm, catatan: e.target.value })} rows={3} className="w-full px-5 py-4 bg-ink-50/30 border-2 border-ink-100 rounded-2xl focus:border-brand-yellow-500 outline-none font-bold text-brand-blue-950 transition-all resize-none placeholder:text-ink-100" placeholder="Catatan tambahan pewawancara..." />
+                <label className="block text-xs font-black text-ink-500 uppercase tracking-widest mb-3">Catatan Tambahan (opsional)</label>
+                <textarea value={cawalsanForm.catatan || ""} onChange={(e) => setCawalsanForm({ ...cawalsanForm, catatan: e.target.value })} rows={3} className="w-full px-5 py-4 bg-ink-50/30 border-2 border-ink-100 rounded-2xl focus:border-brand-yellow-500 outline-none font-bold text-brand-blue-950 transition-all resize-none placeholder:text-ink-400" placeholder="Catatan tambahan pewawancara..." />
               </div>
             </div>
 
@@ -703,15 +703,15 @@ export default function InputNilaiPage() {
             </div>
             <div>
               <h1 className="text-3xl font-black text-brand-blue-950 font-display tracking-tight leading-none">Input Nilai Ujian</h1>
-              <p className="text-sm font-bold text-ink-300 mt-2">Total Terdaftar: <span className="text-brand-blue-700 bg-brand-blue-50 px-2 py-0.5 rounded-lg">{peserta.length} peserta</span></p>
+              <p className="text-sm font-bold text-ink-500 mt-2">Total Terdaftar: <span className="text-brand-blue-700 bg-brand-blue-50 px-2 py-0.5 rounded-lg">{peserta.length} peserta</span></p>
             </div>
           </div>
         </div>
 
         {/* Search */}
         <div className="mt-8 relative z-10">
-          <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-300" />
-          <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Cari nama atau nomor pendaftaran..." className="w-full pl-14 pr-6 py-4.5 bg-ink-50/50 border border-ink-100 rounded-3xl focus:border-brand-blue-500 focus:ring-8 focus:ring-brand-blue-500/5 outline-none text-base font-bold text-brand-blue-950 transition-all placeholder:text-ink-200" />
+          <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-500" />
+          <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Cari nama atau nomor pendaftaran..." className="w-full pl-14 pr-6 py-4.5 bg-ink-50/50 border border-ink-100 rounded-3xl focus:border-brand-blue-500 focus:ring-8 focus:ring-brand-blue-500/5 outline-none text-base font-bold text-brand-blue-950 transition-all placeholder:text-ink-400" />
         </div>
       </div>
 
