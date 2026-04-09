@@ -52,7 +52,7 @@ export async function POST(request: Request) {
                 finalTitle = "Wawancara Cawalsan";
             } else if (role === 'pewawancara_calsan' || role === 'penguji_calsan') {
                 finalTitle = "Wawancara Calsan";
-            } else if (role === 'penguji_quran') {
+            } else if (role === 'penguji_quran' || role === 'penguji') {
                 finalTitle = "Tes Al-Qur'an";
             } else {
                 finalTitle = title || "Sesi Ujian";
