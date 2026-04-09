@@ -1,7 +1,13 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
-import { enqueueWhatsapp, buildMessageKonfirmasiJadwal, buildMessageKonfirmasiJadwalInterviewer } from "@/lib/whatsapp-queue";
+import { 
+    enqueueWhatsapp, 
+    buildMessageKonfirmasiJadwal, 
+    buildMessageKonfirmasiJadwalInterviewer, 
+    buildMessageReminderH1Santri, 
+    buildMessageReminderH1Penguji 
+} from "@/lib/whatsapp-queue";
 
 async function getSession() {
     const cookieStore = await cookies();
@@ -243,6 +249,77 @@ export async function POST(request: Request) {
                         scheduledAt: scheduledAt,
                     }).catch((err: any) => console.error("Failed to enqueue interviewer notification:", err));
                 }
+            }
+
+            // 3. SCHEDULE H-1 REMINDERS (Pukul 20.00 WIB H-1)
+            try {
+                const examDate = new Date(examSession.start_time);
+                const reminderTime = new Date(examDate);
+                reminderTime.setDate(reminderTime.getDate() - 1); // H-1
+                reminderTime.setUTCHours(13, 0, 0, 0); // 20:00 WIB = 13:00 UTC
+
+                // Only schedule if the reminder time is in the future
+                if (reminderTime > new Date()) {
+                    // 3.1. Reminder for Santri
+                    const remSantriMsg = buildMessageReminderH1Santri(
+                        pendaftarInfo.nama_lengkap,
+                        dateStr.split(',')[0] || "Besok", // Day name
+                        dateStr,
+                        timeStr,
+                        lokasi,
+                        jenisUjian
+                    );
+
+                    enqueueWhatsapp({
+                        pendaftarId: session.id,
+                        phone: pendaftarInfo.no_hp,
+                        jenisNotif: "reminder_h1",
+                        messageContent: remSantriMsg,
+                        scheduledAt: reminderTime,
+                    }).then(() => {
+                         // Update flag
+                         prisma.jadwalUjian.update({
+                             where: { id: result.id },
+                             data: { notif_h1_pendaftar_terkirim: true }
+                         }).catch(e => console.error("Failed to update H1 santri flag:", e));
+                    }).catch(err => console.error("Failed to enqueue H1 santri reminder:", err));
+
+                    // 3.2. Reminder for Interviewer
+                    if (examSession.created_by) {
+                        const interviewer = await prisma.profile.findUnique({
+                            where: { id: examSession.created_by },
+                            select: { full_name: true, phone: true, google_meet_link: true }
+                        });
+
+                        if (interviewer && interviewer.phone) {
+                            const remIntMessage = buildMessageReminderH1Penguji(
+                                interviewer.full_name,
+                                pendaftarInfo.nama_lengkap,
+                                dateStr.split(',')[0] || "Besok",
+                                dateStr,
+                                timeStr,
+                                interviewer.google_meet_link || lokasi,
+                                jenisUjian
+                            );
+
+                            enqueueWhatsapp({
+                                pendaftarId: session.id,
+                                phone: interviewer.phone,
+                                jenisNotif: "reminder_h1",
+                                messageContent: remIntMessage,
+                                scheduledAt: reminderTime,
+                            }).then(() => {
+                                 // Update flag
+                                 prisma.jadwalUjian.update({
+                                     where: { id: result.id },
+                                     data: { notif_h1_penguji_terkirim: true }
+                                 }).catch(e => console.error("Failed to update H1 interviewer flag:", e));
+                            }).catch(err => console.error("Failed to enqueue H1 penguji reminder:", err));
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error("Error scheduling H1 reminders:", error);
             }
         }
 

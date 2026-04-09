@@ -742,3 +742,62 @@ export async function getQueueStats() {
             : null,
     };
 }
+
+/**
+ * Template: Pengingat H-1 untuk Santri (H-1 Pukul 20.00 WIB)
+ */
+export function buildMessageReminderH1Santri(
+    nama: string,
+    hari: string,
+    tanggal: string,
+    jam: string,
+    lokasi: string,
+    jenisUjian: string
+): string {
+    return `*PENGINGAT UJIAN SELEKSI (H-1)*
+
+Assalamu'alaikum Wr. Wb.
+Halo Ananda *${nama}*,
+
+Ini adalah pengingat bahwa Anda dijadwalkan mengikuti *${jenisUjian}* pada:
+
+📅 *Hari/Tanggal:* ${hari}, ${tanggal}
+⏰ *Waktu:* ${jam} WIB
+📍 *Lokasi/Link:* ${lokasi}
+
+Mohon persiapkan diri dengan baik dan pastikan koneksi internet stabil jika ujian online. Sampai jumpa besok!
+
+---
+*Panitia PPDB Al-Andalus Al-Imam*`;
+}
+
+/**
+ * Template: Pengingat H-1 untuk Penguji (H-1 Pukul 20.00 WIB)
+ */
+export function buildMessageReminderH1Penguji(
+    namaPenguji: string,
+    namaSantri: string,
+    hari: string,
+    tanggal: string,
+    jam: string,
+    lokasi: string,
+    jenisUjian: string
+): string {
+    return `*REMINDER JADWAL MENGUJI (H-1)*
+
+Assalamu'alaikum Ust/Ustadzah *${namaPenguji}*,
+
+Mengingatkan kembali jadwal menguji Anda untuk besok:
+
+📝 *Mata Pelajaran:* ${jenisUjian}
+👤 *Nama Santri:* ${namaSantri}
+📅 *Hari/Tanggal:* ${hari}, ${tanggal}
+⏰ *Waktu:* ${jam} WIB
+📍 *Link Meet:* ${lokasi}
+
+Mohon kehadirannya tepat waktu. Syukron.
+
+---
+*Sistem PPDB Al-Andalus Al-Imam*`;
+}
+
