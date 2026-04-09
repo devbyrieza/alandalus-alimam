@@ -23,6 +23,7 @@ export type NotifType =
     | "jadwal_tersedia"
     | "jadwal_langsung_tersedia"
     | "konfirmasi_jadwal"
+    | "konfirmasi_jadwal_interviewer"
     | "reminder_h1"
     | "reminder_h0"
     | "hasil_tes";
@@ -675,15 +676,41 @@ Panitia PPDB Al-Imam`;
 
 export function buildMessageHasilTes(nama: string): string {
     return `${pickOpening()} ${nama},
+ 
+ Alhamdulillah, hasil tes seleksi Anda sudah tersedia.
+ 
+ Silakan login ke dashboard untuk melihat hasil lengkap Anda.
+ 
+ Dashboard: ${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/dashboard/pendaftar/pengumuman
+ 
+ Jazakumullahu khairan,
+ Panitia PPDB Al-Imam`;
+}
 
-Alhamdulillah, hasil tes seleksi Anda sudah tersedia.
-
-Silakan login ke dashboard untuk melihat hasil lengkap Anda.
-
-Dashboard: ${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/dashboard/pendaftar/pengumuman
-
-Jazakumullahu khairan,
-Panitia PPDB Al-Imam`;
+/**
+ * Build Message for Interviewer/Penguji
+ */
+export function buildMessageKonfirmasiJadwalInterviewer(
+    namaInterviewer: string,
+    namaSantri: string,
+    tanggal: string,
+    waktu: string,
+    lokasi: string,
+    jenisUjian: string
+): string {
+    const opening = pickOpening();
+    return `${opening} Ustadz/Ustadzah ${namaInterviewer},
+ 
+ Informasikan jadwal ${jenisUjian} baru untuk santri berikut:
+ 
+ Nama Santri: ${namaSantri}
+ Tanggal: ${tanggal}
+ Waktu: ${waktu} WIB
+ Tempat: ${lokasi}
+ 
+ Mohon untuk bersiap di ruangan virtual/fisik tepat waktu. Syukran.
+ 
+ Panitia PPDB Al-Imam`;
 }
 
 // ============================================================================

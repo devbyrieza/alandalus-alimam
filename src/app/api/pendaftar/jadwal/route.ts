@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
-import { enqueueWhatsapp, buildMessageKonfirmasiJadwal } from "@/lib/whatsapp-queue";
+import { enqueueWhatsapp, buildMessageKonfirmasiJadwal, buildMessageKonfirmasiJadwalInterviewer } from "@/lib/whatsapp-queue";
 
 async function getSession() {
     const cookieStore = await cookies();
@@ -125,12 +125,26 @@ export async function POST(request: Request) {
             let pengujiFields: Record<string, string> = {};
             const sessionTitle = (examSession.title || "").toLowerCase();
             if (examSession.created_by) {
+                const interviewer = await tx.profile.findUnique({
+                    where: { id: examSession.created_by },
+                    select: { google_meet_link: true, full_name: true, phone: true }
+                });
+
                 if (sessionTitle.includes("qur") || sessionTitle.includes("quran")) {
-                    pengujiFields = { penguji_quran_id: examSession.created_by };
+                    pengujiFields = {
+                        penguji_quran_id: examSession.created_by,
+                        google_meet_link: interviewer?.google_meet_link || null
+                    };
                 } else if (sessionTitle.includes("calsan") || sessionTitle.includes("santri")) {
-                    pengujiFields = { penguji_santri_id: examSession.created_by };
+                    pengujiFields = {
+                        penguji_santri_id: examSession.created_by,
+                        google_meet_link: interviewer?.google_meet_link || null
+                    };
                 } else if (sessionTitle.includes("cawalsan") || sessionTitle.includes("ortu") || sessionTitle.includes("orang")) {
-                    pengujiFields = { penguji_ortu_id: examSession.created_by };
+                    pengujiFields = {
+                        penguji_ortu_id: examSession.created_by,
+                        google_meet_link: interviewer?.google_meet_link || null
+                    };
                 }
             }
 
@@ -199,6 +213,37 @@ export async function POST(request: Request) {
                 jenisNotif: "konfirmasi_jadwal",
                 messageContent: message,
             }).catch((err: any) => console.error("Failed to enqueue jadwal confirmation:", err));
+
+            // 2. Notify Interviewer (Layer 2.1: Delayed notification for staff)
+            if (examSession.created_by) {
+                const interviewer = await prisma.profile.findUnique({
+                    where: { id: examSession.created_by },
+                    select: { full_name: true, phone: true, google_meet_link: true }
+                });
+
+                if (interviewer && interviewer.phone) {
+                    const intMessage = buildMessageKonfirmasiJadwalInterviewer(
+                        interviewer.full_name,
+                        pendaftarInfo.nama_lengkap,
+                        dateStr,
+                        timeStr,
+                        interviewer.google_meet_link || lokasi,
+                        jenisUjian
+                    );
+
+                    // Stall interviewer notification by 1 minute to avoid consecutive message bursts (Anti-BAN)
+                    const scheduledAt = new Date();
+                    scheduledAt.setMinutes(scheduledAt.getMinutes() + 1);
+
+                    enqueueWhatsapp({
+                        pendaftarId: session.id,
+                        phone: interviewer.phone,
+                        jenisNotif: "konfirmasi_jadwal_interviewer",
+                        messageContent: intMessage,
+                        scheduledAt: scheduledAt,
+                    }).catch((err: any) => console.error("Failed to enqueue interviewer notification:", err));
+                }
+            }
         }
 
         return NextResponse.json({ success: true, data: result });
