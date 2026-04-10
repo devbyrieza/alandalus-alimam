@@ -56,7 +56,7 @@ const AuthInput = ({
   <div className="space-y-3">
     <label className="text-[10px] font-black text-ink-600 uppercase tracking-[0.2em] ml-1">{label}</label>
     <div className="relative group">
-      <div className="absolute left-6 top-1/2 -translate-y-1/2 text-ink-500 group-focus-within:text-brand-blue-600 transition-colors duration-300">
+      <div className="absolute left-5 md:left-6 top-0 bottom-0 flex items-center text-ink-500 group-focus-within:text-brand-blue-600 transition-colors duration-300">
         <Icon className="w-5 h-5" />
       </div>
       {children}
@@ -374,7 +374,7 @@ export default function LoginPage() {
                       value={nomorPendaftaran}
                       onChange={(e) => setNomorPendaftaran(e.target.value.toUpperCase())}
                       placeholder="Contoh: MTI2600001"
-                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-12 md:pl-16 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-maroon-300 focus:ring-4 focus:ring-maroon-50 transition-all font-bold text-ink-950 uppercase placeholder:normal-case placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
+                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-14 md:pl-16 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-maroon-300 focus:ring-4 focus:ring-maroon-50 transition-all font-bold text-ink-950 uppercase placeholder:normal-case placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
                       disabled={isLoading}
                     />
                   </AuthInput>
@@ -387,7 +387,7 @@ export default function LoginPage() {
                       value={nikPendaftar}
                       onChange={(e) => setNikPendaftar(e.target.value.replace(/\D/g, ""))}
                       placeholder="16 Digit NIK Sesuai KK"
-                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-12 md:pl-16 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-maroon-300 focus:ring-4 focus:ring-maroon-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
+                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-14 md:pl-16 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-maroon-300 focus:ring-4 focus:ring-maroon-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
                       disabled={isLoading}
                     />
                   </AuthInput>
@@ -434,7 +434,7 @@ export default function LoginPage() {
                       value={emailAdmin}
                       onChange={(e) => setEmailAdmin(e.target.value)}
                       placeholder="admin@andalus.sch.id"
-                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-12 md:pl-16 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-maroon-300 focus:ring-4 focus:ring-maroon-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
+                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-14 md:pl-16 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-maroon-300 focus:ring-4 focus:ring-maroon-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
                       disabled={isLoading}
                     />
                   </AuthInput>
@@ -446,7 +446,7 @@ export default function LoginPage() {
                         value={passwordAdmin}
                         onChange={(e) => setPasswordAdmin(e.target.value)}
                         placeholder="••••••••"
-                        className="w-full px-5 py-3 md:px-8 md:py-5 pl-12 md:pl-16 pr-12 md:pr-16 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-maroon-300 focus:ring-4 focus:ring-maroon-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
+                        className="w-full px-5 py-3 md:px-8 md:py-5 pl-14 md:pl-16 pr-12 md:pr-16 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-maroon-300 focus:ring-4 focus:ring-maroon-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
                         disabled={isLoading}
                       />
                       <button
