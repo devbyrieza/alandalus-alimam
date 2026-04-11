@@ -24,7 +24,10 @@ export async function GET(request: NextRequest) {
         // 2. Build secure cookie directly based on the token's authenticated payload
         // To minimize database lookups, we trust the HMAC-SHA256 valid signature.
         const targetUrl = redirect || "/dashboard/penguji/input-nilai";
-        const response = NextResponse.redirect(new URL(targetUrl, request.url));
+        
+        // Force use the public URL for redirect base to avoid 0.0.0.0 internal address
+        const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://pesantren-alimam.com";
+        const response = NextResponse.redirect(new URL(targetUrl, baseUrl));
 
         response.cookies.set(
             "app_session",
