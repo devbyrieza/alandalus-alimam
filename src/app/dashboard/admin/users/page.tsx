@@ -25,6 +25,7 @@ interface AdminUser {
     full_name: string;
     role: string;
     secondary_roles?: string[];
+    phone?: string;
     created_at: string;
 }
 
@@ -238,6 +239,7 @@ export default function UserManagementPage() {
             full_name: "",
             role: "admin_berkas",
             secondary_roles: [],
+            phone: "",
         });
     };
 
