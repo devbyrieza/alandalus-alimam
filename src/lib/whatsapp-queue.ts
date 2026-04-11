@@ -644,7 +644,7 @@ export function buildMessageReminderH1(
 ): string {
     return `${pickOpening()} ${nama},
 
-Pengingat: ${jenisUjian} Anda dijadwalkan besok.
+Pengingat jadwal ${jenisUjian} Anda:
 
 📋 *${jenisUjian}*
 📅 Tanggal: ${tanggal}
