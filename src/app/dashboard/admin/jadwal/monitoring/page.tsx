@@ -340,14 +340,14 @@ export default function MonitoringJadwalPage() {
                                         </div>
                                         <h2 className="text-lg font-black text-ink-900">{group.name} <span className="text-blue-600">({group.items.length})</span></h2>
                                     </div>
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-ink-400">Jadwal Penguji</span>
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-ink-400">Jadwal Seleksi</span>
                                 </div>
                                 <div className="p-0">
                                     <table className="w-full text-left border-collapse">
                                         <thead>
                                             <tr className="bg-slate-50/30">
                                                 <th className="px-6 py-3 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Nama Santri</th>
-                                                <th className="px-6 py-3 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Peran Penguji</th>
+                                                <th className="px-6 py-3 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Peran / Tugas</th>
                                                 <th className="px-6 py-3 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Waktu & Lokasi</th>
                                                 <th className="px-6 py-3 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100 text-center">Status</th>
                                             </tr>

@@ -442,7 +442,7 @@ export default function JadwalPengujiPage() {
                 Jadwal & Sesi Ujian
               </h2>
               <p className="text-sm font-bold text-ink-500 mt-1">
-                Kelola jadwal menguji dan ketersediaan waktu
+                Kelola jadwal seleksi dan ketersediaan waktu
               </p>
             </div>
           </div>
