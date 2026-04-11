@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { notifyDocumentVerified } from "@/lib/wablas";
 import { getServerSession } from "@/lib/session";
 import { logAdminAction } from "@/lib/audit";
+import { enqueueWhatsapp, buildMessageJadwalLangsungTersedia, buildMessageJadwalBelum } from "@/lib/whatsapp-queue";
 
 // GET: List dokumen yang perlu diverifikasi
 export async function GET(request: NextRequest) {
@@ -204,6 +205,44 @@ export async function PATCH(request: NextRequest) {
             where: { id: dokumen.pendaftar_id },
             data: { status_pendaftaran: 'docs_verified' }
           });
+
+          // --- AUTOMATED NOTIFICATION LOGIC ---
+          try {
+            // Check available slots
+            const sessions = await prisma.examSession.findMany({
+              where: { is_active: true, start_time: { gte: new Date() } },
+              include: { _count: { select: { bookings: true } } }
+            });
+
+            const totalAvailableSlots = sessions.reduce((acc, s) => acc + Math.max(0, s.quota - s._count.bookings), 0);
+
+            if (dokumen.pendaftar?.no_hp) {
+              if (totalAvailableSlots > 0) {
+                // Skenario A: Jadwal Langsung Tersedia
+                await enqueueWhatsapp({
+                  pendaftarId: dokumen.pendaftar_id,
+                  phone: dokumen.pendaftar.no_hp,
+                  jenisNotif: "jadwal_langsung_tersedia",
+                  messageContent: buildMessageJadwalLangsungTersedia(dokumen.pendaftar.nama_lengkap),
+                });
+                // Mark flag so they don't get double notified by manual broadcast later (unless reset)
+                await prisma.pendaftar.update({
+                  where: { id: dokumen.pendaftar_id },
+                  data: { notif_jadwal_tersedia_terkirim: true }
+                });
+              } else {
+                // Skenario B: Jadwal Belum Ada (Tapi Verifikasi Berhasil)
+                await enqueueWhatsapp({
+                  pendaftarId: dokumen.pendaftar_id,
+                  phone: dokumen.pendaftar.no_hp,
+                  jenisNotif: "jadwal_belum",
+                  messageContent: buildMessageJadwalBelum(dokumen.pendaftar.nama_lengkap),
+                });
+              }
+            }
+          } catch (notifErr) {
+            console.error("Automated notification error:", notifErr);
+          }
         }
       } else {
         // REJECTED: Revert status if it was 'docs_verified'
