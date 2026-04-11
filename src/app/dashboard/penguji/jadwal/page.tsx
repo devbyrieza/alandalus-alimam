@@ -513,9 +513,14 @@ export default function JadwalPengujiPage() {
                   <div key={item.id} className={`bg-white rounded-3xl p-6 md:p-8 border transition-all app-card ${isToday(item.tanggal_ujian) ? "border-emerald-200 shadow-md ring-4 ring-emerald-50" : "border-cream-200 shadow-sm hover:border-maroon-200 hover:shadow-md"}`}>
                     <div className="flex md:items-center justify-between flex-col md:flex-row gap-6">
                       <div className="flex items-start gap-5">
-                        <div className={`p-4 rounded-2xl font-bold text-center min-w-[70px] shrink-0 border ${isToday(item.tanggal_ujian) ? 'bg-emerald-50 border-emerald-100 text-emerald-700' : 'bg-maroon-50 border-maroon-100 text-maroon-700'}`}>
-                          <div className="text-xs uppercase tracking-wider">{new Date(item.tanggal_ujian).toLocaleDateString('id-ID', { month: 'short' })}</div>
-                          <div className="text-3xl font-display mt-0.5">{new Date(item.tanggal_ujian).getDate()}</div>
+                        <div className={`p-3 rounded-2xl font-bold text-center min-w-[80px] shrink-0 border flex flex-col justify-center ${isToday(item.tanggal_ujian) ? 'bg-emerald-50 border-emerald-100 text-emerald-700' : 'bg-maroon-50 border-maroon-100 text-maroon-700'}`}>
+                          <div className="text-[10px] uppercase tracking-widest opacity-70 mb-0.5">
+                            {new Date(item.tanggal_ujian).toLocaleDateString('id-ID', { weekday: 'short' }).replace('Min', 'Ahd')}
+                          </div>
+                          <div className="text-2xl font-display leading-none">{new Date(item.tanggal_ujian).getDate()}</div>
+                          <div className="text-[10px] uppercase tracking-wider mt-1 opacity-70">
+                            {new Date(item.tanggal_ujian).toLocaleDateString('id-ID', { month: 'short' })}
+                          </div>
                         </div>
                         <div>
                           <div className="flex flex-wrap items-center gap-2 mb-2">
