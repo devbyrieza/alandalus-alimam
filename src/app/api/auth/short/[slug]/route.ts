@@ -8,10 +8,10 @@ import { generateMagicToken, PERMANENT_SLUGS } from "@/lib/utils/magic-link";
  */
 export async function GET(
     request: NextRequest,
-    { params }: { params: { slug: string } }
+    { params }: { params: Promise<{ slug: string }> }
 ) {
     try {
-        const { slug } = params;
+        const { slug } = await params;
         const nameQuery = PERMANENT_SLUGS[slug.toLowerCase()];
 
         if (!nameQuery) {
