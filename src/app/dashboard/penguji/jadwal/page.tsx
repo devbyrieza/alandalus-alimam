@@ -369,7 +369,7 @@ export default function JadwalPengujiPage() {
       day: "numeric",
       month: "long",
       year: "numeric",
-    });
+    }).replace("Minggu", "Ahad");
   };
 
   const formatTime = (dateString: string) => {

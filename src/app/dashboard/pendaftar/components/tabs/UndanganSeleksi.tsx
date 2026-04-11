@@ -181,7 +181,7 @@ export default function UndanganSeleksiTab() {
       day: "numeric",
       month: "long",
       year: "numeric",
-    });
+    }).replace("Minggu", "Ahad");
   };
 
   const formatTime = (timeString: string) => {

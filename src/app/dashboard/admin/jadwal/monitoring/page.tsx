@@ -73,7 +73,7 @@ export default function MonitoringJadwalPage() {
             year: "numeric",
             hour: "2-digit",
             minute: "2-digit"
-        });
+        }).replace("Minggu", "Ahad");
     };
 
     const getStatusIcon = (status: string) => {

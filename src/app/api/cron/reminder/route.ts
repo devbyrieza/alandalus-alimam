@@ -92,7 +92,7 @@ export async function GET(request: Request) {
                     month: "long",
                     year: "numeric",
                 }
-            );
+            ).replace("Minggu", "Ahad");
 
             const waktu = jadwal.exam_session
                 ? new Date(jadwal.exam_session.start_time).toLocaleTimeString(

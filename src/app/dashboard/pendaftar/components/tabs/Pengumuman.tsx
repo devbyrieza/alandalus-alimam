@@ -79,7 +79,7 @@ export default function PengumumanTab() {
       day: "numeric",
       month: "long",
       year: "numeric",
-    });
+    }).replace("Minggu", "Ahad");
   };
 
   if (loading) {
