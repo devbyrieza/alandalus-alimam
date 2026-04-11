@@ -42,11 +42,11 @@ export interface EnqueueParams {
 // CONSTANTS
 // ============================================================================
 
-const MAX_MESSAGES_PER_HOUR = 20;
-const MAX_MESSAGES_PER_10MIN = 10;
-const COOLDOWN_MINUTES = 15;
-const MIN_DELAY_MS = 5000;
-const MAX_DELAY_MS = 10000;
+const MAX_MESSAGES_PER_HOUR = 120; // Increased from 20 for faster queue clearing
+const MAX_MESSAGES_PER_10MIN = 30;  // Increased from 10
+const COOLDOWN_MINUTES = 5;         // Reduced from 15 to recover faster
+const MIN_DELAY_MS = 3000;          // Reduced from 5000
+const MAX_DELAY_MS = 7000;          // Reduced from 10000
 const MAX_RETRY_ATTEMPTS = 3;
 const RETRY_DELAY_MINUTES = 5;
 
@@ -60,7 +60,8 @@ const RETRY_DELAY_MINUTES = 5;
  */
 async function isDuplicate(
     pendaftarId: string,
-    jenisNotif: NotifType
+    jenisNotif: NotifType,
+    phone: string
 ): Promise<boolean> {
     // Check Pendaftar flag columns for persistent flags
     const flagMap: Partial<Record<NotifType, string>> = {
@@ -93,11 +94,16 @@ async function isDuplicate(
     }
 
     // For non-flag types (konfirmasi_jadwal, reminder_h1), check WhatsappLog
+    // Added phone check & 48h limit to allow multiple examiners per student and re-tests
+    const recentWindow = new Date(Date.now() - 48 * 60 * 60 * 1000); 
+
     const existingLog = await prisma.whatsappLog.findFirst({
         where: {
             pendaftar_id: pendaftarId,
+            phone: phone, // Check phone too!
             jenis_notif: jenisNotif,
             status: { in: ["pending", "processing", "sent"] },
+            created_at: { gte: recentWindow }
         },
     });
 
@@ -278,9 +284,9 @@ export async function enqueueWhatsapp(
         params;
 
     // Layer 1: Duplicate check
-    const duplicate = await isDuplicate(pendaftarId, jenisNotif);
+    const duplicate = await isDuplicate(pendaftarId, jenisNotif, phone);
     if (duplicate) {
-        return { queued: false, reason: "Notifikasi sudah pernah dikirim/diantri" };
+        return { queued: false, reason: "Notifikasi serupa sudah pernah dikirim/diantri" };
     }
 
     // Layer 5: Check if number is blocked
@@ -698,21 +704,27 @@ export function buildMessageKonfirmasiJadwalInterviewer(
     tanggal: string,
     waktu: string,
     lokasi: string,
-    jenisUjian: string
+    jenisUjian: string,
+    inputNilaiLink?: string
 ): string {
     const opening = pickOpening();
-    return `${opening} Ustadz/Ustadzah ${namaInterviewer},
+    let msg = `${opening} Ustadz/Ustadzah ${namaInterviewer},
  
  Informasikan jadwal ${jenisUjian} baru untuk santri berikut:
  
  Nama Santri: ${namaSantri}
  Tanggal: ${tanggal}
  Waktu: ${waktu} WIB
- Tempat: ${lokasi}
- 
- Mohon untuk bersiap di ruangan virtual/fisik tepat waktu. Syukran.
+ Tempat: ${lokasi}`;
+
+    if (inputNilaiLink) {
+        msg += `\n\n🔗 *Input Hasil:* ${inputNilaiLink}`;
+    }
+
+    msg += `\n\nMohon untuk bersiap di ruangan virtual/fisik tepat waktu. Syukran.
  
  Panitia PPDB Al-Imam`;
+    return msg;
 }
 
 // ============================================================================
@@ -783,9 +795,10 @@ export function buildMessageReminderH1Penguji(
     tanggal: string,
     jam: string,
     lokasi: string,
-    jenisUjian: string
+    jenisUjian: string,
+    inputNilaiLink?: string
 ): string {
-    return `*REMINDER JADWAL MENGUJI (H-1)*
+    let msg = `*REMINDER JADWAL MENGUJI (H-1)*
 
 Assalamu'alaikum Ust/Ustadzah *${namaPenguji}*,
 
@@ -795,12 +808,17 @@ Mengingatkan kembali jadwal menguji Anda untuk besok:
 👤 *Nama Santri:* ${namaSantri}
 📅 *Hari/Tanggal:* ${hari}, ${tanggal}
 ⏰ *Waktu:* ${jam} WIB
-📍 *Link Meet:* ${lokasi}
+📍 *Link Meet:* ${lokasi}`;
 
-Mohon kehadirannya tepat waktu. Syukron.
+    if (inputNilaiLink) {
+        msg += `\n🔗 *Input Hasil:* ${inputNilaiLink}`;
+    }
+
+    msg += `\n\nMohon kehadirannya tepat waktu. Syukron.
 
 ---
 *Sistem PPDB Al-Andalus Al-Imam*`;
+    return msg;
 }
 
 export function buildMessagePembatalanJadwal(

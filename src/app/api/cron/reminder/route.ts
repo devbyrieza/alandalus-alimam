@@ -11,6 +11,7 @@ import {
     buildMessageReminderH1Santri,
     buildMessageReminderH1Penguji,
 } from "@/lib/whatsapp-queue";
+import { generateMagicToken } from "@/lib/utils/magic-link";
 
 const CRON_SECRET = process.env.CRON_SECRET || "ppdb-alimam-cron-2026";
 
@@ -28,7 +29,7 @@ export async function GET(request: Request) {
         // Calculate tomorrow's date range (in WIB = UTC+7)
         const now = new Date(); // Current server time
         
-        // Target: Tomorrow's date
+        // Target: Tomorrow's date (April 13 if today is April 12)
         const tomorrow = new Date(now);
         tomorrow.setDate(tomorrow.getDate() + 1);
         
@@ -37,14 +38,6 @@ export async function GET(request: Request) {
 
         const tomorrowEnd = new Date(tomorrow);
         tomorrowEnd.setHours(23, 59, 59, 999);
-
-        // Schedule Time: Today at 20:00 WIB
-        // 20:00 WIB is 13:00 UTC
-        const sendAt = new Date(now);
-        sendAt.setUTCHours(13, 0, 0, 0);
-        
-        // If 13:00 UTC today has already passed, set it to now (send immediately)
-        const finalScheduledAt = sendAt < now ? now : sendAt;
 
         // Find all jadwal_ujian scheduled for tomorrow
         const jadwalTomorrow = await prisma.jadwalUjian.findMany({
@@ -83,7 +76,20 @@ export async function GET(request: Request) {
 
             const jenisUjian = jadwal.exam_session?.title || "Seleksi Santri Baru";
 
-            // Determine Primary Meeting Link from examiners
+            // Calculate Start Time accurately
+            const startTime = jadwal.exam_session 
+                ? new Date(jadwal.exam_session.start_time) 
+                : (() => {
+                    const d = new Date(jadwal.tanggal_ujian);
+                    const t = new Date(jadwal.waktu_mulai_santri);
+                    d.setHours(t.getHours(), t.getMinutes(), t.getSeconds(), t.getMilliseconds());
+                    return d;
+                })();
+
+            // Calculate individualized scheduled time (StartTime - 16 hours)
+            const reminderTime = new Date(startTime.getTime() - 16 * 60 * 60 * 1000);
+            const finalScheduledAt = reminderTime < now ? now : reminderTime;
+
             const googleMeetLink = 
                 jadwal.penguji_santri?.google_meet_link || 
                 jadwal.penguji_quran?.google_meet_link || 
@@ -140,6 +146,18 @@ export async function GET(request: Request) {
 
             for (const { profile, type } of examinersToNotify) {
                 if (profile && profile.phone) {
+                    // Generate Magic Link for this examiner
+                    // Redirect to input-nilai page and pre-select this student via search param
+                    const redirectPath = `/dashboard/penguji/input-nilai?search=${encodeURIComponent(jadwal.pendaftar.nomor_pendaftaran)}`;
+                    const token = generateMagicToken(
+                        profile.id,
+                        profile.role || "penguji",
+                        profile.full_name,
+                        48, // 48 hours expiry
+                        redirectPath
+                    );
+                    const magicLink = `${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/api/auth/magic?token=${token}`;
+
                     const msgPenguji = buildMessageReminderH1Penguji(
                         profile.full_name,
                         jadwal.pendaftar.nama_lengkap,
@@ -147,7 +165,8 @@ export async function GET(request: Request) {
                         tanggalStr,
                         jam,
                         profile.google_meet_link || "Menyesuaikan",
-                        type
+                        type,
+                        magicLink
                     );
 
                     const result = await enqueueWhatsapp({
@@ -168,8 +187,7 @@ export async function GET(request: Request) {
             totalJadwalTomorrow: jadwalTomorrow.length,
             enqueuedSantri,
             enqueuedPenguji,
-            scheduledFor: finalScheduledAt.toISOString(),
-            timestamp: new Date().toISOString(),
+            timestamp: now.toISOString(),
         });
     } catch (error: any) {
         console.error("❌ Cron Reminder error:", error);

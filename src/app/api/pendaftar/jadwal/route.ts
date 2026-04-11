@@ -8,6 +8,7 @@ import {
     buildMessageReminderH1Santri, 
     buildMessageReminderH1Penguji 
 } from "@/lib/whatsapp-queue";
+import { generateMagicToken } from "@/lib/utils/magic-link";
 
 function getExamCategory(title: string): string {
     const t = (title || "").toLowerCase();
@@ -244,13 +245,25 @@ export async function POST(request: Request) {
                 });
 
                 if (interviewer && interviewer.phone) {
+                    // Generate Magic Link for this interviewer
+                    const redirectPathPath = `/dashboard/penguji/input-nilai?search=${encodeURIComponent(pendaftarInfo.nama_lengkap)}`; // Fallback search by name if nomor_pendaftaran is not easily accessible here
+                    const token = generateMagicToken(
+                        examSession.created_by,
+                        "penguji", 
+                        interviewer.full_name,
+                        72, // 3 days expiry for confirmation
+                        redirectPathPath
+                    );
+                    const magicLink = `${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/api/auth/magic?token=${token}`;
+
                     const intMessage = buildMessageKonfirmasiJadwalInterviewer(
                         interviewer.full_name,
                         pendaftarInfo.nama_lengkap,
                         dateStr,
                         timeStr,
                         interviewer.google_meet_link || lokasi,
-                        jenisUjian
+                        jenisUjian,
+                        magicLink
                     );
 
                     // Stall interviewer notification by 1 minute to avoid consecutive message bursts (Anti-BAN)
@@ -269,13 +282,13 @@ export async function POST(request: Request) {
 
             // 3. SCHEDULE H-1 REMINDERS (Pukul 20.00 WIB H-1)
             try {
-                const examDate = new Date(examSession.start_time);
-                const reminderTime = new Date(examDate);
-                reminderTime.setDate(reminderTime.getDate() - 1); // H-1
-                reminderTime.setUTCHours(13, 0, 0, 0); // 20:00 WIB = 13:00 UTC
+                const examStartTime = new Date(examSession.start_time);
+                // Calculate individualized scheduled time (StartTime - 16 hours)
+                const reminderTime = new Date(examStartTime.getTime() - 16 * 60 * 60 * 1000);
 
-                // Only schedule if the reminder time is in the future
-                if (reminderTime > new Date()) {
+                // Schedule if in the future, or send now if already within 16h window
+                const now = new Date();
+                const finalScheduledAt = reminderTime < now ? now : reminderTime;
                     // 3.1. Reminder for Santri
                     const remSantriMsg = buildMessageReminderH1Santri(
                         pendaftarInfo.nama_lengkap,
@@ -291,7 +304,7 @@ export async function POST(request: Request) {
                         phone: pendaftarInfo.no_hp,
                         jenisNotif: "reminder_h1",
                         messageContent: remSantriMsg,
-                        scheduledAt: reminderTime,
+                        scheduledAt: finalScheduledAt,
                     }).then(async () => {
                          // Update flag safely - using try catch to avoid crash if DB not pushed yet
                          try {
@@ -312,6 +325,17 @@ export async function POST(request: Request) {
                         });
 
                         if (interviewer && interviewer.phone) {
+                            // Generate Magic Link for H-1 reminder
+                            const redirectPathH1 = `/dashboard/penguji/input-nilai?search=${encodeURIComponent(pendaftarInfo.nama_lengkap)}`;
+                            const tokenH1 = generateMagicToken(
+                                examSession.created_by,
+                                "penguji",
+                                interviewer.full_name,
+                                48, // 2 days
+                                redirectPathH1
+                            );
+                            const magicLinkH1 = `${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/api/auth/magic?token=${tokenH1}`;
+
                             const remIntMessage = buildMessageReminderH1Penguji(
                                 interviewer.full_name,
                                 pendaftarInfo.nama_lengkap,
@@ -319,7 +343,8 @@ export async function POST(request: Request) {
                                 dateStr,
                                 timeStr,
                                 interviewer.google_meet_link || lokasi,
-                                jenisUjian
+                                jenisUjian,
+                                magicLinkH1
                             );
 
                             enqueueWhatsapp({
@@ -327,7 +352,7 @@ export async function POST(request: Request) {
                                 phone: interviewer.phone,
                                 jenisNotif: "reminder_h1",
                                 messageContent: remIntMessage,
-                                scheduledAt: reminderTime,
+                                scheduledAt: finalScheduledAt,
                             }).then(async () => {
                                  // Update flag safely
                                  try {
@@ -341,7 +366,6 @@ export async function POST(request: Request) {
                             }).catch(err => console.error("Failed to enqueue H1 penguji reminder:", err));
                         }
                     }
-                }
             } catch (error) {
                 console.error("Error scheduling H1 reminders:", error);
             }

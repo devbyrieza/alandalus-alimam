@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Swal from "sweetalert2";
 import {
   ClipboardCheck,
@@ -173,9 +174,25 @@ const ROLE_TO_FORM_TYPES: Record<string, string[]> = {
 };
 
 export default function InputNilaiPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex flex-col items-center justify-center py-24 bg-white rounded-4xl border border-brand-yellow-100 shadow-sm app-card">
+        <Loader2 className="w-12 h-12 animate-spin text-brand-blue-600 mb-4" />
+        <span className="text-ink-600 font-black uppercase tracking-widest text-sm">Menyiapkan halaman...</span>
+      </div>
+    }>
+      <InputNilaiContent />
+    </Suspense>
+  );
+}
+
+function InputNilaiContent() {
+  const searchParams = useSearchParams();
+  const initialSearch = searchParams.get("search") || "";
+  
   const [peserta, setPeserta] = useState<Peserta[]>([]);
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(initialSearch);
   const [saving, setSaving] = useState<string | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);

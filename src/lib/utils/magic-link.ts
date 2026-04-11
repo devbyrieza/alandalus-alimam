@@ -10,10 +10,11 @@ export function generateMagicToken(
     profileId: string,
     role: string,
     fullName: string,
-    expiresInHours = 24
+    expiresInHours = 24,
+    redirect?: string
 ): string {
     const exp = Date.now() + expiresInHours * 60 * 60 * 1000;
-    const payload = { id: profileId, role, full_name: fullName, exp };
+    const payload = { id: profileId, role, full_name: fullName, exp, redirect };
 
     // Convert payload to base64
     const payloadStr = Buffer.from(JSON.stringify(payload)).toString("base64");
@@ -28,7 +29,7 @@ export function generateMagicToken(
 
 export function verifyMagicToken(token: string): {
     valid: boolean;
-    data?: { id: string; role: string; full_name: string };
+    data?: { id: string; role: string; full_name: string; redirect?: string };
     reason?: string;
 } {
     try {
@@ -63,6 +64,7 @@ export function verifyMagicToken(token: string): {
                 id: payload.id,
                 role: payload.role,
                 full_name: payload.full_name,
+                redirect: payload.redirect,
             },
         };
     } catch (error) {

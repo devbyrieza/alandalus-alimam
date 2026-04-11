@@ -19,11 +19,12 @@ export async function GET(request: NextRequest) {
             return NextResponse.redirect(new URL(`/login?error=${errReason}`, request.url));
         }
 
-        const { id, role, full_name } = verification.data;
+        const { id, role, full_name, redirect } = verification.data;
 
         // 2. Build secure cookie directly based on the token's authenticated payload
         // To minimize database lookups, we trust the HMAC-SHA256 valid signature.
-        const response = NextResponse.redirect(new URL("/dashboard/penguji/input-nilai", request.url));
+        const targetUrl = redirect || "/dashboard/penguji/input-nilai";
+        const response = NextResponse.redirect(new URL(targetUrl, request.url));
 
         response.cookies.set(
             "app_session",
