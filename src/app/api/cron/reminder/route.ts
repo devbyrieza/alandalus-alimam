@@ -86,8 +86,8 @@ export async function GET(request: Request) {
                     return d;
                 })();
 
-            // Calculate individualized scheduled time (StartTime - 16 hours)
-            const reminderTime = new Date(startTime.getTime() - 16 * 60 * 60 * 1000);
+            // Calculate individualized scheduled time (StartTime - 4 hours)
+            const reminderTime = new Date(startTime.getTime() - 4 * 60 * 60 * 1000);
             const finalScheduledAt = reminderTime < now ? now : reminderTime;
 
             const googleMeetLink = 

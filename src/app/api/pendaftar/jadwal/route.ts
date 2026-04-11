@@ -283,8 +283,8 @@ export async function POST(request: Request) {
             // 3. SCHEDULE H-1 REMINDERS (Pukul 20.00 WIB H-1)
             try {
                 const examStartTime = new Date(examSession.start_time);
-                // Calculate individualized scheduled time (StartTime - 16 hours)
-                const reminderTime = new Date(examStartTime.getTime() - 16 * 60 * 60 * 1000);
+                // Calculate individualized scheduled time (StartTime - 4 hours)
+                const reminderTime = new Date(examStartTime.getTime() - 4 * 60 * 60 * 1000);
 
                 // Schedule if in the future, or send now if already within 16h window
                 const now = new Date();
