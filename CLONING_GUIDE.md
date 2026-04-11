@@ -75,7 +75,7 @@ Sesuaikan dengan kebijakan pesantren.
 ## ⚡ **Speed Benefits**
 
 ### 🚀 **Sebelum vs Sesudah:**
-- **Manual Coding**: 2-3 minggu
+- **Manual Coding**: 2-3 pekan
 - **Template Cloning**: 1-2 hari! ⚡
 
 ### 📊 **Business Impact:**

@@ -102,10 +102,10 @@ SCENARIO NORMAL:
    → Middleware detect: Session < 1 hari lagi? TIDAK
    → Action: TIDAK ADA (biarkan saja)
 
-📱 Minggu jam 14:00: User buka dashboard
+📱 Ahad jam 14:00: User buka dashboard
    → Middleware detect: Session < 1 hari lagi? YA! (sisa 18 jam)
    → Action: REFRESH SESSION
-   → Session expires: Minggu depan 14:00 (7 hari baru)
+   → Session expires: Ahad depan 14:00 (7 hari baru)
 
 📱 Selasa jam 09:00: User buka dashboard
    → Middleware detect: Session < 1 hari lagi? TIDAK

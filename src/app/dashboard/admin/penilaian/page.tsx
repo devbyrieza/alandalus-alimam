@@ -36,6 +36,7 @@ export default function ExaminerDashboard() {
     const [grade, setGrade] = useState<string>('');
     const [catatan, setCatatan] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isBroadcasting, setIsBroadcasting] = useState(false);
 
     useEffect(() => {
         fetchStudents();
@@ -144,6 +145,46 @@ export default function ExaminerDashboard() {
                             Swal.fire('Error', 'Gagal menghitung ulang', 'error');
                         }
                     }} variant="outline" className="border-purple-600 text-purple-700 hover:bg-purple-50">Hitung Ulang Semua</Button>
+                    
+                    <Button 
+                        onClick={async () => {
+                            const result = await Swal.fire({
+                                title: 'Siarkan Jadwal?',
+                                text: "Sistem akan mengirim notifikasi WhatsApp ke pendaftar (terverifikasi) yang belum memiliki jadwal.",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#2563eb',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Ya, Siarkan!',
+                                cancelButtonText: 'Batal'
+                            });
+
+                            if (result.isConfirmed) {
+                                try {
+                                    setIsBroadcasting(true);
+                                    const res = await fetch('/api/admin/notifications/broadcast-availability', { 
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({ reset_flags: false })
+                                    });
+                                    if (!res.ok) throw new Error('Failed');
+                                    const data = await res.json();
+                                    Swal.fire('Berhasil', data.message || 'Antrean broadcast telah dibuat', 'success');
+                                } catch (error) {
+                                    console.error(error);
+                                    Swal.fire('Error', 'Gagal memproses broadcast', 'error');
+                                } finally {
+                                    setIsBroadcasting(false);
+                                }
+                            }
+                        }} 
+                        disabled={isBroadcasting}
+                        variant="outline" 
+                        className="border-blue-600 text-blue-700 hover:bg-blue-50"
+                    >
+                        {isBroadcasting ? 'Memproses...' : 'Siarkan Jadwal'}
+                    </Button>
+
                     <Button onClick={fetchStudents} variant="outline" className="border-gray-300">Refresh Data</Button>
                 </div>
             </div>

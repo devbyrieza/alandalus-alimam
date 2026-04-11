@@ -5,6 +5,7 @@ import {
     evaluateKepribadianGrade,
     evaluateQuranGrade,
     evaluateWawancaraGrade,
+    evaluateKesiapanGrade,
     determineFinalDecision
 } from './grading';
 
@@ -107,10 +108,11 @@ export async function recalculateNilaiUjian(pendaftarId: string) {
     const grdQuran = quran > 0 ? evaluateQuranGrade(quran) : null;
     const grdAk = ak > 0 ? evaluateAkademikGrade(ak) : null;
     const grdKp = kp > 0 ? evaluateKepribadianGrade(kp) : null;
+    const grdKs = ks > 0 ? evaluateKesiapanGrade(ks) : null;
     const grdWs = ws > 0 ? evaluateWawancaraGrade(ws) : null; 
     const grdWo = wo > 0 ? evaluateWawancaraGrade(wo) : null; 
 
-    const allGraded = grdQuran !== null && grdAk !== null && grdKp !== null && grdWs !== null && grdWo !== null;
+    const allGraded = grdQuran !== null && grdAk !== null && grdKp !== null && grdKs !== null && grdWs !== null && grdWo !== null;
 
     let status: string;
     if (allGraded) {
@@ -118,6 +120,7 @@ export async function recalculateNilaiUjian(pendaftarId: string) {
             quran: grdQuran,
             akademik: grdAk,
             kepribadian: grdKp,
+            kesiapan: grdKs!,
             wawancaraCalsan: grdWs,
             wawancaraCawalsan: grdWo
         });
