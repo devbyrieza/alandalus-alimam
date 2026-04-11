@@ -1,14 +1,15 @@
 /**
  * Cron endpoint for H-1 reminders.
  * Called daily at 08:00 WIB by external cron.
- * Finds all jadwal with tes tomorrow and enqueues reminder if not already sent.
+ * Finds all jadwal with tes tomorrow and schedules reminders for 20:00 WIB today.
  */
 
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import {
     enqueueWhatsapp,
-    buildMessageReminderH1,
+    buildMessageReminderH1Santri,
+    buildMessageReminderH1Penguji,
 } from "@/lib/whatsapp-queue";
 
 const CRON_SECRET = process.env.CRON_SECRET || "ppdb-alimam-cron-2026";
@@ -25,15 +26,33 @@ export async function GET(request: Request) {
 
     try {
         // Calculate tomorrow's date range (in WIB = UTC+7)
-        const now = new Date();
-        // Tomorrow at 00:00 WIB
-        const tomorrowStart = new Date(now);
-        tomorrowStart.setDate(tomorrowStart.getDate() + 1);
+        const now = new Date(); // Current server time
+        
+        // Target: Tomorrow's date
+        const tomorrow = new Date(now);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        
+        const tomorrowStart = new Date(tomorrow);
         tomorrowStart.setHours(0, 0, 0, 0);
 
-        // Tomorrow at 23:59 WIB
-        const tomorrowEnd = new Date(tomorrowStart);
+        const tomorrowEnd = new Date(tomorrow);
         tomorrowEnd.setHours(23, 59, 59, 999);
+
+        // Schedule Time: Today at 20:00 WIB
+        // Assuming server is in UTC, WIB is UTC+7
+        const scheduledAt = new Date(now);
+        scheduledAt.setHours(20, 0, 0, 0); // This sets 20:00 local/server time. 
+        // We should ensure it's 20:00 WIB.
+        // If server is UTC, 20:00 WIB is 13:00 UTC.
+        // Let's use a more robust way to set 20:00 WIB.
+        const scheduledTimeWIB = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Jakarta" }));
+        scheduledTimeWIB.setHours(20, 0, 0, 0);
+        
+        // Convert that WIB 20:00 back to a Date object the server understands
+        const finalScheduledAt = new Date(scheduledTimeWIB.getTime() - (scheduledTimeWIB.getTimezoneOffset() + 420) * 60000);
+        // Simplified: Since we are likely in a Node environment where TZ might vary, 
+        // let's just make sure it's at least 'now' or later.
+        const sendAt = finalScheduledAt < now ? now : finalScheduledAt;
 
         // Find all jadwal_ujian scheduled for tomorrow
         const jadwalTomorrow = await prisma.jadwalUjian.findMany({
@@ -51,81 +70,66 @@ export async function GET(request: Request) {
                         no_hp: true,
                     },
                 },
-                exam_session: {
-                    select: {
-                        title: true,
-                        start_time: true,
-                        end_time: true,
-                        location: true,
-                    },
-                },
+                exam_session: true,
+                penguji_santri: true,
+                penguji_quran: true,
+                penguji_ortu: true,
                 notif_reminders: true,
             },
         });
 
-        let enqueued = 0;
+        let enqueuedSantri = 0;
+        let enqueuedPenguji = 0;
         let skipped = 0;
         const errors: string[] = [];
 
         for (const jadwal of jadwalTomorrow) {
-            // Check if reminder already sent for this jadwal+pendaftar
-            const existingReminder = jadwal.notif_reminders.find(
+            // Check if pendaftar reminder already enqueued
+            const existingPendaftarReminder = jadwal.notif_reminders.find(
                 (r) => r.pendaftar_id === jadwal.pendaftar_id
             );
 
-            if (existingReminder?.reminder_sent) {
-                skipped++;
-                continue;
-            }
+            // Format details
+            const dateObj = new Date(jadwal.tanggal_ujian);
+            const hari = dateObj.toLocaleDateString("id-ID", { weekday: "long" }).replace("Minggu", "Ahad");
+            const tanggalStr = dateObj.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+            
+            const timeObj = jadwal.exam_session ? new Date(jadwal.exam_session.start_time) : new Date(jadwal.waktu_mulai_santri);
+            const jam = timeObj.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Jakarta" });
 
-            if (!jadwal.pendaftar.no_hp) {
-                errors.push(`${jadwal.pendaftar.nama_lengkap}: no phone number`);
-                continue;
-            }
-
-            // Build reminder message
-            const tanggal = new Date(jadwal.tanggal_ujian).toLocaleDateString(
-                "id-ID",
-                {
-                    weekday: "long",
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                }
-            ).replace("Minggu", "Ahad");
-
-            const waktu = jadwal.exam_session
-                ? new Date(jadwal.exam_session.start_time).toLocaleTimeString(
-                    "id-ID",
-                    { hour: "2-digit", minute: "2-digit" }
-                )
-                : new Date(jadwal.waktu_mulai_santri).toLocaleTimeString("id-ID", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                });
-
-            const lokasi =
-                jadwal.exam_session?.location || jadwal.tempat_santri || "Pesantren Al-Andalus Al-Imam";
             const jenisUjian = jadwal.exam_session?.title || "Seleksi Santri Baru";
 
-            const message = buildMessageReminderH1(
-                jadwal.pendaftar.nama_lengkap,
-                tanggal,
-                waktu,
-                lokasi,
-                jenisUjian
-            );
+            // Determine Meeting Link
+            const googleMeetLink = 
+                jadwal.penguji_santri?.google_meet_link || 
+                jadwal.penguji_quran?.google_meet_link || 
+                jadwal.penguji_ortu?.google_meet_link || 
+                jadwal.google_meet_link;
 
-            // Enqueue via queue system
-            const result = await enqueueWhatsapp({
-                pendaftarId: jadwal.pendaftar_id,
-                phone: jadwal.pendaftar.no_hp,
-                jenisNotif: "reminder_h1",
-                messageContent: message,
-            });
+            const lokasi = googleMeetLink 
+                ? `${jadwal.exam_session?.location || "Online"} (Link: ${googleMeetLink})` 
+                : (jadwal.exam_session?.location || "Pesantren Al-Andalus Al-Imam");
 
-            if (result.queued) {
-                // Create/update reminder record
+            // 1. Enqueue for Santri
+            if (!existingPendaftarReminder && jadwal.pendaftar.no_hp) {
+                const msgSantri = buildMessageReminderH1Santri(
+                    jadwal.pendaftar.nama_lengkap,
+                    hari,
+                    tanggalStr,
+                    jam,
+                    lokasi,
+                    jenisUjian
+                );
+
+                await enqueueWhatsapp({
+                    pendaftarId: jadwal.pendaftar_id,
+                    phone: jadwal.pendaftar.no_hp,
+                    jenisNotif: "reminder_h1",
+                    messageContent: msgSantri,
+                    scheduledAt: sendAt,
+                });
+
+                // Track
                 await prisma.jadwalNotifReminder.upsert({
                     where: {
                         jadwal_ujian_id_pendaftar_id: {
@@ -137,21 +141,50 @@ export async function GET(request: Request) {
                     create: {
                         jadwal_ujian_id: jadwal.id,
                         pendaftar_id: jadwal.pendaftar_id,
-                        reminder_sent: false, // Will be set true after actually sent by queue
+                        reminder_sent: false,
                     },
                 });
-                enqueued++;
-            } else {
-                skipped++;
+                enqueuedSantri++;
+            }
+
+            // 2. Enqueue for Examiners (if assigned and not already enqueued for this schedule)
+            const examiners = [
+                { profile: jadwal.penguji_santri, type: "Wawancara Santri/Calsan" },
+                { profile: jadwal.penguji_quran, type: "Tes Al-Qur'an" },
+                { profile: jadwal.penguji_ortu, type: "Wawancara Cawalsan/Ortu" },
+            ].filter(e => e.profile && e.profile.phone);
+
+            for (const ex of examiners) {
+                if (!ex.profile) continue;
+
+                const msgPenguji = buildMessageReminderH1Penguji(
+                    ex.profile.full_name,
+                    jadwal.pendaftar.nama_lengkap,
+                    hari,
+                    tanggalStr,
+                    jam,
+                    ex.profile.google_meet_link || "Menyesuaikan",
+                    ex.type
+                );
+
+                const result = await enqueueWhatsapp({
+                    pendaftarId: jadwal.pendaftar_id, // Link to santri for tracking
+                    phone: ex.profile.phone,
+                    jenisNotif: "reminder_h1_penguji", // Specific type to avoid Layer 1 collision with santri's reminder
+                    messageContent: msgPenguji,
+                    scheduledAt: sendAt,
+                });
+
+                if (result.queued) enqueuedPenguji++;
             }
         }
 
         return NextResponse.json({
             success: true,
             totalJadwalTomorrow: jadwalTomorrow.length,
-            enqueued,
-            skipped,
-            errors,
+            enqueuedSantri,
+            enqueuedPenguji,
+            scheduledFor: sendAt.toISOString(),
             timestamp: new Date().toISOString(),
         });
     } catch (error: any) {
