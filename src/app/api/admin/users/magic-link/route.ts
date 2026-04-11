@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
         const token = generateMagicToken(user.id, user.role, user.full_name, 24);
 
         // Create full URL wrapper
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://pesantren-alimam.com";
+        const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://pesantren-alimam.com";
         const magicLinkUrl = `${baseUrl}/api/auth/magic?token=${token}`;
 
         return NextResponse.json({ success: true, link: magicLinkUrl });
@@ -82,7 +82,7 @@ export async function GET(request: NextRequest) {
             orderBy: { full_name: 'asc' }
         });
 
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://pesantren-alimam.com";
+        const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://pesantren-alimam.com";
 
         const results = examiners.map(user => {
             // Determine active role for input nilai (prioritize examiner/interviewer roles)
