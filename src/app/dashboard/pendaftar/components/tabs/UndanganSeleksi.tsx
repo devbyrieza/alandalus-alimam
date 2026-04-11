@@ -76,6 +76,8 @@ interface UndanganData {
   };
   progress: ProgressData;
   condition: "jadwal_tersedia" | "jadwal_belum";
+  locked?: boolean;
+  message?: string;
 }
 
 // ============================================================================
@@ -208,8 +210,51 @@ export default function UndanganSeleksiTab() {
     );
   }
 
-  const grupAItems = Object.entries(data.grupA) as [string, GrupAItem][];
+  const grupAItems = Object.entries(data.grupA || {}) as [string, GrupAItem][];
   const grupACompleted = grupAItems.filter(([, v]) => v.completed).length;
+
+  if (data.locked) {
+    return (
+      <div className="space-y-6">
+        <div className="bg-linear-to-r from-stone-600 to-stone-800 rounded-2xl p-6 md:p-8 text-white shadow-lg relative overflow-hidden">
+          <div className="relative z-10">
+            <h1 className="text-2xl font-black mb-2 text-white flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Tahap Seleksi Belum Terbuka
+            </h1>
+            <p className="text-stone-300 text-sm md:text-base">
+              Halaman ini akan terbuka setelah seluruh dokumen Anda diverifikasi oleh Admin.
+            </p>
+          </div>
+        </div>
+
+        <div className="bg-amber-50 border-2 border-amber-200 rounded-3xl p-8 md:p-12 text-center shadow-sm">
+          <div className="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Info className="w-10 h-10 text-amber-600" />
+          </div>
+          <h2 className="text-xl md:text-2xl font-black text-amber-900 mb-4 uppercase tracking-tight">Dokumen Sedang Diverifikasi</h2>
+          <p className="text-amber-800 text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-medium">
+            {data.message || "Panitia sedang meninjau kelengkapan dokumen pendaftaran Anda. Mohon cek berkala dashboard atau tunggu notifikasi WhatsApp selanjutnya."}
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Link 
+              href="/dashboard/pendaftar?tab=upload-berkas"
+              className="px-8 py-3 bg-brand-blue-700 text-white font-black rounded-xl hover:bg-brand-blue-800 transition-all shadow-md uppercase tracking-widest text-sm"
+            >
+              Cek Status Berkas
+            </Link>
+          </div>
+        </div>
+
+        {/* Preview of what's coming (blurred/locked looks) */}
+        <div className="opacity-40 pointer-events-none select-none filter blur-[1px]">
+           <div className="bg-white rounded-xl border border-stone-100 p-8 text-center">
+              <p className="text-stone-400 font-bold uppercase tracking-widest text-sm">Pratinjau Tahap Seleksi</p>
+           </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">

@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 // Simplified type for MVP.
 type Student = {
     id: string;
+    status_pendaftaran: string;
     nama_lengkap: string;
     jenjang: string;
     nomor_pendaftaran: string;
@@ -313,14 +314,33 @@ export default function ExaminerDashboard() {
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{s.jenjang}</td>
                                         <td className="px-6 py-4 whitespace-nowrap">
-                                            <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${s.nilai_ujian?.status_kelulusan === 'LULUS' || s.nilai_ujian?.status_kelulusan === 'DITERIMA' ? 'bg-green-100 text-green-800' :
-                                                s.nilai_ujian?.status_kelulusan === 'CADANGAN' ? 'bg-yellow-100 text-yellow-800' :
-                                                    s.nilai_ujian?.status_kelulusan === 'DITOLAK' ? 'bg-red-100 text-red-800' :
-                                                        s.nilai_ujian?.status_kelulusan === 'BELUM LENGKAP' ? 'bg-blue-100 text-blue-800' :
-                                                            'bg-gray-100 text-gray-800'
-                                                }`}>
-                                                {s.nilai_ujian?.status_kelulusan || '-'}
-                                            </span>
+                                            {(() => {
+                                                const regStatus = s.status_pendaftaran;
+                                                const examStatus = s.nilai_ujian?.status_kelulusan;
+                                                
+                                                // If docs not verified, show Verif Berkas
+                                                const docNotVerified = !['docs_verified', 'scheduled', 'tested', 'announced', 'accepted', 'enrolled'].includes(regStatus);
+                                                
+                                                if (docNotVerified) {
+                                                    return (
+                                                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-50 text-blue-600 border border-blue-200">
+                                                            VERIF BERKAS
+                                                        </span>
+                                                    );
+                                                }
+
+                                                return (
+                                                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                                                        examStatus === 'LULUS' || examStatus === 'DITERIMA' ? 'bg-green-100 text-green-800' :
+                                                        examStatus === 'CADANGAN' ? 'bg-yellow-100 text-yellow-800' :
+                                                        examStatus === 'DITOLAK' ? 'bg-red-100 text-red-800' :
+                                                        examStatus === 'BELUM LENGKAP' ? 'bg-orange-100 text-orange-800' :
+                                                        'bg-gray-100 text-gray-800'
+                                                    }`}>
+                                                        {examStatus || 'BELUM UJIAN'}
+                                                    </span>
+                                                );
+                                            })()}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_akademik != null ? Number(s.nilai_ujian.score_akademik).toFixed(1) : '-'}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_kepribadian != null ? Number(s.nilai_ujian.score_kepribadian).toFixed(1) : '-'}</td>

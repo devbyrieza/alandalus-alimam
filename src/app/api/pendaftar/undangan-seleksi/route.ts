@@ -37,13 +37,14 @@ export async function GET() {
     try {
         const pendaftarId = session.id;
 
-        // 1. Fetch pendaftar with notification flags
+        // 1. Fetch pendaftar with notification flags and status
         const pendaftar = await prisma.pendaftar.findUnique({
             where: { id: pendaftarId },
             select: {
                 id: true,
                 nama_lengkap: true,
                 no_hp: true,
+                status_pendaftaran: true,
                 notif_belum_jadwal_terkirim: true,
                 notif_jadwal_tersedia_terkirim: true,
                 notif_hasil_tes_terkirim: true,
@@ -55,6 +56,20 @@ export async function GET() {
                 { error: "Data pendaftar tidak ditemukan" },
                 { status: 404 }
             );
+        }
+
+        // --- ACCESS GUARD: Only allow if docs are verified ---
+        const ALLOWED_STATUSES = ['docs_verified', 'scheduled', 'tested', 'announced', 'accepted', 'enrolled'];
+        const isLocked = !ALLOWED_STATUSES.includes(pendaftar.status_pendaftaran || '');
+
+        if (isLocked) {
+            return NextResponse.json({
+                data: {
+                    locked: true,
+                    message: "Tahap Seleksi & Tes Online akan terbuka secara otomatis setelah seluruh dokumen Anda diverifikasi oleh Admin.",
+                    current_status: pendaftar.status_pendaftaran
+                }
+            });
         }
 
         // 2. Fetch Grup A — Online test completion status
