@@ -45,6 +45,7 @@ export default function MonitoringJadwalPage() {
     const [search, setSearch] = useState("");
     const [filterJenjang, setFilterJenjang] = useState("ALL");
     const [viewMode, setViewMode] = useState<"flat" | "grouped">("flat");
+    const [showPast, setShowPast] = useState(false);
 
     useEffect(() => {
         fetchMonitoringData();
@@ -93,7 +94,10 @@ export default function MonitoringJadwalPage() {
         
         const matchesJenjang = filterJenjang === "ALL" || s.pendaftar.jenjang === filterJenjang;
         
-        return matchesSearch && matchesJenjang;
+        const isPast = new Date(s.sesi.end).getTime() < new Date().getTime();
+        const matchesPast = showPast || !isPast;
+
+        return matchesSearch && matchesJenjang && matchesPast;
     }).sort((a, b) => new Date(a.sesi.start).getTime() - new Date(b.sesi.start).getTime());
 
     const getGroupedSchedules = () => {
@@ -190,6 +194,16 @@ export default function MonitoringJadwalPage() {
                             Per Penguji
                         </button>
                     </div>
+                    <button 
+                        onClick={() => setShowPast(!showPast)}
+                        className={`px-4 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border h-12 ${
+                            showPast 
+                            ? "bg-amber-50 border-amber-200 text-amber-600 shadow-sm" 
+                            : "bg-white border-slate-200 text-ink-400 hover:text-ink-600 shadow-sm"
+                        }`}
+                    >
+                        {showPast ? "Sembunyikan Lampau" : "Tampilkan Lampau"}
+                    </button>
                 </div>
             </div>
 
