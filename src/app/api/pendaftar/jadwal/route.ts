@@ -292,7 +292,7 @@ export async function POST(request: Request) {
                     // 3.1. Reminder for Santri
                     const remSantriMsg = buildMessageReminderH1Santri(
                         pendaftarInfo.nama_lengkap,
-                        dateStr.split(',')[0] || "Besok", // Day name
+                        dateStr.split(',')[0] || "", // Removed "Besok"
                         dateStr,
                         timeStr,
                         lokasi,
@@ -339,7 +339,7 @@ export async function POST(request: Request) {
                             const remIntMessage = buildMessageReminderH1Penguji(
                                 interviewer.full_name,
                                 pendaftarInfo.nama_lengkap,
-                                dateStr.split(',')[0] || "Besok",
+                                dateStr.split(',')[0] || "",
                                 dateStr,
                                 timeStr,
                                 interviewer.google_meet_link || lokasi,

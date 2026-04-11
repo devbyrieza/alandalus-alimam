@@ -777,7 +777,7 @@ Ini adalah pengingat bahwa Anda dijadwalkan mengikuti *${jenisUjian}* pada:
 ⏰ *Waktu:* ${jam} WIB
 📍 *Lokasi/Link:* ${lokasi}
 
-Mohon persiapkan diri dengan baik dan pastikan koneksi internet stabil jika ujian online. Sampai jumpa besok!
+Mohon persiapkan diri dengan baik dan pastikan koneksi internet stabil.
 
 ---
 *Panitia PPDB Al-Andalus Al-Imam*`;
@@ -805,7 +805,7 @@ export function buildMessageReminderH1Penguji(
 
 Assalamu'alaikum Warahmatullahi Wabarakatuh Ust/Ustadzah *${namaPenguji}*,
 
-Mengingatkan kembali jadwal ${actionWord} Anda untuk besok:
+Mengingatkan kembali jadwal ${actionWord} Anda pada:
 
 📝 *${labelAgenda}:* ${jenisUjian}
 👤 *Nama Santri:* ${namaSantri}
