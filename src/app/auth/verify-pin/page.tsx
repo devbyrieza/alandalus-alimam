@@ -99,22 +99,22 @@ function VerifyPinContent() {
     return (
         <div className="min-h-screen bg-stone-50 flex items-center justify-center p-6 font-sans">
             <div className="max-w-md w-full animate-in fade-in zoom-in duration-500">
-                <div className="bg-white rounded-[2.5rem] shadow-2xl shadow-indigo-100/50 border border-stone-100 overflow-hidden">
-                    <div className="bg-indigo-600 p-10 text-center relative overflow-hidden">
+                <div className="bg-white rounded-[2.5rem] shadow-2xl shadow-indigo-100/50 border border-stone-100 overflow-hidden text-stone-900">
+                    <div className="bg-indigo-600 p-8 sm:p-10 text-center relative overflow-hidden">
                         {/* Decorative background circle */}
                         <div className="absolute top-[-50px] right-[-50px] w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
                         <div className="absolute bottom-[-30px] left-[-30px] w-24 h-24 bg-white/5 rounded-full blur-xl"></div>
                         
-                        <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg border border-white/30 rotate-3">
-                            <Lock className="w-10 h-10 text-white" />
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg border border-white/30 rotate-3">
+                            <Lock className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                         </div>
-                        <h1 className="text-2xl font-bold text-white tracking-tight">Verifikasi Keamanan</h1>
-                        <p className="text-indigo-100/80 text-sm mt-2 font-medium">Lapis kedua perlindungan akun Anda</p>
+                        <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">Verifikasi Keamanan</h1>
+                        <p className="text-indigo-50 font-bold text-xs sm:text-sm mt-2">Lapis kedua perlindungan akun Anda</p>
                     </div>
 
-                    <div className="p-10 text-center">
-                        <p className="text-stone-600 text-base mb-8 leading-relaxed">
-                            Masukkan <span className="font-bold text-indigo-600">4 digit terakhir</span> nomor WhatsApp Anda untuk melanjutkan.
+                    <div className="p-7 sm:p-10 text-center">
+                        <p className="text-stone-900 text-sm sm:text-base mb-8 leading-relaxed font-medium">
+                            Masukkan <span className="font-black text-indigo-700">4 digit terakhir</span> nomor WhatsApp Anda untuk melanjutkan.
                         </p>
 
                         <div className="flex justify-center gap-3 mb-10">
@@ -129,7 +129,7 @@ function VerifyPinContent() {
                                     onChange={(e) => handleChange(i, e.target.value)}
                                     onKeyDown={(e) => handleKeyDown(i, e)}
                                     disabled={loading || success}
-                                    className={`w-14 h-18 text-center text-3xl font-bold bg-stone-50 border-2 rounded-2xl transition-all duration-300 outline-none
+                                    className={`w-12 h-16 sm:w-14 sm:h-18 text-center text-2xl sm:text-3xl font-black bg-stone-50 border-2 rounded-2xl transition-all duration-300 outline-none
                                         ${success ? "border-emerald-500 text-emerald-600 bg-emerald-50" : 
                                           error ? "border-red-300 bg-red-50 text-red-600 focus:border-red-500" : 
                                           "border-stone-100 focus:border-indigo-500 focus:bg-white focus:shadow-md"}`}
