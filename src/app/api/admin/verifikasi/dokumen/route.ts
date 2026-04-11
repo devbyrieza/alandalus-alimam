@@ -4,6 +4,18 @@ import { notifyDocumentVerified } from "@/lib/wablas";
 import { getServerSession } from "@/lib/session";
 import { logAdminAction } from "@/lib/audit";
 import { enqueueWhatsapp, buildMessageJadwalLangsungTersedia, buildMessageJadwalBelum } from "@/lib/whatsapp-queue";
+ 
+const REQUIRED_DOC_TYPES = [
+  'kartu_keluarga', 
+  'akta_kelahiran', 
+  'rapor_sem1', 
+  'rapor_sem2',
+  'nisn', 
+  'foto_setengah_badan', 
+  'surat_kesehatan', 
+  'pakta_integritas', 
+  'pernyataan_bebas_negatif'
+];
 
 // GET: List dokumen yang perlu diverifikasi
 export async function GET(request: NextRequest) {
@@ -150,29 +162,40 @@ export async function PATCH(request: NextRequest) {
       const pendingDocs = allDocs.filter(d => !d.is_verified && !d.catatan);
 
       if (pendingDocs.length === 0) {
-        // All documents processed! Send Summary Notification.
-        try {
-          const rejectedDocs = allDocs.filter(d => !d.is_verified && d.catatan);
-          const isAllVerified = rejectedDocs.length === 0;
+        // All documents UP TO NOW have been processed.
+        const rejectedDocs = allDocs.filter(d => !d.is_verified && d.catatan);
+        const verifiedTypes = new Set(allDocs.filter(d => d.is_verified).map(d => d.jenis_dokumen));
+        const hasAllRequired = REQUIRED_DOC_TYPES.every(type => verifiedTypes.has(type));
+        
+        const isSomeRejected = rejectedDocs.length > 0;
+        const isAllVerifiedAndComplete = !isSomeRejected && hasAllRequired;
 
-          if (dokumen.pendaftar?.no_hp) {
-            let docListStr = "";
-            if (isAllVerified) {
-              docListStr = "Semua Dokumen Lengkap";
-            } else {
-              docListStr = rejectedDocs.map(d => `• ${d.jenis_dokumen}`).join("\n");
+        // ONLY Notify if we have rejections OR if they are FINALLY complete (all 9 verified)
+        if (isSomeRejected || isAllVerifiedAndComplete) {
+            try {
+              if (dokumen.pendaftar?.no_hp) {
+                let docListStr = "";
+                if (isAllVerifiedAndComplete) {
+                  docListStr = "Lengkap (9/9 Dokumen Terverifikasi)";
+                } else {
+                  docListStr = rejectedDocs.map(d => `• ${d.jenis_dokumen}`).join("\n");
+                }
+
+                await notifyDocumentVerified({
+                  phone: dokumen.pendaftar.no_hp,
+                  nama: dokumen.pendaftar.nama_lengkap,
+                  dokumen_list: docListStr,
+                  status: isAllVerifiedAndComplete ? "verified" : "rejected",
+                  catatan: isAllVerifiedAndComplete ? undefined : "Terdapat dokumen yang perlu diperbaiki. Silakan cek dashboard.",
+                });
+              }
+            } catch (error) {
+              console.error("WhatsApp batch notification error:", error);
             }
-
-            await notifyDocumentVerified({
-              phone: dokumen.pendaftar.no_hp,
-              nama: dokumen.pendaftar.nama_lengkap,
-              dokumen_list: docListStr,
-              status: isAllVerified ? "verified" : "rejected",
-              catatan: isAllVerified ? undefined : "Terdapat dokumen yang perlu diperbaiki. Silakan cek dashboard.",
-            });
-          }
-        } catch (error) {
-          console.error("WhatsApp batch notification error:", error);
+        } else {
+            // All currently uploaded are verified, but they haven't uploaded all 9 yet!
+            // We WAIT. Do not send "Verified" message yet.
+            console.log(`[VERIF] Pendaftar ${dokumen.pendaftar_id} has ${verifiedTypes.size}/9 verified docs. Waiting for completion before notify.`);
         }
       }
     }
@@ -190,15 +213,9 @@ export async function PATCH(request: NextRequest) {
           where: { pendaftar_id: dokumen.pendaftar_id }
         });
 
-        // 2. Define required docs
-        const REQUIRED_DOCS = [
-          'kartu_keluarga', 'akta_kelahiran', 'rapor_sem1', 'rapor_sem2',
-          'nisn', 'foto_setengah_badan', 'surat_kesehatan', 'pakta_integritas', 'pernyataan_bebas_negatif'
-        ];
-
-        // 3. check if every required doc is present and verified
+        // 2. check if every required doc is present and verified
         const verifiedTypes = new Set(allDocs.filter(d => d.is_verified).map(d => d.jenis_dokumen));
-        const allRequiredVerified = REQUIRED_DOCS.every(type => verifiedTypes.has(type));
+        const allRequiredVerified = REQUIRED_DOC_TYPES.every(type => verifiedTypes.has(type));
 
         if (allRequiredVerified && currentPendaftar?.status_pendaftaran === 'docs_uploaded') {
           await prisma.pendaftar.update({
