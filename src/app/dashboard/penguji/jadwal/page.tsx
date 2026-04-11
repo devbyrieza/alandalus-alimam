@@ -611,7 +611,6 @@ export default function JadwalPengujiPage() {
                           </button>
                         </div>
                       </div>
-                      </div>
                       <div className="flex flex-col gap-3">
                         <div className="flex flex-col gap-2 min-w-[200px] border-l pl-0 md:pl-6 border-cream-100">
                           <div className="flex items-center gap-2 text-sm text-ink-600">
