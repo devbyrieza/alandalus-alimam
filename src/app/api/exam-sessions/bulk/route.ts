@@ -71,9 +71,9 @@ export async function POST(request: Request) {
                 const dateStr = currentDate.toISOString().split('T')[0];
 
                 for (const slot of timeSlots) {
-                    // Combine dateStr + slot.start to create full ISO
-                    const startISO = `${dateStr}T${slot.start}:00`;
-                    const endISO = `${dateStr}T${slot.end}:00`;
+                    // Combine dateStr + slot.start to create full ISO in WIB (+07:00)
+                    const startISO = `${dateStr}T${slot.start}:00+07:00`;
+                    const endISO = `${dateStr}T${slot.end}:00+07:00`;
 
                     sessionsToCreate.push({
                         title: finalTitle,
