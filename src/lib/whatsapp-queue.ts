@@ -768,7 +768,7 @@ export function buildMessageReminderH1Santri(
     lokasi: string,
     jenisUjian: string
 ): string {
-    return `*PENGINGAT UJIAN SELEKSI (H-1)*
+    return `*PENGINGAT UJIAN SELEKSI*
 
 Assalamu'alaikum Wr. Wb.
 Halo Ananda *${nama}*,
@@ -803,7 +803,7 @@ export function buildMessageReminderH1Penguji(
     const actionWord = isWawancara ? "wawancara" : "menguji";
     const labelAgenda = isWawancara ? "Agenda" : "Mata Pelajaran";
 
-    let msg = `*REMINDER JADWAL ${headerTitle} (H-1)*
+    let msg = `*REMINDER JADWAL ${headerTitle}*
 
 Assalamu'alaikum Ust/Ustadzah *${namaPenguji}*,
 
