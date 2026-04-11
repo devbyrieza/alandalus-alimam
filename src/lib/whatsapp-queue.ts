@@ -705,8 +705,8 @@ export function buildMessageKonfirmasiJadwalInterviewer(
     jenisUjian: string,
     inputNilaiLink?: string
 ): string {
-    const opening = pickOpening();
-    let msg = `${opening} Ustadz/Ustadzah ${namaInterviewer},
+    const title = (namaInterviewer || "").toLowerCase().includes("ustadzah") ? "Ustadzah" : "Ustadz";
+    let msg = `${opening} ${title} ${namaInterviewer},
  
  Informasikan jadwal ${jenisUjian} baru untuk santri berikut:
  
@@ -801,9 +801,10 @@ export function buildMessageReminderH1Penguji(
     const actionWord = isWawancara ? "wawancara" : "menguji";
     const labelAgenda = isWawancara ? "Agenda" : "Mata Pelajaran";
 
+    const title = (namaPenguji || "").toLowerCase().includes("ustadzah") ? "Ustadzah" : "Ustadz";
     let msg = `*REMINDER JADWAL ${headerTitle}*
 
-Assalamu'alaikum Warahmatullahi Wabarakatuh Ust/Ustadzah *${namaPenguji}*,
+Assalamu'alaikum Warahmatullahi Wabarakatuh ${title} *${namaPenguji}*,
 
 Mengingatkan kembali jadwal ${actionWord} Anda pada:
 
