@@ -42,8 +42,8 @@ interface Schedule {
 export default function MonitoringJadwalPage() {
     const [schedules, setSchedules] = useState<Schedule[]>([]);
     const [loading, setLoading] = useState(true);
-    const [search, setSearch] = useState("");
     const [filterJenjang, setFilterJenjang] = useState("ALL");
+    const [viewMode, setViewMode] = useState<"flat" | "grouped">("flat");
 
     useEffect(() => {
         fetchMonitoringData();
@@ -95,6 +95,36 @@ export default function MonitoringJadwalPage() {
         return matchesSearch && matchesJenjang;
     });
 
+    const getGroupedSchedules = () => {
+        const groups: Record<string, { role: string; schedule: Schedule }[]> = {};
+
+        filteredSchedules.forEach(s => {
+            const examiners = [
+                { name: s.ustadz.quran, role: "Quran" },
+                { name: s.ustadz.santri, role: "W. Santri" },
+                { name: s.ustadz.ortu, role: "W. Ortu" }
+            ];
+
+            examiners.forEach(ext => {
+                const name = ext.name && ext.name !== "-" ? ext.name : "Belum Ditentukan";
+                if (!groups[name]) groups[name] = [];
+                groups[name].push({ role: ext.role, schedule: s });
+            });
+        });
+
+        // Sort groups by examiner name, with "Belum Ditentukan" at the end
+        return Object.keys(groups)
+            .sort((a, b) => {
+                if (a === "Belum Ditentukan") return 1;
+                if (b === "Belum Ditentukan") return -1;
+                return a.localeCompare(b);
+            })
+            .map(name => ({
+                name,
+                items: groups[name]
+            }));
+    };
+
     return (
         <div className="space-y-6 max-w-7xl mx-auto">
             {/* Header */}
@@ -143,110 +173,186 @@ export default function MonitoringJadwalPage() {
                     >
                         Refresh Data
                     </button>
+                    <div className="flex bg-slate-100 p-1 rounded-xl h-12">
+                        <button 
+                            onClick={() => setViewMode("flat")}
+                            className={`px-4 rounded-lg text-xs font-black transition-all ${viewMode === "flat" ? "bg-white text-blue-600 shadow-sm" : "text-ink-400 hover:text-ink-600"}`}
+                        >
+                            Flat List
+                        </button>
+                        <button 
+                            onClick={() => setViewMode("grouped")}
+                            className={`px-4 rounded-lg text-xs font-black transition-all ${viewMode === "grouped" ? "bg-white text-blue-600 shadow-sm" : "text-ink-400 hover:text-ink-600"}`}
+                        >
+                            Per Penguji
+                        </button>
+                    </div>
                 </div>
             </div>
 
             {/* Table Area */}
-            <div className="bg-white rounded-3xl shadow-clay-lg overflow-hidden border border-white/40">
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
-                        <thead>
-                            <tr className="bg-slate-50/50">
-                                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Info Peserta</th>
-                                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Waktu & Sesi</th>
-                                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Penguji Quran</th>
-                                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Wawancara Santri</th>
-                                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Wawancara Ortu</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-slate-100">
-                            {loading ? (
-                                <tr>
-                                    <td colSpan={5} className="px-6 py-24 text-center">
-                                        <Loader2 className="w-8 h-8 animate-spin text-blue-500 mx-auto mb-4" />
-                                        <p className="font-bold text-ink-400">Memuat data monitoring...</p>
-                                    </td>
-                                </tr>
-                            ) : filteredSchedules.length === 0 ? (
-                                <tr>
-                                    <td colSpan={5} className="px-6 py-24 text-center">
-                                        <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                                            <Calendar className="w-8 h-8 text-slate-200" />
-                                        </div>
-                                        <p className="font-bold text-ink-400">Tidak ada jadwal yang ditemukan.</p>
-                                    </td>
-                                </tr>
-                            ) : (
-                                filteredSchedules.map((s) => (
-                                    <tr key={s.id} className="hover:bg-blue-50/30 transition-colors group">
-                                        <td className="px-6 py-5">
-                                            <div className="flex flex-col">
-                                                <span className="text-sm font-black text-ink-950 group-hover:text-blue-600 transition-colors">
-                                                    {s.pendaftar.nama.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}
-                                                </span>
-                                                <div className="flex items-center gap-2 mt-1">
-                                                    <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-slate-100 text-slate-500 rounded uppercase">
-                                                        {s.pendaftar.nomor}
-                                                    </span>
-                                                    <span className={`text-[10px] font-black px-1.5 py-0.5 rounded uppercase ${
-                                                        s.pendaftar.jenjang === 'MTs' ? 'bg-purple-100 text-purple-600' : 'bg-emerald-100 text-emerald-600'
-                                                    }`}>
-                                                        {s.pendaftar.jenjang}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-5">
-                                            <div className="flex flex-col">
-                                                <span className="text-xs font-bold text-ink-800 flex items-center gap-1.5">
-                                                    <Calendar className="w-3.5 h-3.5 text-blue-500" />
-                                                    {formatDateTime(s.sesi.start)}
-                                                </span>
-                                                <span className="text-[10px] font-medium text-ink-400 mt-1 flex items-center gap-1.5 pl-5 uppercase tracking-wider">
-                                                    <MapPin className="w-3 h-3" />
-                                                    {s.sesi.location}
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-5">
-                                            <div className="flex items-center gap-3">
-                                                <div className="p-2 rounded-lg bg-orange-50 text-orange-600">
-                                                    {getStatusIcon(s.status.quran)}
-                                                </div>
-                                                <div className="flex flex-col">
-                                                    <span className="text-xs font-black text-ink-800">{s.ustadz.quran}</span>
-                                                    <span className="text-[9px] font-bold text-ink-400 uppercase tracking-widest">{s.status.quran}</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-5">
-                                            <div className="flex items-center gap-3">
-                                                <div className="p-2 rounded-lg bg-indigo-50 text-indigo-600">
-                                                    {getStatusIcon(s.status.santri)}
-                                                </div>
-                                                <div className="flex flex-col">
-                                                    <span className="text-xs font-black text-ink-800">{s.ustadz.santri}</span>
-                                                    <span className="text-[9px] font-bold text-ink-400 uppercase tracking-widest">{s.status.santri}</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-5">
-                                            <div className="flex items-center gap-3">
-                                                <div className="p-2 rounded-lg bg-emerald-50 text-emerald-600">
-                                                    {getStatusIcon(s.status.ortu)}
-                                                </div>
-                                                <div className="flex flex-col">
-                                                    <span className="text-xs font-black text-ink-800">{s.ustadz.ortu}</span>
-                                                    <span className="text-[9px] font-bold text-ink-400 uppercase tracking-widest">{s.status.ortu}</span>
-                                                </div>
-                                            </div>
-                                        </td>
+            <div className="space-y-6">
+                {loading ? (
+                    <div className="bg-white rounded-3xl shadow-clay-lg p-24 text-center border border-white/40">
+                        <Loader2 className="w-8 h-8 animate-spin text-blue-500 mx-auto mb-4" />
+                        <p className="font-bold text-ink-400">Memuat data monitoring...</p>
+                    </div>
+                ) : filteredSchedules.length === 0 ? (
+                    <div className="bg-white rounded-3xl shadow-clay-lg p-24 text-center border border-white/40">
+                        <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <Calendar className="w-8 h-8 text-slate-200" />
+                        </div>
+                        <p className="font-bold text-ink-400">Tidak ada jadwal yang ditemukan.</p>
+                    </div>
+                ) : viewMode === "flat" ? (
+                    <div className="bg-white rounded-3xl shadow-clay-lg overflow-hidden border border-white/40">
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-left border-collapse">
+                                <thead>
+                                    <tr className="bg-slate-50/50">
+                                        <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Info Peserta</th>
+                                        <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Waktu & Sesi</th>
+                                        <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Penguji Quran</th>
+                                        <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Wawancara Santri</th>
+                                        <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Wawancara Ortu</th>
                                     </tr>
-                                ))
-                            )}
-                        </tbody>
-                    </table>
-                </div>
+                                </thead>
+                                <tbody className="divide-y divide-slate-100">
+                                    {filteredSchedules.map((s) => (
+                                        <tr key={s.id} className="hover:bg-blue-50/30 transition-colors group">
+                                            <td className="px-6 py-5">
+                                                <div className="flex flex-col">
+                                                    <span className="text-sm font-black text-ink-950 group-hover:text-blue-600 transition-colors">
+                                                        {s.pendaftar.nama.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}
+                                                    </span>
+                                                    <div className="flex items-center gap-2 mt-1">
+                                                        <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-slate-100 text-slate-500 rounded uppercase">
+                                                            {s.pendaftar.nomor}
+                                                        </span>
+                                                        <span className={`text-[10px] font-black px-1.5 py-0.5 rounded uppercase ${
+                                                            s.pendaftar.jenjang === 'MTs' ? 'bg-purple-100 text-purple-600' : 'bg-emerald-100 text-emerald-600'
+                                                        }`}>
+                                                            {s.pendaftar.jenjang}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td className="px-6 py-5">
+                                                <div className="flex flex-col">
+                                                    <span className="text-xs font-bold text-ink-800 flex items-center gap-1.5">
+                                                        <Calendar className="w-3.5 h-3.5 text-blue-500" />
+                                                        {formatDateTime(s.sesi.start)}
+                                                    </span>
+                                                    <span className="text-[10px] font-medium text-ink-400 mt-1 flex items-center gap-1.5 pl-5 uppercase tracking-wider">
+                                                        <MapPin className="w-3 h-3" />
+                                                        {s.sesi.location}
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td className="px-6 py-5">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="p-2 rounded-lg bg-orange-50 text-orange-600">
+                                                        {getStatusIcon(s.status.quran)}
+                                                    </div>
+                                                    <div className="flex flex-col">
+                                                        <span className="text-xs font-black text-ink-800">{s.ustadz.quran}</span>
+                                                        <span className="text-[9px] font-bold text-ink-400 uppercase tracking-widest">{s.status.quran}</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td className="px-6 py-5">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="p-2 rounded-lg bg-indigo-50 text-indigo-600">
+                                                        {getStatusIcon(s.status.santri)}
+                                                    </div>
+                                                    <div className="flex flex-col">
+                                                        <span className="text-xs font-black text-ink-800">{s.ustadz.santri}</span>
+                                                        <span className="text-[9px] font-bold text-ink-400 uppercase tracking-widest">{s.status.santri}</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td className="px-6 py-5">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="p-2 rounded-lg bg-emerald-50 text-emerald-600">
+                                                        {getStatusIcon(s.status.ortu)}
+                                                    </div>
+                                                    <div className="flex flex-col">
+                                                        <span className="text-xs font-black text-ink-800">{s.ustadz.ortu}</span>
+                                                        <span className="text-[9px] font-bold text-ink-400 uppercase tracking-widest">{s.status.ortu}</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="space-y-8">
+                        {getGroupedSchedules().map((group) => (
+                            <div key={group.name} className="bg-white rounded-3xl shadow-clay-m border border-white/40 overflow-hidden">
+                                <div className="bg-slate-50/50 px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-600/20">
+                                            <Users className="w-5 h-5" />
+                                        </div>
+                                        <h2 className="text-lg font-black text-ink-900">{group.name} <span className="text-blue-600">({group.items.length})</span></h2>
+                                    </div>
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-ink-400">Jadwal Penguji</span>
+                                </div>
+                                <div className="p-0">
+                                    <table className="w-full text-left border-collapse">
+                                        <thead>
+                                            <tr className="bg-slate-50/30">
+                                                <th className="px-6 py-3 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Nama Santri</th>
+                                                <th className="px-6 py-3 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Peran Penguji</th>
+                                                <th className="px-6 py-3 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Waktu & Lokasi</th>
+                                                <th className="px-6 py-3 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100 text-center">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-slate-100 text-xs">
+                                            {group.items.map((item, idx) => (
+                                                <tr key={`${item.schedule.id}-${idx}`} className="hover:bg-blue-50/20 transition-colors">
+                                                    <td className="px-6 py-4">
+                                                        <div className="flex flex-col">
+                                                            <span className="font-black text-ink-900">{item.schedule.pendaftar.nama}</span>
+                                                            <span className="text-[10px] text-ink-400 font-bold uppercase">{item.schedule.pendaftar.nomor} • {item.schedule.pendaftar.jenjang}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-6 py-4">
+                                                        <span className={`px-2 py-0.5 rounded-full font-black text-[9px] uppercase tracking-wider ${
+                                                            item.role === 'Quran' ? 'bg-orange-100 text-orange-600' :
+                                                            item.role === 'W. Santri' ? 'bg-indigo-100 text-indigo-600' :
+                                                            'bg-emerald-100 text-emerald-600'
+                                                        }`}>
+                                                            {item.role}
+                                                        </span>
+                                                    </td>
+                                                    <td className="px-6 py-4">
+                                                        <div className="flex flex-col">
+                                                            <span className="font-bold text-ink-700">{formatDateTime(item.schedule.sesi.start)}</span>
+                                                            <span className="text-[10px] text-ink-400 uppercase tracking-tight">{item.schedule.sesi.location}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-6 py-4 text-center">
+                                                        <div className="flex justify-center">
+                                                            {getStatusIcon(
+                                                                item.role === 'Quran' ? item.schedule.status.quran :
+                                                                item.role === 'W. Santri' ? item.schedule.status.santri :
+                                                                item.schedule.status.ortu
+                                                            )}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
 
             {/* Footer Summary */}
