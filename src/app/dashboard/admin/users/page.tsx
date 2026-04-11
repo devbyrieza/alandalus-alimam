@@ -17,6 +17,7 @@ import {
     MoreHorizontal,
     RefreshCw,
     Link as LinkIcon,
+    Smartphone,
 } from "lucide-react";
 
 interface AdminUser {
