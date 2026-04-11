@@ -798,13 +798,18 @@ export function buildMessageReminderH1Penguji(
     jenisUjian: string,
     inputNilaiLink?: string
 ): string {
-    let msg = `*REMINDER JADWAL MENGUJI (H-1)*
+    const isWawancara = (jenisUjian || "").toLowerCase().includes("wawancara");
+    const headerTitle = isWawancara ? "WAWANCARA" : "MENGUJI";
+    const actionWord = isWawancara ? "wawancara" : "menguji";
+    const labelAgenda = isWawancara ? "Agenda" : "Mata Pelajaran";
+
+    let msg = `*REMINDER JADWAL ${headerTitle} (H-1)*
 
 Assalamu'alaikum Ust/Ustadzah *${namaPenguji}*,
 
-Mengingatkan kembali jadwal menguji Anda untuk besok:
+Mengingatkan kembali jadwal ${actionWord} Anda untuk besok:
 
-📝 *Mata Pelajaran:* ${jenisUjian}
+📝 *${labelAgenda}:* ${jenisUjian}
 👤 *Nama Santri:* ${namaSantri}
 📅 *Hari/Tanggal:* ${hari}, ${tanggal}
 ⏰ *Waktu:* ${jam} WIB
