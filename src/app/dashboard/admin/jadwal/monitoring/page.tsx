@@ -94,7 +94,7 @@ export default function MonitoringJadwalPage() {
         const matchesJenjang = filterJenjang === "ALL" || s.pendaftar.jenjang === filterJenjang;
         
         return matchesSearch && matchesJenjang;
-    });
+    }).sort((a, b) => new Date(a.sesi.start).getTime() - new Date(b.sesi.start).getTime());
 
     const getGroupedSchedules = () => {
         const groups: Record<string, { role: string; schedule: Schedule }[]> = {};
@@ -113,17 +113,19 @@ export default function MonitoringJadwalPage() {
             });
         });
 
-        // Sort groups by examiner name, with "Belum Ditentukan" at the end
+        // Sort groups by the earliest session in each group
         return Object.keys(groups)
-            .sort((a, b) => {
-                if (a === "Belum Ditentukan") return 1;
-                if (b === "Belum Ditentukan") return -1;
-                return a.localeCompare(b);
-            })
             .map(name => ({
                 name,
-                items: groups[name]
-            }));
+                items: groups[name],
+                earliestSession: Math.min(...groups[name].map(i => new Date(i.schedule.sesi.start).getTime()))
+            }))
+            .sort((a, b) => {
+                // Keep "Belum Ditentukan" at the end regardless of time
+                if (a.name === "Belum Ditentukan") return 1;
+                if (b.name === "Belum Ditentukan") return -1;
+                return a.earliestSession - b.earliestSession;
+            });
     };
 
     return (
