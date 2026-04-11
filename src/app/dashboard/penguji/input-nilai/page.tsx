@@ -17,6 +17,8 @@ import {
   BookOpen,
   MessageSquare,
   Users,
+  Clock,
+  Lock as LockIcon,
 } from "lucide-react";
 
 // ============================================================================
@@ -42,6 +44,9 @@ interface Peserta {
   score_quran: number | null;
   score_wawancara: number | null;
   nilai_id: string | null;
+  input_at_quran: string | null;
+  input_at_santri: string | null;
+  input_at_ortu: string | null;
 }
 
 // ============================================================================
@@ -209,6 +214,28 @@ function InputNilaiContent() {
   const toTitleCase = (str: string) => {
     if (!str) return "";
     return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  };
+
+  const getLockInfo = (inputAt: string | null | undefined) => {
+    if (!inputAt) return { isLocked: false, remainingText: "" };
+    
+    const isAdmin = ['admin_super', 'admin', 'head_of_it'].includes(activeRole);
+    if (isAdmin) return { isLocked: false, remainingText: "Akses Admin: Bebas Edit" };
+
+    const inputDate = new Date(inputAt);
+    const lockDate = new Date(inputDate.getTime() + 24 * 60 * 60 * 1000);
+    const now = new Date();
+    
+    const isLocked = now > lockDate;
+    
+    if (isLocked) {
+      return { isLocked: true, remainingText: "Terkunci (Batas edit 24 jam habis)" };
+    } else {
+      const diffMs = lockDate.getTime() - now.getTime();
+      const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+      const diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+      return { isLocked: false, remainingText: `Masa edit: ${diffHours}j ${diffMins}m lagi` };
+    }
   };
 
   useEffect(() => {
@@ -436,12 +463,20 @@ function InputNilaiContent() {
         ) : (
           <div>
             {isSaved ? (
-              <div className="flex items-center gap-3 sm:gap-4 py-4 sm:py-5 bg-white/50 rounded-xl sm:rounded-2xl px-5 sm:px-6 border border-emerald-100/50 shadow-inner">
-                <CheckCircle className="w-6 h-6 sm:w-7 sm:h-7 text-emerald-600 shrink-0" />
-                <div>
-                  <p className="text-emerald-900 font-black text-sm leading-none">Nilai sudah tersimpan.</p>
-                  <p className="text-emerald-700/70 text-[10px] sm:text-xs font-black mt-2 uppercase tracking-widest">Rekomendasi: {p.detail_quran?.rekomendasi}</p>
+              <div className="flex flex-col gap-3 py-4 sm:py-5 bg-white/50 rounded-xl sm:rounded-2xl px-5 sm:px-6 border border-emerald-100/50 shadow-inner">
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <CheckCircle className="w-6 h-6 sm:w-7 sm:h-7 text-emerald-600 shrink-0" />
+                  <div>
+                    <p className="text-emerald-900 font-black text-sm leading-none">Nilai sudah tersimpan.</p>
+                    <p className="text-emerald-700/70 text-[10px] sm:text-xs font-black mt-2 uppercase tracking-widest">Rekomendasi: {p.detail_quran?.rekomendasi}</p>
+                  </div>
                 </div>
+                {p.input_at_quran && (
+                  <div className={`mt-1 flex items-center gap-2 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider ${getLockInfo(p.input_at_quran).isLocked ? "text-red-600" : "text-emerald-600/70"}`}>
+                    {getLockInfo(p.input_at_quran).isLocked ? <LockIcon className="w-3 h-3" /> : <Clock className="w-3 h-3" />}
+                    {getLockInfo(p.input_at_quran).remainingText}
+                  </div>
+                )}
               </div>
             ) : (
               <div className="flex items-center gap-3 text-emerald-700/50 py-2">
@@ -449,9 +484,16 @@ function InputNilaiContent() {
                 <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest italic">Peserta belum dinilai</span>
               </div>
             )}
-            <button onClick={() => startEditing(p)} className="mt-5 sm:mt-6 px-8 py-4 bg-emerald-600 text-white rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-black uppercase tracking-widest hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-900/20 active:scale-95">
-              {isSaved ? "Edit Nilai" : "Input Nilai"}
-            </button>
+            
+            {(!isSaved || !getLockInfo(p.input_at_quran).isLocked) ? (
+              <button onClick={() => startEditing(p)} className="mt-5 sm:mt-6 px-8 py-4 bg-emerald-600 text-white rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-black uppercase tracking-widest hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-900/20 active:scale-95 leading-none">
+                {isSaved ? "Edit Nilai" : "Input Nilai"}
+              </button>
+            ) : (
+              <div className="mt-5 sm:mt-6 inline-flex items-center gap-2 px-6 py-3.5 bg-stone-100 text-stone-400 rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-black uppercase tracking-widest border border-stone-200">
+                <LockIcon className="w-3.5 h-3.5" /> Edit Terkunci
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -535,12 +577,20 @@ function InputNilaiContent() {
         ) : (
           <div>
             {isSaved ? (
-              <div className="flex items-center gap-3 sm:gap-4 py-4 sm:py-5 bg-white/50 rounded-xl sm:rounded-2xl px-5 sm:px-6 border border-brand-blue-100/50 shadow-inner">
-                <CheckCircle className="w-6 h-6 sm:w-7 sm:h-7 text-brand-blue-600 shrink-0" />
-                <div>
-                  <p className="text-brand-blue-950 font-black text-sm leading-none">Hasil wawancara santri sudah tersimpan.</p>
-                  <p className="text-brand-blue-700/70 text-[10px] sm:text-xs font-black mt-2 uppercase tracking-widest">Rekomendasi: {p.detail_wawancara?.rekomendasi?.split('.')[0] || 'Tersimpan'}</p>
+              <div className="flex flex-col gap-3 py-4 sm:py-5 bg-white/50 rounded-xl sm:rounded-2xl px-5 sm:px-6 border border-brand-blue-100/50 shadow-inner">
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <CheckCircle className="w-6 h-6 sm:w-7 sm:h-7 text-brand-blue-600 shrink-0" />
+                  <div>
+                    <p className="text-brand-blue-950 font-black text-sm leading-none">Hasil wawancara santri sudah tersimpan.</p>
+                    <p className="text-brand-blue-700/70 text-[10px] sm:text-xs font-black mt-2 uppercase tracking-widest">Rekomendasi: {p.detail_wawancara?.rekomendasi?.split('.')[0] || 'Tersimpan'}</p>
+                  </div>
                 </div>
+                {p.input_at_santri && (
+                  <div className={`mt-1 flex items-center gap-2 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider ${getLockInfo(p.input_at_santri).isLocked ? "text-red-600" : "text-brand-blue-600/70"}`}>
+                    {getLockInfo(p.input_at_santri).isLocked ? <LockIcon className="w-3 h-3" /> : <Clock className="w-3 h-3" />}
+                    {getLockInfo(p.input_at_santri).remainingText}
+                  </div>
+                )}
               </div>
             ) : (
               <div className="flex items-center gap-3 text-brand-blue-700/50 py-2">
@@ -548,9 +598,16 @@ function InputNilaiContent() {
                 <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest italic">Belum ada data wawancara santri</span>
               </div>
             )}
-            <button onClick={() => startEditing(p)} className="mt-5 sm:mt-6 px-8 py-4 bg-brand-blue-700 text-white rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-black uppercase tracking-widest hover:bg-brand-blue-800 transition-all shadow-lg shadow-brand-blue-900/20 active:scale-95">
-              {isSaved ? "Edit Nilai" : "Input Nilai"}
-            </button>
+
+            {(!isSaved || !getLockInfo(p.input_at_santri).isLocked) ? (
+              <button onClick={() => startEditing(p)} className="mt-5 sm:mt-6 px-8 py-4 bg-brand-blue-700 text-white rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-black uppercase tracking-widest hover:bg-brand-blue-800 transition-all shadow-lg shadow-brand-blue-900/20 active:scale-95 leading-none">
+                {isSaved ? "Edit Nilai" : "Input Nilai"}
+              </button>
+            ) : (
+              <div className="mt-5 sm:mt-6 inline-flex items-center gap-2 px-6 py-3.5 bg-stone-100 text-stone-400 rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-black uppercase tracking-widest border border-stone-200">
+                <LockIcon className="w-3.5 h-3.5" /> Edit Terkunci
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -687,12 +744,20 @@ function InputNilaiContent() {
         ) : (
           <div>
             {isSaved ? (
-              <div className="flex items-center gap-3 sm:gap-4 py-4 sm:py-5 bg-white/50 rounded-xl sm:rounded-2xl px-5 sm:px-6 border border-brand-yellow-100/50 shadow-inner">
-                <CheckCircle className="w-6 h-6 sm:w-7 sm:h-7 text-brand-yellow-600 shrink-0" />
-                <div>
-                  <p className="text-brand-blue-950 font-black text-sm">Hasil wawancara wali santri sudah tersimpan.</p>
-                  <p className="text-brand-yellow-800/70 text-[10px] sm:text-xs font-black mt-2 uppercase tracking-widest italic">Rekomendasi: {p.detail_cawalsan?.rekomendasi}</p>
+              <div className="flex flex-col gap-3 py-4 sm:py-5 bg-white/50 rounded-xl sm:rounded-2xl px-5 sm:px-6 border border-brand-yellow-100/50 shadow-inner">
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <CheckCircle className="w-6 h-6 sm:w-7 sm:h-7 text-brand-yellow-600 shrink-0" />
+                  <div>
+                    <p className="text-brand-blue-950 font-black text-sm">Hasil wawancara wali santri sudah tersimpan.</p>
+                    <p className="text-brand-yellow-800/70 text-[10px] sm:text-xs font-black mt-2 uppercase tracking-widest italic">Rekomendasi: {p.detail_cawalsan?.rekomendasi}</p>
+                  </div>
                 </div>
+                {p.input_at_ortu && (
+                  <div className={`mt-1 flex items-center gap-2 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider ${getLockInfo(p.input_at_ortu).isLocked ? "text-red-600" : "text-brand-yellow-700/70"}`}>
+                    {getLockInfo(p.input_at_ortu).isLocked ? <LockIcon className="w-3 h-3" /> : <Clock className="w-3 h-3" />}
+                    {getLockInfo(p.input_at_ortu).remainingText}
+                  </div>
+                )}
               </div>
             ) : (
               <div className="flex items-center gap-3 text-brand-yellow-700/50 py-2">
@@ -700,9 +765,16 @@ function InputNilaiContent() {
                 <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest italic font-medium">Belum ada data wawancara wali santri</span>
               </div>
             )}
-            <button onClick={() => startEditing(p)} className="mt-5 sm:mt-6 px-8 py-4 bg-brand-yellow-400 text-brand-blue-950 rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-black uppercase tracking-widest hover:bg-brand-yellow-500 transition-all shadow-lg shadow-brand-yellow-400/20 active:scale-95">
-              {isSaved ? "Edit Hasil" : "Input Hasil"}
-            </button>
+
+            {(!isSaved || !getLockInfo(p.input_at_ortu).isLocked) ? (
+              <button onClick={() => startEditing(p)} className="mt-5 sm:mt-6 px-8 py-4 bg-brand-yellow-400 text-brand-blue-950 rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-black uppercase tracking-widest hover:bg-brand-yellow-500 transition-all shadow-lg shadow-brand-yellow-400/20 active:scale-95 leading-none">
+                {isSaved ? "Edit Hasil" : "Input Hasil"}
+              </button>
+            ) : (
+              <div className="mt-5 sm:mt-6 inline-flex items-center gap-2 px-6 py-3.5 bg-stone-100 text-stone-400 rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-black uppercase tracking-widest border border-stone-200">
+                <LockIcon className="w-3.5 h-3.5" /> Edit Terkunci
+              </div>
+            )}
           </div>
         )}
       </div>

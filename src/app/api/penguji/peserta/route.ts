@@ -131,6 +131,11 @@ export async function GET() {
                     
                     existing.score_quran = existing.score_quran ?? score.score_quran;
                     existing.score_wawancara = existing.score_wawancara ?? score.score_wawancara;
+                    
+                    // Fields for 24h edit window
+                    existing.input_at_quran = existing.input_at_quran || score.input_at_quran;
+                    existing.input_at_santri = existing.input_at_santri || score.input_at_santri;
+                    existing.input_at_ortu = existing.input_at_ortu || score.input_at_ortu;
                 }
             } else {
                 pesertaMap.set(pendaftarId, {
@@ -152,6 +157,9 @@ export async function GET() {
                     score_quran: score.score_quran,
                     score_wawancara: score.score_wawancara,
                     nilai_id: score.id,
+                    input_at_quran: score.input_at_quran,
+                    input_at_santri: score.input_at_santri,
+                    input_at_ortu: score.input_at_ortu,
                 });
             }
         }
