@@ -42,6 +42,7 @@ interface Schedule {
 export default function MonitoringJadwalPage() {
     const [schedules, setSchedules] = useState<Schedule[]>([]);
     const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState("");
     const [filterJenjang, setFilterJenjang] = useState("ALL");
     const [viewMode, setViewMode] = useState<"flat" | "grouped">("flat");
 
