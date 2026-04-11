@@ -1,14 +1,11 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Lock, Loader2, AlertCircle, CheckCircle2, ArrowRight } from "lucide-react";
-import Image from "next/image";
 
-/**
- * Premium PIN Verification Page
- */
-export default function VerifyPinPage() {
+function VerifyPinContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const token = searchParams.get("token");
@@ -181,5 +178,20 @@ export default function VerifyPinPage() {
                 </div>
             </div>
         </div>
+    );
+}
+
+export default function VerifyPinPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-stone-50 flex items-center justify-center p-6">
+                <div className="max-w-md w-full bg-white p-10 rounded-3xl shadow-xl flex flex-col items-center gap-4">
+                    <Loader2 className="w-12 h-12 text-indigo-600 animate-spin" />
+                    <p className="text-stone-500 font-medium">Menyiapkan halaman keamanan...</p>
+                </div>
+            </div>
+        }>
+            <VerifyPinContent />
+        </Suspense>
     );
 }
