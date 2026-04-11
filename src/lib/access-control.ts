@@ -431,6 +431,7 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
       { name: 'Penilaian', href: '/dashboard/admin/penilaian', icon: 'ClipboardEdit' },
       { name: 'Pengumuman', href: '/dashboard/admin/pengumuman', icon: 'Bell' },
       { name: 'Hasil Seleksi', href: '/dashboard/admin/hasil-seleksi', icon: 'Trophy' },
+      { name: 'Monitoring Jadwal', href: '/dashboard/admin/jadwal/monitoring', icon: 'Calendar' },
       { name: 'Broadcast WA', href: '/dashboard/admin/broadcast', icon: 'BarChart' },
       { name: 'Statistik Wilayah', href: '/dashboard/admin/statistik-wilayah', icon: 'BarChart' },
       { name: 'Pengaturan', href: '/dashboard/admin/pengaturan', icon: 'Settings' },
