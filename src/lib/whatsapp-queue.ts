@@ -25,6 +25,7 @@ export type NotifType =
     | "konfirmasi_jadwal"
     | "konfirmasi_jadwal_interviewer"
     | "reminder_h1"
+    | "reminder_h1_penguji"
     | "reminder_h0"
     | "hasil_tes"
     | "pembatalan_jadwal";
