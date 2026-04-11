@@ -47,6 +47,9 @@ export default function UserManagementPage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formLoading, setFormLoading] = useState(false);
     const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+    const [isMagicLinksModalOpen, setIsMagicLinksModalOpen] = useState(false);
+    const [bulkMagicLinks, setBulkMagicLinks] = useState<any[]>([]);
+    const [bulkLoading, setBulkLoading] = useState(false);
 
     // Form State
     const [formData, setFormData] = useState({
@@ -168,6 +171,32 @@ export default function UserManagementPage() {
         }
     };
 
+    const fetchBulkMagicLinks = async () => {
+        try {
+            setBulkLoading(true);
+            setIsMagicLinksModalOpen(true);
+            const response = await fetch("/api/admin/users/magic-link");
+            if (response.ok) {
+                const result = await response.json();
+                setBulkMagicLinks(result.data || []);
+            } else {
+                const result = await response.json();
+                throw new Error(result.error || "Gagal mengambil daftar link");
+            }
+        } catch (error: any) {
+            setMessage({ type: "error", text: error.message });
+            setIsMagicLinksModalOpen(false);
+        } finally {
+            setBulkLoading(false);
+        }
+    };
+
+    const copyAllLinks = async () => {
+        const text = bulkMagicLinks.map(l => `${l.full_name}: ${l.link}`).join('\n');
+        await navigator.clipboard.writeText(text);
+        alert("Seluruh daftar link berhasil disalin!");
+    };
+
     const openAddModal = () => {
         resetForm();
         setIsEditing(false);
@@ -234,6 +263,13 @@ export default function UserManagementPage() {
                     >
                         <Plus className="w-5 h-5" />
                         Tambah User
+                    </button>
+                    <button
+                        onClick={fetchBulkMagicLinks}
+                        className="flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold shadow-lg shadow-emerald-100 transition-all hover:scale-105"
+                    >
+                        <LinkIcon className="w-5 h-5" />
+                        Daftar Magic Link
                     </button>
                 </div>
             </div>
@@ -524,6 +560,114 @@ export default function UserManagementPage() {
                                 </button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            )}
+            {/* Modal Manajemen User... (Existing) */}
+            
+            {/* Modal Bulk Magic Links */}
+            {isMagicLinksModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm overflow-y-auto">
+                    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl my-auto animate-in fade-in zoom-in duration-200">
+                        <div className="p-6 border-b border-indigo-100 flex items-center justify-between bg-indigo-50/50 sticky top-0 z-10">
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 bg-emerald-100 text-emerald-700 rounded-lg">
+                                    <LinkIcon className="w-5 h-5" />
+                                </div>
+                                <h3 className="text-xl font-bold text-stone-900">
+                                    Daftar Magic Link Penguji & Pewawancara
+                                </h3>
+                            </div>
+                            <button
+                                onClick={() => setIsMagicLinksModalOpen(false)}
+                                className="text-stone-400 hover:text-stone-600"
+                            >
+                                <XCircle className="w-6 h-6" />
+                            </button>
+                        </div>
+
+                        <div className="p-6 space-y-4">
+                            <div className="flex justify-between items-center mb-2">
+                                <p className="text-sm text-stone-500">
+                                    Tautan di bawah ini memungkinkan Penguji/Pewawancara login secara otomatis tanpa password.
+                                    Berlaku selama 48 jam.
+                                </p>
+                                <button 
+                                    onClick={copyAllLinks}
+                                    disabled={bulkMagicLinks.length === 0}
+                                    className="px-4 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-lg text-sm font-bold flex items-center gap-2"
+                                >
+                                    <RefreshCw className="w-4 h-4" />
+                                    Salin Semua Link
+                                </button>
+                            </div>
+
+                            <div className="border-2 border-indigo-50 rounded-xl overflow-hidden overflow-y-auto max-h-[60vh]">
+                                <table className="w-full text-sm">
+                                    <thead className="bg-stone-50 border-b border-indigo-50 sticky top-0">
+                                        <tr>
+                                            <th className="px-4 py-3 text-left font-bold text-stone-600">Nama</th>
+                                            <th className="px-4 py-3 text-left font-bold text-stone-600">Role</th>
+                                            <th className="px-4 py-3 text-left font-bold text-stone-600">Tautan</th>
+                                            <th className="px-4 py-3 text-right">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-indigo-50">
+                                        {bulkLoading ? (
+                                            <tr>
+                                                <td colSpan={4} className="px-4 py-10 text-center text-stone-400">
+                                                    <Loader2 className="w-6 h-6 animate-spin mx-auto mb-2" />
+                                                    Menghasilkan link...
+                                                </td>
+                                            </tr>
+                                        ) : bulkMagicLinks.length === 0 ? (
+                                            <tr>
+                                                <td colSpan={4} className="px-4 py-10 text-center text-stone-400">
+                                                    Tidak ada penguji ditemukan
+                                                </td>
+                                            </tr>
+                                        ) : (
+                                            bulkMagicLinks.map((item) => (
+                                                <tr key={item.id} className="hover:bg-indigo-50/20">
+                                                    <td className="px-4 py-3 font-bold text-stone-800">{item.full_name}</td>
+                                                    <td className="px-4 py-3">
+                                                        <span className="text-[10px] px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-100">
+                                                            {ROLE_OPTIONS.find(r => r.value === item.role)?.label || item.role}
+                                                        </span>
+                                                    </td>
+                                                    <td className="px-4 py-3">
+                                                        <div className="max-w-[300px] overflow-hidden text-ellipsis whitespace-nowrap text-stone-400 text-xs">
+                                                            {item.link}
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-4 py-3 text-right">
+                                                        <button
+                                                            onClick={() => {
+                                                                navigator.clipboard.writeText(item.link);
+                                                                alert(`Link untuk ${item.full_name} berhasil disalin!`);
+                                                            }}
+                                                            className="p-1.5 text-indigo-600 hover:bg-indigo-50 rounded-lg"
+                                                            title="Salin Link"
+                                                        >
+                                                            <LinkIcon className="w-4 h-4" />
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        )}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div className="p-6 bg-stone-50 border-t border-indigo-100 flex justify-end">
+                            <button
+                                onClick={() => setIsMagicLinksModalOpen(false)}
+                                className="px-6 py-2 bg-white border-2 border-stone-200 text-stone-600 font-bold rounded-xl hover:bg-stone-50"
+                            >
+                                Tutup
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}

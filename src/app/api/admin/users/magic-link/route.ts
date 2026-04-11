@@ -52,3 +52,61 @@ export async function POST(request: NextRequest) {
         );
     }
 }
+
+export async function GET(request: NextRequest) {
+    try {
+        const cookieStore = await cookies();
+        const sessionCookie = cookieStore.get("app_session");
+
+        if (!sessionCookie) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
+        const session = JSON.parse(sessionCookie.value);
+
+        // Only super admin or head of IT can see the bulk magic links
+        if (!["admin_super", "head_of_it", "tim_it"].includes(session.role)) {
+            return NextResponse.json({ error: "Forbidden: Akses ditolak" }, { status: 403 });
+        }
+
+        // Fetch all users that are examiners or interviewers (check role and secondary_roles)
+        const examiners = await prisma.profile.findMany({
+            where: {
+                OR: [
+                    { role: { contains: 'penguji', mode: 'insensitive' } },
+                    { role: { contains: 'pewawancara', mode: 'insensitive' } },
+                    { secondary_roles: { hasSome: ['penguji_calsan', 'pewawancara_calsan', 'pewawancara_cawalsan', 'penguji_umum'] } }
+                ]
+            },
+            select: { id: true, full_name: true, role: true, secondary_roles: true },
+            orderBy: { full_name: 'asc' }
+        });
+
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://pesantren-alimam.com";
+
+        const results = examiners.map(user => {
+            // Determine active role for input nilai (prioritize examiner/interviewer roles)
+            const activeRole = (user.role.includes('admin') && user.secondary_roles.length > 0)
+                ? user.secondary_roles.find(r => r.includes('penguji') || r.includes('pewawancara')) || user.role
+                : user.role;
+
+            const token = generateMagicToken(user.id, activeRole, user.full_name, 48); // Valid for 48 hours for bulk view
+            return {
+                id: user.id,
+                full_name: user.full_name,
+                role: user.role,
+                secondary_roles: user.secondary_roles,
+                link: `${baseUrl}/api/auth/magic?token=${token}`
+            };
+        });
+
+        return NextResponse.json({ success: true, data: results });
+
+    } catch (error: any) {
+        console.error("Bulk Magic Link Error:", error);
+        return NextResponse.json(
+            { error: "Gagal memuat daftar magic link: " + error.message },
+            { status: 500 }
+        );
+    }
+}
