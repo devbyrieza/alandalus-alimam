@@ -797,33 +797,27 @@ export function buildMessageReminderH1Penguji(
     jenisUjian: string,
     inputNilaiLink?: string
 ): string {
-    const isWawancara = (jenisUjian || "").toLowerCase().includes("wawancara");
-    const headerTitle = isWawancara ? "WAWANCARA" : "MENGUJI";
-    const actionWord = isWawancara ? "wawancara" : "menguji";
-    const labelAgenda = isWawancara ? "Agenda" : "Mata Pelajaran";
-
     const title = (namaPenguji || "").toLowerCase().includes("ustadzah") ? "Ustadzah" : "Ustadz";
-    let msg = `*REMINDER JADWAL ${headerTitle}*
+    const opening = pickOpening();
+    
+    return `*REMINDER JADWAL WAWANCARA (H-1)*
 
-Assalamu'alaikum Warahmatullahi Wabarakatuh ${title} *${namaPenguji}*,
+${opening}.
+Ustadz/Ustadzah *${namaPenguji}*,
 
-Mengingatkan kembali jadwal ${actionWord} Anda pada:
+Mengingatkan kembali jadwal wawancara Anda:
 
-📝 *${labelAgenda}:* ${jenisUjian}
+📝 *Agenda:* ${jenisUjian}
 👤 *Nama Santri:* ${namaSantri}
 📅 *Hari/Tanggal:* ${hari}, ${tanggal}
 ⏰ *Waktu:* ${jam} WIB
-📍 *Link Meet:* ${lokasi}`;
+📍 *Link Meet:* ${lokasi}
+🔗 *Input Hasil:* ${inputNilaiLink || "-"}
 
-    if (inputNilaiLink) {
-        msg += `\n🔗 *Input Hasil:* ${inputNilaiLink}`;
-    }
-
-    msg += `\n\nMohon kehadirannya tepat waktu. Syukron.
+Mohon kehadirannya tepat waktu. Syukron.
 
 ---
 *Sistem PPDB Al-Andalus Al-Imam*`;
-    return msg;
 }
 
 export function buildMessagePembatalanJadwal(
