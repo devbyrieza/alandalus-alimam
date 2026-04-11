@@ -546,9 +546,7 @@ async function updateNotifFlag(
 // ============================================================================
 
 const OPENINGS = [
-    "Assalamu'alaikum",
-    "Assalamu'alaikum warahmatullahi wabarakatuh",
-    "Assalamu'alaikum wr. wb.",
+    "Assalamu'alaikum Warahmatullahi Wabarakatuh",
 ];
 
 function pickOpening(): string {
@@ -770,7 +768,7 @@ export function buildMessageReminderH1Santri(
 ): string {
     return `*PENGINGAT UJIAN SELEKSI*
 
-Assalamu'alaikum Wr. Wb.
+Assalamu'alaikum Warahmatullahi Wabarakatuh.
 Halo Ananda *${nama}*,
 
 Ini adalah pengingat bahwa Anda dijadwalkan mengikuti *${jenisUjian}* pada:
@@ -805,7 +803,7 @@ export function buildMessageReminderH1Penguji(
 
     let msg = `*REMINDER JADWAL ${headerTitle}*
 
-Assalamu'alaikum Ust/Ustadzah *${namaPenguji}*,
+Assalamu'alaikum Warahmatullahi Wabarakatuh Ust/Ustadzah *${namaPenguji}*,
 
 Mengingatkan kembali jadwal ${actionWord} Anda untuk besok:
 
@@ -835,7 +833,7 @@ export function buildMessagePembatalanJadwal(
 ): string {
     return `*PEMBATALAN JADWAL UJIAN*
 
-Assalamu'alaikum Wr. Wb.
+Assalamu'alaikum Warahmatullahi Wabarakatuh.
 Halo Ananda *${namaSantri}*,
 
 Kami menginformasikan bahwa jadwal *${jenisUjian}* Anda pada:
