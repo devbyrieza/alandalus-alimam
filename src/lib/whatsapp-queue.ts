@@ -706,6 +706,7 @@ export function buildMessageKonfirmasiJadwalInterviewer(
     inputNilaiLink?: string
 ): string {
     const title = (namaInterviewer || "").toLowerCase().includes("ustadzah") ? "Ustadzah" : "Ustadz";
+    const opening = pickOpening();
     let msg = `${opening} ${title} ${namaInterviewer},
  
  Informasikan jadwal ${jenisUjian} baru untuk santri berikut:
