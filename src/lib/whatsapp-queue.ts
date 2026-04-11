@@ -26,7 +26,8 @@ export type NotifType =
     | "konfirmasi_jadwal_interviewer"
     | "reminder_h1"
     | "reminder_h0"
-    | "hasil_tes";
+    | "hasil_tes"
+    | "pembatalan_jadwal";
 
 export interface EnqueueParams {
     pendaftarId: string;
@@ -801,3 +802,29 @@ Mohon kehadirannya tepat waktu. Syukron.
 *Sistem PPDB Al-Andalus Al-Imam*`;
 }
 
+export function buildMessagePembatalanJadwal(
+    namaSantri: string,
+    jenisUjian: string,
+    tanggal: string,
+    jam: string,
+    alasan: string = "Ustadz Berhalangan Hadir"
+): string {
+    return `*PEMBATALAN JADWAL UJIAN*
+
+Assalamu'alaikum Wr. Wb.
+Halo Ananda *${namaSantri}*,
+
+Kami menginformasikan bahwa jadwal *${jenisUjian}* Anda pada:
+
+📅 *Tanggal:* ${tanggal}
+⏰ *Waktu:* ${jam} WIB
+
+Telah *DIBATALKAN* oleh Penguji karena alasan: *${alasan}*.
+
+Mohon segera login ke Dashboard PPDB untuk memilih kembali jadwal pengganti yang tersedia di menu Undangan Seleksi.
+
+Dashboard: ${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/dashboard/pendaftar/undangan-seleksi
+
+---
+*Panitia PPDB Al-Andalus Al-Imam*`;
+}

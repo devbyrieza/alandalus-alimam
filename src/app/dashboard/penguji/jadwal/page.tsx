@@ -13,7 +13,9 @@ import {
   CheckCircle,
   XCircle,
   Hash,
+  AlertTriangle,
 } from "lucide-react";
+import Swal from "sweetalert2";
 
 // --- Types ---
 
@@ -360,6 +362,48 @@ export default function JadwalPengujiPage() {
       setMessage({ type: "error", text: error.message });
     }
   };
+  
+  const handleCancelAssignment = async (jadwalId: string, pendaftarNama: string) => {
+    const { value: reason } = await Swal.fire({
+      title: 'Batalkan Jadwal?',
+      text: `Apakah Anda yakin ingin membatalkan jadwal ${pendaftarNama}? Santri akan mendapatkan notifikasi untuk memilih jadwal ulang dan slot waktu Anda akan dihapus.`,
+      icon: 'warning',
+      input: 'text',
+      inputLabel: 'Alasan Pembatalan (Opsional)',
+      inputPlaceholder: 'Ustadz Berhalangan Hadir',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Ya, Batalkan!',
+      cancelButtonText: 'Kembali'
+    });
+
+    if (reason === undefined) return; // User cancelled the modal
+
+    try {
+      setLoadingAssignments(true);
+      const response = await fetch("/api/penguji/jadwal/cancel", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          jadwal_id: jadwalId,
+          alasan: reason || "Ustadz Berhalangan Hadir"
+        }),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        Swal.fire('Terhapus!', result.message, 'success');
+        fetchAssignments();
+      } else {
+        throw new Error(result.error || "Gagal membatalkan jadwal");
+      }
+    } catch (error: any) {
+      Swal.fire('Gagal!', error.message, 'error');
+    } finally {
+      setLoadingAssignments(false);
+    }
+  };
 
   // --- Helpers ---
 
@@ -567,18 +611,27 @@ export default function JadwalPengujiPage() {
                           </button>
                         </div>
                       </div>
-                      <div className="flex flex-col gap-2 min-w-[200px] border-l pl-0 md:pl-6 border-cream-100">
-                        <div className="flex items-center gap-2 text-sm text-ink-600">
-                          <Clock className="w-4 h-4 text-maroon-500" />
-                          {formatTime(item.waktu_mulai)} WIB
+                      </div>
+                      <div className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-2 min-w-[200px] border-l pl-0 md:pl-6 border-cream-100">
+                          <div className="flex items-center gap-2 text-sm text-ink-600">
+                            <Clock className="w-4 h-4 text-maroon-500" />
+                            {formatTime(item.waktu_mulai)} WIB
+                          </div>
+                          <div className="flex items-center gap-2 text-sm text-ink-600">
+                            <MapPin className="w-4 h-4 text-maroon-500" />
+                            {item.lokasi || "Lokasi belum ditentukan"}
+                          </div>
+                          {item.session_title && (
+                            <div className="text-xs text-ink-400 mt-1">Sesi: {item.session_title}</div>
+                          )}
                         </div>
-                        <div className="flex items-center gap-2 text-sm text-ink-600">
-                          <MapPin className="w-4 h-4 text-maroon-500" />
-                          {item.lokasi || "Lokasi belum ditentukan"}
-                        </div>
-                        {item.session_title && (
-                          <div className="text-xs text-ink-400 mt-1">Sesi: {item.session_title}</div>
-                        )}
+                        <button
+                          onClick={() => handleCancelAssignment(item.id, item.pendaftar.nama_lengkap)}
+                          className="w-full py-2 border border-red-200 text-red-600 hover:bg-red-50 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2"
+                        >
+                          <Trash2 className="w-4 h-4" /> Batalkan Jadwal
+                        </button>
                       </div>
                     </div>
                   </div>
