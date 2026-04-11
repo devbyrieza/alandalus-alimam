@@ -717,7 +717,7 @@ export function buildMessageKonfirmasiJadwalInterviewer(
  Tempat: ${lokasi}`;
 
     if (inputNilaiLink) {
-        msg += `\n\n🔗 *Input Hasil:* ${inputNilaiLink}`;
+        msg += `\n\n🔗 *Input Hasil:* ${inputNilaiLink}\n(PIN: 4 digit terakhir No. HP Anda)`;
     }
 
     msg += `\n\nMohon untuk bersiap di ruangan virtual/fisik tepat waktu. Syukran.
@@ -813,6 +813,7 @@ Mengingatkan kembali jadwal wawancara Anda:
 ⏰ *Waktu:* ${jam} WIB
 📍 *Link Meet:* ${lokasi}
 🔗 *Input Hasil:* ${inputNilaiLink || "-"}
+(PIN: 4 digit terakhir No. HP Anda)
 
 Mohon kehadirannya tepat waktu. Syukron.
 
