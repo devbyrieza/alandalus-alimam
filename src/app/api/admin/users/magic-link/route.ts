@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
-import { generateMagicToken } from "@/lib/utils/magic-link";
+import { generateMagicToken, getManualTinyUrl, getPermanentAuthUrl, PERMANENT_SLUGS } from "@/lib/utils/magic-link";
 
 export async function POST(request: NextRequest) {
     try {
@@ -42,7 +42,17 @@ export async function POST(request: NextRequest) {
         const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://pesantren-alimam.com";
         const magicLinkUrl = `${baseUrl}/api/auth/magic?token=${token}`;
 
-        return NextResponse.json({ success: true, link: magicLinkUrl });
+        // Add manual or permanent links if exist
+        const shortLink = getManualTinyUrl(user.full_name);
+        const slug = Object.entries(PERMANENT_SLUGS).find(([s, n]) => user.full_name.includes(n))?.[0];
+        const permanentLink = slug ? getPermanentAuthUrl(slug) : null;
+
+        return NextResponse.json({ 
+            success: true, 
+            link: magicLinkUrl,
+            shortLink,
+            permanentLink
+        });
 
     } catch (error: any) {
         console.error("Generate Magic Link Error:", error);
@@ -91,12 +101,19 @@ export async function GET(request: NextRequest) {
                 : user.role;
 
             const token = generateMagicToken(user.id, activeRole, user.full_name, 48); // Valid for 48 hours for bulk view
+            
+            const shortLink = getManualTinyUrl(user.full_name);
+            const slug = Object.entries(PERMANENT_SLUGS).find(([s, n]) => user.full_name.includes(n))?.[0];
+            const permanentLink = slug ? getPermanentAuthUrl(slug) : null;
+
             return {
                 id: user.id,
                 full_name: user.full_name,
                 role: user.role,
                 secondary_roles: user.secondary_roles,
-                link: `${baseUrl}/api/auth/magic?token=${token}`
+                link: `${baseUrl}/api/auth/magic?token=${token}`,
+                shortLink,
+                permanentLink
             };
         });
 

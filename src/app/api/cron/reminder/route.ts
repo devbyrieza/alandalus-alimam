@@ -11,7 +11,7 @@ import {
     buildMessageReminderH1Santri,
     buildMessageReminderH1Penguji,
 } from "@/lib/whatsapp-queue";
-import { generateMagicToken } from "@/lib/utils/magic-link";
+import { generateMagicToken, getManualTinyUrl } from "@/lib/utils/magic-link";
 
 const CRON_SECRET = process.env.CRON_SECRET || "ppdb-alimam-cron-2026";
 
@@ -158,6 +158,10 @@ export async function GET(request: Request) {
                     );
                     const magicLink = `${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/api/auth/magic?token=${token}`;
 
+                    // Use manual short link if exists for better UX/permanence
+                    const manualShortLink = getManualTinyUrl(profile.full_name);
+                    const finalInputLink = manualShortLink || magicLink;
+
                     const msgPenguji = buildMessageReminderH1Penguji(
                         profile.full_name,
                         jadwal.pendaftar.nama_lengkap,
@@ -166,7 +170,7 @@ export async function GET(request: Request) {
                         jam,
                         profile.google_meet_link || "Menyesuaikan",
                         type,
-                        magicLink
+                        finalInputLink
                     );
 
                     const result = await enqueueWhatsapp({

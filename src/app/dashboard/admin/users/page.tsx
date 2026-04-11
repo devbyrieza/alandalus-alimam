@@ -192,7 +192,10 @@ export default function UserManagementPage() {
     };
 
     const copyAllLinks = async () => {
-        const text = bulkMagicLinks.map(l => `${l.full_name}: ${l.link}`).join('\n');
+        const text = bulkMagicLinks.map(l => {
+            const displayLink = l.shortLink || l.permanentLink || l.link;
+            return `${l.full_name}: ${displayLink}`;
+        }).join('\n');
         await navigator.clipboard.writeText(text);
         alert("Seluruh daftar link berhasil disalin!");
     };
@@ -607,50 +610,65 @@ export default function UserManagementPage() {
                                     <thead className="bg-stone-50 border-b border-indigo-50 sticky top-0">
                                         <tr>
                                             <th className="px-4 py-3 text-left font-bold text-stone-600">Nama</th>
-                                            <th className="px-4 py-3 text-left font-bold text-stone-600">Role</th>
-                                            <th className="px-4 py-3 text-left font-bold text-stone-600">Tautan</th>
+                                            <th className="px-4 py-3 text-left font-bold text-stone-600">Short Link (TinyURL)</th>
+                                            <th className="px-4 py-3 text-left font-bold text-stone-600">Slug Permanen</th>
                                             <th className="px-4 py-3 text-right">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-indigo-50">
                                         {bulkLoading ? (
                                             <tr>
-                                                <td colSpan={4} className="px-4 py-10 text-center text-stone-400">
+                                                <td colSpan={5} className="px-4 py-10 text-center text-stone-400">
                                                     <Loader2 className="w-6 h-6 animate-spin mx-auto mb-2" />
                                                     Menghasilkan link...
                                                 </td>
                                             </tr>
                                         ) : bulkMagicLinks.length === 0 ? (
                                             <tr>
-                                                <td colSpan={4} className="px-4 py-10 text-center text-stone-400">
+                                                <td colSpan={5} className="px-4 py-10 text-center text-stone-400">
                                                     Tidak ada penguji ditemukan
                                                 </td>
                                             </tr>
                                         ) : (
                                             bulkMagicLinks.map((item) => (
                                                 <tr key={item.id} className="hover:bg-indigo-50/20">
-                                                    <td className="px-4 py-3 font-bold text-stone-800">{item.full_name}</td>
                                                     <td className="px-4 py-3">
-                                                        <span className="text-[10px] px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-100">
+                                                        <div className="font-bold text-stone-800">{item.full_name}</div>
+                                                        <div className="text-[10px] text-stone-400">
                                                             {ROLE_OPTIONS.find(r => r.value === item.role)?.label || item.role}
-                                                        </span>
-                                                    </td>
-                                                    <td className="px-4 py-3">
-                                                        <div className="max-w-[300px] overflow-hidden text-ellipsis whitespace-nowrap text-stone-400 text-xs">
-                                                            {item.link}
                                                         </div>
                                                     </td>
+                                                    <td className="px-4 py-3">
+                                                        {item.shortLink ? (
+                                                            <div className="flex flex-col gap-1">
+                                                                <span className="text-emerald-600 font-bold text-xs">{item.shortLink}</span>
+                                                                <span className="text-[10px] text-stone-300 line-through">Link Panjang Tersembunyi</span>
+                                                            </div>
+                                                        ) : (
+                                                            <span className="text-stone-400 text-xs italic">Belum diset</span>
+                                                        )}
+                                                    </td>
+                                                    <td className="px-4 py-3">
+                                                       {item.permanentLink && (
+                                                           <div className="text-[10px] text-indigo-500 font-mono bg-indigo-50 px-2 py-1 rounded border border-indigo-100 max-w-[200px] truncate">
+                                                               {item.permanentLink}
+                                                           </div>
+                                                       )}
+                                                    </td>
                                                     <td className="px-4 py-3 text-right">
-                                                        <button
-                                                            onClick={() => {
-                                                                navigator.clipboard.writeText(item.link);
-                                                                alert(`Link untuk ${item.full_name} berhasil disalin!`);
-                                                            }}
-                                                            className="p-1.5 text-indigo-600 hover:bg-indigo-50 rounded-lg"
-                                                            title="Salin Link"
-                                                        >
-                                                            <LinkIcon className="w-4 h-4" />
-                                                        </button>
+                                                        <div className="flex justify-end gap-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    const link = item.shortLink || item.permanentLink || item.link;
+                                                                    navigator.clipboard.writeText(link);
+                                                                    alert(`Link untuk ${item.full_name} berhasil disalin!`);
+                                                                }}
+                                                                className="p-1.5 text-emerald-600 hover:bg-emerald-50 rounded-lg"
+                                                                title="Salin Link Terbaik"
+                                                            >
+                                                                <LinkIcon className="w-4 h-4" />
+                                                            </button>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             ))

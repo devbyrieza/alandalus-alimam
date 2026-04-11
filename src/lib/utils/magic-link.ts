@@ -71,3 +71,55 @@ export function verifyMagicToken(token: string): {
         return { valid: false, reason: "Terjadi kesalahan saat verifikasi" };
     }
 }
+
+// ============================================================================
+// PERMANENT SHORT LINKS MAPPING (Slug -> Name query)
+// ============================================================================
+
+export const PERMANENT_SLUGS: Record<string, string> = {
+    "abah": "Abah",
+    "agus": "Agus Cahyono",
+    "fuad": "Fuad Khomsatun",
+    "jusman": "Jusman",
+    "bachtiar": "Maulidin Bachtiar",
+    "muhajir": "Muhajir",
+    "syauqi": "Muhammad Syauqi Al Faruq",
+    "teguh": "Teguh"
+};
+
+// ============================================================================
+// MANUAL TINYURL MAPPING (Name -> Short URL)
+// ============================================================================
+
+export const MANUAL_TINYURLS: Record<string, string> = {
+    "Abah": "https://tinyurl.com/alimam-abah",
+    "Agus Cahyono": "https://tinyurl.com/alimam-agus",
+    "Fuad Khomsatun": "https://tinyurl.com/alimam-fuad",
+    "Jusman": "https://tinyurl.com/alimam-jusman",
+    "Maulidin Bachtiar": "https://tinyurl.com/alimam-bachtiar",
+    "Muhajir": "https://tinyurl.com/alimam-muhajir",
+    "Muhammad Syauqi Al Faruq": "https://tinyurl.com/alimam-syauqi",
+    "Teguh": "https://tinyurl.com/alimam-teguh"
+};
+
+/**
+ * Get internal short link (permanent) for a slug
+ */
+export function getPermanentAuthUrl(slug: string): string {
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://pesantren-alimam.com";
+    return `${baseUrl}/api/auth/short/${slug}`;
+}
+
+/**
+ * Get manual TinyURL if exists for a user
+ */
+export function getManualTinyUrl(fullName: string): string | null {
+    // Try exact match then contains
+    if (MANUAL_TINYURLS[fullName]) return MANUAL_TINYURLS[fullName];
+    
+    for (const [name, url] of Object.entries(MANUAL_TINYURLS)) {
+        if (fullName.includes(name) || name.includes(fullName)) return url;
+    }
+    
+    return null;
+}
