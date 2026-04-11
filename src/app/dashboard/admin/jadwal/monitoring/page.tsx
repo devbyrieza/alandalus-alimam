@@ -284,7 +284,7 @@ export default function MonitoringJadwalPage() {
                                                         <Calendar className="w-3.5 h-3.5 text-blue-500" />
                                                         {formatDateTime(s.sesi.start)}
                                                     </span>
-                                                    <span className="text-[10px] font-medium text-ink-400 mt-1 flex items-center gap-1.5 pl-5 uppercase tracking-wider">
+                                                    <span className="text-[10px] font-medium text-link-400 mt-1 flex items-center gap-1.5 pl-5 uppercase tracking-wider">
                                                         <MapPin className="w-3 h-3" />
                                                         {s.sesi.location}
                                                     </span>
@@ -329,6 +329,66 @@ export default function MonitoringJadwalPage() {
                             </table>
                         </div>
                     </div>
+                ) : viewMode === "grouped" ? (
+                    <div className="space-y-8">
+                        {getGroupedSchedules().map((group) => (
+                            <div key={group.name} className="bg-white rounded-3xl shadow-clay-m border border-white/40 overflow-hidden">
+                                <div className="bg-slate-50/50 px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-600/20">
+                                            <Users className="w-5 h-5" />
+                                        </div>
+                                        <h2 className="text-lg font-black text-ink-900">{group.name} <span className="text-blue-600">({group.items.length})</span></h2>
+                                    </div>
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-ink-400">Jadwal Penguji</span>
+                                </div>
+                                <div className="p-0">
+                                    <table className="w-full text-left border-collapse">
+                                        <thead>
+                                            <tr className="bg-slate-50/30">
+                                                <th className="px-6 py-3 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Nama Santri</th>
+                                                <th className="px-6 py-3 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Peran Penguji</th>
+                                                <th className="px-6 py-3 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100">Waktu & Lokasi</th>
+                                                <th className="px-6 py-3 text-[10px] font-black uppercase tracking-widest text-ink-400 border-b border-slate-100 text-center">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-slate-100 text-xs">
+                                            {group.items.map((item, idx) => (
+                                                <tr key={`${item.schedule.id}-${idx}`} className="hover:bg-blue-50/20 transition-colors">
+                                                    <td className="px-6 py-4">
+                                                        <div className="flex flex-col">
+                                                            <span className="font-black text-ink-900">{item.schedule.pendaftar.nama}</span>
+                                                            <span className="text-[10px] text-ink-400 font-bold uppercase">{item.schedule.pendaftar.nomor} • {item.schedule.pendaftar.jenjang}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-6 py-4">
+                                                        <span className={`px-2 py-0.5 rounded-full font-black text-[9px] uppercase tracking-wider ${
+                                                            item.role === 'Quran' ? 'bg-orange-100 text-orange-600' :
+                                                            item.role === 'W. Santri' ? 'bg-indigo-100 text-indigo-600' :
+                                                            'bg-emerald-100 text-emerald-600'
+                                                        }`}>
+                                                            {item.role}
+                                                        </span>
+                                                    </td>
+                                                    <td className="px-6 py-4">
+                                                        <div className="flex flex-col">
+                                                            <span className="font-bold text-ink-700">{formatDateTime(item.schedule.sesi.start)}</span>
+                                                            <span className="text-[10px] text-ink-400 uppercase tracking-tight">{item.schedule.sesi.location}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-6 py-4 text-center">
+                                                        <div className="flex justify-center">
+                                                            {getStatusIcon(
+                                                                item.role === 'Quran' ? item.schedule.status.quran :
+                                                                item.role === 'W. Santri' ? item.schedule.status.santri :
+                                                                item.schedule.status.ortu
+                                                            )}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         ))}
@@ -387,8 +447,6 @@ export default function MonitoringJadwalPage() {
                             </div>
                         ))}
                     </div>
-                )}
-            </div>
                 )}
             </div>
 
