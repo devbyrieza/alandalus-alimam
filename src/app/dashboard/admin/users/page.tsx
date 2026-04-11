@@ -50,6 +50,10 @@ export default function UserManagementPage() {
     const [isMagicLinksModalOpen, setIsMagicLinksModalOpen] = useState(false);
     const [bulkMagicLinks, setBulkMagicLinks] = useState<any[]>([]);
     const [bulkLoading, setBulkLoading] = useState(false);
+    const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
+    const [editRole, setEditRole] = useState("");
+    const [editSecondaryRoles, setEditSecondaryRoles] = useState<string[]>([]);
+    const [editPhone, setEditPhone] = useState("");
 
     // Form State
     const [formData, setFormData] = useState({
@@ -59,6 +63,7 @@ export default function UserManagementPage() {
         full_name: "",
         role: "admin_berkas",
         secondary_roles: [] as string[],
+        phone: "",
     });
     const [isEditing, setIsEditing] = useState(false);
 
@@ -97,6 +102,7 @@ export default function UserManagementPage() {
                 full_name: formData.full_name,
                 role: formData.role,
                 secondary_roles: formData.secondary_roles,
+                phone: formData.phone,
             };
 
             if (isEditing) {
@@ -214,7 +220,12 @@ export default function UserManagementPage() {
             full_name: user.full_name,
             role: user.role,
             secondary_roles: user.secondary_roles || [],
+            phone: user.phone || "",
         });
+        setEditRole(user.role);
+        setEditSecondaryRoles(user.secondary_roles || []);
+        setEditPhone(user.phone || "");
+        setSelectedUser(user);
         setIsEditing(true);
         setIsModalOpen(true);
     };
