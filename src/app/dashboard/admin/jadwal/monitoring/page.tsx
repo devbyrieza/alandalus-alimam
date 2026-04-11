@@ -182,11 +182,11 @@ export default function MonitoringJadwalPage() {
                         className="w-full bg-slate-50 border-0 rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/10 outline-none font-medium h-12"
                     />
                 </div>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap items-center gap-3">
                     <select 
                         value={filterJenjang}
                         onChange={(e) => setFilterJenjang(e.target.value)}
-                        className="bg-slate-50 border-0 rounded-xl px-4 py-2 text-sm font-bold text-ink-600 focus:ring-2 focus:ring-blue-500/10 outline-none h-12 min-w-[120px]"
+                        className="flex-1 md:flex-none bg-slate-50 border-0 rounded-xl px-4 py-2 text-sm font-bold text-ink-600 focus:ring-2 focus:ring-blue-500/10 outline-none h-12 min-w-[140px]"
                     >
                         <option value="ALL">Semua Jenjang</option>
                         <option value="MTs">MTs</option>
@@ -194,11 +194,11 @@ export default function MonitoringJadwalPage() {
                     </select>
                     <button 
                         onClick={fetchMonitoringData}
-                        className="px-6 bg-white border border-slate-200 hover:bg-slate-50 text-ink-700 font-bold rounded-xl shadow-sm transition-all h-12 flex items-center gap-2"
+                        className="flex-1 md:flex-none px-4 bg-white border border-slate-200 hover:bg-slate-50 text-ink-700 font-bold rounded-xl shadow-sm transition-all h-12 flex items-center justify-center gap-2 whitespace-nowrap"
                     >
-                        Refresh Data
+                        Refresh
                     </button>
-                    <div className="flex bg-slate-100 p-1 rounded-xl h-12">
+                    <div className="flex-1 md:flex-none flex bg-slate-100 p-1 rounded-xl h-12 overflow-x-auto min-w-fit no-scrollbar">
                         <button 
                             onClick={() => setViewMode("flat")}
                             className={`px-4 rounded-lg text-xs font-black transition-all ${viewMode === "flat" ? "bg-white text-blue-600 shadow-sm" : "text-ink-400 hover:text-ink-600"}`}
@@ -220,13 +220,13 @@ export default function MonitoringJadwalPage() {
                     </div>
                     <button 
                         onClick={() => setShowPast(!showPast)}
-                        className={`px-4 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border h-12 ${
+                        className={`flex-1 md:flex-none px-4 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border h-12 whitespace-nowrap ${
                             showPast 
                             ? "bg-amber-50 border-amber-200 text-amber-600 shadow-sm" 
                             : "bg-white border-slate-200 text-ink-400 hover:text-ink-600 shadow-sm"
                         }`}
                     >
-                        {showPast ? "Sembunyikan Lampau" : "Tampilkan Lampau"}
+                        {showPast ? "Lalu" : "Lampau"}
                     </button>
                 </div>
             </div>
