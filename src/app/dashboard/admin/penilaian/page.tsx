@@ -37,6 +37,7 @@ export default function ExaminerDashboard() {
     const [catatan, setCatatan] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isBroadcasting, setIsBroadcasting] = useState(false);
+    const [isProcessingQueue, setIsProcessingQueue] = useState(false);
 
     useEffect(() => {
         fetchStudents();
@@ -183,6 +184,42 @@ export default function ExaminerDashboard() {
                         className="border-blue-600 text-blue-700 hover:bg-blue-50"
                     >
                         {isBroadcasting ? 'Memproses...' : 'Siarkan Jadwal'}
+                    </Button>
+
+                    <Button 
+                        onClick={async () => {
+                            try {
+                                setIsProcessingQueue(true);
+                                // Triggering the cron endpoint with secret
+                                const res = await fetch('/api/cron/whatsapp?secret=ppdb-alimam-cron-2026');
+                                if (!res.ok) throw new Error('Failed');
+                                const data = await res.json();
+                                
+                                if (data.result?.processed) {
+                                    Swal.fire({
+                                        title: 'Pesan Terkirim',
+                                        text: `1 pesan dalam antrean telah diproses. Sisa antrean: ${data.stats?.queue?.pending || 0}`,
+                                        icon: 'success',
+                                        toast: true,
+                                        position: 'top-end',
+                                        timer: 3000,
+                                        showConfirmButton: false
+                                    });
+                                } else {
+                                    Swal.fire('Info', data.result?.reason || 'Tidak ada pesan yang perlu dikirim', 'info');
+                                }
+                            } catch (error) {
+                                console.error(error);
+                                Swal.fire('Error', 'Gagal memproses antrean', 'error');
+                            } finally {
+                                setIsProcessingQueue(false);
+                            }
+                        }} 
+                        disabled={isProcessingQueue}
+                        variant="outline" 
+                        className="border-emerald-600 text-emerald-700 hover:bg-emerald-50"
+                    >
+                        {isProcessingQueue ? 'Mengirim...' : 'Proses Antrean WA'}
                     </Button>
 
                     <Button onClick={fetchStudents} variant="outline" className="border-gray-300">Refresh Data</Button>
