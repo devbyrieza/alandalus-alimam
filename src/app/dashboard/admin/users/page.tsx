@@ -366,6 +366,12 @@ export default function UserManagementPage() {
                                                     <Mail className="w-3.5 h-3.5" />
                                                     {user.email}
                                                 </div>
+                                                {user.phone && user.phone !== "-" && (
+                                                    <div className="flex items-center gap-1.5 text-[10px] font-bold text-indigo-600 mt-1">
+                                                        <Smartphone className="w-3 h-3" />
+                                                        WA: {user.phone}
+                                                    </div>
+                                                )}
                                             </div>
                                         </td>
                                         <td className="px-6 py-4">
@@ -547,9 +553,28 @@ export default function UserManagementPage() {
                                         value={formData.password}
                                         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                         className="w-full pl-10 pr-4 py-3 border-2 border-stone-200 rounded-xl focus:border-indigo-500 focus:outline-none"
-                                        placeholder={isEditing ? "••••••••" : "Massukan password"}
+                                        placeholder={isEditing ? "••••••••" : "Masukkan password"}
                                     />
                                 </div>
+                            </div>
+
+                            <div className="pt-4 border-t border-stone-100">
+                                <label className="block text-sm font-bold text-stone-700 mb-2">
+                                    No. WhatsApp (Aktif)
+                                </label>
+                                <div className="relative">
+                                    <Smartphone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400" />
+                                    <input
+                                        type="text"
+                                        value={formData.phone}
+                                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                        className="w-full pl-10 pr-4 py-3 border-2 border-stone-200 rounded-xl focus:border-indigo-500 focus:outline-none"
+                                        placeholder="Contoh: 08123456789"
+                                    />
+                                </div>
+                                <p className="mt-1 text-[10px] text-stone-400">
+                                    Penting: 4 digit terakhir akan menjadi PIN untuk login Magic Link.
+                                </p>
                             </div>
 
                             <div className="pt-6 flex gap-3 sticky bottom-0 bg-white shadow-[0_-15px_15px_-15px_rgba(0,0,0,0.1)]">
