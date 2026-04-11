@@ -44,6 +44,7 @@ interface SlotData {
   booked: number;
   location: string;
   notes: string;
+  category: string;
   isFull: boolean;
 }
 
@@ -59,6 +60,7 @@ interface BookedData {
   status_santri?: string;
   status_quran?: string;
   status_ortu?: string;
+  category: string;
 }
 
 interface ProgressData {
@@ -91,9 +93,9 @@ const GRUP_A_ICONS: Record<string, React.ElementType> = {
 };
 
 const GRUP_B_ICONS: Record<string, React.ElementType> = {
-  "Tes Al-Qur'an": BookOpenCheck,
-  "Wawancara Calsan": Users,
-  "Wawancara Cawalsan": UserCheck,
+  "QURAN": BookOpenCheck,
+  "W_SANTRI": Users,
+  "W_ORTU": UserCheck,
 };
 
 // ============================================================================
@@ -403,7 +405,7 @@ export default function UndanganSeleksiTab() {
 
             <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
               {data.grupB.booked.map((item) => {
-                const Icon = GRUP_B_ICONS[item.jenis_ujian] || Calendar;
+                const Icon = GRUP_B_ICONS[item.category] || Calendar;
                 return (
                   <div
                     key={item.id}
@@ -495,12 +497,12 @@ export default function UndanganSeleksiTab() {
             </div>
 
             {(() => {
-              // Filter out slots for types already booked
-              const bookedTypes = data.grupB.booked.map(
-                (j) => j.jenis_ujian
+              // Filter out slots for categories already booked
+              const bookedCategories = data.grupB.booked.map(
+                (j) => j.category
               );
               const filteredSlots = data.grupB.availableSlots.filter(
-                (slot) => !bookedTypes.includes(slot.title)
+                (slot) => !bookedCategories.includes(slot.category)
               );
 
               if (filteredSlots.length === 0) {
@@ -517,7 +519,7 @@ export default function UndanganSeleksiTab() {
               return (
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {filteredSlots.map((slot) => {
-                    const Icon = GRUP_B_ICONS[slot.title] || Calendar;
+                    const Icon = GRUP_B_ICONS[slot.category] || Calendar;
                     return (
                       <div
                         key={slot.id}

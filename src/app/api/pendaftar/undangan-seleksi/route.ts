@@ -17,6 +17,19 @@ import {
     buildMessageJadwalLangsungTersedia,
 } from "@/lib/whatsapp-queue";
 
+function getExamCategory(title: string): string {
+    const t = title.toLowerCase();
+    if (t.includes('quran') || t.includes('qur\'an')) return 'QURAN';
+    if (t.includes('calsan') || t.includes('santri')) return 'W_SANTRI';
+    if (t.includes('cawalsan') || t.includes('ortu') || t.includes('orang tua')) return 'W_ORTU';
+    return 'OTHER';
+}
+
+function sanitizeTitle(title: string): string {
+    // Remove anything in parentheses (e.g. examiner names)
+    return title.replace(/\s*\(.*?\)\s*/g, '').trim();
+}
+
 async function getSession() {
     const cookieStore = await cookies();
     const sessionCookie = cookieStore.get("app_session");
@@ -173,7 +186,9 @@ export async function GET() {
             .filter((s) => s._count.bookings < s.quota)
             .map((s) => ({
                 id: s.id,
-                title: s.title,
+                title: sanitizeTitle(s.title || "Seleksi Santri Baru"),
+                raw_title: s.title, // Keep for reference if needed
+                category: getExamCategory(s.title || ""),
                 start_time: s.start_time,
                 end_time: s.end_time,
                 quota: s.quota,
@@ -184,19 +199,23 @@ export async function GET() {
             }));
 
         // Transform booked jadwal
-        const booked = bookedJadwal.map((j) => ({
-            id: j.id,
-            jenis_ujian: j.exam_session?.title || "Seleksi Santri Baru",
-            tanggal_ujian: j.tanggal_ujian,
-            waktu_mulai: j.exam_session?.start_time || j.waktu_mulai_santri,
-            waktu_selesai: j.exam_session?.end_time || j.waktu_selesai_santri,
-            lokasi: j.exam_session?.location || j.tempat_santri,
-            keterangan: j.catatan || j.exam_session?.notes,
-            online_test_link: j.online_test_link,
-            status_santri: j.status_santri,
-            status_quran: j.status_quran,
-            status_ortu: j.status_ortu,
-        }));
+        const booked = bookedJadwal.map((j) => {
+            const rawTitle = j.exam_session?.title || "Seleksi Santri Baru";
+            return {
+                id: j.id,
+                jenis_ujian: sanitizeTitle(rawTitle),
+                category: getExamCategory(rawTitle),
+                tanggal_ujian: j.tanggal_ujian,
+                waktu_mulai: j.exam_session?.start_time || j.waktu_mulai_santri,
+                waktu_selesai: j.exam_session?.end_time || j.waktu_selesai_santri,
+                lokasi: j.exam_session?.location || j.tempat_santri,
+                keterangan: j.catatan || j.exam_session?.notes,
+                online_test_link: j.online_test_link,
+                status_santri: j.status_santri,
+                status_quran: j.status_quran,
+                status_ortu: j.status_ortu,
+            };
+        });
 
         // Calculate overall progress
         // Grup B: only count as completed when status is "completed", not just "scheduled"

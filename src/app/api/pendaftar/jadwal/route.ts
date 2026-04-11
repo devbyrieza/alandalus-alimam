@@ -9,6 +9,19 @@ import {
     buildMessageReminderH1Penguji 
 } from "@/lib/whatsapp-queue";
 
+function getExamCategory(title: string): string {
+    const t = (title || "").toLowerCase();
+    if (t.includes('quran') || t.includes('qur\'an')) return 'QURAN';
+    if (t.includes('calsan') || t.includes('santri')) return 'W_SANTRI';
+    if (t.includes('cawalsan') || t.includes('ortu') || t.includes('orang tua')) return 'W_ORTU';
+    return 'OTHER';
+}
+
+function sanitizeTitle(title: string): string {
+    // Remove anything in parentheses (e.g. examiner names)
+    return (title || "").replace(/\s*\(.*?\)\s*/g, '').trim();
+}
+
 async function getSession() {
     const cookieStore = await cookies();
     const sessionCookie = cookieStore.get("app_session");
@@ -39,7 +52,8 @@ export async function GET() {
         // Transform to match front-end expectation
         const data = jadwal.map(item => ({
             id: item.id,
-            jenis_ujian: "Seleksi Santri Baru", // Static label or derive
+            jenis_ujian: sanitizeTitle(item.exam_session?.title || "Seleksi Santri Baru"),
+            category: getExamCategory(item.exam_session?.title || ""),
             tanggal_ujian: item.tanggal_ujian,
             waktu_mulai: item.exam_session?.start_time || item.waktu_mulai_santri,
             waktu_selesai: item.exam_session?.end_time || item.waktu_selesai_santri,
@@ -82,27 +96,29 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: "Kuota penuh" }, { status: 400 });
         }
 
-        // 2. Check for reduced duplication (Same Exam Type)
+        // 2. Check for categorical duplication (Quran, Santri, Ortu)
         const existingBookings = await prisma.jadwalUjian.findMany({
             where: { pendaftar_id: session.id },
             include: { exam_session: true }
         });
+        
+        const currentCategory = getExamCategory(examSession.title || "");
 
-        // Check if any existing booking has the same title/type
-        const duplicateType = existingBookings.find(booking => {
-            // If booking has a session, compare titles
-            if (booking.exam_session?.title && examSession.title) {
-                return booking.exam_session.title === examSession.title;
-            }
-            // If legacy booking (no session) or untitled, maybe block to be safe? 
-            // Or assume manual schedule covers everything?
-            // For now, let's assume if titles match, it's a duplicate.
-            return false;
+        // Check if any existing booking has the same category
+        const duplicateCategory = existingBookings.find(booking => {
+            const bookedTitle = booking.exam_session?.title || "";
+            return getExamCategory(bookedTitle) === currentCategory;
         });
 
-        if (duplicateType) {
+        if (duplicateCategory) {
+            const categoryLabel = 
+                currentCategory === 'QURAN' ? 'Ujian Al-Quran' :
+                currentCategory === 'W_SANTRI' ? 'Wawancara Calon Santri' :
+                currentCategory === 'W_ORTU' ? 'Wawancara Orang Tua' : 
+                'Ujian ini';
+            
             return NextResponse.json({
-                error: `Anda sudah memiliki jadwal untuk ${examSession.title || 'Ujian ini'}.`
+                error: `Anda sudah memiliki jadwal untuk ${categoryLabel}.`
             }, { status: 400 });
         }
 
@@ -202,7 +218,7 @@ export async function POST(request: Request) {
             const dateStr = startTime.toLocaleDateString("id-ID", { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
             const timeStr = startTime.toLocaleTimeString("id-ID", { hour: '2-digit', minute: '2-digit' }) + ' WIB';
             const lokasi = examSession.location || "Pesantren Al-Imam";
-            const jenisUjian = examSession.title || "Seleksi Santri Baru";
+            const jenisUjian = sanitizeTitle(examSession.title || "Seleksi Santri Baru");
 
             const message = buildMessageKonfirmasiJadwal(
                 pendaftarInfo.nama_lengkap,
