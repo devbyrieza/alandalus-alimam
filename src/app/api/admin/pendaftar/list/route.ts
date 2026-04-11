@@ -135,6 +135,11 @@ export async function GET(request: NextRequest) {
           },
           pengumuman: {
             select: { status_kelulusan: true }
+          },
+          whatsapp_log: {
+            orderBy: { created_at: "desc" },
+            take: 1,
+            select: { status: true, updated_at: true, error_message: true }
           }
         },
         orderBy: { created_at: "desc" },
@@ -169,6 +174,7 @@ export async function GET(request: NextRequest) {
       return {
         ...item,
         nilai_ujian: mergedNilai,
+        whatsapp_status: item.whatsapp_log?.[0] || null,
         dokumen: item.dokumen.map(doc => ({
           jenis_dokumen: doc.jenis_dokumen,
           status_verifikasi: doc.is_verified ? "verified" : (doc.catatan ? "rejected" : "pending")

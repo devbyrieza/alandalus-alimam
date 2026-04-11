@@ -28,6 +28,7 @@ export default function DashboardPendaftarPage() {
     nomorPendaftaran: "",
     status: "draft" as StatusProses,
     lastUpdate: new Date().toISOString(),
+    schedulesAvailable: false,
     pengumuman: null as {
       status_kelulusan: string;
       catatan?: string;
@@ -69,6 +70,7 @@ export default function DashboardPendaftarPage() {
           nomorPendaftaran: statusData.nomor_pendaftaran || "-",
           status: statusData.status_proses || "draft",
           lastUpdate: statusData.updated_at || new Date().toISOString(),
+          schedulesAvailable: !!statusData.schedules_available,
           pengumuman: statusData.pengumuman || null
         });
       } catch (e: any) {
@@ -124,6 +126,27 @@ export default function DashboardPendaftarPage() {
     <div className="space-y-6">
       {/* Progress Stepper Tracking */}
       <ProgressStepper currentStatus={data.status} />
+
+      {/* Info Banner: Jadwal Tersedia */}
+      {data.schedulesAvailable && ["paid", "docs_verified"].includes(data.status) && (
+        <div className="bg-brand-yellow-400 border border-brand-yellow-500 rounded-3xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-lg animate-bounce-subtle">
+           <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-full bg-brand-blue-900/10 flex items-center justify-center">
+                <Calendar className="w-6 h-6 text-brand-blue-900" />
+              </div>
+              <div>
+                <h3 className="font-black text-brand-blue-950 text-lg leading-tight uppercase tracking-tight">Jadwal Seleksi Tersedia!</h3>
+                <p className="text-brand-blue-900/80 text-sm font-medium">Dokumen Anda sudah terverifikasi. Segera pilih jadwal seleksi agar tidak kehabisan kuota.</p>
+              </div>
+           </div>
+           <Link 
+            href="/dashboard/pendaftar?tab=undangan-seleksi" 
+            className="px-6 py-3 bg-brand-blue-900 text-white font-black text-sm rounded-xl uppercase tracking-widest hover:bg-brand-blue-800 transition-colors shadow-md whitespace-nowrap"
+          >
+            Pilih Jadwal Sekarang
+           </Link>
+        </div>
+      )}
 
       {/* Welcome Banner */}
       <div className="relative overflow-hidden rounded-[2.5rem] bg-linear-to-br from-brand-blue-700 to-brand-blue-900 text-white shadow-lg border border-brand-blue-600 app-card">

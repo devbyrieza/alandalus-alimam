@@ -22,7 +22,12 @@ type Student = {
         score_kepribadian: number;
         score_kesiapan: number;
         nilai_wawancara_ortu: number;
-    }
+    },
+    whatsapp_status?: {
+        status: string;
+        updated_at: string;
+        error_message?: string;
+    } | null;
 };
 
 export default function ExaminerDashboard() {
@@ -38,6 +43,8 @@ export default function ExaminerDashboard() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isBroadcasting, setIsBroadcasting] = useState(false);
     const [isProcessingQueue, setIsProcessingQueue] = useState(false);
+    const [queueStats, setQueueStats] = useState<{ pending: number, sent: number, failed: number } | null>(null);
+    const [flushProgress, setFlushProgress] = useState(0);
 
     useEffect(() => {
         fetchStudents();
@@ -46,13 +53,21 @@ export default function ExaminerDashboard() {
     const fetchStudents = async () => {
         try {
             setLoading(true);
-            const res = await fetch('/api/admin/pendaftar/list?limit=100'); // Removed 'status=scheduled' to allow all applicants to populate
-            // Using existing API which we modified to include scores.
-            // For MVP just list all applicants 
-
+            const res = await fetch('/api/admin/pendaftar/list?limit=100'); 
             if (!res.ok) throw new Error('Failed to fetch');
             const json = await res.json();
             setStudents(json.data || []);
+            
+            // Also fetch stats from cron result (using same secret)
+            const statsRes = await fetch('/api/cron/whatsapp?secret=ppdb-alimam-cron-2026');
+            const statsJson = await statsRes.json();
+            if (statsJson.stats?.queue) {
+                setQueueStats({
+                    pending: statsJson.stats.queue.pending || 0,
+                    sent: statsJson.stats.queue.sent || 0,
+                    failed: statsJson.stats.queue.failed || 0
+                });
+            }
         } catch (error) {
             console.error(error);
         } finally {
@@ -98,6 +113,50 @@ export default function ExaminerDashboard() {
             Swal.fire('Error', 'Gagal menyimpan nilai', 'error');
         } finally {
             setIsSubmitting(false);
+        }
+    };
+
+    const handleFlushQueue = async () => {
+        try {
+            setIsProcessingQueue(true);
+            setFlushProgress(0);
+            
+            let remaining = queueStats?.pending || 0;
+            if (remaining === 0) {
+                Swal.fire('Info', 'Tidak ada antrean yang perlu diproses', 'info');
+                return;
+            }
+
+            const totalToProcess = remaining;
+            let processedInLoop = 0;
+
+            // Process loop (up to 50 at a time or until empty)
+            while (remaining > 0 && processedInLoop < 50) {
+                const res = await fetch('/api/cron/whatsapp?secret=ppdb-alimam-cron-2026');
+                const data = await res.json();
+                
+                if (!data.result?.processed) break;
+                
+                remaining = data.stats?.queue?.pending || 0;
+                processedInLoop++;
+                setFlushProgress(Math.round((processedInLoop / totalToProcess) * 100));
+                
+                // Small delay to prevent browser locking
+                await new Promise(r => setTimeout(r, 500));
+            }
+
+            Swal.fire({
+                title: 'Antrean Diproses',
+                text: `${processedInLoop} pesan telah dikirim ke Wablas.`,
+                icon: 'success'
+            });
+            fetchStudents();
+        } catch (error) {
+            console.error(error);
+            Swal.fire('Error', 'Gagal memproses antrean', 'error');
+        } finally {
+            setIsProcessingQueue(false);
+            setFlushProgress(0);
         }
     };
 
@@ -151,7 +210,7 @@ export default function ExaminerDashboard() {
                         onClick={async () => {
                             const result = await Swal.fire({
                                 title: 'Siarkan Jadwal?',
-                                text: "Sistem akan mengirim notifikasi WhatsApp ke pendaftar (terverifikasi) yang belum memiliki jadwal.",
+                                text: `Sistem akan mencari pendaftar layak yang belum diberi notifikasi jadwal.`,
                                 icon: 'warning',
                                 showCancelButton: true,
                                 confirmButtonColor: '#2563eb',
@@ -170,7 +229,8 @@ export default function ExaminerDashboard() {
                                     });
                                     if (!res.ok) throw new Error('Failed');
                                     const data = await res.json();
-                                    Swal.fire('Berhasil', data.message || 'Antrean broadcast telah dibuat', 'success');
+                                    Swal.fire('Berhasil', `${data.count || 0} pendaftar masuk antrean.`, 'success');
+                                    fetchStudents();
                                 } catch (error) {
                                     console.error(error);
                                     Swal.fire('Error', 'Gagal memproses broadcast', 'error');
@@ -187,44 +247,35 @@ export default function ExaminerDashboard() {
                     </Button>
 
                     <Button 
-                        onClick={async () => {
-                            try {
-                                setIsProcessingQueue(true);
-                                // Triggering the cron endpoint with secret
-                                const res = await fetch('/api/cron/whatsapp?secret=ppdb-alimam-cron-2026');
-                                if (!res.ok) throw new Error('Failed');
-                                const data = await res.json();
-                                
-                                if (data.result?.processed) {
-                                    Swal.fire({
-                                        title: 'Pesan Terkirim',
-                                        text: `1 pesan dalam antrean telah diproses. Sisa antrean: ${data.stats?.queue?.pending || 0}`,
-                                        icon: 'success',
-                                        toast: true,
-                                        position: 'top-end',
-                                        timer: 3000,
-                                        showConfirmButton: false
-                                    });
-                                } else {
-                                    Swal.fire('Info', data.result?.reason || 'Tidak ada pesan yang perlu dikirim', 'info');
-                                }
-                            } catch (error) {
-                                console.error(error);
-                                Swal.fire('Error', 'Gagal memproses antrean', 'error');
-                            } finally {
-                                setIsProcessingQueue(false);
-                            }
-                        }} 
+                        onClick={handleFlushQueue} 
                         disabled={isProcessingQueue}
                         variant="outline" 
                         className="border-emerald-600 text-emerald-700 hover:bg-emerald-50"
                     >
-                        {isProcessingQueue ? 'Mengirim...' : 'Proses Antrean WA'}
+                        {isProcessingQueue ? `Mengirim (${flushProgress}%)...` : 'Kirim Antrean Segala'}
                     </Button>
 
                     <Button onClick={fetchStudents} variant="outline" className="border-gray-300">Refresh Data</Button>
                 </div>
             </div>
+
+            {/* Notification Stats Card */}
+            {queueStats && (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
+                        <div className="text-yellow-800 text-sm font-medium uppercase tracking-wider">Antrean Pending</div>
+                        <div className="text-3xl font-bold text-yellow-900">{queueStats.pending}</div>
+                    </div>
+                    <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
+                        <div className="text-green-800 text-sm font-medium uppercase tracking-wider">Berhasil Terkirim</div>
+                        <div className="text-3xl font-bold text-green-900">{queueStats.sent}</div>
+                    </div>
+                    <div className="bg-red-50 border border-red-200 p-4 rounded-lg">
+                        <div className="text-red-800 text-sm font-medium uppercase tracking-wider">Gagal/Error</div>
+                        <div className="text-3xl font-bold text-red-900">{queueStats.failed}</div>
+                    </div>
+                </div>
+            )}
 
             <div className="bg-white rounded-lg shadow overflow-hidden border">
                 <div className="px-6 py-4 border-b">
@@ -244,6 +295,7 @@ export default function ExaminerDashboard() {
                                 <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Quran</th>
                                 <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Waw. Calsan</th>
                                 <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Waw. Cawalsan</th>
+                                <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Notif WA</th>
                                 <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Aksi</th>
                             </tr>
                         </thead>
@@ -276,6 +328,21 @@ export default function ExaminerDashboard() {
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_quran != null ? Number(s.nilai_ujian.score_quran).toFixed(1) : '-'}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.nilai_wawancara_santri != null ? Number(s.nilai_ujian.nilai_wawancara_santri).toFixed(1) : '-'}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.nilai_wawancara_ortu != null && Number(s.nilai_ujian.nilai_wawancara_ortu) >= 1 ? (Number(s.nilai_ujian.nilai_wawancara_ortu) > 1 ? Number(s.nilai_ujian.nilai_wawancara_ortu).toFixed(1) : 'Lengkap') : '-'}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            {s.whatsapp_status ? (
+                                                <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                                                    s.whatsapp_status.status === 'sent' ? 'bg-green-100 text-green-800' :
+                                                    s.whatsapp_status.status === 'pending' || s.whatsapp_status.status === 'processing' ? 'bg-yellow-100 text-yellow-800' :
+                                                    'bg-red-100 text-red-800'
+                                                }`} title={s.whatsapp_status.error_message || ''}>
+                                                    {s.whatsapp_status.status === 'sent' ? 'Terkirim' : 
+                                                     s.whatsapp_status.status === 'pending' ? 'Antrean' :
+                                                     s.whatsapp_status.status === 'processing' ? 'Proses' : 'Gagal'}
+                                                </span>
+                                            ) : (
+                                                <span className="text-gray-400 text-xs">-</span>
+                                            )}
+                                        </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <div className="flex gap-2">
                                                 <button onClick={() => handleOpenInput(s, 'quran')} className="text-indigo-600 hover:text-indigo-900 bg-indigo-50 px-2 py-1 rounded">Quran</button>
