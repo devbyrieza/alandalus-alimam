@@ -417,29 +417,35 @@ export default function MonitoringJadwalPage() {
                                             </div>
                                             <div className="space-y-3">
                                                 {/* Quran */}
-                                                <div className="flex items-center justify-between text-[11px]">
-                                                    <span className="font-bold text-ink-400">PENGUJI QURAN</span>
-                                                    <div className="text-right">
-                                                        <p className="font-black text-ink-900">{s.ustadz.quran}</p>
-                                                        <p className="text-[9px] font-bold text-indigo-600">{s.status.quran.toUpperCase()}</p>
+                                                {s.ustadz.quran !== "-" && (
+                                                    <div className="flex items-center justify-between text-[11px]">
+                                                        <span className="font-bold text-ink-400">PENGUJI QURAN</span>
+                                                        <div className="text-right">
+                                                            <p className="font-black text-ink-900">{s.ustadz.quran}</p>
+                                                            <p className="text-[9px] font-bold text-indigo-600">{s.status.quran.toUpperCase()}</p>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                )}
                                                 {/* Santri */}
-                                                <div className="flex items-center justify-between text-[11px] pt-2 border-t border-slate-200/50">
-                                                    <span className="font-bold text-ink-400">WAWANCARA SANTRI</span>
-                                                    <div className="text-right">
-                                                        <p className="font-black text-ink-900">{s.ustadz.santri}</p>
-                                                        <p className="text-[9px] font-bold text-indigo-600">{s.status.santri.toUpperCase()}</p>
+                                                {s.ustadz.santri !== "-" && (
+                                                    <div className={`flex items-center justify-between text-[11px] ${s.ustadz.quran !== "-" ? "pt-2 border-t border-slate-200/50" : ""}`}>
+                                                        <span className="font-bold text-ink-400">WAWANCARA SANTRI</span>
+                                                        <div className="text-right">
+                                                            <p className="font-black text-ink-900">{s.ustadz.santri}</p>
+                                                            <p className="text-[9px] font-bold text-indigo-600">{s.status.santri.toUpperCase()}</p>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                )}
                                                 {/* Ortu */}
-                                                <div className="flex items-center justify-between text-[11px] pt-2 border-t border-slate-200/50">
-                                                    <span className="font-bold text-ink-400">WAWANCARA ORTU</span>
-                                                    <div className="text-right">
-                                                        <p className="font-black text-ink-900">{s.ustadz.ortu}</p>
-                                                        <p className="text-[9px] font-bold text-indigo-600">{s.status.ortu.toUpperCase()}</p>
+                                                {s.ustadz.ortu !== "-" && (
+                                                    <div className={`flex items-center justify-between text-[11px] ${(s.ustadz.quran !== "-" || s.ustadz.santri !== "-") ? "pt-2 border-t border-slate-200/50" : ""}`}>
+                                                        <span className="font-bold text-ink-400">WAWANCARA ORTU</span>
+                                                        <div className="text-right">
+                                                            <p className="font-black text-ink-900">{s.ustadz.ortu}</p>
+                                                            <p className="text-[9px] font-bold text-indigo-600">{s.status.ortu.toUpperCase()}</p>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                )}
                                             </div>
                                         </div>
                                     ))}
