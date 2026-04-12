@@ -269,8 +269,8 @@ function InputNilaiContent() {
     }
   };
 
-  const startEditing = (p: Peserta) => {
-    setEditingId(p.id);
+  const startEditing = (p: Peserta, type: "quran" | "wawancara" | "ortu") => {
+    setEditingId(p.id + type);
     // Pre-fill forms from existing data
     setQuranForm(p.detail_quran || {});
     setCalsanForm(p.detail_wawancara || {});
@@ -337,7 +337,7 @@ function InputNilaiContent() {
 
       if (res.ok) {
         setSaving(null); // Clear saving state BEFORE showing popup
-        setEditingId(null); // Clear editing state BEFORE showing popup
+        setEditingId(null); // Clear all editing state
 
         await Swal.fire({
           icon: 'success',
@@ -398,8 +398,8 @@ function InputNilaiContent() {
   // RENDER: Tes Al-Qur'an Form
   // ============================================================================
   const renderQuranForm = (p: Peserta) => {
-    const isEditing = editingId === p.id;
-    const isSaved = !!p.detail_quran?.rekomendasi;
+    const isSaved = !!(p.detail_quran?.rekomendasi || p.nilai_tes_quran != null);
+    const isEditing = editingId === p.id + "quran";
 
     return (
       <div className="bg-emerald-50/50 border border-emerald-100 rounded-2xl sm:rounded-3xl p-5 sm:p-8 space-y-5 sm:space-y-6 shadow-sm">
@@ -486,7 +486,7 @@ function InputNilaiContent() {
             )}
             
             {(!isSaved || !getLockInfo(p.input_at_quran).isLocked) ? (
-              <button onClick={() => startEditing(p)} className="mt-5 sm:mt-6 px-8 py-4 bg-emerald-600 text-white rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-black uppercase tracking-widest hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-900/20 active:scale-95 leading-none">
+              <button onClick={() => startEditing(p, "quran")} className="mt-5 sm:mt-6 px-8 py-4 bg-emerald-600 text-white rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-black uppercase tracking-widest hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-900/20 active:scale-95 leading-none">
                 {isSaved ? "Edit Nilai" : "Input Nilai"}
               </button>
             ) : (
@@ -501,8 +501,8 @@ function InputNilaiContent() {
   };
 
   const renderCalsanForm = (p: Peserta) => {
-    const isEditing = editingId === p.id;
-    const isSaved = !!p.detail_wawancara?.rekomendasi;
+    const isSaved = !!(p.detail_wawancara?.rekomendasi || p.nilai_wawancara_santri != null);
+    const isEditing = editingId === p.id + "wawancara";
 
     return (
       <div className="bg-brand-blue-50/50 border border-brand-blue-100 rounded-2xl sm:rounded-3xl p-5 sm:p-8 space-y-5 sm:space-y-6 shadow-sm">
@@ -600,7 +600,7 @@ function InputNilaiContent() {
             )}
 
             {(!isSaved || !getLockInfo(p.input_at_santri).isLocked) ? (
-              <button onClick={() => startEditing(p)} className="mt-5 sm:mt-6 px-8 py-4 bg-brand-blue-700 text-white rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-black uppercase tracking-widest hover:bg-brand-blue-800 transition-all shadow-lg shadow-brand-blue-900/20 active:scale-95 leading-none">
+              <button onClick={() => startEditing(p, "wawancara")} className="mt-5 sm:mt-6 px-8 py-4 bg-brand-blue-700 text-white rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-black uppercase tracking-widest hover:bg-brand-blue-800 transition-all shadow-lg shadow-brand-blue-900/20 active:scale-95 leading-none">
                 {isSaved ? "Edit Nilai" : "Input Nilai"}
               </button>
             ) : (
@@ -618,8 +618,8 @@ function InputNilaiContent() {
   // RENDER: Wawancara Cawalsan Form
   // ============================================================================
   const renderCawalsanForm = (p: Peserta) => {
-    const isEditing = editingId === p.id;
-    const isSaved = !!p.detail_cawalsan?.rekomendasi;
+    const isSaved = !!(p.detail_cawalsan?.rekomendasi || p.nilai_wawancara_ortu != null);
+    const isEditing = editingId === p.id + "ortu";
 
     return (
       <div className="bg-brand-yellow-50/50 border border-brand-yellow-100 rounded-2xl sm:rounded-3xl p-5 sm:p-8 space-y-5 sm:space-y-6 shadow-sm">

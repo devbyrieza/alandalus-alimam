@@ -78,7 +78,6 @@ export async function GET() {
                 if (item.penguji_quran_id === userId) roles.push('quran');
                 if (item.penguji_ortu_id === userId) roles.push('ortu');
 
-                // Fallback: if matched via exam_session.created_by, derive role from session title
                 if (roles.length === 0 && item.exam_session?.created_by === userId) {
                     const title = (item.exam_session?.title || "").toLowerCase();
                     const hasQuranMatch = title.includes("qur") || title.includes("quran");
@@ -88,78 +87,57 @@ export async function GET() {
                     if (hasQuranMatch) roles.push('quran');
                     if (hasWawancaraMatch) roles.push('wawancara');
                     if (hasOrtuMatch) roles.push('ortu');
-
-                    // If still empty (generic title), fallback to the user's own base role
-                    if (roles.length === 0) {
-                        const baseRole = session.role || "";
-                        if (baseRole.includes("quran") || baseRole === "penguji" || baseRole === "penguji_calsan") roles.push('quran');
-                        if (baseRole.includes("calsan")) roles.push('wawancara');
-                        if (baseRole.includes("cawalsan")) roles.push('ortu');
-                    }
                 }
             }
 
-            // Pick the best score record (linked to this schedule, or simply the latest one)
+            // Pick score data from ALL records for this pendaftar
             const allScores = item.pendaftar.nilai_ujian || [];
-            const scoreByJadwal = allScores.find((s: any) => s.jadwal_ujian_id === item.id);
-            const latestScore = [...allScores].sort((a: any, b: any) => 
-                new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
-            )[0];
-
-            const score = scoreByJadwal || latestScore || {};
+            
+            // Build a merged score view for this student from all their records
+            const mergedScore: any = {};
+            // Start from oldest, newest wins for each field
+            [...allScores].sort((a: any, b: any) => 
+                new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+            ).forEach(s => {
+                Object.entries(s).forEach(([k, v]) => {
+                    if (!isEmpty(v)) mergedScore[k] = v;
+                });
+            });
 
             if (pesertaMap.has(pendaftarId)) {
-                // Merge: add new roles (avoid duplicates) and update score if available
                 const existing = pesertaMap.get(pendaftarId);
                 for (const r of roles) {
                     if (!existing.roles.includes(r)) existing.roles.push(r);
                 }
-                // If this record has score data, merge it in (prefer non-empty values)
-                if (score.id) {
-                    existing.nilai_id = existing.nilai_id || score.id;
-                    existing.nilai_wawancara_santri = existing.nilai_wawancara_santri ?? score.nilai_wawancara_santri;
-                    existing.nilai_tes_quran = existing.nilai_tes_quran ?? score.nilai_tes_quran;
-                    existing.nilai_wawancara_ortu = existing.nilai_wawancara_ortu ?? score.nilai_wawancara_ortu;
-                    existing.catatan_santri = existing.catatan_santri ?? score.catatan_santri;
-                    existing.catatan_quran = existing.catatan_quran ?? score.catatan_quran;
-                    existing.catatan_ortu = existing.catatan_ortu ?? score.catatan_ortu;
-                    
-                    // Aggressive merge for detail objects (overwrite if current is empty)
-                    if (isEmpty(existing.detail_quran)) existing.detail_quran = score.detail_quran;
-                    if (isEmpty(existing.detail_wawancara)) existing.detail_wawancara = score.detail_wawancara;
-                    if (isEmpty(existing.detail_cawalsan)) existing.detail_cawalsan = score.detail_cawalsan;
-                    
-                    existing.score_quran = existing.score_quran ?? score.score_quran;
-                    existing.score_wawancara = existing.score_wawancara ?? score.score_wawancara;
-                    
-                    // Fields for 24h edit window
-                    existing.input_at_quran = existing.input_at_quran || score.input_at_quran;
-                    existing.input_at_santri = existing.input_at_santri || score.input_at_santri;
-                    existing.input_at_ortu = existing.input_at_ortu || score.input_at_ortu;
-                }
+                
+                // Merge scores into existing map entry
+                Object.entries(mergedScore).forEach(([k, v]) => {
+                    if (!isEmpty(v) && isEmpty(existing[k])) {
+                        existing[k] = v;
+                    }
+                });
             } else {
                 pesertaMap.set(pendaftarId, {
                     id: pendaftarId,
-                    jadwal_id: item.id,
-                    nomor_pendaftaran: item.pendaftar.nomor_pendaftaran,
-                    nama_lengkap: item.pendaftar.nama_lengkap,
+                    nama: item.pendaftar.nama_lengkap,
+                    nomor: item.pendaftar.nomor_pendaftaran,
                     jenjang: item.pendaftar.jenjang,
+                    jadwal_id: item.id,
                     roles: roles,
-                    nilai_wawancara_santri: score.nilai_wawancara_santri,
-                    nilai_tes_quran: score.nilai_tes_quran,
-                    nilai_wawancara_ortu: score.nilai_wawancara_ortu,
-                    catatan_santri: score.catatan_santri,
-                    catatan_quran: score.catatan_quran,
-                    catatan_ortu: score.catatan_ortu,
-                    detail_quran: score.detail_quran,
-                    detail_wawancara: score.detail_wawancara,
-                    detail_cawalsan: score.detail_cawalsan,
-                    score_quran: score.score_quran,
-                    score_wawancara: score.score_wawancara,
-                    nilai_id: score.id,
-                    input_at_quran: score.input_at_quran,
-                    input_at_santri: score.input_at_santri,
-                    input_at_ortu: score.input_at_ortu,
+                    // Score fields
+                    nilai_id: mergedScore.id,
+                    nilai_wawancara_santri: mergedScore.nilai_wawancara_santri,
+                    nilai_tes_quran: mergedScore.nilai_tes_quran,
+                    nilai_wawancara_ortu: mergedScore.nilai_wawancara_ortu,
+                    catatan_santri: mergedScore.catatan_santri,
+                    catatan_quran: mergedScore.catatan_quran,
+                    catatan_ortu: mergedScore.catatan_ortu,
+                    detail_quran: mergedScore.detail_quran,
+                    detail_wawancara: mergedScore.detail_wawancara,
+                    detail_cawalsan: mergedScore.detail_cawalsan,
+                    input_at_quran: mergedScore.input_at_quran,
+                    input_at_santri: mergedScore.input_at_santri,
+                    input_at_ortu: mergedScore.input_at_ortu,
                 });
             }
         }
