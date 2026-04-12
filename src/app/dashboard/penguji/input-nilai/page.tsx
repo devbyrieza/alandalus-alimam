@@ -212,8 +212,11 @@ function InputNilaiContent() {
   const visibleFormTypes = ROLE_TO_FORM_TYPES[activeRole] || ['quran', 'wawancara', 'ortu'];
 
   const toTitleCase = (str: string) => {
-    if (!str) return "";
-    return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+    if (!str || typeof str !== 'string') return "";
+    return str.split(" ").map(w => {
+      if (!w) return "";
+      return w[0].toUpperCase() + w.substring(1).toLowerCase();
+    }).join(" ");
   };
 
   const getLockInfo = (inputAt: string | null | undefined) => {
@@ -390,8 +393,8 @@ function InputNilaiContent() {
 
   const filteredPeserta = peserta.filter(
     (p) =>
-      p.nama_lengkap.toLowerCase().includes(search.toLowerCase()) ||
-      p.nomor_pendaftaran.toLowerCase().includes(search.toLowerCase())
+      (p.nama_lengkap || "").toLowerCase().includes(search.toLowerCase()) ||
+      (p.nomor_pendaftaran || "").toLowerCase().includes(search.toLowerCase())
   );
 
   // ============================================================================
@@ -767,7 +770,7 @@ function InputNilaiContent() {
             )}
 
             {(!isSaved || !getLockInfo(p.input_at_ortu).isLocked) ? (
-              <button onClick={() => startEditing(p)} className="mt-5 sm:mt-6 px-8 py-4 bg-brand-yellow-400 text-brand-blue-950 rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-black uppercase tracking-widest hover:bg-brand-yellow-500 transition-all shadow-lg shadow-brand-yellow-400/20 active:scale-95 leading-none">
+              <button onClick={() => startEditing(p, "ortu")} className="mt-5 sm:mt-6 px-8 py-4 bg-brand-yellow-400 text-brand-blue-950 rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-black uppercase tracking-widest hover:bg-brand-yellow-500 transition-all shadow-lg shadow-brand-yellow-400/20 active:scale-95 leading-none">
                 {isSaved ? "Edit Hasil" : "Input Hasil"}
               </button>
             ) : (

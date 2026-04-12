@@ -61,7 +61,16 @@ export async function GET() {
         });
 
         // Helper to check if an object is effectively empty
-        const isEmpty = (obj: any) => !obj || (Object.keys(obj).length === 0 && obj.constructor === Object);
+        const isEmpty = (v: any) => {
+            if (v == null || v === "") return true;
+            if (typeof v === 'object') {
+                if (Array.isArray(v)) return v.length === 0;
+                const keys = Object.keys(v);
+                if (keys.length === 0) return true;
+                return keys.every(key => v[key] == null || v[key] === "");
+            }
+            return false;
+        };
 
         // Build a map to deduplicate by pendaftar.id
         const pesertaMap = new Map<string, any>();
@@ -119,8 +128,8 @@ export async function GET() {
             } else {
                 pesertaMap.set(pendaftarId, {
                     id: pendaftarId,
-                    nama: item.pendaftar.nama_lengkap,
-                    nomor: item.pendaftar.nomor_pendaftaran,
+                    nama_lengkap: item.pendaftar.nama_lengkap,
+                    nomor_pendaftaran: item.pendaftar.nomor_pendaftaran,
                     jenjang: item.pendaftar.jenjang,
                     jadwal_id: item.id,
                     roles: roles,
