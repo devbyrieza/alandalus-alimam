@@ -116,8 +116,8 @@ export default function AdminDashboardPage() {
             <div className="flex items-center gap-3 mb-4">
               <span className="bg-white/10 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border border-white/10">Admin Dashboard</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-black font-display tracking-tight leading-none mb-4">Monitor <br /> Pendaftaran</h1>
-            <p className="text-brand-blue-100 font-bold opacity-80 text-lg max-w-md">Ikhtisar real-time calon santri Al-Andalus Al-Imam Tahun Ajaran {tahunAjaranList.find(t => t.id === selectedTahunAjaranId)?.nama || "..."}.</p>
+            <h1 className="text-4xl md:text-6xl font-black font-display tracking-tight leading-none mb-4 text-white">Monitor <br /> Pendaftaran</h1>
+            <p className="text-brand-blue-100 font-bold opacity-90 text-sm md:text-lg max-w-md">Ikhtisar real-time calon santri Al-Andalus Al-Imam Tahun Ajaran {tahunAjaranList.find(t => t.id === selectedTahunAjaranId)?.nama || "..."}.</p>
           </div>
           <Link href="/dashboard/admin/pendaftar" className="bg-brand-yellow-400 hover:bg-brand-yellow-300 text-brand-blue-950 px-10 py-5 rounded-3xl font-black uppercase text-xs shadow-xl transition-all flex items-center gap-3">
             <Users className="w-6 h-6" /> Data Pendaftar

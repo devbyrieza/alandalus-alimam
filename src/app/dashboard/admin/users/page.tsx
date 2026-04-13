@@ -111,7 +111,7 @@ export default function UserManagementPage() {
                         </div>
                         <div>
                             <span className="bg-white/10 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border border-white/10">Control Console</span>
-                            <h1 className="text-3xl md:text-5xl font-black font-display tracking-tight mt-2 italic shadow-sm">IT Management</h1>
+                            <h1 className="text-3xl md:text-5xl font-black font-display tracking-tight mt-2 italic shadow-sm text-white">IT Management</h1>
                         </div>
                     </div>
                     <button onClick={() => { resetForm(); setIsModalOpen(true); }} className="bg-brand-yellow-400 hover:bg-brand-yellow-300 text-brand-blue-950 px-10 py-5 rounded-3xl font-black uppercase text-xs shadow-xl transition-all flex items-center justify-center gap-2 hover:scale-105 active:scale-95">
