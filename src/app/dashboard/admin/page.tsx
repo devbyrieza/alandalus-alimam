@@ -145,10 +145,36 @@ export default function AdminDashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
           <div className="bg-white rounded-4xl border border-brand-yellow-100 shadow-sm overflow-hidden app-card">
-            <div className="p-8 border-b border-brand-yellow-50 bg-brand-yellow-50/20">
-              <h3 className="text-xl font-black text-brand-blue-950 uppercase tracking-tight">Performa Jenjang</h3>
+            <div className="p-6 md:p-8 border-b border-brand-yellow-50 bg-brand-yellow-50/20">
+              <h3 className="text-lg md:text-xl font-black text-brand-blue-950 uppercase tracking-tight">Performa Jenjang</h3>
             </div>
-            <table className="w-full text-left">
+            
+            {/* Mobile View: Cards */}
+            <div className="md:hidden divide-y divide-brand-yellow-50">
+              {stats.stats_per_jenjang?.map((item: any, idx: number) => (
+                <div key={idx} className="p-6 space-y-4">
+                  <div className="flex items-center gap-4">
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-white font-black text-xs shrink-0 ${item.jenjang === 'MTs' ? 'bg-brand-blue-600' : 'bg-brand-yellow-500'}`}>
+                      {item.jenjang.substring(0, 2)}
+                    </div>
+                    <p className="font-extrabold text-slate-800 leading-tight">{JENJANG_LABELS[item.jenjang] || item.jenjang}</p>
+                  </div>
+                  <div className="flex items-center justify-between pt-2">
+                    <div className="flex flex-col">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Kuota</span>
+                      <span className="text-sm font-bold text-slate-600">{JENJANG_QUOTAS[item.jenjang] || "-"}</span>
+                    </div>
+                    <div className="flex flex-col items-end">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Calon Santri</span>
+                      <span className="px-4 py-1.5 bg-brand-yellow-100 text-brand-yellow-700 font-bold rounded-xl border border-brand-yellow-200 text-sm">{item.pendaftar}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop View: Table */}
+            <table className="hidden md:table w-full text-left">
               <thead className="bg-stone-50 text-[10px] font-black uppercase tracking-widest text-ink-400">
                 <tr>
                   <th className="px-8 py-5">Jenjang</th>
@@ -164,12 +190,12 @@ export default function AdminDashboardPage() {
                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-white font-black text-xs ${item.jenjang === 'MTs' ? 'bg-brand-blue-600' : 'bg-brand-yellow-500'}`}>
                           {item.jenjang.substring(0, 2)}
                         </div>
-                        <p className="font-black text-ink-950">{JENJANG_LABELS[item.jenjang] || item.jenjang}</p>
+                        <p className="font-bold text-slate-800">{JENJANG_LABELS[item.jenjang] || item.jenjang}</p>
                       </div>
                     </td>
-                    <td className="px-8 py-6 text-center font-bold text-ink-300">{JENJANG_QUOTAS[item.jenjang] || "-"}</td>
+                    <td className="px-8 py-6 text-center font-bold text-slate-400">{JENJANG_QUOTAS[item.jenjang] || "-"}</td>
                     <td className="px-8 py-6 text-center">
-                      <span className="px-4 py-2 bg-brand-yellow-100 text-brand-yellow-700 font-black rounded-xl border border-brand-yellow-200">{item.pendaftar}</span>
+                      <span className="px-4 py-2 bg-brand-yellow-100 text-brand-yellow-700 font-bold rounded-xl border border-brand-yellow-200">{item.pendaftar}</span>
                     </td>
                   </tr>
                 ))}
