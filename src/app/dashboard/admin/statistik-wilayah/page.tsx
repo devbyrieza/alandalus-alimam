@@ -78,8 +78,16 @@ export default function StatistikWilayahPage() {
                     </div>
                     <div>
                         <h1 className="text-3xl font-black text-ink-900 tracking-tight">Statistik <span className="text-indigo-600">Wilayah</span></h1>
-                        <p className="text-ink-500 font-medium">Analisis sebaran pendaftar dan wali murid berdasarkan lokasi.</p>
+                        <p className="text-ink-500 font-medium italic opacity-80">Analisis sebaran daerah asal pendaftar berdasarkan data Alamat di Kartu Keluarga (KK).</p>
                     </div>
+                </div>
+                
+                {/* Info Legend */}
+                <div className="mt-8 flex items-start gap-3 p-4 bg-indigo-50/50 border border-indigo-100 rounded-xl text-xs text-indigo-700 font-bold leading-relaxed">
+                    <div className="mt-0.5 bg-indigo-100 p-1 rounded-md shadow-sm">
+                        <ArrowUpRight className="w-3 h-3" />
+                    </div>
+                    <p>Statistik ini diperbarui secara real-time setiap kali pendaftar melengkapi biodata mereka. Data di bawah ini mencakup sebaran di seluruh Provinsi di Indonesia.</p>
                 </div>
             </div>
 
@@ -112,12 +120,13 @@ export default function StatistikWilayahPage() {
                             className="p-6 flex items-center justify-between cursor-pointer hover:bg-cream-50/50 transition-colors"
                         >
                             <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-black text-lg shadow-inner">
-                                    {provData.total}
+                                <div className="flex flex-col items-center justify-center w-16 h-16 rounded-2xl bg-indigo-50 text-indigo-600 shadow-inner border border-indigo-100/50">
+                                    <span className="font-black text-xl leading-none">{provData.total}</span>
+                                    <span className="text-[8px] font-black uppercase mt-1 opacity-60">Diterima</span>
                                 </div>
-                                <div>
-                                    <h3 className="font-black text-ink-900 text-lg">{provName}</h3>
-                                    <p className="text-xs font-bold text-ink-400 uppercase tracking-widest">{provData.cities.length} Kota/Kabupaten</p>
+                                <div className="flex-1">
+                                    <h3 className="font-black text-ink-900 text-lg leading-tight uppercase italic">{provName}</h3>
+                                    <p className="text-[10px] font-black text-ink-400 uppercase tracking-widest mt-1 opacity-70">{provData.cities.length} Kota/Kabupaten Terdata</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-6">
@@ -138,7 +147,10 @@ export default function StatistikWilayahPage() {
                                     {provData.cities.sort((a: any, b: any) => b.count - a.count).map((city: any) => (
                                         <div key={city.name} className="flex items-center justify-between p-4 bg-cream-50 rounded-xl border border-white">
                                             <span className="text-sm font-bold text-ink-700 truncate mr-2">{city.name}</span>
-                                            <span className="px-3 py-1 bg-white rounded-lg text-xs font-black text-indigo-600 shadow-sm border border-indigo-100">{city.count}</span>
+                                            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-xl shadow-clay-sm border border-indigo-50">
+                                                <span className="text-xs font-black text-indigo-600">{city.count}</span>
+                                                <span className="text-[9px] font-black text-ink-300 uppercase">Orang</span>
+                                            </div>
                                         </div>
                                     ))}
                                 </div>
