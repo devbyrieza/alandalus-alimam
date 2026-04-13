@@ -24,8 +24,13 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({ error: "Forbidden" }, { status: 403 });
         }
 
-        // Fetch all JadwalUjian with relations
+        // Fetch all JadwalUjian with relations (filtering out deleted students)
         const schedules = await prisma.jadwalUjian.findMany({
+            where: {
+                pendaftar: {
+                    deleted_at: null
+                }
+            },
             include: {
                 pendaftar: {
                     select: {
@@ -60,6 +65,7 @@ export async function GET(request: NextRequest) {
                     select: {
                         id: true,
                         full_name: true,
+                        google_meet_link: true,
                     }
                 }
             },
