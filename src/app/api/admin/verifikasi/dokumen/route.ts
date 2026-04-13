@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { notifyDocumentVerified } from "@/lib/wablas";
 import { getServerSession } from "@/lib/session";
 import { logAdminAction } from "@/lib/audit";
-import { enqueueWhatsapp, buildMessageJadwalLangsungTersedia, buildMessageJadwalBelum } from "@/lib/whatsapp-queue";
+import { enqueueWhatsapp, buildMessageJadwalLangsungTersedia, buildMessageJadwalBelum, buildMessageDocumentVerified, buildMessageDocumentRejected } from "@/lib/whatsapp-queue";
  
 const REQUIRED_DOC_TYPES = [
   'kartu_keluarga', 
@@ -182,13 +182,15 @@ export async function PATCH(request: NextRequest) {
                   docListStr = rejectedDocs.map(d => `• ${d.jenis_dokumen}`).join("\n");
                 }
 
-                  await notifyDocumentVerified({
+                  const isVerifiedBatch = isAllVerifiedAndComplete;
+                  await enqueueWhatsapp({
+                    pendaftarId: dokumen.pendaftar_id,
                     phone: dokumen.pendaftar.no_hp!,
-                    nama: dokumen.pendaftar.nama_lengkap,
-                  dokumen_list: docListStr,
-                  status: isAllVerifiedAndComplete ? "verified" : "rejected",
-                  catatan: isAllVerifiedAndComplete ? undefined : "Terdapat dokumen yang perlu diperbaiki. Silakan cek dashboard.",
-                });
+                    jenisNotif: isVerifiedBatch ? "document_verified" : "document_rejected",
+                    messageContent: isVerifiedBatch 
+                      ? buildMessageDocumentVerified(dokumen.pendaftar.nama_lengkap, docListStr)
+                      : buildMessageDocumentRejected(dokumen.pendaftar.nama_lengkap, docListStr, isAllVerifiedAndComplete ? "" : "Terdapat dokumen yang perlu diperbaiki. Silakan cek dashboard."),
+                  });
               }
             } catch (error) {
               console.error("WhatsApp batch notification error:", error);

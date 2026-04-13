@@ -28,6 +28,12 @@ export type NotifType =
     | "reminder_h1_penguji"
     | "reminder_h0"
     | "hasil_tes"
+    | "registration_success"
+    | "document_verified"
+    | "document_rejected"
+    | "payment_verified"
+    | "payment_rejected"
+    | "broadcast"
     | "pembatalan_jadwal";
 
 export interface EnqueueParams {
@@ -49,6 +55,8 @@ const MIN_DELAY_MS = 3000;          // Reduced from 5000
 const MAX_DELAY_MS = 7000;          // Reduced from 10000
 const MAX_RETRY_ATTEMPTS = 3;
 const RETRY_DELAY_MINUTES = 5;
+
+const DEFAULT_APP_URL = 'https://pesantren-alimam.com';
 
 // ============================================================================
 // LAYER 1: Anti-Duplicate — Check flag before enqueue
@@ -554,6 +562,124 @@ function pickOpening(): string {
     return OPENINGS[Math.floor(Math.random() * OPENINGS.length)];
 }
 
+export function buildMessageRegistrationSuccess(
+    nama: string,
+    nomor_pendaftaran: string,
+    jenjang: string
+): string {
+    const jenjangStr = jenjang === 'MTs' ? 'Madrasah Tsanawiyah (MTs)' : "I'dad Lughowi (Setara SMA)";
+    return `🎉 *Pendaftaran Berhasil!*
+
+Assalamu'alaikum ${nama},
+
+Alhamdulillah, pendaftaran Anda di Pesantren Al-Andalus Al-Imam telah berhasil!
+
+📋 *Detail Pendaftaran:*
+• Nomor Pendaftaran: ${nomor_pendaftaran}
+• Jenjang: ${jenjangStr}
+• Nama: ${nama}
+
+📝 *Langkah Selanjutnya:*
+1. Login ke dashboard: ${process.env.NEXT_PUBLIC_APP_URL || DEFAULT_APP_URL}/dashboard/pendaftar
+   *(Gunakan Nomor Pendaftaran & NIK untuk Login)*
+2. Lakukan Pembayaran Pendaftaran (Transfer)
+3. Lengkapi biodata & upload dokumen (setelah pembayaran diverifikasi)
+
+💡 *Butuh Bantuan?*
+Hubungi kami di 0851-1152-4441
+
+Jazakumullahu khairan,
+Panitia PPDB Al-Andalus Al-Imam`;
+}
+
+export function buildMessageDocumentVerified(nama: string, dokumenList: string): string {
+    return `✅ *Dokumen Diverifikasi*
+
+Assalamu'alaikum ${nama},
+
+Alhamdulillah, dokumen Anda telah diverifikasi dan *DITERIMA*.
+
+📄 *Dokumen yang Diverifikasi:*
+${dokumenList}
+
+📝 *Langkah Selanjutnya:*
+Silakan pilih jadwal tes masuk melalui dashboard Anda (Menu Jadwal Ujian).
+
+Dashboard: ${process.env.NEXT_PUBLIC_APP_URL || DEFAULT_APP_URL}/dashboard/pendaftar/undangan-seleksi
+
+Jazakumullahu khairan,
+Panitia PPDB Al-Andalus Al-Imam`;
+}
+
+export function buildMessageDocumentRejected(nama: string, dokumenList: string, catatan: string): string {
+    return `❌ *Dokumen Perlu Diperbaiki*
+
+Assalamu'alaikum ${nama},
+
+Mohon maaf, dokumen Anda perlu diperbaiki.
+
+📄 *Dokumen yang Ditolak:*
+${dokumenList}
+
+📝 *Catatan:*
+${catatan}
+
+🔄 *Langkah Selanjutnya:*
+1. Login ke dashboard: ${process.env.NEXT_PUBLIC_APP_URL || DEFAULT_APP_URL}/dashboard/pendaftar/upload-berkas
+2. Upload ulang dokumen yang ditolak
+3. Pastikan dokumen jelas dan sesuai ketentuan
+
+💡 *Butuh Bantuan?*
+Hubungi kami di 0851-1152-4441
+
+Jazakumullahu khairan,
+Panitia PPDB Al-Andalus Al-Imam`;
+}
+
+export function buildMessagePaymentVerified(nama: string, jumlah: string, metode: string, tanggal: string): string {
+    return `✅ *Pembayaran Diterima*
+
+Assalamu'alaikum ${nama},
+
+Alhamdulillah, pembayaran Anda telah kami terima dan verifikasi.
+
+💰 *Detail Pembayaran:*
+* Jumlah: ${jumlah}
+* Metode: ${metode}
+* Tanggal: ${tanggal}
+
+📝 *Langkah Selanjutnya:*
+Silakan login ke dashboard untuk melengkapi Data Santri & Upload Berkas.
+Setelah data lengkap, Anda bisa memilih jadwal tes.
+
+Dashboard: ${process.env.NEXT_PUBLIC_APP_URL || DEFAULT_APP_URL}/dashboard/pendaftar/kelengkapan-berkas
+
+Jazakumullahu khairan,
+Panitia PPDB Al-Andalus Al-Imam`;
+}
+
+export function buildMessagePaymentRejected(nama: string, catatan: string): string {
+    return `❌ *Pembayaran Perlu Diperbaiki*
+
+Assalamu'alaikum ${nama},
+
+Mohon maaf, bukti pembayaran Anda perlu diperbaiki.
+
+📝 *Catatan:*
+${catatan}
+
+🔄 *Langkah Selanjutnya:*
+1. Login ke dashboard: ${process.env.NEXT_PUBLIC_APP_URL || DEFAULT_APP_URL}/dashboard/pendaftar/pembayaran-pendaftaran
+2. Upload ulang bukti pembayaran yang jelas
+3. Pastikan nominal dan rekening tujuan sesuai
+
+💡 *Butuh Bantuan?*
+Hubungi kami di 0851-1152-4441
+
+Jazakumullahu khairan,
+Panitia PPDB Al-Andalus Al-Imam`;
+}
+
 export function buildMessageJadwalBelum(nama: string): string {
     return `${pickOpening()} ${nama},
 
@@ -604,7 +730,7 @@ Silakan login ke dashboard dan pilih sesi jadwal untuk:
 
 Harap segera memilih jadwal sebelum rentang waktu habis atau kuota penuh. Jangan lupa juga untuk menyelesaikan Tes Online (Akademik & Kepribadian).
 
-Dashboard: ${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/dashboard/pendaftar/undangan-seleksi
+Dashboard: ${process.env.NEXT_PUBLIC_APP_URL || DEFAULT_APP_URL}/dashboard/pendaftar/undangan-seleksi
 
 Jazakumullahu khairan,
 Panitia PPDB Al-Imam`;
@@ -688,7 +814,7 @@ export function buildMessageHasilTes(nama: string): string {
  
  Silakan login ke dashboard untuk melihat hasil lengkap Anda.
  
- Dashboard: ${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/dashboard/pendaftar/pengumuman
+ Dashboard: ${process.env.NEXT_PUBLIC_APP_URL || DEFAULT_APP_URL}/dashboard/pendaftar/pengumuman
  
  Jazakumullahu khairan,
  Panitia PPDB Al-Imam`;

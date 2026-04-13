@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { sendMessage } from "@/lib/wablas";
+import { enqueueWhatsapp } from "@/lib/whatsapp-queue";
 import { getServerSession } from "@/lib/session";
 
 export async function POST(req: NextRequest) {
@@ -47,16 +47,13 @@ export async function POST(req: NextRequest) {
             const finalMessage = `${formattedHeader}${salutation}${personalizedMessage}${formattedFooter}`;
 
             try {
-                const response = await sendMessage({
+                await enqueueWhatsapp({
+                    pendaftarId: recipient.id,
                     phone: recipient.no_hp,
-                    message: finalMessage,
+                    jenisNotif: "broadcast",
+                    messageContent: finalMessage,
                 });
-
-                if (response.status) {
-                    results.push({ id: recipient.id, status: "success" });
-                } else {
-                    results.push({ id: recipient.id, status: "failed", error: response.message });
-                }
+                results.push({ id: recipient.id, status: "success" });
             } catch (error: any) {
                 results.push({ id: recipient.id, status: "failed", error: error.message });
             }
