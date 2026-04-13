@@ -172,26 +172,26 @@ export default function RecapFeePage() {
     return (
         <div className="space-y-6 max-w-7xl mx-auto pb-20">
             {/* Header */}
-            <div className="bg-white rounded-[2.5rem] p-8 shadow-clay-lg border border-white/40 overflow-hidden relative">
+            <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] p-5 md:p-8 shadow-clay-lg border border-white/40 overflow-hidden relative">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue-600/5 rounded-full -mr-32 -mt-32 blur-3xl"></div>
-                <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6">
-                    <div className="flex items-center gap-6">
-                        <div className="p-4 bg-linear-to-br from-brand-blue-600 to-brand-blue-800 rounded-3xl shadow-xl shadow-brand-blue-600/20">
-                            <CreditCard className="w-8 h-8 text-white" />
+                <div className="relative flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+                    <div className="flex items-center gap-4 md:gap-6">
+                        <div className="p-3 md:p-4 bg-linear-to-br from-brand-blue-600 to-brand-blue-800 rounded-2xl md:rounded-3xl shadow-xl shadow-brand-blue-600/20 shrink-0">
+                            <CreditCard className="w-7 h-7 md:w-8 md:h-8 text-white" />
                         </div>
                         <div>
-                            <h1 className="text-3xl font-black text-ink-900 tracking-tight">Rekap <span className="text-brand-blue-700">Honor Penguji</span></h1>
+                            <h1 className="text-2xl md:text-3xl font-black text-ink-900 tracking-tight">Rekap <span className="text-brand-blue-700">Honor Penguji</span></h1>
                             <p className="text-ink-500 font-medium mt-1 uppercase text-[10px] tracking-widest leading-none">Manajemen Insentif Petugas Seleksi PPDB</p>
                         </div>
                     </div>
-                    <div className="flex gap-3">
-                        <Button onClick={exportToExcel} className="bg-emerald-50 text-emerald-700 border-emerald-100 hover:bg-emerald-100 rounded-2xl h-12 px-6 font-black shadow-none transition-all">
-                            <Download className="w-4 h-4 mr-2" /> Excel
+                    <div className="flex gap-2 md:gap-3">
+                        <Button onClick={exportToExcel} className="flex-1 md:flex-none bg-emerald-50 text-emerald-700 border-emerald-100 hover:bg-emerald-100 rounded-2xl h-11 md:h-12 px-4 md:px-6 font-black shadow-none transition-all text-sm">
+                            <Download className="w-4 h-4 mr-1.5" /> Excel
                         </Button>
-                        <Button onClick={exportToPDF} className="bg-red-50 text-red-700 border-red-100 hover:bg-red-100 rounded-2xl h-12 px-6 font-black shadow-none transition-all">
-                            <FileText className="w-4 h-4 mr-2" /> PDF
+                        <Button onClick={exportToPDF} className="flex-1 md:flex-none bg-red-50 text-red-700 border-red-100 hover:bg-red-100 rounded-2xl h-11 md:h-12 px-4 md:px-6 font-black shadow-none transition-all text-sm">
+                            <FileText className="w-4 h-4 mr-1.5" /> PDF
                         </Button>
-                        <Button onClick={fetchRecap} disabled={loading} variant="outline" className="rounded-2xl h-12 px-6 border-ink-100 hover:bg-brand-yellow-50 font-black">
+                        <Button onClick={fetchRecap} disabled={loading} variant="outline" className="rounded-2xl h-11 md:h-12 px-4 md:px-6 border-ink-100 hover:bg-brand-yellow-50 font-black">
                             <RefreshCcw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
                         </Button>
                     </div>
@@ -201,28 +201,29 @@ export default function RecapFeePage() {
             {/* Rate Settings & Global Stats */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 {/* Left: Global Stats */}
-                <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="bg-white rounded-[2rem] p-6 shadow-clay-md border border-white/40 relative overflow-hidden group">
+                <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+                    <div className="bg-white rounded-[1.5rem] md:rounded-[2rem] p-5 md:p-6 shadow-clay-md border border-white/40 relative overflow-hidden group">
                         <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:scale-110 transition-transform">
                             <ClipboardCheck className="w-16 h-16" />
                         </div>
-                        <p className="text-[10px] font-black text-ink-400 uppercase tracking-widest mb-1">Total Penguji</p>
-                        <p className="text-3xl font-black text-ink-900">{filteredRecap.length} <span className="text-xs text-ink-400 font-bold uppercase ml-1">Staff</span></p>
+                        <p className="text-[9px] md:text-[10px] font-black text-ink-400 uppercase tracking-widest mb-2 leading-tight">Total Penguji</p>
+                        <p className="text-2xl md:text-3xl font-black text-ink-900">{filteredRecap.length} <span className="text-xs text-ink-400 font-bold uppercase ml-1">Staff</span></p>
                     </div>
-                    <div className="bg-white rounded-[2rem] p-6 shadow-clay-md border border-white/40 relative overflow-hidden group">
+                    <div className="bg-white rounded-[1.5rem] md:rounded-[2rem] p-5 md:p-6 shadow-clay-md border border-white/40 relative overflow-hidden group">
                          <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:scale-110 transition-transform">
                             <TrendingUp className="w-16 h-16" />
                         </div>
-                        <p className="text-[10px] font-black text-ink-400 uppercase tracking-widest mb-1">Total Tes Selesai</p>
-                        <p className="text-3xl font-black text-ink-900">{totals.totalTests} <span className="text-xs text-ink-400 font-bold uppercase ml-1">Sesi</span></p>
+                        <p className="text-[9px] md:text-[10px] font-black text-ink-400 uppercase tracking-widest mb-2 leading-tight">Total Tes Selesai</p>
+                        <p className="text-2xl md:text-3xl font-black text-ink-900">{totals.totalTests} <span className="text-xs text-ink-400 font-bold uppercase ml-1">Sesi</span></p>
                     </div>
-                    <div className="bg-white rounded-[2rem] p-6 shadow-clay-md border border-white/40 relative overflow-hidden group bg-linear-to-br from-brand-blue-700 to-brand-blue-900 text-white">
-                        <div className="absolute top-0 right-0 p-4 opacity-10">
-                            <DollarSign className="w-16 h-16" />
+                    {/* Total Estimasi Fee — full width on mobile, normal on md+ */}
+                    <div className="col-span-2 md:col-span-1 bg-linear-to-br from-brand-blue-700 to-brand-blue-900 rounded-[1.5rem] md:rounded-[2rem] p-5 md:p-6 shadow-clay-md relative overflow-hidden">
+                        <div className="absolute top-0 right-0 p-4 opacity-20">
+                            <DollarSign className="w-16 h-16 text-white" />
                         </div>
-                        <p className="text-[10px] font-black opacity-60 uppercase tracking-widest mb-1">Total Estimasi Fee</p>
-                        <p className="text-2xl font-black">{formatCurrency(totals.grandTotalFee)}</p>
-                        <p className="text-[9px] font-bold opacity-60 mt-1 uppercase tracking-tight">Berdasarkan tarif aktif saat ini</p>
+                        <p className="text-[9px] md:text-[10px] font-black text-white/70 uppercase tracking-widest mb-2 leading-tight">Total Estimasi Fee</p>
+                        <p className="text-2xl md:text-2xl font-black text-white">{formatCurrency(totals.grandTotalFee)}</p>
+                        <p className="text-[9px] font-bold text-brand-yellow-300 mt-2 uppercase tracking-tight">Berdasarkan tarif aktif saat ini</p>
                     </div>
                 </div>
 
@@ -378,43 +379,56 @@ export default function RecapFeePage() {
                         </div>
                     ) : (
                         filteredRecap.map(item => (
-                            <div key={item.id} className="p-4 bg-white hover:bg-brand-blue-50/10 transition-colors">
+                            <div key={item.id} className="p-5 bg-white hover:bg-brand-blue-50/10 transition-colors">
+                                {/* Name + Honor Row */}
                                 <div className="flex items-center gap-3 mb-4">
-                                    <div className="w-10 h-10 rounded-xl bg-brand-yellow-100 flex items-center justify-center text-brand-blue-900 font-black border border-brand-yellow-200">
+                                    <div className="w-11 h-11 rounded-2xl bg-brand-yellow-100 flex items-center justify-center text-brand-blue-900 font-black text-lg border border-brand-yellow-200 shrink-0">
                                         {item.name.charAt(0)}
                                     </div>
-                                    <div className="flex-1">
-                                        <p className="text-sm font-black text-ink-900 uppercase">{item.name}</p>
-                                        <p className="text-[10px] font-bold text-ink-400 uppercase tracking-wider">{item.role.replace('_', ' ')}</p>
-                                    </div>
-                                    <div className="text-right">
-                                        <p className="text-base font-black text-brand-blue-700 leading-none">{formatCurrency(calculateTotalFee(item))}</p>
-                                        <p className="text-[9px] font-black text-emerald-600 uppercase mt-1">Estimasi Honor</p>
+                                    <div className="flex-1 min-w-0">
+                                        <p className="text-sm font-black text-ink-900 uppercase leading-tight truncate">{item.name}</p>
+                                        <p className="text-[10px] font-bold text-ink-400 uppercase tracking-wider mt-0.5">{item.role.replace('_', ' ')}</p>
                                     </div>
                                 </div>
-                                
-                                <div className="grid grid-cols-3 gap-2 bg-ink-50/50 p-2 rounded-xl">
-                                    <div className="text-center">
-                                        <p className="text-xs font-black text-ink-900">{item.counts.quran}</p>
-                                        <p className="text-[8px] font-bold text-ink-400 uppercase">Quran</p>
+
+                                {/* Fee Badge — full width, prominent */}
+                                <div className="mb-3 bg-linear-to-r from-brand-blue-700 to-brand-blue-800 rounded-2xl px-4 py-3 flex items-center justify-between">
+                                    <div>
+                                        <p className="text-[9px] font-black text-white/60 uppercase tracking-widest">Estimasi Honor</p>
+                                        <p className="text-lg font-black text-white leading-none mt-0.5">{formatCurrency(calculateTotalFee(item))}</p>
                                     </div>
-                                    <div className="text-center border-x border-ink-100">
-                                        <p className="text-xs font-black text-ink-900">{item.counts.santri}</p>
-                                        <p className="text-[8px] font-bold text-ink-400 uppercase">W. Santri</p>
+                                    <TrendingUp className="w-5 h-5 text-brand-yellow-300" />
+                                </div>
+
+                                {/* Stats Grid — 3 columns */}
+                                <div className="grid grid-cols-3 gap-2">
+                                    <div className="bg-ink-50 rounded-xl p-3 text-center">
+                                        <p className="text-lg font-black text-ink-900 leading-none">{item.counts.quran}</p>
+                                        <p className="text-[9px] font-bold text-ink-400 uppercase tracking-wide mt-1">Al-Quran</p>
                                     </div>
-                                    <div className="text-center">
-                                        <p className="text-xs font-black text-ink-900">{item.counts.ortu}</p>
-                                        <p className="text-[8px] font-bold text-ink-400 uppercase">W. Ortu</p>
+                                    <div className="bg-ink-50 rounded-xl p-3 text-center">
+                                        <p className="text-lg font-black text-ink-900 leading-none">{item.counts.santri}</p>
+                                        <p className="text-[9px] font-bold text-ink-400 uppercase tracking-wide mt-1">W. Santri</p>
+                                    </div>
+                                    <div className="bg-ink-50 rounded-xl p-3 text-center">
+                                        <p className="text-lg font-black text-ink-900 leading-none">{item.counts.ortu}</p>
+                                        <p className="text-[9px] font-bold text-ink-400 uppercase tracking-wide mt-1">W. Ortu</p>
                                     </div>
                                 </div>
                             </div>
                         ))
                     )}
                     {!loading && filteredRecap.length > 0 && (
-                        <div className="p-4 bg-ink-900 text-white rounded-b-[2.5rem]">
-                            <div className="flex justify-between items-center">
-                                <span className="text-xs font-black uppercase opacity-60">Total Estimasi Keseluruhan</span>
-                                <span className="text-lg font-black text-brand-yellow-400">{formatCurrency(totals.grandTotalFee)}</span>
+                        <div className="p-5 bg-ink-900 text-white rounded-b-[2.5rem]">
+                            <div className="flex flex-col gap-2">
+                                <div className="flex justify-between items-center">
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-white/60">Grand Total Honor</span>
+                                    <span className="text-xl font-black text-brand-yellow-400">{formatCurrency(totals.grandTotalFee)}</span>
+                                </div>
+                                <div className="flex justify-between items-center pt-2 border-t border-white/10">
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-white/50">Total Sesi</span>
+                                    <span className="text-base font-black text-white/80">{totals.totalTests} sesi</span>
+                                </div>
                             </div>
                         </div>
                     )}
