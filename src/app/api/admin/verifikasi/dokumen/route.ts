@@ -4,16 +4,16 @@ import { notifyDocumentVerified } from "@/lib/wablas";
 import { getServerSession } from "@/lib/session";
 import { logAdminAction } from "@/lib/audit";
 import { enqueueWhatsapp, buildMessageJadwalLangsungTersedia, buildMessageJadwalBelum, buildMessageDocumentVerified, buildMessageDocumentRejected } from "@/lib/whatsapp-queue";
- 
+
 const REQUIRED_DOC_TYPES = [
-  'kartu_keluarga', 
-  'akta_kelahiran', 
-  'rapor_sem1', 
+  'kartu_keluarga',
+  'akta_kelahiran',
+  'rapor_sem1',
   'rapor_sem2',
-  'nisn', 
-  'foto_setengah_badan', 
-  'surat_kesehatan', 
-  'pakta_integritas', 
+  'nisn',
+  'foto_setengah_badan',
+  'surat_kesehatan',
+  'pakta_integritas',
   'pernyataan_bebas_negatif'
 ];
 
@@ -167,38 +167,38 @@ export async function PATCH(request: NextRequest) {
         const rejectedDocs = allDocs.filter(d => !d.is_verified && d.catatan);
         const verifiedTypes = new Set(allDocs.filter(d => d.is_verified).map(d => d.jenis_dokumen));
         const hasAllRequired = REQUIRED_DOC_TYPES.every(type => verifiedTypes.has(type));
-        
+
         const isSomeRejected = rejectedDocs.length > 0;
         const isAllVerifiedAndComplete = !isSomeRejected && hasAllRequired;
 
         // ONLY Notify if we have rejections OR if they are FINALLY complete (all 9 verified)
         if (isSomeRejected || isAllVerifiedAndComplete) {
-            try {
-              if (dokumen.pendaftar?.no_hp) {
-                let docListStr = "";
-                if (isAllVerifiedAndComplete) {
-                  docListStr = "Lengkap (9/9 Dokumen Terverifikasi)";
-                } else {
-                  docListStr = rejectedDocs.map(d => `• ${d.jenis_dokumen}`).join("\n");
-                }
-
-                  const isVerifiedBatch = isAllVerifiedAndComplete;
-                  await enqueueWhatsapp({
-                    pendaftarId: dokumen.pendaftar_id,
-                    phone: dokumen.pendaftar.no_hp!,
-                    jenisNotif: isVerifiedBatch ? "document_verified" : "document_rejected",
-                    messageContent: isVerifiedBatch 
-                      ? buildMessageDocumentVerified(dokumen.pendaftar.nama_lengkap, docListStr)
-                      : buildMessageDocumentRejected(dokumen.pendaftar.nama_lengkap, docListStr, isAllVerifiedAndComplete ? "" : "Terdapat dokumen yang perlu diperbaiki. Silakan cek dashboard."),
-                  });
+          try {
+            if (dokumen.pendaftar?.no_hp) {
+              let docListStr = "";
+              if (isAllVerifiedAndComplete) {
+                docListStr = "Lengkap (9/9 Dokumen Terverifikasi)";
+              } else {
+                docListStr = rejectedDocs.map(d => `• ${d.jenis_dokumen}`).join("\n");
               }
-            } catch (error) {
-              console.error("WhatsApp batch notification error:", error);
+
+              const isVerifiedBatch = isAllVerifiedAndComplete;
+              await enqueueWhatsapp({
+                pendaftarId: dokumen.pendaftar_id,
+                phone: dokumen.pendaftar.no_hp!,
+                jenisNotif: isVerifiedBatch ? "document_verified" : "document_rejected",
+                messageContent: isVerifiedBatch
+                  ? buildMessageDocumentVerified(dokumen.pendaftar.nama_lengkap, docListStr)
+                  : buildMessageDocumentRejected(dokumen.pendaftar.nama_lengkap, docListStr, isAllVerifiedAndComplete ? "" : "Terdapat dokumen yang perlu diperbaiki. Silakan cek dashboard."),
+              });
             }
+          } catch (error) {
+            console.error("WhatsApp batch notification error:", error);
+          }
         } else {
-            // All currently uploaded are verified, but they haven't uploaded all 9 yet!
-            // We WAIT. Do not send "Verified" message yet.
-            console.log(`[VERIF] Pendaftar ${dokumen.pendaftar_id} has ${verifiedTypes.size}/9 verified docs. Waiting for completion before notify.`);
+          // All currently uploaded are verified, but they haven't uploaded all 9 yet!
+          // We WAIT. Do not send "Verified" message yet.
+          console.log(`[VERIF] Pendaftar ${dokumen.pendaftar_id} has ${verifiedTypes.size}/9 verified docs. Waiting for completion before notify.`);
         }
       }
     }

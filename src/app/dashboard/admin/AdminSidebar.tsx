@@ -21,7 +21,11 @@ import {
     PanelLeft,
     BarChart,
     ClipboardEdit,
-    UserCog
+    UserCog,
+    Landmark,
+    Map,
+    Zap,
+    UserCircle
 } from "lucide-react";
 import Link from "next/link";
 import { getMenuItemsForRole, UserRole, ROLE_LABELS } from "@/lib/access-control";
@@ -38,7 +42,11 @@ const ICON_MAP: Record<string, any> = {
     FileText,
     BarChart,
     ClipboardEdit,
-    UserCog
+    UserCog,
+    Landmark,
+    Map,
+    Zap,
+    UserCircle
 };
 
 import { BRANDING } from "@/config/branding";
@@ -67,13 +75,13 @@ export default function AdminSidebar({ children, userRole, adminName, userId, av
         return (
             <Link
                 href={item.href}
-                className={`nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 ${item.active
+                className={`nav-link group flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-200 ${item.active
                     ? "active bg-white text-brand-blue-700 shadow-clay-sm border border-brand-blue-100"
                     : "text-ink-500 hover:bg-brand-yellow-50 hover:text-ink-900"
                     }`}
             >
-                <item.icon className={`w-5 h-5 transition-colors ${item.active ? 'text-brand-blue-600' : 'text-ink-400 group-hover:text-ink-600'}`} />
-                <span className="flex-1 font-bold text-sm tracking-tight">{item.name}</span>
+                <item.icon className={`w-4 h-4 transition-colors ${item.active ? 'text-brand-blue-600' : 'text-ink-400 group-hover:text-ink-600'}`} />
+                <span className="flex-1 font-bold text-[13px] tracking-tight">{item.name}</span>
                 {item.active && (
                     <div className="w-1.5 h-1.5 rounded-full bg-brand-blue-600" />
                 )}
@@ -133,7 +141,7 @@ export default function AdminSidebar({ children, userRole, adminName, userId, av
                 <aside className="hidden lg:flex lg:w-72 lg:flex-col lg:fixed lg:inset-y-0 z-50">
                     <div className="flex flex-col h-full bg-white/70 backdrop-blur-xl border-r border-white/50 shadow-clay-lg">
                         {/* Brand Area */}
-                        <div className="px-6 py-8">
+                        <div className="px-6 py-8 pb-4">
                             <div className="flex items-center gap-3 mb-8">
                                 <div className="w-10 h-10 rounded-xl bg-linear-to-br from-brand-blue-700 to-brand-blue-900 flex items-center justify-center text-white shadow-xl shadow-brand-blue-900/20 ring-4 ring-brand-yellow-50/50">
                                     <Shield className="w-5 h-5 text-brand-yellow-100" />
@@ -143,24 +151,25 @@ export default function AdminSidebar({ children, userRole, adminName, userId, av
                                     <p className="text-[10px] text-ink-400 font-bold tracking-widest uppercase mt-0.5">{BRANDING.schoolShortName} PPDB</p>
                                 </div>
                             </div>
-
-                            {/* Search Bar - Aesthetic Only */}
-                            <div className="relative group">
-                                <Search className="absolute left-3 top-2.5 w-4 h-4 text-ink-400 group-focus-within:text-brand-blue-600 transition-colors" />
-                                <input
-                                    type="text"
-                                    placeholder="Cari menu..."
-                                    className="w-full bg-brand-yellow-50 border-0 rounded-xl pl-9 pr-4 py-2 text-sm text-ink-800 placeholder:text-ink-400 focus:ring-2 focus:ring-brand-blue-600/10 focus:bg-white transition-all shadow-inner"
-                                />
-                            </div>
                         </div>
 
                         {/* Navigation */}
-                        <nav className="flex-1 overflow-y-auto px-4 space-y-1 scrollbar-hide py-2">
-                            <p className="px-4 text-xs font-bold text-ink-400 uppercase tracking-wider mb-2 mt-2">Menu Utama</p>
-                            {menuItems.map((item) => (
-                                <NavLink key={item.name} item={item} />
-                            ))}
+                        <nav className="flex-1 overflow-y-auto px-4 space-y-0.5 scrollbar-hide py-2">
+                            {menuItems.map((item, idx) => {
+                                const prevItem = menuItems[idx - 1];
+                                const showGroupLabel = item.group && (!prevItem || prevItem.group !== item.group);
+                                
+                                return (
+                                    <div key={item.name}>
+                                        {showGroupLabel && (
+                                            <p className="px-4 text-[9px] font-black text-ink-300 uppercase tracking-[0.2em] mb-2 mt-6">
+                                                {item.group}
+                                            </p>
+                                        )}
+                                        <NavLink item={item} />
+                                    </div>
+                                );
+                            })}
                         </nav>
 
                         {/* User Profile / Footer */}

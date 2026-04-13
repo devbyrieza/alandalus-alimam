@@ -378,8 +378,8 @@ export function canInputScores(role: UserRole): boolean {
 }
 
 // Get menu items based on role
-export function getMenuItemsForRole(role: UserRole): { name: string; href: string; icon: string }[] {
-  const baseMenuItems: Record<string, { name: string; href: string; icon: string }[]> = {
+export function getMenuItemsForRole(role: UserRole): { name: string; href: string; icon: string; group?: string }[] {
+  const baseMenuItems: Record<string, { name: string; href: string; icon: string; group?: string }[]> = {
     admin_berkas: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
       { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
@@ -422,20 +422,27 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
       { name: 'Manajemen User', href: '/dashboard/admin/users', icon: 'UserCog' },
       { name: 'Pengaturan', href: '/dashboard/admin/pengaturan', icon: 'Settings' },
+      { name: 'Rekap Honor', href: '/dashboard/admin/recap-fee', icon: 'CreditCard' },
       { name: 'Profil Saya', href: '/dashboard/admin/profil', icon: 'UserCircle' },
     ],
     admin_super: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
-      { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
-      { name: 'Rekap Keuangan', href: '/dashboard/admin/keuangan', icon: 'BarChart' },
-      { name: 'Penilaian', href: '/dashboard/admin/penilaian', icon: 'ClipboardEdit' },
-      { name: 'Pengumuman', href: '/dashboard/admin/pengumuman', icon: 'Bell' },
-      { name: 'Hasil Seleksi', href: '/dashboard/admin/hasil-seleksi', icon: 'Trophy' },
-      { name: 'Monitoring Jadwal', href: '/dashboard/admin/jadwal/monitoring', icon: 'Calendar' },
-      { name: 'Broadcast WA', href: '/dashboard/admin/broadcast', icon: 'BarChart' },
-      { name: 'Statistik Wilayah', href: '/dashboard/admin/statistik-wilayah', icon: 'BarChart' },
-      { name: 'Pengaturan', href: '/dashboard/admin/pengaturan', icon: 'Settings' },
-      { name: 'Profil Saya', href: '/dashboard/admin/profil', icon: 'UserCircle' },
+      // Group: OPERASIONAL
+      { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users', group: 'OPERASIONAL' },
+      { name: 'Monitoring Jadwal', href: '/dashboard/admin/jadwal/monitoring', icon: 'Calendar', group: 'OPERASIONAL' },
+      { name: 'Penilaian', href: '/dashboard/admin/penilaian', icon: 'ClipboardEdit', group: 'OPERASIONAL' },
+      // Group: SELEKSI
+      { name: 'Hasil Seleksi', href: '/dashboard/admin/hasil-seleksi', icon: 'Trophy', group: 'HASIL SELEKSI' },
+      { name: 'Pengumuman', href: '/dashboard/admin/pengumuman', icon: 'Bell', group: 'HASIL SELEKSI' },
+      // Group: KEUANGAN & SDM
+      { name: 'Rekap Keuangan', href: '/dashboard/admin/keuangan', icon: 'Landmark', group: 'KEUANGAN & SDM' },
+      { name: 'Rekap Honor', href: '/dashboard/admin/recap-fee', icon: 'CreditCard', group: 'KEUANGAN & SDM' },
+      // Group: ANALITIK & BROADCAST
+      { name: 'Statistik Wilayah', href: '/dashboard/admin/statistik-wilayah', icon: 'Map', group: 'ANALITIK & BROADCAST' },
+      { name: 'Broadcast WA', href: '/dashboard/admin/broadcast', icon: 'Zap', group: 'ANALITIK & BROADCAST' },
+      // Group: SISTEM
+      { name: 'Pengaturan', href: '/dashboard/admin/pengaturan', icon: 'Settings', group: 'SISTEM' },
+      { name: 'Profil Saya', href: '/dashboard/admin/profil', icon: 'UserCircle', group: 'SISTEM' },
     ],
     admin: [
       { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
@@ -445,6 +452,7 @@ export function getMenuItemsForRole(role: UserRole): { name: string; href: strin
       { name: 'Jadwal Ujian', href: '/dashboard/admin/jadwal-ujian', icon: 'Calendar' },
       { name: 'Penilaian', href: '/dashboard/admin/penilaian', icon: 'ClipboardEdit' },
       { name: 'Keuangan', href: '/dashboard/admin/keuangan', icon: 'BarChart' },
+      { name: 'Rekap Honor', href: '/dashboard/admin/recap-fee', icon: 'CreditCard' },
       { name: 'Pengumuman', href: '/dashboard/admin/pengumuman', icon: 'Trophy' },
       { name: 'Broadcast WA', href: '/dashboard/admin/broadcast', icon: 'Bell' },
       { name: 'Statistik Wilayah', href: '/dashboard/admin/statistik-wilayah', icon: 'BarChart' },

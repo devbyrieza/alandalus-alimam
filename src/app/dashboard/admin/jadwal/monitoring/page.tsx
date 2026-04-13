@@ -105,9 +105,9 @@ export default function MonitoringJadwalPage() {
 
         filteredSchedules.forEach(s => {
             const examiners = [
-                { name: s.ustadz.quran, role: "Quran" },
+                { name: s.ustadz.quran, role: "Al-Quran" },
                 { name: s.ustadz.santri, role: "W. Santri" },
-                { name: s.ustadz.ortu, role: "W. Ortu" }
+                { name: s.ustadz.ortu, role: "W. Wali/Ortu" }
             ];
 
             examiners.forEach(ext => {
@@ -297,22 +297,34 @@ export default function MonitoringJadwalPage() {
                                         </div>
                                     </div>
 
-                                    {/* Simplified Status Grid */}
-                                    <div className="grid grid-cols-3 gap-3 py-4 border-y border-slate-100/50">
+                                    {/* Detailed Status Grid */}
+                                    <div className="grid grid-cols-1 gap-2 py-4 border-y border-slate-100/50">
                                         {[
-                                            { label: 'QRN', status: s.status.quran, icon: getStatusIcon(s.status.quran) },
-                                            { label: 'SNTR', status: s.status.santri, icon: getStatusIcon(s.status.santri) },
-                                            { label: 'ORTU', status: s.status.ortu, icon: getStatusIcon(s.status.ortu) }
+                                            { label: 'Ujian Al-Quran', status: s.status.quran, icon: getStatusIcon(s.status.quran), ustadz: s.ustadz.quran },
+                                            { label: 'Wawancara Santri', status: s.status.santri, icon: getStatusIcon(s.status.santri), ustadz: s.ustadz.santri },
+                                            { label: 'Wawancara Wali/Ortu', status: s.status.ortu, icon: getStatusIcon(s.status.ortu), ustadz: s.ustadz.ortu }
                                         ].map((stat, i) => (
-                                            <div key={i} className="flex flex-col items-center gap-1.5">
-                                                <div className={`p-2.5 rounded-xl border transition-colors ${
-                                                    stat.status === 'completed' ? 'bg-green-50 border-green-100' : 
-                                                    stat.status === 'absent' ? 'bg-red-50 border-red-100' : 
-                                                    'bg-blue-50 border-blue-100'
-                                                }`}>
-                                                    {stat.icon}
+                                            <div key={i} className="flex items-center justify-between px-2">
+                                                <div className="flex items-center gap-3">
+                                                    <div className={`p-1.5 rounded-lg border ${
+                                                        stat.status === 'completed' ? 'bg-green-50 border-green-100' : 
+                                                        stat.status === 'absent' ? 'bg-red-50 border-red-100' : 
+                                                        'bg-blue-50 border-blue-100'
+                                                    }`}>
+                                                        {stat.icon}
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-tight leading-none">{stat.label}</p>
+                                                        <p className="text-xs font-bold text-slate-700 mt-0.5">{stat.ustadz || '-'}</p>
+                                                    </div>
                                                 </div>
-                                                <span className="text-[10px] font-bold text-slate-400 tracking-wide">{stat.label}</span>
+                                                <span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-full ${
+                                                    stat.status === 'completed' ? 'bg-emerald-100 text-emerald-700' :
+                                                    stat.status === 'absent' ? 'bg-rose-100 text-rose-700' :
+                                                    'bg-blue-100 text-blue-700'
+                                                }`}>
+                                                    {stat.status === 'completed' ? 'Selesai' : stat.status === 'absent' ? 'Absen' : 'Menunggu'}
+                                                </span>
                                             </div>
                                         ))}
                                     </div>
@@ -372,7 +384,7 @@ export default function MonitoringJadwalPage() {
                                                             <span className="text-xs font-bold text-slate-700">{s.ustadz.quran}</span>
                                                             <span className={`text-[10px] font-bold uppercase tracking-tight ${
                                                                 s.status.quran === 'completed' ? 'text-green-600' : 'text-slate-400'
-                                                            }`}>{s.status.quran}</span>
+                                                            }`}>{s.status.quran === 'completed' ? 'Selesai' : s.status.quran === 'absent' ? 'Alpa' : 'Menunggu'}</span>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -383,7 +395,7 @@ export default function MonitoringJadwalPage() {
                                                             <span className="text-xs font-bold text-slate-700">{s.ustadz.santri}</span>
                                                             <span className={`text-[10px] font-bold uppercase tracking-tight ${
                                                                 s.status.santri === 'completed' ? 'text-indigo-600' : 'text-slate-400'
-                                                            }`}>{s.status.santri}</span>
+                                                            }`}>{s.status.santri === 'completed' ? 'Selesai' : s.status.santri === 'absent' ? 'Alpa' : 'Menunggu'}</span>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -394,7 +406,7 @@ export default function MonitoringJadwalPage() {
                                                             <span className="text-xs font-bold text-slate-700">{s.ustadz.ortu}</span>
                                                             <span className={`text-[10px] font-bold uppercase tracking-tight ${
                                                                 s.status.ortu === 'completed' ? 'text-emerald-600' : 'text-slate-400'
-                                                            }`}>{s.status.ortu}</span>
+                                                            }`}>{s.status.ortu === 'completed' ? 'Selesai' : s.status.ortu === 'absent' ? 'Alpa' : 'Menunggu'}</span>
                                                         </div>
                                                     </div>
                                                 </td>
