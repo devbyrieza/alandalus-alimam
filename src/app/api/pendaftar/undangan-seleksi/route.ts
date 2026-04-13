@@ -153,7 +153,10 @@ export async function GET() {
 
         // 6. Trigger WhatsApp notifications (flag-guarded, async, non-blocking)
         // GUARD: Only notify if they have exactly ZERO existing schedules (past or future)
-        if (pendaftar.no_hp && bookedJadwal.length === 0) {
+        // EXTRA GUARD: Only notify if status is 'paid' or 'docs_verified' (prevent 'tested'/'scheduled' alerts)
+        const isEligibleForNotif = ['paid', 'docs_verified'].includes(pendaftar.status_pendaftaran);
+
+        if (pendaftar.no_hp && bookedJadwal.length === 0 && isEligibleForNotif) {
             if (!hasGrupBSessions && !pendaftar.notif_belum_jadwal_terkirim) {
                 // Kondisi 1: No sessions yet, send "jadwal belum tersedia"
                 const message = buildMessageJadwalBelum(pendaftar.nama_lengkap);

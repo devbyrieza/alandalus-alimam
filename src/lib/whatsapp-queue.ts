@@ -67,6 +67,7 @@ async function isDuplicate(
     const flagMap: Partial<Record<NotifType, string>> = {
         jadwal_belum: "notif_belum_jadwal_terkirim",
         jadwal_tersedia: "notif_jadwal_tersedia_terkirim",
+        jadwal_langsung_tersedia: "notif_jadwal_tersedia_terkirim",
         hasil_tes: "notif_hasil_tes_terkirim",
     };
 

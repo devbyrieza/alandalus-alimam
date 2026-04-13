@@ -226,11 +226,11 @@ export async function PATCH(request: NextRequest) {
           // --- AUTOMATED NOTIFICATION LOGIC ---
           try {
             // New Guard: Only notify if they have exactly ZERO existing schedules (past or future)
-            const existingSchedulesCount = await prisma.jadwalUjian.count({
-              where: { pendaftar_id: dokumen.pendaftar_id }
-            });
+            // GUARD: Only notify if they have exactly ZERO existing schedules
+            // EXTRA GUARD: Only notify if status is 'paid' or 'docs_verified'
+            const isEligibleForNotif = ['paid', 'docs_verified'].includes(pendaftar.status_pendaftaran);
 
-            if (existingSchedulesCount === 0) {
+            if (existingSchedulesCount === 0 && isEligibleForNotif) {
               // Check available slots
               const sessions = await prisma.examSession.findMany({
                 where: { is_active: true, start_time: { gte: new Date() } },
