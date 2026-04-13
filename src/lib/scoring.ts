@@ -77,14 +77,9 @@ export async function recalculateNilaiUjian(pendaftarId: string) {
             // Ignore system fields
             if (['id', 'created_at', 'updated_at', 'pendaftar_id'].includes(key)) return;
             
-            // If master[key] is already set to something non-empty, maybe keep the newer one?
-            // Actually, any non-empty value is better than empty.
-            if (!isEmpty(val)) {
-                // If master field is empty, take this value. 
-                // If both are non-empty, newest record (first in allNilai) wins.
-                if (isEmpty(master[key])) {
-                    master[key] = val;
-                }
+            // Pick newest non-empty value
+            if (!isEmpty(val) && isEmpty(master[key])) {
+                master[key] = val;
             }
         });
     });
