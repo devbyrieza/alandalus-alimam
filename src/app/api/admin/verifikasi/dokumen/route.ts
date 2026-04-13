@@ -225,37 +225,46 @@ export async function PATCH(request: NextRequest) {
 
           // --- AUTOMATED NOTIFICATION LOGIC ---
           try {
-            // Check available slots
-            const sessions = await prisma.examSession.findMany({
-              where: { is_active: true, start_time: { gte: new Date() } },
-              include: { _count: { select: { bookings: true } } }
+            // New Guard: Only notify if they have exactly ZERO existing schedules (past or future)
+            const existingSchedulesCount = await prisma.jadwalUjian.count({
+              where: { pendaftar_id: dokumen.pendaftar_id }
             });
 
-            const totalAvailableSlots = sessions.reduce((acc, s) => acc + Math.max(0, s.quota - s._count.bookings), 0);
+            if (existingSchedulesCount === 0) {
+              // Check available slots
+              const sessions = await prisma.examSession.findMany({
+                where: { is_active: true, start_time: { gte: new Date() } },
+                include: { _count: { select: { bookings: true } } }
+              });
 
-            if (dokumen.pendaftar?.no_hp) {
-              if (totalAvailableSlots > 0) {
-                // Skenario A: Jadwal Langsung Tersedia
-                await enqueueWhatsapp({
-                  pendaftarId: dokumen.pendaftar_id,
-                  phone: dokumen.pendaftar.no_hp,
-                  jenisNotif: "jadwal_langsung_tersedia",
-                  messageContent: buildMessageJadwalLangsungTersedia(dokumen.pendaftar.nama_lengkap),
-                });
-                // Mark flag so they don't get double notified by manual broadcast later (unless reset)
-                await prisma.pendaftar.update({
-                  where: { id: dokumen.pendaftar_id },
-                  data: { notif_jadwal_tersedia_terkirim: true }
-                });
-              } else {
-                // Skenario B: Jadwal Belum Ada (Tapi Verifikasi Berhasil)
-                await enqueueWhatsapp({
-                  pendaftarId: dokumen.pendaftar_id,
-                  phone: dokumen.pendaftar.no_hp,
-                  jenisNotif: "jadwal_belum",
-                  messageContent: buildMessageJadwalBelum(dokumen.pendaftar.nama_lengkap),
-                });
+              const totalAvailableSlots = sessions.reduce((acc, s) => acc + Math.max(0, s.quota - s._count.bookings), 0);
+
+              if (dokumen.pendaftar?.no_hp) {
+                if (totalAvailableSlots > 0) {
+                  // Skenario A: Jadwal Langsung Tersedia
+                  await enqueueWhatsapp({
+                    pendaftarId: dokumen.pendaftar_id,
+                    phone: dokumen.pendaftar.no_hp,
+                    jenisNotif: "jadwal_langsung_tersedia",
+                    messageContent: buildMessageJadwalLangsungTersedia(dokumen.pendaftar.nama_lengkap),
+                  });
+                  // Mark flag so they don't get double notified by manual broadcast later (unless reset)
+                  await prisma.pendaftar.update({
+                    where: { id: dokumen.pendaftar_id },
+                    data: { notif_jadwal_tersedia_terkirim: true }
+                  });
+                } else {
+                  // Skenario B: Jadwal Belum Ada (Tapi Verifikasi Berhasil)
+                  await enqueueWhatsapp({
+                    pendaftarId: dokumen.pendaftar_id,
+                    phone: dokumen.pendaftar.no_hp,
+                    jenisNotif: "jadwal_belum",
+                    messageContent: buildMessageJadwalBelum(dokumen.pendaftar.nama_lengkap),
+                  });
+                }
               }
+            } else {
+              console.log(`[VERIF] Pendaftar ${dokumen.pendaftar_id} transition suppressed: already has ${existingSchedulesCount} schedule(s).`);
             }
           } catch (notifErr) {
             console.error("Automated notification error:", notifErr);

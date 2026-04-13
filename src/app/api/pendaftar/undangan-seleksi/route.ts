@@ -152,7 +152,8 @@ export async function GET() {
         const hasGrupBSessions = availableSessions.length > 0;
 
         // 6. Trigger WhatsApp notifications (flag-guarded, async, non-blocking)
-        if (pendaftar.no_hp) {
+        // GUARD: Only notify if they have exactly ZERO existing schedules (past or future)
+        if (pendaftar.no_hp && bookedJadwal.length === 0) {
             if (!hasGrupBSessions && !pendaftar.notif_belum_jadwal_terkirim) {
                 // Kondisi 1: No sessions yet, send "jadwal belum tersedia"
                 const message = buildMessageJadwalBelum(pendaftar.nama_lengkap);

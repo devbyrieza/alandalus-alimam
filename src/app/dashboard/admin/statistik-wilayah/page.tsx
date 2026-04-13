@@ -77,8 +77,8 @@ export default function StatistikWilayahPage() {
                         <MapPin className="w-8 h-8 text-white" />
                     </div>
                     <div>
-                        <h1 className="text-3xl font-black text-ink-900 tracking-tight">Statistik <span className="text-indigo-600">Wilayah</span></h1>
-                        <p className="text-ink-500 font-medium italic opacity-80">Analisis sebaran daerah asal pendaftar berdasarkan data Alamat di Kartu Keluarga (KK).</p>
+                        <h1 className="text-3xl font-black text-slate-800 tracking-tight">Statistik <span className="text-indigo-600">Wilayah</span></h1>
+                        <p className="text-slate-500 font-medium italic opacity-80 text-sm">Analisis sebaran daerah asal pendaftar berdasarkan data Alamat di Kartu Keluarga (KK).</p>
                     </div>
                 </div>
                 
@@ -92,10 +92,10 @@ export default function StatistikWilayahPage() {
             </div>
 
             {/* Tabs */}
-            <div className="flex gap-2 p-1.5 bg-cream-100 rounded-2xl w-fit">
+            <div className="flex gap-2 p-1.5 bg-slate-100 rounded-2xl w-fit">
                 <button
                     onClick={() => setActiveTab("santri")}
-                    className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold transition-all sm:text-sm ${activeTab === "santri" ? "bg-white text-indigo-600 shadow-clay-sm" : "text-ink-500 hover:text-ink-800"
+                    className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold transition-all text-sm ${activeTab === "santri" ? "bg-white text-indigo-600 shadow-clay-sm" : "text-slate-400 hover:text-slate-600"
                         }`}
                 >
                     <Users className="w-4 h-4" />
@@ -103,11 +103,11 @@ export default function StatistikWilayahPage() {
                 </button>
                 <button
                     onClick={() => setActiveTab("wali")}
-                    className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold transition-all sm:text-sm ${activeTab === "wali" ? "bg-white text-indigo-600 shadow-clay-sm" : "text-ink-500 hover:text-ink-800"
+                    className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold transition-all text-sm ${activeTab === "wali" ? "bg-white text-indigo-600 shadow-clay-sm" : "text-slate-400 hover:text-slate-600"
                         }`}
                 >
                     <Users className="w-4 h-4" />
-                    Sebaran Orang Tua / Wali
+                    Sebaran Wali
                 </button>
             </div>
 
@@ -122,21 +122,23 @@ export default function StatistikWilayahPage() {
                             <div className="flex items-center gap-4">
                                 <div className="flex flex-col items-center justify-center w-16 h-16 rounded-2xl bg-indigo-50 text-indigo-600 shadow-inner border border-indigo-100/50">
                                     <span className="font-black text-xl leading-none">{provData.total}</span>
-                                    <span className="text-[8px] font-black uppercase mt-1 opacity-60">Diterima</span>
+                                    <span className="text-[10px] font-bold uppercase mt-1.5 opacity-60 tracking-wider">Total</span>
                                 </div>
                                 <div className="flex-1">
-                                    <h3 className="font-black text-ink-900 text-lg leading-tight uppercase italic">{provName}</h3>
-                                    <p className="text-[10px] font-black text-ink-400 uppercase tracking-widest mt-1 opacity-70">{provData.cities.length} Kota/Kabupaten Terdata</p>
+                                    <h3 className="font-extrabold text-slate-800 text-[17px] leading-tight uppercase italic group-hover:text-indigo-600 transition-colors">{provName}</h3>
+                                    <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-1.5">{provData.cities.length} Sebaran Wilayah</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-6">
-                                <div className="hidden md:flex flex-col items-end">
-                                    <span className="text-xs font-bold text-ink-400 uppercase">Presentase</span>
+                                <div className="hidden md:flex flex-col items-end mr-2">
+                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Presentase</span>
                                     <span className="text-sm font-black text-indigo-600">
                                         {currentData ? ((provData.total / Object.values(currentData).reduce((sum, province) => sum + province.total, 0)) * 100).toFixed(1) : '0.0'}%
                                     </span>
                                 </div>
-                                {expandedProv === provName ? <ChevronUp className="w-5 h-5 text-ink-300" /> : <ChevronDown className="w-5 h-5 text-ink-300" />}
+                                <div className={`p-2 rounded-xl transition-colors ${expandedProv === provName ? 'bg-indigo-50 text-indigo-600' : 'text-slate-300 group-hover:bg-slate-50'}`}>
+                                    {expandedProv === provName ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                                </div>
                             </div>
                         </div>
 
@@ -145,11 +147,11 @@ export default function StatistikWilayahPage() {
                                 <div className="h-px bg-ink-100 mb-6"></div>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                                     {provData.cities.sort((a: any, b: any) => b.count - a.count).map((city: any) => (
-                                        <div key={city.name} className="flex items-center justify-between p-4 bg-cream-50 rounded-xl border border-white">
-                                            <span className="text-sm font-bold text-ink-700 truncate mr-2">{city.name}</span>
-                                            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-xl shadow-clay-sm border border-indigo-50">
-                                                <span className="text-xs font-black text-indigo-600">{city.count}</span>
-                                                <span className="text-[9px] font-black text-ink-300 uppercase">Orang</span>
+                                        <div key={city.name} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-white hover:border-indigo-100 transition-colors">
+                                            <span className="text-[13px] font-bold text-slate-700 truncate mr-2">{city.name}</span>
+                                            <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-xl shadow-clay-sm border border-indigo-50">
+                                                <span className="text-[13px] font-black text-indigo-600">{city.count}</span>
+                                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tight">Data</span>
                                             </div>
                                         </div>
                                     ))}
