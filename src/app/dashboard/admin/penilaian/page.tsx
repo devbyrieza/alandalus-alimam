@@ -329,11 +329,15 @@ export default function ExaminerDashboard() {
                                     <tr>
                                         <th className="px-6 py-4 text-left text-[10px] font-black text-ink-400 uppercase tracking-widest">No. Daftar</th>
                                         <th className="px-6 py-4 text-left text-[10px] font-black text-ink-400 uppercase tracking-widest">Nama Peserta</th>
-                                        <th className="px-6 py-4 text-left text-[10px] font-black text-ink-400 uppercase tracking-widest">Jenjang</th>
-                                        <th className="px-6 py-4 text-left text-[10px] font-black text-ink-400 uppercase tracking-widest">Status Ujian</th>
-                                        <th className="px-4 py-4 text-center text-[10px] font-black text-ink-400 uppercase tracking-widest">Akad.</th>
-                                        <th className="px-4 py-4 text-center text-[10px] font-black text-ink-400 uppercase tracking-widest">Quran</th>
-                                        <th className="px-4 py-4 text-center text-[10px] font-black text-ink-400 uppercase tracking-widest font-bold">Total</th>
+                                        <th className="px-4 py-4 text-left text-[10px] font-black text-ink-400 uppercase tracking-widest">Jenjang</th>
+                                        <th className="px-4 py-4 text-left text-[10px] font-black text-ink-400 uppercase tracking-widest">Status Ujian</th>
+                                        <th className="px-3 py-4 text-center text-[10px] font-black text-ink-400 uppercase tracking-widest">Akad.</th>
+                                        <th className="px-3 py-4 text-center text-[10px] font-black text-ink-400 uppercase tracking-widest">Keprib.</th>
+                                        <th className="px-3 py-4 text-center text-[10px] font-black text-ink-400 uppercase tracking-widest">Kesiapan</th>
+                                        <th className="px-3 py-4 text-center text-[10px] font-black text-ink-400 uppercase tracking-widest">Quran</th>
+                                        <th className="px-3 py-4 text-center text-[10px] font-black text-ink-400 uppercase tracking-widest">W. Calsan</th>
+                                        <th className="px-3 py-4 text-center text-[10px] font-black text-ink-400 uppercase tracking-widest">W. Cawalsan</th>
+                                        <th className="px-3 py-4 text-center text-[10px] font-black text-brand-blue-700 uppercase tracking-widest bg-brand-blue-50/30">Total</th>
                                         <th className="px-6 py-4 text-center text-[10px] font-black text-ink-400 uppercase tracking-widest">Aksi Input</th>
                                     </tr>
                                 </thead>
@@ -352,10 +356,10 @@ export default function ExaminerDashboard() {
                                                     </p>
                                                     <p className="text-[10px] font-bold text-ink-400 uppercase tracking-wider mt-0.5">{(s.status_pendaftaran || '').replace('_', ' ')}</p>
                                                 </td>
-                                                <td className="px-6 py-4 whitespace-nowrap">
+                                                <td className="px-4 py-4 whitespace-nowrap">
                                                     <span className="text-xs font-bold text-ink-600 bg-ink-100 px-2 py-1 rounded-lg">{s.jenjang}</span>
                                                 </td>
-                                                <td className="px-6 py-4 whitespace-nowrap">
+                                                <td className="px-4 py-4 whitespace-nowrap">
                                                     {(() => {
                                                         const examStatus = s.nilai_ujian?.status_kelulusan;
                                                         const colors: any = {
@@ -374,9 +378,22 @@ export default function ExaminerDashboard() {
                                                         );
                                                     })()}
                                                 </td>
-                                                <td className="px-4 py-4 text-center whitespace-nowrap text-sm font-bold text-ink-800">{s.nilai_ujian?.score_akademik !== undefined ? Math.round(s.nilai_ujian.score_akademik) : '-'}</td>
-                                                <td className="px-4 py-4 text-center whitespace-nowrap text-sm font-bold text-ink-800">{s.nilai_ujian?.score_quran !== undefined ? Math.round(s.nilai_ujian.score_quran) : '-'}</td>
-                                                <td className="px-4 py-4 text-center whitespace-nowrap text-base font-black text-brand-blue-700 bg-brand-blue-50/20">{s.nilai_ujian?.nilai_total !== undefined ? (typeof s.nilai_ujian.nilai_total === 'number' ? s.nilai_ujian.nilai_total.toFixed(1) : s.nilai_ujian.nilai_total) : '-'}</td>
+                                                {/* Kolom Nilai: Akad, Keprib, Kesiapan, Quran, W.Calsan, W.Cawalsan */}
+                                                <td className="px-3 py-4 text-center whitespace-nowrap text-sm font-bold text-ink-800">{s.nilai_ujian?.score_akademik != null ? Math.round(s.nilai_ujian.score_akademik) : <span className="text-ink-300">-</span>}</td>
+                                                <td className="px-3 py-4 text-center whitespace-nowrap text-sm font-bold text-ink-800">{s.nilai_ujian?.score_kepribadian != null ? Math.round(s.nilai_ujian.score_kepribadian) : <span className="text-ink-300">-</span>}</td>
+                                                <td className="px-3 py-4 text-center whitespace-nowrap text-sm font-bold text-ink-800">{s.nilai_ujian?.score_kesiapan != null ? Math.round(s.nilai_ujian.score_kesiapan) : <span className="text-ink-300">-</span>}</td>
+                                                <td className="px-3 py-4 text-center whitespace-nowrap text-sm font-bold text-ink-800">{s.nilai_ujian?.score_quran != null ? Math.round(s.nilai_ujian.score_quran) : <span className="text-ink-300">-</span>}</td>
+                                                <td className="px-3 py-4 text-center whitespace-nowrap text-sm font-bold text-ink-800">{s.nilai_ujian?.nilai_wawancara_santri != null ? Math.round(s.nilai_ujian.nilai_wawancara_santri) : <span className="text-ink-300">-</span>}</td>
+                                                <td className="px-3 py-4 text-center whitespace-nowrap text-sm font-bold text-ink-800">{s.nilai_ujian?.nilai_wawancara_ortu != null ? Math.round(s.nilai_ujian.nilai_wawancara_ortu) : <span className="text-ink-300">-</span>}</td>
+                                                {/* Total */}
+                                                <td className="px-3 py-4 text-center whitespace-nowrap bg-brand-blue-50/20">
+                                                    <span className="text-base font-black text-brand-blue-700">
+                                                        {s.nilai_ujian?.nilai_total != null
+                                                            ? (typeof s.nilai_ujian.nilai_total === 'number' ? s.nilai_ujian.nilai_total.toFixed(1) : s.nilai_ujian.nilai_total)
+                                                            : <span className="text-ink-300 font-bold">-</span>
+                                                        }
+                                                    </span>
+                                                </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-center">
                                                     <div className="flex justify-center items-center gap-1">
                                                         <button 
@@ -401,7 +418,7 @@ export default function ExaminerDashboard() {
                         </div>
 
                         {/* Mobile Card View */}
-                        <div className="md:hidden space-y-4 p-4">
+                        <div className="md:hidden space-y-3 p-4">
                             {loading ? (
                                 <div className="py-12 text-center text-ink-400 font-medium italic">Memuat data pendaftar...</div>
                             ) : filteredStudents.length === 0 ? (
@@ -409,39 +426,79 @@ export default function ExaminerDashboard() {
                             ) : (
                                 filteredStudents.map(s => (
                                     <div key={s.id} className="bg-white rounded-3xl p-5 shadow-clay-sm border border-ink-50 space-y-4">
-                                        <div className="flex justify-between items-start">
-                                            <div>
+                                        {/* Header: No. Daftar + Nama + Jenjang */}
+                                        <div className="flex items-start justify-between gap-3">
+                                            <div className="flex-1 min-w-0">
                                                 <div className="flex items-center gap-2 mb-1">
                                                     <span className="text-[10px] font-mono font-bold text-ink-400 tracking-tight">{s.nomor_pendaftaran || '-'}</span>
                                                     <span className="text-[9px] font-black text-brand-blue-700 bg-brand-blue-50 px-2 py-0.5 rounded-lg uppercase">{s.jenjang}</span>
                                                 </div>
-                                                <h3 className="text-base font-black text-ink-900 uppercase leading-snug">
+                                                <h3 className="text-sm font-black text-ink-900 uppercase leading-snug">
                                                     {(s.nama_lengkap || 'Tanpa Nama').toLowerCase().replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}
                                                 </h3>
+                                                <p className="text-[10px] font-bold text-ink-400 uppercase tracking-wider mt-0.5">{(s.status_pendaftaran || '').replace('_', ' ')}</p>
+                                            </div>
+                                            {/* Total Badge */}
+                                            <div className="bg-brand-blue-600 px-4 py-2.5 rounded-2xl text-white text-center shrink-0">
+                                                <p className="text-[8px] font-black opacity-70 uppercase">Total</p>
+                                                <p className="text-xl font-black leading-none mt-0.5">
+                                                    {s.nilai_ujian?.nilai_total != null
+                                                        ? (typeof s.nilai_ujian.nilai_total === 'number' ? s.nilai_ujian.nilai_total.toFixed(1) : s.nilai_ujian.nilai_total)
+                                                        : '-'
+                                                    }
+                                                </p>
                                             </div>
                                         </div>
 
-                                        <div className="grid grid-cols-2 gap-3">
-                                            <div className="bg-ink-50/50 p-3 rounded-2xl">
-                                                <p className="text-[9px] font-black text-ink-400 uppercase mb-1">Status Ujian</p>
-                                                <p className="text-[10px] font-black text-ink-800 uppercase">{s.nilai_ujian?.status_kelulusan || 'MENUNGGU'}</p>
-                                            </div>
-                                            <div className="bg-brand-blue-600 p-3 rounded-2xl text-white">
-                                                <p className="text-[9px] font-black opacity-70 uppercase mb-1">Nilai Total</p>
-                                                <p className="text-lg font-black leading-none">{s.nilai_ujian?.nilai_total || '-'}</p>
-                                            </div>
+                                        {/* Status Ujian */}
+                                        {(() => {
+                                            const examStatus = s.nilai_ujian?.status_kelulusan;
+                                            const colors: any = {
+                                                'LULUS': 'bg-green-100 text-green-700 border-green-200',
+                                                'DITERIMA': 'bg-green-100 text-green-700 border-green-200',
+                                                'CADANGAN': 'bg-amber-100 text-amber-700 border-amber-200',
+                                                'DITOLAK': 'bg-red-100 text-red-700 border-red-200',
+                                                'BELUM LENGKAP': 'bg-orange-100 text-orange-700 border-orange-200',
+                                                'pending': 'bg-ink-100 text-ink-500 border-ink-200'
+                                            };
+                                            const color = colors[examStatus || 'pending'] || 'bg-ink-100 text-ink-500 border-ink-200';
+                                            return (
+                                                <span className={`inline-flex px-3 py-1 text-[10px] font-black rounded-full border ${color}`}>
+                                                    {examStatus || 'MENUNGGU'}
+                                                </span>
+                                            );
+                                        })()}
+
+                                        {/* 6 Nilai Grid — 3x2 */}
+                                        <div className="grid grid-cols-3 gap-2">
+                                            {[
+                                                { label: 'Akademik', value: s.nilai_ujian?.score_akademik },
+                                                { label: 'Kepribadian', value: s.nilai_ujian?.score_kepribadian },
+                                                { label: 'Kesiapan', value: s.nilai_ujian?.score_kesiapan },
+                                                { label: 'Al-Qur\'an', value: s.nilai_ujian?.score_quran },
+                                                { label: 'W. Calsan', value: s.nilai_ujian?.nilai_wawancara_santri },
+                                                { label: 'W. Cawalsan', value: s.nilai_ujian?.nilai_wawancara_ortu },
+                                            ].map((item) => (
+                                                <div key={item.label} className="bg-ink-50 rounded-xl p-2.5 text-center">
+                                                    <p className="text-sm font-black text-ink-900 leading-none">
+                                                        {item.value != null ? Math.round(item.value) : <span className="text-ink-300">-</span>}
+                                                    </p>
+                                                    <p className="text-[8px] font-bold text-ink-400 uppercase tracking-wide mt-1 leading-tight">{item.label}</p>
+                                                </div>
+                                            ))}
                                         </div>
 
+                                        {/* Action Buttons */}
                                         <div className="grid grid-cols-2 gap-2">
                                             <button 
                                                 onClick={() => handleOpenInput(s, 'quran')} 
-                                                className="flex items-center justify-center gap-2 bg-ink-900 text-white py-3.5 rounded-2xl text-[11px] font-black shadow-lg shadow-ink-900/10 active:scale-95 transition-all"
+                                                className="flex items-center justify-center gap-2 bg-ink-900 text-white py-3 rounded-2xl text-[11px] font-black shadow-lg shadow-ink-900/10 active:scale-95 transition-all"
                                             >
                                                 <Zap className="w-3.5 h-3.5" /> TES QURAN
                                             </button>
                                             <button 
                                                 onClick={() => handleOpenInput(s, 'wawancara_santri')} 
-                                                className="flex items-center justify-center gap-2 bg-brand-yellow-400 text-brand-blue-900 py-3.5 rounded-2xl text-[11px] font-black shadow-lg shadow-brand-yellow-400/20 active:scale-95 transition-all"
+                                                className="flex items-center justify-center gap-2 bg-brand-yellow-400 text-brand-blue-900 py-3 rounded-2xl text-[11px] font-black shadow-lg shadow-brand-yellow-400/20 active:scale-95 transition-all"
                                             >
                                                 <MessageSquare className="w-3.5 h-3.5" /> WAWANCARA
                                             </button>

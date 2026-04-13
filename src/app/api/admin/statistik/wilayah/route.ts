@@ -34,35 +34,52 @@ export async function GET(req: NextRequest) {
         });
 
         const waliGroups: any = {};
+        const ayahGroups: any = {};
+        const ibuGroups: any = {};
+
         allFamilyData.forEach((ot) => {
             // Priority: Wali Address > Pendaftar Address (Fallback)
-            const prov = ot.provinsi_wali || ot.pendaftar?.provinsi || "Lainnya";
-            const kab = ot.kabupaten_wali || ot.pendaftar?.kabupaten || "Lainnya";
+            const santriProv = ot.pendaftar?.provinsi || "Lainnya";
+            const santriKab = ot.pendaftar?.kabupaten || "Lainnya";
+
+            const pWali = ot.provinsi_wali || santriProv;
+            const kWali = ot.kabupaten_wali || santriKab;
             
-            if (prov === "Lainnya" && kab === "Lainnya") return;
+            // For Ayah & Ibu, we currently don't have provincial fields, 
+            // so we fallback to Santri's region.
+            const pAyah = santriProv;
+            const kAyah = santriKab;
 
-            if (!waliGroups[prov]) {
-                waliGroups[prov] = {
-                    total: 0,
-                    cities: {} as Record<string, number>,
-                };
-            }
+            const pIbu = santriProv;
+            const kIbu = santriKab;
 
-            waliGroups[prov].total += 1;
-            waliGroups[prov].cities[kab] = (waliGroups[prov].cities[kab] || 0) + 1;
-        });
-
-        // Format waliGroups to match the expected format
-        const formattedWaliData: any = {};
-        Object.keys(waliGroups).forEach(prov => {
-            formattedWaliData[prov] = {
-                total: waliGroups[prov].total,
-                cities: Object.entries(waliGroups[prov].cities).map(([name, count]) => ({
-                    name,
-                    count
-                }))
+            const processGroup = (group: any, prov: string, kab: string) => {
+                if (prov === "Lainnya" && kab === "Lainnya") return;
+                if (!group[prov]) {
+                    group[prov] = { total: 0, cities: {} as Record<string, number> };
+                }
+                group[prov].total += 1;
+                group[prov].cities[kab] = (group[prov].cities[kab] || 0) + 1;
             };
+
+            processGroup(waliGroups, pWali, kWali);
+            processGroup(ayahGroups, pAyah, kAyah);
+            processGroup(ibuGroups, pIbu, kIbu);
         });
+
+        const formatGroupData = (groups: any) => {
+            const formatted: any = {};
+            Object.keys(groups).forEach(prov => {
+                formatted[prov] = {
+                    total: groups[prov].total,
+                    cities: Object.entries(groups[prov].cities).map(([name, count]) => ({
+                        name,
+                        count
+                    }))
+                };
+            });
+            return formatted;
+        };
 
         const formatSantriData = (raw: any[], provField: string, kabField: string) => {
             const grouped: any = {};
@@ -87,12 +104,12 @@ export async function GET(req: NextRequest) {
             return grouped;
         };
 
-        const santriData = formatSantriData(santriRaw, "provinsi", "kabupaten");
-
         return NextResponse.json({
             success: true,
-            santri: santriData,
-            wali: formattedWaliData,
+            santri: formatSantriData(santriRaw, "provinsi", "kabupaten"),
+            ayah: formatGroupData(ayahGroups),
+            ibu: formatGroupData(ibuGroups),
+            wali: formatGroupData(waliGroups),
         });
     } catch (error: any) {
         console.error("Statistik error:", error);

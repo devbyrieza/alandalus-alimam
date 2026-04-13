@@ -162,9 +162,69 @@ export default function PengumumanPage() {
         </button>
       </div>
 
-      {/* Table */}
+      {/* Table & Mobile View */}
       <div className="bg-white rounded-xl shadow-lg border border-stone-200 overflow-hidden">
-        <div className="overflow-x-auto">
+        {/* Mobile View: Cards */}
+        <div className="md:hidden divide-y divide-stone-100 select-none">
+          {candidates.length === 0 ? (
+            <div className="px-6 py-12 text-center text-stone-500 italic">
+              Tidak ada data kandidat sesuai filter
+            </div>
+          ) : (
+            candidates.map((c) => (
+              <div 
+                key={c.id} 
+                onClick={() => handleSelectOne(c.id)}
+                className={`p-4 flex items-start gap-4 active:bg-stone-50 transition-colors ${selectedIds.includes(c.id) ? 'bg-green-50/50' : ''}`}
+              >
+                <div className="mt-1" onClick={(e) => e.stopPropagation()}>
+                  <input
+                    type="checkbox"
+                    className="w-5 h-5 rounded border-stone-300 text-green-600 focus:ring-green-500"
+                    checked={selectedIds.includes(c.id)}
+                    onChange={() => handleSelectOne(c.id)}
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex justify-between items-start mb-1 gap-2">
+                    <h4 className="font-black text-stone-900 leading-tight uppercase text-sm truncate">
+                      {toTitleCase(c.nama_lengkap)}
+                    </h4>
+                    <span className="px-2 py-0.5 bg-stone-100 text-stone-600 rounded text-[9px] font-black uppercase shrink-0">
+                      {c.jenjang}
+                    </span>
+                  </div>
+                  <p className="text-[10px] font-mono font-bold text-stone-400 tracking-tighter mb-2">{c.nomor_pendaftaran}</p>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex flex-col">
+                      <span className="text-[9px] font-black text-stone-300 uppercase tracking-widest leading-none mb-1">Total Nilai</span>
+                      <span className="text-sm font-black text-stone-700">{c.nilai_ujian?.nilai_total || "-"}</span>
+                    </div>
+                    <div>
+                      {c.status_pendaftaran === 'accepted' ? (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-green-100 text-green-700 text-[10px] font-black uppercase">
+                          <CheckCircle2 className="w-3 h-3" /> Lulus
+                        </span>
+                      ) : c.status_pendaftaran === 'scheduled' ? (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-blue-100 text-blue-700 text-[10px] font-black uppercase">
+                          Siap
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 text-[10px] font-black uppercase">
+                          {c.status_pendaftaran}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* Desktop View: Table */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full">
             <thead className="bg-stone-50 border-b border-stone-200">
               <tr>

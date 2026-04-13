@@ -14,18 +14,21 @@ import {
     Menu,
     X,
     Home,
+    PanelLeft,
     Shield,
     FileText,
     Search,
     Bell,
-    PanelLeft,
     BarChart,
     ClipboardEdit,
     UserCog,
     Landmark,
     Map,
     Zap,
-    UserCircle
+    UserCircle,
+    Edit3,
+    Activity,
+    PieChart
 } from "lucide-react";
 import Link from "next/link";
 import { getMenuItemsForRole, UserRole, ROLE_LABELS } from "@/lib/access-control";
@@ -46,7 +49,10 @@ const ICON_MAP: Record<string, any> = {
     Landmark,
     Map,
     Zap,
-    UserCircle
+    UserCircle,
+    Edit3,
+    Activity,
+    PieChart
 };
 
 import { BRANDING } from "@/config/branding";
