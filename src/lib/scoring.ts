@@ -166,6 +166,7 @@ export async function recalculateNilaiUjian(pendaftarId: string) {
         data: {
             ...master,
             total_score: totalScore,
+            nilai_total: totalScore, // Sync legacy field for other pages
             status_kelulusan: status,
             score_wawancara: wawancaraTotal,
             nilai_wawancara_ortu: wo,

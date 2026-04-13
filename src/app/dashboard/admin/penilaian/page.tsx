@@ -162,10 +162,10 @@ export default function ExaminerDashboard() {
     };
 
     return (
-        <div className="p-6">
-            <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold">Dashboard Penilaian</h1>
-                <div className="flex gap-2">
+        <div className="p-4 md:p-6">
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
+                <h1 className="text-2xl font-bold text-stone-800">Dashboard Penilaian</h1>
+                <div className="flex flex-wrap gap-2 w-full lg:w-auto">
                     <Button onClick={() => {
                         // Simple CSV Export implementation logic without heavy library
                         if (students.length === 0) return Swal.fire('Info', 'Tidak ada data', 'info');
@@ -286,18 +286,19 @@ export default function ExaminerDashboard() {
                     <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                             <tr>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No. Daftar</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenjang</th>
-                                <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Status</th>
-                                <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Akademik</th>
-                                <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Kepribadian</th>
-                                <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Kesiapan</th>
-                                <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Quran</th>
-                                <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Waw. Calsan</th>
-                                <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Waw. Cawalsan</th>
-                                <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Notif WA</th>
-                                <th className="px-6 py-3 text-left text-xs font-black text-stone-500 uppercase tracking-wider">Aksi</th>
+                                <th className="px-3 md:px-6 py-3 text-left text-[10px] md:text-xs font-medium text-gray-500 uppercase tracking-wider">No. Daftar</th>
+                                <th className="px-3 md:px-6 py-3 text-left text-[10px] md:text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
+                                <th className="px-2 md:px-6 py-3 text-left text-[10px] md:text-xs font-medium text-gray-500 uppercase tracking-wider">Jenjang</th>
+                                <th className="px-3 md:px-6 py-3 text-left text-[10px] md:text-xs font-black text-stone-500 uppercase tracking-wider">Status</th>
+                                <th className="px-2 md:px-6 py-3 text-left text-[10px] md:text-xs font-black text-stone-500 uppercase tracking-wider">Akad.</th>
+                                <th className="px-2 md:px-6 py-3 text-left text-[10px] md:text-xs font-black text-stone-500 uppercase tracking-wider">Keprib.</th>
+                                <th className="px-2 md:px-6 py-3 text-left text-[10px] md:text-xs font-black text-stone-500 uppercase tracking-wider">Siap</th>
+                                <th className="px-2 md:px-6 py-3 text-left text-[10px] md:text-xs font-black text-stone-500 uppercase tracking-wider">Quran</th>
+                                <th className="px-2 md:px-6 py-3 text-left text-[10px] md:text-xs font-black text-stone-500 uppercase tracking-wider">Calsan</th>
+                                <th className="px-2 md:px-6 py-3 text-left text-[10px] md:text-xs font-black text-stone-500 uppercase tracking-wider">Cawalsan</th>
+                                <th className="px-2 md:px-6 py-3 text-left text-[10px] md:text-xs font-black text-stone-700 uppercase tracking-wider font-bold">Total</th>
+                                <th className="px-2 md:px-6 py-3 text-left text-[10px] md:text-xs font-black text-stone-500 uppercase tracking-wider">Notif</th>
+                                <th className="px-3 md:px-6 py-3 text-left text-[10px] md:text-xs font-black text-stone-500 uppercase tracking-wider text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
@@ -308,12 +309,12 @@ export default function ExaminerDashboard() {
                             ) : (
                                 students.map(s => (
                                     <tr key={s.id} className="hover:bg-gray-50">
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{s.nomor_pendaftaran}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        <td className="px-3 md:px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-900 font-mono">{s.nomor_pendaftaran}</td>
+                                        <td className="px-3 md:px-6 py-4 whitespace-nowrap text-xs md:text-sm font-bold text-gray-900 border-r border-stone-100">
                                             {s.nama_lengkap.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{s.jenjang}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
+                                        <td className="px-2 md:px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">{s.jenjang}</td>
+                                        <td className="px-3 md:px-6 py-4 whitespace-nowrap">
                                             {(() => {
                                                 const regStatus = s.status_pendaftaran;
                                                 const examStatus = s.nilai_ujian?.status_kelulusan;
@@ -323,50 +324,51 @@ export default function ExaminerDashboard() {
                                                 
                                                 if (docNotVerified) {
                                                     return (
-                                                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-50 text-blue-600 border border-blue-200">
-                                                            VERIF BERKAS
+                                                        <span className="px-2 inline-flex text-[10px] leading-4 font-semibold rounded-full bg-blue-50 text-blue-600 border border-blue-200">
+                                                            VERIF
                                                         </span>
                                                     );
                                                 }
 
                                                 return (
-                                                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                                                    <span className={`px-2 inline-flex text-[10px] leading-4 font-semibold rounded-full ${
                                                         examStatus === 'LULUS' || examStatus === 'DITERIMA' ? 'bg-green-100 text-green-800' :
                                                         examStatus === 'CADANGAN' ? 'bg-yellow-100 text-yellow-800' :
                                                         examStatus === 'DITOLAK' ? 'bg-red-100 text-red-800' :
                                                         examStatus === 'BELUM LENGKAP' ? 'bg-orange-100 text-orange-800' :
                                                         'bg-gray-100 text-gray-800'
                                                     }`}>
-                                                        {examStatus || 'BELUM UJIAN'}
+                                                        {examStatus || 'PENDING'}
                                                     </span>
                                                 );
                                             })()}
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_akademik != null ? Number(s.nilai_ujian.score_akademik).toFixed(1) : '-'}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_kepribadian != null ? Number(s.nilai_ujian.score_kepribadian).toFixed(1) : '-'}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_kesiapan != null ? Number(s.nilai_ujian.score_kesiapan).toFixed(1) : '-'}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_quran != null ? Number(s.nilai_ujian.score_quran).toFixed(1) : '-'}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.nilai_wawancara_santri != null ? Number(s.nilai_ujian.nilai_wawancara_santri).toFixed(1) : '-'}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 font-bold">{s.nilai_ujian?.nilai_wawancara_ortu != null && Number(s.nilai_ujian.nilai_wawancara_ortu) >= 1 ? (Number(s.nilai_ujian.nilai_wawancara_ortu) > 1 ? Number(s.nilai_ujian.nilai_wawancara_ortu).toFixed(1) : 'Lengkap') : '-'}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
+                                        <td className="px-2 md:px-6 py-4 whitespace-nowrap text-[11px] md:text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_akademik != null ? Number(s.nilai_ujian.score_akademik).toFixed(0) : '-'}</td>
+                                        <td className="px-2 md:px-6 py-4 whitespace-nowrap text-[11px] md:text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_kepribadian != null ? Number(s.nilai_ujian.score_kepribadian).toFixed(0) : '-'}</td>
+                                        <td className="px-2 md:px-6 py-4 whitespace-nowrap text-[11px] md:text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_kesiapan != null ? Number(s.nilai_ujian.score_kesiapan).toFixed(0) : '-'}</td>
+                                        <td className="px-2 md:px-6 py-4 whitespace-nowrap text-[11px] md:text-sm text-stone-500 font-bold">{s.nilai_ujian?.score_quran != null ? Number(s.nilai_ujian.score_quran).toFixed(0) : '-'}</td>
+                                        <td className="px-2 md:px-6 py-4 whitespace-nowrap text-[11px] md:text-sm text-stone-500 font-bold">{s.nilai_ujian?.nilai_wawancara_santri != null ? Number(s.nilai_ujian.nilai_wawancara_santri).toFixed(0) : '-'}</td>
+                                        <td className="px-2 md:px-6 py-4 whitespace-nowrap text-[11px] md:text-sm text-stone-500 font-bold">{s.nilai_ujian?.nilai_wawancara_ortu != null && Number(s.nilai_ujian.nilai_wawancara_ortu) >= 1 ? (Number(s.nilai_ujian.nilai_wawancara_ortu) > 1 ? Number(s.nilai_ujian.nilai_wawancara_ortu).toFixed(0) : 'Lengkap') : '-'}</td>
+                                        <td className="px-2 md:px-6 py-4 whitespace-nowrap text-xs md:text-sm text-stone-900 font-black bg-stone-50">{s.nilai_ujian?.total_score != null ? Number(s.nilai_ujian.total_score).toFixed(1) : '-'}</td>
+                                        <td className="px-2 md:px-6 py-4 whitespace-nowrap">
                                             {s.whatsapp_status ? (
-                                                <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                                                <span className={`px-2 py-1 inline-flex text-[10px] leading-4 font-semibold rounded-full ${
                                                     s.whatsapp_status.status === 'sent' ? 'bg-green-100 text-green-800' :
                                                     s.whatsapp_status.status === 'pending' || s.whatsapp_status.status === 'processing' ? 'bg-yellow-100 text-yellow-800' :
                                                     'bg-red-100 text-red-800'
                                                 }`} title={s.whatsapp_status.error_message || ''}>
-                                                    {s.whatsapp_status.status === 'sent' ? 'Terkirim' : 
-                                                     s.whatsapp_status.status === 'pending' ? 'Antrean' :
-                                                     s.whatsapp_status.status === 'processing' ? 'Proses' : 'Gagal'}
+                                                    {s.whatsapp_status.status === 'sent' ? 'OK' : 
+                                                     s.whatsapp_status.status === 'pending' ? 'ANT' :
+                                                     s.whatsapp_status.status === 'processing' ? 'PRO' : 'ERR'}
                                                 </span>
                                             ) : (
                                                 <span className="text-gray-400 text-xs">-</span>
                                             )}
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <div className="flex gap-2">
-                                                <button onClick={() => handleOpenInput(s, 'quran')} className="text-indigo-600 hover:text-indigo-900 bg-indigo-50 px-2 py-1 rounded">Quran</button>
-                                                <button onClick={() => handleOpenInput(s, 'wawancara_santri')} className="text-blue-600 hover:text-blue-900 bg-blue-50 px-2 py-1 rounded">Wawancara</button>
+                                        <td className="px-3 md:px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <div className="flex gap-1">
+                                                <button onClick={() => handleOpenInput(s, 'quran')} className="text-indigo-600 hover:text-indigo-900 bg-indigo-50 px-2 py-1 rounded text-[10px]">Quran</button>
+                                                <button onClick={() => handleOpenInput(s, 'wawancara_santri')} className="text-blue-600 hover:text-blue-900 bg-blue-50 px-2 py-1 rounded text-[10px]">Waw.</button>
                                             </div>
                                         </td>
                                     </tr>

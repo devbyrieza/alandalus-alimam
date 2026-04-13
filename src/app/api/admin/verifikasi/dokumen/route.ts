@@ -133,6 +133,7 @@ export async function PATCH(request: NextRequest) {
             id: true,
             nama_lengkap: true,
             no_hp: true,
+            status_pendaftaran: true,
           },
         },
       },
@@ -181,9 +182,9 @@ export async function PATCH(request: NextRequest) {
                   docListStr = rejectedDocs.map(d => `• ${d.jenis_dokumen}`).join("\n");
                 }
 
-                await notifyDocumentVerified({
-                  phone: dokumen.pendaftar.no_hp,
-                  nama: dokumen.pendaftar.nama_lengkap,
+                  await notifyDocumentVerified({
+                    phone: dokumen.pendaftar.no_hp!,
+                    nama: dokumen.pendaftar.nama_lengkap,
                   dokumen_list: docListStr,
                   status: isAllVerifiedAndComplete ? "verified" : "rejected",
                   catatan: isAllVerifiedAndComplete ? undefined : "Terdapat dokumen yang perlu diperbaiki. Silakan cek dashboard.",
@@ -225,10 +226,12 @@ export async function PATCH(request: NextRequest) {
 
           // --- AUTOMATED NOTIFICATION LOGIC ---
           try {
-            // New Guard: Only notify if they have exactly ZERO existing schedules (past or future)
-            // GUARD: Only notify if they have exactly ZERO existing schedules
-            // EXTRA GUARD: Only notify if status is 'paid' or 'docs_verified'
-            const isEligibleForNotif = ['paid', 'docs_verified'].includes(pendaftar.status_pendaftaran);
+            const existingSchedulesCount = await prisma.jadwalUjian.count({
+              where: { pendaftar_id: dokumen.pendaftar_id }
+            });
+
+            // EXTRA GUARD: Only notify if status is 'paid', 'docs_verified', or 'docs_uploaded' (the pre-transition state)
+            const isEligibleForNotif = ['paid', 'docs_verified', 'docs_uploaded'].includes(dokumen.pendaftar.status_pendaftaran);
 
             if (existingSchedulesCount === 0 && isEligibleForNotif) {
               // Check available slots
@@ -244,7 +247,7 @@ export async function PATCH(request: NextRequest) {
                   // Skenario A: Jadwal Langsung Tersedia
                   await enqueueWhatsapp({
                     pendaftarId: dokumen.pendaftar_id,
-                    phone: dokumen.pendaftar.no_hp,
+                    phone: dokumen.pendaftar.no_hp!,
                     jenisNotif: "jadwal_langsung_tersedia",
                     messageContent: buildMessageJadwalLangsungTersedia(dokumen.pendaftar.nama_lengkap),
                   });
@@ -257,7 +260,7 @@ export async function PATCH(request: NextRequest) {
                   // Skenario B: Jadwal Belum Ada (Tapi Verifikasi Berhasil)
                   await enqueueWhatsapp({
                     pendaftarId: dokumen.pendaftar_id,
-                    phone: dokumen.pendaftar.no_hp,
+                    phone: dokumen.pendaftar.no_hp!,
                     jenisNotif: "jadwal_belum",
                     messageContent: buildMessageJadwalBelum(dokumen.pendaftar.nama_lengkap),
                   });
