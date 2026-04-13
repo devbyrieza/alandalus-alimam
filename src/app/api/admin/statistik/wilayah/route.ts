@@ -94,12 +94,6 @@ export async function GET(req: NextRequest) {
             santri: santriData,
             wali: formattedWaliData,
         });
-
-        return NextResponse.json({
-            success: true,
-            santri: santriData,
-            wali: waliData,
-        });
     } catch (error: any) {
         console.error("Statistik error:", error);
         return NextResponse.json({ error: error.message }, { status: 500 });
