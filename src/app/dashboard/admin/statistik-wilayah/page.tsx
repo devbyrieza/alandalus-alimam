@@ -107,7 +107,7 @@ export default function StatistikWilayahPage() {
                         }`}
                 >
                     <Users className="w-4 h-4" />
-                    Sebaran Wali
+                    Sebaran Orang Tua / Wali
                 </button>
             </div>
 

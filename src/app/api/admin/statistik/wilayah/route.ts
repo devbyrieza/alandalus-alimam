@@ -20,25 +20,51 @@ export async function GET(req: NextRequest) {
             },
         });
 
-        // Aggregate Wali by Region
-        const waliRaw = await prisma.orangTua.groupBy({
-            by: ["provinsi_wali", "kabupaten_wali"],
-            _count: {
-                id: true,
-            },
-            where: {
-                provinsi_wali: { not: null },
-            },
+        // Aggregate Wali/OrangTua by Region
+        // We fetch all parents and join with pendaftar to get fallback address
+        const allFamilyData = await prisma.orangTua.findMany({
+            include: {
+                pendaftar: {
+                    select: {
+                        provinsi: true,
+                        kabupaten: true
+                    }
+                }
+            }
         });
 
-        // Aggregate Schools by Region (Schools are in Pendaftar.provinsi_sekolah/kabupaten_sekolah?)
-        // Wait, let me check Pendaftar model again.
-        // [Pendaftar model only has asal_sekolah, npsn, alamat_sekolah]
-        // It doesn't have explicit school region fields yet. 
-        // Usually school region is same as student or extracted from alamat_sekolah.
-        // For now, I'll aggregate Santri and Wali.
+        const waliGroups: any = {};
+        allFamilyData.forEach((ot) => {
+            // Priority: Wali Address > Pendaftar Address (Fallback)
+            const prov = ot.provinsi_wali || ot.pendaftar?.provinsi || "Lainnya";
+            const kab = ot.kabupaten_wali || ot.pendaftar?.kabupaten || "Lainnya";
+            
+            if (prov === "Lainnya" && kab === "Lainnya") return;
 
-        const formatData = (raw: any[], provField: string, kabField: string) => {
+            if (!waliGroups[prov]) {
+                waliGroups[prov] = {
+                    total: 0,
+                    cities: {} as Record<string, number>,
+                };
+            }
+
+            waliGroups[prov].total += 1;
+            waliGroups[prov].cities[kab] = (waliGroups[prov].cities[kab] || 0) + 1;
+        });
+
+        // Format waliGroups to match the expected format
+        const formattedWaliData: any = {};
+        Object.keys(waliGroups).forEach(prov => {
+            formattedWaliData[prov] = {
+                total: waliGroups[prov].total,
+                cities: Object.entries(waliGroups[prov].cities).map(([name, count]) => ({
+                    name,
+                    count
+                }))
+            };
+        });
+
+        const formatSantriData = (raw: any[], provField: string, kabField: string) => {
             const grouped: any = {};
             raw.forEach((item) => {
                 const prov = item[provField] || "Lainnya";
@@ -61,8 +87,13 @@ export async function GET(req: NextRequest) {
             return grouped;
         };
 
-        const santriData = formatData(santriRaw, "provinsi", "kabupaten");
-        const waliData = formatData(waliRaw, "provinsi_wali", "kabupaten_wali");
+        const santriData = formatSantriData(santriRaw, "provinsi", "kabupaten");
+
+        return NextResponse.json({
+            success: true,
+            santri: santriData,
+            wali: formattedWaliData,
+        });
 
         return NextResponse.json({
             success: true,
