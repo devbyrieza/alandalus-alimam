@@ -181,8 +181,8 @@ export default function AdminDashboardPage() {
         <div className="space-y-6">
           <div className="bg-brand-blue-900 rounded-4xl p-10 text-white relative overflow-hidden app-card shadow-2xl">
             <BarChart3 className="w-12 h-12 text-brand-yellow-400 mb-8" />
-            <h4 className="text-2xl font-black mb-4 font-display leading-tight">Laporan Excel</h4>
-            <p className="text-brand-blue-100 font-bold mb-8 opacity-80">Unduh data pendaftaran terbaru untuk keperluan rapat panitia.</p>
+            <h4 className="text-2xl font-black mb-4 font-display leading-tight text-white">Laporan Excel</h4>
+            <p className="text-brand-blue-100 font-bold mb-8 opacity-100">Unduh data pendaftaran terbaru untuk keperluan rapat panitia.</p>
             <button className="w-full bg-white text-brand-blue-900 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-brand-yellow-300 transition-all shadow-xl">
               Export Database
             </button>
