@@ -431,8 +431,8 @@ export default function JadwalPengujiPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white rounded-3xl p-6 md:p-8 border border-cream-200 shadow-sm app-card">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="bg-white rounded-3xl p-5 md:p-8 border border-cream-200 shadow-sm app-card">
+        <div className="flex flex-col gap-4">
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 bg-maroon-50 rounded-2xl flex items-center justify-center border border-maroon-100 shrink-0">
               <Calendar className="w-7 h-7 text-maroon-600" />
@@ -446,18 +446,18 @@ export default function JadwalPengujiPage() {
               </p>
             </div>
           </div>
-          <div className="flex bg-cream-50 p-1.5 rounded-2xl border border-cream-200">
+          <div className="flex bg-cream-50 p-1.5 rounded-2xl border border-cream-200 w-full">
             <button
               onClick={() => setActiveTab('assigned')}
-              className={`flex-1 px-5 py-2.5 rounded-xl font-black text-sm transition-all text-center ${activeTab === 'assigned' ? 'bg-white shadow-sm text-maroon-700 border border-cream-100' : 'text-ink-400 hover:text-ink-700 hover:bg-cream-100/50'}`}
+              className={`flex-1 py-3 px-3 rounded-xl font-black text-xs md:text-sm transition-all text-center ${activeTab === 'assigned' ? 'bg-white shadow-sm text-maroon-700 border border-cream-100' : 'text-ink-400 hover:text-ink-700 hover:bg-cream-100/50'}`}
             >
               Jadwal Saya
             </button>
             <button
               onClick={() => setActiveTab('slots')}
-              className={`flex-1 px-5 py-2.5 rounded-xl font-black text-sm transition-all text-center ${activeTab === 'slots' ? 'bg-white shadow-sm text-maroon-700 border border-cream-100' : 'text-ink-400 hover:text-ink-700 hover:bg-cream-100/50'}`}
+              className={`flex-1 py-3 px-3 rounded-xl font-black text-xs md:text-sm transition-all text-center ${activeTab === 'slots' ? 'bg-white shadow-sm text-maroon-700 border border-cream-100' : 'text-ink-400 hover:text-ink-700 hover:bg-cream-100/50'}`}
             >
-              Kelola Sesi Ketersediaan
+              Sesi Ketersediaan
             </button>
           </div>
         </div>
@@ -508,136 +508,119 @@ export default function JadwalPengujiPage() {
             }
 
             return (
-              <div className="grid gap-5">
+              <div className="grid gap-4">
                 {filteredAssignments.map(item => (
-                  <div key={item.id} className={`bg-white rounded-3xl p-6 md:p-8 border transition-all app-card ${isToday(item.tanggal_ujian) ? "border-emerald-200 shadow-md ring-4 ring-emerald-50" : "border-cream-200 shadow-sm hover:border-maroon-200 hover:shadow-md"}`}>
-                    <div className="flex md:items-center justify-between flex-col md:flex-row gap-6">
-                      <div className="flex items-start gap-5">
-                        <div className={`p-3 rounded-2xl font-bold text-center min-w-[80px] shrink-0 border flex flex-col justify-center ${isToday(item.tanggal_ujian) ? 'bg-emerald-50 border-emerald-100 text-emerald-700' : 'bg-maroon-50 border-maroon-100 text-maroon-700'}`}>
-                          <div className="text-[10px] uppercase tracking-widest opacity-70 mb-0.5">
-                            {new Date(item.tanggal_ujian).toLocaleDateString('id-ID', { weekday: 'short' }).replace('Min', 'Ahd')}
-                          </div>
-                          <div className="text-2xl font-display leading-none">{new Date(item.tanggal_ujian).getDate()}</div>
-                          <div className="text-[10px] uppercase tracking-wider mt-1 opacity-70">
-                            {new Date(item.tanggal_ujian).toLocaleDateString('id-ID', { month: 'short' })}
-                          </div>
+                  <div key={item.id} className={`bg-white rounded-3xl p-5 md:p-8 border transition-all app-card ${isToday(item.tanggal_ujian) ? "border-emerald-200 shadow-md ring-4 ring-emerald-50" : "border-cream-200 shadow-sm hover:border-maroon-200 hover:shadow-md"}`}>
+                    {/* Top section: Date badge + Name */}
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className={`p-3 rounded-2xl font-bold text-center min-w-[72px] shrink-0 border flex flex-col justify-center ${isToday(item.tanggal_ujian) ? 'bg-emerald-50 border-emerald-100 text-emerald-700' : 'bg-maroon-50 border-maroon-100 text-maroon-700'}`}>
+                        <div className="text-[9px] uppercase tracking-widest opacity-70 mb-0.5">
+                          {new Date(item.tanggal_ujian).toLocaleDateString('id-ID', { weekday: 'short' }).replace('Min', 'Ahd')}
                         </div>
-                        <div>
-                          <div className="flex flex-wrap items-center gap-2 mb-2">
-                            <span className="px-2.5 py-1 bg-surface-100 text-ink-600 border border-surface-200 rounded-lg text-[10px] font-black uppercase tracking-widest">{item.pendaftar.jenjang}</span>
-                            <span className="px-2.5 py-1 bg-maroon-50 text-maroon-700 border border-maroon-100 rounded-lg text-[10px] font-black uppercase tracking-widest flex items-center gap-1.5"><Hash className="w-3 h-3" /> {item.pendaftar.nomor_pendaftaran}</span>
-                          </div>
-                          <h3 className="text-xl font-black text-ink-950 font-display">{item.pendaftar.nama_lengkap}</h3>
-                          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-sm text-ink-500 mt-1.5 font-bold">
-                            <div className="flex items-center gap-1.5">
-                              <FileText className="w-4 h-4 text-ink-400" />
-                              Tugas:
-                            </div>
-                            <span className="text-maroon-700 uppercase tracking-wide text-xs">{item.jenis_tugas}</span>
-                          </div>
-
-                          {/* Action Buttons: Status Completion */}
-                          {(() => {
-                            // Determine which roles this penguji has for this jadwal
-                            const isSantri = item.penguji_santri_id === userId;
-                            const isQuran = item.penguji_quran_id === userId;
-                            const isOrtu = item.penguji_ortu_id === userId;
-                            const isCreator = item.session_created_by === userId;
-
-                            // Fallback: if matched via session creator, derive from jenis_tugas
-                            let showSantri = isSantri;
-                            let showQuran = isQuran;
-                            let showOrtu = isOrtu;
-                            if (!isSantri && !isQuran && !isOrtu && isCreator) {
-                              const tugas = (item.jenis_tugas || "").toLowerCase();
-                              if (tugas.includes("calsan") || tugas.includes("santri")) showSantri = true;
-                              if (tugas.includes("qur")) showQuran = true;
-                              if (tugas.includes("cawalsan") || tugas.includes("ortu")) showOrtu = true;
-                            }
-
-                            return (
-                              <div className="mt-3 flex flex-wrap gap-2">
-                                {userId && showSantri && (
-                                  item.status_santri === 'completed' ? (
-                                    <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
-                                      <CheckCircle className="w-3 h-3" /> Wawancara Calsan Selesai
-                                    </span>
-                                  ) : (
-                                    <button
-                                      onClick={() => handleCompleteExam(item.id)}
-                                      className="px-3 py-1 bg-maroon-600 hover:bg-maroon-700 text-white text-xs font-bold rounded-lg transition-colors"
-                                    >
-                                      Tandai Wawancara Selesai
-                                    </button>
-                                  )
-                                )}
-
-                                {userId && showQuran && (
-                                  item.status_quran === 'completed' ? (
-                                    <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
-                                      <CheckCircle className="w-3 h-3" /> Tes Al-Qur'an Selesai
-                                    </span>
-                                  ) : (
-                                    <button
-                                      onClick={() => handleCompleteExam(item.id)}
-                                      className="px-3 py-1 bg-maroon-600 hover:bg-maroon-700 text-white text-xs font-bold rounded-lg transition-colors"
-                                    >
-                                      Tandai Tes Al-Qur'an Selesai
-                                    </button>
-                                  )
-                                )}
-
-                                {userId && showOrtu && (
-                                  item.status_ortu === 'completed' ? (
-                                    <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
-                                      <CheckCircle className="w-3 h-3" /> Wawancara Cawalsan Selesai
-                                    </span>
-                                  ) : (
-                                    <button
-                                      onClick={() => handleCompleteExam(item.id)}
-                                      className="px-3 py-1 bg-maroon-600 hover:bg-maroon-700 text-white text-xs font-bold rounded-lg transition-colors"
-                                    >
-                                      Tandai Wawancara Cawalsan Selesai
-                                    </button>
-                                  )
-                                )}
-                              </div>
-                            );
-                          })()}
-
-                          <button
-                            onClick={() => {
-                              setSelectedPendaftar(item.pendaftar);
-                              setIsDetailModalOpen(true);
-                            }}
-                            className="mt-2 text-xs font-bold text-maroon-600 hover:text-maroon-800 underline"
-                          >
-                            Lihat Data Pendaftar
-                          </button>
+                        <div className="text-2xl font-display leading-none">{new Date(item.tanggal_ujian).getDate()}</div>
+                        <div className="text-[9px] uppercase tracking-wider mt-1 opacity-70">
+                          {new Date(item.tanggal_ujian).toLocaleDateString('id-ID', { month: 'short' })}
                         </div>
                       </div>
-                      <div className="flex flex-col gap-3">
-                        <div className="flex flex-col gap-2 min-w-[200px] border-l pl-0 md:pl-6 border-cream-100">
-                          <div className="flex items-center gap-2 text-sm text-ink-600">
-                            <Clock className="w-4 h-4 text-maroon-500" />
-                            {formatTime(item.waktu_mulai)} WIB
-                          </div>
-                          <div className="flex items-center gap-2 text-sm text-ink-600">
-                            <MapPin className="w-4 h-4 text-maroon-500" />
-                            {item.lokasi || "Lokasi belum ditentukan"}
-                          </div>
-                          {item.session_title && (
-                            <div className="text-xs text-ink-400 mt-1">Sesi: {item.session_title}</div>
-                          )}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                          <span className="px-2 py-0.5 bg-surface-100 text-ink-600 border border-surface-200 rounded-lg text-[10px] font-black uppercase tracking-widest">{item.pendaftar.jenjang}</span>
+                          <span className="px-2 py-0.5 bg-maroon-50 text-maroon-700 border border-maroon-100 rounded-lg text-[10px] font-black uppercase tracking-widest flex items-center gap-1"><Hash className="w-3 h-3" /> {item.pendaftar.nomor_pendaftaran}</span>
                         </div>
-                        <button
-                          onClick={() => handleCancelAssignment(item.id, item.pendaftar.nama_lengkap)}
-                          className="w-full py-2 border border-red-200 text-red-600 hover:bg-red-50 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2"
-                        >
-                          <Trash2 className="w-4 h-4" /> Batalkan Jadwal
-                        </button>
+                        <h3 className="text-base md:text-xl font-black text-ink-950 font-display leading-tight">{item.pendaftar.nama_lengkap}</h3>
+                        <div className="flex items-center gap-1.5 text-xs text-ink-500 mt-1 font-bold">
+                          <FileText className="w-3.5 h-3.5 text-ink-400 shrink-0" />
+                          <span className="text-maroon-700 uppercase tracking-wide">{item.jenis_tugas}</span>
+                        </div>
                       </div>
                     </div>
+
+                    {/* Time & Location Row */}
+                    <div className="flex flex-wrap items-center gap-3 mb-4 px-1 py-3 bg-cream-50 rounded-2xl border border-cream-100">
+                      <div className="flex items-center gap-2 text-sm text-ink-600 font-bold">
+                        <Clock className="w-4 h-4 text-maroon-500 shrink-0" />
+                        {formatTime(item.waktu_mulai)} WIB
+                      </div>
+                      <div className="w-px h-4 bg-cream-200" />
+                      <div className="flex items-center gap-2 text-sm text-ink-600 font-bold">
+                        <MapPin className="w-4 h-4 text-maroon-500 shrink-0" />
+                        {item.lokasi || "Lokasi belum ditentukan"}
+                      </div>
+                      {item.session_title && (
+                        <span className="text-xs text-ink-400 ml-auto">Sesi: {item.session_title}</span>
+                      )}
+                    </div>
+
+                    {/* Action Buttons: Status Completion */}
+                    {(() => {
+                      const isSantri = item.penguji_santri_id === userId;
+                      const isQuran = item.penguji_quran_id === userId;
+                      const isOrtu = item.penguji_ortu_id === userId;
+                      const isCreator = item.session_created_by === userId;
+
+                      let showSantri = isSantri;
+                      let showQuran = isQuran;
+                      let showOrtu = isOrtu;
+                      if (!isSantri && !isQuran && !isOrtu && isCreator) {
+                        const tugas = (item.jenis_tugas || "").toLowerCase();
+                        if (tugas.includes("calsan") || tugas.includes("santri")) showSantri = true;
+                        if (tugas.includes("qur")) showQuran = true;
+                        if (tugas.includes("cawalsan") || tugas.includes("ortu")) showOrtu = true;
+                      }
+
+                      return (
+                        <div className="flex flex-col gap-2">
+                          {userId && showSantri && (
+                            item.status_santri === 'completed' ? (
+                              <div className="flex items-center gap-2 px-4 py-3 bg-green-50 text-green-700 rounded-2xl text-sm font-bold border border-green-100">
+                                <CheckCircle className="w-4 h-4" /> Wawancara Calsan Selesai
+                              </div>
+                            ) : (
+                              <button onClick={() => handleCompleteExam(item.id)} className="w-full py-3.5 bg-maroon-600 hover:bg-maroon-700 text-white text-sm font-black rounded-2xl transition-colors active:scale-95">
+                                ✓ Tandai Wawancara Selesai
+                              </button>
+                            )
+                          )}
+                          {userId && showQuran && (
+                            item.status_quran === 'completed' ? (
+                              <div className="flex items-center gap-2 px-4 py-3 bg-green-50 text-green-700 rounded-2xl text-sm font-bold border border-green-100">
+                                <CheckCircle className="w-4 h-4" /> Tes Al-Qur'an Selesai
+                              </div>
+                            ) : (
+                              <button onClick={() => handleCompleteExam(item.id)} className="w-full py-3.5 bg-maroon-600 hover:bg-maroon-700 text-white text-sm font-black rounded-2xl transition-colors active:scale-95">
+                                ✓ Tandai Tes Al-Qur'an Selesai
+                              </button>
+                            )
+                          )}
+                          {userId && showOrtu && (
+                            item.status_ortu === 'completed' ? (
+                              <div className="flex items-center gap-2 px-4 py-3 bg-green-50 text-green-700 rounded-2xl text-sm font-bold border border-green-100">
+                                <CheckCircle className="w-4 h-4" /> Wawancara Cawalsan Selesai
+                              </div>
+                            ) : (
+                              <button onClick={() => handleCompleteExam(item.id)} className="w-full py-3.5 bg-maroon-600 hover:bg-maroon-700 text-white text-sm font-black rounded-2xl transition-colors active:scale-95">
+                                ✓ Tandai Wawancara Cawalsan Selesai
+                              </button>
+                            )
+                          )}
+                          {/* Bottom row: Lihat Data + Batalkan */}
+                          <div className="flex gap-2 mt-1">
+                            <button
+                              onClick={() => { setSelectedPendaftar(item.pendaftar); setIsDetailModalOpen(true); }}
+                              className="flex-1 py-3 border border-cream-200 text-ink-600 hover:bg-cream-50 rounded-2xl text-xs font-bold transition-all flex items-center justify-center gap-2 active:scale-95"
+                            >
+                              <FileText className="w-3.5 h-3.5" /> Lihat Data
+                            </button>
+                            <button
+                              onClick={() => handleCancelAssignment(item.id, item.pendaftar.nama_lengkap)}
+                              className="flex-1 py-3 border border-red-200 text-red-600 hover:bg-red-50 rounded-2xl text-xs font-bold transition-all flex items-center justify-center gap-2 active:scale-95"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" /> Batalkan
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })()}
                   </div>
                 ))}
               </div>
@@ -649,24 +632,26 @@ export default function JadwalPengujiPage() {
       {/* TAB CONTENT: SLOTS */}
       {activeTab === 'slots' && (
         <>
-          <div className="flex justify-between items-center bg-white p-4 rounded-xl border border-cream-200">
-            <div>
-              <h3 className="font-bold text-ink-950">Sesi Ketersediaan Anda</h3>
-              <p className="text-sm text-cream-500">Buat sesi waktu dimana Anda bersedia menguji.</p>
-            </div>
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => setIsBulkModalOpen(true)}
-                className="flex items-center gap-2 px-4 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-lg font-bold border border-indigo-200 transition-all"
-              >
-                <Plus className="w-4 h-4" /> Buat Massal
-              </button>
-              <button
-                onClick={() => setIsSlotModalOpen(true)}
-                className="flex items-center gap-2 px-4 py-2 bg-maroon-600 hover:bg-maroon-700 text-white rounded-lg font-bold shadow-lg shadow-maroon-200 transition-all"
-              >
-                <Plus className="w-4 h-4" /> Buat Sesi
-              </button>
+          <div className="bg-white p-5 md:p-6 rounded-2xl border border-cream-200 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div>
+                <h3 className="font-bold text-ink-950">Sesi Ketersediaan Anda</h3>
+                <p className="text-xs text-cream-500 mt-0.5">Buat sesi waktu dimana Anda bersedia menguji.</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setIsBulkModalOpen(true)}
+                  className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-2xl font-bold border border-indigo-200 transition-all text-sm active:scale-95"
+                >
+                  <Plus className="w-4 h-4" /> Buat Massal
+                </button>
+                <button
+                  onClick={() => setIsSlotModalOpen(true)}
+                  className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-3 bg-maroon-600 hover:bg-maroon-700 text-white rounded-2xl font-bold shadow-lg shadow-maroon-200 transition-all text-sm active:scale-95"
+                >
+                  <Plus className="w-4 h-4" /> Buat Sesi
+                </button>
+              </div>
             </div>
           </div>
 

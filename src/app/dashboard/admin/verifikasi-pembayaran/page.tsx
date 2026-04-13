@@ -222,87 +222,84 @@ export default function VerifikasiPembayaranPage() {
         accept="image/jpeg, image/png, application/pdf"
       />
       {/* Header */}
-      <div className="bg-white rounded-[2rem] shadow-sm p-8 border border-stone-100">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-5">
-            <div className="w-16 h-16 bg-brand-blue-50 rounded-2xl flex items-center justify-center border border-brand-blue-100">
-              <CreditCard className="w-8 h-8 text-brand-blue-700" />
+      <div className="bg-white rounded-[2rem] shadow-sm p-5 md:p-8 border border-stone-100">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 md:w-16 md:h-16 bg-brand-blue-50 rounded-2xl flex items-center justify-center border border-brand-blue-100 shrink-0">
+              <CreditCard className="w-6 h-6 md:w-8 md:h-8 text-brand-blue-700" />
             </div>
             <div>
-              <h2 className="text-3xl font-black text-brand-blue-950 tracking-tight mb-1">
+              <h2 className="text-xl md:text-3xl font-black text-brand-blue-950 tracking-tight mb-0.5">
                 Verifikasi Pembayaran
               </h2>
-              <p className="text-stone-500 font-medium">
+              <p className="text-stone-500 font-medium text-sm">
                 Kelola dan verifikasi bukti pembayaran pendaftar
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => handleExport("excel")}
-                disabled={exporting}
-                className="flex items-center gap-2 px-4 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold transition-all shadow-sm hover:shadow-md disabled:opacity-50"
-                title="Download Excel"
-              >
-                {exporting ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
-                  <FileSpreadsheet className="w-4 h-4" />
-                )}
-                Excel
-              </button>
-              <button
-                onClick={() => handleExport("pdf")}
-                disabled={exporting}
-                className="flex items-center gap-2 px-4 py-3 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-bold transition-all shadow-sm hover:shadow-md disabled:opacity-50"
-                title="Download PDF"
-              >
-                {exporting ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
-                  <FileText className="w-4 h-4" />
-                )}
-                PDF
-              </button>
-            </div>
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <button
+              onClick={() => handleExport("excel")}
+              disabled={exporting}
+              className="flex items-center gap-2 px-3 md:px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold transition-all shadow-sm hover:shadow-md disabled:opacity-50 text-sm"
+              title="Download Excel"
+            >
+              {exporting ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <FileSpreadsheet className="w-4 h-4" />
+              )}
+              <span className="hidden sm:inline">Excel</span>
+            </button>
+            <button
+              onClick={() => handleExport("pdf")}
+              disabled={exporting}
+              className="flex items-center gap-2 px-3 md:px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-bold transition-all shadow-sm hover:shadow-md disabled:opacity-50 text-sm"
+              title="Download PDF"
+            >
+              {exporting ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <FileText className="w-4 h-4" />
+              )}
+              <span className="hidden sm:inline">PDF</span>
+            </button>
             <button
               onClick={fetchPembayaran}
-              className="flex items-center gap-2 px-6 py-3 bg-white hover:bg-stone-50 border border-stone-200 text-stone-700 rounded-xl font-bold transition-all shadow-sm hover:shadow-md"
+              className="flex items-center gap-2 px-3 md:px-6 py-2.5 bg-white hover:bg-stone-50 border border-stone-200 text-stone-700 rounded-xl font-bold transition-all shadow-sm hover:shadow-md text-sm"
             >
               <RefreshCw className="w-4 h-4" />
-              Refresh Data
+              <span className="hidden sm:inline">Refresh</span>
             </button>
           </div>
         </div>
 
         {/* Stats / Filter Bar */}
-        <div className="mt-8 flex items-center gap-4 border-t border-stone-100 pt-6">
+        <div className="mt-5 md:mt-8 flex flex-wrap items-center gap-3 border-t border-stone-100 pt-5 md:pt-6">
           <div className="px-4 py-2 bg-stone-100 rounded-lg text-sm font-bold text-stone-600">
             Total: {pembayaran.length}
           </div>
 
-          <div className="h-8 w-px bg-stone-200 mx-2"></div>
+          <div className="h-8 w-px bg-stone-200 mx-1 hidden sm:block"></div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <Filter className="w-4 h-4 text-stone-400" />
-            <span className="text-sm font-bold text-stone-500">Filter:</span>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setStatusFilter("pending")}
-                className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${statusFilter === "pending" ? "bg-amber-100 text-amber-700 ring-2 ring-amber-500/20" : "hover:bg-stone-50 text-stone-500"}`}
+                className={`px-3 md:px-4 py-2 rounded-lg text-sm font-bold transition-all ${statusFilter === "pending" ? "bg-amber-100 text-amber-700 ring-2 ring-amber-500/20" : "hover:bg-stone-50 text-stone-500"}`}
               >
                 Pending
               </button>
               <button
                 onClick={() => setStatusFilter("verified")}
-                className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${statusFilter === "verified" ? "bg-emerald-100 text-emerald-700 ring-2 ring-emerald-500/20" : "hover:bg-stone-50 text-stone-500"}`}
+                className={`px-3 md:px-4 py-2 rounded-lg text-sm font-bold transition-all ${statusFilter === "verified" ? "bg-emerald-100 text-emerald-700 ring-2 ring-emerald-500/20" : "hover:bg-stone-50 text-stone-500"}`}
               >
                 Terverifikasi
               </button>
               <button
                 onClick={() => setStatusFilter("rejected")}
-                className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${statusFilter === "rejected" ? "bg-red-100 text-red-700 ring-2 ring-red-500/20" : "hover:bg-stone-50 text-stone-500"}`}
+                className={`px-3 md:px-4 py-2 rounded-lg text-sm font-bold transition-all ${statusFilter === "rejected" ? "bg-red-100 text-red-700 ring-2 ring-red-500/20" : "hover:bg-stone-50 text-stone-500"}`}
               >
                 Ditolak
               </button>
