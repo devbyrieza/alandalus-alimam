@@ -277,7 +277,8 @@ export default function RecapFeePage() {
                     </div>
                 </div>
 
-                <div className="overflow-x-auto">
+                {/* Desktop Table */}
+                <div className="hidden md:block overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                         <thead>
                             <tr className="bg-ink-50/50">
@@ -361,6 +362,62 @@ export default function RecapFeePage() {
                             </tfoot>
                         )}
                     </table>
+                </div>
+
+                {/* Mobile Card List View */}
+                <div className="md:hidden divide-y divide-ink-50">
+                    {loading ? (
+                        <div className="py-20 text-center">
+                            <Loader2 className="w-8 h-8 animate-spin text-brand-blue-600 mx-auto mb-2" />
+                            <p className="text-sm font-black text-ink-400 italic">Menganalisis...</p>
+                        </div>
+                    ) : filteredRecap.length === 0 ? (
+                        <div className="py-20 text-center">
+                            <Users className="w-12 h-12 text-ink-100 mx-auto mb-2" />
+                            <p className="text-sm font-bold text-ink-400">Data Kosong</p>
+                        </div>
+                    ) : (
+                        filteredRecap.map(item => (
+                            <div key={item.id} className="p-4 bg-white hover:bg-brand-blue-50/10 transition-colors">
+                                <div className="flex items-center gap-3 mb-4">
+                                    <div className="w-10 h-10 rounded-xl bg-brand-yellow-100 flex items-center justify-center text-brand-blue-900 font-black border border-brand-yellow-200">
+                                        {item.name.charAt(0)}
+                                    </div>
+                                    <div className="flex-1">
+                                        <p className="text-sm font-black text-ink-900 uppercase">{item.name}</p>
+                                        <p className="text-[10px] font-bold text-ink-400 uppercase tracking-wider">{item.role.replace('_', ' ')}</p>
+                                    </div>
+                                    <div className="text-right">
+                                        <p className="text-base font-black text-brand-blue-700 leading-none">{formatCurrency(calculateTotalFee(item))}</p>
+                                        <p className="text-[9px] font-black text-emerald-600 uppercase mt-1">Estimasi Honor</p>
+                                    </div>
+                                </div>
+                                
+                                <div className="grid grid-cols-3 gap-2 bg-ink-50/50 p-2 rounded-xl">
+                                    <div className="text-center">
+                                        <p className="text-xs font-black text-ink-900">{item.counts.quran}</p>
+                                        <p className="text-[8px] font-bold text-ink-400 uppercase">Quran</p>
+                                    </div>
+                                    <div className="text-center border-x border-ink-100">
+                                        <p className="text-xs font-black text-ink-900">{item.counts.santri}</p>
+                                        <p className="text-[8px] font-bold text-ink-400 uppercase">W. Santri</p>
+                                    </div>
+                                    <div className="text-center">
+                                        <p className="text-xs font-black text-ink-900">{item.counts.ortu}</p>
+                                        <p className="text-[8px] font-bold text-ink-400 uppercase">W. Ortu</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    )}
+                    {!loading && filteredRecap.length > 0 && (
+                        <div className="p-4 bg-ink-900 text-white rounded-b-[2.5rem]">
+                            <div className="flex justify-between items-center">
+                                <span className="text-xs font-black uppercase opacity-60">Total Estimasi Keseluruhan</span>
+                                <span className="text-lg font-black text-brand-yellow-400">{formatCurrency(totals.grandTotalFee)}</span>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
 

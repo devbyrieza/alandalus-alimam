@@ -120,41 +120,45 @@ export default function AdminSidebar({ children, userRole, adminName, userId, av
 
     return (
         <div className="min-h-screen font-sans bg-brand-yellow-50/30">
-            {/* Mobile Header (Glass) */}
-            <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-md border-b border-white/20 shadow-sm px-4 py-3 flex items-center justify-between">
+            {/* Mobile Header (Premium Glass) */}
+            <div className="lg:hidden fixed top-0 left-0 right-0 z-[60] bg-white/80 backdrop-blur-xl border-b border-white/20 shadow-sm px-5 py-4 flex items-center justify-between">
                 <button
                     onClick={() => setSidebarOpen(true)}
-                    className="p-2 -ml-2 rounded-xl text-ink-600 hover:bg-brand-yellow-100"
+                    className="p-2.5 -ml-2 rounded-2xl text-ink-600 hover:bg-brand-yellow-100 active:scale-95 transition-all"
                 >
                     <Menu className="w-6 h-6" />
                 </button>
 
-                <span className="font-bold text-ink-900">{BRANDING.dashboardTitle}</span>
+                <div className="flex flex-col items-center">
+                    <span className="font-black text-brand-blue-900 tracking-tight leading-none text-base">{BRANDING.schoolShortName}</span>
+                    <span className="text-[9px] font-black text-brand-blue-600/60 uppercase tracking-widest mt-1">Admin Panel</span>
+                </div>
 
-                <div className="w-8 h-8 rounded-full bg-linear-to-br from-brand-blue-700 to-brand-blue-900 flex items-center justify-center text-white text-xs font-black shadow-md border border-brand-yellow-100">
+                <div className="w-9 h-9 rounded-2xl bg-linear-to-br from-brand-blue-700 to-brand-blue-900 flex items-center justify-center text-white text-sm font-black shadow-md border border-brand-yellow-100">
                     {adminName.charAt(0)}
                 </div>
             </div>
 
-            <div className="flex items-start">
-                {/* Desktop Sidebar (Glass Panel) */}
-                <aside className="hidden lg:flex lg:w-72 lg:flex-col lg:fixed lg:inset-y-0 z-50">
-                    <div className="flex flex-col h-full bg-white/70 backdrop-blur-xl border-r border-white/50 shadow-clay-lg">
-                        {/* Brand Area */}
-                        <div className="px-6 py-8 pb-4">
-                            <div className="flex items-center gap-3 mb-8">
-                                <div className="w-10 h-10 rounded-xl bg-linear-to-br from-brand-blue-700 to-brand-blue-900 flex items-center justify-center text-white shadow-xl shadow-brand-blue-900/20 ring-4 ring-brand-yellow-50/50">
-                                    <Shield className="w-5 h-5 text-brand-yellow-100" />
+            {/* Mobile Sidebar Overlay (Improved Accessibility) */}
+            <div className={`fixed inset-0 z-[70] lg:hidden transition-all duration-300 ${sidebarOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}>
+                <div 
+                    className="absolute inset-0 bg-ink-900/40 backdrop-blur-sm transition-opacity duration-300" 
+                    onClick={() => setSidebarOpen(false)} 
+                />
+                <aside className={`absolute top-0 left-0 bottom-0 w-80 max-w-[85%] bg-white shadow-2xl transition-transform duration-300 transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
+                    <div className="flex flex-col h-full bg-white">
+                        <div className="p-6 flex items-center justify-between border-b border-ink-50">
+                            <div className="flex items-center gap-3">
+                                <div className="w-9 h-9 rounded-xl bg-brand-blue-600 flex items-center justify-center text-white shadow-lg shadow-brand-blue-600/20">
+                                    <Shield className="w-4 h-4" />
                                 </div>
-                                <div>
-                                    <h1 className="font-black text-lg text-brand-blue-950 leading-tight">Panel <span className="text-brand-blue-700">Admin</span></h1>
-                                    <p className="text-[10px] text-ink-400 font-bold tracking-widest uppercase mt-0.5">{BRANDING.schoolShortName} PPDB</p>
-                                </div>
+                                <span className="font-black text-ink-900 uppercase tracking-tighter">Navigasi</span>
                             </div>
+                            <button onClick={() => setSidebarOpen(false)} className="p-2 bg-ink-50 rounded-xl text-ink-400 hover:text-ink-900 transition-colors">
+                                <X className="w-5 h-5" />
+                            </button>
                         </div>
-
-                        {/* Navigation */}
-                        <nav className="flex-1 overflow-y-auto px-4 space-y-0.5 scrollbar-hide py-2">
+                        <nav className="flex-1 overflow-y-auto p-4 space-y-0.5 custom-scrollbar">
                             {menuItems.map((item, idx) => {
                                 const prevItem = menuItems[idx - 1];
                                 const showGroupLabel = item.group && (!prevItem || prevItem.group !== item.group);
@@ -162,90 +166,25 @@ export default function AdminSidebar({ children, userRole, adminName, userId, av
                                 return (
                                     <div key={item.name}>
                                         {showGroupLabel && (
-                                            <p className="px-4 text-[9px] font-black text-ink-300 uppercase tracking-[0.2em] mb-2 mt-6">
+                                            <p className="px-4 text-[9px] font-black text-ink-300 uppercase tracking-[0.2em] mb-2 mt-6 leading-none">
                                                 {item.group}
                                             </p>
                                         )}
-                                        <NavLink item={item} />
+                                        <div onClick={() => setSidebarOpen(false)}>
+                                            <NavLink item={item} />
+                                        </div>
                                     </div>
                                 );
                             })}
                         </nav>
-
-                        {/* User Profile / Footer */}
-                        <div className="p-4 border-t border-ink-100/50 bg-white/50 backdrop-blur-sm">
-                            {availableRoles && availableRoles.length > 1 && (
-                                <div className="mb-3 px-2">
-                                    <label className="text-[10px] font-black text-ink-400 uppercase tracking-widest mb-1 shadow-xs block">Switch Role</label>
-                                    <select
-                                        value={userRole || ""}
-                                        onChange={handleRoleSwitch}
-                                        className="w-full bg-brand-yellow-100 border-none text-xs text-brand-blue-900 font-black rounded-lg py-1.5 focus:ring-2 focus:ring-brand-blue-600/20 cursor-pointer"
-                                    >
-                                        {availableRoles.map(role => (
-                                            <option key={role} value={role}>{ROLE_LABELS[role as UserRole] || role}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                            )}
-                            <div className="flex items-center gap-3 p-2.5 rounded-2xl hover:bg-white transition-all cursor-pointer group hover:shadow-clay-sm border border-transparent hover:border-brand-yellow-100">
-                                <div className="w-10 h-10 rounded-full bg-brand-yellow-100 flex items-center justify-center text-brand-blue-900 font-black group-hover:bg-brand-blue-50 group-hover:text-brand-blue-700 transition-colors border border-brand-yellow-200">
-                                    {adminName.charAt(0)}
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                    <p className="text-sm font-bold text-ink-900 truncate">{adminName}</p>
-                                    <p className="text-xs text-ink-500 truncate capitalize">
-                                        {userRole ? ROLE_LABELS[userRole] : ""}
-                                    </p>
-                                </div>
-                                <button onClick={handleLogout} className="p-2 text-ink-400 hover:text-red-600 transition-colors" title="Logout">
-                                    <LogOut className="w-4 h-4" />
-                                </button>
-                            </div>
+                        <div className="p-4 border-t border-ink-50 bg-ink-50/10">
+                            <button onClick={handleLogout} className="flex items-center gap-3 px-4 py-3.5 w-full rounded-2xl text-red-600 font-black text-sm hover:bg-red-50 transition-all border border-transparent hover:border-red-100 active:scale-95">
+                                <LogOut className="w-4 h-4" /> Sign Out
+                            </button>
                         </div>
                     </div>
                 </aside>
-
-                {/* Mobile Sidebar Overlay */}
-                <div className={`fixed inset-0 z-50 lg:hidden transition-opacity duration-300 ${sidebarOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}>
-                    <div className="absolute inset-0 bg-ink-900/20 backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
-                    <div className={`absolute top-0 left-0 bottom-0 w-[80%] max-w-sm bg-white shadow-2xl transition-transform duration-300 transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
-                        <div className="flex flex-col h-full bg-white">
-                            <div className="p-6 flex items-center justify-between border-b border-brand-yellow-100">
-                                <span className="font-black text-xl text-brand-blue-950 tracking-tight">Menu Admin</span>
-                                <button onClick={() => setSidebarOpen(false)} className="p-2 bg-brand-yellow-100 rounded-full text-brand-blue-700">
-                                    <X className="w-5 h-5" />
-                                </button>
-                            </div>
-                            <nav className="flex-1 overflow-y-auto p-4 space-y-1">
-                                {menuItems.map((item) => (
-                                    <div key={item.name} onClick={() => setSidebarOpen(false)}>
-                                        <NavLink item={item} />
-                                    </div>
-                                ))}
-                            </nav>
-                            <div className="p-4 border-t border-brand-yellow-100">
-                                {availableRoles && availableRoles.length > 1 && (
-                                    <div className="mb-4">
-                                        <label className="text-[10px] font-black text-ink-400 mb-2 block uppercase tracking-widest">Switch Role</label>
-                                        <select
-                                            value={userRole || ""}
-                                            onChange={handleRoleSwitch}
-                                            className="w-full bg-brand-yellow-50 border border-brand-yellow-200 text-sm text-brand-blue-900 font-black rounded-xl py-2 px-3 focus:ring-2 focus:ring-brand-blue-600/20"
-                                        >
-                                            {availableRoles.map(role => (
-                                                <option key={role} value={role}>{ROLE_LABELS[role as UserRole] || role}</option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                )}
-                                <button onClick={handleLogout} className="w-full btn-secondary text-red-600 bg-red-50 border-red-100 hover:bg-red-100 py-2.5 rounded-xl font-bold flex items-center justify-center gap-2">
-                                    <LogOut className="w-4 h-4" /> Keluar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
 
                 {/* Main Content Area */}
                 <main className="flex-1 lg:pl-72 min-w-0 transition-all duration-300">

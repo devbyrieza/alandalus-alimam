@@ -322,7 +322,8 @@ export default function ExaminerDashboard() {
                             </div>
                         </div>
 
-                        <div className="overflow-x-auto">
+                        {/* Desktop Table View */}
+                        <div className="hidden md:block overflow-x-auto">
                             <table className="min-w-full divide-y divide-ink-100">
                                 <thead className="bg-ink-50/50">
                                     <tr>
@@ -347,7 +348,7 @@ export default function ExaminerDashboard() {
                                                 <td className="px-6 py-4 whitespace-nowrap text-xs font-mono font-bold text-ink-400">{s.nomor_pendaftaran || '-'}</td>
                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                     <p className="text-sm font-black text-ink-900 leading-tight">
-                                                        {(s.nama_lengkap || 'Tanpa Nama').replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}
+                                                        {(s.nama_lengkap || 'Tanpa Nama').toLowerCase().replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}
                                                     </p>
                                                     <p className="text-[10px] font-bold text-ink-400 uppercase tracking-wider mt-0.5">{(s.status_pendaftaran || '').replace('_', ' ')}</p>
                                                 </td>
@@ -397,6 +398,57 @@ export default function ExaminerDashboard() {
                                     )}
                                 </tbody>
                             </table>
+                        </div>
+
+                        {/* Mobile Card View */}
+                        <div className="md:hidden space-y-4 p-4">
+                            {loading ? (
+                                <div className="py-12 text-center text-ink-400 font-medium italic">Memuat data pendaftar...</div>
+                            ) : filteredStudents.length === 0 ? (
+                                <div className="py-12 text-center text-ink-400 font-medium italic">Tidak ada data pendaftar.</div>
+                            ) : (
+                                filteredStudents.map(s => (
+                                    <div key={s.id} className="bg-white rounded-3xl p-5 shadow-clay-sm border border-ink-50 space-y-4">
+                                        <div className="flex justify-between items-start">
+                                            <div>
+                                                <div className="flex items-center gap-2 mb-1">
+                                                    <span className="text-[10px] font-mono font-bold text-ink-400 tracking-tight">{s.nomor_pendaftaran || '-'}</span>
+                                                    <span className="text-[9px] font-black text-brand-blue-700 bg-brand-blue-50 px-2 py-0.5 rounded-lg uppercase">{s.jenjang}</span>
+                                                </div>
+                                                <h3 className="text-base font-black text-ink-900 uppercase leading-snug">
+                                                    {(s.nama_lengkap || 'Tanpa Nama').toLowerCase().replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}
+                                                </h3>
+                                            </div>
+                                        </div>
+
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <div className="bg-ink-50/50 p-3 rounded-2xl">
+                                                <p className="text-[9px] font-black text-ink-400 uppercase mb-1">Status Ujian</p>
+                                                <p className="text-[10px] font-black text-ink-800 uppercase">{s.nilai_ujian?.status_kelulusan || 'MENUNGGU'}</p>
+                                            </div>
+                                            <div className="bg-brand-blue-600 p-3 rounded-2xl text-white">
+                                                <p className="text-[9px] font-black opacity-70 uppercase mb-1">Nilai Total</p>
+                                                <p className="text-lg font-black leading-none">{s.nilai_ujian?.nilai_total || '-'}</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="grid grid-cols-2 gap-2">
+                                            <button 
+                                                onClick={() => handleOpenInput(s, 'quran')} 
+                                                className="flex items-center justify-center gap-2 bg-ink-900 text-white py-3.5 rounded-2xl text-[11px] font-black shadow-lg shadow-ink-900/10 active:scale-95 transition-all"
+                                            >
+                                                <Zap className="w-3.5 h-3.5" /> TES QURAN
+                                            </button>
+                                            <button 
+                                                onClick={() => handleOpenInput(s, 'wawancara_santri')} 
+                                                className="flex items-center justify-center gap-2 bg-brand-yellow-400 text-brand-blue-900 py-3.5 rounded-2xl text-[11px] font-black shadow-lg shadow-brand-yellow-400/20 active:scale-95 transition-all"
+                                            >
+                                                <MessageSquare className="w-3.5 h-3.5" /> WAWANCARA
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
                         </div>
                     </div>
                 </div>
