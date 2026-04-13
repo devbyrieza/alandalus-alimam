@@ -14,17 +14,7 @@ export default function PengumumanPage() {
     status: "scheduled", // Default to those who have taken exams/interview
   });
 
-  const [sendingProgress, setSendingProgress] = useState<{
-    active: boolean;
-    curr: number;
-    total: number;
-    logs: string[];
-  }>({
-    active: false,
-    curr: 0,
-    total: 0,
-    logs: []
-  });
+  const [isPublishing, setIsPublishing] = useState(false);
 
   const toTitleCase = (str: string) => {
     if (!str) return "";
@@ -81,10 +71,10 @@ export default function PengumumanPage() {
   const handlePublish = async () => {
     if (selectedIds.length === 0) return;
 
-    if (!confirm(`Apakah Anda yakin ingin meluluskan ${selectedIds.length} santri ini? Notifikasi WA akan dikirim.`)) return;
+    if (!confirm(`Apakah Anda yakin ingin meluluskan ${selectedIds.length} santri ini? Status akan diperbarui dan pengumuman akan masuk antrean WhatsApp otomatis.`)) return;
 
     try {
-      setLoading(true);
+      setIsPublishing(true);
       const res = await fetch("/api/admin/pengumuman/publish", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -97,42 +87,7 @@ export default function PengumumanPage() {
 
       const result = await res.json();
       if (res.ok) {
-        // Logic Batch Notification
-        if (result.queue && result.queue.length > 0) {
-          setSendingProgress({ active: true, curr: 0, total: result.queue.length, logs: ["Mulai mengirim pengumuman..."] });
-
-          let successParams = 0;
-          for (let i = 0; i < result.queue.length; i++) {
-            const item = result.queue[i];
-            setSendingProgress(prev => ({
-              ...prev,
-              curr: i + 1,
-              logs: [`Mengirim ke ${item.nama}...`, ...prev.logs.slice(0, 3)]
-            }));
-
-            try {
-              await fetch("/api/admin/notifications/send", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  type: "status",
-                  ...item
-                })
-              });
-              successParams++;
-            } catch (e) { console.error(e); }
-
-            // Jeda 4 Detik
-            if (i < result.queue.length - 1) {
-              await new Promise(r => setTimeout(r, 4000));
-            }
-          }
-          toast.success(`Selesai! ${successParams} notifikasi terkirim.`);
-          setSendingProgress({ active: false, curr: 0, total: 0, logs: [] });
-        } else {
-          toast.success(`Berhasil update status ${result.updated} santri (Tanpa Notifikasi)`);
-        }
-
+        toast.success(result.message || `Berhasil! ${result.queued} pengumuman sedang mengantri untuk dikirim.`);
         fetchCandidates();
         setSelectedIds([]);
       } else {
@@ -141,7 +96,7 @@ export default function PengumumanPage() {
     } catch (error) {
       toast.error("Terjadi kesalahan sistem");
     } finally {
-      setLoading(false);
+      setIsPublishing(false);
     }
   };
 
@@ -195,10 +150,10 @@ export default function PengumumanPage() {
 
         <button
           onClick={handlePublish}
-          disabled={selectedIds.length === 0 || loading}
+          disabled={selectedIds.length === 0 || isPublishing}
           className="flex items-center gap-2 px-6 py-2.5 bg-green-600 hover:bg-green-700 disabled:bg-stone-300 text-white rounded-xl font-bold transition-all shadow-lg shadow-green-200 disabled:shadow-none"
         >
-          {loading ? "Memproses..." : (
+          {isPublishing ? "Memproses..." : (
             <>
               <Send className="w-4 h-4" />
               Umumkan Kelulusan ({selectedIds.length})
@@ -281,34 +236,6 @@ export default function PengumumanPage() {
           </table>
         </div>
       </div>
-
-      {/* Sending Progress Modal */}
-      {
-        sendingProgress.active && (
-          <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-ink-900/80 backdrop-blur-sm">
-            <div className="bg-white rounded-3xl w-full max-w-md shadow-2xl border border-white p-8 text-center animate-pulse">
-              <Loader2 className="w-12 h-12 text-purple-600 animate-spin mx-auto mb-4" />
-              <h2 className="text-2xl font-black text-ink-900 mb-2">Mengirim Pengumuman...</h2>
-              <p className="font-bold text-red-500 mb-6 uppercase tracking-widest text-xs">JANGAN TUTUP HALAMAN INI!</p>
-
-              <div className="w-full bg-cream-100 h-4 rounded-full overflow-hidden mb-4 border border-ink-100">
-                <div
-                  className="h-full bg-gradient-to-r from-green-500 to-emerald-600 transition-all duration-500 ease-out"
-                  style={{ width: `${(sendingProgress.curr / sendingProgress.total) * 100}%` }}
-                ></div>
-              </div>
-
-              <p className="font-mono font-bold text-ink-500 mb-4">{sendingProgress.curr} / {sendingProgress.total}</p>
-
-              <div className="bg-cream-50 rounded-xl p-4 text-left h-32 overflow-hidden flex flex-col-reverse gap-1 border border-ink-100">
-                {sendingProgress.logs.map((log, idx) => (
-                  <p key={idx} className="text-xs font-mono text-ink-400 truncate">{log}</p>
-                ))}
-              </div>
-            </div>
-          </div>
-        )
-      }
     </div >
   );
 }
