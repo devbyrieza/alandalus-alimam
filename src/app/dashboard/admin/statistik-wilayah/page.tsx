@@ -104,11 +104,11 @@ export default function StatistikWilayahPage() {
                 </div>
                 
                 {/* Info Legend */}
-                <div className="mt-8 flex items-start gap-3 p-4 bg-white/10 border border-white/10 rounded-2xl text-xs text-white/90 font-medium leading-relaxed backdrop-blur-sm">
-                    <div className="mt-0.5 bg-[#ffcc00] p-1 rounded-md shadow-sm">
+                <div className="mt-8 flex items-start gap-3 p-4 bg-[#ffcc00]/15 border border-[#ffcc00]/40 rounded-2xl text-xs text-white font-semibold leading-relaxed">
+                    <div className="mt-0.5 bg-[#ffcc00] p-1.5 rounded-md shadow-sm shrink-0">
                         <ArrowUpRight className="w-3 h-3 text-[#0a2647]" />
                     </div>
-                    <p>Data mencakup sebaran Provinsi di Indonesia. Untuk Ayah/Ibu, data menggunakan alamat Santri sebagai acuan utama domisili keluarga.</p>
+                    <p className="text-white/95">Data mencakup sebaran Provinsi di Indonesia. Untuk Ayah/Ibu, data menggunakan alamat Santri sebagai acuan utama domisili keluarga.</p>
                 </div>
             </div>
 
