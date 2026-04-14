@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
     BarChart,
     MapPin,
@@ -13,6 +13,7 @@ import {
     Heart,
     User,
     UserCheck,
+    Home,
 } from "lucide-react";
 
 // Type definitions for the statistics data
@@ -33,10 +34,34 @@ interface StatisticsData {
     wali: Record<string, ProvinceData>;
 }
 
+type TabId = "santri" | "ayah" | "ibu" | "wali" | "keluarga";
+
+// Merge multiple province maps (ayah + ibu + wali) into one combined record
+function mergeProvinceData(sources: Record<string, ProvinceData>[]): Record<string, ProvinceData> {
+    const merged: Record<string, ProvinceData> = {};
+    for (const source of sources) {
+        for (const [provName, provData] of Object.entries(source)) {
+            if (!merged[provName]) {
+                merged[provName] = { total: 0, cities: [] };
+            }
+            merged[provName].total += provData.total;
+            for (const city of provData.cities) {
+                const existing = merged[provName].cities.find(c => c.name === city.name);
+                if (existing) {
+                    existing.count += city.count;
+                } else {
+                    merged[provName].cities.push({ ...city });
+                }
+            }
+        }
+    }
+    return merged;
+}
+
 export default function StatistikWilayahPage() {
     const [data, setData] = useState<StatisticsData | null>(null);
     const [loading, setLoading] = useState(true);
-    const [activeTab, setActiveTab] = useState<"santri" | "ayah" | "ibu" | "wali">("santri");
+    const [activeTab, setActiveTab] = useState<TabId>("santri");
     const [expandedProv, setExpandedProv] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -59,6 +84,12 @@ export default function StatistikWilayahPage() {
         }
     };
 
+    // Compute merged "Keluarga" data (Ayah + Ibu + Wali)
+    const keluargaData = useMemo(() => {
+        if (!data) return {};
+        return mergeProvinceData([data.ayah, data.ibu, data.wali]);
+    }, [data]);
+
     if (loading) {
         return (
             <div className="flex flex-col items-center justify-center min-h-[400px]">
@@ -68,18 +99,25 @@ export default function StatistikWilayahPage() {
         );
     }
 
-    const currentData = data ? data[activeTab] : {};
-    const filteredProvinces = currentData 
-        ? Object.entries(currentData).filter(([name]) => 
+    const currentData: Record<string, ProvinceData> =
+        activeTab === "keluarga"
+            ? keluargaData
+            : data
+            ? data[activeTab as Exclude<TabId, "keluarga">]
+            : {};
+
+    const filteredProvinces = currentData
+        ? Object.entries(currentData).filter(([name]) =>
             name.toLowerCase().includes(searchQuery.toLowerCase())
           ).sort(([, a], [, b]) => b.total - a.total)
         : [];
 
     const tabs = [
-        { id: "santri", label: "Santri", icon: Users, color: "text-blue-600" },
-        { id: "ayah", label: "Ayah", icon: User, color: "text-amber-600" },
-        { id: "ibu", label: "Heart", icon: Heart, color: "text-rose-500" },
-        { id: "wali", label: "Wali", icon: UserCheck, color: "text-emerald-600" },
+        { id: "santri",   label: "Santri",   icon: Users,      color: "text-blue-600"    },
+        { id: "ayah",     label: "Ayah",     icon: User,       color: "text-amber-600"   },
+        { id: "ibu",      label: "Ibu",      icon: Heart,      color: "text-rose-500"    },
+        { id: "wali",     label: "Wali",     icon: UserCheck,  color: "text-emerald-600" },
+        { id: "keluarga", label: "Keluarga", icon: Home,       color: "text-violet-600"  },
     ];
 
     const totalInTab = Object.values(currentData || {}).reduce((acc, prov) => acc + prov.total, 0);
@@ -102,13 +140,15 @@ export default function StatistikWilayahPage() {
                         </p>
                     </div>
                 </div>
-                
+
                 {/* Info Legend */}
                 <div className="mt-8 flex items-start gap-3 p-4 bg-[#ffcc00]/15 border border-[#ffcc00]/40 rounded-2xl text-xs text-white font-semibold leading-relaxed">
                     <div className="mt-0.5 bg-[#ffcc00] p-1.5 rounded-md shadow-sm shrink-0">
                         <ArrowUpRight className="w-3 h-3 text-[#0a2647]" />
                     </div>
-                    <p className="text-white/95">Data mencakup sebaran Provinsi di Indonesia. Untuk Ayah/Ibu, data menggunakan alamat Santri sebagai acuan utama domisili keluarga.</p>
+                    <p className="text-white/95">
+                        Data mencakup sebaran Provinsi di Indonesia. Tab <strong className="text-[#ffcc00]">Keluarga</strong> menggabungkan data Ayah + Ibu + Wali untuk gambaran domisili keluarga secara keseluruhan.
+                    </p>
                 </div>
             </div>
 
@@ -120,17 +160,24 @@ export default function StatistikWilayahPage() {
                         <button
                             key={tab.id}
                             onClick={() => {
-                                setActiveTab(tab.id as any);
+                                setActiveTab(tab.id as TabId);
                                 setExpandedProv(null);
                             }}
-                            className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl font-black transition-all text-xs uppercase tracking-wider ${
-                                activeTab === tab.id 
-                                ? "bg-white text-[#0a2647] shadow-lg" 
+                            className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-black transition-all text-xs uppercase tracking-wider ${
+                                activeTab === tab.id
+                                ? tab.id === "keluarga"
+                                    ? "bg-violet-600 text-white shadow-lg shadow-violet-600/20"
+                                    : "bg-white text-[#0a2647] shadow-lg"
                                 : "text-stone-400 hover:text-stone-600"
                             }`}
                         >
-                            <tab.icon className={`w-4 h-4 ${activeTab === tab.id ? tab.color : ''}`} />
-                            {tab.id === 'ibu' ? 'Ibu' : tab.label}
+                            <tab.icon className={`w-4 h-4 ${activeTab === tab.id ? (tab.id === "keluarga" ? "text-white" : tab.color) : ''}`} />
+                            {tab.label}
+                            {tab.id === "keluarga" && activeTab !== "keluarga" && (
+                                <span className="text-[8px] bg-violet-100 text-violet-600 px-1.5 py-0.5 rounded-full font-black leading-none hidden md:inline">
+                                    A+I+W
+                                </span>
+                            )}
                         </button>
                     ))}
                 </div>
@@ -138,7 +185,7 @@ export default function StatistikWilayahPage() {
                 {/* Search Bar */}
                 <div className="relative w-full xl:w-72">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
-                    <input 
+                    <input
                         type="text"
                         placeholder="Cari Provinsi..."
                         value={searchQuery}
@@ -147,6 +194,16 @@ export default function StatistikWilayahPage() {
                     />
                 </div>
             </div>
+
+            {/* "Keluarga" tab badge info */}
+            {activeTab === "keluarga" && (
+                <div className="flex items-center gap-3 px-5 py-3 bg-violet-50 border border-violet-200 rounded-2xl animate-in fade-in duration-300">
+                    <Home className="w-4 h-4 text-violet-600 shrink-0" />
+                    <p className="text-xs font-semibold text-violet-700">
+                        Menampilkan data gabungan <strong>Ayah + Ibu + Wali</strong>. Total unik ini mencerminkan sebaran domisili keluarga secara keseluruhan (bukan deduplikasi per individu).
+                    </p>
+                </div>
+            )}
 
             {/* Stats List */}
             <div className="grid grid-cols-1 gap-4">
@@ -157,7 +214,11 @@ export default function StatistikWilayahPage() {
                             className="p-5 md:p-6 flex items-center justify-between cursor-pointer hover:bg-stone-50 transition-colors"
                         >
                             <div className="flex items-center gap-4 md:gap-6">
-                                <div className="flex flex-col items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-[#f0f4f8] text-[#0a2647] border border-[#0a2647]/5 shadow-inner">
+                                <div className={`flex flex-col items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-2xl border shadow-inner ${
+                                    activeTab === "keluarga"
+                                        ? "bg-violet-50 text-violet-700 border-violet-100"
+                                        : "bg-[#f0f4f8] text-[#0a2647] border-[#0a2647]/5"
+                                }`}>
                                     <span className="font-black text-xl md:text-2xl leading-none">{provData.total}</span>
                                     <span className="text-[8px] md:text-[10px] font-black uppercase mt-1 md:mt-1.5 opacity-60 tracking-widest">Total</span>
                                 </div>
@@ -166,7 +227,7 @@ export default function StatistikWilayahPage() {
                                         {provName}
                                     </h3>
                                     <div className="flex items-center gap-2 mt-1.5 ">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-[#ffcc00] animate-pulse"></div>
+                                        <div className={`w-1.5 h-1.5 rounded-full animate-pulse ${activeTab === "keluarga" ? "bg-violet-400" : "bg-[#ffcc00]"}`}></div>
                                         <p className="text-[10px] font-bold text-stone-400 uppercase tracking-widest truncate">
                                             {provData.cities.length} Sebaran Wilayah
                                         </p>
@@ -176,7 +237,7 @@ export default function StatistikWilayahPage() {
                             <div className="flex items-center gap-4 md:gap-8">
                                 <div className="hidden sm:flex flex-col items-end">
                                     <span className="text-[10px] font-black text-stone-300 uppercase tracking-widest">Kontribusi</span>
-                                    <span className="text-sm font-black text-[#0a2647]">
+                                    <span className={`text-sm font-black ${activeTab === "keluarga" ? "text-violet-600" : "text-[#0a2647]"}`}>
                                         {totalInTab > 0 ? ((provData.total / totalInTab) * 100).toFixed(1) : '0.0'}%
                                     </span>
                                 </div>
