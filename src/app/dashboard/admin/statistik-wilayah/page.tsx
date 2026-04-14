@@ -235,7 +235,7 @@ export default function StatistikWilayahPage() {
                                 </div>
                             </div>
                             <div className="flex items-center gap-4 md:gap-8">
-                                <div className="hidden sm:flex flex-col items-end">
+                                <div className="flex flex-col items-end">
                                     <span className="text-[10px] font-black text-stone-300 uppercase tracking-widest">Kontribusi</span>
                                     <span className={`text-sm font-black ${activeTab === "keluarga" ? "text-violet-600" : "text-[#0a2647]"}`}>
                                         {totalInTab > 0 ? ((provData.total / totalInTab) * 100).toFixed(1) : '0.0'}%
