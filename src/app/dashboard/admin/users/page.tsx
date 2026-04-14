@@ -11,8 +11,10 @@ import {
     XCircle,
     ShieldAlert,
     Mail,
-    SearchX
+    SearchX,
+    Key
 } from "lucide-react";
+import Swal from "sweetalert2";
 
 interface AdminUser {
     id: string;
@@ -40,6 +42,30 @@ export default function UserManagementPage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+    const generateMagicLink = async (user: AdminUser) => {
+        try {
+            const response = await fetch(`/api/admin/users/magic-link`, {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ user_id: user.id })
+            });
+            const data = await response.json();
+            if (response.ok) {
+                Swal.fire({
+                    title: 'Magic Link Akses Cepat',
+                    html: `<p class="text-sm text-stone-500 mb-4">Bagikan link ini ke penguji/admin terkait untuk login tanpa password (hanya butuh 4 digit terakhir nomor HP)</p><input type="text" value="${data.link}" class="w-full p-3 border-2 border-brand-blue-100 rounded-xl bg-stone-50 font-bold focus:outline-none focus:border-brand-blue-500" readonly onclick="this.select()" />`,
+                    icon: 'success',
+                    confirmButtonText: 'Tutup',
+                    confirmButtonColor: '#1e3a8a'
+                });
+            } else {
+                Swal.fire('Gagal!', data.error || 'Gagal membuat magic link', 'error');
+            }
+        } catch (e: any) {
+            Swal.fire('Error', e.message, 'error');
+        }
+    };
 
     const [formData, setFormData] = useState({
         id: "",
@@ -166,6 +192,9 @@ export default function UserManagementPage() {
                                         </td>
                                         <td className="p-8 text-right">
                                             <div className="flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-4 group-hover:translate-x-0">
+                                                <button onClick={() => generateMagicLink(user)} title="Buat Magic Link Login" className="p-4 bg-emerald-50 text-emerald-600 rounded-2xl hover:bg-emerald-600 hover:text-white transition-all shadow-sm">
+                                                    <Key className="w-5 h-5" />
+                                                </button>
                                                 <button onClick={() => { setFormData({ id: user.id, email: user.email, password: "", full_name: user.full_name, role: user.role, secondary_roles: user.secondary_roles || [], phone: user.phone || "" }); setIsEditing(true); setIsModalOpen(true); }} className="p-4 bg-brand-blue-50 text-brand-blue-600 rounded-2xl hover:bg-brand-blue-600 hover:text-white transition-all shadow-sm">
                                                     <Edit className="w-5 h-5" />
                                                 </button>
