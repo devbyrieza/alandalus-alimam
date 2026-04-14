@@ -32,6 +32,7 @@ export async function GET(req: Request) {
                 nilai_wawancara_santri: 90,
                 nilai_tes_quran: 90,
                 total_score: 95,
+                nilai_total: 95,
                 status_kelulusan: "LULUS",
                 detail_akademik: { skor: 95 },
                 detail_quran: { skor: 90 }
