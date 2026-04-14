@@ -297,13 +297,13 @@ export default function MonitoringJadwalPage() {
                                         </div>
                                     </div>
 
-                                    {/* Detailed Status Grid */}
+                                    {/* Detailed Status Grid - Only show rows with assigned examiner */}
                                     <div className="grid grid-cols-1 gap-2 py-4 border-y border-slate-100/50">
                                         {[
                                             { label: 'Ujian Al-Quran', status: s.status.quran, icon: getStatusIcon(s.status.quran), ustadz: s.ustadz.quran },
                                             { label: 'Wawancara Santri', status: s.status.santri, icon: getStatusIcon(s.status.santri), ustadz: s.ustadz.santri },
                                             { label: 'Wawancara Wali/Ortu', status: s.status.ortu, icon: getStatusIcon(s.status.ortu), ustadz: s.ustadz.ortu }
-                                        ].map((stat, i) => (
+                                        ].filter(stat => stat.ustadz && stat.ustadz !== '-').map((stat, i) => (
                                             <div key={i} className="flex items-center justify-between px-2">
                                                 <div className="flex items-center gap-3">
                                                     <div className={`p-1.5 rounded-lg border ${
@@ -315,7 +315,7 @@ export default function MonitoringJadwalPage() {
                                                     </div>
                                                     <div>
                                                         <p className="text-[10px] font-black text-slate-400 uppercase tracking-tight leading-none">{stat.label}</p>
-                                                        <p className="text-xs font-bold text-slate-700 mt-0.5">{stat.ustadz || '-'}</p>
+                                                        <p className="text-xs font-bold text-slate-700 mt-0.5">{stat.ustadz}</p>
                                                     </div>
                                                 </div>
                                                 <span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-full ${
@@ -331,7 +331,7 @@ export default function MonitoringJadwalPage() {
 
                                     <div className="flex items-center gap-2 text-[11px] text-slate-500 font-bold px-3 py-2 bg-slate-50 rounded-xl">
                                         <MapPin className="w-3.5 h-3.5 text-slate-300" />
-                                        {s.sesi.location}
+                                        {(s.sesi.location || '').replace(/Online\/Pesantren/gi, 'Online').replace(/Pesantren\/Online/gi, 'Online')}
                                     </div>
                                 </div>
                             ))}
@@ -373,7 +373,7 @@ export default function MonitoringJadwalPage() {
                                                         </span>
                                                         <span className="text-[11px] font-semibold text-slate-400 mt-1 flex items-center gap-1.5 pl-5 uppercase tracking-wide">
                                                             <MapPin className="w-3.5 h-3.5" />
-                                                            {s.sesi.location}
+                                                            {(s.sesi.location || '').replace(/Online\/Pesantren/gi, 'Online').replace(/Pesantren\/Online/gi, 'Online')}
                                                         </span>
                                                     </div>
                                                 </td>

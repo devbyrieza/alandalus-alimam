@@ -549,6 +549,16 @@ export default function PembayaranPendaftaranTab({
   const [activePaymentMethod, setActivePaymentMethod] = useState<
     "midtrans" | "manual" | null
   >(null);
+  const instruksiRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll ke instruksi pembayaran saat metode dipilih
+  useEffect(() => {
+    if (activePaymentMethod === 'manual' && instruksiRef.current) {
+      setTimeout(() => {
+        instruksiRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100); // slight delay to let the section render first
+    }
+  }, [activePaymentMethod]);
 
   // Fetch payment status
   const fetchPaymentStatus = useCallback(async () => {
@@ -942,7 +952,7 @@ export default function PembayaranPendaftaranTab({
 
               {/* DETAIL & UPLOAD SECTION (SHOWN BELOW GRID) */}
               {activePaymentMethod === 'manual' && (
-                <div className="mt-8 pt-8 border-t border-ink-100 animate-in slide-in-from-bottom-4 fade-in duration-500">
+                <div ref={instruksiRef} className="mt-8 pt-8 border-t border-ink-100 animate-in slide-in-from-bottom-4 fade-in duration-500">
                   <div className="max-w-5xl mx-auto space-y-8">
                     <div className="text-center mb-8">
                       <h3 className="text-2xl font-black text-ink-900 mb-2">Instruksi Pembayaran</h3>
