@@ -389,7 +389,7 @@ export default function ExaminerDashboard() {
                                                 <td className="px-3 py-4 text-center whitespace-nowrap bg-brand-blue-50/20">
                                                     <span className="text-base font-black text-brand-blue-700">
                                                         {s.nilai_ujian?.nilai_total != null
-                                                            ? (typeof s.nilai_ujian.nilai_total === 'number' ? s.nilai_ujian.nilai_total.toFixed(1) : s.nilai_ujian.nilai_total)
+                                                            ? Number(s.nilai_ujian.nilai_total).toFixed(1)
                                                             : <span className="text-ink-300 font-bold">-</span>
                                                         }
                                                     </span>
@@ -443,7 +443,7 @@ export default function ExaminerDashboard() {
                                                 <p className="text-[8px] font-black opacity-70 uppercase">Total</p>
                                                 <p className="text-xl font-black leading-none mt-0.5">
                                                     {s.nilai_ujian?.nilai_total != null
-                                                        ? (typeof s.nilai_ujian.nilai_total === 'number' ? s.nilai_ujian.nilai_total.toFixed(1) : s.nilai_ujian.nilai_total)
+                                                        ? Number(s.nilai_ujian.nilai_total).toFixed(1)
                                                         : '-'
                                                     }
                                                 </p>
