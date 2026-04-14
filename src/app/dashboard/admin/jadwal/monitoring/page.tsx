@@ -291,8 +291,11 @@ export default function MonitoringJadwalPage() {
                                                 <Clock className="w-3.5 h-3.5" />
                                                 {formatDateTime(s.sesi.start).split(', ')[1]}
                                             </div>
-                                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wide mt-1 whitespace-nowrap">
+                                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wide mt-0.5 whitespace-nowrap">
                                                 {formatDateTime(s.sesi.start).split(', ')[0]}
+                                            </div>
+                                            <div className="text-sm font-black text-slate-700 mt-0.5 whitespace-nowrap">
+                                                {formatDateTime(s.sesi.start).split(', ')[2] ?? ''}
                                             </div>
                                         </div>
                                     </div>
