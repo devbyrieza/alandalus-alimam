@@ -320,10 +320,22 @@ export default function JadwalPengujiPage() {
 
   const handleDeleteSlot = async (id: string, count: number) => {
     if (count > 0) {
-      alert("Tidak dapat menghapus sesi yang sudah ada pendaftar!");
+      Swal.fire('Gagal!', 'Tidak dapat menghapus sesi yang sudah ada pendaftar!', 'error');
       return;
     }
-    if (!confirm("Hapus sesi waktu ini?")) return;
+    
+    const { isConfirmed } = await Swal.fire({
+      title: 'Hapus Sesi?',
+      text: "Apakah Anda yakin ingin menghapus sesi waktu ini?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Ya, Hapus!',
+      cancelButtonText: 'Batal'
+    });
+
+    if (!isConfirmed) return;
 
     try {
       const response = await fetch(`/api/exam-sessions?id=${id}`, { method: "DELETE" });
@@ -339,7 +351,18 @@ export default function JadwalPengujiPage() {
   };
 
   const handleCompleteExam = async (jadwalId: string) => {
-    if (!confirm("Apakah Anda yakin ingin menandai ujian ini selesai? Status akan diperbarui.")) return;
+    const { isConfirmed } = await Swal.fire({
+      title: 'Tandai Selesai?',
+      text: "Apakah Anda yakin ingin menandai ujian ini selesai? Status akan diperbarui.",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#059669', // green-600
+      cancelButtonColor: '#94a3b8',
+      confirmButtonText: 'Ya, Tandai Selesai!',
+      cancelButtonText: 'Batal'
+    });
+
+    if (!isConfirmed) return;
 
     try {
       const response = await fetch("/api/penguji/jadwal/complete", {
@@ -352,7 +375,11 @@ export default function JadwalPengujiPage() {
       if (response.ok) {
         setMessage({ type: "success", text: result.message });
         if (result.isAllDone) {
-          alert("Semua rangkaian ujian santri ini telah SELESAI! Notifikasi telah dikirim.");
+          Swal.fire({
+            title: 'Selesai!',
+            text: 'Semua rangkaian ujian santri ini telah SELESAI! Notifikasi telah dikirim.',
+            icon: 'success'
+          });
         }
         fetchAssignments(); // Refresh data
       } else {
