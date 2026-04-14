@@ -347,12 +347,15 @@ export async function POST(request: Request) {
                                 magicLinkH1
                             );
 
+                            const finalScheduledAtInt = new Date(finalScheduledAt);
+                            finalScheduledAtInt.setMinutes(finalScheduledAtInt.getMinutes() + 5);
+
                             enqueueWhatsapp({
                                 pendaftarId: session.id,
                                 phone: interviewer.phone,
                                 jenisNotif: "reminder_h1",
                                 messageContent: remIntMessage,
-                                scheduledAt: finalScheduledAt,
+                                scheduledAt: finalScheduledAtInt,
                             }).then(async () => {
                                  // Update flag safely
                                  try {
