@@ -896,7 +896,7 @@ export function buildMessageReminderH1Santri(
 ): string {
     return `*PENGINGAT UJIAN SELEKSI*
 
-Assalamu'alaikum Warahmatullahi Wabarakatuh.
+Assalamu'alaikum Wr. Wb.
 Halo Ananda *${nama}*,
 
 Ini adalah pengingat bahwa Anda dijadwalkan mengikuti *${jenisUjian}* pada:
@@ -905,7 +905,7 @@ Ini adalah pengingat bahwa Anda dijadwalkan mengikuti *${jenisUjian}* pada:
 ⏰ *Waktu:* ${jam} WIB
 📍 *Lokasi/Link:* ${lokasi}
 
-Mohon persiapkan diri dengan baik dan pastikan koneksi internet stabil.
+Mohon persiapkan diri dengan baik dan pastikan koneksi internet stabil jika ujian online. Sampai jumpa!
 
 ---
 *Panitia PPDB Al-Andalus Al-Imam*`;
@@ -925,12 +925,12 @@ export function buildMessageReminderH1Penguji(
     inputNilaiLink?: string
 ): string {
     const title = (namaPenguji || "").toLowerCase().includes("ustadzah") ? "Ustadzah" : "Ustadz";
-    const opening = pickOpening();
+    const isWawancara = jenisUjian.toLowerCase().includes("wawancara");
     
-    return `*REMINDER JADWAL WAWANCARA (H-1)*
+    if (isWawancara) {
+        return `*REMINDER JADWAL WAWANCARA*
 
-${opening}.
-Ustadz/Ustadzah *${namaPenguji}*,
+Assalamu'alaikum ${title} *${namaPenguji}*,
 
 Mengingatkan kembali jadwal wawancara Anda:
 
@@ -940,7 +940,25 @@ Mengingatkan kembali jadwal wawancara Anda:
 ⏰ *Waktu:* ${jam} WIB
 📍 *Link Meet:* ${lokasi}
 🔗 *Input Hasil:* ${inputNilaiLink || "-"}
-(PIN: 4 digit terakhir No. HP Anda)
+
+Mohon kehadirannya tepat waktu. Syukron.
+
+---
+*Sistem PPDB Al-Andalus Al-Imam*`;
+    }
+
+    return `*REMINDER JADWAL MENGUJI*
+
+Assalamu'alaikum ${title} *${namaPenguji}*,
+
+Mengingatkan kembali jadwal menguji Anda:
+
+📝 *Mata Pelajaran:* ${jenisUjian}
+👤 *Nama Santri:* ${namaSantri}
+📅 *Hari/Tanggal:* ${hari}, ${tanggal}
+⏰ *Waktu:* ${jam} WIB
+📍 *Link Meet:* ${lokasi}
+🔗 *Input Hasil:* ${inputNilaiLink || "-"}
 
 Mohon kehadirannya tepat waktu. Syukron.
 
