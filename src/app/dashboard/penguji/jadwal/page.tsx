@@ -130,12 +130,13 @@ export default function JadwalPengujiPage() {
   // Bulk Modal State
   const [isBulkModalOpen, setIsBulkModalOpen] = useState(false);
   const [submittingBulk, setSubmittingBulk] = useState(false);
+  const [activeDay, setActiveDay] = useState<number>(new Date().getDay());
   const [bulkForm, setBulkForm] = useState({
     title: "",
     startDate: new Date().toISOString().split('T')[0],
     endDate: "", 
-    daysOfWeek: [] as number[], // 0=Sun, 1=Mon, etc.
-    timeSlots: [{ start: "16:00", end: "17:00" }],
+    selectedDays: [] as number[], // 0=Sun, 1=Mon, etc.
+    daySlots: {} as Record<number, { start: string, end: string }[]>,
     notes: ""
   });
 
@@ -203,6 +204,21 @@ export default function JadwalPengujiPage() {
     }
   }, [activeRole]);
 
+  // Initialize active day's slots if empty when modal opens or activeDay changes
+  useEffect(() => {
+    if (isBulkModalOpen) {
+      if (!bulkForm.daySlots[activeDay]) {
+        setBulkForm(prev => ({
+          ...prev,
+          daySlots: {
+            ...prev.daySlots,
+            [activeDay]: [{ start: "08:00", end: "09:00" }]
+          }
+        }));
+      }
+    }
+  }, [isBulkModalOpen, activeDay]);
+
   // --- Handlers ---
 
   const handleCreateSlot = async (e: React.FormEvent) => {
@@ -263,7 +279,7 @@ export default function JadwalPengujiPage() {
 
   const handleCreateBulk = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (bulkForm.daysOfWeek.length === 0) {
+    if (bulkForm.selectedDays.length === 0) {
       alert("Pilih minimal satu hari!");
       return;
     }
@@ -272,50 +288,101 @@ export default function JadwalPengujiPage() {
       return;
     }
 
+    // Filter daySlots to only include selectedDays
+    const daySlotsToSend: Record<number, any[]> = {};
+    bulkForm.selectedDays.forEach(day => {
+      daySlotsToSend[day] = bulkForm.daySlots[day] || [];
+    });
+
     setSubmittingBulk(true);
     try {
       const res = await fetch("/api/exam-sessions/bulk", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(bulkForm),
+        body: JSON.stringify({
+          ...bulkForm,
+          daySlots: daySlotsToSend
+        }),
       });
       const result = await res.json();
       if (res.ok) {
-        alert(result.message);
+        Swal.fire('Berhasil!', result.message, 'success');
         setIsBulkModalOpen(false);
         fetchSlots();
       } else {
-        alert(result.error);
+        Swal.fire('Gagal!', result.error, 'error');
       }
     } catch (e) {
       console.error(e);
-      alert("Terjadi kesalahan sistem");
+      Swal.fire('Error!', "Terjadi kesalahan sistem", 'error');
     } finally {
       setSubmittingBulk(false);
     }
   };
 
   const addTimeSlot = () => {
+    const currentSlots = bulkForm.daySlots[activeDay] || [];
     setBulkForm({
       ...bulkForm,
-      timeSlots: [...bulkForm.timeSlots, { start: "16:00", end: "17:00" }]
+      daySlots: {
+        ...bulkForm.daySlots,
+        [activeDay]: [...currentSlots, { start: "16:00", end: "17:00" }]
+      }
     });
   };
 
   const removeTimeSlot = (index: number) => {
-    if (bulkForm.timeSlots.length <= 1) return;
-    const newSlots = [...bulkForm.timeSlots];
+    const currentSlots = bulkForm.daySlots[activeDay] || [];
+    if (currentSlots.length <= 1) return;
+    const newSlots = [...currentSlots];
     newSlots.splice(index, 1);
-    setBulkForm({ ...bulkForm, timeSlots: newSlots });
+    setBulkForm({
+      ...bulkForm,
+      daySlots: {
+        ...bulkForm.daySlots,
+        [activeDay]: newSlots
+      }
+    });
   };
 
   const toggleDay = (day: number) => {
-    const current = [...bulkForm.daysOfWeek];
+    const current = [...bulkForm.selectedDays];
+    let newSelected = current;
     if (current.includes(day)) {
-      setBulkForm({ ...bulkForm, daysOfWeek: current.filter(d => d !== day) });
+      newSelected = current.filter(d => d !== day);
     } else {
-      setBulkForm({ ...bulkForm, daysOfWeek: [...current, day] });
+      newSelected = [...current, day];
+      // Initialize slots for this day if they don't exist
+      if (!bulkForm.daySlots[day]) {
+        setBulkForm(prev => ({
+          ...prev,
+          daySlots: {
+            ...prev.daySlots,
+            [day]: prev.daySlots[activeDay] ? [...prev.daySlots[activeDay]] : [{ start: "08:00", end: "09:00" }]
+          }
+        }));
+      }
     }
+    
+    setBulkForm(prev => ({ ...prev, selectedDays: newSelected }));
+    setActiveDay(day);
+  };
+
+  const copySlotsToAll = () => {
+    const currentSlots = bulkForm.daySlots[activeDay] || [];
+    const newDaySlots = { ...bulkForm.daySlots };
+    bulkForm.selectedDays.forEach(day => {
+      newDaySlots[day] = JSON.parse(JSON.stringify(currentSlots));
+    });
+    setBulkForm({ ...bulkForm, daySlots: newDaySlots });
+    Swal.fire({
+      toast: true,
+      position: 'top-end',
+      icon: 'success',
+      title: 'Disalin ke semua hari terpilih',
+      showConfirmButton: false,
+      timer: 1500
+    });
   };
 
   const handleDeleteSlot = async (id: string, count: number) => {
@@ -965,19 +1032,24 @@ export default function JadwalPengujiPage() {
                     { id: 5, label: "Jum" },
                     { id: 6, label: "Sab" },
                     { id: 0, label: "Ahd" },
-                  ].map((day) => (
-                    <button
-                      key={day.id}
-                      type="button"
-                      onClick={() => toggleDay(day.id)}
-                      className={`px-4 py-2 rounded-xl text-sm font-bold transition-all border ${bulkForm.daysOfWeek.includes(day.id) 
-                        ? "bg-maroon-600 text-white border-maroon-600 shadow-md shadow-maroon-200" 
-                        : "bg-white text-ink-500 border-cream-200 hover:bg-cream-50"}`}
-                    >
-                      {day.label}
-                    </button>
-                  ))}
+                  ].map((day) => {
+                    const isSelected = bulkForm.selectedDays.includes(day.id);
+                    const isActive = activeDay === day.id;
+                    return (
+                      <button
+                        key={day.id}
+                        type="button"
+                        onClick={() => toggleDay(day.id)}
+                        className={`px-4 py-2 rounded-xl text-sm font-bold transition-all border ${isSelected 
+                          ? (isActive ? "bg-maroon-700 text-white border-maroon-700 ring-2 ring-maroon-200" : "bg-maroon-200 text-maroon-900 border-maroon-300")
+                          : "bg-white text-ink-500 border-cream-200 hover:bg-cream-50"}`}
+                      >
+                        {day.label}
+                      </button>
+                    );
+                  })}
                 </div>
+                <p className="text-[10px] text-ink-400 mt-2">💡 Klik untuk mengaktifkan hari, klik lagi untuk mengatur jam ketersediaan hari tersebut.</p>
               </div>
 
               {/* Date Range */}
@@ -1006,9 +1078,24 @@ export default function JadwalPengujiPage() {
 
               {/* Time Slots */}
               <div>
-                <label className="block text-xs font-black text-ink-400 uppercase tracking-widest mb-3">Pilihan Jam / Sesi</label>
+                <div className="flex items-center justify-between mb-3 border-b border-cream-100 pb-2">
+                  <label className="block text-xs font-black text-ink-400 uppercase tracking-widest">
+                    Jam Sesi: <span className="text-maroon-600">{
+                      ["Ahad", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"][activeDay]
+                    }</span>
+                  </label>
+                  {bulkForm.selectedDays.length > 1 && (
+                    <button 
+                      type="button" 
+                      onClick={copySlotsToAll}
+                      className="text-[10px] bg-maroon-50 text-maroon-700 px-2 py-1 rounded-lg border border-maroon-100 font-bold hover:bg-maroon-100 transition-colors"
+                    >
+                      Sama untuk semua hari
+                    </button>
+                  )}
+                </div>
                 <div className="space-y-3">
-                  {bulkForm.timeSlots.map((slot, index) => (
+                  {(bulkForm.daySlots[activeDay] || []).map((slot, index) => (
                     <div key={index} className="flex items-center gap-3 bg-cream-50 p-3 rounded-2xl border border-cream-100">
                       <div className="flex-1 grid grid-cols-2 gap-2">
                         <input
@@ -1018,7 +1105,7 @@ export default function JadwalPengujiPage() {
                           value={slot.start}
                           onChange={e => {
                             const newStart = e.target.value;
-                            const newSlots = [...bulkForm.timeSlots];
+                            const newSlots = [...(bulkForm.daySlots[activeDay] || [])];
                             newSlots[index].start = newStart;
                             
                             if (newStart) {
@@ -1029,7 +1116,7 @@ export default function JadwalPengujiPage() {
                                                    date.getMinutes().toString().padStart(2, '0');
                             }
                             
-                            setBulkForm({ ...bulkForm, timeSlots: newSlots });
+                            setBulkForm({ ...bulkForm, daySlots: { ...bulkForm.daySlots, [activeDay]: newSlots } });
                           }}
                         />
                         <input
@@ -1038,9 +1125,9 @@ export default function JadwalPengujiPage() {
                           className="bg-white border-none rounded-xl px-3 py-2 text-sm font-bold shadow-sm"
                           value={slot.end}
                           onChange={e => {
-                            const newSlots = [...bulkForm.timeSlots];
+                            const newSlots = [...(bulkForm.daySlots[activeDay] || [])];
                             newSlots[index].end = e.target.value;
-                            setBulkForm({ ...bulkForm, timeSlots: newSlots });
+                            setBulkForm({ ...bulkForm, daySlots: { ...bulkForm.daySlots, [activeDay]: newSlots } });
                           }}
                         />
                       </div>
