@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
-import { generateMagicToken, getPermanentAuthUrl, PERMANENT_SLUGS, generateTinyUrl } from "@/lib/utils/magic-link";
+import { generateMagicToken, generateTinyUrl } from "@/lib/utils/magic-link";
 
 export async function POST(request: NextRequest) {
     try {
@@ -50,15 +50,10 @@ export async function POST(request: NextRequest) {
         // Generate automatic tinyurl for the magic link
         const shortLink = await generateTinyUrl(magicLinkUrl);
 
-        // Add permanent link if exists
-        const slug = Object.entries(PERMANENT_SLUGS).find(([s, n]) => user.full_name.includes(n))?.[0];
-        const permanentLink = slug ? getPermanentAuthUrl(slug) : null;
-
         return NextResponse.json({
             success: true,
             link: magicLinkUrl,
-            shortLink,
-            permanentLink
+            shortLink
         });
 
     } catch (error: any) {
@@ -113,18 +108,13 @@ export async function GET(request: NextRequest) {
             // Generate automatic tinyurl for the magic link
             const shortLink = await generateTinyUrl(magicLinkUrl);
 
-            // Add permanent link if exists
-            const slug = Object.entries(PERMANENT_SLUGS).find(([s, n]) => user.full_name.includes(n))?.[0];
-            const permanentLink = slug ? getPermanentAuthUrl(slug) : null;
-
             return {
                 id: user.id,
                 full_name: user.full_name,
                 role: user.role,
                 secondary_roles: user.secondary_roles,
                 link: magicLinkUrl,
-                shortLink,
-                permanentLink
+                shortLink
             };
         }));
 
