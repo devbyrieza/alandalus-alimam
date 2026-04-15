@@ -128,6 +128,18 @@ export async function GET() {
                 }
             );
 
+            // DEBUG: Log for Farid to understand the issue
+            if (item.pendaftar.nama_lengkap.toLowerCase().includes("farid")) {
+                console.log("\n=== DEBUG FARID ===");
+                console.log("Pendaftar ID:", item.pendaftar.id);
+                console.log("Jadwal ID:", item.id);
+                console.log("Exam Session ID:", item.exam_session_id);
+                console.log("All scores for Farid:", JSON.stringify(item.pendaftar.nilai_ujian, null, 2));
+                console.log("Scores in session:", JSON.stringify(allScoresInSession, null, 2));
+                console.log("All jadwal in sessions:", JSON.stringify(allJadwalInSessions, null, 2));
+                console.log("===================\n");
+            }
+
             // Merge all scores from the same exam session
             const mergedSessionScore: any = {};
             allScoresInSession.forEach((s: any) => {
