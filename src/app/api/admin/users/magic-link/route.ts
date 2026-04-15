@@ -20,10 +20,14 @@ export async function POST(request: NextRequest) {
         }
 
         const body = await request.json();
+        console.log("Magic Link Request Body:", body);
         const { userId, user_id } = body;
         const finalUserId = userId || user_id;
 
+        console.log("Extracted userId:", userId, "user_id:", user_id, "finalUserId:", finalUserId);
+
         if (!finalUserId) {
+            console.log("Validation failed: User ID is missing");
             return NextResponse.json({ error: "User ID wajib diisi" }, { status: 400 });
         }
 
