@@ -99,32 +99,22 @@ export async function GET() {
                 }
             }
 
-            // Pick score data from ALL records for this pendaftar
-            const allScores = item.pendaftar.nilai_ujian || [];
-            
-            // Build a merged score view for this student from all their records
-            const mergedScore: any = {};
-            // Start from oldest, newest wins for each field
-            [...allScores].sort((a: any, b: any) => 
-                new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
-            ).forEach(s => {
-                Object.entries(s).forEach(([k, v]) => {
-                    if (!isEmpty(v)) mergedScore[k] = v;
-                });
-            });
+            // Find the score record that belongs to THIS specific exam session
+            const sessionScore = (item.pendaftar.nilai_ujian || []).find(
+                (s: any) => s.jadwal_ujian_id === item.id
+            );
+
+            // Use session-specific score, or empty object if none exists
+            const scoreData: any = sessionScore || {};
 
             if (pesertaMap.has(pendaftarId)) {
                 const existing = pesertaMap.get(pendaftarId);
                 for (const r of roles) {
                     if (!existing.roles.includes(r)) existing.roles.push(r);
                 }
-                
-                // Merge scores into existing map entry
-                Object.entries(mergedScore).forEach(([k, v]) => {
-                    if (!isEmpty(v) && isEmpty(existing[k])) {
-                        existing[k] = v;
-                    }
-                });
+
+                // Merge roles but keep the most specific session data
+                // Don't merge scores from different sessions
             } else {
                 pesertaMap.set(pendaftarId, {
                     id: pendaftarId,
@@ -133,20 +123,20 @@ export async function GET() {
                     jenjang: item.pendaftar.jenjang,
                     jadwal_id: item.id,
                     roles: roles,
-                    // Score fields
-                    nilai_id: mergedScore.id,
-                    nilai_wawancara_santri: mergedScore.nilai_wawancara_santri,
-                    nilai_tes_quran: mergedScore.nilai_tes_quran,
-                    nilai_wawancara_ortu: mergedScore.nilai_wawancara_ortu,
-                    catatan_santri: mergedScore.catatan_santri,
-                    catatan_quran: mergedScore.catatan_quran,
-                    catatan_ortu: mergedScore.catatan_ortu,
-                    detail_quran: mergedScore.detail_quran,
-                    detail_wawancara: mergedScore.detail_wawancara,
-                    detail_cawalsan: mergedScore.detail_cawalsan,
-                    input_at_quran: mergedScore.input_at_quran,
-                    input_at_santri: mergedScore.input_at_santri,
-                    input_at_ortu: mergedScore.input_at_ortu,
+                    // Score fields - ONLY from this specific exam session
+                    nilai_id: scoreData.id || null,
+                    nilai_wawancara_santri: scoreData.nilai_wawancara_santri,
+                    nilai_tes_quran: scoreData.nilai_tes_quran,
+                    nilai_wawancara_ortu: scoreData.nilai_wawancara_ortu,
+                    catatan_santri: scoreData.catatan_santri,
+                    catatan_quran: scoreData.catatan_quran,
+                    catatan_ortu: scoreData.catatan_ortu,
+                    detail_quran: scoreData.detail_quran,
+                    detail_wawancara: scoreData.detail_wawancara,
+                    detail_cawalsan: scoreData.detail_cawalsan,
+                    input_at_quran: scoreData.input_at_quran,
+                    input_at_santri: scoreData.input_at_santri,
+                    input_at_ortu: scoreData.input_at_ortu,
                 });
             }
         }
