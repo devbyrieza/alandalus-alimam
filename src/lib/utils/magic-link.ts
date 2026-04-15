@@ -91,8 +91,20 @@ export const PERMANENT_SLUGS: Record<string, string> = {
 // MANUAL TINYURL MAPPING (Name -> Short URL)
 // ============================================================================
 
-// NOTE: Manual tinyurl mappings have been removed because they pointed to localhost URLs.
-// All tinyurls are now generated automatically using the TinyURL API with correct production URLs.
+// Manual tinyurls for specific examiners/interviewers (pointing to correct production URLs)
+export const MANUAL_TINYURLS: Record<string, string> = {
+    "Agus Cahyono": "https://tinyurl.com/alimam-aguscahyono",
+    "Jusman": "https://tinyurl.com/alimam-jusmann",
+    "Muhammad Syauqi Al Faruq": "https://tinyurl.com/alimam-syauqialfaruq",
+    "Maulidin Bachtiar": "https://tinyurl.com/alimam-maulidinbachtiar"
+};
+
+/**
+ * Get manual tinyurl for a specific user (if exists)
+ */
+export function getManualTinyUrl(fullName: string): string | null {
+    return MANUAL_TINYURLS[fullName] || null;
+}
 
 /**
  * Get internal short link (permanent) for a slug
