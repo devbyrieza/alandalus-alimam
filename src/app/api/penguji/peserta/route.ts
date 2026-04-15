@@ -99,13 +99,37 @@ export async function GET() {
                 }
             }
 
-            // Find the score record that belongs to THIS specific exam session
-            const sessionScore = (item.pendaftar.nilai_ujian || []).find(
-                (s: any) => s.jadwal_ujian_id === item.id
+            // Find ALL score records for this pendaftar that belong to the SAME exam session
+            // (A student can have multiple jadwal records in one session: Quran, Wawancara, etc.)
+            const allScoresInSession = (item.pendaftar.nilai_ujian || []).filter(
+                (s: any) => {
+                    // If score has jadwal_ujian_id, check if it belongs to the same exam session
+                    if (s.jadwal_ujian_id) {
+                        // Find the jadwal record for this score
+                        const scoreJadwal = assigned.find((j: any) => j.id === s.jadwal_ujian_id);
+                        // Include if it's the same exam session
+                        return scoreJadwal && scoreJadwal.exam_session_id === item.exam_session_id;
+                    }
+                    // If score has no jadwal_ujian_id (old data), include it
+                    return true;
+                }
             );
 
-            // Use session-specific score, or empty object if none exists
-            const scoreData: any = sessionScore || {};
+            // Merge all scores from the same exam session
+            const mergedSessionScore: any = {};
+            allScoresInSession.forEach((s: any) => {
+                Object.entries(s).forEach(([k, v]) => {
+                    if (!isEmpty(v)) {
+                        // Prefer non-null values
+                        if (mergedSessionScore[k] == null || mergedSessionScore[k] === "") {
+                            mergedSessionScore[k] = v;
+                        }
+                    }
+                });
+            });
+
+            // Use merged session score, or empty object if none exists
+            const scoreData: any = Object.keys(mergedSessionScore).length > 0 ? mergedSessionScore : {};
 
             if (pesertaMap.has(pendaftarId)) {
                 const existing = pesertaMap.get(pendaftarId);
@@ -113,8 +137,13 @@ export async function GET() {
                     if (!existing.roles.includes(r)) existing.roles.push(r);
                 }
 
-                // Merge roles but keep the most specific session data
-                // Don't merge scores from different sessions
+                // Merge scores from the same exam session into existing map entry
+                // This handles cases where a student has multiple jadwal records in the same session
+                Object.entries(scoreData).forEach(([k, v]) => {
+                    if (!isEmpty(v) && isEmpty(existing[k])) {
+                        existing[k] = v;
+                    }
+                });
             } else {
                 pesertaMap.set(pendaftarId, {
                     id: pendaftarId,
@@ -123,7 +152,7 @@ export async function GET() {
                     jenjang: item.pendaftar.jenjang,
                     jadwal_id: item.id,
                     roles: roles,
-                    // Score fields - ONLY from this specific exam session
+                    // Score fields - merged from ALL jadwal in the SAME exam session
                     nilai_id: scoreData.id || null,
                     nilai_wawancara_santri: scoreData.nilai_wawancara_santri,
                     nilai_tes_quran: scoreData.nilai_tes_quran,
