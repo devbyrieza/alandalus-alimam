@@ -20,14 +20,15 @@ export async function POST(request: NextRequest) {
         }
 
         const body = await request.json();
-        const { userId } = body;
+        const { userId, user_id } = body;
+        const finalUserId = userId || user_id;
 
-        if (!userId) {
+        if (!finalUserId) {
             return NextResponse.json({ error: "User ID wajib diisi" }, { status: 400 });
         }
 
         const user = await prisma.profile.findUnique({
-            where: { id: userId },
+            where: { id: finalUserId },
             select: { id: true, role: true, full_name: true }
         });
 
