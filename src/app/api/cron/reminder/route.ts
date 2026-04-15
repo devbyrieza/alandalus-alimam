@@ -1,7 +1,7 @@
 /**
- * Cron endpoint for H-1 reminders.
- * Called daily at 08:00 WIB by external cron.
- * Finds all jadwal with tes tomorrow and schedules reminders for 20:00 WIB today.
+ * Cron endpoint for 4-hour reminders.
+ * Called every 15 minutes by external cron.
+ * Finds all jadwal with exams starting in exactly 4 hours and sends reminders immediately.
  */
 
 import { NextResponse } from "next/server";
@@ -11,7 +11,7 @@ import {
     buildMessageReminderH1Santri,
     buildMessageReminderH1Penguji,
 } from "@/lib/whatsapp-queue";
-import { generateMagicToken, getManualTinyUrl } from "@/lib/utils/magic-link";
+import { generateMagicToken, getManualTinyUrl, generateTinyUrl } from "@/lib/utils/magic-link";
 
 const CRON_SECRET = process.env.CRON_SECRET || "ppdb-alimam-cron-2026";
 
@@ -26,25 +26,19 @@ export async function GET(request: Request) {
     }
 
     try {
-        // Calculate tomorrow's date range (in WIB = UTC+7)
-        const now = new Date(); // Current server time
-        
-        // Target: Tomorrow's date (April 13 if today is April 12)
-        const tomorrow = new Date(now);
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        
-        const tomorrowStart = new Date(tomorrow);
-        tomorrowStart.setHours(0, 0, 0, 0);
+        // Calculate 4-hour window from now
+        const now = new Date();
+        const fourHoursFromNow = new Date(now.getTime() + 4 * 60 * 60 * 1000);
+        const fourHoursPlus15Min = new Date(now.getTime() + 4 * 60 * 60 * 1000 + 15 * 60 * 1000); // 15 min buffer
 
-        const tomorrowEnd = new Date(tomorrow);
-        tomorrowEnd.setHours(23, 59, 59, 999);
-
-        // Find all jadwal_ujian scheduled for tomorrow
-        const jadwalTomorrow = await prisma.jadwalUjian.findMany({
+        // Find all jadwal_ujian with exams starting in the 4-hour window
+        const jadwalIn4Hours = await prisma.jadwalUjian.findMany({
             where: {
-                tanggal_ujian: {
-                    gte: tomorrowStart,
-                    lte: tomorrowEnd,
+                exam_session: {
+                    start_time: {
+                        gte: fourHoursFromNow,
+                        lte: fourHoursPlus15Min,
+                    },
                 },
             },
             include: {
@@ -60,15 +54,12 @@ export async function GET(request: Request) {
         let enqueuedSantri = 0;
         let enqueuedPenguji = 0;
 
-        for (const jadwal of jadwalTomorrow) {
-            // Check if pendaftar reminder already enqueued
-            const existingPendaftarReminder = jadwal.notif_reminders.find(
-                (r) => r.pendaftar_id === jadwal.pendaftar_id
-            );
-
+        for (const jadwal of jadwalIn4Hours) {
             // Format details
             const dateObj = new Date(jadwal.tanggal_ujian);
             const hari = dateObj.toLocaleDateString("id-ID", { weekday: "long" }).replace("Minggu", "Ahad");
+            
+            // Explicitly format to avoid machine-specific weekday prefix in some environments
             const tanggalStr = dateObj.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
             
             const timeObj = jadwal.exam_session ? new Date(jadwal.exam_session.start_time) : new Date(jadwal.waktu_mulai_santri);
@@ -86,9 +77,8 @@ export async function GET(request: Request) {
                     return d;
                 })();
 
-            // Calculate individualized scheduled time (StartTime - 4 hours)
-            const reminderTime = new Date(startTime.getTime() - 4 * 60 * 60 * 1000);
-            const finalScheduledAt = reminderTime < now ? now : reminderTime;
+            // Send immediately since we're already at the 4-hour mark
+            const finalScheduledAt = now;
 
             const googleMeetLink = 
                 jadwal.penguji_santri?.google_meet_link || 
@@ -101,7 +91,7 @@ export async function GET(request: Request) {
                 : (jadwal.exam_session?.location || "Pesantren Al-Andalus Al-Imam");
 
             // 1. Enqueue for Santri
-            if (!existingPendaftarReminder && jadwal.pendaftar.no_hp) {
+            if (jadwal.pendaftar.no_hp) {
                 const msgSantri = buildMessageReminderH1Santri(
                     jadwal.pendaftar.nama_lengkap,
                     hari,
@@ -111,7 +101,7 @@ export async function GET(request: Request) {
                     jenisUjian
                 );
 
-                await enqueueWhatsapp({
+                const result = await enqueueWhatsapp({
                     pendaftarId: jadwal.pendaftar_id,
                     phone: jadwal.pendaftar.no_hp,
                     jenisNotif: "reminder_h1",
@@ -119,22 +109,7 @@ export async function GET(request: Request) {
                     scheduledAt: finalScheduledAt,
                 });
 
-                // Track
-                await prisma.jadwalNotifReminder.upsert({
-                    where: {
-                        jadwal_ujian_id_pendaftar_id: {
-                            jadwal_ujian_id: jadwal.id,
-                            pendaftar_id: jadwal.pendaftar_id,
-                        },
-                    },
-                    update: {},
-                    create: {
-                        jadwal_ujian_id: jadwal.id,
-                        pendaftar_id: jadwal.pendaftar_id,
-                        reminder_sent: false,
-                    },
-                });
-                enqueuedSantri++;
+                if (result.queued) enqueuedSantri++;
             }
 
             // 2. Enqueue for Examiners (if assigned)
@@ -158,9 +133,8 @@ export async function GET(request: Request) {
                     );
                     const magicLink = `${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/api/auth/magic?token=${token}`;
 
-                    // Use manual short link if exists for better UX/permanence
-                    const manualShortLink = getManualTinyUrl(profile.full_name);
-                    const finalInputLink = manualShortLink || magicLink;
+                    // Generate automatic tinyurl for the magic link
+                    const shortUrl = await generateTinyUrl(magicLink);
 
                     const msgPenguji = buildMessageReminderH1Penguji(
                         profile.full_name,
@@ -170,7 +144,7 @@ export async function GET(request: Request) {
                         jam,
                         profile.google_meet_link || "Menyesuaikan",
                         type,
-                        finalInputLink
+                        shortUrl
                     );
 
                     const result = await enqueueWhatsapp({
@@ -188,7 +162,7 @@ export async function GET(request: Request) {
 
         return NextResponse.json({
             success: true,
-            totalJadwalTomorrow: jadwalTomorrow.length,
+            totalJadwalIn4Hours: jadwalIn4Hours.length,
             enqueuedSantri,
             enqueuedPenguji,
             timestamp: now.toISOString(),

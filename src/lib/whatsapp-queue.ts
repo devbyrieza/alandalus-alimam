@@ -894,6 +894,10 @@ export function buildMessageReminderH1Santri(
     lokasi: string,
     jenisUjian: string
 ): string {
+    // Ensure no redundant Hari and WIB
+    const finalHari = tanggal.toLowerCase().includes(hari.toLowerCase()) ? "" : `${hari}, `;
+    const finalJam = jam.toLowerCase().includes("wib") ? jam : `${jam} WIB`;
+
     return `*PENGINGAT UJIAN SELEKSI*
 
 Assalamu'alaikum Wr. Wb.
@@ -901,8 +905,8 @@ Halo Ananda *${nama}*,
 
 Ini adalah pengingat bahwa Anda dijadwalkan mengikuti *${jenisUjian}* pada:
 
-📅 *Hari/Tanggal:* ${hari}, ${tanggal}
-⏰ *Waktu:* ${jam} WIB
+📅 *Hari/Tanggal:* ${finalHari}${tanggal}
+⏰ *Waktu:* ${finalJam}
 📍 *Lokasi/Link:* ${lokasi}
 
 Mohon persiapkan diri dengan baik dan pastikan koneksi internet stabil jika ujian online. Sampai jumpa!
@@ -927,36 +931,23 @@ export function buildMessageReminderH1Penguji(
     const title = (namaPenguji || "").toLowerCase().includes("ustadzah") ? "Ustadzah" : "Ustadz";
     const isWawancara = jenisUjian.toLowerCase().includes("wawancara");
     
-    if (isWawancara) {
-        return `*REMINDER JADWAL WAWANCARA*
+    // Ensure no redundant Hari and WIB
+    const finalHari = tanggal.toLowerCase().includes(hari.toLowerCase()) ? "" : `${hari}, `;
+    const finalJam = jam.toLowerCase().includes("wib") ? jam : `${jam} WIB`;
+
+    const templateTitle = isWawancara ? "*REMINDER JADWAL WAWANCARA*" : "*REMINDER JADWAL MENGUJI*";
+    const agendaLabel = isWawancara ? "*Agenda:*" : "*Mata Pelajaran:*";
+
+    return `${templateTitle}
 
 Assalamu'alaikum ${title} *${namaPenguji}*,
 
-Mengingatkan kembali jadwal wawancara Anda:
+Mengingatkan kembali jadwal ${isWawancara ? "wawancara" : "menguji"} Anda:
 
-📝 *Agenda:* ${jenisUjian}
+📝 ${agendaLabel} ${jenisUjian}
 👤 *Nama Santri:* ${namaSantri}
-📅 *Hari/Tanggal:* ${hari}, ${tanggal}
-⏰ *Waktu:* ${jam} WIB
-📍 *Link Meet:* ${lokasi}
-🔗 *Input Hasil:* ${inputNilaiLink || "-"}
-
-Mohon kehadirannya tepat waktu. Syukron.
-
----
-*Sistem PPDB Al-Andalus Al-Imam*`;
-    }
-
-    return `*REMINDER JADWAL MENGUJI*
-
-Assalamu'alaikum ${title} *${namaPenguji}*,
-
-Mengingatkan kembali jadwal menguji Anda:
-
-📝 *Mata Pelajaran:* ${jenisUjian}
-👤 *Nama Santri:* ${namaSantri}
-📅 *Hari/Tanggal:* ${hari}, ${tanggal}
-⏰ *Waktu:* ${jam} WIB
+📅 *Hari/Tanggal:* ${finalHari}${tanggal}
+⏰ *Waktu:* ${finalJam}
 📍 *Link Meet:* ${lokasi}
 🔗 *Input Hasil:* ${inputNilaiLink || "-"}
 

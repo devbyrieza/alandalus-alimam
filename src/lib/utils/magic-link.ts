@@ -114,12 +114,39 @@ export function getPermanentAuthUrl(slug: string): string {
  * Get manual TinyURL if exists for a user
  */
 export function getManualTinyUrl(fullName: string): string | null {
-    // Try exact match then contains
-    if (MANUAL_TINYURLS[fullName]) return MANUAL_TINYURLS[fullName];
-    
+    if (!fullName) return null;
+    const normalizedTarget = fullName.toLowerCase();
+
+    // 1. Try exact match (normalized)
     for (const [name, url] of Object.entries(MANUAL_TINYURLS)) {
-        if (fullName.includes(name) || name.includes(fullName)) return url;
+        if (name.toLowerCase() === normalizedTarget) return url;
     }
-    
+
+    // 2. Try substring match (normalized)
+    for (const [name, url] of Object.entries(MANUAL_TINYURLS)) {
+        const normalizedName = name.toLowerCase();
+        if (normalizedTarget.includes(normalizedName) || normalizedName.includes(normalizedTarget)) {
+            return url;
+        }
+    }
+
     return null;
+}
+
+/**
+ * Generate automatic TinyURL for any long URL
+ * Uses TinyURL API for short link generation
+ */
+export async function generateTinyUrl(longUrl: string): Promise<string> {
+    try {
+        const response = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`);
+        if (response.ok) {
+            const shortUrl = await response.text();
+            return shortUrl;
+        }
+    } catch (error) {
+        console.error('Failed to generate TinyURL:', error);
+    }
+    // Fallback to original URL if TinyURL generation fails
+    return longUrl;
 }
