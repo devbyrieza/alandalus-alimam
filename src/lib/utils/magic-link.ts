@@ -91,16 +91,8 @@ export const PERMANENT_SLUGS: Record<string, string> = {
 // MANUAL TINYURL MAPPING (Name -> Short URL)
 // ============================================================================
 
-export const MANUAL_TINYURLS: Record<string, string> = {
-    "Abah": "https://tinyurl.com/alimam-abah",
-    "Agus Cahyono": "https://tinyurl.com/alimam-agus",
-    "Fuad Khomsatun": "https://tinyurl.com/alimam-fuad",
-    "Jusman": "https://tinyurl.com/alimam-jusman",
-    "Maulidin Bachtiar": "https://tinyurl.com/alimam-bachtiar",
-    "Muhajir": "https://tinyurl.com/alimam-muhajir",
-    "Muhammad Syauqi Al Faruq": "https://tinyurl.com/alimam-syauqi",
-    "Teguh": "https://tinyurl.com/alimam-teguh"
-};
+// NOTE: Manual tinyurl mappings have been removed because they pointed to localhost URLs.
+// All tinyurls are now generated automatically using the TinyURL API with correct production URLs.
 
 /**
  * Get internal short link (permanent) for a slug
@@ -108,29 +100,6 @@ export const MANUAL_TINYURLS: Record<string, string> = {
 export function getPermanentAuthUrl(slug: string): string {
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://pesantren-alimam.com";
     return `${baseUrl}/api/auth/short/${slug}`;
-}
-
-/**
- * Get manual TinyURL if exists for a user
- */
-export function getManualTinyUrl(fullName: string): string | null {
-    if (!fullName) return null;
-    const normalizedTarget = fullName.toLowerCase();
-
-    // 1. Try exact match (normalized)
-    for (const [name, url] of Object.entries(MANUAL_TINYURLS)) {
-        if (name.toLowerCase() === normalizedTarget) return url;
-    }
-
-    // 2. Try substring match (normalized)
-    for (const [name, url] of Object.entries(MANUAL_TINYURLS)) {
-        const normalizedName = name.toLowerCase();
-        if (normalizedTarget.includes(normalizedName) || normalizedName.includes(normalizedTarget)) {
-            return url;
-        }
-    }
-
-    return null;
 }
 
 /**

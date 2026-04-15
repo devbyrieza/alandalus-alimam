@@ -11,7 +11,7 @@ import {
     buildMessageReminderH1Santri,
     buildMessageReminderH1Penguji,
 } from "@/lib/whatsapp-queue";
-import { generateMagicToken, getManualTinyUrl, generateTinyUrl } from "@/lib/utils/magic-link";
+import { generateMagicToken, generateTinyUrl } from "@/lib/utils/magic-link";
 
 const CRON_SECRET = process.env.CRON_SECRET || "ppdb-alimam-cron-2026";
 

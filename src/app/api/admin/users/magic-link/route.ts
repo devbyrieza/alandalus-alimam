@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
-import { generateMagicToken, getManualTinyUrl, getPermanentAuthUrl, PERMANENT_SLUGS } from "@/lib/utils/magic-link";
+import { generateMagicToken, getPermanentAuthUrl, PERMANENT_SLUGS, generateTinyUrl } from "@/lib/utils/magic-link";
 
 export async function POST(request: NextRequest) {
     try {
@@ -42,13 +42,15 @@ export async function POST(request: NextRequest) {
         const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://pesantren-alimam.com";
         const magicLinkUrl = `${baseUrl}/api/auth/magic?token=${token}`;
 
-        // Add manual or permanent links if exist
-        const shortLink = getManualTinyUrl(user.full_name);
+        // Generate automatic tinyurl for the magic link
+        const shortLink = await generateTinyUrl(magicLinkUrl);
+
+        // Add permanent link if exists
         const slug = Object.entries(PERMANENT_SLUGS).find(([s, n]) => user.full_name.includes(n))?.[0];
         const permanentLink = slug ? getPermanentAuthUrl(slug) : null;
 
-        return NextResponse.json({ 
-            success: true, 
+        return NextResponse.json({
+            success: true,
             link: magicLinkUrl,
             shortLink,
             permanentLink
@@ -94,15 +96,19 @@ export async function GET(request: NextRequest) {
 
         const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://pesantren-alimam.com";
 
-        const results = examiners.map(user => {
+        const results = await Promise.all(examiners.map(async user => {
             // Determine active role for input nilai (prioritize examiner/interviewer roles)
             const activeRole = (user.role.includes('admin') && user.secondary_roles.length > 0)
                 ? user.secondary_roles.find(r => r.includes('penguji') || r.includes('pewawancara')) || user.role
                 : user.role;
 
             const token = generateMagicToken(user.id, activeRole, user.full_name, 48); // Valid for 48 hours for bulk view
-            
-            const shortLink = getManualTinyUrl(user.full_name);
+            const magicLinkUrl = `${baseUrl}/api/auth/magic?token=${token}`;
+
+            // Generate automatic tinyurl for the magic link
+            const shortLink = await generateTinyUrl(magicLinkUrl);
+
+            // Add permanent link if exists
             const slug = Object.entries(PERMANENT_SLUGS).find(([s, n]) => user.full_name.includes(n))?.[0];
             const permanentLink = slug ? getPermanentAuthUrl(slug) : null;
 
@@ -111,11 +117,11 @@ export async function GET(request: NextRequest) {
                 full_name: user.full_name,
                 role: user.role,
                 secondary_roles: user.secondary_roles,
-                link: `${baseUrl}/api/auth/magic?token=${token}`,
+                link: magicLinkUrl,
                 shortLink,
                 permanentLink
             };
-        });
+        }));
 
         return NextResponse.json({ success: true, data: results });
 
