@@ -401,7 +401,7 @@ function InputNilaiContent() {
   // RENDER: Tes Al-Qur'an Form
   // ============================================================================
   const renderQuranForm = (p: Peserta) => {
-    const isSaved = !!(p.detail_quran?.rekomendasi || p.nilai_tes_quran != null);
+    const isSaved = !!(p.detail_quran?.rekomendasi || p.nilai_tes_quran != null || p.score_quran != null);
     const isEditing = editingId === p.id + "quran";
 
     return (
@@ -469,9 +469,25 @@ function InputNilaiContent() {
               <div className="flex flex-col gap-3 py-4 sm:py-5 bg-white/50 rounded-xl sm:rounded-2xl px-5 sm:px-6 border border-emerald-100/50 shadow-inner">
                 <div className="flex items-center gap-3 sm:gap-4">
                   <CheckCircle className="w-6 h-6 sm:w-7 sm:h-7 text-emerald-600 shrink-0" />
-                  <div>
+                  <div className="flex-1">
                     <p className="text-emerald-900 font-black text-sm leading-none">Nilai sudah tersimpan.</p>
-                    <p className="text-emerald-700/70 text-[10px] sm:text-xs font-black mt-2 uppercase tracking-widest">Rekomendasi: {p.detail_quran?.rekomendasi}</p>
+                    <div className="mt-2 space-y-1">
+                      {(p.score_quran != null || p.nilai_tes_quran != null) && (
+                        <p className="text-emerald-700/70 text-[10px] sm:text-xs font-black uppercase tracking-widest">
+                          Skor: {p.score_quran ?? p.nilai_tes_quran}
+                        </p>
+                      )}
+                      {p.detail_quran?.rekomendasi && (
+                        <p className="text-emerald-700/70 text-[10px] sm:text-xs font-black uppercase tracking-widest">
+                          Rekomendasi: {p.detail_quran.rekomendasi}
+                        </p>
+                      )}
+                      {p.detail_quran?.nama_penguji && (
+                        <p className="text-emerald-700/70 text-[10px] sm:text-xs font-black uppercase tracking-widest">
+                          Penguji: {p.detail_quran.nama_penguji}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
                 {p.input_at_quran && (

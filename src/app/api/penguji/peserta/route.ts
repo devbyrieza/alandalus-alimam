@@ -112,16 +112,17 @@ export async function GET() {
                 }
             }
 
-            // Find ALL score records for this pendaftar that belong to the SAME exam session
-            // (A student can have multiple jadwal records in one session: Quran, Wawancara, etc.)
+            // Find ALL score records for this pendaftar
+            // Include both session-specific scores and general scores to ensure no data is lost
             const allScoresInSession = (item.pendaftar.nilai_ujian || []).filter(
                 (s: any) => {
                     // If score has jadwal_ujian_id, check if it belongs to the same exam session
                     if (s.jadwal_ujian_id) {
                         // Find the jadwal record for this score from ALL jadwal in the session
                         const scoreJadwal = allJadwalInSessions.find((j: any) => j.id === s.jadwal_ujian_id);
-                        // Include if it's in the same exam session
-                        return scoreJadwal && scoreJadwal.exam_session_id === item.exam_session_id;
+                        // Include if it's in the same exam session OR if it's a Quran score (to ensure Quran scores are always visible)
+                        return (scoreJadwal && scoreJadwal.exam_session_id === item.exam_session_id) || 
+                               (s.score_quran != null || s.nilai_tes_quran != null || s.detail_quran != null);
                     }
                     // If score has no jadwal_ujian_id (old data), include it
                     return true;
