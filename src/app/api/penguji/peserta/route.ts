@@ -60,6 +60,19 @@ export async function GET() {
             orderBy: { tanggal_ujian: 'asc' }
         });
 
+        // Fetch ALL jadwal records for the exam sessions we're dealing with
+        // This is needed to properly match scores to their jadwal records
+        const examSessionIds = [...new Set(assigned.map(j => j.exam_session_id).filter((id): id is string => Boolean(id)))];
+        const allJadwalInSessions = examSessionIds.length > 0 ? await prisma.jadwalUjian.findMany({
+            where: {
+                exam_session_id: { in: examSessionIds }
+            },
+            select: {
+                id: true,
+                exam_session_id: true
+            }
+        }) : [];
+
         // Helper to check if an object is effectively empty
         const isEmpty = (v: any) => {
             if (v == null || v === "") return true;
@@ -105,9 +118,9 @@ export async function GET() {
                 (s: any) => {
                     // If score has jadwal_ujian_id, check if it belongs to the same exam session
                     if (s.jadwal_ujian_id) {
-                        // Find the jadwal record for this score
-                        const scoreJadwal = assigned.find((j: any) => j.id === s.jadwal_ujian_id);
-                        // Include if it's the same exam session
+                        // Find the jadwal record for this score from ALL jadwal in the session
+                        const scoreJadwal = allJadwalInSessions.find((j: any) => j.id === s.jadwal_ujian_id);
+                        // Include if it's in the same exam session
                         return scoreJadwal && scoreJadwal.exam_session_id === item.exam_session_id;
                     }
                     // If score has no jadwal_ujian_id (old data), include it
