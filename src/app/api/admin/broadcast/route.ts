@@ -24,6 +24,7 @@ export async function POST(req: NextRequest) {
         const recipients = await prisma.pendaftar.findMany({
             where: {
                 id: { in: ids },
+                deleted_at: null, // Don't broadcast to deleted users
             },
             select: {
                 id: true,

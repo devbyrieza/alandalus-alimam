@@ -175,6 +175,9 @@ export default function DashboardLayout({
 
   // Function untuk cek apakah tab bisa diakses
   const isTabAccessible = (tabName: TabName) => {
+    // SPECIAL BYPASS FOR TESTING ACCOUNT: RIEZA TES
+    if (nomorPendaftaran === "ILI2600007") return true;
+    
     return canAccessTab(tabName, statusProses);
   };
 

@@ -106,6 +106,7 @@ export default function UndanganSeleksiTab() {
   const [data, setData] = useState<UndanganData | null>(null);
   const [loading, setLoading] = useState(true);
   const [bookingId, setBookingId] = useState<string | null>(null);
+  const [isTestingAccount, setIsTestingAccount] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -114,6 +115,25 @@ export default function UndanganSeleksiTab() {
   const fetchData = async () => {
     try {
       setLoading(true);
+      
+      // Check session for testing account bypass
+      const sessionRes = await fetch("/api/auth/session");
+      if (sessionRes.ok) {
+        const session = await sessionRes.json();
+        // Check if registration number matches ILI2600007
+        // We might need to fetch the full pendaftar data to get the number if not in session
+        // But the layout already has it, so let's assume it's either in session or we fetch status
+        if (session.pendaftar_id) {
+          const statusRes = await fetch(`/api/pendaftar/status?pendaftar_id=${session.pendaftar_id}`);
+          if (statusRes.ok) {
+            const statusData = await statusRes.json();
+            if (statusData.nomor_pendaftaran === "ILI2600007") {
+              setIsTestingAccount(true);
+            }
+          }
+        }
+      }
+
       const response = await fetch("/api/pendaftar/undangan-seleksi");
       if (response.ok) {
         const result = await response.json();
@@ -215,7 +235,7 @@ export default function UndanganSeleksiTab() {
   const grupAItems = Object.entries(data.grupA || {}) as [string, GrupAItem][];
   const grupACompleted = grupAItems.filter(([, v]) => v.completed).length;
 
-  if (data.locked) {
+  if (data.locked && !isTestingAccount) {
     return (
       <div className="space-y-6">
         <div className="bg-linear-to-r from-stone-600 to-stone-800 rounded-2xl p-6 md:p-8 text-white shadow-lg relative overflow-hidden">

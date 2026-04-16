@@ -17,12 +17,18 @@ export async function GET(req: NextRequest) {
             },
             where: {
                 provinsi: { not: null },
+                deleted_at: null, // Filter out deleted test data
             },
         });
 
         // Aggregate Wali/OrangTua by Region
         // We fetch all parents and join with pendaftar to get fallback address
         const allFamilyData = await prisma.orangTua.findMany({
+            where: {
+                pendaftar: {
+                    deleted_at: null // Filter out parents of deleted test data
+                }
+            },
             include: {
                 pendaftar: {
                     select: {
