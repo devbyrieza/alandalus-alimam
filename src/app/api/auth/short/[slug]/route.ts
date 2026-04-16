@@ -35,8 +35,14 @@ export async function GET(
             ? user.secondary_roles.find(r => r.includes('penguji') || r.includes('pewawancara')) || user.role
             : user.role;
 
+        const { searchParams } = new URL(request.url);
+        const pendaftarNomor = searchParams.get("p");
+        const redirectPath = pendaftarNomor 
+            ? `/dashboard/penguji/input-nilai?search=${encodeURIComponent(pendaftarNomor)}`
+            : undefined;
+
         // Generate a fresh magic token (valid for 48 hours for short links)
-        const token = generateMagicToken(user.id, activeRole, user.full_name, 48);
+        const token = generateMagicToken(user.id, activeRole, user.full_name, 48, redirectPath);
 
         // Redirect to the actual auth magic handler
         const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://pesantren-alimam.com";

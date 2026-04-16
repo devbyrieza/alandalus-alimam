@@ -894,7 +894,9 @@ export function buildMessageReminderH1Santri(
     lokasi: string,
     jenisUjian: string
 ): string {
-    const finalJam = jam.toLowerCase().includes("wib") ? jam : `${jam} WIB`;
+    const finalJam = (jam || "").toLowerCase().includes("wib") ? jam : `${jam} WIB`;
+
+    const finalHari = (tanggal || "").toLowerCase().includes(hari.toLowerCase()) ? "" : `${hari}, `;
 
     return `*PENGINGAT UJIAN SELEKSI*
 
@@ -902,7 +904,7 @@ Assalamu'alaikum *${nama}*,
 
 Ini adalah pengingat bahwa Anda dijadwalkan mengikuti *${jenisUjian}* pada:
 
-📅 *Hari/Tanggal:* ${hari}, ${tanggal}
+📅 *Hari/Tanggal:* ${finalHari}${tanggal}
 ⏰ *Waktu:* ${finalJam}
 📍 *Lokasi/Link:* ${lokasi}
 
@@ -933,6 +935,8 @@ export function buildMessageReminderH1Penguji(
     const templateTitle = isWawancara ? "*REMINDER JADWAL WAWANCARA*" : "*REMINDER JADWAL MENGUJI*";
     const agendaText = isWawancara ? "Wawancara Calon Santri / Ortu" : jenisUjian;
 
+    const finalHari = (tanggal || "").toLowerCase().includes(hari.toLowerCase()) ? "" : `${hari}, `;
+
     return `${templateTitle}
 
 Assalamu'alaikum ${title} *${namaPenguji}*,
@@ -941,7 +945,7 @@ Mengingatkan jadwal ${isWawancara ? "wawancara" : "menguji"} Anda:
 
 📝 *Agenda:* ${agendaText}
 👤 *Nama Santri:* ${namaSantri}
-📅 *Hari/Tanggal:* ${hari}, ${tanggal}
+📅 *Hari/Tanggal:* ${finalHari}${tanggal}
 ⏰ *Waktu:* ${finalJam}
 📍 *Link Meet:* ${lokasi}
 🔗 *Input Hasil:* ${inputNilaiLink || "-"}

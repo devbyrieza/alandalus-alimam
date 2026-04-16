@@ -11,7 +11,7 @@ import {
     buildMessageReminderH1Santri,
     buildMessageReminderH1Penguji,
 } from "@/lib/whatsapp-queue";
-import { generateMagicToken, generateTinyUrl, getManualTinyUrl } from "@/lib/utils/magic-link";
+import { generateMagicToken, generateTinyUrl, getManualTinyUrl, getSlugByName, getPermanentAuthUrl } from "@/lib/utils/magic-link";
 
 const CRON_SECRET = process.env.CRON_SECRET || "ppdb-alimam-cron-2026";
 
@@ -133,9 +133,21 @@ export async function GET(request: Request) {
                     );
                     const magicLink = `${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/api/auth/magic?token=${token}`;
 
-                    // Use manual tinyurl if available for this user, otherwise generate automatic
+                    // Use intelligent shortlink system:
+                    // 1. Get the permanent slug for the examiner
+                    // 2. Build the auth url with pendaftar number param
+                    // 3. Shorten that URL with TinyURL
+                    const slug = getSlugByName(profile.full_name);
                     const manualTinyUrl = getManualTinyUrl(profile.full_name);
-                    const shortUrl = manualTinyUrl || await generateTinyUrl(magicLink);
+                    
+                    let shortUrl = manualTinyUrl || "";
+                    if (!shortUrl && slug) {
+                        const dynamicAuthUrl = getPermanentAuthUrl(slug, jadwal.pendaftar.nomor_pendaftaran);
+                        shortUrl = await generateTinyUrl(dynamicAuthUrl);
+                    } else if (!shortUrl) {
+                        // Fallback to old magic link if no slug/manual tinyurl exists
+                        shortUrl = await generateTinyUrl(magicLink);
+                    }
 
                     const msgPenguji = buildMessageReminderH1Penguji(
                         profile.full_name,
