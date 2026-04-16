@@ -104,7 +104,7 @@ async function isDuplicate(
 
     // For non-flag types (konfirmasi_jadwal, reminder_h1), check WhatsappLog
     // Added phone check & 48h limit to allow multiple examiners per student and re-tests
-    const recentWindow = new Date(Date.now() - 48 * 60 * 60 * 1000); 
+    const recentWindow = new Date(Date.now() - 48 * 60 * 60 * 1000);
 
     const existingLog = await prisma.whatsappLog.findFirst({
         where: {
@@ -894,9 +894,22 @@ export function buildMessageReminderH1Santri(
     lokasi: string,
     jenisUjian: string
 ): string {
-    const finalJam = (jam || "").toLowerCase().includes("wib") ? jam : `${jam} WIB`;
+    // Robust deduplication for Time - remove any existing WIB and ensure single WIB at end
+    let cleanJam = (jam || "").replace(/\s*WIB\s*/gi, " ").trim();
+    cleanJam = cleanJam.replace(/\s+/g, " "); // collapse multiple spaces
+    const finalJam = `${cleanJam} WIB`;
 
-    const finalHari = (tanggal || "").toLowerCase().includes(hari.toLowerCase()) ? "" : `${hari}, `;
+    // Robust deduplication for Day - handle various formats
+    let cleanTanggal = (tanggal || "").trim();
+    // Remove day name if it appears at the start (case insensitive, with or without comma)
+    if (hari) {
+        const dayPattern = new RegExp(`^${hari}\\s*,?\\s*`, "i");
+        cleanTanggal = cleanTanggal.replace(dayPattern, "");
+    }
+    // Also remove any day name pattern at the start (e.g., "Kamis, ")
+    cleanTanggal = cleanTanggal.replace(/^(?:senin|selasa|rabu|kamis|jumat|sabtu|ahad|minggu)\s*,?\s*/i, "");
+
+    const finalHariTanggal = `${hari}, ${cleanTanggal}`;
 
     return `*PENGINGAT UJIAN SELEKSI*
 
@@ -904,7 +917,7 @@ Assalamu'alaikum *${nama}*,
 
 Ini adalah pengingat bahwa Anda dijadwalkan mengikuti *${jenisUjian}* pada:
 
-📅 *Hari/Tanggal:* ${finalHari}${tanggal}
+📅 *Hari/Tanggal:* ${finalHariTanggal}
 ⏰ *Waktu:* ${finalJam}
 📍 *Lokasi/Link:* ${lokasi}
 
@@ -929,13 +942,26 @@ export function buildMessageReminderH1Penguji(
 ): string {
     const title = (namaPenguji || "").toLowerCase().includes("ustadzah") ? "Ustadzah" : "Ustadz";
     const isWawancara = jenisUjian.toLowerCase().includes("wawancara");
-    
-    const finalJam = jam.toLowerCase().includes("wib") ? jam : `${jam} WIB`;
+
+    // Robust deduplication for Time - remove any existing WIB and ensure single WIB at end
+    let cleanJam = (jam || "").replace(/\s*WIB\s*/gi, " ").trim();
+    cleanJam = cleanJam.replace(/\s+/g, " "); // collapse multiple spaces
+    const finalJam = `${cleanJam} WIB`;
+
+    // Robust deduplication for Day - handle various formats
+    let cleanTanggal = (tanggal || "").trim();
+    // Remove day name if it appears at the start (case insensitive, with or without comma)
+    if (hari) {
+        const dayPattern = new RegExp(`^${hari}\\s*,?\\s*`, "i");
+        cleanTanggal = cleanTanggal.replace(dayPattern, "");
+    }
+    // Also remove any day name pattern at the start (e.g., "Kamis, ")
+    cleanTanggal = cleanTanggal.replace(/^(?:senin|selasa|rabu|kamis|jumat|sabtu|ahad|minggu)\s*,?\s*/i, "");
+
+    const finalHariTanggal = `${hari}, ${cleanTanggal}`;
 
     const templateTitle = isWawancara ? "*REMINDER JADWAL WAWANCARA*" : "*REMINDER JADWAL MENGUJI*";
     const agendaText = isWawancara ? "Wawancara Calon Santri / Ortu" : jenisUjian;
-
-    const finalHari = (tanggal || "").toLowerCase().includes(hari.toLowerCase()) ? "" : `${hari}, `;
 
     return `${templateTitle}
 
@@ -945,7 +971,7 @@ Mengingatkan jadwal ${isWawancara ? "wawancara" : "menguji"} Anda:
 
 📝 *Agenda:* ${agendaText}
 👤 *Nama Santri:* ${namaSantri}
-📅 *Hari/Tanggal:* ${finalHari}${tanggal}
+📅 *Hari/Tanggal:* ${finalHariTanggal}    
 ⏰ *Waktu:* ${finalJam}
 📍 *Link Meet:* ${lokasi}
 🔗 *Input Hasil:* ${inputNilaiLink || "-"}
@@ -965,8 +991,7 @@ export function buildMessagePembatalanJadwal(
 ): string {
     return `*PEMBATALAN JADWAL UJIAN*
 
-Assalamu'alaikum Warahmatullahi Wabarakatuh.
-Halo Ananda *${namaSantri}*,
+Assalamu'alaikum *${namaSantri}*,
 
 Kami menginformasikan bahwa jadwal *${jenisUjian}* Anda pada:
 

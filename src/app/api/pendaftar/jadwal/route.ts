@@ -289,39 +289,55 @@ export async function POST(request: Request) {
                 // Schedule if in the future, or send now if already within 16h window
                 const now = new Date();
                 const finalScheduledAt = reminderTime < now ? now : reminderTime;
-                    // 3.1. Reminder for Santri
-                    const remSantriMsg = buildMessageReminderH1Santri(
-                        pendaftarInfo.nama_lengkap,
-                        dateStr.split(',')[0] || "", // Removed "Besok"
-                        dateStr,
-                        timeStr,
-                        lokasi,
-                        jenisUjian
-                    );
 
-                    enqueueWhatsapp({
-                        pendaftarId: session.id,
-                        phone: pendaftarInfo.no_hp,
-                        jenisNotif: "reminder_h1",
-                        messageContent: remSantriMsg,
-                        scheduledAt: finalScheduledAt,
-                    }).then(async () => {
-                         // Update flag safely - using try catch to avoid crash if DB not pushed yet
-                         try {
-                            await prisma.jadwalUjian.update({
-                                where: { id: result.id },
-                                data: { notif_h1_pendaftar_terkirim: true }
-                            });
-                         } catch (e) {
-                            console.warn("Could not update H1 santri flag (DB sync might be pending)");
-                         }
-                    }).catch(err => console.error("Failed to enqueue H1 santri reminder:", err));
+                // Get interviewer info early for Google Meet link
+                let interviewerGoogleMeetLink = null;
+                if (examSession.created_by) {
+                    const interviewer = await prisma.profile.findUnique({
+                        where: { id: examSession.created_by },
+                        select: { google_meet_link: true }
+                    });
+                    interviewerGoogleMeetLink = interviewer?.google_meet_link;
+                }
 
-                    // 3.2. Reminder for Interviewer
-                    if (examSession.created_by) {
-                        const interviewer = await prisma.profile.findUnique({
-                            where: { id: examSession.created_by },
-                            select: { full_name: true, phone: true, google_meet_link: true }
+                // Build location with Google Meet link if available
+                const lokasiWithMeet = interviewerGoogleMeetLink
+                    ? (interviewerGoogleMeetLink.startsWith("http") ? interviewerGoogleMeetLink : `Online (${interviewerGoogleMeetLink})`)
+                    : lokasi;
+
+                // 3.1. Reminder for Santri
+                const remSantriMsg = buildMessageReminderH1Santri(
+                    pendaftarInfo.nama_lengkap,
+                    dateStr.split(',')[0] || "", // Removed "Besok"
+                    dateStr,
+                    timeStr,
+                    lokasiWithMeet,
+                    jenisUjian
+                );
+
+                enqueueWhatsapp({
+                    pendaftarId: session.id,
+                    phone: pendaftarInfo.no_hp,
+                    jenisNotif: "reminder_h1",
+                    messageContent: remSantriMsg,
+                    scheduledAt: finalScheduledAt,
+                }).then(async () => {
+                     // Update flag safely - using try catch to avoid crash if DB not pushed yet
+                     try {
+                        await prisma.jadwalUjian.update({
+                            where: { id: result.id },
+                            data: { notif_h1_pendaftar_terkirim: true }
+                        });
+                     } catch (e) {
+                        console.warn("Could not update H1 santri flag (DB sync might be pending)");
+                     }
+                }).catch(err => console.error("Failed to enqueue H1 santri reminder:", err));
+
+                // 3.2. Reminder for Interviewer
+                if (examSession.created_by) {
+                    const interviewer = await prisma.profile.findUnique({
+                        where: { id: examSession.created_by },
+                        select: { full_name: true, phone: true, google_meet_link: true }
                         });
 
                         if (interviewer && interviewer.phone) {

@@ -117,12 +117,12 @@ export const MANUAL_TINYURLS: Record<string, string> = {
 export function getManualTinyUrl(fullName: string): string | null {
     if (!fullName) return null;
     
-    // Normalize input
-    const normalizedInput = fullName.trim().toLowerCase();
+    // Normalize input: trim, lowercase, and collapse multiple spaces to one
+    const normalizedInput = fullName.trim().toLowerCase().replace(/\s+/g, " ");
 
     // Find match in MANUAL_TINYURLS (also normalized)
     const matchKey = Object.keys(MANUAL_TINYURLS).find(
-        key => key.trim().toLowerCase() === normalizedInput
+        key => key.trim().toLowerCase().replace(/\s+/g, " ") === normalizedInput
     );
 
     return matchKey ? MANUAL_TINYURLS[matchKey] : null;
