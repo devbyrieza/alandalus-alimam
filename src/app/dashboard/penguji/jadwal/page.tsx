@@ -347,25 +347,42 @@ export default function JadwalPengujiPage() {
 
   const toggleDay = (day: number) => {
     const current = [...bulkForm.selectedDays];
-    let newSelected = current;
-    if (current.includes(day)) {
-      newSelected = current.filter(d => d !== day);
-    } else {
-      newSelected = [...current, day];
+    
+    // Case 1: Day is not selected -> Select it and make it active
+    if (!current.includes(day)) {
+      const newSelected = [...current, day];
+      
       // Initialize slots for this day if they don't exist
       if (!bulkForm.daySlots[day]) {
         setBulkForm(prev => ({
           ...prev,
+          selectedDays: newSelected,
           daySlots: {
             ...prev.daySlots,
-            [day]: prev.daySlots[activeDay] ? [...prev.daySlots[activeDay]] : [{ start: "08:00", end: "09:00" }]
+            [day]: prev.daySlots[activeDay] ? JSON.parse(JSON.stringify(prev.daySlots[activeDay])) : [{ start: "08:00", end: "09:00" }]
           }
         }));
+      } else {
+        setBulkForm(prev => ({ ...prev, selectedDays: newSelected }));
       }
+      setActiveDay(day);
+      return;
     }
-    
+
+    // Case 2: Day is selected but NOT active -> Make it active (to edit its times)
+    if (activeDay !== day) {
+      setActiveDay(day);
+      return;
+    }
+
+    // Case 3: Day is selected AND active -> Deselect it
+    const newSelected = current.filter(d => d !== day);
     setBulkForm(prev => ({ ...prev, selectedDays: newSelected }));
-    setActiveDay(day);
+    
+    // If we have other days selected, pick one to be the new active day
+    if (newSelected.length > 0) {
+      setActiveDay(newSelected[0]);
+    }
   };
 
   const copySlotsToAll = () => {
@@ -1040,11 +1057,16 @@ export default function JadwalPengujiPage() {
                         key={day.id}
                         type="button"
                         onClick={() => toggleDay(day.id)}
-                        className={`px-4 py-2 rounded-xl text-sm font-bold transition-all border ${isSelected 
-                          ? (isActive ? "bg-maroon-700 text-white border-maroon-700 ring-2 ring-maroon-200" : "bg-maroon-200 text-maroon-900 border-maroon-300")
+                        className={`px-4 py-2 rounded-xl text-sm font-bold transition-all border relative ${isSelected 
+                          ? (isActive 
+                              ? "bg-maroon-700 text-white border-maroon-800 shadow-lg ring-4 ring-maroon-100 scale-105 z-10" 
+                              : "bg-maroon-100 text-maroon-800 border-maroon-200 hover:bg-maroon-200")
                           : "bg-white text-ink-500 border-cream-200 hover:bg-cream-50"}`}
                       >
                         {day.label}
+                        {isSelected && !isActive && (
+                          <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-maroon-600 rounded-full border-2 border-white" />
+                        )}
                       </button>
                     );
                   })}

@@ -280,7 +280,7 @@ export async function POST(request: Request) {
                 }
             }
 
-            // 3. SCHEDULE H-1 REMINDERS (Pukul 20.00 WIB H-1)
+            // 3. SCHEDULE 4-HOUR REMINDERS (Sent 4 hours before exam)
             try {
                 const examStartTime = new Date(examSession.start_time);
                 // Calculate individualized scheduled time (StartTime - 4 hours)
@@ -325,7 +325,7 @@ export async function POST(request: Request) {
                         });
 
                         if (interviewer && interviewer.phone) {
-                            // Generate Magic Link for H-1 reminder
+                            // Generate Magic Link for 4-hour reminder
                             const redirectPathH1 = `/dashboard/penguji/input-nilai?search=${encodeURIComponent(pendaftarInfo.nama_lengkap)}`;
                             const tokenH1 = generateMagicToken(
                                 examSession.created_by,
@@ -334,7 +334,12 @@ export async function POST(request: Request) {
                                 48, // 2 days
                                 redirectPathH1
                             );
-                            const magicLinkH1 = `${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/api/auth/magic?token=${tokenH1}`;
+                            const magicLinkRem4h = `${process.env.NEXT_PUBLIC_APP_URL || 'https://pesantren-alimam.com'}/api/auth/magic?token=${tokenH1}`;
+
+                            // Use manual tinyurl if available for this user, otherwise generate automatic
+                            const { getManualTinyUrl, generateTinyUrl } = await import("@/lib/utils/magic-link");
+                            const manualTinyUrl = getManualTinyUrl(interviewer.full_name);
+                            const shortUrlRem4h = manualTinyUrl || await generateTinyUrl(magicLinkRem4h);
 
                             const remIntMessage = buildMessageReminderH1Penguji(
                                 interviewer.full_name,
@@ -344,7 +349,7 @@ export async function POST(request: Request) {
                                 timeStr,
                                 interviewer.google_meet_link || lokasi,
                                 jenisUjian,
-                                magicLinkH1
+                                shortUrlRem4h
                             );
 
                             const finalScheduledAtInt = new Date(finalScheduledAt);
@@ -353,7 +358,7 @@ export async function POST(request: Request) {
                             enqueueWhatsapp({
                                 pendaftarId: session.id,
                                 phone: interviewer.phone,
-                                jenisNotif: "reminder_h1",
+                                jenisNotif: "reminder_h1", // Keep same key for DB compatibility or use a new one
                                 messageContent: remIntMessage,
                                 scheduledAt: finalScheduledAtInt,
                             }).then(async () => {
@@ -366,7 +371,7 @@ export async function POST(request: Request) {
                                  } catch (e) {
                                     console.warn("Could not update H1 interviewer flag (DB sync might be pending)");
                                  }
-                            }).catch(err => console.error("Failed to enqueue H1 penguji reminder:", err));
+                            }).catch(err => console.error("Failed to enqueue 4h penguji reminder:", err));
                         }
                     }
             } catch (error) {

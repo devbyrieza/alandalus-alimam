@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
 import { recalculateNilaiUjian } from "@/lib/scoring";
+import { markExamComponentAsComplete } from "@/lib/exam-status";
 
 async function getSession() {
     const cookieStore = await cookies();
@@ -191,6 +192,27 @@ export async function PATCH(
 
         // 4. Trigger Recalculation
         await recalculateNilaiUjian(pendaftarId);
+
+        // 5. AUTOMATION: Mark as finished if assignment exists
+        if (assignment) {
+            try {
+                let componentType: 'santri' | 'quran' | 'ortu' | undefined = undefined;
+                if (body.detail_quran) componentType = 'quran';
+                else if (body.detail_wawancara) componentType = 'santri';
+                else if (body.detail_cawalsan) componentType = 'ortu';
+
+                if (componentType) {
+                    await markExamComponentAsComplete({
+                        jadwalId: assignment.id,
+                        userId,
+                        componentType
+                    });
+                }
+            } catch (err) {
+                console.error("Automation Error (Ignored):", err);
+                // We ignore automation errors so the score save still succeeds
+            }
+        }
 
         return NextResponse.json({ success: true });
     } catch (error: any) {

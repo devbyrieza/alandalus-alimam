@@ -162,12 +162,6 @@ export default function PengujiDashboardLayout({
             </div>
             <span className="font-black text-ink-950 tracking-tight leading-none text-base">Seleksi Panel</span>
           </div>
-          <button
-            onClick={() => setSidebarOpen(true)}
-            className="p-2 text-ink-600 hover:bg-surface-100 rounded-xl transition-colors"
-          >
-            <Menu className="w-6 h-6" />
-          </button>
         </header>
 
         <div className="flex relative">
@@ -276,13 +270,30 @@ export default function PengujiDashboardLayout({
                     <SidebarNav />
                   </div>
 
-                  <button
-                    onClick={handleLogout}
-                    className="mt-auto flex items-center w-full px-4 py-4 text-sm font-black text-red-600 bg-red-50 rounded-xl"
-                  >
-                    <LogOut className="w-5 h-5 mr-3" />
-                    Logout Akun
-                  </button>
+                  <div className="mt-auto pt-6 border-t border-surface-100">
+                    {availableRoles.length > 1 && (
+                      <div className="mb-4 pt-4 border-t border-surface-50 lg:hidden">
+                        <p className="text-[10px] font-bold text-ink-400 uppercase tracking-widest mb-2 pl-1">Ganti Role</p>
+                        <select
+                          value={userRole}
+                          onChange={handleRoleSwitch}
+                          className="w-full bg-surface-50 border border-surface-100 text-xs font-bold text-ink-900 rounded-xl py-2.5 px-3 focus:ring-4 focus:ring-brand-blue-500/10 focus:border-brand-blue-200 outline-none transition-all shadow-premium-sm"
+                        >
+                          {availableRoles.map((role) => (
+                            <option key={role} value={role}>{ROLE_LABELS[role as UserRole] || role}</option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
+
+                    <button
+                      onClick={handleLogout}
+                      className="flex items-center w-full px-4 py-4 text-sm font-black text-red-600 bg-red-50 rounded-xl"
+                    >
+                      <LogOut className="w-5 h-5 mr-3" />
+                      Logout Akun
+                    </button>
+                  </div>
                 </motion.aside>
               </>
             )}

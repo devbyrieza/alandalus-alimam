@@ -894,18 +894,15 @@ export function buildMessageReminderH1Santri(
     lokasi: string,
     jenisUjian: string
 ): string {
-    // Ensure no redundant Hari and WIB
-    const finalHari = tanggal.toLowerCase().includes(hari.toLowerCase()) ? "" : `${hari}, `;
     const finalJam = jam.toLowerCase().includes("wib") ? jam : `${jam} WIB`;
 
     return `*PENGINGAT UJIAN SELEKSI*
 
-Assalamu'alaikum Wr. Wb.
-Halo Ananda *${nama}*,
+Assalamu'alaikum *${nama}*,
 
 Ini adalah pengingat bahwa Anda dijadwalkan mengikuti *${jenisUjian}* pada:
 
-📅 *Hari/Tanggal:* ${finalHari}${tanggal}
+📅 *Hari/Tanggal:* ${hari}, ${tanggal}
 ⏰ *Waktu:* ${finalJam}
 📍 *Lokasi/Link:* ${lokasi}
 
@@ -931,22 +928,20 @@ export function buildMessageReminderH1Penguji(
     const title = (namaPenguji || "").toLowerCase().includes("ustadzah") ? "Ustadzah" : "Ustadz";
     const isWawancara = jenisUjian.toLowerCase().includes("wawancara");
     
-    // Ensure no redundant Hari and WIB
-    const finalHari = tanggal.toLowerCase().includes(hari.toLowerCase()) ? "" : `${hari}, `;
     const finalJam = jam.toLowerCase().includes("wib") ? jam : `${jam} WIB`;
 
     const templateTitle = isWawancara ? "*REMINDER JADWAL WAWANCARA*" : "*REMINDER JADWAL MENGUJI*";
-    const agendaLabel = isWawancara ? "*Agenda:*" : "*Mata Pelajaran:*";
+    const agendaText = isWawancara ? "Wawancara Calon Santri / Ortu" : jenisUjian;
 
     return `${templateTitle}
 
 Assalamu'alaikum ${title} *${namaPenguji}*,
 
-Mengingatkan kembali jadwal ${isWawancara ? "wawancara" : "menguji"} Anda:
+Mengingatkan jadwal ${isWawancara ? "wawancara" : "menguji"} Anda:
 
-📝 ${agendaLabel} ${jenisUjian}
+📝 *Agenda:* ${agendaText}
 👤 *Nama Santri:* ${namaSantri}
-📅 *Hari/Tanggal:* ${finalHari}${tanggal}
+📅 *Hari/Tanggal:* ${hari}, ${tanggal}
 ⏰ *Waktu:* ${finalJam}
 📍 *Link Meet:* ${lokasi}
 🔗 *Input Hasil:* ${inputNilaiLink || "-"}

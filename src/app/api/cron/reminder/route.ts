@@ -104,7 +104,7 @@ export async function GET(request: Request) {
                 const result = await enqueueWhatsapp({
                     pendaftarId: jadwal.pendaftar_id,
                     phone: jadwal.pendaftar.no_hp,
-                    jenisNotif: "reminder_h1",
+                    jenisNotif: "reminder_h1", // Mapping to existing H1 type in DB for now
                     messageContent: msgSantri,
                     scheduledAt: finalScheduledAt,
                 });
@@ -151,7 +151,7 @@ export async function GET(request: Request) {
                     const result = await enqueueWhatsapp({
                         pendaftarId: jadwal.pendaftar_id,
                         phone: profile.phone,
-                        jenisNotif: "reminder_h1_penguji",
+                        jenisNotif: "reminder_h1_penguji", // Mapping to existing H1 type in DB for now
                         messageContent: msgPenguji,
                         scheduledAt: finalScheduledAt,
                     });

@@ -103,7 +103,17 @@ export const MANUAL_TINYURLS: Record<string, string> = {
  * Get manual tinyurl for a specific user (if exists)
  */
 export function getManualTinyUrl(fullName: string): string | null {
-    return MANUAL_TINYURLS[fullName] || null;
+    if (!fullName) return null;
+    
+    // Normalize input
+    const normalizedInput = fullName.trim().toLowerCase();
+
+    // Find match in MANUAL_TINYURLS (also normalized)
+    const matchKey = Object.keys(MANUAL_TINYURLS).find(
+        key => key.trim().toLowerCase() === normalizedInput
+    );
+
+    return matchKey ? MANUAL_TINYURLS[matchKey] : null;
 }
 
 /**
