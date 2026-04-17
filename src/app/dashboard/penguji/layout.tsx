@@ -254,7 +254,7 @@ export default function PengujiDashboardLayout({
                   transition={{ type: "spring", damping: 25, stiffness: 200 }}
                   className="lg:hidden fixed left-0 top-0 bottom-0 w-[280px] z-[70] bg-white shadow-2xl flex flex-col p-6"
                 >
-                  <div className="flex items-center justify-between mb-10">
+                  <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-lg bg-linear-to-br from-brand-blue-600 to-brand-blue-700 flex items-center justify-center text-white shadow-md">
                         <ShieldCheck className="w-5 h-5" />
@@ -266,34 +266,44 @@ export default function PengujiDashboardLayout({
                     </button>
                   </div>
 
+                  {/* User Info */}
+                  <div className="mb-5 p-3.5 rounded-2xl bg-surface-50 border border-surface-100 flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-full bg-white shadow-sm flex items-center justify-center border border-surface-100 font-black text-brand-blue-700 text-sm shrink-0">
+                      {pengujiName.charAt(0)}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-black text-ink-950 text-sm truncate">{pengujiName}</p>
+                      <span className="text-[10px] font-bold text-ink-400 capitalize">{userRole}</span>
+                    </div>
+                  </div>
+
                   <div className="flex-1 overflow-y-auto">
                     <SidebarNav />
                   </div>
 
-                  <div className="mt-auto pt-6 border-t border-surface-100">
-                    {availableRoles.length > 1 && (
-                      <div className="mb-4 pt-4 border-t border-surface-50 lg:hidden">
-                        <p className="text-[10px] font-bold text-ink-400 uppercase tracking-widest mb-2 pl-1">Ganti Role</p>
-                        <select
-                          value={userRole}
-                          onChange={handleRoleSwitch}
-                          className="w-full bg-surface-50 border border-surface-100 text-xs font-bold text-ink-900 rounded-xl py-2.5 px-3 focus:ring-4 focus:ring-brand-blue-500/10 focus:border-brand-blue-200 outline-none transition-all shadow-premium-sm"
-                        >
-                          {availableRoles.map((role) => (
-                            <option key={role} value={role}>{ROLE_LABELS[role as UserRole] || role}</option>
-                          ))}
-                        </select>
-                      </div>
-                    )}
+                  {/* Switch Role - hanya tampil untuk multi-role */}
+                  {availableRoles.length > 1 && (
+                    <div className="mt-4 pt-4 border-t border-surface-100">
+                      <p className="text-[10px] font-bold text-ink-400 uppercase tracking-widest mb-2 pl-1">Ganti Role</p>
+                      <select
+                        value={userRole}
+                        onChange={handleRoleSwitch}
+                        className="w-full bg-surface-50 border border-surface-100 text-xs font-bold text-ink-900 rounded-xl py-2.5 px-3 focus:ring-4 focus:ring-brand-blue-500/10 focus:border-brand-blue-200 outline-none transition-all shadow-sm"
+                      >
+                        {availableRoles.map((role) => (
+                          <option key={role} value={role}>{ROLE_LABELS[role as UserRole] || role}</option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
 
-                    <button
-                      onClick={handleLogout}
-                      className="flex items-center w-full px-4 py-4 text-sm font-black text-red-600 bg-red-50 rounded-xl"
-                    >
-                      <LogOut className="w-5 h-5 mr-3" />
-                      Logout Akun
-                    </button>
-                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="mt-4 flex items-center w-full px-4 py-4 text-sm font-black text-red-600 bg-red-50 rounded-xl"
+                  >
+                    <LogOut className="w-5 h-5 mr-3" />
+                    Logout Akun
+                  </button>
                 </motion.aside>
               </>
             )}
