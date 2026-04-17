@@ -141,14 +141,29 @@ export async function GET() {
                 console.log("===================\n");
             }
 
-            // Merge all scores from the same exam session
+            // Define fields that are allowed to travel across sessions (Universal)
+            const UNIVERSAL_FIELDS = [
+                'nilai_tes_quran', 'score_quran', 'detail_quran', 
+                'catatan_quran', 'input_at_quran', 'input_by_quran'
+            ];
+
+            // Merge all scores found, but apply session-aware logic
             const mergedSessionScore: any = {};
             allScoresInSession.forEach((s: any) => {
+                // Determine if this score record belongs to the CURRENT exam session
+                const scoreJadwal = s.jadwal_ujian_id ? allJadwalInSessions.find((j: any) => j.id === s.jadwal_ujian_id) : null;
+                const isCurrentSession = scoreJadwal && scoreJadwal.exam_session_id === item.exam_session_id;
+
                 Object.entries(s).forEach(([k, v]) => {
                     if (!isEmpty(v)) {
-                        // Prefer non-null values
-                        if (mergedSessionScore[k] == null || mergedSessionScore[k] === "") {
-                            mergedSessionScore[k] = v;
+                        // Logic:
+                        // 1. If it's the current session, we take everything.
+                        // 2. If it's a different session (or orphan), we ONLY take Universal fields (Quran).
+                        if (isCurrentSession || UNIVERSAL_FIELDS.includes(k)) {
+                            // Prefer existing values if already set (merging strategy)
+                            if (mergedSessionScore[k] == null || mergedSessionScore[k] === "") {
+                                mergedSessionScore[k] = v;
+                            }
                         }
                     }
                 });
