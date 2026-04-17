@@ -53,7 +53,11 @@ export default function PengujiDashboardLayout({
         setPengujiName(name);
         setUserId(sessionData.session?.id || "");
         setUserRole(sessionData.session?.role || "");
-        setAvailableRoles(sessionData.availableRoles || []);
+        
+        // Debug: log available roles
+        const roles = sessionData.availableRoles || [];
+        console.log("[Penguji Layout] Available roles:", roles);
+        setAvailableRoles(roles);
       } catch (error) {
         console.error("Error fetching penguji data:", error);
       } finally {
@@ -262,7 +266,7 @@ export default function PengujiDashboardLayout({
                       <div className="w-8 h-8 rounded-lg bg-linear-to-br from-brand-blue-600 to-brand-blue-700 flex items-center justify-center text-white shadow-md">
                         <ShieldCheck className="w-5 h-5" />
                       </div>
-                      <span className="font-black text-ink-950">Tim Seleksi</span>
+                      <span className="font-black text-ink-950">Seleksi Panel</span>
                     </div>
                     <button onClick={() => setSidebarOpen(false)} className="p-2 hover:bg-surface-100 rounded-xl">
                       <X className="w-5 h-5 text-ink-400" />
@@ -285,9 +289,9 @@ export default function PengujiDashboardLayout({
                   </div>
 
                   {/* Switch Role - hanya tampil untuk multi-role */}
-                  {availableRoles.length > 1 && (
+                  {availableRoles && availableRoles.length > 1 ? (
                     <div className="mt-4 pt-4 border-t border-surface-100">
-                      <p className="text-[10px] font-bold text-ink-400 uppercase tracking-widest mb-2 pl-1">Ganti Role</p>
+                      <p className="text-[10px] font-bold text-ink-400 uppercase tracking-widest mb-2 pl-1">Pindah Role</p>
                       <select
                         value={userRole}
                         onChange={handleRoleSwitch}
@@ -297,6 +301,13 @@ export default function PengujiDashboardLayout({
                           <option key={role} value={role}>{ROLE_LABELS[role as UserRole] || role}</option>
                         ))}
                       </select>
+                    </div>
+                  ) : (
+                    <div className="mt-4 pt-4 border-t border-surface-100">
+                      <p className="text-[10px] font-bold text-ink-400 uppercase tracking-widest mb-1 pl-1">Role Saat Ini</p>
+                      <div className="w-full bg-brand-blue-50 border border-brand-blue-100 text-xs font-bold text-brand-blue-900 rounded-xl py-2.5 px-3">
+                        {ROLE_LABELS[userRole as UserRole] || userRole || "Penguji"}
+                      </div>
                     </div>
                   )}
 
