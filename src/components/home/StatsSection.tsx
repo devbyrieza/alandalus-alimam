@@ -7,10 +7,10 @@ import { Container } from "@/components/layout/Container";
 import { Calendar, Users, GraduationCap, Award, TrendingUp, BookOpen } from 'lucide-react';
 
 const STATS = [
-  { id: 'batch', label: 'Angkatan Ke-1', value: 1, icon: Calendar, color: 'brand-blue' as const, suffix: '', sublabel: 'TA 2026/2027' },
-  { id: 'quality', label: 'Standar Global', value: 100, icon: Award, color: 'brand-yellow' as const, suffix: '%', sublabel: 'Kurikulum Al-Andalus IIBS' },
-  { id: 'levels', label: 'Jenjang Tersedia', value: 2, icon: GraduationCap, color: 'gold' as const, suffix: '', sublabel: 'MTs · IL' },
-  { id: 'quota', label: 'Kuota Per Jenjang', value: 25, icon: Users, color: 'brand-blue' as const, suffix: '', sublabel: 'Santri (Terbatas)' },
+  { id: 'batch', label: 'Angkatan Ke-1', value: 1, icon: Calendar, color: 'maroon' as const, suffix: '', sublabel: 'Al-Andalus IIBS' },
+  { id: 'quality', label: 'Standar Global', value: 100, icon: Award, color: 'maroon' as const, suffix: '%', sublabel: 'Kurikulum Unggulan' },
+  { id: 'levels', label: 'Jenjang Tersedia', value: 2, icon: GraduationCap, color: 'maroon' as const, suffix: '', sublabel: 'MTs · IL' },
+  { id: 'quota', label: 'Kuota Terbatas', value: 25, icon: Users, color: 'maroon' as const, suffix: '', sublabel: 'Santri (Eksklusif)' },
 ] as const;
 
 export default function StatsSection() {
@@ -69,9 +69,7 @@ export default function StatsSection() {
                 className="app-card p-6 md:p-8 flex flex-col items-center text-center group"
               >
                 <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-transform duration-500 group-hover:scale-110 shadow-sm
-                  ${stat.color === 'brand-blue' ? 'bg-brand-blue-50 text-brand-blue-600' :
-                  stat.color === 'brand-yellow' ? 'bg-brand-yellow-100 text-brand-yellow-700' :
-                  stat.color === 'gold' ? 'bg-yellow-50 text-yellow-600' :
+                  ${stat.color === 'maroon' ? 'bg-maroon-50 text-maroon-600' :
                   'bg-brand-blue-100 text-brand-blue-800'
                   }`}>
                   <stat.icon className="w-6 h-6" />
@@ -79,10 +77,10 @@ export default function StatsSection() {
 
                 <div className="relative">
                   <motion.div
-                    className="text-4xl md:text-5xl font-black text-brand-blue-700 mb-2 tracking-tighter"
+                    className="text-4xl md:text-5xl font-black text-maroon-700 mb-2 tracking-tighter"
                   >
                     {counters[stat.id as keyof typeof counters]}
-                    {stat.suffix && <span className="text-brand-blue-600 ml-0.5">{stat.suffix}</span>}
+                    {stat.suffix && <span className="text-maroon-600 ml-0.5">{stat.suffix}</span>}
                   </motion.div>
                 </div>
 

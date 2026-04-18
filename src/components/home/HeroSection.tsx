@@ -21,12 +21,12 @@ export default function HeroSection() {
   });
 
   return (
-    <section className="relative min-h-[95vh] flex items-center pt-20 pb-16 md:pt-24 lg:pt-28 lg:pb-24 overflow-hidden bg-cream-gradient">
+    <section className="relative min-h-[95vh] flex items-center pt-20 pb-16 md:pt-24 lg:pt-28 lg:pb-24 overflow-hidden bg-maroon-50/30">
       {/* Sophisticated Background Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-maroon-100/40 blur-[120px] rounded-full" />
         <div className="absolute top-[20%] -right-[10%] w-[40%] h-[50%] bg-cream-300/30 blur-[100px] rounded-full" />
-        <div className="absolute bottom-[0%] left-[20%] w-[40%] h-[40%] bg-brand-blue-50/60 blur-[100px] rounded-full" />
+        <div className="absolute bottom-[0%] left-[20%] w-[40%] h-[40%] bg-maroon-50/60 blur-[100px] rounded-full" />
       </div>
 
       <Container className="relative z-10">
@@ -107,7 +107,7 @@ export default function HeroSection() {
             className="relative w-full mt-8 lg:mt-0"
           >
             {/* Main Image Container */}
-            <div className="relative z-10 rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-xl border-8 sm:border-[12px] border-white ring-1 ring-cream-200 bg-white">
+            <div className="relative z-10 rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl border-8 sm:border-[12px] border-white ring-1 ring-maroon-100 bg-white">
               <Image
                 src="/images/hero.webp"
                 alt={BRANDING.schoolName}
@@ -123,9 +123,9 @@ export default function HeroSection() {
             <motion.div
               animate={{ y: [0, -12, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-4 lg:-top-6 -right-2 lg:-right-8 z-20 flex items-center gap-3 bg-white/90 backdrop-blur-md p-3 px-4 lg:p-4 rounded-2xl shadow-lg border border-white/50"
+              className="absolute -top-4 lg:-top-6 -right-2 lg:-right-8 z-20 flex items-center gap-3 bg-white/95 backdrop-blur-md p-3 px-4 lg:p-4 rounded-2xl shadow-xl border border-white/50"
             >
-              <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-brand-yellow-100 flex items-center justify-center text-cream-600">
+              <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-cream-100 flex items-center justify-center text-maroon-600">
                 <GraduationCap className="w-5 h-5 lg:w-6 lg:h-6" />
               </div>
               <div>
@@ -137,9 +137,9 @@ export default function HeroSection() {
             <motion.div
               animate={{ y: [0, 12, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute -bottom-6 lg:-bottom-10 -left-2 lg:-left-8 z-20 flex items-center gap-3 bg-white/90 backdrop-blur-md p-3 px-4 lg:p-4 rounded-2xl shadow-lg border border-white/50"
+              className="absolute -bottom-6 lg:-bottom-10 -left-2 lg:-left-8 z-20 flex items-center gap-3 bg-white/95 backdrop-blur-md p-3 px-4 lg:p-4 rounded-2xl shadow-xl border border-white/50"
             >
-              <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-brand-blue-50 flex items-center justify-center text-brand-blue-600">
+              <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-maroon-50 flex items-center justify-center text-maroon-600">
                 <Globe className="w-5 h-5 lg:w-6 lg:h-6" />
               </div>
               <div>
@@ -150,7 +150,7 @@ export default function HeroSection() {
 
             {/* Aesthetic Blobs */}
             <div className="absolute -z-10 -bottom-12 -right-12 w-48 h-48 sm:w-64 sm:h-64 bg-maroon-300/20 blur-3xl rounded-full" />
-            <div className="absolute -z-10 -top-12 -left-12 w-36 h-36 sm:w-48 sm:h-48 bg-brand-yellow-400/20 blur-2xl rounded-full" />
+            <div className="absolute -z-10 -top-12 -left-12 w-36 h-36 sm:w-48 sm:h-48 bg-cream-400/20 blur-2xl rounded-full" />
           </motion.div>
         </div>
       </Container>
