@@ -214,9 +214,16 @@ export default function UserManagementPage() {
                                             </div>
                                         </td>
                                         <td className="p-8 text-center">
-                                            <span className="px-4 py-1.5 bg-brand-blue-50 text-brand-blue-700 text-[10px] font-black rounded-xl border border-brand-blue-100 uppercase tracking-widest shadow-sm">
-                                                {user.role}
-                                            </span>
+                                            <div className="flex flex-wrap justify-center gap-2">
+                                                <span className="px-4 py-1.5 bg-brand-blue-50 text-brand-blue-700 text-[10px] font-black rounded-xl border border-brand-blue-100 uppercase tracking-widest shadow-sm">
+                                                    {user.role}
+                                                </span>
+                                                {user.secondary_roles && user.secondary_roles.filter(r => r !== user.role).map((r, i) => (
+                                                    <span key={i} className="px-4 py-1.5 bg-stone-100 text-stone-600 text-[10px] font-black rounded-xl border border-stone-200 uppercase tracking-widest shadow-sm">
+                                                        {r.replace('_', ' ')}
+                                                    </span>
+                                                ))}
+                                            </div>
                                         </td>
                                         <td className="p-8 text-right">
                                             <div className="flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-4 group-hover:translate-x-0">
@@ -267,9 +274,38 @@ export default function UserManagementPage() {
                                 </div>
                                 <div>
                                     <label className="block text-[10px] font-black uppercase text-ink-300 mb-3 tracking-widest">Access Key (Password)</label>
-                                    <input required={!isEditing} type="password" value={formData.password} onChange={e => setFormData({ ...formData, password: e.target.value })} className="w-full px-8 py-5 bg-stone-100/50 border-2 border-transparent focus:border-brand-blue-600 focus:bg-white focus:outline-none font-bold rounded-2xl transition-all" placeholder="••••••••" />
+                                    <input required={!isEditing} type="password" value={formData.password} onChange={e => setFormData({ ...formData, password: e.target.value })} className="w-full px-8 py-5 bg-stone-100/50 border-2 border-transparent focus:border-brand-blue-600 focus:bg-white focus:outline-none font-bold rounded-2xl transition-all" placeholder={isEditing ? "(Kosongkan jika tidak ubah)" : "••••••••"} />
+                                </div>
+                                <div className="col-span-2">
+                                    <label className="block text-[10px] font-black uppercase text-ink-300 mb-3 tracking-widest">Secondary Roles (Multi-Role)</label>
+                                    <div className="flex flex-wrap gap-3">
+                                        {ROLE_OPTIONS.map(o => (
+                                            <label key={o.value} className={`flex items-center gap-2 px-4 py-2 rounded-xl border cursor-pointer transition-all ${formData.secondary_roles.includes(o.value) ? 'bg-brand-blue-50 border-brand-blue-200 text-brand-blue-800' : 'bg-stone-50 border-stone-200 text-stone-500 hover:bg-stone-100'} ${formData.role === o.value ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                                                <input 
+                                                    type="checkbox" 
+                                                    className="w-4 h-4 rounded text-brand-blue-600 focus:ring-brand-blue-500 hidden"
+                                                    checked={formData.secondary_roles.includes(o.value)}
+                                                    onChange={e => {
+                                                        if (e.target.checked) {
+                                                            setFormData({ ...formData, secondary_roles: [...formData.secondary_roles, o.value] });
+                                                        } else {
+                                                            setFormData({ ...formData, secondary_roles: formData.secondary_roles.filter(r => r !== o.value) });
+                                                        }
+                                                    }}
+                                                    disabled={formData.role === o.value}
+                                                />
+                                                <div className={`w-4 h-4 rounded border flex flex-shrink-0 items-center justify-center ${formData.secondary_roles.includes(o.value) ? 'bg-brand-blue-600 border-brand-blue-600 text-white' : 'bg-white border-stone-300'}`}>
+                                                    {formData.secondary_roles.includes(o.value) && (
+                                                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                                    )}
+                                                </div>
+                                                <span className="font-bold text-xs">{o.label}</span>
+                                            </label>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
+
                             <div className="pt-10">
                                 <button type="submit" className="w-full py-6 bg-brand-blue-950 text-white font-black uppercase text-xs tracking-widest rounded-3xl shadow-2xl hover:bg-brand-blue-800 hover:scale-[1.02] active:scale-95 transition-all shadow-brand-blue-900/30">
                                     {isEditing ? "Synchronize Updates" : "Commit New User"}
