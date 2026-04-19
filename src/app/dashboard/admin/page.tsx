@@ -66,24 +66,37 @@ export default function AdminDashboardPage() {
           const list = taData.data || [];
           setTahunAjaranList(list);
           const active = list.find((t: any) => t.is_active);
-          if (active) setSelectedTahunAjaranId(active.id);
+          if (active) {
+            setSelectedTahunAjaranId(active.id);
+          } else if (list.length > 0) {
+            // Fallback to first year if no active found
+            setSelectedTahunAjaranId(list[0].id);
+          } else {
+            // If truly no years exist, trigger fetch once anyway
+            fetchStats("");
+          }
         }
-      } catch (e) { console.error(e); }
+      } catch (e) {
+        console.error(e);
+        fetchStats(""); // Final fallback
+      }
     }
     init();
   }, []);
 
+  const fetchStats = async (id: string) => {
+    try {
+      setLoading(true);
+      const res = await fetch(`/api/admin/stats?tahun_ajaran_id=${id}`);
+      if (res.ok) setStats(await res.json());
+    } catch (e) { console.error(e); }
+    finally { setLoading(false); }
+  };
+
   useEffect(() => {
-    if (!selectedTahunAjaranId) return;
-    async function fetchStats() {
-      try {
-        setLoading(true);
-        const res = await fetch(`/api/admin/stats?tahun_ajaran_id=${selectedTahunAjaranId}`);
-        if (res.ok) setStats(await res.json());
-      } catch (e) { console.error(e); }
-      finally { setLoading(false); }
+    if (selectedTahunAjaranId) {
+      fetchStats(selectedTahunAjaranId);
     }
-    fetchStats();
   }, [selectedTahunAjaranId]);
 
   if (loading) return <div className="flex items-center justify-center min-h-[50vh]"><Loader2 className="w-8 h-8 animate-spin text-brand-blue-600" /></div>;

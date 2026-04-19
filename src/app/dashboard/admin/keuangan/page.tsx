@@ -91,25 +91,36 @@ export default function KeuanganPage() {
                     const list = json.data || [];
                     setTahunAjaranList(list);
                     const active = list.find((t: any) => t.is_active);
-                    if (active) setSelectedTahunAjaranId(active.id);
+                    if (active) {
+                        setSelectedTahunAjaranId(active.id);
+                    } else if (list.length > 0) {
+                        setSelectedTahunAjaranId(list[0].id);
+                    } else {
+                        fetchPendaftaran("");
+                        fetchDaftarUlang("");
+                    }
                 }
             } catch (err) {
                 console.error("Failed to fetch TA list", err);
+                fetchPendaftaran("");
+                fetchDaftarUlang("");
             }
         };
         fetchTA();
     }, []);
 
     useEffect(() => {
-        if (!selectedTahunAjaranId) return;
-        fetchPendaftaran();
-        fetchDaftarUlang();
+        if (selectedTahunAjaranId) {
+            fetchPendaftaran(selectedTahunAjaranId);
+            fetchDaftarUlang(selectedTahunAjaranId);
+        }
     }, [selectedTahunAjaranId]);
 
-    const fetchPendaftaran = async () => {
+    const fetchPendaftaran = async (taId?: string) => {
+        const targetId = taId !== undefined ? taId : selectedTahunAjaranId;
         try {
             setLoadingPendaftaran(true);
-            const res = await fetch(`/api/admin/rekap-pembayaran?tahun_ajaran_id=${selectedTahunAjaranId}`);
+            const res = await fetch(`/api/admin/rekap-pembayaran?tahun_ajaran_id=${targetId}`);
             if (!res.ok) throw new Error("Gagal mengambil data pembayaran pendaftaran");
             const json = await res.json();
             setPendaftaranData(json.data);
@@ -121,10 +132,11 @@ export default function KeuanganPage() {
         }
     };
 
-    const fetchDaftarUlang = async () => {
+    const fetchDaftarUlang = async (taId?: string) => {
+        const targetId = taId !== undefined ? taId : selectedTahunAjaranId;
         try {
             setLoadingDaftarUlang(true);
-            const res = await fetch(`/api/admin/rekap-keuangan?tahun_ajaran_id=${selectedTahunAjaranId}`);
+            const res = await fetch(`/api/admin/rekap-keuangan?tahun_ajaran_id=${targetId}`);
             if (!res.ok) throw new Error("Gagal mengambil data daftar ulang");
             const json = await res.json();
             setDaftarUlangData(json.data);

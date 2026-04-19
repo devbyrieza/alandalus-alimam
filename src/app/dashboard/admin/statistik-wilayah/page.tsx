@@ -76,25 +76,32 @@ export default function StatistikWilayahPage() {
                     const list = json.data || [];
                     setTahunAjaranList(list);
                     const active = list.find((t: any) => t.is_active);
-                    if (active) setSelectedTahunAjaranId(active.id);
+                    if (active) {
+                        setSelectedTahunAjaranId(active.id);
+                    } else if (list.length > 0) {
+                        setSelectedTahunAjaranId(list[0].id);
+                    } else {
+                        fetchStats("");
+                    }
                 }
             } catch (err) {
                 console.error("Failed to fetch TA list", err);
+                fetchStats("");
             }
         };
         fetchTA();
     }, []);
-
     useEffect(() => {
         if (selectedTahunAjaranId) {
-            fetchStats();
+            fetchStats(selectedTahunAjaranId);
         }
     }, [selectedTahunAjaranId]);
 
-    const fetchStats = async () => {
+    const fetchStats = async (taId?: string) => {
+        const targetId = taId !== undefined ? taId : selectedTahunAjaranId;
         try {
             setLoading(true);
-            const res = await fetch(`/api/admin/statistik/wilayah?tahun_ajaran_id=${selectedTahunAjaranId}`);
+            const res = await fetch(`/api/admin/statistik/wilayah?tahun_ajaran_id=${targetId}`);
             if (res.ok) {
                 const json = await res.json();
                 setData(json);
