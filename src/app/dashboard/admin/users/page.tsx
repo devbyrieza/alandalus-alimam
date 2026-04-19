@@ -31,8 +31,10 @@ const ROLE_OPTIONS = [
     { value: "admin_super", label: "Admin Super" },
     { value: "admin_berkas", label: "Admin Berkas" },
     { value: "admin_keuangan", label: "Admin Keuangan" },
-    { value: "penguji_calsan", label: "Penguji" },
-    { value: "pewawancara_calsan", label: "Pewawancara" },
+    { value: "penguji", label: "Penguji Universal" },
+    { value: "penguji_calsan", label: "Penguji Calsan" },
+    { value: "pewawancara_calsan", label: "Pewawancara Calsan" },
+    { value: "pewawancara_cawalsan", label: "Pewawancara Cawalsan" },
 ];
 
 export default function UserManagementPage() {
