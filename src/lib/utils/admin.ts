@@ -11,7 +11,7 @@ export function getAdminWhereClause(tahunAjaranId?: string): any {
       {
         AND: [
           { nama_lengkap: { contains: " Tes", mode: "insensitive" } },
-          { nama_lengkap: { not: { contains: "Rieza Tes", mode: "insensitive" } } }
+          { NOT: { nama_lengkap: { contains: "Rieza Tes", mode: "insensitive" } } }
         ]
       },
       { nama_lengkap: { startsWith: "TEST ", mode: "insensitive" } },

@@ -231,10 +231,16 @@ export async function GET(request: Request) {
       },
 
       // === PERUBAHAN DATA ===
-      permintaan_edit_pending: await prisma.dataPerubahanRequest.count({
-        where: { status: 'pending' }
-      }),
-      permintaan_edit_total: await prisma.dataPerubahanRequest.count(),
+      permintaan_edit_pending: await (async () => {
+        try {
+          return await prisma.dataPerubahanRequest.count({ where: { status: 'pending' } });
+        } catch { return 0; }
+      })(),
+      permintaan_edit_total: await (async () => {
+        try {
+          return await prisma.dataPerubahanRequest.count();
+        } catch { return 0; }
+      })(),
 
       // === FUNNEL DATA (NEW) ===
       funnel_data: [
