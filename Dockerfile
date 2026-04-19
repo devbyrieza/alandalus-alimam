@@ -53,6 +53,10 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/package.json ./package.json
 
+# Run migrations before switching to non-root user
+USER root
+RUN npx prisma migrate deploy
+
 USER nextjs
 
 EXPOSE 3000
