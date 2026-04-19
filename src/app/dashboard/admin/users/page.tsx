@@ -181,12 +181,12 @@ export default function UserManagementPage() {
                         <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-300" />
                         <input type="text" placeholder="Search system users..." value={search} onChange={(e) => setSearch(e.target.value)} className="w-full pl-16 pr-8 py-5 bg-white border-2 border-brand-yellow-100 rounded-[2.5rem] focus:outline-none focus:border-brand-blue-500 font-bold shadow-sm placeholder:text-stone-300" />
                     </div>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-ink-300 bg-stone-100 px-4 py-2 rounded-full">Total: {users.length} Database entries</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-stone-500 bg-stone-100 px-4 py-2 rounded-full">Total: {users.length} Database entries</p>
                 </div>
 
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
-                        <thead className="bg-stone-50/50 text-[10px] font-black uppercase tracking-widest text-ink-300 border-b border-stone-50">
+                        <thead className="bg-stone-50/50 text-[10px] font-black uppercase tracking-widest text-stone-500 border-b border-stone-50">
                             <tr>
                                 <th className="p-8">Identitas Akun</th>
                                 <th className="p-8 text-center">Akses Sistem</th>
@@ -259,25 +259,25 @@ export default function UserManagementPage() {
                         <form onSubmit={handleSubmit} className="p-12 space-y-8">
                             <div className="grid grid-cols-2 gap-8">
                                 <div className="col-span-2">
-                                    <label className="block text-[10px] font-black uppercase text-ink-300 mb-3 tracking-widest">Nama Lengkap Personal</label>
+                                    <label className="block text-[10px] font-black uppercase text-stone-500 mb-3 tracking-widest">Nama Lengkap Personal</label>
                                     <input required type="text" value={formData.full_name} onChange={e => setFormData({ ...formData, full_name: e.target.value })} className="w-full px-8 py-5 bg-stone-100/50 border-2 border-transparent focus:border-brand-blue-600 focus:bg-white focus:outline-none font-bold rounded-2xl transition-all" />
                                 </div>
                                 <div className="col-span-2">
-                                    <label className="block text-[10px] font-black uppercase text-ink-300 mb-3 tracking-widest">Database Identifier (Email)</label>
+                                    <label className="block text-[10px] font-black uppercase text-stone-500 mb-3 tracking-widest">Database Identifier (Email)</label>
                                     <input required type="email" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} className="w-full px-8 py-5 bg-stone-100/50 border-2 border-transparent focus:border-brand-blue-600 focus:bg-white focus:outline-none font-bold rounded-2xl transition-all" />
                                 </div>
                                 <div>
-                                    <label className="block text-[10px] font-black uppercase text-ink-300 mb-3 tracking-widest">Authority Role</label>
+                                    <label className="block text-[10px] font-black uppercase text-stone-500 mb-3 tracking-widest">Authority Role</label>
                                     <select value={formData.role} onChange={e => setFormData({ ...formData, role: e.target.value })} className="w-full px-8 py-5 bg-brand-blue-50 border-2 border-brand-blue-100 text-brand-blue-900 rounded-2xl font-black text-xs uppercase tracking-widest cursor-pointer">
                                         {ROLE_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block text-[10px] font-black uppercase text-ink-300 mb-3 tracking-widest">Access Key (Password)</label>
+                                    <label className="block text-[10px] font-black uppercase text-stone-500 mb-3 tracking-widest">Access Key (Password)</label>
                                     <input required={!isEditing} type="password" value={formData.password} onChange={e => setFormData({ ...formData, password: e.target.value })} className="w-full px-8 py-5 bg-stone-100/50 border-2 border-transparent focus:border-brand-blue-600 focus:bg-white focus:outline-none font-bold rounded-2xl transition-all" placeholder={isEditing ? "(Kosongkan jika tidak ubah)" : "••••••••"} />
                                 </div>
                                 <div className="col-span-2">
-                                    <label className="block text-[10px] font-black uppercase text-ink-300 mb-3 tracking-widest">Secondary Roles (Multi-Role)</label>
+                                    <label className="block text-[10px] font-black uppercase text-stone-500 mb-3 tracking-widest">Secondary Roles (Multi-Role)</label>
                                     <div className="flex flex-wrap gap-3">
                                         {ROLE_OPTIONS.map(o => (
                                             <label key={o.value} className={`flex items-center gap-2 px-4 py-2 rounded-xl border cursor-pointer transition-all ${formData.secondary_roles.includes(o.value) ? 'bg-brand-blue-50 border-brand-blue-200 text-brand-blue-800' : 'bg-stone-50 border-stone-200 text-stone-500 hover:bg-stone-100'} ${formData.role === o.value ? 'opacity-50 cursor-not-allowed' : ''}`}>
