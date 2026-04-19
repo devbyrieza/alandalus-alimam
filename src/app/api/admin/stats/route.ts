@@ -42,7 +42,7 @@ export async function GET(request: Request) {
       }
     }
 
-    console.log(`[API] Admin Stats: ActiveTA=${where.tahun_ajaran_id || 'None'}, Role=${session.role}`);
+    console.log(`[API] Admin Stats: ActiveTA=${where.tahun_ajaran_id || 'None'}, Role=${session.role}, Where=${JSON.stringify(where)}`);
 
     // Fetch pendaftar data with status, jenjang, and location
     const pendaftarData = await prisma.pendaftar.findMany({
