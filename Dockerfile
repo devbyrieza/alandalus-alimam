@@ -35,6 +35,9 @@ ENV NEXTAUTH_SECRET=$NEXTAUTH_SECRET
 RUN npx prisma generate
 RUN npm run build
 
+# Run database migrations
+RUN npx prisma migrate deploy
+
 # 3. Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
@@ -52,10 +55,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 # Copy prisma folder & package.json untuk migrasi database
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/package.json ./package.json
-
-# Run migrations before switching to non-root user
-USER root
-RUN npx prisma migrate deploy
 
 USER nextjs
 
