@@ -94,6 +94,8 @@ export async function recalculateNilaiUjian(pendaftarId: string) {
     if (ws != null && ws <= 10 && ws > 0) {
         ws = normalizeCalsanScore(ws);
     }
+    // Clean up legacy artifact where missing values were mistakenly saved as exactly 0
+    if (ws === 0) ws = null;
 
     let wo = null;
     if (master.detail_cawalsan && !isEmpty(master.detail_cawalsan)) {
@@ -102,6 +104,7 @@ export async function recalculateNilaiUjian(pendaftarId: string) {
         wo = Number(master.nilai_wawancara_ortu);
         if (wo > 0 && wo < 10) wo = 75; // Default "Cukup" if only flag 1 is present
     }
+    if (wo === 0) wo = null;
 
     // Wawancara summary
     let wawancaraTotal = null;
