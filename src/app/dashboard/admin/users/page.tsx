@@ -118,6 +118,34 @@ export default function UserManagementPage() {
         } catch (err) { setMessage({ type: "error", text: "An error occurred" }); }
     };
 
+    const handleDelete = async (id: string, name: string) => {
+        Swal.fire({
+            title: 'Hapus Akses?',
+            text: `Akses untuk ${name} akan dihapus secara permanen.`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#e11d48',
+            cancelButtonColor: '#94a3b8',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await fetch(`/api/admin/users?id=${id}`, { method: "DELETE" });
+                    if (response.ok) {
+                        Swal.fire('Terhapus!', 'Sistem akses user berhasil dicabut.', 'success');
+                        fetchUsers();
+                    } else {
+                        const res = await response.json();
+                        Swal.fire('Gagal!', res.error || 'Gagal menghapus user', 'error');
+                    }
+                } catch (e: any) {
+                    Swal.fire('Error', e.message, 'error');
+                }
+            }
+        });
+    };
+
     const filteredUsers = users.filter(u => 
         u.full_name?.toLowerCase().includes(search.toLowerCase()) || 
         u.email?.toLowerCase().includes(search.toLowerCase())
@@ -198,7 +226,7 @@ export default function UserManagementPage() {
                                                 <button onClick={() => { setFormData({ id: user.id, email: user.email, password: "", full_name: user.full_name, role: user.role, secondary_roles: user.secondary_roles || [], phone: user.phone || "" }); setIsEditing(true); setIsModalOpen(true); }} className="p-4 bg-brand-blue-50 text-brand-blue-600 rounded-2xl hover:bg-brand-blue-600 hover:text-white transition-all shadow-sm">
                                                     <Edit className="w-5 h-5" />
                                                 </button>
-                                                <button className="p-4 bg-rose-50 text-rose-600 rounded-2xl hover:bg-rose-600 hover:text-white transition-all shadow-sm">
+                                                <button onClick={() => handleDelete(user.id, user.full_name)} className="p-4 bg-rose-50 text-rose-600 rounded-2xl hover:bg-rose-600 hover:text-white transition-all shadow-sm">
                                                     <Trash2 className="w-5 h-5" />
                                                 </button>
                                             </div>
