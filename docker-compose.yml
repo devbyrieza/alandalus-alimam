@@ -4,6 +4,19 @@
 version: '3.8'
 
 services:
+  postgres-ulul:
+    image: postgres:15-alpine
+    container_name: pp-ululalbaab-db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-admin_ulul}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password123}
+      POSTGRES_DB: ${POSTGRES_DB:-db_ululalbaab_prod}
+    ports:
+      - "5436:5432" # Pindah port lagi demi keamanan & isolasi
+    volumes:
+      - postgres_ululalbaab_prod_data:/var/lib/postgresql/data
+
   app-alimam:
     build:
       context: .
@@ -27,4 +40,5 @@ services:
       - storage_alimam_data:/app/storage_data
 
 volumes:
+  postgres_ululalbaab_prod_data:
   storage_alimam_data:
