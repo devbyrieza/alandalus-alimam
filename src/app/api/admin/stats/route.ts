@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
+import { getAdminWhereClause } from "@/lib/utils/admin";
 
 async function checkAdmin() {
   const cookieStore = await cookies();
@@ -29,23 +30,10 @@ export async function GET(request: Request) {
     }
 
     // Build where clause
-    const where: any = {
-      deleted_at: null,
-      NOT: [
-        {
-          AND: [
-            { nama_lengkap: { contains: " Tes", mode: "insensitive" } },
-            { nama_lengkap: { not: { contains: "Rieza Tes", mode: "insensitive" } } }
-          ]
-        },
-        { nama_lengkap: { startsWith: "TEST ", mode: "insensitive" } },
-        { nama_lengkap: { contains: "BYPASS", mode: "insensitive" } }
-      ]
-    };
-    if (tahunAjaranId) {
-      where.tahun_ajaran_id = tahunAjaranId;
-    } else {
-      // Default to active tahun ajaran if none specified
+    const where = getAdminWhereClause(tahunAjaranId || undefined) as any;
+
+    // If no year specified and no active year found by utility, find active manually for deeper payment stats
+    if (!where.tahun_ajaran_id) {
       const activeTA = await prisma.tahunAjaran.findFirst({
         where: { is_active: true }
       });
@@ -71,7 +59,7 @@ export async function GET(request: Request) {
     // Fetch pembayaran data for the same year
     const pembayaranData = await prisma.pembayaran.findMany({
       where: {
-        tahun_ajaran_id: where.tahun_ajaran_id
+        tahun_ajaran_id: where.tahun_ajaran_id || undefined
       },
       select: {
         pendaftar_id: true,

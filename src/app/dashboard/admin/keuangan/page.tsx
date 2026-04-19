@@ -78,24 +78,38 @@ export default function KeuanganPage() {
     const [daftarUlangData, setDaftarUlangData] = useState<RekapDaftarUlang[]>([]);
     const [loadingDaftarUlang, setLoadingDaftarUlang] = useState(true);
 
-    // Fetch on tab change
-    useEffect(() => {
-        if (activeTab === "pendaftaran" && pendaftaranData.length === 0) {
-            fetchPendaftaran();
-        }
-        if (activeTab === "daftar-ulang" && daftarUlangData.length === 0) {
-            fetchDaftarUlang();
-        }
-    }, [activeTab]);
+    // TA state
+    const [tahunAjaranList, setTahunAjaranList] = useState<any[]>([]);
+    const [selectedTahunAjaranId, setSelectedTahunAjaranId] = useState<string>("");
 
     useEffect(() => {
-        fetchPendaftaran();
+        const fetchTA = async () => {
+            try {
+                const res = await fetch("/api/admin/tahun-ajaran");
+                if (res.ok) {
+                    const json = await res.json();
+                    const list = json.data || [];
+                    setTahunAjaranList(list);
+                    const active = list.find((t: any) => t.is_active);
+                    if (active) setSelectedTahunAjaranId(active.id);
+                }
+            } catch (err) {
+                console.error("Failed to fetch TA list", err);
+            }
+        };
+        fetchTA();
     }, []);
+
+    useEffect(() => {
+        if (!selectedTahunAjaranId) return;
+        fetchPendaftaran();
+        fetchDaftarUlang();
+    }, [selectedTahunAjaranId]);
 
     const fetchPendaftaran = async () => {
         try {
             setLoadingPendaftaran(true);
-            const res = await fetch("/api/admin/rekap-pembayaran");
+            const res = await fetch(`/api/admin/rekap-pembayaran?tahun_ajaran_id=${selectedTahunAjaranId}`);
             if (!res.ok) throw new Error("Gagal mengambil data pembayaran pendaftaran");
             const json = await res.json();
             setPendaftaranData(json.data);
@@ -110,7 +124,7 @@ export default function KeuanganPage() {
     const fetchDaftarUlang = async () => {
         try {
             setLoadingDaftarUlang(true);
-            const res = await fetch("/api/admin/rekap-keuangan");
+            const res = await fetch(`/api/admin/rekap-keuangan?tahun_ajaran_id=${selectedTahunAjaranId}`);
             if (!res.ok) throw new Error("Gagal mengambil data daftar ulang");
             const json = await res.json();
             setDaftarUlangData(json.data);
@@ -171,10 +185,25 @@ export default function KeuanganPage() {
     return (
         <div className="space-y-6">
             {/* Header */}
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
                 <div>
-                    <h1 className="text-2xl font-bold text-slate-800">Rekap Keuangan</h1>
-                    <p className="text-slate-500">Monitoring status pembayaran seluruh pendaftar</p>
+                    <div className="flex items-center gap-3 mb-1">
+                        <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Rekap Keuangan</h1>
+                        {tahunAjaranList.length > 0 && (
+                            <select
+                                value={selectedTahunAjaranId}
+                                onChange={(e) => setSelectedTahunAjaranId(e.target.value)}
+                                className="bg-slate-100 text-slate-700 text-xs font-bold rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer hover:bg-slate-200 transition-all border-none"
+                            >
+                                {tahunAjaranList.map((ta: any) => (
+                                    <option key={ta.id} value={ta.id}>
+                                        TA {ta.nama}
+                                    </option>
+                                ))}
+                            </select>
+                        )}
+                    </div>
+                    <p className="text-slate-500 text-sm">Monitoring status pembayaran seluruh pendaftar</p>
                 </div>
                 <button
                     onClick={activeTab === "pendaftaran" ? exportPendaftaran : exportDaftarUlang}
