@@ -146,11 +146,6 @@ export default function MonitoringJadwalPage() {
                 name,
                 items: groups[name],
                 earliestSession: Math.min(...groups[name].map(s => new Date(s.sesi.start).getTime()))
-        return Object.keys(groups)
-            .map(name => ({
-                name,
-                items: groups[name],
-                earliestSession: Math.min(...groups[name].map(s => new Date(s.sesi.start).getTime()))
             }))
             .sort((a, b) => a.earliestSession - b.earliestSession);
     };
