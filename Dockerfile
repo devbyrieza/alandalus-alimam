@@ -35,9 +35,6 @@ ENV NEXTAUTH_SECRET=$NEXTAUTH_SECRET
 RUN npx prisma generate
 RUN npm run build
 
-# Run database migrations
-RUN npx prisma migrate deploy
-
 # 3. Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
