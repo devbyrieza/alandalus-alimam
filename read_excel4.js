@@ -1,0 +1,1 @@
+const xlsx = require('xlsx'); const workbook = xlsx.readFile('REKAP HASIL TES.xlsx'); const sheet = workbook.Sheets['R.H']; const data = xlsx.utils.sheet_to_json(sheet, { header: 1 }); console.log(JSON.stringify(data.slice(0, 10), null, 2));

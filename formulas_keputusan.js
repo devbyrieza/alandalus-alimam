@@ -1,0 +1,1 @@
+const xlsx = require('xlsx'); const workbook = xlsx.readFile('REKAP HASIL TES.xlsx', { cellFormula: true }); const sheet = workbook.Sheets['R.H']; console.log('Keputusan Row 2:', sheet['O2']?.f || sheet['O2']?.v); console.log('Keputusan Row 11:', sheet['O11']?.f || sheet['O11']?.v); console.log('Keputusan Row 23:', sheet['O23']?.f || sheet['O23']?.v);
