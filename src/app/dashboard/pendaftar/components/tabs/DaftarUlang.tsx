@@ -118,11 +118,12 @@ export default function DaftarUlangTab() {
     );
   }
 
-  // Cek Status Kelulusan
-  const statusKelulusan = dataUser?.hasil_kelulusan?.status;
+  // Cek Status Kelulusan untuk Akses Daftar Ulang
+  const statusProses = dataUser?.status_proses;
   const isTestingAccount = dataUser?.nomor_pendaftaran === "ILI2600007";
+  const canAccess = statusProses === "accepted" || statusProses === "enrolled" || isTestingAccount;
 
-  if (statusKelulusan !== "LULUS" && !isTestingAccount) {
+  if (!canAccess) {
     return (
       <div className="max-w-xl mx-auto text-center py-12 px-4">
         <div className="bg-slate-100 rounded-full p-4 w-20 h-20 mx-auto mb-6 flex items-center justify-center">
