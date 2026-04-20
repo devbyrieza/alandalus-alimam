@@ -178,19 +178,36 @@ export async function PATCH(request: NextRequest) {
 
     // Send WhatsApp notification via Queue
     try {
-      if (pembayaran.pendaftar?.no_hp) {
+      if (pembayaran.pendaftar?.no_hp && status_pembayaran !== "pending") {
         const isVerifiedPayment = status_pembayaran === "verified";
-        const formattedAmount = `Rp ${parseInt(pembayaran.jumlah.toString()).toLocaleString('id-ID')}`;
-        const paymentDate = new Date(pembayaran.created_at).toLocaleDateString('id-ID');
+        
+        // Prevent duplicate 'payment_verified' notifications
+        let shouldSendNotif = true;
+        if (isVerifiedPayment) {
+          const existingVerifiedNotif = await prisma.whatsappLog.findFirst({
+            where: {
+              pendaftar_id: pembayaran.pendaftar_id,
+              jenis_notif: "payment_verified"
+            }
+          });
+          if (existingVerifiedNotif) {
+            shouldSendNotif = false;
+          }
+        }
 
-        await enqueueWhatsapp({
-          pendaftarId: pembayaran.pendaftar_id,
-          phone: pembayaran.pendaftar.no_hp,
-          jenisNotif: isVerifiedPayment ? "payment_verified" : "payment_rejected",
-          messageContent: isVerifiedPayment
-            ? buildMessagePaymentVerified(pembayaran.pendaftar.nama_lengkap, formattedAmount, pembayaran.metode_pembayaran, paymentDate)
-            : buildMessagePaymentRejected(pembayaran.pendaftar.nama_lengkap, catatan || ""),
-        });
+        if (shouldSendNotif) {
+          const formattedAmount = `Rp ${parseInt(pembayaran.jumlah.toString()).toLocaleString('id-ID')}`;
+          const paymentDate = new Date(pembayaran.created_at).toLocaleDateString('id-ID');
+
+          await enqueueWhatsapp({
+            pendaftarId: pembayaran.pendaftar_id,
+            phone: pembayaran.pendaftar.no_hp,
+            jenisNotif: isVerifiedPayment ? "payment_verified" : "payment_rejected",
+            messageContent: isVerifiedPayment
+              ? buildMessagePaymentVerified(pembayaran.pendaftar.nama_lengkap, formattedAmount, pembayaran.metode_pembayaran, paymentDate)
+              : buildMessagePaymentRejected(pembayaran.pendaftar.nama_lengkap, catatan || ""),
+          });
+        }
       }
     } catch (error) {
       console.error("WhatsApp notification enqueue error:", error);
