@@ -1,4 +1,4 @@
-import jsPDF from "jspdf";
+import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import { PDF_BRANDING } from "@/config/pdf-branding";
 
@@ -177,6 +177,7 @@ export const generateBuktiPendaftaran = async (data: PendaftarPdfData) => {
 
     drawFooter(doc);
     doc.save(`PPDB_BuktiPendaftaran_${data.nomor_pendaftaran}.pdf`);
+    return doc;
 };
 
 /**
@@ -223,9 +224,34 @@ export const generateKartuUjian = async (data: PendaftarPdfData) => {
 
     drawFooter(doc);
     doc.save(`PPDB_KartuUjian_${data.nomor_pendaftaran}.pdf`);
+    return doc;
 };
 
 const fetchImageAsBase64 = async (url: string): Promise<string | null> => {
+    const isServer = typeof window === 'undefined';
+
+    if (isServer) {
+        try {
+            if (url.startsWith('/')) {
+                const fs = await import('fs/promises');
+                const path = await import('path');
+                const filePath = path.join(process.cwd(), 'public', url);
+                const data = await fs.readFile(filePath);
+                const ext = path.extname(url).slice(1) || 'png';
+                return `data:image/${ext};base64,${data.toString('base64')}`;
+            } else {
+                const response = await fetch(url);
+                if (!response.ok) return null;
+                const buffer = Buffer.from(await response.arrayBuffer());
+                const contentType = response.headers.get('content-type') || 'image/png';
+                return `data:${contentType};base64,${buffer.toString('base64')}`;
+            }
+        } catch (err) {
+            console.error(`Server error fetchImageAsBase64 (${url}):`, err);
+            return null;
+        }
+    }
+
     try {
         const response = await fetch(url);
         if (!response.ok) return null;
@@ -233,6 +259,7 @@ const fetchImageAsBase64 = async (url: string): Promise<string | null> => {
         return new Promise((resolve) => {
             const reader = new FileReader();
             reader.onloadend = () => resolve(reader.result as string);
+            reader.onerror = () => resolve(null);
             reader.readAsDataURL(blob);
         });
     } catch {
@@ -301,6 +328,7 @@ export const generateSuratKelulusan = async (data: PendaftarPdfData) => {
 
     drawFooter(doc);
     doc.save(`PPDB_SuratHasilSeleksi_${data.nomor_pendaftaran}.pdf`);
+    return doc;
 };
 
 // ============================================================
@@ -536,6 +564,7 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
 
     drawFooter(doc);
     doc.save(`AIIS_SuratKesehatan_${data.nomor_pendaftaran}.pdf`);
+    return doc;
 };
 
 /**
@@ -656,6 +685,7 @@ export const generateSuratPernyataan = async (data: PendaftarPdfData) => {
 
     drawFooter(doc);
     doc.save(`AIIS_SuratPernyataan_${data.nomor_pendaftaran}.pdf`);
+    return doc;
 };
 
 /**
@@ -830,5 +860,6 @@ export const generatePaktaIntegritas = async (data: PendaftarPdfData) => {
 
     drawFooter(doc);
     doc.save(`AIIS_PaktaIntegritas_${data.nomor_pendaftaran}.pdf`);
+    return doc;
 };
 

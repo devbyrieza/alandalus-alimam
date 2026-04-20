@@ -68,39 +68,25 @@ export async function GET(
       tahun_ajaran: pendaftar.tahun_ajaran?.nama || "2026/2027",
     };
 
-    // Note: The generate functions from pdf-generator.ts save directly to the browser
-    // when run client-side. We need a way to serve it server-side.
-    // Instead of completely rewriting pdf-generator.ts, we'll patch the save method
-    // on the jsPDF prototype temporarily.
-
     let pdfOutput: ArrayBuffer | null = null;
     let filename = `Template_${type}_${pendaftar.nomor_pendaftaran}.pdf`;
 
-    // Hack: Intercept the doc.save call inside the utility function
-    const originalSave = jsPDF.prototype.save;
-    // @ts-ignore
-    jsPDF.prototype.save = function(name: string) {
-        filename = name || filename;
-        pdfOutput = this.output('arraybuffer');
-        return this;
-    };
+    let doc: any = null;
+    if (type === "surat-kesehatan") {
+        doc = await generateSuratKesehatan(pdfData);
+    } else if (type === "surat-pernyataan") {
+        doc = await generateSuratPernyataan(pdfData);
+    } else if (type === "pakta-integritas") {
+        doc = await generatePaktaIntegritas(pdfData);
+    } else {
+        return NextResponse.json(
+            { success: false, error: "Tipe dokumen tidak valid" },
+            { status: 400 }
+        );
+    }
 
-    try {
-        if (type === "surat-kesehatan") {
-            await generateSuratKesehatan(pdfData);
-        } else if (type === "surat-pernyataan") {
-            await generateSuratPernyataan(pdfData);
-        } else if (type === "pakta-integritas") {
-            await generatePaktaIntegritas(pdfData);
-        } else {
-            return NextResponse.json(
-                { success: false, error: "Tipe dokumen tidak valid" },
-                { status: 400 }
-            );
-        }
-    } finally {
-        // Restore original function
-        jsPDF.prototype.save = originalSave;
+    if (doc) {
+        pdfOutput = doc.output('arraybuffer');
     }
     
     if (!pdfOutput) {
