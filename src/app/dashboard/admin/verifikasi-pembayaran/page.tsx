@@ -114,7 +114,7 @@ export default function VerifikasiPembayaranPage() {
 
   const handleVerify = async (
     pembayaranId: string,
-    status: "verified" | "rejected"
+    status: "verified" | "rejected" | "pending"
   ) => {
     try {
       setProcessing(true);
