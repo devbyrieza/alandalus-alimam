@@ -449,6 +449,8 @@ export default function KelengkapanBerkasTab() {
       if (registerData.success && registerData.data) {
         const pendaftar = registerData.data;
         setDataPendaftaran(pendaftar);
+        const statusPendaftaran = pendaftar.status_pendaftaran || "draft";
+        const isLockedStatus = !['draft', 'awaiting_payment', 'verified', 'rejected'].includes(statusPendaftaran);
 
         // Calculate Completion
         const d = pendaftar.data_lengkap || {};
@@ -460,7 +462,13 @@ export default function KelengkapanBerkasTab() {
         const santriNik = s.nik || pendaftar.nik;
 
         const isSantriBasic = s.nama_lengkap && santriNik && s.tempat_lahir && s.tanggal_lahir && s.provinsi && s.kabupaten && s.kecamatan && s.kelurahan && s.kode_pos && s.alamat && s.rt && s.rw;
-        const isSantriPhysical = s.anak_ke && s.berapa_bersaudara && s.golongan_darah && (s.tinggi_badan > 0) && (s.berat_badan > 0) && s.riwayat_penyakit;
+        const isSantriPhysical = 
+          (s.anak_ke !== undefined && s.anak_ke !== null && s.anak_ke !== "") && 
+          (s.berapa_bersaudara !== undefined && s.berapa_bersaudara !== null && s.berapa_bersaudara !== "") && 
+          s.golongan_darah && 
+          (Number(s.tinggi_badan) > 0) && 
+          (Number(s.berat_badan) > 0) && 
+          (s.riwayat_penyakit && s.riwayat_penyakit !== "");
         const isSekolahComplete = s.asal_sekolah && s.nisn && s.tahun_lulus;
 
         if (!isSantriBasic) missing.push("Identitas Santri");
@@ -888,29 +896,31 @@ export default function KelengkapanBerkasTab() {
                 </div>
               )}
 
-              <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button
-                  onClick={() => {
-                    setActiveTab("isi-data");
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  className="w-full sm:w-auto py-3 px-8 rounded-xl text-lg font-bold border-2 border-brand-blue-600 text-brand-blue-700 hover:bg-brand-blue-50 transition-all"
-                >
-                  Kembali Edit Data
-                </button>
+                {!['data_completed', 'docs_uploaded', 'docs_verified', 'scheduled', 'tested', 'announced', 'accepted', 'enrolled'].includes(dataPendaftaran?.status_pendaftaran || "") && (
+                  <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <button
+                      onClick={() => {
+                        setActiveTab("isi-data");
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                      className="w-full sm:w-auto py-3 px-8 rounded-xl text-lg font-bold border-2 border-brand-blue-600 text-brand-blue-700 hover:bg-brand-blue-50 transition-all"
+                    >
+                      Kembali Edit Data
+                    </button>
 
-                <button
-                  disabled={!isDataComplete}
-                  onClick={() => setShowConfirmModal(true)}
-                  className={`w-full sm:w-auto py-3 px-10 rounded-xl text-lg font-black shadow-lg transition-all flex items-center justify-center gap-2 ${isDataComplete
-                    ? 'bg-brand-yellow-400 hover:bg-brand-yellow-300 text-brand-blue-950 shadow-brand-yellow-400/20 border border-brand-yellow-500'
-                    : 'bg-stone-200 text-stone-400 cursor-not-allowed shadow-none'
-                    }`}
-                >
-                  Konfirmasi Data & Lanjut ke Upload Berkas
-                  <CheckCircle className="w-5 h-5 ml-1" />
-                </button>
-              </div>
+                    <button
+                      disabled={!isDataComplete}
+                      onClick={() => setShowConfirmModal(true)}
+                      className={`w-full sm:w-auto py-3 px-10 rounded-xl text-lg font-black shadow-lg transition-all flex items-center justify-center gap-2 ${isDataComplete
+                        ? 'bg-brand-yellow-400 hover:bg-brand-yellow-300 text-brand-blue-950 shadow-brand-yellow-400/20 border border-brand-yellow-500'
+                        : 'bg-stone-200 text-stone-400 cursor-not-allowed shadow-none'
+                        }`}
+                    >
+                      Konfirmasi Data & Lanjut ke Upload Berkas
+                      <CheckCircle className="w-5 h-5 ml-1" />
+                    </button>
+                  </div>
+                )}
             </div>
           ) : (
             <div className="text-center py-12">

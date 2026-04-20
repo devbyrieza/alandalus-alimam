@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
-import { notifyDataComplete } from "@/lib/wablas";
+
 
 /**
  * GET /api/pendaftar/data-lengkap
@@ -210,39 +210,6 @@ export async function POST(request: NextRequest) {
         },
         update: parentData
       });
-    }
-
-    // CHECK PROGRESSION & NOTIFY
-    if (!is_draft) {
-      // Logic: If status is 'registered' or 'verified', move to 'data_completed'
-      // This unlocks Document Upload step
-      const currentPendaftar = await prisma.pendaftar.findUnique({
-        where: { id: pendaftarId },
-        select: { status_pendaftaran: true, no_hp: true, nama_lengkap: true }
-      });
-
-      const allowedToComplete = ['draft', 'registered', 'verified', 'payment_rejected'];
-      
-      if (allowedToComplete.includes(currentPendaftar?.status_pendaftaran || '')) {
-        const newStatus = 'data_completed';
-
-        await prisma.pendaftar.update({
-          where: { id: pendaftarId },
-          data: { status_pendaftaran: newStatus }
-        });
-
-        // Send Data Complete Notification
-        if (currentPendaftar?.no_hp) {
-          try {
-            await notifyDataComplete({
-              phone: currentPendaftar.no_hp,
-              nama: currentPendaftar.nama_lengkap
-            });
-          } catch (e) {
-            console.error("Failed to send data complete notification", e);
-          }
-        }
-      }
     }
 
     return NextResponse.json({

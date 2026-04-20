@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
+import { notifyDataComplete } from "@/lib/wablas";
+
 
 /**
  * POST /api/pendaftar/konfirmasi-data
@@ -55,13 +57,25 @@ export async function POST() {
         // atau jika mereka sedang dalam 'payment_verification' (mungkin lunas tapi admin telat? 
         // tapi SOP-nya harus 'verified' baru bisa isi data lengkap)
 
-        await prisma.pendaftar.update({
+        const updatedPendaftar = await prisma.pendaftar.update({
             where: { id: pendaftarId },
             data: {
                 status_pendaftaran: 'data_completed',
                 updated_at: new Date(),
             },
         });
+
+        // 4. Kirim notifikasi WA (Optional/Async)
+        if (updatedPendaftar.no_hp) {
+            try {
+                await notifyDataComplete({
+                    phone: updatedPendaftar.no_hp,
+                    nama: updatedPendaftar.nama_lengkap
+                });
+            } catch (err) {
+                console.error("Gagal mengirim notifikasi WA:", err);
+            }
+        }
 
         return NextResponse.json({
             success: true,

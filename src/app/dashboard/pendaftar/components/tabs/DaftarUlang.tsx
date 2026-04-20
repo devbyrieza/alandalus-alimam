@@ -147,7 +147,7 @@ export default function DaftarUlangTab() {
         <div className="absolute top-0 right-0 p-4 opacity-10">
           <CheckCircle className="w-32 h-32" />
         </div>
-        <h1 className="text-3xl font-black mb-2 relative z-10">Daftar Ulang Santri Baru</h1>
+        <h1 className="text-3xl font-black mb-2 relative z-10 text-white">Daftar Ulang Santri Baru</h1>
         <p className="text-brand-yellow-100 relative z-10 text-lg font-medium">
           Tahap akhir administrasi penerimaan santri baru
         </p>
@@ -226,7 +226,7 @@ export default function DaftarUlangTab() {
             <ul className="text-sm text-brand-blue-700 space-y-1.5 list-disc list-inside font-medium mb-4">
               <li>Dapat dibayar <strong>Lunas</strong> atau <strong>Dicicil</strong>.</li>
               <li>Opsi cicil tahap pertama minimal <strong>50% (Rp 4.250.000)</strong>.</li>
-              <li>Sisa cicilan <strong>BEBAS nominal dan bebas berapa kali</strong> namun wajib lunas sebelum <strong>Juli 2026</strong>.</li>
+              <li>Sisa cicilan bebas nominal dan bebas berapa kali namun wajib lunas sebelum <strong>Juli 2026</strong>.</li>
             </ul>
           </div>
           <div className="pt-4 border-t border-brand-blue-200">
