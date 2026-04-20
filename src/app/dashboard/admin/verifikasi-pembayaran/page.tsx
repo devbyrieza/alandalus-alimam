@@ -332,8 +332,6 @@ export default function VerifikasiPembayaranPage() {
             </div>
           </div>
         </div>
-      </div>
-
       {/* List */}
       <div className="bg-white rounded-[2rem] shadow-sm border border-stone-100 overflow-hidden min-h-[400px]">
         {loading ? (
