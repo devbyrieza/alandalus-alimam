@@ -18,7 +18,7 @@ export const PDF_BRANDING = {
     // Resource Paths
     assets: {
         logo: "/images/kop-surat.png",
-        stamp: "/images/stempel-pesantren.png",
+        stamp: "/images/stempel-pesantren.jpg",
         signature: "/images/ttd-mudir.png",
     },
 
@@ -45,8 +45,8 @@ export const PDF_BRANDING = {
 
     // Official Mudir / Authority
     authority: {
-        name: "Mudir Al-Imam",
-        role: "Mudir Pondok Pesantren",
+        name: "Wahab Rajasam, M.Pd",
+        role: "Mudir",
         city: "Sukabumi"
     }
 };
