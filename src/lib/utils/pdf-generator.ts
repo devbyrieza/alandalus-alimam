@@ -17,34 +17,53 @@ export interface PendaftarPdfData {
     lokasi_ujian?: string;
 }
 
-const BRAND_NAME = "Pesantren Al-Andalus Al-Imam";
-const BRAND_SUBTITLE = "Penerimaan Santri Baru (PPDB)";
-const BRAND_ADDRESS = "Jl. Karamat No. 123, Gunungpuyuh, Kota Sukabumi, Jawa Barat";
+const BRAND_NAME = "PESANTREN AL-ANDALUS AL-IMAM";
+const BRAND_SUBTITLE = "PANITIA PENERIMAAN SANTRI BARU (PPDB)";
+const BRAND_ADDRESS = "Jl. Karamat No. 123, Gunungpuyuh, Kota Sukabumi, Jawa Barat 43123";
+const BRAND_CONTACT = "Website: https://pesantren-alimam.com | Email: info@pesantren-alimam.com";
+const BRAND_PHONES = "WhatsApp: +62 812-7141-4441 (Putra) / +62 821-1445-7476 (Putri)";
 
 const toTitleCase = (str: string) => {
     if (!str) return "";
     return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 };
 
-const drawHeader = (doc: jsPDF) => {
+const drawHeader = async (doc: jsPDF) => {
     const pageWidth = doc.internal.pageSize.getWidth();
 
-    // Header Box Decor
-    doc.setFillColor(126, 27, 34); // Maroon-700 (#7E1B22)
-    doc.rect(0, 0, pageWidth, 40, "F");
+    // Logo (Try to load from public images)
+    try {
+        const logoUrl = '/images/logo-andalus.webp'; // High quality circular logo
+        const logoBase64 = await fetchImageAsBase64(logoUrl);
+        if (logoBase64) {
+            doc.addImage(logoBase64, 'WEBP', 20, 10, 25, 25);
+        }
+    } catch (e) {
+        console.warn("Logo not loaded in header:", e);
+    }
 
-    // Text
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(22);
+    // Institution Info
+    doc.setTextColor(30, 30, 30);
+    doc.setFontSize(14);
     doc.setFont("helvetica", "bold");
-    doc.text(BRAND_NAME, pageWidth / 2, 18, { align: "center" });
+    doc.text(BRAND_NAME, 50, 18);
 
-    doc.setFontSize(12);
-    doc.setFont("helvetica", "normal");
-    doc.text(BRAND_SUBTITLE, pageWidth / 2, 26, { align: "center" });
+    doc.setFontSize(11);
+    doc.text(BRAND_SUBTITLE, 50, 24);
 
     doc.setFontSize(8);
-    doc.text(BRAND_ADDRESS, pageWidth / 2, 33, { align: "center" });
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(100, 100, 100);
+    doc.text(BRAND_ADDRESS, 50, 29);
+    doc.text(BRAND_CONTACT, 50, 33);
+    doc.text(BRAND_PHONES, 50, 37);
+
+    // Filter/Line Separator (Double line style)
+    doc.setDrawColor(30, 30, 30);
+    doc.setLineWidth(0.8);
+    doc.line(20, 42, pageWidth - 20, 42);
+    doc.setLineWidth(0.2);
+    doc.line(20, 43.5, pageWidth - 20, 43.5);
 
     doc.setTextColor(0, 0, 0); // Reset text color
 };
@@ -61,9 +80,9 @@ const drawFooter = (doc: jsPDF) => {
 /**
  * Generate Bukti Pendaftaran PDF
  */
-export const generateBuktiPendaftaran = (data: PendaftarPdfData) => {
+export const generateBuktiPendaftaran = async (data: PendaftarPdfData) => {
     const doc = new jsPDF();
-    drawHeader(doc);
+    await drawHeader(doc);
 
     const pageWidth = doc.internal.pageSize.getWidth();
 
@@ -114,9 +133,9 @@ export const generateBuktiPendaftaran = (data: PendaftarPdfData) => {
 /**
  * Generate Kartu Ujian PDF
  */
-export const generateKartuUjian = (data: PendaftarPdfData) => {
+export const generateKartuUjian = async (data: PendaftarPdfData) => {
     const doc = new jsPDF();
-    drawHeader(doc);
+    await drawHeader(doc);
 
     const pageWidth = doc.internal.pageSize.getWidth();
 
@@ -183,14 +202,8 @@ export const generateSuratKelulusan = async (data: PendaftarPdfData) => {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
     
-    // Try to load Kop Surat
-    const kopSurat = await fetchImageAsBase64('/images/kop-surat.png');
-    if (kopSurat) {
-        // Adjust height accordingly for your actual proportional kop surat
-        doc.addImage(kopSurat, 'PNG', 0, 0, pageWidth, 40);
-    } else {
-        drawHeader(doc);
-    }
+    // Use the professional structured header
+    await drawHeader(doc);
 
     doc.setFontSize(16);
     doc.setFont("helvetica", "bold");
