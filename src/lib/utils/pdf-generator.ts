@@ -53,7 +53,7 @@ const drawHeader = async (doc: jsPDF) => {
     
     doc.setFontSize(8.5);
     doc.setFont("helvetica", "normal");
-    doc.text("Pesantren Al-Imam Al-Islami Managed by Andalus", textX, 16);
+    doc.text("Pesantren Al-Imam Managed by Andalus", textX, 16);
 
     doc.setFontSize(17);
     doc.setFont("helvetica", "bold");

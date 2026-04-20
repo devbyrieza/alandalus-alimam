@@ -112,7 +112,7 @@ export default function ExamCardPage() {
                             
                             {/* Text Info (More Padding) */}
                             <div className="flex-grow pl-8 text-left">
-                                <p className="text-[11px] font-sans font-medium text-stone-500 uppercase tracking-widest leading-tight">Pesantren Al-Imam Al-Islami Managed by Andalus</p>
+                                <p className="text-[11px] font-sans font-medium text-stone-500 uppercase tracking-widest leading-tight">Pesantren Al-Imam Managed by Andalus</p>
                                 <h1 className="text-2xl font-serif font-black uppercase text-brand-blue-900 mb-1 leading-tight tracking-tight">PANITIA PENERIMAAN SANTRI BARU</h1>
                                 <p className="text-sm font-serif font-bold text-gray-800 mb-1">Tahun Ajaran 2026-2027</p>
                                 <div className="text-[8.5px] leading-tight font-sans text-stone-500 mt-1">
