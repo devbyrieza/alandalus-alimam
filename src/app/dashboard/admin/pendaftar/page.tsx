@@ -1248,6 +1248,7 @@ function AdminPendaftarContent() {
                             ? "bg-purple-100 text-purple-800"
                             : "bg-stone-100 text-stone-500"
                             }`}>
+                            {item.nilai_ujian && item.nilai_ujian.nilai_total > 0
                               ? `Nilai: ${Number(item.nilai_ujian.nilai_total).toFixed(2)}`
                               : "Belum Ujian"}
                           </span>
