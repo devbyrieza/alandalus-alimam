@@ -21,6 +21,7 @@ import {
   Send,
   Lock,
   ShieldCheck,
+  Download,
 } from "lucide-react";
 
 // ============================================
@@ -882,6 +883,69 @@ export default function UploadBerkasTab() {
             <li>Ukuran maksimal file: <strong>5MB (Foto & Dokumen)</strong></li>
             <li>Anda dapat mengupload ulang jika terjadi kesalahan sebelum diverifikasi</li>
           </ul>
+        </div>
+      </div>
+
+      {/* DOWNLOAD TEMPLATE DOKUMEN SECTION BATCH 1 */}
+      <div className="space-y-4">
+        <h2 className="text-lg font-bold text-stone-900 flex items-center gap-2">
+          <span className="w-8 h-8 bg-brand-blue-500 text-white rounded-lg flex items-center justify-center text-sm font-bold">
+            <Download className="w-4 h-4" />
+          </span>
+          Download Template Dokumen
+        </h2>
+        <div className="bg-brand-blue-50 border border-brand-blue-200 rounded-[1.5rem] p-6 shadow-sm relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-brand-blue-100 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+          <p className="text-brand-blue-900 mb-5 relative z-10 font-medium">
+            Silakan unduh, cetak, dan isi ketiga dokumen di bawah ini. Setelah diisi lengkap dan ditandatangani, scan atau foto dokumen tersebut untuk di-upload pada form pendaftaran.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 relative z-10">
+            {/* Surat Kesehatan */}
+            <a 
+              href="/api/dokumen/download/surat-kesehatan" 
+              target="_blank"
+              className="flex flex-col items-center p-4 bg-white rounded-xl border border-brand-blue-100 hover:border-brand-blue-400 hover:shadow-md transition-all group"
+            >
+              <div className="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <FileText className="w-6 h-6 text-emerald-600" />
+              </div>
+              <span className="font-bold text-ink-900 text-sm text-center mb-1">Surat Kesehatan</span>
+              <span className="text-xs text-ink-500 text-center flex items-center gap-1">
+                <Download className="w-3 h-3" /> Unduh PDF
+              </span>
+            </a>
+
+            {/* Surat Pernyataan */}
+            <a 
+              href="/api/dokumen/download/surat-pernyataan" 
+              target="_blank"
+              className="flex flex-col items-center p-4 bg-white rounded-xl border border-brand-blue-100 hover:border-brand-blue-400 hover:shadow-md transition-all group"
+            >
+              <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <FileText className="w-6 h-6 text-blue-600" />
+              </div>
+              <span className="font-bold text-ink-900 text-sm text-center mb-1">Surat Pernyataan</span>
+              <span className="text-xs text-ink-500 text-center flex items-center gap-1">
+                <Download className="w-3 h-3" /> Unduh PDF
+              </span>
+            </a>
+
+            {/* Pakta Integritas */}
+            <a 
+              href="/api/dokumen/download/pakta-integritas" 
+              target="_blank"
+              className="flex flex-col items-center p-4 bg-white rounded-xl border border-brand-blue-100 hover:border-brand-blue-400 hover:shadow-md transition-all group"
+            >
+              <div className="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <FileText className="w-6 h-6 text-amber-600" />
+              </div>
+              <span className="font-bold text-ink-900 text-sm text-center mb-1">Pakta Integritas</span>
+              <span className="text-xs text-ink-500 text-center flex items-center gap-1">
+                <Download className="w-3 h-3" /> Unduh PDF
+              </span>
+            </a>
+          </div>
         </div>
       </div>
 

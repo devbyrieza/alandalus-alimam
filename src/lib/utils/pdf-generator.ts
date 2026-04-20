@@ -302,3 +302,533 @@ export const generateSuratKelulusan = async (data: PendaftarPdfData) => {
     drawFooter(doc);
     doc.save(`PPDB_SuratHasilSeleksi_${data.nomor_pendaftaran}.pdf`);
 };
+
+// ============================================================
+// DOKUMEN TEMPLATE UNTUK CALON SANTRI
+// ============================================================
+
+/**
+ * Helper untuk menggambar tabel isian (formulir) dengan kolom label dan garis kosong
+ */
+const drawFormRow = (doc: jsPDF, label: string, x: number, y: number, lineWidth: number) => {
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10.5);
+    doc.text(label, x, y);
+    doc.text(":", x + 48, y);
+    // Draw dotted line for fill-in
+    doc.setDrawColor(100, 100, 100);
+    doc.setLineWidth(0.2);
+    doc.line(x + 52, y + 1, x + 52 + lineWidth, y + 1);
+};
+
+/**
+ * Generate Surat Pengantar Pemeriksaan Kesehatan (Template)
+ */
+export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const margin = 18;
+    const contentW = pageWidth - margin * 2;
+
+    // === HALAMAN 1: SURAT PENGANTAR ===
+    await drawHeader(doc);
+
+    // Reference info
+    let y = 56;
+    doc.setFontSize(10.5);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(50, 50, 50);
+
+    // Lampiran & Hal
+    const leftColX = margin;
+    const colonX = margin + 20;
+    doc.text("Lamp.", leftColX, y); doc.text(":", colonX, y); doc.text("1 Lembar", colonX + 4, y);
+    y += 6;
+    doc.text("Hal", leftColX, y); doc.text(":", colonX, y);
+    doc.setFont("helvetica", "bold");
+    const halText = "Pemeriksaan Kesehatan Calon Santri Baru\nPesantren Al-Andalus Al-Imam Sukabumi";
+    doc.text(halText, colonX + 4, y);
+    doc.setFont("helvetica", "normal");
+
+    y += 18;
+    doc.text("Kepada Yth.", leftColX, y);
+    y += 6; doc.text("Petugas Kesehatan Puskesmas/Rumah Sakit", leftColX, y);
+    y += 6; doc.text(".............................................", leftColX, y);
+    y += 6; doc.text("Di Tempat", leftColX, y);
+
+    y += 12;
+    doc.setFont("helvetica", "italic");
+    doc.text("Dengan hormat,", leftColX, y);
+    doc.setFont("helvetica", "normal");
+
+    y += 8;
+    const intro = "Sehubungan dengan kegiatan penerimaan calon santri baru Pesantren Al-Andalus Al-Imam Sukabumi Tahun Pelajaran 2026/2027, kami selaku panitia membutuhkan pemeriksaan kesehatan bagi para calon santri sebagai salah satu bagian dari rangkaian proses seleksi.";
+    const introLines = doc.splitTextToSize(intro, contentW);
+    doc.text(introLines, leftColX, y);
+    y += introLines.length * 5.5 + 4;
+
+    const intro2 = "Untuk itu, kami mohon kesediaan Bapak/Ibu untuk melakukan pemeriksaan kesehatan bagi calon santri dengan identitas berikut:";
+    const intro2Lines = doc.splitTextToSize(intro2, contentW);
+    doc.text(intro2Lines, leftColX, y);
+    y += intro2Lines.length * 5.5 + 4;
+
+    // Data calon santri
+    const fields1 = [
+        ["Nama", data.nama_lengkap ? toTitleCase(data.nama_lengkap) : ".................................................."],
+        ["Nomor Pendaftaran", data.nomor_pendaftaran || ".................................................."],
+        ["Tempat, Tanggal Lahir", data.tempat_lahir && data.tanggal_lahir ? `${data.tempat_lahir}, ${data.tanggal_lahir}` : ".................................................."],
+        ["Alamat", data.alamat || ".................................................."],
+    ];
+    for (const [label, value] of fields1) {
+        doc.setFont("helvetica", "bold");
+        doc.text(label, leftColX + 5, y);
+        doc.setFont("helvetica", "normal");
+        doc.text(":", leftColX + 54, y);
+        doc.text(value, leftColX + 57, y);
+        y += 6;
+    }
+
+    y += 6;
+    doc.text("Jenis pemeriksaan kesehatan yang dibutuhkan adalah:", leftColX, y);
+    y += 7;
+    const checks = [
+        "Riwayat Penyakit (Anamnesis)",
+        "Pemeriksaan Fisik (Physical Test)",
+        "Pemeriksaan Tajam Penglihatan (Visus) dan Buta Warna",
+    ];
+    for (const item of checks) {
+        doc.text(`${item}`, leftColX + 5, y);
+        y += 6;
+    }
+
+    y += 4;
+    const note = "Catatan: Bila visus tidak normal, mohon dilengkapi dengan nilai negatif, positif, atau nilai silindrisnya (contoh: V.OD/V.OS: -1/-0,5).";
+    const noteLines = doc.splitTextToSize(note, contentW - 5);
+    doc.setFont("helvetica", "italic");
+    doc.setFontSize(9.5);
+    doc.text(noteLines, leftColX + 5, y);
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10.5);
+    y += noteLines.length * 5 + 5;
+
+    const closing1 = "Hasil pemeriksaan dapat diisikan pada formulir terlampir. Seluruh biaya pemeriksaan kesehatan dibebankan kepada calon santri yang bersangkutan, dengan mekanisme yang ditentukan oleh pihak Rumah Sakit/Puskesmas.";
+    const closing1Lines = doc.splitTextToSize(closing1, contentW);
+    doc.text(closing1Lines, leftColX, y);
+    y += closing1Lines.length * 5.5 + 6;
+
+    doc.setFont("helvetica", "italic");
+    doc.text("Demikian yang dapat kami sampaikan. Atas perhatian dan kerja samanya, kami ucapkan terima kasih.", leftColX, y);
+    doc.setFont("helvetica", "normal");
+
+    // Signature kiri MUDIR (Ketua Panitia)
+    await drawFormalSignature(doc, y + 12);
+
+    drawFooter(doc);
+
+    // === HALAMAN 2: FORMULIR PEMERIKSAAN ===
+    doc.addPage();
+    await drawHeader(doc);
+
+    y = 56;
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(13);
+    doc.text("FORMULIR HASIL PEMERIKSAAN KESEHATAN", pageWidth / 2, y, { align: "center" });
+    y += 7;
+    doc.setFontSize(11);
+    doc.text("CALON SANTRI BARU PESANTREN AL-ANDALUS AL-IMAM SUKABUMI", pageWidth / 2, y, { align: "center" });
+    y += 6;
+    doc.text("Tahun Pelajaran 2026/2027", pageWidth / 2, y, { align: "center" });
+    y += 10;
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10.5);
+    doc.text("Dengan hormat, bersama ini kami sampaikan hasil pemeriksaan medis dari:", leftColX, y);
+    y += 8;
+
+    // Identitas
+    for (const [label, value] of fields1) {
+        doc.setFont("helvetica", "bold");
+        doc.text(label, leftColX + 5, y);
+        doc.setFont("helvetica", "normal");
+        doc.text(":", leftColX + 54, y);
+        doc.text(value, leftColX + 57, y);
+        y += 6;
+    }
+
+    y += 5;
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(11);
+    doc.text("A. Riwayat Kesehatan Pribadi", leftColX, y);
+    y += 5;
+
+    autoTable(doc, {
+        startY: y,
+        head: [["Pertanyaan Riwayat Penyakit", "Jawaban", "Keterangan"]],
+        body: [
+            ["Apakah pernah menderita asma?", "Tidak / Ya", "Ket: Ringan – Sedang – Berat"],
+            ["Apakah pernah menderita TBC?", "Tidak / Ya", "Ket: Sembuh – Proses Pengobatan"],
+            ["Apakah pernah menderita hepatitis?", "Tidak / Ya", "Ket: Sembuh – Proses Pengobatan"],
+            ["Apakah ada riwayat epilepsi?", "Tidak / Ya", "Ket: Sembuh – Proses Pengobatan"],
+            ["Apakah cocok tinggal di daerah dingin?", "Tidak / Ya", ""],
+        ],
+        styles: { fontSize: 9, cellPadding: 2.5 },
+        headStyles: { fillColor: [30, 60, 120], textColor: 255, fontStyle: "bold" },
+        columnStyles: { 0: { cellWidth: 80 }, 1: { cellWidth: 30 }, 2: { cellWidth: 65 } },
+        margin: { left: margin, right: margin },
+    });
+
+    y = (doc as any).lastAutoTable.finalY + 6;
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(11);
+    doc.text("B. Hasil Pemeriksaan Fisik", leftColX, y);
+    y += 4;
+
+    autoTable(doc, {
+        startY: y,
+        head: [["Pemeriksaan", "Hasil", "Ket.", "Pemeriksaan", "Hasil", "Ket."]],
+        body: [
+            ["Keadaan Umum", "", "", "Leher", "", ""],
+            ["Tinggi Badan", "...... cm", "", "Kelenjar Gondok", "Normal / Ada kelainan", ""],
+            ["Berat Badan", "...... kg", "", "Dada", "", ""],
+            ["Tekanan Darah", "...... mmHg", "", "Jantung", "Normal / Ada kelainan", ""],
+            ["Kepala", "", "", "Paru-Paru", "Normal / Ada kelainan", ""],
+            ["Mata / Visus Kanan", ".......", "", "Perut / Hepar", "Normal / Ada kelainan", ""],
+            ["Visus Kiri", ".......", "", "Limpa", "Normal / Ada kelainan", ""],
+            ["Pakai Kacamata", "Ya / Tidak", "", "Hernia", "Normal / Ada kelainan", ""],
+            ["Buta Warna", "Ya / Tidak", "", "Anus & Rektum / Hemoroid", "Ada / Tidak ada", ""],
+            ["Telinga / Membran Timpani", "Normal / Ada kelainan", "", "Ekstremitas Atas", "Normal / Ada kelainan", ""],
+            ["Serumen", "Ada / Tidak ada", "", "Ekstremitas Bawah", "Normal / Ada kelainan", ""],
+            ["Bekas Tindik", "Normal / Ada kelainan", "", "Kulit / Penyakit Kulit", "Ada / Tidak ada", ""],
+            ["Hidung / Polip", "Normal / Ada kelainan", "", "Varises", "Ada / Tidak ada", ""],
+            ["Tenggorokan / Tonsil", "Normal / Ada kelainan", "", "", "", ""],
+            ["Faring", "Normal / Ada kelainan", "", "", "", ""],
+        ],
+        styles: { fontSize: 8, cellPadding: 2 },
+        headStyles: { fillColor: [30, 60, 120], textColor: 255, fontStyle: "bold" },
+        columnStyles: {
+            0: { cellWidth: 40 }, 1: { cellWidth: 22 }, 2: { cellWidth: 10 },
+            3: { cellWidth: 40 }, 4: { cellWidth: 38 }, 5: { cellWidth: 10 },
+        },
+        margin: { left: margin, right: margin },
+    });
+
+    const finalY2 = (doc as any).lastAutoTable.finalY + 8;
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.text("Telah melakukan pemeriksaan dengan benar, dan data yang kami lampirkan adalah sesuai dengan hasil pemeriksaan.", leftColX, finalY2);
+
+    // TTD Dokter - di sebelah kiri bawah
+    const sigY = finalY2 + 10;
+    doc.setFontSize(10.5);
+    doc.text("................., ...................... 2026", leftColX, sigY);
+    doc.text("Dokter Pemeriksa,", leftColX, sigY + 6);
+    doc.setDrawColor(150, 150, 150);
+    doc.setLineWidth(0.3);
+    // Box TTD dokter
+    doc.rect(leftColX, sigY + 8, 60, 30);
+    doc.setFontSize(8);
+    doc.setTextColor(150, 150, 150);
+    doc.text("(Tanda Tangan & Stempel)", leftColX + 7, sigY + 25);
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(10.5);
+    doc.text("dr. .................................", leftColX, sigY + 44);
+    doc.text("NIP. ................................", leftColX, sigY + 50);
+
+    drawFooter(doc);
+    doc.save(`AIIS_SuratKesehatan_${data.nomor_pendaftaran}.pdf`);
+};
+
+/**
+ * Generate Surat Pernyataan Orangtua/Wali (Template)
+ */
+export const generateSuratPernyataan = async (data: PendaftarPdfData) => {
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const margin = 20;
+    const contentW = pageWidth - margin * 2;
+
+    await drawHeader(doc);
+
+    let y = 56;
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.text("SURAT PERNYATAAN ORANGTUA/WALI SANTRI", pageWidth / 2, y, { align: "center" });
+    y += 12;
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10.5);
+    doc.text("Saya yang bertanda tangan di bawah ini:", margin, y);
+    y += 8;
+
+    const parentFields = [
+        ["Nama", ""],
+        ["Pekerjaan", ""],
+        ["Alamat", ""],
+        ["No. HP", ""],
+    ];
+    for (const [label] of parentFields) {
+        doc.setFont("helvetica", "bold");
+        doc.text(label, margin + 5, y);
+        doc.setFont("helvetica", "normal");
+        doc.text(":", margin + 40, y);
+        doc.setDrawColor(100, 100, 100); doc.setLineWidth(0.2);
+        doc.line(margin + 43, y + 1, pageWidth - margin, y + 1);
+        y += 7;
+    }
+
+    y += 5;
+    doc.text("Sebagai orangtua/wali dari calon santri/santriwati:", margin, y);
+    y += 8;
+
+    const santriFields = [
+        ["Nama", data.nama_lengkap ? toTitleCase(data.nama_lengkap) : ""],
+        ["Jenjang", "MTs / I'dad Lughawiy / SMA  *) coret yang tidak perlu"],
+    ];
+    for (const [label, value] of santriFields) {
+        doc.setFont("helvetica", "bold");
+        doc.text(label, margin + 5, y);
+        doc.setFont("helvetica", "normal");
+        doc.text(":", margin + 40, y);
+        if (value) {
+            doc.text(value, margin + 43, y);
+        } else {
+            doc.setDrawColor(100, 100, 100); doc.setLineWidth(0.2);
+            doc.line(margin + 43, y + 1, pageWidth - margin, y + 1);
+        }
+        y += 7;
+    }
+
+    y += 5;
+    const mainText = "Dengan ini menyatakan bahwa apabila di kemudian hari diketahui putra/putri kami melakukan atau terlibat dalam salah satu perilaku berikut:";
+    doc.text(doc.splitTextToSize(mainText, contentW), margin, y);
+    y += 14;
+
+    const violations = [
+        "LGBT atau hubungan sesama jenis",
+        "Merokok",
+        "Mengonsumsi narkoba atau zat adiktif terlarang",
+        "Pacaran yang menjurus pada perzinaan",
+        "Menonton atau kecanduan pornografi",
+        "Melakukan tindakan kekerasan (penganiayaan) terhadap santri lain, baik terencana maupun tidak terencana",
+        "Mencuri barang milik orang lain yang terjadi lebih dari dua kali",
+        "Pemerasan dan perampasan yang dilakukan dua kali berturut-turut",
+        "Provokasi terhadap santri lain atau asatidzah dengan tujuan merusak kerukunan warga pesantren",
+    ];
+    for (let i = 0; i < violations.length; i++) {
+        const lines = doc.setFontSize(10.5).splitTextToSize(`${i + 1}. ${violations[i]}`, contentW - 8);
+        doc.text(lines, margin + 5, y);
+        y += lines.length * 5.5;
+    }
+
+    y += 5;
+    const consequence = "Maka kami menyatakan bersedia dengan ikhlas apabila putra/putri kami dikembalikan kepada kami hingga benar-benar dinyatakan pulih dan layak untuk kembali tinggal di lingkungan Pesantren, yang dibuktikan dengan surat keterangan dari psikolog atau tenaga ahli yang berwenang.";
+    const consequenceLines = doc.splitTextToSize(consequence, contentW);
+    doc.text(consequenceLines, margin, y);
+    y += consequenceLines.length * 5.5 + 6;
+
+    doc.setFont("helvetica", "bold");
+    doc.text("Catatan mengenai kondisi kesehatan:", margin, y);
+    doc.setFont("helvetica", "normal");
+    y += 7;
+    const healthNote = "Apabila putra/putri kami diketahui menderita penyakit kronis (antara lain: jantung, ginjal, HIV/AIDS, TBC, infeksi selaput otak, difteri, kanker, diabetes, atau epilepsi), kami bersedia segera dihubungi oleh pihak Pesantren untuk bersama-sama menentukan langkah terbaik demi keselamatan dan kenyamanan putra/putri kami serta seluruh warga Pesantren.";
+    const healthNoteLines = doc.splitTextToSize(healthNote, contentW);
+    doc.text(healthNoteLines, margin, y);
+    y += healthNoteLines.length * 5.5 + 8;
+
+    // TTD Orangtua (kiri) + TTD Mudir (kanan)
+    const dateStr = `Sukabumi, ......................... 2026`;
+    // Orangtua (kiri)
+    doc.setFontSize(10.5);
+    doc.text(dateStr, margin, y);
+    doc.text("Pembuat Pernyataan,", margin, y + 7);
+    // Materai box
+    doc.setDrawColor(100, 100, 100); doc.setLineWidth(0.3);
+    doc.rect(margin, y + 10, 35, 22);
+    doc.setFontSize(8);
+    doc.setTextColor(100, 100, 100);
+    doc.text("Materai Rp10.000,-", margin + 2, y + 22);
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(10.5);
+    // Name line
+    doc.setLineWidth(0.2);
+    doc.line(margin, y + 40, margin + 70, y + 40);
+    doc.text("(Orangtua/Wali)", margin + 10, y + 46);
+
+    drawFooter(doc);
+    doc.save(`AIIS_SuratPernyataan_${data.nomor_pendaftaran}.pdf`);
+};
+
+/**
+ * Generate Pakta Integritas Santri dan Orangtua/Wali (Template, 2 Halaman)
+ */
+export const generatePaktaIntegritas = async (data: PendaftarPdfData) => {
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const margin = 20;
+    const contentW = pageWidth - margin * 2;
+
+    // === HALAMAN 1: PAKTA INTEGRITAS SANTRI ===
+    await drawHeader(doc);
+
+    let y = 56;
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.text("PAKTA INTEGRITAS SANTRI", pageWidth / 2, y, { align: "center" });
+    y += 12;
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10.5);
+    doc.text("Saya yang bertanda tangan di bawah ini:", margin, y);
+    y += 8;
+
+    const santriFields2 = [
+        ["Nama Lengkap", data.nama_lengkap ? toTitleCase(data.nama_lengkap) : ""],
+        ["Jenjang", "MTs / I'dad Lughawiy / SMA  *) coret yang tidak perlu"],
+        ["Tahun Pelajaran", "2026/2027"],
+        ["Alamat Lengkap", ""],
+    ];
+    for (const [label, value] of santriFields2) {
+        doc.setFont("helvetica", "bold");
+        doc.text(label, margin + 5, y);
+        doc.setFont("helvetica", "normal");
+        doc.text(":", margin + 50, y);
+        if (value) {
+            doc.text(value, margin + 53, y);
+        } else {
+            doc.setDrawColor(100, 100, 100); doc.setLineWidth(0.2);
+            doc.line(margin + 53, y + 1, pageWidth - margin, y + 1);
+        }
+        y += 7;
+    }
+
+    y += 5;
+    const preamble1 = "Dengan sungguh-sungguh dan penuh kesadaran, selama saya menjadi santri di Pesantren Al-Andalus Al-Imam, menyatakan bahwa saya akan:";
+    doc.text(doc.splitTextToSize(preamble1, contentW), margin, y);
+    y += 13;
+
+    const santriCommitments = [
+        "Melaksanakan tuntunan syariat Islam.",
+        "Belajar dengan tekun dan penuh semangat, disertai rasa tanggung jawab sebagai santri.",
+        "Menjaga nama baik diri sendiri dan Pesantren.",
+        "Menaati semua peraturan dan tata tertib Pesantren.",
+        "Bersedia menerima sanksi yang berlaku apabila saya melakukan pelanggaran terhadap tata tertib Pesantren.",
+    ];
+    for (let i = 0; i < santriCommitments.length; i++) {
+        const lines = doc.setFontSize(10.5).splitTextToSize(`${i + 1}. ${santriCommitments[i]}`, contentW - 8);
+        doc.text(lines, margin + 5, y);
+        y += lines.length * 5.5 + 1;
+    }
+
+    y += 5;
+    const closing2 = "Surat pernyataan ini saya buat dengan sebenar-benarnya dan atas persetujuan orangtua/wali.";
+    doc.text(doc.splitTextToSize(closing2, contentW), margin, y);
+    y += 12;
+
+    // TTD Santri (kiri) + TTD Mudir (kanan)
+    const sigDateStr = "Sukabumi, ......................... 2026";
+    // Santri (kiri)
+    doc.setFontSize(10.5);
+    doc.text(sigDateStr, margin, y);
+    doc.text("Pembuat Pernyataan,", margin, y + 7);
+    doc.setDrawColor(100, 100, 100); doc.setLineWidth(0.3);
+    doc.rect(margin, y + 10, 35, 22);
+    doc.setFontSize(8);
+    doc.setTextColor(100, 100, 100);
+    doc.text("Materai Rp10.000,-", margin + 2, y + 22);
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(10.5);
+    doc.setLineWidth(0.2);
+    doc.line(margin, y + 40, margin + 75, y + 40);
+    doc.text("(Santri/Ananda)", margin + 12, y + 46);
+
+    drawFooter(doc);
+
+    // === HALAMAN 2: PAKTA INTEGRITAS ORANGTUA ===
+    doc.addPage();
+    await drawHeader(doc);
+
+    y = 56;
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.text("PAKTA INTEGRITAS ORANGTUA/WALI SANTRI", pageWidth / 2, y, { align: "center" });
+    y += 12;
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10.5);
+    doc.text("Kami yang bertanda tangan di bawah ini:", margin, y);
+    y += 8;
+
+    const ortuFields = [
+        ["Nama Lengkap", ""],
+        ["Alamat Lengkap", ""],
+        ["No. HP / WhatsApp", ""],
+        ["Pekerjaan", ""],
+    ];
+    for (const [label] of ortuFields) {
+        doc.setFont("helvetica", "bold");
+        doc.text(label, margin + 5, y);
+        doc.setFont("helvetica", "normal");
+        doc.text(":", margin + 50, y);
+        doc.setDrawColor(100, 100, 100); doc.setLineWidth(0.2);
+        doc.line(margin + 53, y + 1, pageWidth - margin, y + 1);
+        y += 7;
+    }
+
+    y += 5;
+    doc.text("Sebagai orangtua/wali dari santri/santriwati:", margin, y);
+    y += 7;
+    doc.setFont("helvetica", "bold");
+    doc.text("Nama Santri", margin + 5, y);
+    doc.setFont("helvetica", "normal");
+    doc.text(":", margin + 50, y);
+    doc.text(data.nama_lengkap ? toTitleCase(data.nama_lengkap) : ".................................", margin + 53, y);
+    y += 7;
+    doc.setFont("helvetica", "bold");
+    doc.text("Jenjang", margin + 5, y);
+    doc.setFont("helvetica", "normal");
+    doc.text(":", margin + 50, y);
+    doc.text("MTs / I'dad Lughawiy / SMA  *) coret yang tidak perlu", margin + 53, y);
+    y += 10;
+
+    const preamble2 = "Dengan sungguh-sungguh dan penuh kesadaran, menyatakan bahwa kami akan:";
+    doc.text(doc.splitTextToSize(preamble2, contentW), margin, y);
+    y += 9;
+
+    const ortuCommitments = [
+        "Berupaya menjadi teladan yang baik sesuai ketentuan syariat Islam.",
+        "Berperan aktif dalam membimbing dan mengawasi putra/putri kami agar menaati semua peraturan dan tata tertib Pesantren.",
+        "Membiayai pendidikan putra/putri kami selama masa pendidikan dengan penuh rasa tanggung jawab.",
+        "Tidak mengajukan tuntutan hukum kepada pihak Pesantren Al-Andalus Al-Imam Sukabumi atau tenaga pendidik Pesantren terkait tindakan edukatif yang dilakukan kepada putra/putri kami, sebagaimana diatur dalam PP No. 74 Tahun 2008 sebagaimana telah diubah dengan PP No. 19 Tahun 2017 tentang Guru, serta Permendikbud No. 10 Tahun 2017 tentang Perlindungan Bagi Pendidik dan Tenaga Kependidikan.",
+        "Bersedia mengikuti mekanisme dan aturan yang telah ditetapkan oleh Pesantren, baik dalam penyelenggaraan pendidikan di dalam kelas, pendidikan di luar kelas, maupun dalam hal-hal yang berkaitan dengan administrasi.",
+        "Apabila kami dan putra/putri kami melanggar ketentuan yang telah ditetapkan oleh Pesantren, maka kami bersedia menerima sanksi yang berlaku, sesuai dengan Buku Pedoman Tata Tertib Santri.",
+    ];
+    for (let i = 0; i < ortuCommitments.length; i++) {
+        const lines = doc.setFontSize(10.5).splitTextToSize(`${i + 1}. ${ortuCommitments[i]}`, contentW - 8);
+        doc.text(lines, margin + 5, y);
+        y += lines.length * 5.5 + 1;
+    }
+
+    y += 5;
+    const closing3 = "Surat pernyataan ini kami buat dengan sebenar-benarnya dan tanpa ada paksaan dari pihak mana pun.";
+    doc.text(doc.splitTextToSize(closing3, contentW), margin, y);
+    y += 12;
+
+    // TTD Orangtua (kiri) bermaterai
+    doc.setFontSize(10.5);
+    doc.text(sigDateStr, margin, y);
+    doc.text("Pembuat Pernyataan,", margin, y + 7);
+    doc.setDrawColor(100, 100, 100); doc.setLineWidth(0.3);
+    doc.rect(margin, y + 10, 35, 22);
+    doc.setFontSize(8);
+    doc.setTextColor(100, 100, 100);
+    doc.text("Materai Rp10.000,-", margin + 2, y + 22);
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(10.5);
+    doc.setLineWidth(0.2);
+    doc.line(margin, y + 40, margin + 75, y + 40);
+    doc.text("(Orangtua/Wali)", margin + 12, y + 46);
+
+    drawFooter(doc);
+    doc.save(`AIIS_PaktaIntegritas_${data.nomor_pendaftaran}.pdf`);
+};
+
