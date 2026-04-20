@@ -31,49 +31,48 @@ const toTitleCase = (str: string) => {
 const drawHeader = async (doc: jsPDF) => {
     const pageWidth = doc.internal.pageSize.getWidth();
 
-    // 1. Logo (Droplet)
+    // 1. Logo (Droplet) - Slightly larger and center-aligned vertically to the text block
     try {
         const logoUrl = '/images/kop-surat.png';
         const logoBase64 = await fetchImageAsBase64(logoUrl);
         if (logoBase64) {
-            // Droplet logo is usually tall, 15x25 is a good proportion
-            doc.addImage(logoBase64, 'PNG', 18, 10, 15, 25);
+            doc.addImage(logoBase64, 'PNG', 18, 11, 20, 28);
         }
     } catch (e) {
         console.warn("Logo not loaded in header:", e);
     }
 
-    // 2. Vertical Separator Bar
-    doc.setDrawColor(30, 30, 30);
-    doc.setLineWidth(0.5);
-    doc.line(40, 12, 40, 38);
+    // 2. Vertical Separator Bar - Thinner and more elegant
+    doc.setDrawColor(40, 40, 40);
+    doc.setLineWidth(0.2);
+    doc.line(44, 13, 44, 39);
 
-    // 3. Institution Info (Left Aligned next to bar)
-    const textX = 45;
-    doc.setTextColor(30, 30, 30);
+    // 3. Institution Info (More Padding from bar)
+    const textX = 48;
+    doc.setTextColor(40, 40, 40);
     
-    doc.setFontSize(9);
+    doc.setFontSize(8.5);
     doc.setFont("helvetica", "normal");
-    doc.text("Pesantren Al-Imam Al-Islami Managed by Andalus", textX, 15);
+    doc.text("Pesantren Al-Imam Al-Islami Managed by Andalus", textX, 16);
 
-    doc.setFontSize(18);
+    doc.setFontSize(17);
     doc.setFont("helvetica", "bold");
     doc.text("PANITIA PENERIMAAN SANTRI BARU", textX, 24);
 
-    doc.setFontSize(12);
+    doc.setFontSize(11);
     doc.setFont("helvetica", "normal");
     doc.text(`Tahun Ajaran ${new Date().getFullYear()}-${new Date().getFullYear() + 1}`, textX, 31);
 
-    doc.setFontSize(8);
-    doc.setTextColor(100, 100, 100);
+    doc.setFontSize(7.5);
+    doc.setTextColor(80, 80, 80);
     doc.text(`${BRAND_ADDRESS} | ${BRAND_CONTACT}`, textX, 37);
 
-    // 4. Horizontal Separator (Double line style)
-    doc.setDrawColor(30, 30, 30);
-    doc.setLineWidth(0.8);
-    doc.line(18, 42, pageWidth - 18, 42);
-    doc.setLineWidth(0.2);
-    doc.line(18, 43.5, pageWidth - 18, 43.5);
+    // 4. Horizontal Separator (Premium weighted double line style)
+    doc.setDrawColor(0, 0, 0);
+    doc.setLineWidth(1.2);
+    doc.line(18, 43, pageWidth - 18, 43); // Thick top line
+    doc.setLineWidth(0.3);
+    doc.line(18, 44.5, pageWidth - 18, 44.5); // Thin bottom line
 
     doc.setTextColor(0, 0, 0); // Reset text color
 };

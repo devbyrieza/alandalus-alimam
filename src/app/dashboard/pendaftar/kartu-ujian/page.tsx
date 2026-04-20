@@ -103,24 +103,27 @@ export default function ExamCardPage() {
                     <div className="border border-black p-6 relative">
                         {/* Watermark/Background Logo could go here */}
 
-                        {/* KOP - Professional Institutional Style (Match Pakta Integritas) */}
+                        {/* KOP - Professional Institutional Style (Polished version) */}
                         <div className="flex items-center border-b-4 border-black pb-4 mb-6 relative">
                             {/* Logo (Droplet) */}
-                            <div className="w-16 h-24 shrink-0 flex items-center justify-center border-r-2 border-black pr-4">
+                            <div className="w-16 h-28 shrink-0 flex items-center justify-center border-r border-stone-300 pr-5">
                                 <img src="/images/kop-surat.png" alt="Logo" className="h-full object-contain" />
                             </div>
                             
-                            {/* Text Info */}
-                            <div className="flex-grow pl-6 text-left">
-                                <p className="text-sm font-serif font-medium text-gray-800 leading-tight">Pesantren Al-Imam Al-Islami Managed by Andalus</p>
-                                <h1 className="text-3xl font-serif font-black uppercase text-brand-blue-900 mb-1 leading-tight">PANITIA PENERIMAAN SANTRI BARU</h1>
-                                <p className="text-base font-serif font-bold text-gray-800 mb-1">Tahun Ajaran 2026-2027</p>
-                                <div className="text-[10px] leading-tight font-sans text-stone-500 mt-1">
+                            {/* Text Info (More Padding) */}
+                            <div className="flex-grow pl-8 text-left">
+                                <p className="text-[11px] font-sans font-medium text-stone-500 uppercase tracking-widest leading-tight">Pesantren Al-Imam Al-Islami Managed by Andalus</p>
+                                <h1 className="text-2xl font-serif font-black uppercase text-brand-blue-900 mb-1 leading-tight tracking-tight">PANITIA PENERIMAAN SANTRI BARU</h1>
+                                <p className="text-sm font-serif font-bold text-gray-800 mb-1">Tahun Ajaran 2026-2027</p>
+                                <div className="text-[9px] leading-tight font-sans text-stone-400 mt-2">
                                     <p>Jl. Karamat No. 123, Gunungpuyuh, Kota Sukabumi, Jawa Barat 43123</p>
-                                    <p>Website: https://pesantren-alimam.com | Email: info@pesantren-alimam.com | WhatsApp: +62 812-7141-4441</p>
+                                    <p className="mt-0.5">Website: https://pesantren-alimam.com | Email: info@pesantren-alimam.com | WhatsApp: 0812-7141-4441</p>
                                 </div>
                             </div>
                         </div>
+                        
+                        {/* Secondary Double line for HTML preview to match PDF */}
+                        <div className="absolute left-[2cm] right-[2cm] h-0.5 bg-black -mt-6"></div>
 
                         <div className="text-center mb-8">
                             <span className="bg-black text-white px-6 py-2 font-bold text-xl uppercase tracking-widest inline-block rounded-sm">JADWAL SELEKSI SANTRI</span>
