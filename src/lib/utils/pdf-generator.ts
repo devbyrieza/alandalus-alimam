@@ -31,39 +31,49 @@ const toTitleCase = (str: string) => {
 const drawHeader = async (doc: jsPDF) => {
     const pageWidth = doc.internal.pageSize.getWidth();
 
-    // Logo (Try to load from public images)
+    // 1. Logo (Droplet)
     try {
-        const logoUrl = '/images/logo-andalus.webp'; // High quality circular logo
+        const logoUrl = '/images/kop-surat.png';
         const logoBase64 = await fetchImageAsBase64(logoUrl);
         if (logoBase64) {
-            doc.addImage(logoBase64, 'WEBP', 20, 10, 25, 25);
+            // Droplet logo is usually tall, 15x25 is a good proportion
+            doc.addImage(logoBase64, 'PNG', 18, 10, 15, 25);
         }
     } catch (e) {
         console.warn("Logo not loaded in header:", e);
     }
 
-    // Institution Info
-    doc.setTextColor(30, 30, 30);
-    doc.setFontSize(14);
-    doc.setFont("helvetica", "bold");
-    doc.text(BRAND_NAME, 50, 18);
+    // 2. Vertical Separator Bar
+    doc.setDrawColor(30, 30, 30);
+    doc.setLineWidth(0.5);
+    doc.line(40, 12, 40, 38);
 
-    doc.setFontSize(11);
-    doc.text(BRAND_SUBTITLE, 50, 24);
+    // 3. Institution Info (Left Aligned next to bar)
+    const textX = 45;
+    doc.setTextColor(30, 30, 30);
+    
+    doc.setFontSize(9);
+    doc.setFont("helvetica", "normal");
+    doc.text("Pesantren Al-Imam Al-Islami Managed by Andalus", textX, 15);
+
+    doc.setFontSize(18);
+    doc.setFont("helvetica", "bold");
+    doc.text("PANITIA PENERIMAAN SANTRI BARU", textX, 24);
+
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Tahun Ajaran ${new Date().getFullYear()}-${new Date().getFullYear() + 1}`, textX, 31);
 
     doc.setFontSize(8);
-    doc.setFont("helvetica", "normal");
     doc.setTextColor(100, 100, 100);
-    doc.text(BRAND_ADDRESS, 50, 29);
-    doc.text(BRAND_CONTACT, 50, 33);
-    doc.text(BRAND_PHONES, 50, 37);
+    doc.text(`${BRAND_ADDRESS} | ${BRAND_CONTACT}`, textX, 37);
 
-    // Filter/Line Separator (Double line style)
+    // 4. Horizontal Separator (Double line style)
     doc.setDrawColor(30, 30, 30);
     doc.setLineWidth(0.8);
-    doc.line(20, 42, pageWidth - 20, 42);
+    doc.line(18, 42, pageWidth - 18, 42);
     doc.setLineWidth(0.2);
-    doc.line(20, 43.5, pageWidth - 20, 43.5);
+    doc.line(18, 43.5, pageWidth - 18, 43.5);
 
     doc.setTextColor(0, 0, 0); // Reset text color
 };

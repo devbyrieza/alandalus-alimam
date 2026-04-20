@@ -103,22 +103,21 @@ export default function ExamCardPage() {
                     <div className="border border-black p-6 relative">
                         {/* Watermark/Background Logo could go here */}
 
-                        {/* KOP - Professional Institutional Style */}
-                        <div className="flex items-center border-b-4 border-black pb-4 mb-6 gap-6 relative">
-                            {/* Logo */}
-                            <div className="w-24 h-24 shrink-0 flex items-center justify-center">
-                                <img src="/images/logo-andalus.webp" alt="Logo" className="w-full h-full object-contain" />
+                        {/* KOP - Professional Institutional Style (Match Pakta Integritas) */}
+                        <div className="flex items-center border-b-4 border-black pb-4 mb-6 relative">
+                            {/* Logo (Droplet) */}
+                            <div className="w-16 h-24 shrink-0 flex items-center justify-center border-r-2 border-black pr-4">
+                                <img src="/images/kop-surat.png" alt="Logo" className="h-full object-contain" />
                             </div>
                             
                             {/* Text Info */}
-                            <div className="flex-grow text-left">
-                                <h2 className="text-lg font-serif font-bold tracking-tight text-gray-800 leading-tight">YAYASAN PONDOK PESANTREN</h2>
-                                <h1 className="text-3xl font-serif font-black uppercase text-brand-blue-900 mb-1 leading-tight">AL-ANDALUS AL-IMAM</h1>
-                                <p className="text-sm font-serif font-bold text-gray-800 mb-1">PANITIA PENERIMAAN SANTRI BARU (PPDB)</p>
-                                <div className="text-[10px] leading-relaxed font-sans text-gray-600">
+                            <div className="flex-grow pl-6 text-left">
+                                <p className="text-sm font-serif font-medium text-gray-800 leading-tight">Pesantren Al-Imam Al-Islami Managed by Andalus</p>
+                                <h1 className="text-3xl font-serif font-black uppercase text-brand-blue-900 mb-1 leading-tight">PANITIA PENERIMAAN SANTRI BARU</h1>
+                                <p className="text-base font-serif font-bold text-gray-800 mb-1">Tahun Ajaran 2026-2027</p>
+                                <div className="text-[10px] leading-tight font-sans text-stone-500 mt-1">
                                     <p>Jl. Karamat No. 123, Gunungpuyuh, Kota Sukabumi, Jawa Barat 43123</p>
-                                    <p>Website: https://pesantren-alimam.com | Email: info@pesantren-alimam.com</p>
-                                    <p>WhatsApp: +62 812-7141-4441 (Putra) / +62 821-1445-7476 (Putri)</p>
+                                    <p>Website: https://pesantren-alimam.com | Email: info@pesantren-alimam.com | WhatsApp: +62 812-7141-4441</p>
                                 </div>
                             </div>
                         </div>
