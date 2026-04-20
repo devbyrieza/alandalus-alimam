@@ -415,16 +415,24 @@ export default function VerifikasiPembayaranPage() {
                     )}
 
                     {statusFilter === "verified" && (
-                      <div className="flex items-center justify-center gap-2 px-4 py-3 bg-emerald-50 text-emerald-700 rounded-xl font-bold text-sm border border-emerald-100">
-                        <CheckCircle className="w-4 h-4" />
-                        Sudah Valid
-                      </div>
+                      <button
+                        onClick={() => handleVerify(pay.id, "pending")}
+                        disabled={processing}
+                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-3 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl font-bold text-sm border border-stone-200 transition-all"
+                      >
+                         <RefreshCw className={`w-4 h-4 ${processing ? 'animate-spin' : ''}`} />
+                         Batalkan Verifikasi
+                      </button>
                     )}
                     {statusFilter === "rejected" && (
-                      <div className="flex items-center justify-center gap-2 px-4 py-3 bg-red-50 text-red-700 rounded-xl font-bold text-sm border border-red-100">
-                        <XCircle className="w-4 h-4" />
-                        Ditolak
-                      </div>
+                      <button
+                        onClick={() => handleVerify(pay.id, "pending")}
+                        disabled={processing}
+                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-3 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl font-bold text-sm border border-stone-200 transition-all"
+                      >
+                         <RefreshCw className={`w-4 h-4 ${processing ? 'animate-spin' : ''}`} />
+                         Reset Status
+                      </button>
                     )}
                   </div>
                 </div>

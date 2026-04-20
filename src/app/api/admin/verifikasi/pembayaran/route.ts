@@ -118,9 +118,9 @@ export async function PATCH(request: NextRequest) {
       );
     }
 
-    if (!["verified", "rejected"].includes(status_pembayaran)) {
+    if (!["verified", "rejected", "pending"].includes(status_pembayaran)) {
       return NextResponse.json(
-        { error: "status_pembayaran must be verified or rejected" },
+        { error: "status_pembayaran must be verified, rejected or pending" },
         { status: 400 }
       );
     }
@@ -150,6 +150,8 @@ export async function PATCH(request: NextRequest) {
        if (['draft', 'registered', 'payment_rejected', 'payment_verification'].includes(newPendaftarStatus)) {
            newPendaftarStatus = 'verified';
        }
+    } else if (status_pembayaran === "pending") {
+       newPendaftarStatus = 'payment_verification';
     } else {
        newPendaftarStatus = 'payment_rejected';
     }
