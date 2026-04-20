@@ -8,7 +8,10 @@ import {
   Send,
   Loader2,
   Lock,
-  History
+  History,
+  Copy,
+  Building2,
+  CreditCard as CreditCardIcon
 } from "lucide-react";
 import { Alert } from "@/components/ui";
 import { formatCurrency } from "@/lib/utils"; // Ensure this utils exists or use Intl locally
@@ -24,6 +27,14 @@ export default function DaftarUlangTab() {
   const [pernyataan, setPernyataan] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [paymentMethod, setPaymentMethod] = useState<"transfer" | "va">("transfer");
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   useEffect(() => {
     fetchData();
@@ -164,8 +175,51 @@ export default function DaftarUlangTab() {
         <div className="bg-brand-blue-50 p-6 rounded-xl border border-brand-blue-100 flex flex-col justify-between">
           <div>
             <h3 className="text-sm font-black text-brand-blue-800 mb-3 flex items-center gap-2">
-              <AlertCircle className="w-4 h-4" /> Info Pembayaran
+              <AlertCircle className="w-4 h-4" /> Info Pembayaran & Metode
             </h3>
+            
+            {/* Opsi Metode Pembayaran */}
+            <div className="grid grid-cols-2 gap-2 mb-4 bg-white p-1 rounded-xl shadow-sm border border-brand-blue-100">
+              <button
+                onClick={() => setPaymentMethod("transfer")}
+                className={`py-2 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 ${
+                  paymentMethod === "transfer" 
+                    ? "bg-brand-blue-600 text-white shadow-md" 
+                    : "text-slate-500 hover:bg-slate-50"
+                }`}
+              >
+                <Building2 className="w-4 h-4" /> Transfer Bank
+              </button>
+              <div
+                className="py-2 px-2 rounded-lg text-xs font-bold transition-all flex flex-col items-center justify-center gap-0.5 bg-slate-50 border border-slate-100 text-slate-400 opacity-70 cursor-not-allowed relative overflow-hidden"
+              >
+                <div className="flex items-center gap-1.5"><CreditCardIcon className="w-4 h-4" /> Virtual Account</div>
+                <span className="text-[9px] bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full leading-none mt-0.5">Segera Hadir</span>
+              </div>
+            </div>
+
+            {paymentMethod === "transfer" && (
+              <div className="mb-4 p-3 bg-white border border-brand-blue-100 rounded-lg animate-in fade-in slide-in-from-top-1">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <p className="text-[10px] font-bold text-ink-400 uppercase tracking-widest mb-1 text-left">Rekening Tujuan</p>
+                    <p className="font-extrabold text-brand-blue-900 text-lg flex items-center gap-2">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Bank_Syariah_Indonesia.svg/1200px-Bank_Syariah_Indonesia.svg.png" className="h-4 object-contain" alt="BSI" />
+                      4222224441
+                    </p>
+                    <p className="text-sm font-medium text-brand-blue-700 mt-0.5 text-left">a.n PP Al-Andalus Al-Imam</p>
+                  </div>
+                  <button 
+                    onClick={() => handleCopy("4222224441")}
+                    className="p-2 hover:bg-brand-blue-50 text-brand-blue-600 rounded-lg transition-colors flex flex-col items-center gap-1 group"
+                  >
+                    {copied ? <CheckCircle className="w-5 h-5 text-emerald-500" /> : <Copy className="w-5 h-5 group-hover:scale-110 transition-transform" />}
+                    <span className="text-[9px] font-bold">{copied ? "Tersalin!" : "Salin"}</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
             <ul className="text-sm text-brand-blue-700 space-y-1.5 list-disc list-inside font-medium mb-4">
               <li>Dapat dibayar <strong>Lunas</strong> atau <strong>Dicicil</strong>.</li>
               <li>Opsi cicil tahap pertama minimal <strong>50% (Rp 4.250.000)</strong>.</li>

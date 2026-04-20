@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Download, Search, Loader2, CreditCard, CheckCircle2, Clock, AlertCircle, XCircle, TrendingUp } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 import Alert from "@/components/ui/Alert";
-import * as XLSX from "xlsx";
+import { exportToExcel, exportToPDF } from "@/lib/utils/export";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -159,39 +159,47 @@ export default function KeuanganPage() {
     );
 
     // Export handlers
-    const exportPendaftaran = () => {
-        if (filteredPendaftaran.length === 0) return;
-        const rows = filteredPendaftaran.map(i => ({
-            "No": i.no,
-            "Nama Santri": i.nama,
-            "Nomor Pendaftaran": i.nomor_pendaftaran,
-            "Status Bayar": i.status_pembayaran.replace(/_/g, " "),
-            "Jumlah Bayar (Rp)": i.jumlah_pembayaran,
-            "Metode": i.metode,
-            "Terakhir Update": new Date(i.last_updated).toLocaleDateString("id-ID"),
-        }));
-        const ws = XLSX.utils.json_to_sheet(rows);
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, "Pembayaran Pendaftaran");
-        XLSX.writeFile(wb, `Rekap_Pembayaran_Pendaftaran_${new Date().toISOString().slice(0, 10)}.xlsx`);
-    };
-
-    const exportDaftarUlang = () => {
-        if (filteredDaftarUlang.length === 0) return;
-        const rows = filteredDaftarUlang.map(i => ({
-            "No": i.no,
-            "Nama Santri": i.nama,
-            "Nomor Pendaftaran": i.nomor_pendaftaran,
-            "Status Kelulusan": i.status_kelulusan,
-            "Total Bayar (Rp)": i.total_bayar,
-            "Status Bayar": i.tipe_cicilan.replace(/_/g, " "),
-            "Sisa Tagihan (Rp)": i.sisa_tagihan,
-            "Terakhir Update": new Date(i.last_updated).toLocaleDateString("id-ID"),
-        }));
-        const ws = XLSX.utils.json_to_sheet(rows);
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, "Daftar Ulang");
-        XLSX.writeFile(wb, `Rekap_Keuangan_Daftar_Ulang_${new Date().toISOString().slice(0, 10)}.xlsx`);
+    const handleExport = (type: "excel" | "pdf") => {
+        if (activeTab === "pendaftaran") {
+            if (filteredPendaftaran.length === 0) return;
+            const data = filteredPendaftaran.map(i => ({
+                "No": i.no,
+                "Nama Santri": i.nama,
+                "Nomor Pendaftaran": i.nomor_pendaftaran,
+                "Status Bayar": i.status_pembayaran.replace(/_/g, " "),
+                "Jumlah Bayar (Rp)": i.jumlah_pembayaran,
+                "Metode": i.metode,
+                "Terakhir Update": new Date(i.last_updated).toLocaleDateString("id-ID"),
+            }));
+            const filename = `Rekap_Pembayaran_Pendaftaran_${new Date().toISOString().slice(0, 10)}`;
+            if (type === "excel") {
+                exportToExcel(data, filename, "Pembayaran Pendaftaran");
+            } else {
+                const headers = Object.keys(data[0]);
+                const rows = data.map(item => Object.values(item));
+                exportToPDF("Rekap Pembayaran Pendaftaran", headers, rows, filename, "landscape");
+            }
+        } else {
+            if (filteredDaftarUlang.length === 0) return;
+            const data = filteredDaftarUlang.map(i => ({
+                "No": i.no,
+                "Nama Santri": i.nama,
+                "Nomor Pendaftaran": i.nomor_pendaftaran,
+                "Status Kelulusan": i.status_kelulusan,
+                "Total Bayar (Rp)": i.total_bayar,
+                "Status Bayar": i.tipe_cicilan.replace(/_/g, " "),
+                "Sisa Tagihan (Rp)": i.sisa_tagihan,
+                "Terakhir Update": new Date(i.last_updated).toLocaleDateString("id-ID"),
+            }));
+            const filename = `Rekap_Keuangan_Daftar_Ulang_${new Date().toISOString().slice(0, 10)}`;
+            if (type === "excel") {
+                exportToExcel(data, filename, "Daftar Ulang");
+            } else {
+                const headers = Object.keys(data[0]);
+                const rows = data.map(item => Object.values(item));
+                exportToPDF("Rekap Keuangan Daftar Ulang", headers, rows, filename, "landscape");
+            }
+        }
     };
 
     return (
@@ -217,12 +225,20 @@ export default function KeuanganPage() {
                     </div>
                     <p className="text-slate-500 text-sm">Monitoring status pembayaran seluruh pendaftar</p>
                 </div>
-                <button
-                    onClick={activeTab === "pendaftaran" ? exportPendaftaran : exportDaftarUlang}
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 font-bold shadow-md transition-colors"
-                >
-                    <Download className="w-4 h-4" /> Export Excel
-                </button>
+                <div className="flex items-center gap-2">
+                    <button
+                        onClick={() => handleExport("excel")}
+                        className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 font-bold shadow-md transition-colors"
+                    >
+                        <Download className="w-4 h-4" /> Export Excel
+                    </button>
+                    <button
+                        onClick={() => handleExport("pdf")}
+                        className="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 font-bold shadow-md transition-colors"
+                    >
+                        <Download className="w-4 h-4" /> Export PDF
+                    </button>
+                </div>
             </div>
 
             {/* Tabs */}

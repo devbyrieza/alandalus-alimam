@@ -48,19 +48,20 @@ export default function VerifikasiPembayaranPage() {
   const [catatan, setCatatan] = useState("");
   const [processing, setProcessing] = useState(false);
   const [exporting, setExporting] = useState(false);
+  const [activeTab, setActiveTab] = useState<"PENDAFTARAN" | "DAFTAR_ULANG">("PENDAFTARAN");
   const [uploadingProof, setUploadingProof] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetchPembayaran();
-  }, [statusFilter]);
+  }, [statusFilter, activeTab]);
 
   const fetchPembayaran = async () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `/api/admin/verifikasi/pembayaran?status=${statusFilter}`
+        `/api/admin/verifikasi/pembayaran?status=${statusFilter}&jenis=${activeTab}`
       );
       if (!response.ok) throw new Error("Failed to fetch");
 
@@ -77,7 +78,7 @@ export default function VerifikasiPembayaranPage() {
     try {
       setExporting(true);
       // Fetch ALL data for export
-      const response = await fetch(`/api/admin/verifikasi/pembayaran?status=all`);
+      const response = await fetch(`/api/admin/verifikasi/pembayaran?status=all&jenis=${activeTab}`);
       if (!response.ok) throw new Error("Failed to export");
 
       const result = await response.json();
@@ -95,14 +96,14 @@ export default function VerifikasiPembayaranPage() {
         "Catatan": item.catatan || "-"
       }));
 
-      const filename = `data-pembayaran-${new Date().toISOString().split("T")[0]}`;
+      const filename = `data-pembayaran-${activeTab.toLowerCase()}-${new Date().toISOString().split("T")[0]}`;
 
       if (type === "excel") {
-        exportToExcel(data, filename, "Data Pembayaran");
+        exportToExcel(data, filename, `Data Pembayaran ${activeTab.replace("_", " ")}`);
       } else {
         const headers = Object.keys(data[0] || {});
         const rows = data.map((item: any) => Object.values(item));
-        exportToPDF("Laporan Pembayaran Masuk", headers, rows, filename, "landscape");
+        exportToPDF(`Laporan Pembayaran ${activeTab.replace("_", " ")}`, headers, rows, filename, "landscape");
       }
     } catch (error) {
       console.error("Error exporting:", error);
@@ -273,9 +274,34 @@ export default function VerifikasiPembayaranPage() {
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Stats / Filter Bar */}
-        <div className="mt-5 md:mt-8 flex flex-wrap items-center gap-3 border-t border-stone-100 pt-5 md:pt-6">
+      {/* Tabs Jenis Pembayaran */}
+      <div className="flex gap-1 bg-slate-100 p-1 rounded-xl w-fit mb-2">
+        <button
+          onClick={() => setActiveTab("PENDAFTARAN")}
+          className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${
+            activeTab === "PENDAFTARAN"
+              ? "bg-white text-brand-blue-800 shadow-sm"
+              : "text-slate-500 hover:text-slate-700"
+          }`}
+        >
+          💳 Biaya Pendaftaran
+        </button>
+        <button
+          onClick={() => setActiveTab("DAFTAR_ULANG")}
+          className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${
+            activeTab === "DAFTAR_ULANG"
+              ? "bg-white text-brand-blue-800 shadow-sm"
+              : "text-slate-500 hover:text-slate-700"
+          }`}
+        >
+          🎓 Biaya Daftar Ulang
+        </button>
+      </div>
+
+      {/* Stats / Filter Bar */}
+      <div className="flex flex-wrap items-center gap-3 bg-white p-4 rounded-2xl shadow-sm border border-stone-100">
           <div className="px-4 py-2 bg-stone-100 rounded-lg text-sm font-bold text-stone-600">
             Total: {pembayaran.length}
           </div>
