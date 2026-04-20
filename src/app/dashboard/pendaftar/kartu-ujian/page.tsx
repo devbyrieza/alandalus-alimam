@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Loader2, Printer } from 'lucide-react';
+import { PDF_BRANDING } from '@/config/pdf-branding';
 
 interface StudentData {
     id: string;
@@ -107,17 +108,17 @@ export default function ExamCardPage() {
                         <div className="flex items-center border-b-4 border-black pb-4 mb-6 relative">
                             {/* Logo (Droplet) */}
                             <div className="w-16 h-28 shrink-0 flex items-center justify-center border-r border-stone-300 pr-5">
-                                <img src="/images/kop-surat.png" alt="Logo" className="h-full object-contain" />
+                                <img src={PDF_BRANDING.assets.logo} alt="Logo" className="h-full object-contain" />
                             </div>
                             
                             {/* Text Info (More Padding) */}
                             <div className="flex-grow pl-8 text-left">
-                                <p className="text-[11px] font-sans font-medium text-stone-500 uppercase tracking-widest leading-tight">Pesantren Al-Imam Managed by Andalus</p>
-                                <h1 className="text-2xl font-serif font-black uppercase text-brand-blue-900 mb-1 leading-tight tracking-tight">PANITIA PENERIMAAN SANTRI BARU</h1>
-                                <p className="text-sm font-serif font-bold text-gray-800 mb-1">Tahun Ajaran 2026-2027</p>
-                                <div className="text-[8.5px] leading-tight font-sans text-stone-500 mt-1">
-                                    <p>Jl. Karamat No. 123, Gunungpuyuh, Kota Sukabumi, Jawa Barat 43123</p>
-                                    <p className="mt-0.5">Website: https://pesantren-alimam.com | Email: info@pesantren-alimam.com | WhatsApp: 0812-7141-4441</p>
+                                <p className="text-[11px] font-sans font-medium text-stone-500 uppercase tracking-widest leading-tight">{PDF_BRANDING.institution.subtitle}</p>
+                                <h1 className="text-2xl font-serif font-black uppercase text-brand-blue-900 mb-1 leading-tight tracking-tight">{PDF_BRANDING.institution.committee}</h1>
+                                <p className="text-sm font-serif font-bold text-gray-800 mb-1">Tahun Ajaran {PDF_BRANDING.institution.academic_year}</p>
+                                <div className="text-[9px] leading-tight font-sans text-stone-400 mt-2">
+                                    <p>{PDF_BRANDING.institution.address}</p>
+                                    <p className="mt-0.5">{PDF_BRANDING.institution.contact}</p>
                                 </div>
                             </div>
                         </div>

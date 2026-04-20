@@ -1,0 +1,52 @@
+/**
+ * Single Source of Truth for Institutional PDF Branding
+ * "Locked" specifications for headers, lines, and signatures.
+ */
+
+export const PDF_BRANDING = {
+    // Institution Labels
+    institution: {
+        name: "PESANTREN AL-ANDALUS AL-IMAM",
+        subtitle: "Pesantren Al-Imam Managed by Andalus",
+        committee: "PANITIA PENERIMAAN SANTRI BARU",
+        academic_year: "2026-2027",
+        address: "Jl. Karamat No. 123, Gunungpuyuh, Kota Sukabumi, Jawa Barat 43123",
+        contact: "Website: https://pesantren-alimam.com | Email: info@pesantren-alimam.com",
+        phones: "WhatsApp: 0812-7000-xxxx", // Base phone
+    },
+
+    // Resource Paths
+    assets: {
+        logo: "/images/kop-surat.png",
+        stamp: "/images/stempel-pesantren.png",
+        signature: "/images/ttd-mudir.png",
+    },
+
+    // Precise Coordinate Standards (jsPDF based)
+    coords: {
+        header: {
+            logo: { x: 18, y: 11, w: 20, h: 28 },
+            vertical_bar: { x1: 44, y1: 13, x2: 44, y2: 39, width: 0.2 },
+            text_x: 48,
+            horizontal_sep: {
+                y_thick: 45,
+                y_thin: 46.5,
+                thickness_thick: 1.2,
+                thickness_thin: 0.3
+            }
+        },
+        signature: {
+            stamp: { w: 35, h: 35 },
+            ttd: { w: 35, h: 35 },
+            margin_right: 80,
+            y_offset_ttd: 5
+        }
+    },
+
+    // Official Mudir / Authority
+    authority: {
+        name: "Mudir Al-Imam",
+        role: "Mudir Pondok Pesantren",
+        city: "Sukabumi"
+    }
+};

@@ -1,5 +1,4 @@
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
+import { PDF_BRANDING } from "@/config/pdf-branding";
 
 export interface PendaftarPdfData {
     nomor_pendaftaran: string;
@@ -17,67 +16,79 @@ export interface PendaftarPdfData {
     lokasi_ujian?: string;
 }
 
-const BRAND_NAME = "PESANTREN AL-ANDALUS AL-IMAM";
-const BRAND_SUBTITLE = "PANITIA PENERIMAAN SANTRI BARU (PPDB)";
-const BRAND_ADDRESS = "Jl. Karamat No. 123, Gunungpuyuh, Kota Sukabumi, Jawa Barat 43123";
-const BRAND_CONTACT = "Website: https://pesantren-alimam.com | Email: info@pesantren-alimam.com";
-const BRAND_PHONES = "WhatsApp: +62 812-7141-4441 (Putra) / +62 821-1445-7476 (Putri)";
-
 const toTitleCase = (str: string) => {
     if (!str) return "";
     return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 };
 
+/**
+ * Standard Header for all Institutional Documents
+ */
 const drawHeader = async (doc: jsPDF) => {
     const pageWidth = doc.internal.pageSize.getWidth();
+    const { coords, assets, institution } = PDF_BRANDING;
 
-    // 1. Logo (Droplet) - Slightly larger and center-aligned vertically to the text block
+    // 1. Logo
     try {
-        const logoUrl = '/images/kop-surat.png';
-        const logoBase64 = await fetchImageAsBase64(logoUrl);
+        const logoBase64 = await fetchImageAsBase64(assets.logo);
         if (logoBase64) {
-            doc.addImage(logoBase64, 'PNG', 18, 11, 20, 28);
+            doc.addImage(
+                logoBase64, 
+                'PNG', 
+                coords.header.logo.x, 
+                coords.header.logo.y, 
+                coords.header.logo.w, 
+                coords.header.logo.h
+            );
         }
     } catch (e) {
         console.warn("Logo not loaded in header:", e);
     }
 
-    // 2. Vertical Separator Bar - Thinner and more elegant
+    // 2. Vertical Separator Bar
     doc.setDrawColor(40, 40, 40);
-    doc.setLineWidth(0.2);
-    doc.line(44, 13, 44, 39);
+    doc.setLineWidth(coords.header.vertical_bar.width);
+    doc.line(
+        coords.header.vertical_bar.x1, 
+        coords.header.vertical_bar.y1, 
+        coords.header.vertical_bar.x2, 
+        coords.header.vertical_bar.y2
+    );
 
-    // 3. Institution Info (More Padding from bar)
-    const textX = 48;
+    // 3. Institution Info
+    const textX = coords.header.text_x;
     doc.setTextColor(40, 40, 40);
     
     doc.setFontSize(8.5);
     doc.setFont("helvetica", "normal");
-    doc.text("Pesantren Al-Imam Managed by Andalus", textX, 16);
+    doc.text(institution.subtitle, textX, 16);
 
     doc.setFontSize(17);
     doc.setFont("helvetica", "bold");
-    doc.text("PANITIA PENERIMAAN SANTRI BARU", textX, 24);
+    doc.text(institution.committee, textX, 24);
 
     doc.setFontSize(11);
     doc.setFont("helvetica", "normal");
-    doc.text(`Tahun Ajaran ${new Date().getFullYear()}-${new Date().getFullYear() + 1}`, textX, 31);
+    doc.text(`Tahun Ajaran ${institution.academic_year}`, textX, 31);
 
     doc.setFontSize(7);
     doc.setTextColor(80, 80, 80);
-    doc.text(BRAND_ADDRESS, textX, 36);
-    doc.text(`${BRAND_CONTACT} | WhatsApp: 0812-7141-4441`, textX, 40);
+    doc.text(institution.address, textX, 36);
+    doc.text(`${institution.contact} | WhatsApp: 0812-7000-xxxx`, textX, 40);
 
-    // 4. Horizontal Separator (Premium weighted double line style) - Slightly shifted down
+    // 4. Horizontal Separator
     doc.setDrawColor(0, 0, 0);
-    doc.setLineWidth(1.2);
-    doc.line(18, 45, pageWidth - 18, 45); // Thick top line
-    doc.setLineWidth(0.3);
-    doc.line(18, 46.5, pageWidth - 18, 46.5); // Thin bottom line
+    doc.setLineWidth(coords.header.horizontal_sep.thickness_thick);
+    doc.line(18, coords.header.horizontal_sep.y_thick, pageWidth - 18, coords.header.horizontal_sep.y_thick);
+    doc.setLineWidth(coords.header.horizontal_sep.thickness_thin);
+    doc.line(18, coords.header.horizontal_sep.y_thin, pageWidth - 18, coords.header.horizontal_sep.y_thin);
 
-    doc.setTextColor(0, 0, 0); // Reset text color
+    doc.setTextColor(0, 0, 0);
 };
 
+/**
+ * Standard Footer for all Institutional Documents
+ */
 const drawFooter = (doc: jsPDF) => {
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
@@ -85,6 +96,34 @@ const drawFooter = (doc: jsPDF) => {
     doc.setFontSize(8);
     doc.setTextColor(150, 150, 150);
     doc.text(`Dicetak secara sistem melalui website PPDB Al-Imam pada: ${new Date().toLocaleString("id-ID")}`, pageWidth / 2, pageHeight - 10, { align: "center" });
+};
+
+/**
+ * Standard Formal Signature Section (TTD + Stempel)
+ */
+const drawFormalSignature = async (doc: jsPDF, y: number) => {
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const { authority, assets, coords } = PDF_BRANDING;
+    const xBase = pageWidth - coords.signature.margin_right;
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(11);
+    doc.text(`${authority.city}, ${new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}`, xBase, y);
+    doc.text(authority.role + ",", xBase, y + 6);
+
+    // Load and add images
+    const stempel = await fetchImageAsBase64(assets.stamp);
+    const ttd = await fetchImageAsBase64(assets.signature);
+
+    if (stempel) {
+        doc.addImage(stempel, 'PNG', xBase - 20, y + 10, coords.signature.stamp.w, coords.signature.stamp.h);
+    }
+    if (ttd) {
+        doc.addImage(ttd, 'PNG', xBase + 10, y + 10, coords.signature.ttd.w, coords.signature.ttd.h);
+    }
+
+    doc.setFont("helvetica", "bold");
+    doc.text(authority.name, xBase, y + 45);
 };
 
 /**
@@ -118,9 +157,8 @@ export const generateBuktiPendaftaran = async (data: PendaftarPdfData) => {
         columnStyles: { 0: { fontStyle: "bold", cellWidth: 50 } },
     });
 
-    // Instructions
     const finalY = (doc as any).lastAutoTable.finalY + 15;
-    doc.setFontSize(12);
+    doc.setFontSize(11);
     doc.setFont("helvetica", "bold");
     doc.text("Petunjuk Selanjutnya:", 14, finalY);
 
@@ -130,8 +168,7 @@ export const generateBuktiPendaftaran = async (data: PendaftarPdfData) => {
         "1. Simpan dokumen ini sebagai bukti pendaftaran resmi.",
         "2. Lakukan pelunasan biaya pendaftaran jika belum dilakukan.",
         "3. Lengkapi seluruh biodata dan unggah berkas wajib di dashboard.",
-        "4. Pantau dashboard secara berkala untuk jadwal ujian seleksi.",
-        "5. Hubungi Panitia via WhatsApp jika ada kendala.",
+        "4. Pantau dashboard secara berkala untuk ujian seleksi.",
     ];
 
     doc.text(instructions, 14, finalY + 8);
@@ -178,12 +215,9 @@ export const generateKartuUjian = async (data: PendaftarPdfData) => {
     });
 
     const finalY = (doc as any).lastAutoTable.finalY + 20;
-
-    // Admin Signature Space
-    doc.setFontSize(10);
-    doc.text("Panitia PPDB,", pageWidth - 60, finalY);
-    doc.text("Ponpes Al-Andalus Al-Imam", pageWidth - 60, finalY + 5);
-    doc.text("(............................)", pageWidth - 60, finalY + 30);
+    
+    // Use official signature area
+    await drawFormalSignature(doc, finalY);
 
     drawFooter(doc);
     doc.save(`PPDB_KartuUjian_${data.nomor_pendaftaran}.pdf`);
@@ -194,7 +228,6 @@ const fetchImageAsBase64 = async (url: string): Promise<string | null> => {
         const response = await fetch(url);
         if (!response.ok) return null;
         const blob = await response.blob();
-        if (blob.type !== 'image/png' && blob.type !== 'image/jpeg') return null;
         return new Promise((resolve) => {
             const reader = new FileReader();
             reader.onloadend = () => resolve(reader.result as string);
@@ -212,7 +245,6 @@ export const generateSuratKelulusan = async (data: PendaftarPdfData) => {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
     
-    // Use the professional structured header
     await drawHeader(doc);
 
     doc.setFontSize(16);
@@ -247,7 +279,6 @@ export const generateSuratKelulusan = async (data: PendaftarPdfData) => {
     doc.setFont("helvetica", "bold");
     doc.setFontSize(14);
     
-    // Support for Cadangan / Ditolak if needed, though this is primarily for LULUS
     let statusText = "LULUS / DITERIMA";
     if (data.status_kelulusan === "cadangan") statusText = "CADANGAN";
     if (data.status_kelulusan === "ditolak" || data.status_kelulusan === "rejected") statusText = "BELUM DITERIMA";
@@ -263,23 +294,8 @@ export const generateSuratKelulusan = async (data: PendaftarPdfData) => {
     
     doc.text(doc.splitTextToSize(closing, pageWidth - 40), 20, finalY + 25);
 
-    // Signature and Stamp Area
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(11);
-    doc.text("Mudir Pondok Pesantren,", pageWidth - 80, finalY + 50);
-
-    const stempel = await fetchImageAsBase64('/images/stempel-pesantren.png') || await fetchImageAsBase64('/images/stempel-pesantren.jpg');
-    const ttd = await fetchImageAsBase64('/images/ttd-mudir.png') || await fetchImageAsBase64('/images/ttd-mudir.jpg');
-
-    if (stempel) {
-        doc.addImage(stempel, 'PNG', pageWidth - 100, finalY + 55, 30, 30);
-    }
-    if (ttd) {
-        doc.addImage(ttd, 'PNG', pageWidth - 70, finalY + 55, 30, 30);
-    }
-
-    doc.setFont("helvetica", "bold");
-    doc.text("Mudir Al-Imam", pageWidth - 80, finalY + 90);
+    // Signature Area
+    await drawFormalSignature(doc, finalY + 50);
 
     drawFooter(doc);
     doc.save(`PPDB_SuratHasilSeleksi_${data.nomor_pendaftaran}.pdf`);
