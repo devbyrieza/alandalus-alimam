@@ -242,6 +242,84 @@ export default function PengumumanTab() {
             </div>
           </div>
         </div>
+      ) : pengumuman.status_kelulusan === "cadangan" ? (
+        <div className="space-y-6">
+          {/* Waiting List Card */}
+          <div className="bg-linear-to-r from-amber-500 to-amber-700 rounded-[2rem] p-8 md:p-10 text-white shadow-xl shadow-amber-500/20 relative overflow-hidden app-card">
+            <div className="absolute -top-10 -right-10 p-8 opacity-10 transform rotate-12">
+              <Calendar className="w-64 h-64" />
+            </div>
+            <div className="relative z-10">
+              <div className="flex items-center gap-5 mb-8">
+                <div className="p-4 bg-white/20 backdrop-blur-md rounded-[1.5rem] shadow-sm border border-white/20">
+                  <AlertCircle className="w-10 h-10 text-amber-50" />
+                </div>
+                <div>
+                  <p className="text-amber-100 font-bold tracking-widest uppercase text-sm mb-1">Pemberitahuan</p>
+                  <h2 className="text-3xl md:text-4xl font-black font-display tracking-tight text-white">DAFTAR CADANGAN</h2>
+                </div>
+              </div>
+              <p className="text-amber-50/90 mb-10 max-w-xl text-lg leading-relaxed">
+                Berdasarkan hasil seleksi, Anda dinyatakan masuk dalam <strong>DAFTAR CADANGAN</strong> santri baru PP Al-Andalus Al-Imam.
+              </p>
+ 
+              <div className="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-white text-amber-900 rounded-full font-black shadow-lg transition-all border border-amber-100">
+                <Calendar className="w-5 h-5" />
+                Menunggu Konfirmasi Kuota
+              </div>
+            </div>
+          </div>
+
+          {/* Info Card */}
+          <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-amber-100">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-amber-100 rounded-lg">
+                <FileText className="w-6 h-6 text-amber-600" />
+              </div>
+              <h3 className="text-lg font-bold text-stone-900">
+                Detail Pengumuman
+              </h3>
+            </div>
+
+            <div className="space-y-3">
+              <div>
+                <p className="text-xs text-stone-500 mb-1">
+                  Tanggal Pengumuman
+                </p>
+                <p className="font-bold text-stone-900">
+                  {formatDate(pengumuman.tanggal_pengumuman)}
+                </p>
+              </div>
+
+              <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                <p className="text-sm text-amber-900 leading-relaxed">
+                  <strong>Catatan Panitia:</strong> {pengumuman.catatan || "Mohon bersabar menunggu informasi lebih lanjut jika terdapat kuota yang tersedia dari pembatalan pendaftar lain."}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Next Steps */}
+          <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6">
+            <div className="flex gap-4">
+              <div className="flex-shrink-0">
+                <div className="p-2 bg-blue-200 rounded-lg">
+                  <AlertCircle className="w-6 h-6 text-blue-700" />
+                </div>
+              </div>
+              <div>
+                <h4 className="font-bold text-blue-900 mb-2">
+                  Informasi Penting
+                </h4>
+                <ul className="text-sm text-blue-800 space-y-1">
+                  <li>• Panitia akan menghubungi Anda jika terdapat kuota yang kosong</li>
+                  <li>• Pastikan nomor WhatsApp pendaftaran tetap aktif</li>
+                  <li>• Hubungi panitia melalui layanan informasi untuk pertanyaan lebih lanjut</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       ) : (
         <div className="space-y-6">
           {/* Failed Card */}

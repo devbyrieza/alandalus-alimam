@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "No pendaftar selected" }, { status: 400 });
         }
 
-        if (!new_status || !["accepted", "rejected"].includes(new_status)) {
+        if (!new_status || !["accepted", "rejected", "cadangan"].includes(new_status)) {
             return NextResponse.json({ error: "Invalid status" }, { status: 400 });
         }
 

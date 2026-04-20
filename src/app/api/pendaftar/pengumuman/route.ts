@@ -29,6 +29,7 @@ export async function GET(request: NextRequest) {
           status_kelulusan: 
             pengumuman.status_kelulusan === "Lulus" ? "diterima" : 
             pengumuman.status_kelulusan === "Tidak Lulus" ? "tidak lulus" :
+            pengumuman.status_kelulusan === "Cadangan" ? "cadangan" :
             pengumuman.status_kelulusan.toLowerCase(),
           catatan: pengumuman.catatan,
           tanggal_pengumuman: pengumuman.published_at?.toISOString() || pengumuman.created_at.toISOString(),
@@ -36,17 +37,22 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    // FALLBACK: If missing from Pengumuman table but Pendaftar status is accepted/rejected
+    // FALLBACK: If missing from Pengumuman table but Pendaftar status is accepted/rejected/cadangan
     const pendaftar = await prisma.pendaftar.findUnique({
       where: { id: pendaftarId },
       select: { status_pendaftaran: true, updated_at: true }
     });
 
-    if (pendaftar && (pendaftar.status_pendaftaran === "accepted" || pendaftar.status_pendaftaran === "rejected")) {
+    const announcedStatuses = ["accepted", "rejected", "cadangan"];
+    if (pendaftar && announcedStatuses.includes(pendaftar.status_pendaftaran)) {
+      let statusMapped = pendaftar.status_pendaftaran;
+      if (statusMapped === "accepted") statusMapped = "diterima";
+      if (statusMapped === "rejected") statusMapped = "tidak lulus";
+
       return NextResponse.json({
         data: {
           id: pendaftarId,
-          status_kelulusan: pendaftar.status_pendaftaran === "accepted" ? "diterima" : "tidak lulus",
+          status_kelulusan: statusMapped,
           catatan: "Hasil seleksi telah diumumkan. Silakan cek detail di atas.",
           tanggal_pengumuman: pendaftar.updated_at.toISOString(),
         },
