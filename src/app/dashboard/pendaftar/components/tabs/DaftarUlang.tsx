@@ -201,14 +201,17 @@ export default function DaftarUlangTab() {
             {paymentMethod === "transfer" && (
               <div className="mb-4 p-3 bg-white border border-brand-blue-100 rounded-lg animate-in fade-in slide-in-from-top-1">
                 <div className="flex items-start justify-between">
-                  <div>
-                    <p className="text-[10px] font-bold text-ink-400 uppercase tracking-widest mb-1 text-left">Rekening Tujuan</p>
-                    <p className="font-extrabold text-brand-blue-900 text-lg flex items-center gap-2">
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Bank_Syariah_Indonesia.svg/1200px-Bank_Syariah_Indonesia.svg.png" className="h-4 object-contain" alt="BSI" />
-                      4222224441
-                    </p>
-                    <p className="text-sm font-medium text-brand-blue-700 mt-0.5 text-left">a.n PP Al-Andalus Al-Imam</p>
-                  </div>
+                    <div>
+                      <p className="text-[10px] font-bold text-ink-400 uppercase tracking-widest mb-2 text-left">Rekening Tujuan</p>
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <div className="bg-[#009B9B] px-2 py-1 rounded text-[10px] text-white font-black leading-none flex items-center justify-center shadow-sm">BSI</div>
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tight">Bank Syariah Indonesia</span>
+                      </div>
+                      <p className="font-black text-brand-blue-950 text-2xl tracking-tight leading-none mb-2">
+                        4222224441
+                      </p>
+                      <p className="text-xs font-bold text-brand-blue-700/70 text-left italic">a.n PP Al-Andalus Al-Imam</p>
+                    </div>
                   <button 
                     onClick={() => handleCopy("4222224441")}
                     className="p-2 hover:bg-brand-blue-50 text-brand-blue-600 rounded-lg transition-colors flex flex-col items-center gap-1 group"
