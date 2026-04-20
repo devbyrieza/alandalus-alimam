@@ -13,10 +13,10 @@ export async function GET(req: Request) {
             return NextResponse.json({ error: "Rieza Tes tidak ditemukan" });
         }
 
-        // 1. Update status to 'passed'
+        // 1. Update status to 'tested'
         await prisma.pendaftar.update({
             where: { id: pendaftar.id },
-            data: { status_pendaftaran: "passed" }
+            data: { status_pendaftaran: "tested" }
         });
 
         // 2. Create high dummy scores if none exist
@@ -62,15 +62,15 @@ export async function GET(req: Request) {
             where: { pendaftar_id: pendaftar.id },
             update: {
                 status_kelulusan: "DITERIMA",
-                is_published: true,
-                published_at: new Date()
+                is_published: false, // Set to false so admin can test publishing
+                published_at: null
             },
             create: {
                 pendaftar_id: pendaftar.id,
                 tahun_ajaran_id: pendaftar.tahun_ajaran_id,
                 status_kelulusan: "DITERIMA",
-                is_published: true,
-                published_at: new Date()
+                is_published: false,
+                published_at: null
             }
         });
 

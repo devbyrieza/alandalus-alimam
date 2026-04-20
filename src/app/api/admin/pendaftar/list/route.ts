@@ -73,9 +73,9 @@ export async function GET(request: NextRequest) {
         dokumen_ditolak: ["docs_rejected"],
         terjadwal_ujian: ["scheduled"],
         belum_ujian: ["scheduled"],
-        sudah_ujian: ["tested", "announced", "accepted", "enrolled"],
-        hasil_ujian: ["announced", "accepted", "enrolled"],
-        diterima: ["accepted"],
+        sudah_ujian: ["tested", "passed", "announced", "accepted", "enrolled"],
+        hasil_ujian: ["passed", "announced", "accepted", "enrolled"],
+        diterima: ["accepted", "passed"],
         belum_daftar_ulang: ["accepted"],
         sudah_daftar_ulang: ["enrolled"],
       };
@@ -203,11 +203,11 @@ export async function GET(request: NextRequest) {
 
       // 3. Derive virtual exam_status label for UI
       const sp = (item as any).status_pendaftaran;
-      const examProgressStatuses = ['scheduled', 'testing', 'tested', 'announced', 'accepted', 'enrolled'];
+      const examProgressStatuses = ['scheduled', 'testing', 'tested', 'passed', 'announced', 'accepted', 'enrolled'];
       let examStatus = sp;
       if (examProgressStatuses.includes(sp)) {
-        if (examScoreCount === 6) {
-          examStatus = 'tested'; // Sudah Ujian
+        if (examScoreCount === 6 || sp === 'passed') {
+          examStatus = 'tested'; // Sudah Ujian / Passed by skip-ujian
         } else if (examScoreCount > 0) {
           examStatus = 'testing'; // Sedang Ujian
         } else {
