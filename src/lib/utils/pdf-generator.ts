@@ -63,16 +63,17 @@ const drawHeader = async (doc: jsPDF) => {
     doc.setFont("helvetica", "normal");
     doc.text(`Tahun Ajaran ${new Date().getFullYear()}-${new Date().getFullYear() + 1}`, textX, 31);
 
-    doc.setFontSize(7.5);
+    doc.setFontSize(7);
     doc.setTextColor(80, 80, 80);
-    doc.text(`${BRAND_ADDRESS} | ${BRAND_CONTACT}`, textX, 37);
+    doc.text(BRAND_ADDRESS, textX, 36);
+    doc.text(`${BRAND_CONTACT} | WhatsApp: 0812-7141-4441`, textX, 40);
 
-    // 4. Horizontal Separator (Premium weighted double line style)
+    // 4. Horizontal Separator (Premium weighted double line style) - Slightly shifted down
     doc.setDrawColor(0, 0, 0);
     doc.setLineWidth(1.2);
-    doc.line(18, 43, pageWidth - 18, 43); // Thick top line
+    doc.line(18, 45, pageWidth - 18, 45); // Thick top line
     doc.setLineWidth(0.3);
-    doc.line(18, 44.5, pageWidth - 18, 44.5); // Thin bottom line
+    doc.line(18, 46.5, pageWidth - 18, 46.5); // Thin bottom line
 
     doc.setTextColor(0, 0, 0); // Reset text color
 };
