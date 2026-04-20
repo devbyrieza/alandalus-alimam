@@ -144,7 +144,10 @@ export async function GET() {
             // Define fields that are allowed to travel across sessions (Universal)
             const UNIVERSAL_FIELDS = [
                 'nilai_tes_quran', 'score_quran', 'detail_quran', 
-                'catatan_quran', 'input_at_quran', 'input_by_quran'
+                'catatan_quran', 'input_at_quran', 'input_by_quran',
+                'nilai_wawancara_santri', 'detail_wawancara', 'catatan_santri', 'input_at_santri', 'input_by_santri',
+                'nilai_wawancara_ortu', 'detail_cawalsan', 'catatan_ortu', 'input_at_ortu', 'input_by_ortu',
+                'score_wawancara'
             ];
 
             // Merge all scores found, but apply session-aware logic
