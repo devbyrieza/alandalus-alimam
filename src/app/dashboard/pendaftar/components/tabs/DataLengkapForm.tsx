@@ -641,10 +641,24 @@ export default function DataLengkapForm({ onSuccess }: { onSuccess?: () => void 
 
     try {
       setSaving(true);
+
+      // Data normalization: ensure numeric fields are actually numbers
+      const submissionData = {
+        ...formData,
+        santri: {
+          ...formData.santri,
+          anak_ke: formData.santri.anak_ke ? parseInt(formData.santri.anak_ke.toString()) : 0,
+          berapa_bersaudara: formData.santri.berapa_bersaudara ? parseInt(formData.santri.berapa_bersaudara.toString()) : 0,
+          tinggi_badan: formData.santri.tinggi_badan ? parseFloat(formData.santri.tinggi_badan.toString()) : 0,
+          berat_badan: formData.santri.berat_badan ? parseFloat(formData.santri.berat_badan.toString()) : 0,
+          tahun_lulus: formData.santri.tahun_lulus ? parseInt(formData.santri.tahun_lulus.toString()) : undefined,
+        }
+      };
+
       const response = await fetch("/api/pendaftar/data-lengkap", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(submissionData),
       });
 
       const result = await response.json();
