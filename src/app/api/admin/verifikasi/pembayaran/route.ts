@@ -147,7 +147,7 @@ export async function PATCH(request: NextRequest) {
     let newPendaftarStatus = pembayaran.pendaftar.status_pendaftaran;
     
     if (status_pembayaran === "verified") {
-       if (['draft', 'registered', 'payment_rejected'].includes(newPendaftarStatus)) {
+       if (['draft', 'registered', 'payment_rejected', 'payment_verification'].includes(newPendaftarStatus)) {
            newPendaftarStatus = 'verified';
        }
     } else {
