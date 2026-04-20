@@ -55,15 +55,30 @@ export async function POST(request: NextRequest) {
         });
         
         let queuedCount = 0;
+        let skippedCount = 0;
+        const details: { id: string; name: string; status: string; reason?: string }[] = [];
+
         for (const user of updatedUsers) {
-            if (user.no_hp) {
-                await enqueueWhatsapp({
-                    pendaftarId: user.id,
-                    phone: user.no_hp,
-                    jenisNotif: "hasil_tes",
-                    messageContent: buildMessageHasilTes(user.nama_lengkap),
-                });
+            if (!user.no_hp) {
+                skippedCount++;
+                details.push({ id: user.id, name: user.nama_lengkap, status: "skipped", reason: "Nomor HP kosong" });
+                continue;
+            }
+
+            const resultEnq = await enqueueWhatsapp({
+                pendaftarId: user.id,
+                phone: user.no_hp,
+                jenisNotif: "hasil_tes",
+                messageContent: buildMessageHasilTes(user.nama_lengkap),
+                force: true, // Manual admin trigger should bypass Layer 1 deduplication
+            });
+
+            if (resultEnq.queued) {
                 queuedCount++;
+                details.push({ id: user.id, name: user.nama_lengkap, status: "queued", logId: resultEnq.logId });
+            } else {
+                skippedCount++;
+                details.push({ id: user.id, name: user.nama_lengkap, status: "skipped", reason: resultEnq.reason });
             }
         }
         
@@ -71,7 +86,9 @@ export async function POST(request: NextRequest) {
             success: true,
             updated: result.count,
             queued: queuedCount,
-            message: `${queuedCount} pengumuman telah masuk antrean pengiriman.`
+            skipped: skippedCount,
+            details,
+            message: `${queuedCount} pengumuman telah masuk antrean pengiriman.${skippedCount > 0 ? ` (${skippedCount} dilewati, cek detail)` : ""}`
         });
 
     } catch (error: any) {
