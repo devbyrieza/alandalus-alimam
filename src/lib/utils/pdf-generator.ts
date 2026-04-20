@@ -1,3 +1,5 @@
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 import { PDF_BRANDING } from "@/config/pdf-branding";
 
 export interface PendaftarPdfData {
