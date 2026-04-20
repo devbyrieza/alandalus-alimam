@@ -69,10 +69,11 @@ export async function GET(request: NextRequest) {
         sudah_isi_data: ["data_completed", "docs_uploaded", "docs_verified", "scheduled", "tested", "announced", "accepted", "enrolled"],
         belum_upload_dokumen: ["data_completed"],
         menunggu_verifikasi_dokumen: ["docs_uploaded"],
-        dokumen_terverifikasi: ["docs_verified", "scheduled", "tested", "announced", "accepted", "enrolled"],
+        dokumen_terverifikasi: ["docs_verified", "scheduled", "tested", "passed", "announced", "accepted", "enrolled"],
         dokumen_ditolak: ["docs_rejected"],
         terjadwal_ujian: ["scheduled"],
         belum_ujian: ["scheduled"],
+        tested: ["tested", "passed", "announced", "accepted", "enrolled"], // Matches UI filter
         sudah_ujian: ["tested", "passed", "announced", "accepted", "enrolled"],
         hasil_ujian: ["passed", "announced", "accepted", "enrolled"],
         diterima: ["accepted", "passed"],
