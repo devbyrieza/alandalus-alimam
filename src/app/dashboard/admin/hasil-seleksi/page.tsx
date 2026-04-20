@@ -194,7 +194,9 @@ export default function HasilSeleksiPage() {
                                 <div className="flex items-center justify-between pt-2 border-t border-stone-50">
                                     <div className="flex flex-col">
                                         <span className="text-[9px] font-black text-stone-300 uppercase tracking-widest leading-none mb-1">Total Nilai</span>
-                                        <span className="text-lg font-black text-stone-800">{c.nilai_ujian?.nilai_total || "-"}</span>
+                                        <span className="text-lg font-black text-stone-800">
+                                            {c.nilai_ujian?.nilai_total != null ? Number(c.nilai_ujian.nilai_total).toFixed(2) : "-"}
+                                        </span>
                                     </div>
                                     <div className="shrink-0">
                                         {(c.status_pendaftaran === 'accepted' || c.status_pendaftaran === 'enrolled') ? (
@@ -257,7 +259,7 @@ export default function HasilSeleksiPage() {
                                         </td>
                                         <td className="px-6 py-4">
                                             <div className="font-black text-stone-800 text-lg">
-                                                {c.nilai_ujian?.nilai_total || "-"}
+                                                {c.nilai_ujian?.nilai_total != null ? Number(c.nilai_ujian.nilai_total).toFixed(2) : "-"}
                                             </div>
                                         </td>
                                         <td className="px-6 py-4 text-center">

@@ -530,9 +530,19 @@ function AdminPendaftarContent() {
       return;
     }
 
-    if (!confirm(`Update status ${selectedIds.length} pendaftar menjadi ${bulkStatus}?`)) {
-      return;
-    }
+    const result = await Swal.fire({
+      title: "Update Massal",
+      text: `Yakin ingin update status ${selectedIds.length} pendaftar menjadi "${bulkStatus}"?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#2563eb", // Blue 600
+      cancelButtonColor: "#57534e", // Stone 600
+      confirmButtonText: "Ya, Update Semua",
+      cancelButtonText: "Batal",
+      reverseButtons: true
+    });
+
+    if (!result.isConfirmed) return;
 
     try {
       setBulkUpdating(true);
@@ -1238,8 +1248,7 @@ function AdminPendaftarContent() {
                             ? "bg-purple-100 text-purple-800"
                             : "bg-stone-100 text-stone-500"
                             }`}>
-                            {item.nilai_ujian && item.nilai_ujian.nilai_total > 0
-                              ? `Nilai: ${item.nilai_ujian.nilai_total}`
+                              ? `Nilai: ${Number(item.nilai_ujian.nilai_total).toFixed(2)}`
                               : "Belum Ujian"}
                           </span>
                         </td>

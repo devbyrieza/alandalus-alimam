@@ -32,10 +32,10 @@ async function main() {
       
       p.nilai_ujian.forEach(s => {
         console.log(`Nilai Ujian ID: ${s.id}`);
-        console.log(`  Materi: ${s.materi_uji}`);
-        console.log(`  Nilai: ${s.nilai}`);
-        console.log(`  Penguji ID: ${s.penguji_id}`);
-        console.log(`  Catatan: ${s.catatan}`);
+        console.log(`  Santri Score: ${s.nilai_wawancara_santri}`);
+        console.log(`  Quran Score: ${s.nilai_tes_quran}`);
+        console.log(`  Ortu Score: ${s.nilai_wawancara_ortu}`);
+        console.log(`  Catatan Santri: ${s.catatan_santri}`);
         console.log(`  Raw Object: ${JSON.stringify(s, null, 2)}`);
       });
     }

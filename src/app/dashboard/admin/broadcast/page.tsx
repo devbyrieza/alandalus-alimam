@@ -16,6 +16,7 @@ import {
     Filter,
 } from "lucide-react";
 import Link from "next/link";
+import Swal from "sweetalert2";
 
 interface Pendaftar {
     id: string;
@@ -81,7 +82,19 @@ export default function BroadcastPage() {
     const handleSendBroadcast = async () => {
         if (selectedIds.length === 0 || !message) return;
 
-        if (!confirm(`Kirim pesan ke ${selectedIds.length} penerima?`)) return;
+        const result = await Swal.fire({
+            title: "Kirim Broadcast?",
+            text: `Kirim pesan ke ${selectedIds.length} penerima?`,
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#b91c1c", // Maroon/Red 700
+            cancelButtonColor: "#57534e", // Stone 600
+            confirmButtonText: "Ya, Kirim Sekarang",
+            cancelButtonText: "Batal",
+            reverseButtons: true
+        });
+
+        if (!result.isConfirmed) return;
 
         try {
             setSending(true);
@@ -102,7 +115,7 @@ export default function BroadcastPage() {
             setResults(data);
         } catch (e) {
             console.error(e);
-            alert("Gagal mengirim broadcast");
+            Swal.fire("Error", "Gagal mengirim broadcast. Silakan periksa koneksi atau logs.", "error");
         } finally {
             setSending(false);
         }

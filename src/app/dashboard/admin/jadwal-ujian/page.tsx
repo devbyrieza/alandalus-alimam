@@ -18,6 +18,7 @@ import {
   ArrowRight,
   Send,
 } from "lucide-react";
+import Swal from "sweetalert2";
 
 interface ExamSession {
   id: string;
@@ -154,18 +155,30 @@ export default function JadwalUjianPage() {
         fetchData();
       } else {
         const err = await res.json();
-        alert(err.error);
+        Swal.fire("Gagal", err.error || "Gagal menetapkan jadwal", "error");
       }
     } catch (e) {
       console.error(e);
-      alert("Gagal menetapkan jadwal");
+      Swal.fire("Error", "Terjadi kesalahan sistem saat menetapkan jadwal", "error");
     } finally {
       setAssigning(false);
     }
   };
 
   const handleBulkAssign = async (sessionId: string, sessionTitle: string) => {
-    if (!confirm(`Yakin ingin Assign Massal ke sesi "${sessionTitle}"?\n\nLink ujian akan dikirim via WhatsApp ke semua pendaftar yang belum punya jadwal.`)) return;
+    const result = await Swal.fire({
+      title: "Assign Massal?",
+      text: `Yakin ingin Assign Massal ke sesi "${sessionTitle}"?\n\nLink ujian akan dikirim via WhatsApp ke semua pendaftar yang belum punya jadwal.`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#7c3aed", // Violet 600
+      cancelButtonColor: "#57534e", // Stone 600
+      confirmButtonText: "Ya, Mulai Broadcast",
+      cancelButtonText: "Batal",
+      reverseButtons: true
+    });
+
+    if (!result.isConfirmed) return;
 
     try {
       setAssigning(true);
@@ -209,18 +222,18 @@ export default function JadwalUjianPage() {
             }
           }
 
-          alert(`Selesai! ${success} notifikasi terkirim.`);
+          Swal.fire("Selesai!", `${success} notifikasi berhasil dimasukkan ke antrean pengiriman.`, "success");
           setSendingProgress({ active: false, curr: 0, total: 0, logs: [] });
         } else {
-          alert(data.message);
+          Swal.fire("Info", data.message || "Tidak ada pendaftar baru yang butuh jadwal.", "info");
         }
         fetchData();
       } else {
-        alert(data.error || "Gagal broadcast");
+        Swal.fire("Gagal", data.error || "Gagal melakukan broadcast", "error");
       }
     } catch (e) {
       console.error(e);
-      alert("Terjadi kesalahan sistem");
+      Swal.fire("Error", "Terjadi kesalahan sistem", "error");
     } finally {
       setAssigning(false);
     }
@@ -236,15 +249,15 @@ export default function JadwalUjianPage() {
       });
       const data = await res.json();
       if (res.ok) {
-        alert(data.message);
+        Swal.fire("Sukses", data.message || "Broadcast availability berhasil dijalankan", "success");
         setShowBroadcastModal(false);
         fetchAvailStats();
       } else {
-        alert(data.error || "Gagal broadcast");
+        Swal.fire("Gagal", data.error || "Gagal broadcast", "error");
       }
     } catch (e) {
       console.error(e);
-      alert("Terjadi kesalahan sistem");
+      Swal.fire("Error", "Terjadi kesalahan sistem", "error");
     } finally {
       setBroadcasting(false);
     }
