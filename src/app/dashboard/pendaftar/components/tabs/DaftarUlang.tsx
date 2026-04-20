@@ -226,7 +226,7 @@ export default function DaftarUlangTab() {
             <ul className="text-sm text-brand-blue-700 space-y-1.5 list-disc list-inside font-medium mb-4">
               <li>Dapat dibayar <strong>Lunas</strong> atau <strong>Dicicil</strong>.</li>
               <li>Opsi cicil tahap pertama minimal <strong>50% (Rp 4.250.000)</strong>.</li>
-              <li>Sisa cicilan bebas nominal, wajib Lunas sebelum <strong>Juli 2026</strong>.</li>
+              <li>Sisa cicilan <strong>BEBAS nominal dan bebas berapa kali</strong> namun wajib lunas sebelum <strong>Juli 2026</strong>.</li>
             </ul>
           </div>
           <div className="pt-4 border-t border-brand-blue-200">
