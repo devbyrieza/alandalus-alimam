@@ -392,17 +392,13 @@ export default function VerifikasiPembayaranPage() {
 
                   {/* Actions Column */}
                   <div className="flex sm:flex-col gap-3 sm:w-48 shrink-0">
-                    {pay.bukti_transfer_url && (
-                      <a
-                        href={pay.bukti_transfer_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 bg-white border-2 border-dashed border-stone-300 hover:border-brand-blue-500 hover:bg-brand-blue-50 text-stone-600 hover:text-brand-blue-800 rounded-xl text-sm font-bold transition-all"
-                      >
-                        <Eye className="w-4 h-4" />
-                        Lihat Bukti
-                      </a>
-                    )}
+                    <button
+                      onClick={() => openModal(pay)}
+                      className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 bg-white border-2 border-dashed border-stone-300 hover:border-brand-blue-500 hover:bg-brand-blue-50 text-stone-600 hover:text-brand-blue-800 rounded-xl text-sm font-bold transition-all"
+                    >
+                      <Eye className="w-4 h-4" />
+                      Detail & Bukti
+                    </button>
 
                     {statusFilter === "pending" && (
                       <button
