@@ -21,6 +21,8 @@ export async function GET() {
     }
 
     const userId = session.user_id || session.id;
+    const full_name = session.full_name || session.name || "Reviewer";
+    console.log(`🔍 [API /penguji/peserta] userId: ${userId} | name: ${full_name}`);
 
     try {
         // Fetch user profile to see if they're an admin
