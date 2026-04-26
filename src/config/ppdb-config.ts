@@ -9,9 +9,9 @@ export const PPDB_CONFIG = {
     nama: "Pesantren Al-Andalus Al-Imam",
     singkatan: "Al-Andalus Al-Imam",
     alamat: "Jl. KH Mama Oyon, Cihaur, Kec. Cicantayan, Kabupaten Sukabumi, Jawa Barat 43155",
-    telepon: "+62 888-0993-4970",
-    email: "alandalus.alimam@gmail.com",
-    emailPpdb: "alandalus.alimam@gmail.com",
+    telepon: "+62 851-1152-4441",
+    email: "alandalusalimam@gmail.com",
+    emailPpdb: "alandalusalimam@gmail.com",
     website: "https://www.pesantren-alimam.com",
   },
 
@@ -102,10 +102,10 @@ export const PPDB_CONFIG = {
 
   // 🔗 KONTAK & SOSMED (GANTI SESUAI!)
   contact: {
-    whatsapp: "+6288809934970",
-    instagram: "@pesantrenalimam",
-    facebook: "Pesantren Al-Andalus Al-Imam (Official Fanpage)",
-    youtube: "Al-Andalus Al-Imam"
+    whatsapp: "+6285111524441",
+    instagram: "@alandalusalimam",
+    facebook: "Wahab Rajasam",
+    youtube: "Belum Tersedia"
   },
 
   // ⚙️ SETTING TEKNIS (UMUMNYA TIDAK PERLU DIUBAH)

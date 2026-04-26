@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
@@ -17,21 +17,21 @@ const CONTACT_INFO = [
   {
     icon: MapPin,
     title: "Lokasi Pesantren",
-    content: "Jl. Pelabuhan Ratu II KM 18",
-    detail: "Cikembar, Sukabumi",
+    content: "Jl. KH Mama Oyon, Cihaur",
+    detail: "Cicantayan, Sukabumi",
     color: "maroon",
   },
   {
     icon: Phone,
     title: "Layanan Telepon",
-    content: "+62 888-0993-4970",
+    content: "+62 851-1152-4441",
     detail: "Senin-Sabtu (08.00 - 16.00)",
     color: "teal",
   },
   {
     icon: Mail,
     title: "Email Resmi",
-    content: "alandalus.ululalbaab@gmail.com",
+    content: "alandalusalimam@gmail.com",
     detail: "Kirim pertanyaan kapan saja",
     color: "gold",
   },

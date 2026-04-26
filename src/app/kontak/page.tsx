@@ -127,27 +127,19 @@ export default function ContactPage() {
     const SOCIAL_MEDIA = [
         {
             name: "Instagram",
-            username: "@alandalusululalbaab",
-            url: "https://www.instagram.com/alandalusululalbaab/",
+            username: "@alandalusalimam",
+            url: "https://www.instagram.com/alandalusalimam/",
             icon: Instagram,
             textColor: "text-pink-600",
             bgLight: "bg-pink-50",
         },
         {
             name: "Facebook",
-            username: "Pesantren Al-Andalus Al-Imam",
-            url: "https://www.facebook.com/search/top?q=pesantren%20al-andalus%20ulul%20albaab",
+            username: "Wahab Rajasam",
+            url: "https://www.facebook.com/wahab.rajasam/",
             icon: Facebook,
             textColor: "text-blue-600",
             bgLight: "bg-blue-50",
-        },
-        {
-            name: "Youtube",
-            username: "Al Andalus Al-Imam",
-            url: "https://www.youtube.com/@AlAndalusUlulAlbaab",
-            icon: Youtube,
-            textColor: "text-red-600",
-            bgLight: "bg-red-50",
         },
     ];
 
@@ -205,16 +197,16 @@ export default function ContactPage() {
                         <ContactInfoCard
                             icon={MessageCircle}
                             title="Nomor WhatsApp CS"
-                            content="+62 812-85-300800"
-                            href="https://wa.me/6281285300800"
+                            content="+62 851-1152-4441"
+                            href="https://wa.me/6285111524441"
                             subContent="Layanan Informasi Pelayanan"
                             delay={0.2}
                         />
                         <ContactInfoCard
                             icon={Mail}
                             title="Email Resmi"
-                            content="alandalus.ululalbaab@gmail.com"
-                            href="mailto:alandalus.ululalbaab@gmail.com"
+                            content="alandalusalimam@gmail.com"
+                            href="mailto:alandalusalimam@gmail.com"
                             subContent="Surat Menyurat & Kerjasama"
                             delay={0.3}
                         />
@@ -403,7 +395,7 @@ export default function ContactPage() {
                                         Daftar PPDB Baru
                                     </button>
                                 </Link>
-                                <a href="https://wa.me/6281285300800" className="w-full sm:w-auto">
+                                <a href="https://wa.me/6285111524441" className="w-full sm:w-auto">
                                     <button className="w-full flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-10 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white/10 text-white font-bold border border-white/20 hover:bg-white/20 transition-all text-sm sm:text-base md:text-lg min-h-[48px] sm:min-h-[52px]">
                                         Chat via WhatsApp
                                         <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
