@@ -135,17 +135,19 @@ export async function POST(request: NextRequest) {
         const updatedFilePath = filePath;
 
         // ============================================================
-        // AUTO-UNLOCK: Check if all required documents are now verified
+        // AUTO-UNLOCK & NOTIFY: Check if all required documents are now verified
         // ============================================================
         const REQUIRED_DOCS = [
             'kartu_keluarga', 'akta_kelahiran', 'rapor_sem1', 'rapor_sem2',
             'nisn', 'foto_setengah_badan', 'surat_kesehatan', 'pakta_integritas', 'pernyataan_bebas_negatif'
         ];
 
-        const allDocs = await prisma.dokumen.findMany({
+        const allDocsRaw = await prisma.dokumen.findMany({
             where: { pendaftar_id: pendaftarId }
         });
 
+        // Use same logic as main route: filter to required types
+        const allDocs = allDocsRaw.filter(d => REQUIRED_DOCS.includes(d.jenis_dokumen));
         const verifiedTypes = new Set(allDocs.filter(d => d.is_verified).map(d => d.jenis_dokumen));
         const allRequiredVerified = REQUIRED_DOCS.every(type => verifiedTypes.has(type));
 
@@ -155,26 +157,32 @@ export async function POST(request: NextRequest) {
                 select: { status_pendaftaran: true, no_hp: true, nama_lengkap: true }
             });
 
-            // Update status only if still in docs_uploaded (not yet advanced)
+            // Update status only if still in docs_uploaded (advance)
             if (currentPendaftar?.status_pendaftaran === 'docs_uploaded') {
                 await prisma.pendaftar.update({
                     where: { id: pendaftarId },
                     data: { status_pendaftaran: 'docs_verified' }
                 });
                 console.log(`✅ [Admin Upload] Auto-unlocked pendaftar ${pendaftarId} to docs_verified`);
+            }
 
-                // Send WhatsApp notification
-                if (currentPendaftar.no_hp) {
-                    try {
-                        await notifyDocumentVerified({
-                            phone: currentPendaftar.no_hp,
-                            nama: currentPendaftar.nama_lengkap,
-                            dokumen_list: "Semua Dokumen Lengkap",
-                            status: "verified",
-                        });
-                    } catch (waError) {
-                        console.error("WhatsApp notification error after admin upload:", waError);
-                    }
+            // ALWAYS send notification if they are complete (even if status was already docs_verified)
+            // This handles cases where a document was re-uploaded/corrected.
+            if (currentPendaftar?.no_hp) {
+                try {
+                    const docListStr = `Lengkap (${REQUIRED_DOCS.length}/${REQUIRED_DOCS.length} Dokumen Terverifikasi)`;
+                    
+                    // Use enqueueWhatsapp for consistency with main route and anti-spam protection
+                    const { enqueueWhatsapp, buildMessageDocumentVerified } = await import("@/lib/whatsapp-queue");
+                    await enqueueWhatsapp({
+                        pendaftarId: pendaftarId,
+                        phone: currentPendaftar.no_hp,
+                        jenisNotif: "document_verified",
+                        messageContent: buildMessageDocumentVerified(currentPendaftar.nama_lengkap, docListStr),
+                    });
+                    console.log(`📥 [Admin Upload] Queued document_verified for ${pendaftarId}`);
+                } catch (waError) {
+                    console.error("WhatsApp notification error after admin upload:", waError);
                 }
             }
         }

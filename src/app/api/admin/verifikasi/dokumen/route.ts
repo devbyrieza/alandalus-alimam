@@ -154,62 +154,62 @@ export async function PATCH(request: NextRequest) {
       details: { jenis_dokumen: dokumen.jenis_dokumen, status_verifikasi, dokumen_id }
     });
 
-    // Send WhatsApp notification
     // BATCH NOTIFICATION LOGIC
-    // Check if ALL documents for this pendaftar have been processed (verified or rejected)
-    if (dokumen.pendaftar_id) {
-      const allDocs = await prisma.dokumen.findMany({
-        where: { pendaftar_id: dokumen.pendaftar_id }
-      });
+    // 1. Get ALL documents for this pendaftar
+    const allDocsRaw = await prisma.dokumen.findMany({
+      where: { pendaftar_id: dokumen.pendaftar_id }
+    });
 
-      // Pending = Not Verified AND No Note (Rejected usually implies Note)
-      // Adjust logic if "Rejected" state is defined differently.
-      // Based on GET implementation: blocked if is_verified=false & catatan=null
-      const pendingDocs = allDocs.filter(d => !d.is_verified && !d.catatan);
+    // 2. Filter to only include REQUIRED types to prevent "ghost" documents from blocking logic
+    const allDocs = allDocsRaw.filter(d => REQUIRED_DOC_TYPES.includes(d.jenis_dokumen));
 
-      if (pendingDocs.length === 0) {
-        // All documents UP TO NOW have been processed.
-        const rejectedDocs = allDocs.filter(d => !d.is_verified && d.catatan);
-        const verifiedTypes = new Set(allDocs.filter(d => d.is_verified).map(d => d.jenis_dokumen));
-        const hasAllRequired = REQUIRED_DOC_TYPES.every(type => verifiedTypes.has(type));
+    // Pending = Not Verified AND No Note
+    const pendingDocs = allDocs.filter(d => !d.is_verified && !d.catatan);
 
-        const isSomeRejected = rejectedDocs.length > 0;
-        const isAllVerifiedAndComplete = !isSomeRejected && hasAllRequired;
+    if (pendingDocs.length === 0) {
+      // All documents UP TO NOW have been processed.
+      const rejectedDocs = allDocs.filter(d => !d.is_verified && d.catatan);
+      const verifiedTypes = new Set(allDocs.filter(d => d.is_verified).map(d => d.jenis_dokumen));
+      const hasAllRequired = REQUIRED_DOC_TYPES.every(type => verifiedTypes.has(type));
 
-        // ONLY Notify if we have rejections OR if they are FINALLY complete (all 9 verified)
-        const recipientPhone = dokumen.pendaftar.no_hp || (dokumen.pendaftar as any).user?.phone;
+      const isSomeRejected = rejectedDocs.length > 0;
+      const isAllVerifiedAndComplete = !isSomeRejected && hasAllRequired;
 
-        if (isSomeRejected || isAllVerifiedAndComplete) {
-          try {
-            if (recipientPhone) {
-              let docListStr = "";
-              if (isAllVerifiedAndComplete) {
-                docListStr = `Lengkap (${REQUIRED_DOC_TYPES.length}/${REQUIRED_DOC_TYPES.length} Dokumen Terverifikasi)`;
-              } else {
-                docListStr = rejectedDocs.map(d => `• ${d.jenis_dokumen}`).join("\n");
-              }
+      console.log(`[VERIF] Pendaftar ${dokumen.pendaftar_id}: Pending=${pendingDocs.length}, Rejected=${rejectedDocs.length}, Verified=${verifiedTypes.size}/${REQUIRED_DOC_TYPES.length}`);
 
-              const isVerifiedBatch = isAllVerifiedAndComplete;
-              await enqueueWhatsapp({
-                pendaftarId: dokumen.pendaftar_id,
-                phone: recipientPhone,
-                jenisNotif: isVerifiedBatch ? "document_verified" : "document_rejected",
-                messageContent: isVerifiedBatch
-                  ? buildMessageDocumentVerified(dokumen.pendaftar.nama_lengkap, docListStr)
-                  : buildMessageDocumentRejected(dokumen.pendaftar.nama_lengkap, docListStr, isAllVerifiedAndComplete ? "" : "Terdapat dokumen yang perlu diperbaiki. Silakan cek dashboard."),
-              });
+      // ONLY Notify if we have rejections OR if they are FINALLY complete (all 9 verified)
+      const recipientPhone = dokumen.pendaftar.no_hp || (dokumen.pendaftar as any).user?.phone;
+
+      if (isSomeRejected || isAllVerifiedAndComplete) {
+        try {
+          if (recipientPhone) {
+            let docListStr = "";
+            if (isAllVerifiedAndComplete) {
+              docListStr = `Lengkap (${REQUIRED_DOC_TYPES.length}/${REQUIRED_DOC_TYPES.length} Dokumen Terverifikasi)`;
             } else {
-              console.warn(`[VERIF] Cannot send notification for ${dokumen.pendaftar_id}: No phone number found in Pendaftar or User profile.`);
+              docListStr = rejectedDocs.map(d => `• ${d.jenis_dokumen}`).join("\n");
             }
-          } catch (error) {
-            console.error("WhatsApp batch notification error:", error);
+
+            const isVerifiedBatch = isAllVerifiedAndComplete;
+            await enqueueWhatsapp({
+              pendaftarId: dokumen.pendaftar_id,
+              phone: recipientPhone,
+              jenisNotif: isVerifiedBatch ? "document_verified" : "document_rejected",
+              messageContent: isVerifiedBatch
+                ? buildMessageDocumentVerified(dokumen.pendaftar.nama_lengkap, docListStr)
+                : buildMessageDocumentRejected(dokumen.pendaftar.nama_lengkap, docListStr, isAllVerifiedAndComplete ? "" : "Terdapat dokumen yang perlu diperbaiki. Silakan cek dashboard."),
+            });
+          } else {
+            console.warn(`[VERIF] Cannot send notification for ${dokumen.pendaftar_id}: No phone number found in Pendaftar or User profile.`);
           }
-        } else {
-          // All currently uploaded are verified, but they haven't uploaded all 9 yet!
-          // We WAIT. Do not send "Verified" message yet.
-          const missingTypes = REQUIRED_DOC_TYPES.filter(type => !verifiedTypes.has(type));
-          console.log(`[VERIF] Pendaftar ${dokumen.pendaftar_id} has ${verifiedTypes.size}/${REQUIRED_DOC_TYPES.length} verified docs. Missing: ${missingTypes.join(', ')}. Waiting for completion before notify.`);
+        } catch (error) {
+          console.error("WhatsApp batch notification error:", error);
         }
+      } else {
+        // All currently uploaded are verified, but they haven't uploaded all 9 yet!
+        // We WAIT. Do not send "Verified" message yet.
+        const missingTypes = REQUIRED_DOC_TYPES.filter(type => !verifiedTypes.has(type));
+        console.log(`[VERIF] Pendaftar ${dokumen.pendaftar_id} has ${verifiedTypes.size}/${REQUIRED_DOC_TYPES.length} verified docs. Missing: ${missingTypes.join(', ')}. Waiting for completion before notify.`);
       }
     }
 
