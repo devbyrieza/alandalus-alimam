@@ -206,10 +206,11 @@ export async function DELETE(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Only admin_super can delete
-    if (session.role !== "admin_super") {
+    // Allow admin_super, admin, and penguji to delete
+    const allowedDeleteRoles = ["admin_super", "admin", "penguji"];
+    if (!allowedDeleteRoles.includes(session.role)) {
       return NextResponse.json(
-        { error: "Hanya Admin Super yang dapat menghapus data pendaftar" },
+        { error: "Hanya Admin Super, Admin, atau Penguji yang dapat menghapus data pendaftar" },
         { status: 403 }
       );
     }

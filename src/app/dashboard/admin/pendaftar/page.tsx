@@ -684,7 +684,7 @@ function AdminPendaftarContent() {
             </div>
           </div>
           <div className="flex items-center gap-2 flex-shrink-0">
-            {userRole === "admin_super" && (
+            {['admin_super', 'admin', 'penguji'].includes(userRole) && (
               <Link
                 href="/dashboard/admin/pendaftar/trash"
                 className="flex items-center gap-2 px-3 md:px-4 py-2 bg-stone-600 hover:bg-stone-700 text-white rounded-lg transition-colors text-sm"
@@ -1122,7 +1122,7 @@ function AdminPendaftarContent() {
                         >
                           <Eye className="w-3.5 h-3.5" /> Buka Detail
                         </Link>
-                        {userRole === 'admin_super' && (
+                        {['admin_super', 'admin', 'penguji'].includes(userRole) && (
                           <>
                             <button
                               onClick={() => handleOpenAnnouncement(item)}
@@ -1310,7 +1310,7 @@ function AdminPendaftarContent() {
                             <span>Buka Detail</span>
                           </Link>
                           {/* Super Admin Action: Input Hasil Seleksi */}
-                          {userRole === 'admin_super' && (
+                          {['admin_super', 'admin', 'penguji'].includes(userRole) && (
                             <button
                               onClick={() => handleOpenAnnouncement(item)}
                               className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-bold transition-all shadow-sm hover:shadow-md ml-2"
@@ -1319,7 +1319,7 @@ function AdminPendaftarContent() {
                               <span>Hasil</span>
                             </button>
                           )}
-                          {userRole === 'admin_super' && (
+                          {['admin_super', 'admin', 'penguji'].includes(userRole) && (
                             <button
                               onClick={() => handleOpenDelete(item)}
                               className="inline-flex items-center gap-1 px-3 py-2 bg-red-100 hover:bg-red-600 text-red-700 hover:text-white rounded-lg text-sm font-bold transition-all ml-2"
