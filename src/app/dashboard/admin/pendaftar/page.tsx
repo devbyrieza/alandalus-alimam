@@ -237,7 +237,7 @@ function AdminPendaftarContent() {
 
   const handleSoftDelete = async () => {
     if (!deletingPendaftar) return;
-    if (deleteConfirmName !== deletingPendaftar.nama_lengkap) {
+    if (deleteConfirmName.trim().toLowerCase() !== deletingPendaftar.nama_lengkap.trim().toLowerCase()) {
       Swal.fire("Gagal!", "Nama tidak cocok. Silakan ketik nama lengkap pendaftar dengan benar.", "error");
       return;
     }
@@ -1567,7 +1567,7 @@ function AdminPendaftarContent() {
                 </button>
                 <button
                   onClick={handleSoftDelete}
-                  disabled={isDeleting || deleteConfirmName !== deletingPendaftar.nama_lengkap}
+                  disabled={isDeleting || deleteConfirmName.trim().toLowerCase() !== deletingPendaftar.nama_lengkap.trim().toLowerCase()}
                   className="flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-lg shadow-red-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isDeleting ? (
