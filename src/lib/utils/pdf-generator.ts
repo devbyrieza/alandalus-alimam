@@ -323,8 +323,16 @@ export const generateSuratKelulusan = async (data: PendaftarPdfData) => {
     
     doc.text(doc.splitTextToSize(closing, pageWidth - 40), 20, finalY + 25);
 
+    // Add Enrollment Info for Accepted Candidates
+    if (statusText === "LULUS / DITERIMA") {
+        const daftarUlangInfo = "Pembayaran daftar ulang harus segera dibayarkan minimal 50% paling lambat sepekan setelah pengumuman hasil. Bagi yang membutuhkan keringanan, silakan menghubungi bagian Finance di 0812-2063-6945.";
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(10);
+        doc.text(doc.splitTextToSize(daftarUlangInfo, pageWidth - 40), 20, finalY + 40);
+    }
+
     // Signature Area
-    await drawFormalSignature(doc, finalY + 50);
+    await drawFormalSignature(doc, finalY + 65);
 
     drawFooter(doc);
     doc.save(`PPDB_SuratHasilSeleksi_${data.nomor_pendaftaran}.pdf`);
