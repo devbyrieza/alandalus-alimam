@@ -76,7 +76,7 @@ const drawHeader = async (doc: jsPDF) => {
     doc.setFontSize(7);
     doc.setTextColor(80, 80, 80);
     doc.text(institution.address, textX, 36);
-    doc.text(`${institution.contact} | WhatsApp: 0812-7000-xxxx`, textX, 40);
+    doc.text(`${institution.contact} | ${institution.phones}`, textX, 40);
 
     // 4. Horizontal Separator
     doc.setDrawColor(0, 0, 0);
@@ -355,6 +355,7 @@ const drawFormRow = (doc: jsPDF, label: string, x: number, y: number, lineWidth:
 export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
+    const { institution, authority } = PDF_BRANDING;
     const margin = 18;
     const contentW = pageWidth - margin * 2;
 
@@ -374,7 +375,7 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
     y += 6;
     doc.text("Hal", leftColX, y); doc.text(":", colonX, y);
     doc.setFont("helvetica", "bold");
-    const halText = "Pemeriksaan Kesehatan Calon Santri Baru\nPesantren Al-Andalus Al-Imam Sukabumi";
+    const halText = `Pemeriksaan Kesehatan Calon Santri Baru\n${institution.name} ${authority.city}`;
     doc.text(halText, colonX + 4, y);
     doc.setFont("helvetica", "normal");
 
@@ -390,7 +391,7 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
     doc.setFont("helvetica", "normal");
 
     y += 8;
-    const intro = "Sehubungan dengan kegiatan penerimaan calon santri baru Pesantren Al-Andalus Al-Imam Sukabumi Tahun Pelajaran 2026/2027, kami selaku panitia membutuhkan pemeriksaan kesehatan bagi para calon santri sebagai salah satu bagian dari rangkaian proses seleksi.";
+    const intro = `Sehubungan dengan kegiatan penerimaan calon santri baru ${institution.name} ${authority.city} Tahun Pelajaran 2026/2027, kami selaku panitia membutuhkan pemeriksaan kesehatan bagi para calon santri sebagai salah satu bagian dari rangkaian proses seleksi.`;
     const introLines = doc.splitTextToSize(intro, contentW);
     doc.text(introLines, leftColX, y);
     y += introLines.length * 5.5 + 4;
@@ -463,7 +464,7 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
     doc.text("FORMULIR HASIL PEMERIKSAAN KESEHATAN", pageWidth / 2, y, { align: "center" });
     y += 7;
     doc.setFontSize(11);
-    doc.text("CALON SANTRI BARU PESANTREN AL-ANDALUS AL-IMAM SUKABUMI", pageWidth / 2, y, { align: "center" });
+    doc.text(`CALON SANTRI BARU ${institution.name} ${authority.city.toUpperCase()}`, pageWidth / 2, y, { align: "center" });
     y += 6;
     doc.text("Tahun Pelajaran 2026/2027", pageWidth / 2, y, { align: "center" });
     y += 10;
@@ -573,6 +574,7 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
 export const generateSuratPernyataan = async (data: PendaftarPdfData) => {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
+    const { authority } = PDF_BRANDING;
     const margin = 20;
     const contentW = pageWidth - margin * 2;
 
@@ -665,7 +667,7 @@ export const generateSuratPernyataan = async (data: PendaftarPdfData) => {
     y += healthNoteLines.length * 5.5 + 8;
 
     // TTD Orangtua (kiri) + TTD Mudir (kanan)
-    const dateStr = `Sukabumi, ......................... 2026`;
+    const dateStr = `${authority.city}, ......................... 2026`;
     // Orangtua (kiri)
     doc.setFontSize(10.5);
     doc.text(dateStr, margin, y);
@@ -694,6 +696,7 @@ export const generateSuratPernyataan = async (data: PendaftarPdfData) => {
 export const generatePaktaIntegritas = async (data: PendaftarPdfData) => {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
+    const { authority } = PDF_BRANDING;
     const margin = 20;
     const contentW = pageWidth - margin * 2;
 
@@ -755,7 +758,7 @@ export const generatePaktaIntegritas = async (data: PendaftarPdfData) => {
     y += 12;
 
     // TTD Santri (kiri) + TTD Mudir (kanan)
-    const sigDateStr = "Sukabumi, ......................... 2026";
+    const sigDateStr = `${authority.city}, ......................... 2026`;
     // Santri (kiri)
     doc.setFontSize(10.5);
     doc.text(sigDateStr, margin, y);
