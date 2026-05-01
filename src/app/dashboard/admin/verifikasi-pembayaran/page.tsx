@@ -15,7 +15,8 @@ import {
   DollarSign,
   FileSpreadsheet,
   FileText,
-  UploadCloud
+  UploadCloud,
+  Search
 } from "lucide-react";
 import Link from "next/link";
 import { exportToExcel, exportToPDF } from "@/lib/utils/export";
@@ -43,6 +44,7 @@ export default function VerifikasiPembayaranPage() {
   const [pembayaran, setPembayaran] = useState<Pembayaran[]>([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState("pending");
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedPembayaran, setSelectedPembayaran] = useState<Pembayaran | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [catatan, setCatatan] = useState("");
@@ -73,6 +75,14 @@ export default function VerifikasiPembayaranPage() {
       setLoading(false);
     }
   };
+
+  const filteredPembayaran = pembayaran.filter((item) => {
+    const searchLower = searchTerm.toLowerCase();
+    return (
+      item.pendaftar?.nama_lengkap?.toLowerCase().includes(searchLower) ||
+      item.pendaftar?.nomor_pendaftaran?.toLowerCase().includes(searchLower)
+    );
+  });
 
   const handleExport = async (type: "excel" | "pdf") => {
     try {
@@ -300,10 +310,22 @@ export default function VerifikasiPembayaranPage() {
         </button>
       </div>
 
+      {/* Search Bar */}
+      <div className="relative group">
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400 group-focus-within:text-brand-blue-600 transition-colors" />
+        <input
+          type="text"
+          placeholder="Cari nama atau nomor pendaftaran..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full pl-12 pr-4 py-4 bg-white border border-stone-200 rounded-2xl focus:border-brand-blue-500 focus:ring-4 focus:ring-brand-blue-500/5 focus:outline-none transition-all text-sm md:text-base font-bold text-stone-800 placeholder:text-stone-400 shadow-sm"
+        />
+      </div>
+
       {/* Stats / Filter Bar */}
       <div className="flex flex-wrap items-center gap-3 bg-white p-4 rounded-2xl shadow-sm border border-stone-100">
           <div className="px-4 py-2 bg-stone-100 rounded-lg text-sm font-bold text-stone-600">
-            Total: {pembayaran.length}
+            Total: {filteredPembayaran.length}
           </div>
 
           <div className="h-8 w-px bg-stone-200 mx-1 hidden sm:block"></div>
@@ -341,7 +363,7 @@ export default function VerifikasiPembayaranPage() {
               <p className="text-stone-500 font-medium">Memuat data pembayaran...</p>
             </div>
           </div>
-        ) : pembayaran.length === 0 ? (
+        ) : filteredPembayaran.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-[400px] text-center p-8">
             <div className="w-20 h-20 bg-stone-50 rounded-full flex items-center justify-center mb-6">
               <CreditCard className="w-10 h-10 text-stone-300" />
@@ -350,12 +372,12 @@ export default function VerifikasiPembayaranPage() {
               Tidak ada pembayaran {statusFilter === "pending" ? "pending" : ""}
             </h3>
             <p className="text-stone-500 max-w-sm mx-auto">
-              Belum ada data pembayaran yang ditemukan untuk filter ini.
+              {searchTerm ? "Tidak ada hasil untuk pencarian Anda." : `Belum ada data pembayaran yang ditemukan untuk filter ini.`}
             </p>
           </div>
         ) : (
           <div className="divide-y divide-stone-100">
-            {pembayaran.map((pay) => (
+            {filteredPembayaran.map((pay) => (
               <div
                 key={pay.id}
                 className="p-6 hover:bg-stone-50/50 transition-colors group"
