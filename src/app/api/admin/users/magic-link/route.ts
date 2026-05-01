@@ -40,8 +40,8 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "User tidak ditemukan" }, { status: 404 });
         }
 
-        // Generate token (valid for 24 hours)
-        const token = generateMagicToken(user.id, user.role, user.full_name, 24);
+        // Generate token (PERMANENT)
+        const token = generateMagicToken(user.id, user.role, user.full_name, -1);
 
         // Create full URL wrapper
         const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://pesantren-alimam.com";
@@ -102,7 +102,7 @@ export async function GET(request: NextRequest) {
                 ? user.secondary_roles.find(r => r.includes('penguji') || r.includes('pewawancara')) || user.role
                 : user.role;
 
-            const token = generateMagicToken(user.id, activeRole, user.full_name, 48); // Valid for 48 hours for bulk view
+            const token = generateMagicToken(user.id, activeRole, user.full_name, -1); // Permanent for bulk view
             const magicLinkUrl = `${baseUrl}/api/auth/magic?token=${token}`;
 
             // Generate automatic tinyurl for the magic link

@@ -172,6 +172,8 @@ export function getNextStep(currentStatus: StatusProses): {
     'tested': { status: 'announced', action: 'Tunggu pengumuman hasil', href: '/dashboard/pendaftar/pengumuman' },
     'announced': { status: 'accepted', action: 'Lihat hasil seleksi', href: '/dashboard/pendaftar/pengumuman' },
     'accepted': { status: 'enrolled', action: 'Lakukan daftar ulang', href: '/dashboard/pendaftar/daftar-ulang' },
+    'accepted_not_enrolled': { status: 'enrolled', action: 'Lakukan daftar ulang', href: '/dashboard/pendaftar/daftar-ulang' },
+    'rejected': { status: 'rejected', action: 'Tolak', href: '/dashboard/pendaftar/pengumuman' },
   };
 
   return nextSteps[currentStatus] || null;
@@ -195,6 +197,7 @@ export function formatStatusDisplay(status: StatusProses): { label: string; colo
     'announced': { label: 'Diumumkan', color: 'bg-cyan-100 text-cyan-700' },
     'accepted': { label: 'Diterima', color: 'bg-green-100 text-green-700' },
     'enrolled': { label: 'Terdaftar', color: 'bg-emerald-100 text-emerald-700' },
+
   };
 
   return statusMap[status] || { label: status, color: 'bg-stone-100 text-stone-700' };

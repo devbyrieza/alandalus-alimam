@@ -15,7 +15,7 @@ export async function sendWhatsAppOTP(
     // OTP Message Template
     const message = `🔐 *Kode Verifikasi PPDB Al-Andalus Al-Imam*
 
-Assalamu'alaikum ${nama},
+Assalamu'alaikum *${nama}*,
 
 Kode OTP Anda adalah:
 
@@ -27,8 +27,9 @@ Kode ini berlaku selama *5 menit*.
 • Jangan berikan kode ini kepada siapapun
 • Tim Al-Andalus Al-Imam tidak akan pernah meminta kode OTP Anda
 
-Jazakumullahu khairan,
-Panitia PPDB Al-Andalus Al-Imam`;
+Jazakumullahu khairan
+---
+*Panitia PPDB Al-Andalus Al-Imam*`;
 
     const result = await sendMessage({ phone, message });
 
