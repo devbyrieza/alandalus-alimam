@@ -181,16 +181,6 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // 7. Cek pembayaran pending/rejected
-    const existingPending = await prisma.pembayaran.findFirst({
-      where: {
-        pendaftar_id: session.id,
-        status_pembayaran: { in: ["pending", "rejected"] },
-        jenis_pembayaran: jenisPembayaran as any,
-        metode_pembayaran: "manual",
-      },
-    });
-
     // 8. Detect Real Mime Type via Magic Bytes
     const buffer = Buffer.from(await file.arrayBuffer());
     const hex = buffer.slice(0, 4).toString('hex').toUpperCase();
