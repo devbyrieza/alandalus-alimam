@@ -271,7 +271,7 @@ export default function DataPendaftaranTab() {
 
         {/* Step 2: Isi Data Lengkap */}
         <Link
-          href="/dashboard/pendaftar/kelengkapan-berkas"
+          href="/dashboard/pendaftar/isi-data-lengkap"
           className="group bg-white rounded-xl p-6 border-2 border-stone-200 hover:border-maroon-300 hover:shadow-lg transition-all duration-300"
         >
           <div className="flex flex-col gap-3">
