@@ -54,7 +54,10 @@ export async function GET(request: NextRequest) {
         bukti_transfer_filename: true,
         created_at: true,
         updated_at: true,
-        pendaftar: { // Corrected: pendaftar relation selected
+        tipe_cicilan: true,
+        cicilan_ke: true,
+        total_tagihan: true,
+        pendaftar: {
           select: {
             id: true,
             nomor_pendaftaran: true,
@@ -87,6 +90,9 @@ export async function GET(request: NextRequest) {
         created_at: pembayaran.created_at,
         updated_at: pembayaran.updated_at,
         pendaftar: pembayaran.pendaftar,
+        tipe_cicilan: pembayaran.tipe_cicilan,
+        cicilan_ke: pembayaran.cicilan_ke,
+        total_tagihan: pembayaran.total_tagihan,
       };
     });
 
@@ -114,7 +120,7 @@ export async function PATCH(request: NextRequest) {
 
     // Get request body
     const body = await request.json();
-    const { pembayaran_id, status_pembayaran, catatan, jumlah } = body;
+    const { pembayaran_id, status_pembayaran, catatan, jumlah, tipe_cicilan } = body;
 
     if (!pembayaran_id || !status_pembayaran) {
       return NextResponse.json(
@@ -137,6 +143,7 @@ export async function PATCH(request: NextRequest) {
         status_pembayaran,
         catatan_verifikasi: catatan,
         jumlah: jumlah ? Number(jumlah) : undefined,
+        tipe_cicilan: tipe_cicilan || undefined,
       },
       include: {
         pendaftar: {
@@ -150,16 +157,17 @@ export async function PATCH(request: NextRequest) {
     });
 
     // Also update pendaftar status
+    const { getStatusIndex } = await import("@/lib/access-control");
     let newPendaftarStatus = pembayaran.pendaftar.status_pendaftaran;
     
     if (status_pembayaran === "verified") {
-       if (['draft', 'registered', 'payment_rejected', 'payment_verification'].includes(newPendaftarStatus)) {
+       if (getStatusIndex(newPendaftarStatus as any) < getStatusIndex('verified' as any)) {
            newPendaftarStatus = 'verified';
        }
-    } else if (status_pembayaran === "pending") {
-       newPendaftarStatus = 'payment_verification';
-    } else {
-       newPendaftarStatus = 'payment_rejected';
+    } else if (status_pembayaran === "rejected") {
+       if (getStatusIndex(newPendaftarStatus as any) <= getStatusIndex('payment_verification' as any)) {
+           newPendaftarStatus = 'payment_rejected';
+       }
     }
 
     if (newPendaftarStatus !== pembayaran.pendaftar.status_pendaftaran) {

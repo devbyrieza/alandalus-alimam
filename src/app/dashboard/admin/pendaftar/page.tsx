@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, Suspense, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 
 import {
@@ -26,8 +26,10 @@ import {
   X,
   Save,
   FileCheck,
-  Trash2,
   RotateCcw,
+  UploadCloud,
+  CreditCard,
+  Trash2,
 } from "lucide-react";
 import Link from "next/link";
 import { UserRole } from "@/lib/access-control";
@@ -75,6 +77,7 @@ interface Pendaftar {
   pengumuman?: {
     status_kelulusan: string;
   };
+  pembayaran?: Array<{ id: string; status_pembayaran: string }>;
 }
 
 interface PaginationInfo {
@@ -200,6 +203,13 @@ function AdminPendaftarContent() {
   const [deleteConfirmName, setDeleteConfirmName] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [trashCount, setTrashCount] = useState(0);
+  const [uploadingDoc, setUploadingDoc] = useState<string | null>(null);
+  const [uploadingPay, setUploadingPay] = useState<string | null>(null);
+  const [selectedPendaftarId, setSelectedPendaftarId] = useState<string | null>(null);
+  const [selectedDocType, setSelectedDocType] = useState<string | null>(null);
+  const [selectedPayId, setSelectedPayId] = useState<string | null>(null);
+  const docInputRef = useRef<HTMLInputElement>(null);
+  const payInputRef = useRef<HTMLInputElement>(null);
 
   const handleOpenAnnouncement = (pendaftar: Pendaftar) => {
     setSelectedPendaftar(pendaftar);
@@ -296,6 +306,72 @@ function AdminPendaftarContent() {
       Swal.fire("Error!", error.message, "error");
     } finally {
       setIsSubmittingAnnouncement(false);
+    }
+  };
+
+  const handleQuickDocUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !selectedDocType || !selectedPendaftarId) return;
+
+    try {
+      setUploadingDoc(selectedPendaftarId + selectedDocType);
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("jenis_dokumen", selectedDocType);
+      formData.append("pendaftar_id", selectedPendaftarId);
+
+      const response = await fetch("/api/admin/verifikasi/dokumen/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        Swal.fire({ title: "Berhasil", text: data.message, icon: "success", toast: true, position: 'top-end', timer: 3000, showConfirmButton: false });
+        fetchPendaftar();
+      } else {
+        Swal.fire("Gagal", data.error, "error");
+      }
+    } catch (error) {
+      console.error("Upload error:", error);
+      Swal.fire("Error", "Terjadi kesalahan saat upload", "error");
+    } finally {
+      setUploadingDoc(null);
+      setSelectedDocType(null);
+      setSelectedPendaftarId(null);
+      if (docInputRef.current) docInputRef.current.value = "";
+    }
+  };
+
+  const handleQuickPayUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !selectedPayId) return;
+
+    try {
+      setUploadingPay(selectedPayId);
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("pembayaran_id", selectedPayId);
+
+      const response = await fetch("/api/admin/verifikasi/pembayaran/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        Swal.fire({ title: "Berhasil", text: data.message, icon: "success", toast: true, position: 'top-end', timer: 3000, showConfirmButton: false });
+        fetchPendaftar();
+      } else {
+        Swal.fire("Gagal", data.error, "error");
+      }
+    } catch (error) {
+      console.error("Upload error:", error);
+      Swal.fire("Error", "Terjadi kesalahan saat upload", "error");
+    } finally {
+      setUploadingPay(null);
+      setSelectedPayId(null);
+      if (payInputRef.current) payInputRef.current.value = "";
     }
   };
 
@@ -655,6 +731,20 @@ function AdminPendaftarContent() {
 
   return (
     <div className="space-y-6">
+      <input
+        type="file"
+        ref={docInputRef}
+        onChange={handleQuickDocUpload}
+        className="hidden"
+        accept="image/jpeg, image/png, application/pdf"
+      />
+      <input
+        type="file"
+        ref={payInputRef}
+        onChange={handleQuickPayUpload}
+        className="hidden"
+        accept="image/jpeg, image/png, application/pdf"
+      />
       {/* Back to Dashboard link when filtered */}
       {urlFilter && (
         <Link
@@ -1115,6 +1205,39 @@ function AdminPendaftarContent() {
                         {formatStatus(item.status_pendaftaran)}
                         <span className="text-[10px] text-stone-500">{formatDate(item.created_at)}</span>
                       </div>
+                      <div className="flex flex-wrap gap-1.5 mt-2">
+                         <button
+                           onClick={() => {
+                             setSelectedPendaftarId(item.id);
+                             setSelectedDocType('kartu_keluarga');
+                             setTimeout(() => docInputRef.current?.click(), 100);
+                           }}
+                           className="px-2 py-1 bg-brand-blue-50 text-brand-blue-700 rounded-lg text-[9px] font-black uppercase flex items-center gap-1 border border-brand-blue-100"
+                         >
+                           <UploadCloud className="w-3 h-3" /> KK
+                         </button>
+                         <button
+                           onClick={() => {
+                             setSelectedPendaftarId(item.id);
+                             setSelectedDocType('akta_kelahiran');
+                             setTimeout(() => docInputRef.current?.click(), 100);
+                           }}
+                           className="px-2 py-1 bg-brand-blue-50 text-brand-blue-700 rounded-lg text-[9px] font-black uppercase flex items-center gap-1 border border-brand-blue-100"
+                         >
+                           <UploadCloud className="w-3 h-3" /> Akta
+                         </button>
+                         {item.pembayaran && item.pembayaran.length > 0 && (
+                           <button
+                             onClick={() => {
+                               setSelectedPayId(item.pembayaran![0].id);
+                               setTimeout(() => payInputRef.current?.click(), 100);
+                             }}
+                             className="px-2 py-1 bg-brand-yellow-50 text-brand-yellow-700 rounded-lg text-[9px] font-black uppercase flex items-center gap-1 border border-brand-yellow-100"
+                           >
+                             <CreditCard className="w-3 h-3" /> Bayar
+                           </button>
+                         )}
+                      </div>
                       <div className="flex gap-2 mt-3">
                         <Link
                           href={`/dashboard/admin/pendaftar/${item.id}`}
@@ -1282,52 +1405,89 @@ function AdminPendaftarContent() {
                         </td>
                         {canViewKeuangan && (
                           <td className="px-4 py-3">
-                            {/* @ts-ignore */}
-                            {item.pembayaran?.length > 0 ? (
-                              <span className={`px-2 py-0.5 rounded text-xs font-bold ${
-                                /* @ts-ignore */
-                                item.pembayaran[0].status_pembayaran === 'verified' ? 'bg-green-100 text-green-700' :
-                                  /* @ts-ignore */
-                                  item.pembayaran[0].status_pembayaran === 'pending' ? 'bg-amber-100 text-amber-700' :
-                                    'bg-stone-100 text-stone-700'
-                                }`}>
-                                {/* @ts-ignore */}
-                                {item.pembayaran[0].status_pembayaran === 'verified' ? 'Lunas' :
-                                  /* @ts-ignore */
-                                  item.pembayaran[0].status_pembayaran === 'pending' ? 'Cek' : 'Belum'}
-                              </span>
+                            {item.pembayaran && item.pembayaran.length > 0 ? (
+                              <div className="flex flex-col gap-1.5">
+                                <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase text-center w-full ${
+                                  item.pembayaran[0].status_pembayaran === 'verified' ? 'bg-green-100 text-green-700' :
+                                    item.pembayaran[0].status_pembayaran === 'pending' ? 'bg-amber-100 text-amber-700' :
+                                      'bg-stone-100 text-stone-700'
+                                  }`}>
+                                  {item.pembayaran[0].status_pembayaran === 'verified' ? 'Lunas' :
+                                    item.pembayaran[0].status_pembayaran === 'pending' ? 'Cek' : 'Belum'}
+                                </span>
+                                {item.pembayaran && item.pembayaran.length > 0 && (
+                                  <button
+                                   onClick={() => {
+                                     setSelectedPayId(item.pembayaran![0].id);
+                                     setTimeout(() => payInputRef.current?.click(), 100);
+                                   }}
+                                   className="px-2 py-1 bg-brand-yellow-50 text-brand-yellow-700 hover:bg-brand-yellow-100 rounded-lg text-[9px] font-black uppercase flex items-center justify-center gap-1 border border-brand-yellow-100 transition-colors"
+                                   title="Upload Bukti Bayar"
+                                 >
+                                   <CreditCard className="w-3 h-3" /> Upload
+                                 </button>
+                                )}
+                              </div>
                             ) : (
                               <span className="text-stone-500 text-xs">-</span>
                             )}
                           </td>
                         )}
+                        <td className="px-4 py-3">
+                          <div className="flex flex-wrap gap-1">
+                            <button
+                               onClick={() => {
+                                 setSelectedPendaftarId(item.id);
+                                 setSelectedDocType('kartu_keluarga');
+                                 setTimeout(() => docInputRef.current?.click(), 100);
+                               }}
+                               className="px-2 py-1 bg-brand-blue-50 text-brand-blue-700 hover:bg-brand-blue-100 rounded-lg text-[9px] font-black uppercase flex items-center gap-1 border border-brand-blue-100 transition-colors"
+                               title="Upload KK"
+                             >
+                               <UploadCloud className="w-3 h-3" /> KK
+                             </button>
+                             <button
+                               onClick={() => {
+                                 setSelectedPendaftarId(item.id);
+                                 setSelectedDocType('akta_kelahiran');
+                                 setTimeout(() => docInputRef.current?.click(), 100);
+                               }}
+                               className="px-2 py-1 bg-brand-blue-50 text-brand-blue-700 hover:bg-brand-blue-100 rounded-lg text-[9px] font-black uppercase flex items-center gap-1 border border-brand-blue-100 transition-colors"
+                               title="Upload Akta"
+                             >
+                               <UploadCloud className="w-3 h-3" /> Akta
+                             </button>
+                          </div>
+                        </td>
                         <td className="px-4 py-3 whitespace-nowrap">
-                          <Link
-                            href={`/dashboard/admin/pendaftar/${item.id}`}
-                            className="inline-flex items-center gap-2 px-4 py-2 bg-brand-blue-700 hover:bg-brand-blue-800 text-white rounded-xl text-xs font-black transition-all shadow-lg shadow-brand-blue-700/20 active:scale-95"
-                          >
-                            <Eye className="w-4 h-4" />
-                            <span>Buka Detail</span>
-                          </Link>
-                          {/* Super Admin Action: Input Hasil Seleksi */}
-                          {userRole && ['admin_super', 'admin', 'penguji'].includes(userRole) && (
-                            <button
-                              onClick={() => handleOpenAnnouncement(item)}
-                              className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-bold transition-all shadow-sm hover:shadow-md ml-2"
+                          <div className="flex items-center gap-2">
+                            <Link
+                              href={`/dashboard/admin/pendaftar/${item.id}`}
+                              className="inline-flex items-center gap-2 px-3 py-1.5 bg-brand-blue-700 hover:bg-brand-blue-800 text-white rounded-xl text-[10px] font-black uppercase transition-all shadow-lg shadow-brand-blue-700/20 active:scale-95"
                             >
-                              <FileCheck className="w-4 h-4" />
-                              <span>Hasil</span>
-                            </button>
-                          )}
-                          {userRole && ['admin_super', 'admin', 'penguji'].includes(userRole) && (
-                            <button
-                              onClick={() => handleOpenDelete(item)}
-                              className="inline-flex items-center gap-1 px-3 py-2 bg-red-100 hover:bg-red-600 text-red-700 hover:text-white rounded-lg text-sm font-bold transition-all ml-2"
-                              title="Hapus data (soft delete)"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
-                          )}
+                              <Eye className="w-3.5 h-3.5" />
+                              <span>Detail</span>
+                            </Link>
+                            {/* Super Admin Action: Input Hasil Seleksi */}
+                            {userRole === 'admin_super' && (
+                              <button
+                                onClick={() => handleOpenAnnouncement(item)}
+                                className="p-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-all shadow-sm hover:shadow-md"
+                                title="Hasil Seleksi"
+                              >
+                                <FileCheck className="w-4 h-4" />
+                              </button>
+                            )}
+                            {userRole === 'admin_super' && (
+                              <button
+                                onClick={() => handleOpenDelete(item)}
+                                className="p-1.5 bg-red-100 hover:bg-red-600 text-red-700 hover:text-white rounded-lg transition-all"
+                                title="Hapus"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            )}
+                          </div>
                         </td>
                       </tr>
                     ))}

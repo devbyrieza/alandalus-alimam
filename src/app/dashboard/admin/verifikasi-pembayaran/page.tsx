@@ -38,6 +38,9 @@ interface Pembayaran {
     jenjang: string;
     no_hp: string | null;
   } | null;
+  tipe_cicilan: string;
+  jumlah_cicilan: number;
+  cicilan_ke: number;
 }
 
 export default function VerifikasiPembayaranPage() {
@@ -52,6 +55,9 @@ export default function VerifikasiPembayaranPage() {
   const [processing, setProcessing] = useState(false);
   const [exporting, setExporting] = useState(false);
   const [activeTab, setActiveTab] = useState<"PENDAFTARAN" | "DAFTAR_ULANG">("PENDAFTARAN");
+  const [tipeCicilanFilter, setTipeCicilanFilter] = useState<"ALL" | "LUNAS" | "CICILAN">("ALL");
+  const [editTipeCicilan, setEditTipeCicilan] = useState("LUNAS");
+  const [editJumlahCicilan, setEditJumlahCicilan] = useState(1);
   const [uploadingProof, setUploadingProof] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -79,10 +85,12 @@ export default function VerifikasiPembayaranPage() {
 
   const filteredPembayaran = pembayaran.filter((item) => {
     const searchLower = searchTerm.toLowerCase();
-    return (
+    const matchSearch = (
       item.pendaftar?.nama_lengkap?.toLowerCase().includes(searchLower) ||
       item.pendaftar?.nomor_pendaftaran?.toLowerCase().includes(searchLower)
     );
+    const matchTipe = tipeCicilanFilter === "ALL" || item.tipe_cicilan === tipeCicilanFilter;
+    return matchSearch && matchTipe;
   });
 
   const handleExport = async (type: "excel" | "pdf") => {
@@ -138,6 +146,8 @@ export default function VerifikasiPembayaranPage() {
           status_pembayaran: status,
           catatan: catatan.trim() || null,
           jumlah: editJumlah ? parseFloat(editJumlah) : null,
+          tipe_cicilan: editTipeCicilan,
+          jumlah_cicilan: editJumlahCicilan,
         }),
       });
 
@@ -204,6 +214,8 @@ export default function VerifikasiPembayaranPage() {
     setSelectedPembayaran(pay);
     setCatatan(pay.catatan || "");
     setEditJumlah(pay.jumlah);
+    setEditTipeCicilan(pay.tipe_cicilan || "LUNAS");
+    setEditJumlahCicilan(pay.jumlah_cicilan || 1);
     setShowModal(true);
   };
 
@@ -356,6 +368,30 @@ export default function VerifikasiPembayaranPage() {
               </button>
             </div>
           </div>
+
+          {activeTab === "DAFTAR_ULANG" && (
+            <>
+              <div className="h-8 w-px bg-stone-200 mx-1 hidden sm:block"></div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-bold text-stone-400 uppercase tracking-widest">Tipe:</span>
+                <div className="flex gap-1">
+                  {["ALL", "LUNAS", "CICILAN"].map((tipe) => (
+                    <button
+                      key={tipe}
+                      onClick={() => setTipeCicilanFilter(tipe as any)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all ${
+                        tipeCicilanFilter === tipe
+                          ? "bg-brand-blue-700 text-white shadow-sm shadow-brand-blue-700/20"
+                          : "bg-white text-stone-500 border border-stone-200 hover:bg-stone-50"
+                      }`}
+                    >
+                      {tipe}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       {/* List */}
       <div className="bg-white rounded-[2rem] shadow-sm border border-stone-100 overflow-hidden min-h-[400px]">
@@ -428,6 +464,14 @@ export default function VerifikasiPembayaranPage() {
                           </div>
                         </div>
                       </div>
+                      {pay.tipe_cicilan === "CICILAN" && (
+                        <div>
+                          <p className="text-xs font-bold text-stone-400 uppercase tracking-widest mb-1">Status Cicilan</p>
+                          <span className="px-2.5 py-1 bg-violet-100 text-violet-700 rounded-lg text-[10px] font-black uppercase tracking-widest border border-violet-200">
+                            Cicilan Ke-{pay.cicilan_ke} dari {pay.jumlah_cicilan}
+                          </span>
+                        </div>
+                      )}
                       {pay.catatan && (
                         <div className="col-span-1 sm:col-span-2 pt-2 border-t border-stone-200/50 mt-1">
                           <p className="text-xs text-stone-500">
@@ -528,6 +572,44 @@ export default function VerifikasiPembayaranPage() {
                   <p className="text-sm text-brand-blue-800 mt-1 font-medium italic">Anda dapat mengubah nominal jika tidak sesuai dengan bukti transfer.</p>
                 </div>
               </div>
+
+              {activeTab === "DAFTAR_ULANG" && (
+                <div className="grid grid-cols-2 gap-4 p-4 bg-violet-50 rounded-2xl border border-violet-100">
+                  <div>
+                    <label className="block text-[10px] font-black text-violet-700 uppercase tracking-widest mb-2">Tipe Pembayaran</label>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => setEditTipeCicilan("LUNAS")}
+                        className={`flex-1 py-2 rounded-xl text-xs font-black transition-all ${editTipeCicilan === "LUNAS" ? "bg-violet-600 text-white shadow-md" : "bg-white text-violet-600 border border-violet-200"}`}
+                      >
+                        LUNAS
+                      </button>
+                      <button
+                        onClick={() => setEditTipeCicilan("CICILAN")}
+                        className={`flex-1 py-2 rounded-xl text-xs font-black transition-all ${editTipeCicilan === "CICILAN" ? "bg-violet-600 text-white shadow-md" : "bg-white text-violet-600 border border-violet-200"}`}
+                      >
+                        CICILAN
+                      </button>
+                    </div>
+                  </div>
+                  {editTipeCicilan === "CICILAN" && (
+                    <div>
+                      <label className="block text-[10px] font-black text-violet-700 uppercase tracking-widest mb-2">Jumlah Cicilan</label>
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="number"
+                          min="1"
+                          max="12"
+                          value={editJumlahCicilan}
+                          onChange={(e) => setEditJumlahCicilan(parseInt(e.target.value) || 1)}
+                          className="w-full px-4 py-2 bg-white border border-violet-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-500 font-black text-violet-900"
+                        />
+                        <span className="text-xs font-bold text-violet-600">Kali</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
 
               {selectedPembayaran.bukti_transfer_url ? (
                 <div className="space-y-2">

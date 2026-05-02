@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
 import {
   ArrowLeft,
@@ -24,6 +24,7 @@ import {
   Briefcase,
   DollarSign,
   Trophy,
+  UploadCloud,
 } from "lucide-react";
 import Link from "next/link";
 import Swal from "sweetalert2";
@@ -138,6 +139,12 @@ export default function PendaftarDetailPage() {
   const [editingPhone, setEditingPhone] = useState(false);
   const [newPhone, setNewPhone] = useState("");
   const [savingPhone, setSavingPhone] = useState(false);
+  const [uploadingDoc, setUploadingDoc] = useState<string | null>(null);
+  const [uploadingPayment, setUploadingPayment] = useState<string | null>(null);
+  const docInputRef = useRef<HTMLInputElement>(null);
+  const payInputRef = useRef<HTMLInputElement>(null);
+  const [selectedDocType, setSelectedDocType] = useState<string | null>(null);
+  const [selectedPayId, setSelectedPayId] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -180,6 +187,71 @@ export default function PendaftarDetailPage() {
       console.error("Error fetching pendaftar:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDocUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !selectedDocType || !params.id) return;
+
+    try {
+      setUploadingDoc(selectedDocType);
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("jenis_dokumen", selectedDocType);
+      formData.append("pendaftar_id", params.id as string);
+
+      const response = await fetch("/api/admin/verifikasi/dokumen/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        Swal.fire("Berhasil", data.message, "success");
+        fetchPendaftarDetail();
+      } else {
+        Swal.fire("Gagal", data.error, "error");
+      }
+    } catch (error) {
+      console.error("Upload error:", error);
+      Swal.fire("Error", "Terjadi kesalahan saat upload", "error");
+    } finally {
+      setUploadingDoc(null);
+      setSelectedDocType(null);
+      if (docInputRef.current) docInputRef.current.value = "";
+    }
+  };
+
+  const handlePaymentUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !selectedPayId) return;
+
+    try {
+      setUploadingPayment(selectedPayId);
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("pembayaran_id", selectedPayId);
+
+      const response = await fetch("/api/admin/verifikasi/pembayaran/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        Swal.fire("Berhasil", data.message, "success");
+        fetchPendaftarDetail();
+      } else {
+        Swal.fire("Gagal", data.error, "error");
+      }
+    } catch (error) {
+      console.error("Upload error:", error);
+      Swal.fire("Error", "Terjadi kesalahan saat upload", "error");
+    } finally {
+      setUploadingPayment(null);
+      setSelectedPayId(null);
+      if (payInputRef.current) payInputRef.current.value = "";
     }
   };
 
@@ -313,6 +385,20 @@ export default function PendaftarDetailPage() {
 
   return (
     <div className="space-y-6">
+      <input
+        type="file"
+        ref={docInputRef}
+        onChange={handleDocUpload}
+        className="hidden"
+        accept="image/jpeg, image/png, application/pdf"
+      />
+      <input
+        type="file"
+        ref={payInputRef}
+        onChange={handlePaymentUpload}
+        className="hidden"
+        accept="image/jpeg, image/png, application/pdf"
+      />
       {/* Back Button */}
       <Link
         href="/dashboard/admin/pendaftar"
@@ -500,6 +586,32 @@ export default function PendaftarDetailPage() {
                   <FileText className="w-6 h-6 text-brand-blue-700" />
                 </div>
                 <h3 className="text-xl font-black text-brand-blue-950 tracking-tight">Dokumen (Prioritas Verifikasi)</h3>
+              </div>
+              <div className="mb-4 grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {[
+                  { id: 'kartu_keluarga', label: 'KK' },
+                  { id: 'akta_kelahiran', label: 'Akta' },
+                  { id: 'rapor_sem1', label: 'Rapor 1' },
+                  { id: 'rapor_sem2', label: 'Rapor 2' },
+                  { id: 'nisn', label: 'NISN' },
+                  { id: 'foto_setengah_badan', label: 'Foto' },
+                  { id: 'surat_kesehatan', label: 'Sehat' },
+                  { id: 'pakta_integritas', label: 'Pakta' },
+                  { id: 'pernyataan_bebas_negatif', label: 'Bebas Negatif' },
+                ].map(item => (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      setSelectedDocType(item.id);
+                      setTimeout(() => docInputRef.current?.click(), 100);
+                    }}
+                    disabled={!!uploadingDoc}
+                    className="px-3 py-2 bg-brand-blue-50 hover:bg-brand-blue-100 text-brand-blue-700 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 border border-brand-blue-100 disabled:opacity-50"
+                  >
+                    {uploadingDoc === item.id ? <Loader2 className="w-3 h-3 animate-spin" /> : <UploadCloud className="w-3 h-3" />}
+                    Bantu Upload {item.label}
+                  </button>
+                ))}
               </div>
               {pendaftar.dokumen.length === 0 ? (
                 <p className="text-sm text-stone-500">Belum ada dokumen terupload</p>
@@ -737,6 +849,17 @@ export default function PendaftarDetailPage() {
                               ? "Ditolak"
                               : "Pending"}
                         </span>
+                        <button
+                          onClick={() => {
+                            setSelectedPayId(payment.id);
+                            setTimeout(() => payInputRef.current?.click(), 100);
+                          }}
+                          disabled={!!uploadingPayment}
+                          className="px-3 py-1 bg-white hover:bg-brand-yellow-100 text-brand-yellow-700 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all flex items-center gap-1.5 border border-brand-yellow-200 disabled:opacity-50"
+                        >
+                          {uploadingPayment === payment.id ? <Loader2 className="w-3 h-3 animate-spin" /> : <UploadCloud className="w-3 h-3" />}
+                          Bantu Upload Bukti
+                        </button>
                       </div>
                       <div className="grid grid-cols-2 gap-4 pt-2 border-t border-brand-yellow-200/50">
                         <div>

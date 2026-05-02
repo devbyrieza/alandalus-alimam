@@ -1,6 +1,7 @@
 // Status yang valid sesuai database constraint
 export type StatusProses =
   | 'draft'
+  | 'registered'      // Baru mendaftar, belum bayar
   | 'payment_verification'
   | 'verified'        // Pembayaran terverifikasi (Lunas)
   | 'payment_rejected' // Pembayaran bermasalah/ditolak sementara
@@ -17,9 +18,13 @@ export type StatusProses =
   | 'announced'
   | 'enrolled';
 
-// Status order untuk progress calculation
+/**
+ * URUTAN STATUS PENDAFTARAN (Hierarki)
+ * Digunakan untuk menentukan akses menu dan progres.
+ */
 export const STATUS_ORDER: StatusProses[] = [
   'draft',
+  'registered',
   'awaiting_payment',
   'payment_verification',
   'verified',
@@ -34,9 +39,15 @@ export const STATUS_ORDER: StatusProses[] = [
   'enrolled'
 ];
 
-// Get status index for comparison
-export function getStatusIndex(status: StatusProses): number {
-  const index = STATUS_ORDER.indexOf(status);
+/**
+ * Mendapatkan index status dalam hierarki.
+ * Jika status tidak ditemukan, return 0 (draft).
+ */
+export function getStatusIndex(status: StatusProses | string): number {
+  if (!status) return 0;
+  // Case-insensitive check to be safe
+  const s = status.toLowerCase() as StatusProses;
+  const index = STATUS_ORDER.indexOf(s);
   return index >= 0 ? index : 0;
 }
 
@@ -161,6 +172,7 @@ export function getNextStep(currentStatus: StatusProses): {
 } | null {
   const nextSteps: Record<string, { status: StatusProses; action: string; href: string }> = {
     'draft': { status: 'payment_verification', action: 'Lakukan pembayaran pendaftaran', href: '/dashboard/pendaftar/pembayaran-pendaftaran' },
+    'registered': { status: 'payment_verification', action: 'Lakukan pembayaran pendaftaran', href: '/dashboard/pendaftar/pembayaran-pendaftaran' },
     'awaiting_payment': { status: 'payment_verification', action: 'Upload bukti pembayaran', href: '/dashboard/pendaftar/pembayaran-pendaftaran' },
     'payment_verification': { status: 'verified', action: 'Tunggu verifikasi pembayaran', href: '/dashboard/pendaftar/pembayaran-pendaftaran' },
     'verified': { status: 'data_completed', action: 'Isi formulir data lengkap', href: '/dashboard/pendaftar/isi-data-lengkap' },
@@ -172,8 +184,6 @@ export function getNextStep(currentStatus: StatusProses): {
     'tested': { status: 'announced', action: 'Tunggu pengumuman hasil', href: '/dashboard/pendaftar/pengumuman' },
     'announced': { status: 'accepted', action: 'Lihat hasil seleksi', href: '/dashboard/pendaftar/pengumuman' },
     'accepted': { status: 'enrolled', action: 'Lakukan daftar ulang', href: '/dashboard/pendaftar/daftar-ulang' },
-    'accepted_not_enrolled': { status: 'enrolled', action: 'Lakukan daftar ulang', href: '/dashboard/pendaftar/daftar-ulang' },
-    'rejected': { status: 'rejected', action: 'Tolak', href: '/dashboard/pendaftar/pengumuman' },
   };
 
   return nextSteps[currentStatus] || null;
@@ -183,6 +193,7 @@ export function getNextStep(currentStatus: StatusProses): {
 export function formatStatusDisplay(status: StatusProses): { label: string; color: string } {
   const statusMap: Record<StatusProses, { label: string; color: string }> = {
     'draft': { label: 'Belum Bayar', color: 'bg-amber-100 text-amber-700' },
+    'registered': { label: 'Belum Bayar', color: 'bg-amber-100 text-amber-700' },
     'awaiting_payment': { label: 'Menunggu Pembayaran', color: 'bg-amber-100 text-amber-700' },
     'payment_verification': { label: 'Menunggu Verifikasi', color: 'bg-orange-100 text-orange-700' },
     'verified': { label: 'Pembayaran Lunas', color: 'bg-blue-100 text-blue-700' },
@@ -197,7 +208,6 @@ export function formatStatusDisplay(status: StatusProses): { label: string; colo
     'announced': { label: 'Diumumkan', color: 'bg-cyan-100 text-cyan-700' },
     'accepted': { label: 'Diterima', color: 'bg-green-100 text-green-700' },
     'enrolled': { label: 'Terdaftar', color: 'bg-emerald-100 text-emerald-700' },
-
   };
 
   return statusMap[status] || { label: status, color: 'bg-stone-100 text-stone-700' };
@@ -235,7 +245,7 @@ export const ROLE_LABELS: Record<UserRole, string> = {
 
 // Role descriptions
 export const ROLE_DESCRIPTIONS: Record<UserRole, string> = {
-  pendaftar: 'Calon santri yang mendaftar ke Ponpes Al-Andalus Al-Imam',
+  pendaftar: 'Calon santri yang mendaftar ke Ponpes Al Andalus Ulul Albaab',
   admin_berkas: 'Memverifikasi berkas/dokumen dan data pendaftaran santri',
   admin_keuangan: 'Mengelola verifikasi pembayaran dan keuangan',
   penguji_calsan: 'Melakukan penilaian tahsin/hafalan Al-Quran calon santri',

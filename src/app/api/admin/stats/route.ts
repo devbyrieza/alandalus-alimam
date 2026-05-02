@@ -113,14 +113,13 @@ export async function GET(request: Request) {
       }
 
       // Sudah Bayar Pendaftaran Logic: verified or higher
-      // Status index: verified=25, paid=26, data_completed=27, etc.
-      // We check if current status is at least verified
-      const verifiedIndex = 25; // verified
-      const currentIndex = [
+      const verifiedIndex = 3; // 'verified' index in status list below
+      const statusList = [
         'draft', 'awaiting_payment', 'payment_verification', 'verified', 'paid', 
         'data_completed', 'docs_uploaded', 'docs_verified', 'scheduled', 'tested', 
         'announced', 'accepted', 'enrolled'
-      ].indexOf(status);
+      ];
+      const currentIndex = statusList.indexOf(status);
 
       if (currentIndex >= verifiedIndex || status === "paid") {
         j.bayar_total++;

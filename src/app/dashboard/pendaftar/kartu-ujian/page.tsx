@@ -57,7 +57,7 @@ export default function ExamCardPage() {
                         jenis_ujian: j.jenis_ujian,
                         tanggal_ujian: new Date(j.tanggal_ujian).toLocaleDateString('id-ID'),
                         waktu: j.waktu_mulai.substring(0, 5),
-                        lokasi: j.lokasi || 'Pesantren Al-Andalus Al-Imam'
+                        lokasi: j.lokasi || 'Pesantren Al Andalus Ulul Albaab'
                     })) || []
                 };
 
@@ -193,7 +193,7 @@ export default function ExamCardPage() {
                         <div className="flex justify-end mt-12">
                             <div className="text-center w-48">
                                 <p className="mb-20">Sukabumi, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
-                                <p className="font-bold underline uppercase">Panitia PPDB Al-Imam</p>
+                                <p className="font-bold underline uppercase">Panitia PPDB Ulul Albaab</p>
                             </div>
                         </div>
                     </div>

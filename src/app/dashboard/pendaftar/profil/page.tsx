@@ -155,7 +155,7 @@ export default function ProfilPage() {
             </div>
 
             {requestStatus.status === 'approved_to_edit' && (
-              <Link href="/dashboard/pendaftar/isi-data-lengkap" className="ml-auto px-4 py-2 bg-pine-600 text-white text-xs font-bold rounded-xl hover:bg-pine-700 shadow-pine-500/20 shadow-lg transition-all">
+              <Link href="/dashboard/pendaftar/kelengkapan-berkas" className="ml-auto px-4 py-2 bg-pine-600 text-white text-xs font-bold rounded-xl hover:bg-pine-700 shadow-pine-500/20 shadow-lg transition-all">
                 Edit Sekarang
               </Link>
             )}
