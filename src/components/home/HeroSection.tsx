@@ -50,14 +50,16 @@ export default function HeroSection() {
                 <span>Terakreditasi BAN-PDM • Managed by Al-Andalus IIBS</span>
               </motion.div>
 
-              <h1 className="leading-[1.15] tracking-tight mx-auto lg:mx-0 max-w-2xl lg:max-w-none text-maroon-900 font-black">
-                <span className="block">Mencetak Generasi</span>
-                <span className="block text-[#8B5A2B] drop-shadow-sm">Hanif, Kontributif,</span>
-                <span className="block text-[#8B5A2B] drop-shadow-sm">dan Adaptif</span>
+              <h1 className="leading-[1.1] tracking-tight mx-auto lg:mx-0 max-w-2xl lg:max-w-none text-maroon-950 font-black text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">
+                <span className="block mb-2">Mencetak Generasi</span>
+                <span className="block text-transparent bg-clip-text bg-linear-to-r from-maroon-800 via-[#8B5A2B] to-maroon-900 drop-shadow-sm pb-2">
+                  Hanif, Kontributif, <br className="hidden xl:block" />
+                  dan Adaptif
+                </span>
               </h1>
 
-              <p className="text-base lg:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium font-sans text-ink-600 text-center lg:text-left">
-                Bukan sekadar tempat belajar agama — sistem pembentukan karakter berbasis <span className="font-bold text-maroon-800">Lingkungan, Kebiasaan, Komunitas, dan Spiritualitas</span> tanpa kekerasan dan luka pengasuhan.
+              <p className="text-base lg:text-xl leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium font-sans text-ink-700/80 text-center lg:text-left">
+                Bukan sekadar tempat belajar agama — sistem pembentukan karakter berbasis <span className="font-bold text-maroon-900">Lingkungan, Kebiasaan, Komunitas, dan Spiritualitas</span> tanpa kekerasan dan luka pengasuhan.
               </p>
 
               <div className="mt-4 pt-4 border-t border-cream-200/50">
