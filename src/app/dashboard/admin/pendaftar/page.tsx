@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, Suspense, useRef } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 import {
   Users,
@@ -97,11 +97,13 @@ interface TahunAjaran {
 
 function AdminPendaftarContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   /* const { data: session } = useSession();  -- Removed to fix build error */
   const urlFilter = searchParams.get("filter") || "";
 
   const [pendaftar, setPendaftar] = useState<Pendaftar[]>([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [loadingStats, setLoadingStats] = useState(true);
   const [userRole, setUserRole] = useState<string | null>(null);
 
@@ -180,6 +182,19 @@ function AdminPendaftarContent() {
   const [kabupatenLoading, setKabupatenLoading] = useState(false);
   const [kecamatanLoading, setKecamatanLoading] = useState(false);
   const [kelurahanLoading, setKelurahanLoading] = useState(false);
+
+  const updateFilter = (newFilter: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (newFilter) {
+      params.set("filter", newFilter);
+    } else {
+      params.delete("filter");
+    }
+    router.push(`${window.location.pathname}?${params.toString()}`);
+    setStatusFilter(newFilter);
+    setPagination((prev) => ({ ...prev, page: 1 }));
+  };
+
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [bulkStatus, setBulkStatus] = useState("");
   const [bulkUpdating, setBulkUpdating] = useState(false);
@@ -384,7 +399,11 @@ function AdminPendaftarContent() {
 
   const fetchPendaftar = async () => {
     try {
-      setLoading(true);
+      if (pendaftar.length === 0) {
+        setLoading(true);
+      } else {
+        setRefreshing(true);
+      }
       const params = new URLSearchParams({
         page: pagination.page.toString(),
         limit: pagination.limit.toString(),
@@ -410,6 +429,7 @@ function AdminPendaftarContent() {
       console.error("Error fetching pendaftar:", error);
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   };
 
@@ -731,6 +751,17 @@ function AdminPendaftarContent() {
 
   return (
     <div className="space-y-6">
+      {/* Refreshing Overlay */}
+      {refreshing && (
+        <div className="fixed inset-0 bg-white/40 backdrop-blur-[1px] z-[100] flex items-center justify-center pointer-events-none">
+          <div className="bg-white/80 px-6 py-3 rounded-2xl shadow-xl border border-stone-100 flex items-center gap-3 animate-in fade-in zoom-in duration-300">
+            <Loader2 className="w-5 h-5 animate-spin text-brand-blue-600" />
+            <span className="text-sm font-bold text-stone-700 tracking-tight">
+              Memperbarui data...
+            </span>
+          </div>
+        </div>
+      )}
       <input
         type="file"
         ref={docInputRef}
@@ -805,7 +836,7 @@ function AdminPendaftarContent() {
             <button
               onClick={() => handleExport("pdf")}
               disabled={exporting}
-              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg transition-colors disabled:opacity-50 text-sm"
+              className="flex items-center gap-2 px-3 md:px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-bold transition-all shadow-sm hover:shadow-md disabled:opacity-50 text-sm"
               title="Download PDF"
             >
               {exporting ? (
@@ -815,9 +846,19 @@ function AdminPendaftarContent() {
               )}
               <span className="hidden sm:inline">PDF</span>
             </button>
+            <button
+              onClick={() => fetchPendaftar()}
+              disabled={refreshing}
+              className="flex items-center gap-2 px-3 md:px-6 py-2.5 bg-white hover:bg-stone-50 border border-stone-200 text-stone-700 rounded-xl font-bold transition-all shadow-sm hover:shadow-md text-sm disabled:opacity-50"
+              title="Muat Ulang"
+            >
+              <RefreshCw className={`w-4 h-4 ${refreshing ? "animate-spin" : ""}`} />
+              <span className="hidden sm:inline">Refresh</span>
+            </button>
           </div>
         </div>
       </div>
+
 
       {/* Filters */}
       <div className="bg-white rounded-2xl shadow-sm p-6 border border-brand-yellow-100">
@@ -854,10 +895,7 @@ function AdminPendaftarContent() {
             </label>
             <select
               value={statusFilter}
-              onChange={(e) => {
-                setStatusFilter(e.target.value);
-                setPagination((prev) => ({ ...prev, page: 1 }));
-              }}
+              onChange={(e) => updateFilter(e.target.value)}
               className="w-full px-4 py-3 bg-brand-yellow-50/50 border border-brand-yellow-100 rounded-xl focus:border-brand-blue-500 focus:bg-white focus:outline-none font-bold text-brand-blue-950"
             >
               <option value="">Semua Status</option>

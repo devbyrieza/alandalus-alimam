@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { scrollToSection, scrollToTop, navigateToDetail } from "@/lib/navigation-scroll";
 
+import Image from "next/image";
+
 import { BRANDING } from "@/config/branding";
 
 export default function Navbar() {
@@ -95,7 +97,14 @@ export default function Navbar() {
             <Link href="/" onClick={handleBerandaClick} className="flex items-center gap-3 group min-h-[44px]">
               <div className="relative">
                 <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-[14px] flex items-center justify-center bg-white border border-brand-blue-100 shadow-sm transition-transform duration-500 group-hover:scale-105 group-hover:-rotate-3 overflow-hidden">
-                  <img src={BRANDING.logoPath} alt={`Logo ${BRANDING.schoolName}`} className="w-full h-full object-contain p-0.5" />
+                  <Image 
+                    src={BRANDING.logoPath} 
+                    alt={`Logo ${BRANDING.schoolName}`} 
+                    width={44}
+                    height={44}
+                    className="w-full h-full object-contain p-0.5" 
+                    priority
+                  />
                 </div>
                 <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full z-10" />
               </div>

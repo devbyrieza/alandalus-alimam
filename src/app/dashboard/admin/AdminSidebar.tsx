@@ -55,6 +55,8 @@ const ICON_MAP: Record<string, any> = {
     PieChart
 };
 
+import Image from "next/image";
+
 import { BRANDING } from "@/config/branding";
 
 interface AdminSidebarProps {
@@ -156,7 +158,13 @@ export default function AdminSidebar({ children, userRole, adminName, userId, av
                         <div className="p-6 flex items-center justify-between border-b border-ink-50">
                             <div className="flex items-center gap-3">
                                 <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-md overflow-hidden">
-                                    <img src={BRANDING.logoPath} alt="Logo" className="w-full h-full object-contain p-1" />
+                                    <Image 
+                                        src={BRANDING.logoPath} 
+                                        alt="Logo" 
+                                        width={36}
+                                        height={36}
+                                        className="w-full h-full object-contain p-1" 
+                                    />
                                 </div>
                                 <span className="font-black text-ink-900 uppercase tracking-tighter">Navigasi</span>
                             </div>
@@ -215,7 +223,14 @@ export default function AdminSidebar({ children, userRole, adminName, userId, av
                         <div className="px-6 py-8 pb-4">
                             <div className="flex items-center gap-3 mb-8">
                                 <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-xl shadow-brand-blue-900/10 ring-4 ring-brand-yellow-50/50 overflow-hidden">
-                                    <img src={BRANDING.logoPath} alt="Logo" className="w-full h-full object-contain p-1" />
+                                    <Image 
+                                        src={BRANDING.logoPath} 
+                                        alt="Logo" 
+                                        width={40}
+                                        height={40}
+                                        className="w-full h-full object-contain p-1" 
+                                        priority
+                                    />
                                 </div>
                                 <div>
                                     <h2 className="font-black text-lg text-brand-blue-950 leading-tight">Panel <span className="text-brand-blue-700">Admin</span></h2>

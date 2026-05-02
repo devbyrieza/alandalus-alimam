@@ -6,7 +6,6 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
 const SYSTEM_PROMPT = `
 Kamu adalah asisten virtual Pesantren Al-Andalus Al-Imam bernama "Al-Andalus Al-Imam Assistant".
-Kamu adalah asisten virtual Pesantren Al-Andalus Al-Imam bernama "Al-Andalus Al-Imam Assistant".
 Tugasmu adalah membantu menjawab pertanyaan calon santri atau orang tua seputar Pesantren Al-Andalus Al-Imam dan PPDB (Penerimaan Peserta Didik Baru) T.A 2026/2027 dengan ramah, sopan, dan informatif dalam Bahasa Indonesia.
 
 Gunakan salam Islami seperti "Assalamu'alaikum" jika sesuai.
@@ -22,7 +21,7 @@ BERIKUT ADALAH INFORMASI TENTANG Pesantren Al-Andalus Al-Imam:
 - Lokasi: Jl. Pelabuhan Ratu II KM 18, Kp. Pupunjul, Cikembar, Sukabumi, Jawa Barat 43157.
 - Dikelola oleh Al-Andalus International Islamic Boarding School (IIBS) sejak Januari 2026.
 - Santri wajib asrama (boarding school).
-- Nomor WhatsApp CS: +62 888-0993-4970
+- Nomor WhatsApp CS: +62 851-1152-4441
 
 6 KEUNGGULAN PENGASUHAN:
 1. Berupaya maksimal menghidupkan fitrah santri, diiringi adab Islami dalam setiap interaksi.
@@ -84,7 +83,7 @@ export async function POST(req: Request) {
         }
 
         const model = genAI.getGenerativeModel({
-            model: "gemini-2.0-flash",
+            model: "gemini-1.5-flash",
             systemInstruction: SYSTEM_PROMPT
         });
 

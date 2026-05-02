@@ -18,13 +18,18 @@ import Swal from "sweetalert2";
 
 export default function PerubahanDataPage() {
     const [loading, setLoading] = useState(true);
+    const [refreshing, setRefreshing] = useState(false);
     const [requests, setRequests] = useState<any[]>([]);
     const [filter, setFilter] = useState("pending"); // pending, all
     const [processing, setProcessing] = useState<string | null>(null);
 
     const fetchRequests = async () => {
         try {
-            setLoading(true);
+            if (requests.length === 0) {
+                setLoading(true);
+            } else {
+                setRefreshing(true);
+            }
             const res = await fetch("/api/admin/perubahan-data");
             const data = await res.json();
             if (data.success) {
@@ -34,6 +39,7 @@ export default function PerubahanDataPage() {
             console.error("Error fetching requests:", error);
         } finally {
             setLoading(false);
+            setRefreshing(false);
         }
     };
 
@@ -71,7 +77,7 @@ export default function PerubahanDataPage() {
         return r.status === filter;
     });
 
-    if (loading) {
+    if (loading && requests.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
                 <Loader2 className="w-12 h-12 text-maroon-700 animate-spin" />
@@ -93,7 +99,8 @@ export default function PerubahanDataPage() {
                     <p className="text-ink-500 mt-2 text-lg">Kelola izin perubahan data pendaftar yang sudah terkunci.</p>
                 </div>
 
-                <div className="flex bg-cream-100 p-1.5 rounded-2xl gap-1">
+                <div className="flex bg-cream-100 p-1.5 rounded-2xl gap-1 items-center">
+                    {refreshing && <Loader2 className="w-4 h-4 text-maroon-700 animate-spin mx-2" />}
                     <button
                         onClick={() => setFilter("pending")}
                         className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${filter === 'pending' ? 'bg-white shadow-sm text-maroon-700' : 'text-ink-500'}`}
