@@ -150,6 +150,22 @@ export default function HeroSection() {
               </div>
             </motion.div>
 
+            {/* Scholarship Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
+              animate={{ opacity: 1, scale: 1, rotate: -5 }}
+              transition={{ duration: 0.8, delay: 1.5 }}
+              className="absolute -bottom-2 -right-2 lg:bottom-12 lg:-right-12 z-30 bg-linear-to-br from-brand-yellow-400 to-brand-yellow-600 p-3 lg:p-5 rounded-3xl shadow-premium-lg border-4 border-white rotate-[-5deg] group hover:rotate-0 transition-transform duration-500 cursor-default"
+            >
+              <div className="text-center">
+                <p className="text-[9px] lg:text-[10px] font-black text-maroon-950 uppercase tracking-widest leading-none mb-1">Beasiswa</p>
+                <p className="text-sm lg:text-lg font-black text-maroon-900 leading-tight">Dhuafa<br/>Berprestasi</p>
+                <div className="mt-2 py-0.5 px-2 bg-maroon-950/10 rounded-full">
+                  <p className="text-[8px] lg:text-[9px] font-bold text-maroon-900">Kuota 10 Santri</p>
+                </div>
+              </div>
+            </motion.div>
+
             {/* Aesthetic Blobs */}
             <div className="absolute -z-10 -bottom-12 -right-12 w-48 h-48 sm:w-64 sm:h-64 bg-maroon-300/20 blur-3xl rounded-full" />
             <div className="absolute -z-10 -top-12 -left-12 w-36 h-36 sm:w-48 sm:h-48 bg-cream-400/20 blur-2xl rounded-full" />

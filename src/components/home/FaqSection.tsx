@@ -29,7 +29,7 @@ const FAQS = [
     },
     {
         question: "Apakah tersedia program beasiswa?",
-        answer: "Ya, Al-Andalus Al-Imam menyediakan program beasiswa bagi santri berprestasi (tahfidz 30 juz) dan santri dari keluarga yatim/piatu/dhuafa dengan syarat dan ketentuan yang berlaku.",
+        answer: "Ya, Al-Andalus Al-Imam memiliki Program Beasiswa Dhuafa Berprestasi dengan kuota terbatas (10 santri). Program ini dikhususkan bagi santri dari keluarga kurang mampu yang memiliki hafalan Al-Qur'an (minimal 10 Juz) atau prestasi akademik (Ranking 3 Besar). Calon penerima akan melalui tes seleksi dan survey ekonomi langsung oleh pihak Donatur. Saat ini beasiswa mencakup pembebasan Biaya Uang Pangkal.",
     },
 ] as const;
 
@@ -140,7 +140,7 @@ export default function FaqSection() {
                         <div className="absolute inset-0 bg-gradient-to-r from-brand-yellow-100/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <p className="text-ink-600 font-bold mb-5 relative z-10 text-sm tracking-wide uppercase">Punya pertanyaan lain?</p>
                         <a
-                            href="https://wa.me/6288809934970"
+                            href="https://wa.me/6285111524441"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn-primary w-full relative z-10 justify-center shadow-md bg-[#25D366] hover:bg-[#20BE5A] hover:shadow-lg"
