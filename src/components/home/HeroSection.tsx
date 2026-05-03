@@ -24,7 +24,7 @@ export default function HeroSection() {
     <section className="relative min-h-[95vh] flex items-center pt-20 pb-16 md:pt-24 lg:pt-28 lg:pb-24 overflow-hidden bg-maroon-50/30">
       {/* Sophisticated Background Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-maroon-100/40 blur-[120px] rounded-full" />
+        <div className="absolute -top-[15%] -left-[15%] w-[60%] h-[60%] bg-maroon-200/20 blur-[140px] rounded-full" />
         <div className="absolute top-[20%] -right-[10%] w-[40%] h-[50%] bg-cream-300/30 blur-[100px] rounded-full" />
         <div className="absolute bottom-[0%] left-[20%] w-[40%] h-[40%] bg-maroon-50/60 blur-[100px] rounded-full" />
       </div>
@@ -52,7 +52,7 @@ export default function HeroSection() {
 
               <h1 className="leading-[1.1] tracking-tight mx-auto lg:mx-0 max-w-2xl lg:max-w-none text-maroon-950 font-black text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">
                 <span className="block mb-2">Mencetak Generasi</span>
-                <span className="block text-transparent bg-clip-text bg-linear-to-r from-maroon-800 via-[#8B5A2B] to-maroon-900 drop-shadow-sm pb-2">
+                <span className="block text-transparent bg-clip-text bg-linear-to-r from-maroon-950 via-[#A87B05] to-maroon-900 drop-shadow-sm pb-2">
                   Hanif, Kontributif, <br className="hidden xl:block" />
                   dan Adaptif
                 </span>
