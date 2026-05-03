@@ -1,10 +1,14 @@
+// src/app/page.tsx
 "use client";
 
 import { useEffect } from "react";
+import { LazyMotion, domAnimation } from "framer-motion";
+
 import { restoreScrollPosition } from "@/lib/navigation-scroll";
+import ScrollAnimation from "@/components/ui/ScrollAnimation";
+
 import HeroSection from "@/components/home/HeroSection";
 import StatsSection from "@/components/home/StatsSection";
-import ScrollAnimation from "@/components/ui/ScrollAnimation";
 import AboutSection from "@/components/home/AboutSection";
 import ProgramSection from "@/components/home/ProgramSection";
 import FeaturesSection from "@/components/home/FeaturesSection";
@@ -24,60 +28,97 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main>
-      <HeroSection />
+    <LazyMotion features={domAnimation}>
+      <main
+        id="main-content"
+        className="relative overflow-x-hidden"
+        aria-label="Halaman Utama Al-Imam"
+      >
+        <section id="beranda" aria-label="Hero">
+          <HeroSection />
+        </section>
 
-      <ScrollAnimation delay={0.2} direction="up">
-        <StatsSection />
-      </ScrollAnimation>
+        <section id="statistik" aria-label="Statistik Pesantren">
+          <ScrollAnimation delay={0.15} direction="up" duration={0.7}>
+            <StatsSection />
+          </ScrollAnimation>
+        </section>
 
-      <ScrollAnimation delay={0.1}>
-        <AboutSection />
-      </ScrollAnimation>
+        {/* fade → "none" = hanya opacity, tanpa translasi */}
+        <section id="tentang" aria-label="Tentang Al-Imam">
+          <ScrollAnimation delay={0.1} direction="none" duration={0.8}>
+            <AboutSection />
+          </ScrollAnimation>
+        </section>
 
-      <ScrollAnimation delay={0.1}>
-        <ProgramSection />
-      </ScrollAnimation>
+        <section id="program" aria-label="Program Unggulan">
+          <ScrollAnimation delay={0.12} direction="up" duration={0.7}>
+            <ProgramSection />
+          </ScrollAnimation>
+        </section>
 
-      <ScrollAnimation delay={0.1}>
-        <FeaturesSection />
-      </ScrollAnimation>
+        {/* scale → "none" = fade saja, kesan muncul halus */}
+        <section id="keunggulan" aria-label="Keunggulan Pesantren">
+          <ScrollAnimation delay={0.1} direction="none" duration={0.75}>
+            <FeaturesSection />
+          </ScrollAnimation>
+        </section>
 
-      <ScrollAnimation delay={0.1}>
-        <TeachersSection />
-      </ScrollAnimation>
+        <section id="pengajar" aria-label="Tim Pengajar">
+          <ScrollAnimation delay={0.1} direction="left" duration={0.7}>
+            <TeachersSection />
+          </ScrollAnimation>
+        </section>
 
-      <ScrollAnimation delay={0.1}>
-        <BoardSection />
-      </ScrollAnimation>
+        <section id="pengurus" aria-label="Dewan Pengurus">
+          <ScrollAnimation delay={0.1} direction="up" duration={0.7}>
+            <BoardSection />
+          </ScrollAnimation>
+        </section>
 
-      <ScrollAnimation delay={0.1}>
-        <ProcessSection />
-      </ScrollAnimation>
+        <section id="proses" aria-label="Alur Pendaftaran">
+          <ScrollAnimation delay={0.1} direction="none" duration={0.8}>
+            <ProcessSection />
+          </ScrollAnimation>
+        </section>
 
-      <ScrollAnimation delay={0.1}>
-        <FacilitiesSection />
-      </ScrollAnimation>
+        <section id="fasilitas" aria-label="Fasilitas Pesantren">
+          <ScrollAnimation delay={0.1} direction="up" duration={0.7}>
+            <FacilitiesSection />
+          </ScrollAnimation>
+        </section>
 
-      <ScrollAnimation delay={0.1}>
-        <ActivitiesSection />
-      </ScrollAnimation>
+        <section id="kegiatan" aria-label="Kegiatan Pesantren">
+          <ScrollAnimation delay={0.1} direction="left" duration={0.7}>
+            <ActivitiesSection />
+          </ScrollAnimation>
+        </section>
 
-      <ScrollAnimation delay={0.1}>
-        <TestimonialsSection />
-      </ScrollAnimation>
+        <section id="testimoni" aria-label="Testimoni Santri & Wali">
+          <ScrollAnimation delay={0.12} direction="up" duration={0.75}>
+            <TestimonialsSection />
+          </ScrollAnimation>
+        </section>
 
-      <ScrollAnimation delay={0.1}>
-        <FaqSection />
-      </ScrollAnimation>
+        <section id="faq" aria-label="Pertanyaan Umum">
+          <ScrollAnimation delay={0.1} direction="none" duration={0.8}>
+            <FaqSection />
+          </ScrollAnimation>
+        </section>
 
-      <ScrollAnimation delay={0.1}>
-        <ContactSection />
-      </ScrollAnimation>
+        <section id="kontak" aria-label="Hubungi Kami">
+          <ScrollAnimation delay={0.1} direction="up" duration={0.7}>
+            <ContactSection />
+          </ScrollAnimation>
+        </section>
 
-      <ScrollAnimation delay={0.1}>
-        <CtaSection />
-      </ScrollAnimation>
-    </main>
+        {/* CTA — none agar muncul elegan tanpa terlalu banyak gerak di akhir */}
+        <section id="daftar" aria-label="Daftar Sekarang">
+          <ScrollAnimation delay={0.15} direction="none" duration={0.8}>
+            <CtaSection />
+          </ScrollAnimation>
+        </section>
+      </main>
+    </LazyMotion>
   );
 }
