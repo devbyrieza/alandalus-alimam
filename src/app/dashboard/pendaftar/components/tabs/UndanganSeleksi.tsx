@@ -152,7 +152,7 @@ export default function UndanganSeleksiTab() {
       text: "Apakah Anda yakin ingin memilih jadwal ini? Jadwal tidak dapat diubah setelah dipilih.",
       icon: "question",
       showCancelButton: true,
-      confirmButtonColor: "#0066ff", // brand-blue-600
+      confirmButtonColor: "#0066ff", // maroon-600
       cancelButtonColor: "#ef4444",
       confirmButtonText: "Ya, Pilih Jadwal",
       cancelButtonText: "Batal",
@@ -216,7 +216,7 @@ export default function UndanganSeleksiTab() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <Loader2 className="w-12 h-12 animate-spin text-brand-blue-600 mx-auto mb-4" />
+          <Loader2 className="w-12 h-12 animate-spin text-maroon-600 mx-auto mb-4" />
           <p className="text-stone-600">Memuat info seleksi...</p>
         </div>
       </div>
@@ -261,7 +261,7 @@ export default function UndanganSeleksiTab() {
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link 
               href="/dashboard/pendaftar?tab=upload-berkas"
-              className="px-8 py-3 bg-brand-blue-700 text-white font-black rounded-xl hover:bg-brand-blue-800 transition-all shadow-md uppercase tracking-widest text-sm"
+              className="px-8 py-3 bg-maroon-700 text-white font-black rounded-xl hover:bg-maroon-800 transition-all shadow-md uppercase tracking-widest text-sm"
             >
               Cek Status Berkas
             </Link>
@@ -281,12 +281,12 @@ export default function UndanganSeleksiTab() {
   return (
     <div className="space-y-6">
       {/* ========== HEADER ========== */}
-      <div className="bg-linear-to-r from-brand-blue-700 to-brand-blue-900 rounded-2xl p-6 md:p-8 text-white shadow-lg relative overflow-hidden">
+      <div className="bg-linear-to-r from-maroon-700 to-maroon-900 rounded-2xl p-6 md:p-8 text-white shadow-lg relative overflow-hidden">
         <div className="relative z-10">
           <h1 className="text-2xl font-black mb-2 text-white">
             Undangan Seleksi
           </h1>
-          <p className="text-brand-yellow-100 text-sm md:text-base">
+          <p className="text-gold-100 text-sm md:text-base">
             Jadwal ujian seleksi calon santri baru — selesaikan semua tahapan di bawah ini
           </p>
         </div>
@@ -311,13 +311,13 @@ export default function UndanganSeleksiTab() {
           <h3 className="font-bold text-ink-800 text-sm">
             Progress Seleksi
           </h3>
-          <span className="text-sm font-black text-brand-blue-600">
+          <span className="text-sm font-black text-maroon-600">
             {data.progress.completed}/{data.progress.total} Tahap
           </span>
         </div>
         <div className="w-full h-3 bg-surface-100 rounded-full overflow-hidden">
           <div
-            className="h-full bg-linear-to-r from-brand-blue-500 to-brand-blue-700 rounded-full transition-all duration-700 shadow-lg shadow-brand-blue-500/20"
+            className="h-full bg-linear-to-r from-maroon-500 to-maroon-700 rounded-full transition-all duration-700 shadow-lg shadow-maroon-500/20"
             style={{ width: `${data.progress.percentage}%` }}
           />
         </div>
@@ -329,8 +329,8 @@ export default function UndanganSeleksiTab() {
       {/* ========== GRUP A: TES ONLINE INSTAN ========== */}
       <div className="space-y-4">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-brand-blue-100 rounded-lg flex items-center justify-center">
-            <BookOpen className="w-4 h-4 text-brand-blue-600" />
+          <div className="w-8 h-8 bg-maroon-100 rounded-lg flex items-center justify-center">
+            <BookOpen className="w-4 h-4 text-maroon-600" />
           </div>
           <div>
             <h2 className="font-bold text-stone-900 text-lg">
@@ -354,9 +354,9 @@ export default function UndanganSeleksiTab() {
                   }`}
               >
                 <div className="flex items-start justify-between mb-3">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${item.completed ? "bg-emerald-100" : "bg-brand-blue-50"
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${item.completed ? "bg-emerald-100" : "bg-maroon-50"
                     }`}>
-                    <Icon className={`w-5 h-5 ${item.completed ? "text-emerald-600" : "text-brand-blue-600"
+                    <Icon className={`w-5 h-5 ${item.completed ? "text-emerald-600" : "text-maroon-600"
                       }`} />
                   </div>
                   {item.completed ? (
@@ -364,7 +364,7 @@ export default function UndanganSeleksiTab() {
                       <CheckCircle className="w-3 h-3" /> Selesai
                     </span>
                   ) : (
-                    <span className="px-2.5 py-1 bg-brand-blue-100 text-brand-blue-700 text-xs font-black rounded-full">
+                    <span className="px-2.5 py-1 bg-maroon-100 text-maroon-700 text-xs font-black rounded-full">
                       Tersedia
                     </span>
                   )}
@@ -381,7 +381,7 @@ export default function UndanganSeleksiTab() {
                 ) : (
                   <Link
                     href={`/dashboard/pendaftar/ujian/${key}`}
-                    className="inline-flex items-center gap-2 mt-2 px-4 py-2 bg-brand-yellow-400 hover:bg-brand-yellow-300 text-brand-blue-950 text-xs font-black rounded-lg transition-colors shadow-sm border border-brand-yellow-500"
+                    className="inline-flex items-center gap-2 mt-2 px-4 py-2 bg-gold-400 hover:bg-gold-300 text-maroon-950 text-xs font-black rounded-lg transition-colors shadow-sm border border-gold-500"
                   >
                     Mulai Tes
                   </Link>
@@ -395,8 +395,8 @@ export default function UndanganSeleksiTab() {
       {/* ========== GRUP B: TES TERJADWAL ========== */}
       <div className="space-y-4">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-brand-yellow-100 rounded-lg flex items-center justify-center">
-            <Calendar className="w-4 h-4 text-brand-blue-700" />
+          <div className="w-8 h-8 bg-gold-100 rounded-lg flex items-center justify-center">
+            <Calendar className="w-4 h-4 text-maroon-700" />
           </div>
           <div>
             <h2 className="font-bold text-stone-900 text-lg">
@@ -429,14 +429,14 @@ export default function UndanganSeleksiTab() {
                 return (
                   <div
                     key={item.id}
-                    className="bg-white rounded-xl shadow-sm p-5 border-2 border-brand-blue-100 relative overflow-hidden"
+                    className="bg-white rounded-xl shadow-sm p-5 border-2 border-maroon-100 relative overflow-hidden"
                   >
-                    <div className="absolute top-0 right-0 p-2 bg-brand-blue-50 rounded-bl-xl">
-                      <CheckCircle className="w-4 h-4 text-brand-blue-600" />
+                    <div className="absolute top-0 right-0 p-2 bg-maroon-50 rounded-bl-xl">
+                      <CheckCircle className="w-4 h-4 text-maroon-600" />
                     </div>
 
                     <div className="flex items-center gap-2 mb-3">
-                      <Icon className="w-4 h-4 text-brand-blue-600" />
+                      <Icon className="w-4 h-4 text-maroon-600" />
                       <h3 className="text-sm font-black text-ink-900">
                         {item.jenis_ujian}
                       </h3>
@@ -444,20 +444,20 @@ export default function UndanganSeleksiTab() {
 
                     <div className="space-y-2 text-xs text-stone-600">
                       <div className="flex items-center gap-2">
-                        <Calendar className="w-3.5 h-3.5 text-brand-blue-500" />
+                        <Calendar className="w-3.5 h-3.5 text-maroon-500" />
                         <span className="font-bold text-ink-800">
                           {formatDate(item.tanggal_ujian)}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Clock className="w-3.5 h-3.5 text-brand-blue-500" />
+                        <Clock className="w-3.5 h-3.5 text-maroon-500" />
                         <span className="font-bold text-ink-800">
                           {formatTime(item.waktu_mulai)} WIB
                         </span>
                       </div>
                       {item.lokasi && (
                         <div className="flex items-center gap-2">
-                          <MapPin className="w-3.5 h-3.5 text-brand-blue-500" />
+                          <MapPin className="w-3.5 h-3.5 text-maroon-500" />
                           <span className="font-medium text-ink-700">{item.lokasi}</span>
                         </div>
                       )}
@@ -506,11 +506,11 @@ export default function UndanganSeleksiTab() {
         {/* Condition 2: Sessions available — show picker */}
         {data.grupB.hasSchedules && data.grupB.availableSlots.length > 0 && (
           <div className="space-y-3">
-            <div className="bg-brand-blue-50 border-l-4 border-brand-blue-500 p-4 rounded-r-xl">
-              <h3 className="font-black text-brand-blue-900 text-sm">
+            <div className="bg-maroon-50 border-l-4 border-maroon-500 p-4 rounded-r-xl">
+              <h3 className="font-black text-maroon-900 text-sm">
                 Alhamdulillah, jadwal seleksi sudah bisa dipilih!
               </h3>
-              <p className="text-xs text-brand-blue-700 mt-1 font-medium">
+              <p className="text-xs text-maroon-700 mt-1 font-medium">
                 Silakan pilih sesi ujian untuk jenis ujian yang{" "}
                 <strong>belum Anda ambil</strong>.
               </p>
@@ -545,12 +545,12 @@ export default function UndanganSeleksiTab() {
                         key={slot.id}
                         className={`bg-white rounded-xl shadow-sm p-5 border-2 transition-all ${slot.isFull
                           ? "opacity-75 border-surface-200 bg-surface-50"
-                          : "border-surface-100 hover:border-brand-blue-300 hover:shadow-md"
+                          : "border-surface-100 hover:border-maroon-300 hover:shadow-md"
                           }`}
                       >
                         <div className="flex justify-between items-start mb-3">
                           <div className="flex items-center gap-2">
-                            <Icon className="w-4 h-4 text-brand-blue-600" />
+                            <Icon className="w-4 h-4 text-maroon-600" />
                             <h4
                               className="font-black text-ink-900 text-sm line-clamp-1"
                               title={slot.title}
@@ -571,15 +571,15 @@ export default function UndanganSeleksiTab() {
 
                         <div className="space-y-2 mb-4 text-xs text-ink-600">
                           <div className="flex items-center gap-2 font-medium">
-                            <Calendar className="w-3.5 h-3.5 text-brand-blue-500" />
+                            <Calendar className="w-3.5 h-3.5 text-maroon-500" />
                             {formatDate(slot.start_time)}
                           </div>
                           <div className="flex items-center gap-2 font-medium">
-                            <Clock className="w-3.5 h-3.5 text-brand-blue-500" />
+                            <Clock className="w-3.5 h-3.5 text-maroon-500" />
                             {formatTime(slot.start_time)} WIB
                           </div>
                           <div className="flex items-center gap-2">
-                            <MapPin className="w-3.5 h-3.5 text-brand-blue-500" />
+                            <MapPin className="w-3.5 h-3.5 text-maroon-500" />
                             <span className="line-clamp-1 font-medium">{slot.location}</span>
                           </div>
                           <div className="text-xs text-ink-400 font-bold">
@@ -590,7 +590,7 @@ export default function UndanganSeleksiTab() {
                         <button
                           onClick={() => handleBooking(slot.id)}
                           disabled={slot.isFull || bookingId !== null}
-                          className="w-full py-2.5 bg-brand-yellow-400 hover:bg-brand-yellow-300 text-brand-blue-950 font-black rounded-lg disabled:bg-surface-200 disabled:text-ink-400 disabled:cursor-not-allowed transition-all shadow-sm flex justify-center items-center gap-2 text-sm border border-brand-yellow-500"
+                          className="w-full py-2.5 bg-gold-400 hover:bg-gold-300 text-maroon-950 font-black rounded-lg disabled:bg-surface-200 disabled:text-ink-400 disabled:cursor-not-allowed transition-all shadow-sm flex justify-center items-center gap-2 text-sm border border-gold-500"
                         >
                           {bookingId === slot.id && (
                             <Loader2 className="animate-spin w-4 h-4" />

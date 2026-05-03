@@ -89,7 +89,7 @@ export default function KepribadianTestPage() {
     };
 
     if (checking) {
-        return <div className="flex items-center justify-center min-h-[400px]"><Loader2 className="w-10 h-10 animate-spin text-brand-blue-600" /></div>;
+        return <div className="flex items-center justify-center min-h-[400px]"><Loader2 className="w-10 h-10 animate-spin text-maroon-600" /></div>;
     }
 
     if (alreadyDone) {
@@ -99,7 +99,7 @@ export default function KepribadianTestPage() {
                     <CheckCircle className="w-16 h-16 text-emerald-500 mx-auto mb-4" />
                     <h2 className="text-xl font-bold mb-2">Tes Sudah Dikerjakan</h2>
                     <p className="text-stone-600 mb-6">Anda sudah menyelesaikan Tes Kepribadian sebelumnya.</p>
-                    <button onClick={() => router.push('/dashboard/pendaftar?tab=undangan-seleksi')} className="px-6 py-3 bg-brand-blue-600 hover:bg-brand-blue-700 text-white font-bold rounded-xl transition-colors shadow-lg shadow-brand-blue-100">
+                    <button onClick={() => router.push('/dashboard/pendaftar?tab=undangan-seleksi')} className="px-6 py-3 bg-maroon-600 hover:bg-maroon-700 text-white font-bold rounded-xl transition-colors shadow-lg shadow-maroon-100">
                         Kembali ke Undangan Seleksi
                     </button>
                 </div>
@@ -118,7 +118,7 @@ export default function KepribadianTestPage() {
                     <p className="text-ink-600 mb-8 leading-relaxed font-medium">
                         {lockMessage || "Anda belum dapat mengakses halaman tes ini. Silakan selesaikan tahap verifikasi dokumen terlebih dahulu."}
                     </p>
-                    <button onClick={() => router.push('/dashboard/pendaftar')} className="w-full px-6 py-4 bg-brand-blue-700 hover:bg-brand-blue-800 text-white font-black rounded-xl transition-all shadow-md uppercase tracking-widest text-sm">
+                    <button onClick={() => router.push('/dashboard/pendaftar')} className="w-full px-6 py-4 bg-maroon-700 hover:bg-maroon-800 text-white font-black rounded-xl transition-all shadow-md uppercase tracking-widest text-sm">
                         Kembali ke Dashboard
                     </button>
                 </div>
@@ -133,22 +133,22 @@ export default function KepribadianTestPage() {
                 <ArrowLeft className="w-4 h-4" /> Kembali
             </button>
 
-            <div className="bg-linear-to-r from-brand-blue-600 to-brand-blue-800 rounded-xl p-6 mb-6">
+            <div className="bg-linear-to-r from-maroon-600 to-maroon-800 rounded-xl p-6 mb-6">
                 <h1 className="text-xl font-bold text-white">Tes Kepribadian Calon Santri/Wati</h1>
-                <p className="text-brand-blue-100 text-sm mt-1">20 pernyataan • Skala 1-4 • Durasi 30 menit</p>
+                <p className="text-maroon-100 text-sm mt-1">20 pernyataan • Skala 1-4 • Durasi 30 menit</p>
             </div>
 
-            <div className="bg-brand-blue-50 border border-brand-blue-200 rounded-xl p-4">
+            <div className="bg-maroon-50 border border-maroon-200 rounded-xl p-4">
                 <div className="flex gap-4">
-                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center border border-brand-blue-100 flex-shrink-0">
-                        <AlertCircle className="w-6 h-6 text-brand-blue-600" />
+                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center border border-maroon-100 flex-shrink-0">
+                        <AlertCircle className="w-6 h-6 text-maroon-600" />
                     </div>
                     <div>
-                        <h4 className="font-bold text-brand-blue-800 mb-1 text-sm">Pesan dari Mudir</h4>
-                        <p className="text-sm text-brand-blue-700 leading-relaxed italic">
+                        <h4 className="font-bold text-maroon-800 mb-1 text-sm">Pesan dari Mudir</h4>
+                        <p className="text-sm text-maroon-700 leading-relaxed italic">
                             "Bismillah, kerjakan dengan jujur dan penuh optimisme. Hasil terbaik adalah buah dari kejujuran dan usaha yang ikhlas."
                         </p>
-                        <p className="text-sm text-brand-blue-600 leading-relaxed mt-1">
+                        <p className="text-sm text-maroon-600 leading-relaxed mt-1">
                             - Ustadz Juju Junaedi, M.Pd.
                         </p>
                     </div>
@@ -159,10 +159,10 @@ export default function KepribadianTestPage() {
             <div className="bg-white rounded-xl border p-4 mb-6 shadow-sm mt-6">
                 <div className="flex justify-between items-center mb-2 text-sm">
                     <span className="text-stone-600">Halaman {page + 1} dari {totalPages}</span>
-                    <span className="font-bold text-brand-blue-600">{Object.keys(answers).length}/{KEPRIBADIAN_QUESTIONS.length} dijawab</span>
+                    <span className="font-bold text-maroon-600">{Object.keys(answers).length}/{KEPRIBADIAN_QUESTIONS.length} dijawab</span>
                 </div>
                 <div className="w-full h-2 bg-stone-100 rounded-full overflow-hidden">
-                    <div className="h-full bg-linear-to-r from-brand-blue-500 to-brand-blue-700 rounded-full transition-all duration-500 shadow-sm shadow-brand-blue-200"
+                    <div className="h-full bg-linear-to-r from-maroon-500 to-maroon-700 rounded-full transition-all duration-500 shadow-sm shadow-maroon-200"
                         style={{ width: `${(Object.keys(answers).length / KEPRIBADIAN_QUESTIONS.length) * 100}%` }} />
                 </div>
             </div>
@@ -174,16 +174,16 @@ export default function KepribadianTestPage() {
                         <div className="grid grid-cols-1 gap-3">
                             <div
                                 onClick={() => setAnswers(p => ({ ...p, [q.id]: 'A' }))}
-                                className={`cursor-pointer p-5 border-2 rounded-2xl transition-all duration-300 ${answers[q.id] === 'A' ? 'bg-brand-blue-50 border-brand-blue-500 text-brand-blue-950 shadow-md ring-4 ring-brand-blue-500/5' : 'border-stone-100 hover:border-brand-blue-200 hover:bg-slate-50'}`}
+                                className={`cursor-pointer p-5 border-2 rounded-2xl transition-all duration-300 ${answers[q.id] === 'A' ? 'bg-maroon-50 border-maroon-500 text-maroon-950 shadow-md ring-4 ring-maroon-500/5' : 'border-stone-100 hover:border-maroon-200 hover:bg-slate-50'}`}
                             >
-                                <span className={`font-black mr-3 border rounded-lg px-2.5 py-1 text-xs transition-colors ${answers[q.id] === 'A' ? 'bg-brand-blue-600 text-white border-brand-blue-600' : 'bg-white text-stone-400 border-stone-200'}`}>A</span>
+                                <span className={`font-black mr-3 border rounded-lg px-2.5 py-1 text-xs transition-colors ${answers[q.id] === 'A' ? 'bg-maroon-600 text-white border-maroon-600' : 'bg-white text-stone-400 border-stone-200'}`}>A</span>
                                 <span className="font-bold text-sm sm:text-base">{q.optionA}</span>
                             </div>
                             <div
                                 onClick={() => setAnswers(p => ({ ...p, [q.id]: 'B' }))}
-                                className={`cursor-pointer p-5 border-2 rounded-2xl transition-all duration-300 ${answers[q.id] === 'B' ? 'bg-brand-blue-50 border-brand-blue-500 text-brand-blue-950 shadow-md ring-4 ring-brand-blue-500/5' : 'border-stone-100 hover:border-brand-blue-200 hover:bg-slate-50'}`}
+                                className={`cursor-pointer p-5 border-2 rounded-2xl transition-all duration-300 ${answers[q.id] === 'B' ? 'bg-maroon-50 border-maroon-500 text-maroon-950 shadow-md ring-4 ring-maroon-500/5' : 'border-stone-100 hover:border-maroon-200 hover:bg-slate-50'}`}
                             >
-                                <span className={`font-black mr-3 border rounded-lg px-2.5 py-1 text-xs transition-colors ${answers[q.id] === 'B' ? 'bg-brand-blue-600 text-white border-brand-blue-600' : 'bg-white text-stone-400 border-stone-200'}`}>B</span>
+                                <span className={`font-black mr-3 border rounded-lg px-2.5 py-1 text-xs transition-colors ${answers[q.id] === 'B' ? 'bg-maroon-600 text-white border-maroon-600' : 'bg-white text-stone-400 border-stone-200'}`}>B</span>
                                 <span className="font-bold text-sm sm:text-base">{q.optionB}</span>
                             </div>
                         </div>
@@ -201,12 +201,12 @@ export default function KepribadianTestPage() {
                 )}
                 {page < totalPages - 1 ? (
                     <button onClick={handleNext}
-                        className="flex-1 py-4 bg-brand-blue-600 hover:bg-brand-blue-700 text-white font-black uppercase tracking-widest text-sm rounded-2xl shadow-xl shadow-brand-blue-200 transition-all active:scale-95">
+                        className="flex-1 py-4 bg-maroon-600 hover:bg-maroon-700 text-white font-black uppercase tracking-widest text-sm rounded-2xl shadow-xl shadow-maroon-200 transition-all active:scale-95">
                         Lanjutkan
                     </button>
                 ) : (
                     <button onClick={handleSubmit} disabled={loading}
-                        className="flex-1 py-4 bg-brand-blue-600 hover:bg-brand-blue-700 disabled:bg-stone-300 text-white font-black uppercase tracking-widest text-sm rounded-2xl shadow-xl shadow-brand-blue-200 transition-all active:scale-95 flex items-center justify-center gap-2">
+                        className="flex-1 py-4 bg-maroon-600 hover:bg-maroon-700 disabled:bg-stone-300 text-white font-black uppercase tracking-widest text-sm rounded-2xl shadow-xl shadow-maroon-200 transition-all active:scale-95 flex items-center justify-center gap-2">
                         {loading ? <><Loader2 className="w-5 h-5 animate-spin" /> Mengirim...</> : 'Kirim Jawaban'}
                     </button>
                 )}

@@ -331,7 +331,7 @@ function VerifikasiPembayaranContent() {
       {isRefreshing && (
         <div className="fixed inset-0 bg-white/40 backdrop-blur-[1px] z-[100] flex items-center justify-center pointer-events-none">
           <div className="bg-white/80 px-6 py-3 rounded-2xl shadow-xl border border-stone-100 flex items-center gap-3 animate-in fade-in zoom-in duration-300">
-            <Loader2 className="w-5 h-5 animate-spin text-brand-blue-600" />
+            <Loader2 className="w-5 h-5 animate-spin text-maroon-600" />
             <span className="text-sm font-bold text-stone-700 tracking-tight">
               Memperbarui data...
             </span>
@@ -350,11 +350,11 @@ function VerifikasiPembayaranContent() {
       <div className="bg-white rounded-[2rem] shadow-sm p-5 md:p-8 border border-stone-100">
         <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 md:w-16 md:h-16 bg-brand-blue-50 rounded-2xl flex items-center justify-center border border-brand-blue-100 shrink-0">
-              <CreditCard className="w-6 h-6 md:w-8 md:h-8 text-brand-blue-700" />
+            <div className="w-12 h-12 md:w-16 md:h-16 bg-maroon-50 rounded-2xl flex items-center justify-center border border-maroon-100 shrink-0">
+              <CreditCard className="w-6 h-6 md:w-8 md:h-8 text-maroon-700" />
             </div>
             <div>
-              <h2 className="text-xl md:text-3xl font-black text-brand-blue-950 tracking-tight mb-0.5">
+              <h2 className="text-xl md:text-3xl font-black text-maroon-950 tracking-tight mb-0.5">
                 Verifikasi Pembayaran
               </h2>
               <p className="text-stone-500 font-medium text-sm">
@@ -368,7 +368,7 @@ function VerifikasiPembayaranContent() {
               onClick={() => updateFilters(undefined, "PENDAFTARAN")}
               className={`px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all duration-300 ${
                 activeTab === "PENDAFTARAN"
-                  ? "bg-white text-brand-blue-700 shadow-clay-sm ring-1 ring-stone-100"
+                  ? "bg-white text-maroon-700 shadow-clay-sm ring-1 ring-stone-100"
                   : "text-stone-400 hover:text-stone-600 hover:bg-stone-50"
               }`}
             >
@@ -378,7 +378,7 @@ function VerifikasiPembayaranContent() {
               onClick={() => updateFilters(undefined, "DAFTAR_ULANG")}
               className={`px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all duration-300 ${
                 activeTab === "DAFTAR_ULANG"
-                  ? "bg-white text-brand-blue-700 shadow-clay-sm ring-1 ring-stone-100"
+                  ? "bg-white text-maroon-700 shadow-clay-sm ring-1 ring-stone-100"
                   : "text-stone-400 hover:text-stone-600 hover:bg-stone-50"
               }`}
             >
@@ -426,13 +426,13 @@ function VerifikasiPembayaranContent() {
 
       {/* Search Bar */}
       <div className="relative group">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400 group-focus-within:text-brand-blue-600 transition-colors" />
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400 group-focus-within:text-maroon-600 transition-colors" />
         <input
           type="text"
           placeholder="Cari nama atau nomor pendaftaran..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full pl-12 pr-4 py-4 bg-white border border-stone-200 rounded-2xl focus:border-brand-blue-500 focus:ring-4 focus:ring-brand-blue-500/5 focus:outline-none transition-all text-sm md:text-base font-bold text-stone-800 placeholder:text-stone-400 shadow-sm"
+          className="w-full pl-12 pr-4 py-4 bg-white border border-stone-200 rounded-2xl focus:border-maroon-500 focus:ring-4 focus:ring-maroon-500/5 focus:outline-none transition-all text-sm md:text-base font-bold text-stone-800 placeholder:text-stone-400 shadow-sm"
         />
       </div>
 
@@ -494,7 +494,7 @@ function VerifikasiPembayaranContent() {
                     onClick={() => setTipeCicilanFilter(tipe as any)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all ${
                       tipeCicilanFilter === tipe
-                        ? "bg-brand-blue-700 text-white shadow-sm shadow-brand-blue-700/20"
+                        ? "bg-maroon-700 text-white shadow-sm shadow-maroon-700/20"
                         : "bg-white text-stone-500 border border-stone-200 hover:bg-stone-50"
                     }`}
                   >
@@ -511,7 +511,7 @@ function VerifikasiPembayaranContent() {
         {loading ? (
           <div className="flex items-center justify-center h-[400px]">
             <div className="text-center">
-              <Loader2 className="w-10 h-10 animate-spin text-brand-blue-700 mx-auto mb-4" />
+              <Loader2 className="w-10 h-10 animate-spin text-maroon-700 mx-auto mb-4" />
               <p className="text-stone-500 font-medium">
                 Memuat data pembayaran...
               </p>
@@ -542,13 +542,13 @@ function VerifikasiPembayaranContent() {
                   <div className="flex-1">
                     {/* Header Row */}
                     <div className="flex items-start gap-4 mb-3">
-                      <div className="w-12 h-12 rounded-xl bg-brand-blue-50 flex items-center justify-center text-brand-blue-800 font-black text-lg shrink-0 border border-brand-blue-100">
+                      <div className="w-12 h-12 rounded-xl bg-maroon-50 flex items-center justify-center text-maroon-800 font-black text-lg shrink-0 border border-maroon-100">
                         {pay.pendaftar?.nama_lengkap
                           ? pay.pendaftar.nama_lengkap.charAt(0).toUpperCase()
                           : "?"}
                       </div>
                       <div>
-                        <h3 className="text-lg font-black text-stone-900 group-hover:text-brand-blue-700 transition-colors">
+                        <h3 className="text-lg font-black text-stone-900 group-hover:text-maroon-700 transition-colors">
                           {pay.pendaftar?.nama_lengkap
                             ? toTitleCase(pay.pendaftar.nama_lengkap || "")
                             : "Tanpa Nama"}
@@ -620,7 +620,7 @@ function VerifikasiPembayaranContent() {
                   <div className="flex sm:flex-col gap-3 sm:w-48 shrink-0">
                     <button
                       onClick={() => openModal(pay)}
-                      className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 bg-white border-2 border-dashed border-stone-300 hover:border-brand-blue-500 hover:bg-brand-blue-50 text-stone-600 hover:text-brand-blue-800 rounded-xl text-sm font-bold transition-all"
+                      className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 bg-white border-2 border-dashed border-stone-300 hover:border-maroon-500 hover:bg-maroon-50 text-stone-600 hover:text-maroon-800 rounded-xl text-sm font-bold transition-all"
                     >
                       <Eye className="w-4 h-4" />
                       Detail & Bukti
@@ -629,7 +629,7 @@ function VerifikasiPembayaranContent() {
                     {statusFilter === "pending" && (
                       <button
                         onClick={() => openModal(pay)}
-                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-3 bg-brand-blue-700 hover:bg-brand-blue-800 text-white rounded-xl text-sm font-bold shadow-lg shadow-brand-blue-700/20 transition-all hover:-translate-y-0.5"
+                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-3 bg-maroon-700 hover:bg-maroon-800 text-white rounded-xl text-sm font-bold shadow-lg shadow-maroon-700/20 transition-all hover:-translate-y-0.5"
                       >
                         <CheckCircle className="w-4 h-4" />
                         Verifikasi
@@ -688,26 +688,26 @@ function VerifikasiPembayaranContent() {
 
             {/* Scrollable Content */}
             <div className="flex-1 overflow-y-auto p-6 space-y-6">
-              <div className="flex gap-4 p-4 bg-brand-blue-50 rounded-2xl border border-brand-blue-100">
+              <div className="flex gap-4 p-4 bg-maroon-50 rounded-2xl border border-maroon-100">
                 <div className="p-3 bg-white rounded-xl shadow-sm h-fit">
-                  <DollarSign className="w-6 h-6 text-brand-blue-700" />
+                  <DollarSign className="w-6 h-6 text-maroon-700" />
                 </div>
                 <div>
-                  <p className="text-xs font-black text-brand-blue-700 uppercase tracking-widest mb-1 shadow-xs">
+                  <p className="text-xs font-black text-maroon-700 uppercase tracking-widest mb-1 shadow-xs">
                     Konfirmasi/Ubah Nominal
                   </p>
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl font-black text-brand-blue-950">
+                    <span className="text-2xl font-black text-maroon-950">
                       Rp
                     </span>
                     <input
                       type="number"
                       value={editJumlah}
                       onChange={(e) => setEditJumlah(e.target.value)}
-                      className="text-2xl font-black text-brand-blue-950 bg-transparent border-b-2 border-brand-blue-200 focus:border-brand-blue-500 outline-none w-full max-w-[200px]"
+                      className="text-2xl font-black text-maroon-950 bg-transparent border-b-2 border-maroon-200 focus:border-maroon-500 outline-none w-full max-w-[200px]"
                     />
                   </div>
-                  <p className="text-sm text-brand-blue-800 mt-1 font-medium italic">
+                  <p className="text-sm text-maroon-800 mt-1 font-medium italic">
                     Anda dapat mengubah nominal jika tidak sesuai dengan bukti
                     transfer.
                   </p>
@@ -846,7 +846,7 @@ function VerifikasiPembayaranContent() {
                   value={catatan}
                   onChange={(e) => setCatatan(e.target.value)}
                   placeholder="Contoh: Bukti transfer buram, mohon upload ulang..."
-                  className="w-full px-4 py-3 border border-stone-200 rounded-xl focus:border-brand-blue-600 focus:ring-2 focus:ring-brand-blue-600/20 focus:outline-none resize-none transition-all font-bold text-stone-800"
+                  className="w-full px-4 py-3 border border-stone-200 rounded-xl focus:border-maroon-600 focus:ring-2 focus:ring-maroon-600/20 focus:outline-none resize-none transition-all font-bold text-stone-800"
                   rows={3}
                 />
               </div>
@@ -916,7 +916,7 @@ export default function VerifikasiPembayaranPage() {
     <Suspense
       fallback={
         <div className="flex items-center justify-center min-h-screen">
-          <Loader2 className="w-10 h-10 animate-spin text-brand-blue-600" />
+          <Loader2 className="w-10 h-10 animate-spin text-maroon-600" />
         </div>
       }
     >

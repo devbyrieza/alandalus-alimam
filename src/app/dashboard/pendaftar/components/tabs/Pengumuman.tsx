@@ -109,7 +109,7 @@ export default function PengumumanTab() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <Loader2 className="w-12 h-12 animate-spin text-brand-blue-700 mx-auto mb-4" />
+          <Loader2 className="w-12 h-12 animate-spin text-maroon-700 mx-auto mb-4" />
           <p className="text-ink-600">Memuat pengumuman...</p>
         </div>
       </div>
@@ -119,16 +119,16 @@ export default function PengumumanTab() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="relative overflow-hidden rounded-[2rem] bg-linear-to-br from-brand-blue-700 to-brand-blue-900 border border-brand-blue-600 p-8 md:p-10 text-white shadow-lg app-card">
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brand-yellow-50/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+      <div className="relative overflow-hidden rounded-[2rem] bg-linear-to-br from-maroon-700 to-maroon-900 border border-maroon-600 p-8 md:p-10 text-white shadow-lg app-card">
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-gold-50/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-center gap-5">
             <div className="w-16 h-16 rounded-[1.5rem] bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-sm shrink-0">
-              <Trophy className="w-8 h-8 text-brand-yellow-100" />
+              <Trophy className="w-8 h-8 text-gold-100" />
             </div>
             <div>
               <h1 className="text-2xl md:text-3xl font-black mb-2 tracking-tight text-white font-display">Pengumuman</h1>
-              <p className="text-brand-yellow-100/90 font-medium max-w-xl text-sm md:text-base">
+              <p className="text-gold-100/90 font-medium max-w-xl text-sm md:text-base">
                 Hasil seleksi penerimaan santri baru
               </p>
             </div>
@@ -137,10 +137,10 @@ export default function PengumumanTab() {
       </div>
 
       {!pengumuman ? (
-        <div className="bg-white rounded-[2rem] p-12 shadow-sm border border-brand-blue-100 app-card">
+        <div className="bg-white rounded-[2rem] p-12 shadow-sm border border-maroon-100 app-card">
           <div className="text-center">
-            <div className="w-20 h-20 bg-brand-blue-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
-              <Trophy className="w-10 h-10 text-brand-blue-700" />
+            <div className="w-20 h-20 bg-maroon-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+              <Trophy className="w-10 h-10 text-maroon-700" />
             </div>
             <h3 className="text-xl font-bold text-ink-900 mb-3 font-display">
               Pengumuman Belum Tersedia
@@ -149,8 +149,8 @@ export default function PengumumanTab() {
               Hasil seleksi akan diumumkan setelah seluruh proses ujian selesai dilakukan oleh panitia.
               Silakan cek kembali halaman ini secara berkala.
             </p>
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-blue-50 text-brand-blue-800 rounded-full font-black border border-brand-blue-200 shadow-sm">
-              <Calendar className="w-4 h-4 text-brand-blue-600" />
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-maroon-50 text-maroon-800 rounded-full font-black border border-maroon-200 shadow-sm">
+              <Calendar className="w-4 h-4 text-maroon-600" />
               <span className="text-sm">
                 Estimasi update: setelah ujian selesai
               </span>
@@ -181,7 +181,7 @@ export default function PengumumanTab() {
               <button
                 onClick={handleDownloadSurat}
                 disabled={isGenerating}
-                className="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-brand-yellow-400 text-brand-blue-950 rounded-full font-black hover:bg-brand-yellow-300 transition-all shadow-lg shadow-brand-yellow-400/20 active:scale-95 disabled:opacity-50 border border-brand-yellow-500"
+                className="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-gold-400 text-maroon-950 rounded-full font-black hover:bg-gold-300 transition-all shadow-lg shadow-gold-400/20 active:scale-95 disabled:opacity-50 border border-gold-500"
               >
                 {isGenerating ? <Loader2 className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
                 Download Surat Kelulusan
@@ -211,8 +211,8 @@ export default function PengumumanTab() {
               </div>
 
               {pengumuman.catatan && (
-                <div className="p-4 bg-brand-blue-50 border border-brand-blue-200 rounded-lg">
-                  <p className="text-sm text-brand-blue-900">
+                <div className="p-4 bg-maroon-50 border border-maroon-200 rounded-lg">
+                  <p className="text-sm text-maroon-900">
                     <strong>Catatan:</strong> {pengumuman.catatan}
                   </p>
                 </div>
@@ -364,8 +364,8 @@ export default function PengumumanTab() {
               </div>
 
               {pengumuman.catatan && (
-                <div className="p-4 bg-brand-blue-50 border border-brand-blue-200 rounded-lg">
-                  <p className="text-sm text-brand-blue-900">
+                <div className="p-4 bg-maroon-50 border border-maroon-200 rounded-lg">
+                  <p className="text-sm text-maroon-900">
                     <strong>Catatan:</strong> {pengumuman.catatan}
                   </p>
                 </div>
@@ -374,16 +374,16 @@ export default function PengumumanTab() {
           </div>
 
           {/* Encouragement */}
-          <div className="bg-brand-blue-50 border-2 border-brand-blue-200 rounded-xl p-6">
+          <div className="bg-maroon-50 border-2 border-maroon-200 rounded-xl p-6">
             <div className="flex gap-4">
               <div className="flex-shrink-0">
-                <div className="p-2 bg-brand-blue-200 rounded-lg">
-                  <Trophy className="w-6 h-6 text-brand-blue-700" />
+                <div className="p-2 bg-maroon-200 rounded-lg">
+                  <Trophy className="w-6 h-6 text-maroon-700" />
                 </div>
               </div>
               <div>
-                <h4 className="font-bold text-brand-blue-900 mb-2">Tetap Semangat!</h4>
-                <p className="text-sm text-brand-blue-800">
+                <h4 className="font-bold text-maroon-900 mb-2">Tetap Semangat!</h4>
+                <p className="text-sm text-maroon-800">
                   Anda dapat mendaftar kembali pada periode pendaftaran
                   berikutnya. Gunakan kesempatan ini untuk mempersiapkan diri
                   dengan lebih baik. Jangan ragu untuk bertanya kepada panitia

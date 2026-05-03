@@ -37,7 +37,7 @@ export default function ProgressStepper({ currentStatus }: ProgressStepperProps)
                             {idx < STEPS.length - 1 && (
                                 <div className="absolute top-5 left-[50%] right-[-50%] h-0.5 bg-stone-100 z-0">
                                     <div
-                                        className={`h-full bg-brand-blue-600 transition-all duration-700 ${idx < activeIndex ? 'w-full' : 'w-0'}`}
+                                        className={`h-full bg-maroon-600 transition-all duration-700 ${idx < activeIndex ? 'w-full' : 'w-0'}`}
                                     />
                                 </div>
                             )}
@@ -45,9 +45,9 @@ export default function ProgressStepper({ currentStatus }: ProgressStepperProps)
                             {/* Icon Circle */}
                             <div
                                 className={`w-10 h-10 rounded-full flex items-center justify-center relative z-10 transition-all duration-500 border-2 ${isCompleted
-                                    ? "bg-brand-blue-600 border-brand-blue-600 text-white shadow-brand-blue-200 shadow-lg"
+                                    ? "bg-maroon-600 border-maroon-600 text-white shadow-maroon-200 shadow-lg"
                                     : isActive
-                                        ? "bg-white border-brand-blue-600 text-brand-blue-600 shadow-brand-blue-100 shadow-lg scale-110 font-bold"
+                                        ? "bg-white border-maroon-600 text-maroon-600 shadow-maroon-100 shadow-lg scale-110 font-bold"
                                         : "bg-white border-stone-200 text-stone-300"
                                     }`}
                             >
@@ -56,7 +56,7 @@ export default function ProgressStepper({ currentStatus }: ProgressStepperProps)
 
                             {/* Label */}
                             <span
-                                className={`mt-3 text-[10px] sm:text-xs font-black uppercase tracking-wider transition-colors duration-500 ${isActive ? "text-brand-blue-800" : isCompleted ? "text-stone-600" : "text-stone-400"
+                                className={`mt-3 text-[10px] sm:text-xs font-black uppercase tracking-wider transition-colors duration-500 ${isActive ? "text-maroon-800" : isCompleted ? "text-stone-600" : "text-stone-400"
                                     }`}
                             >
                                 {step.label}
@@ -64,7 +64,7 @@ export default function ProgressStepper({ currentStatus }: ProgressStepperProps)
 
                             {/* Status Indicator Bar */}
                             {isActive && (
-                                <div className="mt-1 h-1 w-8 bg-brand-yellow-400 rounded-full animate-pulse" />
+                                <div className="mt-1 h-1 w-8 bg-gold-400 rounded-full animate-pulse" />
                             )}
                         </div>
                     );

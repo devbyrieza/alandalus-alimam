@@ -107,17 +107,17 @@ function PilihVerifikasiContent() {
   };
 
   return (
-    <div className="max-w-lg w-full bg-white rounded-2xl shadow-2xl border-2 border-brand-blue-200 p-8">
+    <div className="max-w-lg w-full bg-white rounded-2xl shadow-2xl border-2 border-maroon-200 p-8">
       {/* Demo Mode Badge */}
       {DEMO_MODE && (
-        <div className="mb-6 p-3 bg-brand-blue-50 border-2 border-brand-blue-100 rounded-xl app-card">
+        <div className="mb-6 p-3 bg-maroon-50 border-2 border-maroon-100 rounded-xl app-card">
           <div className="flex items-center gap-3 justify-center">
-            <Zap className="w-5 h-5 text-brand-blue-600" />
-            <p className="text-sm font-black text-brand-blue-900">
+            <Zap className="w-5 h-5 text-maroon-600" />
+            <p className="text-sm font-black text-maroon-900">
               MODE DEMO - Verifikasi OTP Di-bypass
             </p>
           </div>
-          <p className="text-xs text-brand-yellow-700 mt-1 text-center">
+          <p className="text-xs text-gold-700 mt-1 text-center">
             Data akan langsung tersimpan tanpa verifikasi OTP
           </p>
         </div>
@@ -125,7 +125,7 @@ function PilihVerifikasiContent() {
 
       {/* Header */}
       <div className="text-center mb-8">
-        <div className="w-20 h-20 bg-gradient-to-r from-brand-blue-500 to-brand-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="w-20 h-20 bg-gradient-to-r from-maroon-500 to-gold-500 rounded-full flex items-center justify-center mx-auto mb-4">
           <ShieldCheck className="w-10 h-10 text-white" />
         </div>
         <h1 className="text-3xl font-black text-stone-900 mb-2">
@@ -136,7 +136,7 @@ function PilihVerifikasiContent() {
             ? "Pilih channel untuk simulasi (tidak akan kirim OTP real)"
             : "Kode OTP 6 digit akan dikirim ke:"}
         </p>
-        <p className="text-xl font-black text-brand-blue-700">{no_hp}</p>
+        <p className="text-xl font-black text-maroon-700">{no_hp}</p>
       </div>
 
       <div className="space-y-4 relative z-10 mb-8">
@@ -147,13 +147,13 @@ function PilihVerifikasiContent() {
             setSelectedChannel("whatsapp");
           }}
           className={`app-card w-full p-6 rounded-[1.5rem] border-2 transition-all duration-300 text-left relative ${selectedChannel === "whatsapp"
-              ? "border-brand-blue-600 bg-brand-blue-50 shadow-md scale-[1.02]"
-              : "border-brand-blue-100 bg-white hover:border-brand-blue-200 hover:shadow-sm"
+              ? "border-maroon-600 bg-maroon-50 shadow-md scale-[1.02]"
+              : "border-maroon-100 bg-white hover:border-maroon-200 hover:shadow-sm"
             }`}
         >
           {/* Selected Badge */}
           {selectedChannel === "whatsapp" && (
-            <div className="absolute -top-3 -right-3 bg-brand-blue-600 text-white rounded-full p-2 shadow-lg animate-bounce">
+            <div className="absolute -top-3 -right-3 bg-maroon-600 text-white rounded-full p-2 shadow-lg animate-bounce">
               <Check className="w-5 h-5" />
             </div>
           )}
@@ -162,14 +162,14 @@ function PilihVerifikasiContent() {
             {/* Icon */}
             <div
               className={`p-4 rounded-xl transition-all duration-300 ${selectedChannel === "whatsapp"
-                  ? "bg-brand-blue-600 shadow-md"
-                  : "bg-brand-yellow-100"
+                  ? "bg-maroon-600 shadow-md"
+                  : "bg-gold-100"
                 }`}
             >
               <Smartphone
                 className={`w-8 h-8 ${selectedChannel === "whatsapp"
                     ? "text-white"
-                    : "text-brand-blue-700"
+                    : "text-maroon-700"
                   }`}
               />
             </div>
@@ -179,13 +179,13 @@ function PilihVerifikasiContent() {
               <div className="flex items-center gap-2 mb-1">
                 <h3
                   className={`text-xl font-black ${selectedChannel === "whatsapp"
-                      ? "text-brand-blue-900"
+                      ? "text-maroon-900"
                       : "text-ink-950"
                     }`}
                 >
                   WhatsApp
                 </h3>
-                <span className="text-[10px] font-black tracking-widest px-3 py-1 bg-brand-blue-100 text-brand-blue-800 rounded-full">
+                <span className="text-[10px] font-black tracking-widest px-3 py-1 bg-maroon-100 text-maroon-800 rounded-full">
                   REKOMENDASI
                 </span>
               </div>
@@ -197,8 +197,8 @@ function PilihVerifikasiContent() {
               <div className="flex items-center gap-2">
                 <div
                   className={`w-2 h-2 rounded-full ${selectedChannel === "whatsapp"
-                      ? "bg-brand-blue-600"
-                      : "bg-brand-yellow-300"
+                      ? "bg-maroon-600"
+                      : "bg-gold-300"
                     }`}
                 />
                 <span className="text-xs text-ink-500 font-bold">
@@ -219,13 +219,13 @@ function PilihVerifikasiContent() {
             setSelectedChannel("sms");
           }}
           className={`app-card w-full p-6 rounded-[1.5rem] border-2 transition-all duration-300 text-left relative ${selectedChannel === "sms"
-              ? "border-brand-blue-600 bg-brand-yellow-50 shadow-md scale-[1.02]"
-              : "border-brand-yellow-200 bg-white hover:border-brand-blue-200 hover:shadow-sm"
+              ? "border-maroon-600 bg-gold-50 shadow-md scale-[1.02]"
+              : "border-gold-200 bg-white hover:border-maroon-200 hover:shadow-sm"
             }`}
         >
           {/* Selected Badge */}
           {selectedChannel === "sms" && (
-            <div className="absolute -top-3 -right-3 bg-brand-blue-600 text-white rounded-full p-2 shadow-lg animate-bounce">
+            <div className="absolute -top-3 -right-3 bg-maroon-600 text-white rounded-full p-2 shadow-lg animate-bounce">
               <Check className="w-5 h-5" />
             </div>
           )}
@@ -234,12 +234,12 @@ function PilihVerifikasiContent() {
             {/* Icon */}
             <div
               className={`p-4 rounded-xl transition-all duration-300 ${selectedChannel === "sms"
-                  ? "bg-brand-blue-600 shadow-md"
-                  : "bg-brand-yellow-100"
+                  ? "bg-maroon-600 shadow-md"
+                  : "bg-gold-100"
                 }`}
             >
               <MessageSquare
-                className={`w-8 h-8 ${selectedChannel === "sms" ? "text-white" : "text-brand-blue-700"
+                className={`w-8 h-8 ${selectedChannel === "sms" ? "text-white" : "text-maroon-700"
                   }`}
               />
             </div>
@@ -247,7 +247,7 @@ function PilihVerifikasiContent() {
             {/* Content */}
             <div className="flex-1">
               <h3
-                className={`text-xl font-black mb-1 ${selectedChannel === "sms" ? "text-brand-blue-900" : "text-ink-950"
+                className={`text-xl font-black mb-1 ${selectedChannel === "sms" ? "text-maroon-900" : "text-ink-950"
                   }`}
               >
                 SMS
@@ -259,7 +259,7 @@ function PilihVerifikasiContent() {
               </p>
               <div className="flex items-center gap-2">
                 <div
-                  className={`w-2 h-2 rounded-full ${selectedChannel === "sms" ? "bg-brand-blue-600" : "bg-brand-yellow-300"
+                  className={`w-2 h-2 rounded-full ${selectedChannel === "sms" ? "bg-maroon-600" : "bg-gold-300"
                     }`}
                 />
                 <span className="text-xs text-ink-500 font-bold">
@@ -276,13 +276,13 @@ function PilihVerifikasiContent() {
       {/* Info Box - Pilihan Aktif */}
       <div
         className={`relative z-10 mb-6 p-4 rounded-xl border transition-all duration-300 ${selectedChannel === "whatsapp"
-            ? "bg-brand-yellow-50 border-brand-blue-200"
-            : "bg-brand-yellow-50 border-brand-blue-200"
+            ? "bg-gold-50 border-maroon-200"
+            : "bg-gold-50 border-maroon-200"
           }`}
       >
         <div className="flex items-center gap-3">
           <div
-            className={`p-2 rounded-lg ${selectedChannel === "whatsapp" ? "bg-brand-blue-600" : "bg-brand-blue-600"
+            className={`p-2 rounded-lg ${selectedChannel === "whatsapp" ? "bg-maroon-600" : "bg-maroon-600"
               }`}
           >
             <Check className="w-5 h-5 text-white" />
@@ -291,11 +291,7 @@ function PilihVerifikasiContent() {
             <p className="text-sm font-bold text-ink-950">
               Anda memilih:{" "}
               <span
-                className={
-                  selectedChannel === "whatsapp"
-                    ? "text-maroon-700"
-                    : "text-maroon-700"
-                }
+                className="text-maroon-700"
               >
                 {selectedChannel === "whatsapp" ? "WhatsApp" : "SMS"}
               </span>

@@ -287,10 +287,10 @@ export default function ExaminerDashboard() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                     <h1 className="text-3xl font-black text-ink-900 tracking-tight flex items-center gap-3">
-                        <div className="p-2 bg-brand-blue-600 rounded-xl shadow-lg shadow-brand-blue-600/20">
+                        <div className="p-2 bg-maroon-600 rounded-xl shadow-lg shadow-maroon-600/20">
                             <ClipboardEdit className="w-6 h-6 text-white" />
                         </div>
-                        Pusat <span className="text-brand-blue-700">Penilaian</span>
+                        Pusat <span className="text-maroon-700">Penilaian</span>
                     </h1>
                     <p className="text-ink-500 font-medium mt-1">Kelola skor ujian dan monitoring notifikasi pendaftar.</p>
                 </div>
@@ -300,7 +300,7 @@ export default function ExaminerDashboard() {
                         onClick={() => setActiveTab('data')}
                         className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${
                             activeTab === 'data' 
-                                ? "bg-white text-brand-blue-700 shadow-clay-sm" 
+                                ? "bg-white text-maroon-700 shadow-clay-sm" 
                                 : "text-ink-500 hover:text-ink-800"
                         }`}
                     >
@@ -311,7 +311,7 @@ export default function ExaminerDashboard() {
                         onClick={() => setActiveTab('system')}
                         className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${
                             activeTab === 'system' 
-                                ? "bg-white text-brand-blue-700 shadow-clay-sm" 
+                                ? "bg-white text-maroon-700 shadow-clay-sm" 
                                 : "text-ink-500 hover:text-ink-800"
                         }`}
                     >
@@ -336,7 +336,7 @@ export default function ExaminerDashboard() {
                                     placeholder="Cari nama atau no. pendaftaran..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full bg-white border border-ink-100 rounded-xl pl-9 pr-4 py-2 text-sm focus:ring-2 focus:ring-brand-blue-600/10 outline-none shadow-inner"
+                                    className="w-full bg-white border border-ink-100 rounded-xl pl-9 pr-4 py-2 text-sm focus:ring-2 focus:ring-maroon-600/10 outline-none shadow-inner"
                                 />
                             </div>
 
@@ -385,7 +385,7 @@ export default function ExaminerDashboard() {
                                         <th className="px-3 py-4 text-center text-[10px] font-black text-ink-400 uppercase tracking-widest">Keprib.</th>
                                         <th className="px-3 py-4 text-center text-[10px] font-black text-ink-400 uppercase tracking-widest">Sesuai</th>
                                         <th className="px-3 py-4 text-center text-[10px] font-black text-ink-400 uppercase tracking-widest">Siap</th>
-                                        <th className="px-3 py-4 text-center text-[10px] font-black text-brand-blue-700 uppercase tracking-widest bg-brand-blue-50/30">Total</th>
+                                        <th className="px-3 py-4 text-center text-[10px] font-black text-maroon-700 uppercase tracking-widest bg-maroon-50/30">Total</th>
                                         <th className="px-6 py-4 text-center text-[10px] font-black text-ink-400 uppercase tracking-widest">Aksi Input</th>
                                     </tr>
                                 </thead>
@@ -396,7 +396,7 @@ export default function ExaminerDashboard() {
                                         <tr><td colSpan={8} className="px-6 py-12 text-center text-ink-400 font-medium italic">Tidak ada data pendaftar yang cocok.</td></tr>
                                     ) : (
                                         filteredStudents.map(s => (
-                                            <tr key={s.id} className="hover:bg-brand-blue-50/30 transition-colors group">
+                                            <tr key={s.id} className="hover:bg-maroon-50/30 transition-colors group">
                                                 <td className="px-6 py-4 whitespace-nowrap text-xs font-mono font-bold text-ink-400">{s.nomor_pendaftaran || '-'}</td>
                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                     <p className="text-sm font-black text-ink-900 leading-tight">
@@ -475,8 +475,8 @@ export default function ExaminerDashboard() {
                                                     })()}
                                                 </td>
                                                 {/* Total */}
-                                                <td className="px-3 py-4 text-center whitespace-nowrap bg-brand-blue-50/20">
-                                                    <span className="text-base font-black text-brand-blue-700">
+                                                <td className="px-3 py-4 text-center whitespace-nowrap bg-maroon-50/20">
+                                                    <span className="text-base font-black text-maroon-700">
                                                         {s.nilai_ujian?.nilai_total != null
                                                             ? Number(s.nilai_ujian.nilai_total).toFixed(2)
                                                             : <span className="text-ink-300 font-bold">-</span>
@@ -487,19 +487,19 @@ export default function ExaminerDashboard() {
                                                     <div className="flex justify-center items-center gap-1">
                                                         <button 
                                                             onClick={() => handleOpenInput(s, 'quran')} 
-                                                            className="flex items-center gap-1.5 bg-ink-900 text-white px-3 py-1.5 rounded-xl text-[10px] font-black hover:bg-brand-blue-600 transition-all shadow-md group-hover:scale-105"
+                                                            className="flex items-center gap-1.5 bg-ink-900 text-white px-3 py-1.5 rounded-xl text-[10px] font-black hover:bg-maroon-600 transition-all shadow-md group-hover:scale-105"
                                                         >
                                                             <Zap className="w-3 h-3" /> QUR&apos;AN
                                                         </button>
                                                         <button 
                                                             onClick={() => handleOpenInput(s, 'wawancara_santri')} 
-                                                            className="flex items-center gap-1.5 bg-white border border-ink-200 text-ink-700 px-3 py-1.5 rounded-xl text-[10px] font-black hover:border-brand-blue-600 transition-all shadow-sm group-hover:scale-105"
+                                                            className="flex items-center gap-1.5 bg-white border border-ink-200 text-ink-700 px-3 py-1.5 rounded-xl text-[10px] font-black hover:border-maroon-600 transition-all shadow-sm group-hover:scale-105"
                                                         >
                                                             <MessageSquare className="w-3 h-3" /> W.SANTRI
                                                         </button>
                                                         <button 
                                                             onClick={() => handleOpenInput(s, 'wawancara_ortu')} 
-                                                            className="flex items-center gap-1.5 bg-brand-yellow-50 border border-brand-yellow-200 text-brand-yellow-800 px-3 py-1.5 rounded-xl text-[10px] font-black hover:border-brand-yellow-400 transition-all shadow-sm group-hover:scale-105"
+                                                            className="flex items-center gap-1.5 bg-gold-50 border border-gold-200 text-gold-800 px-3 py-1.5 rounded-xl text-[10px] font-black hover:border-gold-400 transition-all shadow-sm group-hover:scale-105"
                                                         >
                                                             <MessageSquare className="w-3 h-3" /> W.ORTU
                                                         </button>
@@ -526,7 +526,7 @@ export default function ExaminerDashboard() {
                                             <div className="flex-1 min-w-0">
                                                 <div className="flex items-center gap-2 mb-1">
                                                     <span className="text-[10px] font-mono font-bold text-ink-400 tracking-tight">{s.nomor_pendaftaran || '-'}</span>
-                                                    <span className="text-[9px] font-black text-brand-blue-700 bg-brand-blue-50 px-2 py-0.5 rounded-lg uppercase">{s.jenjang}</span>
+                                                    <span className="text-[9px] font-black text-maroon-700 bg-maroon-50 px-2 py-0.5 rounded-lg uppercase">{s.jenjang}</span>
                                                 </div>
                                                 <h3 className="text-sm font-black text-ink-900 uppercase leading-snug">
                                                     {(s.nama_lengkap || 'Tanpa Nama').toLowerCase().replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}
@@ -534,7 +534,7 @@ export default function ExaminerDashboard() {
                                                 <p className="text-[10px] font-bold text-ink-400 uppercase tracking-wider mt-0.5">{(s.status_pendaftaran || '').replace('_', ' ')}</p>
                                             </div>
                                             {/* Total Badge */}
-                                            <div className="bg-brand-blue-600 px-4 py-2.5 rounded-2xl text-white text-center shrink-0">
+                                            <div className="bg-maroon-600 px-4 py-2.5 rounded-2xl text-white text-center shrink-0">
                                                 <p className="text-[8px] font-black opacity-70 uppercase">Total</p>
                                                 <p className="text-xl font-black leading-none mt-0.5">
                                                     {s.nilai_ujian?.nilai_total != null
@@ -593,13 +593,13 @@ export default function ExaminerDashboard() {
                                             </button>
                                             <button 
                                                 onClick={() => handleOpenInput(s, 'wawancara_santri')} 
-                                                className="flex flex-col items-center justify-center bg-brand-yellow-400 text-brand-blue-900 py-2 rounded-2xl text-[10px] sm:text-[11px] font-black shadow-lg shadow-brand-yellow-400/20 active:scale-95 transition-all"
+                                                className="flex flex-col items-center justify-center bg-gold-400 text-maroon-900 py-2 rounded-2xl text-[10px] sm:text-[11px] font-black shadow-lg shadow-gold-400/20 active:scale-95 transition-all"
                                             >
                                                 <span className="flex items-center gap-1"><MessageSquare className="w-3 h-3" /> SANTRI</span>
                                             </button>
                                             <button 
                                                 onClick={() => handleOpenInput(s, 'wawancara_ortu')} 
-                                                className="flex flex-col items-center justify-center bg-brand-yellow-200 text-brand-yellow-900 py-2 rounded-2xl text-[10px] sm:text-[11px] font-black shadow-lg shadow-brand-yellow-200/20 active:scale-95 transition-all"
+                                                className="flex flex-col items-center justify-center bg-gold-200 text-gold-900 py-2 rounded-2xl text-[10px] sm:text-[11px] font-black shadow-lg shadow-gold-200/20 active:scale-95 transition-all"
                                             >
                                                 <span className="flex items-center gap-1"><MessageSquare className="w-3 h-3" /> ORTU</span>
                                             </button>
@@ -615,7 +615,7 @@ export default function ExaminerDashboard() {
                 <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
                     {/* Progress Monitor if Processing */}
                     {isProcessingQueue && (
-                        <div className="bg-brand-blue-600 rounded-3xl p-6 text-white shadow-xl shadow-brand-blue-600/20 overflow-hidden relative">
+                        <div className="bg-maroon-600 rounded-3xl p-6 text-white shadow-xl shadow-maroon-600/20 overflow-hidden relative">
                             <div className="absolute top-0 right-0 p-8 opacity-10">
                                 <Send className="w-32 h-32 rotate-12" />
                             </div>
@@ -679,9 +679,9 @@ export default function ExaminerDashboard() {
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
-                                <div className="p-6 bg-brand-blue-50/30 rounded-3xl border border-brand-blue-100/50 hover:bg-brand-blue-50 transition-colors">
-                                    <h4 className="font-black text-brand-blue-900 mb-2">Broadcast Jadwal Seleksi</h4>
-                                    <p className="text-xs text-brand-blue-700/70 mb-6 font-medium leading-relaxed">Sistem akan memindai pendaftar yang sudah terverifikasi berkasnya tapi belum memiliki jadwal, lalu memasukkannya ke antrean notifikasi.</p>
+                                <div className="p-6 bg-maroon-50/30 rounded-3xl border border-maroon-100/50 hover:bg-maroon-50 transition-colors">
+                                    <h4 className="font-black text-maroon-900 mb-2">Broadcast Jadwal Seleksi</h4>
+                                    <p className="text-xs text-maroon-700/70 mb-6 font-medium leading-relaxed">Sistem akan memindai pendaftar yang sudah terverifikasi berkasnya tapi belum memiliki jadwal, lalu memasukkannya ke antrean notifikasi.</p>
                                     <Button 
                                         onClick={async () => {
                                             const result = await Swal.fire({
@@ -714,7 +714,7 @@ export default function ExaminerDashboard() {
                                             }
                                         }} 
                                         disabled={isBroadcasting}
-                                        className="w-full bg-brand-blue-600 hover:bg-brand-blue-700 text-white rounded-2xl py-6 font-black text-base shadow-lg shadow-brand-blue-600/20"
+                                        className="w-full bg-maroon-600 hover:bg-maroon-700 text-white rounded-2xl py-6 font-black text-base shadow-lg shadow-maroon-600/20"
                                     >
                                         {isBroadcasting ? 'Memproses...' : 'Siarkan Jadwal Sekarang'}
                                     </Button>
@@ -746,7 +746,7 @@ export default function ExaminerDashboard() {
                         <div className="inline-block align-bottom bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-white/20">
                             <div className="bg-white px-6 pt-8 pb-6 sm:p-8">
                                 <div className="flex items-center gap-3 mb-6">
-                                    <div className="p-3 bg-brand-blue-50 text-brand-blue-600 rounded-2xl">
+                                    <div className="p-3 bg-maroon-50 text-maroon-600 rounded-2xl">
                                         <Zap className="w-5 h-5 font-black" />
                                     </div>
                                     <h3 className="text-xl leading-6 font-black text-ink-900" id="modal-title">
@@ -770,7 +770,7 @@ export default function ExaminerDashboard() {
                                                     value={quranForm.tajwid}
                                                     onChange={(e) => setQuranForm({ ...quranForm, tajwid: e.target.value })}
                                                     placeholder="0-100"
-                                                    className="w-full bg-ink-50 border border-ink-100 rounded-xl px-4 py-3 text-sm font-bold text-ink-900 focus:ring-2 focus:ring-brand-blue-600/10 outline-none"
+                                                    className="w-full bg-ink-50 border border-ink-100 rounded-xl px-4 py-3 text-sm font-bold text-ink-900 focus:ring-2 focus:ring-maroon-600/10 outline-none"
                                                 />
                                             </div>
                                             <div className="flex-1">
@@ -780,7 +780,7 @@ export default function ExaminerDashboard() {
                                                     value={quranForm.kelancaran}
                                                     onChange={(e) => setQuranForm({ ...quranForm, kelancaran: e.target.value })}
                                                     placeholder="0-100"
-                                                    className="w-full bg-ink-50 border border-ink-100 rounded-xl px-4 py-3 text-sm font-bold text-ink-900 focus:ring-2 focus:ring-brand-blue-600/10 outline-none"
+                                                    className="w-full bg-ink-50 border border-ink-100 rounded-xl px-4 py-3 text-sm font-bold text-ink-900 focus:ring-2 focus:ring-maroon-600/10 outline-none"
                                                 />
                                             </div>
                                         </div>
@@ -802,7 +802,7 @@ export default function ExaminerDashboard() {
                                                     <select
                                                         value={(wsForm as any)[f.k]}
                                                         onChange={(e) => setWsForm({ ...wsForm, [f.k]: e.target.value })}
-                                                        className="w-full bg-ink-50 border border-ink-100 rounded-xl px-3 py-2 text-sm font-bold text-ink-900 focus:ring-2 focus:ring-brand-blue-600/10 outline-none"
+                                                        className="w-full bg-ink-50 border border-ink-100 rounded-xl px-3 py-2 text-sm font-bold text-ink-900 focus:ring-2 focus:ring-maroon-600/10 outline-none"
                                                     >
                                                         <option value="">Pilih...</option>
                                                         <option value="1">1</option>
@@ -825,7 +825,7 @@ export default function ExaminerDashboard() {
                                                   <select
                                                       value={(woForm as any)[`q${idx+1}`]}
                                                       onChange={(e) => setWoForm({ ...woForm, [`q${idx+1}`]: e.target.value })}
-                                                      className="w-full bg-ink-50 border border-ink-100 rounded-xl px-3 py-2 text-sm font-bold text-ink-900 focus:ring-2 focus:ring-brand-blue-600/10 outline-none"
+                                                      className="w-full bg-ink-50 border border-ink-100 rounded-xl px-3 py-2 text-sm font-bold text-ink-900 focus:ring-2 focus:ring-maroon-600/10 outline-none"
                                                   >
                                                       <option value="">Pilih...</option>
                                                       <option value="A">A (Sangat Baik / Menerima)</option>
@@ -844,7 +844,7 @@ export default function ExaminerDashboard() {
                                             onChange={(e) => setCatatan(e.target.value)}
                                             rows={3}
                                             placeholder="Tambahkan catatan jika diperlukan..."
-                                            className="w-full bg-ink-50 border border-ink-100 rounded-xl px-4 py-3 text-sm font-bold text-ink-900 focus:ring-2 focus:ring-brand-blue-600/10 outline-none"
+                                            className="w-full bg-ink-50 border border-ink-100 rounded-xl px-4 py-3 text-sm font-bold text-ink-900 focus:ring-2 focus:ring-maroon-600/10 outline-none"
                                         ></textarea>
                                     </div>
                                 </div>
@@ -853,7 +853,7 @@ export default function ExaminerDashboard() {
                                 <Button
                                     onClick={handleSubmitScore}
                                     disabled={isSubmitting}
-                                    className="w-full sm:w-auto bg-brand-blue-600 hover:bg-brand-blue-700 text-white rounded-2xl px-8 py-3 font-black shadow-lg shadow-brand-blue-600/20 disabled:opacity-50"
+                                    className="w-full sm:w-auto bg-maroon-600 hover:bg-maroon-700 text-white rounded-2xl px-8 py-3 font-black shadow-lg shadow-maroon-600/20 disabled:opacity-50"
                                 >
                                     {isSubmitting ? 'Menyimpan...' : 'Simpan Nilai'}
                                 </Button>

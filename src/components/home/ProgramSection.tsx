@@ -26,7 +26,7 @@ const PROGRAMS = [
         ],
         quota: "25 Kursi",
         icon: School,
-        color: "brand-blue"
+        color: "maroon"
     },
     {
         title: "I'dad Lughowi",
@@ -41,7 +41,7 @@ const PROGRAMS = [
         ],
         quota: "25 Kursi",
         icon: BookOpen,
-        color: "brand-yellow"
+        color: "cream"
     },
 ];
 
@@ -58,7 +58,7 @@ export default function ProgramSection() {
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-brand-yellow-50 border border-brand-yellow-400 text-brand-blue-700 text-xs font-bold uppercase tracking-widest mb-6 shadow-sm"
+                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-maroon-50 border border-maroon-100 text-maroon-700 text-xs font-bold uppercase tracking-widest mb-6 shadow-sm"
                     >
                         <GraduationCap className="w-3.5 h-3.5" />
                         <span>Jenjang Pendidikan</span>
@@ -97,15 +97,15 @@ export default function ProgramSection() {
                             whileHover={{ y: -8 }}
                             className="h-full group"
                         >
-                            <div className="bg-white rounded-[3rem] p-10 md:p-12 h-full flex flex-col relative border border-cream-200/60 hover:border-brand-blue-200 hover:shadow-premium-2xl transition-all duration-500 overflow-hidden">
+                            <div className="bg-white rounded-[3rem] p-10 md:p-12 h-full flex flex-col relative border border-cream-200/60 hover:border-maroon-200 hover:shadow-premium-2xl transition-all duration-500 overflow-hidden">
                                 {/* Glassmorphism Accent */}
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-brand-blue-50/50 to-transparent rounded-bl-[4rem] -z-0" />
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-maroon-50/50 to-transparent rounded-bl-[4rem] -z-0" />
                                 
                                 <div className="relative z-10 flex flex-col h-full">
                                     {/* Icon & Quota Row */}
                                     <div className="flex items-start justify-between mb-10">
                                         <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-premium-sm group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 ${
-                                            program.color === 'brand-blue' ? 'bg-brand-blue-600 text-white shadow-brand-blue-200/50' : 'bg-brand-yellow-400 text-maroon-950 shadow-brand-yellow-200/50'
+                                            program.color === 'maroon' ? 'bg-maroon-600 text-white shadow-maroon-200/50' : 'bg-cream-500 text-maroon-950 shadow-cream-200/50'
                                             }`}>
                                             <program.icon className="w-8 h-8" />
                                         </div>
@@ -118,8 +118,8 @@ export default function ProgramSection() {
                                     </div>
 
                                     <div className="mb-10">
-                                        <h3 className="text-3xl md:text-4xl font-black text-ink-950 mb-3 tracking-tight group-hover:text-brand-blue-800 transition-colors">{program.title}</h3>
-                                        <p className="text-[11px] font-black text-brand-blue-600 tracking-[0.2em] uppercase mb-6 opacity-80">{program.subtitle}</p>
+                                        <h3 className="text-3xl md:text-4xl font-black text-ink-950 mb-3 tracking-tight group-hover:text-maroon-800 transition-colors">{program.title}</h3>
+                                        <p className="text-[11px] font-black text-maroon-600 tracking-[0.2em] uppercase mb-6 opacity-80">{program.subtitle}</p>
                                         <p className="text-base text-ink-600 leading-relaxed font-medium text-justify md:text-left">
                                             {program.desc}
                                         </p>
@@ -128,14 +128,14 @@ export default function ProgramSection() {
                                     {/* Feature List with custom bullets */}
                                     <div className="mb-12 grow">
                                         <h4 className="text-xs font-black text-ink-900 uppercase tracking-widest mb-6 flex items-center gap-2">
-                                            <div className="w-8 h-[2px] bg-brand-yellow-400" />
+                                            <div className="w-8 h-[2px] bg-cream-500" />
                                             Target & Kurikulum
                                         </h4>
                                         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-6">
                                             {program.features.map((feature, fIdx) => (
                                                 <li key={fIdx} className="flex items-start gap-3 group/item">
-                                                    <div className="mt-1 w-5 h-5 rounded-full bg-linear-to-br from-brand-blue-50 to-brand-blue-100 flex items-center justify-center shrink-0 border border-brand-blue-200 group-hover/item:bg-brand-blue-600 group-hover/item:border-brand-blue-600 transition-all">
-                                                        <CheckCircle className="w-3 h-3 text-brand-blue-600 group-hover/item:text-white transition-colors" />
+                                                    <div className="mt-1 w-5 h-5 rounded-full bg-linear-to-br from-maroon-50 to-maroon-100 flex items-center justify-center shrink-0 border border-maroon-200 group-hover/item:bg-maroon-600 group-hover/item:border-maroon-600 transition-all">
+                                                        <CheckCircle className="w-3 h-3 text-maroon-600 group-hover/item:text-white transition-colors" />
                                                     </div>
                                                     <span className="text-sm font-bold text-ink-800 group-hover/item:text-ink-950 transition-colors">{feature}</span>
                                                 </li>
@@ -144,7 +144,7 @@ export default function ProgramSection() {
                                     </div>
 
                                     <Link href="/program" onClick={() => navigateToDetail('/program', '#program')} className="relative z-10">
-                                        <button className="w-full bg-surface-50 border-2 border-surface-200 text-ink-950 hover:bg-brand-blue-700 hover:border-brand-blue-700 hover:text-white py-4.5 rounded-2xl font-black text-sm flex items-center justify-center gap-3 transition-all duration-500 shadow-premium-xs group-hover:shadow-premium-md">
+                                        <button className="w-full bg-surface-50 border-2 border-surface-200 text-ink-950 hover:bg-maroon-700 hover:border-maroon-700 hover:text-white py-4.5 rounded-2xl font-black text-sm flex items-center justify-center gap-3 transition-all duration-500 shadow-premium-xs group-hover:shadow-premium-md">
                                             Jelajahi Kurikulum Selengkapnya
                                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                         </button>

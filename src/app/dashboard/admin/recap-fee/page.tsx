@@ -173,14 +173,14 @@ export default function RecapFeePage() {
         <div className="space-y-6 max-w-7xl mx-auto pb-20">
             {/* Header */}
             <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] p-5 md:p-8 shadow-clay-lg border border-white/40 overflow-hidden relative">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue-600/5 rounded-full -mr-32 -mt-32 blur-3xl"></div>
+                <div className="absolute top-0 right-0 w-64 h-64 bg-maroon-600/5 rounded-full -mr-32 -mt-32 blur-3xl"></div>
                 <div className="relative flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
                     <div className="flex items-center gap-4 md:gap-6">
-                        <div className="p-3 md:p-4 bg-linear-to-br from-brand-blue-600 to-brand-blue-800 rounded-2xl md:rounded-3xl shadow-xl shadow-brand-blue-600/20 shrink-0">
+                        <div className="p-3 md:p-4 bg-linear-to-br from-maroon-600 to-maroon-800 rounded-2xl md:rounded-3xl shadow-xl shadow-maroon-600/20 shrink-0">
                             <CreditCard className="w-7 h-7 md:w-8 md:h-8 text-white" />
                         </div>
                         <div>
-                             <h1 className="text-2xl md:text-3xl font-black text-ink-900 tracking-tight">Rekap <span className="text-brand-blue-700">Honor Penguji Al-Qur'an</span></h1>
+                             <h1 className="text-2xl md:text-3xl font-black text-ink-900 tracking-tight">Rekap <span className="text-maroon-700">Honor Penguji Al-Qur'an</span></h1>
                             <p className="text-ink-500 font-medium mt-1 uppercase text-[10px] tracking-widest leading-none">Manajemen Insentif Petugas Seleksi PPDB</p>
                         </div>
                     </div>
@@ -191,7 +191,7 @@ export default function RecapFeePage() {
                         <Button onClick={exportToPDF} className="flex-1 md:flex-none bg-red-50 text-red-700 border-red-100 hover:bg-red-100 rounded-2xl h-11 md:h-12 px-4 md:px-6 font-black shadow-none transition-all text-sm">
                             <FileText className="w-4 h-4 mr-1.5" /> PDF
                         </Button>
-                        <Button onClick={fetchRecap} disabled={loading} variant="outline" className="rounded-2xl h-11 md:h-12 px-4 md:px-6 border-ink-100 hover:bg-brand-yellow-50 font-black">
+                        <Button onClick={fetchRecap} disabled={loading} variant="outline" className="rounded-2xl h-11 md:h-12 px-4 md:px-6 border-ink-100 hover:bg-gold-50 font-black">
                             <RefreshCcw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
                         </Button>
                     </div>
@@ -217,13 +217,13 @@ export default function RecapFeePage() {
                         <p className="text-2xl md:text-3xl font-black text-ink-900">{totals.totalTests} <span className="text-xs text-ink-400 font-bold uppercase ml-1">Sesi</span></p>
                     </div>
                     {/* Total Estimasi Fee — full width on mobile, normal on md+ */}
-                    <div className="col-span-2 md:col-span-1 bg-linear-to-br from-brand-blue-700 to-brand-blue-900 rounded-[1.5rem] md:rounded-[2rem] p-5 md:p-6 shadow-clay-md relative overflow-hidden">
+                    <div className="col-span-2 md:col-span-1 bg-linear-to-br from-maroon-700 to-maroon-900 rounded-[1.5rem] md:rounded-[2rem] p-5 md:p-6 shadow-clay-md relative overflow-hidden">
                         <div className="absolute top-0 right-0 p-4 opacity-20">
                             <DollarSign className="w-16 h-16 text-white" />
                         </div>
                         <p className="text-[9px] md:text-[10px] font-black text-white/70 uppercase tracking-widest mb-2 leading-tight">Total Estimasi Fee</p>
                         <p className="text-2xl md:text-2xl font-black text-white">{formatCurrency(totals.grandTotalFee)}</p>
-                        <p className="text-[9px] font-bold text-brand-yellow-300 mt-2 uppercase tracking-tight">Berdasarkan tarif aktif saat ini</p>
+                        <p className="text-[9px] font-bold text-gold-300 mt-2 uppercase tracking-tight">Berdasarkan tarif aktif saat ini</p>
                     </div>
                 </div>
 
@@ -231,8 +231,8 @@ export default function RecapFeePage() {
                 <div className="lg:col-span-4 h-full">
                     <div className="bg-white rounded-[2rem] p-6 shadow-clay-md border border-white/40 h-full">
                         <div className="flex items-center gap-2 mb-4">
-                            <div className="p-1.5 bg-brand-yellow-100 rounded-lg">
-                                <DollarSign className="w-4 h-4 text-brand-yellow-700" />
+                            <div className="p-1.5 bg-gold-100 rounded-lg">
+                                <DollarSign className="w-4 h-4 text-gold-700" />
                             </div>
                             <h3 className="text-sm font-black text-ink-900 uppercase tracking-tight">Pengaturan Tarif</h3>
                         </div>
@@ -250,7 +250,7 @@ export default function RecapFeePage() {
                                             type="number"
                                             value={field.value}
                                             onChange={(e) => setRates({...rates, [field.id]: parseInt(e.target.value) || 0})}
-                                            className="w-full bg-ink-50 border-none rounded-xl pl-8 pr-4 py-2 text-sm font-black text-ink-900 focus:ring-2 focus:ring-brand-blue-600/20"
+                                            className="w-full bg-ink-50 border-none rounded-xl pl-8 pr-4 py-2 text-sm font-black text-ink-900 focus:ring-2 focus:ring-maroon-600/20"
                                         />
                                     </div>
                                 </div>
@@ -270,7 +270,7 @@ export default function RecapFeePage() {
                             placeholder="Cari penguji..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full bg-white border border-ink-100 rounded-xl pl-9 pr-4 py-2 text-sm focus:ring-2 focus:ring-brand-blue-600/10 outline-none shadow-inner"
+                            className="w-full bg-white border border-ink-100 rounded-xl pl-9 pr-4 py-2 text-sm focus:ring-2 focus:ring-maroon-600/10 outline-none shadow-inner"
                         />
                     </div>
                     <div className="text-xs font-bold text-ink-400 uppercase tracking-widest">
@@ -294,7 +294,7 @@ export default function RecapFeePage() {
                             {loading ? (
                                 <tr>
                                     <td colSpan={5} className="py-20 text-center">
-                                        <Loader2 className="w-8 h-8 animate-spin text-brand-blue-600 mx-auto mb-2" />
+                                        <Loader2 className="w-8 h-8 animate-spin text-maroon-600 mx-auto mb-2" />
                                         <p className="text-sm font-bold text-ink-400 italic">Menganalisis kontribusi penguji...</p>
                                     </td>
                                 </tr>
@@ -307,14 +307,14 @@ export default function RecapFeePage() {
                                 </tr>
                             ) : (
                                 filteredRecap.map(item => (
-                                    <tr key={item.id} className="group hover:bg-brand-blue-50/20 transition-all">
+                                    <tr key={item.id} className="group hover:bg-maroon-50/20 transition-all">
                                         <td className="px-6 py-6">
                                             <div className="flex items-center gap-4">
-                                                <div className="w-10 h-10 rounded-2xl bg-brand-yellow-100 flex items-center justify-center text-brand-blue-900 font-black shadow-sm border border-brand-yellow-200">
+                                                <div className="w-10 h-10 rounded-2xl bg-gold-100 flex items-center justify-center text-maroon-900 font-black shadow-sm border border-gold-200">
                                                     {item.name.charAt(0)}
                                                 </div>
                                                 <div>
-                                                    <p className="text-sm font-black text-ink-900 group-hover:text-brand-blue-700 transition-colors uppercase">{item.name}</p>
+                                                    <p className="text-sm font-black text-ink-900 group-hover:text-maroon-700 transition-colors uppercase">{item.name}</p>
                                                     <p className="text-[9px] font-bold text-ink-400 uppercase tracking-wider mt-0.5">{item.role.replace('_', ' ')}</p>
                                                 </div>
                                             </div>
@@ -339,7 +339,7 @@ export default function RecapFeePage() {
                                         </td>
                                         <td className="px-6 py-6 text-right">
                                             <div className="flex flex-col items-end">
-                                                <span className="text-lg font-black text-brand-blue-700 leading-none">{formatCurrency(calculateTotalFee(item))}</span>
+                                                <span className="text-lg font-black text-maroon-700 leading-none">{formatCurrency(calculateTotalFee(item))}</span>
                                                 <span className="text-[9px] font-bold text-emerald-600 uppercase tracking-tighter mt-1.5 flex items-center gap-1">
                                                     <TrendingUp className="w-3 h-3" /> Total Honor
                                                 </span>
@@ -356,7 +356,7 @@ export default function RecapFeePage() {
                                     <td className="px-4 py-6 text-center text-lg font-black">{totals.quran}</td>
                                     <td className="px-4 py-6 text-center text-lg font-black">{totals.santri}</td>
                                     <td className="px-4 py-6 text-center text-lg font-black">{totals.ortu}</td>
-                                    <td className="px-6 py-6 text-right text-xl font-black text-brand-yellow-400">
+                                    <td className="px-6 py-6 text-right text-xl font-black text-gold-400">
                                         {formatCurrency(totals.grandTotalFee)}
                                     </td>
                                 </tr>
@@ -369,7 +369,7 @@ export default function RecapFeePage() {
                 <div className="md:hidden divide-y divide-ink-50">
                     {loading ? (
                         <div className="py-20 text-center">
-                            <Loader2 className="w-8 h-8 animate-spin text-brand-blue-600 mx-auto mb-2" />
+                            <Loader2 className="w-8 h-8 animate-spin text-maroon-600 mx-auto mb-2" />
                             <p className="text-sm font-black text-ink-400 italic">Menganalisis...</p>
                         </div>
                     ) : filteredRecap.length === 0 ? (
@@ -379,10 +379,10 @@ export default function RecapFeePage() {
                         </div>
                     ) : (
                         filteredRecap.map(item => (
-                            <div key={item.id} className="p-5 bg-white hover:bg-brand-blue-50/10 transition-colors">
+                            <div key={item.id} className="p-5 bg-white hover:bg-maroon-50/10 transition-colors">
                                 {/* Name + Honor Row */}
                                 <div className="flex items-center gap-3 mb-4">
-                                    <div className="w-11 h-11 rounded-2xl bg-brand-yellow-100 flex items-center justify-center text-brand-blue-900 font-black text-lg border border-brand-yellow-200 shrink-0">
+                                    <div className="w-11 h-11 rounded-2xl bg-gold-100 flex items-center justify-center text-maroon-900 font-black text-lg border border-gold-200 shrink-0">
                                         {item.name.charAt(0)}
                                     </div>
                                     <div className="flex-1 min-w-0">
@@ -392,12 +392,12 @@ export default function RecapFeePage() {
                                 </div>
 
                                 {/* Fee Badge — full width, prominent */}
-                                <div className="mb-3 bg-linear-to-r from-brand-blue-700 to-brand-blue-800 rounded-2xl px-4 py-3 flex items-center justify-between">
+                                <div className="mb-3 bg-linear-to-r from-maroon-700 to-maroon-800 rounded-2xl px-4 py-3 flex items-center justify-between">
                                     <div>
                                         <p className="text-[9px] font-black text-white/60 uppercase tracking-widest">Estimasi Honor</p>
                                         <p className="text-lg font-black text-white leading-none mt-0.5">{formatCurrency(calculateTotalFee(item))}</p>
                                     </div>
-                                    <TrendingUp className="w-5 h-5 text-brand-yellow-300" />
+                                    <TrendingUp className="w-5 h-5 text-gold-300" />
                                 </div>
 
                                 {/* Stats Grid — 3 columns */}
@@ -423,7 +423,7 @@ export default function RecapFeePage() {
                             <div className="flex flex-col gap-2">
                                 <div className="flex justify-between items-center">
                                     <span className="text-[10px] font-black uppercase tracking-widest text-white/60">Grand Total Honor</span>
-                                    <span className="text-xl font-black text-brand-yellow-400">{formatCurrency(totals.grandTotalFee)}</span>
+                                    <span className="text-xl font-black text-gold-400">{formatCurrency(totals.grandTotalFee)}</span>
                                 </div>
                                 <div className="flex justify-between items-center pt-2 border-t border-white/10">
                                     <span className="text-[10px] font-black uppercase tracking-widest text-white/50">Total Sesi</span>

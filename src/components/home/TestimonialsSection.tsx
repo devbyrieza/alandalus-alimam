@@ -84,7 +84,7 @@ function TestimonialCard({
       {/* Stars with premium glow */}
       <div className="flex gap-1.5 mb-6 mt-14 relative z-10">
         {[...Array(5)].map((_, i) => (
-          <Star key={i} className="w-4 h-4 text-brand-yellow-500 fill-brand-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.3)]" />
+          <Star key={i} className="w-4 h-4 text-gold-500 fill-gold-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.3)]" />
         ))}
       </div>
 

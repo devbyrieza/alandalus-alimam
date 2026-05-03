@@ -192,14 +192,7 @@ export default function HeroSection() {
               }}
             >
               Bukan sekadar tempat belajar agama — sistem pembentukan karakter
-              berbasis{" "}
-              <strong
-                className="font-bold"
-                style={{ color: "var(--color-maroon-800)" }}
-              >
-                Lingkungan, Kebiasaan, Komunitas, dan Spiritualitas
-              </strong>{" "}
-              tanpa kekerasan dan luka pengasuhan.
+              yang memadukan <strong className="font-bold" style={{ color: "var(--color-maroon-800)" }}>Intensitas Tahfidz Al-Qur'an</strong> dengan <strong className="font-bold" style={{ color: "var(--color-maroon-800)" }}>Kepemimpinan (Leadership)</strong> tanpa kekerasan dan luka pengasuhan.
             </motion.p>
 
             {/* — Tagline Divider — */}
@@ -485,7 +478,7 @@ export default function HeroSection() {
               className="absolute -bottom-3 -right-3 lg:bottom-10 lg:-right-10 z-30 cursor-default"
               style={{
                 background:
-                  "linear-gradient(135deg, var(--color-brand-yellow-400) 0%, var(--color-brand-yellow-600) 100%)",
+                  "linear-gradient(135deg, var(--color-gold-400) 0%, var(--color-gold-600) 100%)",
                 padding: "1rem 1.125rem",
                 borderRadius: "1.5rem",
                 border: "4px solid var(--color-white)",

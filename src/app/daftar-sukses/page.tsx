@@ -136,7 +136,7 @@ function DaftarSuksesContent() {
       {/* Important Notes */}
       <div className="bg-white border-2 border-cream-200 rounded-[1.5rem] p-5 mb-8 relative z-10 shadow-sm">
         <p className="text-sm text-ink-950 font-black mb-3 flex items-center gap-2">
-          <AlertTriangle className="w-4 h-4 text-brand-yellow-400" />
+          <AlertTriangle className="w-4 h-4 text-gold-400" />
           PENTING - Simpan Data Ini!
         </p>
         <ul className="text-xs text-ink-700 space-y-2.5 font-medium">

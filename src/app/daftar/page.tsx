@@ -238,7 +238,7 @@ export default function DaftarPage() {
     <main className="min-h-screen bg-white py-12 md:py-24 relative overflow-hidden">
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cream-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-yellow-100/30 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gold-100/30 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
       <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
 
       <Container className="relative z-10">
@@ -249,7 +249,7 @@ export default function DaftarPage() {
           className="text-center mb-16"
         >
           <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-2xl shadow-sm border border-cream-200 mb-6 group hover:scale-110 transition-transform app-card">
-            <School className="w-8 h-8 text-brand-blue-600" />
+            <School className="w-8 h-8 text-maroon-600" />
           </div>
           <motion.h1
             initial={{ opacity: 0, y: 10 }}
@@ -303,7 +303,7 @@ export default function DaftarPage() {
                       onClick={async () => {
                         const result = await Swal.fire({
                           title: "Hapus Draf?",
-                          text: "Hapus seluruh draf dan mulai dari awal?",
+                          text: "Hapus seluruh draf and mulai dari awal?",
                           icon: "question",
                           showCancelButton: true,
                           confirmButtonColor: "#1e40af",
@@ -342,7 +342,7 @@ export default function DaftarPage() {
                 transition={{ delay: 0.4 }}
               >
                 <div className="flex items-center gap-3 mb-8">
-                  <div className="w-10 h-10 rounded-xl bg-cream-50 flex items-center justify-center text-brand-blue-600 shadow-sm border border-cream-200">
+                  <div className="w-10 h-10 rounded-xl bg-cream-50 flex items-center justify-center text-maroon-600 shadow-sm border border-cream-200">
                     <GraduationCap className="w-6 h-6" />
                   </div>
                   <h3 className="text-2xl font-display font-black text-ink-950">Pilih Jenjang</h3>
@@ -373,7 +373,7 @@ export default function DaftarPage() {
                           isClosedForPutra 
                             ? "opacity-50 grayscale cursor-not-allowed border-cream-200 bg-stone-50"
                             : formData.jenjang === option.value
-                              ? "border-brand-blue-600 bg-cream-50 shadow-md"
+                              ? "border-maroon-600 bg-cream-50 shadow-md"
                               : "border-cream-200 bg-white hover:border-maroon-200 hover:shadow-sm"
                         }`}
                       >
@@ -385,9 +385,9 @@ export default function DaftarPage() {
                         
                         <div className="flex items-center gap-4 relative z-0">
                           <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${
-                            formData.jenjang === option.value ? "border-brand-blue-600" : "border-cream-200"
+                            formData.jenjang === option.value ? "border-maroon-600" : "border-cream-200"
                           }`}>
-                            {formData.jenjang === option.value && <motion.div layoutId="jk-dot-jenjang" className="w-3 h-3 rounded-full bg-brand-blue-600" />}
+                            {formData.jenjang === option.value && <motion.div layoutId="jk-dot-jenjang" className="w-3 h-3 rounded-full bg-maroon-600" />}
                           </div>
                           <div>
                             <p className="font-display font-black text-xl text-ink-950 leading-none mb-1">{option.title}</p>
@@ -400,9 +400,9 @@ export default function DaftarPage() {
                           <motion.div 
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
-                            className="mt-4 p-3 bg-brand-yellow-100/30 rounded-xl border border-brand-yellow-200/50 relative z-0"
+                            className="mt-4 p-3 bg-gold-100/30 rounded-xl border border-gold-200/50 relative z-0"
                           >
-                            <p className="text-[10px] leading-relaxed text-brand-blue-900 font-bold italic">
+                            <p className="text-[10px] leading-relaxed text-maroon-900 font-bold italic">
                               * Syarat pendaftar SMA langsung (tanpa I'dad): Wajib memiliki hafalan 5 Juz Mutqin & lancar berbahasa Arab.
                             </p>
                           </motion.div>
@@ -426,7 +426,7 @@ export default function DaftarPage() {
                 className="space-y-8"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-cream-50 flex items-center justify-center text-brand-blue-600 shadow-sm border border-cream-200">
+                  <div className="w-10 h-10 rounded-xl bg-cream-50 flex items-center justify-center text-maroon-600 shadow-sm border border-cream-200">
                     <User className="w-6 h-6" />
                   </div>
                   <h3 className="text-2xl font-display font-black text-ink-950">Data Calon Santri</h3>
@@ -502,7 +502,7 @@ export default function DaftarPage() {
                 className="space-y-8"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-cream-50 flex items-center justify-center text-brand-blue-600 shadow-sm border border-cream-200">
+                  <div className="w-10 h-10 rounded-xl bg-cream-50 flex items-center justify-center text-maroon-600 shadow-sm border border-cream-200">
                     <Phone className="w-6 h-6" />
                   </div>
                   <h3 className="text-2xl font-display font-black text-ink-950">Kontak Verifikasi</h3>
@@ -581,7 +581,7 @@ export default function DaftarPage() {
           transition={{ delay: 0.8 }}
           className="mt-12 text-center"
         >
-          <Link href="/" className="inline-flex items-center gap-2 text-ink-600 hover:text-brand-blue-700 text-xs font-black uppercase tracking-widest transition-colors">
+          <Link href="/" className="inline-flex items-center gap-2 text-ink-600 hover:text-maroon-700 text-xs font-black uppercase tracking-widest transition-colors">
             <RefreshCw className="w-3.5 h-3.5" /> Kembali Ke Beranda
           </Link>
         </motion.div>

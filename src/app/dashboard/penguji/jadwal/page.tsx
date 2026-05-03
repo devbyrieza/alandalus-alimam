@@ -790,16 +790,16 @@ export default function JadwalPengujiPage() {
   return (
     <div className="space-y-6">
       {/* Header Section */}
-      <div className="bg-white rounded-[2rem] p-6 md:p-10 border border-brand-yellow-100 shadow-sm app-card overflow-hidden relative">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue-600/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+      <div className="bg-white rounded-[2rem] p-6 md:p-10 border border-gold-100 shadow-sm app-card overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-maroon-600/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 relative z-10">
           <div className="flex items-center gap-5">
-            <div className="w-16 h-16 bg-brand-blue-50 rounded-2xl flex items-center justify-center border border-brand-blue-100 shrink-0 shadow-sm">
-              <Calendar className="w-8 h-8 text-brand-blue-700" />
+            <div className="w-16 h-16 bg-maroon-50 rounded-2xl flex items-center justify-center border border-maroon-100 shrink-0 shadow-sm">
+              <Calendar className="w-8 h-8 text-maroon-700" />
             </div>
             <div>
-              <h1 className="text-2xl md:text-4xl font-black text-brand-blue-950 font-display tracking-tight leading-none mb-2">
+              <h1 className="text-2xl md:text-4xl font-black text-maroon-950 font-display tracking-tight leading-none mb-2">
                 Jadwal & Sesi Ujian
               </h1>
               <p className="text-xs md:text-sm font-bold text-ink-500 uppercase tracking-widest opacity-70">
@@ -811,13 +811,13 @@ export default function JadwalPengujiPage() {
           <div className="flex bg-ink-50/50 p-1.5 rounded-2xl border border-ink-100 w-full md:w-auto min-w-[320px]">
             <button
               onClick={() => setActiveTab('assigned')}
-              className={`flex-1 py-3 px-6 rounded-xl font-black text-xs transition-all text-center uppercase tracking-wider ${activeTab === 'assigned' ? 'bg-white shadow-md text-brand-blue-700 border border-ink-100 scale-[1.02]' : 'text-ink-400 hover:text-ink-600'}`}
+              className={`flex-1 py-3 px-6 rounded-xl font-black text-xs transition-all text-center uppercase tracking-wider ${activeTab === 'assigned' ? 'bg-white shadow-md text-maroon-700 border border-ink-100 scale-[1.02]' : 'text-ink-400 hover:text-ink-600'}`}
             >
               Jadwal Saya
             </button>
             <button
               onClick={() => setActiveTab('slots')}
-              className={`flex-1 py-3 px-6 rounded-xl font-black text-xs transition-all text-center uppercase tracking-wider ${activeTab === 'slots' ? 'bg-white shadow-md text-brand-blue-700 border border-ink-100 scale-[1.02]' : 'text-ink-400 hover:text-ink-600'}`}
+              className={`flex-1 py-3 px-6 rounded-xl font-black text-xs transition-all text-center uppercase tracking-wider ${activeTab === 'slots' ? 'bg-white shadow-md text-maroon-700 border border-ink-100 scale-[1.02]' : 'text-ink-400 hover:text-ink-600'}`}
             >
               Sesi Ketersediaan
             </button>
@@ -875,7 +875,7 @@ export default function JadwalPengujiPage() {
                   <div key={item.id} className={`bg-white rounded-3xl p-5 md:p-8 border transition-all app-card ${isToday(item.tanggal_ujian) ? "border-emerald-200 shadow-md ring-4 ring-emerald-50" : "border-cream-200 shadow-sm hover:border-maroon-200 hover:shadow-md"}`}>
                     {/* Top section: Date badge + Name */}
                     <div className="flex items-start gap-5 mb-6">
-                      <div className={`p-4 rounded-[1.5rem] font-bold text-center min-w-[85px] shrink-0 border flex flex-col justify-center shadow-sm ${isToday(item.tanggal_ujian) ? 'bg-brand-blue-600 text-white border-brand-blue-500' : 'bg-brand-blue-50 border-brand-blue-100 text-brand-blue-900'}`}>
+                      <div className={`p-4 rounded-[1.5rem] font-bold text-center min-w-[85px] shrink-0 border flex flex-col justify-center shadow-sm ${isToday(item.tanggal_ujian) ? 'bg-maroon-600 text-white border-maroon-500' : 'bg-maroon-50 border-maroon-100 text-maroon-900'}`}>
                         <div className="text-[10px] uppercase tracking-[0.2em] font-black opacity-80 mb-1">
                           {new Date(item.tanggal_ujian).toLocaleDateString('id-ID', { weekday: 'short' }).replace('Min', 'Ahd')}
                         </div>
@@ -886,35 +886,35 @@ export default function JadwalPengujiPage() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-wrap items-center gap-2 mb-3">
-                          <span className="px-3 py-1 bg-brand-blue-50 text-brand-blue-700 border border-brand-blue-100 rounded-lg text-[9px] font-black uppercase tracking-[0.15em]">{item.pendaftar.jenjang}</span>
-                          <span className="px-3 py-1 bg-brand-yellow-400 text-brand-blue-950 rounded-lg text-[9px] font-black uppercase tracking-[0.15em] flex items-center gap-1.5"><Hash className="w-3.5 h-3.5" /> {item.pendaftar.nomor_pendaftaran}</span>
+                          <span className="px-3 py-1 bg-maroon-50 text-maroon-700 border border-maroon-100 rounded-lg text-[9px] font-black uppercase tracking-[0.15em]">{item.pendaftar.jenjang}</span>
+                          <span className="px-3 py-1 bg-gold-400 text-maroon-950 rounded-lg text-[9px] font-black uppercase tracking-[0.15em] flex items-center gap-1.5"><Hash className="w-3.5 h-3.5" /> {item.pendaftar.nomor_pendaftaran}</span>
                         </div>
-                        <h3 className="text-lg md:text-2xl font-black text-brand-blue-950 font-display leading-tight mb-2">{item.pendaftar.nama_lengkap}</h3>
+                        <h3 className="text-lg md:text-2xl font-black text-maroon-950 font-display leading-tight mb-2">{item.pendaftar.nama_lengkap}</h3>
                         <div className="flex items-center gap-2 text-xs text-ink-500 font-bold">
-                          <div className="w-2 h-2 rounded-full bg-brand-blue-600 animate-pulse" />
-                          <span className="text-brand-blue-700 uppercase tracking-widest font-black">{item.jenis_tugas}</span>
+                          <div className="w-2 h-2 rounded-full bg-maroon-600 animate-pulse" />
+                          <span className="text-maroon-700 uppercase tracking-widest font-black">{item.jenis_tugas}</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Time & Location Row */}
-                    <div className="grid grid-cols-2 gap-4 mb-6 px-4 py-4 bg-brand-blue-50/30 rounded-2xl border border-brand-blue-100/50">
+                    <div className="grid grid-cols-2 gap-4 mb-6 px-4 py-4 bg-maroon-50/30 rounded-2xl border border-maroon-100/50">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center shadow-sm">
-                          <Clock className="w-4 h-4 text-brand-blue-600" />
+                          <Clock className="w-4 h-4 text-maroon-600" />
                         </div>
                         <div className="flex flex-col">
                           <span className="text-[10px] text-ink-400 font-black uppercase tracking-widest">Waktu</span>
-                          <span className="text-sm text-brand-blue-950 font-black">{formatTime(item.waktu_mulai)} WIB</span>
+                          <span className="text-sm text-maroon-950 font-black">{formatTime(item.waktu_mulai)} WIB</span>
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center shadow-sm">
-                          <MapPin className="w-4 h-4 text-brand-blue-600" />
+                          <MapPin className="w-4 h-4 text-maroon-600" />
                         </div>
                         <div className="flex flex-col">
                           <span className="text-[10px] text-ink-400 font-black uppercase tracking-widest">Lokasi</span>
-                          <span className="text-sm text-brand-blue-950 font-black truncate">{item.lokasi || "Online"}</span>
+                          <span className="text-sm text-maroon-950 font-black truncate">{item.lokasi || "Online"}</span>
                         </div>
                       </div>
                     </div>
@@ -944,7 +944,7 @@ export default function JadwalPengujiPage() {
                                 <CheckCircle className="w-4 h-4" /> Wawancara Calsan Selesai
                               </div>
                             ) : (
-                              <button onClick={() => handleCompleteExam(item.id)} className="w-full py-4 bg-brand-blue-600 hover:bg-brand-blue-700 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl transition-all active:scale-95 shadow-lg shadow-brand-blue-600/20">
+                              <button onClick={() => handleCompleteExam(item.id)} className="w-full py-4 bg-maroon-600 hover:bg-maroon-700 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl transition-all active:scale-95 shadow-lg shadow-maroon-600/20">
                                 ✓ Tandai Wawancara Selesai
                               </button>
                             )
@@ -955,7 +955,7 @@ export default function JadwalPengujiPage() {
                                 <CheckCircle className="w-4 h-4" /> Tes Al-Qur'an Selesai
                               </div>
                             ) : (
-                              <button onClick={() => handleCompleteExam(item.id)} className="w-full py-4 bg-brand-blue-600 hover:bg-brand-blue-700 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl transition-all active:scale-95 shadow-lg shadow-brand-blue-600/20">
+                              <button onClick={() => handleCompleteExam(item.id)} className="w-full py-4 bg-maroon-600 hover:bg-maroon-700 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl transition-all active:scale-95 shadow-lg shadow-maroon-600/20">
                                 ✓ Tandai Tes Al-Qur'an Selesai
                               </button>
                             )
@@ -966,7 +966,7 @@ export default function JadwalPengujiPage() {
                                 <CheckCircle className="w-4 h-4" /> Wawancara Cawalsan Selesai
                               </div>
                             ) : (
-                              <button onClick={() => handleCompleteExam(item.id)} className="w-full py-4 bg-brand-blue-600 hover:bg-brand-blue-700 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl transition-all active:scale-95 shadow-lg shadow-brand-blue-600/20">
+                              <button onClick={() => handleCompleteExam(item.id)} className="w-full py-4 bg-maroon-600 hover:bg-maroon-700 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl transition-all active:scale-95 shadow-lg shadow-maroon-600/20">
                                 ✓ Tandai Wawancara Cawalsan Selesai
                               </button>
                             )
@@ -975,7 +975,7 @@ export default function JadwalPengujiPage() {
                           <div className="flex gap-3 mt-2">
                             <button
                               onClick={() => { setSelectedPendaftar(item.pendaftar); setIsDetailModalOpen(true); }}
-                              className="flex-1 py-4 bg-white border border-brand-blue-100 text-brand-blue-700 hover:bg-brand-blue-50 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 active:scale-95 shadow-sm"
+                              className="flex-1 py-4 bg-white border border-maroon-100 text-maroon-700 hover:bg-maroon-50 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 active:scale-95 shadow-sm"
                             >
                               <FileText className="w-4 h-4" /> Lihat Data
                             </button>
@@ -1001,12 +1001,12 @@ export default function JadwalPengujiPage() {
       {/* TAB CONTENT: SLOTS */}
       {activeTab === 'slots' && (
         <>
-          <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-brand-yellow-100 shadow-sm app-card relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-32 h-32 bg-brand-blue-600/5 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2" />
+          <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-gold-100 shadow-sm app-card relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-32 h-32 bg-maroon-600/5 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2" />
             
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
               <div className="max-w-md">
-                <h3 className="text-xl font-black text-brand-blue-950 font-display tracking-tight mb-2">Kelola Sesi Ketersediaan</h3>
+                <h3 className="text-xl font-black text-maroon-950 font-display tracking-tight mb-2">Kelola Sesi Ketersediaan</h3>
                 <p className="text-xs font-bold text-ink-500 leading-relaxed uppercase tracking-widest opacity-60">Pilih waktu dimana Anda bersedia menguji calon santri atau orang tua.</p>
               </div>
               <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
@@ -1030,20 +1030,20 @@ export default function JadwalPengujiPage() {
                     )}
                     <button
                       onClick={() => setIsBulkModalOpen(true)}
-                      className="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-4 bg-brand-blue-50 hover:bg-brand-blue-100 text-brand-blue-700 rounded-2xl font-black border border-brand-blue-100 transition-all text-xs uppercase tracking-widest active:scale-95 shadow-sm"
+                      className="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-4 bg-maroon-50 hover:bg-maroon-100 text-maroon-700 rounded-2xl font-black border border-maroon-100 transition-all text-xs uppercase tracking-widest active:scale-95 shadow-sm"
                     >
                       <Plus className="w-5 h-5" /> Buat Massal
                     </button>
                     <button
                       onClick={() => setIsSlotModalOpen(true)}
-                      className="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-4 bg-brand-blue-600 hover:bg-brand-blue-700 text-white rounded-2xl font-black shadow-lg shadow-brand-blue-600/20 transition-all text-xs uppercase tracking-widest active:scale-95"
+                      className="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-4 bg-maroon-600 hover:bg-maroon-700 text-white rounded-2xl font-black shadow-lg shadow-maroon-600/20 transition-all text-xs uppercase tracking-widest active:scale-95"
                     >
                       <Plus className="w-5 h-5" /> Buat Sesi Tunggal
                     </button>
                   </>
                 ) : (
                   <div className="flex items-center gap-3">
-                    <button onClick={toggleSelectAll} className="flex items-center gap-2 px-4 py-3 bg-brand-blue-50 text-brand-blue-700 rounded-xl font-black text-xs border border-brand-blue-100 hover:bg-brand-blue-100 transition-all">
+                    <button onClick={toggleSelectAll} className="flex items-center gap-2 px-4 py-3 bg-maroon-50 text-maroon-700 rounded-xl font-black text-xs border border-maroon-100 hover:bg-maroon-100 transition-all">
                       {selectedSlotIds.size === slots.length ? <CheckSquare className="w-4 h-4" /> : <Square className="w-4 h-4" />}
                       {selectedSlotIds.size === slots.length ? 'Batal Semua' : 'Pilih Semua'}
                     </button>
@@ -1058,7 +1058,7 @@ export default function JadwalPengujiPage() {
 
           {/* PILIH CEPAT - muncul saat select mode aktif */}
           {isSelectMode && uniqueTimesForChips.length > 1 && (
-            <div className="bg-white rounded-2xl border border-brand-blue-100 px-5 py-4 flex flex-wrap items-center gap-2">
+            <div className="bg-white rounded-2xl border border-maroon-100 px-5 py-4 flex flex-wrap items-center gap-2">
               <span className="text-[10px] font-black text-ink-400 uppercase tracking-widest shrink-0 mr-1">Pilih Cepat:</span>
               {uniqueTimesForChips.map(({ hhmm, label, count }) => {
                 const matchingIds = slots.filter(s => {
@@ -1072,14 +1072,14 @@ export default function JadwalPengujiPage() {
                     onClick={() => selectByTime(hhmm)}
                     className={`flex items-center gap-2 px-3 py-2 rounded-xl font-black text-xs border transition-all active:scale-95 ${
                       allSelected
-                        ? 'bg-brand-blue-600 text-white border-brand-blue-600 shadow-sm'
-                        : 'bg-brand-blue-50 text-brand-blue-700 border-brand-blue-100 hover:bg-brand-blue-100'
+                        ? 'bg-maroon-600 text-white border-maroon-600 shadow-sm'
+                        : 'bg-maroon-50 text-maroon-700 border-maroon-100 hover:bg-maroon-100'
                     }`}
                   >
                     {allSelected ? <CheckSquare className="w-3.5 h-3.5" /> : <Square className="w-3.5 h-3.5" />}
                     {label}
                     <span className={`px-1.5 py-0.5 rounded-md text-[9px] font-black ${
-                      allSelected ? 'bg-white/20 text-white' : 'bg-brand-blue-100 text-brand-blue-700'
+                      allSelected ? 'bg-white/20 text-white' : 'bg-maroon-100 text-maroon-700'
                     }`}>{count}</span>
                   </button>
                 );
@@ -1098,22 +1098,22 @@ export default function JadwalPengujiPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {slots.map(slot => (
                 <div key={slot.id} onClick={isSelectMode ? () => toggleSelectSlot(slot.id) : undefined} className={`bg-white rounded-[2rem] p-6 border shadow-sm transition-all group relative app-card ${
-                  isSelectMode ? 'cursor-pointer hover:border-brand-blue-300' : 'hover:shadow-xl hover:shadow-brand-blue-600/5'
+                  isSelectMode ? 'cursor-pointer hover:border-maroon-300' : 'hover:shadow-xl hover:shadow-maroon-600/5'
                 } ${
-                  selectedSlotIds.has(slot.id) ? 'border-brand-blue-400 ring-2 ring-brand-blue-200 shadow-brand-blue-100' : 'border-brand-yellow-100'
+                  selectedSlotIds.has(slot.id) ? 'border-maroon-400 ring-2 ring-maroon-200 shadow-maroon-100' : 'border-gold-100'
                 }`}>
                   {/* Checkbox overlay in select mode */}
                   {isSelectMode && (
                     <div className="absolute top-5 left-5 z-10">
                       {selectedSlotIds.has(slot.id)
-                        ? <CheckSquare className="w-6 h-6 text-brand-blue-600" />
+                        ? <CheckSquare className="w-6 h-6 text-maroon-600" />
                         : <Square className="w-6 h-6 text-ink-300" />}
                     </div>
                   )}
                   <div className={`absolute top-6 right-6 flex items-center gap-1 ${isSelectMode ? 'hidden' : ''}`}>
                     <button
                       onClick={() => handleOpenEdit(slot)}
-                      className="p-2.5 text-ink-300 hover:text-brand-blue-600 hover:bg-brand-blue-50 rounded-full transition-all active:scale-90"
+                      className="p-2.5 text-ink-300 hover:text-maroon-600 hover:bg-maroon-50 rounded-full transition-all active:scale-90"
                       title="Edit Sesi"
                     >
                       <Edit2 className="w-4 h-4" />
@@ -1128,11 +1128,11 @@ export default function JadwalPengujiPage() {
                   </div>
                   
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="w-14 h-14 bg-brand-blue-50 rounded-2xl flex items-center justify-center border border-brand-blue-100 text-brand-blue-700 font-black text-xl shadow-sm">
+                    <div className="w-14 h-14 bg-maroon-50 rounded-2xl flex items-center justify-center border border-maroon-100 text-maroon-700 font-black text-xl shadow-sm">
                       {slot.title?.charAt(0) || "S"}
                     </div>
                     <div>
-                      <h4 className="font-black text-lg text-brand-blue-950 font-display leading-tight">{slot.title || "Sesi Seleksi"}</h4>
+                      <h4 className="font-black text-lg text-maroon-950 font-display leading-tight">{slot.title || "Sesi Seleksi"}</h4>
                       <div className="flex items-center gap-1.5 mt-1">
                         <div className={`w-2 h-2 rounded-full ${slot._count?.bookings ? 'bg-amber-500 animate-pulse' : 'bg-green-500'}`} />
                         <span className="text-[10px] font-black text-ink-400 uppercase tracking-widest">{slot._count?.bookings ? 'Terisi' : 'Tersedia'}</span>
@@ -1141,16 +1141,16 @@ export default function JadwalPengujiPage() {
                   </div>
 
                   <div className="space-y-3 mb-2">
-                    <div className="flex items-center gap-3 text-brand-blue-900 bg-brand-blue-50/50 p-3 rounded-2xl border border-brand-blue-100/30 font-bold text-xs">
-                      <Calendar className="w-4 h-4 text-brand-blue-600 shrink-0" />
+                    <div className="flex items-center gap-3 text-maroon-900 bg-maroon-50/50 p-3 rounded-2xl border border-maroon-100/30 font-bold text-xs">
+                      <Calendar className="w-4 h-4 text-maroon-600 shrink-0" />
                       {formatDate(slot.start_time)}
                     </div>
-                    <div className="flex items-center gap-3 text-brand-blue-900 bg-brand-blue-50/50 p-3 rounded-2xl border border-brand-blue-100/30 font-bold text-xs">
-                      <Clock className="w-4 h-4 text-brand-blue-600 shrink-0" />
+                    <div className="flex items-center gap-3 text-maroon-900 bg-maroon-50/50 p-3 rounded-2xl border border-maroon-100/30 font-bold text-xs">
+                      <Clock className="w-4 h-4 text-maroon-600 shrink-0" />
                       {formatTime(slot.start_time)}{slot.end_time ? ` – ${formatTime(slot.end_time)}` : ''} WIB
                     </div>
-                    <div className="flex items-center gap-3 text-brand-blue-900 bg-brand-blue-50/50 p-3 rounded-2xl border border-brand-blue-100/30 font-bold text-xs">
-                      <MapPin className="w-4 h-4 text-brand-blue-600 shrink-0" />
+                    <div className="flex items-center gap-3 text-maroon-900 bg-maroon-50/50 p-3 rounded-2xl border border-maroon-100/30 font-bold text-xs">
+                      <MapPin className="w-4 h-4 text-maroon-600 shrink-0" />
                       <span className="truncate">{slot.location || "Online / Zoom"}</span>
                     </div>
                   </div>
@@ -1164,9 +1164,9 @@ export default function JadwalPengujiPage() {
       {/* FLOATING BOTTOM BAR (select mode) */}
       {isSelectMode && selectedSlotIds.size > 0 && (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[55] animate-in slide-in-from-bottom-4 duration-300">
-          <div className="flex items-center gap-4 bg-brand-blue-950 text-white px-6 py-4 rounded-[2rem] shadow-2xl shadow-brand-blue-950/40">
+          <div className="flex items-center gap-4 bg-maroon-950 text-white px-6 py-4 rounded-[2rem] shadow-2xl shadow-maroon-950/40">
             <div className="flex items-center gap-2">
-              <CheckSquare className="w-5 h-5 text-brand-yellow-400" />
+              <CheckSquare className="w-5 h-5 text-gold-400" />
               <span className="font-black text-sm">{selectedSlotIds.size} sesi dipilih</span>
             </div>
             <div className="w-px h-6 bg-white/20" />
@@ -1176,7 +1176,7 @@ export default function JadwalPengujiPage() {
                   setBulkEditForm({ start_time: "08:00", end_time: "09:00", location: "", notes: "", changeTime: false, changeLocation: false, changeNotes: false });
                   setIsBulkEditModalOpen(true);
                 }}
-                className="flex items-center gap-2 px-5 py-2.5 bg-brand-yellow-400 text-brand-blue-950 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-brand-yellow-300 transition-all active:scale-95"
+                className="flex items-center gap-2 px-5 py-2.5 bg-gold-400 text-maroon-950 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-gold-300 transition-all active:scale-95"
               >
                 <Edit2 className="w-4 h-4" /> Edit Terpilih
               </button>
@@ -1201,11 +1201,11 @@ export default function JadwalPengujiPage() {
 
       {/* MODAL BULK EDIT */}
       {isBulkEditModalOpen && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-brand-blue-950/40 backdrop-blur-md animate-in fade-in duration-300">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-maroon-950/40 backdrop-blur-md animate-in fade-in duration-300">
           <div className="bg-white rounded-[32px] shadow-2xl w-full max-w-md overflow-hidden border border-white/20 animate-in zoom-in-95 duration-300">
             <div className="p-6 border-b border-stone-100 flex justify-between items-center bg-stone-50/50">
               <div>
-                <h3 className="text-xl font-black text-brand-blue-950 tracking-tight leading-none">Edit Massal</h3>
+                <h3 className="text-xl font-black text-maroon-950 tracking-tight leading-none">Edit Massal</h3>
                 <p className="text-[10px] text-ink-300 font-bold uppercase tracking-widest mt-1.5">{selectedSlotIds.size} sesi dipilih — centang yang ingin diubah</p>
               </div>
               <button onClick={() => setIsBulkEditModalOpen(false)} className="p-2 hover:bg-stone-200 rounded-full transition-colors text-stone-400">
@@ -1215,44 +1215,44 @@ export default function JadwalPengujiPage() {
 
             <form onSubmit={handleBulkEdit} className="p-8 space-y-5">
               {/* Waktu */}
-              <div className={`p-4 rounded-2xl border-2 transition-all ${bulkEditForm.changeTime ? 'border-brand-blue-300 bg-brand-blue-50/30' : 'border-stone-100 bg-stone-50/50'}`}>
+              <div className={`p-4 rounded-2xl border-2 transition-all ${bulkEditForm.changeTime ? 'border-maroon-300 bg-maroon-50/30' : 'border-stone-100 bg-stone-50/50'}`}>
                 <label className="flex items-center gap-3 cursor-pointer mb-3">
-                  <input type="checkbox" checked={bulkEditForm.changeTime} onChange={e => setBulkEditForm({...bulkEditForm, changeTime: e.target.checked})} className="w-4 h-4 accent-brand-blue-600" />
+                  <input type="checkbox" checked={bulkEditForm.changeTime} onChange={e => setBulkEditForm({...bulkEditForm, changeTime: e.target.checked})} className="w-4 h-4 accent-maroon-600" />
                   <span className="text-xs font-black text-ink-400 uppercase tracking-widest">Ubah Jam</span>
                 </label>
                 {bulkEditForm.changeTime && (
                   <div className="grid grid-cols-2 gap-3 mt-2">
                     <div>
                       <label className="block text-[10px] font-black text-ink-400 uppercase tracking-widest mb-1.5">Mulai</label>
-                      <input type="time" required className="w-full px-3 py-2.5 bg-white border border-stone-200 rounded-xl font-bold text-brand-blue-950 text-sm focus:ring-2 focus:ring-brand-blue-400 outline-none" value={bulkEditForm.start_time} onChange={e => setBulkEditForm({...bulkEditForm, start_time: e.target.value})} />
+                      <input type="time" required className="w-full px-3 py-2.5 bg-white border border-stone-200 rounded-xl font-bold text-maroon-950 text-sm focus:ring-2 focus:ring-maroon-400 outline-none" value={bulkEditForm.start_time} onChange={e => setBulkEditForm({...bulkEditForm, start_time: e.target.value})} />
                     </div>
                     <div>
                       <label className="block text-[10px] font-black text-ink-400 uppercase tracking-widest mb-1.5">Selesai</label>
-                      <input type="time" required className="w-full px-3 py-2.5 bg-white border border-stone-200 rounded-xl font-bold text-brand-blue-950 text-sm focus:ring-2 focus:ring-brand-blue-400 outline-none" value={bulkEditForm.end_time} onChange={e => setBulkEditForm({...bulkEditForm, end_time: e.target.value})} />
+                      <input type="time" required className="w-full px-3 py-2.5 bg-white border border-stone-200 rounded-xl font-bold text-maroon-950 text-sm focus:ring-2 focus:ring-maroon-400 outline-none" value={bulkEditForm.end_time} onChange={e => setBulkEditForm({...bulkEditForm, end_time: e.target.value})} />
                     </div>
                   </div>
                 )}
               </div>
 
               {/* Lokasi */}
-              <div className={`p-4 rounded-2xl border-2 transition-all ${bulkEditForm.changeLocation ? 'border-brand-blue-300 bg-brand-blue-50/30' : 'border-stone-100 bg-stone-50/50'}`}>
+              <div className={`p-4 rounded-2xl border-2 transition-all ${bulkEditForm.changeLocation ? 'border-maroon-300 bg-maroon-50/30' : 'border-stone-100 bg-stone-50/50'}`}>
                 <label className="flex items-center gap-3 cursor-pointer mb-3">
-                  <input type="checkbox" checked={bulkEditForm.changeLocation} onChange={e => setBulkEditForm({...bulkEditForm, changeLocation: e.target.checked})} className="w-4 h-4 accent-brand-blue-600" />
+                  <input type="checkbox" checked={bulkEditForm.changeLocation} onChange={e => setBulkEditForm({...bulkEditForm, changeLocation: e.target.checked})} className="w-4 h-4 accent-maroon-600" />
                   <span className="text-xs font-black text-ink-400 uppercase tracking-widest">Ubah Lokasi</span>
                 </label>
                 {bulkEditForm.changeLocation && (
-                  <input type="text" placeholder="Online / Zoom / Pesantren" className="w-full px-3 py-2.5 bg-white border border-stone-200 rounded-xl font-bold text-brand-blue-950 text-sm focus:ring-2 focus:ring-brand-blue-400 outline-none mt-2" value={bulkEditForm.location} onChange={e => setBulkEditForm({...bulkEditForm, location: e.target.value})} />
+                  <input type="text" placeholder="Online / Zoom / Pesantren" className="w-full px-3 py-2.5 bg-white border border-stone-200 rounded-xl font-bold text-maroon-950 text-sm focus:ring-2 focus:ring-maroon-400 outline-none mt-2" value={bulkEditForm.location} onChange={e => setBulkEditForm({...bulkEditForm, location: e.target.value})} />
                 )}
               </div>
 
               {/* Catatan */}
-              <div className={`p-4 rounded-2xl border-2 transition-all ${bulkEditForm.changeNotes ? 'border-brand-blue-300 bg-brand-blue-50/30' : 'border-stone-100 bg-stone-50/50'}`}>
+              <div className={`p-4 rounded-2xl border-2 transition-all ${bulkEditForm.changeNotes ? 'border-maroon-300 bg-maroon-50/30' : 'border-stone-100 bg-stone-50/50'}`}>
                 <label className="flex items-center gap-3 cursor-pointer mb-3">
-                  <input type="checkbox" checked={bulkEditForm.changeNotes} onChange={e => setBulkEditForm({...bulkEditForm, changeNotes: e.target.checked})} className="w-4 h-4 accent-brand-blue-600" />
+                  <input type="checkbox" checked={bulkEditForm.changeNotes} onChange={e => setBulkEditForm({...bulkEditForm, changeNotes: e.target.checked})} className="w-4 h-4 accent-maroon-600" />
                   <span className="text-xs font-black text-ink-400 uppercase tracking-widest">Ubah Catatan</span>
                 </label>
                 {bulkEditForm.changeNotes && (
-                  <textarea rows={2} placeholder="Catatan untuk semua sesi..." className="w-full px-3 py-2.5 bg-white border border-stone-200 rounded-xl font-bold text-brand-blue-950 text-sm focus:ring-2 focus:ring-brand-blue-400 outline-none resize-none mt-2" value={bulkEditForm.notes} onChange={e => setBulkEditForm({...bulkEditForm, notes: e.target.value})} />
+                  <textarea rows={2} placeholder="Catatan untuk semua sesi..." className="w-full px-3 py-2.5 bg-white border border-stone-200 rounded-xl font-bold text-maroon-950 text-sm focus:ring-2 focus:ring-maroon-400 outline-none resize-none mt-2" value={bulkEditForm.notes} onChange={e => setBulkEditForm({...bulkEditForm, notes: e.target.value})} />
                 )}
               </div>
 
@@ -1262,7 +1262,7 @@ export default function JadwalPengujiPage() {
 
               <div className="flex gap-3 pt-2">
                 <button type="button" onClick={() => setIsBulkEditModalOpen(false)} className="flex-1 py-3.5 border border-stone-200 text-stone-600 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-stone-50 transition-all">Batal</button>
-                <button type="submit" disabled={submittingBulkEdit || (!bulkEditForm.changeTime && !bulkEditForm.changeLocation && !bulkEditForm.changeNotes)} className="flex-1 py-3.5 bg-brand-blue-600 hover:bg-brand-blue-700 disabled:opacity-40 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-lg shadow-brand-blue-600/20">
+                <button type="submit" disabled={submittingBulkEdit || (!bulkEditForm.changeTime && !bulkEditForm.changeLocation && !bulkEditForm.changeNotes)} className="flex-1 py-3.5 bg-maroon-600 hover:bg-maroon-700 disabled:opacity-40 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-lg shadow-maroon-600/20">
                   {submittingBulkEdit ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                   Simpan {selectedSlotIds.size} Sesi
                 </button>
@@ -1274,11 +1274,11 @@ export default function JadwalPengujiPage() {
 
       {/* MODAL EDIT SLOT */}
       {isEditModalOpen && editingSlot && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-brand-blue-950/40 backdrop-blur-md animate-in fade-in duration-300">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-maroon-950/40 backdrop-blur-md animate-in fade-in duration-300">
           <div className="bg-white rounded-[32px] shadow-2xl w-full max-w-md overflow-hidden border border-white/20 animate-in zoom-in-95 duration-300">
             <div className="p-6 border-b border-stone-100 flex justify-between items-center bg-stone-50/50">
               <div>
-                <h3 className="text-xl font-black text-brand-blue-950 tracking-tight leading-none">Edit Sesi</h3>
+                <h3 className="text-xl font-black text-maroon-950 tracking-tight leading-none">Edit Sesi</h3>
                 <p className="text-[10px] text-ink-300 font-bold uppercase tracking-widest mt-1.5">{editingSlot.title || "Sesi Seleksi"}</p>
               </div>
               <button
@@ -1296,7 +1296,7 @@ export default function JadwalPengujiPage() {
                 <input
                   type="date"
                   required
-                  className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-brand-blue-500 outline-none font-bold text-brand-blue-950 transition-all"
+                  className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-maroon-500 outline-none font-bold text-maroon-950 transition-all"
                   value={editForm.date}
                   onChange={e => setEditForm({ ...editForm, date: e.target.value })}
                 />
@@ -1309,7 +1309,7 @@ export default function JadwalPengujiPage() {
                   <input
                     type="time"
                     required
-                    className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-brand-blue-500 outline-none font-bold text-brand-blue-950"
+                    className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-maroon-500 outline-none font-bold text-maroon-950"
                     value={editForm.start_time}
                     onChange={e => setEditForm({ ...editForm, start_time: e.target.value })}
                   />
@@ -1319,7 +1319,7 @@ export default function JadwalPengujiPage() {
                   <input
                     type="time"
                     required
-                    className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-brand-blue-500 outline-none font-bold text-brand-blue-950"
+                    className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-maroon-500 outline-none font-bold text-maroon-950"
                     value={editForm.end_time}
                     onChange={e => setEditForm({ ...editForm, end_time: e.target.value })}
                   />
@@ -1332,7 +1332,7 @@ export default function JadwalPengujiPage() {
                 <input
                   type="text"
                   placeholder="Online / Zoom / Pesantren"
-                  className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-brand-blue-500 outline-none font-bold text-brand-blue-950"
+                  className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-maroon-500 outline-none font-bold text-maroon-950"
                   value={editForm.location}
                   onChange={e => setEditForm({ ...editForm, location: e.target.value })}
                 />
@@ -1344,7 +1344,7 @@ export default function JadwalPengujiPage() {
                 <textarea
                   rows={2}
                   placeholder="Catatan tambahan..."
-                  className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-brand-blue-500 outline-none font-bold text-brand-blue-950 resize-none"
+                  className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-maroon-500 outline-none font-bold text-maroon-950 resize-none"
                   value={editForm.notes}
                   onChange={e => setEditForm({ ...editForm, notes: e.target.value })}
                 />
@@ -1362,7 +1362,7 @@ export default function JadwalPengujiPage() {
                 <button
                   type="submit"
                   disabled={submittingEdit}
-                  className="flex-1 py-3.5 bg-brand-blue-600 hover:bg-brand-blue-700 disabled:opacity-50 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-lg shadow-brand-blue-600/20"
+                  className="flex-1 py-3.5 bg-maroon-600 hover:bg-maroon-700 disabled:opacity-50 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-lg shadow-maroon-600/20"
                 >
                   {submittingEdit ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                   Simpan Perubahan
@@ -1375,12 +1375,12 @@ export default function JadwalPengujiPage() {
 
       {/* MODAL CREATE SLOT */}
       {isSlotModalOpen && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-brand-blue-950/40 backdrop-blur-md animate-in fade-in duration-300">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-maroon-950/40 backdrop-blur-md animate-in fade-in duration-300">
           <div className="bg-white rounded-[32px] shadow-2xl w-full max-w-md overflow-hidden border border-white/20 animate-in zoom-in-95 duration-300">
             {/* Header */}
             <div className="p-6 border-b border-stone-100 flex justify-between items-center bg-stone-50/50">
               <div>
-                <h3 className="text-xl font-black text-brand-blue-950 tracking-tight leading-none">Buat Sesi Baru</h3>
+                <h3 className="text-xl font-black text-maroon-950 tracking-tight leading-none">Buat Sesi Baru</h3>
                 <p className="text-[10px] text-ink-300 font-bold uppercase tracking-widest mt-1.5">Single Availability Slot</p>
               </div>
               <button 
@@ -1398,7 +1398,7 @@ export default function JadwalPengujiPage() {
                   <label className="block text-xs font-black text-ink-400 uppercase tracking-widest mb-2">Jenis Ujian</label>
                   <select
                     required
-                    className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-brand-blue-500 outline-none font-bold text-brand-blue-950 transition-all"
+                    className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-maroon-500 outline-none font-bold text-maroon-950 transition-all"
                     value={slotForm.title}
                     onChange={e => setSlotForm({ ...slotForm, title: e.target.value })}
                   >
@@ -1411,8 +1411,8 @@ export default function JadwalPengujiPage() {
               ) : (
                 <div>
                   <label className="block text-xs font-black text-ink-400 uppercase tracking-widest mb-2">Jenis Ujian</label>
-                  <div className="w-full px-4 py-3 bg-brand-blue-50/50 border border-brand-blue-100 rounded-xl text-brand-blue-900 font-black flex items-center gap-2 shadow-inner">
-                    <div className="w-2 h-2 rounded-full bg-brand-blue-500 animate-pulse"></div>
+                  <div className="w-full px-4 py-3 bg-maroon-50/50 border border-maroon-100 rounded-xl text-maroon-900 font-black flex items-center gap-2 shadow-inner">
+                    <div className="w-2 h-2 rounded-full bg-maroon-500 animate-pulse"></div>
                     {slotForm.title || "—"}
                   </div>
                   <p className="text-[10px] text-ink-300 italic mt-2">*Jenis ujian otomatis sesuai role akun Anda.</p>
@@ -1425,7 +1425,7 @@ export default function JadwalPengujiPage() {
                 <input
                   type="date"
                   required
-                  className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-brand-blue-500 outline-none font-bold text-brand-blue-950 transition-all"
+                  className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-maroon-500 outline-none font-bold text-maroon-950 transition-all"
                   value={slotForm.date}
                   onChange={e => setSlotForm({ ...slotForm, date: e.target.value })}
                 />
@@ -1438,7 +1438,7 @@ export default function JadwalPengujiPage() {
                   <input
                     type="time"
                     required
-                    className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-brand-blue-500 outline-none font-bold text-brand-blue-950"
+                    className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-maroon-500 outline-none font-bold text-maroon-950"
                     value={slotForm.start_time}
                     onChange={e => {
                       const newStart = e.target.value;
@@ -1461,7 +1461,7 @@ export default function JadwalPengujiPage() {
                   <input
                     type="time"
                     required
-                    className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-brand-blue-500 outline-none font-bold text-brand-blue-950"
+                    className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-maroon-500 outline-none font-bold text-maroon-950"
                     value={slotForm.end_time}
                     onChange={e => setSlotForm({ ...slotForm, end_time: e.target.value })}
                   />
@@ -1471,15 +1471,15 @@ export default function JadwalPengujiPage() {
 
               {/* Alerts */}
               <div className="space-y-3">
-                <div className="bg-brand-blue-600 rounded-2xl p-4 shadow-lg shadow-brand-blue-950/20 text-white flex items-start gap-3 relative overflow-hidden group">
+                <div className="bg-maroon-600 rounded-2xl p-4 shadow-lg shadow-maroon-950/20 text-white flex items-start gap-3 relative overflow-hidden group">
                   <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -mr-10 -mt-10 blur-xl"></div>
                   <div className="w-8 h-8 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center shrink-0">
                     <span className="text-sm">✨</span>
                   </div>
                   <div>
-                    <p className="text-[10px] text-brand-blue-100 font-black uppercase tracking-widest mb-0.5">Informasi Otomatis</p>
+                    <p className="text-[10px] text-maroon-100 font-black uppercase tracking-widest mb-0.5">Informasi Otomatis</p>
                     <p className="text-[11px] leading-relaxed font-bold">
-                      Sesi ini diatur sebagai <span className="text-brand-yellow-300">Full Online</span>. Link Meet akan otomatis diambil dari profil Anda.
+                      Sesi ini diatur sebagai <span className="text-gold-300">Full Online</span>. Link Meet akan otomatis diambil dari profil Anda.
                     </p>
                   </div>
                 </div>
@@ -1500,7 +1500,7 @@ export default function JadwalPengujiPage() {
               <button
                 type="submit"
                 disabled={submittingSlot}
-                className="w-full py-4 bg-brand-blue-600 hover:bg-brand-blue-700 text-white font-black rounded-2xl transition-all shadow-xl shadow-brand-blue-900/20 flex items-center justify-center gap-2 active:scale-95 disabled:opacity-50"
+                className="w-full py-4 bg-maroon-600 hover:bg-maroon-700 text-white font-black rounded-2xl transition-all shadow-xl shadow-maroon-900/20 flex items-center justify-center gap-2 active:scale-95 disabled:opacity-50"
               >
                 {submittingSlot ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
                 SIMPAN SESI KETERSEDIAAN
@@ -1610,12 +1610,12 @@ export default function JadwalPengujiPage() {
 
       {/* MODAL BULK CREATE SLOT */}
       {isBulkModalOpen && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-brand-blue-950/40 backdrop-blur-md animate-in fade-in duration-300">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-maroon-950/40 backdrop-blur-md animate-in fade-in duration-300">
           <div className="bg-white rounded-[40px] shadow-2xl w-full max-w-lg max-h-[90vh] flex flex-col animate-in zoom-in-95 duration-300 border border-white/20">
             {/* Header */}
             <div className="p-8 border-b border-stone-100 flex justify-between items-center bg-stone-50/50 rounded-t-[40px] shrink-0">
               <div>
-                <h3 className="text-2xl font-black text-brand-blue-950 tracking-tight leading-tight">Buat Jadwal Massal</h3>
+                <h3 className="text-2xl font-black text-maroon-950 tracking-tight leading-tight">Buat Jadwal Massal</h3>
                 <p className="text-xs text-ink-300 font-bold uppercase tracking-widest mt-2">Bulk Availability Scheduler</p>
               </div>
               <button 
@@ -1628,12 +1628,12 @@ export default function JadwalPengujiPage() {
             
             <form onSubmit={handleCreateBulk} className="p-10 space-y-8 overflow-y-auto overscroll-contain custom-scrollbar flex-1">
               {/* Jenis Ujian Info */}
-              <div className="bg-brand-blue-600 rounded-3xl p-6 shadow-xl shadow-brand-blue-950/20 text-white relative overflow-hidden">
+              <div className="bg-maroon-600 rounded-3xl p-6 shadow-xl shadow-maroon-950/20 text-white relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
-                <p className="text-[10px] text-brand-blue-100 font-black uppercase tracking-widest mb-1.5 leading-none">Mata Ujian Terpilih</p>
+                <p className="text-[10px] text-maroon-100 font-black uppercase tracking-widest mb-1.5 leading-none">Mata Ujian Terpilih</p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center text-xl shadow-inner">
-                    <Trophy className="w-5 h-5 text-brand-yellow-300" />
+                    <Trophy className="w-5 h-5 text-gold-300" />
                   </div>
                   <p className="text-2xl font-black tracking-tight text-white">{bulkForm.title || "—"}</p>
                 </div>
@@ -1661,8 +1661,8 @@ export default function JadwalPengujiPage() {
                         onClick={() => toggleDay(day.id)}
                         className={`px-4 py-2.5 rounded-2xl text-xs font-black transition-all border relative flex flex-col items-center min-w-[70px] ${isSelected 
                           ? (isActive 
-                              ? "bg-brand-blue-700 text-white border-brand-blue-800 shadow-lg scale-105 z-10" 
-                              : "bg-brand-blue-50 text-brand-blue-700 border-brand-blue-100 hover:bg-brand-blue-100")
+                              ? "bg-maroon-700 text-white border-maroon-800 shadow-lg scale-105 z-10" 
+                              : "bg-maroon-50 text-maroon-700 border-maroon-100 hover:bg-maroon-100")
                           : "bg-stone-50 text-stone-400 border-stone-200 hover:bg-stone-100"}`}
                       >
                         {day.label}
@@ -1670,14 +1670,14 @@ export default function JadwalPengujiPage() {
                           <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white shadow-sm" />
                         )}
                         {isActive && (
-                          <div className="mt-1 w-5 h-1 bg-brand-yellow-400 rounded-full"></div>
+                          <div className="mt-1 w-5 h-1 bg-gold-400 rounded-full"></div>
                         )}
                       </button>
                     );
                   })}
                 </div>
                 <p className="text-[10px] text-ink-300 italic mt-3 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-blue-400"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-maroon-400"></span>
                   Klik untuk aktifkan hari, klik lagi untuk atur jam spesifik hari tersebut.
                 </p>
               </div>
@@ -1689,7 +1689,7 @@ export default function JadwalPengujiPage() {
                   <input
                     type="date"
                     required
-                    className="w-full px-4 py-3 bg-white border border-stone-200 rounded-2xl focus:ring-2 focus:ring-brand-blue-500 outline-none font-black text-brand-blue-950 shadow-sm"
+                    className="w-full px-4 py-3 bg-white border border-stone-200 rounded-2xl focus:ring-2 focus:ring-maroon-500 outline-none font-black text-maroon-950 shadow-sm"
                     value={bulkForm.startDate}
                     onChange={e => setBulkForm({ ...bulkForm, startDate: e.target.value })}
                   />
@@ -1699,7 +1699,7 @@ export default function JadwalPengujiPage() {
                   <input
                     type="date"
                     required
-                    className="w-full px-4 py-3 bg-white border border-stone-200 rounded-2xl focus:ring-2 focus:ring-brand-blue-500 outline-none font-black text-brand-blue-950 shadow-sm"
+                    className="w-full px-4 py-3 bg-white border border-stone-200 rounded-2xl focus:ring-2 focus:ring-maroon-500 outline-none font-black text-maroon-950 shadow-sm"
                     value={bulkForm.endDate}
                     onChange={e => setBulkForm({ ...bulkForm, endDate: e.target.value })}
                   />
@@ -1711,7 +1711,7 @@ export default function JadwalPengujiPage() {
                 <div className="flex items-center justify-between mb-6 border-b border-stone-200 pb-4">
                   <div>
                     <label className="block text-[10px] text-ink-300 font-black uppercase tracking-[0.2em] mb-1">Pengaturan Sesi:</label>
-                    <span className="text-xl font-black text-brand-blue-800">{
+                    <span className="text-xl font-black text-maroon-800">{
                       ["Ahad", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"][activeDay]
                     }</span>
                   </div>
@@ -1719,7 +1719,7 @@ export default function JadwalPengujiPage() {
                     <button 
                       type="button" 
                       onClick={copySlotsToAll}
-                      className="text-[10px] bg-brand-blue-600 text-white px-3 py-2 rounded-xl font-black hover:bg-brand-blue-700 transition-all shadow-md active:scale-95 flex items-center gap-2"
+                      className="text-[10px] bg-maroon-600 text-white px-3 py-2 rounded-xl font-black hover:bg-maroon-700 transition-all shadow-md active:scale-95 flex items-center gap-2"
                     >
                       <Save className="w-3 h-3" /> SALIN KE SEMUA HARI
                     </button>
@@ -1734,7 +1734,7 @@ export default function JadwalPengujiPage() {
                           <input
                             type="time"
                             required
-                            className="w-full bg-stone-50 border border-stone-100 rounded-2xl px-4 py-3 text-sm font-black text-brand-blue-950 focus:ring-2 focus:ring-brand-blue-500 outline-none"
+                            className="w-full bg-stone-50 border border-stone-100 rounded-2xl px-4 py-3 text-sm font-black text-maroon-950 focus:ring-2 focus:ring-maroon-500 outline-none"
                             value={slot.start}
                             onChange={e => {
                               const newStart = e.target.value;
@@ -1758,7 +1758,7 @@ export default function JadwalPengujiPage() {
                           <input
                             type="time"
                             required
-                            className="w-full bg-stone-50 border border-stone-100 rounded-2xl px-4 py-3 text-sm font-black text-brand-blue-950 focus:ring-2 focus:ring-brand-blue-500 outline-none"
+                            className="w-full bg-stone-50 border border-stone-100 rounded-2xl px-4 py-3 text-sm font-black text-maroon-950 focus:ring-2 focus:ring-maroon-500 outline-none"
                             value={slot.end}
                             onChange={e => {
                               const newSlots = [...(bulkForm.daySlots[activeDay] || [])];
@@ -1781,7 +1781,7 @@ export default function JadwalPengujiPage() {
                   <button
                     type="button"
                     onClick={addTimeSlot}
-                    className="w-full py-4 border-2 border-dashed border-stone-200 rounded-[28px] text-[10px] font-black text-stone-400 hover:border-brand-blue-300 hover:text-brand-blue-600 hover:bg-brand-blue-50 transition-all flex items-center justify-center gap-2 tracking-[0.2em]"
+                    className="w-full py-4 border-2 border-dashed border-stone-200 rounded-[28px] text-[10px] font-black text-stone-400 hover:border-maroon-300 hover:text-maroon-600 hover:bg-maroon-50 transition-all flex items-center justify-center gap-2 tracking-[0.2em]"
                   >
                     <Plus className="w-4 h-4" /> TAMBAH JAM LAIN
                   </button>
@@ -1789,14 +1789,14 @@ export default function JadwalPengujiPage() {
               </div>
 
               {/* Informational Alert */}
-              <div className="bg-brand-yellow-50 rounded-3xl p-6 border border-brand-yellow-100 flex items-start gap-4">
-                <div className="w-10 h-10 bg-brand-yellow-400 rounded-2xl flex items-center justify-center shrink-0 text-brand-blue-950">
+              <div className="bg-gold-50 rounded-3xl p-6 border border-gold-100 flex items-start gap-4">
+                <div className="w-10 h-10 bg-gold-400 rounded-2xl flex items-center justify-center shrink-0 text-maroon-950">
                   <AlertCircle className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-xs font-black text-brand-yellow-800 uppercase tracking-widest mb-1">Informasi Otomatis</p>
-                  <p className="text-[11px] text-brand-blue-900 leading-relaxed font-bold">
-                    Semua sesi yang dibuat massal akan otomatis diset sebagai <span className="text-brand-blue-600">Online</span> dan memiliki <span className="text-emerald-600">Kuota 1 Santri</span>.
+                  <p className="text-xs font-black text-gold-800 uppercase tracking-widest mb-1">Informasi Otomatis</p>
+                  <p className="text-[11px] text-maroon-900 leading-relaxed font-bold">
+                    Semua sesi yang dibuat massal akan otomatis diset sebagai <span className="text-maroon-600">Online</span> dan memiliki <span className="text-emerald-600">Kuota 1 Santri</span>.
                   </p>
                 </div>
               </div>
@@ -1804,7 +1804,7 @@ export default function JadwalPengujiPage() {
               <button
                 type="submit"
                 disabled={submittingBulk}
-                className="w-full py-5 bg-brand-blue-600 hover:bg-brand-blue-700 text-white font-black rounded-[32px] transition-all shadow-2xl shadow-brand-blue-900/40 flex items-center justify-center gap-3 active:scale-95 disabled:opacity-50 text-lg tracking-tight"
+                className="w-full py-5 bg-maroon-600 hover:bg-maroon-700 text-white font-black rounded-[32px] transition-all shadow-2xl shadow-maroon-900/40 flex items-center justify-center gap-3 active:scale-95 disabled:opacity-50 text-lg tracking-tight"
               >
                 {submittingBulk ? <Loader2 className="w-6 h-6 animate-spin" /> : <Save className="w-6 h-6" />}
                 BUAT JADWAL RUTIN SEKARANG

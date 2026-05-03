@@ -114,7 +114,7 @@ export default function ExamCardPage() {
                             {/* Text Info (More Padding) */}
                             <div className="flex-grow pl-8 text-left">
                                 <p className="text-[11px] font-sans font-medium text-stone-500 uppercase tracking-widest leading-tight">{PDF_BRANDING.institution.subtitle}</p>
-                                <h1 className="text-2xl font-serif font-black uppercase text-brand-blue-900 mb-1 leading-tight tracking-tight">{PDF_BRANDING.institution.committee}</h1>
+                                <h1 className="text-2xl font-serif font-black uppercase text-maroon-900 mb-1 leading-tight tracking-tight">{PDF_BRANDING.institution.committee}</h1>
                                 <p className="text-sm font-serif font-bold text-gray-800 mb-1">Tahun Ajaran {PDF_BRANDING.institution.academic_year}</p>
                                 <div className="text-[9px] leading-tight font-sans text-stone-400 mt-2">
                                     <p>{PDF_BRANDING.institution.address}</p>

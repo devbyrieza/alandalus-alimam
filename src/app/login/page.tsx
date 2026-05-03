@@ -60,7 +60,7 @@ const AuthInput = ({
   <div className="space-y-3">
     <label className="text-[10px] font-black text-ink-600 uppercase tracking-[0.2em] ml-1">{label}</label>
     <div className="relative group">
-      <div className="absolute left-5 md:left-6 top-0 bottom-0 flex items-center text-ink-500 group-focus-within:text-brand-blue-600 transition-colors duration-300 pointer-events-none">
+      <div className="absolute left-5 md:left-6 top-0 bottom-0 flex items-center text-ink-500 group-focus-within:text-maroon-600 transition-colors duration-300 pointer-events-none">
         <Icon className="w-5 h-5" />
       </div>
       {children}
@@ -249,7 +249,7 @@ export default function LoginPage() {
           className="text-center mb-12"
         >
           <Link href="/">
-            <div className="app-card inline-flex items-center justify-center w-20 h-20 bg-white rounded-3xl shadow-sm border border-brand-blue-100 mb-8 hover:scale-110 transition-transform group overflow-hidden">
+            <div className="app-card inline-flex items-center justify-center w-20 h-20 bg-white rounded-3xl shadow-sm border border-maroon-100 mb-8 hover:scale-110 transition-transform group overflow-hidden">
               <Image 
                 src={BRANDING.logoPath} 
                 alt={"Logo " + BRANDING.schoolName} 
@@ -273,10 +273,10 @@ export default function LoginPage() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1 }}
-          className="app-card w-full max-w-[480px] bg-white rounded-[2.5rem] md:rounded-[4rem] shadow-lg border border-brand-blue-100 p-6 md:p-14 relative overflow-hidden"
+          className="app-card w-full max-w-[480px] bg-white rounded-[2.5rem] md:rounded-[4rem] shadow-lg border border-maroon-100 p-6 md:p-14 relative overflow-hidden"
         >
           {/* Subtle inside gradient */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue-50/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-maroon-50/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
           {/* Tab Switcher - Premium "Pill" style */}
           {!roleSelectionData && (
@@ -334,8 +334,8 @@ export default function LoginPage() {
                   className="space-y-5"
                 >
                   <div className="text-center mb-6">
-                    <div className="w-14 h-14 bg-brand-yellow-100 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-brand-yellow-200">
-                      <Layers className="w-7 h-7 text-brand-blue-700" />
+                    <div className="w-14 h-14 bg-gold-100 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gold-200">
+                      <Layers className="w-7 h-7 text-maroon-700" />
                     </div>
                     <h2 className="text-xl font-black text-ink-950">Selamat datang, {roleSelectionData.full_name.split(' ')[0]}!</h2>
                     <p className="text-sm text-ink-600 font-medium mt-1">Pilih dashboard yang ingin diakses</p>
@@ -483,7 +483,7 @@ export default function LoginPage() {
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-4 md:py-6 rounded-pill bg-brand-yellow-400 text-brand-blue-900 font-black text-lg md:text-xl hover:bg-brand-yellow-500 shadow-xl shadow-brand-yellow-100 border border-brand-yellow-300 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                    className="w-full py-4 md:py-6 rounded-pill bg-gold-400 text-maroon-900 font-black text-lg md:text-xl hover:bg-gold-500 shadow-xl shadow-gold-100 border border-gold-300 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                   >
                     {isLoading ? (
                       <Loader2 className="w-6 h-6 animate-spin" />
@@ -495,8 +495,8 @@ export default function LoginPage() {
                     )}
                   </motion.button>
 
-                  <div className="p-6 bg-cream-50/50 rounded-3xl border border-brand-yellow-100 flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-xl bg-brand-yellow-100 flex items-center justify-center text-brand-blue-700 shrink-0">
+                  <div className="p-6 bg-cream-50/50 rounded-3xl border border-gold-100 flex items-start gap-4">
+                    <div className="w-8 h-8 rounded-xl bg-gold-100 flex items-center justify-center text-maroon-700 shrink-0">
                       <Sparkles className="w-4 h-4" />
                     </div>
                     <p className="text-xs text-ink-600 font-bold leading-relaxed">
@@ -518,9 +518,9 @@ export default function LoginPage() {
         >
           <Link
             href="/"
-            className="group flex items-center gap-3 text-ink-600 hover:text-brand-blue-700 font-black uppercase tracking-[0.2em] text-[10px] transition-all"
+            className="group flex items-center gap-3 text-ink-600 hover:text-maroon-700 font-black uppercase tracking-[0.2em] text-[10px] transition-all"
           >
-            <div className="w-8 h-8 rounded-full bg-brand-blue-50 border border-brand-blue-100 flex items-center justify-center group-hover:scale-110 transition-transform">
+            <div className="w-8 h-8 rounded-full bg-maroon-50 border border-maroon-100 flex items-center justify-center group-hover:scale-110 transition-transform">
               <ArrowLeft className="w-4 h-4" />
             </div>
             Kembali ke Beranda

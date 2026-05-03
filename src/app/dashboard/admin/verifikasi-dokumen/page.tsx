@@ -142,14 +142,14 @@ export default function VerifikasiDokumenPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white rounded-2xl shadow-sm p-4 md:p-8 border border-brand-yellow-100 mb-8">
+      <div className="bg-white rounded-2xl shadow-sm p-4 md:p-8 border border-gold-100 mb-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-3 md:gap-5">
-            <div className="p-2.5 md:p-4 bg-linear-to-br from-brand-blue-600 to-brand-blue-900 rounded-2xl shadow-xl shadow-brand-blue-900/20 flex-shrink-0">
-              <FileCheck className="w-6 h-6 md:w-8 md:h-8 text-brand-yellow-100" />
+            <div className="p-2.5 md:p-4 bg-linear-to-br from-maroon-600 to-maroon-900 rounded-2xl shadow-xl shadow-maroon-900/20 flex-shrink-0">
+              <FileCheck className="w-6 h-6 md:w-8 md:h-8 text-gold-100" />
             </div>
             <div>
-              <h1 className="text-lg md:text-3xl font-black text-brand-blue-950 tracking-tight leading-none mb-1">Verifikasi Dokumen</h1>
+              <h1 className="text-lg md:text-3xl font-black text-maroon-950 tracking-tight leading-none mb-1">Verifikasi Dokumen</h1>
               <p className="text-sm text-ink-400 font-bold tracking-wide">Kelola dan verifikasi berkas pendaftaran santri</p>
             </div>
           </div>
@@ -182,15 +182,15 @@ export default function VerifikasiDokumenPage() {
         </div>
 
         {/* Global Filter Bar */}
-        <div className="flex flex-col gap-3 md:gap-6 pt-6 border-t border-brand-yellow-50">
+        <div className="flex flex-col gap-3 md:gap-6 pt-6 border-t border-gold-50">
           <div className="relative flex-1 group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-300 group-focus-within:text-brand-blue-600 transition-colors" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-300 group-focus-within:text-maroon-600 transition-colors" />
             <input
               type="text"
               placeholder="Cari nama atau nomor pendaftaran..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 bg-brand-yellow-50/50 border border-brand-yellow-100 rounded-2xl focus:border-brand-blue-500 focus:bg-white focus:outline-none transition-all text-sm md:text-base font-bold text-brand-blue-950 placeholder:text-ink-300"
+              className="w-full pl-12 pr-4 py-4 bg-gold-50/50 border border-gold-100 rounded-2xl focus:border-maroon-500 focus:bg-white focus:outline-none transition-all text-sm md:text-base font-bold text-maroon-950 placeholder:text-ink-300"
             />
           </div>
           <div className="flex flex-wrap gap-2">
@@ -203,8 +203,8 @@ export default function VerifikasiDokumenPage() {
                 key={s.id}
                 onClick={() => setStatusFilter(s.id)}
                 className={`px-4 md:px-8 py-3 rounded-2xl font-black transition-all text-sm md:text-base whitespace-nowrap active:scale-95 ${statusFilter === s.id
-                  ? "bg-brand-blue-700 text-white shadow-lg shadow-brand-blue-700/30 ring-2 ring-brand-blue-500/20"
-                  : "bg-white border border-brand-yellow-200 text-ink-400 hover:bg-brand-yellow-50 hover:text-brand-blue-700"
+                  ? "bg-maroon-700 text-white shadow-lg shadow-maroon-700/30 ring-2 ring-maroon-500/20"
+                  : "bg-white border border-gold-200 text-ink-400 hover:bg-gold-50 hover:text-maroon-700"
                   }`}
               >
                 {s.label}
@@ -215,16 +215,16 @@ export default function VerifikasiDokumenPage() {
       </div>
 
       {loading && pendaftarList.length === 0 ? (
-        <div className="flex flex-col items-center justify-center p-20 bg-white rounded-3xl border border-brand-yellow-100">
-          <Loader2 className="w-12 h-12 animate-spin text-brand-blue-600 mb-4" />
+        <div className="flex flex-col items-center justify-center p-20 bg-white rounded-3xl border border-gold-100">
+          <Loader2 className="w-12 h-12 animate-spin text-maroon-600 mb-4" />
           <p className="text-ink-400 font-bold tracking-wide">Mengambil data pendaftar...</p>
         </div>
       ) : (
         <>
           {refreshing && (
             <div className="flex items-center justify-center py-2 mb-2">
-              <Loader2 className="w-5 h-5 animate-spin text-brand-blue-600 mr-2" />
-              <span className="text-xs font-bold text-brand-blue-600">Memperbarui data...</span>
+              <Loader2 className="w-5 h-5 animate-spin text-maroon-600 mr-2" />
+              <span className="text-xs font-bold text-maroon-600">Memperbarui data...</span>
             </div>
           )}
           {filteredList.length === 0 ? (
@@ -246,25 +246,25 @@ export default function VerifikasiDokumenPage() {
                   <Link
                     key={pendaftar.id}
                     href={`/dashboard/admin/verifikasi-dokumen/${pendaftar.id}`}
-                    className="group bg-white rounded-3xl border border-brand-yellow-100 hover:border-brand-blue-400 p-6 transition-all hover:shadow-xl hover:shadow-brand-blue-900/5 relative overflow-hidden"
+                    className="group bg-white rounded-3xl border border-gold-100 hover:border-maroon-400 p-6 transition-all hover:shadow-xl hover:shadow-maroon-900/5 relative overflow-hidden"
                   >
                     {/* Background Decor */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-brand-blue-50 to-brand-yellow-50 -mr-16 -mt-16 rounded-full opacity-50 transition-transform group-hover:scale-110" />
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-maroon-50 to-gold-50 -mr-16 -mt-16 rounded-full opacity-50 transition-transform group-hover:scale-110" />
 
                     <div className="relative">
                       <div className="flex items-center gap-4 mb-6">
-                        <div className="w-14 h-14 bg-brand-yellow-100 rounded-2xl flex items-center justify-center group-hover:from-brand-blue-600 group-hover:to-brand-blue-900 transition-all duration-500 shadow-inner border border-brand-yellow-200">
-                          <User className="w-6 h-6 text-brand-blue-400 group-hover:text-white transition-colors" />
+                        <div className="w-14 h-14 bg-gold-100 rounded-2xl flex items-center justify-center group-hover:from-maroon-600 group-hover:to-maroon-900 transition-all duration-500 shadow-inner border border-gold-200">
+                          <User className="w-6 h-6 text-maroon-400 group-hover:text-white transition-colors" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-black text-brand-blue-950 truncate group-hover:text-brand-blue-700 transition-colors leading-tight mb-1">
+                          <h3 className="font-black text-maroon-950 truncate group-hover:text-maroon-700 transition-colors leading-tight mb-1">
                             {toTitleCase(pendaftar.nama_lengkap)}
                           </h3>
                           <div className="flex items-center gap-2">
-                            <span className="text-xs font-mono font-black text-brand-blue-400 bg-brand-blue-50 px-2 py-0.5 rounded">
+                            <span className="text-xs font-mono font-black text-maroon-400 bg-maroon-50 px-2 py-0.5 rounded">
                               {pendaftar.nomor_pendaftaran}
                             </span>
-                            <span className="text-[10px] font-black uppercase tracking-widest text-brand-blue-700 bg-brand-yellow-100 border border-brand-yellow-200 px-2 py-0.5 rounded shadow-xs">
+                            <span className="text-[10px] font-black uppercase tracking-widest text-maroon-700 bg-gold-100 border border-gold-200 px-2 py-0.5 rounded shadow-xs">
                               {pendaftar.jenjang}
                             </span>
                           </div>
@@ -275,11 +275,11 @@ export default function VerifikasiDokumenPage() {
                       <div className="space-y-3 mb-6">
                         <div className="flex items-center justify-between text-xs font-black uppercase tracking-widest leading-none">
                           <span className="text-ink-300">Penyelesaian Verifikasi</span>
-                          <span className="text-brand-blue-700">{percentage}%</span>
+                          <span className="text-maroon-700">{percentage}%</span>
                         </div>
-                        <div className="h-2.5 bg-brand-yellow-100/50 rounded-full overflow-hidden shadow-inner border border-brand-yellow-50">
+                        <div className="h-2.5 bg-gold-100/50 rounded-full overflow-hidden shadow-inner border border-gold-50">
                           <div
-                            className="h-full bg-linear-to-r from-brand-blue-500 to-brand-blue-700 rounded-full transition-all duration-1000 ease-out"
+                            className="h-full bg-linear-to-r from-maroon-500 to-maroon-700 rounded-full transition-all duration-1000 ease-out"
                             style={{ width: `${percentage}%` }}
                           />
                         </div>
@@ -295,15 +295,15 @@ export default function VerifikasiDokumenPage() {
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between pt-4 border-t border-brand-yellow-50 group-hover:border-brand-blue-100 transition-colors">
-                        <div className="flex items-center gap-2 text-ink-300 font-black text-[10px] uppercase tracking-widest group-hover:text-brand-blue-600 transition-colors">
+                      <div className="flex items-center justify-between pt-4 border-t border-gold-50 group-hover:border-maroon-100 transition-colors">
+                        <div className="flex items-center gap-2 text-ink-300 font-black text-[10px] uppercase tracking-widest group-hover:text-maroon-600 transition-colors">
                           Proses Verifikasi
                           <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                         </div>
                         {percentage === 100 ? (
                           <CheckCircle className="w-6 h-6 text-emerald-500" />
                         ) : (
-                          <Clock className="w-5 h-5 text-brand-blue-500 animate-pulse" />
+                          <Clock className="w-5 h-5 text-maroon-500 animate-pulse" />
                         )}
                       </div>
                     </div>

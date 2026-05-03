@@ -8,7 +8,7 @@ import { Calendar, Users, GraduationCap, Award, TrendingUp, BookOpen } from 'luc
 
 const STATS = [
   { id: 'batch', label: 'Angkatan Ke-1', value: 1, icon: Calendar, color: 'maroon' as const, suffix: '', sublabel: 'Al-Andalus IIBS' },
-  { id: 'quality', label: 'Standar Global', value: 100, icon: Award, color: 'maroon' as const, suffix: '%', sublabel: 'Kurikulum Unggulan' },
+  { id: 'quality', label: 'Standar Global', value: 100, icon: Award, color: 'maroon' as const, suffix: '%', sublabel: 'Leadership Mastery' },
   { id: 'levels', label: 'Jenjang Tersedia', value: 2, icon: GraduationCap, color: 'maroon' as const, suffix: '', sublabel: 'MTs · IL' },
   { id: 'quota', label: 'Kuota Terbatas', value: 25, icon: Users, color: 'maroon' as const, suffix: '', sublabel: 'Santri (Eksklusif)' },
 ] as const;
@@ -53,7 +53,7 @@ export default function StatsSection() {
     <section className="py-16 md:py-24 bg-white relative overflow-hidden border-b border-cream-200">
       {/* Sophisticated Background Element */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-maroon-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-yellow-100/40 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gold-100/40 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2" />
 
       <Container className="relative z-10">
         <div className="max-w-6xl mx-auto">
@@ -70,7 +70,7 @@ export default function StatsSection() {
               >
                 <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-transform duration-500 group-hover:scale-110 shadow-sm
                   ${stat.color === 'maroon' ? 'bg-maroon-50 text-maroon-600' :
-                  'bg-brand-blue-100 text-brand-blue-800'
+                  'bg-gold-50 text-gold-700'
                   }`}>
                   <stat.icon className="w-6 h-6" />
                 </div>
@@ -112,11 +112,11 @@ export default function StatsSection() {
               <span className="text-[10px] font-bold text-ink-700 uppercase tracking-widest">Pendaftaran Dibuka</span>
             </div>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-cream-50 rounded-pill border border-cream-200">
-              <Award className="w-3.5 h-3.5 text-brand-blue-600" />
+              <Award className="w-3.5 h-3.5 text-maroon-600" />
               <span className="text-[10px] font-bold text-ink-700 uppercase tracking-widest">Resmi Kemendikdasmen</span>
             </div>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-cream-50 rounded-pill border border-cream-200">
-              <TrendingUp className="w-3.5 h-3.5 text-brand-blue-600" />
+              <TrendingUp className="w-3.5 h-3.5 text-maroon-600" />
               <span className="text-[10px] font-bold text-ink-700 uppercase tracking-widest">Kurikulum Terintegrasi</span>
             </div>
           </motion.div>

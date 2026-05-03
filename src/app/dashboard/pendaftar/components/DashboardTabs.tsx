@@ -42,7 +42,7 @@ export default function DashboardTabs({ statusProses }: DashboardTabsProps) {
   ];
 
   return (
-    <div className="w-full bg-white/80 backdrop-blur-md sticky top-0 z-30 border-b border-brand-yellow-100 shadow-sm overflow-hidden rounded-b-[2rem]">
+    <div className="w-full bg-white/80 backdrop-blur-md sticky top-0 z-30 border-b border-gold-100 shadow-sm overflow-hidden rounded-b-[2rem]">
       <div className="max-w-7xl mx-auto flex items-center overflow-x-auto scrollbar-hide px-4 py-2 gap-2 sm:gap-4 no-scrollbar">
         {tabs.map((tab) => {
           const isActive = pathname === tab.href || (tab.id === 'data-pribadi' && pathname === '/dashboard/pendaftar');
@@ -76,17 +76,17 @@ export default function DashboardTabs({ statusProses }: DashboardTabsProps) {
               href={tab.href}
               className={`flex-shrink-0 flex items-center gap-2 px-4 py-3 rounded-2xl transition-all duration-300 relative group ${
                 isActive
-                  ? "bg-brand-blue-900 text-white shadow-brand-blue-200 shadow-lg scale-105"
-                  : "text-ink-600 hover:bg-brand-yellow-50 hover:text-brand-blue-900"
+                  ? "bg-maroon-900 text-white shadow-maroon-200 shadow-lg scale-105"
+                  : "text-ink-600 hover:bg-gold-50 hover:text-maroon-900"
               }`}
             >
-              <Icon className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:scale-110 ${isActive ? 'text-brand-yellow-300' : ''}`} />
+              <Icon className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:scale-110 ${isActive ? 'text-gold-300' : ''}`} />
               <span className={`text-[10px] sm:text-xs font-black uppercase tracking-widest ${isActive ? 'block' : 'hidden md:block'}`}>
                 {tab.label}
               </span>
               
               {isActive && (
-                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-brand-yellow-400 rounded-full" />
+                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-gold-400 rounded-full" />
               )}
             </Link>
           );
