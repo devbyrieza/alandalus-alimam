@@ -103,6 +103,7 @@ export const metadata: Metadata = {
       "Pendidikan berbasis Al-Qur'an dan As-Sunnah sesuai pemahaman salafush shalih.",
     images: ["/twitter-image.jpg"],
     creator: "@alandalus_ppdb",
+
   },
 
   verification: {
@@ -139,7 +140,8 @@ export default function RootLayout({
           content="black-translucent"
         />
         <meta name="color-scheme" content="light only" />
-        <style dangerouslySetInnerHTML={{ __html: `
+        <style dangerouslySetInnerHTML={{
+          __html: `
           :root {
             --brand-primary: ${BRANDING.primaryColor};
             --brand-secondary: ${BRANDING.secondaryColor};
