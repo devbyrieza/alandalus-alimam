@@ -21,7 +21,6 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { motion, type Variants, type Transition } from "framer-motion";
-import { navigateToDetail } from "@/lib/navigation-scroll";
 
 const FACILITIES = [
     { name: "Masjid Kapasitas 1000 Jamaah", icon: Home, color: "maroon" },
@@ -80,7 +79,7 @@ const FACILITY_IMAGES = [
 const iconClasses: Record<string, string> = {
     maroon: "bg-maroon-50 text-maroon-700 ring-maroon-100",
     cream: "bg-cream-100 text-maroon-800 ring-cream-200",
-    gold: "bg-yellow-50 text-yellow-600 ring-yellow-100",
+    gold: "bg-gold-50 text-gold-700 ring-gold-200",
     teal: "bg-teal-50 text-teal-600 ring-teal-100",
     red: "bg-red-50 text-red-600 ring-red-100",
     orange: "bg-orange-50 text-orange-600 ring-orange-100",
@@ -88,7 +87,7 @@ const iconClasses: Record<string, string> = {
     amber: "bg-amber-50 text-amber-600 ring-amber-100",
     emerald: "bg-emerald-50 text-emerald-600 ring-emerald-100",
     cyan: "bg-cyan-50 text-cyan-600 ring-cyan-100",
-    ink: "bg-surface-100 text-ink-600 ring-ink-100",
+    ink: "bg-cream-50 text-ink-600 ring-cream-200",
 };
 
 /* ── Easing & transition helpers ── */
@@ -103,12 +102,12 @@ const springTransition: Transition = {
 const containerVariants: Variants = {
     hidden: {},
     visible: {
-        transition: { staggerChildren: 0.06, delayChildren: 0.1 },
+        transition: { staggerChildren: 0.04, delayChildren: 0.05 },
     },
 };
 
 const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 16, scale: 0.97 },
+    hidden: { opacity: 0, y: 16, scale: 0.98 },
     visible: {
         opacity: 1,
         y: 0,
@@ -121,17 +120,18 @@ const itemVariants: Variants = {
 };
 
 const photoVariants: Variants = {
-    hidden: { opacity: 0, scale: 0.96 },
+    hidden: { opacity: 0, scale: 0.98, y: 16 },
     visible: {
         opacity: 1,
         scale: 1,
+        y: 0,
         transition: springTransition,
     },
 };
 
 export default function FacilitiesSection() {
     return (
-        <section id="fasilitas" className="section-std overflow-hidden">
+        <section id="fasilitas" className="section-std relative overflow-hidden border-b border-cream-100">
             {/* ── Decorative blobs ── */}
             <div
                 aria-hidden
@@ -141,6 +141,7 @@ export default function FacilitiesSection() {
                 aria-hidden
                 className="pointer-events-none absolute -top-16 -left-16 w-[320px] h-[320px] rounded-full bg-maroon-50 blur-[100px] opacity-50"
             />
+            <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
 
             <Container className="relative z-10">
                 {/* ── Section header ── */}
@@ -148,59 +149,51 @@ export default function FacilitiesSection() {
                     <motion.div
                         initial={{ opacity: 0, y: 8 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: true, margin: "-40px" }}
                         transition={{ duration: 0.4, ease: SPRING_EASE }}
-                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full
-                       bg-maroon-50 border border-maroon-100
-                       text-maroon-700 text-xs font-bold uppercase tracking-widest
-                       mb-5 shadow-xs"
+                        className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-gold-200 text-maroon-700 text-[0.65rem] font-bold uppercase tracking-[0.12em] mb-5 shadow-xs"
                     >
-                        <MapPin className="w-3.5 h-3.5 shrink-0" />
+                        <MapPin className="w-3.5 h-3.5 shrink-0" strokeWidth={2} />
                         <span>Lingkungan Pesantren</span>
                     </motion.div>
 
                     <motion.h2
                         initial={{ opacity: 0, y: 18 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: true, margin: "-40px" }}
                         transition={{ duration: 0.5, delay: 0.08, ease: SPRING_EASE }}
                         className="section-title mb-4"
                     >
-                        Fasilitas{" "}
-                        <span className="text-gradient-maroon">Terpadu &amp; Lengkap</span>
+                        Fasilitas <span className="text-gradient-maroon">Terpadu & Lengkap</span>
                     </motion.h2>
 
                     <motion.p
                         initial={{ opacity: 0, y: 16 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: true, margin: "-40px" }}
                         transition={{ duration: 0.5, delay: 0.16, ease: SPRING_EASE }}
-                        className="section-subtitle"
+                        className="section-subtitle mx-auto"
                     >
-                        Sarana dan prasarana yang memadai untuk menunjang kenyamanan
-                        belajar, beribadah, dan aktivitas harian seluruh santri.
+                        Sarana dan prasarana yang memadai untuk menunjang kenyamanan belajar, beribadah, dan aktivitas harian seluruh santri.
                     </motion.p>
                 </div>
 
                 {/* ── Photo gallery ── */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-14 auto-rows-[200px] md:auto-rows-[220px]">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-16 auto-rows-[180px] md:auto-rows-[220px]">
                     {FACILITY_IMAGES.map((img, idx) => (
                         <motion.div
                             key={idx}
                             initial="hidden"
                             whileInView="visible"
-                            viewport={{ once: true, margin: "-60px" }}
+                            viewport={{ once: true, margin: "-40px" }}
                             variants={photoVariants}
                             transition={{
                                 duration: 0.6,
                                 delay: idx * 0.08,
                                 ease: SPRING_EASE,
                             }}
-                            className={`${img.span} relative rounded-2xl overflow-hidden group
-                          border border-white/80 ring-1 ring-cream-200
-                          shadow-md`}
+                            className={`${img.span} relative rounded-[1.5rem] overflow-hidden group shadow-premium-sm ring-1 ring-cream-200`}
                         >
-                            {/* Image */}
                             <Image
                                 src={img.src}
                                 alt={img.label}
@@ -211,34 +204,19 @@ export default function FacilitiesSection() {
                                         ? "(max-width:768px) 100vw, 50vw"
                                         : "(max-width:768px) 50vw, 25vw"
                                 }
-                                className="object-cover transition-transform duration-700 ease-out
-                           group-hover:scale-[1.06] bg-cream-100"
+                                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] bg-cream-50"
                             />
 
-                            {/* Gradient overlay */}
-                            <div
-                                className="absolute inset-0 bg-gradient-to-t
-                             from-black/60 via-black/10 to-transparent
-                             transition-opacity duration-300
-                             group-hover:from-black/70"
-                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-maroon-950/80 via-maroon-900/10 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-400" />
 
-                            {/* Label */}
-                            <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5">
-                                <p className="text-white font-bold text-sm md:text-base leading-snug drop-shadow">
+                            <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-400">
+                                <p className="text-white font-bold text-[0.9375rem] md:text-[1.0625rem] leading-snug drop-shadow-sm mb-1 tracking-tight">
                                     {img.label}
                                 </p>
-                                <p className="text-white/70 font-medium text-xs mt-0.5 leading-snug">
+                                <p className="text-white/80 font-semibold text-[0.65rem] md:text-[0.7rem] uppercase tracking-[0.1em] drop-shadow-sm opacity-0 group-hover:opacity-100 transition-opacity duration-400 delay-100">
                                     {img.sub}
                                 </p>
                             </div>
-
-                            {/* Hover shine */}
-                            <div
-                                className="absolute inset-0 opacity-0 group-hover:opacity-100
-                             bg-gradient-to-br from-white/6 to-transparent
-                             transition-opacity duration-500 pointer-events-none"
-                            />
                         </motion.div>
                     ))}
                 </div>
@@ -251,11 +229,11 @@ export default function FacilitiesSection() {
                     transition={{ duration: 0.5 }}
                     className="flex items-center gap-4 mb-10"
                 >
-                    <div className="flex-1 h-px bg-gradient-to-r from-transparent via-maroon-100 to-transparent" />
-                    <span className="text-xs font-bold uppercase tracking-widest text-maroon-300 whitespace-nowrap px-1">
+                    <div className="flex-1 h-px bg-gradient-to-r from-transparent via-cream-200 to-transparent" />
+                    <span className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-ink-400 px-2">
                         Fasilitas Penunjang
                     </span>
-                    <div className="flex-1 h-px bg-gradient-to-r from-transparent via-maroon-100 to-transparent" />
+                    <div className="flex-1 h-px bg-gradient-to-r from-transparent via-cream-200 to-transparent" />
                 </motion.div>
 
                 {/* ── Facilities list ── */}
@@ -264,43 +242,23 @@ export default function FacilitiesSection() {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-40px" }}
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mb-14"
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mb-16"
                 >
                     {FACILITIES.map((facility, idx) => (
                         <motion.div
                             key={idx}
                             variants={itemVariants}
-                            whileHover={{ y: -2 }}
-                            className="group flex items-center gap-3.5 p-4 rounded-xl
-                         bg-white border border-cream-200
-                         hover:border-maroon-200 hover:shadow-sm
-                         transition-all duration-300 ease-out cursor-default"
+                            className="group flex items-center gap-3.5 p-3.5 rounded-2xl bg-white border border-cream-100 hover:border-maroon-100 shadow-premium-sm hover:shadow-premium-md transition-all duration-300 ease-out cursor-default"
                         >
-                            {/* Icon */}
-                            <div
-                                className={`w-10 h-10 rounded-lg flex items-center justify-center
-                             shrink-0 ring-1 shadow-xs
-                             transition-transform duration-300 group-hover:scale-105
-                             ${iconClasses[facility.color] ?? iconClasses.ink}`}
-                            >
-                                <facility.icon className="w-[18px] h-[18px]" strokeWidth={1.8} />
+                            <div className={`w-10 h-10 rounded-[10px] flex items-center justify-center shrink-0 ring-1 shadow-xs transition-transform duration-300 group-hover:scale-105 ${iconClasses[facility.color] ?? iconClasses.ink}`}>
+                                <facility.icon className="w-4 h-4" strokeWidth={2} />
                             </div>
 
-                            {/* Name */}
-                            <span
-                                className="font-semibold text-ink-800 text-sm leading-snug
-                               group-hover:text-maroon-800 transition-colors duration-200"
-                            >
+                            <span className="font-bold text-ink-900 text-[0.875rem] leading-snug group-hover:text-maroon-800 transition-colors duration-200">
                                 {facility.name}
                             </span>
 
-                            {/* Hover arrow indicator */}
-                            <ChevronRight
-                                className="w-3.5 h-3.5 text-maroon-300 ml-auto shrink-0
-                             opacity-0 -translate-x-1
-                             group-hover:opacity-100 group-hover:translate-x-0
-                             transition-all duration-200"
-                            />
+                            <ChevronRight className="w-3.5 h-3.5 text-maroon-300 ml-auto shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" />
                         </motion.div>
                     ))}
                 </motion.div>
@@ -309,20 +267,14 @@ export default function FacilitiesSection() {
                 <motion.div
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, margin: "-40px" }}
                     transition={{ duration: 0.5, ease: SPRING_EASE }}
                     className="flex justify-center"
                 >
-                    <Link
-                        href="/fasilitas"
-                        onClick={() => navigateToDetail("/fasilitas", "#fasilitas")}
-                    >
-                        <button className="btn-secondary group inline-flex items-center gap-2.5 px-9">
-                            <span>Lihat Semua Fasilitas</span>
-                            <ArrowRight
-                                className="w-[18px] h-[18px] transition-transform duration-300
-                             group-hover:translate-x-1"
-                            />
+                    <Link href="/fasilitas">
+                        <button className="btn-secondary group inline-flex items-center gap-2 px-8 py-3 bg-white border border-cream-200 shadow-sm hover:shadow-md transition-all">
+                            <span className="text-[0.875rem] font-bold">Lihat Semua Fasilitas</span>
+                            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                         </button>
                     </Link>
                 </motion.div>
