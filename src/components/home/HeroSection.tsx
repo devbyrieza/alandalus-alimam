@@ -108,7 +108,7 @@ export default function HeroSection() {
                 <span
                   className="block mt-1"
                   style={{
-                    background: "linear-gradient(135deg, var(--color-maroon-500) 0%, var(--color-gold-400) 50%, var(--color-maroon-600) 100%)",
+                    background: "linear-gradient(135deg, var(--color-maroon-600) 0%, var(--color-gold-500) 50%, var(--color-maroon-700) 100%)",
                     WebkitBackgroundClip: "text",
                     backgroundClip: "text",
                     WebkitTextFillColor: "transparent",
