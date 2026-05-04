@@ -165,7 +165,7 @@ export default function HeroSection() {
                   className="block mt-1"
                   style={{
                     background:
-                      "linear-gradient(135deg, var(--color-maroon-950) 0%, #A87B05 50%, var(--color-maroon-900) 100%)",
+                      "linear-gradient(135deg, var(--color-maroon-950) 0%, var(--color-gold-500) 50%, var(--color-maroon-900) 100%)",
                     WebkitBackgroundClip: "text",
                     backgroundClip: "text",
                     WebkitTextFillColor: "transparent",
@@ -212,7 +212,7 @@ export default function HeroSection() {
                 style={{ color: "var(--color-maroon-700)" }}
               >
                 "Pendidikan Berkualitas, Diperkuat Sistem{" "}
-                {BRANDING.schoolName.includes("Al-Andalus")
+                {BRANDING.schoolName.toLowerCase().includes("al-andalus")
                   ? "Al-Andalus"
                   : BRANDING.schoolShortName}
                 "
@@ -403,6 +403,12 @@ export default function HeroSection() {
                     style={{ color: "var(--color-maroon-900)" }}
                   >
                     MTs &amp; IL
+                  </p>
+                  <p
+                    className="text-[10px] font-semibold mt-0.5"
+                    style={{ color: "var(--color-ink-500)" }}
+                  >
+                    Kuota terbatas
                   </p>
                 </div>
               </div>
