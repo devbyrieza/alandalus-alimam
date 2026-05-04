@@ -27,8 +27,8 @@
   --color-maroon-600: #800000;
   --color-maroon-700: #660000;
   --color-maroon-800: #4D0000;
-  --color-maroon-900: #330000;
-  --color-maroon-950: #1A0000;
+  --color-maroon-900: #5C0000;  /* was #330000 — lightened so not near-black */
+  --color-maroon-950: #3D0000;  /* was #1A0000 — deep maroon, not black */
 
   /* ─── Cream (Backgrounds — Warm off-white) ─── */
   --color-cream-50: #FEFCF7;
@@ -340,7 +340,7 @@
     font-size: 0.9375rem;
     letter-spacing: -0.01em;
     color: var(--color-cream-100);
-    background: linear-gradient(135deg, var(--color-maroon-700) 0%, var(--color-maroon-950) 100%);
+    background: linear-gradient(135deg, var(--color-maroon-500) 0%, var(--color-maroon-700) 100%);
     box-shadow: var(--shadow-maroon);
     transition: all var(--duration-base) var(--ease-spring);
     border: none;
@@ -1194,7 +1194,7 @@
   }
 
   .bg-maroon-gradient {
-    background: linear-gradient(135deg, var(--color-maroon-700) 0%, var(--color-maroon-950) 100%);
+    background: linear-gradient(135deg, var(--color-maroon-500) 0%, var(--color-maroon-700) 100%);
   }
 
   .bg-gold-gradient {

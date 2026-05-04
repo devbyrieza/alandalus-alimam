@@ -100,8 +100,7 @@ export default function HeroSection() {
               <h1
                 className="leading-[1.06] tracking-[-0.03em] mx-auto lg:mx-0 max-w-2xl lg:max-w-none font-black text-balance"
                 style={{
-                  color: "var(--color-maroon-950)",
-                  // Explicit fluid size — tidak bergantung hanya pada global CSS
+                  color: "var(--color-maroon-600)",
                   fontSize: "clamp(2rem, 5vw + 0.75rem, 5rem)",
                 }}
               >
@@ -109,7 +108,7 @@ export default function HeroSection() {
                 <span
                   className="block mt-1"
                   style={{
-                    background: "linear-gradient(135deg, var(--color-maroon-950) 0%, var(--color-gold-500) 50%, var(--color-maroon-900) 100%)",
+                    background: "linear-gradient(135deg, var(--color-maroon-500) 0%, var(--color-gold-400) 50%, var(--color-maroon-600) 100%)",
                     WebkitBackgroundClip: "text",
                     backgroundClip: "text",
                     WebkitTextFillColor: "transparent",

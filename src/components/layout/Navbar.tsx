@@ -139,8 +139,8 @@ export default function Navbar() {
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
                   className={`px-4 py-2 text-sm font-bold rounded-full transition-all duration-300 min-h-[40px] flex items-center ${isActive(link.href)
-                      ? "bg-[var(--color-maroon-950)] text-[var(--color-cream-100)] shadow-[var(--shadow-maroon)]"
-                      : "text-[var(--color-ink-700)] hover:text-[var(--color-maroon-900)] hover:bg-[var(--color-maroon-50)]"
+                      ? "bg-[var(--color-maroon-600)] text-white shadow-[var(--shadow-maroon)]"
+                      : "text-[var(--color-ink-700)] hover:text-[var(--color-maroon-700)] hover:bg-[var(--color-maroon-50)]"
                     }`}
                 >
                   {link.label}
@@ -220,7 +220,7 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-[var(--color-maroon-950)]/40 backdrop-blur-sm"
+              className="absolute inset-0 bg-[var(--color-maroon-700)]/30 backdrop-blur-sm"
               onClick={() => setIsMenuOpen(false)}
             />
 
@@ -288,8 +288,8 @@ export default function Navbar() {
                           setIsMenuOpen(false);
                         }}
                         className={`px-4 py-4 rounded-xl text-base font-bold transition-all min-h-[56px] flex items-center justify-between group ${isActive(link.href)
-                            ? "bg-[var(--color-maroon-950)] text-[var(--color-cream-100)] shadow-[var(--shadow-maroon)]"
-                            : "text-[var(--color-ink-800)] hover:bg-[var(--color-maroon-50)] hover:text-[var(--color-maroon-900)]"
+                            ? "bg-[var(--color-maroon-600)] text-white shadow-[var(--shadow-maroon)]"
+                            : "text-[var(--color-ink-700)] hover:bg-[var(--color-maroon-50)] hover:text-[var(--color-maroon-700)]"
                           }`}
                       >
                         <span>{link.label}</span>
