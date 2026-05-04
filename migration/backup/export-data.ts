@@ -80,7 +80,7 @@ async function main() {
     prisma.pembayaran.findMany({ orderBy: { created_at: 'asc' } })
   ));
 
-  // 7. Jadwal Ujian
+  // 7. Jadwal Seleksi
   results.push(await exportTable('jadwal_ujian', () =>
     prisma.jadwalUjian.findMany({ orderBy: { created_at: 'asc' } })
   ));

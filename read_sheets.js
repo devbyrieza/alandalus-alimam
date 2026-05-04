@@ -1,1 +1,0 @@
-const xlsx = require('xlsx'); const workbook = xlsx.readFile('REKAP HASIL TES.xlsx'); const sheet = workbook.Sheets['Cdgn']; const sheet2 = workbook.Sheets['DTrma']; console.log('Cadangan:', xlsx.utils.sheet_to_json(sheet).slice(0, 5)); console.log('Diterima:', xlsx.utils.sheet_to_json(sheet2).slice(0, 5));

@@ -43,9 +43,9 @@ export async function POST() {
 
         // Deactivate others
         await tx.tahunAjaran.updateMany({
-          where: { 
+          where: {
             id: { not: existing.id },
-            is_active: true 
+            is_active: true,
           },
           data: { is_active: false },
         });
@@ -54,27 +54,27 @@ export async function POST() {
         console.log(`[SEED] Migrating data to ${existing.id} (2026/2027)`);
         await tx.pendaftar.updateMany({
           where: { tahun_ajaran_id: { not: existing.id } },
-          data: { tahun_ajaran_id: existing.id }
+          data: { tahun_ajaran_id: existing.id },
         });
         await tx.pembayaran.updateMany({
           where: { tahun_ajaran_id: { not: existing.id } },
-          data: { tahun_ajaran_id: existing.id }
+          data: { tahun_ajaran_id: existing.id },
         });
         await tx.jadwalUjian.updateMany({
           where: { tahun_ajaran_id: { not: existing.id } },
-          data: { tahun_ajaran_id: existing.id }
+          data: { tahun_ajaran_id: existing.id },
         });
         await tx.pengumuman.updateMany({
           where: { tahun_ajaran_id: { not: existing.id } },
-          data: { tahun_ajaran_id: existing.id }
+          data: { tahun_ajaran_id: existing.id },
         });
         await tx.hasilSeleksi.updateMany({
           where: { tahun_ajaran_id: { not: existing.id } },
-          data: { tahun_ajaran_id: existing.id }
+          data: { tahun_ajaran_id: existing.id },
         });
         await tx.reservasiPSB.updateMany({
           where: { tahun_ajaran_id: { not: existing.id } },
-          data: { tahun_ajaran_id: existing.id }
+          data: { tahun_ajaran_id: existing.id },
         });
       });
 
@@ -127,7 +127,7 @@ export async function POST() {
     console.error("Seed tahun ajaran error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -161,7 +161,9 @@ export async function GET() {
     });
 
     const active = data.find((ta) => ta.is_active);
-    const has2026 = data.find((ta) => ta.tahun_mulai === 2026 && ta.tahun_selesai === 2027);
+    const has2026 = data.find(
+      (ta) => ta.tahun_mulai === 2026 && ta.tahun_selesai === 2027,
+    );
 
     return NextResponse.json({
       all: data,
@@ -172,7 +174,7 @@ export async function GET() {
     console.error("Get tahun ajaran error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

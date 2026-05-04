@@ -19,15 +19,22 @@ export default function CalendarPage() {
           </h1>
 
           <p className="text-lg text-ink-600 mb-10 leading-relaxed font-medium">
-            Mohon maaf, halaman Kalender Akademik sedang dalam tahap penyempurnaan.
-            Kami sedang menyusun jadwal terbaik untuk santri Al Imam.
+            Mohon maaf, halaman Kalender Akademik sedang dalam tahap
+            penyempurnaan. Kami sedang menyusun jadwal terbaik untuk santri Al
+            Imam.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/" className="inline-flex items-center justify-center px-10 py-4 rounded-pill bg-maroon-900 text-white font-black text-lg hover:bg-maroon-800 shadow-premium-lg transition-all">
+            <Link
+              href="/"
+              className="inline-flex items-center justify-center px-10 py-4 rounded-pill bg-maroon-900 text-white font-black text-lg hover:bg-maroon-800 shadow-premium-lg transition-all"
+            >
               Kembali ke Beranda
             </Link>
-            <Link href="/kontak" className="inline-flex items-center justify-center px-10 py-4 rounded-pill bg-white border border-surface-200 text-ink-950 font-black text-lg hover:bg-surface-50 transition-all shadow-premium-sm" >
+            <Link
+              href="/kontak"
+              className="inline-flex items-center justify-center px-10 py-4 rounded-pill bg-white border border-surface-200 text-ink-950 font-black text-lg hover:bg-surface-50 transition-all shadow-premium-sm"
+            >
               Hubungi Kami
             </Link>
           </div>

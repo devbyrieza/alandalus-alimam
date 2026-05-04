@@ -24,7 +24,7 @@ Urutan dari atas ke bawah:
 1. 📋 Data Pendaftaran
 2. 💰 Pembayaran Pendaftaran
 3. 📄 Kelengkapan Berkas
-4. 📅 Undangan Seleksi
+4. 📅 Jadwal Seleksi
 5. 🏆 Pengumuman
 6. ✅ Daftar Ulang
 7. 👤 Profil
@@ -45,7 +45,7 @@ Urutan dari atas ke bawah:
 | Data Pendaftaran | 📋 Clipboard | ClipboardList icon |
 | Pembayaran Pendaftaran | 💳 CreditCard | CreditCard icon |
 | Kelengkapan Berkas | 📄 FileCheck | FileCheck icon |
-| Undangan Seleksi | 📅 Calendar | Calendar icon |
+| Jadwal Seleksi | 📅 Calendar | Calendar icon |
 | Pengumuman | 🏆 Trophy | Trophy icon |
 | Daftar Ulang | ✅ CheckCircle | CheckCircle icon |
 | Profil | ⚙️ Settings | Settings icon |
@@ -79,8 +79,8 @@ Urutan dari atas ke bawah:
 
 **Pass/Fail:** ☐ PASS ☐ FAIL
 
-**Test Undangan Seleksi:**
-1. Klik menu "Undangan Seleksi"
+**Test Jadwal Seleksi:**
+1. Klik menu "Jadwal Seleksi"
 2. URL harus berubah ke `/dashboard/pendaftar/undangan-seleksi`
 
 **Pass/Fail:** ☐ PASS ☐ FAIL

@@ -4,151 +4,86 @@ import { generateNomorPendaftaran } from "@/lib/utils/nomor-pendaftaran";
 import { enqueueWhatsapp, buildMessageRegistrationSuccess } from "@/lib/whatsapp-queue";
 import crypto from "crypto";
 
-function hashOTP(otp: string): string {
-  return crypto.createHash("sha256").update(otp).digest("hex");
-}
+/**
+ * ─── REGISTER API: VERIFY OTP ───
+ * Langkah terakhir pendaftaran: Memvalidasi kode OTP 
+ * dan membuat akun santri secara resmi di database.
+ */
 
-import { normalizePhoneNumber } from "@/lib/validations/registration";
+const hashOTP = (otp: string) => crypto.createHash("sha256").update(otp).digest("hex");
 
 export async function POST(request: NextRequest) {
   try {
     const { no_hp, otp_code } = await request.json();
-
-    if (!no_hp || !otp_code) {
-      return NextResponse.json(
-        { success: false, error: "Data tidak lengkap" },
-        { status: 400 },
-      );
-    }
-
-    const normalizedPhone = normalizePhoneNumber(no_hp);
     const hashedOTP = hashOTP(otp_code);
 
-    // Verify OTP
+    // 1. Validasi Kode OTP & Masa Berlaku
     const otpRecord = await prisma.otpVerification.findFirst({
       where: {
-        phone: normalizedPhone,
+        phone: no_hp,
         otp_hash: hashedOTP,
         expires_at: { gt: new Date() },
       },
     });
 
-    if (!otpRecord) {
-      return NextResponse.json(
-        { success: false, error: "Kode OTP salah atau kadaluarsa" },
-        { status: 400 },
-      );
-    }
+    if (!otpRecord) return NextResponse.json({ success: false, error: "Kode OTP salah atau sudah kadaluarsa" }, { status: 400 });
 
-    const registrationData = (otpRecord.registration_data as any) || {};
+    const regData = (otpRecord.registration_data as any) || {};
 
-    if (!registrationData) {
-      return NextResponse.json(
-        { success: false, error: "Data pendaftaran tidak ditemukan" },
-        { status: 404 },
-      );
-    }
+    // 2. Ambil Tahun Ajaran Aktif (Fallback Logic)
+    const activeTA = await prisma.tahunAjaran.findFirst({ where: { is_active: true } }) 
+                  || await prisma.tahunAjaran.findFirst({ orderBy: { created_at: "desc" } });
 
-    // Get active tahun ajaran (Robust logic)
-    const activeTahunAjaran = await prisma.tahunAjaran.findFirst({
-      where: { is_active: true },
-      select: { id: true },
-    });
+    if (!activeTA) return NextResponse.json({ success: false, error: "Sistem belum siap: Tahun Ajaran tidak ditemukan" }, { status: 500 });
 
-    let tahunAjaranId = "";
-    if (activeTahunAjaran) {
-      tahunAjaranId = activeTahunAjaran.id;
-    } else {
-      // Fallback: Get the latest created tahun ajaran
-      console.warn("⚠️ No active Tahun Ajaran found, falling back to latest created.");
-      const latestTahunAjaran = await prisma.tahunAjaran.findFirst({
-        orderBy: { created_at: "desc" },
-        select: { id: true },
-      });
+    // 3. Generate Nomor Pendaftaran Unik
+    const nomorPendaftaran = await generateNomorPendaftaran(regData.jenjang, regData.jenis_kelamin);
 
-      if (latestTahunAjaran) {
-        tahunAjaranId = latestTahunAjaran.id;
-      } else {
-        return NextResponse.json(
-          { success: false, error: "Sistem belum siap: Data Tahun Ajaran tidak ditemukan. Hubungi admin." },
-          { status: 500 },
-        );
-      }
-    }
-
-    // Generate nomor pendaftaran
-    const nomorPendaftaran = await generateNomorPendaftaran(
-      registrationData.jenjang,
-      registrationData.jenis_kelamin,
-    );
-
-    // Create profile for the pendaftar
+    // 4. PEMBUATAN AKUN (Profile & Pendaftar)
     const profileId = crypto.randomUUID();
-    await prisma.profile.create({
-      data: {
-        id: profileId,
-        full_name: registrationData.nama_lengkap,
-        phone: normalizedPhone,
-        role: "pendaftar",
-      },
-    });
+    
+    // Gunakan Transaction agar jika salah satu gagal, semua dibatalkan (Data Integrity)
+    await prisma.$transaction([
+      // A. Buat Profile untuk Login
+      prisma.profile.create({
+        data: { id: profileId, full_name: regData.nama_lengkap, phone: no_hp, role: "pendaftar" },
+      }),
+      // B. Buat Data Pendaftaran Santri
+      prisma.pendaftar.create({
+        data: {
+          nik: regData.nik,
+          nama_lengkap: regData.nama_lengkap,
+          tanggal_lahir: regData.tanggal_lahir ? new Date(regData.tanggal_lahir) : undefined,
+          jenis_kelamin: regData.jenis_kelamin,
+          jenjang: regData.jenjang,
+          no_hp: no_hp,
+          email: regData.email || "",
+          status_pendaftaran: "draft",
+          user_id: profileId,
+          tahun_ajaran_id: activeTA.id,
+          nomor_pendaftaran: nomorPendaftaran,
+        },
+      }),
+      // C. Hapus OTP agar tidak bisa digunakan lagi
+      prisma.otpVerification.delete({ where: { id: otpRecord.id } }),
+    ]);
 
-    // Insert pendaftar
-    const pendaftar = await prisma.pendaftar.create({
-      data: {
-        nik: registrationData.nik,
-        nama_lengkap: registrationData.nama_lengkap,
-        tanggal_lahir: registrationData.tanggal_lahir
-          ? new Date(registrationData.tanggal_lahir)
-          : undefined,
-        jenis_kelamin: registrationData.jenis_kelamin,
-        jenjang: registrationData.jenjang,
-        no_hp: registrationData.no_hp,
-        email: registrationData.email || "",
-        status_pendaftaran: "draft",
-        user_id: profileId,
-        tahun_ajaran_id: tahunAjaranId,
-        nomor_pendaftaran: nomorPendaftaran,
-      },
-    });
-
-    // Delete used OTP
-    await prisma.otpVerification.delete({ where: { id: otpRecord.id } });
-
-    // Send WhatsApp Notification (Non-blocking via Queue)
-    try {
-      console.log(`📱 Enqueueing registration success notification for ${registrationData.no_hp}`);
-      await enqueueWhatsapp({
-        pendaftarId: pendaftar.id,
-        phone: registrationData.no_hp,
-        jenisNotif: "registration_success",
-        messageContent: buildMessageRegistrationSuccess(
-          registrationData.nama_lengkap,
-          nomorPendaftaran,
-          registrationData.jenjang
-        ),
-      });
-    } catch (waError) {
-      console.error("❌ WhatsApp registration enqueue error:", waError);
-      // We don't throw here to ensure the user still sees their registration was successful
-    }
+    // 5. Kirim Notifikasi Sukses via WhatsApp Queue
+    await enqueueWhatsapp({
+      pendaftarId: profileId, // Dummy link to profile
+      phone: no_hp,
+      jenisNotif: "registration_success",
+      messageContent: buildMessageRegistrationSuccess(regData.nama_lengkap, nomorPendaftaran, regData.jenjang),
+    }).catch(e => console.error("WA Queue Error:", e.message));
 
     return NextResponse.json({
       success: true,
-      data: {
-        nomor_pendaftaran: nomorPendaftaran,
-        nama_lengkap: registrationData.nama_lengkap,
-        jenjang: registrationData.jenjang,
-        jenis_kelamin: registrationData.jenis_kelamin,
-        nik: registrationData.nik,
-        otp_id: otpRecord.id,
-      },
+      message: "Pendaftaran Berhasil!",
+      data: { nomor_pendaftaran: nomorPendaftaran }
     });
+
   } catch (error: any) {
-    console.error("Verify API Error:", error);
-    return NextResponse.json(
-      { success: false, error: "Terjadi kesalahan internal server" },
-      { status: 500 },
-    );
+    console.error("❌ VERIFY_OTP_ERROR:", error.message);
+    return NextResponse.json({ success: false, error: "Gagal memverifikasi pendaftaran" }, { status: 500 });
   }
 }

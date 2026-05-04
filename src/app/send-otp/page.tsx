@@ -143,34 +143,42 @@ export default function SendOtpPage() {
           <div className="space-y-3">
             {/* Telegram Option */}
             <div
-              className={`p-4 border-2 rounded-xl cursor-pointer transition-all app-card ${selectedChannel === "telegram"
+              className={`p-4 border-2 rounded-xl cursor-pointer transition-all app-card ${
+                selectedChannel === "telegram"
                   ? "border-maroon-600 bg-maroon-50 shadow-md scale-[1.02]"
                   : "border-surface-200 bg-white hover:border-maroon-200 hover:shadow-sm"
-                }`}
+              }`}
               onClick={() => setSelectedChannel("telegram")}
             >
               <div className="flex items-center">
                 <div
-                  className={`p-2 rounded-lg mr-3 transition-colors ${selectedChannel === "telegram"
+                  className={`p-2 rounded-lg mr-3 transition-colors ${
+                    selectedChannel === "telegram"
                       ? "bg-maroon-600"
                       : "bg-gold-100"
-                    }`}
+                  }`}
                 >
                   <MessageSquare
-                    className={`w-5 h-5 ${selectedChannel === "telegram"
+                    className={`w-5 h-5 ${
+                      selectedChannel === "telegram"
                         ? "text-white"
                         : "text-maroon-700"
-                      }`}
+                    }`}
                   />
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-center">
-                    <span className={`font-black ${selectedChannel === "telegram" ? "text-maroon-900" : "text-ink-900"}`}>Telegram</span>
+                    <span
+                      className={`font-black ${selectedChannel === "telegram" ? "text-maroon-900" : "text-ink-900"}`}
+                    >
+                      Telegram
+                    </span>
                     <div
-                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${selectedChannel === "telegram"
+                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                        selectedChannel === "telegram"
                           ? "border-maroon-600"
                           : "border-gold-300"
-                        }`}
+                      }`}
                     >
                       {selectedChannel === "telegram" && (
                         <div className="w-2.5 h-2.5 rounded-full bg-maroon-600"></div>
@@ -186,37 +194,45 @@ export default function SendOtpPage() {
 
             {/* Email Option */}
             <div
-              className={`p-4 border-2 rounded-xl cursor-pointer transition-all app-card ${selectedChannel === "email"
+              className={`p-4 border-2 rounded-xl cursor-pointer transition-all app-card ${
+                selectedChannel === "email"
                   ? "border-maroon-600 bg-gold-50 shadow-md scale-[1.02]"
                   : "border-gold-200 bg-white hover:border-maroon-200 hover:shadow-sm"
-                }`}
+              }`}
               onClick={() => setSelectedChannel("email")}
             >
               <div className="flex items-center">
                 <div
-                  className={`p-2 rounded-lg mr-3 transition-colors ${selectedChannel === "email" ? "bg-maroon-600" : "bg-gold-100"
-                    }`}
+                  className={`p-2 rounded-lg mr-3 transition-colors ${
+                    selectedChannel === "email"
+                      ? "bg-maroon-600"
+                      : "bg-gold-100"
+                  }`}
                 >
                   <Mail
-                    className={`w-5 h-5 ${selectedChannel === "email"
+                    className={`w-5 h-5 ${
+                      selectedChannel === "email"
                         ? "text-white"
                         : "text-maroon-700"
-                      }`}
+                    }`}
                   />
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-center">
-                    <span className={`font-black ${selectedChannel === "email" ? "text-maroon-900" : "text-ink-900"}`}>
+                    <span
+                      className={`font-black ${selectedChannel === "email" ? "text-maroon-900" : "text-ink-900"}`}
+                    >
                       Email{" "}
                       <span className="text-maroon-600 bg-maroon-100 px-2 py-0.5 rounded text-[10px] font-bold ml-1">
                         GRATIS
                       </span>
                     </span>
                     <div
-                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${selectedChannel === "email"
+                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                        selectedChannel === "email"
                           ? "border-maroon-600"
                           : "border-gold-300"
-                        }`}
+                      }`}
                     >
                       {selectedChannel === "email" && (
                         <div className="w-2.5 h-2.5 rounded-full bg-maroon-600"></div>
@@ -239,32 +255,40 @@ export default function SendOtpPage() {
 
             {/* SMS Option */}
             <div
-              className={`p-4 border-2 rounded-xl cursor-pointer transition-all app-card ${selectedChannel === "sms"
+              className={`p-4 border-2 rounded-xl cursor-pointer transition-all app-card ${
+                selectedChannel === "sms"
                   ? "border-maroon-600 bg-gold-50 shadow-md scale-[1.02]"
                   : "border-gold-200 bg-white hover:border-maroon-200 hover:shadow-sm"
-                }`}
+              }`}
               onClick={() => setSelectedChannel("sms")}
             >
               <div className="flex items-center">
                 <div
-                  className={`p-2 rounded-lg mr-3 transition-colors ${selectedChannel === "sms" ? "bg-maroon-600" : "bg-gold-100"
-                    }`}
+                  className={`p-2 rounded-lg mr-3 transition-colors ${
+                    selectedChannel === "sms" ? "bg-maroon-600" : "bg-gold-100"
+                  }`}
                 >
                   <Smartphone
-                    className={`w-5 h-5 ${selectedChannel === "sms"
+                    className={`w-5 h-5 ${
+                      selectedChannel === "sms"
                         ? "text-white"
                         : "text-maroon-700"
-                      }`}
+                    }`}
                   />
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-center">
-                    <span className={`font-black ${selectedChannel === "sms" ? "text-maroon-900" : "text-ink-900"}`}>SMS</span>
+                    <span
+                      className={`font-black ${selectedChannel === "sms" ? "text-maroon-900" : "text-ink-900"}`}
+                    >
+                      SMS
+                    </span>
                     <div
-                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${selectedChannel === "sms"
+                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                        selectedChannel === "sms"
                           ? "border-maroon-600"
                           : "border-gold-300"
-                        }`}
+                      }`}
                     >
                       {selectedChannel === "sms" && (
                         <div className="w-2.5 h-2.5 rounded-full bg-maroon-600"></div>
@@ -401,19 +425,25 @@ export default function SendOtpPage() {
           </h3>
           <ul className="text-xs text-ink-600 space-y-2 font-medium">
             <li className="flex items-start">
-              <span className="text-maroon-500 mr-2 flex-shrink-0 mt-0.5">•</span>
+              <span className="text-maroon-500 mr-2 flex-shrink-0 mt-0.5">
+                •
+              </span>
               <span>
                 <strong>Telegram</strong> jika ingin notifikasi real-time gratis
               </span>
             </li>
             <li className="flex items-start">
-              <span className="text-maroon-500 mr-2 flex-shrink-0 mt-0.5">•</span>
+              <span className="text-maroon-500 mr-2 flex-shrink-0 mt-0.5">
+                •
+              </span>
               <span>
                 <strong>Email</strong> untuk dokumentasi resmi
               </span>
             </li>
             <li className="flex items-start">
-              <span className="text-maroon-500 mr-2 flex-shrink-0 mt-0.5">•</span>
+              <span className="text-maroon-500 mr-2 flex-shrink-0 mt-0.5">
+                •
+              </span>
               <span>
                 <strong>SMS</strong> jika internet terbatas
               </span>

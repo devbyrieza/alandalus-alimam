@@ -4,10 +4,18 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useRef } from "react";
 import { Container } from "@/components/layout/Container";
-import { Calendar, Users, GraduationCap, Award, TrendingUp, BookOpen, ShieldCheck } from 'lucide-react';
+import {
+  Calendar,
+  Users,
+  GraduationCap,
+  Award,
+  TrendingUp,
+  BookOpen,
+  ShieldCheck,
+} from "lucide-react";
 
 // ─── Types ───────────────────────────────────────────
-type StatColor = 'maroon' | 'gold';
+type StatColor = "maroon" | "gold";
 
 interface Stat {
   id: string;
@@ -23,51 +31,51 @@ interface Stat {
 // ─── Data ────────────────────────────────────────────
 const STATS: Stat[] = [
   {
-    id: 'batch',
-    label: 'Angkatan Perdana',
+    id: "batch",
+    label: "Angkatan Perdana",
     value: 1,
     icon: Calendar,
-    color: 'maroon',
-    suffix: '',
-    sublabel: 'Al Andalus IIBS',
-    description: 'Momen bersejarah pembukaan angkatan pertama.',
+    color: "maroon",
+    suffix: "",
+    sublabel: "Al Andalus IIBS",
+    description: "Momen bersejarah pembukaan angkatan pertama.",
   },
   {
-    id: 'quality',
-    label: 'Standar Global',
+    id: "quality",
+    label: "Standar Global",
     value: 100,
     icon: Award,
-    color: 'gold',
-    suffix: '%',
-    sublabel: 'Leadership Mastery',
-    description: 'Kurikulum kepemimpinan terintegrasi penuh.',
+    color: "gold",
+    suffix: "%",
+    sublabel: "Leadership Mastery",
+    description: "Kurikulum kepemimpinan terintegrasi penuh.",
   },
   {
-    id: 'levels',
-    label: 'Jenjang Tersedia',
+    id: "levels",
+    label: "Jenjang Tersedia",
     value: 2,
     icon: GraduationCap,
-    color: 'maroon',
-    suffix: '',
-    sublabel: 'MTs · IL',
-    description: 'Pendidikan menengah dengan kurikulum syar\'i.',
+    color: "maroon",
+    suffix: "",
+    sublabel: "MTs · IL",
+    description: "Pendidikan menengah dengan kurikulum syar'i.",
   },
   {
-    id: 'quota',
-    label: 'Kuota Eksklusif',
+    id: "quota",
+    label: "Kuota Eksklusif",
     value: 25,
     icon: Users,
-    color: 'gold',
-    suffix: '',
-    sublabel: 'Santri Terpilih',
-    description: 'Seleksi ketat untuk menjaga kualitas pendidikan.',
+    color: "gold",
+    suffix: "",
+    sublabel: "Santri Terpilih",
+    description: "Seleksi ketat untuk menjaga kualitas pendidikan.",
   },
 ];
 
 const TRUST_BADGES = [
-  { icon: BookOpen, label: 'Pendaftaran Dibuka', pulse: true },
-  { icon: ShieldCheck, label: 'Resmi Kemendikdasmen', pulse: false },
-  { icon: TrendingUp, label: 'Kurikulum Terintegrasi', pulse: false },
+  { icon: BookOpen, label: "Pendaftaran Dibuka", pulse: true },
+  { icon: ShieldCheck, label: "Resmi Kemendikdasmen", pulse: false },
+  { icon: TrendingUp, label: "Kurikulum Terintegrasi", pulse: false },
 ];
 
 // ─── Animated Counter ────────────────────────────────
@@ -96,11 +104,23 @@ function AnimatedCounter({
     return controls.stop;
   }, [trigger, value, delay, motionVal]);
 
-  return <span ref={ref} className="tabular-nums">0</span>;
+  return (
+    <span ref={ref} className="tabular-nums">
+      0
+    </span>
+  );
 }
 
 // ─── Stat Card ───────────────────────────────────────
-function StatCard({ stat, index, trigger }: { stat: Stat; index: number; trigger: boolean }) {
+function StatCard({
+  stat,
+  index,
+  trigger,
+}: {
+  stat: Stat;
+  index: number;
+  trigger: boolean;
+}) {
   const Icon = stat.icon;
 
   const styles = {
@@ -112,7 +132,7 @@ function StatCard({ stat, index, trigger }: { stat: Stat; index: number; trigger
       sublabel: "text-maroon-400",
       accent: "bg-maroon-200 group-hover:bg-maroon-500",
       ring: "ring-maroon-200",
-      glow: "rgba(128,0,0,0.03)"
+      glow: "rgba(128,0,0,0.03)",
     },
     gold: {
       card: "border-gold-100 hover:border-gold-200",
@@ -122,8 +142,8 @@ function StatCard({ stat, index, trigger }: { stat: Stat; index: number; trigger
       sublabel: "text-gold-400",
       accent: "bg-gold-200 group-hover:bg-gold-500",
       ring: "ring-gold-200",
-      glow: "rgba(212,175,55,0.03)"
-    }
+      glow: "rgba(212,175,55,0.03)",
+    },
   };
 
   const current = styles[stat.color];
@@ -140,21 +160,29 @@ function StatCard({ stat, index, trigger }: { stat: Stat; index: number; trigger
       }}
       className="group relative"
     >
-      <div className={`relative flex flex-col items-center text-center px-6 py-8 md:px-8 md:py-10 bg-white rounded-2xl border ${current.card} shadow-premium-sm transition-all duration-500 ease-spring hover:-translate-y-1.5 hover:shadow-premium-md overflow-hidden`}>
-
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+      <div
+        className={`relative flex flex-col items-center text-center px-6 py-8 md:px-8 md:py-10 bg-white rounded-2xl border ${current.card} shadow-premium-sm transition-all duration-500 ease-spring hover:-translate-y-1.5 hover:shadow-premium-md overflow-hidden`}
+      >
+        <div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
           style={{
             background: `radial-gradient(ellipse 80% 60% at 50% 100%, ${current.glow} 0%, transparent 70%)`,
           }}
         />
 
-        <div className={`relative mb-6 w-13 h-13 md:w-14 md:h-14 flex items-center justify-center rounded-xl transition-all duration-500 group-hover:scale-110 shadow-xs ${current.icon}`}>
+        <div
+          className={`relative mb-6 w-13 h-13 md:w-14 md:h-14 flex items-center justify-center rounded-xl transition-all duration-500 group-hover:scale-110 shadow-xs ${current.icon}`}
+        >
           <Icon className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.75} />
-          <div className={`absolute inset-0 rounded-xl ring-0 group-hover:ring-2 ${current.ring} transition-all duration-500`} />
+          <div
+            className={`absolute inset-0 rounded-xl ring-0 group-hover:ring-2 ${current.ring} transition-all duration-500`}
+          />
         </div>
 
         <div className="flex items-baseline justify-center gap-0.5 mb-1">
-          <span className={`text-[2.625rem] md:text-[3.25rem] font-black leading-none tracking-[-0.04em] ${current.number}`}>
+          <span
+            className={`text-[2.625rem] md:text-[3.25rem] font-black leading-none tracking-[-0.04em] ${current.number}`}
+          >
             <AnimatedCounter
               value={stat.value}
               trigger={trigger}
@@ -162,7 +190,9 @@ function StatCard({ stat, index, trigger }: { stat: Stat; index: number; trigger
             />
           </span>
           {stat.suffix && (
-            <span className={`text-2xl md:text-3xl font-black leading-none tracking-[-0.03em] ${current.suffix}`}>
+            <span
+              className={`text-2xl md:text-3xl font-black leading-none tracking-[-0.03em] ${current.suffix}`}
+            >
               {stat.suffix}
             </span>
           )}
@@ -172,11 +202,15 @@ function StatCard({ stat, index, trigger }: { stat: Stat; index: number; trigger
           {stat.label}
         </p>
 
-        <p className={`text-[0.6rem] md:text-[0.65rem] font-semibold tracking-wide mt-0.5 ${current.sublabel}`}>
+        <p
+          className={`text-[0.6rem] md:text-[0.65rem] font-semibold tracking-wide mt-0.5 ${current.sublabel}`}
+        >
           {stat.sublabel}
         </p>
 
-        <div className={`mt-5 h-[2px] w-6 rounded-full transition-all duration-500 group-hover:w-10 ${current.accent}`} />
+        <div
+          className={`mt-5 h-[2px] w-6 rounded-full transition-all duration-500 group-hover:w-10 ${current.accent}`}
+        />
       </div>
     </motion.div>
   );
@@ -216,7 +250,10 @@ export default function StatsSection() {
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
                   </span>
                 ) : (
-                  <BadgeIcon className="w-3 h-3 shrink-0 text-maroon-500" strokeWidth={2} />
+                  <BadgeIcon
+                    className="w-3 h-3 shrink-0 text-maroon-500"
+                    strokeWidth={2}
+                  />
                 )}
                 <span className="text-[0.6rem] md:text-[0.65rem] font-bold text-ink-700 uppercase tracking-[0.1em] whitespace-nowrap">
                   {label}

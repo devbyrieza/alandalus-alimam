@@ -33,14 +33,16 @@ export default function PengumumanTab() {
   const fetchPengumuman = async () => {
     try {
       setLoading(true);
-      
+
       // Check session for testing account bypass
       const sessionRes = await fetch("/api/auth/session");
       let currentRegNo = "";
       if (sessionRes.ok) {
         const session = await sessionRes.json();
         if (session.pendaftar_id) {
-          const statusRes = await fetch(`/api/pendaftar/status?pendaftar_id=${session.pendaftar_id}`);
+          const statusRes = await fetch(
+            `/api/pendaftar/status?pendaftar_id=${session.pendaftar_id}`,
+          );
           if (statusRes.ok) {
             const statusData = await statusRes.json();
             currentRegNo = statusData.nomor_pendaftaran;
@@ -57,8 +59,9 @@ export default function PengumumanTab() {
         setPengumuman({
           id: "test-id",
           status_kelulusan: "diterima",
-          catatan: "Ini adalah tampilan simulasi khusus untuk Akun Rieza Tes (ILI2600007).",
-          tanggal_pengumuman: new Date().toISOString()
+          catatan:
+            "Ini adalah tampilan simulasi khusus untuk Akun Rieza Tes (ILI2600007).",
+          tanggal_pengumuman: new Date().toISOString(),
         });
       }
     } catch (error) {
@@ -79,7 +82,9 @@ export default function PengumumanTab() {
         const session = await sessionRes.json();
 
         if (session.pendaftar_id) {
-          const res = await fetch(`/api/pendaftar/document-data?pendaftar_id=${session.pendaftar_id}`);
+          const res = await fetch(
+            `/api/pendaftar/document-data?pendaftar_id=${session.pendaftar_id}`,
+          );
           const result = await res.json();
           currentDocData = result.data;
           setDocData(currentDocData);
@@ -97,12 +102,14 @@ export default function PengumumanTab() {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("id-ID", {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    }).replace("Minggu", "Ahad");
+    return new Date(dateString)
+      .toLocaleDateString("id-ID", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
+      .replace("Minggu", "Ahad");
   };
 
   if (loading) {
@@ -127,7 +134,9 @@ export default function PengumumanTab() {
               <Trophy className="w-8 h-8 text-gold-100" />
             </div>
             <div>
-              <h1 className="text-2xl md:text-3xl font-black mb-2 tracking-tight text-white font-display">Pengumuman</h1>
+              <h1 className="text-2xl md:text-3xl font-black mb-2 tracking-tight text-white font-display">
+                Pengumuman
+              </h1>
               <p className="text-gold-100/90 font-medium max-w-xl text-sm md:text-base">
                 Hasil seleksi penerimaan santri baru
               </p>
@@ -146,8 +155,9 @@ export default function PengumumanTab() {
               Pengumuman Belum Tersedia
             </h3>
             <p className="text-ink-600 max-w-md mx-auto mb-6 leading-relaxed">
-              Hasil seleksi akan diumumkan setelah seluruh proses ujian selesai dilakukan oleh panitia.
-              Silakan cek kembali halaman ini secara berkala.
+              Hasil seleksi akan diumumkan setelah seluruh proses ujian selesai
+              dilakukan oleh panitia. Silakan cek kembali halaman ini secara
+              berkala.
             </p>
             <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-maroon-50 text-maroon-800 rounded-full font-black border border-maroon-200 shadow-sm">
               <Calendar className="w-4 h-4 text-maroon-600" />
@@ -170,20 +180,30 @@ export default function PengumumanTab() {
                   <CheckCircle className="w-10 h-10 text-emerald-50" />
                 </div>
                 <div>
-                  <p className="text-emerald-100 font-bold tracking-widest uppercase text-sm mb-1">Alhamdulillah</p>
-                  <h2 className="text-3xl md:text-4xl font-black font-display tracking-tight text-white">LULUS SELEKSI</h2>
+                  <p className="text-emerald-100 font-bold tracking-widest uppercase text-sm mb-1">
+                    Alhamdulillah
+                  </p>
+                  <h2 className="text-3xl md:text-4xl font-black font-display tracking-tight text-white">
+                    LULUS SELEKSI
+                  </h2>
                 </div>
               </div>
               <p className="text-emerald-50/90 mb-10 max-w-xl text-lg leading-relaxed">
-                Berdasarkan hasil seleksi, Anda dinyatakan <strong>LULUS DITERIMA</strong> sebagai santri baru PP Al Andalus Al Imam.
+                Berdasarkan hasil seleksi, Anda dinyatakan{" "}
+                <strong>LULUS DITERIMA</strong> sebagai santri baru PP Al
+                Andalus Al Imam.
               </p>
- 
+
               <button
                 onClick={handleDownloadSurat}
                 disabled={isGenerating}
                 className="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-gold-400 text-maroon-950 rounded-full font-black hover:bg-gold-300 transition-all shadow-lg shadow-gold-400/20 active:scale-95 disabled:opacity-50 border border-gold-500"
               >
-                {isGenerating ? <Loader2 className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
+                {isGenerating ? (
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                ) : (
+                  <Download className="w-5 h-5" />
+                )}
                 Download Surat Kelulusan
               </button>
             </div>
@@ -233,7 +253,9 @@ export default function PengumumanTab() {
                   Langkah Selanjutnya
                 </h4>
                 <ul className="text-sm text-amber-800 space-y-1">
-                  <li>• Segera lakukan daftar ulang melalui tab "Daftar Ulang"</li>
+                  <li>
+                    • Segera lakukan daftar ulang melalui tab "Daftar Ulang"
+                  </li>
                   <li>• Siapkan dokumen yang diperlukan untuk daftar ulang</li>
                   <li>• Ikuti petunjuk yang diberikan oleh panitia</li>
                   <li>• Hubungi panitia jika ada pertanyaan</li>
@@ -255,14 +277,20 @@ export default function PengumumanTab() {
                   <AlertCircle className="w-10 h-10 text-amber-50" />
                 </div>
                 <div>
-                  <p className="text-amber-100 font-bold tracking-widest uppercase text-sm mb-1">Pemberitahuan</p>
-                  <h2 className="text-3xl md:text-4xl font-black font-display tracking-tight text-white">DAFTAR CADANGAN</h2>
+                  <p className="text-amber-100 font-bold tracking-widest uppercase text-sm mb-1">
+                    Pemberitahuan
+                  </p>
+                  <h2 className="text-3xl md:text-4xl font-black font-display tracking-tight text-white">
+                    DAFTAR CADANGAN
+                  </h2>
                 </div>
               </div>
               <p className="text-amber-50/90 mb-10 max-w-xl text-lg leading-relaxed">
-                Berdasarkan hasil seleksi, Anda dinyatakan masuk dalam <strong>DAFTAR CADANGAN</strong> santri baru PP Al Andalus Al Imam.
+                Berdasarkan hasil seleksi, Anda dinyatakan masuk dalam{" "}
+                <strong>DAFTAR CADANGAN</strong> santri baru PP Al Andalus Al
+                Imam.
               </p>
- 
+
               <div className="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-white text-amber-900 rounded-full font-black shadow-lg transition-all border border-amber-100">
                 <Calendar className="w-5 h-5" />
                 Menunggu Konfirmasi Kuota
@@ -293,7 +321,9 @@ export default function PengumumanTab() {
 
               <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
                 <p className="text-sm text-amber-900 leading-relaxed">
-                  <strong>Catatan Panitia:</strong> {pengumuman.catatan || "Mohon bersabar menunggu informasi lebih lanjut jika terdapat kuota yang tersedia dari pembatalan pendaftar lain."}
+                  <strong>Catatan Panitia:</strong>{" "}
+                  {pengumuman.catatan ||
+                    "Mohon bersabar menunggu informasi lebih lanjut jika terdapat kuota yang tersedia dari pembatalan pendaftar lain."}
                 </p>
               </div>
             </div>
@@ -312,9 +342,15 @@ export default function PengumumanTab() {
                   Informasi Penting
                 </h4>
                 <ul className="text-sm text-blue-800 space-y-1">
-                  <li>• Panitia akan menghubungi Anda jika terdapat kuota yang kosong</li>
+                  <li>
+                    • Panitia akan menghubungi Anda jika terdapat kuota yang
+                    kosong
+                  </li>
                   <li>• Pastikan nomor WhatsApp pendaftaran tetap aktif</li>
-                  <li>• Hubungi panitia melalui layanan informasi untuk pertanyaan lebih lanjut</li>
+                  <li>
+                    • Hubungi panitia melalui layanan informasi untuk pertanyaan
+                    lebih lanjut
+                  </li>
                 </ul>
               </div>
             </div>
@@ -332,8 +368,12 @@ export default function PengumumanTab() {
                 <XCircle className="w-10 h-10 text-red-50" />
               </div>
               <div>
-                <p className="text-red-100 font-bold tracking-widest uppercase text-sm mb-1">Mohon Maaf</p>
-                <h2 className="text-3xl md:text-4xl font-black font-display tracking-tight text-white">BELUM BERHASIL</h2>
+                <p className="text-red-100 font-bold tracking-widest uppercase text-sm mb-1">
+                  Mohon Maaf
+                </p>
+                <h2 className="text-3xl md:text-4xl font-black font-display tracking-tight text-white">
+                  BELUM BERHASIL
+                </h2>
               </div>
             </div>
             <p className="text-red-50/90 leading-relaxed max-w-xl text-lg relative z-10">
@@ -382,7 +422,9 @@ export default function PengumumanTab() {
                 </div>
               </div>
               <div>
-                <h4 className="font-bold text-maroon-900 mb-2">Tetap Semangat!</h4>
+                <h4 className="font-bold text-maroon-900 mb-2">
+                  Tetap Semangat!
+                </h4>
                 <p className="text-sm text-maroon-800">
                   Anda dapat mendaftar kembali pada periode pendaftaran
                   berikutnya. Gunakan kesempatan ini untuk mempersiapkan diri

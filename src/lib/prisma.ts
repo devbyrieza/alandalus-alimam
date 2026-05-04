@@ -1,45 +1,54 @@
 import { PrismaClient } from "@prisma/client";
 
+/**
+ * ─── DATABASE CONNECTION & WORKER SYSTEM ───
+ * File ini menangani koneksi ke Database (Prisma) 
+ * dan menjalankan "Pekerja Latar Belakang" (Internal Cron Worker).
+ */
+
+// ─── 1. PRISMA SINGLETON PATTERN ───
+/**
+ * Singleton Pattern memastikan kita tidak membuka terlalu banyak koneksi ke database,
+ * yang bisa menyebabkan error "Too many connections" pada server.
+ */
 const prismaClientSingleton = () => {
-  if (process.env.NODE_ENV === 'production' && !process.env.DATABASE_URL) {
-    console.error('CRITICAL ERROR: DATABASE_URL is not defined in process.env at runtime!');
+  if (process.env.NODE_ENV === "production" && !process.env.DATABASE_URL) {
+    console.error("CRITICAL: DATABASE_URL is missing in Production!");
   }
 
   return new PrismaClient({
-    datasources: {
-      db: {
-        url: process.env.DATABASE_URL,
-      },
-    },
-  })
-}
+    datasources: { db: { url: process.env.DATABASE_URL } },
+  });
+};
 
-type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>
+type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>;
+const globalForPrisma = globalThis as unknown as { prisma: PrismaClientSingleton | undefined };
 
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClientSingleton | undefined
-}
+export const prisma = globalForPrisma.prisma ?? prismaClientSingleton();
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 
-export const prisma = globalForPrisma.prisma ?? prismaClientSingleton()
-
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
-
-// --- INTERNAL CRON WORKER ---
-// Trigger Whatsapp queue processing every 1 minute automatically without external cron.
-if (typeof window === 'undefined' && process.env.NODE_ENV !== 'test') {
+// ─── 2. INTERNAL CRON WORKER (WHATSAPP QUEUE) ───
+/**
+ * Sistem ini bertindak sebagai 'Robot' yang bangun setiap 1 menit 
+ * untuk mengecek apakah ada pesan WhatsApp yang harus dikirim.
+ * Jadi kita tidak perlu setting Cron Job manual di server.
+ */
+if (typeof window === "undefined" && process.env.NODE_ENV !== "test") {
   if (!(globalThis as any).__CRON_STARTED__) {
-    if (!process.argv.includes('build') && !process.env.NEXT_PHASE?.includes('build')) {
+    // Pastikan robot tidak jalan saat proses 'build' agar tidak mengganggu deployment
+    if (!process.argv.includes("build") && !process.env.NEXT_PHASE?.includes("build")) {
       (globalThis as any).__CRON_STARTED__ = true;
-      console.log("🚀 Starting internal WhatsApp Background Processor...");
-      
-      // Delay 10 seconds to ensure server is fully bound before first ping
+      console.log("🚀 WhatsApp Background Worker: ACTIVE");
+
+      // Robot mulai bekerja 10 detik setelah server nyala
       setTimeout(() => {
         setInterval(() => {
-          const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://127.0.0.1:3000';
+          const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://127.0.0.1:3000";
+          // Memanggil API internal untuk memproses antrean pesan
           fetch(`${baseUrl}/api/cron/whatsapp?secret=ppdb-alimam-cron-2026`, {
-              headers: { 'User-Agent': 'Internal-Worker/1.0' }
-          }).catch(() => {}); // silent fail if network error
-        }, 60000); // Check every 60 seconds
+            headers: { "User-Agent": "Internal-Worker/1.0" },
+          }).catch(() => {}); // Gagal diam-diam jika server sedang sibuk
+        }, 60000); // Eksekusi setiap 60 detik (1 menit)
       }, 10000);
     }
   }

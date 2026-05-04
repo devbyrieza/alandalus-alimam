@@ -17,7 +17,7 @@ import {
   FileSpreadsheet,
   FileText,
   UploadCloud,
-  Search
+  Search,
 } from "lucide-react";
 import Link from "next/link";
 import { exportToExcel, exportToPDF } from "@/lib/utils/export";
@@ -56,9 +56,8 @@ function VerifikasiPembayaranContent() {
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState(urlStatus);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedPembayaran, setSelectedPembayaran] = useState<Pembayaran | null>(
-    null
-  );
+  const [selectedPembayaran, setSelectedPembayaran] =
+    useState<Pembayaran | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [catatan, setCatatan] = useState("");
   const [editJumlah, setEditJumlah] = useState("");
@@ -66,7 +65,7 @@ function VerifikasiPembayaranContent() {
   const [exporting, setExporting] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [activeTab, setActiveTab] = useState<"PENDAFTARAN" | "DAFTAR_ULANG">(
-    urlJenis as any
+    urlJenis as any,
   );
   const [tipeCicilanFilter, setTipeCicilanFilter] = useState<
     "ALL" | "LUNAS" | "CICILAN"
@@ -127,7 +126,7 @@ function VerifikasiPembayaranContent() {
       if (!silent) setLoading(true);
       else setIsRefreshing(true);
       const response = await fetch(
-        `/api/admin/verifikasi/pembayaran?status=${statusFilter}&jenis=${activeTab}`
+        `/api/admin/verifikasi/pembayaran?status=${statusFilter}&jenis=${activeTab}`,
       );
       if (!response.ok) throw new Error("Failed to fetch");
 
@@ -155,7 +154,7 @@ function VerifikasiPembayaranContent() {
     try {
       setExporting(true);
       const response = await fetch(
-        `/api/admin/verifikasi/pembayaran?status=all&jenis=${activeTab}`
+        `/api/admin/verifikasi/pembayaran?status=all&jenis=${activeTab}`,
       );
       if (!response.ok) throw new Error("Failed to export");
 
@@ -187,7 +186,7 @@ function VerifikasiPembayaranContent() {
         exportToExcel(
           data,
           filename,
-          `Data Pembayaran ${activeTab.replace("_", " ")}`
+          `Data Pembayaran ${activeTab.replace("_", " ")}`,
         );
       } else {
         const headers = Object.keys(data[0] || {});
@@ -197,7 +196,7 @@ function VerifikasiPembayaranContent() {
           headers,
           rows,
           filename,
-          "landscape"
+          "landscape",
         );
       }
     } catch (error) {
@@ -210,7 +209,7 @@ function VerifikasiPembayaranContent() {
 
   const handleVerify = async (
     pembayaranId: string,
-    status: "verified" | "rejected" | "pending"
+    status: "verified" | "rejected" | "pending",
   ) => {
     try {
       setProcessing(true);
@@ -269,7 +268,7 @@ function VerifikasiPembayaranContent() {
         Swal.fire(
           "Berhasil!",
           "Bukti pembayaran berhasil diganti dan otomatis diverifikasi",
-          "success"
+          "success",
         );
         fetchPembayaran(true); // Refresh the list
         setShowModal(false); // Close modal
@@ -277,7 +276,7 @@ function VerifikasiPembayaranContent() {
         Swal.fire(
           "Gagal!",
           data.error || "Gagal mengunggah bukti pembayaran",
-          "error"
+          "error",
         );
       }
     } catch (error) {
@@ -293,7 +292,7 @@ function VerifikasiPembayaranContent() {
     if (!str) return "";
     return str.replace(
       /\w\S*/g,
-      (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase()
+      (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase(),
     );
   };
 
@@ -583,7 +582,8 @@ function VerifikasiPembayaranContent() {
                         <div className="flex flex-col gap-1">
                           <div className="flex items-center gap-2 text-sm font-bold text-stone-700">
                             <CreditCard className="w-3.5 h-3.5 text-stone-400" />
-                            {pay.catatan && pay.catatan.includes("Virtual Account")
+                            {pay.catatan &&
+                            pay.catatan.includes("Virtual Account")
                               ? "Midtrans"
                               : "Transfer Manual"}
                           </div>
@@ -601,7 +601,8 @@ function VerifikasiPembayaranContent() {
                             Status Cicilan
                           </p>
                           <span className="px-2.5 py-1 bg-violet-100 text-violet-700 rounded-lg text-[10px] font-black uppercase tracking-widest border border-violet-200">
-                            Cicilan Ke-{pay.cicilan_ke} dari {pay.jumlah_cicilan}
+                            Cicilan Ke-{pay.cicilan_ke} dari{" "}
+                            {pay.jumlah_cicilan}
                           </span>
                         </div>
                       )}
@@ -674,7 +675,9 @@ function VerifikasiPembayaranContent() {
                 </h3>
                 <p className="text-sm text-stone-500 font-medium">
                   {selectedPembayaran.pendaftar?.nama_lengkap
-                    ? toTitleCase(selectedPembayaran.pendaftar.nama_lengkap || "")
+                    ? toTitleCase(
+                        selectedPembayaran.pendaftar.nama_lengkap || "",
+                      )
                     : ""}
                 </p>
               </div>
@@ -755,9 +758,7 @@ function VerifikasiPembayaranContent() {
                           max="12"
                           value={editJumlahCicilan}
                           onChange={(e) =>
-                            setEditJumlahCicilan(
-                              parseInt(e.target.value) || 1
-                            )
+                            setEditJumlahCicilan(parseInt(e.target.value) || 1)
                           }
                           className="w-full px-4 py-2 bg-white border border-violet-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-500 font-black text-violet-900"
                         />
@@ -924,4 +925,3 @@ export default function VerifikasiPembayaranPage() {
     </Suspense>
   );
 }
-

@@ -40,9 +40,9 @@ async function main() {
     console.log(`  Wawancara Santri (nilai): ${n.nilai_wawancara_santri}`);
     console.log(`  Quran (nilai): ${n.nilai_tes_quran}`);
     console.log(`  Wawancara Ortu (nilai): ${n.nilai_wawancara_ortu}`);
-    console.log(`  Detail Cawalsan (exists): ${!!n.detail_cawalsan}`);
+    console.log(`  Detail Orang Tua (exists): ${!!n.detail_cawalsan}`);
     if (n.detail_cawalsan) {
-        console.log(`  Detail Cawalsan (rekomendasi): ${(n.detail_cawalsan as any).rekomendasi}`);
+        console.log(`  Detail Orang Tua (rekomendasi): ${(n.detail_cawalsan as any).rekomendasi}`);
     }
   });
 }

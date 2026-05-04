@@ -1,1 +1,0 @@
-const xlsx = require('xlsx'); const workbook = xlsx.readFile('REKAP HASIL TES.xlsx'); const sheet = workbook.Sheets['AQ']; console.log('Nilai Tajwid range: D'); console.log('Nilai Kelancaran range: E');

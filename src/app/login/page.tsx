@@ -28,13 +28,46 @@ import Image from "next/image";
 import { BRANDING } from "@/config/branding";
 
 // Role label & icon map
-const ROLE_INFO: Record<string, { label: string; icon: string; desc: string; color: string }> = {
-  admin_super: { label: "Admin Super", icon: "👑", desc: "Akses penuh semua fitur", color: "from-amber-50 to-yellow-50 border-amber-200" },
-  admin_berkas: { label: "Admin Berkas", icon: "📂", desc: "Verifikasi dokumen pendaftar", color: "from-blue-50 to-indigo-50 border-blue-200" },
-  admin_keuangan: { label: "Admin Keuangan", icon: "💰", desc: "Verifikasi pembayaran", color: "from-emerald-50 to-teal-50 border-emerald-200" },
-  pewawancara_cawalsan: { label: "Pewawancara Calon Orangtua/Wali Santri", icon: "🎙️", desc: "Wawancara calon orangtua/wali santri", color: "from-purple-50 to-violet-50 border-purple-200" },
-  pewawancara_calsan: { label: "Pewawancara Calon Santri", icon: "🎙️", desc: "Wawancara calon santri", color: "from-rose-50 to-pink-50 border-rose-200" },
-  penguji_calsan: { label: "Penguji Al-Qur'an", icon: "📖", desc: "Penguji tes Al-Qur'an", color: "from-green-50 to-lime-50 border-green-200" },
+const ROLE_INFO: Record<
+  string,
+  { label: string; icon: string; desc: string; color: string }
+> = {
+  admin_super: {
+    label: "Admin Super",
+    icon: "👑",
+    desc: "Akses penuh semua fitur",
+    color: "from-amber-50 to-yellow-50 border-amber-200",
+  },
+  admin_berkas: {
+    label: "Admin Berkas",
+    icon: "📂",
+    desc: "Verifikasi dokumen pendaftar",
+    color: "from-blue-50 to-indigo-50 border-blue-200",
+  },
+  admin_keuangan: {
+    label: "Admin Keuangan",
+    icon: "💰",
+    desc: "Verifikasi pembayaran",
+    color: "from-emerald-50 to-teal-50 border-emerald-200",
+  },
+  pewawancara_cawalsan: {
+    label: "Pewawancara Calon Orangtua/Wali Santri",
+    icon: "🎙️",
+    desc: "Wawancara calon orangtua/wali santri",
+    color: "from-purple-50 to-violet-50 border-purple-200",
+  },
+  pewawancara_calsan: {
+    label: "Pewawancara Calon Santri",
+    icon: "🎙️",
+    desc: "Wawancara calon santri",
+    color: "from-rose-50 to-pink-50 border-rose-200",
+  },
+  penguji_calsan: {
+    label: "Penguji Al-Qur'an",
+    icon: "📖",
+    desc: "Penguji tes Al-Qur'an",
+    color: "from-green-50 to-lime-50 border-green-200",
+  },
 };
 
 // ========================================
@@ -46,16 +79,18 @@ const AuthInput = ({
   icon: Icon,
   error,
   children,
-  rightElement
+  rightElement,
 }: {
-  label: string,
-  icon: any,
-  error?: string,
-  children: React.ReactNode,
-  rightElement?: React.ReactNode
+  label: string;
+  icon: any;
+  error?: string;
+  children: React.ReactNode;
+  rightElement?: React.ReactNode;
 }) => (
   <div className="space-y-3">
-    <label className="text-[10px] font-black text-ink-600 uppercase tracking-[0.2em] ml-1">{label}</label>
+    <label className="text-[10px] font-black text-ink-600 uppercase tracking-[0.2em] ml-1">
+      {label}
+    </label>
     <div className="relative group">
       <div className="absolute left-5 md:left-6 top-0 bottom-0 flex items-center text-ink-500 group-focus-within:text-maroon-600 transition-colors duration-300 pointer-events-none">
         <Icon className="w-5 h-5" />
@@ -87,7 +122,9 @@ export default function LoginPage() {
   const router = useRouter();
 
   // Tab state
-  const [activeTab, setActiveTab] = useState<"pendaftar" | "admin">("pendaftar");
+  const [activeTab, setActiveTab] = useState<"pendaftar" | "admin">(
+    "pendaftar",
+  );
 
   // Pendaftar login state
   const [nikPendaftar, setNikPendaftar] = useState("");
@@ -195,9 +232,20 @@ export default function LoginPage() {
       }
 
       // Single role: redirect
-      if (["admin", "admin_super", "admin_berkas", "admin_keuangan"].includes(data.role)) {
+      if (
+        ["admin", "admin_super", "admin_berkas", "admin_keuangan"].includes(
+          data.role,
+        )
+      ) {
         window.location.href = "/dashboard/admin";
-      } else if (["penguji", "penguji_calsan", "pewawancara_calsan", "pewawancara_cawalsan"].includes(data.role)) {
+      } else if (
+        [
+          "penguji",
+          "penguji_calsan",
+          "pewawancara_calsan",
+          "pewawancara_cawalsan",
+        ].includes(data.role)
+      ) {
         window.location.href = "/dashboard/penguji";
       } else {
         throw new Error(`Role tidak dikenali: ${data.role}`);
@@ -247,18 +295,21 @@ export default function LoginPage() {
         >
           <Link href="/">
             <div className="app-card inline-flex items-center justify-center w-20 h-20 bg-white rounded-3xl shadow-sm border border-maroon-100 mb-8 hover:scale-110 transition-transform group overflow-hidden">
-              <Image 
-                src={BRANDING.logoPath} 
-                alt={"Logo " + BRANDING.schoolName} 
+              <Image
+                src={BRANDING.logoPath}
+                alt={"Logo " + BRANDING.schoolName}
                 width={80}
                 height={80}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 priority
               />
             </div>
           </Link>
           <h1 className="text-4xl md:text-5xl font-display font-black text-ink-950 mb-3 tracking-tight">
-            Portal <span className="text-gradient-maroon font-black">{BRANDING.schoolShortName}</span>
+            Portal{" "}
+            <span className="text-gradient-maroon font-black">
+              {BRANDING.schoolShortName}
+            </span>
           </h1>
           <p className="text-lg text-ink-700 font-medium">
             Masuk ke Sistem Administrasi & Pendaftaran
@@ -282,18 +333,27 @@ export default function LoginPage() {
               <motion.div
                 layoutId="auth-tab"
                 transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                className={`absolute top-2 bottom-2 rounded-2xl bg-white shadow-sm border border-slate-200/50 ${activeTab === 'pendaftar' ? 'left-2 w-[calc(50%-8px)]' : 'left-[calc(50%+4px)] w-[calc(50%-8px)]'
-                  }`}
+                className={`absolute top-2 bottom-2 rounded-2xl bg-white shadow-sm border border-slate-200/50 ${
+                  activeTab === "pendaftar"
+                    ? "left-2 w-[calc(50%-8px)]"
+                    : "left-[calc(50%+4px)] w-[calc(50%-8px)]"
+                }`}
               />
 
               <button
-                onClick={() => { setActiveTab("pendaftar"); setError(""); }}
+                onClick={() => {
+                  setActiveTab("pendaftar");
+                  setError("");
+                }}
                 className={`flex-1 relative z-10 py-3.5 text-xs font-black uppercase tracking-widest text-center rounded-2xl transition-colors duration-300 ${activeTab === "pendaftar" ? "text-maroon-700" : "text-ink-600 hover:text-ink-800"}`}
               >
                 Pendaftar
               </button>
               <button
-                onClick={() => { setActiveTab("admin"); setError(""); }}
+                onClick={() => {
+                  setActiveTab("admin");
+                  setError("");
+                }}
                 className={`flex-1 relative z-10 py-3.5 text-xs font-black uppercase tracking-widest text-center rounded-2xl transition-colors duration-300 ${activeTab === "admin" ? "text-maroon-700" : "text-ink-600 hover:text-ink-800"}`}
               >
                 Portal Staf
@@ -313,7 +373,9 @@ export default function LoginPage() {
                 <div className="w-10 h-10 bg-red-500 rounded-2xl flex items-center justify-center text-white shrink-0 shadow-premium-xs">
                   <AlertCircle className="w-6 h-6" />
                 </div>
-                <p className="text-sm text-red-700 font-bold leading-tight mt-0.5">{error}</p>
+                <p className="text-sm text-red-700 font-bold leading-tight mt-0.5">
+                  {error}
+                </p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -334,13 +396,23 @@ export default function LoginPage() {
                     <div className="w-14 h-14 bg-gold-100 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gold-200">
                       <Layers className="w-7 h-7 text-maroon-700" />
                     </div>
-                    <h2 className="text-xl font-black text-ink-950">Selamat datang, {roleSelectionData.full_name.split(' ')[0]}!</h2>
-                    <p className="text-sm text-ink-600 font-medium mt-1">Pilih dashboard yang ingin diakses</p>
+                    <h2 className="text-xl font-black text-ink-950">
+                      Selamat datang,{" "}
+                      {roleSelectionData.full_name.split(" ")[0]}!
+                    </h2>
+                    <p className="text-sm text-ink-600 font-medium mt-1">
+                      Pilih dashboard yang ingin diakses
+                    </p>
                   </div>
 
                   <div className="space-y-3">
                     {roleSelectionData.available_roles.map((role) => {
-                      const info = ROLE_INFO[role] || { label: role, icon: "🔑", desc: "", color: "from-slate-50 to-gray-50 border-slate-200" };
+                      const info = ROLE_INFO[role] || {
+                        label: role,
+                        icon: "🔑",
+                        desc: "",
+                        color: "from-slate-50 to-gray-50 border-slate-200",
+                      };
                       return (
                         <motion.button
                           key={role}
@@ -352,8 +424,14 @@ export default function LoginPage() {
                         >
                           <div className="text-3xl">{info.icon}</div>
                           <div className="flex-1">
-                            <p className="font-black text-ink-900 text-base">{info.label}</p>
-                            {info.desc && <p className="text-xs text-ink-600 font-medium mt-0.5">{info.desc}</p>}
+                            <p className="font-black text-ink-900 text-base">
+                              {info.label}
+                            </p>
+                            {info.desc && (
+                              <p className="text-xs text-ink-600 font-medium mt-0.5">
+                                {info.desc}
+                              </p>
+                            )}
                           </div>
                           {selectingRole ? (
                             <Loader2 className="w-5 h-5 animate-spin text-ink-400" />
@@ -366,7 +444,10 @@ export default function LoginPage() {
                   </div>
 
                   <button
-                    onClick={() => { setRoleSelectionData(null); setError(""); }}
+                    onClick={() => {
+                      setRoleSelectionData(null);
+                      setError("");
+                    }}
                     className="w-full text-center text-xs text-ink-500 hover:text-ink-800 font-bold mt-2 flex items-center justify-center gap-1.5"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" /> Gunakan akun lain
@@ -385,7 +466,9 @@ export default function LoginPage() {
                     <input
                       type="text"
                       value={nomorPendaftaran}
-                      onChange={(e) => setNomorPendaftaran(e.target.value.toUpperCase())}
+                      onChange={(e) =>
+                        setNomorPendaftaran(e.target.value.toUpperCase())
+                      }
                       placeholder="Contoh: MTI2600001"
                       className="w-full px-5 py-3 md:px-8 md:py-5 pl-14 md:pl-16 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-maroon-300 focus:ring-4 focus:ring-maroon-50 transition-all font-bold text-ink-950 uppercase placeholder:normal-case placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
                       disabled={isLoading}
@@ -398,7 +481,9 @@ export default function LoginPage() {
                       inputMode="numeric"
                       maxLength={16}
                       value={nikPendaftar}
-                      onChange={(e) => setNikPendaftar(e.target.value.replace(/\D/g, ""))}
+                      onChange={(e) =>
+                        setNikPendaftar(e.target.value.replace(/\D/g, ""))
+                      }
                       placeholder="16 Digit NIK Sesuai KK"
                       className="w-full px-5 py-3 md:px-8 md:py-5 pl-14 md:pl-16 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-maroon-300 focus:ring-4 focus:ring-maroon-50 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
                       disabled={isLoading}
@@ -423,7 +508,9 @@ export default function LoginPage() {
                   </motion.button>
 
                   <div className="text-center pt-4">
-                    <p className="text-sm text-ink-600 font-bold uppercase tracking-widest mb-4">Belum Punya Akun?</p>
+                    <p className="text-sm text-ink-600 font-bold uppercase tracking-widest mb-4">
+                      Belum Punya Akun?
+                    </p>
                     <Link
                       href="/daftar"
                       className="inline-flex items-center gap-2 px-10 py-3 rounded-pill bg-cream-50 text-maroon-700 font-black text-sm border border-cream-200 hover:bg-white hover:shadow-sm transition-all"
@@ -452,8 +539,8 @@ export default function LoginPage() {
                     />
                   </AuthInput>
 
-                  <AuthInput 
-                    label="Kata Sandi" 
+                  <AuthInput
+                    label="Kata Sandi"
                     icon={Lock}
                     rightElement={
                       <button
@@ -461,7 +548,11 @@ export default function LoginPage() {
                         onClick={() => setShowPassword(!showPassword)}
                         className="text-ink-500 hover:text-ink-800 transition-colors duration-300 p-2"
                       >
-                        {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                        {showPassword ? (
+                          <EyeOff className="w-5 h-5" />
+                        ) : (
+                          <Eye className="w-5 h-5" />
+                        )}
                       </button>
                     }
                   >
@@ -497,7 +588,8 @@ export default function LoginPage() {
                       <Sparkles className="w-4 h-4" />
                     </div>
                     <p className="text-xs text-ink-600 font-bold leading-relaxed">
-                      Lupa password? Silakan hubungi Admin Pusat untuk reset akses Anda.
+                      Lupa password? Silakan hubungi Admin Pusat untuk reset
+                      akses Anda.
                     </p>
                   </div>
                 </motion.form>
@@ -505,7 +597,6 @@ export default function LoginPage() {
             </AnimatePresence>
           </div>
         </motion.div>
-
 
         {/* Footer Link */}
         <motion.div

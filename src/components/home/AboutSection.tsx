@@ -74,7 +74,6 @@ export default function AboutSection() {
 
       <Container className="relative z-10">
         <div className="max-w-5xl mx-auto">
-
           {/* ── Header ─────────────────────────────── */}
           <motion.div
             className="text-center mb-16 lg:mb-24"
@@ -115,7 +114,6 @@ export default function AboutSection() {
 
           {/* ── Visi & Misi Grid ─────────────────── */}
           <div className="grid gap-5 lg:gap-6 mb-16 lg:mb-20">
-
             {/* Visi — Full Width, Statement Card */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
@@ -130,7 +128,10 @@ export default function AboutSection() {
                 <div className="flex flex-col items-center text-center px-8 py-12 md:px-16 md:py-16">
                   {/* Icon */}
                   <div className="mb-7 w-14 h-14 rounded-xl bg-maroon-50 border border-maroon-100 flex items-center justify-center shadow-xs group-hover:shadow-sm transition-shadow duration-300">
-                    <Target className="w-6 h-6 text-maroon-700" strokeWidth={1.75} />
+                    <Target
+                      className="w-6 h-6 text-maroon-700"
+                      strokeWidth={1.75}
+                    />
                   </div>
 
                   <span className="badge badge-maroon mb-5 text-[11px] tracking-wider uppercase">
@@ -158,13 +159,21 @@ export default function AboutSection() {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ type: "tween", duration: 0.6, ease: SPRING, delay: 0.08 }}
+              transition={{
+                type: "tween",
+                duration: 0.6,
+                ease: SPRING,
+                delay: 0.08,
+              }}
             >
               <div className="rounded-2xl border border-maroon-100 bg-white shadow-premium-sm overflow-hidden">
                 {/* Header */}
                 <div className="flex items-center gap-4 px-8 py-7 md:px-10 border-b border-maroon-50">
                   <div className="w-11 h-11 rounded-xl bg-maroon-50 border border-maroon-100 flex items-center justify-center shrink-0">
-                    <Rocket className="w-5 h-5 text-maroon-600" strokeWidth={1.75} />
+                    <Rocket
+                      className="w-5 h-5 text-maroon-600"
+                      strokeWidth={1.75}
+                    />
                   </div>
                   <div>
                     <h3 className="font-display font-bold text-xl text-maroon-900 tracking-tight leading-tight">
@@ -223,7 +232,12 @@ export default function AboutSection() {
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ type: "tween", duration: 0.5, ease: SPRING, delay: 0.1 }}
+            transition={{
+              type: "tween",
+              duration: 0.5,
+              ease: SPRING,
+              delay: 0.1,
+            }}
             className="flex flex-col items-center"
           >
             <Link
@@ -233,13 +247,10 @@ export default function AboutSection() {
             >
               <button className="btn-secondary w-full px-10 py-3.5 group">
                 Lanjut Baca Profil 🚀
-                <ArrowRight
-                  className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-                />
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
             </Link>
           </motion.div>
-
         </div>
       </Container>
     </section>

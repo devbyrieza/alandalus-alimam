@@ -1,1 +1,0 @@
-const ExcelJS = require('exceljs'); const workbook = new ExcelJS.Workbook(); workbook.xlsx.readFile('REKAP HASIL TES.xlsx').then(() => { const sheet = workbook.getWorksheet('R.H'); const row = sheet.getRow(1); const headers = []; row.eachCell((cell, colNumber) => { headers.push(colNumber + ': ' + cell.value); }); console.log(headers.join(', ')); });

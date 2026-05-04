@@ -75,7 +75,6 @@ export default function Footer() {
 
       <Container className="relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10 mb-16">
-
           {/* ── Brand Info ── */}
           <div className="lg:col-span-1 space-y-8">
             <Link href="/" className="flex items-center gap-4 group">
@@ -229,7 +228,6 @@ export default function Footer() {
               Kontak Kami
             </h4>
             <div className="space-y-4">
-
               {/* Alamat */}
               <div className="flex gap-3.5">
                 <div
@@ -288,13 +286,10 @@ export default function Footer() {
                 >
                   <Mail className="w-4 h-4" />
                 </div>
-                <p
-                  className="text-sm font-bold text-white break-all pt-1.5"
-                >
+                <p className="text-sm font-bold text-white break-all pt-1.5">
                   {BRANDING.email}
                 </p>
               </div>
-
             </div>
           </div>
         </div>
@@ -308,7 +303,8 @@ export default function Footer() {
             className="text-xs font-medium order-2 md:order-1 text-center md:text-left"
             style={{ color: "rgba(253,248,238,0.35)" }}
           >
-            &copy; {currentYear} {BRANDING.schoolName}. Hak cipta dilindungi undang-undang.
+            &copy; {currentYear} {BRANDING.schoolName}. Hak cipta dilindungi
+            undang-undang.
           </p>
 
           <div className="flex flex-wrap justify-center items-center gap-5 order-1 md:order-2">

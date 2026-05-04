@@ -5,41 +5,35 @@ import { normalizePhoneNumber } from "@/lib/validations/registration";
 import { prisma } from "@/lib/prisma";
 import crypto from "crypto";
 
-function generateOTP(): string {
-  return Math.floor(100000 + Math.random() * 900000).toString();
-}
+/**
+ * ─── REGISTER API: SEND OTP ───
+ * Menangani permintaan kode OTP via WhatsApp/SMS saat santri mendaftar.
+ * Fitur Keamanan: Rate Limiting & Hashed OTP Storage.
+ */
 
-function hashOTP(otp: string): string {
-  return crypto.createHash("sha256").update(otp).digest("hex");
-}
-
-const normalizePhone = normalizePhoneNumber;
-
-const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
-const MAX_OTP_ATTEMPTS = 5; // Max 5 OTPs per hour per number
-
+// ─── 1. SECURITY CONFIG ───
+const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // Jeda 1 jam
+const MAX_OTP_ATTEMPTS = 5;               // Maksimal 5x minta OTP per nomor per jam
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 
+/**
+ * checkRateLimit
+ * Mencegah satu nomor HP membombardir server dengan permintaan OTP (Anti-Spam).
+ */
 function checkRateLimit(phone: string): boolean {
   const now = Date.now();
   const limit = rateLimitStore.get(phone);
-
-  if (!limit) {
-    return true; // No record, allowed
-  }
-
+  if (!limit) return true;
   if (now > limit.resetTime) {
-    rateLimitStore.delete(phone); // Expired, allowed
+    rateLimitStore.delete(phone);
     return true;
   }
-
   return limit.count < MAX_OTP_ATTEMPTS;
 }
 
 function updateRateLimit(phone: string): void {
   const now = Date.now();
   const limit = rateLimitStore.get(phone);
-
   if (!limit || now > limit.resetTime) {
     rateLimitStore.set(phone, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
   } else {
@@ -47,50 +41,36 @@ function updateRateLimit(phone: string): void {
   }
 }
 
+// ─── 2. LOGIC HELPERS ───
+
+/**
+ * generateOTP: Membuat 6 digit angka acak.
+ * hashOTP: Mengenkripsi OTP sebelum disimpan di database demi keamanan.
+ */
+const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
+const hashOTP = (otp: string) => crypto.createHash("sha256").update(otp).digest("hex");
+
+// ─── 3. MAIN API HANDLER ───
+
 export async function POST(request: NextRequest) {
   try {
-    const {
-      email,
-      telegram_username,
-      no_hp,
-      otp_channel = "whatsapp",
-      nik,
-      nama_lengkap,
-      jenis_kelamin,
-      jenjang,
-      tanggal_lahir,
-    } = await request.json();
+    const body = await request.json();
+    const { no_hp, otp_channel = "whatsapp", nama_lengkap } = body;
 
-    const validChannels: OTPChannel[] = ["whatsapp", "sms"];
-    if (!otp_channel || !validChannels.includes(otp_channel as OTPChannel)) {
-      return NextResponse.json(
-        { success: false, error: "Channel tidak valid. Pilih: whatsapp atau sms" },
-        { status: 400 },
-      );
-    }
+    // A. Validasi Input
+    if (!no_hp) return NextResponse.json({ success: false, error: "Nomor HP wajib diisi" }, { status: 400 });
 
-    if (!no_hp) {
-      return NextResponse.json(
-        { success: false, error: "Nomor HP diperlukan" },
-        { status: 400 },
-      );
-    }
+    const normalizedPhone = normalizePhoneNumber(no_hp);
 
-    // Normalization
-    const normalizePhone = normalizePhoneNumber;
-    const normalizedPhone = normalizePhone(no_hp);
-
-    // Rate Limiting Check
+    // B. Cek Batas Permintaan (Security Check)
     if (!checkRateLimit(normalizedPhone)) {
-      return NextResponse.json(
-        { success: false, error: "Terlalu banyak permintaan OTP. Coba lagi nanti." },
-        { status: 429 },
-      );
+      return NextResponse.json({ success: false, error: "Terlalu banyak permintaan. Silakan tunggu 1 jam." }, { status: 429 });
     }
 
+    // C. Proses Pembuatan & Pengiriman OTP
     const otp = generateOTP();
     const hashedOTP = hashOTP(otp);
-    const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
+    const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // Kode hangus dalam 5 menit
 
     const otpResult = await sendOTP({
       channel: otp_channel as OTPChannel,
@@ -100,67 +80,33 @@ export async function POST(request: NextRequest) {
     });
 
     if (!otpResult.success) {
-      return NextResponse.json(
-        { success: false, error: otpResult.message || "Gagal memproses OTP" },
-        { status: 500 },
-      );
+      return NextResponse.json({ success: false, error: "Gagal mengirim pesan WhatsApp" }, { status: 500 });
     }
 
+    // D. Simpan ke Database (Tabel Sementara)
+    // Data pendaftaran disimpan di sini dulu, baru dipindah ke tabel Pendaftar setelah OTP diverifikasi.
     await prisma.otpVerification.create({
       data: {
         phone: normalizedPhone,
         otp_hash: hashedOTP,
         expires_at: expiresAt,
-        attempts: 0,
         otp_channel: otp_channel,
-        registration_data: {
-          nik,
-          nama_lengkap,
-          tanggal_lahir,
-          no_hp: normalizedPhone,
-          jenis_kelamin,
-          jenjang,
-          email,
-        } as any,
+        registration_data: body, // Menyimpan seluruh payload pendaftaran
       },
     });
 
     updateRateLimit(normalizedPhone);
 
-    const response: any = {
+    // E. Response ke User
+    return NextResponse.json({
       success: true,
-      message: otpResult.message,
+      message: "Kode OTP telah dikirim ke WhatsApp Anda",
       channel: otp_channel,
-      identifier: normalizedPhone,
-      expires_in: 300,
-      mode: "auto",
-    };
-
-    if (process.env.NODE_ENV === "development") {
-      response.debugOtp = otp;
-      response.phone = normalizedPhone;
-    }
-
-    // Temporary: return OTP for self-verification when WhatsApp not available
-    if (process.env.SKIP_WHATSAPP_OTP === "true") {
-      response.simulation_code = otp;
-    }
-
-    return NextResponse.json(response);
-  } catch (error: any) {
-    console.error("❌ ERROR in send-otp API:", {
-      message: error.message,
-      stack: error.stack,
-      cause: error.cause,
-      code: error.code // Prisma or Node error code
+      expires_in: 300 // 5 menit
     });
-    return NextResponse.json(
-      {
-        success: false,
-        error: `Server Error: ${error.message}`,
-        debug: error.stack
-      },
-      { status: 500 },
-    );
+
+  } catch (error: any) {
+    console.error("❌ REGISTER_OTP_ERROR:", error.message);
+    return NextResponse.json({ success: false, error: "Gagal memproses pendaftaran" }, { status: 500 });
   }
 }

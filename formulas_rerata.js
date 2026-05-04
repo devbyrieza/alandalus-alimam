@@ -1,1 +1,0 @@
-const xlsx = require('xlsx'); const workbook = xlsx.readFile('REKAP HASIL TES.xlsx', { cellFormula: true }); const sheet = workbook.Sheets[workbook.SheetNames[0]]; console.log('Nilai Rerata Row 2:', sheet['I2']?.f || sheet['I2']?.v); console.log('Row 3:', sheet['I3']?.f || sheet['I3']?.v);

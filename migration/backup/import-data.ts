@@ -195,7 +195,7 @@ async function main() {
     return count;
   }));
 
-  // 7. Jadwal Ujian
+  // 7. Jadwal Seleksi
   const jadwalUjian = loadJSON('jadwal_ujian').map(parseDates);
   results.push(await importTable('jadwal_ujian', jadwalUjian, async (items) => {
     let count = 0;

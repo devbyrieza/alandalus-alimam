@@ -1,1 +1,0 @@
-const ExcelJS = require('exceljs'); const workbook = new ExcelJS.Workbook(); workbook.xlsx.readFile('REKAP HASIL TES.xlsx').then(() => { const sheet = workbook.getWorksheet('AQ'); console.log('F2:', sheet.getCell('F2').formula); });

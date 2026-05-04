@@ -16,14 +16,14 @@ async function main() {
     return
   }
 
-  // Rename all "Sesi Ujian" created by this interviewer to "Wawancara Cawalsan"
+  // Rename all "Sesi Ujian" created by this interviewer to "Seleksi Wawancara Orang Tua"
   const result = await prisma.examSession.updateMany({
     where: {
       created_by: interviewer.id,
       title: 'Sesi Ujian'
     },
     data: {
-      title: 'Wawancara Cawalsan'
+      title: 'Seleksi Wawancara Orang Tua'
     }
   })
 

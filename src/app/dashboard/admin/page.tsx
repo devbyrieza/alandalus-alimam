@@ -2,101 +2,95 @@
 
 import { useState, useEffect } from "react";
 import {
-  Users,
-  Timer,
-  Wallet,
-  FileCheck,
-  GraduationCap,
-  Loader2,
-  BarChart3,
-  ArrowUpRight,
-  CreditCard,
-  Calendar as CalendarIcon,
-  ClipboardCheck,
-  TrendingUp,
-  Download,
-  RefreshCw,
-  Search,
-  CheckCircle2,
-  Clock
+  Users, Wallet, FileCheck, Loader2, ArrowUpRight, 
+  Calendar as CalendarIcon, ClipboardCheck, TrendingUp, 
+  Download, RefreshCw, Search, CheckCircle2, Clock
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { UserRole } from "@/lib/access-control";
-import Swal from "sweetalert2";
 
-// PPDB Deadline: 30 Mei 2026
+/**
+ * ─── ADMIN DASHBOARD PAGE ───
+ * Halaman pusat kendali untuk Admin PPDB Al-Imam.
+ * Menampilkan statistik real-time, grafik performa jenjang, 
+ * dan manajemen antrean verifikasi.
+ */
+
+// ─── 1. CONSTANTS & HELPERS ───
+
 const PPDB_DEADLINE = new Date("2026-05-30T23:59:59+07:00");
 
 function getPPDBCountdown() {
-  const now = new Date();
-  const diff = PPDB_DEADLINE.getTime() - now.getTime();
-  if (diff <= 0) return null;
-  return Math.floor(diff / (1000 * 60 * 60 * 24));
+  const diff = PPDB_DEADLINE.getTime() - new Date().getTime();
+  return diff <= 0 ? 0 : Math.floor(diff / (1000 * 60 * 60 * 24));
 }
 
-const JENJANG_LABELS: Record<string, string> = {
-  MTS: "MTs",
-  IL: "IL",
-  SMA: "SMA",
-};
+const JENJANG_LABELS: Record<string, string> = { MTS: "MTs", IL: "IL", SMA: "SMA" };
 
-// ─── HELPER COMPONENTS ───
+// ─── 2. INTERNAL COMPONENTS ───
+
+/**
+ * StatWidget: Kartu angka statistik yang dinamis.
+ */
 const StatWidget = ({ label, value, icon: Icon, color, trend }: any) => {
-    const colors: any = {
-        maroon: "text-maroon-600 bg-maroon-50",
-        emerald: "text-emerald-600 bg-emerald-50",
-        amber: "text-amber-600 bg-amber-50",
-        blue: "text-blue-600 bg-blue-50",
-        purple: "text-purple-600 bg-purple-50"
-    };
+  const colorMap: any = {
+    maroon: "text-maroon-600 bg-maroon-50",
+    emerald: "text-emerald-600 bg-emerald-50",
+    amber: "text-amber-600 bg-amber-50",
+    blue: "text-blue-600 bg-blue-50",
+    purple: "text-purple-600 bg-purple-50",
+  };
 
-    return (
-        <div className="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-md transition-all group">
-            <div className="flex items-start justify-between mb-4">
-                <div className={`p-2.5 rounded-xl ${colors[color] || colors.maroon} transition-transform group-hover:scale-110`}>
-                    <Icon className="w-5 h-5" />
-                </div>
-                {trend && (
-                    <div className="flex items-center gap-1 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
-                        <TrendingUp className="w-3 h-3" />
-                        <span>{trend}</span>
-                    </div>
-                )}
-            </div>
-            <div>
-                <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-1">{label}</p>
-                <h3 className="text-3xl font-black text-slate-900 tracking-tight">{value}</h3>
-            </div>
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-md transition-all group"
+    >
+      <div className="flex items-start justify-between mb-4">
+        <div className={`p-2.5 rounded-xl ${colorMap[color] || colorMap.maroon} transition-transform group-hover:scale-110`}>
+          <Icon className="w-5 h-5" />
         </div>
-    );
+        {trend && (
+          <div className="flex items-center gap-1 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
+            <TrendingUp className="w-3 h-3" />
+            <span>{trend}</span>
+          </div>
+        )}
+      </div>
+      <div>
+        <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-1">{label}</p>
+        <h3 className="text-3xl font-black text-slate-900 tracking-tight">{value}</h3>
+      </div>
+    </motion.div>
+  );
 };
+
+// ─── 3. MAIN PAGE COMPONENT ───
 
 export default function AdminDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [role, setRole] = useState<UserRole | null>(null);
   const [stats, setStats] = useState<any>({
-    total_pendaftar: 0,
-    sudah_bayar: 0,
-    sudah_isi_data: 0,
-    diterima: 0,
-    cadangan: 0,
-    daftar_ulang: 0,
-    waiting_payment: 0,
-    waiting_docs: 0,
-    stats_per_jenjang: [],
+    total_pendaftar: 0, sudah_bayar: 0, sudah_isi_data: 0, 
+    diterima: 0, cadangan: 0, daftar_ulang: 0, 
+    waiting_payment: 0, waiting_docs: 0, stats_per_jenjang: [],
   });
 
   const [tahunAjaranList, setTahunAjaranList] = useState<any[]>([]);
-  const [selectedTahunAjaranId, setSelectedTahunAjaranId] = useState<string>("");
+  const [selectedTA, setSelectedTA] = useState<string>("");
 
+  /**
+   * fetchStats: Mengambil data angka terbaru dari API khusus admin.
+   */
   const fetchStats = async (id: string) => {
     try {
       setLoading(true);
       const res = await fetch(`/api/admin/stats?tahun_ajaran_id=${id}`);
       if (res.ok) setStats(await res.json());
     } catch (e) {
-      console.error(e);
+      console.error("Gagal mengambil statistik:", e);
     } finally {
       setLoading(false);
     }
@@ -105,46 +99,50 @@ export default function AdminDashboardPage() {
   useEffect(() => {
     async function init() {
       try {
-        const sessionRes = await fetch("/api/auth/session");
+        const [sessionRes, taRes] = await Promise.all([
+          fetch("/api/auth/session"),
+          fetch("/api/admin/tahun-ajaran")
+        ]);
+        
         if (sessionRes.ok) {
-          const sessionData = await sessionRes.json();
-          setRole(sessionData.session?.role || sessionData.user?.user_metadata?.role);
+          const sData = await sessionRes.json();
+          setRole(sData.session?.role);
         }
-        const taRes = await fetch("/api/admin/tahun-ajaran");
+        
         if (taRes.ok) {
           const taData = await taRes.json();
           const list = taData.data || [];
           setTahunAjaranList(list);
-          const active = list.find((t: any) => t.is_active);
-          if (active) setSelectedTahunAjaranId(active.id);
-          else if (list.length > 0) setSelectedTahunAjaranId(list[0].id);
+          const active = list.find((t: any) => t.is_active) || list[0];
+          if (active) setSelectedTA(active.id);
         }
       } catch (e) {
-        console.error(e);
+        console.error("Init Error:", e);
       }
     }
     init();
   }, []);
 
   useEffect(() => {
-    if (selectedTahunAjaranId) fetchStats(selectedTahunAjaranId);
-  }, [selectedTahunAjaranId]);
+    if (selectedTA) fetchStats(selectedTA);
+  }, [selectedTA]);
 
+  // Loading State
   if (loading && stats.total_pendaftar === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
         <Loader2 className="w-10 h-10 animate-spin text-maroon-600" />
-        <p className="text-sm font-bold text-slate-400 uppercase tracking-widest animate-pulse">Menghubungkan ke Pusat Data...</p>
+        <p className="text-sm font-bold text-slate-400 tracking-widest animate-pulse uppercase">Sinkronisasi Data...</p>
       </div>
     );
   }
 
-  const daysLeft = getPPDBCountdown();
   const isAdminSuper = role === "admin_super" || role === "admin";
 
   return (
     <div className="max-w-[1400px] mx-auto space-y-8 pb-20">
-      {/* Header & Filter Area */}
+      
+      {/* SECTION: HEADER & FILTER */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <h1 className="text-3xl font-black text-slate-900 tracking-tight mb-2">Dashboard Al Imam</h1>
@@ -155,8 +153,8 @@ export default function AdminDashboardPage() {
           <div className="bg-white border border-slate-200 rounded-xl px-4 py-2 flex items-center gap-3 shadow-sm">
             <CalendarIcon className="w-4 h-4 text-slate-400" />
             <select 
-              value={selectedTahunAjaranId}
-              onChange={(e) => setSelectedTahunAjaranId(e.target.value)}
+              value={selectedTA} 
+              onChange={(e) => setSelectedTA(e.target.value)}
               className="bg-transparent text-[13px] font-bold text-slate-700 focus:outline-none cursor-pointer"
             >
               {tahunAjaranList.map((ta: any) => (
@@ -164,223 +162,155 @@ export default function AdminDashboardPage() {
               ))}
             </select>
           </div>
-          
           <button 
-            onClick={() => fetchStats(selectedTahunAjaranId)}
-            className="p-2.5 bg-white border border-slate-200 rounded-xl text-slate-500 hover:text-maroon-600 hover:border-maroon-200 transition-all shadow-sm"
-            title="Refresh Data"
+            onClick={() => fetchStats(selectedTA)}
+            className="p-2.5 bg-white border border-slate-200 rounded-xl text-slate-500 hover:text-maroon-600 transition-all shadow-sm"
           >
-            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
           </button>
         </div>
       </div>
 
-      {/* Hero Alert & Stats Summary */}
+      {/* SECTION: HERO BANNER & QUICK ACTIONS */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Banner Deadline */}
         <div className="lg:col-span-8">
-            <div className="relative overflow-hidden rounded-[2rem] bg-slate-900 p-8 md:p-10 text-white shadow-xl shadow-slate-950/20 group">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-maroon-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                
-                <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-                    <div className="max-w-md">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/10 text-[10px] font-bold uppercase tracking-widest mb-6">
-                            <Clock className="w-3.5 h-3.5 text-maroon-400" />
-                            <span>Status Pendaftaran</span>
-                        </div>
-                        <h2 className="text-3xl md:text-4xl font-black mb-4 tracking-tight leading-tight">
-                            {daysLeft} Hari Lagi Menuju <span className="text-maroon-400">Penutupan</span>
-                        </h2>
-                        <p className="text-slate-400 font-medium text-sm leading-relaxed mb-6">
-                            Pendaftaran gelombang pertama akan berakhir pada 30 Mei 2026. Pantau terus grafik harian calon santri.
-                        </p>
-                        <div className="flex items-center gap-6">
-                            <div className="flex flex-col">
-                                <span className="text-2xl font-black text-white">{stats.total_pendaftar}</span>
-                                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Pendaftar</span>
-                            </div>
-                            <div className="w-px h-8 bg-slate-800" />
-                            <div className="flex flex-col">
-                                <span className="text-2xl font-black text-maroon-400">{stats.sudah_bayar}</span>
-                                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Sudah Bayar</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <Link href="/dashboard/admin/pendaftar" className="shrink-0 group/btn">
-                        <div className="flex items-center justify-center w-32 h-32 rounded-full border-2 border-white/10 hover:border-maroon-500/50 transition-colors relative">
-                            <div className="absolute inset-2 rounded-full border border-dashed border-white/20 group-hover/btn:rotate-90 transition-transform duration-1000" />
-                            <ArrowUpRight className="w-10 h-10 text-white group-hover/btn:scale-110 transition-transform" />
-                        </div>
-                    </Link>
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-slate-900 p-10 text-white shadow-2xl">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-maroon-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+              <div className="max-w-md">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[10px] font-bold uppercase mb-6">
+                  <Clock className="w-3.5 h-3.5 text-maroon-400" />
+                  <span>Countdown Penutupan</span>
                 </div>
+                <h2 className="text-4xl font-black mb-4 tracking-tight leading-tight">
+                  {getPPDBCountdown()} Hari Lagi Menuju <span className="text-maroon-400">Finish</span>
+                </h2>
+                <div className="flex items-center gap-6 mt-8">
+                  <div className="flex flex-col">
+                    <span className="text-2xl font-black">{stats.total_pendaftar}</span>
+                    <span className="text-[10px] font-bold text-slate-500 uppercase">Pendaftar</span>
+                  </div>
+                  <div className="w-px h-8 bg-slate-800" />
+                  <div className="flex flex-col">
+                    <span className="text-2xl font-black text-maroon-400">{stats.sudah_bayar}</span>
+                    <span className="text-[10px] font-bold text-slate-500 uppercase">Lunas</span>
+                  </div>
+                </div>
+              </div>
+              <Link href="/dashboard/admin/pendaftar" className="group">
+                <div className="w-32 h-32 rounded-full border-2 border-white/10 hover:border-maroon-500/50 flex items-center justify-center transition-all relative">
+                  <ArrowUpRight className="w-10 h-10 group-hover:scale-120 transition-transform" />
+                </div>
+              </Link>
             </div>
+          </div>
         </div>
 
-        {/* Quick Action Card */}
         <div className="lg:col-span-4 flex flex-col gap-4">
-            <div className="flex-1 bg-maroon-600 rounded-[2rem] p-8 text-white relative overflow-hidden shadow-lg shadow-maroon-900/20">
-                <div className="absolute bottom-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl translate-y-1/2 translate-x-1/2" />
-                <h4 className="text-xl font-bold mb-3">Laporan Database</h4>
-                <p className="text-maroon-50 text-sm font-medium mb-6 leading-relaxed opacity-80">Export seluruh data pendaftar Al Imam ke format Excel.</p>
-                <button className="w-full bg-white text-maroon-900 py-4 rounded-xl font-black text-[11px] uppercase tracking-widest hover:bg-slate-50 transition-all flex items-center justify-center gap-2">
-                    <Download className="w-4 h-4" /> Download Data
-                </button>
+          <div className="flex-1 bg-maroon-700 rounded-[2.5rem] p-8 text-white relative overflow-hidden">
+            <h4 className="text-xl font-bold mb-2">Export Data</h4>
+            <p className="text-maroon-100 text-sm opacity-70 mb-6">Download rekapan pendaftar ke Excel.</p>
+            <button className="w-full bg-white text-maroon-900 py-4 rounded-xl font-black text-[11px] uppercase tracking-widest hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+              <Download className="w-4 h-4" /> Download Report
+            </button>
+          </div>
+          <div className="flex-1 bg-white border border-slate-200 rounded-[2.5rem] p-8 shadow-sm">
+            <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">Antrean Cek</h4>
+            <div className="space-y-4">
+              <Link href="/dashboard/admin/verifikasi-pembayaran" className="flex items-center justify-between group">
+                <span className="text-xs font-bold text-slate-600 group-hover:text-maroon-600">Keuangan</span>
+                <span className="px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 text-[10px] font-black">{stats.waiting_payment}</span>
+              </Link>
+              <Link href="/dashboard/admin/verifikasi-dokumen" className="flex items-center justify-between group">
+                <span className="text-xs font-bold text-slate-600 group-hover:text-maroon-600">Dokumen</span>
+                <span className="px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 text-[10px] font-black">{stats.waiting_docs}</span>
+              </Link>
             </div>
-            
-            <div className="flex-1 bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm">
-                <div className="flex items-center justify-between mb-6">
-                    <h4 className="text-sm font-black text-slate-900 uppercase tracking-widest">Antrean Verifikasi</h4>
-                    <Search className="w-4 h-4 text-slate-300" />
-                </div>
-                <div className="space-y-3">
-                    <Link href="/dashboard/admin/verifikasi-pembayaran" className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors group">
-                        <span className="text-xs font-bold text-slate-600 group-hover:text-maroon-600">Bayar Pendaftaran</span>
-                        <div className="px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 text-[10px] font-black">{stats.waiting_payment}</div>
-                    </Link>
-                    <Link href="/dashboard/admin/verifikasi-dokumen" className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors group">
-                        <span className="text-xs font-bold text-slate-600 group-hover:text-maroon-600">Berkas Dokumen</span>
-                        <div className="px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 text-[10px] font-black">{stats.waiting_docs}</div>
-                    </Link>
-                </div>
-            </div>
+          </div>
         </div>
       </div>
 
-      {/* Main Stats Widgets */}
+      {/* SECTION: STATS GRID (Dinamis sesuai Role) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatWidget 
-            label="Total Pendaftar" 
-            value={stats.total_pendaftar} 
-            icon={Users} 
-            color="blue" 
-            trend="+8% minggu ini" 
-          />
-          <StatWidget 
-            label="Lulus Seleksi" 
-            value={stats.diterima} 
-            icon={CheckCircle2} 
-            color="emerald" 
-          />
-          <StatWidget 
-            label="Cadangan" 
-            value={stats.cadangan} 
-            icon={Clock} 
-            color="amber" 
-          />
-          <StatWidget 
-            label="Daftar Ulang" 
-            value={stats.daftar_ulang} 
-            icon={Wallet} 
-            color="purple" 
-            trend="Stabil"
-          />
+        {(isAdminSuper || role === "admin_berkas") && (
+          <StatWidget label="Total Pendaftar" value={stats.total_pendaftar} icon={Users} color="blue" trend="+5% week" />
+        )}
+        {(isAdminSuper || role === "admin_keuangan") && (
+          <StatWidget label="Sudah Bayar" value={stats.sudah_bayar} icon={Wallet} color="emerald" trend="Verified" />
+        )}
+        {(isAdminSuper || role === "admin_berkas") && (
+          <StatWidget label="Lengkap Berkas" value={stats.sudah_isi_data} icon={ClipboardCheck} color="purple" />
+        )}
+        {isAdminSuper && (
+          <StatWidget label="Lulus Seleksi" value={stats.diterima} icon={CheckCircle2} color="emerald" />
+        )}
       </div>
 
-      {/* Table Section: Performa Jenjang */}
+      {/* SECTION: TABEL PERFORMA JENJANG */}
       <div className="bg-white rounded-[2.5rem] border border-slate-200 shadow-sm overflow-hidden">
-          <div className="px-8 py-6 border-b border-slate-100 flex items-center justify-between">
-              <div>
-                <h3 className="text-lg font-black text-slate-900 tracking-tight">Performa Jenjang</h3>
-                <p className="text-[11px] text-slate-400 font-bold uppercase tracking-widest mt-1">Distribusi Santri Al Imam</p>
-              </div>
-              <div className="h-8 w-px bg-slate-100 hidden md:block" />
-              <div className="flex items-center gap-6 hidden md:flex">
-                  <div className="flex items-center gap-2">
-                      <div className="w-2.5 h-2.5 rounded-full bg-maroon-500" />
-                      <span className="text-xs font-bold text-slate-500">Putra</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                      <div className="w-2.5 h-2.5 rounded-full bg-pink-500" />
-                      <span className="text-xs font-bold text-slate-500">Putri</span>
-                  </div>
-              </div>
+        <div className="px-8 py-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+          <div>
+            <h3 className="text-lg font-black text-slate-900 tracking-tight">Performa Jenjang</h3>
+            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Distribusi Per Sekolah</p>
           </div>
+        </div>
 
-          <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse min-w-[900px]">
-                  <thead className="bg-slate-50/50 text-[10px] font-black uppercase tracking-widest text-slate-400">
-                      <tr>
-                          <th className="px-8 py-4 border-b border-slate-100">Jenjang</th>
-                          <th className="px-4 py-4 border-b border-slate-100 text-center">Kuota (L/P/T)</th>
-                          <th className="px-4 py-4 border-b border-slate-100 text-center">Pendaftar (L/P/T)</th>
-                          <th className="px-4 py-4 border-b border-slate-100 text-center">Sudah Bayar</th>
-                          <th className="px-4 py-4 border-b border-slate-100 text-center">Lulus</th>
-                          <th className="px-8 py-4 border-b border-slate-100 text-center">Progress</th>
-                      </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-50">
-                      {stats.stats_per_jenjang?.map((item: any, idx: number) => {
-                          const percentage = Math.min(100, Math.round((item.pendaftar / item.kuota_total) * 100) || 0);
-                          return (
-                              <tr key={idx} className="hover:bg-slate-50/40 transition-colors group">
-                                  <td className="px-8 py-5">
-                                      <div className="flex items-center gap-4">
-                                          <div className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-maroon-700 font-black text-xs border border-slate-200">
-                                              {item.jenjang.substring(0, 2)}
-                                          </div>
-                                          <div>
-                                              <p className="font-bold text-slate-900">{JENJANG_LABELS[item.jenjang] || item.jenjang}</p>
-                                              <p className="text-[10px] text-slate-400 font-bold uppercase">Pesantren</p>
-                                          </div>
-                                      </div>
-                                  </td>
-                                  <td className="px-4 py-5 text-center">
-                                      <div className="flex items-center justify-center gap-1.5 text-xs font-bold text-slate-400">
-                                          <span>{item.kuota_putra}</span>
-                                          <span className="opacity-30">/</span>
-                                          <span>{item.kuota_putri}</span>
-                                          <span className="opacity-30">/</span>
-                                          <span className="text-slate-900">{item.kuota_total}</span>
-                                      </div>
-                                  </td>
-                                  <td className="px-4 py-5 text-center">
-                                      <div className="flex items-center justify-center gap-1.5 text-xs font-bold">
-                                          <span className="text-maroon-600">{item.pendaftar_putra}</span>
-                                          <span className="opacity-20 text-slate-400">/</span>
-                                          <span className="text-pink-500">{item.pendaftar_putri}</span>
-                                          <span className="opacity-20 text-slate-400">/</span>
-                                          <span className="text-slate-900">{item.pendaftar}</span>
-                                      </div>
-                                  </td>
-                                  <td className="px-4 py-5 text-center">
-                                      <span className="px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-[11px] font-black">
-                                          {item.bayar_total || 0}
-                                      </span>
-                                  </td>
-                                  <td className="px-4 py-5 text-center">
-                                      <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[11px] font-black">
-                                          {item.diterima || 0}
-                                      </span>
-                                  </td>
-                                  <td className="px-8 py-5">
-                                      <div className="w-full max-w-[120px] ml-auto">
-                                          <div className="flex items-center justify-between mb-1.5">
-                                              <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">{percentage}%</span>
-                                              <span className="text-[10px] font-bold text-slate-400">Isi</span>
-                                          </div>
-                                          <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden flex">
-                                              <motion.div 
-                                                  initial={{ width: 0 }}
-                                                  animate={{ width: `${Math.round((item.pendaftar_putra / item.kuota_total) * 100) || 0}%` }}
-                                                  className="h-full bg-maroon-600 transition-all duration-500" 
-                                                  title={`Putra: ${item.pendaftar_putra}`}
-                                              />
-                                              <motion.div 
-                                                  initial={{ width: 0 }}
-                                                  animate={{ width: `${Math.round((item.pendaftar_putri / item.kuota_total) * 100) || 0}%` }}
-                                                  className="h-full bg-pink-400 transition-all duration-500" 
-                                                  title={`Putri: ${item.pendaftar_putri}`}
-                                              />
-                                          </div>
-                                      </div>
-                                  </td>
-                              </tr>
-                          );
-                      })}
-                  </tbody>
-              </table>
-          </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left min-w-[800px]">
+            <thead className="bg-white text-[10px] font-black uppercase tracking-widest text-slate-400 border-b border-slate-100">
+              <tr>
+                <th className="px-8 py-4">Jenjang</th>
+                <th className="px-4 py-4 text-center">Pendaftar (L/P/T)</th>
+                <th className="px-4 py-4 text-center">Sudah Bayar</th>
+                <th className="px-4 py-4 text-center">Lulus</th>
+                <th className="px-8 py-4 text-right">Progress Isi</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-50">
+              {stats.stats_per_jenjang?.map((item: any, idx: number) => {
+                const perc = Math.round((item.pendaftar / item.kuota_total) * 100) || 0;
+                return (
+                  <tr key={idx} className="hover:bg-slate-50/50 transition-colors group">
+                    <td className="px-8 py-5">
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-maroon-700 font-black text-xs border border-slate-200">
+                          {item.jenjang.substring(0, 2)}
+                        </div>
+                        <div>
+                          <p className="font-bold text-slate-900">{JENJANG_LABELS[item.jenjang] || item.jenjang}</p>
+                          <p className="text-[10px] text-slate-400 font-bold">AL IMAM</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-4 py-5 text-center">
+                      <div className="text-xs font-bold">
+                        <span className="text-maroon-600">{item.pendaftar_putra}</span>
+                        <span className="opacity-20 mx-1">/</span>
+                        <span className="text-pink-500">{item.pendaftar_putri}</span>
+                        <span className="opacity-20 mx-1">/</span>
+                        <span className="text-slate-900">{item.pendaftar}</span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-5 text-center">
+                      <span className="px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-[11px] font-black">{item.bayar_total || 0}</span>
+                    </td>
+                    <td className="px-4 py-5 text-center">
+                      <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[11px] font-black">{item.diterima || 0}</span>
+                    </td>
+                    <td className="px-8 py-5">
+                      <div className="w-full max-w-[120px] ml-auto">
+                        <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden flex">
+                          <div style={{ width: `${perc}%` }} className="h-full bg-maroon-600" />
+                        </div>
+                        <span className="text-[10px] font-black text-slate-400 mt-1 block text-right">{perc}%</span>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

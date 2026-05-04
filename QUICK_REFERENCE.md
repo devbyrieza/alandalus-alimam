@@ -13,7 +13,7 @@
 1. Data Pendaftaran         (📋 ClipboardList)
 2. Pembayaran Pendaftaran   (💰 CreditCard)    ← Renamed + repositioned
 3. Kelengkapan Berkas       (📄 FileCheck)     ← Now with 3 tabs!
-4. Undangan Seleksi         (📅 Calendar)
+4. Jadwal Seleksi         (📅 Calendar)
 5. Pengumuman               (🏆 Trophy)
 6. Daftar Ulang             (✅ CheckCircle)    ← NEW!
 7. Profil                   (⚙️ Settings)
@@ -53,7 +53,7 @@
 | Data Pendaftaran | `/dashboard/pendaftar` | `/dashboard/pendaftar` | ✅ Same |
 | Pembayaran | `/dashboard/pendaftar/pembayaran-pendaftaran` | `/status-pembayaran` | 🔄 Renamed |
 | Kelengkapan Berkas | `/dashboard/pendaftar/kelengkapan-berkas` | Same | 🔄 Enhanced |
-| Undangan Seleksi | `/dashboard/pendaftar/undangan-seleksi` | Same | ✅ Same |
+| Jadwal Seleksi | `/dashboard/pendaftar/undangan-seleksi` | Same | ✅ Same |
 | Pengumuman | `/dashboard/pendaftar/pengumuman` | Same | ✅ Same |
 | Daftar Ulang | `/dashboard/pendaftar/daftar-ulang` | ❌ N/A | ✨ New |
 | Profil | `/dashboard/pendaftar/profil` | Same | ✅ Same |

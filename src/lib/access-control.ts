@@ -1,496 +1,332 @@
-// Status yang valid sesuai database constraint
-export type StatusProses =
-  | 'draft'
-  | 'registered'      // Baru mendaftar, belum bayar
-  | 'payment_verification'
-  | 'verified'        // Pembayaran terverifikasi (Lunas)
-  | 'payment_rejected' // Pembayaran bermasalah/ditolak sementara
-  | 'rejected'        // Akhir: Tidak diterima (Hasil Seleksi)
-  | 'scheduled'       // Terjadwal ujian
-  | 'accepted'        // Diterima
-  // Legacy statuses (untuk backward compatibility)
-  | 'awaiting_payment'
-  | 'paid'
-  | 'data_completed'
-  | 'docs_uploaded'
-  | 'docs_verified'
-  | 'tested'
-  | 'announced'
-  | 'enrolled';
+/**
+ * ─── ACCESS CONTROL SYSTEM ───
+ * File ini adalah jantung dari logika alur pendaftaran (State Machine) 
+ * dan sistem keamanan hak akses (Role-Based Access Control / RBAC).
+ * 
+ * Digunakan oleh: Sidebar, Middleware, dan Halaman Dashboard untuk menentukan
+ * apa yang bisa dilihat dan dilakukan oleh user.
+ */
+
+// ─── 1. STATUS PENDAFTARAN (STATE MACHINE) ───
 
 /**
- * URUTAN STATUS PENDAFTARAN (Hierarki)
- * Digunakan untuk menentukan akses menu dan progres.
+ * StatusProses
+ * Mendefinisikan semua tahapan yang harus dilalui oleh seorang pendaftar.
+ * Dari membuat akun (draft) sampai menjadi santri resmi (enrolled).
+ */
+export type StatusProses =
+  | "draft"                // Tahap awal: Akun dibuat tapi belum bayar
+  | "registered"           // Akun terdaftar secara sistem
+  | "payment_verification" // User sudah upload bukti bayar, menunggu admin keuangan
+  | "verified"             // LUNAS: Pembayaran sudah dikonfirmasi admin
+  | "payment_rejected"     // Masalah pembayaran: Admin butuh bukti bayar baru
+  | "rejected"             // Akhir: Pendaftar tidak lulus seleksi
+  | "scheduled"            // Sudah memilih jadwal ujian seleksi
+  | "accepted"             // LULUS: Dinyatakan diterima di pesantren
+  // Status tambahan untuk kompatibilitas data lama (Legacy)
+  | "awaiting_payment"
+  | "paid"
+  | "data_completed"
+  | "docs_uploaded"
+  | "docs_verified"
+  | "tested"
+  | "announced"
+  | "enrolled";
+
+/**
+ * STATUS_ORDER
+ * Menentukan urutan hierarki status.
+ * Penting untuk logika "halaman selanjutnya hanya terbuka jika halaman sebelumnya selesai".
  */
 export const STATUS_ORDER: StatusProses[] = [
-  'draft',
-  'registered',
-  'awaiting_payment',
-  'payment_verification',
-  'verified',
-  'paid',
-  'data_completed',
-  'docs_uploaded',
-  'docs_verified',
-  'scheduled',
-  'tested',
-  'announced',
-  'accepted',
-  'enrolled'
+  "draft",
+  "registered",
+  "awaiting_payment",
+  "payment_verification",
+  "verified",
+  "paid",
+  "data_completed",
+  "docs_uploaded",
+  "docs_verified",
+  "scheduled",
+  "tested",
+  "announced",
+  "accepted",
+  "enrolled",
 ];
 
 /**
- * Mendapatkan index status dalam hierarki.
- * Jika status tidak ditemukan, return 0 (draft).
+ * getStatusIndex
+ * Mencari posisi numerik sebuah status dalam urutan progres.
  */
 export function getStatusIndex(status: StatusProses | string): number {
   if (!status) return 0;
-  // Case-insensitive check to be safe
   const s = status.toLowerCase() as StatusProses;
   const index = STATUS_ORDER.indexOf(s);
   return index >= 0 ? index : 0;
 }
 
-// Check if current status meets minimum requirement
-export function hasReachedStatus(currentStatus: StatusProses, minimumStatus: StatusProses): boolean {
+/**
+ * hasReachedStatus
+ * Mengecek apakah user sudah mencapai atau melewati tahap tertentu.
+ * Contoh: User bisa upload dokumen jika sudah mencapai status 'verified'.
+ */
+export function hasReachedStatus(
+  currentStatus: StatusProses,
+  minimumStatus: StatusProses,
+): boolean {
   return getStatusIndex(currentStatus) >= getStatusIndex(minimumStatus);
 }
 
-export type TabName =
-  | 'data-pribadi'              // Step 1 - always accessible
-  | 'pembayaran-pendaftaran'    // Step 2 - always accessible
-  | 'status-pembayaran'         // Step 3 - always accessible
-  | 'kelengkapan-berkas'        // Step 4 - after payment verified
-  | 'upload-berkas'             // Step 5 - after data completed
-  | 'download-berkas'           // Step 6 - after docs uploaded
-  | 'undangan-seleksi'          // Step 7 - after docs verified
-  | 'pengumuman'                // Step 8 - after tested
-  | 'daftar-ulang'              // Step 9 - after accepted
-  | 'profil';                   // always accessible
+// ─── 2. SISTEM TABS (NAVIGATION CONTROL) ───
 
-// Step requirements - which status is needed to access each tab
-export const STEP_REQUIREMENTS: Record<TabName, {
-  minimumStatus: StatusProses | null;
-  label: string;
-  description: string;
-}> = {
-  'data-pribadi': {
-    minimumStatus: null,
-    label: 'Data Pribadi',
-    description: 'Lihat data pendaftaran Anda'
-  },
-  'pembayaran-pendaftaran': {
-    minimumStatus: null,
-    label: 'Pembayaran',
-    description: 'Lakukan pembayaran pendaftaran'
-  },
-  'status-pembayaran': {
-    minimumStatus: null,
-    label: 'Status Bayar',
-    description: 'Cek status pembayaran'
-  },
-  'profil': {
-    minimumStatus: null,
-    label: 'Profil',
-    description: 'Kelola profil Anda'
-  },
-  'kelengkapan-berkas': {
-    minimumStatus: 'verified', // STRICT: Must be verified by admin
-    label: 'Isi Data Lengkap',
-    description: 'Menunggu pembayaran diverifikasi admin'
-  },
-  'upload-berkas': {
-    minimumStatus: 'data_completed',
-    label: 'Upload Berkas',
-    description: 'Data lengkap harus diisi terlebih dahulu'
-  },
-  'download-berkas': {
-    minimumStatus: 'docs_uploaded',
-    label: 'Download Berkas',
-    description: 'Berkas harus diupload terlebih dahulu'
-  },
-  'undangan-seleksi': {
-    minimumStatus: 'docs_verified',
-    label: 'Undangan Seleksi',
-    description: 'Menunggu dokumen diverifikasi admin'
-  },
-  'pengumuman': {
-    minimumStatus: 'tested',
-    label: 'Pengumuman',
-    description: 'Ikuti seleksi ujian terlebih dahulu'
-  },
-  'daftar-ulang': {
-    minimumStatus: 'accepted',
-    label: 'Daftar Ulang',
-    description: 'Anda belum dinyatakan diterima'
+export type TabName =
+  | "data-pribadi"
+  | "pembayaran-pendaftaran"
+  | "status-pembayaran"
+  | "kelengkapan-berkas"
+  | "upload-berkas"
+  | "download-berkas"
+  | "undangan-seleksi"
+  | "pengumuman"
+  | "daftar-ulang"
+  | "profil";
+
+/**
+ * STEP_REQUIREMENTS
+ * Aturan akses untuk setiap tab di Dashboard Pendaftar.
+ */
+export const STEP_REQUIREMENTS: Record<
+  TabName,
+  {
+    minimumStatus: StatusProses | null;
+    label: string;
+    description: string;
   }
+> = {
+  "data-pribadi": {
+    minimumStatus: null,
+    label: "Data Pribadi",
+    description: "Lihat data pendaftaran Anda",
+  },
+  "pembayaran-pendaftaran": {
+    minimumStatus: null,
+    label: "Pembayaran",
+    description: "Lakukan pembayaran pendaftaran",
+  },
+  "status-pembayaran": {
+    minimumStatus: null,
+    label: "Status Bayar",
+    description: "Cek status pembayaran",
+  },
+  profil: {
+    minimumStatus: null,
+    label: "Profil",
+    description: "Kelola profil Anda",
+  },
+  "kelengkapan-berkas": {
+    minimumStatus: "verified", // Wajib Lunas dulu baru bisa isi data santri
+    label: "Isi Data Lengkap",
+    description: "Menunggu pembayaran diverifikasi admin",
+  },
+  "upload-berkas": {
+    minimumStatus: "data_completed",
+    label: "Upload Berkas",
+    description: "Data lengkap harus diisi terlebih dahulu",
+  },
+  "download-berkas": {
+    minimumStatus: "docs_uploaded",
+    label: "Download Berkas",
+    description: "Berkas harus diupload terlebih dahulu",
+  },
+  "undangan-seleksi": {
+    minimumStatus: "docs_verified",
+    label: "Jadwal Seleksi",
+    description: "Menunggu dokumen diverifikasi admin",
+  },
+  pengumuman: {
+    minimumStatus: "tested",
+    label: "Pengumuman",
+    description: "Ikuti seleksi ujian terlebih dahulu",
+  },
+  "daftar-ulang": {
+    minimumStatus: "accepted",
+    label: "Daftar Ulang",
+    description: "Anda belum dinyatakan diterima",
+  },
 };
 
-// Main function to check tab access
-export function canAccessTab(tabName: TabName, statusProses: StatusProses): boolean {
+/**
+ * canAccessTab
+ * Memvalidasi apakah user boleh mengklik sebuah menu tab.
+ */
+export function canAccessTab(
+  tabName: TabName,
+  statusProses: StatusProses,
+): boolean {
   const requirement = STEP_REQUIREMENTS[tabName];
-
-  // No requirement = always accessible
-  if (!requirement || !requirement.minimumStatus) {
-    return true;
-  }
-
-  // Check if current status meets minimum
+  if (!requirement || !requirement.minimumStatus) return true;
   return hasReachedStatus(statusProses, requirement.minimumStatus);
 }
 
-// Get unlock message for a tab
-export function getUnlockMessage(tabName: TabName): string {
-  const requirement = STEP_REQUIREMENTS[tabName];
-  return requirement?.description || 'Selesaikan tahap sebelumnya';
-}
+// ─── 3. GUIDED ACTION LOGIC ───
 
-// Calculate progress percentage to unlock a tab
-export function calculateProgressToUnlock(tabName: TabName, currentStatus: StatusProses): number {
-  const requirement = STEP_REQUIREMENTS[tabName];
-
-  if (!requirement || !requirement.minimumStatus) {
-    return 100; // Always accessible
-  }
-
-  const currentIndex = getStatusIndex(currentStatus);
-  const requiredIndex = getStatusIndex(requirement.minimumStatus);
-
-  if (currentIndex >= requiredIndex) {
-    return 100;
-  }
-
-  // Calculate progress (0-99%)
-  return Math.min(99, Math.round((currentIndex / requiredIndex) * 100));
-}
-
-// Get next step info
+/**
+ * getNextStep
+ * Fungsi pintar untuk menentukan tombol apa yang harus muncul di Dashboard Hero Section.
+ */
 export function getNextStep(currentStatus: StatusProses): {
   status: StatusProses;
   action: string;
   href: string;
 } | null {
   const nextSteps: Record<string, { status: StatusProses; action: string; href: string }> = {
-    'draft': { status: 'payment_verification', action: 'Lakukan pembayaran pendaftaran', href: '/dashboard/pendaftar/pembayaran-pendaftaran' },
-    'registered': { status: 'payment_verification', action: 'Lakukan pembayaran pendaftaran', href: '/dashboard/pendaftar/pembayaran-pendaftaran' },
-    'awaiting_payment': { status: 'payment_verification', action: 'Upload bukti pembayaran', href: '/dashboard/pendaftar/pembayaran-pendaftaran' },
-    'payment_verification': { status: 'verified', action: 'Tunggu verifikasi pembayaran', href: '/dashboard/pendaftar/pembayaran-pendaftaran' },
-    'verified': { status: 'data_completed', action: 'Isi formulir data lengkap', href: '/dashboard/pendaftar/isi-data-lengkap' },
-    'paid': { status: 'data_completed', action: 'Isi formulir data lengkap', href: '/dashboard/pendaftar/isi-data-lengkap' },
-    'data_completed': { status: 'docs_uploaded', action: 'Upload dokumen persyaratan', href: '/dashboard/pendaftar/upload-berkas' },
-    'docs_uploaded': { status: 'docs_verified', action: 'Tunggu verifikasi dokumen', href: '/dashboard/pendaftar/upload-berkas' },
-    'docs_verified': { status: 'scheduled', action: 'Pilih Jadwal Seleksi', href: '/dashboard/pendaftar/undangan-seleksi' },
-    'scheduled': { status: 'tested', action: 'Ikuti ujian seleksi', href: '/dashboard/pendaftar/ujian' },
-    'tested': { status: 'announced', action: 'Tunggu pengumuman hasil', href: '/dashboard/pendaftar/pengumuman' },
-    'announced': { status: 'accepted', action: 'Lihat hasil seleksi', href: '/dashboard/pendaftar/pengumuman' },
-    'accepted': { status: 'enrolled', action: 'Lakukan daftar ulang', href: '/dashboard/pendaftar/daftar-ulang' },
+    draft: { status: "payment_verification", action: "Klik di Sini untuk Bayar", href: "/dashboard/pendaftar/pembayaran-pendaftaran" },
+    registered: { status: "payment_verification", action: "Klik di Sini untuk Bayar", href: "/dashboard/pendaftar/pembayaran-pendaftaran" },
+    awaiting_payment: { status: "payment_verification", action: "Upload Bukti Bayar", href: "/dashboard/pendaftar/pembayaran-pendaftaran" },
+    payment_verification: { status: "verified", action: "Tunggu Verifikasi Keuangan", href: "/dashboard/pendaftar/pembayaran-pendaftaran" },
+    verified: { status: "data_completed", action: "Lanjut Isi Data Lengkap", href: "/dashboard/pendaftar/isi-data-lengkap" },
+    paid: { status: "data_completed", action: "Lanjut Isi Data Lengkap", href: "/dashboard/pendaftar/isi-data-lengkap" },
+    data_completed: { status: "docs_uploaded", action: "Lanjut Upload Berkas", href: "/dashboard/pendaftar/upload-berkas" },
+    docs_uploaded: { status: "docs_verified", action: "Tunggu Verifikasi Berkas", href: "/dashboard/pendaftar/upload-berkas" },
+    docs_verified: { status: "scheduled", action: "Pilih Jadwal Seleksi", href: "/dashboard/pendaftar/undangan-seleksi" },
+    scheduled: { status: "tested", action: "Siap Mengikuti Ujian", href: "/dashboard/pendaftar/ujian" },
+    tested: { status: "announced", action: "Tunggu Pengumuman", href: "/dashboard/pendaftar/pengumuman" },
+    announced: { status: "accepted", action: "Lihat Hasil Kelulusan", href: "/dashboard/pendaftar/pengumuman" },
+    accepted: { status: "enrolled", action: "Lakukan Daftar Ulang", href: "/dashboard/pendaftar/daftar-ulang" },
   };
 
   return nextSteps[currentStatus] || null;
 }
 
-// Format status for display
+// ─── 4. DISPLAY FORMATTERS ───
+
+/**
+ * formatStatusDisplay
+ * Mengubah kode status teknis (misal: 'draft') menjadi label cantik (misal: 'Tahap 1: Pembayaran') 
+ * beserta warnanya untuk UI.
+ */
 export function formatStatusDisplay(status: StatusProses): { label: string; color: string } {
-  const statusMap: Record<StatusProses, { label: string; color: string }> = {
-    'draft': { label: 'Belum Bayar', color: 'bg-amber-100 text-amber-700' },
-    'registered': { label: 'Belum Bayar', color: 'bg-amber-100 text-amber-700' },
-    'awaiting_payment': { label: 'Menunggu Pembayaran', color: 'bg-amber-100 text-amber-700' },
-    'payment_verification': { label: 'Menunggu Verifikasi', color: 'bg-orange-100 text-orange-700' },
-    'verified': { label: 'Pembayaran Lunas', color: 'bg-blue-100 text-blue-700' },
-    'paid': { label: 'Pembayaran Lunas', color: 'bg-blue-100 text-blue-700' },
-    'payment_rejected': { label: 'Pembayaran Bermasalah', color: 'bg-red-100 text-red-700' },
-    'rejected': { label: 'Perlu Perbaikan', color: 'bg-red-100 text-red-700' },
-    'data_completed': { label: 'Data Lengkap', color: 'bg-teal-100 text-teal-700' },
-    'docs_uploaded': { label: 'Dokumen Berhasil Diupload', color: 'bg-indigo-100 text-indigo-700' },
-    'docs_verified': { label: 'Dokumen Terverifikasi', color: 'bg-green-100 text-green-700' },
-    'scheduled': { label: 'Terjadwal Ujian', color: 'bg-purple-100 text-purple-700' },
-    'tested': { label: 'Sudah Ujian', color: 'bg-violet-100 text-violet-700' },
-    'announced': { label: 'Diumumkan', color: 'bg-cyan-100 text-cyan-700' },
-    'accepted': { label: 'Diterima', color: 'bg-green-100 text-green-700' },
-    'enrolled': { label: 'Terdaftar', color: 'bg-emerald-100 text-emerald-700' },
+  const statusMap: Record<string, { label: string; color: string }> = {
+    draft: { label: "Tahap 1: Pembayaran", color: "bg-amber-100 text-amber-700" },
+    registered: { label: "Tahap 1: Pembayaran", color: "bg-amber-100 text-amber-700" },
+    awaiting_payment: { label: "Menunggu Bukti Bayar", color: "bg-amber-100 text-amber-700" },
+    payment_verification: { label: "Verifikasi Keuangan", color: "bg-orange-100 text-orange-700" },
+    verified: { label: "Lunas & Terverifikasi", color: "bg-blue-100 text-blue-700" },
+    paid: { label: "Lunas & Terverifikasi", color: "bg-blue-100 text-blue-700" },
+    payment_rejected: { label: "Bayar Perlu Dicek", color: "bg-red-100 text-red-700" },
+    rejected: { label: "Berkas Belum Sesuai", color: "bg-red-100 text-red-700" },
+    data_completed: { label: "Tahap 2: Isi Berkas", color: "bg-teal-100 text-teal-700" },
+    docs_uploaded: { label: "Menunggu Cek Panitia", color: "bg-indigo-100 text-indigo-700" },
+    docs_verified: { label: "Berkas Selesai", color: "bg-green-100 text-green-700" },
+    scheduled: { label: "Jadwal Tes Tersedia", color: "bg-purple-100 text-purple-700" },
+    tested: { label: "Tes Selesai Diikuti", color: "bg-violet-100 text-violet-700" },
+    announced: { label: "Hasil Sudah Keluar", color: "bg-cyan-100 text-cyan-700" },
+    accepted: { label: "Alhamdulillah LULUS", color: "bg-green-100 text-green-700" },
+    enrolled: { label: "Santri Terdaftar", color: "bg-emerald-100 text-emerald-700" },
   };
 
-  return statusMap[status] || { label: status, color: 'bg-stone-100 text-stone-700' };
+  return statusMap[status] || { label: status, color: "bg-stone-100 text-stone-700" };
 }
 
-// ============================================================================
-// ROLE DEFINITIONS - 5 DASHBOARD TYPES
-// ============================================================================
+// ─── 5. ROLE-BASED ACCESS CONTROL (RBAC) ───
 
 export type UserRole =
-  | 'pendaftar'       // Dashboard Pendaftar - calon santri
-  | 'admin_berkas'    // Dashboard Admin Berkas dan Pendaftaran Umum - verifikasi dokumen & data pendaftaran
-  | 'admin_keuangan'  // Dashboard Keuangan - verifikasi pembayaran & keuangan
-  | 'penguji_calsan'   // Dashboard Penguji (Quran)
-  | 'pewawancara_calsan' // Dashboard Pewawancara Calsan
-  | 'pewawancara_cawalsan' // Dashboard Pewawancara Orang Tua (Cawalsan)
-  | 'admin_super'     // Dashboard Admin Super - akses penuh ke semua fitur
-  | 'admin';          // Legacy Admin Role
+  | "pendaftar"
+  | "admin_berkas"
+  | "admin_keuangan"
+  | "penguji_calsan"
+  | "pewawancara_calsan"
+  | "pewawancara_cawalsan"
+  | "admin_super"
+  | "admin";
 
-// Role display names
 export const ROLE_LABELS: Record<UserRole, string> = {
-  pendaftar: 'Pendaftar',
-  admin_berkas: 'Admin Berkas',
-  admin_keuangan: 'Admin Keuangan',
+  pendaftar: "Pendaftar",
+  admin_berkas: "Admin Berkas",
+  admin_keuangan: "Admin Keuangan",
   penguji_calsan: "Penguji Al-Qur'an",
-  pewawancara_calsan: 'Pewawancara Calon Santri',
-  pewawancara_cawalsan: 'Pewawancara Calon Orangtua/Wali Santri',
-  admin_super: 'Admin Super',
-  admin: 'Administrator (Legacy)',
+  pewawancara_calsan: "Pewawancara Calon Santri",
+  pewawancara_cawalsan: "Pewawancara Calon Orangtua",
+  admin_super: "Admin Super",
+  admin: "Administrator (Legacy)",
 };
 
-// Role descriptions
-export const ROLE_DESCRIPTIONS: Record<UserRole, string> = {
-  pendaftar: 'Calon santri yang mendaftar ke Ponpes Al Andalus Ulul Albaab',
-  admin_berkas: 'Memverifikasi berkas/dokumen dan data pendaftaran santri',
-  admin_keuangan: 'Mengelola verifikasi pembayaran dan keuangan',
-  penguji_calsan: 'Melakukan penilaian tahsin/hafalan Al-Quran calon santri',
-  pewawancara_calsan: 'Melakukan wawancara calon santri',
-  pewawancara_cawalsan: 'Melakukan wawancara orang tua wali santri',
-  admin_super: 'Akses penuh operasional PPDB & Manajemen User',
-  admin: 'Administrator (Legacy - Full Access)',
-};
-
-// Role permissions
+/**
+ * ROLE_PERMISSIONS
+ * Daftar hak akses mentah untuk setiap role.
+ * Digunakan untuk proteksi tombol atau fitur spesifik.
+ */
 export const ROLE_PERMISSIONS: Record<UserRole, string[]> = {
-  pendaftar: [
-    'view_own_data',
-    'edit_own_data',
-    'upload_documents',
-    'view_payment_status',
-    'view_exam_schedule',
-    'view_announcement',
-  ],
-  admin_berkas: [
-    'view_pendaftar_list',
-    'view_pendaftar_detail',
-    'verify_documents',
-    'view_document_status',
-    'export_pendaftar_data',
-  ],
-  admin_keuangan: [
-    'view_pendaftar_list',
-    'view_payment_list',
-    'verify_payment',
-    'view_financial_reports',
-    'export_payment_data',
-  ],
-  penguji_calsan: [
-    'view_exam_schedule',
-    'view_pendaftar_for_exam',
-    'input_exam_scores',
-    'view_exam_results',
-  ],
-  pewawancara_calsan: [
-    'view_exam_schedule',
-    'view_pendaftar_for_exam',
-    'input_exam_scores',
-    'view_exam_results',
-  ],
-  pewawancara_cawalsan: [
-    'view_exam_schedule',
-    'view_pendaftar_for_exam',
-    'input_exam_scores',
-    'view_exam_results',
-  ],
-  admin_super: [
-    // Monitoring & Data
-    'view_pendaftar_list',
-    'view_pendaftar_detail',
-    'view_dashboard_stats',
-    'view_regional_stats',
-    'advanced_filter',
-    'view_charts',
-    'export_all_data',
-    // Seleksi & Keputusan
-    'input_selection_result',
-    'publish_announcement',
-    // WhatsApp Blast
-    'view_broadcast',
-    'send_wa_blast',
-    'send_google_form',
-    // System & User Management
-    'manage_users',
-    'manage_settings',
-  ],
-  admin: [
-    'view_pendaftar_list',
-    'view_pendaftar_detail',
-    'edit_pendaftar_data',
-    'delete_pendaftar',
-    'verify_documents',
-    'view_document_status',
-    'view_payment_list',
-    'verify_payment',
-    'view_financial_reports',
-    'view_exam_schedule',
-    'manage_exam_schedule',
-    'input_exam_scores',
-    'view_exam_results',
-    'publish_announcement',
-    // 'manage_users', // REMOVED
-    'manage_settings',
-    'export_all_data',
-    'view_dashboard_stats',
-    'view_broadcast',
-    'send_broadcast',
-    'view_regional_stats',
-  ],
+  pendaftar: ["view_own_data", "edit_own_data", "upload_documents", "view_payment_status", "view_announcement"],
+  admin_berkas: ["view_pendaftar_list", "view_pendaftar_detail", "verify_documents", "export_pendaftar_data"],
+  admin_keuangan: ["view_pendaftar_list", "view_payment_list", "verify_payment", "view_financial_reports"],
+  penguji_calsan: ["view_exam_schedule", "input_exam_scores"],
+  pewawancara_calsan: ["view_exam_schedule", "input_exam_scores"],
+  pewawancara_cawalsan: ["view_exam_schedule", "input_exam_scores"],
+  admin_super: ["view_pendaftar_list", "view_dashboard_stats", "export_all_data", "input_selection_result", "manage_users", "manage_settings", "send_wa_blast"],
+  admin: ["view_pendaftar_list", "view_pendaftar_detail", "verify_documents", "verify_payment", "input_exam_scores", "manage_settings"],
 };
 
-// Dashboard routes per role
+/**
+ * DASHBOARD_ROUTES
+ * Menentukan halaman tujuan setelah login sukses berdasarkan role.
+ */
 export const DASHBOARD_ROUTES: Record<UserRole, string> = {
-  pendaftar: '/dashboard/pendaftar',
-  admin_berkas: '/dashboard/admin',
-  admin_keuangan: '/dashboard/admin',
-  penguji_calsan: '/dashboard/penguji',
-  pewawancara_calsan: '/dashboard/penguji',
-  pewawancara_cawalsan: '/dashboard/penguji',
-  admin_super: '/dashboard/admin',
-  admin: '/dashboard/admin',
+  pendaftar: "/dashboard/pendaftar",
+  admin_berkas: "/dashboard/admin",
+  admin_keuangan: "/dashboard/admin",
+  penguji_calsan: "/dashboard/penguji",
+  pewawancara_calsan: "/dashboard/penguji",
+  pewawancara_cawalsan: "/dashboard/penguji",
+  admin_super: "/dashboard/admin",
+  admin: "/dashboard/admin",
 };
 
-// Check if role has permission
 export function hasPermission(role: UserRole, permission: string): boolean {
   return ROLE_PERMISSIONS[role]?.includes(permission) ?? false;
 }
 
-// Check if role is admin type (can access admin dashboard)
 export function isAdminRole(role: UserRole): boolean {
-  return ['admin_berkas', 'admin_keuangan', 'admin_super', 'admin'].includes(role);
+  return ["admin_berkas", "admin_keuangan", "admin_super", "admin"].includes(role);
 }
 
-// Check if role can verify documents
-export function canVerifyDocuments(role: UserRole): boolean {
-  return hasPermission(role, 'verify_documents');
-}
+// ─── 6. DYNAMIC MENU LOGIC ───
 
-// Check if role can verify payments
-export function canVerifyPayments(role: UserRole): boolean {
-  return hasPermission(role, 'verify_payment');
-}
-
-// Check if role can input exam scores
-export function canInputScores(role: UserRole): boolean {
-  return hasPermission(role, 'input_exam_scores');
-}
-
-// Get menu items based on role
-export function getMenuItemsForRole(role: UserRole): { name: string; href: string; icon: string; group?: string }[] {
-  const baseMenuItems: Record<string, { name: string; href: string; icon: string; group?: string }[]> = {
+/**
+ * getMenuItemsForRole
+ * Menghasilkan daftar menu navigasi (sidebar) yang dipersonalisasi per role.
+ */
+export function getMenuItemsForRole(role: UserRole) {
+  const menus: Record<string, any[]> = {
     admin_berkas: [
-      { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
-      { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
-      { name: 'Permintaan Edit', href: '/dashboard/admin/perubahan-data', icon: 'Edit3' },
-      { name: 'Verifikasi Dokumen', href: '/dashboard/admin/verifikasi-dokumen', icon: 'FileCheck' },
-      { name: 'Profil Saya', href: '/dashboard/admin/profil', icon: 'UserCircle' },
+      { name: "Dashboard", href: "/dashboard/admin", icon: "LayoutDashboard" },
+      { name: "Data Pendaftar", href: "/dashboard/admin/pendaftar", icon: "Users" },
+      { name: "Verifikasi Dokumen", href: "/dashboard/admin/verifikasi-dokumen", icon: "FileCheck" },
     ],
     admin_keuangan: [
-      { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
-      { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
-      { name: 'Verifikasi Pembayaran', href: '/dashboard/admin/verifikasi-pembayaran', icon: 'CreditCard' },
-      { name: 'Rekap Keuangan', href: '/dashboard/admin/keuangan', icon: 'BarChart' },
-      { name: 'Profil Saya', href: '/dashboard/admin/profil', icon: 'UserCircle' },
+      { name: "Dashboard", href: "/dashboard/admin", icon: "LayoutDashboard" },
+      { name: "Data Pendaftar", href: "/dashboard/admin/pendaftar", icon: "Users" },
+      { name: "Verifikasi Pembayaran", href: "/dashboard/admin/verifikasi-pembayaran", icon: "CreditCard" },
+      { name: "Rekap Keuangan", href: "/dashboard/admin/keuangan", icon: "BarChart" },
     ],
     penguji_calsan: [
-      { name: 'Dasbor', href: '/dashboard/penguji', icon: 'LayoutDashboard' },
-      { name: 'Jadwal Ujian', href: '/dashboard/penguji/jadwal', icon: 'Calendar' },
-      { name: 'Input Nilai', href: '/dashboard/penguji/input-nilai', icon: 'ClipboardEdit' },
-      { name: 'Profil Saya', href: '/dashboard/penguji/profil', icon: 'UserCircle' },
-    ],
-    pewawancara_calsan: [
-      { name: 'Dasbor', href: '/dashboard/penguji', icon: 'LayoutDashboard' },
-      { name: 'Jadwal Ujian', href: '/dashboard/penguji/jadwal', icon: 'Calendar' },
-      { name: 'Input Nilai', href: '/dashboard/penguji/input-nilai', icon: 'ClipboardEdit' },
-      { name: 'Profil Saya', href: '/dashboard/penguji/profil', icon: 'UserCircle' },
-    ],
-    pewawancara_cawalsan: [
-      { name: 'Dasbor', href: '/dashboard/penguji', icon: 'LayoutDashboard' },
-      { name: 'Jadwal Ujian', href: '/dashboard/penguji/jadwal', icon: 'Calendar' },
-      { name: 'Input Nilai', href: '/dashboard/penguji/input-nilai', icon: 'ClipboardEdit' },
-      { name: 'Profil Saya', href: '/dashboard/penguji/profil', icon: 'UserCircle' },
+      { name: "Dasbor", href: "/dashboard/penguji", icon: "LayoutDashboard" },
+      { name: "Jadwal Seleksi", href: "/dashboard/penguji/jadwal", icon: "Calendar" },
+      { name: "Input Nilai", href: "/dashboard/penguji/input-nilai", icon: "ClipboardEdit" },
     ],
     admin_super: [
-      { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
-      // Group: OPERASIONAL
-      { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users', group: 'OPERASIONAL' },
-      { name: 'Monitoring Jadwal', href: '/dashboard/admin/jadwal/monitoring', icon: 'Calendar', group: 'OPERASIONAL' },
-      { name: 'Penilaian', href: '/dashboard/admin/penilaian', icon: 'ClipboardEdit', group: 'OPERASIONAL' },
-      // Group: SELEKSI
-      { name: 'Hasil Seleksi', href: '/dashboard/admin/hasil-seleksi', icon: 'Trophy', group: 'HASIL SELEKSI' },
-      { name: 'Pengumuman', href: '/dashboard/admin/pengumuman', icon: 'Bell', group: 'HASIL SELEKSI' },
-      // Group: KEUANGAN & SDM
-      { name: 'Rekap Keuangan', href: '/dashboard/admin/keuangan', icon: 'Landmark', group: 'KEUANGAN & SDM' },
-      { name: 'Rekap Honor', href: '/dashboard/admin/recap-fee', icon: 'CreditCard', group: 'KEUANGAN & SDM' },
-      // Group: ANALITIK & BROADCAST
-      { name: 'Statistik Wilayah', href: '/dashboard/admin/statistik-wilayah', icon: 'Map', group: 'ANALITIK & BROADCAST' },
-      { name: 'Broadcast WA', href: '/dashboard/admin/broadcast', icon: 'Zap', group: 'ANALITIK & BROADCAST' },
-      // Group: SISTEM
-      { name: 'Manajemen User', href: '/dashboard/admin/users', icon: 'UserCog', group: 'SISTEM' },
-      { name: 'Pengaturan', href: '/dashboard/admin/pengaturan', icon: 'Settings', group: 'SISTEM' },
-      { name: 'Profil Saya', href: '/dashboard/admin/profil', icon: 'UserCircle', group: 'SISTEM' },
+      { name: "Dashboard", href: "/dashboard/admin", icon: "LayoutDashboard" },
+      { name: "Data Pendaftar", href: "/dashboard/admin/pendaftar", icon: "Users", group: "OPERASIONAL" },
+      { name: "Monitoring Jadwal", href: "/dashboard/admin/jadwal/monitoring", icon: "Calendar", group: "OPERASIONAL" },
+      { name: "Hasil Seleksi", href: "/dashboard/admin/hasil-seleksi", icon: "Trophy", group: "HASIL SELEKSI" },
+      { name: "Pengumuman", href: "/dashboard/admin/pengumuman", icon: "Bell", group: "HASIL SELEKSI" },
+      { name: "Rekap Keuangan", href: "/dashboard/admin/keuangan", icon: "Landmark", group: "KEUANGAN & SDM" },
+      { name: "Broadcast WA", href: "/dashboard/admin/broadcast", icon: "Zap", group: "ANALITIK" },
+      { name: "Manajemen User", href: "/dashboard/admin/users", icon: "UserCog", group: "SISTEM" },
+      { name: "Pengaturan", href: "/dashboard/admin/pengaturan", icon: "Settings", group: "SISTEM" },
     ],
-    admin: [
-      { name: 'Dashboard', href: '/dashboard/admin', icon: 'LayoutDashboard' },
-      { name: 'Data Pendaftar', href: '/dashboard/admin/pendaftar', icon: 'Users' },
-      { name: 'Verifikasi Pembayaran', href: '/dashboard/admin/verifikasi-pembayaran', icon: 'CreditCard' },
-      { name: 'Verifikasi Dokumen', href: '/dashboard/admin/verifikasi-dokumen', icon: 'FileCheck' },
-      { name: 'Jadwal Ujian', href: '/dashboard/admin/jadwal-ujian', icon: 'Calendar' },
-      { name: 'Penilaian', href: '/dashboard/admin/penilaian', icon: 'ClipboardEdit' },
-      { name: 'Keuangan', href: '/dashboard/admin/keuangan', icon: 'BarChart' },
-      { name: 'Rekap Honor', href: '/dashboard/admin/recap-fee', icon: 'CreditCard' },
-      { name: 'Pengumuman', href: '/dashboard/admin/pengumuman', icon: 'Trophy' },
-      { name: 'Broadcast WA', href: '/dashboard/admin/broadcast', icon: 'Bell' },
-      { name: 'Statistik Wilayah', href: '/dashboard/admin/statistik-wilayah', icon: 'BarChart' },
-      { name: 'Pengaturan', href: '/dashboard/admin/pengaturan', icon: 'Settings' },
-      { name: 'Profil Saya', href: '/dashboard/admin/profil', icon: 'UserCircle' },
-    ],
-    pendaftar: [], // Pendaftar uses tab-based navigation
   };
 
-  return baseMenuItems[role] || [];
-}
-
-// Validate role access to a route
-export function canAccessRoute(role: UserRole, route: string): boolean {
-  // Admin super can access everything
-  if (role === 'admin_super' || role === 'admin') {
-    return true;
-  }
-
-
-
-  // Pendaftar can only access pendaftar routes
-  if (role === 'pendaftar') {
-    return route.startsWith('/dashboard/pendaftar') || route === '/dashboard';
-  }
-
-  // Admin berkas can access admin dashboard and document verification
-  if (role === 'admin_berkas') {
-    const allowedRoutes = [
-      '/dashboard/admin',
-      '/dashboard/admin/pendaftar',
-      '/dashboard/admin/verifikasi-dokumen',
-      '/dashboard/admin/perubahan-data',
-    ];
-    return allowedRoutes.some(r => route.startsWith(r));
-  }
-
-  // Admin keuangan can access admin dashboard and payment verification
-  if (role === 'admin_keuangan') {
-    const allowedRoutes = [
-      '/dashboard/admin',
-      '/dashboard/admin/pendaftar',
-      '/dashboard/admin/verifikasi-pembayaran',
-      '/dashboard/admin/keuangan', // UPDATED
-    ];
-    return allowedRoutes.some(r => route.startsWith(r));
-  }
-
-  // Examiners can only access penguji routes
-  if (role === 'penguji_calsan' || role === 'pewawancara_calsan' || role === 'pewawancara_cawalsan') {
-    return route.startsWith('/dashboard/penguji');
-  }
-
-  return false;
+  return menus[role] || [];
 }

@@ -16,7 +16,7 @@ import {
   ShieldCheck,
   Search,
   ExternalLink,
-  Home
+  Home,
 } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -54,7 +54,7 @@ export default function PengujiDashboardLayout({
         setPengujiName(name);
         setUserId(sessionData.session?.id || "");
         setUserRole(sessionData.session?.role || "");
-        
+
         // Debug: log available roles
         const roles = sessionData.availableRoles || [];
         console.log("[Penguji Layout] Available roles:", roles);
@@ -77,7 +77,7 @@ export default function PengujiDashboardLayout({
       active: pathname === "/dashboard/penguji",
     },
     {
-      name: "Jadwal Ujian Saya",
+      name: "Jadwal Seleksi Saya",
       href: "/dashboard/penguji/jadwal",
       icon: Calendar,
       active: pathname === "/dashboard/penguji/jadwal",
@@ -128,7 +128,9 @@ export default function PengujiDashboardLayout({
               : "text-ink-600 hover:bg-maroon-50 hover:text-maroon-700"
           }`}
         >
-          <item.icon className={`w-5 h-5 mr-3 shrink-0 transition-colors ${item.active ? 'text-white' : 'text-ink-400 group-hover:text-maroon-600'}`} />
+          <item.icon
+            className={`w-5 h-5 mr-3 shrink-0 transition-colors ${item.active ? "text-white" : "text-ink-400 group-hover:text-maroon-600"}`}
+          />
           <span className="flex-1 truncate tracking-tight">{item.name}</span>
           {item.active && <ChevronRight className="w-4 h-4 text-maroon-200" />}
         </Link>
@@ -148,7 +150,9 @@ export default function PengujiDashboardLayout({
             </div>
           </div>
           <h2 className="text-xl font-black text-ink-950 mb-2">Al Imam</h2>
-          <p className="text-ink-500 text-sm font-medium animate-pulse">Menghubungkan ke sistem seleksi...</p>
+          <p className="text-ink-500 text-sm font-medium animate-pulse">
+            Menghubungkan ke sistem seleksi...
+          </p>
         </div>
       </div>
     );
@@ -158,9 +162,8 @@ export default function PengujiDashboardLayout({
     <>
       <IdleTimeoutTracker />
       <div className="min-h-screen bg-surface-50 font-sans selection:bg-maroon-100 selection:text-maroon-900">
-        
         {/* Mobile Header - branding only, NO hamburger */}
-        <header 
+        <header
           data-ui-version="2"
           className="lg:hidden sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-surface-200 px-5 py-4 flex items-center justify-center"
         >
@@ -168,7 +171,9 @@ export default function PengujiDashboardLayout({
             <div className="w-8 h-8 rounded-lg bg-linear-to-br from-maroon-600 to-maroon-700 flex items-center justify-center text-white text-sm font-black shadow-md">
               <ShieldCheck className="w-4 h-4" />
             </div>
-            <span className="font-black text-ink-950 tracking-tight leading-none text-sm">Seleksi Panel</span>
+            <span className="font-black text-ink-950 tracking-tight leading-none text-sm">
+              Seleksi Panel
+            </span>
           </div>
         </header>
 
@@ -183,8 +188,12 @@ export default function PengujiDashboardLayout({
                     <ShieldCheck className="w-6 h-6" />
                   </div>
                   <div>
-                    <h1 className="font-black text-xl text-ink-950 leading-none tracking-tight">Seleksi <span className="text-maroon-600">Panel</span></h1>
-                    <p className="text-[10px] uppercase tracking-widest font-black text-gold-600 mt-1">Al Imam</p>
+                    <h1 className="font-black text-xl text-ink-950 leading-none tracking-tight">
+                      Seleksi <span className="text-maroon-600">Panel</span>
+                    </h1>
+                    <p className="text-[10px] uppercase tracking-widest font-black text-gold-600 mt-1">
+                      Al Imam
+                    </p>
                   </div>
                 </div>
               </div>
@@ -197,11 +206,15 @@ export default function PengujiDashboardLayout({
                   </div>
                   <div className="relative z-10 flex items-center gap-3 mb-3">
                     <div className="w-10 h-10 rounded-full bg-white shadow-premium-sm flex items-center justify-center border border-surface-100 font-black text-maroon-700">
-                       {pengujiName.charAt(0)}
+                      {pengujiName.charAt(0)}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-black text-ink-950 text-sm truncate">{pengujiName}</p>
-                      <span className="text-[10px] font-bold text-ink-400 capitalize">{userRole}</span>
+                      <p className="font-black text-ink-950 text-sm truncate">
+                        {pengujiName}
+                      </p>
+                      <span className="text-[10px] font-bold text-ink-400 capitalize">
+                        {userRole}
+                      </span>
                     </div>
                   </div>
                   <div className="flex items-center gap-2 text-[9px] font-black text-maroon-700 bg-maroon-50 px-2.5 py-1 rounded-lg border border-maroon-100 uppercase tracking-widest">
@@ -213,7 +226,9 @@ export default function PengujiDashboardLayout({
 
               {/* Navigation Menu */}
               <div className="flex-1 px-6 overflow-y-auto custom-scrollbar">
-                <p className="text-[10px] font-black text-ink-300 uppercase tracking-[0.2em] mb-4 pl-1">Navigasi Utama</p>
+                <p className="text-[10px] font-black text-ink-300 uppercase tracking-[0.2em] mb-4 pl-1">
+                  Navigasi Utama
+                </p>
                 <SidebarNav />
               </div>
 
@@ -221,14 +236,18 @@ export default function PengujiDashboardLayout({
               <div className="p-6 border-t border-surface-50 mt-auto">
                 {availableRoles.length > 1 && (
                   <div className="mb-4">
-                    <p className="text-[10px] font-bold text-ink-400 uppercase tracking-widest mb-2 pl-1">Ganti Role</p>
+                    <p className="text-[10px] font-bold text-ink-400 uppercase tracking-widest mb-2 pl-1">
+                      Ganti Role
+                    </p>
                     <select
                       value={userRole}
                       onChange={handleRoleSwitch}
                       className="w-full bg-surface-50 border border-surface-100 text-xs font-bold text-ink-900 rounded-xl py-2.5 px-3 focus:ring-4 focus:ring-maroon-500/10 focus:border-maroon-200 outline-none transition-all shadow-premium-sm"
                     >
                       {availableRoles.map((role) => (
-                        <option key={role} value={role}>{ROLE_LABELS[role as UserRole] || role}</option>
+                        <option key={role} value={role}>
+                          {ROLE_LABELS[role as UserRole] || role}
+                        </option>
                       ))}
                     </select>
                   </div>
@@ -267,9 +286,14 @@ export default function PengujiDashboardLayout({
                       <div className="w-8 h-8 rounded-lg bg-linear-to-br from-maroon-600 to-maroon-700 flex items-center justify-center text-white shadow-md">
                         <ShieldCheck className="w-5 h-5" />
                       </div>
-                      <span className="font-black text-ink-950">Seleksi Panel</span>
+                      <span className="font-black text-ink-950">
+                        Seleksi Panel
+                      </span>
                     </div>
-                    <button onClick={() => setSidebarOpen(false)} className="p-2 hover:bg-surface-100 rounded-xl">
+                    <button
+                      onClick={() => setSidebarOpen(false)}
+                      className="p-2 hover:bg-surface-100 rounded-xl"
+                    >
                       <X className="w-5 h-5 text-ink-400" />
                     </button>
                   </div>
@@ -280,8 +304,12 @@ export default function PengujiDashboardLayout({
                       {pengujiName.charAt(0)}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-black text-ink-950 text-sm truncate">{pengujiName}</p>
-                      <span className="text-[10px] font-bold text-ink-400 capitalize">{userRole}</span>
+                      <p className="font-black text-ink-950 text-sm truncate">
+                        {pengujiName}
+                      </p>
+                      <span className="text-[10px] font-bold text-ink-400 capitalize">
+                        {userRole}
+                      </span>
                     </div>
                   </div>
 
@@ -291,7 +319,9 @@ export default function PengujiDashboardLayout({
 
                   {/* Switch Role - SELALU tampilkan di mobile untuk akses mudah */}
                   <div className="mt-4 pt-4 border-t border-surface-100">
-                    <p className="text-[10px] font-bold text-ink-400 uppercase tracking-widest mb-2 pl-1">Role</p>
+                    <p className="text-[10px] font-bold text-ink-400 uppercase tracking-widest mb-2 pl-1">
+                      Role
+                    </p>
                     {availableRoles && availableRoles.length > 1 ? (
                       <select
                         value={userRole}
@@ -299,12 +329,16 @@ export default function PengujiDashboardLayout({
                         className="w-full bg-surface-50 border border-surface-100 text-xs font-bold text-ink-900 rounded-xl py-2.5 px-3 focus:ring-4 focus:ring-maroon-500/10 focus:border-maroon-200 outline-none transition-all shadow-sm"
                       >
                         {availableRoles.map((role) => (
-                          <option key={role} value={role}>{ROLE_LABELS[role as UserRole] || role}</option>
+                          <option key={role} value={role}>
+                            {ROLE_LABELS[role as UserRole] || role}
+                          </option>
                         ))}
                       </select>
                     ) : (
                       <div className="w-full bg-maroon-50 border border-maroon-100 text-xs font-bold text-maroon-900 rounded-xl py-2.5 px-3">
-                        {ROLE_LABELS[userRole as UserRole] || userRole || "Penguji"}
+                        {ROLE_LABELS[userRole as UserRole] ||
+                          userRole ||
+                          "Penguji"}
                       </div>
                     )}
                   </div>
@@ -325,34 +359,42 @@ export default function PengujiDashboardLayout({
           <div className="flex-1 flex flex-col min-w-0 lg:ml-72 min-h-screen">
             {/* Topbar Desktop */}
             <header className="hidden lg:flex items-center justify-between h-24 px-10 sticky top-0 bg-surface-50/80 backdrop-blur-md z-30 shrink-0">
-               <div className="flex-1 max-w-xl">
-                  <div className="relative group">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-300 group-focus-within:text-maroon-600 transition-colors" />
-                    <input 
-                      type="text" 
-                      placeholder="Cari data pendaftar..." 
-                      className="w-full bg-white border border-surface-200 focus:border-maroon-300 focus:ring-4 focus:ring-maroon-500/5 rounded-[1.25rem] py-3 pl-11 pr-4 text-sm font-medium outline-none transition-all shadow-premium-sm"
-                    />
-                  </div>
-               </div>
+              <div className="flex-1 max-w-xl">
+                <div className="relative group">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-300 group-focus-within:text-maroon-600 transition-colors" />
+                  <input
+                    type="text"
+                    placeholder="Cari data pendaftar..."
+                    className="w-full bg-white border border-surface-200 focus:border-maroon-300 focus:ring-4 focus:ring-maroon-500/5 rounded-[1.25rem] py-3 pl-11 pr-4 text-sm font-medium outline-none transition-all shadow-premium-sm"
+                  />
+                </div>
+              </div>
 
-               <div className="flex items-center gap-6">
-                  <div className="flex items-center gap-4">
-                    <Link href="/" target="_blank" className="p-3 text-ink-400 hover:text-maroon-600 bg-white hover:bg-maroon-50 border border-surface-100 rounded-full transition-all shadow-premium-sm">
-                      <ExternalLink className="w-5 h-5" />
-                    </Link>
-                    <div className="w-px h-6 bg-surface-200" />
-                    <div className="flex items-center gap-3">
-                       <div className="text-right hidden xl:block">
-                          <p className="text-sm font-black text-ink-950 leading-none">{pengujiName}</p>
-                          <p className="text-[10px] font-bold text-maroon-600 uppercase tracking-widest mt-1">Penguji Al-Qur&apos;an</p>
-                       </div>
-                       <div className="w-12 h-12 rounded-2xl bg-linear-to-br from-maroon-50 to-maroon-100 flex items-center justify-center border border-maroon-200 shadow-premium-sm text-maroon-700 font-black">
-                          {pengujiName.charAt(0)}
-                       </div>
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-4">
+                  <Link
+                    href="/"
+                    target="_blank"
+                    className="p-3 text-ink-400 hover:text-maroon-600 bg-white hover:bg-maroon-50 border border-surface-100 rounded-full transition-all shadow-premium-sm"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                  </Link>
+                  <div className="w-px h-6 bg-surface-200" />
+                  <div className="flex items-center gap-3">
+                    <div className="text-right hidden xl:block">
+                      <p className="text-sm font-black text-ink-950 leading-none">
+                        {pengujiName}
+                      </p>
+                      <p className="text-[10px] font-bold text-maroon-600 uppercase tracking-widest mt-1">
+                        Penguji Al-Qur&apos;an
+                      </p>
+                    </div>
+                    <div className="w-12 h-12 rounded-2xl bg-linear-to-br from-maroon-50 to-maroon-100 flex items-center justify-center border border-maroon-200 shadow-premium-sm text-maroon-700 font-black">
+                      {pengujiName.charAt(0)}
                     </div>
                   </div>
-               </div>
+                </div>
+              </div>
             </header>
 
             {/* Content Area */}
@@ -374,20 +416,35 @@ export default function PengujiDashboardLayout({
 
             {/* Mobile Bottom Navigation */}
             <footer className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-surface-200 px-2 py-3 z-40 flex items-center justify-around shadow-[0_-10px_40px_-5px_rgba(0,0,0,0.05)] rounded-t-[2rem]">
-               {menuItems.map((item) => (
-                  <Link key={item.name} href={item.href} className="flex flex-col items-center gap-1 group py-1 min-w-[70px]">
-                     <div className={`p-2 rounded-2xl transition-all ${item.active ? 'bg-maroon-600 text-white shadow-lg shadow-maroon-200' : 'text-ink-400 group-hover:bg-maroon-50'}`}>
-                        <item.icon className="w-5 h-5" />
-                     </div>
-                     <span className={`text-[9px] font-black uppercase tracking-widest ${item.active ? 'text-maroon-700' : 'text-ink-400'}`}>{item.name}</span>
-                  </Link>
-               ))}
-               <button onClick={() => setSidebarOpen(true)} className="flex flex-col items-center gap-1 group py-1 min-w-[70px]">
-                  <div className="p-2 rounded-2xl text-ink-400 group-hover:bg-maroon-50 transition-all">
-                    <Menu className="w-5 h-5" />
+              {menuItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="flex flex-col items-center gap-1 group py-1 min-w-[70px]"
+                >
+                  <div
+                    className={`p-2 rounded-2xl transition-all ${item.active ? "bg-maroon-600 text-white shadow-lg shadow-maroon-200" : "text-ink-400 group-hover:bg-maroon-50"}`}
+                  >
+                    <item.icon className="w-5 h-5" />
                   </div>
-                  <span className="text-[9px] font-black uppercase tracking-widest text-ink-400">Menu</span>
-               </button>
+                  <span
+                    className={`text-[9px] font-black uppercase tracking-widest ${item.active ? "text-maroon-700" : "text-ink-400"}`}
+                  >
+                    {item.name}
+                  </span>
+                </Link>
+              ))}
+              <button
+                onClick={() => setSidebarOpen(true)}
+                className="flex flex-col items-center gap-1 group py-1 min-w-[70px]"
+              >
+                <div className="p-2 rounded-2xl text-ink-400 group-hover:bg-maroon-50 transition-all">
+                  <Menu className="w-5 h-5" />
+                </div>
+                <span className="text-[9px] font-black uppercase tracking-widest text-ink-400">
+                  Menu
+                </span>
+              </button>
             </footer>
           </div>
         </div>
