@@ -79,7 +79,7 @@ export default function HeroSection() {
 
       <Container className="relative z-10">
         {/* ── FIX #1: Added overflow-visible on grid so tablet floating cards aren't clipped ── */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center">
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] xl:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-16 xl:gap-20 items-center">
 
           {/* CONTENT SIDE */}
           <div className="flex flex-col gap-7 lg:gap-9 text-center lg:text-left">
@@ -191,7 +191,7 @@ export default function HeroSection() {
           <motion.div
             variants={fadeIn} initial="hidden" animate={animate}
             transition={{ delay: shouldReduceMotion ? 0 : 0.25 }}
-            className="relative w-full mt-8 lg:mt-0"
+            className="relative w-full mt-8 lg:mt-0 lg:max-w-[500px] xl:max-w-[540px] lg:ml-auto"
             style={{ overflow: "visible" }}   // ← FIX tablet clip
           >
             {/* Main Image */}
