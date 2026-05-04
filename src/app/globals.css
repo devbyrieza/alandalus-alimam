@@ -55,17 +55,17 @@
   --color-surface-200: #EDECEA;
 
   /* ─── Ink (Text — warm-tinted agar sesuai branding maroon) ─── */
-  --color-ink-950: #120A0A;
-  --color-ink-900: #1E1010;
-  --color-ink-800: #2E1A1A;
-  --color-ink-700: #4A2A2A;
-  --color-ink-600: #6B4040;
-  --color-ink-500: #8C6060;
-  --color-ink-400: #B09090;
-  --color-ink-300: #CDB8B8;
-  --color-ink-200: #E8DADA;
-  --color-ink-100: #F4EEEE;
-  --color-ink-50: #FAF7F7;
+  --color-ink-950: #2D1010;   /* charcoal warm — bukan hitam pekat */
+  --color-ink-900: #3D1818;   /* dark warm — lebih hidup dari pure black */
+  --color-ink-800: #5C2E2E;
+  --color-ink-700: #7A4444;
+  --color-ink-600: #966060;
+  --color-ink-500: #B08080;
+  --color-ink-400: #C8AAAA;
+  --color-ink-300: #DECECE;
+  --color-ink-200: #EEE0E0;
+  --color-ink-100: #F7F0F0;
+  --color-ink-50: #FCF8F8;
 
   /* ─── Status Colors ─── */
   --color-success-500: #16A34A;
@@ -192,7 +192,7 @@
     letter-spacing: -0.03em;
     font-size: clamp(2.25rem, 5vw + 1rem, 5rem);
     line-height: 1.05;
-    color: var(--color-maroon-950);
+    color: var(--color-maroon-700); /* #660000 — kaya maroon, tidak hitam */
   }
 
   h2 {
@@ -201,7 +201,7 @@
     letter-spacing: -0.025em;
     font-size: clamp(1.75rem, 3.5vw + 0.75rem, 3.5rem);
     line-height: 1.15;
-    color: var(--color-maroon-900);
+    color: var(--color-maroon-700);
   }
 
   h3 {
@@ -210,7 +210,7 @@
     letter-spacing: -0.02em;
     font-size: clamp(1.25rem, 2vw + 0.5rem, 2rem);
     line-height: 1.25;
-    color: var(--color-maroon-800);
+    color: var(--color-maroon-600); /* #800000 — rich maroon */
   }
 
   h4 {
@@ -219,7 +219,7 @@
     letter-spacing: -0.015em;
     font-size: clamp(1.125rem, 1.5vw + 0.5rem, 1.5rem);
     line-height: 1.35;
-    color: var(--color-ink-900);
+    color: var(--color-ink-800);
   }
 
   h5,
