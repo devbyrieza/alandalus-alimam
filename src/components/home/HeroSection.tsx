@@ -87,11 +87,10 @@ export default function HeroSection() {
             {/* Opening Badge */}
             <motion.div variants={fadeUp} initial="hidden" animate={animate} transition={{ delay: 0.1 }} className="flex justify-center lg:justify-start">
               <span
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.08em]"
-                style={{ background: "var(--color-white)", border: "1px solid var(--color-cream-300)", color: "var(--color-maroon-700)", boxShadow: "var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,0.8)" }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[11px] lg:text-[12px] font-bold tracking-[0.05em]"
+                style={{ background: "var(--color-surface-50)", border: "1px solid var(--color-maroon-200)", color: "var(--color-maroon-800)", boxShadow: "var(--shadow-sm)" }}
               >
-                <Sparkles className="w-3.5 h-3.5 flex-shrink-0" style={{ color: "var(--color-cream-600)" }} aria-hidden="true" />
-                <span>Terakreditasi BAN-PDM • Managed by Al-Andalus IIBS</span>
+                <span>✨ Selamat Datang di {BRANDING.schoolShortName} 👋</span>
               </span>
             </motion.div>
 
@@ -104,7 +103,7 @@ export default function HeroSection() {
                   fontSize: "clamp(2rem, 5vw + 0.75rem, 5rem)",
                 }}
               >
-                <span className="block">Mencetak Generasi</span>
+                <span className="block">Mencetak Generasi 🎓</span>
                 <span
                   className="block mt-1"
                   style={{
@@ -117,7 +116,7 @@ export default function HeroSection() {
                 >
                   Hanif, Kontributif,{" "}
                   <br className="hidden xl:block" />
-                  dan Adaptif
+                  dan Adaptif 🌟
                 </span>
               </h1>
             </motion.div>
@@ -151,8 +150,7 @@ export default function HeroSection() {
               <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                 <Link href="/ppdb" className="w-full sm:w-auto">
                   <button className="btn-primary w-full sm:w-auto px-8 lg:px-10 py-4 lg:py-[1.125rem] min-h-[56px] text-[0.9375rem]" style={{ boxShadow: "var(--shadow-maroon-lg)" }}>
-                    Daftar PPDB Sekarang
-                    <ArrowRight className="w-4 h-4 ml-0.5" aria-hidden="true" />
+                    Daftar PPDB Sekarang 🚀
                   </button>
                 </Link>
                 <Link href="/program" className="w-full sm:w-auto">

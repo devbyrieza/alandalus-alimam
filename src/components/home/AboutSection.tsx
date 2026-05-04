@@ -86,7 +86,7 @@ export default function AboutSection() {
             <motion.div variants={itemVariants} className="inline-flex mb-6">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-maroon-100 text-maroon-700 text-[11px] font-bold uppercase tracking-[0.12em] shadow-xs">
                 <Sparkles className="w-3 h-3" />
-                Profil Pesantren
+                Profil Pesantren 🏫
               </span>
             </motion.div>
 
@@ -96,7 +96,7 @@ export default function AboutSection() {
             >
               Mengedepankan{" "}
               <span className="text-gradient-maroon">
-                Bimbingan &amp; Pengawasan Melekat
+                Bimbingan &amp; Pengawasan Melekat ✨
               </span>
             </motion.h2>
 
@@ -134,7 +134,7 @@ export default function AboutSection() {
                   </div>
 
                   <span className="badge badge-maroon mb-5 text-[11px] tracking-wider uppercase">
-                    Visi Utama
+                    Visi Utama 🎯
                   </span>
 
                   <blockquote className="max-w-2xl mx-auto">
@@ -168,7 +168,7 @@ export default function AboutSection() {
                   </div>
                   <div>
                     <h3 className="font-display font-bold text-xl text-maroon-900 tracking-tight leading-tight">
-                      Misi Kami
+                      Misi Kami 🚀
                     </h3>
                     <p className="text-[13px] text-ink-400 mt-0.5">
                       Empat langkah strategis pembentukan karakter
@@ -232,7 +232,7 @@ export default function AboutSection() {
               className="w-full sm:w-auto"
             >
               <button className="btn-secondary w-full px-10 py-3.5 group">
-                Lanjut Baca Profil
+                Lanjut Baca Profil 🚀
                 <ArrowRight
                   className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
                 />
