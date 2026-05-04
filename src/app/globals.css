@@ -54,18 +54,18 @@
   --color-surface-100: #F5F4F2;
   --color-surface-200: #EDECEA;
 
-  /* ─── Ink (Text — warm-tinted agar sesuai branding maroon) ─── */
-  --color-ink-950: #2D1010;   /* charcoal warm — bukan hitam pekat */
-  --color-ink-900: #3D1818;   /* dark warm — lebih hidup dari pure black */
-  --color-ink-800: #5C2E2E;
-  --color-ink-700: #7A4444;
-  --color-ink-600: #966060;
-  --color-ink-500: #B08080;
-  --color-ink-400: #C8AAAA;
-  --color-ink-300: #DECECE;
-  --color-ink-200: #EEE0E0;
-  --color-ink-100: #F7F0F0;
-  --color-ink-50: #FCF8F8;
+  /* ─── Ink (Text — neutral gray, fresh & clean) ─── */
+  --color-ink-950: #111111;
+  --color-ink-900: #1C1C1C;
+  --color-ink-800: #2D2D2D;
+  --color-ink-700: #444444;
+  --color-ink-600: #666666;
+  --color-ink-500: #888888;
+  --color-ink-400: #AAAAAA;
+  --color-ink-300: #CCCCCC;
+  --color-ink-200: #E4E4E4;
+  --color-ink-100: #F2F2F2;
+  --color-ink-50: #F8F8F8;
 
   /* ─── Status Colors ─── */
   --color-success-500: #16A34A;
@@ -165,9 +165,8 @@
   }
 
   body {
-    /* Background off-white kecokelatan — manuskrip antik mewah */
-    background-color: #FAF9F6;
-    color: var(--color-ink-900);
+    background-color: #FFFFFF; /* Pure white — fresh & clean */
+    color: var(--color-ink-700);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -192,7 +191,7 @@
     letter-spacing: -0.03em;
     font-size: clamp(2.25rem, 5vw + 1rem, 5rem);
     line-height: 1.05;
-    color: var(--color-maroon-700); /* #660000 — kaya maroon, tidak hitam */
+    color: var(--color-maroon-600); /* #800000 — vivid maroon, not black */
   }
 
   h2 {
@@ -201,7 +200,7 @@
     letter-spacing: -0.025em;
     font-size: clamp(1.75rem, 3.5vw + 0.75rem, 3.5rem);
     line-height: 1.15;
-    color: var(--color-maroon-700);
+    color: var(--color-maroon-600);
   }
 
   h3 {
@@ -210,7 +209,7 @@
     letter-spacing: -0.02em;
     font-size: clamp(1.25rem, 2vw + 0.5rem, 2rem);
     line-height: 1.25;
-    color: var(--color-maroon-600); /* #800000 — rich maroon */
+    color: var(--color-maroon-700); /* #660000 */
   }
 
   h4 {
@@ -219,7 +218,7 @@
     letter-spacing: -0.015em;
     font-size: clamp(1.125rem, 1.5vw + 0.5rem, 1.5rem);
     line-height: 1.35;
-    color: var(--color-ink-800);
+    color: var(--color-ink-700);
   }
 
   h5,
