@@ -94,7 +94,7 @@ export default function HomePage() {
           </ScrollAnimation>
         </section>
 
-        <section id="testimoni" aria-label="Testimoni Santri & Wali">
+        <section id="testimoni" aria-label="Testimoni Santri & Wali ">
           <ScrollAnimation delay={0.12} direction="up" duration={0.75}>
             <TestimonialsSection />
           </ScrollAnimation>

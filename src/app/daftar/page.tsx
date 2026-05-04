@@ -156,7 +156,6 @@ export default function DaftarPage() {
         }
       }
     }
-
     if (!formData.jenis_kelamin) {
       errors.jenis_kelamin = "Pilih jenis kelamin santri";
     } else if (formData.jenis_kelamin === "P") {
@@ -166,7 +165,6 @@ export default function DaftarPage() {
     if (!formData.jenjang) {
       errors.jenjang = "Pilih jenjang pendidikan";
     }
-
 
     setFieldErrors(errors);
     return Object.keys(errors).length === 0;
