@@ -13,7 +13,7 @@ import {
   Moon,
   Star,
 } from "lucide-react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, type Variants, type Transition } from "framer-motion";
 import { useRef } from "react";
 import { Container } from "@/components/layout/Container";
 
@@ -85,7 +85,11 @@ const SCHEDULE_ITEMS = [
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    ANIMATION VARIANTS
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-const containerVariants = {
+
+// Cubic-bezier sebagai tuple [number,number,number,number] agar TypeScript happy
+const SPRING = [0.16, 1, 0.3, 1] as [number, number, number, number];
+
+const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
@@ -95,7 +99,7 @@ const containerVariants = {
   },
 };
 
-const fadeUpVariants = {
+const fadeUpVariants: Variants = {
   hidden: { opacity: 0, y: 28, filter: "blur(4px)" },
   visible: {
     opacity: 1,
@@ -103,12 +107,12 @@ const fadeUpVariants = {
     filter: "blur(0px)",
     transition: {
       duration: 0.65,
-      ease: [0.16, 1, 0.3, 1],
-    },
+      ease: SPRING,
+    } as Transition,
   },
 };
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 36, scale: 0.97 },
   visible: (i: number) => ({
     opacity: 1,
@@ -117,12 +121,12 @@ const cardVariants = {
     transition: {
       duration: 0.7,
       delay: i * 0.1,
-      ease: [0.16, 1, 0.3, 1],
-    },
+      ease: SPRING,
+    } as Transition,
   }),
 };
 
-const scheduleVariants = {
+const scheduleVariants: Variants = {
   hidden: { opacity: 0, x: -12 },
   visible: (i: number) => ({
     opacity: 1,
@@ -130,8 +134,8 @@ const scheduleVariants = {
     transition: {
       duration: 0.55,
       delay: i * 0.08,
-      ease: [0.16, 1, 0.3, 1],
-    },
+      ease: SPRING,
+    } as Transition,
   }),
 };
 
@@ -152,7 +156,7 @@ function GalleryCard({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-60px" }}
-      whileHover={{ y: -6, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } }}
+      whileHover={{ y: -6, transition: { duration: 0.35, ease: SPRING } }}
       className="group relative rounded-2xl overflow-hidden cursor-pointer"
       style={{ boxShadow: "0 4px 20px -4px rgba(26,0,0,0.10), 0 2px 8px -2px rgba(0,0,0,0.06)" }}
     >
