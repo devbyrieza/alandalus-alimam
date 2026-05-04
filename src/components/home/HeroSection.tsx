@@ -205,16 +205,16 @@ export default function HeroSection() {
               }}
             >
               <Image
-                src="/images/hero.webp"
+                src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1400&auto=format&fit=crop"
                 alt={`${BRANDING.schoolName} — Pesantren Modern`}
                 width={800}
                 height={600}
                 className="w-full h-auto object-cover aspect-[4/3]"
                 style={{ transition: "transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)" }}
-                // FIX #3: CSS-driven hover works on all devices; JS onMouseEnter kept as progressive enhancement
                 onMouseEnter={(e) => { if (!shouldReduceMotion) e.currentTarget.style.transform = "scale(1.04)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
                 priority
+                sizes="(max-width: 768px) 100vw, 800px"
               />
               {/* Vignette */}
               <div
