@@ -58,10 +58,10 @@ export default function FeaturesSection() {
                   <span>Keunggulan Utama</span>
                 </div>
                 <h2 className="section-title mb-3">
-                  Kenapa Harus Al-Imam
+                  Kenapa Harus Al Imam
                 </h2>
                 <p className="text-xs font-bold text-maroon-600 uppercase tracking-widest mb-6">
-                  Managed by Al-Andalus IIBS
+                  Managed by Al Andalus IIBS
                 </p>
                 <p className="text-lg text-ink-600 leading-relaxed font-medium text-justify lg:text-left">
                   Sistem pembentukan karakter berbasis <strong className="text-maroon-700">Lingkungan, Kebiasaan, Komunitas, dan Spiritualitas</strong> — bukan sekadar tempat belajar agama.
@@ -115,7 +115,7 @@ export default function FeaturesSection() {
                     <p className="text-sm font-bold text-ink-700 uppercase tracking-wider">Angkatan Pertama</p>
                     <p className="text-xs leading-tight text-ink-500 font-medium">
                       Dimulainya Sejarah Baru <br />
-                      <span className="text-maroon-700 font-bold block mt-1">Managed by Al-Andalus IIBS</span>
+                      <span className="text-maroon-700 font-bold block mt-1">Managed by Al Andalus IIBS</span>
                     </p>
                   </div>
                 </div>

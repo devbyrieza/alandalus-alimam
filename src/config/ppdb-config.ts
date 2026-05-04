@@ -6,8 +6,8 @@
 export const PPDB_CONFIG = {
   // 🏫 INFO PESANTREN (GANTI INI DULU!)
   pesantren: {
-    nama: "Pesantren Al-Andalus Al-Imam",
-    singkatan: "Al-Andalus Al-Imam",
+    nama: "Pesantren Al Andalus Al Imam",
+    singkatan: "Al Andalus Al Imam",
     alamat: "Jl. KH Mama Oyon, Cihaur, Kec. Cicantayan, Kabupaten Sukabumi, Jawa Barat 43155",
     telepon: "+62 851-1152-4441",
     email: "alandalusalimam@gmail.com",
@@ -17,7 +17,7 @@ export const PPDB_CONFIG = {
 
   // 🎨 BRAND COLORS (GANTI SESUAI LOGO)
   colors: {
-    // Primary Colors (Maroon / Cream - Warna Khas Al-Imam)
+    // Primary Colors (Maroon / Cream - Warna Khas Al Imam)
     primary: {
       50: "#fdf6e3",
       100: "#f9e8c8",
@@ -110,7 +110,7 @@ export const PPDB_CONFIG = {
 
   // ⚙️ SETTING TEKNIS (UMUMNYA TIDAK PERLU DIUBAH)
   technical: {
-    appName: "PPDB Al-Andalus Al-Imam",
+    appName: "PPDB Al Andalus Al Imam",
     appDescription: "Sistem Penerimaan Peserta Didik Baru",
     version: "2.0.0",
     author: "Rieza Eka Tomara"

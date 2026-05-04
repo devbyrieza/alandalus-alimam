@@ -32,7 +32,7 @@ export default function HomePage() {
       <main
         id="main-content"
         className="relative overflow-x-hidden"
-        aria-label="Halaman Utama Al-Imam"
+        aria-label="Halaman Utama Al Imam"
       >
         <section id="beranda" aria-label="Hero">
           <HeroSection />
@@ -45,7 +45,7 @@ export default function HomePage() {
         </section>
 
         {/* fade → "none" = hanya opacity, tanpa translasi */}
-        <section id="tentang" aria-label="Tentang Al-Imam">
+        <section id="tentang" aria-label="Tentang Al Imam">
           <ScrollAnimation delay={0.1} direction="none" duration={0.8}>
             <AboutSection />
           </ScrollAnimation>

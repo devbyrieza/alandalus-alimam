@@ -92,7 +92,7 @@ export async function GET(request: Request) {
 
             const lokasi = googleMeetLink 
                 ? (googleMeetLink.startsWith("http") ? googleMeetLink : `${jadwal.exam_session?.location || "Online"} (${googleMeetLink})`)
-                : (jadwal.exam_session?.location || "Pesantren Al-Andalus Al-Imam");
+                : (jadwal.exam_session?.location || "Pesantren Al Andalus Al Imam");
 
             // 1. Enqueue for Santri / Parents
             const isCawalsan = jenisUjian.toLowerCase().includes("cawalsan") || (jadwal.exam_session?.title || "").toLowerCase().includes("cawalsan");
@@ -147,7 +147,7 @@ export async function GET(request: Request) {
             const examinersToNotify = [
                 { profile: jadwal.penguji_santri, type: "Wawancara Calon Santri (Calsan)" },
                 { profile: jadwal.penguji_quran, type: "Tes Al-Qur'an" },
-                { profile: jadwal.penguji_ortu, type: "Wawancara Calon Wali Santri (Cawalsan/Ortu)" },
+                { profile: jadwal.penguji_ortu, type: "Wawancara Calon Orangtua/Wali Santri (Cawalsan/Ortu)" },
             ];
 
             for (const { profile, type } of examinersToNotify) {

@@ -175,7 +175,7 @@ export default function PengumumanTab() {
                 </div>
               </div>
               <p className="text-emerald-50/90 mb-10 max-w-xl text-lg leading-relaxed">
-                Berdasarkan hasil seleksi, Anda dinyatakan <strong>LULUS DITERIMA</strong> sebagai santri baru PP Al-Andalus Al-Imam.
+                Berdasarkan hasil seleksi, Anda dinyatakan <strong>LULUS DITERIMA</strong> sebagai santri baru PP Al Andalus Al Imam.
               </p>
  
               <button
@@ -260,7 +260,7 @@ export default function PengumumanTab() {
                 </div>
               </div>
               <p className="text-amber-50/90 mb-10 max-w-xl text-lg leading-relaxed">
-                Berdasarkan hasil seleksi, Anda dinyatakan masuk dalam <strong>DAFTAR CADANGAN</strong> santri baru PP Al-Andalus Al-Imam.
+                Berdasarkan hasil seleksi, Anda dinyatakan masuk dalam <strong>DAFTAR CADANGAN</strong> santri baru PP Al Andalus Al Imam.
               </p>
  
               <div className="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-white text-amber-900 rounded-full font-black shadow-lg transition-all border border-amber-100">

@@ -6,8 +6,8 @@
 export const PDF_BRANDING = {
     // Institution Labels
     institution: {
-        name: "PESANTREN AL-ANDALUS AL-IMAM",
-        subtitle: "Pesantren Al Imam Managed by Al-Andalus",
+        name: "PESANTREN AL ANDALUS AL IMAM",
+        subtitle: "Pesantren Al Imam Managed by Al Andalus",
         committee: "PANITIA PENERIMAAN SANTRI BARU",
         academic_year: "2026-2027",
         address: "Jl. Pelabuhan II KM 18 Kampung Pupunjul, RT./RW/RW.01/02, Cikembar, Kec. Cikembar, Kabupaten Sukabumi, Jawa Barat 43157",

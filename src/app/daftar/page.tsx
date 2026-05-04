@@ -352,7 +352,7 @@ export default function DaftarPage() {
                   ].map((option) => {
                     const isPutra = formData.jenis_kelamin === "L";
                     const isPutri = formData.jenis_kelamin === "P";
-                    const isClosed = isPutri; // Tutup jika memilih Putri di Al-Imam
+                    const isClosed = isPutri; // Tutup jika memilih Putri di Al Imam
                     
                     return (
                       <motion.div

@@ -206,7 +206,7 @@ function PPDBContent() {
               transition={{ delay: 0.2 }}
               className="text-xl md:text-2xl text-ink-600 max-w-3xl mx-auto leading-relaxed font-medium mb-10"
             >
-              Bergabunglah dengan Pesantren Al-Andalus Al-Imam. Lingkungan yang kondusif untuk mencetak Hafidz Qur'an yang berwawasan luas and berakhlak mulia.
+              Bergabunglah dengan Pesantren Al Andalus Al Imam. Lingkungan yang kondusif untuk mencetak Hafidz Qur'an yang berwawasan luas and berakhlak mulia.
             </motion.p>
 
             <motion.div
@@ -221,10 +221,10 @@ function PPDBContent() {
               </div>
               <div>
                 <h3 className="text-xl md:text-2xl font-display font-black text-maroon-900 mb-2">
-                  ✨ Kesempatan Emas: Angkatan Pertama Era Al-Andalus
+                  ✨ Kesempatan Emas: Angkatan Pertama Era Al Andalus
                 </h3>
                 <p className="text-maroon-800 font-medium leading-relaxed">
-                  Menjadi bagian dari angkatan 2026/2027 adalah sebuah keistimewaan. Ananda akan menjadi <strong>pionir dan tonggak sejarah pertama</strong> yang merasakan secara penuh perpaduan mantap antara sistem unggulan Al-Andalus dengan kekayaan warisan Al-Imam.
+                  Menjadi bagian dari angkatan 2026/2027 adalah sebuah keistimewaan. Ananda akan menjadi <strong>pionir dan tonggak sejarah pertama</strong> yang merasakan secara penuh perpaduan mantap antara sistem unggulan Al Andalus dengan kekayaan warisan Al Imam.
                 </p>
               </div>
             </motion.div>
@@ -398,7 +398,7 @@ function PPDBContent() {
               </div>
             </div>
 
-            {/* Why Al-Imam & FAQ */}
+            {/* Why Al Imam & FAQ */}
             <div className="space-y-12 md:space-y-16">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -411,7 +411,7 @@ function PPDBContent() {
                   <h3 className="text-2xl md:text-3xl font-display font-black mb-8 md:mb-10 text-white tracking-tight text-center lg:text-left">Kenapa Pilih Kami?</h3>
                   <div className="grid gap-4 md:gap-6">
                     {[
-                      { icon: BookOpen, title: "Kurikulum Mutakhir", desc: "Perpaduan kurikulum Nasional & kurikulum khas Al-Andalus." },
+                      { icon: BookOpen, title: "Kurikulum Mutakhir", desc: "Perpaduan kurikulum Nasional & kurikulum khas Al Andalus." },
                       { icon: GraduationCap, title: "Guru Berkompeten", desc: "Alumni Perguruan Tinggi Terbaik Dalam & Luar Negeri serta Pondok Pesantren Unggulan." },
                       { icon: MapPin, title: "Lingkungan Asri", desc: "Suasana belajar yang tenang & udara bersih." },
                     ].map((feat, i) => {
@@ -438,7 +438,7 @@ function PPDBContent() {
                   {[
                     {
                       q: "Apakah santri wajib asrama?",
-                      a: "Ya, seluruh santri di Pesantren Al-Andalus Al-Imam wajib tinggal di asrama untuk mengikuti seluruh rangkaian kegiatan tarbiyah, halaqah tahfidz, dan pembelajaran kitab turots secara maksimal."
+                      a: "Ya, seluruh santri di Pesantren Al Andalus Al Imam wajib tinggal di asrama untuk mengikuti seluruh rangkaian kegiatan tarbiyah, halaqah tahfidz, dan pembelajaran kitab turots secara maksimal."
                     },
                     {
                       q: "Kapan batas akhir pendaftaran?",
@@ -446,7 +446,7 @@ function PPDBContent() {
                     },
                     {
                       q: "Bagaimana sistem kurikulumnya?",
-                      a: "Kami menerapkan Kurikulum Terpadu yang menggabungkan kurikulum Nasional dengan kurikulum khas Al-Andalus yang berfokus pada penguasaan Bahasa Arab, Tahfidz Al-Qur'an, dan Kitab Turots."
+                      a: "Kami menerapkan Kurikulum Terpadu yang menggabungkan kurikulum Nasional dengan kurikulum khas Al Andalus yang berfokus pada penguasaan Bahasa Arab, Tahfidz Al-Qur'an, dan Kitab Turots."
                     }
                   ].map((faq, i) => (
                     <motion.div key={i} className="group">

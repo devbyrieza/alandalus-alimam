@@ -147,7 +147,7 @@ export default function AdminDashboardPage() {
       {/* Header & Filter Area */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <h1 className="text-3xl font-black text-slate-900 tracking-tight mb-2">Dashboard Al-Imam</h1>
+          <h1 className="text-3xl font-black text-slate-900 tracking-tight mb-2">Dashboard Al Imam</h1>
           <p className="text-sm text-slate-500 font-medium">Monitoring pendaftaran santri secara real-time.</p>
         </div>
 
@@ -222,7 +222,7 @@ export default function AdminDashboardPage() {
             <div className="flex-1 bg-maroon-600 rounded-[2rem] p-8 text-white relative overflow-hidden shadow-lg shadow-maroon-900/20">
                 <div className="absolute bottom-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl translate-y-1/2 translate-x-1/2" />
                 <h4 className="text-xl font-bold mb-3">Laporan Database</h4>
-                <p className="text-maroon-50 text-sm font-medium mb-6 leading-relaxed opacity-80">Export seluruh data pendaftar Al-Imam ke format Excel.</p>
+                <p className="text-maroon-50 text-sm font-medium mb-6 leading-relaxed opacity-80">Export seluruh data pendaftar Al Imam ke format Excel.</p>
                 <button className="w-full bg-white text-maroon-900 py-4 rounded-xl font-black text-[11px] uppercase tracking-widest hover:bg-slate-50 transition-all flex items-center justify-center gap-2">
                     <Download className="w-4 h-4" /> Download Data
                 </button>
@@ -282,7 +282,7 @@ export default function AdminDashboardPage() {
           <div className="px-8 py-6 border-b border-slate-100 flex items-center justify-between">
               <div>
                 <h3 className="text-lg font-black text-slate-900 tracking-tight">Performa Jenjang</h3>
-                <p className="text-[11px] text-slate-400 font-bold uppercase tracking-widest mt-1">Distribusi Santri Al-Imam</p>
+                <p className="text-[11px] text-slate-400 font-bold uppercase tracking-widest mt-1">Distribusi Santri Al Imam</p>
               </div>
               <div className="h-8 w-px bg-slate-100 hidden md:block" />
               <div className="flex items-center gap-6 hidden md:flex">

@@ -297,7 +297,7 @@ export default function ActivitiesSection() {
                                         Lihat Jadwal Harian Lengkap Santri
                                     </h4>
                                     <p className="text-cream-100/70 font-medium text-sm leading-relaxed">
-                                        Setiap detik di pesantren adalah ibadah dan ilmu. Unduh jadwal harian lengkap untuk mengetahui rutinitas santri Al-Imam.
+                                        Setiap detik di pesantren adalah ibadah dan ilmu. Unduh jadwal harian lengkap untuk mengetahui rutinitas santri Al Imam.
                                     </p>
                                 </div>
                                 

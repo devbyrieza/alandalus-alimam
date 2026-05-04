@@ -211,7 +211,7 @@ export default function DaftarUlangTab() {
                       <p className="font-black text-maroon-950 text-2xl tracking-tight leading-none mb-2">
                         4222224441
                       </p>
-                      <p className="text-xs font-bold text-maroon-700/70 text-left italic">a.n PP Al-Andalus Al-Imam</p>
+                      <p className="text-xs font-bold text-maroon-700/70 text-left italic">a.n PP Al Andalus Al Imam</p>
                     </div>
                   <button 
                     onClick={() => handleCopy("4222224441")}

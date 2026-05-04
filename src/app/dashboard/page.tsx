@@ -145,7 +145,7 @@ const STATUS_LABELS: Record<
     border: "border-emerald-200",
     text: "text-emerald-700",
     icon: Trophy,
-    message: "Alhamdulillah! Selamat, putra/putri Anda diterima di Pesantren Al-Andalus Al-Imam!",
+    message: "Alhamdulillah! Selamat, putra/putri Anda diterima di Pesantren Al Andalus Al Imam!",
   },
   payment_rejected: {
     label: "Pembayaran Bermasalah",

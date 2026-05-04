@@ -234,7 +234,7 @@ export async function POST(request: Request) {
             const startTime = new Date(examSession.start_time);
             const dateStr = startTime.toLocaleDateString("id-ID", { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Jakarta' });
             const timeStr = startTime.toLocaleTimeString("id-ID", { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }) + ' WIB';
-            const lokasi = examSession.location || "Pesantren Al-Imam";
+            const lokasi = examSession.location || "Pesantren Al Imam";
             const jenisUjian = sanitizeTitle(examSession.title || "Seleksi Santri Baru");
 
             /* 

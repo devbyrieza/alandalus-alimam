@@ -28,7 +28,6 @@ interface AdminUser {
 }
 
 const ROLE_OPTIONS = [
-    { value: "tim_it", label: "Tim IT" },
     { value: "admin_super", label: "Admin Super" },
     { value: "admin_berkas", label: "Admin Berkas" },
     { value: "admin_keuangan", label: "Admin Keuangan" },
@@ -167,7 +166,7 @@ export default function UserManagementPage() {
                         </div>
                         <div>
                             <span className="bg-white/10 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border border-white/10">Control Console</span>
-                            <h1 className="text-3xl md:text-5xl font-black font-display tracking-tight mt-2 italic shadow-sm text-white">IT Management</h1>
+                            <h1 className="text-3xl md:text-5xl font-black font-display tracking-tight mt-2 italic shadow-sm text-white">Admin Management</h1>
                         </div>
                     </div>
                     <button onClick={() => { resetForm(); setIsModalOpen(true); }} className="bg-gold-400 hover:bg-gold-300 text-maroon-950 px-10 py-5 rounded-3xl font-black uppercase text-xs shadow-xl transition-all flex items-center justify-center gap-2 hover:scale-105 active:scale-95">

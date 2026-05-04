@@ -1,4 +1,4 @@
-# Development Guide - PPDB Al-Imam
+# Development Guide - PPDB Al Imam
 
 ## 🚀 Quick Start
 

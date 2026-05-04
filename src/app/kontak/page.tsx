@@ -356,7 +356,7 @@ export default function ContactPage() {
                                         allowFullScreen
                                         loading="lazy"
                                         referrerPolicy="no-referrer-when-downgrade"
-                                        title="Lokasi Pesantren Al-Andalus Al-Imam"
+                                        title="Lokasi Pesantren Al Andalus Al Imam"
                                         className="grayscale hover:grayscale-0 transition-all duration-700"
                                     />
                                     <div className="absolute bottom-3 left-3 md:bottom-6 md:left-6 bg-white/90 backdrop-blur-sm px-3 py-1.5 md:px-6 md:py-3 rounded-lg md:rounded-2xl shadow-md border border-maroon-100 flex items-center gap-1.5 md:gap-3 z-10">
@@ -387,7 +387,7 @@ export default function ContactPage() {
                                 Mari Bergabung <br /> <span className="text-cream-100">Menjadi Keluarga</span>
                             </h2>
                             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-maroon-50 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 lg:mb-12 font-medium px-2">
-                                Kami menunggu kehadiran Anda di Pesantren Al-Andalus Al-Imam. Pendaftaran santri baru telah dibuka!
+                                Kami menunggu kehadiran Anda di Pesantren Al Andalus Al Imam. Pendaftaran santri baru telah dibuka!
                             </p>
                             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center px-4">
                                 <Link href="/ppdb">

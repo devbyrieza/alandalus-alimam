@@ -43,7 +43,7 @@ export default function HeroSection() {
   return (
     <section
       ref={ref}
-      aria-label="Hero — Beranda Al-Imam"
+      aria-label="Hero — Beranda Al Imam"
       className="relative min-h-[96vh] flex items-center pt-24 pb-20 md:pt-28 lg:pt-32 lg:pb-28 overflow-hidden"
       style={{
         background:
@@ -140,7 +140,7 @@ export default function HeroSection() {
               <div className="h-px flex-1 max-w-[3rem]" style={{ background: "var(--color-cream-300)" }} />
               <p className="text-sm font-semibold italic" style={{ color: "var(--color-maroon-700)" }}>
                 "Pendidikan Berkualitas, Diperkuat Sistem{" "}
-                {BRANDING.schoolName.toLowerCase().includes("al-andalus") ? "Al-Andalus" : BRANDING.schoolShortName}"
+                {BRANDING.schoolName.toLowerCase().includes("al-andalus") ? "Al Andalus" : BRANDING.schoolShortName}"
               </p>
               <div className="h-px flex-1 max-w-[3rem]" style={{ background: "var(--color-cream-300)" }} />
             </motion.div>
@@ -169,7 +169,7 @@ export default function HeroSection() {
                 </div>
                 <p className="text-[11px] font-semibold leading-tight" style={{ color: "var(--color-ink-500)" }}>
                   <span className="font-bold uppercase tracking-wide" style={{ color: "var(--color-maroon-700)" }}>Angkatan Pertama</span>
-                  {" • "}Managed by Al-Andalus IIBS
+                  {" • "}Managed by Al Andalus IIBS
                 </p>
               </div>
 

@@ -29,7 +29,7 @@ const STATS: Stat[] = [
     icon: Calendar,
     color: 'maroon',
     suffix: '',
-    sublabel: 'Al-Andalus IIBS',
+    sublabel: 'Al Andalus IIBS',
     description: 'Momen bersejarah pembukaan angkatan pertama.',
   },
   {

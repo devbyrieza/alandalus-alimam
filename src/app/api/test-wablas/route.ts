@@ -19,13 +19,18 @@ export async function GET(request: Request) {
     try {
         const result = await sendMessage({
             phone,
-            message: `Halo! Ini adalah pesan tes koneksi WABLAS. Jika Anda menerima ini, berarti sistem PPDB Al-Imam sudah terhubung dengan benar.\n\n_Pesanan ini dikirim secara otomatis oleh sistem PPDB Al-Imam._\n\nTerima kasih,\nTim IT Al-Imam.`,
+            message: `Halo! Ini adalah pesan tes koneksi WABLAS. Jika Anda menerima ini, berarti sistem PPDB Al Imam sudah terhubung dengan benar.
+
+_Pesanan ini dikirim secara otomatis oleh sistem PPDB Al Imam._
+
+Terima kasih,
+Admin Pusat Al Imam.`,
         });
 
         return NextResponse.json({
             success: true,
             message: 'Test message sent successfully',
-            lokasi: "Ponpes Al-Imam",
+            lokasi: "Ponpes Al Imam",
         });
     } catch (error) {
         console.error('Error testing Wablas:', error);

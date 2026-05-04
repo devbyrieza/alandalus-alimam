@@ -8,7 +8,7 @@ dotenv.config({ path: path.join(process.cwd(), '.env.local') });
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('🚀 Normalizing Gender data in DB (Al-Imam)...');
+  console.log('🚀 Normalizing Gender data in DB (Al Imam)...');
 
   // Normalize Laki-laki -> L
   const resultL = await prisma.pendaftar.updateMany({
@@ -38,8 +38,8 @@ async function main() {
     }
   });
 
-  console.log(`✅ Normalized ${resultL.count} Male records to 'L' in Al-Imam`);
-  console.log(`✅ Normalized ${resultP.count} Female records to 'P' in Al-Imam`);
+  console.log(`✅ Normalized ${resultL.count} Male records to 'L' in Al Imam`);
+  console.log(`✅ Normalized ${resultP.count} Female records to 'P' in Al Imam`);
   
   // Optional: check for any other weird values
   const remaining = await prisma.pendaftar.groupBy({
@@ -54,10 +54,10 @@ async function main() {
   });
 
   if (remaining.length > 0) {
-    console.log('⚠️ Warning: Some weird values still exist in Al-Imam:');
+    console.log('⚠️ Warning: Some weird values still exist in Al Imam:');
     console.table(remaining);
   } else {
-    console.log('✨ All gender data is now consistent (L/P) in Al-Imam.');
+    console.log('✨ All gender data is now consistent (L/P) in Al Imam.');
   }
 }
 

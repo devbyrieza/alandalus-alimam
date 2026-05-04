@@ -156,7 +156,7 @@ export async function GET(request: Request) {
       provinsiCounts[provinsi] = (provinsiCounts[provinsi] || 0) + 1;
     });
 
-    // Quota configuration for Al-Imam
+    // Quota configuration for Al Imam
     const QUOTAS: Record<string, { putra: number; putri: number; total: number }> = {
       MTS: { putra: 32, putri: 30, total: 62 },
       IL: { putra: 32, putri: 30, total: 62 },

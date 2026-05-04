@@ -164,7 +164,7 @@ export default function ProcessSection() {
                         className="section-subtitle max-w-xl mx-auto"
                     >
                         Ikuti langkah-langkah mudah berikut untuk menjadi bagian dari keluarga besar
-                        Pesantren Al-Andalus Al-Imam.
+                        Pesantren Al Andalus Al Imam.
                     </motion.p>
                 </div>
 
