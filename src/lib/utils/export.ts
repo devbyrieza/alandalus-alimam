@@ -157,9 +157,33 @@ export const exportToPDF = (
     head: [columns],
     body: data,
     startY: 35,
-    styles: { fontSize: 8 },
-    headStyles: { fillColor: [22, 163, 74] }, // Green-600 to match branding
-    alternateRowStyles: { fillColor: [240, 253, 244] }, // Light green
+    margin: { top: 35, bottom: 20 },
+    styles: { 
+      fontSize: 8,
+      cellPadding: 3,
+      valign: 'middle',
+      font: 'helvetica'
+    },
+    headStyles: { 
+      fillColor: [12, 94, 43], // Darker professional green
+      textColor: [255, 255, 255],
+      fontStyle: 'bold',
+      halign: 'center'
+    },
+    alternateRowStyles: { 
+      fillColor: [245, 250, 245] 
+    },
+    columnStyles: {
+      0: { halign: 'center' } // Align 'No' to center
+    },
+    didDrawPage: (data) => {
+      // Footer
+      const str = "Halaman " + doc.internal.getNumberOfPages();
+      doc.setFontSize(8);
+      const pageSize = doc.internal.pageSize;
+      const pageHeight = pageSize.height ? pageSize.height : pageSize.getHeight();
+      doc.text(str, data.settings.margin.left, pageHeight - 10);
+    }
   });
 
   doc.save(`${fileName}.pdf`);

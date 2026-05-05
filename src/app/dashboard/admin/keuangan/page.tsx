@@ -192,12 +192,12 @@ export default function KeuanganPage() {
         const header = [
           "No",
           "Nama Santri",
-          "Nomor Pendaftaran",
+          "No. Pendaftaran",
           "Jenjang",
           "Status Bayar",
           "Jumlah Bayar",
           "Metode",
-          "Update",
+          "Tgl Update",
         ];
 
         // Grouping
@@ -213,9 +213,9 @@ export default function KeuanganPage() {
           i.nama.toUpperCase(),
           i.nomor_pendaftaran,
           (i as any).jenjang || "-",
-          i.status_pembayaran.replace(/_/g, " "),
+          i.status_pembayaran === "verified" ? "TERVERIFIKASI" : i.status_pembayaran === "payment_verification" ? "MENUNGGU" : "BELUM BAYAR",
           i.jumlah_pembayaran,
-          i.metode,
+          i.metode.toUpperCase(),
           new Date(i.last_updated).toLocaleDateString("id-ID"),
         ];
 
@@ -248,14 +248,12 @@ export default function KeuanganPage() {
       } else {
         const data = filteredPendaftaran.map((i) => ({
           No: i.no,
-          "Nama Santri": i.nama,
-          "Nomor Pendaftaran": i.nomor_pendaftaran,
-          "Status Bayar": i.status_pembayaran.replace(/_/g, " "),
-          "Jumlah Bayar (Rp)": i.jumlah_pembayaran,
-          Metode: i.metode,
-          "Terakhir Update": new Date(i.last_updated).toLocaleDateString(
-            "id-ID",
-          ),
+          "Nama Santri": i.nama.toUpperCase(),
+          "No. Pendaftaran": i.nomor_pendaftaran,
+          "Status Bayar": i.status_pembayaran === "verified" ? "TERVERIFIKASI" : "PENDING",
+          "Jumlah (Rp)": i.jumlah_pembayaran,
+          Metode: i.metode.toUpperCase(),
+          "Tgl Update": new Date(i.last_updated).toLocaleDateString("id-ID"),
         }));
         const headers = Object.keys(data[0]);
         const rows = data.map((item) => Object.values(item));
@@ -331,15 +329,13 @@ export default function KeuanganPage() {
       } else {
         const data = filteredDaftarUlang.map((i) => ({
           No: i.no,
-          "Nama Santri": i.nama,
-          "Nomor Pendaftaran": i.nomor_pendaftaran,
-          "Status Kelulusan": i.status_kelulusan,
+          "Nama Santri": i.nama.toUpperCase(),
+          "No. Pendaftaran": i.nomor_pendaftaran,
+          "Status Seleksi": i.status_kelulusan,
           "Total Bayar (Rp)": i.total_bayar,
-          "Status Bayar": i.tipe_cicilan.replace(/_/g, " "),
+          "Status Bayar": i.tipe_cicilan,
           "Sisa Tagihan (Rp)": i.sisa_tagihan,
-          "Terakhir Update": new Date(i.last_updated).toLocaleDateString(
-            "id-ID",
-          ),
+          "Tgl Update": new Date(i.last_updated).toLocaleDateString("id-ID"),
         }));
         const headers = Object.keys(data[0]);
         const rows = data.map((item) => Object.values(item));
