@@ -172,13 +172,13 @@ export default function KeuanganPage() {
 
   // Filter
   const filteredPendaftaran = pendaftaranData.filter(
-    (item: RekapPendaftaran) =>
+    (item) =>
       item.nama.toLowerCase().includes(search.toLowerCase()) ||
       item.nomor_pendaftaran.includes(search),
   );
 
   const filteredDaftarUlang = daftarUlangData.filter(
-    (item: RekapDaftarUlang) =>
+    (item) =>
       item.nama.toLowerCase().includes(search.toLowerCase()) ||
       item.nomor_pendaftaran.includes(search),
   );
@@ -246,7 +246,7 @@ export default function KeuanganPage() {
           sheets,
         });
       } else {
-        const data = filteredPendaftaran.map((i: RekapPendaftaran) => ({
+        const data = filteredPendaftaran.map((i) => ({
           No: i.no,
           "Nama Santri": i.nama,
           "Nomor Pendaftaran": i.nomor_pendaftaran,
@@ -258,7 +258,7 @@ export default function KeuanganPage() {
           ),
         }));
         const headers = Object.keys(data[0]);
-        const rows = data.map((item: any) => Object.values(item));
+        const rows = data.map((item) => Object.values(item));
         exportToPDF(
           "Rekap Pembayaran Pendaftaran",
           headers,
@@ -329,7 +329,7 @@ export default function KeuanganPage() {
           sheets,
         });
       } else {
-        const data = filteredDaftarUlang.map((i: RekapDaftarUlang) => ({
+        const data = filteredDaftarUlang.map((i) => ({
           No: i.no,
           "Nama Santri": i.nama,
           "Nomor Pendaftaran": i.nomor_pendaftaran,
@@ -342,7 +342,7 @@ export default function KeuanganPage() {
           ),
         }));
         const headers = Object.keys(data[0]);
-        const rows = data.map((item: any) => Object.values(item));
+        const rows = data.map((item) => Object.values(item));
         exportToPDF(
           "Rekap Keuangan Daftar Ulang",
           headers,
