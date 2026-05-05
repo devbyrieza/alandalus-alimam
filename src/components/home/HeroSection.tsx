@@ -278,7 +278,7 @@ export default function HeroSection() {
                   >
                     Angkatan Pertama
                   </span>
-                  {" • "}Managed by Al Andalus IIBS
+                  {" • "}Dikelola oleh Al Andalus IIBS
                 </p>
               </div>
 
