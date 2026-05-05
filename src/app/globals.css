@@ -1,6 +1,6 @@
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    PONPES AL-IMAM — GLOBAL STYLES
-   Branding: Maroon · Cream · Putih
+   Branding: Maroon (#800000) · Ivory (#F5EADD) · Putih
    Mobile-First · Linear-Inspired Premium UI
    Tailwind CSS v4
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -32,13 +32,14 @@
   --color-maroon-900: #5c0000; /* was #330000 — lightened so not near-black */
   --color-maroon-950: #3d0000; /* was #1A0000 — deep maroon, not black */
 
-  /* ─── Cream (Backgrounds — Warm off-white) ─── */
-  --color-cream-50: #fefcf7;
-  --color-cream-100: #fdf8ee;
-  --color-cream-200: #faf0d7;
-  --color-cream-300: #f5e4b8;
-  --color-cream-400: #edd494;
-  --color-cream-500: #e4c16f;
+  /* ─── Cream (Secondary — Al Imam Warm Ivory) ─── */
+  /* Base anchor: #F5EADD (245, 234, 221) — warna secondary/ikonik Al-Imam */
+  --color-cream-50: #fdfaf6;
+  --color-cream-100: #faf4ec;
+  --color-cream-200: #f5eadd; /* ← SECONDARY BRAND COLOR — HEX #F5EADD */
+  --color-cream-300: #eddbca;
+  --color-cream-400: #e2c9b0;
+  --color-cream-500: #d4b48e;
 
   /* ─── Gold (Accent — Premium & Islamic) ─── */
   --color-gold-50: #fffbeb;
