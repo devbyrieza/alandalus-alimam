@@ -100,16 +100,16 @@ export async function GET() {
         // Admin can see all assignment types
         jenis_tugas.push(
           "Seleksi Al Qur'an",
-          "Seleksi Wawancara Santri",
-          "Seleksi Wawancara Orang Tua",
+          "Seleksi Wawancara Calon Santri",
+          "Seleksi Wawancara Calon Orangtua/Wali Santri",
         );
       } else {
         if (item.penguji_santri_id === userId)
-          jenis_tugas.push("Seleksi Wawancara Santri");
+          jenis_tugas.push("Seleksi Wawancara Calon Santri");
         if (item.penguji_quran_id === userId)
           jenis_tugas.push("Seleksi Al Qur'an");
         if (item.penguji_ortu_id === userId)
-          jenis_tugas.push("Seleksi Wawancara Orang Tua");
+          jenis_tugas.push("Seleksi Wawancara Calon Orangtua/Wali Santri");
 
         // Fallback: if matched via exam_session.created_by, derive from session title
         if (
@@ -120,13 +120,13 @@ export async function GET() {
           if (title.includes("qur") || title.includes("quran"))
             jenis_tugas.push("Seleksi Al Qur'an");
           else if (title.includes("calsan") || title.includes("santri"))
-            jenis_tugas.push("Seleksi Wawancara Santri");
+            jenis_tugas.push("Seleksi Wawancara Calon Santri");
           else if (
             title.includes("cawalsan") ||
             title.includes("ortu") ||
             title.includes("orang")
           )
-            jenis_tugas.push("Seleksi Wawancara Orang Tua");
+            jenis_tugas.push("Seleksi Wawancara Calon Orangtua/Wali Santri");
           else jenis_tugas.push(item.exam_session?.title || "Ujian");
         }
       }

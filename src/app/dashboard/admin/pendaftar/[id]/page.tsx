@@ -169,7 +169,7 @@ export default function PendaftarDetailPage() {
   const isKeuangan = userRole === "admin_keuangan";
   const isBerkas = userRole === "admin_berkas";
   const isPenguji =
-    userRole === "penguji_calsan" ||
+    userRole === "penguji" ||
     userRole === "pewawancara_calsan" ||
     userRole === "pewawancara_cawalsan";
 
@@ -900,7 +900,7 @@ export default function PendaftarDetailPage() {
                   )}
                 </div>
 
-                {/* 5. Seleksi Wawancara Santri (Offline) */}
+                {/* 5. Seleksi Wawancara Calon Santri (Offline) */}
                 <div className="bg-amber-50/50 p-4 rounded-xl border border-amber-100 flex flex-col justify-between">
                   <div>
                     <span className="block text-xs text-amber-600 font-bold uppercase tracking-wide mb-1">
