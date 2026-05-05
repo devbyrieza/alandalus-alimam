@@ -241,57 +241,63 @@ export default function AdminDashboardPage() {
       {/* SECTION: HERO BANNER & QUICK ACTIONS */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div className="lg:col-span-8">
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-slate-900 p-10 text-white shadow-2xl">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-maroon-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="relative overflow-hidden rounded-[3rem] bg-slate-900 p-12 text-white shadow-2xl border border-white/5">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-maroon-500/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
               <div className="max-w-md">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[10px] font-bold uppercase mb-6">
-                  <Clock className="w-3.5 h-3.5 text-maroon-400" />
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-[10px] font-black uppercase tracking-widest mb-8 border border-white/10">
+                  <Clock className="w-4 h-4 text-maroon-400" />
                   <span>Countdown Penutupan</span>
                 </div>
-                <h2 className="text-5xl font-black mb-4 tracking-tighter leading-tight">
-                  {getPPDBCountdown()} Hari Lagi Menuju <span className="text-maroon-400 drop-shadow-sm">Finish</span>
+                <h2 className="text-5xl font-black mb-6 tracking-tighter leading-tight italic">
+                  {getPPDBCountdown()} Hari Lagi Menuju <span className="text-maroon-400">Finish</span>
                 </h2>
-                <div className="flex items-center gap-8 mt-10">
+                <div className="flex items-center gap-12 mt-12">
                   <div className="flex flex-col">
-                    <span className="text-3xl font-black text-white">{stats.total_pendaftar}</span>
-                    <span className="text-[11px] font-black text-slate-400 uppercase tracking-wider">Pendaftar</span>
+                    <span className="text-4xl font-black text-white italic">{stats.total_pendaftar}</span>
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-2">Pendaftar</span>
                   </div>
-                  <div className="w-px h-10 bg-slate-800" />
+                  <div className="w-px h-12 bg-slate-800" />
                   <div className="flex flex-col">
-                    <span className="text-3xl font-black text-maroon-400">{stats.sudah_bayar}</span>
-                    <span className="text-[11px] font-black text-slate-400 uppercase tracking-wider">Lunas</span>
+                    <span className="text-4xl font-black text-maroon-400 italic">{stats.sudah_bayar}</span>
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-2">Lunas</span>
                   </div>
                 </div>
               </div>
-              <Link href="/dashboard/admin/pendaftar" className="group">
-                <div className="w-32 h-32 rounded-full border-2 border-white/10 hover:border-maroon-500/50 flex items-center justify-center transition-all relative">
-                  <ArrowUpRight className="w-10 h-10 group-hover:scale-120 transition-transform" />
+              <Link href="/dashboard/admin/pendaftar" className="group shrink-0">
+                <div className="w-28 h-28 rounded-full border-2 border-white/10 group-hover:border-maroon-500/50 flex items-center justify-center transition-all duration-500 relative bg-white/5 backdrop-blur-sm">
+                  <ArrowUpRight className="w-8 h-8 group-hover:scale-125 transition-transform duration-500 text-white" />
                 </div>
               </Link>
             </div>
           </div>
         </div>
 
-        <div className="lg:col-span-4 flex flex-col gap-4">
-          <div className="flex-1 bg-gradient-to-br from-maroon-700 to-maroon-800 rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-xl shadow-maroon-900/20">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-            <h4 className="text-2xl font-black mb-2 tracking-tight">Export Data</h4>
-            <p className="text-maroon-100 text-sm font-medium mb-8 leading-relaxed">Download rekapan pendaftar ke format Excel untuk laporan.</p>
-            <button className="w-full bg-white text-maroon-950 py-4.5 rounded-2xl font-black text-[11px] uppercase tracking-widest hover:bg-maroon-50 hover:scale-[1.02] transition-all flex items-center justify-center gap-3 shadow-lg">
-              <Download className="w-4 h-4" /> Download Report
-            </button>
+        <div className="lg:col-span-4 flex flex-col gap-6">
+          <div className="flex-1 bg-linear-to-br from-maroon-800 to-maroon-950 rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-xl border border-white/5">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+            <div className="relative z-10 flex flex-col h-full">
+              <h4 className="text-2xl font-black mb-3 tracking-tight italic">Export Data</h4>
+              <p className="text-maroon-200 text-xs font-medium mb-8 leading-relaxed">
+                Download rekapan pendaftar ke format Excel untuk laporan resmi.
+              </p>
+              <div className="mt-auto">
+                <button className="w-full bg-white text-maroon-950 py-4 rounded-2xl font-black text-[11px] uppercase tracking-[0.2em] hover:bg-maroon-50 transition-all flex items-center justify-center gap-3 shadow-xl">
+                  <Download className="w-4 h-4" /> Download Report
+                </button>
+              </div>
+            </div>
           </div>
-          <div className="flex-1 bg-white border border-slate-200 rounded-[2.5rem] p-8 shadow-sm">
-            <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">Antrean Cek</h4>
-            <div className="space-y-4">
+          <div className="flex-1 bg-white border border-slate-100 rounded-[2.5rem] p-8 shadow-premium-sm flex flex-col justify-center">
+            <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em] mb-6">Antrean Cek</h4>
+            <div className="space-y-5">
               <Link href="/dashboard/admin/verifikasi-pembayaran" className="flex items-center justify-between group">
-                <span className="text-xs font-bold text-slate-600 group-hover:text-maroon-600">Keuangan</span>
-                <span className="px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 text-[10px] font-black">{stats.waiting_payment}</span>
+                <span className="text-xs font-black text-slate-600 group-hover:text-maroon-600 transition-colors uppercase tracking-tight">Keuangan</span>
+                <span className="px-3 py-1 rounded-lg bg-amber-50 text-amber-600 text-[11px] font-black border border-amber-100">{stats.waiting_payment}</span>
               </Link>
               <Link href="/dashboard/admin/verifikasi-dokumen" className="flex items-center justify-between group">
-                <span className="text-xs font-bold text-slate-600 group-hover:text-maroon-600">Dokumen</span>
-                <span className="px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 text-[10px] font-black">{stats.waiting_docs}</span>
+                <span className="text-xs font-black text-slate-600 group-hover:text-maroon-600 transition-colors uppercase tracking-tight">Dokumen</span>
+                <span className="px-3 py-1 rounded-lg bg-blue-50 text-blue-600 text-[11px] font-black border border-blue-100">{stats.waiting_docs}</span>
               </Link>
             </div>
           </div>
