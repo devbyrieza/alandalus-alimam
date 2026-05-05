@@ -178,7 +178,7 @@ export const exportToPDF = (
     },
     didDrawPage: (data) => {
       // Footer
-      const str = "Halaman " + doc.internal.getNumberOfPages();
+      const str = "Halaman " + (doc.internal as any).getNumberOfPages();
       doc.setFontSize(8);
       const pageSize = doc.internal.pageSize;
       const pageHeight = pageSize.height ? pageSize.height : pageSize.getHeight();
