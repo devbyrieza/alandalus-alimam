@@ -235,7 +235,7 @@ export type UserRole =
   | "pendaftar"
   | "admin_berkas"
   | "admin_keuangan"
-  | "penguji_calsan"
+  | "penguji"
   | "pewawancara_calsan"
   | "pewawancara_cawalsan"
   | "admin_super"
@@ -245,11 +245,11 @@ export const ROLE_LABELS: Record<UserRole, string> = {
   pendaftar: "Pendaftar",
   admin_berkas: "Admin Berkas",
   admin_keuangan: "Admin Keuangan",
-  penguji_calsan: "Penguji Al-Qur'an",
-  pewawancara_calsan: "Pewawancara Calon Santri",
-  pewawancara_cawalsan: "Pewawancara Calon Orangtua",
+  penguji: "Penguji Al-Qur'an",
+  pewawancara_calsan: "Pewawancara Calsan",
+  pewawancara_cawalsan: "Pewawancara Cawalsan",
   admin_super: "Admin Super",
-  admin: "Administrator (Legacy)",
+  admin: "Administrator",
 };
 
 /**
@@ -261,7 +261,7 @@ export const ROLE_PERMISSIONS: Record<UserRole, string[]> = {
   pendaftar: ["view_own_data", "edit_own_data", "upload_documents", "view_payment_status", "view_announcement"],
   admin_berkas: ["view_pendaftar_list", "view_pendaftar_detail", "verify_documents", "export_pendaftar_data"],
   admin_keuangan: ["view_pendaftar_list", "view_payment_list", "verify_payment", "view_financial_reports"],
-  penguji_calsan: ["view_exam_schedule", "input_exam_scores"],
+  penguji: ["view_exam_schedule", "input_exam_scores"],
   pewawancara_calsan: ["view_exam_schedule", "input_exam_scores"],
   pewawancara_cawalsan: ["view_exam_schedule", "input_exam_scores"],
   admin_super: ["view_pendaftar_list", "view_dashboard_stats", "export_all_data", "input_selection_result", "manage_users", "manage_settings", "send_wa_blast"],
@@ -276,7 +276,7 @@ export const DASHBOARD_ROUTES: Record<UserRole, string> = {
   pendaftar: "/dashboard/pendaftar",
   admin_berkas: "/dashboard/admin",
   admin_keuangan: "/dashboard/admin",
-  penguji_calsan: "/dashboard/penguji",
+  penguji: "/dashboard/penguji",
   pewawancara_calsan: "/dashboard/penguji",
   pewawancara_cawalsan: "/dashboard/penguji",
   admin_super: "/dashboard/admin",
@@ -310,7 +310,7 @@ export function getMenuItemsForRole(role: UserRole) {
       { name: "Verifikasi Pembayaran", href: "/dashboard/admin/verifikasi-pembayaran", icon: "CreditCard" },
       { name: "Rekap Keuangan", href: "/dashboard/admin/keuangan", icon: "BarChart" },
     ],
-    penguji_calsan: [
+    penguji: [
       { name: "Dasbor", href: "/dashboard/penguji", icon: "LayoutDashboard" },
       { name: "Jadwal Seleksi", href: "/dashboard/penguji/jadwal", icon: "Calendar" },
       { name: "Input Nilai", href: "/dashboard/penguji/input-nilai", icon: "ClipboardEdit" },
