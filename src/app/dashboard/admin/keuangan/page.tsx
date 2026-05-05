@@ -235,6 +235,7 @@ export default function KeuanganPage() {
             sheets.push({
               name: j.substring(0, 31),
               title: `PEMBAYARAN PENDAFTARAN - ${j}`,
+              subTitle: "",
               header,
               data: jenjangGroups[j].map(formatRow),
             });
