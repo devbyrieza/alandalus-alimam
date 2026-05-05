@@ -31,9 +31,9 @@ const JENJANG_LABELS: Record<string, string> = { MTS: "MTs", IL: "IL", SMA: "SMA
 // ─── 2. INTERNAL COMPONENTS ───
 
 /**
- * StatWidget: Kartu angka statistik yang dinamis.
+ * StatWidget: Kartu angka statistik yang dinamis dengan dukungan breakdown.
  */
-const StatWidget = ({ label, value, icon: Icon, color, trend }: any) => {
+const StatWidget = ({ label, value, icon: Icon, color, trend, breakdown }: any) => {
   const colorMap: any = {
     maroon: "text-maroon-600 bg-maroon-50",
     emerald: "text-emerald-600 bg-emerald-50",
@@ -46,23 +46,45 @@ const StatWidget = ({ label, value, icon: Icon, color, trend }: any) => {
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-md transition-all group"
+      className="bg-white p-6 rounded-3xl border border-slate-200/60 shadow-sm hover:shadow-md transition-all group"
     >
       <div className="flex items-start justify-between mb-4">
-        <div className={`p-2.5 rounded-xl ${colorMap[color] || colorMap.maroon} transition-transform group-hover:scale-110`}>
+        <div className={`p-2.5 rounded-2xl ${colorMap[color] || colorMap.maroon} transition-transform group-hover:scale-110`}>
           <Icon className="w-5 h-5" />
         </div>
         {trend && (
-          <div className="flex items-center gap-1 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
+          <div className="flex items-center gap-1 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">
             <TrendingUp className="w-3 h-3" />
             <span>{trend}</span>
           </div>
         )}
       </div>
-      <div>
-        <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-1">{label}</p>
-        <h3 className="text-3xl font-black text-slate-900 tracking-tight">{value}</h3>
+      
+      <div className="mb-4">
+        <p className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">{label}</p>
+        <h3 className="text-4xl font-black text-slate-900 tracking-tighter">{value}</h3>
       </div>
+
+      {breakdown && (
+        <div className="grid grid-cols-2 gap-y-3 pt-4 border-t border-slate-50">
+          <div className="flex flex-col">
+            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">MTs Putra</span>
+            <span className="text-sm font-black text-maroon-700 leading-none">{breakdown.mts_l || 0}</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">IL Putra</span>
+            <span className="text-sm font-black text-maroon-700 leading-none">{breakdown.il_l || 0}</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">MTs Putri</span>
+            <span className="text-sm font-black text-pink-600 leading-none">{breakdown.mts_p || 0}</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">IL Putri</span>
+            <span className="text-sm font-black text-pink-600 leading-none">{breakdown.il_p || 0}</span>
+          </div>
+        </div>
+      )}
     </motion.div>
   );
 };
@@ -138,6 +160,40 @@ export default function AdminDashboardPage() {
   }
 
   const isAdminSuper = role === "admin_super" || role === "admin";
+  const isAdminKeuangan = role === "admin_keuangan";
+  const isAdminBerkas = role === "admin_berkas";
+
+  // Helper to extract breakdown data
+  const getBreakdown = (type: "total" | "lulus" | "ulang") => {
+    const mts = stats.stats_per_jenjang.find((j: any) => j.jenjang === "MTS") || {};
+    const il = stats.stats_per_jenjang.find((j: any) => j.jenjang === "IL") || {};
+
+    if (type === "total") {
+      return {
+        mts_l: mts.pendaftar_putra || 0,
+        mts_p: mts.pendaftar_putri || 0,
+        il_l: il.pendaftar_putra || 0,
+        il_p: il.pendaftar_putri || 0,
+      };
+    }
+    if (type === "lulus") {
+      return {
+        mts_l: mts.diterima_putra || 0,
+        mts_p: mts.diterima_putri || 0,
+        il_l: il.diterima_putra || 0,
+        il_p: il.diterima_putri || 0,
+      };
+    }
+    if (type === "ulang") {
+      return {
+        mts_l: mts.ulang_putra || 0,
+        mts_p: mts.ulang_putri || 0,
+        il_l: il.ulang_putra || 0,
+        il_p: il.ulang_putri || 0,
+      };
+    }
+    return null;
+  };
 
   return (
     <div className="max-w-[1400px] mx-auto space-y-8 pb-20">
@@ -232,18 +288,51 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* SECTION: STATS GRID (Dinamis sesuai Role) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {(isAdminSuper || role === "admin_berkas") && (
-          <StatWidget label="Total Pendaftar" value={stats.total_pendaftar} icon={Users} color="blue" />
-        )}
-        {(isAdminSuper || role === "admin_berkas") && (
-          <StatWidget label="Lengkap Berkas" value={stats.sudah_isi_data} icon={FileCheck} color="purple" />
-        )}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* VIEW: ADMIN SUPER / ADMIN */}
         {isAdminSuper && (
-          <StatWidget label="Lulus Seleksi" value={stats.diterima} icon={CheckCircle2} color="emerald" />
+          <>
+            <StatWidget 
+              label="Total Pendaftar" 
+              value={stats.total_pendaftar} 
+              icon={Users} 
+              color="blue" 
+              trend="+5% week" 
+              breakdown={getBreakdown("total")}
+            />
+            <StatWidget 
+              label="Lulus Seleksi" 
+              value={stats.diterima} 
+              icon={CheckCircle2} 
+              color="emerald" 
+              breakdown={getBreakdown("lulus")}
+            />
+            <StatWidget 
+              label="Sudah Daftar Ulang" 
+              value={stats.daftar_ulang} 
+              icon={ClipboardCheck} 
+              color="amber" 
+              breakdown={getBreakdown("ulang")}
+            />
+          </>
         )}
-        {isAdminSuper && (
-          <StatWidget label="Sudah Daftar Ulang" value={stats.daftar_ulang} icon={ClipboardCheck} color="amber" />
+
+        {/* VIEW: ADMIN BERKAS */}
+        {isAdminBerkas && (
+          <>
+            <StatWidget label="Total Pendaftar" value={stats.total_pendaftar} icon={Users} color="blue" />
+            <StatWidget label="Lengkap Berkas" value={stats.sudah_isi_data} icon={FileCheck} color="purple" />
+            <StatWidget label="Menunggu Verifikasi" value={stats.waiting_docs} icon={Clock} color="amber" />
+          </>
+        )}
+
+        {/* VIEW: ADMIN KEUANGAN */}
+        {isAdminKeuangan && (
+          <>
+            <StatWidget label="Total Pendaftar" value={stats.total_pendaftar} icon={Users} color="blue" />
+            <StatWidget label="Sudah Bayar" value={stats.sudah_bayar} icon={Wallet} color="emerald" />
+            <StatWidget label="Menunggu Verifikasi" value={stats.waiting_payment} icon={Clock} color="amber" />
+          </>
         )}
       </div>
 
@@ -268,7 +357,7 @@ export default function AdminDashboardPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50">
-              {stats.stats_per_jenjang?.map((item: any, idx: number) => {
+              {stats.stats_per_jenjang?.filter((j: any) => j.jenjang !== "SMA").map((item: any, idx: number) => {
                 const perc = Math.round((item.pendaftar / item.kuota_total) * 100) || 0;
                 return (
                   <tr key={idx} className="hover:bg-slate-50/50 transition-colors group">
