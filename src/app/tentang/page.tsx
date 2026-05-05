@@ -98,6 +98,8 @@ export default function TentangPage() {
               src="/images/welcome-selamat-datang.webp"
               alt="Selamat Datang di Al Andalus Al Imam"
               fill
+              priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
               className="object-cover transition-transform duration-1000 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-linear-to-t from-maroon-950/40 via-transparent to-transparent" />
@@ -122,6 +124,8 @@ export default function TentangPage() {
                     src="/images/tentang.webp"
                     alt="Pesantren Al Andalus Al Imam"
                     fill
+                    priority
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-maroon-950/50 via-transparent to-transparent" />
