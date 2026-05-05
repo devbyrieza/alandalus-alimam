@@ -58,7 +58,6 @@ const PROGRAMS: ProgramItem[] = [
     icon: BookOpen,
     variant: "gold",
   },
-  },
 ];
 
 const containerVariants: Variants = {
