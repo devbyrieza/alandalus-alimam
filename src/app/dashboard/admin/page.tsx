@@ -234,16 +234,16 @@ export default function AdminDashboardPage() {
       {/* SECTION: STATS GRID (Dinamis sesuai Role) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {(isAdminSuper || role === "admin_berkas") && (
-          <StatWidget label="Total Pendaftar" value={stats.total_pendaftar} icon={Users} color="blue" trend="+5% week" />
-        )}
-        {(isAdminSuper || role === "admin_keuangan") && (
-          <StatWidget label="Sudah Bayar" value={stats.sudah_bayar} icon={Wallet} color="emerald" trend="Verified" />
+          <StatWidget label="Total Pendaftar" value={stats.total_pendaftar} icon={Users} color="blue" />
         )}
         {(isAdminSuper || role === "admin_berkas") && (
-          <StatWidget label="Lengkap Berkas" value={stats.sudah_isi_data} icon={ClipboardCheck} color="purple" />
+          <StatWidget label="Lengkap Berkas" value={stats.sudah_isi_data} icon={FileCheck} color="purple" />
         )}
         {isAdminSuper && (
           <StatWidget label="Lulus Seleksi" value={stats.diterima} icon={CheckCircle2} color="emerald" />
+        )}
+        {isAdminSuper && (
+          <StatWidget label="Sudah Daftar Ulang" value={stats.daftar_ulang} icon={ClipboardCheck} color="amber" />
         )}
       </div>
 
