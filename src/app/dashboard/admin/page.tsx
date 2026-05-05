@@ -35,56 +35,67 @@ const JENJANG_LABELS: Record<string, string> = { MTS: "MTs", IL: "IL", SMA: "SMA
  */
 const StatWidget = ({ label, value, icon: Icon, color, trend, breakdown }: any) => {
   const colorMap: any = {
-    maroon: "text-maroon-600 bg-maroon-50",
-    emerald: "text-emerald-600 bg-emerald-50",
-    amber: "text-amber-600 bg-amber-50",
-    blue: "text-blue-600 bg-blue-50",
-    purple: "text-purple-600 bg-purple-50",
+    maroon: "from-maroon-600 to-maroon-700 shadow-maroon-200",
+    emerald: "from-emerald-600 to-emerald-700 shadow-emerald-200",
+    amber: "from-amber-500 to-amber-600 shadow-amber-200",
+    blue: "from-blue-600 to-blue-700 shadow-blue-200",
+    purple: "from-purple-600 to-purple-700 shadow-purple-200",
   };
 
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white p-6 rounded-3xl border border-slate-200/60 shadow-sm hover:shadow-md transition-all group"
+      className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-premium-sm hover:shadow-premium-lg transition-all group relative overflow-hidden"
     >
-      <div className="flex items-start justify-between mb-4">
-        <div className={`p-2.5 rounded-2xl ${colorMap[color] || colorMap.maroon} transition-transform group-hover:scale-110`}>
-          <Icon className="w-5 h-5" />
+      <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-maroon-50 transition-colors duration-500" />
+      
+      <div className="relative z-10">
+        <div className="flex items-center justify-between mb-8">
+          <div className={`w-14 h-14 rounded-2xl bg-linear-to-br ${colorMap[color] || colorMap.maroon} flex items-center justify-center text-white shadow-xl transition-transform group-hover:scale-110 group-hover:rotate-3 duration-500`}>
+            <Icon className="w-6 h-6" />
+          </div>
+          {trend && (
+            <div className="flex items-center gap-1.5 text-[10px] font-black text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100">
+              <TrendingUp className="w-3.5 h-3.5" />
+              <span className="uppercase tracking-wider">{trend}</span>
+            </div>
+          )}
         </div>
-        {trend && (
-          <div className="flex items-center gap-1 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">
-            <TrendingUp className="w-3 h-3" />
-            <span>{trend}</span>
+        
+        <div className="mb-8">
+          <p className="text-[11px] font-black text-slate-400 uppercase tracking-[0.25em] mb-2">{label}</p>
+          <div className="flex items-baseline gap-2">
+            <h3 className="text-5xl font-black text-slate-900 tracking-tighter italic">{value}</h3>
+            <span className="text-xs font-bold text-slate-400">Total</span>
+          </div>
+        </div>
+
+        {breakdown && (
+          <div className="grid grid-cols-2 gap-4 pt-6 border-t border-slate-50">
+            <div className="space-y-4">
+              <div className="flex flex-col">
+                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">MTs Putra</span>
+                <span className="text-base font-black text-maroon-800 leading-none">{breakdown.mts_l || 0}</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">MTs Putri</span>
+                <span className="text-base font-black text-pink-500 leading-none">{breakdown.mts_p || 0}</span>
+              </div>
+            </div>
+            <div className="space-y-4 border-l border-slate-50 pl-4">
+              <div className="flex flex-col">
+                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">IL Putra</span>
+                <span className="text-base font-black text-maroon-800 leading-none">{breakdown.il_l || 0}</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">IL Putri</span>
+                <span className="text-base font-black text-pink-500 leading-none">{breakdown.il_p || 0}</span>
+              </div>
+            </div>
           </div>
         )}
       </div>
-      
-      <div className="mb-4">
-        <p className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">{label}</p>
-        <h3 className="text-4xl font-black text-slate-900 tracking-tighter">{value}</h3>
-      </div>
-
-      {breakdown && (
-        <div className="grid grid-cols-2 gap-y-3 pt-4 border-t border-slate-50">
-          <div className="flex flex-col">
-            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">MTs Putra</span>
-            <span className="text-sm font-black text-maroon-700 leading-none">{breakdown.mts_l || 0}</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">IL Putra</span>
-            <span className="text-sm font-black text-maroon-700 leading-none">{breakdown.il_l || 0}</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">MTs Putri</span>
-            <span className="text-sm font-black text-pink-600 leading-none">{breakdown.mts_p || 0}</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">IL Putri</span>
-            <span className="text-sm font-black text-pink-600 leading-none">{breakdown.il_p || 0}</span>
-          </div>
-        </div>
-      )}
     </motion.div>
   );
 };
@@ -336,70 +347,87 @@ export default function AdminDashboardPage() {
         )}
       </div>
 
-      {/* SECTION: TABEL PERFORMA JENJANG */}
-      <div className="bg-white rounded-[2.5rem] border border-slate-200 shadow-sm overflow-hidden">
-        <div className="px-8 py-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-          <div>
-            <h3 className="text-lg font-black text-slate-900 tracking-tight">Performa Jenjang</h3>
-            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Distribusi Per Sekolah</p>
+      {/* SECTION: SUMMARY INSIGHTS (Replacing Table) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="bg-slate-900 rounded-[2.5rem] p-10 text-white relative overflow-hidden group">
+          <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:rotate-12 transition-transform duration-700">
+            <TrendingUp className="w-48 h-48" />
+          </div>
+          <div className="relative z-10">
+            <h3 className="text-2xl font-black mb-6 tracking-tight flex items-center gap-3">
+              <div className="w-2 h-8 bg-maroon-500 rounded-full" />
+              Insight Pendaftaran
+            </h3>
+            <div className="grid grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <div>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Sudah Bayar</p>
+                  <p className="text-3xl font-black text-white">{stats.sudah_bayar} <span className="text-xs text-slate-500 font-bold">Santri</span></p>
+                </div>
+                <div>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Sudah Lengkap Berkas</p>
+                  <p className="text-3xl font-black text-maroon-400">{stats.sudah_isi_data} <span className="text-xs text-slate-500 font-bold">Santri</span></p>
+                </div>
+              </div>
+              <div className="space-y-6 pl-8 border-l border-white/10">
+                <div>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Menunggu Verifikasi</p>
+                  <p className="text-3xl font-black text-white">{stats.waiting_payment + stats.waiting_docs} <span className="text-xs text-slate-500 font-bold">Tugas</span></p>
+                </div>
+                <div>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Tingkat Kelulusan</p>
+                  <p className="text-3xl font-black text-emerald-400">
+                    {stats.total_pendaftar > 0 ? Math.round((stats.diterima / stats.total_pendaftar) * 100) : 0}%
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left min-w-[800px]">
-            <thead className="bg-white text-[10px] font-black uppercase tracking-widest text-slate-400 border-b border-slate-100">
-              <tr>
-                <th className="px-8 py-4">Jenjang</th>
-                <th className="px-4 py-4 text-center">Pendaftar (L/P/T)</th>
-                <th className="px-4 py-4 text-center">Sudah Bayar</th>
-                <th className="px-4 py-4 text-center">Lulus</th>
-                <th className="px-8 py-4 text-right">Progress Isi</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-50">
-              {stats.stats_per_jenjang?.filter((j: any) => j.jenjang !== "SMA").map((item: any, idx: number) => {
-                const perc = Math.round((item.pendaftar / item.kuota_total) * 100) || 0;
-                return (
-                  <tr key={idx} className="hover:bg-slate-50/50 transition-colors group">
-                    <td className="px-8 py-5">
-                      <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-maroon-700 font-black text-xs border border-slate-200">
-                          {item.jenjang.substring(0, 2)}
-                        </div>
-                        <div>
-                          <p className="font-bold text-slate-900">{JENJANG_LABELS[item.jenjang] || item.jenjang}</p>
-                          <p className="text-[10px] text-slate-400 font-bold">AL IMAM</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-4 py-5 text-center">
-                      <div className="text-xs font-bold">
-                        <span className="text-maroon-600">{item.pendaftar_putra}</span>
-                        <span className="opacity-20 mx-1">/</span>
-                        <span className="text-pink-500">{item.pendaftar_putri}</span>
-                        <span className="opacity-20 mx-1">/</span>
-                        <span className="text-slate-900">{item.pendaftar}</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-5 text-center">
-                      <span className="px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-[11px] font-black">{item.bayar_total || 0}</span>
-                    </td>
-                    <td className="px-4 py-5 text-center">
-                      <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[11px] font-black">{item.diterima || 0}</span>
-                    </td>
-                    <td className="px-8 py-5">
-                      <div className="w-full max-w-[120px] ml-auto">
-                        <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden flex">
-                          <div style={{ width: `${perc}%` }} className="h-full bg-maroon-600" />
-                        </div>
-                        <span className="text-[10px] font-black text-slate-400 mt-1 block text-right">{perc}%</span>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+        <div className="bg-white rounded-[2.5rem] border border-slate-100 p-10 shadow-premium-sm relative overflow-hidden group">
+          <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:-rotate-12 transition-transform duration-700">
+            <CheckCircle2 className="w-48 h-48 text-maroon-950" />
+          </div>
+          <div className="relative z-10">
+            <h3 className="text-2xl font-black text-slate-900 mb-6 tracking-tight flex items-center gap-3">
+              <div className="w-2 h-8 bg-slate-900 rounded-full" />
+              Quick Check
+            </h3>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-maroon-200 transition-all cursor-default">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-maroon-600">
+                    <Users className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-black text-slate-900 uppercase tracking-tighter leading-none mb-1">Verifikasi Pendaftar</p>
+                    <p className="text-[10px] text-slate-400 font-bold">Lakukan verifikasi berkas harian</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xl font-black text-slate-900">{stats.waiting_docs}</span>
+                  <ChevronRight className="w-4 h-4 text-slate-300" />
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-emerald-200 transition-all cursor-default">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-emerald-600">
+                    <Wallet className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-black text-slate-900 uppercase tracking-tighter leading-none mb-1">Konfirmasi Pembayaran</p>
+                    <p className="text-[10px] text-slate-400 font-bold">Update status keuangan hari ini</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xl font-black text-slate-900">{stats.waiting_payment}</span>
+                  <ChevronRight className="w-4 h-4 text-slate-300" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
