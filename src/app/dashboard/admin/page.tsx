@@ -182,18 +182,18 @@ export default function AdminDashboardPage() {
                   <Clock className="w-3.5 h-3.5 text-maroon-400" />
                   <span>Countdown Penutupan</span>
                 </div>
-                <h2 className="text-4xl font-black mb-4 tracking-tight leading-tight">
-                  {getPPDBCountdown()} Hari Lagi Menuju <span className="text-maroon-400">Finish</span>
+                <h2 className="text-5xl font-black mb-4 tracking-tighter leading-tight">
+                  {getPPDBCountdown()} Hari Lagi Menuju <span className="text-maroon-400 drop-shadow-sm">Finish</span>
                 </h2>
-                <div className="flex items-center gap-6 mt-8">
+                <div className="flex items-center gap-8 mt-10">
                   <div className="flex flex-col">
-                    <span className="text-2xl font-black">{stats.total_pendaftar}</span>
-                    <span className="text-[10px] font-bold text-slate-500 uppercase">Pendaftar</span>
+                    <span className="text-3xl font-black text-white">{stats.total_pendaftar}</span>
+                    <span className="text-[11px] font-black text-slate-400 uppercase tracking-wider">Pendaftar</span>
                   </div>
-                  <div className="w-px h-8 bg-slate-800" />
+                  <div className="w-px h-10 bg-slate-800" />
                   <div className="flex flex-col">
-                    <span className="text-2xl font-black text-maroon-400">{stats.sudah_bayar}</span>
-                    <span className="text-[10px] font-bold text-slate-500 uppercase">Lunas</span>
+                    <span className="text-3xl font-black text-maroon-400">{stats.sudah_bayar}</span>
+                    <span className="text-[11px] font-black text-slate-400 uppercase tracking-wider">Lunas</span>
                   </div>
                 </div>
               </div>
@@ -207,10 +207,11 @@ export default function AdminDashboardPage() {
         </div>
 
         <div className="lg:col-span-4 flex flex-col gap-4">
-          <div className="flex-1 bg-maroon-700 rounded-[2.5rem] p-8 text-white relative overflow-hidden">
-            <h4 className="text-xl font-bold mb-2">Export Data</h4>
-            <p className="text-maroon-100 text-sm opacity-70 mb-6">Download rekapan pendaftar ke Excel.</p>
-            <button className="w-full bg-white text-maroon-900 py-4 rounded-xl font-black text-[11px] uppercase tracking-widest hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+          <div className="flex-1 bg-gradient-to-br from-maroon-700 to-maroon-800 rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-xl shadow-maroon-900/20">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+            <h4 className="text-2xl font-black mb-2 tracking-tight">Export Data</h4>
+            <p className="text-maroon-100 text-sm font-medium mb-8 leading-relaxed">Download rekapan pendaftar ke format Excel untuk laporan.</p>
+            <button className="w-full bg-white text-maroon-950 py-4.5 rounded-2xl font-black text-[11px] uppercase tracking-widest hover:bg-maroon-50 hover:scale-[1.02] transition-all flex items-center justify-center gap-3 shadow-lg">
               <Download className="w-4 h-4" /> Download Report
             </button>
           </div>
