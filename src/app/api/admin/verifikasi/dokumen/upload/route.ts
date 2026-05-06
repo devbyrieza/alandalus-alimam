@@ -172,7 +172,7 @@ export async function POST(request: NextRequest) {
 
     // Upload via helper function local storage
     const filePath = await saveFileLocal(
-      file,
+      buffer,
       "dokumen-pendaftaran",
       pendaftarId,
       fileName,
