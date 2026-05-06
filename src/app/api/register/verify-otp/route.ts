@@ -81,7 +81,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: "Pendaftaran Berhasil!",
-      data: { nomor_pendaftaran: nomorPendaftaran }
+      data: {
+        nomor_pendaftaran: nomorPendaftaran,
+        nama_lengkap: regData.nama_lengkap,
+        nik: regData.nik,
+        jenjang: regData.jenjang,
+      }
     });
 
   } catch (error: any) {
