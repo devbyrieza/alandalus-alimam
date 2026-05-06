@@ -362,12 +362,12 @@ export default function DaftarPage() {
                   {[
                     {
                       value: "MTs",
-                      title: "MTs Putra",
+                      title: "Madrasah Tsanawiyah",
                       subtitle: "Lulusan SD/Sederajat",
                     },
                     {
                       value: "IL",
-                      title: "I'dad Lughowi Putra",
+                      title: "I'dad Lughowi",
                       subtitle: "Lulusan SMP/Sederajat",
                     },
                   ].map((option) => {
@@ -397,7 +397,7 @@ export default function DaftarPage() {
                       >
                         {isClosed && (
                           <div className="absolute top-4 right-4 bg-red-600 text-white text-[10px] font-black px-2 py-1 rounded-full uppercase tracking-tighter shadow-sm z-10">
-                            Khusus Putra
+                            Pendaftaran Putri Belum Dibuka
                           </div>
                         )}
 
