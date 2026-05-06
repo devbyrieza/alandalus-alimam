@@ -46,9 +46,9 @@ const StatWidget = ({ label, value, icon: Icon, color, trend, breakdown }: any) 
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-premium-sm hover:shadow-premium-lg transition-all group relative overflow-hidden"
+      className="bg-white p-8 rounded-[2.5rem] border border-ink-100 shadow-premium-sm hover:shadow-premium-lg transition-all group relative overflow-hidden"
     >
-      <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-maroon-50 transition-colors duration-500" />
+      <div className="absolute top-0 right-0 w-32 h-32 bg-cream-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-maroon-50 transition-colors duration-500" />
       
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-8">
@@ -64,15 +64,15 @@ const StatWidget = ({ label, value, icon: Icon, color, trend, breakdown }: any) 
         </div>
         
         <div className="mb-8">
-          <p className="text-[11px] font-black text-slate-400 uppercase tracking-[0.25em] mb-2">{label}</p>
+          <p className="text-[11px] font-black text-ink-400 uppercase tracking-[0.25em] mb-2">{label}</p>
           <div className="flex items-baseline gap-2">
-            <h3 className="text-5xl font-black text-slate-900 tracking-tighter italic">{value}</h3>
-            <span className="text-xs font-bold text-slate-400">Total</span>
+            <h3 className="text-5xl font-black text-ink-900 tracking-tighter italic">{value}</h3>
+            <span className="text-xs font-bold text-ink-400">Orang</span>
           </div>
         </div>
 
         {breakdown && (
-          <div className="grid grid-cols-2 gap-4 pt-6 border-t border-slate-50">
+          <div className="grid grid-cols-2 gap-4 pt-6 border-t border-cream-100">
             <div className="space-y-4">
               <div className="flex flex-col">
                 <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">MTs Putra</span>
@@ -83,7 +83,7 @@ const StatWidget = ({ label, value, icon: Icon, color, trend, breakdown }: any) 
                 <span className="text-base font-black text-pink-500 leading-none">{breakdown.mts_p || 0}</span>
               </div>
             </div>
-            <div className="space-y-4 border-l border-slate-50 pl-4">
+            <div className="space-y-4 border-l border-cream-100 pl-4">
               <div className="flex flex-col">
                 <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">IL Putra</span>
                 <span className="text-base font-black text-maroon-800 leading-none">{breakdown.il_l || 0}</span>
@@ -212,17 +212,17 @@ export default function AdminDashboardPage() {
       {/* SECTION: HEADER & FILTER */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <h1 className="text-3xl font-black text-slate-900 tracking-tight mb-2">Dashboard Al Imam</h1>
-          <p className="text-sm text-slate-500 font-medium">Monitoring pendaftaran santri secara real-time.</p>
+          <h1 className="text-3xl font-black text-maroon-950 tracking-tight mb-2">Dasbor Al Imam</h1>
+          <p className="text-sm text-ink-500 font-medium">Pantau perkembangan pendaftaran santri secara langsung.</p>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="bg-white border border-slate-200 rounded-xl px-4 py-2 flex items-center gap-3 shadow-sm">
-            <CalendarIcon className="w-4 h-4 text-slate-400" />
+          <div className="bg-white border border-cream-200 rounded-xl px-4 py-2 flex items-center gap-3 shadow-sm">
+            <CalendarIcon className="w-4 h-4 text-ink-400" />
             <select 
               value={selectedTA} 
               onChange={(e) => setSelectedTA(e.target.value)}
-              className="bg-transparent text-[13px] font-bold text-slate-700 focus:outline-none cursor-pointer"
+              className="bg-transparent text-[13px] font-bold text-ink-700 focus:outline-none cursor-pointer"
             >
               {tahunAjaranList.map((ta: any) => (
                 <option key={ta.id} value={ta.id}>TA {ta.nama}</option>
@@ -231,7 +231,7 @@ export default function AdminDashboardPage() {
           </div>
           <button 
             onClick={() => fetchStats(selectedTA)}
-            className="p-2.5 bg-white border border-slate-200 rounded-xl text-slate-500 hover:text-maroon-600 transition-all shadow-sm"
+            className="p-2.5 bg-white border border-cream-200 rounded-xl text-ink-500 hover:text-maroon-600 transition-all shadow-sm"
           >
             <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
           </button>
@@ -250,7 +250,7 @@ export default function AdminDashboardPage() {
                   <span>Countdown Penutupan</span>
                 </div>
                 <h2 className="text-5xl font-black mb-6 tracking-tighter leading-tight italic">
-                  {getPPDBCountdown()} Hari Lagi Menuju <span className="text-maroon-400">Finish</span>
+                  {getPPDBCountdown()} Hari Lagi Menuju <span className="text-maroon-400">Penutupan</span>
                 </h2>
                 <div className="flex items-center gap-12 mt-12">
                   <div className="flex flex-col">
@@ -277,27 +277,27 @@ export default function AdminDashboardPage() {
           <div className="flex-1 bg-linear-to-br from-maroon-800 to-maroon-950 rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-xl border border-white/5">
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
             <div className="relative z-10 flex flex-col h-full">
-              <h4 className="text-2xl font-black mb-3 tracking-tight italic">Export Data</h4>
+              <h4 className="text-2xl font-black mb-3 tracking-tight italic">Ekspor Data</h4>
               <p className="text-maroon-200 text-xs font-medium mb-8 leading-relaxed">
-                Download rekapan pendaftar ke format Excel untuk laporan resmi.
+                Unduh rekap pendaftar ke format Excel untuk laporan resmi.
               </p>
               <div className="mt-auto">
                 <button className="w-full bg-white text-maroon-950 py-4 rounded-2xl font-black text-[11px] uppercase tracking-[0.2em] hover:bg-maroon-50 transition-all flex items-center justify-center gap-3 shadow-xl">
-                  <Download className="w-4 h-4" /> Download Report
+                  <Download className="w-4 h-4" /> Unduh Laporan
                 </button>
               </div>
             </div>
           </div>
-          <div className="flex-1 bg-white border border-slate-100 rounded-[2.5rem] p-8 shadow-premium-sm flex flex-col justify-center">
-            <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em] mb-6">Antrean Cek</h4>
+          <div className="flex-1 bg-white border border-cream-100 rounded-[2.5rem] p-8 shadow-premium-sm flex flex-col justify-center">
+            <h4 className="text-[10px] font-black text-ink-400 uppercase tracking-[0.25em] mb-6">Antrean Verifikasi</h4>
             <div className="space-y-5">
               <Link href="/dashboard/admin/verifikasi-pembayaran" className="flex items-center justify-between group">
-                <span className="text-xs font-black text-slate-600 group-hover:text-maroon-600 transition-colors uppercase tracking-tight">Keuangan</span>
-                <span className="px-3 py-1 rounded-lg bg-amber-50 text-amber-600 text-[11px] font-black border border-amber-100">{stats.waiting_payment}</span>
+                <span className="text-xs font-black text-ink-600 group-hover:text-maroon-600 transition-colors uppercase tracking-tight">Keuangan</span>
+                <span className="px-3 py-1 rounded-lg bg-gold-50 text-gold-700 text-[11px] font-black border border-gold-100">{stats.waiting_payment}</span>
               </Link>
               <Link href="/dashboard/admin/verifikasi-dokumen" className="flex items-center justify-between group">
-                <span className="text-xs font-black text-slate-600 group-hover:text-maroon-600 transition-colors uppercase tracking-tight">Dokumen</span>
-                <span className="px-3 py-1 rounded-lg bg-blue-50 text-blue-600 text-[11px] font-black border border-blue-100">{stats.waiting_docs}</span>
+                <span className="text-xs font-black text-ink-600 group-hover:text-maroon-600 transition-colors uppercase tracking-tight">Dokumen</span>
+                <span className="px-3 py-1 rounded-lg bg-maroon-50 text-maroon-600 text-[11px] font-black border border-maroon-100">{stats.waiting_docs}</span>
               </Link>
             </div>
           </div>
@@ -314,7 +314,7 @@ export default function AdminDashboardPage() {
               value={stats.total_pendaftar} 
               icon={Users} 
               color="blue" 
-              trend="+5% week" 
+              trend="+5% minggu ini" 
               breakdown={getBreakdown("total")}
             />
             <StatWidget 
@@ -355,7 +355,7 @@ export default function AdminDashboardPage() {
 
       {/* SECTION: SUMMARY INSIGHTS (Replacing Table) */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-slate-900 rounded-[2.5rem] p-10 text-white relative overflow-hidden group">
+        <div className="bg-maroon-950 rounded-[2.5rem] p-10 text-white relative overflow-hidden group">
           <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:rotate-12 transition-transform duration-700">
             <TrendingUp className="w-48 h-48" />
           </div>
@@ -396,40 +396,40 @@ export default function AdminDashboardPage() {
             <CheckCircle2 className="w-48 h-48 text-maroon-950" />
           </div>
           <div className="relative z-10">
-            <h3 className="text-2xl font-black text-slate-900 mb-6 tracking-tight flex items-center gap-3">
-              <div className="w-2 h-8 bg-slate-900 rounded-full" />
-              Quick Check
+            <h3 className="text-2xl font-black text-ink-900 mb-6 tracking-tight flex items-center gap-3">
+              <div className="w-2 h-8 bg-maroon-600 rounded-full" />
+              Pemeriksaan Cepat
             </h3>
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-maroon-200 transition-all cursor-default">
+              <div className="flex items-center justify-between p-4 bg-cream-50 rounded-2xl border border-cream-100 hover:border-maroon-200 transition-all cursor-default">
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-maroon-600">
                     <Users className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-xs font-black text-slate-900 uppercase tracking-tighter leading-none mb-1">Verifikasi Pendaftar</p>
-                    <p className="text-[10px] text-slate-400 font-bold">Lakukan verifikasi berkas harian</p>
+                    <p className="text-xs font-black text-ink-900 uppercase tracking-tighter leading-none mb-1">Verifikasi Berkas</p>
+                    <p className="text-[10px] text-ink-400 font-bold">Lakukan verifikasi berkas harian</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xl font-black text-slate-900">{stats.waiting_docs}</span>
-                  <ChevronRight className="w-4 h-4 text-slate-300" />
+                  <span className="text-xl font-black text-ink-900">{stats.waiting_docs}</span>
+                  <ChevronRight className="w-4 h-4 text-ink-300" />
                 </div>
               </div>
 
-              <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-emerald-200 transition-all cursor-default">
+              <div className="flex items-center justify-between p-4 bg-cream-50 rounded-2xl border border-cream-100 hover:border-maroon-200 transition-all cursor-default">
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-emerald-600">
+                  <div className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-maroon-600">
                     <Wallet className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-xs font-black text-slate-900 uppercase tracking-tighter leading-none mb-1">Konfirmasi Pembayaran</p>
-                    <p className="text-[10px] text-slate-400 font-bold">Update status keuangan hari ini</p>
+                    <p className="text-xs font-black text-ink-900 uppercase tracking-tighter leading-none mb-1">Konfirmasi Pembayaran</p>
+                    <p className="text-[10px] text-ink-400 font-bold">Perbarui status keuangan hari ini</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xl font-black text-slate-900">{stats.waiting_payment}</span>
-                  <ChevronRight className="w-4 h-4 text-slate-300" />
+                  <span className="text-xl font-black text-ink-900">{stats.waiting_payment}</span>
+                  <ChevronRight className="w-4 h-4 text-ink-300" />
                 </div>
               </div>
             </div>
