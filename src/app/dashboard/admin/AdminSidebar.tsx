@@ -172,12 +172,12 @@ export default function AdminSidebar({
   };
 
   return (
-    <div className="min-h-screen bg-[#fcfcfc] font-sans selection:bg-maroon-100 selection:text-maroon-900">
+    <div className="min-h-screen bg-[#fafaf9] font-sans selection:bg-maroon-100 selection:text-maroon-900">
       {/* ─── MOBILE HEADER (Hanya muncul di layar < 1024px) ─── */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-[60] bg-white/90 backdrop-blur-2xl border-b border-slate-200/60 px-6 py-4 flex items-center justify-between shadow-sm">
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-[60] bg-white/90 backdrop-blur-2xl border-b border-ink-200/60 px-6 py-4 flex items-center justify-between shadow-sm">
         <button
           onClick={() => setSidebarOpen(true)}
-          className="p-2.5 -ml-2 text-slate-600 hover:bg-slate-100 rounded-2xl transition-all active:scale-95"
+          className="p-2.5 -ml-2 text-ink-600 hover:bg-ink-100 rounded-2xl transition-all active:scale-95"
         >
           <Menu className="w-6 h-6" />
         </button>
@@ -213,9 +213,9 @@ export default function AdminSidebar({
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
               className="fixed top-0 left-0 bottom-0 z-[80] w-80 bg-white shadow-2xl lg:hidden flex flex-col rounded-r-[3rem] overflow-hidden"
             >
-              <div className="p-8 flex items-center justify-between border-b border-slate-50 bg-linear-to-b from-stone-50 to-white">
+              <div className="p-8 flex items-center justify-between border-b border-ink-50 bg-linear-to-b from-ink-50 to-white">
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-white rounded-2xl flex items-center justify-center shadow-clay-sm border border-stone-100">
+                  <div className="w-10 h-10 bg-white rounded-2xl flex items-center justify-center shadow-clay-sm border border-ink-100">
                     <img
                       src={BRANDING.logoPath}
                       alt="Logo"
@@ -243,12 +243,12 @@ export default function AdminSidebar({
                     className={`flex items-center justify-between px-4 py-4 rounded-2xl transition-all ${
                       item.isActive
                         ? "bg-maroon-700 text-white shadow-xl shadow-maroon-200 font-bold"
-                        : "text-slate-500 hover:bg-stone-50 hover:text-maroon-900"
+                        : "text-ink-500 hover:bg-ink-50 hover:text-maroon-900"
                     }`}
                   >
                     <div className="flex items-center gap-4">
                       <item.icon
-                        className={`w-5 h-5 ${item.isActive ? "text-white" : "text-slate-400"}`}
+                        className={`w-5 h-5 ${item.isActive ? "text-white" : "text-ink-400"}`}
                       />
                       <span className="text-sm tracking-tight">
                         {item.name}
@@ -265,7 +265,7 @@ export default function AdminSidebar({
                 ))}
               </nav>
 
-              <div className="p-8 border-t border-slate-50">
+              <div className="p-8 border-t border-ink-50">
                 <button
                   onClick={handleLogout}
                   className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-red-50 text-red-600 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-red-100 transition-all active:scale-95"
@@ -280,7 +280,7 @@ export default function AdminSidebar({
 
       {/* ─── DESKTOP SIDEBAR (Premium Slim Design) ─── */}
       <aside
-        className={`hidden lg:flex fixed inset-y-0 left-0 z-50 flex-col bg-white border-r border-slate-100 transition-all duration-500 ease-in-out ${collapsed ? "w-24" : "w-72"}`}
+        className={`hidden lg:flex fixed inset-y-0 left-0 z-50 flex-col bg-white border-r border-ink-100 transition-all duration-500 ease-in-out ${collapsed ? "w-24" : "w-72"}`}
       >
         {/* Logo & Branding Area */}
         <div className="h-24 flex items-center px-8">
@@ -288,7 +288,7 @@ export default function AdminSidebar({
             href="/dashboard/admin"
             className="flex items-center gap-4 overflow-hidden group"
           >
-            <div className="shrink-0 w-12 h-12 bg-white rounded-2xl flex items-center justify-center border border-stone-100 shadow-xl group-hover:rotate-6 transition-all duration-500">
+            <div className="shrink-0 w-12 h-12 bg-white rounded-2xl flex items-center justify-center border border-ink-100 shadow-xl group-hover:rotate-6 transition-all duration-500">
               <img
                 src={BRANDING.logoPath}
                 alt="Logo"
@@ -324,7 +324,7 @@ export default function AdminSidebar({
                 <select
                   value={userRole || ""}
                   onChange={handleRoleSwitch}
-                  className="w-full appearance-none bg-stone-50 border border-stone-100 text-[10px] font-black text-maroon-900 uppercase tracking-widest pl-10 pr-8 py-3 rounded-xl cursor-pointer focus:outline-none focus:ring-4 focus:ring-maroon-500/5 transition-all group-hover:bg-stone-100"
+                  className="w-full appearance-none bg-ink-50 border border-ink-100 text-[10px] font-black text-maroon-900 uppercase tracking-widest pl-10 pr-8 py-3 rounded-xl cursor-pointer focus:outline-none focus:ring-4 focus:ring-maroon-500/5 transition-all group-hover:bg-ink-100"
                 >
                   {availableRoles.map((role) => (
                     <option key={role} value={role}>
@@ -332,7 +332,7 @@ export default function AdminSidebar({
                     </option>
                   ))}
                 </select>
-                <ChevronRight className="absolute right-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-maroon-400 pointer-events-none group-hover:text-maroon-900 transition-colors" />
+                <ChevronRight className="absolute right-3 top-1/2 -tranink-y-1/2 w-3.5 h-3.5 text-maroon-400 pointer-events-none group-hover:text-maroon-900 transition-colors" />
               </div>
             </div>
           )}
@@ -349,7 +349,7 @@ export default function AdminSidebar({
                 <div key={item.name} className="relative">
                   {/* Group Header (Hanya muncul saat expanded) */}
                   {showGroupLabel && (
-                    <p className="px-5 text-[9px] font-black text-stone-400 uppercase tracking-[0.2em] mt-8 mb-3 opacity-60">
+                    <p className="px-5 text-[9px] font-black text-ink-400 uppercase tracking-[0.2em] mt-8 mb-3 opacity-60">
                       {item.group}
                     </p>
                   )}
@@ -358,7 +358,7 @@ export default function AdminSidebar({
                     className={`relative group flex items-center justify-between px-4 py-3.5 rounded-2xl transition-all duration-300 ${
                       item.isActive
                         ? "text-maroon-950 font-black"
-                        : "text-slate-500 hover:text-maroon-900 hover:bg-stone-50"
+                        : "text-ink-500 hover:text-maroon-900 hover:bg-ink-50"
                     }`}
                   >
                     {/* Active Background Animation: Menggunakan LayoutId untuk transisi antar item yang halus */}
@@ -375,7 +375,7 @@ export default function AdminSidebar({
                     )}
                     <div className="flex items-center gap-4">
                       <item.icon
-                        className={`w-5 h-5 shrink-0 transition-all duration-300 ${item.isActive ? "text-maroon-700 scale-110" : "text-slate-400 group-hover:text-maroon-600"}`}
+                        className={`w-5 h-5 shrink-0 transition-all duration-300 ${item.isActive ? "text-maroon-700 scale-110" : "text-ink-400 group-hover:text-maroon-600"}`}
                       />
                       {!collapsed && (
                         <span className="text-[14px] tracking-tight">
@@ -415,11 +415,11 @@ export default function AdminSidebar({
         </div>
 
         {/* Footer Section: Collapse Toggle & Profile */}
-        <div className="p-6 border-t border-slate-50 bg-stone-50/30">
+        <div className="p-6 border-t border-ink-50 bg-ink-50/30">
           {/* Toggle Button */}
           <button
             onClick={() => setCollapsed(!collapsed)}
-            className={`w-full flex items-center justify-center p-3 rounded-xl text-slate-400 hover:text-maroon-950 hover:bg-white hover:shadow-sm mb-4 transition-all duration-300 active:scale-95 ${collapsed ? "" : "gap-3"}`}
+            className={`w-full flex items-center justify-center p-3 rounded-xl text-ink-400 hover:text-maroon-950 hover:bg-white hover:shadow-sm mb-4 transition-all duration-300 active:scale-95 ${collapsed ? "" : "gap-3"}`}
           >
             <PanelLeft
               className={`w-5 h-5 shrink-0 transition-transform duration-700 ${collapsed ? "rotate-180" : ""}`}
@@ -433,7 +433,7 @@ export default function AdminSidebar({
 
           {/* Profile Card */}
           <div
-            className={`flex items-center gap-4 p-3 rounded-2xl transition-all group relative ${collapsed ? "justify-center" : "bg-white shadow-sm border border-stone-100"}`}
+            className={`flex items-center gap-4 p-3 rounded-2xl transition-all group relative ${collapsed ? "justify-center" : "bg-white shadow-sm border border-ink-100"}`}
           >
             <div className="shrink-0 w-10 h-10 rounded-2xl bg-linear-to-br from-maroon-700 to-maroon-900 flex items-center justify-center text-white font-black text-sm shadow-xl shadow-maroon-100 ring-4 ring-white border border-maroon-500/20">
               {adminName.charAt(0)}
@@ -451,7 +451,7 @@ export default function AdminSidebar({
             {!collapsed && (
               <button
                 onClick={handleLogout}
-                className="p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all active:scale-90"
+                className="p-2 text-ink-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all active:scale-90"
                 title="Logout"
               >
                 <LogOut className="w-4 h-4" />
@@ -466,37 +466,37 @@ export default function AdminSidebar({
         className={`flex-1 min-w-0 transition-all duration-500 ${collapsed ? "lg:pl-24" : "lg:pl-72"}`}
       >
         {/* Top Desktop Navigation (Floating Navbar) */}
-        <header className="hidden lg:flex sticky top-0 z-40 bg-white/80 backdrop-blur-2xl border-b border-slate-100 h-24 items-center justify-between px-12">
+        <header className="hidden lg:flex sticky top-0 z-40 bg-white/80 backdrop-blur-2xl border-b border-ink-100 h-24 items-center justify-between px-12">
           <div className="flex items-center gap-10">
             {/* Breadcrumbs: Memandu user posisi saat ini */}
-            <div className="flex items-center gap-3 text-[11px] font-black text-stone-400 uppercase tracking-widest">
+            <div className="flex items-center gap-3 text-[11px] font-black text-ink-400 uppercase tracking-widest">
               <Link
                 href="/dashboard/admin"
                 className="hover:text-maroon-700 transition-colors"
               >
                 Admin Portal
               </Link>
-              <ChevronRight className="w-3.5 h-3.5 text-stone-300" />
+              <ChevronRight className="w-3.5 h-3.5 text-ink-300" />
               <span className="text-maroon-950 italic">Dashboard Overview</span>
             </div>
 
-            <div className="h-6 w-px bg-stone-100" />
+            <div className="h-6 w-px bg-ink-100" />
 
             {/* Quick Search */}
             <div className="relative group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-300 group-focus-within:text-maroon-600 transition-colors" />
+              <Search className="absolute left-4 top-1/2 -tranink-y-1/2 w-4 h-4 text-ink-300 group-focus-within:text-maroon-600 transition-colors" />
               <input
                 type="text"
                 placeholder="Cari data pendaftar..."
-                className="bg-stone-50 border-stone-100 rounded-[1.25rem] pl-11 pr-6 py-3 text-[13px] w-80 focus:w-[450px] focus:bg-white focus:ring-4 focus:ring-maroon-500/5 focus:border-maroon-100 transition-all duration-500 placeholder:text-stone-300 font-medium"
+                className="bg-ink-50 border-ink-100 rounded-[1.25rem] pl-11 pr-6 py-3 text-[13px] w-80 focus:w-[450px] focus:bg-white focus:ring-4 focus:ring-maroon-500/5 focus:border-maroon-100 transition-all duration-500 placeholder:text-ink-300 font-medium"
               />
             </div>
           </div>
 
           <div className="flex items-center gap-6">
             <LanguageSwitcher />
-            <div className="h-6 w-px bg-stone-100" />
-            <button className="relative p-3 text-stone-400 hover:text-maroon-700 hover:bg-maroon-50 rounded-2xl transition-all active:scale-95">
+            <div className="h-6 w-px bg-ink-100" />
+            <button className="relative p-3 text-ink-400 hover:text-maroon-700 hover:bg-maroon-50 rounded-2xl transition-all active:scale-95">
               <Bell className="w-5 h-5" />
               <span className="absolute top-3 right-3 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white shadow-sm animate-pulse" />
             </button>
@@ -517,3 +517,4 @@ export default function AdminSidebar({
     </div>
   );
 }
+
