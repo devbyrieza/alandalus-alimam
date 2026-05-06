@@ -166,7 +166,9 @@ export default function AdminDashboardPage() {
         </>)}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {/* SUMMARY INSIGHTS - Hanya untuk Admin Operasional */}
+      {!isAdminSuper && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="bg-maroon-800 rounded-[2.5rem] p-10 text-white relative overflow-hidden group">
           <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:rotate-12 transition-transform duration-700">
             <TrendingUp className="w-48 h-48" />
@@ -243,7 +245,7 @@ export default function AdminDashboardPage() {
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
