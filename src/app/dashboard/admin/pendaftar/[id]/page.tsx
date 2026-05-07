@@ -819,7 +819,7 @@ export default function PendaftarDetailPage() {
                   ) : (
                     <div className="flex items-baseline gap-1">
                       <span className="text-4xl font-black text-maroon-950">
-                        {pendaftar.nilai_ujian?.score_akademik ?? "-"}
+                        {pendaftar.nilai_ujian?.score_akademik != null ? Number(pendaftar.nilai_ujian.score_akademik).toFixed(1).replace(".0", "") : "-"}
                       </span>
                       <span className="text-xs text-maroon-300 font-black uppercase">
                         pts
@@ -840,7 +840,7 @@ export default function PendaftarDetailPage() {
                   ) : (
                     <div className="flex items-baseline gap-2">
                       <span className="text-3xl font-black text-indigo-900">
-                        {pendaftar.nilai_ujian?.score_kepribadian ?? "-"}
+                        {pendaftar.nilai_ujian?.score_kepribadian != null ? Number(pendaftar.nilai_ujian.score_kepribadian).toFixed(1).replace(".0", "") : "-"}
                       </span>
                       <span className="text-sm text-indigo-400 font-medium">
                         / 100
@@ -861,7 +861,7 @@ export default function PendaftarDetailPage() {
                   ) : (
                     <div className="flex items-baseline gap-2">
                       <span className="text-3xl font-black text-violet-900">
-                        {pendaftar.nilai_ujian?.score_kesiapan ?? "-"}
+                        {pendaftar.nilai_ujian?.score_kesiapan != null ? Number(pendaftar.nilai_ujian.score_kesiapan).toFixed(1).replace(".0", "") : "-"}
                       </span>
                       <span className="text-sm text-violet-400 font-medium">
                         / 100

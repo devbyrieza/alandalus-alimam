@@ -79,20 +79,23 @@ export async function recalculateNilaiUjian(pendaftarId: string) {
   });
 
   // 3. Normalisasi & Ekstraksi Nilai
-  const ak = master.score_akademik != null ? Number(master.score_akademik) : null;
-  const quran = master.score_quran != null ? Number(master.score_quran) : null;
+  const ak = (master.score_akademik != null ? Number(master.score_akademik) : (master.nilai_tes_tertulis_total != null ? Number(master.nilai_tes_tertulis_total) : null));
+  const quran = (master.score_quran != null ? Number(master.score_quran) : (master.nilai_tes_quran != null ? Number(master.nilai_tes_quran) : null));
   const kp = master.score_kepribadian != null ? Number(master.score_kepribadian) : null;
   const ks = master.score_kesiapan != null ? Number(master.score_kesiapan) : null;
 
-  let ws = master.nilai_wawancara_santri != null ? Number(master.nilai_wawancara_santri) : null;
+  let ws = (master.score_wawancara != null && master.nilai_wawancara_santri == null) 
+    ? Number(master.score_wawancara) 
+    : (master.nilai_wawancara_santri != null ? Number(master.nilai_wawancara_santri) : null);
+  
   if (ws != null && ws <= 10 && ws > 0) ws = normalizeSantriScore(ws);
 
   let wo = null;
-  if (master.detail_cawalsan && !isEmpty(master.detail_cawalsan)) {
-    wo = calculateOrangTuaScore(master.detail_cawalsan);
-  } else if (master.nilai_wawancara_ortu != null) {
-    wo = Number(master.nilai_wawancara_ortu);
-  }
+  const calculatedWo = master.detail_cawalsan && !isEmpty(master.detail_cawalsan) ? calculateOrangTuaScore(master.detail_cawalsan) : 0;
+  const manualWo = master.nilai_wawancara_ortu != null ? Number(master.nilai_wawancara_ortu) : null;
+  
+  // Prefer calculated if it's > 0, otherwise fallback to manual
+  wo = (calculatedWo > 0) ? calculatedWo : (manualWo ?? (calculatedWo || null));
 
   // Rata-rata Wawancara (Santri + Orang Tua)
   const wawancaraTotal = (ws != null && wo != null) ? (ws + wo) / 2 : (ws ?? wo ?? null);
@@ -134,19 +137,36 @@ export async function recalculateNilaiUjian(pendaftarId: string) {
       });
 
       // 7. Kirim Notifikasi WhatsApp Otomatis
-      const { notifyCombinedFinalResult } = await import("./wablas");
-      const phone = pendaftar.no_hp || pendaftar.orang_tua?.no_hp_ayah || pendaftar.orang_tua?.no_hp_ibu;
-      if (phone) {
-        await notifyCombinedFinalResult({
-          pendaftarId, phone, nama: pendaftar.nama_lengkap,
-          status: status as any, jenjang: pendaftar.jenjang
+      try {
+        const { notifyCombinedFinalResult } = await import("./wablas");
+        const phone = pendaftar.no_hp || pendaftar.orang_tua?.no_hp_ayah || pendaftar.orang_tua?.no_hp_ibu;
+        if (phone) {
+          await notifyCombinedFinalResult({
+            pendaftarId, phone, nama: pendaftar.nama_lengkap,
+            status: status as any, jenjang: pendaftar.jenjang
+          });
+        }
+      } catch (err) {
+        console.error("WhatsApp Notification Error:", err);
+      }
+    }
+  } else {
+    // If not all graded, but some are, update status to 'tested' (Sedang Ujian) 
+    // to ensure they appear in the right lists
+    const someGraded = ak != null || quran != null || kp != null || ks != null || ws != null || wo != null;
+    if (someGraded) {
+      const pendaftar = await prisma.pendaftar.findUnique({ where: { id: pendaftarId } });
+      if (pendaftar && ["docs_verified", "scheduled"].includes(pendaftar.status_pendaftaran)) {
+        await prisma.pendaftar.update({
+          where: { id: pendaftarId },
+          data: { status_pendaftaran: "tested" }
         });
       }
     }
   }
 
-  // 8. Simpan Hasil Akhir ke Database
-  return await prisma.nilaiUjian.update({
+  // 8. Simpan Hasil Akhir ke Database (Update yang terbaru/utama)
+  const mainRecord = await prisma.nilaiUjian.update({
     where: { id: allNilai[0].id },
     data: {
       ...master,
@@ -155,4 +175,14 @@ export async function recalculateNilaiUjian(pendaftarId: string) {
       total_score: totalScore, nilai_total: totalScore, status_kelulusan: status, updated_at: new Date(),
     },
   });
+
+  // 9. Bersihkan duplikat jika ada (Hanya sisakan satu record utama)
+  if (allNilai.length > 1) {
+    const idsToDelete = allNilai.slice(1).map(n => n.id);
+    await prisma.nilaiUjian.deleteMany({
+      where: { id: { in: idsToDelete } }
+    });
+  }
+
+  return mainRecord;
 }
