@@ -11,6 +11,8 @@ const StatWidget = ({ label, value, icon: Icon, color, trend, breakdown }: any) 
     emerald: "from-emerald-600 to-emerald-700",
     amber: "from-amber-500 to-amber-600",
     purple: "from-purple-600 to-purple-700",
+    rose: "from-rose-600 to-rose-700",
+    slate: "from-slate-600 to-slate-700",
   };
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
@@ -90,6 +92,9 @@ export default function AdminDashboardPage() {
     if (type === "total") return { mts_l: mts.pendaftar_putra || 0, mts_p: mts.pendaftar_putri || 0, il_l: il.pendaftar_putra || 0, il_p: il.pendaftar_putri || 0 };
     if (type === "lulus") return { mts_l: mts.diterima_putra || 0, mts_p: mts.diterima_putri || 0, il_l: il.diterima_putra || 0, il_p: il.diterima_putri || 0 };
     if (type === "ulang") return { mts_l: mts.ulang_putra || 0, mts_p: mts.ulang_putri || 0, il_l: il.ulang_putra || 0, il_p: il.ulang_putri || 0 };
+    if (type === "cadangan") return { mts_l: mts.cadangan_putra || 0, mts_p: mts.cadangan_putri || 0, il_l: il.cadangan_putra || 0, il_p: il.cadangan_putri || 0 };
+    if (type === "ditolak") return { mts_l: mts.ditolak_putra || 0, mts_p: mts.ditolak_putri || 0, il_l: il.ditolak_putra || 0, il_p: il.ditolak_putri || 0 };
+    if (type === "berkas") return { mts_l: mts.berkas_putra || 0, mts_p: mts.berkas_putri || 0, il_l: il.berkas_putra || 0, il_p: il.berkas_putri || 0 };
     return null;
   };
 
@@ -151,8 +156,11 @@ export default function AdminDashboardPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {isAdminSuper && (<>
           <StatWidget label="Total Pendaftar" value={stats.total_pendaftar} icon={Users} color="blue" trend="+5% minggu ini" breakdown={getBreakdown("total")} />
+          <StatWidget label="Berkas Lengkap" value={stats.berkas_lengkap} icon={ClipboardCheck} color="purple" breakdown={getBreakdown("berkas")} />
           <StatWidget label="Lulus Seleksi" value={stats.diterima} icon={CheckCircle2} color="emerald" breakdown={getBreakdown("lulus")} />
-          <StatWidget label="Sudah Daftar Ulang" value={stats.daftar_ulang} icon={ClipboardCheck} color="amber" breakdown={getBreakdown("ulang")} />
+          <StatWidget label="Sudah Daftar Ulang" value={stats.daftar_ulang} icon={Wallet} color="amber" breakdown={getBreakdown("ulang")} />
+          <StatWidget label="Status Cadangan" value={stats.cadangan} icon={Clock} color="slate" breakdown={getBreakdown("cadangan")} />
+          <StatWidget label="Ditolak / Gugur" value={stats.ditolak} icon={Activity} color="rose" breakdown={getBreakdown("ditolak")} />
         </>)}
         {isAdminBerkas && (<>
           <StatWidget label="Total Pendaftar" value={stats.total_pendaftar} icon={Users} color="blue" />
