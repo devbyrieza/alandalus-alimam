@@ -49,11 +49,20 @@ export async function GET() {
       }
 
       // 1. Create/Update NilaiUjian
-      await prisma.nilaiUjian.upsert({
-        where: { pendaftar_id: pendaftar.id },
-        update: { ...update.scores, updated_at: new Date() },
-        create: { ...update.scores, pendaftar_id: pendaftar.id, created_at: new Date(), updated_at: new Date() }
+      const existingNilai = await prisma.nilaiUjian.findFirst({
+        where: { pendaftar_id: pendaftar.id }
       });
+
+      if (existingNilai) {
+        await prisma.nilaiUjian.update({
+          where: { id: existingNilai.id },
+          data: { ...update.scores, updated_at: new Date() }
+        });
+      } else {
+        await prisma.nilaiUjian.create({
+          data: { ...update.scores, pendaftar_id: pendaftar.id, created_at: new Date(), updated_at: new Date() }
+        });
+      }
 
       // 2. Force Status Update
       await prisma.pendaftar.update({
