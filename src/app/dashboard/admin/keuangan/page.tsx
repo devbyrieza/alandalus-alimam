@@ -250,7 +250,7 @@ export default function KeuanganPage() {
           No: i.no,
           "Nama Santri": i.nama.toUpperCase(),
           "No. Pendaftaran": i.nomor_pendaftaran,
-          "Status Bayar": i.status_pembayaran === "verified" ? "TERVERIFIKASI" : "PENDING",
+          "Status Bayar": i.status_pembayaran === "verified" ? "Terverifikasi" : "Pending",
           "Jumlah (Rp)": i.jumlah_pembayaran,
           Metode: i.metode.toUpperCase(),
           "Tgl Update": new Date(i.last_updated).toLocaleDateString("id-ID"),
@@ -333,7 +333,7 @@ export default function KeuanganPage() {
           "No. Pendaftaran": i.nomor_pendaftaran,
           "Status Seleksi": i.status_kelulusan,
           "Total Bayar (Rp)": i.total_bayar,
-          "Status Bayar": i.tipe_cicilan,
+          "Status Bayar": i.tipe_cicilan === "LUNAS" ? "Lunas" : (i.tipe_cicilan === "BELUM_BAYAR" ? "Belum Bayar" : "Cicilan"),
           "Sisa Tagihan (Rp)": i.sisa_tagihan,
           "Tgl Update": new Date(i.last_updated).toLocaleDateString("id-ID"),
         }));
