@@ -75,6 +75,10 @@ const PROGRAMS = [
 ];
 
 export default function ProgramPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [activeSection, setActiveSection] = useState<string>("mts");
 
   useEffect(() => {
