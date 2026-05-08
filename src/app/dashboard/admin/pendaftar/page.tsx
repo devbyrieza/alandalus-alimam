@@ -1629,7 +1629,7 @@ function AdminPendaftarContent() {
                         Pembayaran
                       </th>
                     )}
-                    <th className="px-4 py-4 text-left text-[10px] font-black text-maroon-900 uppercase tracking-widest">
+                    <th colSpan={2} className="px-4 py-4 text-left text-[10px] font-black text-maroon-900 uppercase tracking-widest">
                       Aksi
                     </th>
                   </tr>
@@ -1822,7 +1822,7 @@ function AdminPendaftarContent() {
                         <div className="flex items-center gap-2">
                           <Link
                             href={`/dashboard/admin/pendaftar/${item.id}`}
-                            className="inline-flex items-center gap-2 px-3 py-1.5 bg-maroon-700 hover:bg-maroon-800 text-white rounded-xl text-[10px] font-black uppercase transition-all shadow-lg shadow-maroon-700/20 active:scale-95"
+                            className="inline-flex items-center gap-2 px-3 py-1.5 bg-maroon-950 hover:bg-maroon-800 text-white rounded-xl text-[10px] font-black uppercase transition-all shadow-lg shadow-maroon-950/20 active:scale-95"
                             title="Buka Detail"
                           >
                             <Eye className="w-3.5 h-3.5" />
@@ -1933,7 +1933,7 @@ function AdminPendaftarContent() {
                             onClick={() => handlePageChange(page)}
                             className={`w-8 h-8 md:w-10 md:h-10 rounded-lg font-medium transition-colors text-sm md:text-base ${
                               page === pagination.page
-                                ? "bg-blue-600 text-white"
+                                ? "bg-maroon-700 text-white"
                                 : "bg-white border-2 border-stone-200 hover:bg-blue-50 hover:border-blue-300"
                             }`}
                           >
@@ -2068,7 +2068,7 @@ function AdminPendaftarContent() {
                 <button
                   type="submit"
                   disabled={isSubmittingAnnouncement}
-                  className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-200 hover:shadow-blue-300 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center gap-2 px-6 py-2.5 bg-maroon-700 hover:bg-maroon-800 text-white font-bold rounded-xl shadow-lg shadow-maroon-200 hover:shadow-maroon-300 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmittingAnnouncement ? (
                     <>
