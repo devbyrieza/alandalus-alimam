@@ -477,7 +477,7 @@ export default function AdminSidebar({
                 Admin Portal
               </Link>
               <ChevronRight className="w-3.5 h-3.5 text-ink-300" />
-              <span className="text-maroon-950 italic">Dashboard Overview</span>
+              <span className="text-maroon-950 italic">Ikhtisar Dasbor</span>
             </div>
 
             <div className="h-6 w-px bg-ink-100" />
@@ -504,7 +504,7 @@ export default function AdminSidebar({
               href="/"
               className="px-8 py-3.5 bg-maroon-950 text-white text-[11px] font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-maroon-800 transition-all shadow-xl shadow-maroon-950/20 active:scale-95"
             >
-              Visit Site
+              Kunjungi Situs
             </Link>
           </div>
         </header>
