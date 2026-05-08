@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Users, Wallet, Loader2, RefreshCw, Clock, FileCheck, CheckCircle2, ClipboardCheck, TrendingUp, ChevronRight, Activity } from "lucide-react";
+import { Users, Wallet, Loader2, RefreshCw, Clock, FileCheck, CheckCircle2, ClipboardCheck, TrendingUp, ChevronRight, Activity, FileSpreadsheet, FileText } from "lucide-react";
 import { UserRole } from "@/lib/access-control";
 import { motion } from "framer-motion";
+import { exportToExcelProfessional, exportToPDF } from "@/lib/utils/export";
 
-const StatWidget = ({ label, value, icon: Icon, color, trend, breakdown, highlighted }: any) => {
+const StatWidget = ({ label, value, icon: Icon, color, trend, breakdown, highlighted, onDownload, isDownloading }: any) => {
   const colorMap: any = {
     blue: "from-maroon-600 to-maroon-800",
     emerald: "from-emerald-600 to-emerald-700",
@@ -46,13 +47,52 @@ const StatWidget = ({ label, value, icon: Icon, color, trend, breakdown, highlig
           <p className={`text-[10px] sm:text-[11px] font-black uppercase tracking-[0.25em] mb-2 ${
             highlighted ? "text-cream-300" : "text-maroon-400"
           }`}>{label}</p>
-          <div className="flex items-baseline gap-2">
-            <h3 className={`text-3xl sm:text-4xl lg:text-5xl font-black tracking-tighter italic ${
-              highlighted ? "text-white" : "text-maroon-900"
-            }`}>{value}</h3>
-            <span className={`text-xs font-bold ${
-              highlighted ? "text-cream-300" : "text-maroon-300"
-            }`}>Orang</span>
+          <div className="flex items-baseline justify-between gap-2">
+            <div className="flex items-baseline gap-2">
+              <h3 className={`text-3xl sm:text-4xl lg:text-5xl font-black tracking-tighter italic ${
+                highlighted ? "text-white" : "text-maroon-900"
+              }`}>{value}</h3>
+              <span className={`text-xs font-bold ${
+                highlighted ? "text-cream-300" : "text-maroon-300"
+              }`}>Orang</span>
+            </div>
+
+            {onDownload && (
+              <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <button
+                  onClick={(e) => { e.stopPropagation(); onDownload("excel"); }}
+                  disabled={!!isDownloading}
+                  title="Unduh Excel"
+                  className={`p-2 rounded-xl border transition-all hover:scale-105 duration-300 ${
+                    highlighted 
+                      ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/20" 
+                      : "bg-emerald-50 border-emerald-100 text-emerald-600 hover:bg-emerald-100"
+                  }`}
+                >
+                  {isDownloading === "excel" ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <FileSpreadsheet className="w-4 h-4" />
+                  )}
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); onDownload("pdf"); }}
+                  disabled={!!isDownloading}
+                  title="Unduh PDF"
+                  className={`p-2 rounded-xl border transition-all hover:scale-105 duration-300 ${
+                    highlighted 
+                      ? "bg-rose-500/10 border-rose-500/20 text-rose-400 hover:bg-rose-500/20" 
+                      : "bg-rose-50 border-rose-100 text-rose-600 hover:bg-rose-100"
+                  }`}
+                >
+                  {isDownloading === "pdf" ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <FileText className="w-4 h-4" />
+                  )}
+                </button>
+              </div>
+            )}
           </div>
         </div>
         {breakdown && (
@@ -108,6 +148,79 @@ export default function AdminDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [role, setRole] = useState<UserRole | null>(null);
   const [stats, setStats] = useState<any>({ total_pendaftar: 0, sudah_bayar: 0, diterima: 0, daftar_ulang: 0, sudah_isi_data: 0, waiting_payment: 0, waiting_docs: 0, stats_per_jenjang: [] });
+  const [downloadingKey, setDownloadingKey] = useState<string | null>(null);
+
+  const handleSingleCardExport = async (statusKey: string, cardLabel: string, type: "excel" | "pdf") => {
+    try {
+      setDownloadingKey(`${statusKey}_${type}`);
+      const params = new URLSearchParams();
+      if (statusKey) params.append("status", statusKey);
+      
+      const response = await fetch(`/api/admin/pendaftar/export?${params}`);
+      if (!response.ok) throw new Error("Failed to export");
+
+      const result = await response.json();
+      const data: any[] = result.data;
+      const filename = `Data_${cardLabel.replace(/\s+/g, "_")}_${new Date().toISOString().split("T")[0]}`;
+
+      if (data.length === 0) {
+        alert("Tidak ada data untuk diunduh");
+        return;
+      }
+
+      if (type === "excel") {
+        const header = Object.keys(data[0] || {});
+        // Grouping by Jenjang
+        const jenjangGroups: Record<string, any[]> = {};
+        data.forEach((item) => {
+          const j = item["Jenjang"] || "LAINNYA";
+          if (!jenjangGroups[j]) jenjangGroups[j] = [];
+          jenjangGroups[j].push(item);
+        });
+
+        const sheets = [
+          {
+            name: "SEMUA PENDAFTAR",
+            title: `DATA ${cardLabel.toUpperCase()}`,
+            subTitle: `Tanggal Ekspor: ${new Date().toLocaleDateString("id-ID")}`,
+            header,
+            data: data.map((item) => Object.values(item)),
+          },
+        ];
+
+        Object.keys(jenjangGroups)
+          .sort()
+          .forEach((j) => {
+            sheets.push({
+              name: j.substring(0, 31),
+              title: `DATA ${cardLabel.toUpperCase()} - ${j}`,
+              subTitle: `Jenjang: ${j} | Tanggal Ekspor: ${new Date().toLocaleDateString("id-ID")}`,
+              header,
+              data: jenjangGroups[j].map((item) => Object.values(item)),
+            });
+          });
+
+        await exportToExcelProfessional({
+          fileName: filename,
+          sheets,
+        });
+      } else {
+        const headers = Object.keys(data[0] || {});
+        const rows = data.map((item: any) => Object.values(item));
+        exportToPDF(
+          `Data ${cardLabel}`,
+          headers,
+          rows,
+          filename,
+          "landscape",
+        );
+      }
+    } catch (error) {
+      console.error("Export error:", error);
+    } finally {
+      setDownloadingKey(null);
+    }
+  };
 
   const fetchStats = async () => {
     try {
@@ -149,7 +262,7 @@ export default function AdminDashboardPage() {
     <div className="max-w-[1400px] mx-auto space-y-6 sm:space-y-8 pb-20 px-1">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-maroon-900 tracking-tight italic">Dasbor Al-Imam</h1>
+          <h1 className="text-2xl sm:text-3xl font-black text-maroon-900 tracking-tight italic">Dasbor Al Imam</h1>
           <p className="text-xs sm:text-sm text-maroon-500 font-medium mt-1">Pantau perkembangan pendaftaran santri secara langsung.</p>
         </div>
         <button onClick={fetchStats} className="p-3 bg-white border border-cream-200 rounded-2xl text-maroon-400 hover:text-maroon-600 transition-all shadow-premium-sm self-start sm:self-auto">
@@ -176,13 +289,13 @@ export default function AdminDashboardPage() {
               <div className="w-px h-12 sm:h-16 bg-white/20" />
               <div>
                 <span className="text-3xl sm:text-5xl font-black text-gold-400 italic">{stats.sudah_bayar}</span>
-                <p className="text-[10px] sm:text-[11px] font-black text-cream-300 uppercase tracking-widest mt-2">Tervalidasi</p>
+                <p className="text-[10px] sm:text-[11px] font-black text-cream-300 uppercase tracking-widest mt-2">Bayar Pendaftaran</p>
               </div>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 sm:gap-6 w-full lg:w-auto">
             <div className="bg-white/5 backdrop-blur-md p-4 sm:p-6 lg:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-white/10 flex flex-col items-center">
-              <p className="text-[9px] sm:text-[10px] font-black text-cream-300 uppercase tracking-widest mb-2 sm:mb-4 text-center">Lulus Seleksi</p>
+              <p className="text-[9px] sm:text-[10px] font-black text-cream-300 uppercase tracking-widest mb-2 sm:mb-4 text-center">Diterima</p>
               <p className="text-2xl sm:text-4xl font-black text-emerald-400 italic">{stats.diterima}</p>
             </div>
             <div className="bg-white/5 backdrop-blur-md p-4 sm:p-6 lg:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-white/10 flex flex-col items-center">
@@ -195,14 +308,14 @@ export default function AdminDashboardPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
         {isAdminSuper && (<>
-          <StatWidget label="Total Pendaftar" value={stats.total_pendaftar} icon={Users} color="blue" trend="+5% minggu ini" breakdown={getBreakdown("total")} highlighted={false} />
-          <StatWidget label="Sudah Bayar Pendaftaran" value={stats.sudah_bayar} icon={Wallet} color="emerald" breakdown={getBreakdown("bayar")} highlighted={false} />
-          <StatWidget label="Data Lengkap" value={stats.sudah_isi_data} icon={FileCheck} color="purple" breakdown={getBreakdown("data")} highlighted={false} />
-          <StatWidget label="Berkas Lengkap" value={stats.berkas_lengkap} icon={ClipboardCheck} color="purple" breakdown={getBreakdown("berkas")} highlighted={false} />
-          <StatWidget label="Diterima" value={stats.diterima} icon={CheckCircle2} color="emerald" breakdown={getBreakdown("lulus")} highlighted={false} />
-          <StatWidget label="Cadangan" value={stats.cadangan} icon={Clock} color="slate" breakdown={getBreakdown("cadangan")} highlighted={false} />
-          <StatWidget label="Ditolak" value={stats.ditolak} icon={Activity} color="rose" breakdown={getBreakdown("ditolak")} highlighted={false} />
-          <StatWidget label="Sudah Daftar Ulang" value={stats.daftar_ulang} icon={Wallet} color="amber" breakdown={getBreakdown("ulang")} highlighted={false} />
+          <StatWidget label="Total Pendaftar" value={stats.total_pendaftar} icon={Users} color="blue" trend="+5% minggu ini" breakdown={getBreakdown("total")} highlighted={false} onDownload={(type: "excel" | "pdf") => handleSingleCardExport("", "Total Pendaftar", type)} isDownloading={downloadingKey?.startsWith("_") ? downloadingKey.split("_")[1] : null} />
+          <StatWidget label="Bayar Pendaftaran" value={stats.sudah_bayar} icon={Wallet} color="emerald" breakdown={getBreakdown("bayar")} highlighted={false} onDownload={(type: "excel" | "pdf") => handleSingleCardExport("sudah_bayar", "Bayar Pendaftaran", type)} isDownloading={downloadingKey?.startsWith("sudah_bayar_") ? downloadingKey.split("_")[2] : null} />
+          <StatWidget label="Data Lengkap" value={stats.sudah_isi_data} icon={FileCheck} color="purple" breakdown={getBreakdown("data")} highlighted={false} onDownload={(type: "excel" | "pdf") => handleSingleCardExport("sudah_isi_data", "Data Lengkap", type)} isDownloading={downloadingKey?.startsWith("sudah_isi_data_") ? downloadingKey.split("_")[3] : null} />
+          <StatWidget label="Berkas Lengkap" value={stats.berkas_lengkap} icon={ClipboardCheck} color="purple" breakdown={getBreakdown("berkas")} highlighted={false} onDownload={(type: "excel" | "pdf") => handleSingleCardExport("dokumen_terverifikasi", "Berkas Lengkap", type)} isDownloading={downloadingKey?.startsWith("dokumen_terverifikasi_") ? downloadingKey.split("_")[2] : null} />
+          <StatWidget label="Diterima" value={stats.diterima} icon={CheckCircle2} color="emerald" breakdown={getBreakdown("lulus")} highlighted={false} onDownload={(type: "excel" | "pdf") => handleSingleCardExport("diterima", "Diterima", type)} isDownloading={downloadingKey?.startsWith("diterima_") ? downloadingKey.split("_")[1] : null} />
+          <StatWidget label="Cadangan" value={stats.cadangan} icon={Clock} color="slate" breakdown={getBreakdown("cadangan")} highlighted={false} onDownload={(type: "excel" | "pdf") => handleSingleCardExport("announced", "Cadangan", type)} isDownloading={downloadingKey?.startsWith("announced_") ? downloadingKey.split("_")[1] : null} />
+          <StatWidget label="Ditolak" value={stats.ditolak} icon={Activity} color="rose" breakdown={getBreakdown("ditolak")} highlighted={false} onDownload={(type: "excel" | "pdf") => handleSingleCardExport("pembayaran_ditolak", "Ditolak", type)} isDownloading={downloadingKey?.startsWith("pembayaran_ditolak_") ? downloadingKey.split("_")[2] : null} />
+          <StatWidget label="Daftar Ulang" value={stats.daftar_ulang} icon={Wallet} color="amber" breakdown={getBreakdown("ulang")} highlighted={false} onDownload={(type: "excel" | "pdf") => handleSingleCardExport("sudah_daftar_ulang", "Daftar Ulang", type)} isDownloading={downloadingKey?.startsWith("sudah_daftar_ulang_") ? downloadingKey.split("_")[3] : null} />
         </>)}
         {isAdminBerkas && (<>
           <StatWidget label="Total Pendaftar" value={stats.total_pendaftar} icon={Users} color="blue" />
