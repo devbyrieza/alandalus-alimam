@@ -211,11 +211,7 @@ export default function HeroSection() {
                 className="text-sm font-semibold italic"
                 style={{ color: "var(--color-maroon-700)" }}
               >
-                "Pendidikan Berkualitas, Diperkuat Sistem{" "}
-                {BRANDING.schoolName.toLowerCase().includes("al-andalus")
-                  ? "Al Andalus"
-                  : BRANDING.schoolShortName}
-                "
+                "Pendidikan Berkualitas, Diperkuat Sistem Al Andalus"
               </p>
               <div
                 className="h-px flex-1 max-w-[3rem]"
@@ -286,7 +282,7 @@ export default function HeroSection() {
               <div className="flex flex-wrap gap-x-5 gap-y-2 justify-center lg:justify-start mt-1">
                 {[
                   "Beasiswa tersedia",
-                  "Kurikulum nasional + pesantren",
+                  "Perpaduan kurikulum nasional + kurikulum khas Al Andalus",
                   "Tanpa kekerasan",
                 ].map((point) => (
                   <span
