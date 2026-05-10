@@ -328,7 +328,7 @@ export default function ActivitiesSection() {
                     Lihat Jadwal Harian Lengkap Santri
                   </h4>
                   <p className="text-cream-100/70 font-medium text-sm leading-relaxed">
-                    Setiap detik di pesantren adalah ibadah dan ilmu. Unduh
+                    Setiap detik di pesantren adalah ibadah dan ilmu. Pelajari
                     jadwal harian lengkap untuk mengetahui rutinitas santri Al
                     Imam.
                   </p>
@@ -337,7 +337,7 @@ export default function ActivitiesSection() {
                 <div className="shrink-0">
                   <Link href="/kegiatan">
                     <button className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gold-500 text-maroon-950 font-black text-sm uppercase tracking-widest rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-105 active:scale-95">
-                      <span className="relative z-10">Unduh Jadwal Harian</span>
+                      <span className="relative z-10">Eksplorasi Seluruh Kegiatan</span>
                       <CalendarIcon className="relative z-10 w-5 h-5 transition-transform duration-300 group-hover:rotate-12" />
                       <div className="absolute inset-0 bg-gold-400 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                     </button>
