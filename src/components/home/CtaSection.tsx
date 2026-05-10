@@ -57,7 +57,7 @@ export default function CtaSection() {
               <div className="flex items-center gap-2 text-cream-100/70">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 <span className="text-[0.6rem] font-bold uppercase tracking-[0.1em]">
-                  Terakreditasi BAN-PDM
+                  Terakreditasi B — BAN-PDM
                 </span>
               </div>
               <div className="flex items-center gap-2 text-cream-100/70">
