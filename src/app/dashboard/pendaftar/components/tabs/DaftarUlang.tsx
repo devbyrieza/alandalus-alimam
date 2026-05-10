@@ -278,14 +278,17 @@ export default function DaftarUlangTab() {
                 Sisa cicilan bebas nominal dan bebas berapa kali namun wajib
                 lunas sebelum <strong>Juli 2026</strong>.
               </li>
+              <li className="text-emerald-700 font-bold">
+                Tersedia kebijakan <strong>Keringanan Khusus</strong> bagi wali santri yang membutuhkan.
+              </li>
             </ul>
           </div>
           <div className="pt-4 border-t border-maroon-200">
-            <span className="text-xs text-maroon-600 block mb-1">
-              Pertanyaan/Konfirmasi Biaya Daftar Ulang?
+            <span className="text-xs text-maroon-600 block mb-1 leading-tight">
+              Butuh bantuan, keringanan, atau konfirmasi biaya?
             </span>
             <a
-              href="https://wa.me/6281220636945"
+              href="https://wa.me/6281220636945?text=Assalamualaikum%20Admin%20Finance%2C%20saya%20wali%20dari%20calon%20santri%20ingin%20berkonsultasi%2Fmengajukan%20keringanan%20terkait%20biaya%20Daftar%20Ulang."
               target="_blank"
               rel="noreferrer"
               className="mt-2 inline-flex items-center justify-center gap-2 w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold transition-all shadow-md hover:shadow-lg active:scale-95 group"
