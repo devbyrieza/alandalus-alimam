@@ -109,7 +109,7 @@ export default function Footer() {
 
             <p
               className="font-medium leading-relaxed max-w-xs text-sm"
-              style={{ color: "rgba(253,248,238,0.65)" }}
+              style={{ color: "rgba(253,248,238,0.85)" }}
             >
               Membangun generasi Qur&apos;ani yang cerdas &amp; berakhlak mulia
               melalui sistem terintegrasi Al Andalus.
@@ -169,13 +169,13 @@ export default function Footer() {
                   <Link
                     href="#"
                     className="text-sm font-semibold flex items-center gap-1.5 group/link transition-colors duration-200"
-                    style={{ color: "rgba(253,248,238,0.65)" }}
+                    style={{ color: "rgba(253,248,238,0.85)" }}
                     onMouseEnter={(e) => {
                       (e.currentTarget as HTMLElement).style.color = "#fff";
                     }}
                     onMouseLeave={(e) => {
                       (e.currentTarget as HTMLElement).style.color =
-                        "rgba(253,248,238,0.65)";
+                        "rgba(253,248,238,0.85)";
                     }}
                   >
                     {item}
@@ -203,13 +203,13 @@ export default function Footer() {
                   <Link
                     href="#"
                     className="text-sm font-semibold transition-colors duration-200"
-                    style={{ color: "rgba(253,248,238,0.65)" }}
+                    style={{ color: "rgba(253,248,238,0.85)" }}
                     onMouseEnter={(e) => {
                       (e.currentTarget as HTMLElement).style.color = "#fff";
                     }}
                     onMouseLeave={(e) => {
                       (e.currentTarget as HTMLElement).style.color =
-                        "rgba(253,248,238,0.65)";
+                        "rgba(253,248,238,0.85)";
                     }}
                   >
                     {item}
@@ -242,7 +242,7 @@ export default function Footer() {
                 </div>
                 <p
                   className="text-sm font-medium leading-relaxed pt-1"
-                  style={{ color: "rgba(253,248,238,0.65)" }}
+                  style={{ color: "rgba(253,248,238,0.85)" }}
                   dangerouslySetInnerHTML={{
                     __html: BRANDING.address.replace(/,/g, ",<br />"),
                   }}
@@ -267,7 +267,7 @@ export default function Footer() {
                   </p>
                   <p
                     className="text-[11px] font-medium tracking-wide mt-0.5"
-                    style={{ color: "rgba(253,248,238,0.45)" }}
+                    style={{ color: "rgba(253,248,238,0.65)" }}
                   >
                     Layanan Pelanggan
                   </p>
@@ -301,7 +301,7 @@ export default function Footer() {
         >
           <p
             className="text-xs font-medium order-2 md:order-1 text-center md:text-left"
-            style={{ color: "rgba(253,248,238,0.35)" }}
+            style={{ color: "rgba(253,248,238,0.60)" }}
           >
             &copy; {currentYear} {BRANDING.schoolName}. Hak cipta dilindungi
             undang-undang.
@@ -313,14 +313,14 @@ export default function Footer() {
                 key={item}
                 href="#"
                 className="text-xs font-semibold transition-colors duration-200"
-                style={{ color: "rgba(253,248,238,0.40)" }}
+                style={{ color: "rgba(253,248,238,0.65)" }}
                 onMouseEnter={(e) => {
                   (e.currentTarget as HTMLElement).style.color =
                     "rgba(253,248,238,0.85)";
                 }}
                 onMouseLeave={(e) => {
                   (e.currentTarget as HTMLElement).style.color =
-                    "rgba(253,248,238,0.40)";
+                    "rgba(253,248,238,0.65)";
                 }}
               >
                 {item}
