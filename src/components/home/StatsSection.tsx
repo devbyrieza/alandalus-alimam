@@ -208,8 +208,11 @@ function StatCard({
           {stat.sublabel}
         </p>
 
+        {/* Spacer to push accent line to bottom */}
+        <div className="flex-grow" />
+
         <div
-          className={`mt-auto pt-5 h-[2px] w-6 rounded-full transition-all duration-500 group-hover:w-10 ${current.accent}`}
+          className={`mt-5 h-[2px] w-6 rounded-full transition-all duration-500 group-hover:w-10 ${current.accent}`}
         />
       </div>
     </motion.div>
