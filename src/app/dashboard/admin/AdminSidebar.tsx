@@ -477,7 +477,7 @@ export default function AdminSidebar({
                 Admin Portal
               </Link>
               <ChevronRight className="w-3.5 h-3.5 text-ink-300" />
-              <span className="text-maroon-950 italic">Ikhtisar Dasbor</span>
+              <span className="text-maroon-950 italic">Ikhtisar Dashboard</span>
             </div>
 
             <div className="h-6 w-px bg-ink-100" />

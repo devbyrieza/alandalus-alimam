@@ -312,7 +312,7 @@ export default function AdminDashboardPage() {
     <div className="max-w-[1400px] mx-auto space-y-6 sm:space-y-8 pb-20 px-1">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-maroon-900 tracking-tight italic">Dasbor Al Imam</h1>
+          <h1 className="text-2xl sm:text-3xl font-black text-maroon-900 tracking-tight italic">Dashboard Al Imam</h1>
           <p className="text-xs sm:text-sm text-maroon-500 font-medium mt-1">Pantau perkembangan pendaftaran santri secara langsung.</p>
         </div>
         <button onClick={fetchStats} className="p-3 bg-white border border-cream-200 rounded-2xl text-maroon-400 hover:text-maroon-600 transition-all shadow-premium-sm self-start sm:self-auto">
