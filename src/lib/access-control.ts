@@ -322,6 +322,16 @@ export function getMenuItemsForRole(role: UserRole) {
       { name: "Jadwal Seleksi", href: "/dashboard/penguji/jadwal", icon: "Calendar" },
       { name: "Input Nilai", href: "/dashboard/penguji/input-nilai", icon: "ClipboardEdit" },
     ],
+    pewawancara_calsan: [
+      { name: "Dasbor", href: "/dashboard/penguji", icon: "LayoutDashboard" },
+      { name: "Jadwal Seleksi", href: "/dashboard/penguji/jadwal", icon: "Calendar" },
+      { name: "Input Nilai", href: "/dashboard/penguji/input-nilai", icon: "ClipboardEdit" },
+    ],
+    pewawancara_cawalsan: [
+      { name: "Dasbor", href: "/dashboard/penguji", icon: "LayoutDashboard" },
+      { name: "Jadwal Seleksi", href: "/dashboard/penguji/jadwal", icon: "Calendar" },
+      { name: "Input Nilai", href: "/dashboard/penguji/input-nilai", icon: "ClipboardEdit" },
+    ],
     admin_super: [
       { name: "Dashboard", href: "/dashboard/admin", icon: "LayoutDashboard" },
       { name: "Data Pendaftar", href: "/dashboard/admin/pendaftar", icon: "Users", group: "OPERASIONAL" },
