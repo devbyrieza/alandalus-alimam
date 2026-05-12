@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
 import {
   enqueueWhatsapp,
-  buildMessageKonfirmasiJadwal,
   buildMessageKonfirmasiJadwalPendaftar,
   buildMessageKonfirmasiJadwalInterviewer,
   buildMessageReminderH1Santri,
@@ -32,6 +31,7 @@ async function getSession() {
   if (!sessionCookie) return null;
   try {
     return JSON.parse(sessionCookie.value);
+
   } catch {
     return null;
   }
@@ -295,7 +295,7 @@ export async function POST(request: Request) {
       if (finalId) {
         const interviewer = await prisma.profile.findUnique({
           where: { id: finalId },
-          select: { full_name: true, phone: true, google_meet_link: true, gender: true },
+          select: { full_name: true, phone: true, google_meet_link: true },
         });
 
         if (interviewer && interviewer.phone) {
