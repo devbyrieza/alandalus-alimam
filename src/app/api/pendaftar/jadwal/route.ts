@@ -433,16 +433,17 @@ export async function POST(request: Request) {
             const shortUrlRem4h =
               manualTinyUrl || (await generateTinyUrl(magicLinkRem4h));
 
-            const remIntMessage = buildMessageReminderH1Penguji(
-              interviewer.full_name,
-              pendaftarInfo.nama_lengkap,
-              dateStr.split(",")[0] || "",
-              dateStr,
-              timeStr,
-              interviewer.google_meet_link || lokasi,
-              jenisUjian,
-              shortUrlRem4h,
-            );
+              const remIntMessage = buildMessageReminderH1Penguji(
+                interviewer.full_name,
+                pendaftarInfo.nama_lengkap,
+                dateStr.split(",")[0] || "",
+                dateStr,
+                timeStr,
+                interviewer.google_meet_link || lokasi,
+                jenisUjian,
+                undefined, // gender (default L)
+                shortUrlRem4h,
+              );
 
             const finalScheduledAtInt = new Date(finalScheduledAt);
             finalScheduledAtInt.setMinutes(

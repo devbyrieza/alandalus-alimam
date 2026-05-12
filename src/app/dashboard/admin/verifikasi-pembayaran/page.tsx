@@ -73,7 +73,7 @@ function VerifikasiPembayaranContent() {
     "ALL" | "LUNAS" | "CICILAN"
   >("ALL");
   const [editTipeCicilan, setEditTipeCicilan] = useState("LUNAS");
-  const [editJumlahCicilan, setEditJumlahCicilan] = useState(1);
+  const [editCicilanKe, setEditCicilanKe] = useState(1);
   const [uploadingProof, setUploadingProof] = useState<string | null>(null);
   const [userRole, setUserRole] = useState<string | null>(null);
 
@@ -224,7 +224,7 @@ function VerifikasiPembayaranContent() {
           catatan: catatan.trim() || null,
           jumlah: editJumlah ? parseFloat(editJumlah) : null,
           tipe_cicilan: editTipeCicilan,
-          jumlah_cicilan: editJumlahCicilan,
+          cicilan_ke: editCicilanKe,
         }),
       });
 
@@ -303,7 +303,7 @@ function VerifikasiPembayaranContent() {
     setCatatan(pay.catatan || "");
     setEditJumlah(pay.jumlah);
     setEditTipeCicilan(pay.tipe_cicilan || "LUNAS");
-    setEditJumlahCicilan(pay.jumlah_cicilan || 1);
+    setEditCicilanKe(pay.cicilan_ke || 1);
     setShowModal(true);
   };
 
@@ -603,8 +603,7 @@ function VerifikasiPembayaranContent() {
                             Status Cicilan
                           </p>
                           <span className="px-2.5 py-1 bg-violet-100 text-violet-700 rounded-lg text-[10px] font-black uppercase tracking-widest border border-violet-200">
-                            Cicilan Ke-{pay.cicilan_ke} dari{" "}
-                            {pay.jumlah_cicilan}
+                            Cicilan Ke-{pay.cicilan_ke}
                           </span>
                         </div>
                       )}
@@ -759,22 +758,19 @@ function VerifikasiPembayaranContent() {
                   {editTipeCicilan === "CICILAN" && (
                     <div>
                       <label className="block text-[10px] font-black text-violet-700 uppercase tracking-widest mb-2">
-                        Jumlah Cicilan
+                        Cicilan Ke-
                       </label>
                       <div className="flex items-center gap-2">
                         <input
                           type="number"
                           min="1"
                           max="12"
-                          value={editJumlahCicilan}
+                          value={editCicilanKe}
                           onChange={(e) =>
-                            setEditJumlahCicilan(parseInt(e.target.value) || 1)
+                            setEditCicilanKe(parseInt(e.target.value) || 1)
                           }
                           className="w-full px-4 py-2 bg-white border border-violet-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-500 font-black text-violet-900"
                         />
-                        <span className="text-xs font-bold text-violet-600">
-                          Kali
-                        </span>
                       </div>
                     </div>
                   )}
