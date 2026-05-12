@@ -78,9 +78,10 @@ interface UndanganData {
     booked: BookedData[];
   };
   progress: ProgressData;
-  condition: "jadwal_tersedia" | "jadwal_belum";
+  condition: "jadwal_tersedia" | "jadwal_belum" | "seleksi_selesai";
   locked?: boolean;
   message?: string;
+  current_status?: string;
 }
 
 // ============================================================================
@@ -299,6 +300,103 @@ export default function UndanganSeleksiTab() {
               Pratinjau Tahap Seleksi
             </p>
           </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ── SELEKSI SELESAI: Pendaftar sudah diterima/enrolled ──
+  if (data.condition === "seleksi_selesai") {
+    return (
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="bg-linear-to-r from-emerald-700 to-emerald-900 rounded-2xl p-6 md:p-8 text-white shadow-lg relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+          <div className="relative z-10">
+            <div className="flex items-center gap-3 mb-2">
+              <CheckCircle className="w-7 h-7 text-emerald-300" />
+              <h1 className="text-2xl font-black text-white">Seleksi Selesai!</h1>
+            </div>
+            <p className="text-emerald-100 text-sm md:text-base">
+              Alhamdulillah — proses seleksi Ananda telah selesai. Cek hasil dan langkah selanjutnya.
+            </p>
+          </div>
+        </div>
+
+        {/* Progress Bar — 100% */}
+        <div className="bg-white rounded-xl border border-stone-200 p-5 shadow-sm">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="font-bold text-ink-800 text-sm">Progress Seleksi</h3>
+            <span className="text-sm font-black text-emerald-600">6/6 Tahap ✓</span>
+          </div>
+          <div className="w-full h-3 bg-surface-100 rounded-full overflow-hidden">
+            <div className="h-full bg-linear-to-r from-emerald-500 to-emerald-700 rounded-full w-full shadow-lg shadow-emerald-500/20" />
+          </div>
+          <p className="text-xs text-emerald-600 mt-2 font-medium">100% selesai — Semua tahapan seleksi telah dilalui ✓</p>
+        </div>
+
+        {/* Next Steps Cards */}
+        <div className="grid md:grid-cols-2 gap-4">
+          {/* Card Pengumuman */}
+          <Link
+            href="/dashboard/pendaftar/pengumuman"
+            className="bg-white rounded-2xl border-2 border-maroon-100 hover:border-maroon-300 p-6 shadow-sm hover:shadow-md transition-all group"
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center group-hover:bg-maroon-100 transition-colors">
+                <CheckCircle className="w-6 h-6 text-maroon-600" />
+              </div>
+              <div>
+                <h3 className="font-black text-ink-900">Lihat Pengumuman</h3>
+                <p className="text-xs text-stone-500">Hasil seleksi & kelulusan Ananda</p>
+              </div>
+            </div>
+            <p className="text-sm text-stone-600 font-medium">
+              Klik untuk melihat hasil seleksi, nilai, dan status kelulusan Ananda.
+            </p>
+            <div className="mt-4 flex items-center gap-2 text-maroon-700 text-sm font-black">
+              Lihat Pengumuman →
+            </div>
+          </Link>
+
+          {/* Card Daftar Ulang */}
+          {data.current_status === "enrolled" ? (
+            <div className="bg-emerald-50 rounded-2xl border-2 border-emerald-200 p-6 shadow-sm">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
+                  <CheckCircle className="w-6 h-6 text-emerald-600" />
+                </div>
+                <div>
+                  <h3 className="font-black text-emerald-900">Daftar Ulang ✓</h3>
+                  <p className="text-xs text-emerald-700">Pembayaran daftar ulang telah diterima</p>
+                </div>
+              </div>
+              <p className="text-sm text-emerald-800 font-medium">
+                Alhamdulillah, proses daftar ulang telah selesai. Ananda resmi menjadi santri baru.
+              </p>
+            </div>
+          ) : (
+            <Link
+              href="/dashboard/pendaftar/daftar-ulang"
+              className="bg-white rounded-2xl border-2 border-gold-200 hover:border-gold-400 p-6 shadow-sm hover:shadow-md transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-12 h-12 bg-gold-50 rounded-xl flex items-center justify-center group-hover:bg-gold-100 transition-colors">
+                  <CheckCircle className="w-6 h-6 text-maroon-600" />
+                </div>
+                <div>
+                  <h3 className="font-black text-ink-900">Daftar Ulang</h3>
+                  <p className="text-xs text-stone-500">Selesaikan pembayaran daftar ulang</p>
+                </div>
+              </div>
+              <p className="text-sm text-stone-600 font-medium">
+                Lakukan pembayaran daftar ulang untuk mengkonfirmasi kehadiran Ananda sebagai santri baru.
+              </p>
+              <div className="mt-4 flex items-center gap-2 text-maroon-700 text-sm font-black">
+                Ke Daftar Ulang →
+              </div>
+            </Link>
+          )}
         </div>
       </div>
     );

@@ -120,6 +120,25 @@ export async function GET() {
       });
     }
 
+    // ── EARLY EXIT: Seleksi sudah selesai & pendaftar sudah accepted/enrolled ──
+    // Tampilkan halaman "Seleksi Selesai" daripada form jadwal
+    const SELEKSI_DONE_STATUSES = ["accepted", "enrolled"];
+    if (SELEKSI_DONE_STATUSES.includes(pendaftar.status_pendaftaran || "")) {
+      return NextResponse.json({
+        data: {
+          condition: "seleksi_selesai",
+          current_status: pendaftar.status_pendaftaran,
+          grupA: {
+            akademik: { completed: true, label: "Kemampuan Dasar Akademik" },
+            kepribadian: { completed: true, label: "Identifikasi Kepribadian" },
+            kesiapan: { completed: true, label: "Seleksi Kesiapan" },
+          },
+          grupB: { hasSchedules: false, availableSlots: [], booked: [] },
+          progress: { completed: 6, total: 6, percentage: 100 },
+        },
+      });
+    }
+
     // 2. Fetch Grup A — Online test completion status
     const nilaiUjian = await prisma.nilaiUjian.findMany({
       where: { pendaftar_id: pendaftarId },

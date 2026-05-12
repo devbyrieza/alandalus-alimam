@@ -267,7 +267,6 @@ export async function PATCH(request: NextRequest) {
               finalMessage = buildMessagePaymentVerified(
                 pembayaran.pendaftar.nama_lengkap,
                 formattedAmount,
-                pembayaran.metode_pembayaran,
                 paymentDate,
               );
             }
