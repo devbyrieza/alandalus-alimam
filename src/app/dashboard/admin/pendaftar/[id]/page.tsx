@@ -536,7 +536,7 @@ export default function PendaftarDetailPage() {
                   </>
                 ) : hasPendingPayment ? (
                   <>
-                    <AlertCircle className="w-5 h-5 text-sand-400" />{" "}
+                    <AlertCircle className="w-5 h-5 text-cream-400" />{" "}
                     Pending
                   </>
                 ) : (

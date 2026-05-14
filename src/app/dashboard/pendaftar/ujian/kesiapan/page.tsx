@@ -86,7 +86,7 @@ export default function KesiapanTestPage() {
   if (checking) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="w-10 h-10 animate-spin text-teal-600" />
+        <Loader2 className="w-10 h-10 animate-spin text-maroon-600" />
       </div>
     );
   }
@@ -104,7 +104,7 @@ export default function KesiapanTestPage() {
             onClick={() =>
               router.push("/dashboard/pendaftar?tab=undangan-seleksi")
             }
-            className="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl transition-colors"
+            className="px-6 py-3 bg-maroon-600 hover:bg-maroon-700 text-white font-bold rounded-xl transition-colors"
           >
             Kembali ke Jadwal Seleksi
           </button>

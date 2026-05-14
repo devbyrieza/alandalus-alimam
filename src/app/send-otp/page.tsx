@@ -358,9 +358,9 @@ export default function SendOtpPage() {
         {/* Messages */}
         <div className="relative z-10">
           {successMessage && (
-            <div className="mb-4 p-4 bg-teal-50 border border-teal-200 text-teal-800 rounded-[1rem] shadow-sm">
+            <div className="mb-4 p-4 bg-maroon-50 border border-maroon-200 text-maroon-800 rounded-[1rem] shadow-sm">
               <div className="flex items-center">
-                <div className="w-5 h-5 rounded-full bg-teal-500 flex items-center justify-center mr-2">
+                <div className="w-5 h-5 rounded-full bg-maroon-500 flex items-center justify-center mr-2">
                   <span className="text-white text-xs">✓</span>
                 </div>
                 <span className="font-bold text-sm">{successMessage}</span>

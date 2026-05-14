@@ -221,7 +221,7 @@ export function formatStatusDisplay(status: StatusProses): { label: string; colo
     paid: { label: "Lunas & Terverifikasi", color: "bg-blue-100 text-blue-700" },
     payment_rejected: { label: "Bayar Perlu Dicek", color: "bg-red-100 text-red-700" },
     rejected: { label: "Berkas Belum Sesuai", color: "bg-red-100 text-red-700" },
-    data_completed: { label: "Tahap 2: Isi Berkas", color: "bg-teal-100 text-teal-700" },
+    data_completed: { label: "Tahap 2: Isi Berkas", color: "bg-maroon-100 text-maroon-700" },
     docs_uploaded: { label: "Menunggu Cek Panitia", color: "bg-indigo-100 text-indigo-700" },
     docs_verified: { label: "Berkas Lengkap", color: "bg-green-100 text-green-700" },
     selection: { label: "Sedang Seleksi", color: "bg-purple-100 text-purple-700" },
@@ -230,7 +230,7 @@ export function formatStatusDisplay(status: StatusProses): { label: string; colo
     announced: { label: "Hasil Pengumuman", color: "bg-cyan-100 text-cyan-700" },
     accepted: { label: "Diterima", color: "bg-green-100 text-green-700" },
     enrolled: { label: "Sedang Daftar Ulang", color: "bg-emerald-100 text-emerald-700" },
-    enrolled_full: { label: "Selesai", color: "bg-teal-100 text-teal-700" },
+    enrolled_full: { label: "Selesai", color: "bg-maroon-100 text-maroon-700" },
   };
 
   return statusMap[status] || { label: status, color: "bg-stone-100 text-stone-700" };

@@ -235,7 +235,7 @@ export default function TentangPage() {
                   </p>
                 </div>
                 <div className="app-card bg-white p-5 md:p-6 flex flex-col items-start group">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-teal-50 flex items-center justify-center mb-4 text-teal-600 group-hover:scale-110 transition-transform shadow-sm">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-maroon-50 flex items-center justify-center mb-4 text-maroon-600 group-hover:scale-110 transition-transform shadow-sm">
                     <ShieldCheck className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <h4 className="font-black text-ink-950 text-lg md:text-xl tracking-tighter mb-1">
