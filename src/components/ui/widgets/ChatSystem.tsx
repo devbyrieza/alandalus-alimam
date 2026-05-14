@@ -150,13 +150,13 @@ export default function ChatSystem() {
                 {/* 
                                 <button
                                     onClick={openTawkTo}
-                                    className="w-full flex items-center gap-3 p-3 hover:bg-teal-50 rounded-xl transition-colors group text-left"
+                                    className="w-full flex items-center gap-3 p-3 hover:bg-maroon-50 rounded-xl transition-colors group text-left"
                                 >
-                                    <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center shrink-0 group-hover:bg-teal-600 transition-colors">
-                                        <Headphones className="w-5 h-5 text-teal-600 group-hover:text-white transition-colors" />
+                                    <div className="w-10 h-10 rounded-full bg-maroon-100 flex items-center justify-center shrink-0 group-hover:bg-maroon-600 transition-colors">
+                                        <Headphones className="w-5 h-5 text-maroon-600 group-hover:text-white transition-colors" />
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-ink-900 group-hover:text-teal-800 text-sm mb-0.5">🎧 Live Chat CS</h4>
+                                        <h4 className="font-bold text-ink-900 group-hover:text-maroon-800 text-sm mb-0.5">🎧 Live Chat CS</h4>
                                         <p className="text-[11px] text-ink-500 font-medium">Chat langsung dengan panitia</p>
                                     </div>
                                 </button>

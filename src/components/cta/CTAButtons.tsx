@@ -89,8 +89,8 @@ export function CTASyaratJadwal({
         size="lg"
         className={`
           group shadow-lg hover:shadow-xl font-bold transition-all duration-300 hover:-translate-y-1
-          bg-gradient-to-r from-[var(--color-teal-600)] to-[var(--color-teal-700)] 
-          hover:from-[var(--color-teal-700)] hover:to-[var(--color-teal-800)] text-white
+          bg-gradient-to-r from-[var(--color-maroon-600)] to-[var(--color-maroon-700)] 
+          hover:from-[var(--color-maroon-700)] hover:to-[var(--color-maroon-800)] text-white
           ${size === "sm" ? "px-6 py-2.5 text-sm" : "px-8 py-4 text-base"}
           ${className}
         `}
@@ -136,8 +136,8 @@ export function CTAKonsultasi({
         group font-semibold transition-all duration-300 hover:-translate-y-1
         ${
           variant === "outline"
-            ? "border-2 border-[var(--color-teal-600)] text-[var(--color-teal-700)] hover:bg-[var(--color-teal-50)] shadow-md hover:shadow-lg"
-            : "bg-[var(--color-teal-50)] text-[var(--color-teal-700)] hover:bg-[var(--color-teal-100)] shadow-sm hover:shadow-md"
+            ? "border-2 border-[var(--color-maroon-600)] text-[var(--color-maroon-700)] hover:bg-[var(--color-maroon-50)] shadow-md hover:shadow-lg"
+            : "bg-[var(--color-maroon-50)] text-[var(--color-maroon-700)] hover:bg-[var(--color-maroon-100)] shadow-sm hover:shadow-md"
         }
         ${size === "sm" ? "px-6 py-2.5 text-sm" : "px-8 py-4 text-base"}
         ${className}
