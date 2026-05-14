@@ -147,16 +147,16 @@ function StatCard({
           className={[
             "relative mb-6 w-13 h-13 md:w-14 md:h-14 flex items-center justify-center rounded-xl shadow-xs",
             "transition-all duration-500 group-hover:scale-110",
-            isMaroon ? "bg-maroon-50 text-maroon-700 group-hover:bg-maroon-100" : "",
-            isCream ? "bg-cream-100 text-maroon-700 group-hover:bg-cream-200" : "",
+            isMaroon ? "bg-primary-50 text-primary-700 group-hover:bg-primary-100" : "",
+            isCream ? "bg-secondary-100 text-primary-700 group-hover:bg-secondary-200" : "",
           ].join(" ")}
         >
           <Icon className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.75} />
           <div
             className={[
               "absolute inset-0 rounded-xl ring-0 transition-all duration-500",
-              isMaroon ? "group-hover:ring-2 group-hover:ring-maroon-200" : "",
-              isCream ? "group-hover:ring-2 group-hover:ring-cream-300" : "",
+              isMaroon ? "group-hover:ring-2 group-hover:ring-primary-200" : "",
+              isCream ? "group-hover:ring-2 group-hover:ring-secondary-300" : "",
             ].join(" ")}
           />
         </div>
@@ -166,8 +166,8 @@ function StatCard({
           <span
             className={[
               "text-[2.625rem] md:text-[3.25rem] font-black leading-none tracking-[-0.04em]",
-              isMaroon ? "text-maroon-700" : "",
-              isCream ? "text-maroon-800" : "",
+              isMaroon ? "text-primary-700" : "",
+              isCream ? "text-primary-800" : "",
             ].join(" ")}
           >
             <AnimatedCounter
@@ -180,8 +180,8 @@ function StatCard({
             <span
               className={[
                 "text-2xl md:text-3xl font-black leading-none tracking-[-0.03em]",
-                isMaroon ? "text-maroon-500" : "",
-                isCream ? "text-cream-600" : "",
+                isMaroon ? "text-primary-500" : "",
+                isCream ? "text-secondary-600" : "",
               ].join(" ")}
             >
               {stat.suffix}
@@ -198,8 +198,8 @@ function StatCard({
         <p
           className={[
             "text-[0.6rem] md:text-[0.65rem] font-semibold tracking-wide mt-0.5",
-            isMaroon ? "text-maroon-500" : "",
-            isCream ? "text-cream-500" : "",
+            isMaroon ? "text-primary-500" : "",
+            isCream ? "text-secondary-500" : "",
           ].join(" ")}
         >
           {stat.sublabel}
@@ -217,8 +217,8 @@ function StatCard({
         <div
           className={[
             "mt-5 h-[2px] w-6 rounded-full transition-all duration-500 group-hover:w-10",
-            isMaroon ? "bg-maroon-100 group-hover:bg-maroon-500" : "",
-            isCream ? "bg-cream-200 group-hover:bg-maroon-300" : "",
+            isMaroon ? "bg-primary-100 group-hover:bg-primary-500" : "",
+            isCream ? "bg-secondary-200 group-hover:bg-primary-300" : "",
           ].join(" ")}
         />
       </div>
@@ -236,8 +236,8 @@ export default function StatsSection() {
       className="relative py-16 md:py-24 bg-white border-b border-surface-200 overflow-hidden"
     >
       {/* CiroAI Background glows */}
-      <div className="glow-blob glow-blob-maroon w-[600px] h-[600px] -top-[25%] right-0 translate-x-[20%]" aria-hidden="true" />
-      <div className="glow-blob glow-blob-cream w-[500px] h-[500px] -bottom-[25%] left-0 -translate-x-[20%]" aria-hidden="true" />
+      <div className="glow-blob glow-blob-primary w-[600px] h-[600px] -top-[25%] right-0 translate-x-[20%]" aria-hidden="true" />
+      <div className="glow-blob glow-blob-secondary w-[500px] h-[500px] -bottom-[25%] left-0 -translate-x-[20%]" aria-hidden="true" />
 
       <Container className="relative z-10">
         <div className="max-w-5xl mx-auto space-y-12 md:space-y-14">
@@ -258,23 +258,23 @@ export default function StatsSection() {
           >
             {/* CiroAI-style badges */}
             {/* Badge 1 — Pulse */}
-            <div className="section-label section-label-maroon hover:bg-maroon-50/50 cursor-default">
+            <div className="section-label section-label-primary hover:bg-primary-50/50 cursor-default">
               <span className="relative flex h-2 w-2 shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-maroon-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-maroon-500" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-500" />
               </span>
               <span>Pendaftaran Dibuka</span>
             </div>
 
             {/* Badge 2 — Akreditasi */}
-            <div className="section-label section-label-white border-cream-200 text-ink-700 bg-cream-50/50 hover:bg-cream-100/50 cursor-default">
-              <ShieldCheck className="w-3 h-3 shrink-0 text-maroon-600" strokeWidth={2} />
+            <div className="section-label section-label-white border-secondary-200 text-ink-700 bg-secondary-50/50 hover:bg-secondary-100/50 cursor-default">
+              <ShieldCheck className="w-3 h-3 shrink-0 text-primary-600" strokeWidth={2} />
               <span>Terakreditasi A — BAN-PDM</span>
             </div>
 
             {/* Badge 3 — School Network */}
-            <div className="section-label section-label-maroon hover:bg-maroon-50/50 cursor-default">
-              <TrendingUp className="w-3 h-3 shrink-0 text-maroon-600" strokeWidth={2} />
+            <div className="section-label section-label-primary hover:bg-primary-50/50 cursor-default">
+              <TrendingUp className="w-3 h-3 shrink-0 text-primary-600" strokeWidth={2} />
               <span>{BRANDING.schoolNetwork}</span>
             </div>
           </motion.div>

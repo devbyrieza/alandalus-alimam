@@ -33,9 +33,9 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 const ACCENT_MAP = {
   maroon: {
-    number: "bg-maroon-700 text-white",
-    badge: "bg-maroon-50 text-maroon-700 border-maroon-100",
-    title: "group-hover:text-maroon-700",
+    number: "bg-primary-700 text-white",
+    badge: "bg-primary-50 text-primary-700 border-primary-100",
+    title: "group-hover:text-primary-700",
   },
   gold: {
     number: "bg-gold-50 text-gold-700 border border-gold-200",
@@ -49,7 +49,7 @@ export default function CalendarSection() {
   return (
     <section
       id="kalender"
-      className="section-std relative border-y border-cream-100 overflow-hidden"
+      className="section-std relative border-y border-secondary-100 overflow-hidden"
     >
       {/* Background texture */}
       <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
@@ -64,19 +64,19 @@ export default function CalendarSection() {
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, ease: EASE }}
             >
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cream-50 border border-cream-200 text-maroon-700 text-[0.65rem] font-bold uppercase tracking-[0.12em] mb-5 shadow-xs">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary-50 border border-secondary-200 text-primary-700 text-[0.65rem] font-bold uppercase tracking-[0.12em] mb-5 shadow-xs">
                 <Calendar className="w-3 h-3 shrink-0" strokeWidth={2} />
                 <span>Agenda Penting</span>
               </div>
 
               <h2 className="section-title mb-10">
                 Timeline{" "}
-                <span className="text-gradient-maroon">Terstruktur</span>
+                <span className="text-gradient-primary">Terstruktur</span>
               </h2>
 
               <div className="space-y-6 relative pl-3">
                 {/* Vertical Connector Line */}
-                <div className="absolute left-[35px] top-6 bottom-6 w-px bg-gradient-to-b from-cream-300 via-cream-200 to-transparent" />
+                <div className="absolute left-[35px] top-6 bottom-6 w-px bg-gradient-to-b from-secondary-300 via-secondary-200 to-transparent" />
 
                 {IMPORTANT_DATES.map((item, idx) => {
                   const colors = ACCENT_MAP[item.accent];
@@ -107,8 +107,8 @@ export default function CalendarSection() {
                       </div>
 
                       {/* Content Card */}
-                      <div className="bg-white p-6 md:p-7 rounded-2xl border border-cream-100 shadow-premium-sm hover:shadow-premium-md hover:border-maroon-100 transition-all duration-400 flex-grow relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-br from-maroon-50/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+                      <div className="bg-white p-6 md:p-7 rounded-2xl border border-secondary-100 shadow-premium-sm hover:shadow-premium-md hover:border-primary-100 transition-all duration-400 flex-grow relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary-50/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
 
                         <div className="relative z-10">
                           <span
@@ -143,21 +143,21 @@ export default function CalendarSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, ease: EASE }}
-              className="bg-white rounded-[2.5rem] p-8 sm:p-10 md:p-12 flex flex-col justify-center items-center text-center relative overflow-hidden shadow-premium-lg border border-cream-200 group hover:border-maroon-200 transition-all duration-500"
+              className="bg-white rounded-[2.5rem] p-8 sm:p-10 md:p-12 flex flex-col justify-center items-center text-center relative overflow-hidden shadow-premium-lg border border-secondary-200 group hover:border-primary-200 transition-all duration-500"
             >
               {/* Decorative glows */}
               <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-gold-100/50 rounded-full blur-[60px] pointer-events-none transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute -top-24 -left-24 w-64 h-64 bg-maroon-50/80 rounded-full blur-[60px] pointer-events-none transition-transform duration-700 group-hover:scale-110" />
+              <div className="absolute -top-24 -left-24 w-64 h-64 bg-primary-50/80 rounded-full blur-[60px] pointer-events-none transition-transform duration-700 group-hover:scale-110" />
 
               <div className="relative z-10 flex flex-col items-center">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-cream-50 rounded-2xl flex items-center justify-center mb-6 shadow-sm border border-cream-100 group-hover:scale-105 group-hover:border-maroon-100 transition-all duration-400">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-secondary-50 rounded-2xl flex items-center justify-center mb-6 shadow-sm border border-secondary-100 group-hover:scale-105 group-hover:border-primary-100 transition-all duration-400">
                   <Clock
-                    className="w-8 h-8 sm:w-10 sm:h-10 text-maroon-600"
+                    className="w-8 h-8 sm:w-10 sm:h-10 text-primary-600"
                     strokeWidth={1.5}
                   />
                 </div>
 
-                <h3 className="text-[1.35rem] sm:text-[1.75rem] font-display font-black text-ink-900 mb-4 tracking-tight leading-snug group-hover:text-maroon-800 transition-colors duration-300">
+                <h3 className="text-[1.35rem] sm:text-[1.75rem] font-display font-black text-ink-900 mb-4 tracking-tight leading-snug group-hover:text-primary-800 transition-colors duration-300">
                   Manajemen Waktu <br /> yang Barokah
                 </h3>
 
@@ -174,7 +174,7 @@ export default function CalendarSection() {
                     </button>
                   </Link>
                   <Link href="#" className="block w-full">
-                    <button className="btn-secondary w-full justify-center py-3 bg-white hover:bg-cream-50 border-cream-200 group/btn">
+                    <button className="btn-secondary w-full justify-center py-3 bg-white hover:bg-secondary-50 border-secondary-200 group/btn">
                       <Download className="w-4 h-4 mr-2 group-hover/btn:-translate-y-0.5 transition-transform" />
                       <span className="text-[0.8125rem]">Unduh PDF</span>
                     </button>

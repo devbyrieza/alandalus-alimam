@@ -45,7 +45,7 @@ export default function Footer() {
       className="relative overflow-hidden pt-20 pb-28 md:pb-14"
       style={{
         background:
-          "linear-gradient(160deg, var(--color-maroon-900) 0%, var(--color-maroon-950) 60%, #2A0505 100%)",
+          "linear-gradient(160deg, var(--color-primary-900) 0%, var(--color-primary-950) 60%, #2A0505 100%)",
         borderTop: "1px solid rgba(255,255,255,0.05)",
       }}
     >
@@ -82,7 +82,7 @@ export default function Footer() {
                 className="w-12 h-12 rounded-2xl flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:scale-105 group-hover:-rotate-3 flex-shrink-0"
                 style={{
                   background:
-                    "linear-gradient(135deg, var(--color-cream-100) 0%, var(--color-cream-200) 100%)",
+                    "linear-gradient(135deg, var(--color-secondary-100) 0%, var(--color-secondary-200) 100%)",
                   boxShadow: "0 4px 16px rgba(0,0,0,0.20)",
                 }}
               >
@@ -100,7 +100,7 @@ export default function Footer() {
                 </h3>
                 <p
                   className="text-[10px] font-bold uppercase tracking-widest mt-1.5"
-                  style={{ color: "var(--color-cream-400)" }}
+                  style={{ color: "var(--color-secondary-400)" }}
                 >
                   Pesantren Modern International
                 </p>
@@ -126,15 +126,15 @@ export default function Footer() {
                   style={{
                     background: "rgba(255,255,255,0.06)",
                     border: "1px solid rgba(255,255,255,0.10)",
-                    color: "var(--color-cream-300)",
+                    color: "var(--color-secondary-300)",
                   }}
                   onMouseEnter={(e) => {
                     (e.currentTarget as HTMLElement).style.background =
-                      "var(--color-cream-200)";
+                      "var(--color-secondary-200)";
                     (e.currentTarget as HTMLElement).style.borderColor =
-                      "var(--color-cream-200)";
+                      "var(--color-secondary-200)";
                     (e.currentTarget as HTMLElement).style.color =
-                      "var(--color-maroon-900)";
+                      "var(--color-primary-900)";
                     (e.currentTarget as HTMLElement).style.transform =
                       "translateY(-2px)";
                   }}
@@ -144,7 +144,7 @@ export default function Footer() {
                     (e.currentTarget as HTMLElement).style.borderColor =
                       "rgba(255,255,255,0.10)";
                     (e.currentTarget as HTMLElement).style.color =
-                      "var(--color-cream-300)";
+                      "var(--color-secondary-300)";
                     (e.currentTarget as HTMLElement).style.transform =
                       "translateY(0)";
                   }}
@@ -159,7 +159,7 @@ export default function Footer() {
           <div className="space-y-6">
             <h4
               className="text-xs font-black uppercase tracking-[0.12em]"
-              style={{ color: "var(--color-cream-400)" }}
+              style={{ color: "var(--color-secondary-400)" }}
             >
               Lembaga
             </h4>
@@ -193,7 +193,7 @@ export default function Footer() {
           <div className="space-y-6">
             <h4
               className="text-xs font-black uppercase tracking-[0.12em]"
-              style={{ color: "var(--color-cream-400)" }}
+              style={{ color: "var(--color-secondary-400)" }}
             >
               Informasi
             </h4>
@@ -223,7 +223,7 @@ export default function Footer() {
           <div className="space-y-6">
             <h4
               className="text-xs font-black uppercase tracking-[0.12em]"
-              style={{ color: "var(--color-cream-400)" }}
+              style={{ color: "var(--color-secondary-400)" }}
             >
               Kontak Kami
             </h4>

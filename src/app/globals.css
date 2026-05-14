@@ -104,6 +104,38 @@
   --color-ink-100: #f2f2f2;
   --color-ink-50: #f8f8f8;
 
+  
+  /* ━━━ SEMANTIC THEME ━━━ */
+  --color-primary-50: var(--color-maroon-50);
+  --color-primary-100: var(--color-maroon-100);
+  --color-primary-200: var(--color-maroon-200);
+  --color-primary-300: var(--color-maroon-300);
+  --color-primary-400: var(--color-maroon-400);
+  --color-primary-500: var(--color-maroon-500);
+  --color-primary-600: var(--color-maroon-600);
+  --color-primary-700: var(--color-maroon-700);
+  --color-primary-800: var(--color-maroon-800);
+  --color-primary-900: var(--color-maroon-900);
+  --color-primary-950: var(--color-maroon-950);
+  --color-primary: var(--color-maroon-600);
+  --color-primary-light: var(--color-maroon-50);
+  --color-primary-dark: var(--color-maroon-800);
+
+  --color-secondary-50: var(--color-cream-50);
+  --color-secondary-100: var(--color-cream-100);
+  --color-secondary-200: var(--color-cream-200);
+  --color-secondary-300: var(--color-cream-300);
+  --color-secondary-400: var(--color-cream-400);
+  --color-secondary-500: var(--color-cream-500);
+  --color-secondary-600: var(--color-cream-600);
+  --color-secondary-700: var(--color-cream-700);
+  --color-secondary-800: var(--color-cream-800);
+  --color-secondary-900: var(--color-cream-900);
+  --color-secondary-950: var(--color-cream-950);
+  --color-secondary: var(--color-cream-600);
+  --color-secondary-light: var(--color-cream-50);
+  --color-secondary-dark: var(--color-cream-800);
+
   /* ─── Status Colors ─── */
   --color-success-500: #16a34a;
   --color-success-100: #dcfce7;

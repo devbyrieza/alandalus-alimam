@@ -68,20 +68,20 @@ function TestimonialCard({
       viewport={{ once: true, margin: "-32px" }}
       transition={{ delay: idx * 0.08, duration: 0.6, ease: EASE }}
       whileHover={{ y: -4 }}
-      className="group relative bg-white flex flex-col h-full rounded-2xl border border-cream-100 shadow-premium-sm hover:shadow-premium-md hover:border-maroon-200 overflow-hidden transition-all duration-400"
+      className="group relative bg-white flex flex-col h-full rounded-2xl border border-secondary-100 shadow-premium-sm hover:shadow-premium-md hover:border-primary-200 overflow-hidden transition-all duration-400"
     >
       {/* Hover gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-maroon-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
       {/* Card inner */}
       <div className="relative z-10 flex flex-col h-full p-6 md:p-7">
         {/* Top row — number badge + quote icon */}
         <div className="flex items-center justify-between mb-5">
-          <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-cream-50 border border-cream-200 text-[0.6rem] font-black text-maroon-700 tracking-wide shadow-xs group-hover:bg-maroon-50 group-hover:border-maroon-100 transition-all duration-300">
+          <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-secondary-50 border border-secondary-200 text-[0.6rem] font-black text-primary-700 tracking-wide shadow-xs group-hover:bg-primary-50 group-hover:border-primary-100 transition-all duration-300">
             #{no}
           </span>
           <Quote
-            className="w-8 h-8 text-maroon-50 -rotate-12 transition-colors duration-400 group-hover:text-maroon-100"
+            className="w-8 h-8 text-primary-50 -rotate-12 transition-colors duration-400 group-hover:text-primary-100"
             aria-hidden
           />
         </div>
@@ -103,10 +103,10 @@ function TestimonialCard({
         </p>
 
         {/* Author */}
-        <div className="border-t border-cream-100 pt-5">
+        <div className="border-t border-secondary-100 pt-5">
           <div className="flex items-center gap-3.5">
             {/* Avatar */}
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-maroon-600 to-maroon-800 flex items-center justify-center shrink-0 text-white font-black text-sm shadow-xs group-hover:shadow-maroon/20 group-hover:-rotate-3 transition-all duration-400">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center shrink-0 text-white font-black text-sm shadow-xs group-hover:shadow-primary/20 group-hover:-rotate-3 transition-all duration-400">
               {initial}
             </div>
 
@@ -114,12 +114,12 @@ function TestimonialCard({
               <p className="text-[0.8125rem] font-bold text-ink-900 leading-tight truncate">
                 {name}
               </p>
-              <p className="text-[0.6rem] font-bold text-maroon-600 uppercase tracking-[0.1em] leading-tight mt-0.5">
+              <p className="text-[0.6rem] font-bold text-primary-600 uppercase tracking-[0.1em] leading-tight mt-0.5">
                 {role}
               </p>
             </div>
 
-            <span className="text-[0.575rem] font-black text-maroon-600 uppercase tracking-widest bg-maroon-50 px-2 py-1 rounded-full border border-maroon-100 shadow-xs whitespace-nowrap">
+            <span className="text-[0.575rem] font-black text-primary-600 uppercase tracking-widest bg-primary-50 px-2 py-1 rounded-full border border-primary-100 shadow-xs whitespace-nowrap">
               {date}
             </span>
           </div>
@@ -138,7 +138,7 @@ export default function TestimonialsSection() {
   return (
     <section
       id="testimonials"
-      className="section-alt relative border-y border-cream-200 overflow-hidden"
+      className="section-alt relative border-y border-secondary-200 overflow-hidden"
     >
       {/* Background texture */}
       <div
@@ -163,7 +163,7 @@ export default function TestimonialsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: EASE }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-cream-200 text-maroon-700 text-[0.65rem] font-bold uppercase tracking-[0.12em] mb-5 shadow-xs"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-secondary-200 text-primary-700 text-[0.65rem] font-bold uppercase tracking-[0.12em] mb-5 shadow-xs"
           >
             <MessageCircle className="w-3 h-3 shrink-0" strokeWidth={2} />
             <span>Reputasi Al Andalus Pusat (Jonggol)</span>
@@ -177,7 +177,7 @@ export default function TestimonialsSection() {
             className="section-title mb-4"
           >
             Cerita Keberhasilan{" "}
-            <span className="text-gradient-maroon">Alumni & Wali Santri</span>
+            <span className="text-gradient-primary">Alumni & Wali Santri</span>
           </motion.h2>
 
           <motion.p
@@ -197,7 +197,7 @@ export default function TestimonialsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.22, duration: 0.5, ease: EASE }}
-            className="inline-flex items-center gap-2 bg-maroon-50 text-maroon-800 px-4 py-2 rounded-xl border border-maroon-100 font-bold text-[0.8125rem] shadow-xs"
+            className="inline-flex items-center gap-2 bg-primary-50 text-primary-800 px-4 py-2 rounded-xl border border-primary-100 font-bold text-[0.8125rem] shadow-xs"
           >
             <span className="text-gold-500">✦</span> Reputasi Global yang Teruji
           </motion.div>

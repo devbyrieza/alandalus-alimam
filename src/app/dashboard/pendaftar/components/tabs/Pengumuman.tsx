@@ -116,7 +116,7 @@ export default function PengumumanTab() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <Loader2 className="w-12 h-12 animate-spin text-maroon-700 mx-auto mb-4" />
+          <Loader2 className="w-12 h-12 animate-spin text-primary-700 mx-auto mb-4" />
           <p className="text-ink-600">Memuat pengumuman...</p>
         </div>
       </div>
@@ -126,7 +126,7 @@ export default function PengumumanTab() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="relative overflow-hidden rounded-[2rem] bg-linear-to-br from-maroon-700 to-maroon-900 border border-maroon-600 p-8 md:p-10 text-white shadow-lg app-card">
+      <div className="relative overflow-hidden rounded-[2rem] bg-linear-to-br from-primary-700 to-primary-900 border border-primary-600 p-8 md:p-10 text-white shadow-lg app-card">
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-gold-50/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-center gap-5">
@@ -146,10 +146,10 @@ export default function PengumumanTab() {
       </div>
 
       {!pengumuman ? (
-        <div className="bg-white rounded-[2rem] p-12 shadow-sm border border-maroon-100 app-card">
+        <div className="bg-white rounded-[2rem] p-12 shadow-sm border border-primary-100 app-card">
           <div className="text-center">
-            <div className="w-20 h-20 bg-maroon-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
-              <Trophy className="w-10 h-10 text-maroon-700" />
+            <div className="w-20 h-20 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+              <Trophy className="w-10 h-10 text-primary-700" />
             </div>
             <h3 className="text-xl font-bold text-ink-900 mb-3 font-display">
               Pengumuman Belum Tersedia
@@ -159,8 +159,8 @@ export default function PengumumanTab() {
               dilakukan oleh panitia. Silakan cek kembali halaman ini secara
               berkala.
             </p>
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-maroon-50 text-maroon-800 rounded-full font-black border border-maroon-200 shadow-sm">
-              <Calendar className="w-4 h-4 text-maroon-600" />
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-50 text-primary-800 rounded-full font-black border border-primary-200 shadow-sm">
+              <Calendar className="w-4 h-4 text-primary-600" />
               <span className="text-sm">
                 Estimasi update: setelah ujian selesai
               </span>
@@ -197,7 +197,7 @@ export default function PengumumanTab() {
               <button
                 onClick={handleDownloadSurat}
                 disabled={isGenerating}
-                className="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-gold-400 text-maroon-950 rounded-full font-black hover:bg-gold-300 transition-all shadow-lg shadow-gold-400/20 active:scale-95 disabled:opacity-50 border border-gold-500"
+                className="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-gold-400 text-primary-950 rounded-full font-black hover:bg-gold-300 transition-all shadow-lg shadow-gold-400/20 active:scale-95 disabled:opacity-50 border border-gold-500"
               >
                 {isGenerating ? (
                   <Loader2 className="w-5 h-5 animate-spin" />
@@ -231,8 +231,8 @@ export default function PengumumanTab() {
               </div>
 
               {pengumuman.catatan && (
-                <div className="p-4 bg-maroon-50 border border-maroon-200 rounded-lg">
-                  <p className="text-sm text-maroon-900">
+                <div className="p-4 bg-primary-50 border border-primary-200 rounded-lg">
+                  <p className="text-sm text-primary-900">
                     <strong>Catatan:</strong> {pengumuman.catatan}
                   </p>
                 </div>
@@ -241,18 +241,18 @@ export default function PengumumanTab() {
           </div>
 
           {/* Next Steps */}
-          <div className="bg-amber-50 border-2 border-amber-200 rounded-xl p-6">
+          <div className="bg-secondary-50 border-2 border-secondary-200 rounded-xl p-6">
             <div className="flex gap-4">
               <div className="flex-shrink-0">
-                <div className="p-2 bg-amber-200 rounded-lg">
-                  <AlertCircle className="w-6 h-6 text-amber-700" />
+                <div className="p-2 bg-secondary-200 rounded-lg">
+                  <AlertCircle className="w-6 h-6 text-secondary-700" />
                 </div>
               </div>
               <div>
-                <h4 className="font-bold text-amber-900 mb-2">
+                <h4 className="font-bold text-secondary-900 mb-2">
                   Langkah Selanjutnya
                 </h4>
-                <ul className="text-sm text-amber-800 space-y-1">
+                <ul className="text-sm text-secondary-800 space-y-1">
                   <li>
                     • Segera lakukan daftar ulang melalui tab "Daftar Ulang"
                   </li>
@@ -267,17 +267,17 @@ export default function PengumumanTab() {
       ) : pengumuman.status_kelulusan === "cadangan" ? (
         <div className="space-y-6">
           {/* Waiting List Card */}
-          <div className="bg-linear-to-r from-amber-500 to-amber-700 rounded-[2rem] p-8 md:p-10 text-white shadow-xl shadow-amber-500/20 relative overflow-hidden app-card">
+          <div className="bg-linear-to-r from-secondary-500 to-secondary-700 rounded-[2rem] p-8 md:p-10 text-white shadow-xl shadow-secondary-500/20 relative overflow-hidden app-card">
             <div className="absolute -top-10 -right-10 p-8 opacity-10 transform rotate-12">
               <Calendar className="w-64 h-64" />
             </div>
             <div className="relative z-10">
               <div className="flex items-center gap-5 mb-8">
                 <div className="p-4 bg-white/20 backdrop-blur-md rounded-[1.5rem] shadow-sm border border-white/20">
-                  <AlertCircle className="w-10 h-10 text-amber-50" />
+                  <AlertCircle className="w-10 h-10 text-secondary-50" />
                 </div>
                 <div>
-                  <p className="text-amber-100 font-bold tracking-widest uppercase text-sm mb-1">
+                  <p className="text-secondary-100 font-bold tracking-widest uppercase text-sm mb-1">
                     Pemberitahuan
                   </p>
                   <h2 className="text-3xl md:text-4xl font-black font-display tracking-tight text-white">
@@ -285,13 +285,13 @@ export default function PengumumanTab() {
                   </h2>
                 </div>
               </div>
-              <p className="text-amber-50/90 mb-10 max-w-xl text-lg leading-relaxed">
+              <p className="text-secondary-50/90 mb-10 max-w-xl text-lg leading-relaxed">
                 Berdasarkan hasil seleksi, Anda dinyatakan masuk dalam{" "}
                 <strong>DAFTAR CADANGAN</strong> santri baru PP Al Andalus Al
                 Imam.
               </p>
 
-              <div className="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-white text-amber-900 rounded-full font-black shadow-lg transition-all border border-amber-100">
+              <div className="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-white text-secondary-900 rounded-full font-black shadow-lg transition-all border border-secondary-100">
                 <Calendar className="w-5 h-5" />
                 Menunggu Konfirmasi Kuota
               </div>
@@ -299,10 +299,10 @@ export default function PengumumanTab() {
           </div>
 
           {/* Info Card */}
-          <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-amber-100">
+          <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-secondary-100">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-amber-100 rounded-lg">
-                <FileText className="w-6 h-6 text-amber-600" />
+              <div className="p-2 bg-secondary-100 rounded-lg">
+                <FileText className="w-6 h-6 text-secondary-600" />
               </div>
               <h3 className="text-lg font-bold text-stone-900">
                 Detail Pengumuman
@@ -319,8 +319,8 @@ export default function PengumumanTab() {
                 </p>
               </div>
 
-              <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
-                <p className="text-sm text-amber-900 leading-relaxed">
+              <div className="p-4 bg-secondary-50 border border-secondary-200 rounded-lg">
+                <p className="text-sm text-secondary-900 leading-relaxed">
                   <strong>Catatan Panitia:</strong>{" "}
                   {pengumuman.catatan ||
                     "Mohon bersabar menunggu informasi lebih lanjut jika terdapat kuota yang tersedia dari pembatalan pendaftar lain."}
@@ -330,18 +330,18 @@ export default function PengumumanTab() {
           </div>
 
           {/* Next Steps */}
-          <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6">
+          <div className="bg-primary-50 border-2 border-primary-200 rounded-xl p-6">
             <div className="flex gap-4">
               <div className="flex-shrink-0">
-                <div className="p-2 bg-blue-200 rounded-lg">
-                  <AlertCircle className="w-6 h-6 text-blue-700" />
+                <div className="p-2 bg-primary-200 rounded-lg">
+                  <AlertCircle className="w-6 h-6 text-primary-700" />
                 </div>
               </div>
               <div>
-                <h4 className="font-bold text-blue-900 mb-2">
+                <h4 className="font-bold text-primary-900 mb-2">
                   Informasi Penting
                 </h4>
-                <ul className="text-sm text-blue-800 space-y-1">
+                <ul className="text-sm text-primary-800 space-y-1">
                   <li>
                     • Panitia akan menghubungi Anda jika terdapat kuota yang
                     kosong
@@ -404,8 +404,8 @@ export default function PengumumanTab() {
               </div>
 
               {pengumuman.catatan && (
-                <div className="p-4 bg-maroon-50 border border-maroon-200 rounded-lg">
-                  <p className="text-sm text-maroon-900">
+                <div className="p-4 bg-primary-50 border border-primary-200 rounded-lg">
+                  <p className="text-sm text-primary-900">
                     <strong>Catatan:</strong> {pengumuman.catatan}
                   </p>
                 </div>
@@ -414,18 +414,18 @@ export default function PengumumanTab() {
           </div>
 
           {/* Encouragement */}
-          <div className="bg-maroon-50 border-2 border-maroon-200 rounded-xl p-6">
+          <div className="bg-primary-50 border-2 border-primary-200 rounded-xl p-6">
             <div className="flex gap-4">
               <div className="flex-shrink-0">
-                <div className="p-2 bg-maroon-200 rounded-lg">
-                  <Trophy className="w-6 h-6 text-maroon-700" />
+                <div className="p-2 bg-primary-200 rounded-lg">
+                  <Trophy className="w-6 h-6 text-primary-700" />
                 </div>
               </div>
               <div>
-                <h4 className="font-bold text-maroon-900 mb-2">
+                <h4 className="font-bold text-primary-900 mb-2">
                   Tetap Semangat!
                 </h4>
-                <p className="text-sm text-maroon-800">
+                <p className="text-sm text-primary-800">
                   Anda dapat mendaftar kembali pada periode pendaftaran
                   berikutnya. Gunakan kesempatan ini untuk mempersiapkan diri
                   dengan lebih baik. Jangan ragu untuk bertanya kepada panitia

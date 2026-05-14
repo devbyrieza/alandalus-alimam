@@ -68,7 +68,7 @@ export default function GaleriPage() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-maroon-50 border border-maroon-100 text-maroon-700 text-xs font-bold uppercase tracking-widest mb-10 shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-primary-50 border border-primary-100 text-primary-700 text-xs font-bold uppercase tracking-widest mb-10 shadow-sm"
           >
             <Camera className="w-3.5 h-3.5" />
             <span>Dokumentasi Pesantren</span>
@@ -81,7 +81,7 @@ export default function GaleriPage() {
             className="text-5xl md:text-7xl lg:text-8xl font-display font-black mb-10 tracking-tight leading-[0.9] text-ink-950"
           >
             Galeri <br />
-            <span className="text-gradient-blue">Al Imam</span>
+            <span className="text-gradient-primary">Al Imam</span>
           </motion.h1>
 
           <motion.p
@@ -110,7 +110,7 @@ export default function GaleriPage() {
               className="mb-12"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-maroon-50 flex items-center justify-center text-maroon-700 border border-maroon-100">
+                <div className="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center text-primary-700 border border-primary-100">
                   <Images className="w-5 h-5" />
                 </div>
                 <h2 className="text-3xl md:text-4xl font-display font-black text-ink-950 tracking-tight">
@@ -156,7 +156,7 @@ export default function GaleriPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-maroon-900 bg-linear-to-br from-maroon-800 to-maroon-950 rounded-[2rem] md:rounded-[3rem] lg:rounded-[4rem] p-6 sm:p-8 md:p-16 lg:p-24 text-center text-white relative overflow-hidden shadow-lg"
+            className="bg-primary-900 bg-linear-to-br from-primary-800 to-primary-950 rounded-[2rem] md:rounded-[3rem] lg:rounded-[4rem] p-6 sm:p-8 md:p-16 lg:p-24 text-center text-white relative overflow-hidden shadow-lg"
           >
             <div className="absolute top-0 right-0 w-32 h-32 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-white/5 rounded-full blur-[60px] md:blur-[100px] -translate-y-1/2 translate-x-1/2" />
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
@@ -166,13 +166,13 @@ export default function GaleriPage() {
                 Tertarik? <br />{" "}
                 <span className="text-gold-400">Kunjungi Langsung!</span>
               </h2>
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-maroon-50 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 lg:mb-12 font-medium px-2">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-primary-50 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 lg:mb-12 font-medium px-2">
                 Foto tidak cukup menggambarkan suasana sesungguhnya. Jadwalkan
                 kunjungan ke pesantren dan rasakan sendiri.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center px-4">
                 <Link href="/kontak">
-                  <button className="w-full sm:w-auto px-6 sm:px-10 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white text-maroon-950 font-black text-sm sm:text-base md:text-lg hover:bg-maroon-50 shadow-md transition-all min-h-[48px] sm:min-h-[52px]">
+                  <button className="w-full sm:w-auto px-6 sm:px-10 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white text-primary-950 font-black text-sm sm:text-base md:text-lg hover:bg-primary-50 shadow-md transition-all min-h-[48px] sm:min-h-[52px]">
                     Jadwalkan Kunjungan
                   </button>
                 </Link>

@@ -903,10 +903,10 @@ function AdminPendaftarContent() {
       },
       payment_verification: {
         label: "Verifikasi Bayar",
-        color: "bg-maroon-50 text-maroon-700 border border-maroon-100",
+        color: "bg-primary-50 text-primary-700 border border-primary-100",
       },
-      paid: { label: "Terdaftar", color: "bg-maroon-100 text-maroon-800" },
-      verified: { label: "Terdaftar", color: "bg-maroon-100 text-maroon-800" },
+      paid: { label: "Terdaftar", color: "bg-primary-100 text-primary-800" },
+      verified: { label: "Terdaftar", color: "bg-primary-100 text-primary-800" },
       data_completed: {
         label: "Data Lengkap",
         color: "bg-gold-50 text-gold-800 border border-gold-100",
@@ -933,11 +933,11 @@ function AdminPendaftarContent() {
       },
       tested: {
         label: "Sudah Ujian",
-        color: "bg-maroon-600 text-white shadow-sm",
+        color: "bg-primary-600 text-white shadow-sm",
       },
       exam_completed: {
         label: "Sudah Ujian",
-        color: "bg-maroon-600 text-white shadow-sm",
+        color: "bg-primary-600 text-white shadow-sm",
       },
       announced: {
         label: "Cadangan",
@@ -986,7 +986,7 @@ function AdminPendaftarContent() {
       {refreshing && (
         <div className="fixed inset-0 bg-white/40 backdrop-blur-[1px] z-[100] flex items-center justify-center pointer-events-none">
           <div className="bg-white/80 px-6 py-3 rounded-2xl shadow-xl border border-stone-100 flex items-center gap-3 animate-in fade-in zoom-in duration-300">
-            <Loader2 className="w-5 h-5 animate-spin text-maroon-600" />
+            <Loader2 className="w-5 h-5 animate-spin text-primary-600" />
             <span className="text-sm font-bold text-stone-700 tracking-tight">
               Memperbarui data...
             </span>
@@ -1011,7 +1011,7 @@ function AdminPendaftarContent() {
       {urlFilter && (
         <Link
           href="/dashboard/admin"
-          className="inline-flex items-center gap-2 text-maroon-600 hover:text-maroon-800 font-bold"
+          className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-800 font-bold"
         >
           <ArrowLeft className="w-4 h-4" />
           Kembali ke Dashboard
@@ -1022,11 +1022,11 @@ function AdminPendaftarContent() {
       <div className="bg-white rounded-3xl shadow-sm p-4 md:p-8 border border-gold-100">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3 md:gap-5 min-w-0">
-            <div className="p-2.5 md:p-4 bg-linear-to-br from-maroon-600 to-maroon-900 rounded-2xl shadow-xl shadow-maroon-900/20 flex-shrink-0">
+            <div className="p-2.5 md:p-4 bg-linear-to-br from-primary-600 to-primary-900 rounded-2xl shadow-xl shadow-primary-900/20 flex-shrink-0">
               <Users className="w-6 h-6 md:w-8 md:h-8 text-gold-300" />
             </div>
             <div className="min-w-0">
-              <h2 className="text-lg md:text-3xl font-black text-maroon-950 tracking-tight leading-none truncate">
+              <h2 className="text-lg md:text-3xl font-black text-primary-950 tracking-tight leading-none truncate">
                 {activeFilterLabel || "Pendaftar"}
               </h2>
               <p className="text-sm text-stone-600">
@@ -1098,7 +1098,7 @@ function AdminPendaftarContent() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Search */}
           <div className="md:col-span-2">
-            <label className="block text-sm font-bold text-maroon-900 mb-2 leading-none uppercase tracking-widest text-[10px]">
+            <label className="block text-sm font-bold text-primary-900 mb-2 leading-none uppercase tracking-widest text-[10px]">
               <Search className="w-3.5 h-3.5 inline mr-1" />
               Cari Pendaftar
             </label>
@@ -1109,11 +1109,11 @@ function AdminPendaftarContent() {
                 onChange={(e) => setSearchInput(e.target.value)}
                 onKeyPress={(e) => e.key === "Enter" && handleSearch()}
                 placeholder="Cari nama, NIK, atau nomor pendaftaran..."
-                className="flex-1 w-full px-4 py-3 bg-gold-50/50 border border-gold-100 rounded-xl focus:border-maroon-500 focus:bg-white focus:outline-none text-sm md:text-base font-bold text-maroon-950 placeholder:text-ink-400"
+                className="flex-1 w-full px-4 py-3 bg-gold-50/50 border border-gold-100 rounded-xl focus:border-primary-500 focus:bg-white focus:outline-none text-sm md:text-base font-bold text-primary-950 placeholder:text-ink-400"
               />
               <button
                 onClick={handleSearch}
-                className="w-full sm:w-auto px-8 py-3 bg-maroon-700 hover:bg-maroon-800 text-white rounded-xl font-black transition-all flex-shrink-0 text-sm md:text-base shadow-lg shadow-maroon-700/20 active:scale-95"
+                className="w-full sm:w-auto px-8 py-3 bg-primary-700 hover:bg-primary-800 text-white rounded-xl font-black transition-all flex-shrink-0 text-sm md:text-base shadow-lg shadow-primary-700/20 active:scale-95"
               >
                 Cari
               </button>
@@ -1122,14 +1122,14 @@ function AdminPendaftarContent() {
 
           {/* Status Filter */}
           <div>
-            <label className="block text-sm font-bold text-maroon-900 mb-2 leading-none uppercase tracking-widest text-[10px]">
+            <label className="block text-sm font-bold text-primary-900 mb-2 leading-none uppercase tracking-widest text-[10px]">
               <Filter className="w-3.5 h-3.5 inline mr-1" />
               Filter Status
             </label>
             <select
               value={statusFilter}
               onChange={(e) => updateFilter(e.target.value)}
-              className="w-full px-4 py-3 bg-gold-50/50 border border-gold-100 rounded-xl focus:border-maroon-500 focus:bg-white focus:outline-none font-bold text-maroon-950"
+              className="w-full px-4 py-3 bg-gold-50/50 border border-gold-100 rounded-xl focus:border-primary-500 focus:bg-white focus:outline-none font-bold text-primary-950"
             >
               <option value="">Semua Status</option>
 
@@ -1225,7 +1225,7 @@ function AdminPendaftarContent() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
           {/* Gender Filter */}
           <div>
-            <label className="block text-[10px] font-black text-maroon-900 mb-2 leading-none uppercase tracking-widest">
+            <label className="block text-[10px] font-black text-primary-900 mb-2 leading-none uppercase tracking-widest">
               Filter Putra / Putri
             </label>
             <select
@@ -1234,7 +1234,7 @@ function AdminPendaftarContent() {
                 setJenisKelaminFilter(e.target.value);
                 setPagination((prev) => ({ ...prev, page: 1 }));
               }}
-              className="w-full px-4 py-3 bg-gold-50/50 border border-gold-100 rounded-xl focus:border-maroon-500 focus:bg-white focus:outline-none font-bold text-maroon-950"
+              className="w-full px-4 py-3 bg-gold-50/50 border border-gold-100 rounded-xl focus:border-primary-500 focus:bg-white focus:outline-none font-bold text-primary-950"
             >
               <option value="">Semua (Putra & Putri)</option>
               <option value="L">Putra (Laki-laki)</option>
@@ -1244,7 +1244,7 @@ function AdminPendaftarContent() {
 
           {/* Jenjang Filter */}
           <div>
-            <label className="block text-[10px] font-black text-maroon-900 mb-2 leading-none uppercase tracking-widest">
+            <label className="block text-[10px] font-black text-primary-900 mb-2 leading-none uppercase tracking-widest">
               Filter Jenjang Sekolah
             </label>
             <select
@@ -1253,7 +1253,7 @@ function AdminPendaftarContent() {
                 setJenjangFilter(e.target.value);
                 setPagination((prev) => ({ ...prev, page: 1 }));
               }}
-              className="w-full px-4 py-3 bg-gold-50/50 border border-gold-100 rounded-xl focus:border-maroon-500 focus:bg-white focus:outline-none font-bold text-maroon-950"
+              className="w-full px-4 py-3 bg-gold-50/50 border border-gold-100 rounded-xl focus:border-primary-500 focus:bg-white focus:outline-none font-bold text-primary-950"
             >
               <option value="">Semua Jenjang</option>
               <option value="MTs">MTs (Madrasah Tsanawiyah)</option>
@@ -1263,7 +1263,7 @@ function AdminPendaftarContent() {
 
           {/* Tahun Ajaran Filter */}
           <div>
-            <label className="block text-[10px] font-black text-maroon-900 mb-2 leading-none uppercase tracking-widest">
+            <label className="block text-[10px] font-black text-primary-900 mb-2 leading-none uppercase tracking-widest">
               Filter Tahun Ajaran
             </label>
             <select
@@ -1272,7 +1272,7 @@ function AdminPendaftarContent() {
                 setTahunAjaranFilter(e.target.value);
                 setPagination((prev) => ({ ...prev, page: 1 }));
               }}
-              className="w-full px-4 py-3 bg-gold-50/50 border border-gold-100 rounded-xl focus:border-maroon-500 focus:bg-white focus:outline-none font-bold text-maroon-950"
+              className="w-full px-4 py-3 bg-gold-50/50 border border-gold-100 rounded-xl focus:border-primary-500 focus:bg-white focus:outline-none font-bold text-primary-950"
             >
               <option value="">Semua Tahun Ajaran</option>
               {tahunAjaranList.map((ta) => (
@@ -1316,7 +1316,7 @@ function AdminPendaftarContent() {
         {/* Location cascading filters */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
           <div>
-            <label className="block text-[10px] font-black text-maroon-900 mb-2 leading-none uppercase tracking-widest">
+            <label className="block text-[10px] font-black text-primary-900 mb-2 leading-none uppercase tracking-widest">
               Provinsi{" "}
               {provinsiLoading && (
                 <span className="inline-block ml-2 text-[8px] text-stone-500 italic">
@@ -1329,7 +1329,7 @@ function AdminPendaftarContent() {
               onChange={(e) => setProvinsiFilter(e.target.value)}
               aria-label="Filter provinsi"
               aria-busy={provinsiLoading}
-              className="w-full px-4 py-3 bg-gold-50/50 border border-gold-100 rounded-xl focus:border-maroon-500 focus:bg-white focus:outline-none font-bold text-maroon-950"
+              className="w-full px-4 py-3 bg-gold-50/50 border border-gold-100 rounded-xl focus:border-primary-500 focus:bg-white focus:outline-none font-bold text-primary-950"
             >
               <option value="">Semua Provinsi</option>
               {provinsiList.map((p) => (
@@ -1341,7 +1341,7 @@ function AdminPendaftarContent() {
           </div>
 
           <div>
-            <label className="block text-[10px] font-black text-maroon-900 mb-2 leading-none uppercase tracking-widest">
+            <label className="block text-[10px] font-black text-primary-900 mb-2 leading-none uppercase tracking-widest">
               Kabupaten / Kota{" "}
               {kabupatenLoading && (
                 <span className="inline-block ml-2 text-[8px] text-stone-500 italic">
@@ -1355,7 +1355,7 @@ function AdminPendaftarContent() {
               disabled={kabupatenList.length === 0 || kabupatenLoading}
               aria-label="Filter kabupaten atau kota"
               aria-busy={kabupatenLoading}
-              className="w-full px-4 py-3 bg-gold-50/50 border border-gold-100 rounded-xl focus:border-maroon-500 focus:bg-white focus:outline-none font-bold text-maroon-950 disabled:opacity-50"
+              className="w-full px-4 py-3 bg-gold-50/50 border border-gold-100 rounded-xl focus:border-primary-500 focus:bg-white focus:outline-none font-bold text-primary-950 disabled:opacity-50"
             >
               <option value="">Semua Kabupaten / Kota</option>
               {kabupatenList.map((k) => (
@@ -1367,7 +1367,7 @@ function AdminPendaftarContent() {
           </div>
 
           <div>
-            <label className="block text-[10px] font-black text-maroon-900 mb-2 leading-none uppercase tracking-widest">
+            <label className="block text-[10px] font-black text-primary-900 mb-2 leading-none uppercase tracking-widest">
               Kecamatan{" "}
               {kecamatanLoading && (
                 <span className="inline-block ml-2 text-[8px] text-stone-500 italic">
@@ -1381,7 +1381,7 @@ function AdminPendaftarContent() {
               disabled={kecamatanList.length === 0 || kecamatanLoading}
               aria-label="Filter kecamatan"
               aria-busy={kecamatanLoading}
-              className="w-full px-4 py-3 bg-gold-50/50 border border-gold-100 rounded-xl focus:border-maroon-500 focus:bg-white focus:outline-none font-bold text-maroon-950 disabled:opacity-50"
+              className="w-full px-4 py-3 bg-gold-50/50 border border-gold-100 rounded-xl focus:border-primary-500 focus:bg-white focus:outline-none font-bold text-primary-950 disabled:opacity-50"
             >
               <option value="">Semua Kecamatan</option>
               {kecamatanList.map((c) => (
@@ -1393,7 +1393,7 @@ function AdminPendaftarContent() {
           </div>
 
           <div>
-            <label className="block text-[10px] font-black text-maroon-900 mb-2 leading-none uppercase tracking-widest">
+            <label className="block text-[10px] font-black text-primary-900 mb-2 leading-none uppercase tracking-widest">
               Kelurahan{" "}
               {kelurahanLoading && (
                 <span className="inline-block ml-2 text-[8px] text-stone-500 italic">
@@ -1407,7 +1407,7 @@ function AdminPendaftarContent() {
               disabled={kelurahanList.length === 0 || kelurahanLoading}
               aria-label="Filter kelurahan"
               aria-busy={kelurahanLoading}
-              className="w-full px-4 py-3 bg-gold-50/50 border border-gold-100 rounded-xl focus:border-maroon-500 focus:bg-white focus:outline-none font-bold text-maroon-950 disabled:opacity-50"
+              className="w-full px-4 py-3 bg-gold-50/50 border border-gold-100 rounded-xl focus:border-primary-500 focus:bg-white focus:outline-none font-bold text-primary-950 disabled:opacity-50"
             >
               <option value="">Semua Kelurahan</option>
               {kelurahanList.map((k) => (
@@ -1422,7 +1422,7 @@ function AdminPendaftarContent() {
 
       {/* Bulk Actions */}
       {selectedIds.length > 0 && (
-        <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl shadow-lg p-4 border-2 border-purple-200">
+        <div className="bg-gradient-to-r from-purple-50 to-primary-50 rounded-xl shadow-lg p-4 border-2 border-purple-200">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
@@ -1508,7 +1508,7 @@ function AdminPendaftarContent() {
         {loading ? (
           <div className="flex items-center justify-center py-20">
             <div className="text-center">
-              <Loader2 className="w-12 h-12 animate-spin text-blue-600 mx-auto mb-4" />
+              <Loader2 className="w-12 h-12 animate-spin text-primary-600 mx-auto mb-4" />
               <p className="text-stone-600">Memuat data pendaftar...</p>
             </div>
           </div>
@@ -1544,14 +1544,14 @@ function AdminPendaftarContent() {
                     </button>
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <span className="font-mono text-xs font-bold text-maroon-700 bg-maroon-50 px-2 py-0.5 rounded">
+                        <span className="font-mono text-xs font-bold text-primary-700 bg-primary-50 px-2 py-0.5 rounded">
                           {item.nomor_pendaftaran}
                         </span>
                         <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 bg-purple-100 text-purple-700 rounded-full">
                           {item.jenjang}
                         </span>
                       </div>
-                      <p className="font-black text-maroon-950 leading-tight text-sm">
+                      <p className="font-black text-primary-950 leading-tight text-sm">
                         {toTitleCase(item.nama_lengkap)}
                       </p>
                       <p className="text-xs text-stone-500 mt-0.5">
@@ -1579,7 +1579,7 @@ function AdminPendaftarContent() {
                                   100,
                                 );
                               }}
-                              className="px-2 py-1 bg-maroon-50 text-maroon-700 rounded-lg text-[9px] font-black uppercase flex items-center gap-1 border border-maroon-100"
+                              className="px-2 py-1 bg-primary-50 text-primary-700 rounded-lg text-[9px] font-black uppercase flex items-center gap-1 border border-primary-100"
                             >
                               <UploadCloud className="w-3 h-3" /> KK
                             </button>
@@ -1592,7 +1592,7 @@ function AdminPendaftarContent() {
                                   100,
                                 );
                               }}
-                              className="px-2 py-1 bg-maroon-50 text-maroon-700 rounded-lg text-[9px] font-black uppercase flex items-center gap-1 border border-maroon-100"
+                              className="px-2 py-1 bg-primary-50 text-primary-700 rounded-lg text-[9px] font-black uppercase flex items-center gap-1 border border-primary-100"
                             >
                               <UploadCloud className="w-3 h-3" /> Akta
                             </button>
@@ -1619,7 +1619,7 @@ function AdminPendaftarContent() {
                       <div className="flex gap-2 mt-3">
                         <Link
                           href={`/dashboard/admin/pendaftar/${item.id}`}
-                          className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-maroon-700 hover:bg-maroon-800 text-white rounded-xl text-xs font-black transition-all active:scale-95"
+                          className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-primary-700 hover:bg-primary-800 text-white rounded-xl text-xs font-black transition-all active:scale-95"
                         >
                           <Eye className="w-3.5 h-3.5" /> Buka Detail
                         </Link>
@@ -1658,12 +1658,12 @@ function AdminPendaftarContent() {
             {/* Desktop Table View — disembunyikan di mobile */}
             <div className="hidden md:block overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-linear-to-r from-maroon-50 to-gold-50 border-b border-gold-100">
+                <thead className="bg-linear-to-r from-primary-50 to-gold-50 border-b border-gold-100">
                   <tr>
                     <th className="px-4 py-4 text-center">
                       <button
                         onClick={handleSelectAll}
-                        className="text-maroon-600 hover:text-maroon-800"
+                        className="text-primary-600 hover:text-primary-800"
                       >
                         {selectedIds.length === pendaftar.length ? (
                           <CheckSquare className="w-5 h-5" />
@@ -1672,27 +1672,27 @@ function AdminPendaftarContent() {
                         )}
                       </button>
                     </th>
-                    <th className="px-4 py-4 text-left text-[10px] font-black text-maroon-900 uppercase tracking-widest">
+                    <th className="px-4 py-4 text-left text-[10px] font-black text-primary-900 uppercase tracking-widest">
                       No. Pendaftaran
                     </th>
-                    <th className="px-4 py-4 text-left text-[10px] font-black text-maroon-900 uppercase tracking-widest">
+                    <th className="px-4 py-4 text-left text-[10px] font-black text-primary-900 uppercase tracking-widest">
                       Nama Lengkap
                     </th>
-                    <th className="px-4 py-4 text-left text-[10px] font-black text-maroon-900 uppercase tracking-widest">
+                    <th className="px-4 py-4 text-left text-[10px] font-black text-primary-900 uppercase tracking-widest">
                       NIK
                     </th>
                     {(isAdminSuper || isBerkas) && (
-                      <th className="px-4 py-4 text-left text-[10px] font-black text-maroon-900 uppercase tracking-widest">
+                      <th className="px-4 py-4 text-left text-[10px] font-black text-primary-900 uppercase tracking-widest">
                         Kontak
                       </th>
                     )}
-                    <th className="px-4 py-4 text-left text-[10px] font-black text-maroon-900 uppercase tracking-widest">
+                    <th className="px-4 py-4 text-left text-[10px] font-black text-primary-900 uppercase tracking-widest">
                       Jenjang
                     </th>
-                    <th className="px-4 py-4 text-left text-[10px] font-black text-maroon-900 uppercase tracking-widest">
+                    <th className="px-4 py-4 text-left text-[10px] font-black text-primary-900 uppercase tracking-widest">
                       Status Pendaftaran
                     </th>
-                    <th className="px-4 py-4 text-left text-[10px] font-black text-maroon-900 uppercase tracking-widest">
+                    <th className="px-4 py-4 text-left text-[10px] font-black text-primary-900 uppercase tracking-widest">
                       Aksi
                     </th>
                   </tr>
@@ -1701,7 +1701,7 @@ function AdminPendaftarContent() {
                   {pendaftar.map((item) => (
                     <tr
                       key={item.id}
-                      className={`hover:bg-blue-50 transition-colors ${
+                      className={`hover:bg-primary-50 transition-colors ${
                         selectedIds.includes(item.id) ? "bg-purple-50" : ""
                       }`}
                     >
@@ -1719,8 +1719,8 @@ function AdminPendaftarContent() {
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap">
                         <div className="flex items-center gap-2">
-                          <Hash className="w-4 h-4 text-blue-600" />
-                          <span className="font-mono text-sm font-bold text-blue-700">
+                          <Hash className="w-4 h-4 text-primary-600" />
+                          <span className="font-mono text-sm font-bold text-primary-700">
                             {item.nomor_pendaftaran}
                           </span>
                         </div>
@@ -1775,7 +1775,7 @@ function AdminPendaftarContent() {
                         <div className="flex items-center gap-2">
                           <Link
                             href={`/dashboard/admin/pendaftar/${item.id}`}
-                            className="inline-flex items-center gap-2 px-3 py-1.5 bg-maroon-950 hover:bg-maroon-800 text-white rounded-xl text-[10px] font-black uppercase transition-all shadow-lg shadow-maroon-950/20 active:scale-95"
+                            className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary-950 hover:bg-primary-800 text-white rounded-xl text-[10px] font-black uppercase transition-all shadow-lg shadow-primary-950/20 active:scale-95"
                             title="Buka Detail"
                           >
                             <Eye className="w-3.5 h-3.5" />
@@ -1786,7 +1786,7 @@ function AdminPendaftarContent() {
                           {isBerkas && (
                             <Link
                               href={`/dashboard/admin/verifikasi-dokumen`}
-                              className="p-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all"
+                              className="p-1.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-all"
                               title="Verifikasi Dokumen"
                             >
                               <FileCheck className="w-4 h-4" />
@@ -1796,7 +1796,7 @@ function AdminPendaftarContent() {
                           {isKeuangan && (
                             <Link
                               href={`/dashboard/admin/verifikasi-pembayaran`}
-                              className="p-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition-all"
+                              className="p-1.5 bg-secondary-600 hover:bg-secondary-700 text-white rounded-lg transition-all"
                               title="Verifikasi Pembayaran"
                             >
                               <CreditCard className="w-4 h-4" />
@@ -1836,7 +1836,7 @@ function AdminPendaftarContent() {
             </div>
 
             {/* Pagination */}
-            <div className="bg-stone-50 px-6 py-4 border-t-2 border-blue-200">
+            <div className="bg-stone-50 px-6 py-4 border-t-2 border-primary-200">
               <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="text-sm text-stone-600 text-center md:text-left">
                   Menampilkan{" "}
@@ -1861,7 +1861,7 @@ function AdminPendaftarContent() {
                   <button
                     onClick={() => handlePageChange(pagination.page - 1)}
                     disabled={pagination.page === 1}
-                    className="px-3 md:px-4 py-2 bg-white border-2 border-stone-200 rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-50 hover:border-blue-300 transition-colors"
+                    className="px-3 md:px-4 py-2 bg-white border-2 border-stone-200 rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-50 hover:border-primary-300 transition-colors"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
@@ -1891,8 +1891,8 @@ function AdminPendaftarContent() {
                             onClick={() => handlePageChange(page)}
                             className={`w-8 h-8 md:w-10 md:h-10 rounded-lg font-medium transition-colors text-sm md:text-base ${
                               page === pagination.page
-                                ? "bg-maroon-700 text-white"
-                                : "bg-white border-2 border-stone-200 hover:bg-blue-50 hover:border-blue-300"
+                                ? "bg-primary-700 text-white"
+                                : "bg-white border-2 border-stone-200 hover:bg-primary-50 hover:border-primary-300"
                             }`}
                           >
                             {page}
@@ -1904,7 +1904,7 @@ function AdminPendaftarContent() {
                   <button
                     onClick={() => handlePageChange(pagination.page + 1)}
                     disabled={pagination.page === pagination.totalPages}
-                    className="px-3 md:px-4 py-2 bg-white border-2 border-stone-200 rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-50 hover:border-blue-300 transition-colors"
+                    className="px-3 md:px-4 py-2 bg-white border-2 border-stone-200 rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-50 hover:border-primary-300 transition-colors"
                   >
                     <ChevronRight className="w-5 h-5" />
                   </button>
@@ -1983,7 +1983,7 @@ function AdminPendaftarContent() {
                     })
                   }
                   placeholder="Tambahkan catatan khusus jika ada..."
-                  className="w-full px-4 py-3 border-2 border-stone-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 border-2 border-stone-200 rounded-xl focus:border-primary-500 focus:outline-none transition-colors"
                 />
               </div>
 
@@ -2004,7 +2004,7 @@ function AdminPendaftarContent() {
                       })
                     }
                     placeholder="https://docs.google.com/..."
-                    className="w-full pl-12 pr-4 py-3 border-2 border-stone-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors"
+                    className="w-full pl-12 pr-4 py-3 border-2 border-stone-200 rounded-xl focus:border-primary-500 focus:outline-none transition-colors"
                   />
                 </div>
                 <p className="text-xs text-stone-500 mt-2">
@@ -2026,7 +2026,7 @@ function AdminPendaftarContent() {
                 <button
                   type="submit"
                   disabled={isSubmittingAnnouncement}
-                  className="flex items-center gap-2 px-6 py-2.5 bg-maroon-700 hover:bg-maroon-800 text-white font-bold rounded-xl shadow-lg shadow-maroon-200 hover:shadow-maroon-300 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center gap-2 px-6 py-2.5 bg-primary-700 hover:bg-primary-800 text-white font-bold rounded-xl shadow-lg shadow-primary-200 hover:shadow-primary-300 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmittingAnnouncement ? (
                     <>
@@ -2073,8 +2073,8 @@ function AdminPendaftarContent() {
             </div>
 
             <div className="p-6 space-y-4">
-              <div className="bg-amber-50 border-2 border-amber-200 rounded-xl p-4">
-                <p className="text-sm text-amber-800 font-medium">
+              <div className="bg-secondary-50 border-2 border-secondary-200 rounded-xl p-4">
+                <p className="text-sm text-secondary-800 font-medium">
                   ⚠️ Anda akan menghapus data{" "}
                   <strong>{toTitleCase(deletingPendaftar.nama_lengkap)}</strong>{" "}
                   ({deletingPendaftar.nomor_pendaftaran}). Data akan dipindahkan
@@ -2145,7 +2145,7 @@ export default function AdminPendaftarPage() {
       fallback={
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
-            <Loader2 className="w-12 h-12 animate-spin text-blue-600 mx-auto mb-4" />
+            <Loader2 className="w-12 h-12 animate-spin text-primary-600 mx-auto mb-4" />
             <p className="text-stone-600 font-medium">Memuat halaman...</p>
           </div>
         </div>

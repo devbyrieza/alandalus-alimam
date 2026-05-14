@@ -37,7 +37,7 @@ export default function UrgencyBar() {
   if (!visible || !countdown) return null;
 
   return (
-    <div className="relative w-full bg-maroon-950 text-white overflow-hidden">
+    <div className="relative w-full bg-primary-950 text-white overflow-hidden">
       {/* On mobile: 2-row layout. On sm+: single row */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-y-1 gap-x-3 px-3 sm:px-8 py-1.5 sm:py-2">
         {/* Row 1 (mobile) / Left section (desktop): Badge + Countdown */}
@@ -45,7 +45,7 @@ export default function UrgencyBar() {
           {/* Badge */}
           <div className="flex items-center gap-1.5 shrink-0">
             <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse shrink-0" />
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-maroon-200 whitespace-nowrap">
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-primary-200 whitespace-nowrap">
               PPDB 2026/2027 Dibuka
             </span>
           </div>
@@ -92,14 +92,14 @@ export default function UrgencyBar() {
 
         {/* Row 2 (mobile) / Right section (desktop): hint + CTA */}
         <div className="flex items-center gap-2">
-          <span className="text-[9px] sm:text-xs text-maroon-300 whitespace-nowrap">
+          <span className="text-[9px] sm:text-xs text-primary-300 whitespace-nowrap">
             lagi • Kuota terbatas
           </span>
 
           {/* CTA Button */}
           <Link
             href="/ppdb"
-            className="inline-flex items-center gap-1 sm:gap-1.5 px-3 py-1 rounded-full bg-gold-400 text-maroon-950 text-[10px] sm:text-[11px] font-black uppercase tracking-widest hover:bg-white transition-colors whitespace-nowrap shrink-0 shadow-sm"
+            className="inline-flex items-center gap-1 sm:gap-1.5 px-3 py-1 rounded-full bg-gold-400 text-primary-950 text-[10px] sm:text-[11px] font-black uppercase tracking-widest hover:bg-white transition-colors whitespace-nowrap shrink-0 shadow-sm"
           >
             <Zap className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
             Daftar Sekarang
@@ -108,7 +108,7 @@ export default function UrgencyBar() {
           {/* Dismiss button - mobile friendly, inline */}
           <button
             onClick={() => setVisible(false)}
-            className="sm:hidden text-maroon-400 hover:text-white transition-colors p-0.5"
+            className="sm:hidden text-primary-400 hover:text-white transition-colors p-0.5"
             aria-label="Tutup"
           >
             <X className="w-3.5 h-3.5" />
@@ -119,7 +119,7 @@ export default function UrgencyBar() {
       {/* Dismiss button - desktop, absolute */}
       <button
         onClick={() => setVisible(false)}
-        className="hidden sm:block absolute right-4 top-1/2 -translate-y-1/2 text-maroon-400 hover:text-white transition-colors p-1"
+        className="hidden sm:block absolute right-4 top-1/2 -translate-y-1/2 text-primary-400 hover:text-white transition-colors p-1"
         aria-label="Tutup"
       >
         <X className="w-4 h-4" />

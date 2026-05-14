@@ -118,8 +118,8 @@ export default function DashboardTabs({ statusProses }: DashboardTabsProps) {
               href={tab.href}
               className={`flex-shrink-0 flex items-center gap-2 px-4 py-3 rounded-2xl transition-all duration-300 relative group ${
                 isActive
-                  ? "bg-maroon-900 text-white shadow-maroon-200 shadow-lg scale-105"
-                  : "text-ink-600 hover:bg-gold-50 hover:text-maroon-900"
+                  ? "bg-primary-900 text-white shadow-primary-200 shadow-lg scale-105"
+                  : "text-ink-600 hover:bg-gold-50 hover:text-primary-900"
               }`}
             >
               <Icon

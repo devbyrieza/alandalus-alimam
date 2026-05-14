@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
    BUTTON — Al Imam Edition
    Token-aligned dengan globals.css alimam:
    · Warna   : maroon, cream, gold, ink
-   · Shadow  : --shadow-maroon, --shadow-maroon-lg, --shadow-gold, --shadow-cream
+   · Shadow  : --shadow-primary, --shadow-primary-lg, --shadow-gold, --shadow-secondary
    · Radius  : --radius-full (pill), --radius-md, --radius-lg
    · Easing  : --ease-spring, --ease-smooth
    · Duration: --duration-fast, --duration-base
@@ -26,9 +26,9 @@ const buttonVariants = cva(
     /* Focus ring — branded maroon */
     "focus-visible:outline-none",
     "focus-visible:ring-2",
-    "focus-visible:ring-[var(--color-maroon-600)]",
+    "focus-visible:ring-[var(--color-primary-600)]",
     "focus-visible:ring-offset-2",
-    "focus-visible:ring-offset-[var(--color-cream-50)]",
+    "focus-visible:ring-offset-[var(--color-secondary-50)]",
     /* Disabled */
     "disabled:pointer-events-none disabled:opacity-45",
     /* Active scale — semua variant */
@@ -40,15 +40,15 @@ const buttonVariants = cva(
         /* ─── PRIMARY — Maroon gradient utama ─── */
         primary: [
           "relative overflow-hidden",
-          "bg-gradient-to-br from-[var(--color-maroon-700)] to-[var(--color-maroon-950)]",
-          "text-[var(--color-cream-100)]",
-          "[box-shadow:var(--shadow-maroon)]",
+          "bg-gradient-to-br from-[var(--color-primary-700)] to-[var(--color-primary-950)]",
+          "text-[var(--color-secondary-100)]",
+          "[box-shadow:var(--shadow-primary)]",
           /* Shine overlay */
           "before:absolute before:inset-0 before:rounded-[inherit]",
           "before:bg-gradient-to-br before:from-white/[0.10] before:to-transparent",
           "before:pointer-events-none",
           "hover:-translate-y-[2px]",
-          "hover:[box-shadow:var(--shadow-maroon-lg)]",
+          "hover:[box-shadow:var(--shadow-primary-lg)]",
           "hover:brightness-[1.07]",
           "active:translate-y-0",
         ].join(" "),
@@ -56,11 +56,11 @@ const buttonVariants = cva(
         /* ─── SECONDARY — Putih + border maroon ─── */
         secondary: [
           "bg-[var(--color-white)]",
-          "text-[var(--color-maroon-800)]",
-          "border border-[var(--color-maroon-200)]",
+          "text-[var(--color-primary-800)]",
+          "border border-[var(--color-primary-200)]",
           "[box-shadow:var(--shadow-xs)]",
-          "hover:bg-[var(--color-maroon-50)]",
-          "hover:border-[var(--color-maroon-400)]",
+          "hover:bg-[var(--color-primary-50)]",
+          "hover:border-[var(--color-primary-400)]",
           "hover:[box-shadow:var(--shadow-sm)]",
           "hover:-translate-y-[1px]",
           "active:translate-y-0",
@@ -69,10 +69,10 @@ const buttonVariants = cva(
         /* ─── CREAM — Cream gradient, hangat & elegan ─── */
         cream: [
           "relative overflow-hidden",
-          "bg-gradient-to-br from-[var(--color-cream-200)] to-[var(--color-cream-400)]",
-          "text-[var(--color-maroon-900)]",
-          "border border-[var(--color-cream-400)]",
-          "[box-shadow:var(--shadow-cream)]",
+          "bg-gradient-to-br from-[var(--color-secondary-200)] to-[var(--color-secondary-400)]",
+          "text-[var(--color-primary-900)]",
+          "border border-[var(--color-secondary-400)]",
+          "[box-shadow:var(--shadow-secondary)]",
           "before:absolute before:inset-0 before:rounded-[inherit]",
           "before:bg-gradient-to-br before:from-white/20 before:to-transparent",
           "before:pointer-events-none",
@@ -86,7 +86,7 @@ const buttonVariants = cva(
         gold: [
           "relative overflow-hidden",
           "bg-gradient-to-br from-[var(--color-gold-300)] to-[var(--color-gold-500)]",
-          "text-[var(--color-maroon-950)]",
+          "text-[var(--color-primary-950)]",
           "[box-shadow:var(--shadow-gold)]",
           "before:absolute before:inset-0 before:rounded-[inherit]",
           "before:bg-gradient-to-br before:from-white/20 before:to-transparent",
@@ -100,12 +100,12 @@ const buttonVariants = cva(
         /* ─── OUTLINE — Border maroon, fill on hover ─── */
         outline: [
           "bg-transparent",
-          "text-[var(--color-maroon-700)]",
-          "border-[1.5px] border-[var(--color-maroon-300)]",
-          "hover:bg-[var(--color-maroon-950)]",
-          "hover:text-[var(--color-cream-100)]",
-          "hover:border-[var(--color-maroon-950)]",
-          "hover:[box-shadow:var(--shadow-maroon)]",
+          "text-[var(--color-primary-700)]",
+          "border-[1.5px] border-[var(--color-primary-300)]",
+          "hover:bg-[var(--color-primary-950)]",
+          "hover:text-[var(--color-secondary-100)]",
+          "hover:border-[var(--color-primary-950)]",
+          "hover:[box-shadow:var(--shadow-primary)]",
           "hover:-translate-y-[1px]",
           "active:translate-y-0",
         ].join(" "),
@@ -115,9 +115,9 @@ const buttonVariants = cva(
           "bg-transparent",
           "text-[var(--color-ink-600)]",
           "border border-transparent",
-          "hover:bg-[var(--color-maroon-50)]",
-          "hover:text-[var(--color-maroon-800)]",
-          "hover:border-[var(--color-maroon-100)]",
+          "hover:bg-[var(--color-primary-50)]",
+          "hover:text-[var(--color-primary-800)]",
+          "hover:border-[var(--color-primary-100)]",
           "[transition-timing-function:var(--ease-smooth)]",
           "duration-[var(--duration-fast)]",
         ].join(" "),
@@ -136,9 +136,9 @@ const buttonVariants = cva(
         /* ─── LINK — Inline text link, minimal ─── */
         link: [
           "bg-transparent p-0 h-auto",
-          "text-[var(--color-maroon-700)]",
+          "text-[var(--color-primary-700)]",
           "font-medium underline-offset-4",
-          "hover:underline hover:text-[var(--color-maroon-950)]",
+          "hover:underline hover:text-[var(--color-primary-950)]",
           "[transition-timing-function:var(--ease-smooth)]",
           "duration-[var(--duration-fast)]",
           "active:scale-100",

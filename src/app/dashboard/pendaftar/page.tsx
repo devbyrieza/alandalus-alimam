@@ -120,7 +120,7 @@ export default function DashboardPendaftarPage() {
 
 function HeroBanner({ nama, nomorPendaftaran, lastUpdate }: any) {
   return (
-    <div className="relative overflow-hidden rounded-[2.5rem] md:rounded-[3.5rem] bg-linear-to-br from-maroon-700 to-maroon-900 text-white p-8 md:p-16 shadow-2xl border border-maroon-600/50">
+    <div className="relative overflow-hidden rounded-[2.5rem] md:rounded-[3.5rem] bg-linear-to-br from-primary-700 to-primary-900 text-white p-8 md:p-16 shadow-2xl border border-primary-600/50">
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gold-400/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/2" />
       <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
         <div className="flex-1 space-y-6">
@@ -128,7 +128,7 @@ function HeroBanner({ nama, nomorPendaftaran, lastUpdate }: any) {
             <span className="px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-[10px] tracking-[0.2em] font-black uppercase border border-white/20 text-gold-200">
               PENDAFTARAN SANTRI BARU
             </span>
-            <span className="flex items-center gap-2 text-xs font-bold text-maroon-100/70">
+            <span className="flex items-center gap-2 text-xs font-bold text-primary-100/70">
               <Clock className="w-4 h-4" />
               Update:{" "}
               {new Date(lastUpdate).toLocaleDateString("id-ID", {
@@ -144,7 +144,7 @@ function HeroBanner({ nama, nomorPendaftaran, lastUpdate }: any) {
               {nama}!
             </span>
           </h1>
-          <p className="text-maroon-100 text-lg md:text-xl font-medium max-w-xl opacity-80 leading-relaxed italic border-l-4 border-gold-500/50 pl-6">
+          <p className="text-primary-100 text-lg md:text-xl font-medium max-w-xl opacity-80 leading-relaxed italic border-l-4 border-gold-500/50 pl-6">
             "Kami berkomitmen membimbing putra-putri Anda menjadi generasi
             Qur'ani yang berakhlak mulia."
           </p>
@@ -166,7 +166,7 @@ function GuidedActionCard({ nextStep }: any) {
   return (
     <div className="bg-white rounded-[2.5rem] border-2 border-gold-100 shadow-xl shadow-gold-500/5 overflow-hidden group">
       <div className="flex flex-col md:flex-row items-stretch">
-        <div className="bg-gold-400 p-8 md:p-12 flex flex-col items-center justify-center text-maroon-950 min-w-[200px]">
+        <div className="bg-gold-400 p-8 md:p-12 flex flex-col items-center justify-center text-primary-950 min-w-[200px]">
           <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
             <Target className="w-8 h-8" />
           </div>
@@ -177,12 +177,12 @@ function GuidedActionCard({ nextStep }: any) {
         </div>
         <div className="flex-1 p-8 md:p-12 space-y-6">
           <div>
-            <h2 className="text-2xl md:text-3xl font-black text-maroon-950 mb-2">
+            <h2 className="text-2xl md:text-3xl font-black text-primary-950 mb-2">
               Apa yang harus saya lakukan?
             </h2>
             <p className="text-ink-600 font-medium text-lg italic">
               "Silakan tekan tombol di samping untuk{" "}
-              <span className="text-maroon-700 font-black not-italic">
+              <span className="text-primary-700 font-black not-italic">
                 {nextStep.action.toLowerCase()}
               </span>
               ."
@@ -191,7 +191,7 @@ function GuidedActionCard({ nextStep }: any) {
           <div className="flex flex-wrap gap-4">
             <Link
               href={nextStep.href}
-              className="px-10 py-5 bg-maroon-700 hover:bg-maroon-800 text-white rounded-2xl font-black uppercase text-sm shadow-2xl shadow-maroon-200 transition-all hover:scale-105 active:scale-95 flex items-center gap-3 group/btn"
+              className="px-10 py-5 bg-primary-700 hover:bg-primary-800 text-white rounded-2xl font-black uppercase text-sm shadow-2xl shadow-primary-200 transition-all hover:scale-105 active:scale-95 flex items-center gap-3 group/btn"
             >
               Mulai Sekarang{" "}
               <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-2 transition-transform" />
@@ -210,8 +210,8 @@ function StatusGrid({ status, statusLabel, pengumuman }: any) {
       val: statusLabel,
       desc: "Posisi pendaftaran Anda sekarang",
       icon: ShieldCheck,
-      color: "text-maroon-600",
-      bg: "bg-maroon-50",
+      color: "text-primary-600",
+      bg: "bg-primary-50",
     },
     {
       label: "Ujian Seleksi",
@@ -248,7 +248,7 @@ function StatusGrid({ status, statusLabel, pengumuman }: any) {
           <p className="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-1">
             {item.label}
           </p>
-          <p className="text-2xl font-black text-maroon-950 mb-2 leading-none">
+          <p className="text-2xl font-black text-primary-950 mb-2 leading-none">
             {item.val}
           </p>
           <p className="text-xs font-medium text-stone-400 italic">
@@ -262,8 +262,8 @@ function StatusGrid({ status, statusLabel, pengumuman }: any) {
 
 function SupportCenter() {
   return (
-    <div className="bg-maroon-950 text-white rounded-[3rem] p-10 md:p-16 relative overflow-hidden group shadow-2xl">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-maroon-800 rounded-full blur-[100px] opacity-20 -translate-y-1/2 translate-x-1/2" />
+    <div className="bg-primary-950 text-white rounded-[3rem] p-10 md:p-16 relative overflow-hidden group shadow-2xl">
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary-800 rounded-full blur-[100px] opacity-20 -translate-y-1/2 translate-x-1/2" />
       <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12 text-center lg:text-left">
         <div className="flex-1 space-y-4">
           <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/10 rounded-full border border-white/10">
@@ -276,7 +276,7 @@ function SupportCenter() {
             Bingung Harus Ke Mana? <br />
             <span className="text-gold-400">Tanya Panitia Yuk!</span>
           </h3>
-          <p className="text-maroon-200 text-lg md:text-xl font-medium opacity-80 max-w-2xl">
+          <p className="text-primary-200 text-lg md:text-xl font-medium opacity-80 max-w-2xl">
             Jangan ragu untuk bertanya. Tim kami siap membantu Ayah/Bunda
             menyelesaikan pendaftaran dengan mudah.
           </p>
@@ -284,7 +284,7 @@ function SupportCenter() {
         <a
           href="https://wa.me/6281285300800"
           target="_blank"
-          className="px-12 py-5 bg-gold-400 text-maroon-950 font-black text-sm uppercase tracking-widest rounded-[1.5rem] hover:bg-gold-300 shadow-xl transition-all hover:scale-105 active:scale-95 text-center"
+          className="px-12 py-5 bg-gold-400 text-primary-950 font-black text-sm uppercase tracking-widest rounded-[1.5rem] hover:bg-gold-300 shadow-xl transition-all hover:scale-105 active:scale-95 text-center"
         >
           Chat WhatsApp Panitia
         </a>
@@ -298,7 +298,7 @@ function SupportCenter() {
 function LoadingState() {
   return (
     <div className="flex items-center justify-center min-vh-50 p-20">
-      <Clock className="w-10 h-10 animate-spin text-maroon-600" />
+      <Clock className="w-10 h-10 animate-spin text-primary-600" />
     </div>
   );
 }

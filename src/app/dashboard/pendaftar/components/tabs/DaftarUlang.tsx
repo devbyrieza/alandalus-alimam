@@ -149,7 +149,7 @@ export default function DaftarUlangTab() {
   if (loading) {
     return (
       <div className="flex justify-center p-12">
-        <Loader2 className="w-8 h-8 animate-spin text-maroon-600" />
+        <Loader2 className="w-8 h-8 animate-spin text-primary-600" />
       </div>
     );
   }
@@ -168,7 +168,7 @@ export default function DaftarUlangTab() {
         <div className="bg-slate-100 rounded-full p-4 w-20 h-20 mx-auto mb-6 flex items-center justify-center">
           <Lock className="w-10 h-10 text-slate-400" />
         </div>
-        <h2 className="text-2xl font-black text-maroon-950 mb-2">
+        <h2 className="text-2xl font-black text-primary-950 mb-2">
           Belum Tersedia
         </h2>
         <p className="text-ink-500">
@@ -258,7 +258,7 @@ export default function DaftarUlangTab() {
   return (
     <div className="space-y-8 max-w-4xl mx-auto pb-12">
       {/* Header */}
-      <div className="bg-linear-to-br from-maroon-700 to-maroon-900 rounded-2xl p-8 text-white shadow-lg relative overflow-hidden">
+      <div className="bg-linear-to-br from-primary-700 to-primary-900 rounded-2xl p-8 text-white shadow-lg relative overflow-hidden">
         <div className="absolute top-0 right-0 p-4 opacity-10">
           <CheckCircle className="w-32 h-32" />
         </div>
@@ -272,12 +272,12 @@ export default function DaftarUlangTab() {
 
       {/* Info Tagihan */}
       <div className="grid md:grid-cols-2 gap-6">
-        <div className="bg-white p-6 rounded-xl border border-maroon-100 shadow-sm space-y-4">
+        <div className="bg-white p-6 rounded-xl border border-primary-100 shadow-sm space-y-4">
           <div>
-            <h3 className="text-sm font-black text-maroon-900 uppercase tracking-wider mb-2">
+            <h3 className="text-sm font-black text-primary-900 uppercase tracking-wider mb-2">
               Total Biaya Masuk
             </h3>
-            <div className="text-3xl font-black text-maroon-600">
+            <div className="text-3xl font-black text-primary-600">
               Rp 8.500.000
             </div>
           </div>
@@ -293,19 +293,19 @@ export default function DaftarUlangTab() {
           </div>
         </div>
 
-        <div className="bg-maroon-50 p-6 rounded-xl border border-maroon-100 flex flex-col justify-between">
+        <div className="bg-primary-50 p-6 rounded-xl border border-primary-100 flex flex-col justify-between">
           <div>
-            <h3 className="text-sm font-black text-maroon-800 mb-3 flex items-center gap-2">
+            <h3 className="text-sm font-black text-primary-800 mb-3 flex items-center gap-2">
               <AlertCircle className="w-4 h-4" /> Info Pembayaran & Metode
             </h3>
 
             {/* Opsi Metode Pembayaran */}
-            <div className="grid grid-cols-2 gap-2 mb-4 bg-white p-1 rounded-xl shadow-sm border border-maroon-100">
+            <div className="grid grid-cols-2 gap-2 mb-4 bg-white p-1 rounded-xl shadow-sm border border-primary-100">
               <button
                 onClick={() => setPaymentMethod("transfer")}
                 className={`py-2 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 ${
                   paymentMethod === "transfer"
-                    ? "bg-maroon-600 text-white shadow-md"
+                    ? "bg-primary-600 text-white shadow-md"
                     : "text-slate-500 hover:bg-slate-50"
                 }`}
               >
@@ -315,14 +315,14 @@ export default function DaftarUlangTab() {
                 <div className="flex items-center gap-1.5">
                   <CreditCardIcon className="w-4 h-4" /> Virtual Account
                 </div>
-                <span className="text-[9px] bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full leading-none mt-0.5">
+                <span className="text-[9px] bg-secondary-100 text-secondary-700 px-1.5 py-0.5 rounded-full leading-none mt-0.5">
                   Segera Hadir
                 </span>
               </div>
             </div>
 
             {paymentMethod === "transfer" && (
-              <div className="mb-4 p-3 bg-white border border-maroon-100 rounded-lg animate-in fade-in slide-in-from-top-1">
+              <div className="mb-4 p-3 bg-white border border-primary-100 rounded-lg animate-in fade-in slide-in-from-top-1">
                 <div className="flex items-start justify-between">
                   <div>
                     <p className="text-[10px] font-bold text-ink-400 uppercase tracking-widest mb-2 text-left">
@@ -336,16 +336,16 @@ export default function DaftarUlangTab() {
                         Bank Syariah Indonesia
                       </span>
                     </div>
-                    <p className="font-black text-maroon-950 text-2xl tracking-tight leading-none mb-2">
+                    <p className="font-black text-primary-950 text-2xl tracking-tight leading-none mb-2">
                       4222224441
                     </p>
-                    <p className="text-xs font-bold text-maroon-700/70 text-left italic">
+                    <p className="text-xs font-bold text-primary-700/70 text-left italic">
                       a.n PP Al Andalus Al Imam
                     </p>
                   </div>
                   <button
                     onClick={() => handleCopy("4222224441")}
-                    className="p-2 hover:bg-maroon-50 text-maroon-600 rounded-lg transition-colors flex flex-col items-center gap-1 group"
+                    className="p-2 hover:bg-primary-50 text-primary-600 rounded-lg transition-colors flex flex-col items-center gap-1 group"
                   >
                     {copied ? (
                       <CheckCircle className="w-5 h-5 text-emerald-500" />
@@ -360,7 +360,7 @@ export default function DaftarUlangTab() {
               </div>
             )}
 
-            <ul className="text-sm text-maroon-700 space-y-1.5 list-disc list-inside font-medium mb-4">
+            <ul className="text-sm text-primary-700 space-y-1.5 list-disc list-inside font-medium mb-4">
               <li>
                 Dapat dibayar <strong>Lunas</strong> atau{" "}
                 <strong>Dicicil</strong>.
@@ -378,8 +378,8 @@ export default function DaftarUlangTab() {
               </li>
             </ul>
           </div>
-          <div className="pt-4 border-t border-maroon-200">
-            <span className="text-xs text-maroon-600 block mb-2 leading-tight">
+          <div className="pt-4 border-t border-primary-200">
+            <span className="text-xs text-primary-600 block mb-2 leading-tight">
               Butuh bantuan, keringanan, atau konfirmasi biaya?
             </span>
             <div className="grid grid-cols-2 gap-2 mt-2">
@@ -450,7 +450,7 @@ export default function DaftarUlangTab() {
       <div className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
         <div className="p-6 border-b border-ink-100 bg-surface-50 flex justify-between items-center">
           <h3 className="font-black text-lg text-ink-900 flex items-center gap-2">
-            <FileText className="w-5 h-5 text-maroon-600" />
+            <FileText className="w-5 h-5 text-primary-600" />
             Form Pembayaran & Konfirmasi
           </h3>
           {/* Badge Status Pembayaran User bisa ditaruh sini jika fetch history */}
@@ -470,7 +470,7 @@ export default function DaftarUlangTab() {
                 }
                 className={`p-4 rounded-xl border-2 transition-all text-left flex flex-col ${
                   numericNominal === 8500000
-                    ? "border-maroon-500 bg-maroon-50/50 ring-2 ring-maroon-500/20 shadow-md"
+                    ? "border-primary-500 bg-primary-50/50 ring-2 ring-primary-500/20 shadow-md"
                     : "border-slate-200 bg-white hover:bg-slate-50"
                 }`}
               >
@@ -479,7 +479,7 @@ export default function DaftarUlangTab() {
                     Bayar Lunas
                   </span>
                   {numericNominal === 8500000 ? (
-                    <CheckCircle className="w-5 h-5 text-maroon-600" />
+                    <CheckCircle className="w-5 h-5 text-primary-600" />
                   ) : (
                     <div className="w-5 h-5 rounded-full border-2 border-slate-300" />
                   )}
@@ -487,7 +487,7 @@ export default function DaftarUlangTab() {
                 <span className="text-[11px] text-slate-500 leading-tight">
                   Pelunasan sekaligus seluruh biaya administrasi.
                 </span>
-                <span className="text-sm font-black text-maroon-600 mt-2">
+                <span className="text-sm font-black text-primary-600 mt-2">
                   Rp 8.500.000
                 </span>
               </button>
@@ -499,7 +499,7 @@ export default function DaftarUlangTab() {
                 }
                 className={`p-4 rounded-xl border-2 transition-all text-left flex flex-col ${
                   numericNominal >= 4250000 && numericNominal < 8500000
-                    ? "border-maroon-500 bg-maroon-50/50 ring-2 ring-maroon-500/20 shadow-md"
+                    ? "border-primary-500 bg-primary-50/50 ring-2 ring-primary-500/20 shadow-md"
                     : "border-slate-200 bg-white hover:bg-slate-50"
                 }`}
               >
@@ -508,7 +508,7 @@ export default function DaftarUlangTab() {
                     Bayar Dicicil
                   </span>
                   {numericNominal >= 4250000 && numericNominal < 8500000 ? (
-                    <CheckCircle className="w-5 h-5 text-maroon-600" />
+                    <CheckCircle className="w-5 h-5 text-primary-600" />
                   ) : (
                     <div className="w-5 h-5 rounded-full border-2 border-slate-300" />
                   )}
@@ -516,7 +516,7 @@ export default function DaftarUlangTab() {
                 <span className="text-[11px] text-slate-500 leading-tight">
                   Pembayaran bertahap minimal 50% di awal.
                 </span>
-                <span className="text-sm font-black text-maroon-600 mt-2">
+                <span className="text-sm font-black text-primary-600 mt-2">
                   Min. Rp 4.250.000
                 </span>
               </button>
@@ -534,7 +534,7 @@ export default function DaftarUlangTab() {
                   type="text"
                   readOnly
                   value={cicilanKe}
-                  className="w-full px-4 py-3 text-lg font-black text-maroon-700 border border-maroon-200 bg-maroon-50 rounded-xl focus:outline-none transition-all shadow-inner text-center"
+                  className="w-full px-4 py-3 text-lg font-black text-primary-700 border border-primary-200 bg-primary-50 rounded-xl focus:outline-none transition-all shadow-inner text-center"
                 />
                 <p className="text-[10px] text-slate-500 mt-1 font-medium italic">
                   * Otomatis dihitung sistem
@@ -561,7 +561,7 @@ export default function DaftarUlangTab() {
                     new Intl.NumberFormat("id-ID").format(parseInt(val || "0")),
                   );
                 }}
-                className="w-full pl-12 pr-4 py-3 text-lg font-black text-ink-900 border border-ink-300 rounded-xl focus:ring-2 focus:ring-maroon-500 focus:border-maroon-500 transition-all shadow-inner"
+                className="w-full pl-12 pr-4 py-3 text-lg font-black text-ink-900 border border-ink-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all shadow-inner"
                 placeholder="0"
               />
             </div>
@@ -577,8 +577,8 @@ export default function DaftarUlangTab() {
                     tipeBayar === "LUNAS"
                       ? "bg-emerald-100 text-emerald-700 border-emerald-200"
                       : tipeBayar.includes("50% ATAU LEBIH")
-                        ? "bg-maroon-100 text-maroon-700 border-maroon-200"
-                        : "bg-amber-100 text-amber-700 border-amber-200"
+                        ? "bg-primary-100 text-primary-700 border-primary-200"
+                        : "bg-secondary-100 text-secondary-700 border-secondary-200"
                   }`}
                 >
                   {tipeBayar}
@@ -591,21 +591,21 @@ export default function DaftarUlangTab() {
              tipeBayar === "CICILAN DIBAWAH 50%" && 
              !hasExistingVerifiedPayment && 
              totalPaid < 4250000 && (
-              <div className="mt-4 p-4 bg-amber-50 border border-amber-200 rounded-xl space-y-3 animate-in fade-in slide-in-from-top-1">
-                <div className="flex items-center gap-2 text-amber-800">
+              <div className="mt-4 p-4 bg-secondary-50 border border-secondary-200 rounded-xl space-y-3 animate-in fade-in slide-in-from-top-1">
+                <div className="flex items-center gap-2 text-secondary-800">
                   <AlertCircle className="w-4 h-4" />
                   <span className="font-black text-xs uppercase tracking-wider">
                     Permohonan Keringanan Khusus
                   </span>
                 </div>
-                <p className="text-[11px] text-amber-700 leading-relaxed font-medium">
+                <p className="text-[11px] text-secondary-700 leading-relaxed font-medium">
                   Pembayaran di bawah 50% hanya diizinkan bagi wali santri yang memiliki kendala finansial mendesak. Silakan tuliskan alasan singkat Anda di bawah ini agar dapat dipertimbangkan oleh tim Finance.
                 </p>
                 <textarea
                   value={keringananReason}
                   onChange={(e) => setKeringananReason(e.target.value)}
                   placeholder="Contoh: Sedang ada musibah keluarga, mohon keringanan cicilan pertama 1jt dulu..."
-                  className="w-full p-3 text-xs border border-amber-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all bg-white font-medium min-h-[80px]"
+                  className="w-full p-3 text-xs border border-secondary-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500 transition-all bg-white font-medium min-h-[80px]"
                   required
                 />
               </div>
@@ -627,8 +627,8 @@ export default function DaftarUlangTab() {
               <div className="flex flex-col items-center gap-2 pointer-events-none">
                 {file ? (
                   <>
-                    <FileText className="w-8 h-8 text-maroon-600" />
-                    <span className="font-black text-maroon-700">
+                    <FileText className="w-8 h-8 text-primary-600" />
+                    <span className="font-black text-primary-700">
                       {file.name}
                     </span>
                     <span className="text-xs text-ink-400">
@@ -658,7 +658,7 @@ export default function DaftarUlangTab() {
               type="checkbox"
               checked={pernyataan}
               onChange={(e) => setPernyataan(e.target.checked)}
-              className="mt-1 w-5 h-5 text-maroon-600 rounded border-ink-300 focus:ring-maroon-500"
+              className="mt-1 w-5 h-5 text-primary-600 rounded border-ink-300 focus:ring-primary-500"
             />
             <div className="text-sm text-slate-600">
               <span className="font-bold text-slate-800 block mb-1">
@@ -673,7 +673,7 @@ export default function DaftarUlangTab() {
           <button
             type="submit"
             disabled={submitting || !pernyataan || !file || !nominal}
-            className="w-full py-4 bg-gold-400 hover:bg-gold-300 text-maroon-950 font-black rounded-xl shadow-xl shadow-gold-400/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 border border-gold-500"
+            className="w-full py-4 bg-gold-400 hover:bg-gold-300 text-primary-950 font-black rounded-xl shadow-xl shadow-gold-400/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 border border-gold-500"
           >
             {submitting ? (
               <Loader2 className="animate-spin" />

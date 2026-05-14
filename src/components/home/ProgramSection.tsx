@@ -92,23 +92,23 @@ function getTokens(variant: ProgramVariant) {
     case "maroon":
       return {
         accentBar:
-          "bg-gradient-to-r from-maroon-700 via-maroon-500 to-maroon-300",
-        corner: "bg-maroon-50",
-        icon: "bg-maroon-600 text-white ring-1 ring-maroon-200",
-        subtitleText: "text-maroon-500",
-        dividerLine: "bg-maroon-200",
-        checkBg: "bg-maroon-50 border-maroon-200",
+          "bg-gradient-to-r from-primary-700 via-primary-500 to-primary-300",
+        corner: "bg-primary-50",
+        icon: "bg-primary-600 text-white ring-1 ring-primary-200",
+        subtitleText: "text-primary-500",
+        dividerLine: "bg-primary-200",
+        checkBg: "bg-primary-50 border-primary-200",
         checkHover:
-          "group-hover/item:bg-maroon-600 group-hover/item:border-maroon-600",
-        checkIcon: "text-maroon-600 group-hover/item:text-white",
+          "group-hover/item:bg-primary-600 group-hover/item:border-primary-600",
+        checkIcon: "text-primary-600 group-hover/item:text-white",
         ctaBtn:
-          "bg-white border-maroon-200 text-maroon-800 hover:bg-maroon-700 hover:border-maroon-700 hover:text-white shadow-sm hover:shadow-md",
+          "bg-white border-primary-200 text-primary-800 hover:bg-primary-700 hover:border-primary-700 hover:text-white shadow-sm hover:shadow-md",
       };
     case "gold":
       return {
         accentBar: "bg-gradient-to-r from-gold-500 via-gold-400 to-gold-200",
         corner: "bg-gold-50",
-        icon: "bg-gold-400 text-maroon-950 ring-1 ring-gold-200",
+        icon: "bg-gold-400 text-primary-950 ring-1 ring-gold-200",
         subtitleText: "text-gold-600",
         dividerLine: "bg-gold-300",
         checkBg: "bg-gold-50 border-gold-200",
@@ -116,21 +116,21 @@ function getTokens(variant: ProgramVariant) {
           "group-hover/item:bg-gold-500 group-hover/item:border-gold-500",
         checkIcon: "text-gold-600 group-hover/item:text-white",
         ctaBtn:
-          "bg-white border-gold-300 text-maroon-800 hover:bg-gold-400 hover:border-gold-400 hover:text-maroon-950 shadow-sm hover:shadow-md",
+          "bg-white border-gold-300 text-primary-800 hover:bg-gold-400 hover:border-gold-400 hover:text-primary-950 shadow-sm hover:shadow-md",
       };
     case "cream":
       return {
-        accentBar: "bg-gradient-to-r from-cream-400 via-gold-400 to-cream-300",
-        corner: "bg-cream-50",
-        icon: "bg-maroon-800 text-gold-300 ring-1 ring-cream-200",
-        subtitleText: "text-maroon-400",
-        dividerLine: "bg-cream-200",
-        checkBg: "bg-cream-50 border-cream-200",
+        accentBar: "bg-gradient-to-r from-secondary-400 via-gold-400 to-secondary-300",
+        corner: "bg-secondary-50",
+        icon: "bg-primary-800 text-gold-300 ring-1 ring-secondary-200",
+        subtitleText: "text-primary-400",
+        dividerLine: "bg-secondary-200",
+        checkBg: "bg-secondary-50 border-secondary-200",
         checkHover:
-          "group-hover/item:bg-maroon-800 group-hover/item:border-maroon-800",
-        checkIcon: "text-maroon-600 group-hover/item:text-gold-300",
+          "group-hover/item:bg-primary-800 group-hover/item:border-primary-800",
+        checkIcon: "text-primary-600 group-hover/item:text-gold-300",
         ctaBtn:
-          "bg-white border-cream-200 text-maroon-800 hover:bg-maroon-800 hover:border-maroon-800 hover:text-white shadow-sm hover:shadow-md",
+          "bg-white border-secondary-200 text-primary-800 hover:bg-primary-800 hover:border-primary-800 hover:text-white shadow-sm hover:shadow-md",
       };
   }
 }
@@ -139,15 +139,15 @@ export default function ProgramSection() {
   return (
     <section
       id="program"
-      className="section-alt relative overflow-hidden border-y border-cream-100"
+      className="section-alt relative overflow-hidden border-y border-secondary-100"
     >
       <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 overflow-hidden"
       >
-        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-cream-100/70 blur-[100px]" />
-        <div className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full bg-maroon-50/40 blur-[80px]" />
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-secondary-100/70 blur-[100px]" />
+        <div className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full bg-primary-50/40 blur-[80px]" />
       </div>
 
       <Container className="relative z-10">
@@ -157,7 +157,7 @@ export default function ProgramSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.5, ease: EASE }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-gold-200 text-maroon-700 text-[0.65rem] font-bold uppercase tracking-[0.12em] shadow-xs mb-5"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-gold-200 text-primary-700 text-[0.65rem] font-bold uppercase tracking-[0.12em] shadow-xs mb-5"
           >
             <GraduationCap className="w-3 h-3" strokeWidth={2} />
             <span>Jenjang Pendidikan</span>
@@ -171,7 +171,7 @@ export default function ProgramSection() {
             className="section-title mb-4"
           >
             Program Studi{" "}
-            <span className="text-gradient-maroon">Unggulan</span>
+            <span className="text-gradient-primary">Unggulan</span>
           </motion.h2>
 
           <motion.p
@@ -205,7 +205,7 @@ export default function ProgramSection() {
                 }}
                 className="group h-full"
               >
-                <div className="relative h-full flex flex-col bg-white rounded-[1.5rem] border border-cream-200 overflow-hidden shadow-premium-sm group-hover:shadow-premium-md group-hover:border-maroon-200 transition-all duration-400">
+                <div className="relative h-full flex flex-col bg-white rounded-[1.5rem] border border-secondary-200 overflow-hidden shadow-premium-sm group-hover:shadow-premium-md group-hover:border-primary-200 transition-all duration-400">
                   <div
                     className={`absolute top-0 left-0 right-0 h-[3px] ${tokens.accentBar}`}
                   />
@@ -238,7 +238,7 @@ export default function ProgramSection() {
                           <span className="text-[0.6rem] font-bold text-ink-400 uppercase tracking-[0.15em]">
                             Syarat Khusus
                           </span>
-                          <div className="flex items-center gap-1.5 bg-gold-400 text-maroon-950 px-2.5 py-1 rounded-[8px] shadow-sm">
+                          <div className="flex items-center gap-1.5 bg-gold-400 text-primary-950 px-2.5 py-1 rounded-[8px] shadow-sm">
                             <span className="text-[0.65rem] font-black">
                               Seleksi
                             </span>
@@ -248,7 +248,7 @@ export default function ProgramSection() {
                     </div>
 
                     <div className="mb-7">
-                      <h3 className="font-display font-black text-[1.35rem] text-ink-950 tracking-tight leading-[1.1] mb-2 group-hover:text-maroon-800 transition-colors duration-300">
+                      <h3 className="font-display font-black text-[1.35rem] text-ink-950 tracking-tight leading-[1.1] mb-2 group-hover:text-primary-800 transition-colors duration-300">
                         {program.title}
                       </h3>
                       <p
