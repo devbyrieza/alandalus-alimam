@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion, useMotionValue, animate } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useRef } from "react";
 import { Container } from "@/components/layout/Container";
@@ -10,12 +10,12 @@ import {
   GraduationCap,
   Award,
   TrendingUp,
-  BookOpen,
   ShieldCheck,
 } from "lucide-react";
+import { BRANDING } from "@/config/branding";
 
 // ─── Types ───────────────────────────────────────────
-type StatColor = "maroon" | "gold";
+type StatColor = "maroon" | "cream";
 
 interface Stat {
   id: string;
@@ -32,50 +32,44 @@ interface Stat {
 const STATS: Stat[] = [
   {
     id: "batch",
-    label: "Angkatan Perdana",
+    label: "Angkatan Pertama",
     value: 1,
     icon: Calendar,
     color: "maroon",
     suffix: "",
-    sublabel: "Al Andalus IIBS",
-    description: "Momen bersejarah pembukaan angkatan pertama.",
+    sublabel: "Tahun Ajaran 2026/2027",
+    description: "Momen bersejarah pembukaan",
   },
   {
     id: "quality",
-    label: "Standar Global",
+    label: "Kurikulum Terintegrasi",
     value: 100,
     icon: Award,
-    color: "gold",
+    color: "cream",
     suffix: "%",
-    sublabel: "Leadership Mastery",
-    description: "Kurikulum kepemimpinan terintegrasi penuh.",
+    sublabel: "Tahfidz, Syar'i & Akademik",
+    description: "Tiga pilar pendidikan utama",
   },
   {
     id: "levels",
-    label: "Jenjang Tersedia",
+    label: "Jenjang Pendidikan",
     value: 2,
     icon: GraduationCap,
     color: "maroon",
     suffix: "",
     sublabel: "MTs · IL",
-    description: "Pendidikan menengah dengan kurikulum syar'i.",
+    description: "Pendidikan menengah lengkap",
   },
   {
     id: "quota",
-    label: "Kuota Eksklusif",
+    label: "Kuota Terbatas",
     value: 25,
     icon: Users,
-    color: "gold",
+    color: "cream",
     suffix: "",
-    sublabel: "Santri Terpilih",
-    description: "Seleksi ketat untuk menjaga kualitas pendidikan.",
+    sublabel: "Per Jenjang (Eksklusif)",
+    description: "Seleksi ketat, kualitas terjaga",
   },
-];
-
-const TRUST_BADGES = [
-  { icon: BookOpen, label: "Pendaftaran Dibuka", pulse: true },
-  { icon: ShieldCheck, label: "Resmi Kemendikdasmen", pulse: false },
-  { icon: TrendingUp, label: "Kurikulum Terintegrasi", pulse: false },
 ];
 
 // ─── Animated Counter ────────────────────────────────
@@ -122,31 +116,8 @@ function StatCard({
   trigger: boolean;
 }) {
   const Icon = stat.icon;
-
-  const styles = {
-    maroon: {
-      card: "border-maroon-100 hover:border-maroon-200",
-      icon: "bg-maroon-50 text-maroon-600 group-hover:bg-maroon-100",
-      number: "text-maroon-700",
-      suffix: "text-maroon-500",
-      sublabel: "text-maroon-400",
-      accent: "bg-maroon-200 group-hover:bg-maroon-500",
-      ring: "ring-maroon-200",
-      glow: "rgba(128,0,0,0.03)",
-    },
-    gold: {
-      card: "border-gold-100 hover:border-gold-200",
-      icon: "bg-gold-50 text-gold-600 group-hover:bg-gold-100",
-      number: "text-gold-700",
-      suffix: "text-gold-500",
-      sublabel: "text-gold-400",
-      accent: "bg-gold-200 group-hover:bg-gold-500",
-      ring: "ring-gold-200",
-      glow: "rgba(212,175,55,0.03)",
-    },
-  };
-
-  const current = styles[stat.color];
+  const isMaroon = stat.color === "maroon";
+  const isCream = stat.color === "cream";
 
   return (
     <motion.div
@@ -158,30 +129,46 @@ function StatCard({
         duration: 0.6,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className="group relative h-full"
+      className="group relative h-full hover-lift-sm"
     >
-      <div
-        className={`relative flex flex-col items-center text-center px-6 py-8 md:px-8 md:py-10 bg-white rounded-2xl border ${current.card} shadow-premium-sm transition-all duration-500 ease-spring hover:-translate-y-1.5 hover:shadow-premium-md overflow-hidden h-full`}
-      >
+      <div className="glass-panel relative flex flex-col items-center text-center px-6 py-8 md:px-8 md:py-10 rounded-2xl overflow-hidden h-full">
+        {/* Hover radial bg */}
         <div
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
           style={{
-            background: `radial-gradient(ellipse 80% 60% at 50% 100%, ${current.glow} 0%, transparent 70%)`,
+            background: isMaroon
+              ? "radial-gradient(ellipse 80% 60% at 50% 100%, rgba(128,0,0,0.04) 0%, transparent 70%)"
+              : "radial-gradient(ellipse 80% 60% at 50% 100%, rgba(255,253,240,0.06) 0%, transparent 70%)",
           }}
         />
 
+        {/* Icon */}
         <div
-          className={`relative mb-6 w-13 h-13 md:w-14 md:h-14 flex items-center justify-center rounded-xl transition-all duration-500 group-hover:scale-110 shadow-xs ${current.icon}`}
+          className={[
+            "relative mb-6 w-13 h-13 md:w-14 md:h-14 flex items-center justify-center rounded-xl shadow-xs",
+            "transition-all duration-500 group-hover:scale-110",
+            isMaroon ? "bg-maroon-50 text-maroon-700 group-hover:bg-maroon-100" : "",
+            isCream ? "bg-cream-100 text-maroon-700 group-hover:bg-cream-200" : "",
+          ].join(" ")}
         >
           <Icon className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.75} />
           <div
-            className={`absolute inset-0 rounded-xl ring-0 group-hover:ring-2 ${current.ring} transition-all duration-500`}
+            className={[
+              "absolute inset-0 rounded-xl ring-0 transition-all duration-500",
+              isMaroon ? "group-hover:ring-2 group-hover:ring-maroon-200" : "",
+              isCream ? "group-hover:ring-2 group-hover:ring-cream-300" : "",
+            ].join(" ")}
           />
         </div>
 
+        {/* Number */}
         <div className="flex items-baseline justify-center gap-0.5 mb-1">
           <span
-            className={`text-[2.625rem] md:text-[3.25rem] font-black leading-none tracking-[-0.04em] ${current.number}`}
+            className={[
+              "text-[2.625rem] md:text-[3.25rem] font-black leading-none tracking-[-0.04em]",
+              isMaroon ? "text-maroon-700" : "",
+              isCream ? "text-maroon-800" : "",
+            ].join(" ")}
           >
             <AnimatedCounter
               value={stat.value}
@@ -191,50 +178,77 @@ function StatCard({
           </span>
           {stat.suffix && (
             <span
-              className={`text-2xl md:text-3xl font-black leading-none tracking-[-0.03em] ${current.suffix}`}
+              className={[
+                "text-2xl md:text-3xl font-black leading-none tracking-[-0.03em]",
+                isMaroon ? "text-maroon-500" : "",
+                isCream ? "text-cream-600" : "",
+              ].join(" ")}
             >
               {stat.suffix}
             </span>
           )}
         </div>
 
+        {/* Label */}
         <p className="text-[0.65rem] md:text-[0.7rem] font-bold text-ink-500 uppercase tracking-[0.12em] mt-2">
           {stat.label}
         </p>
 
+        {/* Sublabel */}
         <p
-          className={`text-[0.6rem] md:text-[0.65rem] font-semibold tracking-wide mt-0.5 ${current.sublabel}`}
+          className={[
+            "text-[0.6rem] md:text-[0.65rem] font-semibold tracking-wide mt-0.5",
+            isMaroon ? "text-maroon-500" : "",
+            isCream ? "text-cream-500" : "",
+          ].join(" ")}
         >
           {stat.sublabel}
+        </p>
+
+        {/* Description — hover reveal desktop */}
+        <p className="hidden md:block text-[0.7rem] text-ink-400 mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-400 leading-relaxed max-w-[140px]">
+          {stat.description}
         </p>
 
         {/* Spacer to push accent line to bottom */}
         <div className="flex-grow" />
 
+        {/* Bottom accent line */}
         <div
-          className={`mt-5 h-[2px] w-6 rounded-full transition-all duration-500 group-hover:w-10 ${current.accent}`}
+          className={[
+            "mt-5 h-[2px] w-6 rounded-full transition-all duration-500 group-hover:w-10",
+            isMaroon ? "bg-maroon-100 group-hover:bg-maroon-500" : "",
+            isCream ? "bg-cream-200 group-hover:bg-maroon-300" : "",
+          ].join(" ")}
         />
       </div>
     </motion.div>
   );
 }
 
+// ─── Main Component ──────────────────────────────────
 export default function StatsSection() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.15 });
 
   return (
     <section
       ref={ref}
-      className="relative py-16 md:py-24 bg-white border-b border-cream-200 overflow-hidden"
+      className="relative py-16 md:py-24 bg-white border-b border-surface-200 overflow-hidden"
     >
+      {/* CiroAI Background glows */}
+      <div className="glow-blob glow-blob-maroon w-[600px] h-[600px] -top-[25%] right-0 translate-x-[20%]" aria-hidden="true" />
+      <div className="glow-blob glow-blob-cream w-[500px] h-[500px] -bottom-[25%] left-0 -translate-x-[20%]" aria-hidden="true" />
+
       <Container className="relative z-10">
         <div className="max-w-5xl mx-auto space-y-12 md:space-y-14">
+          {/* Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
             {STATS.map((stat, i) => (
               <StatCard key={stat.id} stat={stat} index={i} trigger={inView} />
             ))}
           </div>
 
+          {/* Trust Badges */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -242,27 +256,27 @@ export default function StatsSection() {
             transition={{ delay: 0.55, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-wrap justify-center items-center gap-2.5 md:gap-3"
           >
-            {TRUST_BADGES.map(({ icon: BadgeIcon, label, pulse }) => (
-              <div
-                key={label}
-                className="inline-flex items-center gap-2 px-3.5 py-2 bg-cream-50 rounded-full border border-cream-200 hover:border-maroon-200 hover:bg-cream-100 transition-all duration-300 cursor-default shadow-xs"
-              >
-                {pulse ? (
-                  <span className="relative flex h-2 w-2 shrink-0">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
-                  </span>
-                ) : (
-                  <BadgeIcon
-                    className="w-3 h-3 shrink-0 text-maroon-500"
-                    strokeWidth={2}
-                  />
-                )}
-                <span className="text-[0.6rem] md:text-[0.65rem] font-bold text-ink-700 uppercase tracking-[0.1em] whitespace-nowrap">
-                  {label}
-                </span>
-              </div>
-            ))}
+            {/* CiroAI-style badges */}
+            {/* Badge 1 — Pulse */}
+            <div className="section-label section-label-maroon hover:bg-maroon-50/50 cursor-default">
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-maroon-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-maroon-500" />
+              </span>
+              <span>Pendaftaran Dibuka</span>
+            </div>
+
+            {/* Badge 2 — Akreditasi */}
+            <div className="section-label section-label-white border-cream-200 text-ink-700 bg-cream-50/50 hover:bg-cream-100/50 cursor-default">
+              <ShieldCheck className="w-3 h-3 shrink-0 text-maroon-600" strokeWidth={2} />
+              <span>Terakreditasi A — BAN-PDM</span>
+            </div>
+
+            {/* Badge 3 — School Network */}
+            <div className="section-label section-label-maroon hover:bg-maroon-50/50 cursor-default">
+              <TrendingUp className="w-3 h-3 shrink-0 text-maroon-600" strokeWidth={2} />
+              <span>{BRANDING.schoolNetwork}</span>
+            </div>
           </motion.div>
         </div>
       </Container>

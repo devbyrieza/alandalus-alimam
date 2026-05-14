@@ -1,6 +1,6 @@
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   PONPES AL-IMAM — GLOBAL STYLES
-   Branding: Maroon (#800000) · Ivory (#F5EADD) · Putih
+   AL-ANDALUS TEMPLATE — GLOBAL STYLES
+   Master Template · Brand-Agnostic · Fleksibel
    Mobile-First · Linear-Inspired Premium UI
    Tailwind CSS v4
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -26,52 +26,106 @@
     sans-serif;
   --font-arabic: "Amiri", "Traditional Arabic", "Arabic Typesetting", serif;
 
-  /* ─── Maroon (PRIMARY — Al Imam Identity) ─── */
-  /* Deep premium maroon, elegant & iconic */
-  --color-maroon-50: #fdf2f2;
-  --color-maroon-100: #fbe6e6;
-  --color-maroon-200: #f2c7c7;
-  --color-maroon-300: #e69d9d;
-  --color-maroon-400: #d15f5f;
-  --color-maroon-500: #b33030;
-  --color-maroon-600: #800000;
-  --color-maroon-700: #660000;
-  --color-maroon-800: #4d0000;
-  --color-maroon-900: #5c0000; /* was #330000 — lightened so not near-black */
-  --color-maroon-950: #3d0000; /* was #1A0000 — deep maroon, not black */
+  /* ━━━ BRAND COLOR PALETTE — LENGKAP SEMUA PESANTREN ━━━ */
 
-  /* ─── Cream (Secondary — Al Imam Warm Ivory) ─── */
-  /* Base anchor: #F5EADD (245, 234, 221) — warna secondary/ikonik Al Imam */
-  --color-cream-50: #fdfaf6;
-  --color-cream-100: #faf4ec;
-  --color-cream-200: #f5eadd; /* ← SECONDARY BRAND COLOR — HEX #F5EADD */
-  --color-cream-300: #eddbca;
-  --color-cream-400: #e2c9b0;
-  --color-cream-500: #d4b48e;
+  /* ─── Biru Cerah (Ulul Albaab Primary) ─── */
+  --color-blue-50: #f0f8ff;
+  --color-blue-100: #dcedff;
+  --color-blue-200: #b3d7ff;
+  --color-blue-300: #7dbeff;
+  --color-blue-400: #3d9ef8;
+  --color-blue-500: #0e86e8;
+  --color-blue-600: #0369c7;
+  --color-blue-700: #0255a3;
+  --color-blue-800: #024282;
+  --color-blue-900: #013062;
+  --color-blue-950: #011e42;
 
-  /* ─── Gold (Accent — Premium & Islamic) ─── */
+  /* ─── Kuning (Ulul Albaab Secondary) ─── */
+  --color-amber-50: #fffbeb;
+  --color-amber-100: #fef3c7;
+  --color-amber-200: #fde68a;
+  --color-amber-300: #fcd34d;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
+  --color-amber-700: #b45309;
+  --color-amber-800: #92400e;
+  --color-amber-900: #713b12;
+
+  /* ─── Gold (Accent premium) ─── */
   --color-gold-50: #fffbeb;
   --color-gold-100: #fef3c7;
   --color-gold-200: #fde68a;
   --color-gold-300: #fcd34d;
   --color-gold-400: #fbbf24;
   --color-gold-500: #f59e0b;
-  --color-gold-600: #c9a84c; /* Warm Premium Gold */
-  --color-gold-700: #b48c36;
+  --color-gold-600: #d97706;
+  --color-gold-700: #b45309;
+
+  /* ─── Maroon (Al Imam Primary) ─── */
+  --color-maroon-50: #fdf5f5;
+  --color-maroon-100: #f7e6e6;
+  --color-maroon-200: #edcaca;
+  --color-maroon-300: #dda0a0;
+  --color-maroon-400: #c87070;
+  --color-maroon-500: #b04040;
+  --color-maroon-600: #8b2020;
+  --color-maroon-700: #6b0f0f;
+  --color-maroon-800: #520a0a;
+  --color-maroon-900: #3d0707;
+  --color-maroon-950: #800000;
+
+  /* ─── Cream (Al Imam Secondary) ─── */
+  --color-cream-50: #fefcf7;
+  --color-cream-100: #fdf8ee;
+  --color-cream-200: #faf0d7;
+  --color-cream-300: #f5e4b8;
+  --color-cream-400: #edd494;
+  --color-cream-500: #e4c16f;
+  --color-cream-600: #c9a84c;
+
+  /* ─── Hijau Islami (Template-Demo Primary — Premium Emerald-Teal) ─── */
+  --color-teal-50: #f0fdfa;
+  --color-teal-100: #ccfbf1;
+  --color-teal-200: #99f6e4;
+  --color-teal-300: #5eead4;
+  --color-teal-400: #2dd4bf;
+  --color-teal-500: #14b8a6;
+  /* Hijau Islami Medium */
+  --color-teal-600: #0d9488;
+  /* Hijau Islami Primary */
+  --color-teal-700: #0f766e;
+  --color-teal-800: #115e59;
+  --color-teal-900: #134e4a;
+  --color-teal-950: #042f2e;
+
+  /* ─── Gold Islami (Template-Demo Secondary) ─── */
+  --color-sand-50: #fffdf0;
+  --color-sand-100: #fef9d9;
+  --color-sand-200: #fdf0a8;
+  --color-sand-300: #f7df6e;
+  --color-sand-400: #eecb45;
+  --color-sand-500: #D4AF37;
+  /* Gold Islami Secondary */
+  --color-sand-600: #b8922a;
+  --color-sand-700: #9a7520;
+  --color-sand-800: #7a5c18;
+  --color-sand-900: #5c4410;
 
   /* ─── Surface / White ─── */
   --color-white: #ffffff;
-  --color-surface-50: #fafaf9;
-  --color-surface-100: #f5f4f2;
-  --color-surface-200: #edecea;
+  --color-surface-50: #F8FAFC;
+  --color-surface-100: #F1F5F9;
+  --color-surface-200: #e5e7eb;
 
   /* ─── Ink (Text — neutral gray, fresh & clean) ─── */
-  --color-ink-950: #111111;
-  --color-ink-900: #1c1c1c;
-  --color-ink-800: #2d2d2d;
-  --color-ink-700: #444444;
-  --color-ink-600: #666666;
-  --color-ink-500: #888888;
+  --color-ink-950: #111827;
+  --color-ink-900: #374151;
+  --color-ink-800: #374151;
+  --color-ink-700: #374151;
+  --color-ink-600: #4B5563;
+  --color-ink-500: #6B7280;
   --color-ink-400: #aaaaaa;
   --color-ink-300: #cccccc;
   --color-ink-200: #e4e4e4;
@@ -88,47 +142,90 @@
   --color-danger-500: #dc2626;
   --color-danger-100: #fee2e2;
   --color-danger-50: #fff1f1;
-  --color-info-500: #0284c7;
-  --color-info-100: #e0f2fe;
-  --color-info-50: #f0f9ff;
+  --color-info-500: #0369c7;
+  --color-info-100: #dcedff;
+  --color-info-50: #f0f8ff;
 
-  /* ─── Shadows — maroon-tinted, Linear-style depth ─── */
-  --shadow-xs: 0 1px 2px 0 rgba(26, 0, 0, 0.04);
+  /* ━━━ TEMPLATE SEMANTIC TOKENS ━━━
+     Override ini di masing-masing project untuk ganti branding.
+     Default: Hijau Islami + Gold (Template-Demo)
+     Untuk Ulul Albaab: teal + sand
+     Untuk Al Imam: maroon + cream
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /* ─── Islamic Color Palette — Semantic Tokens ─── */
+  --color-primary: var(--color-maroon-700);
+  /* Maroon utama */
+  --color-primary-light: var(--color-maroon-50);
+  /* Maroon muda / background aksen */
+  --color-secondary: var(--color-cream-400);
+  /* Cream Secondary */
+  --color-background: #FFFFFF;
+  /* Background utama */
+  --color-text: #374151;
+  /* Teks utama */
+
+  /* ─── Shadows — neutral, tidak condong ke brand mana pun ─── */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
   --shadow-sm:
-    0 1px 4px 0 rgba(26, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+    0 1px 4px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
   --shadow-md:
-    0 4px 12px -2px rgba(26, 0, 0, 0.08), 0 2px 6px -2px rgba(0, 0, 0, 0.05);
+    0 4px 12px -2px rgba(0, 0, 0, 0.08), 0 2px 6px -2px rgba(0, 0, 0, 0.05);
   --shadow-lg:
-    0 12px 28px -4px rgba(26, 0, 0, 0.1), 0 4px 10px -4px rgba(0, 0, 0, 0.06);
+    0 12px 28px -4px rgba(0, 0, 0, 0.1), 0 4px 10px -4px rgba(0, 0, 0, 0.06);
   --shadow-xl:
-    0 24px 48px -6px rgba(26, 0, 0, 0.12), 0 8px 18px -6px rgba(0, 0, 0, 0.08);
+    0 24px 48px -6px rgba(0, 0, 0, 0.12), 0 8px 18px -6px rgba(0, 0, 0, 0.07);
   --shadow-2xl:
-    0 40px 72px -8px rgba(26, 0, 0, 0.16), 0 16px 32px -8px rgba(0, 0, 0, 0.1);
+    0 40px 72px -8px rgba(0, 0, 0, 0.15), 0 16px 32px -8px rgba(0, 0, 0, 0.09);
 
-  /* Premium shadows — untuk card utama & hero element */
+  /* Premium shadows — bias-neutral */
   --shadow-premium-sm:
-    0 2px 10px rgba(26, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+    0 2px 10px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
   --shadow-premium-md:
-    0 8px 28px rgba(26, 0, 0, 0.09), 0 3px 8px rgba(0, 0, 0, 0.05);
+    0 8px 28px rgba(0, 0, 0, 0.09), 0 3px 8px rgba(0, 0, 0, 0.05);
   --shadow-premium-lg:
-    0 18px 48px rgba(26, 0, 0, 0.11), 0 6px 16px rgba(0, 0, 0, 0.06);
+    0 18px 48px rgba(0, 0, 0, 0.11), 0 6px 16px rgba(0, 0, 0, 0.06);
   --shadow-premium-xl:
-    0 28px 64px rgba(26, 0, 0, 0.14), 0 10px 24px rgba(0, 0, 0, 0.07);
+    0 28px 64px rgba(0, 0, 0, 0.13), 0 10px 24px rgba(0, 0, 0, 0.07);
   --shadow-premium-2xl:
-    0 40px 80px rgba(26, 0, 0, 0.18), 0 16px 36px rgba(0, 0, 0, 0.09);
+    0 40px 80px rgba(0, 0, 0, 0.16), 0 16px 36px rgba(0, 0, 0, 0.09);
 
-  /* Colored shadows — untuk tombol & badge */
+  /* Colored shadows — tersedia untuk semua brand */
+  --shadow-blue:
+    0 4px 16px -2px rgba(3, 105, 199, 0.32), 0 2px 6px rgba(3, 105, 199, 0.16);
+  --shadow-blue-lg:
+    0 8px 28px -4px rgba(3, 105, 199, 0.38), 0 4px 10px rgba(3, 105, 199, 0.18);
+  --shadow-yellow:
+    0 4px 16px -2px rgba(245, 158, 11, 0.3), 0 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-yellow-lg:
+    0 8px 28px -4px rgba(245, 158, 11, 0.38),
+    0 4px 10px rgba(245, 158, 11, 0.08);
   --shadow-maroon:
-    0 4px 16px -2px rgba(26, 0, 0, 0.3), 0 2px 6px rgba(26, 0, 0, 0.15);
+    0 4px 16px -2px rgba(128, 0, 0, 0.3), 0 2px 6px rgba(128, 0, 0, 0.15);
   --shadow-maroon-lg:
-    0 8px 28px -4px rgba(26, 0, 0, 0.36), 0 4px 10px rgba(26, 0, 0, 0.18);
+    0 8px 28px -4px rgba(128, 0, 0, 0.36), 0 4px 10px rgba(128, 0, 0, 0.18);
   --shadow-gold:
-    0 4px 16px -2px rgba(201, 168, 76, 0.28), 0 2px 6px rgba(0, 0, 0, 0.06);
+    0 4px 16px -2px rgba(212, 175, 55, 0.35), 0 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-gold-lg:
+    0 8px 28px -4px rgba(212, 175, 55, 0.45), 0 4px 10px rgba(212, 175, 55, 0.12);
   --shadow-cream:
     0 4px 14px -2px rgba(254, 252, 247, 0.32), 0 2px 6px rgba(0, 0, 0, 0.05);
+  --shadow-teal:
+    0 4px 16px -2px rgba(27, 107, 58, 0.32), 0 2px 6px rgba(27, 107, 58, 0.15);
+  --shadow-teal-lg:
+    0 8px 28px -4px rgba(27, 107, 58, 0.38),
+    0 4px 10px rgba(27, 107, 58, 0.18);
+  --shadow-sand:
+    0 4px 14px -2px rgba(212, 175, 55, 0.3), 0 2px 6px rgba(0, 0, 0, 0.05);
 
-  /* Inner shadow — untuk input focus */
-  --shadow-inner-maroon: inset 0 2px 6px rgba(26, 0, 0, 0.06);
+  /* Legacy aliases — backward compat */
+  --shadow-teal:
+    0 4px 16px -2px rgba(27, 107, 58, 0.32), 0 2px 6px rgba(27, 107, 58, 0.15);
+  --shadow-sand:
+    0 4px 16px -4px rgba(212, 175, 55, 0.32), 0 2px 6px rgba(0, 0, 0, 0.04);
+
+  /* Inner shadow */
+  --shadow-inner: inset 0 2px 6px rgba(0, 0, 0, 0.06);
 
   /* ─── Border Radius — Watzap-style Ceria & Rounded ─── */
   --radius-xs: 0.25rem;
@@ -141,7 +238,7 @@
   --radius-full: 9999px;
   --radius-pill: 9999px;
 
-  /* ─── Spacing Scale (untuk konsistensi Linear-style) ─── */
+  /* ─── Spacing Scale ─── */
   --space-section-y: clamp(4rem, 10vw, 7rem);
   --space-section-y-sm: clamp(3rem, 7vw, 5rem);
 
@@ -183,8 +280,8 @@
   }
 
   body {
-    background-color: #ffffff; /* Pure white — fresh & clean */
-    color: var(--color-ink-700);
+    background-color: var(--color-background);
+    color: var(--color-text);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -209,7 +306,7 @@
     letter-spacing: -0.03em;
     font-size: clamp(2.25rem, 5vw + 1rem, 5rem);
     line-height: 1.05;
-    color: var(--color-maroon-600); /* #800000 — vivid maroon, not black */
+    color: var(--color-primary);
   }
 
   h2 {
@@ -218,7 +315,7 @@
     letter-spacing: -0.025em;
     font-size: clamp(1.75rem, 3.5vw + 0.75rem, 3.5rem);
     line-height: 1.15;
-    color: var(--color-maroon-600);
+    color: var(--color-primary);
   }
 
   h3 {
@@ -227,7 +324,7 @@
     letter-spacing: -0.02em;
     font-size: clamp(1.25rem, 2vw + 0.5rem, 2rem);
     line-height: 1.25;
-    color: var(--color-maroon-700); /* #660000 */
+    color: var(--color-primary);
   }
 
   h4 {
@@ -245,7 +342,7 @@
     font-weight: 600;
     letter-spacing: -0.01em;
     line-height: 1.4;
-    color: var(--color-ink-800);
+    color: var(--color-ink-700);
   }
 
   p,
@@ -264,13 +361,13 @@
   }
 
   a {
-    color: var(--color-maroon-700);
+    color: var(--color-primary);
     text-decoration: none;
     transition: color var(--duration-fast) var(--ease-smooth);
   }
 
   a:hover {
-    color: var(--color-maroon-950);
+    color: var(--color-secondary);
   }
 
   img {
@@ -284,44 +381,45 @@
     overflow-wrap: break-word;
   }
 
-  /* ─── Selection color — maroon branded ─── */
+  /* ─── Selection — teal-tinted ─── */
   ::selection {
-    background: var(--color-maroon-200);
-    color: var(--color-maroon-900);
+    background: var(--color-primary-light);
+    color: var(--color-primary);
   }
 
-  /* ─── Custom Scrollbar — maroon branded ─── */
+  /* ─── Custom Scrollbar ─── */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--color-cream-100);
+    background: var(--color-surface-100);
     border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--color-maroon-300);
+    background: var(--color-ink-300);
     border-radius: 9999px;
-    border: 1.5px solid var(--color-cream-100);
+    border: 1.5px solid var(--color-surface-100);
     background-clip: content-box;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-maroon-600);
+    background: var(--color-ink-400);
     background-clip: content-box;
   }
 
-  /* ─── Focus Ring — aksesibilitas + branded ─── */
+  /* ─── Focus Ring ─── */
   :focus-visible {
-    outline: 2px solid var(--color-maroon-600);
+    outline: 2px solid var(--color-primary);
     outline-offset: 3px;
     border-radius: var(--radius-sm);
   }
 
   /* ─── Touch targets — mobile-first ─── */
   @media (max-width: 768px) {
+
     button,
     a,
     input[type="button"],
@@ -344,7 +442,12 @@
    3. COMPONENTS
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 @layer components {
-  /* ─── Buttons ─── */
+  /* ━━━ BUTTONS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     Template menyediakan SEMUA varian.
+     Template-Demo default: teal/sand
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /* ─── Primary gold (Template-Demo default) ─── */
   .btn-primary {
     display: inline-flex;
     align-items: center;
@@ -355,12 +458,114 @@
     font-weight: 700;
     font-size: 0.9375rem;
     letter-spacing: -0.01em;
+    color: #155230;
+    background: linear-gradient(135deg,
+        var(--color-secondary) 0%,
+        #b8922a 100%);
+    box-shadow: var(--shadow-gold);
+    transition: all var(--duration-base) var(--ease-spring);
+    border: none;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+          rgba(255, 255, 255, 0.2) 0%,
+          rgba(255, 255, 255, 0) 60%);
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-gold-lg);
+      filter: brightness(1.08);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.98);
+      box-shadow: var(--shadow-gold);
+    }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
+  /* ─── Primary Blue (Ulul Albaab variant) ─── */
+  .btn-primary-blue {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
+    color: var(--color-white);
+    background: linear-gradient(135deg,
+        var(--color-teal-500) 0%,
+        var(--color-teal-800) 100%);
+    box-shadow: var(--shadow-blue);
+    transition: all var(--duration-base) var(--ease-spring);
+    border: none;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+          rgba(255, 255, 255, 0.12) 0%,
+          rgba(255, 255, 255, 0) 60%);
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-blue-lg);
+      filter: brightness(1.08);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.98);
+      box-shadow: var(--shadow-blue);
+    }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
+  /* ─── Primary Maroon (Al Imam variant) ─── */
+  .btn-primary-maroon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
     color: var(--color-cream-100);
-    background: linear-gradient(
-      135deg,
-      var(--color-maroon-500) 0%,
-      var(--color-maroon-700) 100%
-    );
+    background: linear-gradient(135deg,
+        var(--color-maroon-700) 0%,
+        var(--color-maroon-950) 100%);
     box-shadow: var(--shadow-maroon);
     transition: all var(--duration-base) var(--ease-spring);
     border: none;
@@ -372,11 +577,9 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.1) 0%,
-        rgba(255, 255, 255, 0) 60%
-      );
+      background: linear-gradient(135deg,
+          rgba(255, 255, 255, 0.1) 0%,
+          rgba(255, 255, 255, 0) 60%);
       border-radius: inherit;
       pointer-events: none;
     }
@@ -389,7 +592,6 @@
 
     &:active {
       transform: translateY(0) scale(0.98);
-      box-shadow: var(--shadow-maroon);
     }
 
     &:disabled {
@@ -400,7 +602,80 @@
     }
   }
 
+  /* ─── Secondary teal (Template-Demo default) ─── */
   .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
+    color: var(--color-teal-700);
+    background: var(--color-background);
+    border: 1.5px solid var(--color-teal-200);
+    box-shadow: var(--shadow-xs);
+    transition: all var(--duration-base) var(--ease-smooth);
+    text-decoration: none;
+
+    &:hover {
+      background: var(--color-primary-light);
+      border-color: var(--color-teal-400);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+  /* ─── Secondary Blue (Ulul Albaab variant) ─── */
+  .btn-secondary-blue {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
+    color: var(--color-teal-700);
+    background: var(--color-white);
+    border: 1.5px solid var(--color-teal-200);
+    box-shadow: var(--shadow-xs);
+    transition: all var(--duration-base) var(--ease-smooth);
+    text-decoration: none;
+
+    &:hover {
+      background: var(--color-teal-50);
+      border-color: var(--color-teal-400);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+  /* ─── Secondary Maroon (Al Imam variant) ─── */
+  .btn-secondary-maroon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -435,6 +710,81 @@
     }
   }
 
+  /* ─── sand accent (Template-Demo) ─── */
+  .btn-sand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
+    color: var(--color-teal-900);
+    background: linear-gradient(135deg,
+        var(--color-sand-200) 0%,
+        var(--color-sand-400) 100%);
+    box-shadow: var(--shadow-sand);
+    transition: all var(--duration-base) var(--ease-spring);
+    text-decoration: none;
+    border: 1px solid var(--color-sand-300);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px -4px rgba(175, 165, 90, 0.4);
+      filter: brightness(1.05);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+  /* ─── Yellow / Cream accent ─── */
+  .btn-yellow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
+    color: var(--color-teal-900);
+    background: linear-gradient(135deg,
+        var(--color-sand-300) 0%,
+        var(--color-sand-500) 100%);
+    box-shadow: var(--shadow-yellow);
+    transition: all var(--duration-base) var(--ease-spring);
+    text-decoration: none;
+    border: none;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-yellow-lg);
+      filter: brightness(1.06);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+  /* Legacy alias */
   .btn-cream {
     display: inline-flex;
     align-items: center;
@@ -446,11 +796,9 @@
     font-size: 0.9375rem;
     letter-spacing: -0.01em;
     color: var(--color-maroon-900);
-    background: linear-gradient(
-      135deg,
-      var(--color-cream-200) 0%,
-      var(--color-cream-400) 100%
-    );
+    background: linear-gradient(135deg,
+        var(--color-cream-200) 0%,
+        var(--color-cream-400) 100%);
     box-shadow: var(--shadow-cream);
     transition: all var(--duration-base) var(--ease-spring);
     text-decoration: none;
@@ -467,6 +815,7 @@
     }
   }
 
+  /* ─── Gold ─── */
   .btn-gold {
     display: inline-flex;
     align-items: center;
@@ -477,12 +826,10 @@
     font-weight: 700;
     font-size: 0.9375rem;
     letter-spacing: -0.01em;
-    color: var(--color-maroon-950);
-    background: linear-gradient(
-      135deg,
-      var(--color-gold-300) 0%,
-      var(--color-gold-500) 100%
-    );
+    color: var(--color-ink-900);
+    background: linear-gradient(135deg,
+        var(--color-gold-300) 0%,
+        var(--color-gold-500) 100%);
     box-shadow: var(--shadow-gold);
     transition: all var(--duration-base) var(--ease-spring);
     text-decoration: none;
@@ -499,6 +846,7 @@
     }
   }
 
+  /* ─── Ghost ─── */
   .btn-ghost {
     display: inline-flex;
     align-items: center;
@@ -515,16 +863,75 @@
     text-decoration: none;
 
     &:hover {
-      background: var(--color-maroon-50);
-      color: var(--color-maroon-800);
+      background: var(--color-surface-100);
+      color: var(--color-ink-800);
     }
 
     &:active {
-      background: var(--color-maroon-100);
+      background: var(--color-surface-200);
       transform: scale(0.98);
     }
   }
 
+  /* ─── Outline teal (Template-Demo) ─── */
+  .btn-outline-teal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-teal-700);
+    background: transparent;
+    border: 1.5px solid var(--color-teal-300);
+    transition: all var(--duration-base) var(--ease-smooth);
+    text-decoration: none;
+
+    &:hover {
+      background: var(--color-teal-800);
+      color: var(--color-sand-100);
+      border-color: var(--color-teal-800);
+      box-shadow: var(--shadow-teal);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.98);
+    }
+  }
+
+  /* ─── Outline Blue (Ulul Albaab variant) ─── */
+  .btn-outline-blue {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-teal-600);
+    background: transparent;
+    border: 1.5px solid var(--color-teal-300);
+    transition: all var(--duration-base) var(--ease-smooth);
+    text-decoration: none;
+
+    &:hover {
+      background: var(--color-teal-800);
+      color: var(--color-white);
+      border-color: var(--color-teal-800);
+      box-shadow: var(--shadow-blue);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.98);
+    }
+  }
+
+  /* ─── Outline Maroon (Al Imam variant) ─── */
   .btn-outline-maroon {
     display: inline-flex;
     align-items: center;
@@ -553,11 +960,12 @@
     }
   }
 
-  /* ─── Cards ─── */
+  /* ━━━ CARDS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
   .app-card {
     background-color: var(--color-white);
     border-radius: var(--radius-xl);
-    border: 1px solid var(--color-maroon-100);
+    border: 1px solid var(--color-surface-200);
     box-shadow: var(--shadow-premium-sm);
     transition: all var(--duration-slow) var(--ease-spring);
     overflow: hidden;
@@ -565,7 +973,7 @@
     &:hover {
       transform: translateY(-4px);
       box-shadow: var(--shadow-premium-md);
-      border-color: var(--color-maroon-200);
+      border-color: var(--color-ink-200);
     }
   }
 
@@ -585,12 +993,117 @@
     }
   }
 
+  /* teal variant (Template-Demo) */
+  .card-teal {
+    background: linear-gradient(145deg,
+        var(--color-teal-50) 0%,
+        var(--color-white) 100%);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-teal-100);
+    box-shadow: var(--shadow-premium-sm);
+    transition: all var(--duration-slow) var(--ease-spring);
+    overflow: hidden;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-premium-md);
+      border-color: var(--color-teal-200);
+    }
+  }
+
+  /* Dark teal (Template-Demo — hero/CTA) */
+  .card-dark-teal {
+    background: linear-gradient(135deg,
+        var(--color-teal-700) 0%,
+        var(--color-teal-950) 100%);
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--shadow-premium-lg);
+    overflow: hidden;
+    color: var(--color-sand-100);
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.14),
+          transparent);
+    }
+  }
+
+  /* sand variant (Template-Demo) */
+  .card-sand {
+    background: linear-gradient(145deg,
+        var(--color-sand-50) 0%,
+        var(--color-white) 100%);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-sand-200);
+    box-shadow: var(--shadow-premium-sm);
+    transition: all var(--duration-slow) var(--ease-spring);
+    overflow: hidden;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-premium-md);
+      border-color: var(--color-sand-300);
+    }
+  }
+
+  /* Blue variant (Ulul Albaab) */
+  .card-blue {
+    background: linear-gradient(145deg,
+        var(--color-teal-50) 0%,
+        var(--color-white) 100%);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-teal-100);
+    box-shadow: var(--shadow-premium-sm);
+    transition: all var(--duration-slow) var(--ease-spring);
+    overflow: hidden;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-premium-md);
+      border-color: var(--color-teal-200);
+    }
+  }
+
+  /* Dark blue (Ulul Albaab — hero/CTA) */
+  .card-dark-blue {
+    background: linear-gradient(135deg,
+        var(--color-teal-800) 0%,
+        var(--color-teal-950) 100%);
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--shadow-premium-lg);
+    overflow: hidden;
+    color: var(--color-white);
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.18),
+          transparent);
+    }
+  }
+
+  /* Cream variant (Al Imam) */
   .card-cream {
-    background: linear-gradient(
-      145deg,
-      var(--color-cream-50) 0%,
-      var(--color-white) 100%
-    );
+    background: linear-gradient(145deg,
+        var(--color-cream-50) 0%,
+        var(--color-white) 100%);
     border-radius: var(--radius-xl);
     border: 1px solid var(--color-cream-200);
     box-shadow: var(--shadow-premium-sm);
@@ -604,12 +1117,11 @@
     }
   }
 
+  /* Dark maroon (Al Imam — hero/CTA) */
   .card-maroon {
-    background: linear-gradient(
-      135deg,
-      var(--color-maroon-900) 0%,
-      var(--color-maroon-950) 100%
-    );
+    background: linear-gradient(135deg,
+        var(--color-maroon-900) 0%,
+        var(--color-maroon-950) 100%);
     border-radius: var(--radius-xl);
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: var(--shadow-premium-lg);
@@ -624,12 +1136,10 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.15),
-        transparent
-      );
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.15),
+          transparent);
     }
   }
 
@@ -637,7 +1147,7 @@
   .card-wablas {
     background-color: var(--color-white);
     border-radius: var(--radius-2xl);
-    border: 1px solid var(--color-maroon-100);
+    border: 1px solid var(--color-surface-200);
     box-shadow: var(--shadow-premium-sm);
     transition: all var(--duration-slow) var(--ease-spring);
 
@@ -647,13 +1157,14 @@
     }
   }
 
-  /* ─── Inputs ─── */
+  /* ━━━ INPUTS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
   .input-clean {
     width: 100%;
     padding: 0.875rem 1.25rem;
     border-radius: var(--radius-md);
     background: var(--color-white);
-    border: 1.5px solid var(--color-maroon-100);
+    border: 1.5px solid var(--color-ink-200);
     color: var(--color-ink-900);
     font-weight: 500;
     font-size: 0.9375rem;
@@ -662,18 +1173,18 @@
     box-shadow: var(--shadow-xs);
 
     &::placeholder {
-      color: var(--color-ink-300);
+      color: var(--color-ink-400);
     }
 
     &:hover {
-      border-color: var(--color-maroon-200);
+      border-color: var(--color-ink-300);
     }
 
     &:focus {
-      background: var(--color-white);
-      border-color: var(--color-maroon-500);
+      background: var(--color-background);
+      border-color: var(--color-primary);
       box-shadow:
-        0 0 0 3px rgba(128, 0, 0, 0.08),
+        0 0 0 3px rgba(27, 107, 58, 0.12),
         var(--shadow-xs);
     }
 
@@ -688,7 +1199,7 @@
     padding: 0.875rem 1.5rem;
     border-radius: var(--radius-full);
     background: var(--color-white);
-    border: 1.5px solid var(--color-maroon-100);
+    border: 1.5px solid var(--color-ink-200);
     color: var(--color-ink-900);
     font-weight: 500;
     font-size: 0.9375rem;
@@ -697,18 +1208,18 @@
     box-shadow: var(--shadow-xs);
 
     &::placeholder {
-      color: var(--color-ink-300);
+      color: var(--color-ink-400);
     }
 
     &:hover {
-      border-color: var(--color-maroon-200);
+      border-color: var(--color-ink-300);
     }
 
     &:focus {
-      background: var(--color-white);
-      border-color: var(--color-maroon-500);
+      background: var(--color-background);
+      border-color: var(--color-primary);
       box-shadow:
-        0 0 0 3px rgba(128, 0, 0, 0.08),
+        0 0 0 3px rgba(27, 107, 58, 0.12),
         var(--shadow-xs);
     }
   }
@@ -718,7 +1229,7 @@
     padding: 0.875rem 1.25rem 0.875rem 3rem;
     border-radius: var(--radius-md);
     background: var(--color-white);
-    border: 1.5px solid var(--color-maroon-100);
+    border: 1.5px solid var(--color-ink-200);
     color: var(--color-ink-900);
     font-weight: 500;
     font-size: 0.9375rem;
@@ -727,23 +1238,24 @@
     box-shadow: var(--shadow-xs);
 
     &::placeholder {
-      color: var(--color-ink-300);
+      color: var(--color-ink-400);
     }
 
     &:hover {
-      border-color: var(--color-maroon-200);
+      border-color: var(--color-ink-300);
     }
 
     &:focus {
-      background: var(--color-white);
-      border-color: var(--color-maroon-500);
+      background: var(--color-background);
+      border-color: var(--color-primary);
       box-shadow:
-        0 0 0 3px rgba(128, 0, 0, 0.08),
+        0 0 0 3px rgba(27, 107, 58, 0.12),
         var(--shadow-xs);
     }
   }
 
-  /* ─── Badges / Pills ─── */
+  /* ━━━ BADGES ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
   .badge {
     display: inline-flex;
     align-items: center;
@@ -756,36 +1268,56 @@
     line-height: 1;
   }
 
+  /* teal brand (Template-Demo) */
+  .badge-teal {
+    background: var(--color-teal-100);
+    color: var(--color-teal-800);
+    border: 1px solid var(--color-teal-200);
+  }
+
+  /* sand brand (Template-Demo) */
+  .badge-sand {
+    background: var(--color-sand-100);
+    color: var(--color-sand-800);
+    border: 1px solid var(--color-sand-200);
+  }
+
+  /* Blue brand (Ulul Albaab) */
+  .badge-teal {
+    background: var(--color-teal-100);
+    color: var(--color-teal-700);
+    border: 1px solid var(--color-teal-200);
+  }
+
+  /* Yellow brand (Ulul Albaab) */
+  .badge-sand {
+    background: var(--color-sand-100);
+    color: var(--color-sand-700);
+    border: 1px solid var(--color-sand-200);
+  }
+
+  /* Maroon (Al Imam) */
   .badge-maroon {
     background: var(--color-maroon-100);
     color: var(--color-maroon-800);
     border: 1px solid var(--color-maroon-200);
   }
 
+  /* Cream (Al Imam) */
   .badge-cream {
     background: var(--color-cream-200);
     color: var(--color-maroon-800);
     border: 1px solid var(--color-cream-300);
   }
 
+  /* Gold */
   .badge-gold {
     background: var(--color-gold-100);
     color: var(--color-gold-700);
     border: 1px solid var(--color-gold-200);
   }
 
-  .badge-maroon {
-    background: var(--color-maroon-100);
-    color: var(--color-maroon-700);
-    border: 1px solid var(--color-maroon-200);
-  }
-
-  .badge-gold {
-    background: var(--color-gold-100);
-    color: var(--color-gold-700);
-    border: 1px solid var(--color-gold-200);
-  }
-
+  /* Status */
   .badge-success {
     background: var(--color-success-100);
     color: var(--color-success-500);
@@ -807,7 +1339,7 @@
   .badge-info {
     background: var(--color-info-100);
     color: var(--color-info-500);
-    border: 1px solid rgba(2, 132, 199, 0.15);
+    border: 1px solid rgba(3, 105, 199, 0.15);
   }
 
   /* ─── Status Pill (fintech style) ─── */
@@ -854,11 +1386,12 @@
   }
 
   .status-pill-pending {
-    background: var(--color-cream-200);
-    color: var(--color-maroon-700);
+    background: var(--color-sand-100);
+    color: var(--color-sand-700);
   }
 
-  /* ─── Navigation ─── */
+  /* ━━━ NAVIGATION ━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
   .nav-link {
     display: flex;
     align-items: center;
@@ -872,34 +1405,34 @@
     text-decoration: none;
 
     &:hover {
-      background: var(--color-maroon-50);
-      color: var(--color-maroon-800);
+      background: var(--color-surface-100);
+      color: var(--color-ink-800);
     }
 
     &.active {
-      background: var(--color-maroon-950);
-      color: var(--color-cream-100);
+      background: var(--color-primary);
+      color: var(--color-primary-light);
       font-weight: 600;
     }
   }
 
-  /* ─── Bottom Navigation (Mobile) ─── */
+  /* ─── Bottom Navigation ─── */
   .bottom-nav {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 50;
-    background: rgba(255, 252, 247, 0.96);
+    background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(24px) saturate(1.8);
     -webkit-backdrop-filter: blur(24px) saturate(1.8);
-    border-top: 1px solid var(--color-maroon-100);
+    border-top: 1px solid var(--color-surface-200);
     padding: 0.5rem 1rem;
     padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
     display: flex;
     align-items: center;
     justify-content: space-around;
-    box-shadow: 0 -4px 24px rgba(128, 0, 0, 0.06);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.06);
   }
 
   .bottom-nav-item {
@@ -918,8 +1451,8 @@
     cursor: pointer;
 
     &.active {
-      color: var(--color-maroon-700);
-      background: var(--color-maroon-50);
+      color: var(--color-primary);
+      background: var(--color-primary-light);
     }
 
     & svg,
@@ -935,14 +1468,12 @@
     }
   }
 
-  /* ─── App Header (Dashboard) ─── */
+  /* ─── App Header ─── */
   .app-header {
-    background: linear-gradient(
-      135deg,
-      var(--color-maroon-800) 0%,
-      var(--color-maroon-950) 100%
-    );
-    color: var(--color-cream-100);
+    background: linear-gradient(135deg,
+        var(--color-primary) 0%,
+        var(--color-teal-900) 100%);
+    color: var(--color-primary-light);
     padding: 1.5rem;
     position: relative;
     overflow: hidden;
@@ -966,12 +1497,10 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.12),
-        transparent
-      );
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.12),
+          transparent);
     }
   }
 
@@ -984,7 +1513,7 @@
     gap: 0.5rem;
     padding: 1.25rem 0.75rem;
     background: var(--color-white);
-    border: 1px solid var(--color-maroon-100);
+    border: 1px solid var(--color-surface-200);
     border-radius: var(--radius-lg);
     text-align: center;
     cursor: pointer;
@@ -997,11 +1526,11 @@
 
     &:hover,
     &:active {
-      background: var(--color-maroon-50);
-      border-color: var(--color-maroon-200);
+      background: var(--color-surface-50);
+      border-color: var(--color-ink-300);
       box-shadow: var(--shadow-premium-sm);
       transform: translateY(-2px);
-      color: var(--color-maroon-800);
+      color: var(--color-ink-900);
     }
   }
 
@@ -1009,15 +1538,11 @@
     width: 48px;
     height: 48px;
     border-radius: var(--radius-md);
-    background: linear-gradient(
-      135deg,
-      var(--color-maroon-50),
-      var(--color-maroon-100)
-    );
+    background: var(--color-surface-100);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-maroon-700);
+    color: var(--color-ink-600);
     font-size: 1.375rem;
     transition: transform var(--duration-base) var(--ease-spring);
 
@@ -1030,7 +1555,7 @@
   .progress-track {
     width: 100%;
     height: 6px;
-    background: var(--color-maroon-100);
+    background: var(--color-surface-200);
     border-radius: var(--radius-full);
     overflow: hidden;
   }
@@ -1038,11 +1563,9 @@
   .progress-fill {
     height: 100%;
     border-radius: var(--radius-full);
-    background: linear-gradient(
-      90deg,
-      var(--color-maroon-600),
-      var(--color-maroon-950)
-    );
+    background: linear-gradient(90deg,
+        var(--color-teal-400),
+        var(--color-primary));
     transition: width 0.7s var(--ease-spring);
     position: relative;
 
@@ -1053,11 +1576,9 @@
       right: 0;
       bottom: 0;
       width: 40px;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.25)
-      );
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.28));
       border-radius: inherit;
     }
   }
@@ -1068,13 +1589,14 @@
     align-items: flex-start;
     gap: 0.875rem;
     padding: 1rem 1.25rem;
-    background: var(--color-cream-50);
-    border: 1px solid var(--color-cream-200);
+    background: var(--color-primary-light);
+    border: 1px solid var(--color-teal-200);
     border-radius: var(--radius-lg);
-    border-left: 3px solid var(--color-maroon-500);
+    border-left: 3px solid var(--color-primary);
   }
 
-  /* ─── Section Utilities ─── */
+  /* ━━━ SECTIONS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
   .section-std {
     padding-top: var(--space-section-y);
     padding-bottom: var(--space-section-y);
@@ -1091,26 +1613,35 @@
     overflow: hidden;
   }
 
-  .section-cream {
+  /* teal tint (Template-Demo) */
+  .section-teal {
     padding-top: var(--space-section-y);
     padding-bottom: var(--space-section-y);
-    background: linear-gradient(
-      180deg,
-      var(--color-cream-100) 0%,
-      var(--color-cream-50) 100%
-    );
+    background: linear-gradient(180deg,
+        var(--color-teal-50) 0%,
+        var(--color-surface-50) 100%);
     position: relative;
     overflow: hidden;
   }
 
-  .section-maroon {
+  /* sand tint (Template-Demo) */
+  .section-sand {
     padding-top: var(--space-section-y);
     padding-bottom: var(--space-section-y);
-    background: linear-gradient(
-      135deg,
-      var(--color-maroon-900) 0%,
-      var(--color-maroon-950) 100%
-    );
+    background: linear-gradient(180deg,
+        var(--color-sand-50) 0%,
+        var(--color-white) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Dark Hijau Islami (Template-Demo — hero/CTA) */
+  .section-dark-teal {
+    padding-top: var(--space-section-y);
+    padding-bottom: var(--space-section-y);
+    background: linear-gradient(135deg,
+        var(--color-primary) 0%,
+        var(--color-teal-900) 100%);
     position: relative;
     overflow: hidden;
 
@@ -1121,20 +1652,93 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent
-      );
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.12),
+          transparent);
     }
+  }
+
+  /* Blue tint (Ulul Albaab) */
+  .section-blue {
+    padding-top: var(--space-section-y);
+    padding-bottom: var(--space-section-y);
+    background: linear-gradient(180deg,
+        var(--color-teal-50) 0%,
+        var(--color-surface-50) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Cream tint (Al Imam) */
+  .section-cream {
+    padding-top: var(--space-section-y);
+    padding-bottom: var(--space-section-y);
+    background: linear-gradient(180deg,
+        var(--color-cream-100) 0%,
+        var(--color-cream-50) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Dark Blue (Ulul Albaab) */
+  .section-dark-blue {
+    padding-top: var(--space-section-y);
+    padding-bottom: var(--space-section-y);
+    background: linear-gradient(135deg,
+        var(--color-teal-700) 0%,
+        var(--color-teal-900) 100%);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.12),
+          transparent);
+    }
+  }
+
+  /* Dark Maroon (Al Imam) */
+  .section-maroon {
+    padding-top: var(--space-section-y);
+    padding-bottom: var(--space-section-y);
+    background: linear-gradient(135deg,
+        var(--color-maroon-900) 0%,
+        var(--color-maroon-950) 100%);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent);
+    }
+  }
+
+  /* Legacy — backward compat */
+  .section-dark {
+    @extend .section-dark-teal;
   }
 
   .section-title {
     font-family: var(--font-display);
     font-size: clamp(1.75rem, 3.5vw, 3rem);
     font-weight: 800;
-    color: var(--color-maroon-900);
+    color: var(--color-teal-800);
     letter-spacing: -0.025em;
     line-height: 1.15;
   }
@@ -1152,42 +1756,47 @@
   .container-padding {
     padding-left: clamp(1rem, 5vw, 2rem);
     padding-right: clamp(1rem, 5vw, 2rem);
+
   }
 
-  /* ─── Sidebar ─── */
+  /* ━━━ SIDEBAR ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /* Hijau Islami sidebar (Template-Demo default) */
+  .sidebar-teal {
+    background: linear-gradient(180deg,
+        var(--color-primary) 0%,
+        var(--color-teal-900) 100%);
+    color: var(--color-primary-light);
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  /* Blue sidebar (Ulul Albaab) */
+  .sidebar-blue {
+    background: linear-gradient(180deg,
+        var(--color-teal-700) 0%,
+        var(--color-teal-900) 100%);
+    color: var(--color-sand-100);
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  /* Maroon sidebar (Al Imam) */
   .sidebar-maroon {
-    background: linear-gradient(
-      180deg,
-      var(--color-maroon-900) 0%,
-      var(--color-maroon-950) 100%
-    );
+    background: linear-gradient(180deg,
+        var(--color-maroon-900) 0%,
+        var(--color-maroon-950) 100%);
     color: var(--color-cream-200);
     height: 100%;
     overflow-y: auto;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.08),
-        transparent
-      );
-    }
   }
 
-  .sidebar-maroon {
-    background: linear-gradient(
-      180deg,
-      var(--color-maroon-800) 0%,
-      var(--color-maroon-950) 100%
-    );
-    color: var(--color-gold-100);
+  /* Neutral sidebar */
+  .sidebar-neutral {
+    background: linear-gradient(180deg,
+        var(--color-ink-900) 0%,
+        var(--color-ink-950) 100%);
+    color: rgba(255, 255, 255, 0.8);
     height: 100%;
     overflow-y: auto;
   }
@@ -1198,7 +1807,7 @@
     gap: 0.75rem;
     padding: 0.625rem 1.25rem;
     border-radius: var(--radius-md);
-    color: rgba(253, 248, 238, 0.65);
+    color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
     font-size: 0.9rem;
     transition: all var(--duration-fast) var(--ease-smooth);
@@ -1206,16 +1815,29 @@
     margin: 0.125rem 0.5rem;
 
     &:hover {
-      background: rgba(255, 248, 238, 0.08);
-      color: var(--color-cream-100);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--color-white);
     }
 
     &.active {
-      background: rgba(255, 248, 238, 0.14);
-      color: var(--color-cream-200);
+      background: rgba(255, 255, 255, 0.14);
+      color: var(--color-white);
       font-weight: 600;
-      border: 1px solid rgba(255, 248, 238, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
+  }
+
+  /* Active state khusus per brand */
+  .sidebar-teal .sidebar-link.active {
+    color: var(--color-secondary);
+  }
+
+  .sidebar-blue .sidebar-link.active {
+    color: var(--color-sand-300);
+  }
+
+  .sidebar-maroon .sidebar-link.active {
+    color: var(--color-cream-200);
   }
 
   .sidebar-section-title {
@@ -1223,7 +1845,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: rgba(255, 248, 238, 0.35);
+    color: rgba(255, 255, 255, 0.35);
     padding: 0.5rem 1.75rem;
     margin-top: 1rem;
   }
@@ -1231,24 +1853,40 @@
   /* ─── Divider ─── */
   .divider {
     height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      var(--color-maroon-100),
-      transparent
-    );
+    background: linear-gradient(90deg,
+        transparent,
+        var(--color-surface-200),
+        transparent);
+    border: none;
+    margin: 0;
+  }
+
+  .divider-teal {
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent,
+        var(--color-teal-200),
+        transparent);
+    border: none;
+    margin: 0;
+  }
+
+  .divider-blue {
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent,
+        var(--color-teal-100),
+        transparent);
     border: none;
     margin: 0;
   }
 
   .divider-cream {
     height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      var(--color-cream-300),
-      transparent
-    );
+    background: linear-gradient(90deg,
+        transparent,
+        var(--color-cream-300),
+        transparent);
     border: none;
     margin: 0;
   }
@@ -1258,93 +1896,149 @@
    4. UTILITIES
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 @layer utilities {
-  /* ─── Text Gradients ─── */
-  .text-gradient-maroon {
-    background: linear-gradient(
-      135deg,
-      var(--color-maroon-600) 0%,
-      var(--color-maroon-950) 100%
-    );
+
+  /* ─── Text Gradients — semua brand ─── */
+  .text-gradient-teal {
+    background: linear-gradient(135deg,
+        var(--color-teal-500) 0%,
+        var(--color-teal-900) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  .text-gradient-gold {
-    background: linear-gradient(
-      135deg,
-      var(--color-gold-400) 0%,
-      var(--color-gold-600) 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .text-gradient-cream {
-    background: linear-gradient(
-      135deg,
-      var(--color-cream-300) 0%,
-      var(--color-cream-500) 100%
-    );
+  .text-gradient-teal-sand {
+    background: linear-gradient(135deg,
+        var(--color-teal-700) 0%,
+        var(--color-sand-500) 60%,
+        var(--color-teal-900) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .text-gradient-blue {
-    background: linear-gradient(
-      135deg,
-      var(--color-maroon-500) 0%,
-      var(--color-maroon-800) 100%
-    );
+    background: linear-gradient(135deg,
+        var(--color-teal-500) 0%,
+        var(--color-teal-900) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  /* ─── Backgrounds ─── */
-  .bg-maroon-gradient {
-    background: linear-gradient(
-      135deg,
-      var(--color-maroon-800) 0%,
-      var(--color-maroon-950) 100%
-    );
+  .text-gradient-teal {
+    background: linear-gradient(135deg,
+        var(--color-teal-600) 0%,
+        var(--color-teal-900) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
-  .bg-cream-gradient {
-    background: linear-gradient(
-      160deg,
-      var(--color-cream-50) 0%,
-      var(--color-white) 50%,
-      var(--color-cream-100) 100%
-    );
+  .text-gradient-maroon {
+    background: linear-gradient(135deg,
+        var(--color-maroon-600) 0%,
+        var(--color-maroon-950) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg,
+        var(--color-gold-400) 0%,
+        var(--color-gold-600) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-cream {
+    background: linear-gradient(135deg,
+        var(--color-cream-300) 0%,
+        var(--color-cream-500) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-sky {
+    background: linear-gradient(135deg,
+        var(--color-teal-300) 0%,
+        var(--color-teal-600) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* ─── Backgrounds — semua brand ─── */
+  .bg-teal-gradient {
+    background: linear-gradient(135deg,
+        var(--color-primary) 0%,
+        var(--color-teal-900) 100%);
+  }
+
+  .bg-teal-subtle {
+    background: linear-gradient(160deg,
+        var(--color-teal-50) 0%,
+        var(--color-white) 60%,
+        var(--color-sand-50) 100%);
+  }
+
+  .bg-sand-gradient {
+    background: linear-gradient(160deg,
+        var(--color-sand-50) 0%,
+        var(--color-white) 50%,
+        var(--color-sand-100) 100%);
+  }
+
+  .bg-blue-gradient {
+    background: linear-gradient(135deg,
+        var(--color-teal-600) 0%,
+        var(--color-teal-900) 100%);
+  }
+
+  .bg-blue-subtle {
+    background: linear-gradient(160deg,
+        var(--color-teal-50) 0%,
+        var(--color-white) 60%,
+        var(--color-surface-100) 100%);
+  }
+
+  .bg-yellow-gradient {
+    background: linear-gradient(160deg,
+        var(--color-sand-50) 0%,
+        var(--color-white) 50%,
+        var(--color-sand-100) 100%);
+  }
+
+  .bg-maroon-gradient {
+    background: linear-gradient(135deg,
+        var(--color-maroon-800) 0%,
+        var(--color-maroon-950) 100%);
   }
 
   .bg-maroon-subtle {
-    background: linear-gradient(
-      160deg,
-      var(--color-maroon-50) 0%,
-      var(--color-white) 60%,
-      var(--color-cream-50) 100%
-    );
+    background: linear-gradient(160deg,
+        var(--color-maroon-50) 0%,
+        var(--color-white) 60%,
+        var(--color-cream-50) 100%);
   }
 
-  .bg-maroon-gradient {
-    background: linear-gradient(
-      135deg,
-      var(--color-maroon-500) 0%,
-      var(--color-maroon-700) 100%
-    );
+  .bg-cream-gradient {
+    background: linear-gradient(160deg,
+        var(--color-cream-50) 0%,
+        var(--color-white) 50%,
+        var(--color-cream-100) 100%);
   }
 
-  .bg-gold-gradient {
-    background: linear-gradient(
-      160deg,
-      var(--color-gold-50) 0%,
-      var(--color-white) 50%,
-      var(--color-gold-100) 100%
-    );
+  /* Legacy aliases */
+  .bg-teal-gradient {
+    @extend .bg-blue-gradient;
+  }
+
+  .bg-sand-gradient {
+    @extend .bg-yellow-gradient;
   }
 
   /* ─── Glass ─── */
@@ -1353,6 +2047,20 @@
     backdrop-filter: blur(24px) saturate(1.8);
     -webkit-backdrop-filter: blur(24px) saturate(1.8);
     border: 1px solid rgba(255, 255, 255, 0.55);
+  }
+
+  .glass-teal {
+    background: rgba(27, 107, 58, 0.82);
+    backdrop-filter: blur(24px) saturate(1.5);
+    -webkit-backdrop-filter: blur(24px) saturate(1.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-blue {
+    background: rgba(3, 105, 199, 0.8);
+    backdrop-filter: blur(24px) saturate(1.5);
+    -webkit-backdrop-filter: blur(24px) saturate(1.5);
+    border: 1px solid rgba(255, 255, 255, 0.12);
   }
 
   .glass-maroon {
@@ -1369,7 +2077,14 @@
     border: 1px solid rgba(228, 193, 111, 0.25);
   }
 
-  /* ─── Typography Utilities ─── */
+  .glass-surface {
+    background: rgba(249, 250, 251, 0.88);
+    backdrop-filter: blur(20px) saturate(1.6);
+    -webkit-backdrop-filter: blur(20px) saturate(1.6);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  /* ─── Typography ─── */
   .text-balance {
     text-wrap: balance;
   }
@@ -1515,6 +2230,7 @@
   }
 
   @keyframes float {
+
     0%,
     100% {
       transform: translateY(0px);
@@ -1553,6 +2269,7 @@
   }
 
   @keyframes pulseGlow {
+
     0%,
     100% {
       opacity: 1;
@@ -1568,6 +2285,7 @@
   }
 
   @keyframes pulseDot {
+
     0%,
     100% {
       transform: scale(1);
@@ -1582,12 +2300,10 @@
 
   /* ─── Shimmer (loading skeleton) ─── */
   .shimmer {
-    background: linear-gradient(
-      90deg,
-      var(--color-maroon-50) 25%,
-      var(--color-maroon-100) 50%,
-      var(--color-maroon-50) 75%
-    );
+    background: linear-gradient(90deg,
+        var(--color-surface-100) 25%,
+        var(--color-surface-200) 50%,
+        var(--color-surface-100) 75%);
     background-size: 200% 100%;
     animation: shimmer 1.6s infinite;
   }
@@ -1628,7 +2344,7 @@
     perspective: 1000px;
   }
 
-  /* ─── Safe area (notch phones) ─── */
+  /* ─── Safe area ─── */
   .pb-safe {
     padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
@@ -1645,7 +2361,7 @@
     padding-right: max(0px, env(safe-area-inset-right));
   }
 
-  /* ─── Mask utilities (Linear-style fade edge) ─── */
+  /* ─── Mask utilities ─── */
   .mask-fade-bottom {
     mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
@@ -1657,23 +2373,19 @@
   }
 
   .mask-fade-x {
-    mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      black 10%,
-      black 90%,
-      transparent 100%
-    );
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      black 10%,
-      black 90%,
-      transparent 100%
-    );
+    mask-image: linear-gradient(to right,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%);
+    -webkit-mask-image: linear-gradient(to right,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%);
   }
 
-  /* ─── Noise texture overlay (subtle premium feel) ─── */
+  /* ─── Noise texture overlay ─── */
   .noise-overlay {
     position: relative;
     isolation: isolate;
@@ -1688,5 +2400,375 @@
     pointer-events: none;
     border-radius: inherit;
     z-index: 1;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     CIROAI PREMIUM ENTERPRISE AESTHETIC
+     Terinspirasi dari UI www.ciroai.us
+     Brand-agnostic — Dipakai semua project
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /* ── Section Label Badge (CiroAI "ENTERPRISE DATA INTELLIGENCE" pill) ──
+     Gunakan di atas heading section sebagai label kecil uppercase
+     Contoh: <span class="section-label section-label-teal">Fitur Unggulan</span>
+  */
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: var(--radius-full);
+    font-size: 0.6875rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1;
+    border: 1px solid;
+    transition: all var(--duration-base) var(--ease-smooth);
+
+    /* Dot indicator sebelum label */
+    &::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+  }
+
+  /* Teal variant (Template-Demo) */
+  .section-label-teal {
+    background: rgba(13, 148, 136, 0.08);
+    color: var(--color-teal-700);
+    border-color: rgba(13, 148, 136, 0.18);
+  }
+
+  /* Blue variant (Ulul Albaab) */
+  .section-label-blue {
+    background: rgba(3, 105, 199, 0.08);
+    color: var(--color-blue-700);
+    border-color: rgba(3, 105, 199, 0.18);
+  }
+
+  /* Maroon variant (Al Imam) */
+  .section-label-maroon {
+    background: rgba(128, 0, 0, 0.08);
+    color: var(--color-maroon-700);
+    border-color: rgba(128, 0, 0, 0.18);
+  }
+
+  /* White variant (untuk section gelap) */
+  .section-label-white {
+    background: rgba(255, 255, 255, 0.10);
+    color: rgba(255, 255, 255, 0.85);
+    border-color: rgba(255, 255, 255, 0.20);
+  }
+
+  /* ── Glassmorphism Panels (CiroAI floating card effect) ──
+     Gunakan untuk floating cards, navbar, atau stat widget overlay
+  */
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(28px) saturate(1.9);
+    -webkit-backdrop-filter: blur(28px) saturate(1.9);
+    border: 1px solid rgba(255, 255, 255, 0.60);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.04);
+    transition: all var(--duration-slow) var(--ease-spring);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 8px 36px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  /* Dark glass (untuk section gelap) */
+  .glass-panel-dark {
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(28px) saturate(1.6);
+    -webkit-backdrop-filter: blur(28px) saturate(1.6);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition: all var(--duration-slow) var(--ease-spring);
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.32);
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+  }
+
+  /* Teal glass (Template-Demo hero stat cards) */
+  .glass-panel-teal {
+    background: rgba(13, 148, 136, 0.08);
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    border: 1px solid rgba(13, 148, 136, 0.15);
+    box-shadow: 0 2px 16px rgba(13, 148, 136, 0.08);
+  }
+
+  /* Blue glass (Ulul Albaab) */
+  .glass-panel-blue {
+    background: rgba(3, 105, 199, 0.07);
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    border: 1px solid rgba(3, 105, 199, 0.14);
+    box-shadow: 0 2px 16px rgba(3, 105, 199, 0.08);
+  }
+
+  /* Maroon glass (Al Imam) */
+  .glass-panel-maroon {
+    background: rgba(128, 0, 0, 0.07);
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    border: 1px solid rgba(128, 0, 0, 0.14);
+    box-shadow: 0 2px 16px rgba(128, 0, 0, 0.08);
+  }
+
+  /* ── Ambient Glow Blobs (CiroAI background orbs) ──
+     Gunakan sebagai elemen dekoratif absolut di dalam section/hero
+     Tidak memerlukan tailwind khusus, cukup pakai class ini
+  */
+  .glow-blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+    opacity: 0.18;
+  }
+
+  .glow-blob-teal {
+    background: radial-gradient(ellipse, var(--color-teal-400) 0%, transparent 70%);
+  }
+
+  .glow-blob-blue {
+    background: radial-gradient(ellipse, var(--color-blue-400) 0%, transparent 70%);
+  }
+
+  .glow-blob-maroon {
+    background: radial-gradient(ellipse, var(--color-maroon-500) 0%, transparent 70%);
+  }
+
+  .glow-blob-gold {
+    background: radial-gradient(ellipse, var(--color-gold-400) 0%, transparent 70%);
+  }
+
+  .glow-blob-amber {
+    background: radial-gradient(ellipse, var(--color-amber-400) 0%, transparent 70%);
+  }
+
+  /* ── Gradient Text (CiroAI "Platform." styling) ──
+     Gunakan pada h1/h2 keyword penting agar lebih dramatis & premium
+     Contoh: <span class="gradient-text-teal">Penerimaan Santri</span>
+  */
+  .gradient-text-teal {
+    background: linear-gradient(135deg, var(--color-teal-500) 0%, var(--color-sand-400) 55%, var(--color-teal-700) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline;
+  }
+
+  .gradient-text-blue {
+    background: linear-gradient(135deg, var(--color-blue-500) 0%, var(--color-amber-400) 55%, var(--color-blue-700) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline;
+  }
+
+  .gradient-text-maroon {
+    background: linear-gradient(135deg, var(--color-maroon-600) 0%, var(--color-cream-400) 55%, var(--color-maroon-800) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline;
+  }
+
+  /* White gradient (untuk section gelap) */
+  .gradient-text-white {
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.65) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline;
+  }
+
+  /* ── Neon Accent Border (CiroAI blue button glow) ──
+     Menambah glow effect pada elemen dengan brand color
+  */
+  .glow-ring-teal {
+    box-shadow: 0 0 0 1px rgba(13, 148, 136, 0.3), 0 0 20px rgba(13, 148, 136, 0.15);
+    transition: box-shadow var(--duration-base) var(--ease-smooth);
+
+    &:hover {
+      box-shadow: 0 0 0 1px rgba(13, 148, 136, 0.5), 0 0 30px rgba(13, 148, 136, 0.22);
+    }
+  }
+
+  .glow-ring-blue {
+    box-shadow: 0 0 0 1px rgba(3, 105, 199, 0.3), 0 0 20px rgba(3, 105, 199, 0.15);
+    transition: box-shadow var(--duration-base) var(--ease-smooth);
+
+    &:hover {
+      box-shadow: 0 0 0 1px rgba(3, 105, 199, 0.5), 0 0 30px rgba(3, 105, 199, 0.22);
+    }
+  }
+
+  .glow-ring-maroon {
+    box-shadow: 0 0 0 1px rgba(128, 0, 0, 0.3), 0 0 20px rgba(128, 0, 0, 0.15);
+    transition: box-shadow var(--duration-base) var(--ease-smooth);
+
+    &:hover {
+      box-shadow: 0 0 0 1px rgba(128, 0, 0, 0.5), 0 0 30px rgba(128, 0, 0, 0.22);
+    }
+  }
+
+  /* ── Shimmer Loading Effect (CiroAI sophistication) ── */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--color-surface-100) 25%,
+      var(--color-surface-200) 50%,
+      var(--color-surface-100) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.8s ease-in-out infinite;
+    border-radius: var(--radius-sm);
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  /* ── Top Shine Line (CiroAI card top highlight) ──
+     Tambahkan class ini pada card dark untuk efek "sheen" di bagian atas
+     Requires: position:relative; overflow:hidden
+  */
+  .shine-top::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.20), transparent);
+    pointer-events: none;
+  }
+
+  /* ── Stat Number Style (CiroAI "20+ / Multi-LLM" stat blocks) ── */
+  .stat-label {
+    font-size: 0.625rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-ink-400);
+    line-height: 1;
+  }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--color-ink-900);
+  }
+
+  /* ── Divider Line (CiroAI subtle separator) ── */
+  .divider-gradient {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-ink-200) 30%, var(--color-ink-200) 70%, transparent);
+    border: none;
+    margin: 0;
+  }
+
+  .divider-gradient-brand-teal {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-teal-200) 30%, var(--color-teal-200) 70%, transparent);
+    border: none;
+  }
+
+  .divider-gradient-brand-blue {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-blue-200) 30%, var(--color-blue-200) 70%, transparent);
+    border: none;
+  }
+
+  .divider-gradient-brand-maroon {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-maroon-200) 30%, var(--color-maroon-200) 70%, transparent);
+    border: none;
+  }
+
+  /* ── Icon Box (CiroAI feature icon container) ── */
+  .icon-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    transition: all var(--duration-base) var(--ease-spring);
+    flex-shrink: 0;
+
+    &:hover, .group:hover & {
+      transform: scale(1.10) rotate(3deg);
+    }
+  }
+
+  .icon-box-teal {
+    background: linear-gradient(135deg, var(--color-teal-500), var(--color-teal-800));
+    color: var(--color-white);
+    box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
+  }
+
+  .icon-box-blue {
+    background: linear-gradient(135deg, var(--color-blue-500), var(--color-blue-800));
+    color: var(--color-white);
+    box-shadow: 0 4px 14px rgba(3, 105, 199, 0.35);
+  }
+
+  .icon-box-maroon {
+    background: linear-gradient(135deg, var(--color-maroon-700), var(--color-maroon-950));
+    color: var(--color-cream-100);
+    box-shadow: 0 4px 14px rgba(128, 0, 0, 0.35);
+  }
+
+  .icon-box-gold {
+    background: linear-gradient(135deg, var(--color-gold-400), var(--color-gold-600));
+    color: var(--color-ink-900);
+    box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+  }
+
+  .icon-box-amber {
+    background: linear-gradient(135deg, var(--color-amber-400), var(--color-amber-600));
+    color: var(--color-ink-900);
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.30);
+  }
+
+  /* ── Hover Lift (standard micro-interaction) ── */
+  .hover-lift {
+    transition: transform var(--duration-base) var(--ease-spring), box-shadow var(--duration-base) var(--ease-spring);
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-premium-lg);
+    }
+
+    &:active {
+      transform: translateY(-1px) scale(0.99);
+    }
+  }
+
+  .hover-lift-sm {
+    transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast) var(--ease-spring);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-premium-md);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.99);
+    }
   }
 }

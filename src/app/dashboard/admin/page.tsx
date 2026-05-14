@@ -6,6 +6,7 @@ import { UserRole } from "@/lib/access-control";
 import { motion } from "framer-motion";
 import { exportToExcelProfessional, exportToPDF } from "@/lib/utils/export";
 import Swal from "sweetalert2";
+import { BRANDING } from "@/config/branding";
 
 const StatWidget = ({ label, value, icon: Icon, color, trend, breakdown, highlighted, onDownload, isDownloading, onPromote, isPromoting }: any) => {
   const colorMap: any = {
@@ -17,20 +18,21 @@ const StatWidget = ({ label, value, icon: Icon, color, trend, breakdown, highlig
     slate: "from-slate-600 to-slate-700",
   };
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-      className={`p-5 sm:p-6 lg:p-8 rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[2.5rem] border transition-all group relative overflow-hidden duration-300 ${
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }} 
+      animate={{ opacity: 1, y: 0 }}
+      className={`glass-panel p-5 sm:p-6 lg:p-8 rounded-[2rem] border transition-all group relative overflow-hidden duration-300 hover-lift ${
         highlighted 
-          ? "bg-linear-to-br from-maroon-900 via-maroon-950 to-maroon-900 text-white border-maroon-800 shadow-premium-lg hover:shadow-premium-xl hover:scale-102" 
-          : "bg-white text-maroon-950 border-cream-200 shadow-premium-sm hover:shadow-premium-lg hover:scale-101"
-      }`}>
-      <div className={`absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 transition-colors duration-500 ${
-        highlighted 
-          ? "bg-white/10 group-hover:bg-maroon-500/10" 
-          : "bg-cream-50 group-hover:bg-cream-100"
-      }`} />
+          ? "glass-panel-dark text-white border-maroon-800 shadow-premium-lg" 
+          : "text-maroon-950 border-cream-200 shadow-premium-sm"
+      }`}
+    >
+      <div className={`glow-blob w-32 h-32 opacity-10 transition-colors duration-500 -top-10 -right-10 ${
+        highlighted ? "glow-blob-maroon" : "glow-blob-cream"
+      }`} aria-hidden="true" />
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-8">
-          <div className={`w-14 h-14 rounded-2xl bg-linear-to-br ${colorMap[color] || colorMap.blue} flex items-center justify-center text-white shadow-xl transition-transform group-hover:scale-110 group-hover:rotate-3 duration-500`}>
+          <div className={`icon-box w-14 h-14 rounded-2xl bg-linear-to-br ${colorMap[color] || colorMap.blue} text-white shadow-xl group-hover:scale-110 group-hover:rotate-3 duration-500`}>
             <Icon className="w-6 h-6" />
           </div>
           {trend && (
@@ -45,7 +47,7 @@ const StatWidget = ({ label, value, icon: Icon, color, trend, breakdown, highlig
           )}
         </div>
         <div className="mb-6 lg:mb-8">
-          <p className={`text-[10px] sm:text-[11px] font-black uppercase tracking-[0.25em] mb-2 ${
+          <p className={`stat-label uppercase tracking-[0.25em] mb-2 ${
             highlighted ? "text-cream-300" : "text-maroon-400"
           }`}>{label}</p>
           <div className="flex items-baseline justify-between gap-2">
@@ -374,23 +376,29 @@ export default function AdminDashboardPage() {
   );
 
   return (
-    <div className="max-w-[1400px] mx-auto space-y-6 sm:space-y-8 pb-20 px-1">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="relative max-w-[1400px] mx-auto space-y-6 sm:space-y-8 pb-20 px-1">
+      {/* Background Ambience */}
+      <div className="glow-blob glow-blob-maroon w-[50%] h-[40%] -top-[10%] -left-[10%] opacity-[0.03] fixed" aria-hidden="true" />
+      <div className="glow-blob glow-blob-cream w-[40%] h-[50%] top-[20%] -right-[10%] opacity-[0.02] fixed" aria-hidden="true" />
+
+      <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-maroon-900 tracking-tight italic">Dashboard Al Imam</h1>
+          <h1 className="text-2xl sm:text-3xl font-black tracking-tight italic">
+            <span className="gradient-text-maroon">Dashboard Admin {BRANDING.schoolShortName}</span>
+          </h1>
           <p className="text-xs sm:text-sm text-maroon-500 font-medium mt-1">Pantau perkembangan pendaftaran santri secara langsung.</p>
         </div>
-        <button onClick={fetchStats} className="p-3 bg-white border border-cream-200 rounded-2xl text-maroon-400 hover:text-maroon-600 transition-all shadow-premium-sm self-start sm:self-auto">
+        <button onClick={fetchStats} className="p-3 bg-white border border-cream-200 rounded-2xl text-maroon-400 hover:text-maroon-600 transition-all shadow-premium-sm self-start sm:self-auto hover-lift">
           <RefreshCw className={`w-5 h-5 ${loading ? "animate-spin" : ""}`} />
         </button>
       </div>
 
-      <div className="bg-maroon-900 rounded-[2rem] sm:rounded-[2.5rem] lg:rounded-[3rem] p-6 sm:p-8 lg:p-12 text-white relative overflow-hidden shadow-2xl border border-white/5">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-maroon-600/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+      <div className="glass-panel glass-panel-dark rounded-[2.5rem] lg:rounded-[3rem] p-6 sm:p-8 lg:p-12 text-white relative overflow-hidden shadow-2xl border border-maroon-800/50">
+        <div className="glow-blob glow-blob-maroon w-96 h-96 opacity-20 -top-20 -right-20" aria-hidden="true" />
         <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
           <div className="max-w-xl w-full">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-[10px] font-black uppercase tracking-widest mb-6 lg:mb-8 border border-white/10">
-              <Activity className="w-4 h-4 text-gold-400" />
+            <div className="section-label section-label-maroon mb-6 lg:mb-8">
+              <Activity className="w-4 h-4" />
               <span>Status Operasional: Aktif</span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black mb-4 sm:mb-6 tracking-tighter leading-tight italic text-white">

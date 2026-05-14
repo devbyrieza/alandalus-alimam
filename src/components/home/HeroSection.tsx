@@ -1,5 +1,5 @@
-// src/components/home/HeroSection.tsx — alandalus-alimam
-// FIXED: reduced motion badge, tablet breakpoint, touch hover, maroon-950 note
+// src/components/home/HeroSection.tsx — alfath-template-demo
+// FIXED: reduced motion badge, tablet breakpoint, touch hover, explicit font sizing
 "use client";
 
 import Link from "next/link";
@@ -16,7 +16,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { BRANDING } from "@/config/branding";
 
-// ─── Animation variants ───
 const fadeUp = {
   hidden: { opacity: 0, y: 28, filter: "blur(4px)" },
   visible: {
@@ -44,65 +43,39 @@ const fadeIn = {
 
 export default function HeroSection() {
   const shouldReduceMotion = useReducedMotion();
-
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.08 });
   const animate = inView ? "visible" : "hidden";
 
-  // ── FIX #4: Reduced motion badge state ──
+  // FIX #4: Badge animate computed correctly — no scale jump when reduced motion is on
   const badgeAnimate = inView
-    ? shouldReduceMotion
-      ? { opacity: 1, scale: 1, rotate: -6 } // skip scale pop when reduced
-      : { opacity: 1, scale: 1, rotate: -6 }
-    : { opacity: 0, scale: shouldReduceMotion ? 1 : 0.5, rotate: -25 }; // no scale flash
+    ? { opacity: 1, scale: 1, rotate: -6 }
+    : { opacity: 0, scale: shouldReduceMotion ? 1 : 0.5, rotate: -25 };
 
   return (
     <section
       ref={ref}
-      aria-label="Hero — Beranda Al Imam"
+      aria-label={`Hero — Beranda ${BRANDING.schoolName}`}
       className="relative min-h-[96vh] flex items-center pt-24 pb-20 md:pt-28 lg:pt-32 lg:pb-28 overflow-hidden"
       style={{
         background:
-          "linear-gradient(160deg, var(--color-cream-50) 0%, var(--color-white) 55%, var(--color-maroon-50) 100%)",
+          "linear-gradient(160deg, var(--color-surface-50) 0%, var(--color-white) 55%, var(--color-maroon-50) 100%)",
       }}
     >
-      {/* ── Atmospheric Background ── */}
-      <div
-        className="absolute inset-0 pointer-events-none overflow-hidden"
-        aria-hidden="true"
-      >
+      {/* CiroAI Atmospheric Background Blobs */}
+      <div className="glow-blob glow-blob-maroon w-[60%] h-[70%] -top-[20%] -left-[10%] opacity-15" aria-hidden="true" />
+      <div className="glow-blob glow-blob-cream w-[50%] h-[60%] top-[10%] -right-[10%] opacity-15" aria-hidden="true" />
+      <div className="glow-blob glow-blob-maroon w-[40%] h-[40%] bottom-[-10%] left-[20%] opacity-10" aria-hidden="true" />
+      
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <div
-          className="absolute -top-[20%] -left-[10%] w-[55%] h-[65%] rounded-full opacity-40"
+          className="absolute inset-0 opacity-[0.015]"
           style={{
-            background:
-              "radial-gradient(ellipse, var(--color-maroon-200) 0%, transparent 70%)",
-            filter: "blur(80px)",
-          }}
-        />
-        <div
-          className="absolute top-[15%] -right-[8%] w-[42%] h-[55%] rounded-full opacity-35"
-          style={{
-            background:
-              "radial-gradient(ellipse, var(--color-cream-400) 0%, transparent 70%)",
-            filter: "blur(90px)",
-          }}
-        />
-        <div
-          className="absolute bottom-[-5%] left-[25%] w-[50%] h-[45%] rounded-full opacity-25"
-          style={{
-            background:
-              "radial-gradient(ellipse, var(--color-maroon-100) 0%, transparent 70%)",
-            filter: "blur(100px)",
-          }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.025]"
-          style={{
-            backgroundImage: `linear-gradient(var(--color-maroon-400) 1px, transparent 1px), linear-gradient(90deg, var(--color-maroon-400) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(var(--color-maroon-500) 1px, transparent 1px), linear-gradient(90deg, var(--color-maroon-500) 1px, transparent 1px)`,
             backgroundSize: "64px 64px",
           }}
         />
         <div
-          className="absolute inset-0 opacity-[0.018]"
+          className="absolute inset-0 opacity-[0.012]"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
           }}
@@ -110,7 +83,6 @@ export default function HeroSection() {
       </div>
 
       <Container className="relative z-10">
-        {/* ── FIX #1: Added overflow-visible on grid so tablet floating cards aren't clipped ── */}
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] xl:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-16 xl:gap-20 items-center">
           {/* CONTENT SIDE */}
           <div className="flex flex-col gap-7 lg:gap-9 text-center lg:text-left">
@@ -122,20 +94,12 @@ export default function HeroSection() {
               transition={{ delay: 0.1 }}
               className="flex justify-center lg:justify-start"
             >
-              <span
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[11px] lg:text-[12px] font-bold tracking-[0.05em]"
-                style={{
-                  background: "var(--color-surface-50)",
-                  border: "1px solid var(--color-maroon-200)",
-                  color: "var(--color-maroon-800)",
-                  boxShadow: "var(--shadow-sm)",
-                }}
-              >
-                <span>Selamat Datang di {BRANDING.schoolShortName}</span>
+              <span className="section-label section-label-maroon">
+                Selamat Datang di {BRANDING.schoolShortName}
               </span>
             </motion.div>
 
-            {/* Headline — FIX #1: explicit clamp so mobile 360px tidak overflow */}
+            {/* Headline — FIX #1: explicit clamp for 360px safety */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -146,24 +110,14 @@ export default function HeroSection() {
               <h1
                 className="leading-[1.06] tracking-[-0.03em] mx-auto lg:mx-0 max-w-2xl lg:max-w-none font-black text-balance"
                 style={{
-                  color: "var(--color-maroon-600)",
+                  color: "var(--color-maroon-700)",
                   fontSize: "clamp(2rem, 5vw + 0.75rem, 5rem)",
                 }}
               >
                 <span className="block">Mencetak Generasi</span>
-                <span
-                  className="block mt-1"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, var(--color-maroon-600) 0%, var(--color-gold-500) 50%, var(--color-maroon-700) 100%)",
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    paddingBottom: "0.15em",
-                  }}
-                >
-                  Hanif, Kontributif, <br className="hidden sm:block" />
-                  dan Adaptif
+                <span className="gradient-text-maroon block mt-1">
+                  Unggul, Cerdas, <br className="hidden sm:block" />
+                  dan Berintegritas
                 </span>
               </h1>
             </motion.div>
@@ -177,22 +131,15 @@ export default function HeroSection() {
               className="text-base lg:text-[1.075rem] leading-[1.85] max-w-[38rem] mx-auto lg:mx-0 text-center lg:text-left text-pretty"
               style={{ color: "var(--color-ink-600)", fontWeight: 450 }}
             >
-              Bukan sekadar tempat belajar agama — sistem pembentukan karakter
+              Bukan sekadar tempat belajar — sebuah sistem pembentukan karakter
               yang memadukan{" "}
               <strong
                 className="font-bold"
-                style={{ color: "var(--color-maroon-800)" }}
+                style={{ color: "var(--color-maroon-700)" }}
               >
-                Intensitas Tahfidz Al-Qur'an
+                Intensitas Tahfidz Al-Qur'an, Ilmu Syar'i, dan Kepemimpinan
               </strong>{" "}
-              dengan{" "}
-              <strong
-                className="font-bold"
-                style={{ color: "var(--color-maroon-800)" }}
-              >
-                Kepemimpinan (Leadership)
-              </strong>{" "}
-              tanpa kekerasan dan luka pengasuhan.
+              dalam satu lingkungan pesantren modern.
             </motion.p>
 
             {/* Tagline Divider */}
@@ -205,17 +152,17 @@ export default function HeroSection() {
             >
               <div
                 className="h-px flex-1 max-w-[3rem]"
-                style={{ background: "var(--color-cream-300)" }}
+                style={{ background: "var(--color-maroon-200)" }}
               />
               <p
                 className="text-sm font-semibold italic"
                 style={{ color: "var(--color-maroon-700)" }}
               >
-                "Pendidikan Berkualitas, Diperkuat Sistem Al Andalus"
+                "{BRANDING.schoolTagline}"
               </p>
               <div
                 className="h-px flex-1 max-w-[3rem]"
-                style={{ background: "var(--color-cream-300)" }}
+                style={{ background: "var(--color-maroon-200)" }}
               />
             </motion.div>
 
@@ -230,20 +177,19 @@ export default function HeroSection() {
               <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                 <Link href="/ppdb" className="w-full sm:w-auto">
                   <button
-                    className="btn-primary w-full sm:w-auto px-8 lg:px-10 py-4 lg:py-[1.125rem] min-h-[56px] text-[0.9375rem]"
+                    className="btn-primary-maroon w-full sm:w-auto px-8 lg:px-10 py-4 lg:py-[1.125rem] min-h-[56px] text-[0.9375rem]"
                     style={{ boxShadow: "var(--shadow-maroon-lg)" }}
                   >
                     Daftar PPDB Sekarang
                   </button>
                 </Link>
                 <Link href="/program" className="w-full sm:w-auto">
-                  <button className="btn-secondary w-full sm:w-auto px-8 lg:px-10 py-4 lg:py-[1.125rem] min-h-[56px] text-[0.9375rem]">
-                    Lihat Program Studi
+                  <button className="btn-secondary-maroon w-full sm:w-auto px-8 lg:px-10 py-4 lg:py-[1.125rem] min-h-[56px] text-[0.9375rem]">
+                    Lihat Program Kami
                   </button>
                 </Link>
               </div>
 
-              {/* Trust microcopy */}
               <div className="flex items-center gap-3 mt-1">
                 <div className="flex -space-x-2.5">
                   {[
@@ -274,16 +220,15 @@ export default function HeroSection() {
                   >
                     Angkatan Pertama
                   </span>
-                  {" • "}Dikelola oleh Al Andalus IIBS
+                  {" • "} {BRANDING.schoolName}
                 </p>
               </div>
 
-              {/* 3 trust points */}
               <div className="flex flex-wrap gap-x-5 gap-y-2 justify-center lg:justify-start mt-1">
                 {[
-                  "Beasiswa tersedia",
-                  "Perpaduan kurikulum nasional + kurikulum khas Al Andalus",
-                  "Tanpa kekerasan",
+                  "MTs & IL tersedia",
+                  "Proses cepat & transparan",
+                  BRANDING.schoolNetwork,
                 ].map((point) => (
                   <span
                     key={point}
@@ -302,16 +247,14 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* VISUAL SIDE
-              FIX #2: overflow-visible so floating cards tidak terpotong di md breakpoint
-          */}
+          {/* VISUAL SIDE — FIX #2: overflow visible + md breakpoints */}
           <motion.div
             variants={fadeIn}
             initial="hidden"
             animate={animate}
             transition={{ delay: shouldReduceMotion ? 0 : 0.25 }}
             className="relative w-full mt-8 lg:mt-0 lg:max-w-[500px] xl:max-w-[540px] lg:ml-auto"
-            style={{ overflow: "visible" }} // ← FIX tablet clip
+            style={{ overflow: "visible" }}
           >
             {/* Main Image */}
             <div
@@ -321,14 +264,16 @@ export default function HeroSection() {
                 border: "10px solid var(--color-white)",
                 boxShadow:
                   "var(--shadow-premium-2xl), 0 0 0 1px var(--color-maroon-100)",
-                overflow: "hidden", // only image wrapper clips, not outer div
+                overflow: "hidden",
               }}
             >
               <Image
                 src="/images/hero.jpg"
-                alt={`${BRANDING.schoolName} — Pesantren Modern`}
+                alt={`${BRANDING.schoolName}`}
                 width={800}
                 height={600}
+                priority
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
                 className="w-full h-auto object-cover aspect-[4/3]"
                 style={{
                   transition: "transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)",
@@ -340,75 +285,41 @@ export default function HeroSection() {
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "scale(1)";
                 }}
-                priority
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
               />
-              {/* Vignette */}
               <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
                   background:
-                    "linear-gradient(to top, rgba(61,7,7,0.45) 0%, transparent 55%)",
+                    "linear-gradient(to top, rgba(10, 22, 16, 0.50) 0%, transparent 55%)",
                 }}
                 aria-hidden="true"
               />
             </div>
 
-            {/* Floating Card: Tersedia
-                FIX #2: Added md: breakpoint between mobile -right-2 and lg:-right-6
-            */}
+            {/* Floating Card: Tersedia — FIX #2 md breakpoint */}
             <motion.div
               animate={shouldReduceMotion ? {} : { y: [0, -10, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               className="absolute -top-4 md:-top-5 lg:-top-6 -right-2 md:-right-4 lg:-right-6 z-20"
               style={{ transformOrigin: "right center" }}
             >
-              <div
-                className="flex items-center gap-3 px-4 py-3 rounded-2xl"
-                style={{
-                  background: "rgba(255,255,255,0.95)",
-                  backdropFilter: "blur(20px) saturate(1.8)",
-                  WebkitBackdropFilter: "blur(20px) saturate(1.8)",
-                  border: "1px solid rgba(255,255,255,0.7)",
-                  boxShadow: "var(--shadow-premium-md)",
-                }}
-              >
-                <div
-                  className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                  style={{ background: "var(--color-cream-100)" }}
-                >
-                  <GraduationCap
-                    className="w-5 h-5"
-                    style={{ color: "var(--color-maroon-600)" }}
-                    aria-hidden="true"
-                  />
+              <div className="glass-panel flex items-center gap-3 px-4 py-3 rounded-2xl">
+                <div className="icon-box icon-box-maroon w-11 h-11 rounded-xl">
+                  <GraduationCap className="w-5 h-5" />
                 </div>
                 <div>
-                  <p
-                    className="text-[9px] font-bold uppercase tracking-[0.08em] leading-none mb-1"
-                    style={{ color: "var(--color-ink-400)" }}
-                  >
-                    Tersedia
-                  </p>
-                  <p
-                    className="text-sm font-black leading-tight"
-                    style={{ color: "var(--color-maroon-900)" }}
-                  >
+                  <p className="stat-label mb-1">Tersedia</p>
+                  <p className="text-sm font-black leading-tight text-[var(--color-maroon-900)]">
                     MTs &amp; IL
                   </p>
-                  <p
-                    className="text-[10px] font-semibold mt-0.5"
-                    style={{ color: "var(--color-ink-500)" }}
-                  >
+                  <p className="text-[10px] font-semibold mt-0.5 text-[var(--color-ink-500)]">
                     Kuota terbatas
                   </p>
                 </div>
               </div>
             </motion.div>
 
-            {/* Floating Card: Jaringan Global
-                FIX #2: Added md: breakpoint
-            */}
+            {/* Floating Card: Jaringan Global — FIX #2 md breakpoint */}
             <motion.div
               animate={shouldReduceMotion ? {} : { y: [0, 10, 0] }}
               transition={{
@@ -420,46 +331,22 @@ export default function HeroSection() {
               className="absolute -bottom-5 md:-bottom-6 lg:-bottom-8 -left-2 md:-left-4 lg:-left-6 z-20"
               style={{ transformOrigin: "left center" }}
             >
-              <div
-                className="flex items-center gap-3 px-4 py-3 rounded-2xl"
-                style={{
-                  background: "rgba(255,255,255,0.95)",
-                  backdropFilter: "blur(20px) saturate(1.8)",
-                  WebkitBackdropFilter: "blur(20px) saturate(1.8)",
-                  border: "1px solid rgba(255,255,255,0.7)",
-                  boxShadow: "var(--shadow-premium-md)",
-                }}
-              >
-                <div
-                  className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                  style={{ background: "var(--color-maroon-50)" }}
-                >
-                  <Globe
-                    className="w-5 h-5"
-                    style={{ color: "var(--color-maroon-600)" }}
-                    aria-hidden="true"
-                  />
+              <div className="glass-panel flex items-center gap-3 px-4 py-3 rounded-2xl">
+                <div className="icon-box icon-box-maroon w-11 h-11 rounded-xl">
+                  <Globe className="w-5 h-5" />
                 </div>
                 <div>
-                  <p
-                    className="text-sm font-black leading-tight"
-                    style={{ color: "var(--color-maroon-900)" }}
-                  >
+                  <p className="text-sm font-black leading-tight text-[var(--color-maroon-900)]">
                     Jaringan Global
                   </p>
-                  <p
-                    className="text-[10px] font-semibold mt-0.5"
-                    style={{ color: "var(--color-ink-500)" }}
-                  >
-                    Timur Tengah
+                  <p className="text-[10px] font-semibold mt-0.5 text-[var(--color-ink-500)]">
+                    {BRANDING.schoolShortName}
                   </p>
                 </div>
               </div>
             </motion.div>
 
-            {/* Scholarship Badge
-                FIX #4: Properly respects shouldReduceMotion — no scale pop, no rotate anim
-            */}
+            {/* Info Badge — FIX #4: proper reduced motion, FIX #2: md position */}
             <motion.div
               initial={{
                 opacity: 0,
@@ -476,7 +363,7 @@ export default function HeroSection() {
               className="absolute -bottom-3 -right-3 md:bottom-6 md:-right-6 lg:bottom-10 lg:-right-10 z-30 cursor-default"
               style={{
                 background:
-                  "linear-gradient(135deg, var(--color-gold-400) 0%, var(--color-gold-600) 100%)",
+                  "linear-gradient(135deg, var(--color-cream-300) 0%, var(--color-cream-500) 100%)",
                 padding: "1rem 1.125rem",
                 borderRadius: "1.5rem",
                 border: "4px solid var(--color-white)",
@@ -489,51 +376,33 @@ export default function HeroSection() {
                   className="text-[9px] font-black uppercase tracking-[0.1em] leading-none mb-1.5"
                   style={{ color: "var(--color-maroon-950)" }}
                 >
-                  Beasiswa
+                  Info Penting
                 </p>
                 <p
                   className="text-base font-black leading-tight"
                   style={{ color: "var(--color-maroon-900)" }}
                 >
-                  Dhuafa
+                  Pendaftaran
                   <br />
-                  Berprestasi
+                  Dibuka
                 </p>
                 <div
                   className="mt-2 py-1 px-2.5 rounded-full"
-                  style={{ background: "rgba(61, 7, 7, 0.12)" }}
+                  style={{ background: "rgba(10, 22, 16, 0.12)" }}
                 >
                   <p
                     className="text-[9px] font-bold"
                     style={{ color: "var(--color-maroon-900)" }}
                   >
-                    Kuota 10 Santri
+                    Kuota Terbatas
                   </p>
                 </div>
               </div>
             </motion.div>
 
-            {/* Decorative blobs */}
-            <div
-              className="absolute -z-10 -bottom-14 -right-14 w-64 h-64 rounded-full pointer-events-none"
-              style={{
-                background:
-                  "radial-gradient(ellipse, var(--color-maroon-300) 0%, transparent 70%)",
-                filter: "blur(40px)",
-                opacity: 0.2,
-              }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute -z-10 -top-10 -left-10 w-48 h-48 rounded-full pointer-events-none"
-              style={{
-                background:
-                  "radial-gradient(ellipse, var(--color-cream-400) 0%, transparent 70%)",
-                filter: "blur(36px)",
-                opacity: 0.25,
-              }}
-              aria-hidden="true"
-            />
+            {/* Decorative glows */}
+            <div className="glow-blob glow-blob-maroon w-64 h-64 -bottom-14 -right-14 opacity-15" aria-hidden="true" />
+            <div className="glow-blob glow-blob-cream w-48 h-48 -top-10 -left-10 opacity-20" aria-hidden="true" />
           </motion.div>
         </div>
       </Container>

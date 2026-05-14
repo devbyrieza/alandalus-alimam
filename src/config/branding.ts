@@ -1,6 +1,11 @@
 export const BRANDING = {
   schoolName: process.env.NEXT_PUBLIC_SCHOOL_NAME || "Al Andalus Al Imam",
   schoolShortName: process.env.NEXT_PUBLIC_SCHOOL_SHORT_NAME || "Al Imam",
+  schoolTagline:
+    process.env.NEXT_PUBLIC_SCHOOL_TAGLINE ||
+    "Mencetak Generasi Rabbani, Unggul, dan Berintegritas",
+  schoolNetwork:
+    process.env.NEXT_PUBLIC_SCHOOL_NETWORK || "Jaringan Al Andalus",
   primaryColor: process.env.NEXT_PUBLIC_PRIMARY_COLOR || "#800000", // Default Maroon
   secondaryColor: process.env.NEXT_PUBLIC_SECONDARY_COLOR || "#FDF5E6", // Default Cream
   logoPath: process.env.NEXT_PUBLIC_LOGO_PATH || "/images/logo.jpg",
