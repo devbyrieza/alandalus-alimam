@@ -3,7 +3,7 @@ export const BRANDING = {
   schoolShortName: process.env.NEXT_PUBLIC_SCHOOL_SHORT_NAME || "Al Imam",
   schoolTagline:
     process.env.NEXT_PUBLIC_SCHOOL_TAGLINE ||
-    "Mencetak Generasi Rabbani, Unggul, dan Berintegritas",
+    "Mencetak Generasi Hanif, Kontributif, dan Adaptif",
   schoolNetwork:
     process.env.NEXT_PUBLIC_SCHOOL_NETWORK || "Perpaduan Kurikulum Nasional dan Khas Andalus",
   primaryColor: process.env.NEXT_PUBLIC_PRIMARY_COLOR || "#800000", // Default Maroon
