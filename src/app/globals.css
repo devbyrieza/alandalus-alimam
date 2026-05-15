@@ -2496,23 +2496,15 @@
   }
 
   .glow-blob-maroon {
-    background: radial-gradient(ellipse, var(--color-maroon-400) 0%, transparent 70%);
-  }
-
-  .glow-blob-blue {
-    background: radial-gradient(ellipse, var(--color-blue-400) 0%, transparent 70%);
-  }
-
-  .glow-blob-maroon {
     background: radial-gradient(ellipse, var(--color-maroon-500) 0%, transparent 70%);
   }
 
-  .glow-blob-gold {
-    background: radial-gradient(ellipse, var(--color-gold-400) 0%, transparent 70%);
+  .glow-blob-primary {
+    background: radial-gradient(ellipse, var(--color-primary-400) 0%, transparent 70%);
   }
 
-  .glow-blob-amber {
-    background: radial-gradient(ellipse, var(--color-amber-400) 0%, transparent 70%);
+  .glow-blob-secondary {
+    background: radial-gradient(ellipse, var(--color-secondary-400) 0%, transparent 70%);
   }
 
   /* ── Gradient Text (CiroAI "Platform." styling) ──
@@ -2520,7 +2512,7 @@
      Contoh: <span class="gradient-text-maroon">Penerimaan Santri</span>
   */
   .gradient-text-maroon {
-    background: linear-gradient(135deg, var(--color-maroon-600) 0%, var(--color-cream-400) 55%, var(--color-maroon-800) 100%);
+    background: linear-gradient(135deg, var(--color-maroon-700) 0%, var(--color-secondary-300) 50%, var(--color-maroon-600) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;

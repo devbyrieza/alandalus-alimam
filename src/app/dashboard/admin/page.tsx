@@ -403,7 +403,7 @@ export default function AdminDashboardPage() {
               <span>Status Operasional: Aktif</span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black mb-4 sm:mb-6 tracking-tighter leading-tight italic text-white">
-              Pantau <span className="text-gold-400">Pendaftaran</span>
+              Pantau <span className="text-secondary-200">Pendaftaran</span>
             </h2>
             <div className="flex items-center gap-8 sm:gap-12 mt-8 lg:mt-12">
               <div>
@@ -412,7 +412,7 @@ export default function AdminDashboardPage() {
               </div>
               <div className="w-px h-12 sm:h-16 bg-white/20" />
               <div>
-                <span className="text-3xl sm:text-5xl font-black text-gold-400 italic">{stats.sudah_bayar}</span>
+                <span className="text-3xl sm:text-5xl font-black text-secondary-200 italic">{stats.sudah_bayar}</span>
                 <p className="text-[10px] sm:text-[11px] font-black text-secondary-300 uppercase tracking-widest mt-2">Bayar Pendaftaran</p>
               </div>
             </div>
@@ -424,7 +424,7 @@ export default function AdminDashboardPage() {
             </div>
             <div className="bg-white/10 backdrop-blur-md p-4 sm:p-6 lg:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-white/10 flex flex-col items-center transition-all hover:bg-white/15 hover:scale-[1.02] duration-300">
               <p className="text-[9px] sm:text-[10px] font-black text-white/60 uppercase tracking-widest mb-2 sm:mb-4 text-center">Sedang Daftar Ulang</p>
-              <p className="text-2xl sm:text-4xl font-black text-gold-400 italic">{stats.daftar_ulang_sedang}</p>
+              <p className="text-2xl sm:text-4xl font-black text-secondary-200 italic">{stats.daftar_ulang_sedang}</p>
             </div>
             <div className="bg-white/10 backdrop-blur-md p-4 sm:p-6 lg:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-white/10 flex flex-col items-center transition-all hover:bg-white/15 hover:scale-[1.02] duration-300">
               <p className="text-[9px] sm:text-[10px] font-black text-white/60 uppercase tracking-widest mb-2 sm:mb-4 text-center">Selesai</p>
@@ -468,7 +468,7 @@ export default function AdminDashboardPage() {
           </div>
           <div className="relative z-10">
             <h3 className="text-xl sm:text-2xl font-black mb-6 sm:mb-8 tracking-tight flex items-center gap-3 italic text-white">
-              <div className="w-2 h-8 bg-gold-400 rounded-full" />
+              <div className="w-2 h-8 bg-secondary-500 rounded-full" />
               Statistik Pendaftaran
             </h3>
             <div className="grid grid-cols-2 gap-4 sm:gap-8">
@@ -483,7 +483,7 @@ export default function AdminDashboardPage() {
                 </div>
                 <div>
                   <p className="text-[10px] font-black text-secondary-300 uppercase tracking-widest mb-2">Sedang Daftar Ulang</p>
-                  <p className="text-2xl sm:text-4xl font-black text-gold-400 italic">{stats.daftar_ulang_sedang}</p>
+                  <p className="text-2xl sm:text-4xl font-black text-secondary-200 italic">{stats.daftar_ulang_sedang}</p>
                 </div>
               </div>
               <div className="space-y-6 sm:space-y-8 pl-4 sm:pl-10 border-l border-white/20">
