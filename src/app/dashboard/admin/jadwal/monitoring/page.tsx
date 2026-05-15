@@ -47,9 +47,53 @@ export default function MonitoringJadwalPage() {
     const [viewMode, setViewMode] = useState<"flat" | "grouped" | "santri">("flat");
     const [showPast, setShowPast] = useState(false);
 
+    const [conflicts, setConflicts] = useState<any[]>([]);
+
     useEffect(() => {
         fetchMonitoringData();
     }, []);
+
+    const findConflicts = (data: Schedule[]) => {
+        const examinerTimeMap: Record<string, { student: string; pendaftarId: string; scheduleId: string }[]> = {};
+        const newConflicts: any[] = [];
+
+        data.forEach(s => {
+            const timeKey = new Date(s.sesi.start).getTime().toString();
+            
+            const roles = [
+                { type: 'quran', name: s.ustadz.quran, label: 'Al-Qur\'an' },
+                { type: 'santri', name: s.ustadz.santri, label: 'W. Santri' },
+                { type: 'ortu', name: s.ustadz.ortu, label: 'W. Ortu' }
+            ];
+
+            roles.forEach(role => {
+                if (role.name && role.name !== "-") {
+                    const key = `${role.name}_${timeKey}`;
+                    if (!examinerTimeMap[key]) {
+                        examinerTimeMap[key] = [];
+                    }
+                    examinerTimeMap[key].push({
+                        student: s.pendaftar.nama,
+                        pendaftarId: s.pendaftar.nomor,
+                        scheduleId: s.id
+                    });
+                }
+            });
+        });
+
+        Object.entries(examinerTimeMap).forEach(([key, items]) => {
+            if (items.length > 1) {
+                const [name, time] = key.split('_');
+                newConflicts.push({
+                    name,
+                    time: parseInt(time),
+                    items
+                });
+            }
+        });
+
+        setConflicts(newConflicts);
+    };
 
     const fetchMonitoringData = async () => {
         try {
@@ -57,7 +101,9 @@ export default function MonitoringJadwalPage() {
             const res = await fetch("/api/admin/jadwal/monitoring");
             if (res.ok) {
                 const json = await res.json();
-                setSchedules(json.data || []);
+                const data = json.data || [];
+                setSchedules(data);
+                findConflicts(data);
             }
         } catch (error) {
             console.error("Failed to fetch monitoring data", error);
@@ -201,6 +247,39 @@ export default function MonitoringJadwalPage() {
                     <p className="text-2xl md:text-3xl font-black text-purple-600 relative z-10">{selesaiWOrangTua}</p>
                 </div>
             </div>
+
+            {/* Conflict Alert */}
+            {conflicts.length > 0 && (
+                <motion.div 
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    className="bg-rose-50 border border-rose-200 rounded-2xl p-5 flex items-start gap-4 shadow-sm shadow-rose-100"
+                >
+                    <div className="w-10 h-10 bg-rose-100 rounded-xl flex items-center justify-center text-rose-600 shrink-0">
+                        <XCircle className="w-6 h-6" />
+                    </div>
+                    <div className="flex-1">
+                        <h3 className="text-sm font-black text-rose-900 uppercase tracking-tight">Terdeteksi Bentrokan Jadwal ({conflicts.length})</h3>
+                        <p className="text-xs text-rose-700 font-bold mt-1">Satu penguji terdeteksi menangani beberapa santri di jam yang sama. Mohon segera kroscek data berikut:</p>
+                        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                            {conflicts.map((c, i) => (
+                                <div key={i} className="bg-white/60 border border-rose-100 rounded-xl p-3 text-[11px]">
+                                    <p className="font-black text-rose-800 uppercase tracking-wider">{c.name}</p>
+                                    <p className="text-rose-500 font-bold mt-0.5">{formatDateTime(new Date(c.time).toISOString())}</p>
+                                    <div className="mt-2 space-y-1">
+                                        {c.items.map((item: any, j: number) => (
+                                            <div key={j} className="flex items-center gap-2 text-slate-600 font-medium">
+                                                <div className="w-1 h-1 bg-rose-400 rounded-full" />
+                                                <span>{item.student} ({item.pendaftarId})</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </motion.div>
+            )}
 
             {/* Filter & Actions Bar */}
             <div className="flex flex-col gap-4">
@@ -396,11 +475,11 @@ export default function MonitoringJadwalPage() {
                                                         </span>
                                                     </div>
                                                 </td>
-                                                <td className="px-6 py-6">
+                                                 <td className="px-6 py-6">
                                                     <div className="flex items-center gap-3">
                                                         {getStatusIcon(s.status.quran)}
                                                         <div className="flex flex-col">
-                                                            <span className="text-xs font-bold text-slate-700">{s.ustadz.quran}</span>
+                                                            <span className={`text-xs font-bold ${conflicts.some(c => c.name === s.ustadz.quran && c.time === new Date(s.sesi.start).getTime()) ? 'text-rose-600' : 'text-slate-700'}`}>{s.ustadz.quran}</span>
                                                             <span className={`text-[10px] font-bold uppercase tracking-tight ${
                                                                 s.status.quran === 'completed' ? 'text-green-600' : 'text-slate-400'
                                                             }`}>{s.status.quran === 'completed' ? 'Selesai' : s.status.quran === 'absent' ? 'Alpa' : 'Menunggu'}</span>
@@ -411,7 +490,7 @@ export default function MonitoringJadwalPage() {
                                                     <div className="flex items-center gap-3">
                                                         {getStatusIcon(s.status.santri)}
                                                         <div className="flex flex-col">
-                                                            <span className="text-xs font-bold text-slate-700">{s.ustadz.santri}</span>
+                                                            <span className={`text-xs font-bold ${conflicts.some(c => c.name === s.ustadz.santri && c.time === new Date(s.sesi.start).getTime()) ? 'text-rose-600' : 'text-slate-700'}`}>{s.ustadz.santri}</span>
                                                             <span className={`text-[10px] font-bold uppercase tracking-tight ${
                                                                 s.status.santri === 'completed' ? 'text-indigo-600' : 'text-slate-400'
                                                             }`}>{s.status.santri === 'completed' ? 'Selesai' : s.status.santri === 'absent' ? 'Alpa' : 'Menunggu'}</span>
@@ -422,7 +501,7 @@ export default function MonitoringJadwalPage() {
                                                     <div className="flex items-center gap-3">
                                                         {getStatusIcon(s.status.ortu)}
                                                         <div className="flex flex-col">
-                                                            <span className="text-xs font-bold text-slate-700">{s.ustadz.ortu}</span>
+                                                            <span className={`text-xs font-bold ${conflicts.some(c => c.name === s.ustadz.ortu && c.time === new Date(s.sesi.start).getTime()) ? 'text-rose-600' : 'text-slate-700'}`}>{s.ustadz.ortu}</span>
                                                             <span className={`text-[10px] font-bold uppercase tracking-tight ${
                                                                 s.status.ortu === 'completed' ? 'text-emerald-600' : 'text-slate-400'
                                                             }`}>{s.status.ortu === 'completed' ? 'Selesai' : s.status.ortu === 'absent' ? 'Alpa' : 'Menunggu'}</span>
