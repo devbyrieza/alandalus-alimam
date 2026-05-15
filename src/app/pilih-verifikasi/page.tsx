@@ -121,7 +121,7 @@ function PilihVerifikasiContent() {
 
       {/* Header */}
       <div className="text-center mb-8">
-        <div className="w-20 h-20 bg-gradient-to-r from-primary-500 to-gold-500 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="w-20 h-20 bg-gradient-to-r from-primary-500 to-primary-800 rounded-full flex items-center justify-center mx-auto mb-4">
           <ShieldCheck className="w-10 h-10 text-white" />
         </div>
         <h1 className="text-3xl font-black text-stone-900 mb-2">

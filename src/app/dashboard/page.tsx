@@ -564,7 +564,7 @@ export default function DashboardPage() {
               transition={{ delay: 0.6 }}
               className="bg-white p-12 rounded-[4rem] shadow-2xl shadow-primary-900/5 border border-ink-50 flex flex-col items-center text-center relative overflow-hidden group"
             >
-              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary-600 to-gold-500" />
+              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary-600 to-primary-900" />
               <div className="w-20 h-20 rounded-[2rem] bg-primary-50 flex items-center justify-center text-primary-600 mb-8 border border-primary-100 shadow-sm transition-transform group-hover:scale-110">
                 <IdCard className="w-10 h-10" />
               </div>

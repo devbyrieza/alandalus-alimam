@@ -106,31 +106,31 @@ function getTokens(variant: ProgramVariant) {
       };
     case "gold":
       return {
-        accentBar: "bg-gradient-to-r from-gold-500 via-gold-400 to-gold-200",
-        corner: "bg-gold-50",
-        icon: "bg-gold-400 text-primary-950 ring-1 ring-gold-200",
-        subtitleText: "text-gold-600",
-        dividerLine: "bg-gold-300",
-        checkBg: "bg-gold-50 border-gold-200",
+        accentBar: "bg-gradient-to-r from-primary-600 via-primary-400 to-primary-200",
+        corner: "bg-primary-50/50",
+        icon: "bg-primary-500 text-white ring-1 ring-primary-100",
+        subtitleText: "text-primary-600",
+        dividerLine: "bg-primary-300",
+        checkBg: "bg-primary-50 border-primary-200",
         checkHover:
-          "group-hover/item:bg-gold-500 group-hover/item:border-gold-500",
-        checkIcon: "text-gold-600 group-hover/item:text-white",
+          "group-hover/item:bg-primary-500 group-hover/item:border-primary-500",
+        checkIcon: "text-primary-600 group-hover/item:text-white",
         ctaBtn:
-          "bg-white border-gold-300 text-primary-800 hover:bg-gold-400 hover:border-gold-400 hover:text-primary-950 shadow-sm hover:shadow-md",
+          "bg-white border-primary-300 text-primary-800 hover:bg-primary-500 hover:border-primary-500 hover:text-white shadow-sm hover:shadow-md",
       };
     case "cream":
       return {
-        accentBar: "bg-gradient-to-r from-secondary-400 via-gold-400 to-secondary-300",
-        corner: "bg-secondary-50",
-        icon: "bg-primary-800 text-gold-300 ring-1 ring-secondary-200",
+        accentBar: "bg-gradient-to-r from-primary-800 via-primary-600 to-primary-400",
+        corner: "bg-primary-50/30",
+        icon: "bg-primary-900 text-white ring-1 ring-primary-700",
         subtitleText: "text-primary-400",
-        dividerLine: "bg-secondary-200",
-        checkBg: "bg-secondary-50 border-secondary-200",
+        dividerLine: "bg-primary-200",
+        checkBg: "bg-primary-50 border-primary-100",
         checkHover:
-          "group-hover/item:bg-primary-800 group-hover/item:border-primary-800",
-        checkIcon: "text-primary-600 group-hover/item:text-gold-300",
+          "group-hover/item:bg-primary-900 group-hover/item:border-primary-900",
+        checkIcon: "text-primary-700 group-hover/item:text-white",
         ctaBtn:
-          "bg-white border-secondary-200 text-primary-800 hover:bg-primary-800 hover:border-primary-800 hover:text-white shadow-sm hover:shadow-md",
+          "bg-white border-primary-100 text-primary-800 hover:bg-primary-900 hover:border-primary-900 hover:text-white shadow-sm hover:shadow-md",
       };
   }
 }

@@ -1336,7 +1336,7 @@ export default function KelengkapanBerkasTab() {
                   }
                 }}
                 disabled={loading}
-                className="flex-1 py-3.5 px-4 rounded-xl bg-linear-to-r from-gold-400 to-gold-500 text-primary-950 font-black hover:shadow-lg hover:shadow-gold-400/30 transition-all active:scale-95 flex items-center justify-center gap-2 disabled:opacity-70 disabled:active:scale-100"
+                className="flex-1 py-3.5 px-4 rounded-xl bg-linear-to-r from-primary-700 to-primary-900 text-white font-black hover:shadow-lg hover:shadow-primary-700/30 transition-all active:scale-95 flex items-center justify-center gap-2 disabled:opacity-70 disabled:active:scale-100"
               >
                 {loading ? (
                   <Loader2 className="w-5 h-5 animate-spin" />

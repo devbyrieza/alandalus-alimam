@@ -123,7 +123,7 @@ export default function AboutSection() {
             >
               <div className="relative overflow-hidden rounded-2xl border border-primary-100 bg-white shadow-premium-sm group">
                 {/* Card top accent bar */}
-                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary-600 via-primary-400 to-secondary-400 rounded-t-2xl" />
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary-700 via-primary-500 to-primary-800 rounded-t-2xl" />
 
                 <div className="flex flex-col items-center text-center px-8 py-12 md:px-16 md:py-16">
                   {/* Icon */}
@@ -146,9 +146,9 @@ export default function AboutSection() {
                   </blockquote>
 
                   <div className="mt-8 flex items-center gap-3">
-                    <div className="h-px w-10 bg-gradient-to-r from-transparent to-secondary-300" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-secondary-400" />
-                    <div className="h-px w-10 bg-gradient-to-l from-transparent to-secondary-300" />
+                    <div className="h-px w-10 bg-gradient-to-r from-transparent to-primary-200" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary-300" />
+                    <div className="h-px w-10 bg-gradient-to-l from-transparent to-primary-200" />
                   </div>
                 </div>
               </div>

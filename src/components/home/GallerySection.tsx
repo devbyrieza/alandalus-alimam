@@ -147,7 +147,7 @@ function GalleryCard({
         <div className="absolute inset-0 bg-gradient-to-t from-primary-950/80 via-primary-900/20 to-transparent transition-opacity duration-500 opacity-80 group-hover:opacity-100" />
       </div>
 
-      <div className="absolute top-3.5 right-3.5 w-8 h-8 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-gold-400 group-hover:border-gold-300 group-hover:text-primary-900 shadow-sm">
+      <div className="absolute top-3.5 right-3.5 w-8 h-8 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-primary-700 group-hover:border-primary-600 group-hover:text-white shadow-sm">
         <Icon className="w-4 h-4" />
       </div>
 
@@ -160,7 +160,7 @@ function GalleryCard({
         </p>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-gradient-to-r from-gold-400 to-gold-300 group-hover:w-full transition-all duration-500 ease-out" />
+      <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-gradient-to-r from-primary-400 to-primary-300 group-hover:w-full transition-all duration-500 ease-out" />
     </motion.div>
   );
 }
@@ -224,7 +224,7 @@ export default function GallerySection() {
         >
           <div className="max-w-xl">
             <motion.div variants={fadeUpVariants}>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-gold-200 text-primary-700 text-[0.65rem] font-bold uppercase tracking-[0.12em] mb-4 shadow-xs">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-primary-200 text-primary-700 text-[0.65rem] font-bold uppercase tracking-[0.12em] mb-4 shadow-xs">
                 <Images className="w-3 h-3" strokeWidth={2} />
                 <span>Dokumentasi</span>
               </div>
@@ -266,7 +266,7 @@ export default function GallerySection() {
           transition={{ duration: 0.7, ease: EASE }}
           className="relative rounded-t-[2.5rem] overflow-hidden border border-b-0 border-secondary-200 bg-gradient-to-br from-secondary-50/50 to-white shadow-[0_-12px_40px_-12px_rgba(0,0,0,0.05)]"
         >
-          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary-300 via-gold-300 to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary-300 via-primary-200 to-transparent" />
 
           <div className="relative z-10 grid lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-14 items-center p-8 md:p-12 lg:p-14 max-w-6xl mx-auto">
             <motion.div
@@ -275,7 +275,7 @@ export default function GallerySection() {
               animate={scheduleInView ? "visible" : "hidden"}
             >
               <motion.div variants={fadeUpVariants}>
-                <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gold-50 border border-gold-200 text-primary-700 text-[0.65rem] font-bold uppercase tracking-[0.12em] mb-5 shadow-xs">
+                <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary-50 border border-primary-200 text-primary-700 text-[0.65rem] font-bold uppercase tracking-[0.12em] mb-5 shadow-xs">
                   <Star className="w-3 h-3 fill-current" />
                   <span>Jadwal Harian</span>
                 </div>
