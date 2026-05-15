@@ -13,6 +13,7 @@ import {
     XCircle,
     Download
 } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface Schedule {
     id: string;
