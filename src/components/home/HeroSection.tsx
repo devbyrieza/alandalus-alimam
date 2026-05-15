@@ -1,4 +1,4 @@
-// src/components/home/HeroSection.tsx — alfath-template-demo
+// src/components/home/HeroSection.tsx — alandalus-alimam
 // FIXED: reduced motion badge, tablet breakpoint, touch hover, explicit font sizing
 "use client";
 
@@ -137,8 +137,8 @@ export default function HeroSection() {
               >
                 <span className="block">Mencetak Generasi</span>
                 <span className="gradient-text-maroon block mt-1">
-                  Unggul, Cerdas, <br className="hidden sm:block" />
-                  dan Berintegritas
+                  Hanif, Kontributif, <br className="hidden sm:block" />
+                  dan Adaptif
                 </span>
               </h1>
             </motion.div>
@@ -158,9 +158,9 @@ export default function HeroSection() {
                 className="font-bold"
                 style={{ color: "var(--color-primary-700)" }}
               >
-                Intensitas Tahfidz Al-Qur'an, Ilmu Syar'i, dan Kepemimpinan
+                Intensitas Tahfidz Al-Qur'an, Ilmu Syar'i, Enterpreneurship, dan Kepemimpinan
               </strong>{" "}
-              dalam satu lingkungan pesantren modern.
+              dalam lingkungan {BRANDING.schoolName}.
             </motion.p>
 
             {/* Tagline Divider */}
@@ -376,10 +376,10 @@ export default function HeroSection() {
                 </div>
                 <div>
                   <p className="text-sm font-black leading-tight text-[var(--color-primary-900)]">
-                    Jaringan Global
+                    Bekerjasama dengan
                   </p>
                   <p className="text-[10px] font-semibold mt-0.5 text-[var(--color-ink-500)]">
-                    {BRANDING.schoolShortName}
+                    Universitas Islam Terkemuka di 3 Benua
                   </p>
                 </div>
               </div>
