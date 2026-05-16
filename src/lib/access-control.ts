@@ -45,6 +45,7 @@ export const STATUS_ORDER: StatusProses[] = [
   "registered",
   "awaiting_payment",
   "payment_verification",
+  "payment_rejected",
   "verified",
   "paid",
   "data_completed",
@@ -54,6 +55,7 @@ export const STATUS_ORDER: StatusProses[] = [
   "scheduled",
   "tested",
   "announced",
+  "rejected",
   "accepted",
   "enrolled",
   "enrolled_full",
@@ -149,14 +151,14 @@ export const STEP_REQUIREMENTS: Record<
     description: "Menunggu dokumen diverifikasi admin",
   },
   pengumuman: {
-    minimumStatus: "tested",
+    minimumStatus: "announced", // LOCK sampai semua tes selesai (status announced/accepted/rejected)
     label: "Pengumuman",
-    description: "Ikuti seleksi ujian terlebih dahulu",
+    description: "Selesaikan semua tahapan seleksi terlebih dahulu",
   },
   "daftar-ulang": {
     minimumStatus: "accepted",
     label: "Daftar Ulang",
-    description: "Anda belum dinyatakan diterima",
+    description: "Hanya tersedia bagi pendaftar yang diterima",
   },
 };
 
