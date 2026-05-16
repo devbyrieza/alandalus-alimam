@@ -38,7 +38,7 @@ export default function TentangPage() {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-primary-50 border border-primary-100 text-primary-700 text-xs font-bold uppercase tracking-widest mb-8 shadow-sm"
           >
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Mengenal Al Imam • Managed by Al Andalus IIBS</span>
+            <span>Mengenal Al Andalus Al Imam • Managed by Al Andalus IIBS</span>
           </motion.div>
 
           <motion.h1
@@ -206,7 +206,7 @@ export default function TentangPage() {
                   serta barisan asatidzah yang kompeten di bidangnya.
                 </p>
                 <p>
-                  Mulai tahun 2026, Al Imam bertransformasi total untuk
+                  Mulai tahun 2026, Al Andalus Al Imam bertransformasi total untuk
                   memberikan layanan pendidikan terbaik, mencakup hirarki
                   kepengurusan yang profesional, sistem pendidikan tahfidz
                   intensif, dan pengasuhan berbasis adab.
@@ -395,7 +395,7 @@ export default function TentangPage() {
             <div className="relative z-10 max-w-3xl mx-auto">
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 md:mb-8 text-white tracking-tight leading-[1.1]">
                 Mari Menjadi Bagian <br />
-                Keluarga <span className="text-secondary-300">Al Imam</span>
+                Keluarga <span className="text-secondary-300">Al Andalus Al Imam</span>
               </h2>
               <p className="text-base md:text-lg lg:text-xl text-white/90 mb-8 md:mb-10 lg:mb-12 max-w-2xl mx-auto leading-relaxed font-medium px-2">
                 Daftarkan putra Anda sekarang dan persiapkan masa depan gemilang

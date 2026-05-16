@@ -1,6 +1,6 @@
 export const BRANDING = {
   schoolName: process.env.NEXT_PUBLIC_SCHOOL_NAME || "Pesantren Al Andalus Al Imam",
-  schoolShortName: process.env.NEXT_PUBLIC_SCHOOL_SHORT_NAME || "Al Imam",
+  schoolShortName: process.env.NEXT_PUBLIC_SCHOOL_SHORT_NAME || "Al Andalus Al Imam",
   schoolTagline:
     process.env.NEXT_PUBLIC_SCHOOL_TAGLINE ||
     "Mencetak Generasi Hanif, Kontributif, dan Adaptif",

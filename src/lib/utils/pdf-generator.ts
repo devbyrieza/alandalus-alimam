@@ -111,7 +111,7 @@ const drawFooter = (doc: jsPDF) => {
   doc.setFontSize(8);
   doc.setTextColor(150, 150, 150);
   doc.text(
-    `Dicetak secara sistem melalui website PPDB Al Imam pada: ${new Date().toLocaleString("id-ID")}`,
+    `Dicetak secara sistem melalui website PPDB Al Andalus Al Imam pada: ${new Date().toLocaleString("id-ID")}`,
     pageWidth / 2,
     pageHeight - 10,
     { align: "center" },
@@ -244,7 +244,7 @@ export const generateKartuUjian = async (data: PendaftarPdfData) => {
     ["NIK", `: ${data.nik}`],
     ["Jenjang", `: ${data.jenjang}`],
     ["Jadwal Seleksi", `: ${data.jadwal_ujian || "Menunggu Konfirmasi"}`],
-    ["Lokasi", `: ${data.lokasi_ujian || "Kampus Al Imam"}`],
+    ["Lokasi", `: ${data.lokasi_ujian || "Kampus Al Andalus Al Imam"}`],
   ];
 
   autoTable(doc, {

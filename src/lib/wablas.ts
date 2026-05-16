@@ -344,7 +344,7 @@ Alhamdulillah, kami dengan senang hati mengumumkan bahwa Anda *DITERIMA* di Pesa
 
 Dashboard: {{dashboard_url}}
 
-Selamat bergabung di keluarga besar Al Imam! 🎓
+Selamat bergabung di keluarga besar Al Andalus Al Imam! 🎓
 
 Jazakumullahu khairan,
 Panitia PPDB Al Andalus Al Imam`,
@@ -587,7 +587,7 @@ export async function notifyTestSchedule(data: {
     tanggal: data.tanggal,
     waktu: data.waktu,
     tempat: data.tempat,
-    dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL || "https://pesantren-ululalbaab.com"}/dashboard/pendaftar/undangan-seleksi`,
+    dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL || DEFAULT_APP_URL}/dashboard/pendaftar/undangan-seleksi`,
   };
 
   Object.entries(variables).forEach(([key, value]) => {

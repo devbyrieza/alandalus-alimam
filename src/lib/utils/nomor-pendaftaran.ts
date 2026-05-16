@@ -126,7 +126,7 @@ export function generatePrefix(jenjang: string, jenis_kelamin: string): string {
     prefix += "A"; // Putra
   } else {
     throw new Error(
-      `Jenis kelamin tidak valid untuk Al Imam (Hanya Putra): ${jenis_kelamin}`,
+      `Jenis kelamin tidak valid untuk Al Andalus Al Imam (Hanya Putra): ${jenis_kelamin}`,
     );
   }
 
