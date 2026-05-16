@@ -6,9 +6,15 @@ const globalForRedis = global as unknown as { redis: Redis };
 export const redis =
   globalForRedis.redis ||
   new Redis({
-    host: process.env.REDIS_HOST || '127.0.0.1',
-    port: parseInt(process.env.REDIS_PORT || '6379'),
-    // password: process.env.REDIS_PASSWORD || undefined, // uncomment if using password
+    host: process.env.REDIS_HOST || "127.0.0.1",
+    port: parseInt(process.env.REDIS_PORT || "6379"),
+    // password: process.env.REDIS_PASSWORD || undefined,
+    connectTimeout: 5000, // 5 seconds timeout
+    maxRetriesPerRequest: 1, // Stop trying after 1 failure per request
+    retryStrategy(times) {
+      if (times > 3) return null; // stop retrying after 3 attempts
+      return Math.min(times * 50, 2000);
+    },
   });
 
 if (process.env.NODE_ENV !== 'production') globalForRedis.redis = redis;

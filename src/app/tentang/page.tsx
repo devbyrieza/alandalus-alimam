@@ -195,7 +195,7 @@ export default function TentangPage() {
                   hadir sebagai babak baru dalam dunia pendidikan Islam di
                   Sukabumi. Sebagai cabang resmi dari{" "}
                   <span className="text-primary-700 italic font-bold">
-                    Managed by Al Andalus International Islamic Boarding School
+                    Managed by Al Andalus IIBS
                   </span>
                   , kami menerapkan standar operasional, kurikulum, dan
                   pengasuhan yang identik dengan kampus pusat.

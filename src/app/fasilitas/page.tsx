@@ -90,7 +90,7 @@ export default function FasilitasPage() {
     
     const message = `Assalamu'alaikum Warahmatullahi Wabarakatuh.
 
-Saya ingin mengajukan Jadwal Kunjungan ke Pesantren Al Imam.
+Saya ingin mengajukan Jadwal Kunjungan ke Pesantren Al Andalus Al Imam.
 
 *Rincian Rencana Kunjungan:*
 • Nama: ${visitForm.nama}
@@ -1027,7 +1027,7 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
                     Kunjungi <span className="text-gradient-primary">Kami</span>
                   </h2>
                   <p className="text-lg text-ink-600 mb-8 leading-relaxed font-medium">
-                    Masih banyak fasilitas pendukung lainnya di dalam Pesantren Al Imam.
+                    Masih banyak fasilitas pendukung lainnya di dalam Pesantren Al Andalus Al Imam.
                     Ingin melihat langsung? Jadwalkan kunjungan Anda melalui formulir ini.
                   </p>
                   
@@ -1069,7 +1069,7 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
                         allowFullScreen
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
-                        title="Lokasi Pesantren Al Imam"
+                        title="Lokasi Pesantren Al Andalus Al Imam"
                         className="grayscale group-hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100"
                       />
                       <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-xl shadow-sm border border-primary-100 flex items-center gap-2 z-10 pointer-events-none">
