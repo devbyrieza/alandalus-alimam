@@ -37,6 +37,7 @@ export default function DashboardPendaftarPage() {
     nama: "Pendaftar",
     nomorPendaftaran: "-",
     status: "draft" as StatusProses,
+    tipePendaftaran: "",
     lastUpdate: new Date().toISOString(),
     schedulesAvailable: false,
     pengumuman: null as any,
@@ -57,7 +58,7 @@ export default function DashboardPendaftarPage() {
         if (session.pendaftar_id) {
           // 2. Ambil status pendaftaran berdasarkan ID pendaftar
           const statusRes = await fetch(
-            `/api/pendaftar/status?pendaftar_id=${session.pendaftar_id}`,
+             `/api/pendaftar/status?pendaftar_id=${session.pendaftar_id}`,
           );
           if (!statusRes.ok)
             throw new Error("Gagal menyinkronkan status pendaftaran");
@@ -67,6 +68,7 @@ export default function DashboardPendaftarPage() {
             nama: (statusData.nama_lengkap || "Pendaftar").split(" ")[0],
             nomorPendaftaran: statusData.nomor_pendaftaran || "-",
             status: statusData.status_proses || "draft",
+            tipePendaftaran: statusData.tipe_pendaftaran || "",
             lastUpdate: statusData.updated_at || new Date().toISOString(),
             schedulesAvailable: !!statusData.schedules_available,
             pengumuman: statusData.pengumuman || null,
@@ -86,7 +88,7 @@ export default function DashboardPendaftarPage() {
   if (error) return <ErrorState message={error} />;
 
   const statusInfo = formatStatusDisplay(data.status);
-  const nextStep = getNextStep(data.status);
+  const nextStep = getNextStep(data.status, data.tipePendaftaran);
 
   return (
     <div className="space-y-8 pb-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">
