@@ -72,6 +72,7 @@ export async function GET(request: NextRequest) {
             status_pembayaran: true,
             jenis_pembayaran: true,
             created_at: true,
+
           },
           orderBy: { created_at: "desc" },
         },
@@ -231,8 +232,8 @@ export async function PATCH(request: NextRequest) {
     }
 
     const validStatuses = [
-      "draft", "registered", "payment_verification", "verified", "data_completed", 
-      "docs_uploaded", "docs_verified", "selection", "announced", "accepted", 
+      "draft", "registered", "payment_verification", "verified", "data_completed",
+      "docs_uploaded", "docs_verified", "selection", "announced", "accepted",
       "enrolled", "enrolled_full", "pindah_keluar"
     ];
     if (!validStatuses.includes(status_pendaftaran)) {
