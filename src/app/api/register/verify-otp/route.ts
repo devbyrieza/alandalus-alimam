@@ -38,6 +38,22 @@ export async function POST(request: NextRequest) {
 
     if (!activeTA) return NextResponse.json({ success: false, error: "Sistem belum siap: Tahun Ajaran tidak ditemukan" }, { status: 500 });
 
+    // 2.5 Cek duplikat NIK sebelum membuat akun (abaikan yang sudah dihapus/soft-delete)
+    const existingPendaftar = await prisma.pendaftar.findFirst({
+      where: { 
+        nik: regData.nik,
+        deleted_at: null 
+      },
+    });
+    if (existingPendaftar) {
+      // Hapus OTP agar tidak bisa coba lagi dengan data yang sama
+      await prisma.otpVerification.delete({ where: { id: otpRecord.id } }).catch(() => {});
+      return NextResponse.json({ 
+        success: false, 
+        error: "NIK ini sudah terdaftar. Gunakan NIK lain atau hubungi panitia jika ini adalah kesalahan." 
+      }, { status: 409 });
+    }
+
     // 3. Generate Nomor Pendaftaran Unik
     const nomorPendaftaran = await generateNomorPendaftaran(regData.jenjang, regData.jenis_kelamin);
 
