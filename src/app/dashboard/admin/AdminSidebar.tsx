@@ -84,7 +84,6 @@ interface AdminSidebarProps {
   unverifiedPaymentsCount?: number;
   unverifiedDocsCount?: number;
   pendingDataRequestsCount?: number;
-  pindahanCount?: number;
 }
 
 /**
@@ -101,7 +100,6 @@ export default function AdminSidebar({
   unverifiedPaymentsCount = 0,
   unverifiedDocsCount = 0,
   pendingDataRequestsCount = 0,
-  pindahanCount = 0,
 }: AdminSidebarProps) {
   const pathname = usePathname();
 
@@ -123,8 +121,6 @@ export default function AdminSidebar({
       badgeCount = unverifiedDocsCount;
     } else if (item.name === "Perubahan Data" || item.name.includes("Perubahan") || item.name.includes("Edit")) {
       badgeCount = pendingDataRequestsCount;
-    } else if (item.name === "Siswa Pindahan") {
-      badgeCount = pindahanCount;
     }
 
     return {
