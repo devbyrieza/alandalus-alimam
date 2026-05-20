@@ -71,6 +71,7 @@ export async function POST(request: NextRequest) {
         data: {
           nik: regData.nik,
           nama_lengkap: regData.nama_lengkap,
+          tempat_lahir: regData.tempat_lahir || undefined,
           tanggal_lahir: regData.tanggal_lahir ? new Date(regData.tanggal_lahir) : undefined,
           jenis_kelamin: regData.jenis_kelamin,
           jenjang: regData.jenjang,
@@ -80,6 +81,11 @@ export async function POST(request: NextRequest) {
           user_id: profileId,
           tahun_ajaran_id: activeTA.id,
           nomor_pendaftaran: nomorPendaftaran,
+          tipe_pendaftaran: regData.tipe_pendaftaran || "BARU",
+          kelas_masuk: regData.kelas_masuk ? parseInt(regData.kelas_masuk) : undefined,
+          asal_institusi: regData.asal_institusi || undefined,
+          nomor_induk_lama: regData.nomor_induk_lama || undefined,
+          catatan_pindahan: regData.catatan_pindahan || undefined,
         },
       }),
       // C. Hapus OTP agar tidak bisa digunakan lagi
