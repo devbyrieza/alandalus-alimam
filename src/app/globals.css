@@ -503,7 +503,7 @@
     }
   }
 
-  /* ─── Primary Blue (Ulul Albaab variant) ─── */
+  /* ─── Primary Blue (Ulul Albaab variant — kept for compat) ─── */
   .btn-primary-blue {
     display: inline-flex;
     align-items: center;
@@ -514,11 +514,11 @@
     font-weight: 700;
     font-size: 0.9375rem;
     letter-spacing: -0.01em;
-    color: var(--color-white);
+    color: var(--color-cream-100);
     background: linear-gradient(135deg,
-        var(--color-maroon-500) 0%,
-        var(--color-maroon-800) 100%);
-    box-shadow: var(--shadow-blue);
+        var(--color-maroon-600) 0%,
+        var(--color-maroon-900) 100%);
+    box-shadow: var(--shadow-maroon);
     transition: all var(--duration-base) var(--ease-spring);
     border: none;
     text-decoration: none;
@@ -538,13 +538,13 @@
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: var(--shadow-blue-lg);
+      box-shadow: var(--shadow-maroon-lg);
       filter: brightness(1.08);
     }
 
     &:active {
       transform: translateY(0) scale(0.98);
-      box-shadow: var(--shadow-blue);
+      box-shadow: var(--shadow-maroon);
     }
 
     &:disabled {
@@ -642,7 +642,7 @@
     }
   }
 
-  /* ─── Secondary Blue (Ulul Albaab variant) ─── */
+  /* ─── Secondary Blue (Ulul Albaab compat variant) ─── */
   .btn-secondary-blue {
     display: inline-flex;
     align-items: center;
@@ -653,7 +653,7 @@
     font-weight: 600;
     font-size: 0.9375rem;
     letter-spacing: -0.01em;
-    color: var(--color-maroon-700);
+    color: var(--color-maroon-800);
     background: var(--color-white);
     border: 1.5px solid var(--color-maroon-200);
     box-shadow: var(--shadow-xs);
