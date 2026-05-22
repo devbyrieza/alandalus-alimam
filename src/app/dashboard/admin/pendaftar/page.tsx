@@ -1099,6 +1099,7 @@ function AdminPendaftarContent() {
               />
             </button>
             {userRole && ["admin_super", "admin"].includes(userRole) && (
+              <>
               <Link
                 href="/daftar"
                 target="_blank"
@@ -1117,7 +1118,7 @@ function AdminPendaftarContent() {
                 <Shuffle className="w-4 h-4" />
                 <span className="hidden sm:inline">Daftar Pindahan</span>
               </Link>
-            </>
+              </>
             )}
           </div>
         </div>
