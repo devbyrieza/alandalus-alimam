@@ -30,7 +30,7 @@ const PROGRAMS = [
     buttonLabel: "Daftar MTs",
     fullName: "Program Madrasah Tsanawiyah (SMP)",
     description:
-      "Kami menerapkan Kurikulum Terpadu yang menggabungkan standar Nasional dengan kekhasan Al Andalus, berfokus pada penguasaan Tahfidz Al-Qur'an serta pembentukan karakter kepemimpinan (Leadership) yang kokoh sejak dini.",
+      "Kami menerapkan Kurikulum Terpadu yang menggabungkan standar Nasional dengan kekhasan Al Andalus, berfokus pada penguasaan Tahfidz Al-Qur'an serta pembentukan karakter Leadership yang kokoh sejak dini.",
     stats: [
       { label: "Tahfidz", value: "Target 12 Juz", icon: BookOpen },
       { label: "Prioritas", value: "Leadership", icon: ShieldCheck },
@@ -54,10 +54,10 @@ const PROGRAMS = [
     buttonLabel: "Daftar IL",
     fullName: "Program I'dad Lughowi (SMA)",
     description:
-      "Program persiapan intensif menuju jenjang Aliyah, berfokus pada pemantapan Bahasa Arab, Tahfidz, dan kematangan kepemimpinan organisasi untuk mencetak kader ulama yang kontributif.",
+      "Program persiapan intensif menuju jenjang Aliyah, berfokus pada pemantapan Bahasa Arab, Tahfidz, dan kematangan leadership organisasi untuk mencetak kader ulama yang kontributif.",
     stats: [
       { label: "Tahfidz", value: "Target 16 Juz", icon: BookOpen },
-      { label: "Kekhasan", value: "Kader Kepemimpinan", icon: Users },
+      { label: "Kekhasan", value: "Kader Leadership", icon: Users },
       { label: "Fokus", value: "Bahasa & Syar'i", icon: Sparkles },
     ],
     curriculum: [

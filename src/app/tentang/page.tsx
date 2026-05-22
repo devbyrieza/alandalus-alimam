@@ -60,8 +60,8 @@ export default function TentangPage() {
             className="text-base sm:text-lg md:text-xl text-ink-600 max-w-3xl mx-auto leading-relaxed font-medium mb-12 px-4"
           >
             Menghadirkan standar keunggulan Al Andalus di Sukabumi — memadukan
-            intensitas Tahfidz Al-Qur'an dengan pengembangan jiwa kepemimpinan
-            (Leadership) untuk mencetak generasi yang Hanif, Kontributif, dan
+            intensitas Tahfidz Al-Qur'an dengan pengembangan jiwa Leadership
+            untuk mencetak generasi yang Hanif, Kontributif, dan
             Adaptif.
           </motion.p>
         </Container>
@@ -357,7 +357,7 @@ export default function TentangPage() {
               <ul className="grid md:grid-cols-2 gap-x-8 lg:gap-x-12 gap-y-6">
                 {[
                   "Menguatkan akidah shahihah dan membiasakan beribadah sesuai sunnah melalui sistem Tahfidz intensif, pembelajaran Bahasa Arab, dan adab Islami.",
-                  "Membina jiwa kepemimpinan (Leadership) melalui partisipasi aktif dalam organisasi, manajemen kegiatan, dan public speaking berbasis dakwah.",
+                  "Membina jiwa Leadership melalui partisipasi aktif dalam organisasi, manajemen kegiatan, dan public speaking berbasis dakwah.",
                   "Membimbing pembentukan karakter melalui sistem pengasuhan berbasis fitrah dengan pendekatan penyadaran dan pendewasaan.",
                   "Membekali Hard Skill melalui kewirausahaan dan keterampilan praktis sebagai bekal hidup mandiri dan bermanfaat bagi umat.",
                 ].map((item, idx) => (
