@@ -80,18 +80,18 @@ export const PPDB_CONFIG = {
     },
     {
       label: "Uang Pangkal",
-      amount: "Rp 9.800.000",
+      amount: "Rp 7.500.000",
       note: "Pembayaran dapat dicicil",
     },
     {
-      label: "Iuran Taawun/Tahun",
-      amount: "Rp 13.200.000",
-      note: "All in (SPP + Makan + Asrama)",
+      label: "SPP Bulan Pertama",
+      amount: "Rp 1.000.000",
+      note: "Biaya SPP",
     },
     {
-      label: "Cicilan per Bulan",
-      amount: "Rp 1.100.000",
-      note: "Jika memilih sistem cicilan",
+      label: "Total Daftar Ulang",
+      amount: "Rp 8.500.000",
+      note: "Uang Pangkal + SPP Bulan Pertama",
     },
   ],
 
