@@ -106,8 +106,7 @@ export default function AboutSection() {
               <span className="font-semibold text-primary-800">
                 Bukan sekadar tempat belajar agama.
               </span>{" "}
-              Sistem pembentukan karakter yang mengedepankan keteladanan para pendidik serta mendidik tanpa kekerasan dan luka pengasuhan — untuk mencetak generasi yang
-              memiliki pribadi Hanif, Kontributif, dan Adaptif.
+              Sistem pembentukan karakter yang mengedepankan keteladanan para pendidik serta mendidik tanpa kekerasan dan luka pengasuhan — untuk mengusung visi Kaderisasi Ummat Hanif, Kontributif, dan Adaptif.
             </motion.p>
           </motion.div>
 
@@ -139,7 +138,7 @@ export default function AboutSection() {
 
                   <blockquote className="max-w-2xl mx-auto">
                     <p className="font-display font-black text-2xl md:text-[2.15rem] leading-[1.2] tracking-tight text-primary-900 italic">
-                      &ldquo;Mencetak Generasi yang Memiliki Pribadi Hanif,
+                      &ldquo;Kaderisasi Ummat Hanif,
                       Kontributif, dan Adaptif.&rdquo;
                     </p>
                   </blockquote>

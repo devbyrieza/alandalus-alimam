@@ -61,7 +61,7 @@ export default function TentangPage() {
           >
             Menghadirkan standar keunggulan Al Andalus di Sukabumi — memadukan
             intensitas Tahfidz Al-Qur'an dengan pengembangan jiwa Leadership
-            untuk mencetak generasi yang Hanif, Kontributif, dan
+            untuk Kaderisasi Ummat Hanif, Kontributif, dan
             Adaptif.
           </motion.p>
         </Container>
@@ -300,7 +300,7 @@ export default function TentangPage() {
                 Visi
               </h3>
               <p className="text-lg md:text-xl font-black text-primary-800 italic leading-[1.5] md:leading-[1.4] flex-1">
-                "Mencetak Generasi yang Memiliki Pribadi Hanif, Kontributif, dan
+                "Kaderisasi Ummat Hanif, Kontributif, dan
                 Adaptif."
               </p>
             </motion.div>
