@@ -137,7 +137,7 @@ export default function HeroSection() {
                 <span className="block" style={{ color: "var(--color-maroon-700)" }}>
                   Kaderisasi Ummat
                 </span>
-                <span className="block mt-1 bg-gradient-to-r from-amber-500 to-amber-700 bg-clip-text text-transparent">
+                <span className="block mt-1" style={{ color: "var(--color-cream-600)" }}>
                   Hanif, Kontributif, <br className="hidden sm:block" />
                   dan Adaptif
                 </span>
