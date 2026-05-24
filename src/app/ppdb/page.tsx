@@ -495,7 +495,7 @@ function PPDBContent() {
                       {
                         icon: BookOpen,
                         title: "Kurikulum Mutakhir",
-                        desc: "Perpaduan kurikulum Nasional & kurikulum khas Al Andalus.",
+                        desc: "Perpaduan kurikulum Nasional & kurikulum khas Andalus.",
                       },
                       {
                         icon: GraduationCap,
@@ -548,7 +548,7 @@ function PPDBContent() {
                     },
                     {
                       q: "Bagaimana sistem kurikulumnya?",
-                      a: "Kami menerapkan Kurikulum Terpadu yang menggabungkan kurikulum Nasional dengan kurikulum khas Al Andalus yang berfokus pada penguasaan Bahasa Arab, Tahfidz Al-Qur'an, dan Kitab Turots.",
+                      a: "Kami menerapkan Kurikulum Terpadu yang menggabungkan kurikulum Nasional dengan kurikulum khas Andalus yang berfokus pada penguasaan Bahasa Arab, Tahfidz Al-Qur'an, dan Kitab Turots.",
                     },
                   ].map((faq, i) => (
                     <motion.div key={i} className="group">

@@ -30,7 +30,7 @@ const PROGRAMS = [
     buttonLabel: "Daftar MTs",
     fullName: "Program Madrasah Tsanawiyah (SMP)",
     description:
-      "Kami menerapkan Kurikulum Terpadu yang menggabungkan standar Nasional dengan kekhasan Al Andalus, berfokus pada penguasaan Tahfidz Al-Qur'an serta pembentukan karakter Leadership yang kokoh sejak dini.",
+      "Kami menerapkan Kurikulum Terpadu yang menggabungkan standar Nasional dengan khas Andalus, berfokus pada penguasaan Tahfidz Al-Qur'an serta pembentukan karakter Leadership yang kokoh sejak dini.",
     stats: [
       { label: "Tahfidz", value: "Target 12 Juz", icon: BookOpen },
       { label: "Prioritas", value: "Leadership", icon: ShieldCheck },
@@ -138,7 +138,7 @@ export default function ProgramPage() {
             className="text-lg md:text-xl text-ink-600 max-w-2xl mx-auto leading-relaxed font-medium"
           >
             Kurikulum terintegrasi komprehensif yang menyelaraskan standar
-            Nasional dengan kekhasan Al Andalus.
+            Nasional dengan khas Andalus.
           </motion.p>
         </Container>
       </section>
