@@ -11,7 +11,7 @@ export const PDF_BRANDING = {
     committee: "PANITIA PENERIMAAN SANTRI BARU",
     academic_year: "2026-2027",
     address:
-      "Jl. Pelabuhan II KM 18 Kampung Pupunjul, RT./RW/RW.01/02, Cikembar, Kec. Cikembar, Kabupaten Sukabumi, Jawa Barat 43157",
+      "Jl. Pelabuhan II KM 18 Kampung Pupunjul, RT./RW/RW.01, 02, Cikembar, Kec. Cikembar, Kabupaten Sukabumi, Jawa Barat 43157",
     contact:
       "Website: https://pesantren-alimam.com | Email: alandalusalimam@gmail.com",
     phones: "WhatsApp: 0851-1152-4441", // Base phone

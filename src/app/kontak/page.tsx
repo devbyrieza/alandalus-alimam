@@ -210,7 +210,7 @@ export default function ContactPage() {
             <ContactInfoCard
               icon={MapPin}
               title="Alamat Lengkap"
-              content="Jl. KH Mama Oyon, Cihaur, Kec. Cicantayan, Kabupaten Sukabumi, Jawa Barat 43155"
+              content="Jl. Pelabuhan II KM 18 Kampung Pupunjul, RT./RW/RW.01, 02, Cikembar, Kec. Cikembar, Kabupaten Sukabumi, Jawa Barat 43157"
               subContent="Lokasi Strategis & Asri"
               delay={0.1}
             />

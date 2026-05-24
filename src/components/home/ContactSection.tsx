@@ -9,8 +9,8 @@ const CONTACT_INFO = [
   {
     icon: MapPin,
     title: "Lokasi Pesantren",
-    content: "Jl. KH Mama Oyon, Cihaur",
-    detail: "Cicantayan, Sukabumi",
+    content: "Jl. Pelabuhan II KM 18",
+    detail: "Kampung Pupunjul, Cikembar, Sukabumi",
     accent: "maroon" as const,
   },
   {

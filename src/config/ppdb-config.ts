@@ -9,7 +9,7 @@ export const PPDB_CONFIG = {
     nama: "Pesantren Al Andalus Al Imam",
     singkatan: "Al Andalus Al Imam",
     alamat:
-      "Jl. KH Mama Oyon, Cihaur, Kec. Cicantayan, Kabupaten Sukabumi, Jawa Barat 43155",
+      "Jl. Pelabuhan II KM 18 Kampung Pupunjul, RT./RW/RW.01, 02, Cikembar, Kec. Cikembar, Kabupaten Sukabumi, Jawa Barat 43157",
     telepon: "+62 851-1152-4441",
     email: "alandalusalimam@gmail.com",
     emailPpdb: "alandalusalimam@gmail.com",

@@ -18,7 +18,7 @@ BERIKUT ADALAH INFORMASI TENTANG Pesantren Al Andalus Al Imam:
 - Hanif: Lurus akidahnya, benar ibadahnya, dan baik akhlaqnya.
 - Kontributif: Memiliki karya, gagasan, dan peran nyata bagi lingkungannya.
 - Adaptif: Terbuka terhadap kritik, cerdas membaca realitas, kuat menjaga prinsip.
-- Lokasi: Jl. Pelabuhan Ratu II KM 18, Kp. Pupunjul, Cikembar, Sukabumi, Jawa Barat 43157.
+- Lokasi: Jl. Pelabuhan II KM 18 Kampung Pupunjul, RT./RW/RW.01, 02, Cikembar, Kec. Cikembar, Kabupaten Sukabumi, Jawa Barat 43157.
 - Dikelola oleh Al Andalus International Islamic Boarding School (IIBS) sejak Januari 2026.
 - Santri wajib asrama (boarding school).
 - Nomor WhatsApp CS: +62 851-1152-4441
