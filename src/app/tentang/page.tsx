@@ -59,10 +59,10 @@ export default function TentangPage() {
             transition={{ delay: 0.2 }}
             className="text-base sm:text-lg md:text-xl text-ink-600 max-w-3xl mx-auto leading-relaxed font-medium mb-12 px-4"
           >
-            Menghadirkan standar keunggulan Al Andalus di Sukabumi — memadukan
-            intensitas Tahfidz Al-Qur'an dengan pengembangan jiwa Leadership
-            untuk Kaderisasi Ummat Hanif, Kontributif, dan
-            Adaptif.
+            Pesantren Al Andalus Al Imam Sukabumi, cabang resmi Managed by Al Andalus IIBS.
+            Memadukan intensitas Tahfidz Al-Qur'an dengan pengembangan jiwa Leadership untuk
+            Kaderisasi Ummat Hanif, Kontributif, dan Adaptif. Tahun Ajaran 2026/2027 merupakan
+            Angkatan Pertama (Era Baru) sejak dikelola oleh Al Andalus IIBS.
           </motion.p>
         </Container>
       </section>
