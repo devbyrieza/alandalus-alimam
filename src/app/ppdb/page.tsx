@@ -242,7 +242,7 @@ function PPDBContent() {
               className="text-xl md:text-2xl text-ink-600 max-w-3xl mx-auto leading-relaxed font-medium mb-10"
             >
               Bergabunglah dengan Pesantren Al Andalus Al Imam. Lingkungan yang
-              kondusif untuk mencetak Hafidz Qur'an yang berwawasan luas and
+              kondusif untuk mencetak Hafidz Qur'an yang berwawasan luas dan
               berakhlak mulia.
             </motion.p>
 
