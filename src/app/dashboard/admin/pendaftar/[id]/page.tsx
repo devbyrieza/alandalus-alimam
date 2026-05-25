@@ -1122,6 +1122,39 @@ export default function PendaftarDetailPage() {
                   </Link>
                 </div>
               )}
+
+              {/* Tombol Hitung Ulang untuk Admin */}
+              {(userRole === "admin_super" || userRole === "admin") && pendaftar.nilai_ujian && (
+                <div className="mt-4 flex justify-end">
+                  <button
+                    onClick={async () => {
+                      const result = await Swal.fire({
+                        title: "Hitung Ulang Nilai?",
+                        text: "Sistem akan menghitung ulang total skor dan menentukan status kelulusan berdasarkan semua nilai yang ada.",
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonText: "Ya, Hitung Ulang!",
+                        cancelButtonText: "Batal",
+                        confirmButtonColor: "#800000",
+                      });
+                      if (!result.isConfirmed) return;
+                      try {
+                        const res = await fetch(`/api/penilaian/recalculate/${params.id}`, { method: "POST" });
+                        const data = await res.json();
+                        if (!res.ok) throw new Error(data.error || "Gagal menghitung ulang");
+                        Swal.fire("Berhasil!", `Skor akhir: ${data.nilai_total ? Number(data.nilai_total).toFixed(2) : "-"} | Status: ${data.status_kelulusan || "-"}`, "success");
+                        fetchPendaftarDetail();
+                      } catch (err: any) {
+                        Swal.fire("Error", err.message || "Terjadi kesalahan", "error");
+                      }
+                    }}
+                    className="flex items-center gap-2 px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors shadow hover:shadow-md font-bold text-sm"
+                  >
+                    <Trophy className="w-4 h-4" />
+                    Hitung Ulang Nilai
+                  </button>
+                </div>
+              )}
             </div>
           )}
 

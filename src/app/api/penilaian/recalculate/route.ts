@@ -22,10 +22,10 @@ export async function POST() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Only admin_super can trigger batch recalculation
-    if (session.role !== "admin_super") {
+    // Only admin_super or admin can trigger batch recalculation
+    if (!["admin_super", "admin"].includes(session.role)) {
       return NextResponse.json(
-        { error: "Forbidden: Only admin super can recalculate" },
+        { error: "Forbidden: Only admin can recalculate" },
         { status: 403 },
       );
     }

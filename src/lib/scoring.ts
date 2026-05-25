@@ -154,7 +154,7 @@ export async function recalculateNilaiUjian(pendaftarId: string) {
       include: { orang_tua: true },
     });
 
-    if (pendaftar && !["enrolled", "re_registered", "accepted"].includes(pendaftar.status_pendaftaran)) {
+    if (pendaftar && !["enrolled", "re_registered"].includes(pendaftar.status_pendaftaran)) {
       let nextStatus = status === "DITERIMA" ? "accepted" : (status === "DITOLAK" ? "rejected" : "announced");
       let displayLabel = status === "DITERIMA" ? "Diterima" : (status === "DITOLAK" ? "Ditolak" : "Cadangan");
 
@@ -187,10 +187,10 @@ export async function recalculateNilaiUjian(pendaftarId: string) {
 
     }
   } else {
-    // If not all graded, but some are, update status to 'tested' (Sedang Seleksi) 
-    // to ensure they appear in the right lists
-    const someGraded = ak != null || quran != null || kp != null || ks != null || ws != null || wo != null;
-    if (someGraded) {
+    // Only mark as 'tested' (Siap Audit) when ALL 6 score components have been filled.
+    // Partial grading should NOT trigger 'tested' status to avoid premature appearance in Audit Seleksi.
+    const allSixFilled = ak != null && quran != null && kp != null && ks != null && ws != null && wo != null;
+    if (allSixFilled) {
       const pendaftar = await prisma.pendaftar.findUnique({ where: { id: pendaftarId } });
       if (pendaftar && ["docs_verified", "scheduled"].includes(pendaftar.status_pendaftaran)) {
         await prisma.pendaftar.update({
