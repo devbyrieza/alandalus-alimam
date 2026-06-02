@@ -38,16 +38,17 @@ if (typeof window === "undefined" && process.env.NODE_ENV !== "test") {
     // Pastikan robot tidak jalan saat proses 'build' agar tidak mengganggu deployment
     if (!process.argv.includes("build") && !process.env.NEXT_PHASE?.includes("build")) {
       (globalThis as any).__CRON_STARTED__ = true;
-      console.log("🚀 WhatsApp Background Worker: ACTIVE");
+      console.log("🚀 WhatsApp Background Worker: ACTIVE (In-Process)");
 
       // Robot mulai bekerja 10 detik setelah server nyala
       setTimeout(() => {
-        setInterval(() => {
-          const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://127.0.0.1:3000";
-          // Memanggil API internal untuk memproses antrean pesan
-          fetch(`${baseUrl}/api/cron/whatsapp?secret=ppdb-alimam-cron-2026`, {
-            headers: { "User-Agent": "Internal-Worker/1.0" },
-          }).catch(() => {}); // Gagal diam-diam jika server sedang sibuk
+        setInterval(async () => {
+          try {
+            const { processWhatsappQueue } = await import("./whatsapp-queue");
+            await processWhatsappQueue();
+          } catch (err) {
+            console.error("❌ Background Worker Error:", err);
+          }
         }, 60000); // Eksekusi setiap 60 detik (1 menit)
       }, 10000);
     }
