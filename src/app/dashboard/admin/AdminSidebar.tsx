@@ -37,6 +37,7 @@ import {
   ChevronRight,
   Search,
   Shuffle,
+  Shirt,
 } from "lucide-react";
 
 // ─── CONFIG & UTILS ───
@@ -73,6 +74,7 @@ const ICON_MAP: Record<string, any> = {
   Activity,
   PieChart,
   Shuffle,
+  Shirt,
 };
 
 interface AdminSidebarProps {

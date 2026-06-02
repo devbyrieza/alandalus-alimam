@@ -23,6 +23,7 @@ import {
   ShieldCheck,
   Bell,
   Search,
+  Shirt,
 } from "lucide-react";
 import { BRANDING } from "@/config/branding";
 import Link from "next/link";
@@ -174,6 +175,13 @@ export default function DashboardLayout({
       tabName: "daftar-ulang" as TabName,
       icon: CheckCircle,
       active: pathname === "/dashboard/pendaftar/daftar-ulang",
+    },
+    {
+      name: "Ukuran Seragam",
+      href: "/dashboard/pendaftar/seragam",
+      tabName: "daftar-ulang" as TabName, // Menggunakan rules akses yang sama dengan daftar-ulang
+      icon: Shirt,
+      active: pathname === "/dashboard/pendaftar/seragam",
     },
     {
       name: "Profil Akun",

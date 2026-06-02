@@ -131,6 +131,8 @@ model Pendaftar {
   tahun_ajaran                   TahunAjaran            @relation(fields: [tahun_ajaran_id], references: [id])
   user                           Profile?               @relation(fields: [user_id], references: [id])
   pengumuman                     Pengumuman?
+  ukuran_seragam_baju            String?
+  ukuran_seragam_celana          String?
   reservasi                      ReservasiPSB[]
   whatsapp_logs                  WhatsappLog[]
 
