@@ -56,7 +56,7 @@ export function calculateOrangTuaScore(detail: any): number {
  * FUNGSI INTI: Menghitung total nilai akhir santri.
  * Menggabungkan semua data ujian (Al-Quran, Akademik, Wawancara) menjadi satu kesimpulan.
  */
-export async function recalculateNilaiUjian(pendaftarId: string) {
+export async function recalculateNilaiUjian(pendaftarId: string, overrideStatus?: string) {
   // 1. Ambil semua rekaman nilai untuk pendaftar ini (bisa lebih dari satu jika diinput bertahap)
   const allNilai = await prisma.nilaiUjian.findMany({
     where: { pendaftar_id: pendaftarId },
@@ -136,7 +136,7 @@ export async function recalculateNilaiUjian(pendaftarId: string) {
   const allGraded = ak != null && quran != null && kp != null && ks != null && ws != null && wo != null;
   let status: string = "BELUM LENGKAP";
 
-  if (allGraded) {
+  if (allGraded || overrideStatus) {
     const grades = {
       quran: master.detail_quran?.rekomendasi ? evaluateStatusGrade(master.detail_quran.rekomendasi) : evaluateQuranGrade(quran || 0),
       akademik: evaluateAkademikGrade(ak || 0),
@@ -146,7 +146,7 @@ export async function recalculateNilaiUjian(pendaftarId: string) {
       wawancaraOrangTua: evaluateWawancaraGrade(wo || 0),
     };
 
-    status = determineFinalDecision(grades);
+    status = overrideStatus || determineFinalDecision(grades);
 
     // 6. Sinkronisasi ke Tabel Pendaftar & Pengumuman
     const pendaftar = await prisma.pendaftar.findUnique({
@@ -154,7 +154,7 @@ export async function recalculateNilaiUjian(pendaftarId: string) {
       include: { orang_tua: true },
     });
 
-    if (pendaftar && !["enrolled", "re_registered"].includes(pendaftar.status_pendaftaran)) {
+    if (pendaftar && !["enrolled", "re_registered", "accepted"].includes(pendaftar.status_pendaftaran)) {
       let nextStatus = status === "DITERIMA" ? "accepted" : (status === "DITOLAK" ? "rejected" : "announced");
       let displayLabel = status === "DITERIMA" ? "Diterima" : (status === "DITOLAK" ? "Ditolak" : "Cadangan");
 
@@ -187,10 +187,10 @@ export async function recalculateNilaiUjian(pendaftarId: string) {
 
     }
   } else {
-    // Only mark as 'tested' (Siap Audit) when ALL 6 score components have been filled.
-    // Partial grading should NOT trigger 'tested' status to avoid premature appearance in Audit Seleksi.
-    const allSixFilled = ak != null && quran != null && kp != null && ks != null && ws != null && wo != null;
-    if (allSixFilled) {
+    // If not all graded, but some are, update status to 'tested' (Sedang Seleksi) 
+    // to ensure they appear in the right lists
+    const someGraded = ak != null || quran != null || kp != null || ks != null || ws != null || wo != null;
+    if (someGraded) {
       const pendaftar = await prisma.pendaftar.findUnique({ where: { id: pendaftarId } });
       if (pendaftar && ["docs_verified", "scheduled"].includes(pendaftar.status_pendaftaran)) {
         await prisma.pendaftar.update({
