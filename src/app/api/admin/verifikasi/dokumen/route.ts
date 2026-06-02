@@ -112,16 +112,16 @@ export async function PATCH(request: NextRequest) {
     if (!session)
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    // Check custom role
-    const allowedRoles = [
-      "admin",
-      "admin_berkas",
-      "admin_keuangan",
-      "penguji",
-      "admin_super",
-    ];
+    // Check custom role: ONLY Admin and Berkas can verify
+    const allowedRoles = ["admin", "admin_super", "admin_berkas"];
     if (!allowedRoles.includes(session.role)) {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+      return NextResponse.json(
+        {
+          error:
+            "Forbidden: Only Document Admin or Super Admin can verify documents",
+        },
+        { status: 403 },
+      );
     }
 
     // Get request body
@@ -182,90 +182,89 @@ export async function PATCH(request: NextRequest) {
       },
     });
 
+    // Send WhatsApp notification
     // BATCH NOTIFICATION LOGIC
-    // 1. Get ALL documents for this pendaftar
-    const allDocsRaw = await prisma.dokumen.findMany({
-      where: { pendaftar_id: dokumen.pendaftar_id },
-    });
+    // Check if ALL documents for this pendaftar have been processed (verified or rejected)
+    if (dokumen.pendaftar_id) {
+      const allDocs = await prisma.dokumen.findMany({
+        where: { pendaftar_id: dokumen.pendaftar_id },
+      });
 
-    // 2. Filter to only include REQUIRED types to prevent "ghost" documents from blocking logic
-    const allDocs = allDocsRaw.filter((d) =>
-      REQUIRED_DOC_TYPES.includes(d.jenis_dokumen),
-    );
+      // Check if all MANDATORY documents for this pendaftar have been processed
+      const mandatoryDocs = allDocs.filter((d) =>
+        REQUIRED_DOC_TYPES.includes(d.jenis_dokumen),
+      );
+      const pendingMandatory = mandatoryDocs.filter(
+        (d) => !d.is_verified && !d.catatan,
+      );
 
-    // Pending = Not Verified AND No Note
-    const pendingDocs = allDocs.filter((d) => !d.is_verified && !d.catatan);
-
-    if (pendingDocs.length === 0) {
-      // All documents UP TO NOW have been processed.
+      // We notify if all mandatory docs are processed, OR if we have at least one rejection (to notify ASAP)
       const rejectedDocs = allDocs.filter((d) => !d.is_verified && d.catatan);
+      const isSomeRejected = rejectedDocs.length > 0;
+
       const verifiedTypes = new Set(
         allDocs.filter((d) => d.is_verified).map((d) => d.jenis_dokumen),
       );
       const hasAllRequired = REQUIRED_DOC_TYPES.every((type) =>
         verifiedTypes.has(type),
       );
-
-      const isSomeRejected = rejectedDocs.length > 0;
       const isAllVerifiedAndComplete = !isSomeRejected && hasAllRequired;
 
-      console.log(
-        `[VERIF] Pendaftar ${dokumen.pendaftar_id}: Pending=${pendingDocs.length}, Rejected=${rejectedDocs.length}, Verified=${verifiedTypes.size}/${REQUIRED_DOC_TYPES.length}`,
-      );
+      // Logic: Notify if (All Mandatory Processed) OR (Something is Rejected)
+      if (pendingMandatory.length === 0 || isSomeRejected) {
+        const recipientPhone =
+          dokumen.pendaftar.no_hp || (dokumen.pendaftar as any).user?.phone;
 
-      // ONLY Notify if we have rejections OR if they are FINALLY complete (all 9 verified)
-      const recipientPhone =
-        dokumen.pendaftar.no_hp || (dokumen.pendaftar as any).user?.phone;
+        if (isSomeRejected || isAllVerifiedAndComplete) {
+          try {
+            if (recipientPhone) {
+              let docListStr = "";
+              if (isAllVerifiedAndComplete) {
+                docListStr = `Lengkap (${REQUIRED_DOC_TYPES.length}/${REQUIRED_DOC_TYPES.length} Dokumen Terverifikasi)`;
+              } else {
+                docListStr = rejectedDocs
+                  .map((d) => `• ${d.jenis_dokumen}`)
+                  .join("\n");
+              }
 
-      if (isSomeRejected || isAllVerifiedAndComplete) {
-        try {
-          if (recipientPhone) {
-            let docListStr = "";
-            if (isAllVerifiedAndComplete) {
-              docListStr = `Lengkap (${REQUIRED_DOC_TYPES.length}/${REQUIRED_DOC_TYPES.length} Dokumen Terverifikasi)`;
+              const isVerifiedBatch = isAllVerifiedAndComplete;
+              await enqueueWhatsapp({
+                pendaftarId: dokumen.pendaftar_id,
+                phone: recipientPhone,
+                jenisNotif: isVerifiedBatch
+                  ? "document_verified"
+                  : "document_rejected",
+                messageContent: isVerifiedBatch
+                  ? buildMessageDocumentVerified(
+                      dokumen.pendaftar.nama_lengkap,
+                      docListStr,
+                    )
+                  : buildMessageDocumentRejected(
+                      dokumen.pendaftar.nama_lengkap,
+                      docListStr,
+                      isAllVerifiedAndComplete
+                        ? ""
+                        : "Terdapat dokumen yang perlu diperbaiki. Silakan cek dashboard.",
+                    ),
+              });
             } else {
-              docListStr = rejectedDocs
-                .map((d) => `• ${d.jenis_dokumen}`)
-                .join("\n");
+              console.warn(
+                `[VERIF] Cannot send notification for ${dokumen.pendaftar_id}: No phone number found in Pendaftar or User profile.`,
+              );
             }
-
-            const isVerifiedBatch = isAllVerifiedAndComplete;
-            await enqueueWhatsapp({
-              pendaftarId: dokumen.pendaftar_id,
-              phone: recipientPhone,
-              jenisNotif: isVerifiedBatch
-                ? "document_verified"
-                : "document_rejected",
-              messageContent: isVerifiedBatch
-                ? buildMessageDocumentVerified(
-                    dokumen.pendaftar.nama_lengkap,
-                    docListStr,
-                  )
-                : buildMessageDocumentRejected(
-                    dokumen.pendaftar.nama_lengkap,
-                    docListStr,
-                    isAllVerifiedAndComplete
-                      ? ""
-                      : "Terdapat dokumen yang perlu diperbaiki. Silakan cek dashboard.",
-                  ),
-            });
-          } else {
-            console.warn(
-              `[VERIF] Cannot send notification for ${dokumen.pendaftar_id}: No phone number found in Pendaftar or User profile.`,
-            );
+          } catch (error) {
+            console.error("WhatsApp batch notification error:", error);
           }
-        } catch (error) {
-          console.error("WhatsApp batch notification error:", error);
+        } else {
+          // All currently uploaded are verified, but they haven't uploaded all 9 yet!
+          // We WAIT. Do not send "Verified" message yet.
+          const missingTypes = REQUIRED_DOC_TYPES.filter(
+            (type) => !verifiedTypes.has(type),
+          );
+          console.log(
+            `[VERIF] Pendaftar ${dokumen.pendaftar_id} has ${verifiedTypes.size}/${REQUIRED_DOC_TYPES.length} verified docs. Missing: ${missingTypes.join(", ")}. Waiting for completion before notify.`,
+          );
         }
-      } else {
-        // All currently uploaded are verified, but they haven't uploaded all 9 yet!
-        // We WAIT. Do not send "Verified" message yet.
-        const missingTypes = REQUIRED_DOC_TYPES.filter(
-          (type) => !verifiedTypes.has(type),
-        );
-        console.log(
-          `[VERIF] Pendaftar ${dokumen.pendaftar_id} has ${verifiedTypes.size}/${REQUIRED_DOC_TYPES.length} verified docs. Missing: ${missingTypes.join(", ")}. Waiting for completion before notify.`,
-        );
       }
     }
 
@@ -290,9 +289,13 @@ export async function PATCH(request: NextRequest) {
           verifiedTypes.has(type),
         );
 
+        const { getStatusIndex } = await import("@/lib/access-control");
+        const currentStatusIndex = getStatusIndex(currentPendaftar?.status_pendaftaran || "draft");
+        const targetIndex = getStatusIndex("docs_verified");
+
         if (
           allRequiredVerified &&
-          currentPendaftar?.status_pendaftaran === "docs_uploaded"
+          currentStatusIndex < targetIndex
         ) {
           await prisma.pendaftar.update({
             where: { id: dokumen.pendaftar_id },
