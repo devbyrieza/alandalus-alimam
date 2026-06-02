@@ -246,7 +246,7 @@ function PPDBContent() {
               berakhlak mulia.
             </motion.p>
 
-            <motion.div
+            <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.25 }}
@@ -265,7 +265,7 @@ function PPDBContent() {
                   keistimewaan. Ananda akan menjadi{" "}
                   <strong>pionir dan tonggak sejarah pertama</strong> yang
                   merasakan secara penuh perpaduan mantap antara sistem unggulan
-                  Al Andalus dengan kekayaan warisan Al Imam.
+                  Al Andalus dengan kekayaan warisan Al   Imam.
                 </p>
               </div>
             </motion.div>
