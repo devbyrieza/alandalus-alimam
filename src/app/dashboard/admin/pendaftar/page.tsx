@@ -1599,6 +1599,7 @@ function AdminPendaftarContent() {
                 <option value="rejected">Ditolak</option>
                 <option value="enrolled">Sedang Daftar Ulang</option>
                 <option value="enrolled_full">Selesai</option>
+                <option value="mengundurkan_diri">Mengundurkan Diri</option>
               </select>
 
               <button
