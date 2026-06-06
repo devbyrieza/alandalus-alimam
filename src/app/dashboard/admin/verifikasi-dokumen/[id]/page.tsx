@@ -109,10 +109,14 @@ export default function VerifikasiDokumenDetailPage() {
 
       const result = await response.json();
 
-      if (result.data && result.data.length > 0) {
+      if (result.pendaftar) {
+        setPendaftar(result.pendaftar);
+      } else if (result.data && result.data.length > 0) {
         const firstDoc = result.data[0];
         setPendaftar(firstDoc.pendaftar);
+      }
 
+      if (result.data) {
         // Process uploaded documents
         const docsData = result.data || [];
 
