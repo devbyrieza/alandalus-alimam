@@ -68,8 +68,11 @@ function formatFileSize(bytes: number): string {
 }
 
 async function compressImage(file: File): Promise<File> {
-  // Hanya kompres jika file adalah gambar
-  if (!file.type.startsWith("image/")) return file;
+  // Pengecekan apakah file adalah gambar
+  const isImageByType = file.type.startsWith("image/");
+  const isImageByExt = /\\.(jpe?g|png|webp|heic)$/i.test(file.name);
+  
+  if (!isImageByType && !isImageByExt) return file;
 
   return new Promise((resolve) => {
     const reader = new FileReader();
@@ -332,6 +335,21 @@ function DokumenCard({
             </div>
           </div>
           <div className="flex items-center gap-2">
+            {[
+              "surat_kesehatan",
+              "pakta_integritas_santri",
+              "pakta_integritas_ortu",
+              "pernyataan_bebas_negatif",
+            ].includes(dokumen.key) && (
+              <button
+                disabled
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-primary-50 text-primary-400 rounded-lg text-[10px] font-black border border-primary-100 cursor-not-allowed opacity-70"
+                title="Format dokumen sedang disiapkan panitia"
+              >
+                <Download className="w-3.5 h-3.5" />
+                Format Belum Ready
+              </button>
+            )}
             {dokumen.status !== "pending" && (
               <button
                 onClick={(e) => {
@@ -489,7 +507,7 @@ function DokumenCard({
                   <Loader2 className="w-8 h-8 text-primary-700 animate-spin" />
                 </div>
               ) : (
-                <div className="w-16 h-16 bg-surface-100 rounded-2xl flex items-center justify-center group-hover:bg-gold-100 group-hover:scale-110 transition-all duration-300 shadow-inner">
+                <div className="w-16 h-16 bg-surface-100 rounded-2xl flex items-center justify-center group-hover:bg-secondary-100 group-hover:scale-110 transition-all duration-300 shadow-inner">
                   {isLocked ? (
                     <ShieldCheck className="w-8 h-8 text-emerald-500" />
                   ) : (
@@ -830,17 +848,17 @@ export default function UploadBerkasTab() {
 
       {/* Header */}
       <div className="relative overflow-hidden rounded-[2rem] bg-linear-to-br from-primary-700 to-primary-900 border border-primary-600 p-5 md:p-8 md:p-10 text-white shadow-lg app-card">
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-gold-50/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-secondary-50/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-center gap-5">
             <div className="w-16 h-16 rounded-[1.5rem] bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-sm shrink-0">
-              <Upload className="w-8 h-8 text-gold-100" />
+              <Upload className="w-8 h-8 text-secondary-100" />
             </div>
             <div>
               <h1 className="text-2xl md:text-3xl font-black mb-2 tracking-tight text-white font-display">
                 Upload Berkas
               </h1>
-              <p className="text-gold-100/90 font-medium max-w-xl text-sm md:text-base">
+              <p className="text-secondary-100/90 font-medium max-w-xl text-sm md:text-base">
                 Lengkapi dokumen persyaratan untuk verifikasi data.
               </p>
             </div>
@@ -919,7 +937,7 @@ export default function UploadBerkasTab() {
 
           <div className="bg-white rounded-2xl p-5 border border-ink-100 shadow-sm hover:shadow-md transition-all">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-gold-50 rounded-xl flex items-center justify-center">
+              <div className="w-12 h-12 bg-secondary-50 rounded-xl flex items-center justify-center">
                 <div className="w-6 h-6 flex items-center justify-center">
                   <span className="text-xs font-black text-primary-700">
                     {summary.progress.required.percentage}%
@@ -969,77 +987,6 @@ export default function UploadBerkasTab() {
               diverifikasi
             </li>
           </ul>
-        </div>
-      </div>
-
-      {/* DOWNLOAD TEMPLATE DOKUMEN SECTION BATCH 1 */}
-      <div className="space-y-4">
-        <h2 className="text-lg font-bold text-stone-900 flex items-center gap-2">
-          <span className="w-8 h-8 bg-primary-500 text-white rounded-lg flex items-center justify-center text-sm font-bold">
-            <Download className="w-4 h-4" />
-          </span>
-          Download Template Dokumen
-        </h2>
-        <div className="bg-primary-50 border border-primary-200 rounded-[1.5rem] p-6 shadow-sm relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-primary-100 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-          <p className="text-primary-900 mb-5 relative z-10 font-medium">
-            Silakan unduh, cetak, dan isi ketiga dokumen di bawah ini. Setelah
-            diisi lengkap dan ditandatangani, scan atau foto dokumen tersebut
-            untuk di-upload pada form pendaftaran.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 relative z-10">
-            {/* Surat Kesehatan */}
-            <a
-              href="/api/dokumen/download/surat-kesehatan"
-              target="_blank"
-              className="flex flex-col items-center p-4 bg-white rounded-xl border border-primary-100 hover:border-primary-400 hover:shadow-md transition-all group"
-            >
-              <div className="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                <FileText className="w-6 h-6 text-emerald-600" />
-              </div>
-              <span className="font-bold text-ink-900 text-sm text-center mb-1">
-                Surat Kesehatan
-              </span>
-              <span className="text-xs text-ink-500 text-center flex items-center gap-1">
-                <Download className="w-3 h-3" /> Unduh PDF
-              </span>
-            </a>
-
-            {/* Surat Pernyataan */}
-            <a
-              href="/api/dokumen/download/surat-pernyataan"
-              target="_blank"
-              className="flex flex-col items-center p-4 bg-white rounded-xl border border-primary-100 hover:border-primary-400 hover:shadow-md transition-all group"
-            >
-              <div className="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                <FileText className="w-6 h-6 text-primary-600" />
-              </div>
-              <span className="font-bold text-ink-900 text-sm text-center mb-1">
-                Surat Pernyataan
-              </span>
-              <span className="text-xs text-ink-500 text-center flex items-center gap-1">
-                <Download className="w-3 h-3" /> Unduh PDF
-              </span>
-            </a>
-
-            {/* Pakta Integritas */}
-            <a
-              href="/api/dokumen/download/pakta-integritas"
-              target="_blank"
-              className="flex flex-col items-center p-4 bg-white rounded-xl border border-primary-100 hover:border-primary-400 hover:shadow-md transition-all group"
-            >
-              <div className="w-12 h-12 bg-secondary-50 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                <FileText className="w-6 h-6 text-secondary-600" />
-              </div>
-              <span className="font-bold text-ink-900 text-sm text-center mb-1">
-                Pakta Integritas
-              </span>
-              <span className="text-xs text-ink-500 text-center flex items-center gap-1">
-                <Download className="w-3 h-3" /> Unduh PDF
-              </span>
-            </a>
-          </div>
         </div>
       </div>
 
@@ -1128,7 +1075,7 @@ export default function UploadBerkasTab() {
             ) : isVerified ? (
               // Case: Documents APPROVED/VERIFIED
               <>
-                <div className="w-16 h-16 rounded-2xl bg-gold-100 text-primary-700 flex items-center justify-center mx-auto transition-colors">
+                <div className="w-16 h-16 rounded-2xl bg-secondary-100 text-primary-700 flex items-center justify-center mx-auto transition-colors">
                   <CheckCircle className="w-8 h-8" />
                 </div>
 
@@ -1141,7 +1088,7 @@ export default function UploadBerkasTab() {
                   </p>
                   <Link
                     href="/dashboard/pendaftar/undangan-seleksi"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-primary-950 font-black rounded-xl hover:bg-gold-300 transition-all shadow-lg shadow-gold-400/20 hover:-translate-y-1 border border-gold-500"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-secondary-400 text-primary-950 font-black rounded-xl hover:bg-secondary-300 transition-all shadow-lg shadow-secondary-400/20 hover:-translate-y-1 border border-secondary-500"
                   >
                     Buka Jadwal Seleksi
                     <FileCheck className="w-5 h-5" />
@@ -1184,12 +1131,12 @@ export default function UploadBerkasTab() {
                     <p className="text-emerald-700 text-xs mt-0.5 font-medium">
                       Anda bisa menghubungi CS di nomor{" "}
                       <a
-                        href="https://wa.me/6285111524441"
+                        href="https://wa.me/6281285300800"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="font-black underline hover:text-emerald-900"
                       >
-                        0851-1152-4441
+                        0812-8530-0800
                       </a>{" "}
                       jika ingin cepat diverifikasi.
                     </p>
@@ -1202,7 +1149,7 @@ export default function UploadBerkasTab() {
               <div
                 className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto transition-colors ${
                   summary && summary.progress.required.percentage === 100
-                    ? "bg-gold-100 text-primary-700"
+                    ? "bg-secondary-100 text-primary-700"
                     : "bg-surface-100 text-ink-300"
                 }`}
               >
@@ -1233,7 +1180,7 @@ export default function UploadBerkasTab() {
                   summary &&
                   summary.progress.required.percentage === 100 &&
                   !isSubmitting
-                    ? "bg-gold-400 text-primary-950 hover:bg-gold-300 shadow-xl shadow-gold-400/20 hover:-translate-y-1 border border-gold-500"
+                    ? "bg-secondary-400 text-primary-950 hover:bg-secondary-300 shadow-xl shadow-secondary-400/20 hover:-translate-y-1 border border-secondary-500"
                     : "bg-surface-200 text-ink-400 cursor-not-allowed"
                 }`}
               >
