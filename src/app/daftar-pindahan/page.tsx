@@ -191,9 +191,9 @@ export default function DaftarPindahanPage() {
     } else if (formData.jenis_kelamin === "P") {
       errors.jenis_kelamin =
         "Mohon maaf, pendaftaran Santri Putri dilakukan melalui Pesantren Ulul Albaab.";
-    } else if (formData.jenis_kelamin === "L" && formData.jenjang === "MA") {
+    } else if (formData.jenis_kelamin === "L") {
       errors.jenis_kelamin =
-        "Mohon maaf, pendaftaran MA Putra Belum Dibuka.";
+        "Mohon maaf, pendaftaran Santri Pindahan Al-Imam Belum Dibuka.";
     }
 
     if (!formData.jenjang) {
@@ -422,10 +422,8 @@ export default function DaftarPindahanPage() {
                   ].map((option) => {
                     const isPutra = formData.jenis_kelamin === "L";
                     const isPutri = formData.jenis_kelamin === "P";
-                    const isClosed = isPutri || (option.value === "MA" && isPutra);
-                    const closedLabel = isPutri
-                      ? "Pendaftaran Putri Belum Dibuka"
-                      : "Pendaftaran Putra Belum Dibuka";
+                    const isClosed = true;
+                    const closedLabel = "Pendaftaran Pindahan Belum Dibuka";
 
                     return (
                       <motion.div
