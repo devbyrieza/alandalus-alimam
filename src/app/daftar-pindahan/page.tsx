@@ -191,6 +191,9 @@ export default function DaftarPindahanPage() {
     } else if (formData.jenis_kelamin === "P") {
       errors.jenis_kelamin =
         "Mohon maaf, pendaftaran Santri Putri dilakukan melalui Pesantren Ulul Albaab.";
+    } else if (formData.jenis_kelamin === "L" && formData.jenjang === "MA") {
+      errors.jenis_kelamin =
+        "Mohon maaf, pendaftaran MA Putra Belum Dibuka.";
     }
 
     if (!formData.jenjang) {
@@ -417,7 +420,12 @@ export default function DaftarPindahanPage() {
                       subtitle: "Pindahan tingkat SMA/MA",
                     },
                   ].map((option) => {
-                    const isClosed = false;
+                    const isPutra = formData.jenis_kelamin === "L";
+                    const isPutri = formData.jenis_kelamin === "P";
+                    const isClosed = isPutri || (option.value === "MA" && isPutra);
+                    const closedLabel = isPutri
+                      ? "Pendaftaran Putri Belum Dibuka"
+                      : "Pendaftaran Putra Belum Dibuka";
 
                     return (
                       <motion.div
@@ -439,6 +447,11 @@ export default function DaftarPindahanPage() {
                               : "border-secondary-200 bg-white hover:border-primary-200 hover:shadow-sm"
                         }`}
                       >
+                        {isClosed && (
+                          <div className="absolute top-4 right-4 bg-red-600 text-white text-[10px] font-black px-2 py-1 rounded-full uppercase tracking-tighter shadow-sm z-10">
+                            {closedLabel}
+                          </div>
+                        )}
                         <div className="flex items-center gap-4 relative z-0">
                           <div
                             className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${
