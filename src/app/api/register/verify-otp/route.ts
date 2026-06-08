@@ -38,6 +38,18 @@ export async function POST(request: NextRequest) {
 
     if (!activeTA) return NextResponse.json({ success: false, error: "Sistem belum siap: Tahun Ajaran tidak ditemukan" }, { status: 500 });
 
+    const parseSafeDate = (val: any) => {
+      if (!val) return undefined;
+      const d = new Date(val);
+      return isNaN(d.getTime()) ? undefined : d;
+    };
+
+    const parseSafeInt = (val: any) => {
+      if (val === undefined || val === null || val === "") return undefined;
+      const parsed = parseInt(val.toString());
+      return isNaN(parsed) ? undefined : parsed;
+    };
+
     // 2.5 Cek duplikat NIK sebelum membuat akun (abaikan yang sudah dihapus/soft-delete)
     const existingPendaftar = await prisma.pendaftar.findFirst({
       where: { 
@@ -74,7 +86,7 @@ export async function POST(request: NextRequest) {
           nik: regData.nik,
           nama_lengkap: formatNamaLengkap(regData.nama_lengkap),
           tempat_lahir: regData.tempat_lahir || undefined,
-          tanggal_lahir: regData.tanggal_lahir ? new Date(regData.tanggal_lahir) : undefined,
+          tanggal_lahir: parseSafeDate(regData.tanggal_lahir),
           jenis_kelamin: regData.jenis_kelamin,
           jenjang: regData.jenjang,
           no_hp: no_hp,
@@ -84,7 +96,7 @@ export async function POST(request: NextRequest) {
           tahun_ajaran_id: activeTA.id,
           nomor_pendaftaran: nomorPendaftaran,
           tipe_pendaftaran: regData.tipe_pendaftaran || "BARU",
-          kelas_masuk: regData.kelas_masuk ? parseInt(regData.kelas_masuk) : undefined,
+          kelas_masuk: parseSafeInt(regData.kelas_masuk),
           asal_institusi: regData.asal_institusi || undefined,
           nomor_induk_lama: regData.nomor_induk_lama || undefined,
           catatan_pindahan: regData.catatan_pindahan || undefined,
