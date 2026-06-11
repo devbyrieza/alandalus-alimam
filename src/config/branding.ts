@@ -11,7 +11,7 @@ export const BRANDING = {
   logoPath: process.env.NEXT_PUBLIC_LOGO_PATH || "/images/logo.jpg",
   faviconPath: process.env.NEXT_PUBLIC_FAVICON_PATH || "/favicon.ico",
   websiteUrl:
-    process.env.NEXT_PUBLIC_WEBSITE_URL || "https://pesantren-alimam.com",
+    process.env.NEXT_PUBLIC_WEBSITE_URL || "https://ppdb.pesantren-alimam.com",
   dashboardTitle: process.env.NEXT_PUBLIC_DASHBOARD_TITLE || "Panel Admin PPDB",
   address:
     process.env.NEXT_PUBLIC_ADDRESS ||
