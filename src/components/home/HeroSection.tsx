@@ -212,7 +212,7 @@ export default function HeroSection() {
                   </Link>
                 ) : (
                   <>
-                    <a href="https://ppdb.alandalus-alimam.com" className="w-full sm:w-auto">
+                    <a href="/daftar" className="w-full sm:w-auto">
                       <button
                         className="btn-primary-maroon w-full sm:w-auto px-8 lg:px-10 py-4 lg:py-[1.125rem] min-h-[56px] text-[0.9375rem]"
                         style={{ boxShadow: "var(--shadow-primary-lg)" }}
