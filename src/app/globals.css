@@ -68,28 +68,35 @@
   --color-maroon-100: #f7e6e6;
   --color-maroon-200: #edcaca;
   --color-maroon-300: #dda0a0;
-  --color-maroon-400: #c87070;
-  --color-maroon-500: #b04040;
-  --color-maroon-600: #8b2020;
-  --color-maroon-700: #6b0f0f;
+  --color-maroon-400: #c06060;  /* lebih cerah & vibrant */
+  --color-maroon-500: #a03030;  /* lebih vibrant */
+  --color-maroon-600: #800a0a;  /* lebih bold */
+  --color-maroon-700: #640a0a;  /* sedikit lebih cerah */
   --color-maroon-800: #520a0a;
   --color-maroon-900: #3d0707;
-  --color-maroon-950: #800000;
+  --color-maroon-950: #550000;  /* identitas utama Al Imam */
 
   /* ─── Cream (Al Imam Secondary) ─── */
   --color-cream-50: #fefcf7;
   --color-cream-100: #fdf8ee;
   --color-cream-200: #faf0d7;
-  --color-cream-300: #f5e4b8;
-  --color-cream-400: #edd494;
-  --color-cream-500: #e4c16f;
-  --color-cream-600: #c9a84c;
+  --color-cream-300: #f0d8a8;  /* lebih warm */
+  --color-cream-400: #ddc192;  /* identitas utama */
+  --color-cream-500: #c9a84c;  /* lebih gold */
+  --color-cream-600: #b8922e;
+
+  /* ─── Teal Fresh Accent (pai-next spirit — untuk keseimbangan cerah) ─── */
+  --color-teal-accent: #0d9488;
+  --color-teal-light: #ccfbf1;
+  --color-teal-mid: #14b8a6;
 
   /* ─── Surface / White ─── */
   --color-white: #ffffff;
   --color-surface-50: #F8FAFC;
   --color-surface-100: #F1F5F9;
   --color-surface-200: #e5e7eb;
+  --color-surface-warm: #fdf8f0;  /* Warm tint — campuran cream */
+  --color-surface-maroon: #fdf5f5; /* Maroon tint subtle */
 
   /* ─── Ink (Text — neutral gray, fresh & clean) ─── */
   --color-ink-950: #111827;
@@ -164,7 +171,7 @@
   /* Maroon muda / background aksen */
   --color-secondary: var(--color-cream-400);
   /* Cream Secondary */
-  --color-background: #FFFFFF;
+  --color-background: #fafaf9; /* Warm white — lebih segar dari pure white */
   /* Background utama */
   --color-text: #374151;
   /* Teks utama */
@@ -390,14 +397,14 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--color-ink-300);
+    background: var(--color-maroon-300);
     border-radius: 9999px;
     border: 1.5px solid var(--color-surface-100);
     background-clip: content-box;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-ink-400);
+    background: var(--color-maroon-400);
     background-clip: content-box;
   }
 
@@ -1599,7 +1606,7 @@
   .section-alt {
     padding-top: var(--space-section-y);
     padding-bottom: var(--space-section-y);
-    background: var(--color-surface-50);
+    background: linear-gradient(180deg, #fafaf9 0%, var(--color-cream-50) 100%);
     position: relative;
     overflow: hidden;
   }
@@ -1969,8 +1976,9 @@
     background: linear-gradient(135deg, var(--color-maroon-600) 0%, var(--color-maroon-900) 100%);
   }
 
+  /* Fresher bg-maroon-subtle — pai-next spirit */
   .bg-maroon-subtle {
-    background: linear-gradient(160deg, var(--color-maroon-50) 0%, var(--color-white) 60%, var(--color-cream-50) 100%);
+    background: linear-gradient(160deg, var(--color-maroon-50) 0%, #fafaf9 60%, var(--color-cream-50) 100%);
   }
 
   /* Legacy aliases */
@@ -2394,9 +2402,16 @@
 
   /* Maroon variant (Al Imam) */
   .section-label-maroon {
-    background: rgba(128, 0, 0, 0.08);
+    background: rgba(100, 10, 10, 0.09);
     color: var(--color-maroon-700);
-    border-color: rgba(128, 0, 0, 0.18);
+    border-color: rgba(100, 10, 10, 0.20);
+  }
+
+  /* Alias primary — untuk kemudahan pakai di Al Imam */
+  .section-label-primary {
+    background: rgba(100, 10, 10, 0.09);
+    color: var(--color-maroon-700);
+    border-color: rgba(100, 10, 10, 0.20);
   }
 
   /* White variant (untuk section gelap) */
@@ -2478,8 +2493,8 @@
     position: absolute;
     border-radius: 50%;
     pointer-events: none;
-    filter: blur(80px);
-    opacity: 0.18;
+    filter: blur(60px);
+    opacity: 0.25;
   }
 
   .glow-blob-maroon {
@@ -2487,11 +2502,11 @@
   }
 
   .glow-blob-primary {
-    background: radial-gradient(ellipse, var(--color-primary-400) 0%, transparent 70%);
+    background: radial-gradient(ellipse, var(--color-maroon-400) 0%, transparent 70%);
   }
 
   .glow-blob-secondary {
-    background: radial-gradient(ellipse, var(--color-secondary-400) 0%, transparent 70%);
+    background: radial-gradient(ellipse, var(--color-cream-400) 0%, transparent 70%);
   }
 
   /* ── Gradient Text (CiroAI "Platform." styling) ──
@@ -2500,6 +2515,24 @@
   */
   .gradient-text-maroon {
     background: linear-gradient(135deg, var(--color-maroon-700) 0%, var(--color-maroon-950) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline;
+  }
+
+  /* Gold-warmth gradient (pai-next style — maroon to cream/gold) */
+  .gradient-text-maroon-gold {
+    background: linear-gradient(135deg, var(--color-maroon-700) 0%, var(--color-cream-500) 60%, var(--color-maroon-600) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline;
+  }
+
+  /* Cream-to-white (untuk section gelap) */
+  .gradient-text-cream-warm {
+    background: linear-gradient(135deg, var(--color-cream-200) 0%, #fff5e0 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
