@@ -96,7 +96,7 @@ export default function Footer() {
               </div>
               <div>
                 <h3 className="text-lg font-black text-white tracking-tight leading-tight">
-                  {BRANDING.schoolName}
+                  {BRANDING.schoolLegalName}
                 </h3>
                 <p
                   className="text-[10px] font-bold uppercase tracking-widest mt-1.5"
@@ -303,7 +303,7 @@ export default function Footer() {
             className="text-xs font-medium order-2 md:order-1 text-center md:text-left"
             style={{ color: "rgba(253,248,238,0.60)" }}
           >
-            &copy; {currentYear} {BRANDING.schoolName}. Hak cipta dilindungi
+            &copy; {currentYear} {BRANDING.schoolLegalName}. Hak cipta dilindungi
             undang-undang.
           </p>
 
