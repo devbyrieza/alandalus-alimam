@@ -418,6 +418,62 @@ export default function PendaftarDetailPage() {
     }
   };
 
+  const handleDeleteDokumen = async (id: string) => {
+    const result = await Swal.fire({
+      title: "Hapus Dokumen?",
+      text: "Anda yakin ingin menghapus file dokumen ini? File yang dihapus tidak bisa dikembalikan.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#dc2626",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Ya, Hapus!",
+      cancelButtonText: "Batal"
+    });
+    if (result.isConfirmed) {
+      try {
+        const res = await fetch(`/api/admin/verifikasi/dokumen/${id}`, { method: "DELETE" });
+        const data = await res.json();
+        if (data.success) {
+          Swal.fire("Terhapus!", data.message, "success");
+          fetchPendaftarDetail();
+        } else {
+          Swal.fire("Gagal", data.error, "error");
+        }
+      } catch (error) {
+        console.error("Delete document error:", error);
+        Swal.fire("Error", "Terjadi kesalahan sistem", "error");
+      }
+    }
+  };
+
+  const handleDeletePembayaran = async (id: string) => {
+    const result = await Swal.fire({
+      title: "Hapus Bukti Transfer?",
+      text: "Anda yakin ingin menghapus file bukti transfer ini?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#dc2626",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Ya, Hapus!",
+      cancelButtonText: "Batal"
+    });
+    if (result.isConfirmed) {
+      try {
+        const res = await fetch(`/api/admin/verifikasi/pembayaran/${id}/bukti`, { method: "DELETE" });
+        const data = await res.json();
+        if (data.success) {
+          Swal.fire("Terhapus!", data.message, "success");
+          fetchPendaftarDetail();
+        } else {
+          Swal.fire("Gagal", data.error, "error");
+        }
+      } catch (error) {
+        console.error("Delete payment error:", error);
+        Swal.fire("Error", "Terjadi kesalahan sistem", "error");
+      }
+    }
+  };
+
   const handleUpdateStatus = async () => {
     try {
       setSavingStatus(true);
@@ -871,17 +927,30 @@ export default function PendaftarDetailPage() {
                             </span>
                             {((doc as any).file_url ||
                               (doc as any).file_path) && (
-                              <a
-                                href={
-                                  (doc as any).file_url ||
-                                  `/api/files/${(doc as any).file_path}`
-                                }
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-xs text-primary-600 hover:underline"
-                              >
-                                Lihat File
-                              </a>
+                              <>
+                                <a
+                                  href={
+                                    (doc as any).file_url ||
+                                    `/api/files/${(doc as any).file_path}`
+                                  }
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-xs text-primary-600 hover:underline"
+                                >
+                                  Lihat File
+                                </a>
+                                {!doc.is_verified && (
+                                  <>
+                                    <span className="mx-2 text-stone-300">|</span>
+                                    <button
+                                      onClick={() => handleDeleteDokumen(doc.id)}
+                                      className="text-xs text-red-600 hover:underline"
+                                    >
+                                      Hapus
+                                    </button>
+                                  </>
+                                )}
+                              </>
                             )}
                             {isRejected && (
                               <p className="text-xs text-red-600 mt-1">
@@ -1200,25 +1269,49 @@ export default function PendaftarDetailPage() {
                         >
                           {payment.status_pembayaran === "verified"
                             ? "Terverifikasi"
-                            : payment.status_pembayaran === "rejected"
-                              ? "Ditolak"
-                              : "Pending"}
-                        </span>
-                        <button
-                          onClick={() => {
-                            setSelectedPayId(payment.id);
-                            setTimeout(() => payInputRef.current?.click(), 100);
-                          }}
-                          disabled={!!uploadingPayment}
-                          className="px-3 py-1 bg-white hover:bg-gold-100 text-gold-700 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all flex items-center gap-1.5 border border-gold-200 disabled:opacity-50"
-                        >
-                          {uploadingPayment === payment.id ? (
-                            <Loader2 className="w-3 h-3 animate-spin" />
-                          ) : (
-                            <UploadCloud className="w-3 h-3" />
+</span>
+                        <div className="flex flex-col items-end gap-2">
+                          {payment.bukti_transfer_path && (
+                            <div className="flex items-center gap-2">
+                              <a
+                                href={`/api/files/${payment.bukti_transfer_path}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[10px] text-primary-600 hover:underline font-bold"
+                              >
+                                Lihat Bukti
+                              </a>
+                              {payment.status_pembayaran !== "verified" && (
+                                <>
+                                  <span className="text-stone-300">|</span>
+                                  <button
+                                    onClick={() => handleDeletePembayaran(payment.id)}
+                                    className="text-[10px] text-red-600 hover:underline font-bold"
+                                  >
+                                    Hapus
+                                  </button>
+                                </>
+                              )}
+                            </div>
                           )}
-                          Bantu Upload Bukti
-                        </button>
+                          {(!payment.bukti_transfer_path || payment.status_pembayaran !== "verified") && (
+                            <button
+                              onClick={() => {
+                                setSelectedPayId(payment.id);
+                                setTimeout(() => payInputRef.current?.click(), 100);
+                              }}
+                              disabled={!!uploadingPayment}
+                              className="px-3 py-1 bg-white hover:bg-gold-100 text-gold-700 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all flex items-center gap-1.5 border border-gold-200 disabled:opacity-50"
+                            >
+                              {uploadingPayment === payment.id ? (
+                                <Loader2 className="w-3 h-3 animate-spin" />
+                              ) : (
+                                <UploadCloud className="w-3 h-3" />
+                              )}
+                              Bantu Upload Bukti
+                            </button>
+                          )}
+                        </div>
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-gold-200/50">
                         <div>
