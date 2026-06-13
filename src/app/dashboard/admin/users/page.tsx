@@ -37,6 +37,8 @@ const ROLE_OPTIONS = [
   { value: "penguji", label: "Penguji Al-Qur'an" },
   { value: "pewawancara_calsan", label: "Pewawancara Calsan" },
   { value: "pewawancara_cawalsan", label: "Pewawancara Cawalsan" },
+  { value: "penguji_hafalan", label: "Penguji Hafalan Al-Qur'an" },
+  { value: "penguji_bahasa_arab", label: "Penguji Lisan B. Arab" },
 ];
 
 export default function UserManagementPage() {
@@ -164,11 +166,9 @@ export default function UserManagementPage() {
       });
       if (response.ok) {
         Swal.fire({
-          title: "Berhasil!",
-          text: isEditing
-            ? "Data user berhasil diperbarui."
-            : "User baru berhasil didaftarkan.",
           icon: "success",
+          title: "Berhasil",
+          text: "Data user berhasil disimpan",
           confirmButtonColor: "#1e3a8a",
         });
         setIsModalOpen(false);
@@ -178,16 +178,24 @@ export default function UserManagementPage() {
         try {
           const res = await response.json();
           errorText = res.error || errorText;
-        } catch (e) {}
+        } catch (e) {
+          if (response.status === 502 || response.status === 503) {
+            errorText = "Sistem sedang diperbarui/restart. Silakan coba beberapa saat lagi.";
+          }
+        }
         Swal.fire({
-          title: "Gagal!",
-          text: errorText,
           icon: "error",
+          title: "Gagal Menyimpan",
+          text: errorText,
           confirmButtonColor: "#e11d48",
         });
       }
-    } catch (err) {
-      Swal.fire("Error", "Terjadi kesalahan pada sistem.", "error");
+    } catch (err: any) {
+      Swal.fire(
+        "Error",
+        "Sistem sedang sibuk atau offline. Coba lagi nanti.",
+        "error",
+      );
     }
   };
 
@@ -240,12 +248,12 @@ export default function UserManagementPage() {
 
   return (
     <div className="space-y-10 pb-16 animate-in fade-in duration-700">
-      {/* IT Banner */}
+      {/* Admin Banner */}
       <div className="relative overflow-hidden rounded-4xl bg-linear-to-br from-primary-700 to-primary-900 text-white p-6 md:p-10 md:p-14 shadow-2xl app-card border border-primary-600">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gold-400/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-secondary-400/10 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="flex items-center gap-6">
-            <div className="w-20 h-20 rounded-3xl bg-white/10 flex items-center justify-center border border-white/20 text-gold-300">
+            <div className="w-20 h-20 rounded-3xl bg-white/10 flex items-center justify-center border border-white/20 text-secondary-300">
               <ShieldAlert className="w-10 h-10" />
             </div>
             <div>
@@ -262,7 +270,7 @@ export default function UserManagementPage() {
               resetForm();
               setIsModalOpen(true);
             }}
-            className="bg-gold-400 hover:bg-gold-300 text-primary-950 px-6 md:px-10 py-5 rounded-3xl font-black uppercase text-xs shadow-xl transition-all flex items-center justify-center gap-2 hover:scale-105 active:scale-95"
+            className="bg-secondary-400 hover:bg-secondary-300 text-primary-950 px-6 md:px-10 py-5 rounded-3xl font-black uppercase text-xs shadow-xl transition-all flex items-center justify-center gap-2 hover:scale-105 active:scale-95"
           >
             <Plus className="w-6 h-6" /> Add System User
           </button>
@@ -270,8 +278,8 @@ export default function UserManagementPage() {
       </div>
 
       {/* User List Dashboard */}
-      <div className="bg-white rounded-4xl border border-gold-100 shadow-sm overflow-hidden app-card">
-        <div className="p-5 md:p-8 border-b border-stone-50 flex flex-col md:flex-row justify-between items-center gap-6 bg-gold-50/10">
+      <div className="bg-white rounded-4xl border border-secondary-100 shadow-sm overflow-hidden app-card">
+        <div className="p-5 md:p-8 border-b border-stone-50 flex flex-col md:flex-row justify-between items-center gap-6 bg-secondary-50/10">
           <div className="relative w-full md:w-[28rem]">
             <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-300" />
             <input
@@ -279,7 +287,7 @@ export default function UserManagementPage() {
               placeholder="Search system users..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-16 pr-8 py-5 bg-white border-2 border-gold-100 rounded-[2.5rem] focus:outline-none focus:border-primary-500 font-bold shadow-sm placeholder:text-stone-300"
+              className="w-full pl-16 pr-8 py-5 bg-white border-2 border-secondary-100 rounded-[2.5rem] focus:outline-none focus:border-primary-500 font-bold shadow-sm placeholder:text-stone-300"
             />
           </div>
           <p className="text-[10px] font-black uppercase tracking-widest text-stone-500 bg-stone-100 px-4 py-2 rounded-full">
@@ -308,7 +316,7 @@ export default function UserManagementPage() {
                 filteredUsers.map((user) => (
                   <tr
                     key={user.id}
-                    className="hover:bg-gold-50/30 transition-colors group"
+                    className="hover:bg-secondary-50/30 transition-colors group"
                   >
                     <td className="p-5 md:p-8">
                       <div className="flex items-center gap-5">
