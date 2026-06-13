@@ -117,6 +117,17 @@ export async function POST(request: NextRequest) {
     let biaya = 0;
     let tipeCicilan = "LUNAS";
 
+    // Parse keringanan dari data_lengkap
+    let expectedTagihanDaftarUlang = 8500000;
+    let dataLengkap = pendaftar.data_lengkap as any || {};
+    if (typeof dataLengkap === "string") {
+      try { dataLengkap = JSON.parse(dataLengkap); } catch(e) {}
+    }
+    const keringanan = dataLengkap.keringanan_daftar_ulang;
+    if (keringanan && typeof keringanan.nominal_potongan === "number") {
+      expectedTagihanDaftarUlang -= keringanan.nominal_potongan;
+    }
+
     // Logic khusus Daftar Ulang
     if (jenisPembayaran === "DAFTAR_ULANG") {
       // Cek kelulusan berdasarkan status_pendaftaran (bukan nilai_ujian)
@@ -156,9 +167,9 @@ export async function POST(request: NextRequest) {
       biaya = inputJumlah;
 
       // Tentukan Tipe Cicilan
-      if (biaya >= 9800000) {
+      if (biaya >= expectedTagihanDaftarUlang) {
         tipeCicilan = "LUNAS";
-      } else if (biaya >= 4900000) {
+      } else if (biaya >= (expectedTagihanDaftarUlang / 2)) {
         tipeCicilan = "CICIL_50_LEBIH";
       } else {
         tipeCicilan = "CICIL_DIBAWAH_50";
@@ -179,14 +190,6 @@ export async function POST(request: NextRequest) {
     });
 
     if (existingVerified && jenisPembayaran === "PENDAFTARAN") {
-      // Untuk pendaftaran, cuma boleh sekali bayar verified.
-      // Untuk Daftar Ulang, mungkin boleh nyicil berkali-kali?
-      // User request imply: "WAJIB MEMBAYAR CICILAN PERTAMA SAAT DI DAFTAR ULANG ONLINE INI".
-      // So this endpoint is for the FIRST payment/commitment.
-      // Future payments might be manual offline? Or repeated uploads?
-      // Currently assume logic handles the first upload.
-      // If existing verified daftar ulang, maybe block or allow topup?
-      // Let's block for now to keep it simple, or user can contact admin.
       return NextResponse.json(
         {
           success: false,
@@ -268,7 +271,7 @@ export async function POST(request: NextRequest) {
           cicilan_ke: cicilanKe,
           keringanan_reason: keringananReason as any,
           jumlah: biaya,
-          total_tagihan: jenisPembayaran === "DAFTAR_ULANG" ? 9800000 : biaya,
+          total_tagihan: jenisPembayaran === "DAFTAR_ULANG" ? expectedTagihanDaftarUlang : biaya,
           bukti_transfer_path: filePath,
           bukti_transfer_filename: safeFileName,
           status_pembayaran: "pending",

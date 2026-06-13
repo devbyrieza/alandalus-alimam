@@ -86,9 +86,21 @@ export default function DaftarUlangTab() {
     }
   };
 
+  // Cek Keringanan
+  let expectedTagihan = 8500000;
+  let dataLengkap = dataUser?.data_lengkap;
+  if (typeof dataLengkap === 'string') {
+    try { dataLengkap = JSON.parse(dataLengkap); } catch(e) {}
+  }
+  const keringanan = dataLengkap?.keringanan_daftar_ulang;
+  if (keringanan && typeof keringanan.nominal_potongan === 'number') {
+    expectedTagihan -= keringanan.nominal_potongan;
+  }
+  const halfTagihan = expectedTagihan / 2;
+
   const calculateTipe = (amount: number) => {
-    if (amount >= 8500000) return "LUNAS";
-    if (amount >= 4250000) return "CICILAN 50% ATAU LEBIH";
+    if (amount >= expectedTagihan) return "LUNAS";
+    if (amount >= halfTagihan) return "CICILAN 50% ATAU LEBIH";
     return "CICILAN DIBAWAH 50%";
   };
 
@@ -101,7 +113,7 @@ export default function DaftarUlangTab() {
 
     // Execution 2: Flexible Amounts after first installment
     // If they have a verified payment, they don't need keringananReason for < 50%
-    if (amount < 4250000 && !keringananReason.trim() && !hasExistingVerifiedPayment && totalPaid < 4250000) {
+    if (amount < halfTagihan && !keringananReason.trim() && !hasExistingVerifiedPayment && totalPaid < halfTagihan) {
       setMessage({
         type: "error",
         text: "Untuk pembayaran cicilan pertama di bawah 50%, Anda wajib mengisi alasan/permohonan keringanan pada kolom yang tersedia.",
@@ -119,7 +131,7 @@ export default function DaftarUlangTab() {
     if (keringananReason) formData.append("keringanan_reason", keringananReason);
     
     const numericNominalValue = parseInt(nominal.replace(/\D/g, "") || "0");
-    if (numericNominalValue < 8500000) {
+    if (numericNominalValue < expectedTagihan) {
       formData.append("cicilan_ke", cicilanKe);
     }
 
@@ -183,7 +195,7 @@ export default function DaftarUlangTab() {
   }
 
   // ENROLLED STATE (Already Paid Full)
-  const isLunas = totalPaid >= 8500000;
+    const isLunas = totalPaid >= expectedTagihan;
 
   if (isLunas) {
     return (
@@ -303,7 +315,7 @@ export default function DaftarUlangTab() {
             {formatCurrency(totalPaid)}
           </span>
           <p className="text-[10px] text-slate-400 mt-3 font-medium">
-            Biaya Masuk: Rp 8.500.000
+            Total Biaya Masuk: {formatCurrency(expectedTagihan)}
           </p>
         </div>
 
@@ -313,7 +325,7 @@ export default function DaftarUlangTab() {
             Sisa Tagihan
           </span>
           <span className="text-2xl font-black text-rose-600 mt-2">
-            {formatCurrency(8500000 - totalPaid)}
+            {formatCurrency(expectedTagihan - totalPaid)}
           </span>
           <p className="text-[10px] text-slate-400 mt-3 font-medium">
             Wajib lunas sebelum Juli 2026
@@ -336,7 +348,7 @@ export default function DaftarUlangTab() {
                 <div>
                   <div className="flex items-center gap-2">
                     <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">
-                      {p.jumlah >= 8500000 ? 'Pelunasan' : `Cicilan ke-${p.cicilan_ke || '?'}`}
+                      {p.jumlah >= expectedTagihan ? 'Pelunasan' : `Cicilan ke-${p.cicilan_ke || '?'}`}
                     </p>
                     {p.keringanan_reason && (
                       <span className="text-[9px] bg-secondary-100 text-secondary-700 border border-secondary-200 px-1.5 py-0.5 rounded-full font-black">
@@ -389,7 +401,7 @@ export default function DaftarUlangTab() {
               Total Biaya Masuk
             </h3>
             <div className="text-3xl font-black text-primary-600">
-              Rp 8.500.000
+              {formatCurrency(expectedTagihan)}
             </div>
           </div>
           <div className="space-y-1">
@@ -478,7 +490,7 @@ export default function DaftarUlangTab() {
               </li>
               <li>
                 Opsi cicil tahap pertama minimal{" "}
-                <strong>50% (Rp 4.250.000)</strong>.
+                <strong>50% ({formatCurrency(halfTagihan)})</strong>.
               </li>
               <li>
                 Sisa cicilan bebas nominal dan bebas berapa kali namun wajib
@@ -577,10 +589,10 @@ export default function DaftarUlangTab() {
               <button
                 type="button"
                 onClick={() =>
-                  setNominal(new Intl.NumberFormat("id-ID").format(8500000))
+                  setNominal(new Intl.NumberFormat("id-ID").format(expectedTagihan))
                 }
                 className={`p-4 rounded-xl border-2 transition-all text-left flex flex-col ${
-                  numericNominal === 8500000
+                  numericNominal === expectedTagihan
                     ? "border-primary-500 bg-primary-50/50 ring-2 ring-primary-500/20 shadow-md"
                     : "border-slate-200 bg-white hover:bg-slate-50"
                 }`}
@@ -589,7 +601,7 @@ export default function DaftarUlangTab() {
                   <span className="font-black text-slate-900">
                     Bayar Lunas
                   </span>
-                  {numericNominal === 8500000 ? (
+                  {numericNominal === expectedTagihan ? (
                     <CheckCircle className="w-5 h-5 text-primary-600" />
                   ) : (
                     <div className="w-5 h-5 rounded-full border-2 border-slate-300" />
@@ -599,17 +611,17 @@ export default function DaftarUlangTab() {
                   Pelunasan sekaligus seluruh biaya administrasi.
                 </span>
                 <span className="text-sm font-black text-primary-600 mt-2">
-                  Rp 8.500.000
+                  {formatCurrency(expectedTagihan)}
                 </span>
               </button>
 
               <button
                 type="button"
                 onClick={() =>
-                  setNominal(new Intl.NumberFormat("id-ID").format(4250000))
+                  setNominal(new Intl.NumberFormat("id-ID").format(halfTagihan))
                 }
                 className={`p-4 rounded-xl border-2 transition-all text-left flex flex-col ${
-                  numericNominal >= 4250000 && numericNominal < 8500000
+                  numericNominal >= halfTagihan && numericNominal < expectedTagihan
                     ? "border-primary-500 bg-primary-50/50 ring-2 ring-primary-500/20 shadow-md"
                     : "border-slate-200 bg-white hover:bg-slate-50"
                 }`}
@@ -618,7 +630,7 @@ export default function DaftarUlangTab() {
                   <span className="font-black text-slate-900">
                     Bayar Dicicil
                   </span>
-                  {numericNominal >= 4250000 && numericNominal < 8500000 ? (
+                  {numericNominal >= halfTagihan && numericNominal < expectedTagihan ? (
                     <CheckCircle className="w-5 h-5 text-primary-600" />
                   ) : (
                     <div className="w-5 h-5 rounded-full border-2 border-slate-300" />
@@ -628,14 +640,14 @@ export default function DaftarUlangTab() {
                   Pembayaran bertahap minimal 50% di awal.
                 </span>
                 <span className="text-sm font-black text-primary-600 mt-2">
-                  Min. Rp 4.250.000
+                  Min. {formatCurrency(halfTagihan)}
                 </span>
               </button>
             </div>
           </div>
 
           {/* Input Cicilan Ke (Hanya jika dicicil) */}
-          {numericNominal > 0 && numericNominal < 8500000 && (
+          {numericNominal > 0 && numericNominal < expectedTagihan && (
             <div className="pt-2 border-t border-slate-100 animate-in fade-in slide-in-from-top-1">
               <label className="block text-sm font-bold text-slate-700 mb-2">
                 Ini adalah Pembayaran Cicilan ke-
@@ -701,7 +713,7 @@ export default function DaftarUlangTab() {
             {numericNominal > 0 && 
              tipeBayar === "CICILAN DIBAWAH 50%" && 
              !hasExistingVerifiedPayment && 
-             totalPaid < 4250000 && (
+             totalPaid < halfTagihan && (
               <div className="mt-4 p-4 bg-secondary-50 border border-secondary-200 rounded-xl space-y-3 animate-in fade-in slide-in-from-top-1">
                 <div className="flex items-center gap-2 text-secondary-800">
                   <AlertCircle className="w-4 h-4" />
@@ -798,3 +810,6 @@ export default function DaftarUlangTab() {
     </div>
   );
 }
+
+
+

@@ -204,6 +204,38 @@ export default function KeuanganPage() {
   );
 
   // Export handlers
+  const handleExportKeringanan = async () => {
+    try {
+      const res = await fetch("/api/admin/laporan/keringanan");
+      const json = await res.json();
+      if (!res.ok || !json.success) throw new Error(json.error || "Gagal mengambil data");
+      
+      const data = json.data;
+      if (!data || data.length === 0) {
+        alert("Tidak ada data keringanan/beasiswa untuk diexport.");
+        return;
+      }
+
+      const header = Object.keys(data[0]);
+      const sheets = [
+        {
+          name: "Laporan Keringanan",
+          title: "LAPORAN KERINGANAN & BEASISWA PENDAFTAR",
+          subTitle: `Tanggal Export: ${new Date().toLocaleDateString("id-ID")}`,
+          header,
+          data: data.map((d: any) => Object.values(d))
+        }
+      ];
+
+      await exportToExcelProfessional({
+        fileName: `Laporan_Keringanan_${new Date().toISOString().slice(0, 10)}`,
+        sheets,
+      });
+    } catch (e: any) {
+      alert(e.message);
+    }
+  };
+
   const handleExport = async (type: "excel" | "pdf") => {
     if (activeTab === "pendaftaran") {
       if (filteredPendaftaran.length === 0) return;
@@ -432,8 +464,14 @@ export default function KeuanganPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => handleExport("excel")}
+                      <button
+              onClick={handleExportKeringanan}
+              className="bg-gold-600 hover:bg-gold-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 font-bold shadow-md transition-colors"
+            >
+              <Download className="w-4 h-4" /> Export Keringanan
+            </button>
+            <button
+              onClick={() => handleExport("excel")}
             className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 font-bold shadow-md transition-colors"
           >
             <Download className="w-4 h-4" /> Export Excel
@@ -950,3 +988,4 @@ export default function KeuanganPage() {
     </div>
   );
 }
+
