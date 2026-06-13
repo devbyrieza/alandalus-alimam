@@ -301,9 +301,10 @@ export default function JadwalPengujiPage() {
           const res = await fetch("/api/admin/users");
           if (res.ok) {
             const data = await res.json();
-            const filtered = (data.data || []).filter((u: any) => 
-              ["penguji", "pewawancara_calsan", "pewawancara_cawalsan"].includes(u.role)
-            );
+            const filtered = (data.data || []).filter((u: any) => {
+              const roles = ["penguji", "pewawancara_calsan", "pewawancara_cawalsan"];
+              return roles.includes(u.role) || (Array.isArray(u.secondary_roles) && u.secondary_roles.some((r: string) => roles.includes(r)));
+            });
             setPengujiList(filtered);
           }
         } catch (e) {
@@ -2319,11 +2320,19 @@ export default function JadwalPengujiPage() {
                     }}
                   >
                     <option value="">Pilih Penguji (Opsional)</option>
-                    {pengujiList.map((p) => (
-                      <option key={p.id} value={p.id}>
-                        {p.full_name} ({p.role.replace("_", " ").toUpperCase()})
-                      </option>
-                    ))}
+                    {pengujiList.map((p) => {
+                      const exRoles = ["penguji", "pewawancara_calsan", "pewawancara_cawalsan"];
+                      let displayRole = p.role;
+                      if (!exRoles.includes(p.role) && Array.isArray(p.secondary_roles)) {
+                        const secRole = p.secondary_roles.find((r: string) => exRoles.includes(r));
+                        if (secRole) displayRole = secRole;
+                      }
+                      return (
+                        <option key={p.id} value={p.id}>
+                          {p.full_name} ({displayRole.replace(/_/g, " ").toUpperCase()})
+                        </option>
+                      );
+                    })}
                   </select>
                   <p className="text-xs text-stone-500">
                     Jika dikosongkan, jadwal akan dibuat atas nama Anda sendiri.
