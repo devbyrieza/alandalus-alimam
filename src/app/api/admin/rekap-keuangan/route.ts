@@ -64,6 +64,18 @@ export async function GET(request: NextRequest) {
           {
             nama_lengkap: { contains: "Azka Panji", mode: "insensitive" },
           },
+          {
+            nama_lengkap: { contains: "Fazril", mode: "insensitive" },
+          },
+          {
+            nama_lengkap: { contains: "Muhammad Rizky", mode: "insensitive" },
+          },
+          {
+            nama_lengkap: { contains: "M. Rizky", mode: "insensitive" },
+          },
+          {
+            nama_lengkap: { contains: "M Rizky", mode: "insensitive" },
+          },
         ],
       } as any,
       select: {
@@ -176,7 +188,11 @@ export async function GET(request: NextRequest) {
       const nameLower = student.nama_lengkap.toLowerCase();
       const isSpecialStudent = nameLower.includes("fariq malaibui") || 
                               nameLower.includes("asrorin") || 
-                              nameLower.includes("azka panji");
+                              nameLower.includes("azka panji") ||
+                              nameLower.includes("fazril") ||
+                              nameLower.includes("muhammad rizky") ||
+                              nameLower.includes("m. rizky") ||
+                              nameLower.includes("m rizky");
 
       return {
         no: index + 1,
