@@ -10,59 +10,61 @@ datasource db {
 }
 
 model Profile {
-  id                    String                @id @default(uuid()) @db.Uuid
-  role                  String                @default("pendaftar")
-  secondary_roles       String[]              @default([])
-  full_name             String
-    jenis_kelamin         String?
-  email                 String?
-  phone                 String
-  google_meet_link      String?
-  created_at            DateTime              @default(now()) @db.Timestamptz(6)
-  updated_at            DateTime              @default(now()) @db.Timestamptz(6)
-  password_hash         String?
-  kesehatan_verified    DataKesehatan[]       @relation("KesehatanVerifiedBy")
-  dokumen_verified      Dokumen[]             @relation("DokumenVerifiedBy")
-  sessions_created      ExamSession[]         @relation("SessionCreatedBy")
-  hasil_seleksi_admin   HasilSeleksi[]        @relation("HasilSeleksiBy")
-  jadwal_penguji_ortu   JadwalUjian[]         @relation("PengujiOrtu")
-  jadwal_penguji_quran  JadwalUjian[]         @relation("PengujiQuran")
-  jadwal_penguji_santri JadwalUjian[]         @relation("PengujiSantri")
+  id                     String                @id @default(uuid()) @db.Uuid
+  role                   String                @default("pendaftar")
+  secondary_roles        String[]              @default([])
+  full_name              String
+  jenis_kelamin          String?
+  email                  String?
+  phone                  String
+  google_meet_link       String?
+  created_at             DateTime              @default(now()) @db.Timestamptz(6)
+  updated_at             DateTime              @default(now()) @db.Timestamptz(6)
+  password_hash          String?
+  kesehatan_verified     DataKesehatan[]       @relation("KesehatanVerifiedBy")
+  dokumen_verified       Dokumen[]             @relation("DokumenVerifiedBy")
+  sessions_created       ExamSession[]         @relation("SessionCreatedBy")
+  hasil_seleksi_admin    HasilSeleksi[]        @relation("HasilSeleksiBy")
+  jadwal_penguji_ortu    JadwalUjian[]         @relation("PengujiOrtu")
+  jadwal_penguji_quran   JadwalUjian[]         @relation("PengujiQuran")
+  jadwal_penguji_santri  JadwalUjian[]         @relation("PengujiSantri")
   jadwal_penguji_hafalan JadwalUjian[]         @relation("PengujiHafalan")
-  jadwal_penguji_arab   JadwalUjian[]         @relation("PengujiArab")
-  ketersediaan          KetersediaanPenguji[] @relation("KetersediaanPenguji")
-  nilai_input_ortu      NilaiUjian[]          @relation("NilaiInputByOrtu")
-  nilai_input_quran     NilaiUjian[]          @relation("NilaiInputByQuran")
-  nilai_input_santri    NilaiUjian[]          @relation("NilaiInputBySantri")
-  nilai_input_hafalan   NilaiUjian[]          @relation("NilaiInputByHafalan")
-  nilai_input_arab      NilaiUjian[]          @relation("NilaiInputByArab")
-  pembayaran_verified   Pembayaran[]          @relation("PembayaranVerifiedBy")
-  pendaftar             Pendaftar[]
-  beasiswa_approved              PengajuanBeasiswa[] @relation("BeasiswaApprovedBy")
-    pengumuman_published  Pengumuman[]          @relation("PengumumanPublishedBy")
-  reservasi_approved    ReservasiPSB[]        @relation("ReservasiApprovedBy")
+  jadwal_penguji_arab    JadwalUjian[]         @relation("PengujiArab")
+  ketersediaan           KetersediaanPenguji[] @relation("KetersediaanPenguji")
+  nilai_input_ortu       NilaiUjian[]          @relation("NilaiInputByOrtu")
+  nilai_input_quran      NilaiUjian[]          @relation("NilaiInputByQuran")
+  nilai_input_santri     NilaiUjian[]          @relation("NilaiInputBySantri")
+  nilai_input_hafalan    NilaiUjian[]          @relation("NilaiInputByHafalan")
+  nilai_input_arab       NilaiUjian[]          @relation("NilaiInputByArab")
+  pembayaran_verified    Pembayaran[]          @relation("PembayaranVerifiedBy")
+  pendaftar              Pendaftar[]
+  beasiswa_approved      PengajuanBeasiswa[]   @relation("BeasiswaApprovedBy")
+  pengumuman_published   Pengumuman[]          @relation("PengumumanPublishedBy")
+  reservasi_approved     ReservasiPSB[]        @relation("ReservasiApprovedBy")
+  TransaksiDompet        TransaksiDompet[]
+  PerizinanSantri        PerizinanSantri[]
 
   @@map("profiles")
 }
 
 model TahunAjaran {
-  id                        String         @id @default(uuid()) @db.Uuid
+  id                        String              @id @default(uuid()) @db.Uuid
   tahun_mulai               Int
   tahun_selesai             Int
   nama                      String
-  is_active                 Boolean        @default(false)
-  tanggal_buka_pendaftaran  DateTime       @db.Date
-  tanggal_tutup_pendaftaran DateTime       @db.Date
-  biaya_pendaftaran         Decimal        @default(200000.00) @db.Decimal
+  is_active                 Boolean             @default(false)
+  tanggal_buka_pendaftaran  DateTime            @db.Date
+  tanggal_tutup_pendaftaran DateTime            @db.Date
+  biaya_pendaftaran         Decimal             @default(200000.00) @db.Decimal
   link_tes_tertulis         String?
   deskripsi_tes_tertulis    String?
-  created_at                DateTime       @default(now()) @db.Timestamptz(6)
-  updated_at                DateTime       @default(now()) @db.Timestamptz(6)
+  created_at                DateTime            @default(now()) @db.Timestamptz(6)
+  updated_at                DateTime            @default(now()) @db.Timestamptz(6)
   hasil_seleksi             HasilSeleksi[]
   jadwal_ujian              JadwalUjian[]
   pembayaran                Pembayaran[]
   pendaftar                 Pendaftar[]
-  pengajuan_beasiswa             PengajuanBeasiswa[]
+  pengajuan_beasiswa        PengajuanBeasiswa[]
   pengumuman                Pengumuman[]
   reservasi                 ReservasiPSB[]
 
@@ -144,6 +146,8 @@ model Pendaftar {
   ukuran_seragam_almamater       String?
   reservasi                      ReservasiPSB[]
   whatsapp_logs                  WhatsappLog[]
+  DompetSantri                   DompetSantri?
+  PerizinanSantri                PerizinanSantri[]
 
   @@map("pendaftar")
 }
@@ -253,65 +257,65 @@ model Pembayaran {
 }
 
 model JadwalUjian {
-  id                   String                @id @default(uuid()) @db.Uuid
-  tahun_ajaran_id      String                @db.Uuid
-  pendaftar_id         String                @db.Uuid
-  tanggal_ujian        DateTime              @db.Date
-  metode_ujian         String                @default("offline")
-  google_meet_link     String?
-  google_meet_password String?
-  waktu_mulai_santri   DateTime              @db.Time(6)
-  waktu_selesai_santri DateTime              @db.Time(6)
-  tempat_santri        String
-  ruangan_santri       String?
-  penguji_santri_id    String?               @db.Uuid
-  status_santri        String?               @default("scheduled")
-  waktu_mulai_ortu     DateTime              @db.Time(6)
-  waktu_selesai_ortu   DateTime              @db.Time(6)
-  tempat_ortu          String
-  ruangan_ortu         String?
-  penguji_ortu_id      String?               @db.Uuid
-  status_ortu          String?               @default("scheduled")
-  catatan              String?
-  created_at           DateTime              @default(now()) @db.Timestamptz(6)
-  updated_at           DateTime              @default(now()) @db.Timestamptz(6)
-  exam_session_id      String?               @db.Uuid
-  online_test_link     String?
-  penguji_quran_id     String?               @db.Uuid
-  status_online_test   String?               @default("pending")
-  status_quran         String?               @default("scheduled")
-  zoom_link_ortu       String?
-  zoom_link_quran      String?
-  zoom_link_santri     String?
-  notif_interviewer_terkirim Boolean              @default(false)
-  notif_h1_pendaftar_terkirim Boolean              @default(false)
-  notif_h1_penguji_terkirim   Boolean              @default(false)
-  notif_reminders      JadwalNotifReminder[]
-  exam_session         ExamSession?          @relation(fields: [exam_session_id], references: [id])
-  pendaftar            Pendaftar             @relation(fields: [pendaftar_id], references: [id], onDelete: Cascade)
-  penguji_ortu         Profile?              @relation("PengujiOrtu", fields: [penguji_ortu_id], references: [id])
-  penguji_quran        Profile?              @relation("PengujiQuran", fields: [penguji_quran_id], references: [id])
-  penguji_santri       Profile?              @relation("PengujiSantri", fields: [penguji_santri_id], references: [id])
-  waktu_mulai_hafalan  DateTime?             @db.Time(6)
-  waktu_selesai_hafalan DateTime?            @db.Time(6)
-  tempat_hafalan       String?
-  ruangan_hafalan      String?
-  penguji_hafalan_id   String?               @db.Uuid
-  status_hafalan       String?               @default("scheduled")
-  zoom_link_hafalan    String?
+  id                          String                @id @default(uuid()) @db.Uuid
+  tahun_ajaran_id             String                @db.Uuid
+  pendaftar_id                String                @db.Uuid
+  tanggal_ujian               DateTime              @db.Date
+  metode_ujian                String                @default("offline")
+  google_meet_link            String?
+  google_meet_password        String?
+  waktu_mulai_santri          DateTime              @db.Time(6)
+  waktu_selesai_santri        DateTime              @db.Time(6)
+  tempat_santri               String
+  ruangan_santri              String?
+  penguji_santri_id           String?               @db.Uuid
+  status_santri               String?               @default("scheduled")
+  waktu_mulai_ortu            DateTime              @db.Time(6)
+  waktu_selesai_ortu          DateTime              @db.Time(6)
+  tempat_ortu                 String
+  ruangan_ortu                String?
+  penguji_ortu_id             String?               @db.Uuid
+  status_ortu                 String?               @default("scheduled")
+  catatan                     String?
+  created_at                  DateTime              @default(now()) @db.Timestamptz(6)
+  updated_at                  DateTime              @default(now()) @db.Timestamptz(6)
+  exam_session_id             String?               @db.Uuid
+  online_test_link            String?
+  penguji_quran_id            String?               @db.Uuid
+  status_online_test          String?               @default("pending")
+  status_quran                String?               @default("scheduled")
+  zoom_link_ortu              String?
+  zoom_link_quran             String?
+  zoom_link_santri            String?
+  notif_interviewer_terkirim  Boolean               @default(false)
+  notif_h1_pendaftar_terkirim Boolean               @default(false)
+  notif_h1_penguji_terkirim   Boolean               @default(false)
+  notif_reminders             JadwalNotifReminder[]
+  exam_session                ExamSession?          @relation(fields: [exam_session_id], references: [id])
+  pendaftar                   Pendaftar             @relation(fields: [pendaftar_id], references: [id], onDelete: Cascade)
+  penguji_ortu                Profile?              @relation("PengujiOrtu", fields: [penguji_ortu_id], references: [id])
+  penguji_quran               Profile?              @relation("PengujiQuran", fields: [penguji_quran_id], references: [id])
+  penguji_santri              Profile?              @relation("PengujiSantri", fields: [penguji_santri_id], references: [id])
+  waktu_mulai_hafalan         DateTime?             @db.Time(6)
+  waktu_selesai_hafalan       DateTime?             @db.Time(6)
+  tempat_hafalan              String?
+  ruangan_hafalan             String?
+  penguji_hafalan_id          String?               @db.Uuid
+  status_hafalan              String?               @default("scheduled")
+  zoom_link_hafalan           String?
 
-  waktu_mulai_arab     DateTime?             @db.Time(6)
-  waktu_selesai_arab   DateTime?             @db.Time(6)
-  tempat_arab          String?
-  ruangan_arab         String?
-  penguji_arab_id      String?               @db.Uuid
-  status_arab          String?               @default("scheduled")
-  zoom_link_arab       String?
+  waktu_mulai_arab   DateTime? @db.Time(6)
+  waktu_selesai_arab DateTime? @db.Time(6)
+  tempat_arab        String?
+  ruangan_arab       String?
+  penguji_arab_id    String?   @db.Uuid
+  status_arab        String?   @default("scheduled")
+  zoom_link_arab     String?
 
-  penguji_hafalan      Profile?              @relation("PengujiHafalan", fields: [penguji_hafalan_id], references: [id])
-  penguji_arab         Profile?              @relation("PengujiArab", fields: [penguji_arab_id], references: [id])
-  tahun_ajaran         TahunAjaran           @relation(fields: [tahun_ajaran_id], references: [id])
-  nilai_ujian          NilaiUjian[]
+  penguji_hafalan Profile?     @relation("PengujiHafalan", fields: [penguji_hafalan_id], references: [id])
+  penguji_arab    Profile?     @relation("PengujiArab", fields: [penguji_arab_id], references: [id])
+  tahun_ajaran    TahunAjaran  @relation(fields: [tahun_ajaran_id], references: [id])
+  nilai_ujian     NilaiUjian[]
 
   @@map("jadwal_ujian")
 }
@@ -336,28 +340,28 @@ model ExamSession {
 }
 
 model NilaiUjian {
-  id                       String       @id @default(uuid()) @db.Uuid
-  jadwal_ujian_id          String?      @db.Uuid
-  pendaftar_id             String       @db.Uuid
+  id                       String    @id @default(uuid()) @db.Uuid
+  jadwal_ujian_id          String?   @db.Uuid
+  pendaftar_id             String    @db.Uuid
   nilai_tes_tertulis       Json?
-  nilai_tes_tertulis_total Decimal?     @db.Decimal
+  nilai_tes_tertulis_total Decimal?  @db.Decimal
   catatan_tes_tertulis     String?
-  nilai_wawancara_santri   Decimal?     @db.Decimal
-  nilai_tes_quran          Decimal?     @db.Decimal
-  nilai_santri_total       Decimal?     @db.Decimal
+  nilai_wawancara_santri   Decimal?  @db.Decimal
+  nilai_tes_quran          Decimal?  @db.Decimal
+  nilai_santri_total       Decimal?  @db.Decimal
   catatan_santri           String?
-  input_by_santri          String?      @db.Uuid
-  input_at_santri          DateTime?    @db.Timestamptz(6)
-  nilai_wawancara_ortu     Decimal?     @db.Decimal
+  input_by_santri          String?   @db.Uuid
+  input_at_santri          DateTime? @db.Timestamptz(6)
+  nilai_wawancara_ortu     Decimal?  @db.Decimal
   catatan_ortu             String?
-  input_by_ortu            String?      @db.Uuid
-  input_at_ortu            DateTime?    @db.Timestamptz(6)
-  nilai_total              Decimal?     @db.Decimal
+  input_by_ortu            String?   @db.Uuid
+  input_at_ortu            DateTime? @db.Timestamptz(6)
+  nilai_total              Decimal?  @db.Decimal
   catatan_umum             String?
-  created_at               DateTime     @default(now()) @db.Timestamptz(6)
-  updated_at               DateTime     @default(now()) @db.Timestamptz(6)
-  input_at_quran           DateTime?    @db.Timestamptz(6)
-  input_by_quran           String?      @db.Uuid
+  created_at               DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at               DateTime  @default(now()) @db.Timestamptz(6)
+  input_at_quran           DateTime? @db.Timestamptz(6)
+  input_by_quran           String?   @db.Uuid
   catatan_quran            String?
   catatan_kelulusan        String?
   detail_akademik          Json?
@@ -373,22 +377,22 @@ model NilaiUjian {
   score_wawancara          Float?
   status_kelulusan         String?
   total_score              Float?
-  input_by_ortu_profile    Profile?     @relation("NilaiInputByOrtu", fields: [input_by_ortu], references: [id])
-  input_by_quran_profile   Profile?     @relation("NilaiInputByQuran", fields: [input_by_quran], references: [id])
-  input_by_santri_profile  Profile?     @relation("NilaiInputBySantri", fields: [input_by_santri], references: [id])
-  nilai_hafalan_total  Decimal?     @db.Decimal
-  catatan_hafalan      String?
-  detail_hafalan       Json?
-  input_by_hafalan     String?      @db.Uuid
-  input_at_hafalan     DateTime?    @db.Timestamptz(6)
-  score_hafalan        Float?
+  input_by_ortu_profile    Profile?  @relation("NilaiInputByOrtu", fields: [input_by_ortu], references: [id])
+  input_by_quran_profile   Profile?  @relation("NilaiInputByQuran", fields: [input_by_quran], references: [id])
+  input_by_santri_profile  Profile?  @relation("NilaiInputBySantri", fields: [input_by_santri], references: [id])
+  nilai_hafalan_total      Decimal?  @db.Decimal
+  catatan_hafalan          String?
+  detail_hafalan           Json?
+  input_by_hafalan         String?   @db.Uuid
+  input_at_hafalan         DateTime? @db.Timestamptz(6)
+  score_hafalan            Float?
 
-  nilai_arab_total     Decimal?     @db.Decimal
-  catatan_arab         String?
-  detail_arab          Json?
-  input_by_arab        String?      @db.Uuid
-  input_at_arab        DateTime?    @db.Timestamptz(6)
-  score_arab           Float?
+  nilai_arab_total Decimal?  @db.Decimal
+  catatan_arab     String?
+  detail_arab      Json?
+  input_by_arab    String?   @db.Uuid
+  input_at_arab    DateTime? @db.Timestamptz(6)
+  score_arab       Float?
 
   input_by_hafalan_profile Profile?     @relation("NilaiInputByHafalan", fields: [input_by_hafalan], references: [id])
   input_by_arab_profile    Profile?     @relation("NilaiInputByArab", fields: [input_by_arab], references: [id])
@@ -674,6 +678,7 @@ enum JenisPembayaran {
   PENDAFTARAN
   DAFTAR_ULANG
   SPP
+  TOPUP_DOMPET
 }
 
 enum TipeCicilan {
@@ -694,38 +699,87 @@ enum StatusSeleksi {
   DITOLAK
 }
 
-
-
 model PengajuanBeasiswa {
-  id                    String    @id @default(uuid()) @db.Uuid
-  pendaftar_id          String    @unique @db.Uuid
-  tahun_ajaran_id       String    @db.Uuid
-  jenis_pengajuan       String    // "BEASISWA_PRESTASI" | "KERINGANAN_BIAYA"
-  alasan_pengajuan      String?   @db.Text
-  nominal_kesanggupan   Decimal?  @db.Decimal
-  
-  file_sktm_path        String?
-  file_slip_gaji_path   String?
-  file_ktp_path         String?
-  file_prestasi_path    String?
-  diajukan_oleh_id      String?   @db.Uuid
-  diajukan_oleh_role    String?
-  
-  status                String    @default("PENDING") // "PENDING" | "DISETUJUI" | "DITOLAK"
-  
-  disetujui_oleh        String?   @db.Uuid
-  disetujui_pada        DateTime? @db.Timestamptz(6)
-  catatan_keputusan     String?   @db.Text
-  tipe_potongan         String?   // "NOMINAL" | "PERSENTASE"
-  nominal_potongan      Decimal?  @db.Decimal
-  persentase_potongan   Decimal?  @db.Decimal(5,2)
+  id                  String   @id @default(uuid()) @db.Uuid
+  pendaftar_id        String   @unique @db.Uuid
+  tahun_ajaran_id     String   @db.Uuid
+  jenis_pengajuan     String // "BEASISWA_PRESTASI" | "KERINGANAN_BIAYA"
+  alasan_pengajuan    String?  @db.Text
+  nominal_kesanggupan Decimal? @db.Decimal
 
-  created_at            DateTime  @default(now()) @db.Timestamptz(6)
-  updated_at            DateTime  @default(now()) @db.Timestamptz(6)
+  file_sktm_path      String?
+  file_slip_gaji_path String?
+  file_ktp_path       String?
+  file_prestasi_path  String?
+  diajukan_oleh_id    String? @db.Uuid
+  diajukan_oleh_role  String?
 
-  pendaftar             Pendaftar @relation(fields: [pendaftar_id], references: [id], onDelete: Cascade)
-  tahun_ajaran          TahunAjaran @relation(fields: [tahun_ajaran_id], references: [id])
-  approver              Profile?  @relation("BeasiswaApprovedBy", fields: [disetujui_oleh], references: [id])
+  status String @default("PENDING") // "PENDING" | "DISETUJUI" | "DITOLAK"
+
+  disetujui_oleh      String?   @db.Uuid
+  disetujui_pada      DateTime? @db.Timestamptz(6)
+  catatan_keputusan   String?   @db.Text
+  tipe_potongan       String? // "NOMINAL" | "PERSENTASE"
+  nominal_potongan    Decimal?  @db.Decimal
+  persentase_potongan Decimal?  @db.Decimal(5, 2)
+
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  updated_at DateTime @default(now()) @db.Timestamptz(6)
+
+  pendaftar    Pendaftar   @relation(fields: [pendaftar_id], references: [id], onDelete: Cascade)
+  tahun_ajaran TahunAjaran @relation(fields: [tahun_ajaran_id], references: [id])
+  approver     Profile?    @relation("BeasiswaApprovedBy", fields: [disetujui_oleh], references: [id])
 
   @@map("pengajuan_beasiswa")
+}
+
+model DompetSantri {
+  id             String   @id @default(uuid()) @db.Uuid
+  pendaftar_id   String   @unique @db.Uuid // Relasi ke pendaftar/santri
+  qr_code_string String   @unique // String unik yang ada di QR Card
+  saldo          Decimal  @default(0) @db.Decimal(12, 2)
+  status               String   @default("AKTIF") // AKTIF, BLOKIR, HILANG
+  pin                  String?
+  batas_jajan_harian   Decimal  @default(25000) @db.Decimal(12, 2)
+  batas_maksimal_saldo Decimal  @default(2000000) @db.Decimal(12, 2)
+  created_at           DateTime @default(now()) @db.Timestamptz(6)
+  updated_at           DateTime @default(now()) @db.Timestamptz(6)
+
+  transaksi TransaksiDompet[]
+  pendaftar Pendaftar         @relation(fields: [pendaftar_id], references: [id])
+
+  @@map("dompet_santri")
+}
+
+model TransaksiDompet {
+  id              String   @id @default(uuid()) @db.Uuid
+  dompet_id       String   @db.Uuid
+  jenis_transaksi String // "TOPUP", "JAJAN_KANTIN", "JAJAN_KOPERASI", "TARIK_TUNAI"
+  nominal         Decimal  @db.Decimal(12, 2)
+  saldo_akhir     Decimal  @db.Decimal(12, 2) // Snapshot saldo setelah transaksi
+  keterangan      String?
+  kasir_id        String?  @db.Uuid // Admin/Kasir yang memproses
+  created_at      DateTime @default(now()) @db.Timestamptz(6)
+
+  dompet DompetSantri @relation(fields: [dompet_id], references: [id])
+  kasir  Profile?     @relation(fields: [kasir_id], references: [id])
+
+  @@map("transaksi_dompet")
+}
+
+model PerizinanSantri {
+  id              String    @id @default(uuid()) @db.Uuid
+  pendaftar_id    String    @db.Uuid
+  jenis_izin      String // "PULANG", "KELUAR_PONDOK", "SAKIT"
+  alasan          String
+  waktu_keluar    DateTime  @default(now()) @db.Timestamptz(6)
+  batas_kembali   DateTime? @db.Timestamptz(6)
+  waktu_kembali   DateTime? @db.Timestamptz(6)
+  status          String    @default("DI_LUAR") // "DI_LUAR", "SUDAH_KEMBALI", "TERLAMBAT"
+  pemberi_izin_id String    @db.Uuid
+
+  pendaftar    Pendaftar @relation(fields: [pendaftar_id], references: [id])
+  pemberi_izin Profile   @relation(fields: [pemberi_izin_id], references: [id])
+
+  @@map("perizinan_santri")
 }

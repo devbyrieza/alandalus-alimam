@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
     // 3. Find the payment record by order_id
     const pembayaran = await prisma.pembayaran.findFirst({
       where: { midtrans_order_id: orderId },
-      select: { id: true, pendaftar_id: true, status_pembayaran: true },
+      select: { id: true, pendaftar_id: true, status_pembayaran: true, jenis_pembayaran: true, jumlah: true },
     });
 
     if (!pembayaran) {
@@ -112,32 +112,58 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // 6. Update pendaftar status if payment is successful
-    if (shouldUpdatePendaftar) {
-      // Get current pendaftar status
-      const pendaftar = await prisma.pendaftar.findUnique({
-        where: { id: pembayaran.pendaftar_id },
-        select: { status_pendaftaran: true },
-      });
-
-      // Only update if still waiting for payment
-      if (
-        pendaftar &&
-        (pendaftar.status_pendaftaran === "draft" ||
-          pendaftar.status_pendaftaran === "waiting_payment" ||
-          pendaftar.status_pendaftaran === "payment_verification")
-      ) {
-        await prisma.pendaftar.update({
+    // 6. Update pendaftar status or DompetSantri if payment is successful
+    if (shouldUpdatePendaftar && pembayaran.status_pembayaran !== "verified") {
+      if (pembayaran.jenis_pembayaran === "TOPUP_DOMPET") {
+        await prisma.$transaction(async (tx) => {
+          const dompet = await tx.dompetSantri.findUnique({
+            where: { pendaftar_id: pembayaran.pendaftar_id },
+          });
+          
+          if (dompet) {
+            const newSaldo = Number(dompet.saldo) + Number(pembayaran.jumlah);
+            await tx.dompetSantri.update({
+              where: { id: dompet.id },
+              data: { saldo: newSaldo },
+            });
+            await tx.transaksiDompet.create({
+              data: {
+                dompet_id: dompet.id,
+                jenis_transaksi: "TOPUP",
+                nominal: pembayaran.jumlah,
+                saldo_akhir: newSaldo,
+                keterangan: `Top-up via Midtrans (${notification.payment_type})`,
+              },
+            });
+            console.log(`Topup ${pembayaran.jumlah} for Dompet ${dompet.id} successful`);
+          }
+        });
+      } else {
+        // Get current pendaftar status
+        const pendaftar = await prisma.pendaftar.findUnique({
           where: { id: pembayaran.pendaftar_id },
-          data: {
-            status_pendaftaran: "verified",
-            updated_at: new Date(),
-          },
+          select: { status_pendaftaran: true },
         });
 
-        console.log(
-          `Pendaftar ${pembayaran.pendaftar_id} status updated to verified`,
-        );
+        // Only update if still waiting for payment
+        if (
+          pendaftar &&
+          (pendaftar.status_pendaftaran === "draft" ||
+            pendaftar.status_pendaftaran === "waiting_payment" ||
+            pendaftar.status_pendaftaran === "payment_verification")
+        ) {
+          await prisma.pendaftar.update({
+            where: { id: pembayaran.pendaftar_id },
+            data: {
+              status_pendaftaran: "verified",
+              updated_at: new Date(),
+            },
+          });
+
+          console.log(
+            `Pendaftar ${pembayaran.pendaftar_id} status updated to verified`,
+          );
+        }
       }
     }
 

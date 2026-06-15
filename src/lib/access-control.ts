@@ -73,6 +73,7 @@ export type TabName =
   | "pengumuman"
   | "daftar-ulang"
   | "ukuran-seragam"
+  | "kartu-jajan"
   | "profil";
 
 export const STEP_REQUIREMENTS: Record<TabName, { minimumStatus: StatusProses | null; label: string; description: string; }> = {
@@ -87,6 +88,7 @@ export const STEP_REQUIREMENTS: Record<TabName, { minimumStatus: StatusProses | 
   pengumuman: { minimumStatus: "announced", label: "Pengumuman", description: "Selesaikan semua tahapan seleksi terlebih dahulu" },
   "daftar-ulang": { minimumStatus: "accepted", label: "Daftar Ulang", description: "Hanya tersedia bagi pendaftar yang diterima" },
   "ukuran-seragam": { minimumStatus: "enrolled", label: "Ukuran Seragam", description: "Hanya tersedia bagi pendaftar yang telah melakukan daftar ulang" },
+  "kartu-jajan": { minimumStatus: "accepted", label: "Kartu Jajan", description: "Akses Dompet Santri" },
 };
 
 export function canAccessTab(tabName: TabName, statusProses: StatusProses): boolean {

@@ -183,6 +183,13 @@ export default function DashboardLayout({
       active: pathname === "/dashboard/pendaftar/seragam",
     },
     {
+      name: "Kartu Jajan",
+      href: "/dashboard/pendaftar/kartu-jajan",
+      tabName: "kartu-jajan" as TabName,
+      icon: HandCoins,
+      active: pathname === "/dashboard/pendaftar/kartu-jajan",
+    },
+    {
       name: "Profil Akun",
       href: "/dashboard/pendaftar/profil",
       tabName: "profil" as TabName,
