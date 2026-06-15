@@ -55,6 +55,15 @@ export async function GET(request: NextRequest) {
           {
             tipe_pendaftaran: "PINDAHAN",
           },
+          {
+            nama_lengkap: { contains: "Fariq Malaibui", mode: "insensitive" },
+          },
+          {
+            nama_lengkap: { contains: "Asrorin", mode: "insensitive" },
+          },
+          {
+            nama_lengkap: { contains: "Azka Panji", mode: "insensitive" },
+          },
         ],
       } as any,
       select: {
@@ -164,13 +173,20 @@ export async function GET(request: NextRequest) {
       }
       const keringanan_reason = reasons.length > 0 ? reasons.join(" | ") : null;
 
+      const nameLower = student.nama_lengkap.toLowerCase();
+      const isSpecialStudent = nameLower.includes("fariq malaibui") || 
+                              nameLower.includes("asrorin") || 
+                              nameLower.includes("azka panji");
+
       return {
         no: index + 1,
         id: student.id,
         nama: student.nama_lengkap,
         nomor_pendaftaran: student.nomor_pendaftaran,
         jenjang: student.jenjang || "-",
-        status_kelulusan: (["accepted", "passed", "enrolled"].includes(student.status_pendaftaran) || student.tipe_pendaftaran === "PINDAHAN")
+        status_kelulusan: (["accepted", "passed", "enrolled"].includes(student.status_pendaftaran) || 
+                            student.tipe_pendaftaran === "PINDAHAN" || 
+                            isSpecialStudent)
           ? "DITERIMA"
           : (student.nilai_ujian[0]?.status_kelulusan || "LULUS"),
         total_bayar: totalBayar,
