@@ -264,7 +264,7 @@ export async function POST(request: Request) {
     // Send WhatsApp via Queue (Layer 2: Non-blocking, through queue)
     const pendaftarInfo = await prisma.pendaftar.findUnique({
       where: { id: session.id },
-      select: { nama_lengkap: true, no_hp: true },
+      select: { nama_lengkap: true, no_hp: true, nomor_pendaftaran: true },
     });
 
     if (pendaftarInfo && pendaftarInfo.no_hp) {
@@ -436,9 +436,9 @@ export async function POST(request: Request) {
           });
 
           if (interviewer && interviewer.phone) {
-            // Generate Magic Link for 4-hour reminder
-            const host = req.headers.get("host") || "pesantren-alimam.com";
-            const protocol = req.headers.get("x-forwarded-proto") || "https";
+            // Generate Magic Link for this interviewer
+            const host = request.headers.get("host") || "pesantren-alimam.com";
+            const protocol = request.headers.get("x-forwarded-proto") || "https";
             const reqBaseUrl = `${protocol}://${host}`;
             const appUrlEnv = process.env.NEXT_PUBLIC_APP_URL || "";
             const fullAppUrl = appUrlEnv.startsWith("http") ? appUrlEnv : `${reqBaseUrl}${appUrlEnv}`;
