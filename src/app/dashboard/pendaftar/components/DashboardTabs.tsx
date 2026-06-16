@@ -74,6 +74,12 @@ export default function DashboardTabs({ statusProses }: DashboardTabsProps) {
       href: "/dashboard/pendaftar/daftar-ulang",
     },
     {
+      id: "kartu-jajan" as TabName, // Using kartu-jajan id for access control rule
+      label: "ZAD",
+      icon: CreditCard,
+      href: "/dashboard/pendaftar/keuangan",
+    },
+    {
       id: "profil",
       label: "Profil",
       icon: Settings,

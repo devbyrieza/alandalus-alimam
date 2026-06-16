@@ -183,11 +183,11 @@ export default function DashboardLayout({
       active: pathname === "/dashboard/pendaftar/seragam",
     },
     {
-      name: "Kartu Jajan",
-      href: "/dashboard/pendaftar/kartu-jajan",
-      tabName: "kartu-jajan" as TabName,
+      name: "Keuangan (ZAD)",
+      href: "/dashboard/pendaftar/keuangan",
+      tabName: "kartu-jajan" as TabName, // still using the same access control rule internally
       icon: HandCoins,
-      active: pathname === "/dashboard/pendaftar/kartu-jajan",
+      active: pathname === "/dashboard/pendaftar/keuangan",
     },
     {
       name: "Profil Akun",

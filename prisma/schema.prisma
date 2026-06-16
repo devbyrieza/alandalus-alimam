@@ -738,12 +738,14 @@ model DompetSantri {
   pendaftar_id   String   @unique @db.Uuid // Relasi ke pendaftar/santri
   qr_code_string String   @unique // String unik yang ada di QR Card
   saldo          Decimal  @default(0) @db.Decimal(12, 2)
-  status               String   @default("AKTIF") // AKTIF, BLOKIR, HILANG
+  status               String    @default("AKTIF") // AKTIF, BLOKIR, HILANG
   pin                  String?
-  batas_jajan_harian   Decimal  @default(25000) @db.Decimal(12, 2)
-  batas_maksimal_saldo Decimal  @default(2000000) @db.Decimal(12, 2)
-  created_at           DateTime @default(now()) @db.Timestamptz(6)
-  updated_at           DateTime @default(now()) @db.Timestamptz(6)
+  batas_jajan_harian   Decimal   @default(25000) @db.Decimal(12, 2)
+  batas_maksimal_saldo Decimal   @default(2000000) @db.Decimal(12, 2)
+  is_limit_terbuka     Boolean   @default(false)
+  limit_terbuka_sampai DateTime? @db.Timestamptz(6)
+  created_at           DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at           DateTime  @default(now()) @db.Timestamptz(6)
 
   transaksi TransaksiDompet[]
   pendaftar Pendaftar         @relation(fields: [pendaftar_id], references: [id])
