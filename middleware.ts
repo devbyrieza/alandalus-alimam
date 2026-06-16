@@ -37,6 +37,9 @@ export async function middleware(request: NextRequest) {
   
   if (!isLocalhost) {
     const isPpdbDomain = host.startsWith("ppdb.");
+    const isSafinaDomain = host.startsWith("safina.") || host.startsWith("keuangan.");
+    const isAppDomain = isPpdbDomain || isSafinaDomain;
+
     const ppdbPaths = [
       "/ppdb", "/login", "/daftar", "/daftar-pindahan", "/daftar-sukses", 
       "/dashboard", "/admin", "/auth", "/pilih-verifikasi", "/send-otp", "/verifikasi-otp"
@@ -47,16 +50,32 @@ export async function middleware(request: NextRequest) {
     const isStaticOrApi = pathname.startsWith("/_next") || pathname.startsWith("/api") || pathname.includes(".");
     
     if (!isStaticOrApi) {
-      if (isPpdbDomain && !isPpdbPath && pathname !== "/") {
-        // If on PPDB domain but trying to access non-PPDB path (like /tentang), redirect to main domain
-        const mainDomain = host.replace("ppdb.", "");
+      if (isSafinaDomain) {
+        // Auto-redirect keuangan.* to safina.* for brand consistency
+        if (host.startsWith("keuangan.")) {
+          const redirectUrl = new URL(pathname, `https://${host.replace("keuangan.", "safina.")}`);
+          redirectUrl.search = request.nextUrl.search;
+          return NextResponse.redirect(redirectUrl);
+        }
+
+        // If accessing root of Safina, go straight to login
+        if (pathname === "/") {
+          const redirectUrl = new URL("/login", request.url);
+          redirectUrl.search = request.nextUrl.search;
+          return NextResponse.redirect(redirectUrl);
+        }
+      }
+
+      if (isAppDomain && !isPpdbPath && pathname !== "/") {
+        // If on App domain (PPDB/Safina) but trying to access non-App path (like /tentang), redirect to main website
+        const mainDomain = host.replace("ppdb.", "").replace("safina.", "").replace("keuangan.", "");
         const redirectUrl = new URL(pathname, `https://${mainDomain}`);
         redirectUrl.search = request.nextUrl.search;
         return NextResponse.redirect(redirectUrl);
       }
       
-      if (!isPpdbDomain && isPpdbPath) {
-        // If on main domain but trying to access PPDB path, redirect to PPDB domain
+      if (!isAppDomain && isPpdbPath) {
+        // If on main website domain but trying to access App path, redirect to PPDB domain
         const baseHost = host.replace(/^www\./, "");
         const newPathname = pathname === "/ppdb" ? "/" : pathname;
         const redirectUrl = new URL(newPathname, `https://ppdb.${baseHost}`);
