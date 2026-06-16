@@ -206,11 +206,13 @@ function GuidedActionCard({ nextStep }: any) {
 }
 
 function StatusGrid({ status, statusLabel, pengumuman }: any) {
+  const isFinalStatus = ["announced", "accepted", "rejected", "enrolled", "enrolled_full"].includes(status);
+
   const items = [
     {
       label: "Status Saat Ini",
       val: statusLabel,
-      desc: "Posisi pendaftaran Anda sekarang",
+      desc: "Tahap pendaftaran Anda saat ini",
       icon: ShieldCheck,
       color: "text-primary-600",
       bg: "bg-primary-50",
@@ -220,15 +222,15 @@ function StatusGrid({ status, statusLabel, pengumuman }: any) {
       val: ["tested", "announced", "accepted", "enrolled"].includes(status)
         ? "Selesai"
         : "Menunggu",
-      desc: "Jadwal dan hasil tes seleksi",
+      desc: "Jadwal dan hasil ujian",
       icon: Target,
       color: "text-purple-600",
       bg: "bg-purple-50",
     },
     {
-      label: "Hasil Seleksi",
-      val: pengumuman ? pengumuman.status_kelulusan : "Belum Rilis",
-      desc: "Pengumuman kelulusan santri",
+      label: "Hasil Akhir",
+      val: (pengumuman && isFinalStatus) ? pengumuman.status_kelulusan : "Belum Dirilis",
+      desc: "Hasil penerimaan santri",
       icon: CheckCircle,
       color: "text-emerald-600",
       bg: "bg-emerald-50",
