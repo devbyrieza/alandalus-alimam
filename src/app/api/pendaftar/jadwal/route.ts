@@ -432,6 +432,12 @@ export async function POST(request: Request) {
 
           if (interviewer && interviewer.phone) {
             // Generate Magic Link for 4-hour reminder
+            const host = req.headers.get("host") || "pesantren-alimam.com";
+            const protocol = req.headers.get("x-forwarded-proto") || "https";
+            const reqBaseUrl = `${protocol}://${host}`;
+            const appUrlEnv = process.env.NEXT_PUBLIC_APP_URL || "";
+            const fullAppUrl = appUrlEnv.startsWith("http") ? appUrlEnv : `${reqBaseUrl}${appUrlEnv}`;
+            
             const redirectPathH1 = `/dashboard/penguji/input-nilai?search=${encodeURIComponent(pendaftarInfo.nama_lengkap)}`;
             const tokenH1 = generateMagicToken(
               finalIdRem,
@@ -440,24 +446,29 @@ export async function POST(request: Request) {
               48, // 2 days
               redirectPathH1,
             );
-            const magicLinkRem4h = `${process.env.NEXT_PUBLIC_APP_URL || "https://pesantren-alimam.com"}/api/auth/magic?token=${tokenH1}`;
+            const magicLinkRem4h = `${fullAppUrl}/api/auth/magic?token=${tokenH1}`;
 
             // Use manual tinyurl if available for this user, otherwise generate automatic
-            const { generateShortLink } =
-              await import("@/lib/utils/magic-link");
-            
-            const shortUrlRem4h =
-              (await generateShortLink(magicLinkRem4h));
+            const { generateShortLink, getSlugByName, getPermanentAuthUrl } = await import("@/lib/utils/magic-link");
+            const slug = getSlugByName(interviewer.full_name);
+            let shortUrlRem4h = "";
+            if (slug) {
+                const dynamicAuthUrl = getPermanentAuthUrl(slug, pendaftarInfo.nomor_pendaftaran, fullAppUrl);
+                shortUrlRem4h = await generateShortLink(dynamicAuthUrl);
+            } else {
+                shortUrlRem4h = await generateShortLink(magicLinkRem4h);
+            }
 
+              const gender = (interviewer.full_name.match(/halimah|maryani|fatimah|azzahra|putri|utami/i)) ? "P" : "L";
               const remIntMessage = buildMessageReminderH1Penguji(
                 interviewer.full_name,
                 pendaftarInfo.nama_lengkap,
                 dateStr.split(",")[0] || "",
                 dateStr,
                 timeStr,
-                interviewer.google_meet_link || lokasi,
+                interviewer.google_meet_link || "-",
                 jenisUjian,
-                undefined, // gender (default L)
+                gender,
                 shortUrlRem4h,
               );
 

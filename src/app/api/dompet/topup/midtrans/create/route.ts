@@ -40,12 +40,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: "Dompet sedang diblokir" }, { status: 400 });
     }
 
-    // Cek batas maksimal saldo
-    const targetSaldo = Number(dompet.saldo) + nominal;
-    const batasMaksimal = Number(dompet.batas_maksimal_saldo);
-    if (targetSaldo > batasMaksimal) {
-      return NextResponse.json({ success: false, error: `Melebihi batas maksimal saldo (Maks: Rp ${batasMaksimal.toLocaleString("id-ID")})` }, { status: 400 });
-    }
+    // Cek batas maksimal saldo dihapus agar unlimited sesuai request
 
     const serverKey = process.env.MIDTRANS_SERVER_KEY;
     const isProduction = process.env.MIDTRANS_IS_PRODUCTION === "true";

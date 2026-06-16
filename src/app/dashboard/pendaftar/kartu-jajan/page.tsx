@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { HandCoins, CreditCard, Clock, CheckCircle2, XCircle, AlertCircle, RefreshCw } from "lucide-react";
+import { HandCoins, CreditCard, Clock, CheckCircle2, XCircle, AlertCircle, RefreshCw, Edit2, Save, X } from "lucide-react";
 
 interface DompetSantri {
   id: string;
@@ -27,6 +27,11 @@ export default function KartuJajanPage() {
   const [topupAmount, setTopupAmount] = useState<number>(50000);
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState("");
+  
+  // States for Edit Limit
+  const [isEditingLimit, setIsEditingLimit] = useState(false);
+  const [newLimit, setNewLimit] = useState<number>(0);
+  const [savingLimit, setSavingLimit] = useState(false);
 
   const presetAmounts = [20000, 50000, 100000, 200000, 500000];
 
@@ -60,6 +65,7 @@ export default function KartuJajanPage() {
       if (data.success) {
         setDompet(data.data.dompet);
         setTransaksiList(data.data.transaksi);
+        setNewLimit(Number(data.data.dompet.batas_jajan_harian));
       }
     } catch (err) {
       console.error("Gagal mengambil data dompet:", err);
@@ -110,6 +116,26 @@ export default function KartuJajanPage() {
     }
   };
 
+  const handleSaveLimit = async () => {
+    try {
+      setSavingLimit(true);
+      const res = await fetch("/api/dompet/limit", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ limit: newLimit }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Gagal mengubah limit");
+      
+      setIsEditingLimit(false);
+      fetchDompet();
+    } catch (err: any) {
+      alert(err.message);
+    } finally {
+      setSavingLimit(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -145,9 +171,33 @@ export default function KartuJajanPage() {
               Rp {Number(dompet.saldo).toLocaleString("id-ID")}
             </h2>
             <div className="flex flex-wrap items-center gap-3 mt-4">
-              <span className="px-3 py-1 bg-white/10 backdrop-blur-sm rounded-lg text-xs font-bold border border-white/20">
-                Limit Harian: Rp {Number(dompet.batas_jajan_harian).toLocaleString("id-ID")}
-              </span>
+              {isEditingLimit ? (
+                <div className="flex items-center gap-2 bg-white/20 p-1.5 rounded-xl">
+                  <span className="text-sm font-bold ml-2">Rp</span>
+                  <input
+                    type="number"
+                    value={newLimit}
+                    onChange={(e) => setNewLimit(Number(e.target.value))}
+                    className="w-24 bg-transparent border-b border-white/50 text-white font-bold outline-hidden focus:border-white"
+                  />
+                  <button onClick={handleSaveLimit} disabled={savingLimit} className="p-1.5 bg-green-500 hover:bg-green-600 rounded-lg text-white">
+                    {savingLimit ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                  </button>
+                  <button onClick={() => setIsEditingLimit(false)} className="p-1.5 bg-red-500 hover:bg-red-600 rounded-lg text-white">
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <span className="px-3 py-1 bg-white/10 backdrop-blur-sm rounded-lg text-xs font-bold border border-white/20">
+                    Limit Harian: Rp {Number(dompet.batas_jajan_harian).toLocaleString("id-ID")}
+                  </span>
+                  <button onClick={() => { setIsEditingLimit(true); setNewLimit(Number(dompet.batas_jajan_harian)); }} className="p-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors" title="Ubah Limit Jajan">
+                    <Edit2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              )}
+              
               <span className={`px-3 py-1 rounded-lg text-xs font-bold border ${dompet.status === "AKTIF" ? "bg-green-500/20 text-green-200 border-green-500/30" : "bg-red-500/20 text-red-200 border-red-500/30"}`}>
                 Status: {dompet.status}
               </span>
