@@ -166,8 +166,19 @@ export async function POST(request: NextRequest) {
 
       biaya = inputJumlah;
 
+      // Ambil total pembayaran daftar ulang yang sudah diverifikasi sebelumnya
+      const existingPayments = await prisma.pembayaran.findMany({
+        where: {
+          pendaftar_id: session.id,
+          jenis_pembayaran: "DAFTAR_ULANG",
+          status_pembayaran: "verified"
+        }
+      });
+      const totalPaid = existingPayments.reduce((acc, p) => acc + Number(p.jumlah), 0);
+      const totalAccumulated = totalPaid + biaya;
+
       // Tentukan Tipe Cicilan
-      if (biaya >= expectedTagihanDaftarUlang) {
+      if (totalAccumulated >= expectedTagihanDaftarUlang) {
         tipeCicilan = "LUNAS";
       } else if (biaya >= (expectedTagihanDaftarUlang / 2)) {
         tipeCicilan = "CICIL_50_LEBIH";
