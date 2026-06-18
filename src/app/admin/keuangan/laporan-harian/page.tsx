@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Printer, Calendar, Search, FileText, CheckCircle2, TrendingUp } from "lucide-react";
 
 export default function LaporanHarianPage() {

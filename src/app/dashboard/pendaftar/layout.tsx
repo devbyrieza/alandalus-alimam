@@ -184,7 +184,7 @@ export default function DashboardLayout({
     },
     {
       name: "Keuangan (ZAD)",
-      href: "/dashboard/pendaftar/keuangan",
+      href: "http://localhost:3001/wali-santri",
       tabName: "kartu-jajan" as TabName, // still using the same access control rule internally
       icon: HandCoins,
       active: pathname === "/dashboard/pendaftar/keuangan",
