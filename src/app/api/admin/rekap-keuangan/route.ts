@@ -52,30 +52,6 @@ export async function GET(request: NextRequest) {
           {
             status_pendaftaran: { in: ["accepted", "announced", "cadangan", "passed", "enrolled"] },
           },
-          {
-            tipe_pendaftaran: "PINDAHAN",
-          },
-          {
-            nama_lengkap: { contains: "Fariq Malaibui", mode: "insensitive" },
-          },
-          {
-            nama_lengkap: { contains: "Asrorin", mode: "insensitive" },
-          },
-          {
-            nama_lengkap: { contains: "Azka Panji", mode: "insensitive" },
-          },
-          {
-            nama_lengkap: { contains: "Fazril", mode: "insensitive" },
-          },
-          {
-            nama_lengkap: { contains: "Muhammad Rizky", mode: "insensitive" },
-          },
-          {
-            nama_lengkap: { contains: "M. Rizky", mode: "insensitive" },
-          },
-          {
-            nama_lengkap: { contains: "M Rizky", mode: "insensitive" },
-          },
         ],
       } as any,
       select: {
@@ -86,7 +62,6 @@ export async function GET(request: NextRequest) {
         no_hp: true,
         email: true,
         data_lengkap: true,
-        tipe_pendaftaran: true,
         updated_at: true,
         status_pendaftaran: true,
         nilai_ujian: {
@@ -113,11 +88,12 @@ export async function GET(request: NextRequest) {
         },
         pembayaran: {
           where: {
-            jenis_pembayaran: "DAFTAR_ULANG",
+            jenis_pembayaran: { in: ["DAFTAR_ULANG", "SPP"] } as any,
           },
           select: {
             id: true,
             jumlah: true,
+            jenis_pembayaran: true,
             status_pembayaran: true,
             metode_pembayaran: true,
             bukti_transfer_path: true,
@@ -135,14 +111,23 @@ export async function GET(request: NextRequest) {
 
     // 3. Transform Data
     const rekapData = students.map((student: any, index: number) => {
-      // Calculate Total Paid for Daftar Ulang (only verified payments)
+      // Calculate Total Paid for Daftar Ulang + SPP (only verified payments)
+      const verifiedDUPayments = student.pembayaran.filter(
+        (p: any) => p.status_pembayaran === "verified" && p.jenis_pembayaran === "DAFTAR_ULANG",
+      );
+      const verifiedSPPPayments = student.pembayaran.filter(
+        (p: any) => p.status_pembayaran === "verified" && p.jenis_pembayaran === "SPP",
+      );
       const verifiedPayments = student.pembayaran.filter(
         (p: any) => p.status_pembayaran === "verified",
       );
-      const totalBayar = verifiedPayments.reduce(
-        (sum: number, p: any) => sum + Number(p.jumlah),
-        0,
+      const totalBayarDU = verifiedDUPayments.reduce(
+        (sum: number, p: any) => sum + Number(p.jumlah), 0,
       );
+      const totalBayarSPP = verifiedSPPPayments.reduce(
+        (sum: number, p: any) => sum + Number(p.jumlah), 0,
+      );
+      const totalBayar = totalBayarDU + totalBayarSPP;
 
       // Fetch approved scholarship details from database or fallback from JSON
       const dataLengkap = (student.data_lengkap as any) || {};
@@ -153,6 +138,7 @@ export async function GET(request: NextRequest) {
         keringananJson.nominal_potongan ?? 
         0
       );
+      // requiredAmount = uang pangkal (setelah potongan) + SPP = 8.500.000 - potongan
       const requiredAmount = 8500000 - nominalPotongan;
 
       // Determine Status
@@ -201,24 +187,13 @@ export async function GET(request: NextRequest) {
       }
       const keringanan_reason = reasons.length > 0 ? reasons.join(" | ") : null;
 
-      const nameLower = student.nama_lengkap.toLowerCase();
-      const isSpecialStudent = nameLower.includes("fariq malaibui") || 
-                              nameLower.includes("asrorin") || 
-                              nameLower.includes("azka panji") ||
-                              nameLower.includes("fazril") ||
-                              nameLower.includes("muhammad rizky") ||
-                              nameLower.includes("m. rizky") ||
-                              nameLower.includes("m rizky");
-
       return {
         no: index + 1,
         id: student.id,
         nama: student.nama_lengkap,
         nomor_pendaftaran: student.nomor_pendaftaran,
         jenjang: student.jenjang || "-",
-        status_kelulusan: (["accepted", "passed", "enrolled"].includes(student.status_pendaftaran) || 
-                            student.tipe_pendaftaran === "PINDAHAN" || 
-                            isSpecialStudent)
+        status_kelulusan: ["accepted", "passed", "enrolled"].includes(student.status_pendaftaran)
           ? "DITERIMA"
           : (student.nilai_ujian[0]?.status_kelulusan || "LULUS"),
         total_bayar: totalBayar,
