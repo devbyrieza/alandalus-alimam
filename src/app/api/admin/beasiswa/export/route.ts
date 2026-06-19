@@ -14,7 +14,6 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    // Ambil semua pengajuan beasiswa yang disetujui (DISETUJUI)
     const listBeasiswa = await prisma.pengajuanBeasiswa.findMany({
       where: {
         status: "DISETUJUI"
@@ -32,18 +31,15 @@ export async function GET(req: NextRequest) {
       }
     });
 
-    // Klasifikasikan menjadi beasiswa full & keringanan potongan
     const beasiswaFull = listBeasiswa.filter(item => item.jenis_pengajuan === "BEASISWA_PRESTASI");
     const keringananPotongan = listBeasiswa.filter(item => item.jenis_pengajuan === "KERINGANAN_BIAYA");
 
-    // Buat Excel workbook
     const workbook = new ExcelJS.Workbook();
     workbook.creator = "PPDB Al-Andalus";
     workbook.created = new Date();
 
     const normalTotal = 8500000;
 
-    // Helper to extract parent details with fallback to data_lengkap JSON
     const getParentInfo = (item: any) => {
       const p = item.pendaftar;
       const ot = p?.orang_tua || {};
@@ -113,19 +109,15 @@ export async function GET(req: NextRequest) {
       };
     };
 
-    // Helper function to build sheet structure
     const buildSheet = (sheetName: string, dataList: typeof listBeasiswa, discountValue: number) => {
       const sheet = workbook.addWorksheet(sheetName);
 
-      // Set Page Setup
       sheet.pageSetup.orientation = "landscape";
       sheet.pageSetup.fitToPage = true;
 
-      // Styling Header Maroon (RGB: 128, 0, 0 / Maroon Al-Imam)
       const headerColor = "800000";
       const headerTextColor = "FFFFFF";
 
-      // 1. Title Row
       sheet.mergeCells("A1:O1");
       const titleCell = sheet.getCell("A1");
       titleCell.value = `LAPORAN PENERIMA ${sheetName.toUpperCase()} - PESANTREN AL-ANDALUS`;
@@ -133,7 +125,6 @@ export async function GET(req: NextRequest) {
       titleCell.alignment = { vertical: "middle", horizontal: "center" };
       sheet.getRow(1).height = 40;
 
-      // 2. Subtitle Row
       sheet.mergeCells("A2:O2");
       const subtitleCell = sheet.getCell("A2");
       subtitleCell.value = `Tahun Ajaran: 2026/2027 | Tanggal Ekspor: ${new Date().toLocaleDateString("id-ID")}`;
@@ -141,9 +132,8 @@ export async function GET(req: NextRequest) {
       subtitleCell.alignment = { vertical: "middle", horizontal: "center" };
       sheet.getRow(2).height = 20;
 
-      sheet.addRow([]); // Blank spacer
+      sheet.addRow([]);
 
-      // 3. Table Headers
       const headers = [
         "No", "No. Pendaftaran", "NIK Santri", "Nama Santri", "Jenjang", "No. HP Santri",
         "Nama Ayah", "Pekerjaan Ayah", "No. HP Ayah",
@@ -170,7 +160,6 @@ export async function GET(req: NextRequest) {
         };
       });
 
-      // 4. Populate Data
       dataList.forEach((item, index) => {
         const p = item.pendaftar;
         const info = getParentInfo(item);
@@ -185,7 +174,10 @@ export async function GET(req: NextRequest) {
         }
         
         const keringananJson = dl.keringanan_daftar_ulang || {};
-        const pot = Number(keringananJson.nominal_potongan ?? item.nominal_potongan ?? discountValue);
+        const potJson = keringananJson.potongan_uang_pangkal !== undefined || keringananJson.potongan_spp !== undefined 
+          ? Number(keringananJson.potongan_uang_pangkal || 0) + Number(keringananJson.potongan_spp || 0) 
+          : undefined;
+        const pot = Number(keringananJson.nominal_potongan ?? potJson ?? item.nominal_potongan ?? discountValue);
         const sisa = normalTotal - pot;
 
         const rowValues = [
@@ -218,7 +210,6 @@ export async function GET(req: NextRequest) {
             right: { style: "thin" }
           };
 
-          // Alignment logic
           if (colIndex === 1 || colIndex === 2 || colIndex === 5 || colIndex === 15) {
             cell.alignment = { vertical: "middle", horizontal: "center" };
           } else if (colIndex === 13 || colIndex === 14) {
@@ -230,11 +221,10 @@ export async function GET(req: NextRequest) {
         });
       });
 
-      // Adjust column widths
       sheet.columns.forEach((col, colIndex) => {
         let maxLen = 0;
         sheet.eachRow((row, rowIndex) => {
-          if (rowIndex > 3) { // Skip title and subtitle
+          if (rowIndex > 3) {
             const val = row.getCell(colIndex + 1).value;
             if (val) {
               const len = val.toString().length;
@@ -244,20 +234,15 @@ export async function GET(req: NextRequest) {
         });
         col.width = Math.max(maxLen + 4, 12);
       });
-      // Specific width fine-tuning
-      sheet.getColumn(1).width = 5;   // No
-      sheet.getColumn(4).width = 25;  // Nama Santri
-      sheet.getColumn(7).width = 22;  // Nama Ayah
-      sheet.getColumn(10).width = 22; // Nama Ibu
+      sheet.getColumn(1).width = 5;
+      sheet.getColumn(4).width = 25;
+      sheet.getColumn(7).width = 22;
+      sheet.getColumn(10).width = 22;
     };
 
-    // Build Sheet 1: Beasiswa Full
     buildSheet("Beasiswa Full", beasiswaFull, 7500000);
-
-    // Build Sheet 2: Keringanan Potongan
     buildSheet("Keringanan Potongan", keringananPotongan, 1500000);
 
-    // Generate buffer
     const buffer = await workbook.xlsx.writeBuffer();
 
     logAdminAction({
