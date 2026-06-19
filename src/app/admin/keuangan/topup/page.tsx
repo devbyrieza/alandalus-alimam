@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Search, Wallet, CheckCircle2, Loader2, RefreshCcw, History, Plus } from "lucide-react";
+import { Search, Wallet, CheckCircle2, Loader2, RefreshCcw, History, Plus, XCircle } from "lucide-react";
 
 interface Dompet {
   id: string;

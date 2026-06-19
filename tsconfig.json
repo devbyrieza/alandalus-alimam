@@ -38,6 +38,11 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "update-photos.ts",
+    "check-restored-users.ts",
+    "check_prod_users.ts",
+    "get-demo-data.ts",
+    "test-nilai.ts"
   ]
 }

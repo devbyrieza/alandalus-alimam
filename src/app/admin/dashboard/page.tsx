@@ -104,7 +104,7 @@ export default function DashboardEksekutifPage() {
                 <Tooltip 
                   cursor={{ fill: '#f1f5f9' }} 
                   contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-                  formatter={(value: number) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(value)}
+                  formatter={(value: any) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(Number(value))}
                 />
                 <Legend iconType="circle" wrapperStyle={{ paddingTop: '20px' }} />
                 <Bar dataKey="spp" name="Penerimaan SPP" fill="#850000" radius={[4, 4, 0, 0]} barSize={30} />
@@ -130,13 +130,13 @@ export default function DashboardEksekutifPage() {
                   dataKey="value"
                   stroke="none"
                 >
-                  {sppStatusData.map((entry, index) => (
+                  {sppStatusData.map((entry: any, index: number) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
                 <Tooltip 
                   contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-                  formatter={(value: number) => [`${value} Santri`, 'Total']}
+                  formatter={(value: any) => [`${value} Santri`, 'Total']}
                 />
               </PieChart>
             </ResponsiveContainer>
@@ -148,7 +148,7 @@ export default function DashboardEksekutifPage() {
           </div>
           
           <div className="mt-4 space-y-3">
-            {sppStatusData.map(item => (
+            {sppStatusData.map((item: any) => (
               <div key={item.name} className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></div>
