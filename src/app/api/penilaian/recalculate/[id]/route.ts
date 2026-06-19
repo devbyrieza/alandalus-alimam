@@ -37,7 +37,17 @@ export async function POST(
       );
     }
 
-    const result = await recalculateNilaiUjian(pendaftarId);
+    let overrideStatus: string | undefined;
+    try {
+      const body = await _request.json();
+      if (body && body.overrideStatus) {
+        overrideStatus = body.overrideStatus;
+      }
+    } catch (e) {
+      // Body might be empty or invalid JSON, ignore
+    }
+
+    const result = await recalculateNilaiUjian(pendaftarId, overrideStatus);
 
     return NextResponse.json({
       success: true,
