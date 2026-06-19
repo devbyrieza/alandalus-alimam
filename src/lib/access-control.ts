@@ -73,7 +73,6 @@ export type TabName =
   | "pengumuman"
   | "daftar-ulang"
   | "ukuran-seragam"
-  | "kartu-jajan"
   | "profil";
 
 export const STEP_REQUIREMENTS: Record<TabName, { minimumStatus: StatusProses | null; label: string; description: string; }> = {
@@ -88,7 +87,6 @@ export const STEP_REQUIREMENTS: Record<TabName, { minimumStatus: StatusProses | 
   pengumuman: { minimumStatus: "announced", label: "Pengumuman", description: "Selesaikan semua tahapan seleksi terlebih dahulu" },
   "daftar-ulang": { minimumStatus: "accepted", label: "Daftar Ulang", description: "Hanya tersedia bagi pendaftar yang diterima" },
   "ukuran-seragam": { minimumStatus: "enrolled", label: "Ukuran Seragam", description: "Hanya tersedia bagi pendaftar yang telah melakukan daftar ulang" },
-  "kartu-jajan": { minimumStatus: "accepted", label: "Kartu Jajan", description: "Akses Dompet Santri" },
 };
 
 export function canAccessTab(tabName: TabName, statusProses: StatusProses): boolean {
@@ -267,7 +265,8 @@ export function getMenuItemsForRole(role: UserRole) {
       { name: "Verifikasi Pembayaran", href: "/dashboard/admin/verifikasi-pembayaran", icon: "CreditCard" },
       { name: "Rekap Seragam", href: "/dashboard/admin/seragam", icon: "Shirt" },
       { name: "Manajemen Jadwal", href: "/dashboard/admin/jadwal/monitoring", icon: "Calendar" },
-      { name: "Review Beasiswa", href: "/dashboard/admin/beasiswa", icon: "Trophy" },
+      { name: "Penilaian", href: "/dashboard/admin/penilaian", icon: "ClipboardEdit" },
+      { name: "Bantuan Biaya", href: "/dashboard/admin/beasiswa", icon: "Trophy" },
     ],
     admin_super: [
       { name: "Dashboard", href: "/dashboard/admin", icon: "LayoutDashboard" },
@@ -275,7 +274,8 @@ export function getMenuItemsForRole(role: UserRole) {
       { name: "Rekap Keuangan", href: "/dashboard/admin/keuangan", icon: "Landmark", group: "OPERASIONAL" },
       { name: "Rekap Seragam", href: "/dashboard/admin/seragam", icon: "Shirt", group: "OPERASIONAL" },
       { name: "Manajemen Jadwal", href: "/dashboard/admin/jadwal/monitoring", icon: "Calendar", group: "OPERASIONAL" },
-      { name: "Review Beasiswa", href: "/dashboard/admin/beasiswa", icon: "Trophy", group: "OPERASIONAL" },
+      { name: "Bantuan Biaya", href: "/dashboard/admin/beasiswa", icon: "Trophy", group: "OPERASIONAL" },
+      { name: "Penilaian", href: "/dashboard/admin/penilaian", icon: "ClipboardEdit", group: "HASIL SELEKSI" },
       { name: "Rekap Nilai & Kelulusan", href: "/dashboard/admin/audit-seleksi", icon: "Activity", group: "HASIL SELEKSI" },
       { name: "Broadcast WA", href: "/dashboard/admin/broadcast", icon: "Zap", group: "KOMUNIKASI" },
       { name: "Manajemen User", href: "/dashboard/admin/users", icon: "UserCog", group: "SISTEM" },
