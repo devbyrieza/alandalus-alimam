@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 
 import { Button } from "@/components/ui/button";
 import Swal from "sweetalert2";
@@ -1453,7 +1454,7 @@ export default function ExaminerDashboard() {
       )}
 
       {/* Custom Modal for Assign Examiner (PLOT) */}
-      {assignStudent && (
+      {assignStudent && typeof document !== "undefined" && createPortal(
         <div
           className="fixed inset-0 overflow-y-auto p-4"
           style={{ zIndex: 99999 }}
@@ -1558,10 +1559,10 @@ export default function ExaminerDashboard() {
             </div>
           </div>
         </div>
-      )}
+      ), document.body)}
 
       {/* Custom Modal for Input Nilai */}
-      {selectedStudent && (
+      {selectedStudent && typeof document !== "undefined" && createPortal(
         <div
           className="fixed inset-0 overflow-y-auto p-4"
           style={{ zIndex: 99999 }}
@@ -1777,7 +1778,7 @@ export default function ExaminerDashboard() {
             </div>
           </div>
         </div>
-      )}
+      ), document.body)}
     </div>
   );
 }
