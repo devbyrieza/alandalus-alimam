@@ -54,7 +54,7 @@ export default function SmoothScrollProvider({
     if (document.body) {
       resizeObserver.observe(document.body);
     }
-
+  
     // Delayed initial resize to ensure hydration layout is complete
     const initialResizeTimeout = setTimeout(() => {
       lenis.resize();
@@ -89,7 +89,7 @@ export default function SmoothScrollProvider({
           height: auto;
         }
 
-        .lenis.lenis-smooth {
+        .lenis.lenis-smooth { 
           scroll-behavior: auto !important;
         }
 
