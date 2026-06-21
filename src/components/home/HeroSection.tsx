@@ -134,10 +134,10 @@ export default function HeroSection() {
                   fontSize: "clamp(2rem, 5vw + 0.75rem, 5rem)",
                 }}
               >
-                <span className="block" style={{ color: "var(--color-maroon-700)" }}>
+                <span className="block text-ink-950">
                   Kaderisasi Ummat
                 </span>
-                <span className="block mt-1" style={{ color: "var(--color-cream-600)" }}>
+                <span className="block mt-1 gradient-text-maroon">
                   Hanif, Kontributif, <br className="hidden sm:block" />
                   dan Adaptif
                 </span>
