@@ -276,7 +276,7 @@ function SupportCenter() {
               Pusat Bantuan PPDB
             </span>
           </div>
-          <h3 className="font-black text-3xl md:text-4xl lg:text-3xl md:text-5xl font-display leading-tight">
+          <h3 className="font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display leading-tight">
             Bingung Harus Ke Mana? <br />
             <span className="text-gold-400">Tanya Panitia Yuk!</span>
           </h3>
