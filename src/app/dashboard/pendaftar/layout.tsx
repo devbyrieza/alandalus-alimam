@@ -202,10 +202,28 @@ export default function DashboardLayout({
     },
   ];
 
+  // Daftar nomor pendaftaran santri yang mendapat akses khusus ke menu Ukuran Seragam
+  // meskipun status mereka belum mencapai "Diterima"
+  const SERAGAM_BYPASS_LIST = [
+    "ILA2600019", // Abdurrahim Pati Raja
+    "ILA2600016", // Fanni Hariri Hamonangan
+    "ILA2600017", // Hibban Hibaturrahman
+    "MTA2600020", // M Fazril Alkais
+    "MTA2600022", // Muh Asrorin Da Silva
+    "MTA2600021", // Azka Panji Kusuma
+    "ILA2600014", // Muhammad Rizky
+  ];
+
   // Function untuk cek apakah tab bisa diakses
   const isTabAccessible = (tabName: TabName) => {
     // SPECIAL BYPASS FOR TESTING ACCOUNT: RIEZA TES
     if (nomorPendaftaran === "ILI2600007") return true;
+
+    // SPECIAL BYPASS: Santri tertentu mendapat akses ke menu Ukuran Seragam
+    // meski status belum "Diterima" (by request admin - 27 Jun 2026)
+    if (tabName === "ukuran-seragam" && SERAGAM_BYPASS_LIST.includes(nomorPendaftaran)) {
+      return true;
+    }
 
     return canAccessTab(tabName, statusProses);
   };
