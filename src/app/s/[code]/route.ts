@@ -42,6 +42,8 @@ export async function GET(req: Request, { params }: { params: Promise<{ code: st
     
     if (targetQuery === "jadwal") {
       redirectPath = "/dashboard/pendaftar/jadwal";
+    } else if (targetQuery === "welcome") {
+      redirectPath = "/dashboard/pendaftar/welcome-day";
     }
     // Add more types here in the future if needed
 

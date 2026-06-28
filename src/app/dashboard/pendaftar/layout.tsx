@@ -187,6 +187,13 @@ export default function DashboardLayout({
       active: pathname === "/dashboard/pendaftar/seragam",
     },
     {
+      name: "Welcome Day",
+      href: "/dashboard/pendaftar/welcome-day",
+      tabName: "welcome-day" as TabName,
+      icon: Calendar,
+      active: pathname === "/dashboard/pendaftar/welcome-day",
+    },
+    {
       name: "Keuangan (ZAD)",
       href: "http://localhost:3001/wali-santri",
       tabName: "kartu-jajan" as TabName, // still using the same access control rule internally
