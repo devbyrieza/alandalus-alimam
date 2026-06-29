@@ -269,6 +269,7 @@ export function getMenuItemsForRole(role: UserRole) {
       { name: "Manajemen Jadwal", href: "/dashboard/admin/jadwal/monitoring", icon: "Calendar" },
       { name: "Penilaian", href: "/dashboard/admin/penilaian", icon: "ClipboardEdit" },
       { name: "Bantuan Biaya", href: "/dashboard/admin/beasiswa", icon: "Trophy" },
+      { name: "Arsip Surat", href: "/dashboard/admin/arsip-surat", icon: "Mail" },
     ],
     admin_super: [
       { name: "Dashboard", href: "/dashboard/admin", icon: "LayoutDashboard" },
@@ -281,6 +282,7 @@ export function getMenuItemsForRole(role: UserRole) {
       { name: "Penilaian", href: "/dashboard/admin/penilaian", icon: "ClipboardEdit", group: "HASIL SELEKSI" },
       { name: "Rekap Nilai & Kelulusan", href: "/dashboard/admin/audit-seleksi", icon: "Activity", group: "HASIL SELEKSI" },
       { name: "Broadcast WA", href: "/dashboard/admin/broadcast", icon: "Zap", group: "KOMUNIKASI" },
+      { name: "Arsip Surat", href: "/dashboard/admin/arsip-surat", icon: "Mail", group: "KOMUNIKASI" },
       { name: "Manajemen User", href: "/dashboard/admin/users", icon: "UserCog", group: "SISTEM" },
       { name: "Statistik Wilayah", href: "/dashboard/admin/statistik-wilayah", icon: "Map", group: "SISTEM" },
       { name: "Pengaturan", href: "/dashboard/admin/pengaturan", icon: "Settings", group: "SISTEM" },

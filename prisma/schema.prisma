@@ -43,6 +43,7 @@ model Profile {
   reservasi_approved     ReservasiPSB[]        @relation("ReservasiApprovedBy")
   TransaksiDompet        TransaksiDompet[]
   PerizinanSantri        PerizinanSantri[]
+  surat_keluar           SuratKeluar[]     @relation("SuratDibuatOleh")
 
   @@map("profiles")
 }
@@ -786,4 +787,57 @@ model PerizinanSantri {
   pemberi_izin Profile   @relation(fields: [pemberi_izin_id], references: [id])
 
   @@map("perizinan_santri")
+}
+
+// ─── E-OFFICE: ARSIP SURAT KELUAR ───────────────────────────────────────────
+
+enum JenisSurat {
+  UND  // Undangan
+  PMB  // Pemberitahuan / Edaran
+  PENG // Pengumuman
+  SK   // Surat Keputusan
+  KET  // Surat Keterangan
+  ST   // Surat Tugas
+}
+
+enum KodeDivisi {
+  TU   // Tata Usaha
+  KS   // Kesantrian / Pengasuhan
+  AK   // Akademik / Kurikulum
+  KU   // Keuangan
+  PSB  // Panitia Penerimaan Santri Baru
+}
+
+enum StatusSurat {
+  DRAFT
+  PUBLISHED
+}
+
+model SuratKeluar {
+  id              String      @id @default(uuid()) @db.Uuid
+  nomor_urut      Int         // Nomor urut dalam satu tahun ajaran (reset tiap Juli)
+  nomor_surat     String      @unique // Format: 001/UND/TU/PP-AI/VI/2026
+  jenis_surat     JenisSurat
+  kode_divisi     KodeDivisi
+  judul           String
+  perihal         String
+  isi_singkat     String?     @db.Text
+  tanggal_surat   DateTime    @db.Date
+  bulan_romawi    String      // I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII
+  tahun           Int
+  tahun_ajaran    String      // e.g. "2026/2027"
+  status          StatusSurat @default(DRAFT)
+  file_path       String?     // URL ke file PDF (Supabase Storage / local)
+  file_name       String?
+  penerima        String?     // Ditujukan kepada (opsional)
+  dibuat_oleh     String?     @db.Uuid
+  published_at    DateTime?   @db.Timestamptz(6)
+  created_at      DateTime    @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime    @default(now()) @db.Timestamptz(6)
+
+  pembuat         Profile?    @relation("SuratDibuatOleh", fields: [dibuat_oleh], references: [id])
+
+  @@index([tahun_ajaran, nomor_urut])
+  @@index([status, tanggal_surat])
+  @@map("surat_keluar")
 }

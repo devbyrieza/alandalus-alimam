@@ -15,7 +15,7 @@ import {
 import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 import { BRANDING } from "@/config/branding";
-
+ 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 

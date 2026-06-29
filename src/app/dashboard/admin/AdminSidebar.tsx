@@ -39,6 +39,7 @@ import {
   Shuffle,
   Shirt,
   Wallet,
+  Mail,
 } from "lucide-react";
 
 // ─── CONFIG & UTILS ───
@@ -77,6 +78,7 @@ const ICON_MAP: Record<string, any> = {
   Shuffle,
   Shirt,
   Wallet,
+  Mail,
 };
 
 interface AdminSidebarProps {
