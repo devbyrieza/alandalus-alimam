@@ -171,13 +171,12 @@ export function formatStatusDisplay(status: StatusProses) {
 
 // ─── 5. ROLE-BASED ACCESS CONTROL (RBAC) ───
 
-export type UserRole = "pendaftar" | "admin_berkas" | "admin_keuangan" | "admin_tu" | "penguji" | "pewawancara_calsan" | "pewawancara_cawalsan" | "admin_super" | "admin" | "penguji_hafalan" | "penguji_bahasa_arab";
+export type UserRole = "pendaftar" | "admin_berkas" | "admin_keuangan" | "penguji" | "pewawancara_calsan" | "pewawancara_cawalsan" | "admin_super" | "admin" | "penguji_hafalan" | "penguji_bahasa_arab";
 
 export const ROLE_LABELS: Record<UserRole, string> = {
   pendaftar: "Pendaftar",
   admin_berkas: "Admin Berkas",
   admin_keuangan: "Admin Keuangan",
-  admin_tu: "Kepala TU (Tata Usaha)",
   penguji: "Penguji Al-Qur'an",
   pewawancara_calsan: "Pewawancara Calsan",
   pewawancara_cawalsan: "Pewawancara Cawalsan",
@@ -191,21 +190,19 @@ export const ROLE_PERMISSIONS: Record<UserRole, string[]> = {
   pendaftar: ["view_own_data", "edit_own_data", "upload_documents", "view_payment_status", "view_announcement"],
   admin_berkas: ["view_pendaftar_list", "verify_documents", "export_pendaftar_data"],
   admin_keuangan: ["view_pendaftar_list", "verify_payment", "view_financial_reports"],
-  admin_tu: ["manage_letters"],
   penguji: ["view_exam_schedule", "input_exam_scores"],
   pewawancara_calsan: ["view_exam_schedule", "input_exam_scores"],
   pewawancara_cawalsan: ["view_exam_schedule", "input_exam_scores"],
   penguji_hafalan: ["view_exam_schedule", "input_exam_scores"],
   penguji_bahasa_arab: ["view_exam_schedule", "input_exam_scores"],
-  admin_super: ["view_pendaftar_list", "view_dashboard_stats", "manage_users", "manage_settings", "manage_letters"],
-  admin: ["view_pendaftar_list", "verify_documents", "verify_payment", "input_exam_scores", "manage_letters"],
+  admin_super: ["view_pendaftar_list", "view_dashboard_stats", "manage_users", "manage_settings"],
+  admin: ["view_pendaftar_list", "verify_documents", "verify_payment", "input_exam_scores"],
 };
 
 export const DASHBOARD_ROUTES: Record<UserRole, string> = {
   pendaftar: "/dashboard/pendaftar",
   admin_berkas: "/dashboard/admin",
   admin_keuangan: "/dashboard/admin",
-  admin_tu: "/dashboard/admin",
   penguji: "/dashboard/penguji",
   pewawancara_calsan: "/dashboard/penguji",
   pewawancara_cawalsan: "/dashboard/penguji",
@@ -220,7 +217,7 @@ export function hasPermission(role: UserRole, permission: string): boolean {
 }
 
 export function isAdminRole(role: UserRole): boolean {
-  return ["admin_berkas", "admin_keuangan", "admin_tu", "admin_super", "admin"].includes(role);
+  return ["admin_berkas", "admin_keuangan", "admin_super", "admin"].includes(role);
 }
 
 // ─── 6. DYNAMIC MENU LOGIC ───
@@ -237,10 +234,6 @@ export function getMenuItemsForRole(role: UserRole) {
       { name: "Data Pendaftar", href: "/dashboard/admin/pendaftar", icon: "Users" },
       { name: "Verifikasi Pembayaran", href: "/dashboard/admin/verifikasi-pembayaran", icon: "CreditCard" },
       { name: "Rekap Keuangan", href: "/dashboard/admin/keuangan", icon: "BarChart" },
-    ],
-    admin_tu: [
-      { name: "Dashboard", href: "/dashboard/admin", icon: "LayoutDashboard" },
-      { name: "Arsip Surat", href: "/dashboard/admin/arsip-surat", icon: "Mail" },
     ],
     penguji: [
       { name: "Dashboard", href: "/dashboard/penguji", icon: "LayoutDashboard" },
@@ -276,7 +269,6 @@ export function getMenuItemsForRole(role: UserRole) {
       { name: "Manajemen Jadwal", href: "/dashboard/admin/jadwal/monitoring", icon: "Calendar" },
       { name: "Penilaian", href: "/dashboard/admin/penilaian", icon: "ClipboardEdit" },
       { name: "Bantuan Biaya", href: "/dashboard/admin/beasiswa", icon: "Trophy" },
-      { name: "Arsip Surat", href: "/dashboard/admin/arsip-surat", icon: "Mail" },
     ],
     admin_super: [
       { name: "Dashboard", href: "/dashboard/admin", icon: "LayoutDashboard" },
@@ -289,7 +281,6 @@ export function getMenuItemsForRole(role: UserRole) {
       { name: "Penilaian", href: "/dashboard/admin/penilaian", icon: "ClipboardEdit", group: "HASIL SELEKSI" },
       { name: "Rekap Nilai & Kelulusan", href: "/dashboard/admin/audit-seleksi", icon: "Activity", group: "HASIL SELEKSI" },
       { name: "Broadcast WA", href: "/dashboard/admin/broadcast", icon: "Zap", group: "KOMUNIKASI" },
-      { name: "Arsip Surat", href: "/dashboard/admin/arsip-surat", icon: "Mail", group: "KOMUNIKASI" },
       { name: "Manajemen User", href: "/dashboard/admin/users", icon: "UserCog", group: "SISTEM" },
       { name: "Statistik Wilayah", href: "/dashboard/admin/statistik-wilayah", icon: "Map", group: "SISTEM" },
       { name: "Pengaturan", href: "/dashboard/admin/pengaturan", icon: "Settings", group: "SISTEM" },
