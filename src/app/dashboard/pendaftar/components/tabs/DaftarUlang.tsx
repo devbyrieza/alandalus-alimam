@@ -503,7 +503,7 @@ export default function DaftarUlangTab() {
                       4222224441
                     </p>
                     <p className="text-xs font-bold text-primary-700/70 text-left italic">
-                      a.n PP Al Andalus Al Imam
+                      a.n PP Al Imam Al Islami
                     </p>
                   </div>
                   <button

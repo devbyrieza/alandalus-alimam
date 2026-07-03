@@ -1010,7 +1010,7 @@ Jazakumullahu khairan
 }
 
 export function buildMessageHasilTes(nama: string): string {
-    const cleanSchoolName = BRANDING.schoolShortName === "Al Andalus Al Imam" ? "Al-Andalus Al-Imam" : "Al-Andalus Ulul Albaab";
+    const cleanSchoolName = BRANDING.schoolShortName === "Al Imam Al Islami" ? "Al-Andalus Al-Imam" : "Al-Andalus Ulul Albaab";
     return `Assalamu'alaikum, Abu/Ummu *${nama}*.
 
 Alhamdulillah, hasil tes seleksi Ananda sudah tersedia.

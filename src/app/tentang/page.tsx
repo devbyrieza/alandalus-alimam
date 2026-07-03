@@ -38,7 +38,7 @@ export default function TentangPage() {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-primary-50 border border-primary-100 text-primary-700 text-xs font-bold uppercase tracking-widest mb-8 shadow-sm"
           >
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Mengenal Al Andalus Al Imam • Managed by Al Andalus IIBS</span>
+            <span>Mengenal Al Imam Al Islami • Managed by Al Andalus IIBS</span>
           </motion.div>
 
           <motion.h1
@@ -59,7 +59,7 @@ export default function TentangPage() {
             transition={{ delay: 0.2 }}
             className="text-base sm:text-lg md:text-xl text-ink-600 max-w-3xl mx-auto leading-relaxed font-medium mb-12 px-4"
           >
-            Pesantren Al Andalus Al Imam Sukabumi, cabang resmi Managed by Al Andalus IIBS.
+            Pesantren Al Imam Al Islami Sukabumi, cabang resmi Managed by Al Andalus IIBS.
             Memadukan intensitas Tahfidz Al-Qur'an dengan pengembangan jiwa Leadership untuk
             Kaderisasi Ummat Hanif, Kontributif, dan Adaptif. Tahun Ajaran 2026/2027 merupakan
             Angkatan Pertama (Era Baru) sejak dikelola oleh Al Andalus IIBS.
@@ -101,7 +101,7 @@ export default function TentangPage() {
           >
             <Image
               src="/images/welcome-selamat-datang.webp"
-              alt="Selamat Datang di Al Andalus Al Imam"
+              alt="Selamat Datang di Al Imam Al Islami"
               fill
               priority
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
@@ -126,7 +126,7 @@ export default function TentangPage() {
                 <div className="relative w-full h-full rounded-[2rem] md:rounded-[2.5rem] overflow-hidden">
                   <Image
                     src="/images/tentang.webp"
-                    alt="Pesantren Al Andalus Al Imam"
+                    alt="Pesantren Al Imam Al Islami"
                     fill
                     priority
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -188,7 +188,7 @@ export default function TentangPage() {
               >
                 <p>
                   <span className="text-ink-950 font-black">
-                    Pesantren Al Andalus Al Imam
+                    Pesantren Al Imam Al Islami
                   </span>{" "}
                   hadir sebagai babak baru dalam dunia pendidikan Islam di
                   Sukabumi. Sebagai cabang resmi dari{" "}
@@ -204,7 +204,7 @@ export default function TentangPage() {
                   serta barisan asatidzah yang kompeten di bidangnya.
                 </p>
                 <p>
-                  Mulai tahun 2026, Al Andalus Al Imam bertransformasi total untuk
+                  Mulai tahun 2026, Al Imam Al Islami bertransformasi total untuk
                   memberikan layanan pendidikan terbaik, mencakup hirarki
                   kepengurusan yang profesional, sistem pendidikan tahfidz
                   intensif, dan pengasuhan berbasis adab.
@@ -393,7 +393,7 @@ export default function TentangPage() {
             <div className="relative z-10 max-w-3xl mx-auto">
               <h2 className="text-3xl sm:text-2xl md:text-4xl md:text-5xl lg:text-6xl font-black mb-6 md:mb-8 text-white tracking-tight leading-[1.1]">
                 Mari Menjadi Bagian <br />
-                Keluarga <span className="text-secondary-300">Al Andalus Al Imam</span>
+                Keluarga <span className="text-secondary-300">Al Imam Al Islami</span>
               </h2>
               <p className="text-base md:text-lg lg:text-xl text-white/90 mb-8 md:mb-10 lg:mb-12 max-w-2xl mx-auto leading-relaxed font-medium px-2">
                 Daftarkan putra Anda sekarang dan persiapkan masa depan gemilang

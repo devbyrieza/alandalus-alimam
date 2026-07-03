@@ -90,7 +90,7 @@ export async function GET(request: Request) {
       );
 
       const lokasi =
-        jadwal.exam_session.location || "Pesantren Al Andalus Al Imam";
+        jadwal.exam_session.location || "Pesantren Al Imam Al Islami";
       const jenisUjian = jadwal.exam_session.title || "Seleksi Santri Baru";
 
       const message = buildMessageReminderH0(

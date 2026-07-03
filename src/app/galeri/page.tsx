@@ -91,7 +91,7 @@ export default function GaleriPage() {
             className="text-xl md:text-2xl text-ink-600 max-w-3xl mx-auto leading-relaxed font-medium"
           >
             Koleksi foto suasana, fasilitas, dan kegiatan santri di Pesantren Al
-            Andalus Al Imam.
+            Al Imam Al Islami.
           </motion.p>
         </Container>
       </section>

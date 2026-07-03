@@ -92,7 +92,7 @@ export default function TeachersSection() {
             </h2>
 
             <p className="section-subtitle lg:ml-0 text-justify lg:text-left mb-10 max-w-lg mx-auto lg:mx-0">
-              Pesantren Al Andalus Al Imam didukung oleh asatidzah profesional
+              Pesantren Al Imam Al Islami didukung oleh asatidzah profesional
               lulusan universitas terbaik dunia Islam serta pakar pendidikan
               nasional.
             </p>

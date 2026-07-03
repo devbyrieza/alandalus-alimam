@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
+import Image from "next/image";
 import {
   Loader2,
   Calendar,
@@ -304,6 +304,38 @@ export default function WelcomeDayPage() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* ─── DOKUMEN RESMI (DOWNLOAD) ─── */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <a
+          href="/documents/Surat_Undangan_Welcome_Day.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-3 bg-white hover:bg-primary-50 rounded-2xl p-4 border border-ink-100 hover:border-primary-200 transition-all shadow-sm group"
+        >
+          <div className="w-10 h-10 rounded-xl bg-primary-100 text-primary-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+            <Download className="w-5 h-5" />
+          </div>
+          <div>
+            <p className="font-black text-ink-900 text-sm group-hover:text-primary-800 transition-colors">Undangan Welcome Day</p>
+            <p className="text-xs text-ink-500 font-medium">Download surat undangan resmi</p>
+          </div>
+        </a>
+        <a
+          href="/documents/Surat_Pemberitahuan_Kedatangan.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-3 bg-white hover:bg-emerald-50 rounded-2xl p-4 border border-ink-100 hover:border-emerald-200 transition-all shadow-sm group"
+        >
+          <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+            <Download className="w-5 h-5" />
+          </div>
+          <div>
+            <p className="font-black text-ink-900 text-sm group-hover:text-emerald-800 transition-colors">Surat Pemberitahuan</p>
+            <p className="text-xs text-ink-500 font-medium">Informasi & tata tertib kedatangan</p>
+          </div>
+        </a>
       </div>
 
       {/* ─── PESAN SUKSES/ERROR ─── */}
@@ -819,6 +851,61 @@ export default function WelcomeDayPage() {
         </div>
       </div>
 
+      {/* ─── VISUAL GALLERY & INFOGRAFIS ─── */}
+      <div className="bg-white rounded-3xl border border-ink-100 shadow-sm overflow-hidden">
+        <div className="px-6 py-4 border-b border-ink-100 bg-emerald-50 flex items-center gap-3">
+          <div className="w-9 h-9 bg-emerald-100 rounded-xl flex items-center justify-center">
+            <Calendar className="w-5 h-5 text-emerald-700" />
+          </div>
+          <div>
+            <h2 className="font-black text-emerald-950 text-base">Infografis & Panduan Visual</h2>
+            <p className="text-xs text-emerald-600 font-bold">Panduan lengkap pelaksanaan Welcome Day</p>
+          </div>
+        </div>
+        <div className="p-6 space-y-6">
+          <div className="space-y-3">
+            <h3 className="font-black text-ink-900 text-lg flex items-center gap-2">
+              <span className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs">1</span>
+              Rundown Acara
+            </h3>
+            <div className="rounded-2xl overflow-hidden border-2 border-ink-100 shadow-sm relative w-full" style={{ aspectRatio: "16/9" }}>
+              <Image 
+                src="/images/welcome-day/rundown.png"
+                alt="Rundown Acara Welcome Day"
+                fill
+                className="object-contain bg-ink-50"
+              />
+            </div>
+          </div>
+          
+          <div className="space-y-3 pt-4 border-t border-ink-100">
+            <h3 className="font-black text-ink-900 text-lg flex items-center gap-2">
+              <span className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs">2</span>
+              Alur Kedatangan
+            </h3>
+            <div className="rounded-2xl overflow-hidden border-2 border-ink-100 shadow-sm relative w-full" style={{ aspectRatio: "16/9" }}>
+              <Image 
+                src="/images/welcome-day/alur_kedatangan.png"
+                alt="Alur Kedatangan Welcome Day"
+                fill
+                className="object-contain bg-ink-50"
+              />
+            </div>
+            <div className="flex justify-center mt-3">
+              <a 
+                href="/images/welcome-day/alur_kedatangan_banner.png" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs font-bold text-emerald-600 hover:text-emerald-700 hover:underline"
+              >
+                <Download className="w-3.5 h-3.5" />
+                Lihat Resolusi Penuh (Banner)
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* ─── FAQ ─── */}
       <div className="bg-white rounded-3xl border border-ink-100 shadow-sm overflow-hidden">
         <div className="px-6 py-4 border-b border-ink-100 bg-blue-50 flex items-center gap-3">
@@ -895,7 +982,7 @@ export default function WelcomeDayPage() {
       <div className="bg-primary-50 border border-primary-100 rounded-2xl px-5 py-4 flex items-start gap-3">
         <Heart className="w-5 h-5 text-primary-500 flex-shrink-0 mt-0.5" />
         <p className="text-xs text-primary-700 font-medium leading-relaxed">
-          Kami sangat antusias menyambut kehadiran putra/putri terbaik Anda di Pesantren kami. 
+          Kami sangat antusias menyambut kehadiran putra terbaik Anda di Pesantren kami. 
           Semoga proses adaptasi berjalan lancar dan santri baru dapat segera nyaman di lingkungan pesantren. 
           Jika ada kendala atau pertanyaan, jangan ragu untuk menghubungi panitia kami.
         </p>

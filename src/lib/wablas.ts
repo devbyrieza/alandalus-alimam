@@ -178,7 +178,7 @@ const TEMPLATES: Record<string, string> = {
 
 Assalamu'alaikum {{nama}},
 
-Alhamdulillah, pendaftaran Anda di Pesantren Al Andalus Al Imam telah berhasil!
+Alhamdulillah, pendaftaran Anda di Pesantren Al Imam Al Islami telah berhasil!
 
 📋 *Detail Pendaftaran:*
 • Nomor Pendaftaran: {{nomor_pendaftaran}}
@@ -195,7 +195,7 @@ Alhamdulillah, pendaftaran Anda di Pesantren Al Andalus Al Imam telah berhasil!
 Hubungi kami di {{kontak}}
 
 Jazakumullahu khairan,
-Panitia PPDB Al Andalus Al Imam`,
+Panitia PPDB Al Imam Al Islami`,
 
   // Dokumen diverifikasi - Approved
   document_verified: `✅ *Dokumen Diverifikasi*
@@ -213,7 +213,7 @@ Silakan pilih jadwal seleksi masuk melalui dashboard Anda (Menu Jadwal Seleksi).
 Dashboard: {{dashboard_url}}
 
 Jazakumullahu khairan,
-Panitia PPDB Al Andalus Al Imam`,
+Panitia PPDB Al Imam Al Islami`,
 
   // Dokumen ditolak
   document_rejected: `❌ *Dokumen Perlu Diperbaiki*
@@ -237,7 +237,7 @@ Mohon maaf, dokumen Anda perlu diperbaiki.
 Hubungi kami di {{kontak}}
 
 Jazakumullahu khairan,
-Panitia PPDB Al Andalus Al Imam`,
+Panitia PPDB Al Imam Al Islami`,
 
   // Pembayaran diverifikasi - Approved
   payment_verified: `✅ *Pembayaran Diterima*
@@ -258,7 +258,7 @@ Setelah data lengkap, Anda bisa memilih jadwal tes.
 Dashboard: {{dashboard_url}}
 
 Jazakumullahu khairan,
-Panitia PPDB Al Andalus Al Imam`,
+Panitia PPDB Al Imam Al Islami`,
 
   // Pembayaran ditolak
   payment_rejected: `❌ *Pembayaran Perlu Diperbaiki*
@@ -279,7 +279,7 @@ Mohon maaf, bukti pembayaran Anda perlu diperbaiki.
 Hubungi kami di {{kontak}}
 
 Jazakumullahu khairan,
-Panitia PPDB Al Andalus Al Imam`,
+Panitia PPDB Al Imam Al Islami`,
 
   // Reminder deadline
   deadline_reminder: `⏰ *Pengingat Deadline*
@@ -299,7 +299,7 @@ Ini adalah pengingat bahwa deadline {{jenis_deadline}} akan berakhir pada:
 Dashboard: {{dashboard_url}}
 
 Jazakumullahu khairan,
-Panitia PPDB Al Andalus Al Imam`,
+Panitia PPDB Al Imam Al Islami`,
 
   // Jadwal seleksi masuk
   test_schedule: `📅 *Jadwal seleksi masuk*
@@ -324,14 +324,14 @@ Berikut jadwal seleksi masuk Anda:
 Dashboard: {{dashboard_url}}
 
 Jazakumullahu khairan,
-Panitia PPDB Al Andalus Al Imam`,
+Panitia PPDB Al Imam Al Islami`,
 
   // Pengumuman kelulusan - Diterima
   announcement_accepted: `🎉 *SELAMAT! Anda DITERIMA*
 
 Assalamu'alaikum {{nama}},
 
-Alhamdulillah, kami dengan senang hati mengumumkan bahwa Anda *DITERIMA* di Pesantren Al Andalus Al Imam!
+Alhamdulillah, kami dengan senang hati mengumumkan bahwa Anda *DITERIMA* di Pesantren Al Imam Al Islami!
 
 📋 *Detail:*
 • Jenjang: {{jenjang}}
@@ -344,17 +344,17 @@ Alhamdulillah, kami dengan senang hati mengumumkan bahwa Anda *DITERIMA* di Pesa
 
 Dashboard: {{dashboard_url}}
 
-Selamat bergabung di keluarga besar Al Andalus Al Imam! 🎓
+Selamat bergabung di keluarga besar Al Imam Al Islami! 🎓
 
 Jazakumullahu khairan,
-Panitia PPDB Al Andalus Al Imam`,
+Panitia PPDB Al Imam Al Islami`,
 
   // Pengumuman kelulusan - Cadangan
   announcement_reserve: `📋 *PENGUMUMAN HASIL SELEKSI*
 
 Assalamu'alaikum {{nama}},
 
-Berdasarkan hasil seleksi PPDB Pesantren Al Andalus Al Imam, kami informasikan bahwa Anda dinyatakan *CADANGAN*.
+Berdasarkan hasil seleksi PPDB Pesantren Al Imam Al Islami, kami informasikan bahwa Anda dinyatakan *CADANGAN*.
 
 📋 *Detail:*
 • Jenjang: {{jenjang}}
@@ -367,14 +367,14 @@ Pantau terus dashboard Anda untuk update terbaru.
 Dashboard: {{dashboard_url}}
 
 Jazakumullahu khairan,
-Panitia PPDB Al Andalus Al Imam`,
+Panitia PPDB Al Imam Al Islami`,
 
   // Pengumuman kelulusan - Ditolak
   announcement_rejected: `📋 *PENGUMUMAN HASIL SELEKSI*
 
 Assalamu'alaikum {{nama}},
 
-Berdasarkan hasil seleksi PPDB Pesantren Al Andalus Al Imam, kami informasikan bahwa Anda *BELUM DITERIMA* pada periode ini.
+Berdasarkan hasil seleksi PPDB Pesantren Al Imam Al Islami, kami informasikan bahwa Anda *BELUM DITERIMA* pada periode ini.
 
 📋 *Detail:*
 • Jenjang: {{jenjang}}
@@ -383,7 +383,7 @@ Berdasarkan hasil seleksi PPDB Pesantren Al Andalus Al Imam, kami informasikan b
 Kami mengapresiasi semangat dan usaha Anda. Semoga dimudahkan jalannya untuk menuntut ilmu di manapun.
 
 Jazakumullahu khairan,
-Panitia PPDB Al Andalus Al Imam`,
+Panitia PPDB Al Imam Al Islami`,
 
   // Google Form Link
   google_form_link: `📝 *LINK FORMULIR TAMBAHAN*
@@ -402,7 +402,7 @@ Pastikan mengisi dengan data yang benar dan lengkap.
 Dashboard: {{dashboard_url}}
 
 Jazakumullahu khairan,
-Panitia PPDB Al Andalus Al Imam`,
+Panitia PPDB Al Imam Al Islami`,
 
   // Zoom/Online Meeting Link
   zoom_meeting: `🎥 *UNDANGAN TES ONLINE*
@@ -424,7 +424,7 @@ Berikut jadwal {{jenis_ujian}} secara online:
 Dashboard: {{dashboard_url}}
 
 Jazakumullahu khairan,
-Panitia PPDB Al Andalus Al Imam`,
+Panitia PPDB Al Imam Al Islami`,
 
   // Data Lengkap -> Unlock Upload Berkas
   data_complete: `✅ *DATA LENGKAP*
@@ -441,14 +441,14 @@ Silakan login ke dashboard dan unggah dokumen yang diperlukan (KK, Akta, dll).
 Dashboard: {{dashboard_url}}
 
 Jazakumullahu khairan,
-Panitia PPDB Al Andalus Al Imam`,
+Panitia PPDB Al Imam Al Islami`,
 
   // Semua Ujian Selesai
   all_exams_complete: `🎉 *RANGKAIAN SELEKSI SELESAI*
 
 Assalamu'alaikum {{nama}},
 
-Alhamdulillah, Anda telah menyelesaikan seluruh rangkaian ujian/seleksi masuk Pesantren Al Andalus Al Imam.
+Alhamdulillah, Anda telah menyelesaikan seluruh rangkaian ujian/seleksi masuk Pesantren Al Imam Al Islami.
 
 🔐 *Status Terkini:*
 Halaman Pengumuman Hasil Seleksi kini telah terbuka di dashboard Anda.
@@ -459,7 +459,7 @@ Pengumuman kelulusan belum tersedia saat ini. Mohon menunggu update selanjutnya 
 Dashboard: {{dashboard_url}}
 
 Jazakumullahu khairan,
-Panitia PPDB Al Andalus Al Imam`,
+Panitia PPDB Al Imam Al Islami`,
 };
 
 // ============================================

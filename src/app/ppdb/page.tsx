@@ -241,7 +241,7 @@ function PPDBContent() {
               transition={{ delay: 0.2 }}
               className="text-xl md:text-2xl text-ink-600 max-w-3xl mx-auto leading-relaxed font-medium mb-10"
             >
-              Bergabunglah dengan Pesantren Al Andalus Al Imam. Lingkungan yang
+              Bergabunglah dengan Pesantren Al Imam Al Islami. Lingkungan yang
               kondusif untuk mencetak Hafidz Qur'an yang berwawasan luas dan
               berakhlak mulia.
             </motion.p>
@@ -540,7 +540,7 @@ function PPDBContent() {
                   {[
                     {
                       q: "Apakah santri wajib asrama?",
-                      a: "Ya, seluruh santri di Pesantren Al Andalus Al Imam wajib tinggal di asrama untuk mengikuti seluruh rangkaian kegiatan tarbiyah, halaqah tahfidz, dan pembelajaran kitab turots secara maksimal.",
+                      a: "Ya, seluruh santri di Pesantren Al Imam Al Islami wajib tinggal di asrama untuk mengikuti seluruh rangkaian kegiatan tarbiyah, halaqah tahfidz, dan pembelajaran kitab turots secara maksimal.",
                     },
                     {
                       q: "Kapan batas akhir pendaftaran?",

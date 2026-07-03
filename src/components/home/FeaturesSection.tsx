@@ -143,7 +143,7 @@ export default function FeaturesSection() {
                     <p className="text-xs leading-tight text-ink-500 font-medium">
                       Dimulainya Sejarah Baru <br />
                       <span className="text-primary-700 font-bold block mt-1">
-                        Pesantren Al Andalus Al Imam
+                        Pesantren Al Imam Al Islami
                       </span>
                     </p>
                   </div>

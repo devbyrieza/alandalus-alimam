@@ -78,7 +78,7 @@ interface PaymentStatusResponse {
 const BANK_INFO = {
   nama_bank: "BSI (Bank Syariah Indonesia)",
   nomor_rekening: "4222224441",
-  atas_nama: "PP Al Andalus Al Imam",
+  atas_nama: "PP Al Imam Al Islami",
   kode_bank: "451",
 };
 
