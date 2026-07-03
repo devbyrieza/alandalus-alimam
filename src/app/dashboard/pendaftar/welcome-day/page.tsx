@@ -812,7 +812,7 @@ export default function WelcomeDayPage() {
               </div>
               <div>
                 <p className="text-base font-black text-amber-950">Bongkar Muat Barang</p>
-                <p className="text-sm text-amber-700/80 mt-1 leading-relaxed">Santri berkendaraan pribadi <strong>dilarang</strong> menurunkan barang hingga acara selesai. Jika tanpa kendaraan, barang ditaruh di area masjid.</p>
+                <p className="text-sm text-amber-700/80 mt-1 leading-relaxed">Begitu tiba, santri dan wali santri <strong>langsung menurunkan barang bawaan</strong> sebelum mobil diarahkan ke area parkir.</p>
               </div>
             </div>
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 border border-amber-100 hover:border-amber-300 hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex gap-4 group">
