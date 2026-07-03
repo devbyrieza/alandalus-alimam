@@ -48,7 +48,7 @@ export async function POST(req: Request) {
 
     const pendaftarId = session.id;
     const body = await req.json();
-    const { statusKehadiran, jumlahPendamping, totalPengantar, catatanTambahan } = body;
+    const { statusKehadiran, jumlahPendamping, totalPengantar, catatanTambahan, jumlahMobil = 0, jumlahMotor = 0 } = body;
 
     // Pastikan pendaftar ada dan sudah diterima/daftar ulang
     const pendaftar = await prisma.pendaftar.findUnique({
@@ -82,6 +82,8 @@ export async function POST(req: Request) {
       jumlahPendamping,
       totalPengantar,
       catatanTambahan,
+      jumlahMobil,
+      jumlahMotor,
       confirmedAt: new Date().toISOString()
     };
 
