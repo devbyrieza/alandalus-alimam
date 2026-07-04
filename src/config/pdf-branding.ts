@@ -34,7 +34,7 @@ export const PDF_BRANDING = {
   // Content Area Coordinates (berlaku ketika template = "full_image")
   // Berdasarkan posisi area kosong di kop-surat-full.jpg
   content_area: {
-    y_start: 65,    // Diubah dari 58 ke 65 agar benar-benar tidak menimpa garis diagonal kop di sebelah kanan
+    y_start: 85,    // Diubah dari 65 ke 85 agar tidak menimpa elemen desain kop surat
     y_end: 255,     // Y akhir konten (sebelum footer kop)
     x_left: 18,     // Margin kiri
     x_right: 192,   // Margin kanan (210 - 18)
