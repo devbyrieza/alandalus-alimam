@@ -25,7 +25,7 @@ interface SectionProps extends React.HTMLAttributes<HTMLElement> {
 const Section = React.forwardRef<HTMLElement, SectionProps>(
   (
     {
-      className,
+      className ,
       spacing = "md",
       background = "transparent",
       children,
@@ -38,7 +38,7 @@ const Section = React.forwardRef<HTMLElement, SectionProps>(
         ref={ref}
         className={cn(
           // ✅ ONLY VERTICAL SPACING - NO HORIZONTAL PADDING!
-          {
+          { 
             "py-12 md:py-16": spacing === "sm",
             "py-16 md:py-20": spacing === "md",
             "py-20 md:py-28": spacing === "lg",

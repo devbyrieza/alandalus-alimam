@@ -3,12 +3,12 @@ import { generateSuratKesehatan, generateSuratPernyataan, generatePaktaIntegrita
 
 const dummyData: PendaftarPdfData = {
   nomor_pendaftaran: "TEST-2026-001",
-  nama_lengkap: "Ahmad Fulan bin Fulan",
+  nama_lengkap: "",
   nik: "3202111111111111",
   jenjang: "SMA",
   tempat_lahir: "Sukabumi",
   tanggal_lahir: "01 Januari 2010",
-  alamat: "Jl. Merdeka No. 10, Sukabumi",
+  alamat: "",
   no_hp: "081234567890",
   tahun_ajaran: "2026/2027",
 };
