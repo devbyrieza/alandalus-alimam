@@ -1138,7 +1138,7 @@ export default function DataLengkapForm({
                       updateSantri("tinggi_badan", parseInt(v) || 0)
                     }
                     type="number"
-                    placeholder="150"
+                    placeholder="Contoh: 150"
                     required
                   />
                   <InputField
@@ -1149,7 +1149,7 @@ export default function DataLengkapForm({
                       updateSantri("berat_badan", parseFloat(v) || 0)
                     }
                     type="number"
-                    placeholder="45"
+                    placeholder="Contoh: 45"
                     required
                   />
                   <div className="md:col-span-2 lg:col-span-1">
