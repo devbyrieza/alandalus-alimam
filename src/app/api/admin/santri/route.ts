@@ -13,6 +13,7 @@ export async function GET(request: NextRequest) {
       select: {
         id: true,
         nomor_pendaftaran: true,
+        nis: true,
         nama_lengkap: true,
         jenjang: true,
       },

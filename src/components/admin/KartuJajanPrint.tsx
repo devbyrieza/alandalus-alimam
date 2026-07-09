@@ -4,6 +4,7 @@ import { Phone, Globe } from "lucide-react";
 interface Santri {
   id: string;
   nomor_pendaftaran: string;
+  nis?: string;
   nama_lengkap: string;
   jenjang: string;
 }
@@ -69,7 +70,7 @@ export default function KartuJajanPrint({ santri, fotoUrl }: KartuJajanPrintProp
         {/* QR Code */}
         <div className="mt-auto mb-1 bg-white p-1 rounded-md border border-slate-200 shadow-sm relative z-10">
           <img 
-            src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&color=0f172a&data=${santri.nomor_pendaftaran}`} 
+            src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&color=0f172a&data=${santri.nis || santri.nomor_pendaftaran}`} 
             alt="QR Code" 
             className="w-[45px] h-[45px]"
           />
@@ -77,7 +78,7 @@ export default function KartuJajanPrint({ santri, fotoUrl }: KartuJajanPrintProp
 
         {/* Footer Area */}
         <div className="w-full h-5 flex items-center justify-center absolute bottom-0 left-0 z-20" style={{ backgroundColor: '#550000', borderTop: '2px solid #ddc192' }}>
-          <p className="text-[6.5px] font-bold uppercase tracking-widest" style={{ color: '#ddc192' }}>No. Reg: {santri.nomor_pendaftaran}</p>
+          <p className="text-[6.5px] font-bold uppercase tracking-widest" style={{ color: '#ddc192' }}>NIS: {santri.nis || '-'}</p>
         </div>
 
       </div>
