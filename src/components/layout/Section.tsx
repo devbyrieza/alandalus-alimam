@@ -59,7 +59,7 @@ const Section = React.forwardRef<HTMLElement, SectionProps>(
       </section>
     );
   },
-);
+); 
 
 Section.displayName = "Section";
 
