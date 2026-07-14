@@ -215,7 +215,7 @@ export default function KartuJajanPage() {
           </h3>
 
           <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {presetAmounts.map((amount) => (
                 <button
                   key={amount}

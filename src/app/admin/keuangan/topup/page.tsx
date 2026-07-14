@@ -196,7 +196,7 @@ export default function FinanceTopupPage() {
                 </div>
 
                 {/* Preset Nominal */}
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   {[50000, 100000, 500000].map(val => (
                     <button 
                       key={val}

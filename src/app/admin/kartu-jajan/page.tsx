@@ -76,10 +76,10 @@ export default function AdminKartuJajanPage() {
             <table className="w-full text-left text-sm">
               <thead className="bg-slate-50 text-slate-500 uppercase text-xs font-black">
                 <tr>
-                  <th className="px-4 py-3">No. Reg</th>
-                  <th className="px-4 py-3">Nama Santri</th>
-                  <th className="px-4 py-3">Jenjang</th>
-                  <th className="px-4 py-3 text-center">Status</th>
+                  <th className="px-4 py-3 whitespace-nowrap">No. Reg</th>
+                  <th className="px-4 py-3 whitespace-nowrap">Nama Santri</th>
+                  <th className="px-4 py-3 whitespace-nowrap">Jenjang</th>
+                  <th className="px-4 py-3 text-center whitespace-nowrap">Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
