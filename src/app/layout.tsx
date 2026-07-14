@@ -153,7 +153,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${plusJakarta.variable} ${inter.variable} font-sans antialiased bg-white text-ink-900 overflow-x-hidden transition-colors duration-500`}
+        className={`${plusJakarta.variable} ${inter.variable}`}
         suppressHydrationWarning
       >
         <ProgressBarProvider>
