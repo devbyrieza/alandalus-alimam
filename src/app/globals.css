@@ -257,11 +257,11 @@
 @layer base {
   :root {
   /* Dashboard Gold Standard Vars */
-  --primary:        #550000;
-  --primary-dark:   #330000;
-  --primary-light:  #880000;
-  --secondary:          #ddc192;
-  --secondary-light:    #e8d4b3;
+  --primary:        #7c1010;
+  --primary-dark:   #4a0909;
+  --primary-light:  #9b1414;
+  --secondary:      #c9983a;
+  --secondary-light: #d6af5e;
   --secondary-pale:     #f9f5ed;
   --bg:            #f8f7f4;
   --bg-card:       #ffffff;
