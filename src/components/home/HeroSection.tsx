@@ -1,4 +1,4 @@
-// src/components/home/HeroSection.tsx — alandalus-alimam
+// src/components/home/HeroSection.tsx — alfath-template-demo
 // FIXED: reduced motion badge, tablet breakpoint, touch hover, explicit font sizing
 "use client";
 
@@ -75,7 +75,7 @@ export default function HeroSection() {
   return (
     <section
       ref={ref}
-      aria-label={`Hero — Beranda ${BRANDING.schoolName}`}
+      aria-label="Hero — Beranda Al Fath"
       className="relative min-h-[100vh] md:min-h-[90vh] lg:min-h-[85vh] flex items-center pt-24 pb-20 md:pt-28 lg:pt-24 lg:pb-20 overflow-hidden"
       style={{
         background:
@@ -83,8 +83,8 @@ export default function HeroSection() {
       }}
     >
       {/* CiroAI Atmospheric Background Blobs */}
-      <div className="glow-blob glow-blob-primary w-[60%] h-[70%] -top-[20%] -left-[10%] opacity-15" aria-hidden="true" />
-      <div className="glow-blob glow-blob-secondary w-[50%] h-[60%] top-[10%] -right-[10%] opacity-15" aria-hidden="true" />
+      <div className="glow-blob glow-blob-primary w-[60%] h-[70%] -top-[20%] -left-[10%] opacity-20" aria-hidden="true" />
+      <div className="glow-blob glow-blob-gold w-[50%] h-[60%] top-[10%] -right-[10%] opacity-15" aria-hidden="true" />
       <div className="glow-blob glow-blob-primary w-[40%] h-[40%] bottom-[-10%] left-[20%] opacity-10" aria-hidden="true" />
       
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
@@ -131,15 +131,20 @@ export default function HeroSection() {
               <h1
                 className="leading-[1.06] tracking-[-0.03em] mx-auto lg:mx-0 max-w-2xl lg:max-w-none font-black text-balance"
                 style={{
-                  fontSize: "clamp(2rem, 5vw + 0.75rem, 5rem)",
+                  fontSize: "clamp(2.5rem, 5vw + 1rem, 5rem)",
                 }}
               >
                 <span className="block text-ink-950">
                   Kaderisasi Ummat
                 </span>
-                <span className="block mt-1 gradient-text-maroon">
-                  Hanif, Kontributif, <br className="hidden sm:block" />
-                  dan Adaptif
+                <span className="block mt-1 text-[var(--color-primary-700)]">
+                  <span className="bg-gradient-to-r from-[var(--color-primary-700)] to-[var(--color-secondary-600)] text-transparent bg-clip-text">
+                    Unggul, Cerdas, 
+                  </span>
+                  <br className="hidden sm:block" />
+                  <span className="bg-gradient-to-r from-[var(--color-primary-700)] to-[var(--color-secondary-600)] text-transparent bg-clip-text">
+                    dan Berintegritas
+                  </span>
                 </span>
               </h1>
             </motion.div>
@@ -199,7 +204,7 @@ export default function HeroSection() {
                 {session ? (
                   <Link href="/dashboard" className="w-full sm:w-auto">
                     <button
-                      className="btn-primary-maroon w-full sm:w-auto px-10 lg:px-12 py-4 lg:py-[1.125rem] min-h-[56px] text-[0.9375rem] flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-98 transition-all relative overflow-hidden group font-bold"
+                      className="btn-primary w-full sm:w-auto px-10 lg:px-12 py-4 lg:py-[1.125rem] min-h-[56px] text-[0.9375rem] flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-98 transition-all relative overflow-hidden group font-bold"
                       style={{ boxShadow: "var(--shadow-primary-lg)" }}
                     >
                       <span className="flex h-2.5 w-2.5 relative">
@@ -212,17 +217,17 @@ export default function HeroSection() {
                   </Link>
                 ) : (
                   <>
-                    <a href="/daftar" className="w-full sm:w-auto">
+                    <Link href="/ppdb" className="w-full sm:w-auto">
                       <button
-                        className="btn-primary-maroon shine-hover w-full sm:w-auto px-8 lg:px-10 py-4 lg:py-[1.125rem] min-h-[56px] text-[0.9375rem] flex items-center justify-center gap-2.5 group font-bold"
+                        className="btn-primary shine-hover w-full sm:w-auto px-8 lg:px-10 py-4 lg:py-[1.125rem] min-h-[56px] text-[0.9375rem] flex items-center justify-center gap-2.5 group font-bold"
                         style={{ boxShadow: "var(--shadow-primary-lg)" }}
                       >
                         Daftar PPDB Sekarang
                         <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                       </button>
-                    </a>
+                    </Link>
                     <Link href="/program" className="w-full sm:w-auto">
-                      <button className="btn-secondary-maroon w-full sm:w-auto px-8 lg:px-10 py-4 lg:py-[1.125rem] min-h-[56px] text-[0.9375rem] flex items-center justify-center gap-2 group">
+                      <button className="btn-secondary w-full sm:w-auto px-8 lg:px-10 py-4 lg:py-[1.125rem] min-h-[56px] text-[0.9375rem] flex items-center justify-center gap-2 group">
                         Lihat Program Kami
                         <ArrowRight className="w-4 h-4 opacity-50 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0.5" />
                       </button>
@@ -262,7 +267,7 @@ export default function HeroSection() {
                   >
                     Angkatan Pertama
                   </span>
-                  {" • "} {BRANDING.schoolName}
+                  {" • "}Pesantren Al Fath
                 </p>
               </div>
 
@@ -311,7 +316,7 @@ export default function HeroSection() {
             >
               <Image
                 src="/images/hero.jpg"
-                alt={`${BRANDING.schoolName}`}
+                alt={`${BRANDING.schoolName} — Pesantren Al Fath`}
                 width={800}
                 height={600}
                 priority
@@ -467,7 +472,7 @@ export default function HeroSection() {
 
             {/* Decorative glows */}
             <div className="glow-blob glow-blob-primary w-64 h-64 -bottom-14 -right-14 opacity-15" aria-hidden="true" />
-            <div className="glow-blob glow-blob-secondary w-48 h-48 -top-10 -left-10 opacity-20" aria-hidden="true" />
+            <div className="glow-blob glow-blob-gold w-48 h-48 -top-10 -left-10 opacity-20" aria-hidden="true" />
           </motion.div>
         </div>
       </Container>
