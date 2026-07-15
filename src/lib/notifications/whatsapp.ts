@@ -4,6 +4,8 @@
  */
 
 import { sendMessage } from "@/lib/wablas";
+import { BRANDING } from "@/config/branding";
+
 import { prisma } from "@/lib/prisma";
 
 export async function sendWhatsAppOTP(
@@ -103,3 +105,4 @@ Jazakumullahu khairan
     };
   }
 }
+
