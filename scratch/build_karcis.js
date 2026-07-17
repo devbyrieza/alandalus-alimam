@@ -250,7 +250,7 @@ let htmlContent = `<!DOCTYPE html>
         @media print {
             @page {
                 size: A4;
-                margin: 5mm;
+                margin: 3mm;
             }
             body {
                 background-color: white;
@@ -265,7 +265,7 @@ let htmlContent = `<!DOCTYPE html>
                 box-shadow: none;
             }
             .tickets-container {
-                gap: 4mm;
+                gap: 2mm;
             }
         }
     </style>
