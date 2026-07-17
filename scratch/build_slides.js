@@ -84,9 +84,19 @@ data.forEach((student, index) => {
     let photoSrc = '';
     let isDefault = true;
     
-    // Try exact match
+    // Manual mapping for mismatched names
+    const manualMap = {
+        'muhammad-azzam-al-hafiz': 'muhammad-azzam-al-hafidz',
+        'muhammad-rifqi-hamid': 'muhammad-rifqy-hamid',
+        'muhammad-yahya-ayyash': 'muhammad-yahya-ayyash-mts'
+    };
+    
+    // Try exact match or manual map
     if (availablePhotos[normName]) {
         photoSrc = availablePhotos[normName];
+        isDefault = false;
+    } else if (manualMap[normName] && availablePhotos[manualMap[normName]]) {
+        photoSrc = availablePhotos[manualMap[normName]];
         isDefault = false;
     } else {
         // Try partial match
