@@ -305,8 +305,8 @@ for (let i = 1; i <= 150; i++) {
                 <div class="footer-area">
                     <div class="footer-note">
                         <ul>
-                            <li>Mohon letakkan karcis ini di atas dashboard mobil yang terlihat dari luar.</li>
-                            <li>Harap mengunci kendaraan Anda dengan aman.</li>
+                            <li>Harap simpan karcis ini dan serahkan kepada petugas saat keluar gerbang.</li>
+                            <li>Pastikan Anda telah mengunci kendaraan dengan aman sebelum ditinggalkan.</li>
                         </ul>
                     </div>
                     <div class="signature-area">
