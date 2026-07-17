@@ -249,7 +249,8 @@ const htmlTemplate = `<!DOCTYPE html>
             position: absolute;
             width: 80%;
             max-width: 1200px;
-            height: 70vh;
+            height: auto;
+            min-height: 75vh;
             opacity: 0;
             transform: scale(0.95) translateY(20px);
             transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
@@ -289,7 +290,7 @@ const htmlTemplate = `<!DOCTYPE html>
         /* Left side: Photo */
         .photo-section {
             flex: 0 0 45%;
-            padding: 50px;
+            padding: 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -349,7 +350,7 @@ const htmlTemplate = `<!DOCTYPE html>
         /* Right side: Info */
         .info-section {
             flex: 1;
-            padding: 60px 80px;
+            padding: 40px 60px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -358,16 +359,16 @@ const htmlTemplate = `<!DOCTYPE html>
         .greeting {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 32px;
+            font-size: 30px;
             color: var(--gold);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .student-name {
-            font-size: 54px;
+            font-size: clamp(32px, 4vw, 54px);
             font-weight: 800;
             line-height: 1.1;
-            margin: 0 0 40px 0;
+            margin: 0 0 25px 0;
             color: var(--white);
             text-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
@@ -375,28 +376,28 @@ const htmlTemplate = `<!DOCTYPE html>
         .student-details {
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 20px;
         }
 
         .detail-item {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 2px;
         }
 
         .detail-label {
-            font-size: 14px;
+            font-size: 13px;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             color: rgba(212, 175, 55, 0.7);
             font-weight: 600;
         }
 
         .detail-value {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 400;
             color: var(--gold-light);
-            padding-bottom: 15px;
+            padding-bottom: 10px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
