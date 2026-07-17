@@ -37,6 +37,18 @@ const data = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
 
 console.log(`Found ${data.length} students in Excel.`);
 
+// Read Logos for Header
+const logoAlimamPath = path.join(__dirname, '../public/images/logo.png');
+const logoAndalusPath = path.join(__dirname, '../public/images/logo-andalus.png');
+let logoAlimamBase64 = '';
+let logoAndalusBase64 = '';
+if (fs.existsSync(logoAlimamPath)) {
+    logoAlimamBase64 = 'data:image/png;base64,' + fs.readFileSync(logoAlimamPath).toString('base64');
+}
+if (fs.existsSync(logoAndalusPath)) {
+    logoAndalusBase64 = 'data:image/png;base64,' + fs.readFileSync(logoAndalusPath).toString('base64');
+}
+
 // Generate slides HTML
 let slidesHtml = '';
 
@@ -187,17 +199,20 @@ const htmlTemplate = `<!DOCTYPE html>
         }
 
         .header-logo {
-            width: 60px;
-            height: 60px;
-            background: var(--gold-light);
-            border-radius: 12px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            color: var(--maroon);
-            font-weight: 800;
-            font-size: 24px;
+            gap: 15px;
+            padding: 8px 15px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .header-logo img {
+            height: 50px;
+            object-fit: contain;
         }
 
         .header-text h3 {
@@ -452,7 +467,10 @@ const htmlTemplate = `<!DOCTYPE html>
     <div class="bg-pattern"></div>
     
     <div class="header">
-        <div class="header-logo">AI</div>
+        <div class="header-logo">
+            \${logoAlimamBase64 ? \`<img src="\${logoAlimamBase64}" alt="Logo Al-Imam">\` : ''}
+            \${logoAndalusBase64 ? \`<img src="\${logoAndalusBase64}" alt="Logo Andalus">\` : ''}
+        </div>
         <div class="header-text">
             <h3>Pesantren Al-Imam Al-Islami</h3>
             <h2>Welcome Day 2026</h2>
