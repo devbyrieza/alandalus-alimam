@@ -65,7 +65,7 @@ let htmlContent = `<!DOCTYPE html>
 
         .ticket {
             width: 180mm;
-            height: 65mm;
+            height: 68mm;
             background: var(--primary);
             border-radius: 12px;
             display: flex;
@@ -126,7 +126,7 @@ let htmlContent = `<!DOCTYPE html>
 
         .main {
             flex: 1;
-            padding: 15px 25px;
+            padding: 12px 25px;
             display: flex;
             flex-direction: column;
             position: relative;
@@ -177,13 +177,13 @@ let htmlContent = `<!DOCTYPE html>
 
         .title-area {
             text-align: center;
-            margin-top: 15px;
+            margin-top: 10px;
             flex: 1;
         }
 
         .title-area h2 {
             margin: 0;
-            font-size: 38px;
+            font-size: 32px;
             font-weight: 800;
             color: var(--secondary);
             text-transform: uppercase;
@@ -192,8 +192,8 @@ let htmlContent = `<!DOCTYPE html>
         }
 
         .title-area p {
-            margin: 5px 0 0 0;
-            font-size: 16px;
+            margin: 2px 0 0 0;
+            font-size: 14px;
             font-weight: 300;
             color: var(--white);
             letter-spacing: 3px;
@@ -232,10 +232,10 @@ let htmlContent = `<!DOCTYPE html>
         }
 
         .signature-space {
-            height: 45px;
+            height: 40px;
             background-color: var(--light-gold);
             border-radius: 6px;
-            margin: 4px 0;
+            margin: 2px 0;
             border: 1px solid var(--secondary);
             /* Placeholder for signature */
         }
