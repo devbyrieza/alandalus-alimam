@@ -16,6 +16,28 @@ function normalizeName(name) {
         .trim();
 }
 
+// Helper to calculate age
+function calculateAge(dateStringOrNumber) {
+    let d;
+    if (typeof dateStringOrNumber === 'number') {
+        d = new Date(Math.round((dateStringOrNumber - 25569) * 86400 * 1000));
+    } else if (typeof dateStringOrNumber === 'string') {
+        const m = { 'januari': 0, 'februari': 1, 'maret': 2, 'april': 3, 'mei': 4, 'juni': 5, 'juli': 6, 'agustus': 7, 'september': 8, 'oktober': 9, 'november': 10, 'desember': 11 };
+        const p = dateStringOrNumber.toLowerCase().split(' ');
+        if (p.length >= 3) {
+            d = new Date(p[2], m[p[1]], p[0]);
+        }
+    }
+    if (!d) return null;
+    const t = new Date();
+    let a = t.getFullYear() - d.getFullYear();
+    const mm = t.getMonth() - d.getMonth();
+    if (mm < 0 || (mm === 0 && t.getDate() < d.getDate())) {
+        a--;
+    }
+    return a;
+}
+
 // Read photos
 let availablePhotos = {};
 if (fs.existsSync(PHOTOS_DIR)) {
@@ -113,8 +135,10 @@ data.forEach((student, index) => {
     // Extract Kelas and Kelahiran
     const jenjang = student['Kelas Detail'] || student['Kelas'] || '-';
     
-    // Format Date of Birth
+    // Format Date of Birth and calculate age
     let tanggalLahir = student['Tanggal Lahir'];
+    const age = calculateAge(tanggalLahir);
+    
     if (typeof tanggalLahir === 'number') {
         const date = new Date(Math.round((tanggalLahir - 25569) * 86400 * 1000));
         tanggalLahir = date.toLocaleDateString('id-ID', {day: 'numeric', month: 'long', year: 'numeric'});
@@ -125,6 +149,11 @@ data.forEach((student, index) => {
         kelahiran = `${student['Tempat Lahir']}, ${tanggalLahir}`;
     } else if (student['Tempat Lahir']) {
         kelahiran = student['Tempat Lahir'];
+    }
+    
+    // Append age if calculated successfully
+    if (age !== null) {
+        kelahiran += ` (${age} Tahun)`;
     }
     
     slidesHtml += `
