@@ -99,7 +99,14 @@ data.forEach((student, index) => {
         }
     }
     
-    const nis = student['Nomor Identitas 1'] || '-';
+    // Extract Kelas and Kelahiran
+    const jenjang = student['Kelas Detail'] || student['Kelas'] || '-';
+    let kelahiran = '-';
+    if (student['Tempat Lahir'] && student['Tanggal Lahir']) {
+        kelahiran = `${student['Tempat Lahir']}, ${student['Tanggal Lahir']}`;
+    } else if (student['Tempat Lahir']) {
+        kelahiran = student['Tempat Lahir'];
+    }
     
     slidesHtml += `
     <div class="slide ${index === 0 ? 'active' : ''}" id="slide-${index}">
@@ -115,12 +122,16 @@ data.forEach((student, index) => {
                 <h1 class="student-name">${name}</h1>
                 <div class="student-details">
                     <div class="detail-item">
-                        <span class="detail-label">NIS</span>
-                        <span class="detail-value">${nis}</span>
+                        <span class="detail-label">KELAS / JENJANG</span>
+                        <span class="detail-value">${jenjang}</span>
                     </div>
                     <div class="detail-item">
-                        <span class="detail-label">ASAL</span>
+                        <span class="detail-label">ASAL KOTA</span>
                         <span class="detail-value">${city}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">KELAHIRAN</span>
+                        <span class="detail-value" style="font-size: 20px;">${kelahiran}</span>
                     </div>
                 </div>
             </div>
