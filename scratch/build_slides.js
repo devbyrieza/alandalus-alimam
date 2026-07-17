@@ -162,8 +162,8 @@ data.forEach((student, index) => {
             <div class="photo-section">
                 <div class="photo-frame">
                     ${imgTag}
+                    <div class="photo-badge">#${index + 1}</div>
                 </div>
-                <div class="photo-badge">#${index + 1}</div>
             </div>
             <div class="info-section">
                 <div class="greeting">Ahlan wa Sahlan</div>
@@ -364,11 +364,11 @@ const htmlTemplate = `<!DOCTYPE html>
 
         .photo-badge {
             position: absolute;
-            bottom: 30px;
-            right: 40px;
+            bottom: 15px;
+            right: 15px;
             background: var(--maroon);
             color: var(--gold);
-            padding: 10px 20px;
+            padding: 8px 18px;
             border-radius: 30px;
             font-weight: 800;
             font-size: 20px;
