@@ -468,8 +468,8 @@ const htmlTemplate = `<!DOCTYPE html>
     
     <div class="header">
         <div class="header-logo">
-            \${logoAlimamBase64 ? \`<img src="\${logoAlimamBase64}" alt="Logo Al-Imam">\` : ''}
-            \${logoAndalusBase64 ? \`<img src="\${logoAndalusBase64}" alt="Logo Andalus">\` : ''}
+            ${logoAlimamBase64 ? `<img src="${logoAlimamBase64}" alt="Logo Al-Imam">` : ''}
+            ${logoAndalusBase64 ? `<img src="${logoAndalusBase64}" alt="Logo Andalus">` : ''}
         </div>
         <div class="header-text">
             <h3>Pesantren Al-Imam Al-Islami</h3>
