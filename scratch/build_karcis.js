@@ -103,12 +103,12 @@ let htmlContent = `<!DOCTYPE html>
             transform: rotate(-90deg);
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             white-space: nowrap;
         }
 
         .stub .vertical-text {
-            font-size: 22px;
+            font-size: 16px;
             font-weight: 800;
             letter-spacing: 2px;
             color: var(--secondary);
@@ -116,11 +116,11 @@ let htmlContent = `<!DOCTYPE html>
         }
 
         .stub .number {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             background: var(--primary);
             color: var(--secondary);
-            padding: 5px 15px;
+            padding: 4px 12px;
             border-radius: 20px;
         }
 
