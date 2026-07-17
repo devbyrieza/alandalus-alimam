@@ -162,7 +162,7 @@ data.forEach((student, index) => {
             <div class="photo-section">
                 <div class="photo-frame">
                     ${imgTag}
-                    <div class="photo-badge">#${index + 1}</div>
+                    <div class="photo-badge">2026</div>
                 </div>
             </div>
             <div class="info-section">
