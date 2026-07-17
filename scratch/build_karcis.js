@@ -232,7 +232,11 @@ let htmlContent = `<!DOCTYPE html>
         }
 
         .signature-space {
-            height: 40px;
+            height: 45px;
+            background-color: var(--light-gold);
+            border-radius: 6px;
+            margin: 4px 0;
+            border: 1px solid var(--secondary);
             /* Placeholder for signature */
         }
 
