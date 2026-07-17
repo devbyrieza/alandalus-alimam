@@ -257,7 +257,7 @@ let htmlContent = `<!DOCTYPE html>
             }
             .ticket {
                 page-break-inside: avoid;
-                margin-bottom: 5mm;
+                margin-bottom: 0;
                 box-shadow: none;
             }
             .tickets-container {
