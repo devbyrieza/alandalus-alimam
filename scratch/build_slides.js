@@ -467,8 +467,9 @@ const htmlTemplate = `<!DOCTYPE html>
             ${logoAndalusBase64 ? `<img src="${logoAndalusBase64}" alt="Logo Andalus">` : ''}
         </div>
         <div class="header-text">
-            <h3>Pesantren Al-Imam Al-Islami</h3>
-            <h2>Welcome Day 2026</h2>
+            <h3>Pesantren Al Imam Al Islami</h3>
+            <div style="font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.7); letter-spacing: 2px; margin: 4px 0 2px 0; text-transform: uppercase;">Managed by Al Andalus IIBS</div>
+            <h2 style="margin-top: 5px;">Welcome Day 2026</h2>
         </div>
     </div>
 
