@@ -96,16 +96,19 @@ data.forEach((student, index) => {
         }
     }
 
-    // Extract City from Alamat (usually the part after KOTA or KABUPATEN)
+    // Extract City and Province from Alamat
     let city = "Asal Daerah";
     if (student.Alamat) {
-        const addressUpper = student.Alamat.toUpperCase();
-        if (addressUpper.includes("KOTA")) {
-            const parts = addressUpper.split("KOTA");
-            city = "KOTA " + parts[1].split(",")[0].trim();
-        } else if (addressUpper.includes("KABUPATEN")) {
-            const parts = addressUpper.split("KABUPATEN");
-            city = "KABUPATEN " + parts[1].split(",")[0].trim();
+        const addr = student.Alamat.toUpperCase();
+        let match = addr.match(/(KOTA|KABUPATEN|KAB\.)\s+([^,]+),\s*([A-Z\s]+)/);
+        if (match) {
+            let kabKota = match[1] + " " + match[2];
+            let provinsi = match[3].replace(/\s*\d{5}$/, '').trim();
+            city = kabKota + ", " + provinsi;
+        } else if (addr.includes("KOTA") || addr.includes("KABUPATEN")) {
+            const type = addr.includes("KOTA") ? "KOTA" : "KABUPATEN";
+            const parts = addr.split(type);
+            city = type + " " + parts[1].split(",")[0].trim();
         } else if (student['Tempat Lahir']) {
             city = student['Tempat Lahir'];
         }
