@@ -73,6 +73,7 @@ if (fs.existsSync(logoAndalusPath)) {
 
 // Generate slides HTML
 let slidesHtml = '';
+let slideIndex = 0;
 
 data.forEach((student, index) => {
     if (!student.Nama) return;
@@ -107,25 +108,22 @@ data.forEach((student, index) => {
         }
     }
     
-    let imgTag = '';
+    
+    // Skip students without photos
     if (isDefault) {
-        // SVG Placeholder
-        imgTag = `<div class="avatar-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-        </div>`;
-    } else {
-        // Convert local path to base64 for standalone HTML
-        try {
-            const ext = path.extname(photoSrc).toLowerCase();
-            const mime = ext === '.png' ? 'image/png' : 'image/jpeg';
-            const imgData = fs.readFileSync(photoSrc).toString('base64');
-            imgTag = `<img src="data:${mime};base64,${imgData}" class="student-photo" alt="${name}">`;
-        } catch (e) {
-            imgTag = `<div class="avatar-placeholder">...</div>`;
-        }
+        return;
+    }
+    
+    // Convert local path to base64 for standalone HTML
+    let imgTag = '';
+    try {
+        const ext = path.extname(photoSrc).toLowerCase();
+        const mime = ext === '.png' ? 'image/png' : 'image/jpeg';
+        const imgData = fs.readFileSync(photoSrc).toString('base64');
+        imgTag = `<img src="data:${mime};base64,${imgData}" class="student-photo" alt="${name}">`;
+    } catch (e) {
+        // If conversion fails, skip this student too
+        return;
     }
 
     // Extract City and Province from Alamat
@@ -167,7 +165,7 @@ data.forEach((student, index) => {
     }
     
     slidesHtml += `
-    <div class="slide ${index === 0 ? 'active' : ''}" id="slide-${index}">
+    <div class="slide ${slideIndex === 0 ? 'active' : ''}" id="slide-${slideIndex}">
         <div class="slide-content">
             <div class="photo-section">
                 <div class="photo-frame">
@@ -195,6 +193,8 @@ data.forEach((student, index) => {
             </div>
         </div>
     </div>`;
+    
+    slideIndex++;
 });
 
 // Full HTML Template
