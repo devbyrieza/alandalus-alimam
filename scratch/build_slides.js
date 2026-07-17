@@ -100,25 +100,29 @@ data.forEach((student, index) => {
     let city = "Asal Daerah";
     if (student.Alamat) {
         const addr = student.Alamat.toUpperCase();
-        let match = addr.match(/(KOTA|KABUPATEN|KAB\.)\s+([^,]+),\s*([A-Z\s]+)/);
-        if (match) {
-            let kabKota = match[1] + " " + match[2];
-            let provinsi = match[3].replace(/\s*\d{5}$/, '').trim();
+        const parts = addr.split(',');
+        if (parts.length >= 2) {
+            let kabKota = parts[parts.length - 2].trim();
+            let provinsi = parts[parts.length - 1].replace(/\s*\d{5}$/, '').trim();
             city = kabKota + ", " + provinsi;
-        } else if (addr.includes("KOTA") || addr.includes("KABUPATEN")) {
-            const type = addr.includes("KOTA") ? "KOTA" : "KABUPATEN";
-            const parts = addr.split(type);
-            city = type + " " + parts[1].split(",")[0].trim();
-        } else if (student['Tempat Lahir']) {
-            city = student['Tempat Lahir'];
+        } else {
+            city = addr;
         }
     }
-    
+
     // Extract Kelas and Kelahiran
     const jenjang = student['Kelas Detail'] || student['Kelas'] || '-';
+    
+    // Format Date of Birth
+    let tanggalLahir = student['Tanggal Lahir'];
+    if (typeof tanggalLahir === 'number') {
+        const date = new Date(Math.round((tanggalLahir - 25569) * 86400 * 1000));
+        tanggalLahir = date.toLocaleDateString('id-ID', {day: 'numeric', month: 'long', year: 'numeric'});
+    }
+    
     let kelahiran = '-';
-    if (student['Tempat Lahir'] && student['Tanggal Lahir']) {
-        kelahiran = `${student['Tempat Lahir']}, ${student['Tanggal Lahir']}`;
+    if (student['Tempat Lahir'] && tanggalLahir) {
+        kelahiran = `${student['Tempat Lahir']}, ${tanggalLahir}`;
     } else if (student['Tempat Lahir']) {
         kelahiran = student['Tempat Lahir'];
     }
