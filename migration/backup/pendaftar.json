@@ -42,7 +42,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "95cff43a-8796-438c-b453-4ef4d506d032",
@@ -87,7 +88,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "53b5f6d4-c9a0-4c4b-b1c9-b2e6b5009b4e",
@@ -132,7 +134,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "de532d18-dc13-4071-b808-2ba470e2d1b3",
@@ -177,7 +180,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "e9c6ca1c-b8ce-45a1-a094-70af0ecc71b6",
@@ -222,7 +226,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "efe2a4a7-0df1-48a1-8360-bceb09d4c54f",
@@ -267,7 +272,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "59626884-1f1a-4510-857a-c949ea0f02f8",
@@ -312,7 +318,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "81c06db2-7c49-41c9-8eef-48fd13fb1dba",
@@ -357,7 +364,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "22efa8c0-726d-48e5-adc7-9dabf25133a1",
@@ -402,7 +410,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "4fcee939-a2bb-45d1-8d87-4e12cceb2a2e",
@@ -447,7 +456,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "6aa75eb4-336c-4ea4-be14-7420c4641ad0",
@@ -492,7 +502,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "6790c3db-4c8a-4878-b04d-13df2ec4c744",
@@ -537,7 +548,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "55b4a48f-9305-4154-a858-c18eac0aed86",
@@ -582,7 +594,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "1dcb19ce-89dd-4b6f-bbfd-34720b501419",
@@ -627,7 +640,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "3298f10e-3ed2-487d-b4f3-e5354f760c7d",
@@ -672,7 +686,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": "\"\"\"{\\\"\"santri\\\"\":{\\\"\"tempat_lahir\\\"\":\\\"\"Negeri Batin\\\"\""
+    "data_lengkap": "\"\"\"{\\\"\"santri\\\"\":{\\\"\"tempat_lahir\\\"\":\\\"\"Negeri Batin\\\"\"",
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "39f200d5-d758-435e-9234-aa9d48055053",
@@ -717,7 +732,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "30534ab1-6bfe-42a4-8fb3-b55090f53285",
@@ -762,7 +778,8 @@
     "verifikasi_status": "verified",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "eca877bc-4e03-47d7-8132-4d2b1d944bc7",
@@ -807,7 +824,8 @@
     "verifikasi_status": "verified",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "5c16f74b-63ae-4d25-afab-bb836011a76e",
@@ -852,7 +870,8 @@
     "verifikasi_status": "verified",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "4024f997-9d60-4b96-8eba-8a355f3dfa1b",
@@ -897,7 +916,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "d79c5294-6b8c-4607-b747-8cc05bf13aa1",
@@ -942,7 +962,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "b3a38bdc-dc39-44b3-94bb-09962d074d20",
@@ -987,7 +1008,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "7e22b661-d1d6-4e04-b3be-3f5d9b2ff388",
@@ -1032,7 +1054,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "563bfea9-8cdc-4b67-8437-e3bec5ba64e3",
@@ -1077,7 +1100,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "42680581-0aa8-4ed3-b844-6b01ab87e977",
@@ -1122,7 +1146,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "5476f00c-b25d-4d77-8abd-9a441f95718e",
@@ -1167,7 +1192,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "ea2feb1f-d74a-4c7b-80ee-c1b5e9d43205",
@@ -1212,7 +1238,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "3837ca2c-f3f6-4a85-bb65-21fdb2e5e2b1",
@@ -1257,7 +1284,8 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   },
   {
     "id": "becc0a08-c729-4140-b151-b8dba14cf257",
@@ -1302,6 +1330,7 @@
     "verifikasi_status": "pending",
     "notifikasi_whatsapp_id": null,
     "notifikasi_sms_id": null,
-    "data_lengkap": ""
+    "data_lengkap": null,
+    "notif_belum_jadwal_terkirim": false
   }
 ]
