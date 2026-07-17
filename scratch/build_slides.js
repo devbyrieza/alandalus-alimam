@@ -201,18 +201,13 @@ const htmlTemplate = `<!DOCTYPE html>
         .header-logo {
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 8px 15px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(5px);
-            border-radius: 12px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            gap: 20px;
         }
         
         .header-logo img {
-            height: 50px;
+            height: 60px;
             object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
         }
 
         .header-text h3 {
