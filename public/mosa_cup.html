@@ -324,7 +324,29 @@
             const sorted = Object.values(table).sort((a, b) => {
                 if (b.pts !== a.pts) return b.pts - a.pts;
                 if (b.gd !== a.gd) return b.gd - a.gd;
-                return b.gf - a.gf;
+                if (b.gf !== a.gf) return b.gf - a.gf;
+                
+                // Kriteria 4: Head-to-Head otomatis
+                const h2h = matchesData.find(m => 
+                    (m.home === a.name && m.away === b.name) || 
+                    (m.home === b.name && m.away === a.name)
+                );
+                
+                if (h2h) {
+                    const hScore = scores[`${h2h.id}_home`];
+                    const aScore = scores[`${h2h.id}_away`];
+                    
+                    if (hScore !== undefined && aScore !== undefined) {
+                        if (h2h.home === a.name) {
+                            if (hScore > aScore) return -1; // a menang
+                            if (hScore < aScore) return 1;  // b menang
+                        } else {
+                            if (hScore > aScore) return 1;  // b menang
+                            if (hScore < aScore) return -1; // a menang
+                        }
+                    }
+                }
+                return 0; // Draw mutlak
             });
 
             const tbody = document.getElementById('standings-body');
