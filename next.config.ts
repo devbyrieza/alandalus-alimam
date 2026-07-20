@@ -17,16 +17,22 @@ const nextConfig: any = {
     scrollRestoration: false,
     optimizePackageImports: ['lucide-react', '@headlessui/react'],
   },
-
-  // Disable image optimization to prevent sharp memory corruption (502 errors)
-  images: {
-    unoptimized: true,
-  },
-
-  // Cache optimization
-  onDemandEntries: {
-    maxInactiveAge: 25 * 1000,
-    pagesBufferLength: 2,
+  // Rewrite khusus untuk subdomain MOSA CUP
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/',
+          has: [
+            {
+              type: 'host',
+              value: 'mosacup.pesantren-alimam.com',
+            },
+          ],
+          destination: '/mosa_cup.html',
+        },
+      ],
+    };
   },
 };
 
