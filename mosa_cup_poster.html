@@ -50,13 +50,18 @@
         @media print {
             @page {
                 size: A4 portrait;
-                margin: 0;
+                margin: 8mm;
             }
             body { 
                 background-color: white !important; 
                 padding: 0 !important;
                 margin: 0 !important;
-                zoom: 38%;
+                zoom: 72%;
+            }
+            .print-page-break {
+                page-break-before: always !important;
+                break-before: page !important;
+                margin-top: 1.5rem !important;
             }
             .print-shadow-none { box-shadow: none !important; }
             .container { max-width: 100% !important; margin: 0 !important; padding: 0 !important; border-radius: 0 !important; }
@@ -232,8 +237,8 @@
                     </div>
                 </div>
 
-                <!-- Pembagian Tim -->
-                <div class="lg:col-span-7 space-y-4">
+                <!-- Pembagian Tim (Halaman 2) -->
+                <div class="lg:col-span-7 space-y-4 print-page-break">
                     <h2 class="font-display text-3xl font-bold text-brand-900 border-b-2 border-brand-100 pb-2">PEMBAGIAN TIM</h2>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
