@@ -153,11 +153,11 @@
                     <div class="flex flex-col sm:flex-row gap-3">
                         <select id="ts-team" class="border-2 border-gray-200 rounded-lg p-2.5 flex-1 bg-white outline-none focus:border-brand-500 font-medium" onchange="updatePlayerDropdown()">
                             <option value="">-- Pilih Tim --</option>
-                            <option value="Abu Bakar">Abu Bakar</option>
-                            <option value="Umar">Umar</option>
-                            <option value="Utsman">Utsman</option>
-                            <option value="Ali">Ali</option>
-                            <option value="Thalhah">Thalhah</option>
+                            <option value="Badar">Badar</option>
+                            <option value="Uhud">Uhud</option>
+                            <option value="Khandaq">Khandaq</option>
+                            <option value="Khaibar">Khaibar</option>
+                            <option value="Tabuk">Tabuk</option>
                         </select>
                         <select id="ts-player" class="border-2 border-gray-200 rounded-lg p-2.5 flex-1 bg-white outline-none focus:border-brand-500 disabled:bg-gray-100 font-medium" disabled>
                             <option value="">-- Pilih Pemain --</option>
@@ -190,29 +190,29 @@
 
     <script>
         // Team definitions
-        const teams = ["Abu Bakar", "Umar", "Utsman", "Ali", "Thalhah"];
+        const teams = ["Badar", "Uhud", "Khandaq", "Khaibar", "Tabuk"];
         
         // Players Database
         const playersData = {
-            "Abu Bakar": ["Andi Ibra Faeyza", "Haidar Ayyubi", "M Fazril Alkais", "Favian Radi", "Raylan Akbar", "Fanni Hariri", "Lalu M. Rizky", "Syeh Al Bani", "Yasser Ali Nurdin", "Pandi Rianto"],
-            "Umar": ["M Hafidz Reo Afelano", "Azka Panji Kusuma", "Muh Asrorin Da Silva", "Fiqri Ramdan Handoko", "Abdurrahim Pati Raja", "Panji Ahmad", "Hibban", "Zakaria", "Dicky Dwy AP", "Salman Abdul Rahim"],
-            "Utsman": ["M Yahya Ayyash", "Naufal Dzakiy", "M Rifqi Hamid", "M Azzam Al Hafiz", "Abdullah Rasyid", "Daffa Muammar Dzaki", "Muhammad Rizky", "Miizan Alghifary", "Muhammad Abdurrahman", "Radil"],
-            "Ali": ["Abdul Hakim", "Khalish", "Rifqi Arsyad Fadilah", "Labibullah El Fatih", "Wahyu Hidayat", "Farid", "M Rasyid Ridho", "M Hafidz Abdurrahman", "Muhammad Abdurrahim", "Muhammad Habib Rizky"],
-            "Thalhah": ["Ahmad Farros Al Barqy", "Fariq Malaibui", "Abdul Aziz Ali", "Atqanul Ummah", "M Khoirul Azzam", "Ken Alfarezha", "Khubaib Abdul Aziz", "Nurcahya Eka Putra", "M Naufal Alfaniri", "Syafiq Karimalay"]
+            "Badar": ["Andi Ibra Faeyza", "Haidar Ayyubi", "M Fazril Alkais", "Favian Radi", "Raylan Akbar", "Fanni Hariri", "Lalu M. Rizky", "Syeh Al Bani", "Yasser Khaibar Nurdin", "Pandi Rianto"],
+            "Uhud": ["M Hafidz Reo Afelano", "Azka Panji Kusuma", "Muh Asrorin Da Silva", "Fiqri Ramdan Handoko", "Abdurrahim Pati Raja", "Panji Ahmad", "Hibban", "Zakaria", "Dicky Dwy AP", "Salman Abdul Rahim"],
+            "Khandaq": ["M Yahya Ayyash", "Naufal Dzakiy", "M Rifqi Hamid", "M Azzam Al Hafiz", "Abdullah Rasyid", "Daffa Muammar Dzaki", "Muhammad Rizky", "Miizan Alghifary", "Muhammad Abdurrahman", "Radil"],
+            "Khaibar": ["Abdul Hakim", "Khalish", "Rifqi Arsyad Fadilah", "Labibullah El Fatih", "Wahyu Hidayat", "Farid", "M Rasyid Ridho", "M Hafidz Abdurrahman", "Muhammad Abdurrahim", "Muhammad Habib Rizky"],
+            "Tabuk": ["Ahmad Farros Al Barqy", "Fariq Malaibui", "Abdul Aziz Khaibar", "Atqanul Ummah", "M Khoirul Azzam", "Ken Alfarezha", "Khubaib Abdul Aziz", "Nurcahya Eka Putra", "M Naufal Alfaniri", "Syafiq Karimalay"]
         };
 
         // Matches definition based on our schedule
         const matchesData = [
-            { id: 'm1', day: 1, home: 'Abu Bakar', away: 'Umar' },
-            { id: 'm2', day: 1, home: 'Utsman', away: 'Ali' },
-            { id: 'm3', day: 1, home: 'Thalhah', away: 'Abu Bakar' },
-            { id: 'm4', day: 2, home: 'Umar', away: 'Utsman' },
-            { id: 'm5', day: 2, home: 'Ali', away: 'Thalhah' },
-            { id: 'm6', day: 2, home: 'Abu Bakar', away: 'Utsman' },
-            { id: 'm7', day: 2, home: 'Umar', away: 'Ali' },
-            { id: 'm8', day: 3, home: 'Utsman', away: 'Thalhah' },
-            { id: 'm9', day: 3, home: 'Abu Bakar', away: 'Ali' },
-            { id: 'm10', day: 3, home: 'Umar', away: 'Thalhah' },
+            { id: 'm1', day: 1, home: 'Badar', away: 'Uhud' },
+            { id: 'm2', day: 1, home: 'Khandaq', away: 'Khaibar' },
+            { id: 'm3', day: 1, home: 'Tabuk', away: 'Badar' },
+            { id: 'm4', day: 2, home: 'Uhud', away: 'Khandaq' },
+            { id: 'm5', day: 2, home: 'Khaibar', away: 'Tabuk' },
+            { id: 'm6', day: 2, home: 'Badar', away: 'Khandaq' },
+            { id: 'm7', day: 2, home: 'Uhud', away: 'Khaibar' },
+            { id: 'm8', day: 3, home: 'Khandaq', away: 'Tabuk' },
+            { id: 'm9', day: 3, home: 'Badar', away: 'Khaibar' },
+            { id: 'm10', day: 3, home: 'Uhud', away: 'Tabuk' },
         ];
 
         // State to hold scores and goals
