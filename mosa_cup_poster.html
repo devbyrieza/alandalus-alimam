@@ -34,10 +34,12 @@
         }
     </script>
     <style>
-        body {
-            background-color: #f3f4f6;
+        * {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
+        }
+        body {
+            background-color: #f3f4f6;
         }
         .glass-card {
             background: rgba(255, 255, 255, 0.95);
@@ -46,9 +48,18 @@
             box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
         }
         @media print {
-            body { background-color: white; }
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+            body { 
+                background-color: white !important; 
+                padding: 0 !important;
+                margin: 0 !important;
+                zoom: 45%;
+            }
             .print-shadow-none { box-shadow: none !important; }
-            .container { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+            .container { max-width: 100% !important; margin: 0 !important; padding: 0 !important; border-radius: 0 !important; }
         }
     </style>
 </head>
