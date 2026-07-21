@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Klasemen & Top Skor MOSA CUP</title>
+    <title>Klasemen & Top Skor MOSA CUP 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
     <script>
@@ -46,14 +46,37 @@
 <body class="bg-gray-50 text-gray-800 min-h-screen font-sans selection:bg-brand-500 selection:text-white pb-20">
 
     <!-- Header -->
-    <header class="bg-brand-900 text-white py-8 px-4 shadow-lg sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto flex flex-col items-center text-center">
-            <h1 class="font-display text-3xl md:text-5xl font-extrabold tracking-tight mb-2">
-                MOSA CUP <span class="text-gold-400">SCOREBOARD</span>
-            </h1>
-            <p class="text-brand-100 text-sm md:text-base font-medium">Klasemen & Pencetak Gol Otomatis</p>
+    <header class="bg-brand-900 text-white py-6 px-4 shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gold-500/20 border border-gold-400 flex items-center justify-center font-bold text-gold-400 text-xl">⚽</div>
+                <div class="text-left">
+                    <h1 class="font-display text-2xl md:text-3xl font-extrabold tracking-tight">
+                        MOSA CUP <span class="text-gold-400">SCOREBOARD</span>
+                    </h1>
+                    <p class="text-brand-100 text-xs md:text-sm font-medium">Pesantren Al-Imam Al-Islami 2026</p>
+                </div>
+            </div>
+
+            <!-- Mode Status & Login Button -->
+            <div class="flex items-center gap-3">
+                <div id="mode-badge" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span id="mode-text">👁️ Mode Penonton (Read-Only)</span>
+                </div>
+
+                <button id="admin-toggle-btn" onclick="toggleAdminMode()" class="bg-gold-500 hover:bg-gold-400 text-brand-900 font-bold text-xs px-4 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center gap-1.5">
+                    <span id="admin-btn-icon">🔑</span> <span id="admin-btn-text">Login Panitia</span>
+                </button>
+            </div>
         </div>
     </header>
+
+    <!-- Admin Status Banner (shown when logged in) -->
+    <div id="admin-banner" class="hidden bg-amber-400 text-brand-900 px-4 py-2 text-xs font-bold text-center border-b border-amber-500 shadow-inner flex items-center justify-center gap-2">
+        <span>🔓 MODE PANITIA AKTIF (Ust. Rieza Eka Tomara / Ust. Iqbal) &bull; Anda dapat menginput skor & top scorer.</span>
+        <button onclick="logoutAdmin()" class="underline text-brand-900 font-extrabold hover:text-black ml-2">[ Keluar Admin ]</button>
+    </div>
 
     <main class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
         
@@ -61,8 +84,11 @@
         <div class="lg:col-span-5 space-y-6">
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 md:p-6">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="font-display text-2xl font-bold text-gray-900">Input Skor Laga</h2>
-                    <button onclick="resetData()" class="text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg font-semibold hover:bg-red-100 transition-colors">Reset Data</button>
+                    <div>
+                        <h2 class="font-display text-2xl font-bold text-gray-900">Jadwal & Hasil Laga</h2>
+                        <p class="text-xs text-gray-500 mt-0.5" id="match-subtitle">Hasil pertandingan langsung dari lapangan</p>
+                    </div>
+                    <button id="reset-btn" onclick="resetData()" class="hidden text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg font-semibold hover:bg-red-100 transition-colors">Reset Data</button>
                 </div>
                 
                 <form id="scoreForm" class="space-y-6">
@@ -104,8 +130,9 @@
         <div class="lg:col-span-7 space-y-8">
             <!-- Standings Table -->
             <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-                <div class="bg-gradient-to-r from-gray-900 to-gray-800 p-5 md:p-6 border-b border-gray-700">
-                    <h2 class="font-display text-2xl font-bold text-white text-center tracking-wide">KLASEMEN SEMENTARA</h2>
+                <div class="bg-gradient-to-r from-gray-900 to-gray-800 p-5 md:p-6 border-b border-gray-700 flex justify-between items-center">
+                    <h2 class="font-display text-2xl font-bold text-white tracking-wide">KLASEMEN SEMENTARA</h2>
+                    <span class="text-xs bg-gold-400/20 text-gold-300 border border-gold-400/30 px-3 py-1 rounded-full font-semibold">LIVE</span>
                 </div>
                 
                 <div class="overflow-x-auto">
@@ -136,7 +163,7 @@
                         <span>Peringkat 1 & 2 : Lolos ke <strong>GRAND FINAL</strong></span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <div class="w-3 h-3 rounded-full bg-blue-50 border border-blue-300"></div>
+                        <div class="w-3 h-3 rounded-full bg-blue-100 border border-blue-300"></div>
                         <span>Peringkat 3 & 4 : Perebutan <strong>JUARA 3</strong></span>
                     </div>
                 </div>
@@ -144,12 +171,13 @@
 
             <!-- Top Scorer Section -->
             <div class="bg-white rounded-2xl shadow-xl border border-brand-100 overflow-hidden">
-                <div class="bg-gradient-to-r from-brand-900 to-brand-700 p-5 md:p-6 border-b border-brand-800">
-                    <h2 class="font-display text-2xl font-bold text-white text-center tracking-wide">TOP SCORER</h2>
+                <div class="bg-gradient-to-r from-brand-900 to-brand-700 p-5 md:p-6 border-b border-brand-800 flex justify-between items-center">
+                    <h2 class="font-display text-2xl font-bold text-white tracking-wide">TOP SCORER</h2>
+                    <span class="text-xs bg-white/10 text-brand-100 px-3 py-1 rounded-full font-semibold">MOSA 2026</span>
                 </div>
                 
-                <div class="p-5 md:p-6 border-b border-gray-100 bg-brand-50/30">
-                    <h3 class="text-sm font-bold text-gray-700 mb-3">Catat Gol Baru:</h3>
+                <div id="top-scorer-input-box" class="hidden p-5 md:p-6 border-b border-gray-100 bg-brand-50/30">
+                    <h3 class="text-sm font-bold text-gray-700 mb-3">Catat Gol Baru (Khusus Panitia):</h3>
                     <div class="flex flex-col sm:flex-row gap-3">
                         <select id="ts-team" class="border-2 border-gray-200 rounded-lg p-2.5 flex-1 bg-white outline-none focus:border-brand-500 font-medium" onchange="updatePlayerDropdown()">
                             <option value="">-- Pilih Tim --</option>
@@ -176,7 +204,7 @@
                                 <th class="px-4 py-3">Nama Pemain</th>
                                 <th class="px-4 py-3">Tim</th>
                                 <th class="px-4 py-3 text-center font-bold text-brand-900">Total Gol</th>
-                                <th class="px-4 py-3 w-16 text-center">Aksi</th>
+                                <th id="ts-action-header" class="hidden px-4 py-3 w-16 text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="top-scorer-body" class="divide-y divide-gray-100">
@@ -188,20 +216,40 @@
         </div>
     </main>
 
+    <!-- PIN Modal -->
+    <div id="pin-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-6 md:p-8 max-w-sm w-full shadow-2xl border border-gray-100 text-center">
+            <div class="w-12 h-12 bg-brand-50 rounded-full flex items-center justify-center text-brand-700 text-2xl mx-auto mb-4">🔑</div>
+            <h3 class="font-display text-xl font-bold text-gray-900 mb-1">Login Panitia MOSA</h3>
+            <p class="text-xs text-gray-500 mb-6">Masukkan PIN Panitia untuk menginput skor</p>
+            
+            <input type="password" id="pin-input" placeholder="Masukkan PIN (1234)" class="w-full text-center text-2xl tracking-widest font-bold border-2 border-gray-300 rounded-xl p-3 mb-4 outline-none focus:border-brand-500">
+            <div id="pin-error" class="hidden text-xs text-red-500 font-bold mb-4">PIN Salah! Silakan coba lagi.</div>
+
+            <div class="flex gap-3">
+                <button onclick="closePinModal()" class="flex-1 bg-gray-100 text-gray-700 font-bold py-3 rounded-xl hover:bg-gray-200 transition-colors">Batal</button>
+                <button onclick="submitPin()" class="flex-1 bg-brand-600 text-white font-bold py-3 rounded-xl hover:bg-brand-700 transition-colors shadow-lg">Masuk</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        const PIN_SECRET = "1234";
+        let isAdmin = false;
+
         // Team definitions
         const teams = ["Badar", "Uhud", "Khandaq", "Khaibar", "Tabuk"];
         
         // Players Database
         const playersData = {
-            "Badar": ["Andi Ibra Faeyza", "Haidar Ayyubi", "M Fazril Alkais", "Favian Radi", "Raylan Akbar", "Fanni Hariri", "Lalu M. Rizky", "Syeh Al Bani", "Yasser Khaibar Nurdin", "Pandi Rianto"],
+            "Badar": ["Andi Ibra Faeyza", "Haidar Ayyubi", "M Fazril Alkais", "Favian Radi", "Raylan Akbar", "Fanni Hariri", "Lalu M. Rizky", "Syeh Al Bani", "Yasser Ali Nurdin", "Pandi Rianto"],
             "Uhud": ["M Hafidz Reo Afelano", "Azka Panji Kusuma", "Muh Asrorin Da Silva", "Fiqri Ramdan Handoko", "Abdurrahim Pati Raja", "Panji Ahmad", "Hibban", "Zakaria", "Dicky Dwy AP", "Salman Abdul Rahim"],
             "Khandaq": ["M Yahya Ayyash", "Naufal Dzakiy", "M Rifqi Hamid", "M Azzam Al Hafiz", "Abdullah Rasyid", "Daffa Muammar Dzaki", "Muhammad Rizky", "Miizan Alghifary", "Muhammad Abdurrahman", "Radil"],
             "Khaibar": ["Abdul Hakim", "Khalish", "Rifqi Arsyad Fadilah", "Labibullah El Fatih", "Wahyu Hidayat", "Farid", "M Rasyid Ridho", "M Hafidz Abdurrahman", "Muhammad Abdurrahim", "Muhammad Habib Rizky"],
-            "Tabuk": ["Ahmad Farros Al Barqy", "Fariq Malaibui", "Abdul Aziz Khaibar", "Atqanul Ummah", "M Khoirul Azzam", "Ken Alfarezha", "Khubaib Abdul Aziz", "Nurcahya Eka Putra", "M Naufal Alfaniri", "Syafiq Karimalay"]
+            "Tabuk": ["Ahmad Farros Al Barqy", "Fariq Malaibui", "Abdul Aziz Ali", "Atqanul Ummah", "M Khoirul Azzam", "Ken Alfarezha", "Khubaib Abdul Aziz", "Nurcahya Eka Putra", "M Naufal Alfaniri", "Syafiq Karimalay"]
         };
 
-        // Matches definition based on our schedule
+        // Matches definition
         const matchesData = [
             { id: 'm1', day: 1, home: 'Badar', away: 'Uhud' },
             { id: 'm2', day: 1, home: 'Khandaq', away: 'Khaibar' },
@@ -215,11 +263,10 @@
             { id: 'm10', day: 3, home: 'Uhud', away: 'Tabuk' },
         ];
 
-        // State to hold scores and goals
         let scores = {};
-        let goals = {}; // { "Player Name": { team: "Team", count: 2 } }
+        let goals = {};
 
-        // Load data from localStorage
+        // Load data & admin state
         function loadData() {
             const savedScores = localStorage.getItem('mosa_scores_draft');
             if (savedScores) {
@@ -229,14 +276,87 @@
             if (savedGoals) {
                 try { goals = JSON.parse(savedGoals); } catch(e) { goals = {}; }
             }
+            const adminSession = localStorage.getItem('mosa_admin_session');
+            if (adminSession === 'true') {
+                isAdmin = true;
+            }
+            updateAdminUI();
         }
 
-        // Save data to localStorage
         function saveData() {
             localStorage.setItem('mosa_scores_draft', JSON.stringify(scores));
             localStorage.setItem('mosa_goals_draft', JSON.stringify(goals));
             calculateStandings();
             renderTopScorers();
+        }
+
+        // Admin Auth
+        function toggleAdminMode() {
+            if (isAdmin) {
+                logoutAdmin();
+            } else {
+                document.getElementById('pin-modal').classList.remove('hidden');
+                document.getElementById('pin-input').focus();
+            }
+        }
+
+        function closePinModal() {
+            document.getElementById('pin-modal').classList.add('hidden');
+            document.getElementById('pin-input').value = '';
+            document.getElementById('pin-error').classList.add('hidden');
+        }
+
+        function submitPin() {
+            const pin = document.getElementById('pin-input').value;
+            if (pin === PIN_SECRET) {
+                isAdmin = true;
+                localStorage.setItem('mosa_admin_session', 'true');
+                closePinModal();
+                updateAdminUI();
+                renderMatches();
+                renderTopScorers();
+            } else {
+                document.getElementById('pin-error').classList.remove('hidden');
+            }
+        }
+
+        function logoutAdmin() {
+            isAdmin = false;
+            localStorage.removeItem('mosa_admin_session');
+            updateAdminUI();
+            renderMatches();
+            renderTopScorers();
+        }
+
+        function updateAdminUI() {
+            const modeBadge = document.getElementById('mode-badge');
+            const modeText = document.getElementById('mode-text');
+            const adminBtnIcon = document.getElementById('admin-btn-icon');
+            const adminBtnText = document.getElementById('admin-btn-text');
+            const adminBanner = document.getElementById('admin-banner');
+            const resetBtn = document.getElementById('reset-btn');
+            const topScorerBox = document.getElementById('top-scorer-input-box');
+            const tsActionHeader = document.getElementById('ts-action-header');
+
+            if (isAdmin) {
+                modeBadge.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-amber-400 text-brand-900 border border-amber-300 flex items-center gap-1.5";
+                modeText.innerText = "🔓 Mode Panitia (Edit Aktif)";
+                adminBtnIcon.innerText = "🔒";
+                adminBtnText.innerText = "Keluar Admin";
+                adminBanner.classList.remove('hidden');
+                resetBtn.classList.remove('hidden');
+                topScorerBox.classList.remove('hidden');
+                tsActionHeader.classList.remove('hidden');
+            } else {
+                modeBadge.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 flex items-center gap-1.5";
+                modeText.innerText = "👁️ Mode Penonton (Read-Only)";
+                adminBtnIcon.innerText = "🔑";
+                adminBtnText.innerText = "Login Panitia";
+                adminBanner.classList.add('hidden');
+                resetBtn.classList.add('hidden');
+                topScorerBox.classList.add('hidden');
+                tsActionHeader.classList.add('hidden');
+            }
         }
 
         function resetData() {
@@ -251,7 +371,7 @@
             }
         }
 
-        // Render match inputs
+        // Render match inputs or read-only view
         function renderMatches() {
             [1, 2, 3].forEach(day => {
                 const container = document.getElementById(`day${day}-matches`);
@@ -261,43 +381,57 @@
                     const homeScore = scores[`${match.id}_home`] !== undefined ? scores[`${match.id}_home`] : '';
                     const awayScore = scores[`${match.id}_away`] !== undefined ? scores[`${match.id}_away`] : '';
                     
-                    const html = `
-                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200 hover:border-brand-300 transition-colors">
-                            <div class="flex-1 text-right font-medium text-sm md:text-base ${homeScore !== '' && homeScore > awayScore ? 'text-brand-700 font-bold' : 'text-gray-700'}">${match.home}</div>
-                            
-                            <div class="mx-3 md:mx-6 flex items-center gap-2">
+                    let centerContent = '';
+                    if (isAdmin) {
+                        centerContent = `
+                            <div class="mx-2 md:mx-4 flex items-center gap-1.5">
                                 <input type="number" min="0" data-match="${match.id}" data-team="home" value="${homeScore}"
-                                    class="score-input w-10 md:w-12 h-10 md:h-12 text-center font-bold text-lg border-2 border-gray-300 rounded-lg focus:border-brand-500 focus:ring-0 outline-none bg-white">
+                                    class="score-input w-9 md:w-11 h-9 md:h-11 text-center font-bold text-base md:text-lg border-2 border-gray-300 rounded-lg focus:border-brand-500 outline-none bg-white">
                                 <span class="text-gray-400 font-bold text-xs">VS</span>
                                 <input type="number" min="0" data-match="${match.id}" data-team="away" value="${awayScore}"
-                                    class="score-input w-10 md:w-12 h-10 md:h-12 text-center font-bold text-lg border-2 border-gray-300 rounded-lg focus:border-brand-500 focus:ring-0 outline-none bg-white">
+                                    class="score-input w-9 md:w-11 h-9 md:h-11 text-center font-bold text-base md:text-lg border-2 border-gray-300 rounded-lg focus:border-brand-500 outline-none bg-white">
                             </div>
+                        `;
+                    } else {
+                        const scoreDisplay = (homeScore !== '' && awayScore !== '') ? `${homeScore} - ${awayScore}` : `VS`;
+                        const bgDisplay = (homeScore !== '' && awayScore !== '') ? `bg-brand-900 text-white font-black` : `bg-gray-100 text-gray-500 font-bold`;
+                        centerContent = `
+                            <div class="mx-3 px-3 py-1 rounded-lg text-xs md:text-sm ${bgDisplay} tracking-wider">
+                                ${scoreDisplay}
+                            </div>
+                        `;
+                    }
 
-                            <div class="flex-1 text-left font-medium text-sm md:text-base ${awayScore !== '' && awayScore > homeScore ? 'text-brand-700 font-bold' : 'text-gray-700'}">${match.away}</div>
+                    const html = `
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200">
+                            <div class="flex-1 text-right font-semibold text-xs md:text-sm ${homeScore !== '' && homeScore > awayScore ? 'text-brand-700 font-extrabold' : 'text-gray-700'}">${match.home}</div>
+                            ${centerContent}
+                            <div class="flex-1 text-left font-semibold text-xs md:text-sm ${awayScore !== '' && awayScore > homeScore ? 'text-brand-700 font-extrabold' : 'text-gray-700'}">${match.away}</div>
                         </div>
                     `;
                     container.insertAdjacentHTML('beforeend', html);
                 });
             });
 
-            // Add event listeners to inputs
-            document.querySelectorAll('.score-input').forEach(input => {
-                input.addEventListener('input', (e) => {
-                    const matchId = e.target.getAttribute('data-match');
-                    const teamType = e.target.getAttribute('data-team');
-                    const val = e.target.value;
-                    
-                    if (val === '') {
-                        delete scores[`${matchId}_${teamType}`];
-                    } else {
-                        scores[`${matchId}_${teamType}`] = parseInt(val, 10);
-                    }
-                    saveData();
+            if (isAdmin) {
+                document.querySelectorAll('.score-input').forEach(input => {
+                    input.addEventListener('input', (e) => {
+                        const matchId = e.target.getAttribute('data-match');
+                        const teamType = e.target.getAttribute('data-team');
+                        const val = e.target.value;
+                        
+                        if (val === '') {
+                            delete scores[`${matchId}_${teamType}`];
+                        } else {
+                            scores[`${matchId}_${teamType}`] = parseInt(val, 10);
+                        }
+                        saveData();
+                    });
                 });
-            });
+            }
         }
 
-        // Calculate and render standings
+        // Calculate and render standings with automatic H2H tie-breaker
         function calculateStandings() {
             let table = {};
             teams.forEach(t => {
@@ -334,63 +468,66 @@
                 }
             });
 
-            Object.values(table).forEach(t => t.gd = t.gf - t.ga);
+            Object.values(table).forEach(t => {
+                t.gd = t.gf - t.ga;
+            });
 
+            // Sorting with FIFA H2H tie-breaker
             const sorted = Object.values(table).sort((a, b) => {
                 if (b.pts !== a.pts) return b.pts - a.pts;
                 if (b.gd !== a.gd) return b.gd - a.gd;
                 if (b.gf !== a.gf) return b.gf - a.gf;
-                
-                // Kriteria 4: Head-to-Head otomatis
-                const h2h = matchesData.find(m => 
+
+                // Automatic Head-to-Head Check
+                const h2hMatch = matchesData.find(m => 
                     (m.home === a.name && m.away === b.name) || 
                     (m.home === b.name && m.away === a.name)
                 );
-                
-                if (h2h) {
-                    const hScore = scores[`${h2h.id}_home`];
-                    const aScore = scores[`${h2h.id}_away`];
-                    
+                if (h2hMatch) {
+                    const hScore = scores[`${h2hMatch.id}_home`];
+                    const aScore = scores[`${h2hMatch.id}_away`];
                     if (hScore !== undefined && aScore !== undefined) {
-                        if (h2h.home === a.name) {
-                            if (hScore > aScore) return -1; // a menang
-                            if (hScore < aScore) return 1;  // b menang
+                        if (h2hMatch.home === a.name) {
+                            if (hScore > aScore) return -1;
+                            if (aScore > hScore) return 1;
                         } else {
-                            if (hScore > aScore) return 1;  // b menang
-                            if (hScore < aScore) return -1; // a menang
+                            if (aScore > hScore) return -1;
+                            if (hScore > aScore) return 1;
                         }
                     }
                 }
-                return 0; // Draw mutlak
+                return 0;
             });
 
             const tbody = document.getElementById('standings-body');
             tbody.innerHTML = '';
 
             sorted.forEach((team, index) => {
-                let rowClass = "hover:bg-gray-50 transition-colors bg-white";
-                let rankBadge = `<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-gray-100 text-gray-600 font-bold text-xs">${index + 1}</span>`;
+                let rowBg = "bg-white";
+                let rankBadge = `${index + 1}`;
                 
-                if (index === 0 || index === 1) {
-                    rowClass = "bg-green-50/50 hover:bg-green-50";
-                    rankBadge = `<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-500 text-white font-bold text-xs shadow-sm">${index + 1}</span>`;
-                } else if (index === 2 || index === 3) {
-                    rowClass = "bg-blue-50/30 hover:bg-blue-50/50";
-                    rankBadge = `<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-400 text-white font-bold text-xs shadow-sm">${index + 1}</span>`;
+                if (index < 2) {
+                    rowBg = "bg-green-50/50";
+                    rankBadge = `<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-600 text-white font-bold text-xs">${index + 1}</span>`;
+                } else if (index < 4) {
+                    rowBg = "bg-blue-50/30";
+                    rankBadge = `<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-500 text-white font-bold text-xs">${index + 1}</span>`;
+                } else {
+                    rankBadge = `<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-gray-200 text-gray-700 font-bold text-xs">${index + 1}</span>`;
                 }
 
                 const tr = `
-                    <tr class="${rowClass}">
-                        <td class="px-4 py-3 md:py-4 text-center whitespace-nowrap">${rankBadge}</td>
-                        <td class="px-4 py-3 md:py-4 font-bold text-gray-900">${team.name}</td>
-                        <td class="px-2 py-3 text-center text-gray-600">${team.p}</td>
-                        <td class="px-2 py-3 text-center text-green-600 font-medium">${team.w}</td>
-                        <td class="px-2 py-3 text-center text-gray-500">${team.d}</td>
-                        <td class="px-2 py-3 text-center text-red-500 font-medium">${team.l}</td>
-                        <td class="px-2 py-3 text-center text-gray-600">${team.gf}</td>
-                        <td class="px-2 py-3 text-center text-gray-600">${team.ga}</td>
-                        <td class="px-2 py-3 text-center font-bold ${team.gd > 0 ? 'text-green-600' : team.gd < 0 ? 'text-red-600' : 'text-gray-500'}">${team.gd > 0 ? '+'+team.gd : team.gd}</td>
-                        <td class="px-4 py-3 text-center font-black text-brand-900 text-lg bg-gray-50/50">${team.pts}</td>
+                    <tr class="${rowBg} border-b border-gray-100 hover:bg-gray-100/60 transition-colors">
+                        <td class="px-4 py-3.5 text-center">${rankBadge}</td>
+                        <td class="px-4 py-3.5 font-bold text-gray-900">${team.name}</td>
+                        <td class="px-2 py-3.5 text-center font-medium">${team.p}</td>
+                        <td class="px-2 py-3.5 text-center text-green-600 font-semibold">${team.w}</td>
+                        <td class="px-2 py-3.5 text-center text-gray-500">${team.d}</td>
+                        <td class="px-2 py-3.5 text-center text-red-500">${team.l}</td>
+                        <td class="px-2 py-3.5 text-center text-gray-600">${team.gf}</td>
+                        <td class="px-2 py-3.5 text-center text-gray-600">${team.ga}</td>
+                        <td class="px-2 py-3.5 text-center font-bold ${team.gd > 0 ? 'text-green-600' : team.gd < 0 ? 'text-red-500' : 'text-gray-400'}">${team.gd > 0 ? '+' + team.gd : team.gd}</td>
+                        <td class="px-4 py-3.5 text-center font-black text-brand-900 text-lg">${team.pts}</td>
                     </tr>
                 `;
                 tbody.insertAdjacentHTML('beforeend', tr);
@@ -401,7 +538,6 @@
         function updatePlayerDropdown() {
             const team = document.getElementById('ts-team').value;
             const playerSelect = document.getElementById('ts-player');
-            
             playerSelect.innerHTML = '<option value="">-- Pilih Pemain --</option>';
             
             if (team && playersData[team]) {
@@ -427,10 +563,8 @@
                 goals[player] = { team: team, count: 0 };
             }
             goals[player].count += 1;
-            
             saveData();
             
-            // Reset dropdowns
             document.getElementById('ts-team').value = "";
             updatePlayerDropdown();
         }
@@ -449,7 +583,6 @@
             const tbody = document.getElementById('top-scorer-body');
             tbody.innerHTML = '';
             
-            // Convert to array and sort by goal count descending
             const sortedScorers = Object.entries(goals)
                 .map(([name, data]) => ({ name, team: data.team, count: data.count }))
                 .sort((a, b) => b.count - a.count);
@@ -461,9 +594,15 @@
 
             sortedScorers.forEach((scorer, index) => {
                 let badgeClass = "bg-gray-100 text-gray-600";
-                if (index === 0) badgeClass = "bg-gold-400 text-white shadow-sm";
+                if (index === 0) badgeClass = "bg-gold-500 text-brand-900 font-black shadow-sm";
                 else if (index === 1) badgeClass = "bg-gray-300 text-gray-800 shadow-sm";
-                else if (index === 2) badgeClass = "bg-orange-300 text-white shadow-sm";
+                else if (index === 2) badgeClass = "bg-amber-200 text-amber-900 shadow-sm";
+
+                const actionCol = isAdmin ? `
+                    <td class="px-4 py-3 text-center">
+                        <button onclick="removeGoal('${scorer.name}')" class="text-xs text-red-500 hover:text-red-700 hover:bg-red-50 px-2 py-1 rounded border border-red-100 transition-colors">-1 Gol</button>
+                    </td>
+                ` : '';
 
                 const tr = `
                     <tr class="hover:bg-brand-50/30 bg-white transition-colors">
@@ -473,14 +612,17 @@
                         <td class="px-4 py-3 font-semibold text-gray-900">${scorer.name}</td>
                         <td class="px-4 py-3 text-gray-600 text-xs md:text-sm">${scorer.team}</td>
                         <td class="px-4 py-3 text-center font-black text-brand-700 text-lg">${scorer.count}</td>
-                        <td class="px-4 py-3 text-center">
-                            <button onclick="removeGoal('${scorer.name}')" class="text-xs text-red-500 hover:text-red-700 hover:bg-red-50 px-2 py-1 rounded border border-red-100 transition-colors">-1 Gol</button>
-                        </td>
+                        ${actionCol}
                     </tr>
                 `;
                 tbody.insertAdjacentHTML('beforeend', tr);
             });
         }
+
+        // Enter key for PIN modal
+        document.getElementById('pin-input')?.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') submitPin();
+        });
 
         // Init
         loadData();
