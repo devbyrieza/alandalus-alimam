@@ -5,24 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOSA CUP 2026/2027 - Pesantren Al Andalus Al Imam</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@500;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         brand: {
-                            50: '#fdf5f5',
-                            100: '#fbebeb',
-                            500: '#990000',
-                            700: '#800000',
-                            800: '#6a0000',
-                            900: '#550000', // Maroon Al-Imam
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0f172a', // Dark Navy Slate (Crisp & High Contrast)
                         },
                         gold: {
-                            400: '#e8d4b3',
-                            500: '#ddc192', // Krem Emas Al-Imam
-                            600: '#cba570',
+                            400: '#fde047', // Yellow Gold
+                            500: '#eab308', 
+                            600: '#ca8a04',
                         }
                     },
                     fontFamily: {
@@ -39,279 +39,249 @@
             print-color-adjust: exact !important;
         }
         body {
-            background-color: #f3f4f6;
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+            background-color: #f8fafc;
         }
         @media print {
             @page {
                 size: A4 portrait;
-                margin: 5mm;
+                margin: 6mm;
             }
             body { 
                 background-color: white !important; 
                 padding: 0 !important;
                 margin: 0 !important;
-                zoom: 58%;
+                zoom: 78%;
             }
             .print-page-break {
                 page-break-before: always !important;
                 break-before: page !important;
-                margin-top: 0.5rem !important;
+                margin-top: 1rem !important;
             }
             .print-shadow-none { box-shadow: none !important; }
-            .container { max-width: 100% !important; margin: 0 !important; padding: 0 !important; border-radius: 0 !important; }
+            .container { max-width: 100% !important; margin: 0 !important; padding: 0 !important; border-radius: 0 !important; border: none !important; }
         }
     </style>
 </head>
-<body class="text-gray-800 antialiased min-h-screen py-8 px-4 md:px-8 flex items-center justify-center bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]">
+<body class="text-slate-900 antialiased min-h-screen py-6 px-4 md:px-8 flex items-center justify-center bg-slate-100">
     
-    <div class="container max-w-4xl mx-auto bg-white rounded-3xl overflow-hidden shadow-2xl relative border-4 border-brand-900 print-shadow-none">
+    <div class="container max-w-4xl mx-auto bg-white rounded-3xl overflow-hidden shadow-2xl relative border-4 border-slate-900 print-shadow-none">
         
-        <!-- Header Section -->
-        <div class="bg-gradient-to-br from-brand-900 via-brand-800 to-brand-700 text-white p-8 md:p-12 text-center relative overflow-hidden">
-            <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
-            
-            <div class="relative z-10">
-                <div class="flex justify-center items-center gap-6 mb-4">
-                    <img src="public/images/logo.png" alt="Logo Al Imam" class="h-16 md:h-20 drop-shadow-md">
-                    <img src="public/images/logo-andalus.png" alt="Logo Al Andalus" class="h-16 md:h-20 drop-shadow-md">
+        <!-- Header Section (Bright Royal Navy & Gold) -->
+        <div class="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white p-8 md:p-10 text-center relative overflow-hidden">
+            <div class="relative z-10 space-y-3">
+                <div class="flex items-center justify-center gap-6 mb-2">
+                    <img src="C:\Users\itpua\Dev\Work\al-andalus\excel_task\extracted_logo_0.png" alt="Logo Al Andalus" class="h-16 md:h-20 object-contain drop-shadow-md">
+                    <img src="C:\Users\itpua\Dev\Work\al-andalus\eoffice-alimam\public\images\logo-alimam.png" alt="Logo Al Imam" class="h-16 md:h-20 object-contain drop-shadow-md">
                 </div>
-                <p class="text-brand-100 font-semibold tracking-wide text-xs md:text-sm mb-2 uppercase max-w-2xl mx-auto leading-relaxed">
-                    Pesantren Al Imam Al Islami<br>
-                    <span class="opacity-80 text-xs">Managed by Al Andalus International Islamic Boarding School</span>
-                </p>
-                <h1 class="font-display text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-300 mb-2 drop-shadow-lg">
-                    MOSA CUP <span class="text-gold-400">26/27</span>
-                </h1>
-                <div class="inline-block mt-3 px-6 py-2 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 text-sm md:text-base font-medium tracking-wide">
-                    ⚽ TURNAMEN SEPAK BOLA &nbsp;|&nbsp; 📅 22 - 25 JULI 2026
-                </div>
-            </div>
-        </div>
-
-        <div class="p-6 md:p-10 space-y-10 bg-gray-50">
-            
-            <!-- Peraturan Section (Moved to top for visibility) -->
-            <div class="glass-card rounded-2xl p-6 relative overflow-hidden border-l-4 border-l-gold-500">
-                <h2 class="font-display text-2xl font-bold text-brand-900 mb-4 flex items-center gap-2">
-                    <svg class="w-6 h-6 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                    PERATURAN SINGKAT & INFO PENTING
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-sm md:text-base">
-                    <ul class="space-y-3 font-medium text-gray-700">
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand-700 mt-0.5">▪</span> 
-                            <span><strong class="text-brand-900">Format 7v7 & Tanpa Offside:</strong> Sistem Liga 1 x 10 menit. Bebas offside agar permainan mengalir cepat & banyak gol.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand-700 mt-0.5">▪</span> 
-                            <span><strong class="text-brand-900 font-bold text-amber-800 bg-amber-100 px-1 rounded">Kehadiran Wajib:</strong> Seluruh santri yang namanya tertera di daftar tim WAJIB hadir & bertanding.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand-700 mt-0.5">▪</span> 
-                            <span><strong class="text-brand-900">Bola Out (Kick-in):</strong> Bola keluar dimainkan dengan <strong>tendangan kaki</strong> di garis (bukan lemparan tangan).</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand-700 mt-0.5">▪</span> 
-                            <span><strong class="text-brand-900">Wajib Rotasi:</strong> Setiap pemain cadangan WAJIB dimainkan agar seluruh santri kebagian menit bermain.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand-700 mt-0.5">▪</span> 
-                            <span><strong class="text-brand-900 text-red-600">Dilarang Meluncur di Tanah:</strong> Merebut bola wajib dalam posisi berdiri (mencegah cedera & lecet).</span>
-                        </li>
-                    </ul>
-                    <ul class="space-y-3 font-medium text-gray-700">
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand-700 mt-0.5">▪</span> 
-                            <span><strong class="text-brand-900">Fair Play & Akhlaq:</strong> Dilarang emosi/berkata kasar. WAJIB <strong>berbaris bersalaman (musafahah)</strong> sebelum laga & bersalaman penutup sesudah laga.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand-700 mt-0.5">▪</span> 
-                            <span><strong class="text-brand-900">Hanya Kapten:</strong> Protes liar dilarang keras. Hanya Kapten tim yang boleh bertanya/berbicara ke Ustadz dengan adab.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand-700 mt-0.5">▪</span> 
-                            <span class="text-red-700 font-semibold bg-red-50 p-1 rounded">Keputusan Ustadz sebagai wasit di pinggir lapangan bersifat FINAL & MUTLAK.</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 
-                <!-- Jadwal Section -->
-                <div class="lg:col-span-5 space-y-6">
-                    <h2 class="font-display text-3xl font-bold text-brand-900 border-b-2 border-brand-100 pb-2">JADWAL LAGA <span class="text-sm font-normal text-brand-700 ml-2">(Sistem Liga)</span></h2>
-                    
-                    <div class="space-y-4">
-                        <!-- Day 1 -->
-                        <div class="bg-white rounded-xl shadow-md p-4 border-l-4 border-l-brand-900">
-                            <div class="text-sm font-bold text-white bg-brand-900 inline-block px-3 py-1 rounded-md mb-3">Rabu, 22 Juli</div>
-                            <div class="space-y-3">
-                                <div class="flex justify-between items-center text-xs md:text-sm border-b border-gray-100 pb-2">
-                                    <span class="text-gray-500 font-medium w-20">16.00-16.10</span>
-                                    <span class="font-bold flex-1 text-center">Badar <span class="text-red-500 mx-1">vs</span> Uhud</span>
-                                </div>
-                                <div class="flex justify-between items-center text-xs md:text-sm border-b border-gray-100 pb-2">
-                                    <span class="text-gray-500 font-medium w-20">16.15-16.25</span>
-                                    <span class="font-bold flex-1 text-center">Khandaq <span class="text-red-500 mx-1">vs</span> Khaibar</span>
-                                </div>
-                                <div class="flex justify-between items-center text-xs md:text-sm pt-1">
-                                    <span class="text-gray-500 font-medium w-20">16.30-16.40</span>
-                                    <span class="font-bold flex-1 text-center">Tabuk <span class="text-red-500 mx-1">vs</span> Badar</span>
-                                </div>
-                            </div>
-                        </div>
+                <p class="text-xs md:text-sm font-bold tracking-widest text-amber-300 uppercase">
+                    PESANTREN AL IMAM AL ISLAMI &bull; AL ANDALUS IBS
+                </p>
+                
+                <h1 class="font-display text-4xl md:text-6xl font-black tracking-tight text-white uppercase drop-shadow-md leading-none">
+                    MOSA CUP 2026/2027
+                </h1>
+                
+                <div class="inline-flex items-center gap-2 bg-amber-400 text-slate-900 font-extrabold px-5 py-1.5 rounded-full text-xs md:text-sm shadow-md">
+                    <span>⚽ TURNAMEN SEPAK BOLA SANTRI BARU</span>
+                    <span>&bull;</span>
+                    <span>📅 22 - 25 JULI 2026</span>
+                </div>
+            </div>
+        </div>
 
-                        <!-- Day 2 -->
-                        <div class="bg-white rounded-xl shadow-md p-4 border-l-4 border-l-brand-900">
-                            <div class="text-sm font-bold text-white bg-brand-900 inline-block px-3 py-1 rounded-md mb-3">Kamis, 23 Juli</div>
-                            <div class="space-y-3">
-                                <div class="flex justify-between items-center text-xs md:text-sm border-b border-gray-100 pb-2">
-                                    <span class="text-gray-500 font-medium w-20">16.00-16.10</span>
-                                    <span class="font-bold flex-1 text-center">Uhud <span class="text-red-500 mx-1">vs</span> Khandaq</span>
-                                </div>
-                                <div class="flex justify-between items-center text-xs md:text-sm border-b border-gray-100 pb-2">
-                                    <span class="text-gray-500 font-medium w-20">16.15-16.25</span>
-                                    <span class="font-bold flex-1 text-center">Khaibar <span class="text-red-500 mx-1">vs</span> Tabuk</span>
-                                </div>
-                                <div class="flex justify-between items-center text-xs md:text-sm border-b border-gray-100 pb-2">
-                                    <span class="text-gray-500 font-medium w-20">16.30-16.40</span>
-                                    <span class="font-bold flex-1 text-center">Badar <span class="text-red-500 mx-1">vs</span> Khandaq</span>
-                                </div>
-                                <div class="flex justify-between items-center text-xs md:text-sm pt-1">
-                                    <span class="text-gray-500 font-medium w-20">16.45-16.55</span>
-                                    <span class="font-bold flex-1 text-center">Uhud <span class="text-red-500 mx-1">vs</span> Khaibar</span>
-                                </div>
-                            </div>
-                        </div>
+        <!-- Content Section -->
+        <div class="p-6 md:p-10 space-y-8">
+            
+            <!-- Peraturan Singkat -->
+            <div class="bg-blue-50/80 rounded-2xl p-6 border-2 border-blue-200">
+                <h2 class="font-display text-2xl md:text-3xl font-extrabold text-blue-950 mb-4 flex items-center gap-2 border-b-2 border-blue-200 pb-2">
+                    <span class="text-amber-500">⚠️</span> PERATURAN SINGKAT & INFO PENTING
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-sm md:text-base">
+                    <ul class="space-y-2.5 font-semibold text-slate-800">
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-700 font-bold">▪</span> 
+                            <span><strong class="text-blue-950 font-extrabold">Format 7v7 & Tanpa Offside:</strong> 1 x 10 menit. Bebas offside agar permainan cepat & banyak gol.</span>
+                        </li>
+                        <li class="flex items-start gap-2 bg-amber-200/80 p-1.5 rounded-lg border border-amber-300">
+                            <span class="text-amber-900 font-bold">▪</span> 
+                            <span><strong class="text-amber-950 font-black">Kehadiran Wajib:</strong> Seluruh santri yang tertera di tim WAJIB hadir & bertanding.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-700 font-bold">▪</span> 
+                            <span><strong class="text-blue-950 font-extrabold">Bola Out (Kick-in):</strong> Bola keluar dimainkan dengan <strong>tendangan kaki</strong> di garis.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-700 font-bold">▪</span> 
+                            <span><strong class="text-blue-950 font-extrabold">Wajib Rotasi:</strong> Seluruh pemain cadangan WAJIB dimainkan ke lapangan.</span>
+                        </li>
+                        <li class="flex items-start gap-2 bg-red-100 p-1.5 rounded-lg border border-red-300">
+                            <span class="text-red-700 font-bold">▪</span> 
+                            <span><strong class="text-red-900 font-black">Dilarang Meluncur di Tanah:</strong> Merebut bola WAJIB posisi berdiri (mencegah cedera & lecet).</span>
+                        </li>
+                    </ul>
+                    <ul class="space-y-2.5 font-semibold text-slate-800">
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-700 font-bold">▪</span> 
+                            <span><strong class="text-blue-950 font-extrabold">Fair Play & Akhlaq:</strong> Dilarang emosi/berkata kasar. WAJIB <strong>berbaris bersalaman (musafahah)</strong> sebelum & sesudah laga.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-700 font-bold">▪</span> 
+                            <span><strong class="text-blue-950 font-extrabold">Hanya Kapten:</strong> Protes liar dilarang. Hanya Kapten yang boleh bicara ke Ustadz dengan adab.</span>
+                        </li>
+                        <li class="flex items-start gap-2 bg-slate-900 text-white p-2 rounded-lg">
+                            <span class="text-amber-400 font-bold">▪</span> 
+                            <span class="font-extrabold text-amber-300">Keputusan Ustadz sebagai wasit bersifat FINAL & MUTLAK.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-                        <!-- Day 3 -->
-                        <div class="bg-gradient-to-r from-brand-900 to-brand-700 rounded-xl shadow-md p-4 text-white">
-                            <div class="text-sm font-bold text-brand-900 bg-gold-400 inline-block px-3 py-1 rounded-md mb-3">Jum'at, 24 Juli</div>
-                            <div class="space-y-3">
-                                <div class="flex justify-between items-center text-xs md:text-sm border-b border-white/20 pb-2">
-                                    <span class="text-brand-100 font-medium w-20">16.00-16.10</span>
-                                    <span class="font-bold flex-1 text-center">Khandaq <span class="text-brand-500 mx-1">vs</span> Tabuk</span>
-                                </div>
-                                <div class="flex justify-between items-center text-xs md:text-sm border-b border-white/20 pb-2">
-                                    <span class="text-brand-100 font-medium w-20">16.15-16.25</span>
-                                    <span class="font-bold flex-1 text-center">Badar <span class="text-brand-500 mx-1">vs</span> Khaibar</span>
-                                </div>
-                                <div class="flex justify-between items-center text-xs md:text-sm pt-1">
-                                    <span class="text-brand-100 font-medium w-20">16.30-16.40</span>
-                                    <span class="font-bold flex-1 text-center">Uhud <span class="text-brand-500 mx-1">vs</span> Tabuk</span>
-                                </div>
-                            </div>
+            <!-- Jadwal Laga -->
+            <div class="space-y-4">
+                <h2 class="font-display text-2xl md:text-3xl font-extrabold text-blue-950 border-b-4 border-blue-900 pb-1.5 flex justify-between items-center">
+                    <span>JADWAL LAGA <span class="text-sm font-semibold text-blue-700 ml-2">(Sistem Liga)</span></span>
+                    <span class="text-xs bg-blue-100 text-blue-900 font-bold px-3 py-1 rounded-md">1 x 10 Menit</span>
+                </h2>
+                
+                <div class="grid grid-cols-1 gap-3 text-sm md:text-base">
+                    <!-- Day 1 -->
+                    <div class="bg-white rounded-xl shadow-sm p-4 border-2 border-slate-300">
+                        <div class="text-xs font-black text-white bg-slate-900 inline-block px-3 py-1 rounded-md mb-2">Rabu, 22 Juli</div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 font-bold text-slate-800">
+                            <div class="bg-slate-50 p-2 rounded border text-center"><span class="text-slate-500 text-xs block">16.00-16.10</span> Badar <span class="text-red-600">vs</span> Uhud</div>
+                            <div class="bg-slate-50 p-2 rounded border text-center"><span class="text-slate-500 text-xs block">16.15-16.25</span> Khandaq <span class="text-red-600">vs</span> Khaibar</div>
+                            <div class="bg-slate-50 p-2 rounded border text-center"><span class="text-slate-500 text-xs block">16.30-16.40</span> Tabuk <span class="text-red-600">vs</span> Badar</div>
                         </div>
+                    </div>
 
-                        <!-- Day 4 (Finals & Super Match) -->
-                        <div class="bg-gradient-to-r from-gold-500 to-gold-400 rounded-xl shadow-md p-4 text-brand-900 border-2 border-brand-900">
-                            <div class="text-sm font-bold text-white bg-brand-900 inline-block px-3 py-1 rounded-md mb-3">Sabtu, 25 Juli</div>
-                            <div class="space-y-2.5">
-                                <div class="flex justify-between items-center text-xs md:text-sm border-b border-brand-900/20 pb-1.5">
-                                    <span class="font-bold w-20">16.00-16.10</span>
-                                    <span class="font-bold flex-1 text-center text-brand-800">Perebutan Juara 3 <span class="text-[10px] font-normal ml-1">(Rank 3 vs 4)</span></span>
-                                </div>
-                                <div class="flex justify-between items-center text-sm border-b border-brand-900/20 pb-1.5">
-                                    <span class="font-bold w-20">16.15-16.25</span>
-                                    <span class="font-display tracking-wide font-black flex-1 text-center text-lg text-brand-900 drop-shadow-sm">GRAND FINAL <span class="text-[10px] font-bold ml-1 text-brand-700">(Rank 1 vs 2)</span></span>
-                                </div>
-                                <!-- Super Match Asatidzah -->
-                                <div class="bg-brand-900 text-white p-2.5 rounded-lg shadow-inner text-center">
-                                    <div class="flex justify-between items-center text-xs text-gold-400 font-bold border-b border-white/10 pb-1 mb-1">
-                                        <span>⏰ 16.35 - 16.50 WIB</span>
-                                        <span class="text-[10px] bg-gold-500/20 text-gold-300 px-2 py-0.5 rounded-full font-normal">(Istirahat 10 Menit Pasca Final)</span>
-                                    </div>
-                                    <div class="text-[11px] font-bold tracking-wider text-gold-400 uppercase">🔥 EXHIBITION SUPER MATCH 🔥</div>
-                                    <div class="font-black text-sm md:text-base text-white mt-0.5">JUARA 1 <span class="text-gold-400 font-normal">VS</span> TIM ASATIDZAH</div>
-                                    <div class="text-[10px] text-gold-200 mt-1 font-semibold italic">🎁 Bonus Hadiah Khusus jika Santri Berhasil Mengalahkan Tim Asatidzah!</div>
-                                </div>
+                    <!-- Day 2 -->
+                    <div class="bg-white rounded-xl shadow-sm p-4 border-2 border-slate-300">
+                        <div class="text-xs font-black text-white bg-slate-900 inline-block px-3 py-1 rounded-md mb-2">Kamis, 23 Juli</div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 font-bold text-slate-800">
+                            <div class="bg-slate-50 p-2 rounded border text-center"><span class="text-slate-500 text-xs block">16.00-16.10</span> Uhud <span class="text-red-600">vs</span> Khandaq</div>
+                            <div class="bg-slate-50 p-2 rounded border text-center"><span class="text-slate-500 text-xs block">16.15-16.25</span> Khaibar <span class="text-red-600">vs</span> Tabuk</div>
+                            <div class="bg-slate-50 p-2 rounded border text-center"><span class="text-slate-500 text-xs block">16.30-16.40</span> Badar <span class="text-red-600">vs</span> Khandaq</div>
+                            <div class="bg-slate-50 p-2 rounded border text-center"><span class="text-slate-500 text-xs block">16.45-16.55</span> Uhud <span class="text-red-600">vs</span> Khaibar</div>
+                        </div>
+                    </div>
+
+                    <!-- Day 3 -->
+                    <div class="bg-slate-900 rounded-xl shadow-sm p-4 text-white">
+                        <div class="text-xs font-black text-slate-900 bg-amber-400 inline-block px-3 py-1 rounded-md mb-2">Jum'at, 24 Juli</div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 font-bold text-white">
+                            <div class="bg-slate-800 p-2 rounded border border-slate-700 text-center"><span class="text-slate-400 text-xs block">16.00-16.10</span> Khandaq <span class="text-amber-400">vs</span> Tabuk</div>
+                            <div class="bg-slate-800 p-2 rounded border border-slate-700 text-center"><span class="text-slate-400 text-xs block">16.15-16.25</span> Badar <span class="text-amber-400">vs</span> Khaibar</div>
+                            <div class="bg-slate-800 p-2 rounded border border-slate-700 text-center"><span class="text-slate-400 text-xs block">16.30-16.40</span> Uhud <span class="text-amber-400">vs</span> Tabuk</div>
+                        </div>
+                    </div>
+
+                    <!-- Day 4 (Finals & Super Match) -->
+                    <div class="bg-gradient-to-r from-amber-400 to-amber-300 rounded-xl shadow-md p-4 text-slate-900 border-2 border-slate-900">
+                        <div class="text-xs font-black text-white bg-slate-900 inline-block px-3 py-1 rounded-md mb-2">Sabtu, 25 Juli (BABAK FINAL & SUPER MATCH)</div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+                            <div class="bg-white p-2.5 rounded-lg border border-slate-900 text-center font-bold">
+                                <span class="text-xs text-slate-600 block">16.00-16.10 WIB</span>
+                                <span class="text-sm font-black text-blue-900">🥉 PEREBUTAN JUARA 3</span>
+                                <span class="text-xs block text-slate-600">(Rank 3 vs 4)</span>
+                            </div>
+                            <div class="bg-white p-2.5 rounded-lg border-2 border-blue-900 text-center font-black">
+                                <span class="text-xs text-blue-700 block">16.15-16.25 WIB</span>
+                                <span class="text-base text-blue-950">🏆 GRAND FINAL</span>
+                                <span class="text-xs block text-blue-800">(Rank 1 vs 2)</span>
+                            </div>
+                            <div class="bg-slate-900 text-white p-2.5 rounded-lg text-center font-bold border border-amber-400">
+                                <div class="text-[10px] text-amber-300">⏰ 16.35 - 16.50 WIB (Istirahat 10 mnt)</div>
+                                <div class="text-xs font-extrabold text-amber-400">🔥 SUPER MATCH 🔥</div>
+                                <div class="text-sm font-black">JUARA 1 vs ASATIDZAH</div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Pembagian Tim (Halaman 2) -->
-                <div class="lg:col-span-7 space-y-4 print-page-break">
-                    <h2 class="font-display text-3xl font-bold text-brand-900 border-b-2 border-brand-100 pb-2">PEMBAGIAN TIM</h2>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- Tim Badar -->
-                        <div class="bg-white rounded-xl border border-blue-200 overflow-hidden shadow-sm">
-                            <div class="bg-blue-600 text-white font-bold px-4 py-2 text-sm uppercase tracking-wider">TIM BADAR</div>
-                            <div class="p-4 text-xs md:text-sm text-gray-700 leading-relaxed font-medium">
-                                Andi Ibra Faeyza &bull; Haidar Ayyubi &bull; M Fazril Alkais &bull; Favian Radi &bull; Raylan Akbar &bull; Fanni Hariri &bull; Lalu M. Rizky &bull; Syeh Al Bani &bull; Yasser Khaibar Nurdin &bull; Pandi Rianto
-                            </div>
+            <!-- Pembagian Tim (Halaman 2 saat diprint) -->
+            <div class="space-y-4 print-page-break pt-4">
+                <h2 class="font-display text-3xl font-extrabold text-blue-950 border-b-4 border-blue-900 pb-1.5 flex justify-between items-center">
+                    <span>PEMBAGIAN TIM SANTRI <span class="text-sm font-semibold text-blue-700 ml-2">(Total 50 Santri)</span></span>
+                    <span class="text-xs bg-slate-900 text-white font-bold px-3 py-1 rounded-md">5 Tim @ 10 Anak</span>
+                </h2>
+                
+                <div class="grid grid-cols-1 gap-3 text-sm md:text-base">
+                    <!-- Tim Badar -->
+                    <div class="bg-white rounded-xl border-2 border-blue-600 overflow-hidden shadow-sm">
+                        <div class="bg-blue-600 text-white font-black px-4 py-2 text-sm uppercase tracking-wider flex justify-between">
+                            <span>🛡️ TIM BADAR</span>
+                            <span>10 Santri</span>
                         </div>
-
-                        <!-- Tim Uhud -->
-                        <div class="bg-white rounded-xl border border-green-200 overflow-hidden shadow-sm">
-                            <div class="bg-green-600 text-white font-bold px-4 py-2 text-sm uppercase tracking-wider">TIM UHUD</div>
-                            <div class="p-4 text-xs md:text-sm text-gray-700 leading-relaxed font-medium">
-                                M Hafidz Reo Afelano &bull; Azka Panji Kusuma &bull; Muh Asrorin Da Silva &bull; Fiqri Ramdan Handoko &bull; Abdurrahim Pati Raja &bull; Panji Ahmad &bull; Hibban &bull; Zakaria &bull; Dicky Dwy AP &bull; Salman Abdul Rahim
-                            </div>
+                        <div class="p-4 text-xs md:text-sm text-slate-900 font-bold leading-relaxed">
+                            Andi Ibra Faeyza &bull; Haidar Ayyubi &bull; M Fazril Alkais &bull; Favian Radi &bull; Raylan Akbar &bull; Fanni Hariri &bull; Lalu M. Rizky &bull; Syeh Al Bani &bull; Yasser Khaibar Nurdin &bull; Pandi Rianto
                         </div>
+                    </div>
 
-                        <!-- Tim Khandaq -->
-                        <div class="bg-white rounded-xl border border-yellow-400 overflow-hidden shadow-sm">
-                            <div class="bg-yellow-500 text-white font-bold px-4 py-2 text-sm uppercase tracking-wider">TIM KHANDAQ</div>
-                            <div class="p-4 text-xs md:text-sm text-gray-700 leading-relaxed font-medium">
-                                M Yahya Ayyash &bull; Naufal Dzakiy &bull; M Rifqi Hamid &bull; M Azzam Al Hafiz &bull; Abdullah Rasyid &bull; Daffa Muammar Dzaki &bull; Muhammad Rizky &bull; Miizan Alghifary &bull; Muhammad Abdurrahman &bull; Radil
-                            </div>
+                    <!-- Tim Uhud -->
+                    <div class="bg-white rounded-xl border-2 border-emerald-600 overflow-hidden shadow-sm">
+                        <div class="bg-emerald-600 text-white font-black px-4 py-2 text-sm uppercase tracking-wider flex justify-between">
+                            <span>🛡️ TIM UHUD</span>
+                            <span>10 Santri</span>
                         </div>
-
-                        <!-- Tim Khaibar -->
-                        <div class="bg-white rounded-xl border border-purple-200 overflow-hidden shadow-sm">
-                            <div class="bg-purple-600 text-white font-bold px-4 py-2 text-sm uppercase tracking-wider">TIM KHAIBAR</div>
-                            <div class="p-4 text-xs md:text-sm text-gray-700 leading-relaxed font-medium">
-                                Abdul Hakim &bull; Khalish &bull; Rifqi Arsyad Fadilah &bull; Labibullah El Fatih &bull; Wahyu Hidayat &bull; Farid &bull; M Rasyid Ridho &bull; M Hafidz Abdurrahman &bull; Muhammad Abdurrahim &bull; Muhammad Habib Rizky
-                            </div>
+                        <div class="p-4 text-xs md:text-sm text-slate-900 font-bold leading-relaxed">
+                            M Hafidz Reo Afelano &bull; Azka Panji Kusuma &bull; Muh Asrorin Da Silva &bull; Fiqri Ramdan Handoko &bull; Abdurrahim Pati Raja &bull; Panji Ahmad &bull; Hibban &bull; Zakaria &bull; Dicky Dwy AP &bull; Salman Abdul Rahim
                         </div>
+                    </div>
 
-                        <!-- Tim Tabuk -->
-                        <div class="bg-white rounded-xl border border-brand-200 overflow-hidden shadow-sm md:col-span-2">
-                            <div class="bg-brand-700 text-white font-bold px-4 py-2 text-sm uppercase tracking-wider">TIM TABUK</div>
-                            <div class="p-4 text-xs md:text-sm text-gray-700 leading-relaxed font-medium">
-                                Ahmad Farros Al Barqy &bull; Fariq Malaibui &bull; Abdul Aziz Khaibar &bull; Atqanul Ummah &bull; M Khoirul Azzam &bull; Ken Alfarezha &bull; Khubaib Abdul Aziz &bull; Nurcahya Eka Putra &bull; M Naufal Alfaniri &bull; Syafiq Karimalay
-                            </div>
+                    <!-- Tim Khandaq -->
+                    <div class="bg-white rounded-xl border-2 border-amber-500 overflow-hidden shadow-sm">
+                        <div class="bg-amber-500 text-slate-950 font-black px-4 py-2 text-sm uppercase tracking-wider flex justify-between">
+                            <span>🛡️ TIM KHANDAQ</span>
+                            <span>10 Santri</span>
+                        </div>
+                        <div class="p-4 text-xs md:text-sm text-slate-900 font-bold leading-relaxed">
+                            M Yahya Ayyash &bull; Naufal Dzakiy &bull; M Rifqi Hamid &bull; M Azzam Al Hafiz &bull; Abdullah Rasyid &bull; Daffa Muammar Dzaki &bull; Muhammad Rizky &bull; Miizan Alghifary &bull; Muhammad Abdurrahman &bull; Radil
+                        </div>
+                    </div>
+
+                    <!-- Tim Khaibar -->
+                    <div class="bg-white rounded-xl border-2 border-purple-600 overflow-hidden shadow-sm">
+                        <div class="bg-purple-600 text-white font-black px-4 py-2 text-sm uppercase tracking-wider flex justify-between">
+                            <span>🛡️ TIM KHAIBAR</span>
+                            <span>10 Santri</span>
+                        </div>
+                        <div class="p-4 text-xs md:text-sm text-slate-900 font-bold leading-relaxed">
+                            Abdul Hakim &bull; Khalish &bull; Rifqi Arsyad Fadilah &bull; Labibullah El Fatih &bull; Wahyu Hidayat &bull; Farid &bull; M Rasyid Ridho &bull; M Hafidz Abdurrahman &bull; Muhammad Abdurrahim &bull; Muhammad Habib Rizky
+                        </div>
+                    </div>
+
+                    <!-- Tim Tabuk -->
+                    <div class="bg-white rounded-xl border-2 border-slate-800 overflow-hidden shadow-sm">
+                        <div class="bg-slate-800 text-white font-black px-4 py-2 text-sm uppercase tracking-wider flex justify-between">
+                            <span>🛡️ TIM TABUK</span>
+                            <span>10 Santri</span>
+                        </div>
+                        <div class="p-4 text-xs md:text-sm text-slate-900 font-bold leading-relaxed">
+                            Ahmad Farros Al Barqy &bull; Fariq Malaibui &bull; Abdul Aziz Khaibar &bull; Atqanul Ummah &bull; M Khoirul Azzam &bull; Ken Alfarezha &bull; Khubaib Abdul Aziz &bull; Nurcahya Eka Putra &bull; M Naufal Alfaniri &bull; Syafiq Karimalay
                         </div>
                     </div>
                 </div>
 
-            </div>
+                <!-- Footer Quotes & Badges -->
+                <div class="pt-4 border-t-2 border-slate-200 text-center space-y-3">
+                    <div class="flex flex-wrap justify-center gap-2 text-xs font-extrabold">
+                        <span class="bg-amber-100 text-amber-900 px-3 py-1 rounded-full border border-amber-300">🏆 Juara 1 (Piala + Voucher 10k/anak)</span>
+                        <span class="bg-slate-200 text-slate-800 px-3 py-1 rounded-full border border-slate-300">🥈 Juara 2 (Piala + Voucher 5k/anak)</span>
+                        <span class="bg-amber-200 text-amber-900 px-3 py-1 rounded-full border border-amber-400">🥉 Juara 3 (Piala + Voucher 5k/anak)</span>
+                        <span class="bg-blue-100 text-blue-900 px-3 py-1 rounded-full border border-blue-300">🤝 Tim Fair Play (Piagam)</span>
+                    </div>
 
-            <!-- Kategori Penghargaan -->
-            <div class="mt-8 pt-8 border-t-2 border-dashed border-gray-200">
-                <h3 class="text-center font-bold text-gray-400 uppercase tracking-widest text-sm mb-4">Memperebutkan Gelar</h3>
-                <div class="flex flex-wrap justify-center gap-2 md:gap-4">
-                    <span class="px-4 py-2 bg-gold-400 text-brand-900 font-bold rounded-lg shadow-sm text-sm">🏆 Juara 1</span>
-                    <span class="px-4 py-2 bg-gray-300 text-gray-800 font-bold rounded-lg shadow-sm text-sm">🥈 Juara 2</span>
-                    <span class="px-4 py-2 bg-orange-300 text-orange-900 font-bold rounded-lg shadow-sm text-sm">🥉 Juara 3</span>
-                    <span class="px-4 py-2 bg-brand-800 text-white font-bold rounded-lg shadow-sm text-sm">🌟 Best Player</span>
-                    <span class="px-4 py-2 bg-brand-800 text-white font-bold rounded-lg shadow-sm text-sm">⚽ Top Scorer</span>
-                    <span class="px-4 py-2 bg-brand-800 text-white font-bold rounded-lg shadow-sm text-sm">🧤 Best GK</span>
-                    <span class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg shadow-sm text-sm">🤝 Fair Play</span>
+                    <div class="bg-slate-900 text-white p-4 rounded-xl font-bold text-sm md:text-base">
+                        "Kemenangan Bukan Tujuan Utama — Adab, Akhlaq, dan Ukhuwah di Atas Segalanya"
+                        <div class="text-xs font-medium text-amber-400 mt-1">PANITIA MOSA CUP &bull; PESANTREN AL IMAM AL ISLAMI 2026/2027</div>
+                    </div>
                 </div>
             </div>
 
         </div>
-
-        <!-- Footer -->
-        <div class="bg-brand-900 text-center py-6 px-4">
-            <p class="text-gold-400 font-display text-xl md:text-2xl font-bold italic drop-shadow-md">
-                "Kemenangan bukan tujuan utama — Akhlak dan Ukhuwah di atas segalanya"
-            </p>
-            <p class="text-white font-semibold text-xs mt-3 uppercase tracking-widest">
-                Panitia MOSA | Al Imam Al Islami | 2026/2027
-            </p>
-        </div>
-
     </div>
 </body>
 </html>
