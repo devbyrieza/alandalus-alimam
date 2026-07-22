@@ -261,6 +261,67 @@
                     </table>
                 </div>
             </div>
+
+            <!-- Special Awards Section -->
+            <div class="bg-white rounded-2xl shadow-xl border border-gold-200 overflow-hidden mt-6">
+                <div class="bg-gradient-to-r from-gold-400 to-amber-500 p-4 border-b border-gold-500 flex justify-between items-center">
+                    <h2 class="font-display text-xl font-bold text-brand-900 tracking-wide"><i data-lucide="award" class="w-5 h-5 inline-block"></i> PENGHARGAAN SPESIAL</h2>
+                </div>
+                
+                <div class="p-5 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Best Player -->
+                    <div class="bg-brand-50 border border-brand-200 rounded-xl p-4 text-center relative overflow-hidden group">
+                        <div class="absolute -right-4 -top-4 opacity-10 group-hover:scale-110 transition-transform"><i data-lucide="star" class="w-24 h-24 text-brand-900"></i></div>
+                        <div class="text-brand-600 mb-2 flex justify-center"><i data-lucide="star" class="w-8 h-8 fill-brand-600"></i></div>
+                        <h3 class="font-black text-brand-900 text-sm tracking-widest mb-1">BEST PLAYER</h3>
+                        <p class="text-xs text-gray-500 mb-3 border-b border-brand-200/50 pb-2">Pemain Terbaik</p>
+                        
+                        <div id="award-best-player-display" class="font-bold text-lg text-brand-700 min-h-[28px]"><span class="text-gray-400 italic text-sm">Menunggu Final...</span></div>
+                        
+                        <div class="award-admin-box hidden mt-3 relative z-10">
+                            <input type="text" id="input-best-player" class="w-full text-xs p-2 border border-brand-300 rounded focus:outline-none focus:border-brand-600 text-center mb-2 font-bold" placeholder="Nama Pemain">
+                            <button onclick="saveAward('best-player')" class="bg-brand-600 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow w-full hover:bg-brand-700">Simpan</button>
+                        </div>
+                    </div>
+
+                    <!-- Best Goalkeeper -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center relative overflow-hidden group">
+                        <div class="absolute -right-4 -top-4 opacity-10 group-hover:scale-110 transition-transform"><i data-lucide="shield" class="w-24 h-24 text-slate-900"></i></div>
+                        <div class="text-slate-600 mb-2 flex justify-center"><i data-lucide="shield" class="w-8 h-8 fill-slate-600"></i></div>
+                        <h3 class="font-black text-slate-900 text-sm tracking-widest mb-1">BEST GOALKEEPER</h3>
+                        <p class="text-xs text-gray-500 mb-3 border-b border-slate-200/50 pb-2">Kiper Terbaik</p>
+                        
+                        <div id="award-best-gk-display" class="font-bold text-lg text-slate-700 min-h-[28px]"><span class="text-gray-400 italic text-sm">Menunggu Final...</span></div>
+                        
+                        <div class="award-admin-box hidden mt-3 relative z-10">
+                            <input type="text" id="input-best-gk" class="w-full text-xs p-2 border border-slate-300 rounded focus:outline-none focus:border-slate-600 text-center mb-2 font-bold" placeholder="Nama Kiper">
+                            <button onclick="saveAward('best-gk')" class="bg-slate-600 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow w-full hover:bg-slate-700">Simpan</button>
+                        </div>
+                    </div>
+
+                    <!-- Fair Play Team -->
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-center relative overflow-hidden group">
+                        <div class="absolute -right-4 -top-4 opacity-10 group-hover:scale-110 transition-transform"><i data-lucide="users" class="w-24 h-24 text-emerald-900"></i></div>
+                        <div class="text-emerald-600 mb-2 flex justify-center"><i data-lucide="users" class="w-8 h-8 fill-emerald-600"></i></div>
+                        <h3 class="font-black text-emerald-900 text-sm tracking-widest mb-1">FAIR PLAY TEAM</h3>
+                        <p class="text-xs text-gray-500 mb-3 border-b border-emerald-200/50 pb-2">Tim Paling Sportif</p>
+                        
+                        <div id="award-fair-play-display" class="font-bold text-lg text-emerald-700 min-h-[28px]"><span class="text-gray-400 italic text-sm">Menunggu Final...</span></div>
+                        
+                        <div class="award-admin-box hidden mt-3 relative z-10">
+                            <select id="input-fair-play" class="w-full text-xs p-2 border border-emerald-300 rounded focus:outline-none focus:border-emerald-600 text-center mb-2 font-bold bg-white">
+                                <option value="">-- Pilih Tim --</option>
+                                <option value="Badar">Badar</option>
+                                <option value="Uhud">Uhud</option>
+                                <option value="Khandaq">Khandaq</option>
+                                <option value="Khaibar">Khaibar</option>
+                                <option value="Tabuk">Tabuk</option>
+                            </select>
+                            <button onclick="saveAward('fair-play')" class="bg-emerald-600 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow w-full hover:bg-emerald-700">Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -390,6 +451,7 @@
         let scores = {};
         let goals = {};
         let attendance = {}; // { 'day_team_player': 'hadir'|'alpha'|'belum' }
+        let specialAwards = {}; // { 'best-player': '', 'best-gk': '', 'fair-play': '' }
         let currentAbsensiDay = 1;
 
         // Load data & admin state
@@ -407,6 +469,7 @@
                     if (data.scores) scores = data.scores;
                     if (data.goals) goals = data.goals;
                     if (data.attendance) attendance = data.attendance;
+                    if (data.awards) specialAwards = data.awards;
                 }
             } catch(e) {
                 console.error("Gagal memuat data dari server:", e);
@@ -417,25 +480,30 @@
                 if (savedGoals) { try { goals = JSON.parse(savedGoals); } catch(e) { goals = {}; } }
                 const savedAttendance = localStorage.getItem('mosa_attendance_draft');
                 if (savedAttendance) { try { attendance = JSON.parse(savedAttendance); } catch(e) { attendance = {}; } }
+                const savedAwards = localStorage.getItem('mosa_awards_draft');
+                if (savedAwards) { try { specialAwards = JSON.parse(savedAwards); } catch(e) { specialAwards = {}; } }
             }
             
             renderMatches(); refreshIcons();
             calculateStandings();
             renderTopScorers(); refreshIcons();
             renderAbsensi(); refreshIcons();
+            renderAwards();
         }
 
         function saveData() {
             localStorage.setItem('mosa_scores_draft', JSON.stringify(scores));
             localStorage.setItem('mosa_goals_draft', JSON.stringify(goals));
             localStorage.setItem('mosa_attendance_draft', JSON.stringify(attendance));
+            localStorage.setItem('mosa_awards_draft', JSON.stringify(specialAwards));
             calculateStandings();
             renderTopScorers(); refreshIcons();
+            renderAwards();
 
             fetch('/api/mosa-cup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ scores, goals, attendance })
+                body: JSON.stringify({ scores, goals, attendance, awards: specialAwards })
             }).catch(e => console.error("Gagal sinkronisasi data ke server", e));
         }
 
@@ -498,6 +566,7 @@
                 topScorerBox.classList.remove('hidden');
                 tsActionHeader.classList.remove('hidden');
                 absensiNote.classList.remove('hidden');
+                document.querySelectorAll('.award-admin-box').forEach(el => el.classList.remove('hidden'));
             } else {
                 modeBadge.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 flex items-center gap-1.5";
                 modeText.innerHTML = `<i data-lucide="eye" class="w-4 h-4 inline-block"></i> Mode Penonton (Read-Only)`;
@@ -508,8 +577,36 @@
                 topScorerBox.classList.add('hidden');
                 tsActionHeader.classList.add('hidden');
                 absensiNote.classList.add('hidden');
+                document.querySelectorAll('.award-admin-box').forEach(el => el.classList.add('hidden'));
             }
             renderAbsensi(); refreshIcons();
+        }
+
+        // Penghargaan Spesial Logic
+        function renderAwards() {
+            const bp = specialAwards['best-player'];
+            const bgk = specialAwards['best-gk'];
+            const fp = specialAwards['fair-play'];
+            
+            document.getElementById('award-best-player-display').innerHTML = bp ? `<i data-lucide="check-circle" class="w-4 h-4 inline-block text-brand-500 mr-1"></i> ${bp}` : `<span class="text-gray-400 italic text-sm">Menunggu Final...</span>`;
+            document.getElementById('award-best-gk-display').innerHTML = bgk ? `<i data-lucide="check-circle" class="w-4 h-4 inline-block text-slate-500 mr-1"></i> ${bgk}` : `<span class="text-gray-400 italic text-sm">Menunggu Final...</span>`;
+            document.getElementById('award-fair-play-display').innerHTML = fp ? `<i data-lucide="check-circle" class="w-4 h-4 inline-block text-emerald-500 mr-1"></i> Tim ${fp}` : `<span class="text-gray-400 italic text-sm">Menunggu Final...</span>`;
+            
+            if (isAdmin) {
+                if (bp) document.getElementById('input-best-player').value = bp;
+                if (bgk) document.getElementById('input-best-gk').value = bgk;
+                if (fp) document.getElementById('input-fair-play').value = fp;
+            }
+            refreshIcons();
+        }
+
+        function saveAward(type) {
+            const val = document.getElementById(`input-${type}`).value.trim();
+            if (val) {
+                specialAwards[type] = val;
+                saveData();
+                alert("Berhasil menyimpan Penghargaan!");
+            }
         }
 
         function resetData() {
