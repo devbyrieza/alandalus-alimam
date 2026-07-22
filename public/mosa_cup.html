@@ -256,6 +256,12 @@
             <!-- Summary Bar -->
             <div id="absensi-summary" class="grid grid-cols-4 divide-x divide-gray-200 border-b border-gray-200 bg-gray-50"></div>
 
+            <!-- Wali Santri note -->
+            <div id="absensi-wali-note" class="bg-blue-50 border-b border-blue-200 px-5 py-3 text-xs text-blue-800 font-semibold flex justify-between items-center">
+                <span><i data-lucide="shield-alert" class="w-4 h-4 inline-block mr-1"></i> Mode Publik (Privasi Nama Disamarkan)</span>
+                <button onclick="loginWali()" class="bg-blue-600 text-white px-3 py-1.5 rounded-lg shadow hover:bg-blue-700 transition active:scale-95 font-bold flex items-center gap-1"><i data-lucide="key" class="w-3 h-3 inline-block"></i> Akses Wali</button>
+            </div>
+
             <!-- Admin note -->
             <div id="absensi-admin-note" class="hidden bg-amber-50 border-b border-amber-200 px-5 py-2.5 text-xs text-amber-800 font-semibold flex items-center gap-2">
                 <span><i data-lucide="pencil" class="w-3 h-3 inline-block"></i></span> Mode Panitia: Ketuk tombol untuk mengubah status kehadiran santri.
@@ -298,7 +304,21 @@
 
     <script>
         const PIN_SECRET = "7678";
+        const PIN_WALI = "2026";
         let isAdmin = false;
+        let isWali = (localStorage.getItem('mosa_wali_session') === 'true');
+
+        function loginWali() {
+            const pin = prompt("Masukkan PIN Khusus Wali Santri (Silakan tanya di Grup WA):");
+            if (pin === PIN_WALI) {
+                isWali = true;
+                localStorage.setItem('mosa_wali_session', 'true');
+                renderAbsensi(); refreshIcons();
+                alert("Akses Wali Santri Berhasil! Nama lengkap santri telah dibuka.");
+            } else if (pin) {
+                alert("PIN Salah.");
+            }
+        }
 
         // Team definitions
         const teams = ["Badar", "Uhud", "Khandaq", "Khaibar", "Tabuk"];
@@ -836,9 +856,15 @@
                     const btnClass = `att-btn ${classMap[status]} ${isAdmin ? '' : 'readonly'}`;
                     const clickAttr = isAdmin ? `onclick="cycleAttendance(${day}, '${team}', '${player}')"` : '';
 
+                    let displayPlayer = player;
+                    if (!isAdmin && !isWali) {
+                        let parts = player.split(' ');
+                        displayPlayer = parts[0] + ' ' + (parts[1] ? parts[1].substring(0,1) + '***' : '***');
+                    }
+
                     playersHtml += `
                         <div class="flex items-center justify-between py-1.5 border-b border-gray-100 last:border-0">
-                            <span class="text-xs font-medium text-gray-700 truncate mr-2" title="${player}">${player}</span>
+                            <span class="text-xs font-medium text-gray-700 truncate mr-2" title="${player}">${displayPlayer}</span>
                             <button class="${btnClass}" ${clickAttr}>${labelMap[status]}</button>
                         </div>`;
                 });
@@ -880,6 +906,15 @@
                     <div class="text-[10px] md:text-xs text-gray-500 font-semibold"><i data-lucide="clock" class="w-3 h-3 inline-block"></i> Belum</div>
                 </div>
             `;
+            
+            const waliNote = document.getElementById('absensi-wali-note');
+            if (waliNote) {
+                if (isAdmin || isWali) {
+                    waliNote.classList.add('hidden');
+                } else {
+                    waliNote.classList.remove('hidden');
+                }
+            }
         }
 
         // Enter key for PIN modal
