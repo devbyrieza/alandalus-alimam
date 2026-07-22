@@ -455,8 +455,13 @@
                 matchesData.filter(m => m.day === day).forEach(match => {
                     const homeScore = scores[`${match.id}_home`] !== undefined ? scores[`${match.id}_home`] : '';
                     const awayScore = scores[`${match.id}_away`] !== undefined ? scores[`${match.id}_away`] : '';
+                    const homePen = scores[`${match.id}_home_pen`] !== undefined ? scores[`${match.id}_home_pen`] : '';
+                    const awayPen = scores[`${match.id}_away_pen`] !== undefined ? scores[`${match.id}_away_pen`] : '';
                     
+                    const isDraw = homeScore !== '' && awayScore !== '' && homeScore === awayScore;
+
                     let centerContent = '';
+                    let penContent = '';
                     if (isAdmin) {
                         centerContent = `
                             <div class="mx-2 md:mx-4 flex items-center gap-1.5">
@@ -467,6 +472,16 @@
                                     class="score-input w-9 md:w-11 h-9 md:h-11 text-center font-bold text-base md:text-lg border-2 border-gray-300 rounded-lg focus:border-brand-500 outline-none bg-white">
                             </div>
                         `;
+                        penContent = `
+                            <div id="pen-container-${match.id}" class="${isDraw ? '' : 'hidden'} w-full mt-2 pt-2 border-t border-gray-200 flex items-center justify-center gap-2">
+                                <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">Penalti:</span>
+                                <input type="number" min="0" data-match="${match.id}" data-team="home_pen" value="${homePen}" placeholder="0"
+                                    class="score-input w-8 h-8 text-center font-bold text-sm border-2 border-amber-300 bg-amber-50 rounded focus:border-brand-500 outline-none">
+                                <span class="text-gray-400 font-bold text-xs">-</span>
+                                <input type="number" min="0" data-match="${match.id}" data-team="away_pen" value="${awayPen}" placeholder="0"
+                                    class="score-input w-8 h-8 text-center font-bold text-sm border-2 border-amber-300 bg-amber-50 rounded focus:border-brand-500 outline-none">
+                            </div>
+                        `;
                     } else {
                         const scoreDisplay = (homeScore !== '' && awayScore !== '') ? `${homeScore} - ${awayScore}` : `VS`;
                         const bgDisplay = (homeScore !== '' && awayScore !== '') ? `bg-brand-900 text-white font-black` : `bg-gray-100 text-gray-500 font-bold`;
@@ -475,13 +490,25 @@
                                 ${scoreDisplay}
                             </div>
                         `;
+                        if (isDraw && homePen !== '' && awayPen !== '') {
+                            penContent = `
+                                <div class="w-full mt-1.5 pt-1.5 border-t border-gray-200 flex items-center justify-center">
+                                    <span class="text-[10px] font-black text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full border border-amber-200 tracking-wide uppercase">
+                                        Penalti: ${homePen} - ${awayPen}
+                                    </span>
+                                </div>
+                            `;
+                        }
                     }
 
                     const html = `
-                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200">
-                            <div class="flex-1 text-right font-semibold text-xs md:text-sm ${homeScore !== '' && homeScore > awayScore ? 'text-brand-700 font-extrabold' : 'text-gray-700'}">${match.home}</div>
-                            ${centerContent}
-                            <div class="flex-1 text-left font-semibold text-xs md:text-sm ${awayScore !== '' && awayScore > homeScore ? 'text-brand-700 font-extrabold' : 'text-gray-700'}">${match.away}</div>
+                        <div class="p-3 bg-gray-50 rounded-xl border border-gray-200 flex flex-col">
+                            <div class="flex items-center justify-between">
+                                <div class="flex-1 text-right font-semibold text-xs md:text-sm ${homeScore !== '' && homeScore > awayScore ? 'text-brand-700 font-extrabold' : 'text-gray-700'}">${match.home}</div>
+                                ${centerContent}
+                                <div class="flex-1 text-left font-semibold text-xs md:text-sm ${awayScore !== '' && awayScore > homeScore ? 'text-brand-700 font-extrabold' : 'text-gray-700'}">${match.away}</div>
+                            </div>
+                            ${penContent}
                         </div>
                     `;
                     container.insertAdjacentHTML('beforeend', html);
@@ -500,6 +527,21 @@
                         } else {
                             scores[`${matchId}_${teamType}`] = parseInt(val, 10);
                         }
+                        
+                        // Show or hide pen container dynamically
+                        if (teamType === 'home' || teamType === 'away') {
+                            const h = scores[`${matchId}_home`];
+                            const a = scores[`${matchId}_away`];
+                            const penContainer = document.getElementById(`pen-container-${matchId}`);
+                            if (h !== undefined && a !== undefined && h === a) {
+                                if(penContainer) penContainer.classList.remove('hidden');
+                            } else {
+                                if(penContainer) penContainer.classList.add('hidden');
+                                delete scores[`${matchId}_home_pen`];
+                                delete scores[`${matchId}_away_pen`];
+                            }
+                        }
+                        
                         saveData();
                     });
                 });
@@ -536,9 +578,23 @@
                         table[match.home].l += 1;
                     } else {
                         table[match.home].d += 1;
-                        table[match.home].pts += 1;
                         table[match.away].d += 1;
-                        table[match.away].pts += 1;
+                        
+                        const hPen = scores[`${match.id}_home_pen`];
+                        const aPen = scores[`${match.id}_away_pen`];
+                        
+                        if (hPen !== undefined && aPen !== undefined && hPen !== aPen) {
+                            if (hPen > aPen) {
+                                table[match.home].pts += 2;
+                                table[match.away].pts += 1;
+                            } else {
+                                table[match.away].pts += 2;
+                                table[match.home].pts += 1;
+                            }
+                        } else {
+                            table[match.home].pts += 1;
+                            table[match.away].pts += 1;
+                        }
                     }
                 }
             });
