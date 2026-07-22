@@ -42,6 +42,7 @@
             -moz-appearance: textfield;
         }
     </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen font-sans selection:bg-brand-500 selection:text-white pb-20">
 
@@ -49,7 +50,7 @@
     <header class="bg-brand-900 text-white py-6 px-4 shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-gold-500/20 border border-gold-400 flex items-center justify-center font-bold text-gold-400 text-xl">⚽</div>
+                <div class="w-10 h-10 rounded-full bg-gold-500/20 border border-gold-400 flex items-center justify-center font-bold text-gold-400 text-xl"><i data-lucide="dribbble" class="w-5 h-5 md:w-6 md:h-6 inline-block"></i></div>
                 <div class="text-left">
                     <h1 class="font-display text-2xl md:text-3xl font-extrabold tracking-tight">
                         MOSA CUP <span class="text-gold-400">SCOREBOARD</span>
@@ -62,11 +63,11 @@
             <div class="flex items-center gap-3">
                 <div id="mode-badge" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span id="mode-text">👁️ Mode Penonton (Read-Only)</span>
+                    <span id="mode-text"><i data-lucide="eye" class="w-4 h-4 inline-block"></i> Mode Penonton (Read-Only)</span>
                 </div>
 
                 <button id="admin-toggle-btn" onclick="toggleAdminMode()" class="bg-gold-500 hover:bg-gold-400 text-brand-900 font-bold text-xs px-4 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center gap-1.5">
-                    <span id="admin-btn-icon">🔑</span> <span id="admin-btn-text">Login Panitia</span>
+                    <span id="admin-btn-icon"><i data-lucide="key" class="w-4 h-4 inline-block"></i></span> <span id="admin-btn-text">Login Panitia</span>
                 </button>
             </div>
         </div>
@@ -74,7 +75,7 @@
 
     <!-- Admin Status Banner (shown when logged in) -->
     <div id="admin-banner" class="hidden bg-amber-400 text-brand-900 px-4 py-2 text-xs font-bold text-center border-b border-amber-500 shadow-inner flex items-center justify-center gap-2">
-        <span>🔓 MODE PANITIA AKTIF (Ust. Rieza Eka Tomara / Ust. Iqbal) &bull; Anda dapat menginput skor & top scorer.</span>
+        <span><i data-lucide="unlock" class="w-4 h-4 inline-block"></i> MODE PANITIA AKTIF (Ust. Rieza Eka Tomara / Ust. Iqbal) &bull; Anda dapat menginput skor & top scorer.</span>
         <button onclick="logoutAdmin()" class="underline text-brand-900 font-extrabold hover:text-black ml-2">[ Keluar Admin ]</button>
     </div>
 
@@ -111,11 +112,11 @@
                     <div>
                         <h3 class="text-sm font-bold text-brand-900 bg-amber-400 inline-block px-3 py-1 rounded-md mb-3">Hari 4 - Final & Super Match (Sabtu, 25 Juli)</h3>
                         <div class="bg-amber-50 border border-amber-300 p-3.5 rounded-xl text-xs space-y-1.5 text-brand-900 shadow-sm">
-                            <div class="font-medium flex justify-between text-gray-700"><span>16.00-16.10 WIB &bull; 🥉 Perebutan Juara 3:</span> <span>Rank 3 vs Rank 4</span></div>
-                            <div class="font-bold flex justify-between border-b border-amber-200 pb-1.5"><span>16.15-16.25 WIB &bull; 🏆 GRAND FINAL:</span> <span>Rank 1 vs Rank 2</span></div>
+                            <div class="font-medium flex justify-between text-gray-700"><span>16.00-16.10 WIB &bull; <i data-lucide="medal" class="w-4 h-4 inline-block"></i> Perebutan Juara 3:</span> <span>Rank 3 vs Rank 4</span></div>
+                            <div class="font-bold flex justify-between border-b border-amber-200 pb-1.5"><span>16.15-16.25 WIB &bull; <i data-lucide="trophy" class="w-4 h-4 inline-block"></i> GRAND FINAL:</span> <span>Rank 1 vs Rank 2</span></div>
                             <div class="font-extrabold text-amber-900 pt-1 flex justify-between items-center">
                                 <div>
-                                    <span>⏰ 16.35-16.50 WIB &bull; 🔥 EXHIBITION MATCH:</span>
+                                    <span><i data-lucide="alarm-clock" class="w-4 h-4 inline-block"></i> 16.35-16.50 WIB &bull; <i data-lucide="flame" class="w-4 h-4 inline-block"></i> EXHIBITION MATCH:</span>
                                     <div class="text-[10px] text-amber-700 font-normal ml-4">(Istirahat 10 Menit Pasca Final)</div>
                                 </div>
                                 <span>JUARA 1 vs TIM ASATIDZAH</span>
@@ -238,7 +239,7 @@
             <!-- Header -->
             <div class="bg-gradient-to-r from-emerald-800 to-emerald-600 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h2 class="font-display text-2xl font-bold text-white tracking-wide">📋 ABSENSI SANTRI</h2>
+                    <h2 class="font-display text-2xl font-bold text-white tracking-wide"><i data-lucide="clipboard-list" class="w-6 h-6 inline-block"></i> ABSENSI SANTRI</h2>
                     <p class="text-emerald-100 text-sm mt-1">Total 50 Santri Baru • 5 Tim @ 10 Anak</p>
                 </div>
                 <!-- Day Tabs -->
@@ -255,7 +256,7 @@
 
             <!-- Admin note -->
             <div id="absensi-admin-note" class="hidden bg-amber-50 border-b border-amber-200 px-5 py-2.5 text-xs text-amber-800 font-semibold flex items-center gap-2">
-                <span>✏️</span> Mode Panitia: Ketuk tombol untuk mengubah status kehadiran santri.
+                <span><i data-lucide="pencil" class="w-3 h-3 inline-block"></i></span> Mode Panitia: Ketuk tombol untuk mengubah status kehadiran santri.
             </div>
 
             <!-- Teams Grid -->
@@ -279,7 +280,7 @@
     <!-- PIN Modal -->
     <div id="pin-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl p-6 md:p-8 max-w-sm w-full shadow-2xl border border-gray-100 text-center">
-            <div class="w-12 h-12 bg-brand-50 rounded-full flex items-center justify-center text-brand-700 text-2xl mx-auto mb-4">🔑</div>
+            <div class="w-12 h-12 bg-brand-50 rounded-full flex items-center justify-center text-brand-700 text-2xl mx-auto mb-4"><i data-lucide="key" class="w-4 h-4 inline-block"></i></div>
             <h3 class="font-display text-xl font-bold text-gray-900 mb-1">Login Panitia MOSA</h3>
             <p class="text-xs text-gray-500 mb-6">Hubungi Ust. Rieza / Ust. Iqbal untuk mendapatkan PIN.</p>
             
@@ -334,7 +335,7 @@
             if (adminSession === 'true') {
                 isAdmin = true;
             }
-            updateAdminUI();
+            updateAdminUI(); refreshIcons();
 
             try {
                 const res = await fetch('/api/mosa-cup');
@@ -355,10 +356,10 @@
                 if (savedAttendance) { try { attendance = JSON.parse(savedAttendance); } catch(e) { attendance = {}; } }
             }
             
-            renderMatches();
+            renderMatches(); refreshIcons();
             calculateStandings();
-            renderTopScorers();
-            renderAbsensi();
+            renderTopScorers(); refreshIcons();
+            renderAbsensi(); refreshIcons();
         }
 
         function saveData() {
@@ -366,7 +367,7 @@
             localStorage.setItem('mosa_goals_draft', JSON.stringify(goals));
             localStorage.setItem('mosa_attendance_draft', JSON.stringify(attendance));
             calculateStandings();
-            renderTopScorers();
+            renderTopScorers(); refreshIcons();
 
             fetch('/api/mosa-cup', {
                 method: 'POST',
@@ -397,9 +398,9 @@
                 isAdmin = true;
                 localStorage.setItem('mosa_admin_session', 'true');
                 closePinModal();
-                updateAdminUI();
-                renderMatches();
-                renderTopScorers();
+                updateAdminUI(); refreshIcons();
+                renderMatches(); refreshIcons();
+                renderTopScorers(); refreshIcons();
             } else {
                 document.getElementById('pin-error').classList.remove('hidden');
             }
@@ -408,9 +409,9 @@
         function logoutAdmin() {
             isAdmin = false;
             localStorage.removeItem('mosa_admin_session');
-            updateAdminUI();
-            renderMatches();
-            renderTopScorers();
+            updateAdminUI(); refreshIcons();
+            renderMatches(); refreshIcons();
+            renderTopScorers(); refreshIcons();
         }
 
         function updateAdminUI() {
@@ -426,8 +427,8 @@
 
             if (isAdmin) {
                 modeBadge.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-amber-400 text-brand-900 border border-amber-300 flex items-center gap-1.5";
-                modeText.innerText = "🔓 Mode Panitia (Edit Aktif)";
-                adminBtnIcon.innerText = "🔒";
+                modeText.innerText = "<i data-lucide="unlock" class="w-4 h-4 inline-block"></i> Mode Panitia (Edit Aktif)";
+                adminBtnIcon.innerText = "<i data-lucide="lock" class="w-4 h-4 inline-block"></i>";
                 adminBtnText.innerText = "Keluar Admin";
                 adminBanner.classList.remove('hidden');
                 resetBtn.classList.remove('hidden');
@@ -436,8 +437,8 @@
                 absensiNote.classList.remove('hidden');
             } else {
                 modeBadge.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 flex items-center gap-1.5";
-                modeText.innerText = "👁️ Mode Penonton (Read-Only)";
-                adminBtnIcon.innerText = "🔑";
+                modeText.innerText = "<i data-lucide="eye" class="w-4 h-4 inline-block"></i> Mode Penonton (Read-Only)";
+                adminBtnIcon.innerText = "<i data-lucide="key" class="w-4 h-4 inline-block"></i>";
                 adminBtnText.innerText = "Login Panitia";
                 adminBanner.classList.add('hidden');
                 resetBtn.classList.add('hidden');
@@ -445,7 +446,7 @@
                 tsActionHeader.classList.add('hidden');
                 absensiNote.classList.add('hidden');
             }
-            renderAbsensi();
+            renderAbsensi(); refreshIcons();
         }
 
         function resetData() {
@@ -456,10 +457,10 @@
                 localStorage.removeItem('mosa_scores_draft');
                 localStorage.removeItem('mosa_goals_draft');
                 localStorage.removeItem('mosa_attendance_draft');
-                renderMatches();
+                renderMatches(); refreshIcons();
                 calculateStandings();
-                renderTopScorers();
-                renderAbsensi();
+                renderTopScorers(); refreshIcons();
+                renderAbsensi(); refreshIcons();
             }
         }
 
@@ -771,11 +772,11 @@
         // ABSENSI MODULE
         // =============================================
         const teamColors = {
-            'Badar':   { bg: 'bg-blue-50',   border: 'border-blue-300',   header: 'bg-blue-600',   icon: '🔵' },
-            'Uhud':    { bg: 'bg-green-50',  border: 'border-green-300',  header: 'bg-green-600',  icon: '🟢' },
-            'Khandaq': { bg: 'bg-amber-50',  border: 'border-amber-300',  header: 'bg-amber-500',  icon: '🟡' },
-            'Khaibar': { bg: 'bg-purple-50', border: 'border-purple-300', header: 'bg-purple-600', icon: '🟣' },
-            'Tabuk':   { bg: 'bg-slate-50',  border: 'border-slate-300',   header: 'bg-slate-700',   icon: '⚫' },
+            'Badar':   { bg: 'bg-blue-50',   border: 'border-blue-300',   header: 'bg-blue-600',   icon: '<i data-lucide="shield-half" class="w-4 h-4 inline-block"></i>' },
+            'Uhud':    { bg: 'bg-green-50',  border: 'border-green-300',  header: 'bg-green-600',  icon: '<i data-lucide="shield-half" class="w-4 h-4 inline-block"></i>' },
+            'Khandaq': { bg: 'bg-amber-50',  border: 'border-amber-300',  header: 'bg-amber-500',  icon: '<i data-lucide="shield-half" class="w-4 h-4 inline-block"></i>' },
+            'Khaibar': { bg: 'bg-purple-50', border: 'border-purple-300', header: 'bg-purple-600', icon: '<i data-lucide="shield-half" class="w-4 h-4 inline-block"></i>' },
+            'Tabuk':   { bg: 'bg-slate-50',  border: 'border-slate-300',   header: 'bg-slate-700',   icon: '<i data-lucide="shield-half" class="w-4 h-4 inline-block"></i>' },
         };
 
         function getAttKey(day, team, player) {
@@ -793,7 +794,7 @@
             const next = current === 'belum' ? 'hadir' : current === 'hadir' ? 'telat' : current === 'telat' ? 'alpha' : 'belum';
             attendance[key] = next;
             saveData();
-            renderAbsensi();
+            renderAbsensi(); refreshIcons();
         }
 
         function switchAbsensiDay(day) {
@@ -803,7 +804,7 @@
                 if (d === day) tab.classList.add('active-tab');
                 else tab.classList.remove('active-tab');
             });
-            renderAbsensi();
+            renderAbsensi(); refreshIcons();
         }
 
         function renderAbsensi() {
@@ -828,7 +829,7 @@
                     else if (status === 'alpha') { teamAlpha++; totalAlpha++; }
                     else totalBelum++;
 
-                    const labelMap = { hadir: '✅ Hadir', telat: '⚠️ Telat', alpha: '❌ Tidak', belum: '• Belum' };
+                    const labelMap = { hadir: '<i data-lucide="check-circle-2" class="w-3 h-3 inline-block"></i> Hadir', telat: '<i data-lucide="alert-triangle" class="w-3 h-3 inline-block"></i> Telat', alpha: '<i data-lucide="x-circle" class="w-3 h-3 inline-block"></i> Tidak', belum: '• Belum' };
                     const classMap = { hadir: 'att-hadir', telat: 'att-telat', alpha: 'att-alpha', belum: 'att-belum' };
                     const btnClass = `att-btn ${classMap[status]} ${isAdmin ? '' : 'readonly'}`;
                     const clickAttr = isAdmin ? `onclick="cycleAttendance(${day}, '${team}', '${player}')"` : '';
@@ -848,9 +849,9 @@
                                 <span class="text-[10px] group-open:rotate-180 transition-transform">▼</span>
                             </span>
                             <div class="flex gap-1.5 text-xs">
-                                <span class="bg-white/20 text-white rounded-full px-2 py-0.5 font-bold">✅ ${teamHadir}</span>
-                                <span class="bg-amber-400/80 text-amber-900 rounded-full px-2 py-0.5 font-bold">⚠️ ${teamTelat}</span>
-                                <span class="bg-red-400/40 text-white rounded-full px-2 py-0.5 font-bold">❌ ${teamAlpha}</span>
+                                <span class="bg-white/20 text-white rounded-full px-2 py-0.5 font-bold"><i data-lucide="check-circle-2" class="w-3 h-3 inline-block"></i> ${teamHadir}</span>
+                                <span class="bg-amber-400/80 text-amber-900 rounded-full px-2 py-0.5 font-bold"><i data-lucide="alert-triangle" class="w-3 h-3 inline-block"></i> ${teamTelat}</span>
+                                <span class="bg-red-400/40 text-white rounded-full px-2 py-0.5 font-bold"><i data-lucide="x-circle" class="w-3 h-3 inline-block"></i> ${teamAlpha}</span>
                             </div>
                         </summary>
                         <div class="px-4 py-2 border-t border-white/20">${playersHtml}</div>
@@ -862,19 +863,19 @@
             summary.innerHTML = `
                 <div class="px-3 py-3 text-center">
                     <div class="text-xl md:text-2xl font-black text-emerald-700">${totalHadir}</div>
-                    <div class="text-[10px] md:text-xs text-gray-500 font-semibold">✅ Hadir</div>
+                    <div class="text-[10px] md:text-xs text-gray-500 font-semibold"><i data-lucide="check-circle-2" class="w-3 h-3 inline-block"></i> Hadir</div>
                 </div>
                 <div class="px-3 py-3 text-center">
                     <div class="text-xl md:text-2xl font-black text-amber-600">${totalTelat}</div>
-                    <div class="text-[10px] md:text-xs text-gray-500 font-semibold">⚠️ Telat</div>
+                    <div class="text-[10px] md:text-xs text-gray-500 font-semibold"><i data-lucide="alert-triangle" class="w-3 h-3 inline-block"></i> Telat</div>
                 </div>
                 <div class="px-3 py-3 text-center">
                     <div class="text-xl md:text-2xl font-black text-red-600">${totalAlpha}</div>
-                    <div class="text-[10px] md:text-xs text-gray-500 font-semibold">❌ Tidak</div>
+                    <div class="text-[10px] md:text-xs text-gray-500 font-semibold"><i data-lucide="x-circle" class="w-3 h-3 inline-block"></i> Tidak</div>
                 </div>
                 <div class="px-3 py-3 text-center">
                     <div class="text-xl md:text-2xl font-black text-gray-400">${totalBelum}</div>
-                    <div class="text-[10px] md:text-xs text-gray-500 font-semibold">⏳ Belum</div>
+                    <div class="text-[10px] md:text-xs text-gray-500 font-semibold"><i data-lucide="clock" class="w-3 h-3 inline-block"></i> Belum</div>
                 </div>
             `;
         }
@@ -883,6 +884,8 @@
         document.getElementById('pin-input')?.addEventListener('keyup', (e) => {
             if (e.key === 'Enter') submitPin();
         });
+
+        function refreshIcons() { if(window.lucide) { lucide.createIcons(); } }
 
         // Init
         loadData();
