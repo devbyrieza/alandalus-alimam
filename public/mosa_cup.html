@@ -216,6 +216,49 @@
         </div>
     </main>
 
+    <!-- ABSENSI SECTION (Full Width) -->
+    <section class="max-w-7xl mx-auto px-4 pb-12">
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-emerald-800 to-emerald-600 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="font-display text-2xl font-bold text-white tracking-wide">📋 ABSENSI SANTRI</h2>
+                    <p class="text-emerald-100 text-sm mt-1">Total 50 Santri Baru • 5 Tim @ 10 Anak</p>
+                </div>
+                <!-- Day Tabs -->
+                <div class="flex gap-2 flex-wrap">
+                    <button onclick="switchAbsensiDay(1)" id="day-tab-1" class="absensi-tab active-tab px-4 py-2 rounded-xl font-bold text-sm transition-all">Hari 1<br><span class="text-xs font-normal">22 Jul</span></button>
+                    <button onclick="switchAbsensiDay(2)" id="day-tab-2" class="absensi-tab px-4 py-2 rounded-xl font-bold text-sm transition-all">Hari 2<br><span class="text-xs font-normal">23 Jul</span></button>
+                    <button onclick="switchAbsensiDay(3)" id="day-tab-3" class="absensi-tab px-4 py-2 rounded-xl font-bold text-sm transition-all">Hari 3<br><span class="text-xs font-normal">24 Jul</span></button>
+                    <button onclick="switchAbsensiDay(4)" id="day-tab-4" class="absensi-tab px-4 py-2 rounded-xl font-bold text-sm transition-all">Hari 4<br><span class="text-xs font-normal">25 Jul</span></button>
+                </div>
+            </div>
+
+            <!-- Summary Bar -->
+            <div id="absensi-summary" class="grid grid-cols-3 divide-x divide-gray-200 border-b border-gray-200 bg-gray-50"></div>
+
+            <!-- Admin note -->
+            <div id="absensi-admin-note" class="hidden bg-amber-50 border-b border-amber-200 px-5 py-2.5 text-xs text-amber-800 font-semibold flex items-center gap-2">
+                <span>✏️</span> Mode Panitia: Ketuk tombol untuk mengubah status kehadiran santri.
+            </div>
+
+            <!-- Teams Grid -->
+            <div id="absensi-teams-grid" class="p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5"></div>
+        </div>
+    </section>
+
+    <style>
+        .absensi-tab { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.25); }
+        .absensi-tab:hover { background: rgba(255,255,255,0.25); }
+        .absensi-tab.active-tab { background: white; color: #065f46; border-color: white; }
+        .att-btn { cursor: pointer; border-radius: 8px; padding: 4px 10px; font-size: 11px; font-weight: 700; transition: all 0.15s; border: 1.5px solid transparent; white-space: nowrap; }
+        .att-hadir  { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+        .att-alpha  { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+        .att-belum  { background: #f3f4f6; color: #6b7280; border-color: #d1d5db; }
+        .att-btn.readonly { cursor: default; pointer-events: none; }
+    </style>
+
+
     <!-- PIN Modal -->
     <div id="pin-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl p-6 md:p-8 max-w-sm w-full shadow-2xl border border-gray-100 text-center">
@@ -265,6 +308,8 @@
 
         let scores = {};
         let goals = {};
+        let attendance = {}; // { 'day_team_player': 'hadir'|'alpha'|'belum' }
+        let currentAbsensiDay = 1;
 
         // Load data & admin state
         function loadData() {
@@ -276,6 +321,10 @@
             if (savedGoals) {
                 try { goals = JSON.parse(savedGoals); } catch(e) { goals = {}; }
             }
+            const savedAttendance = localStorage.getItem('mosa_attendance_draft');
+            if (savedAttendance) {
+                try { attendance = JSON.parse(savedAttendance); } catch(e) { attendance = {}; }
+            }
             const adminSession = localStorage.getItem('mosa_admin_session');
             if (adminSession === 'true') {
                 isAdmin = true;
@@ -286,6 +335,7 @@
         function saveData() {
             localStorage.setItem('mosa_scores_draft', JSON.stringify(scores));
             localStorage.setItem('mosa_goals_draft', JSON.stringify(goals));
+            localStorage.setItem('mosa_attendance_draft', JSON.stringify(attendance));
             calculateStandings();
             renderTopScorers();
         }
@@ -337,6 +387,7 @@
             const resetBtn = document.getElementById('reset-btn');
             const topScorerBox = document.getElementById('top-scorer-input-box');
             const tsActionHeader = document.getElementById('ts-action-header');
+            const absensiNote = document.getElementById('absensi-admin-note');
 
             if (isAdmin) {
                 modeBadge.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-amber-400 text-brand-900 border border-amber-300 flex items-center gap-1.5";
@@ -347,6 +398,7 @@
                 resetBtn.classList.remove('hidden');
                 topScorerBox.classList.remove('hidden');
                 tsActionHeader.classList.remove('hidden');
+                absensiNote.classList.remove('hidden');
             } else {
                 modeBadge.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 flex items-center gap-1.5";
                 modeText.innerText = "👁️ Mode Penonton (Read-Only)";
@@ -356,18 +408,23 @@
                 resetBtn.classList.add('hidden');
                 topScorerBox.classList.add('hidden');
                 tsActionHeader.classList.add('hidden');
+                absensiNote.classList.add('hidden');
             }
+            renderAbsensi();
         }
 
         function resetData() {
-            if(confirm("Apakah Anda yakin ingin menghapus semua data (Skor Laga & Top Skor)?")) {
+            if(confirm("Apakah Anda yakin ingin menghapus semua data (Skor Laga, Top Skor, & Absensi)?")) {
                 scores = {};
                 goals = {};
+                attendance = {};
                 localStorage.removeItem('mosa_scores_draft');
                 localStorage.removeItem('mosa_goals_draft');
+                localStorage.removeItem('mosa_attendance_draft');
                 renderMatches();
                 calculateStandings();
                 renderTopScorers();
+                renderAbsensi();
             }
         }
 
@@ -619,6 +676,111 @@
             });
         }
 
+        // =============================================
+        // ABSENSI MODULE
+        // =============================================
+        const teamColors = {
+            'Badar':   { bg: 'bg-blue-50',   border: 'border-blue-300',   header: 'bg-blue-600',   icon: '🔵' },
+            'Uhud':    { bg: 'bg-green-50',  border: 'border-green-300',  header: 'bg-green-600',  icon: '🟢' },
+            'Khandaq': { bg: 'bg-amber-50',  border: 'border-amber-300',  header: 'bg-amber-500',  icon: '🟡' },
+            'Khaibar': { bg: 'bg-purple-50', border: 'border-purple-300', header: 'bg-purple-600', icon: '🟣' },
+            'Tabuk':   { bg: 'bg-gray-900',  border: 'border-gray-700',   header: 'bg-gray-800',   icon: '⚫' },
+        };
+
+        function getAttKey(day, team, player) {
+            return `${day}__${team}__${player}`;
+        }
+
+        function getAttStatus(day, team, player) {
+            return attendance[getAttKey(day, team, player)] || 'belum';
+        }
+
+        function cycleAttendance(day, team, player) {
+            if (!isAdmin) return;
+            const key = getAttKey(day, team, player);
+            const current = attendance[key] || 'belum';
+            const next = current === 'belum' ? 'hadir' : current === 'hadir' ? 'alpha' : 'belum';
+            attendance[key] = next;
+            localStorage.setItem('mosa_attendance_draft', JSON.stringify(attendance));
+            renderAbsensi();
+        }
+
+        function switchAbsensiDay(day) {
+            currentAbsensiDay = day;
+            [1,2,3,4].forEach(d => {
+                const tab = document.getElementById(`day-tab-${d}`);
+                if (d === day) tab.classList.add('active-tab');
+                else tab.classList.remove('active-tab');
+            });
+            renderAbsensi();
+        }
+
+        function renderAbsensi() {
+            const day = currentAbsensiDay;
+            const grid = document.getElementById('absensi-teams-grid');
+            const summary = document.getElementById('absensi-summary');
+            grid.innerHTML = '';
+
+            let totalHadir = 0, totalAlpha = 0, totalBelum = 0;
+
+            teams.forEach(team => {
+                const players = playersData[team];
+                const c = teamColors[team];
+                const isTabuk = team === 'Tabuk';
+
+                let teamHadir = 0, teamAlpha = 0;
+                let playersHtml = '';
+
+                players.forEach(player => {
+                    const status = getAttStatus(day, team, player);
+                    if (status === 'hadir') { teamHadir++; totalHadir++; }
+                    else if (status === 'alpha') { teamAlpha++; totalAlpha++; }
+                    else totalBelum++;
+
+                    const labelMap = { hadir: '✅ Hadir', alpha: '❌ Tidak', belum: '• Belum' };
+                    const classMap = { hadir: 'att-hadir', alpha: 'att-alpha', belum: 'att-belum' };
+                    const btnClass = `att-btn ${classMap[status]} ${isAdmin ? '' : 'readonly'}`;
+                    const clickAttr = isAdmin ? `onclick="cycleAttendance(${day}, '${team}', '${player}')"` : '';
+
+                    playersHtml += `
+                        <div class="flex items-center justify-between py-1.5 border-b ${isTabuk ? 'border-gray-700' : 'border-gray-100'} last:border-0">
+                            <span class="text-xs font-medium ${isTabuk ? 'text-gray-200' : 'text-gray-700'} truncate mr-2" title="${player}">${player}</span>
+                            <button class="${btnClass}" ${clickAttr}>${labelMap[status]}</button>
+                        </div>`;
+                });
+
+                const cardHtml = `
+                    <div class="rounded-xl border-2 ${c.border} ${c.bg} overflow-hidden">
+                        <div class="${c.header} px-4 py-2.5 flex justify-between items-center">
+                            <span class="font-bold text-white text-sm">${c.icon} TIM ${team.toUpperCase()}</span>
+                            <div class="flex gap-1.5 text-xs">
+                                <span class="bg-white/20 text-white rounded-full px-2 py-0.5 font-bold">✅ ${teamHadir}</span>
+                                <span class="bg-red-400/40 text-white rounded-full px-2 py-0.5 font-bold">❌ ${teamAlpha}</span>
+                            </div>
+                        </div>
+                        <div class="px-4 py-2">${playersHtml}</div>
+                    </div>`;
+                grid.insertAdjacentHTML('beforeend', cardHtml);
+            });
+
+            // Update summary bar
+            const dayLabels = ['Rabu 22 Jul','Kamis 23 Jul',"Jum'at 24 Jul",'Sabtu 25 Jul'];
+            summary.innerHTML = `
+                <div class="px-5 py-3 text-center">
+                    <div class="text-2xl font-black text-emerald-700">${totalHadir}</div>
+                    <div class="text-xs text-gray-500 font-semibold">✅ Hadir</div>
+                </div>
+                <div class="px-5 py-3 text-center">
+                    <div class="text-2xl font-black text-red-600">${totalAlpha}</div>
+                    <div class="text-xs text-gray-500 font-semibold">❌ Tidak Hadir</div>
+                </div>
+                <div class="px-5 py-3 text-center">
+                    <div class="text-2xl font-black text-gray-400">${totalBelum}</div>
+                    <div class="text-xs text-gray-500 font-semibold">⏳ Belum Absen</div>
+                </div>
+            `;
+        }
+
         // Enter key for PIN modal
         document.getElementById('pin-input')?.addEventListener('keyup', (e) => {
             if (e.key === 'Enter') submitPin();
@@ -629,6 +791,7 @@
         renderMatches();
         calculateStandings();
         renderTopScorers();
+        renderAbsensi();
 
     </script>
 </body>
