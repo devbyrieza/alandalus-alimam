@@ -279,7 +279,9 @@
                         <div id="award-best-player-display" class="font-bold text-lg text-brand-700 min-h-[28px]"><span class="text-gray-400 italic text-sm">Menunggu Final...</span></div>
                         
                         <div class="award-admin-box hidden mt-3 relative z-10">
-                            <input type="text" id="input-best-player" class="w-full text-xs p-2 border border-brand-300 rounded focus:outline-none focus:border-brand-600 text-center mb-2 font-bold" placeholder="Nama Pemain">
+                            <select id="input-best-player" class="w-full text-xs p-2 border border-brand-300 rounded focus:outline-none focus:border-brand-600 text-center mb-2 font-bold bg-white">
+                                <option value="">-- Pilih Pemain --</option>
+                            </select>
                             <button onclick="saveAward('best-player')" class="bg-brand-600 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow w-full hover:bg-brand-700">Simpan</button>
                         </div>
                     </div>
@@ -294,7 +296,9 @@
                         <div id="award-best-gk-display" class="font-bold text-lg text-slate-700 min-h-[28px]"><span class="text-gray-400 italic text-sm">Menunggu Final...</span></div>
                         
                         <div class="award-admin-box hidden mt-3 relative z-10">
-                            <input type="text" id="input-best-gk" class="w-full text-xs p-2 border border-slate-300 rounded focus:outline-none focus:border-slate-600 text-center mb-2 font-bold" placeholder="Nama Kiper">
+                            <select id="input-best-gk" class="w-full text-xs p-2 border border-slate-300 rounded focus:outline-none focus:border-slate-600 text-center mb-2 font-bold bg-white">
+                                <option value="">-- Pilih Kiper --</option>
+                            </select>
                             <button onclick="saveAward('best-gk')" class="bg-slate-600 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow w-full hover:bg-slate-700">Simpan</button>
                         </div>
                     </div>
@@ -1098,9 +1102,24 @@
             if (e.key === 'Enter') submitPin();
         });
 
+        // Initialize players for Special Awards dropdowns
+        function populatePlayerDropdowns() {
+            let optionsHtml = '';
+            for (const team in playersData) {
+                optionsHtml += `<optgroup label="Tim ${team}">`;
+                playersData[team].forEach(player => {
+                    optionsHtml += `<option value="${player}">${player}</option>`;
+                });
+                optionsHtml += `</optgroup>`;
+            }
+            document.getElementById('input-best-player').insertAdjacentHTML('beforeend', optionsHtml);
+            document.getElementById('input-best-gk').insertAdjacentHTML('beforeend', optionsHtml);
+        }
+
         function refreshIcons() { if(window.lucide) { lucide.createIcons(); } }
 
         // Init
+        populatePlayerDropdowns();
         loadData();
 
     </script>
