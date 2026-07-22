@@ -476,8 +476,8 @@
             "Khaibar": ["Abdul Hakim", "Khalish", "Rifqi Arsyad Fadilah", "Labibullah El Fatih", "Wahyu Hidayat", "Farid", "M Rasyid Ridho", "M Hafidz Abdurrahman", "Muhammad Abdurrahim", "Muhammad Habib Rizky"],
             "Tabuk": ["Ahmad Farros Al Barqy", "Fariq Malaibui", "Abdul Aziz Ali", "Atqanul Ummah", "M Khoirul Azzam", "Ken Alfarezha", "Khubaib Abdul Aziz", "Nurcahya Eka Putra", "M Naufal Alfaniri", "Syafiq Karimalay"]
         };
-
         // Matches definition
+        let currentStandings = [];
         const matchesData = [
             { id: 'm1', day: 1, home: 'Badar', away: 'Uhud' },
             { id: 'm2', day: 1, home: 'Khandaq', away: 'Khaibar' },
@@ -850,6 +850,8 @@
                 }
                 return 0;
             });
+            
+            currentStandings = sorted;
 
             const tbody = document.getElementById('standings-body');
             tbody.innerHTML = '';
@@ -937,7 +939,16 @@
             
             const sortedScorers = Object.entries(goals)
                 .map(([name, data]) => ({ name, team: data.team, count: data.count }))
-                .sort((a, b) => b.count - a.count);
+                .sort((a, b) => {
+                    if (b.count !== a.count) return b.count - a.count;
+                    
+                    // Tie-breaker: urutkan berdasarkan peringkat tim di klasemen
+                    const rankA = currentStandings.findIndex(t => t.name === a.team);
+                    const rankB = currentStandings.findIndex(t => t.name === b.team);
+                    
+                    // index lebih kecil berarti peringkat lebih tinggi
+                    return rankA - rankB; 
+                });
                 
             if (sortedScorers.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="5" class="px-4 py-8 text-center text-gray-400 italic">Belum ada pencetak gol tercatat</td></tr>`;
