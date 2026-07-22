@@ -427,8 +427,8 @@
 
             if (isAdmin) {
                 modeBadge.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-amber-400 text-brand-900 border border-amber-300 flex items-center gap-1.5";
-                modeText.innerText = "<i data-lucide="unlock" class="w-4 h-4 inline-block"></i> Mode Panitia (Edit Aktif)";
-                adminBtnIcon.innerText = "<i data-lucide="lock" class="w-4 h-4 inline-block"></i>";
+                modeText.innerHTML = `<i data-lucide="unlock" class="w-4 h-4 inline-block"></i> Mode Panitia (Edit Aktif)`;
+                adminBtnIcon.innerHTML = `<i data-lucide="lock" class="w-4 h-4 inline-block"></i>`;
                 adminBtnText.innerText = "Keluar Admin";
                 adminBanner.classList.remove('hidden');
                 resetBtn.classList.remove('hidden');
@@ -437,8 +437,8 @@
                 absensiNote.classList.remove('hidden');
             } else {
                 modeBadge.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 flex items-center gap-1.5";
-                modeText.innerText = "<i data-lucide="eye" class="w-4 h-4 inline-block"></i> Mode Penonton (Read-Only)";
-                adminBtnIcon.innerText = "<i data-lucide="key" class="w-4 h-4 inline-block"></i>";
+                modeText.innerHTML = `<i data-lucide="eye" class="w-4 h-4 inline-block"></i> Mode Penonton (Read-Only)`;
+                adminBtnIcon.innerHTML = `<i data-lucide="key" class="w-4 h-4 inline-block"></i>`;
                 adminBtnText.innerText = "Login Panitia";
                 adminBanner.classList.add('hidden');
                 resetBtn.classList.add('hidden');
