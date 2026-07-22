@@ -312,24 +312,36 @@
         let currentAbsensiDay = 1;
 
         // Load data & admin state
-        function loadData() {
-            const savedScores = localStorage.getItem('mosa_scores_draft');
-            if (savedScores) {
-                try { scores = JSON.parse(savedScores); } catch(e) { scores = {}; }
-            }
-            const savedGoals = localStorage.getItem('mosa_goals_draft');
-            if (savedGoals) {
-                try { goals = JSON.parse(savedGoals); } catch(e) { goals = {}; }
-            }
-            const savedAttendance = localStorage.getItem('mosa_attendance_draft');
-            if (savedAttendance) {
-                try { attendance = JSON.parse(savedAttendance); } catch(e) { attendance = {}; }
-            }
+        async function loadData() {
             const adminSession = localStorage.getItem('mosa_admin_session');
             if (adminSession === 'true') {
                 isAdmin = true;
             }
             updateAdminUI();
+
+            try {
+                const res = await fetch('/api/mosa-cup');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.scores) scores = data.scores;
+                    if (data.goals) goals = data.goals;
+                    if (data.attendance) attendance = data.attendance;
+                }
+            } catch(e) {
+                console.error("Gagal memuat data dari server:", e);
+                // Fallback to local storage if offline
+                const savedScores = localStorage.getItem('mosa_scores_draft');
+                if (savedScores) { try { scores = JSON.parse(savedScores); } catch(e) { scores = {}; } }
+                const savedGoals = localStorage.getItem('mosa_goals_draft');
+                if (savedGoals) { try { goals = JSON.parse(savedGoals); } catch(e) { goals = {}; } }
+                const savedAttendance = localStorage.getItem('mosa_attendance_draft');
+                if (savedAttendance) { try { attendance = JSON.parse(savedAttendance); } catch(e) { attendance = {}; } }
+            }
+            
+            renderMatches();
+            calculateStandings();
+            renderTopScorers();
+            renderAbsensi();
         }
 
         function saveData() {
@@ -338,6 +350,12 @@
             localStorage.setItem('mosa_attendance_draft', JSON.stringify(attendance));
             calculateStandings();
             renderTopScorers();
+
+            fetch('/api/mosa-cup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ scores, goals, attendance })
+            }).catch(e => console.error("Gagal sinkronisasi data ke server", e));
         }
 
         // Admin Auth
@@ -701,7 +719,7 @@
             const current = attendance[key] || 'belum';
             const next = current === 'belum' ? 'hadir' : current === 'hadir' ? 'alpha' : 'belum';
             attendance[key] = next;
-            localStorage.setItem('mosa_attendance_draft', JSON.stringify(attendance));
+            saveData();
             renderAbsensi();
         }
 
@@ -788,10 +806,6 @@
 
         // Init
         loadData();
-        renderMatches();
-        calculateStandings();
-        renderTopScorers();
-        renderAbsensi();
 
     </script>
 </body>
