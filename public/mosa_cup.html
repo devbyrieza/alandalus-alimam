@@ -316,11 +316,11 @@
                 return;
             }
 
-            const searchName = inputName.toLowerCase();
+            const searchName = inputName.toLowerCase().replace(/\s+/g, '');
             const allPlayers = Object.values(playersData).flat();
             
-            // Cek apakah ada nama santri yang mengandung kata yang diinput wali
-            const isMatch = allPlayers.some(player => player.toLowerCase().includes(searchName));
+            // Cek apakah ada nama santri yang mengandung kata yang diinput wali (mengabaikan spasi dan besar kecil huruf)
+            const isMatch = allPlayers.some(player => player.toLowerCase().replace(/\s+/g, '').includes(searchName));
 
             if (isMatch) {
                 isWali = true;
