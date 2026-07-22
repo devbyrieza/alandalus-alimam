@@ -304,19 +304,31 @@
 
     <script>
         const PIN_SECRET = "7678";
-        const PIN_WALI = "2026";
         let isAdmin = false;
         let isWali = (localStorage.getItem('mosa_wali_session') === 'true');
 
         function loginWali() {
-            const pin = prompt("Masukkan PIN Khusus Wali Santri (Silakan tanya di Grup WA):");
-            if (pin === PIN_WALI) {
+            const inputName = prompt("Masukkan Nama Panggilan Anak Anda:");
+            if (!inputName) return;
+
+            if (inputName.length < 3) {
+                alert("Mohon masukkan minimal 3 huruf dari nama anak Anda.");
+                return;
+            }
+
+            const searchName = inputName.toLowerCase();
+            const allPlayers = Object.values(playersData).flat();
+            
+            // Cek apakah ada nama santri yang mengandung kata yang diinput wali
+            const isMatch = allPlayers.some(player => player.toLowerCase().includes(searchName));
+
+            if (isMatch) {
                 isWali = true;
                 localStorage.setItem('mosa_wali_session', 'true');
                 renderAbsensi(); refreshIcons();
-                alert("Akses Wali Santri Berhasil! Nama lengkap santri telah dibuka.");
-            } else if (pin) {
-                alert("PIN Salah.");
+                alert("Verifikasi Berhasil! Nama lengkap seluruh santri telah dibuka.");
+            } else {
+                alert("Nama tidak ditemukan di daftar santri. Silakan coba nama panggilan lainnya.");
             }
         }
 
