@@ -235,7 +235,7 @@
             </div>
 
             <!-- Summary Bar -->
-            <div id="absensi-summary" class="grid grid-cols-3 divide-x divide-gray-200 border-b border-gray-200 bg-gray-50"></div>
+            <div id="absensi-summary" class="grid grid-cols-4 divide-x divide-gray-200 border-b border-gray-200 bg-gray-50"></div>
 
             <!-- Admin note -->
             <div id="absensi-admin-note" class="hidden bg-amber-50 border-b border-amber-200 px-5 py-2.5 text-xs text-amber-800 font-semibold flex items-center gap-2">
@@ -253,6 +253,7 @@
         .absensi-tab.active-tab { background: white; color: #065f46; border-color: white; }
         .att-btn { cursor: pointer; border-radius: 8px; padding: 4px 10px; font-size: 11px; font-weight: 700; transition: all 0.15s; border: 1.5px solid transparent; white-space: nowrap; }
         .att-hadir  { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+        .att-telat  { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
         .att-alpha  { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
         .att-belum  { background: #f3f4f6; color: #6b7280; border-color: #d1d5db; }
         .att-btn.readonly { cursor: default; pointer-events: none; }
@@ -773,7 +774,7 @@
             if (!isAdmin) return;
             const key = getAttKey(day, team, player);
             const current = attendance[key] || 'belum';
-            const next = current === 'belum' ? 'hadir' : current === 'hadir' ? 'alpha' : 'belum';
+            const next = current === 'belum' ? 'hadir' : current === 'hadir' ? 'telat' : current === 'telat' ? 'alpha' : 'belum';
             attendance[key] = next;
             saveData();
             renderAbsensi();
@@ -795,24 +796,24 @@
             const summary = document.getElementById('absensi-summary');
             grid.innerHTML = '';
 
-            let totalHadir = 0, totalAlpha = 0, totalBelum = 0;
+            let totalHadir = 0, totalTelat = 0, totalAlpha = 0, totalBelum = 0;
 
             teams.forEach(team => {
                 const players = playersData[team];
                 const c = teamColors[team];
-                const isTabuk = team === 'Tabuk';
 
-                let teamHadir = 0, teamAlpha = 0;
+                let teamHadir = 0, teamTelat = 0, teamAlpha = 0;
                 let playersHtml = '';
 
                 players.forEach(player => {
                     const status = getAttStatus(day, team, player);
                     if (status === 'hadir') { teamHadir++; totalHadir++; }
+                    else if (status === 'telat') { teamTelat++; totalTelat++; }
                     else if (status === 'alpha') { teamAlpha++; totalAlpha++; }
                     else totalBelum++;
 
-                    const labelMap = { hadir: '✅ Hadir', alpha: '❌ Tidak', belum: '• Belum' };
-                    const classMap = { hadir: 'att-hadir', alpha: 'att-alpha', belum: 'att-belum' };
+                    const labelMap = { hadir: '✅ Hadir', telat: '⚠️ Telat', alpha: '❌ Tidak', belum: '• Belum' };
+                    const classMap = { hadir: 'att-hadir', telat: 'att-telat', alpha: 'att-alpha', belum: 'att-belum' };
                     const btnClass = `att-btn ${classMap[status]} ${isAdmin ? '' : 'readonly'}`;
                     const clickAttr = isAdmin ? `onclick="cycleAttendance(${day}, '${team}', '${player}')"` : '';
 
@@ -824,33 +825,40 @@
                 });
 
                 const cardHtml = `
-                    <div class="rounded-xl border-2 ${c.border} ${c.bg} overflow-hidden">
-                        <div class="${c.header} px-4 py-2.5 flex justify-between items-center">
-                            <span class="font-bold text-white text-sm">${c.icon} TIM ${team.toUpperCase()}</span>
+                    <details class="rounded-xl border-2 ${c.border} ${c.bg} overflow-hidden group">
+                        <summary class="${c.header} px-4 py-2.5 flex justify-between items-center cursor-pointer list-none">
+                            <span class="font-bold text-white text-sm flex items-center gap-2">
+                                ${c.icon} TIM ${team.toUpperCase()}
+                                <span class="text-[10px] group-open:rotate-180 transition-transform">▼</span>
+                            </span>
                             <div class="flex gap-1.5 text-xs">
                                 <span class="bg-white/20 text-white rounded-full px-2 py-0.5 font-bold">✅ ${teamHadir}</span>
+                                <span class="bg-amber-400/80 text-amber-900 rounded-full px-2 py-0.5 font-bold">⚠️ ${teamTelat}</span>
                                 <span class="bg-red-400/40 text-white rounded-full px-2 py-0.5 font-bold">❌ ${teamAlpha}</span>
                             </div>
-                        </div>
-                        <div class="px-4 py-2">${playersHtml}</div>
-                    </div>`;
+                        </summary>
+                        <div class="px-4 py-2 border-t border-white/20">${playersHtml}</div>
+                    </details>`;
                 grid.insertAdjacentHTML('beforeend', cardHtml);
             });
 
             // Update summary bar
-            const dayLabels = ['Rabu 22 Jul','Kamis 23 Jul',"Jum'at 24 Jul",'Sabtu 25 Jul'];
             summary.innerHTML = `
-                <div class="px-5 py-3 text-center">
-                    <div class="text-2xl font-black text-emerald-700">${totalHadir}</div>
-                    <div class="text-xs text-gray-500 font-semibold">✅ Hadir</div>
+                <div class="px-3 py-3 text-center">
+                    <div class="text-xl md:text-2xl font-black text-emerald-700">${totalHadir}</div>
+                    <div class="text-[10px] md:text-xs text-gray-500 font-semibold">✅ Hadir</div>
                 </div>
-                <div class="px-5 py-3 text-center">
-                    <div class="text-2xl font-black text-red-600">${totalAlpha}</div>
-                    <div class="text-xs text-gray-500 font-semibold">❌ Tidak Hadir</div>
+                <div class="px-3 py-3 text-center">
+                    <div class="text-xl md:text-2xl font-black text-amber-600">${totalTelat}</div>
+                    <div class="text-[10px] md:text-xs text-gray-500 font-semibold">⚠️ Telat</div>
                 </div>
-                <div class="px-5 py-3 text-center">
-                    <div class="text-2xl font-black text-gray-400">${totalBelum}</div>
-                    <div class="text-xs text-gray-500 font-semibold">⏳ Belum Absen</div>
+                <div class="px-3 py-3 text-center">
+                    <div class="text-xl md:text-2xl font-black text-red-600">${totalAlpha}</div>
+                    <div class="text-[10px] md:text-xs text-gray-500 font-semibold">❌ Tidak</div>
+                </div>
+                <div class="px-3 py-3 text-center">
+                    <div class="text-xl md:text-2xl font-black text-gray-400">${totalBelum}</div>
+                    <div class="text-[10px] md:text-xs text-gray-500 font-semibold">⏳ Belum</div>
                 </div>
             `;
         }
