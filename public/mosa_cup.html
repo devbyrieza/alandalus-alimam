@@ -899,8 +899,7 @@
 
                     let displayPlayer = player;
                     if (!isAdmin && !isWali) {
-                        let parts = player.split(' ');
-                        displayPlayer = parts[0] + ' ' + (parts[1] ? parts[1].substring(0,1) + '***' : '***');
+                        displayPlayer = "Santri " + (players.indexOf(player) + 1);
                     }
 
                     playersHtml += `
