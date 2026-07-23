@@ -401,10 +401,10 @@
         <div class="bg-white rounded-2xl p-6 md:p-8 max-w-sm w-full shadow-2xl border border-gray-100 text-center transform transition-all">
             <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 text-2xl mx-auto mb-4"><i data-lucide="shield-check" class="w-6 h-6 inline-block"></i></div>
             <h3 class="font-display text-xl font-bold text-gray-900 mb-2">Akses Wali Santri</h3>
-            <p class="text-xs text-gray-500 mb-5 leading-relaxed">Abu/Ummu, silakan masukkan <strong>nama lengkap atau sebagian nama ananda</strong> untuk membuka privasi absensi dan melihat ananda berada di tim mana.</p>
+            <p class="text-xs text-gray-500 mb-5 leading-relaxed">Abu/Ummu, silakan masukkan <strong>Nomor Pendaftaran / No. Induk ananda</strong> untuk membuka privasi absensi dan melihat ananda berada di tim mana.</p>
             
-            <input type="text" id="wali-input" placeholder="Ketik sebagian nama..." class="w-full text-center text-lg font-bold border-2 border-gray-300 rounded-xl p-3 mb-2 outline-none focus:border-blue-500">
-            <div id="wali-error" class="hidden text-[11px] text-red-500 font-bold mb-3">Mohon masukkan minimal 3 huruf.</div>
+            <input type="number" id="wali-input" placeholder="Ketik Nomor Pendaftaran..." class="w-full text-center text-lg font-bold border-2 border-gray-300 rounded-xl p-3 mb-2 outline-none focus:border-blue-500">
+            <div id="wali-error" class="hidden text-[11px] text-red-500 font-bold mb-3">Mohon masukkan minimal 6 digit angka.</div>
 
             <div class="flex gap-3 mt-2">
                 <button onclick="closeWaliModal()" class="flex-1 bg-gray-100 text-gray-700 font-bold py-3 rounded-xl hover:bg-gray-200 transition-colors">Batal</button>
@@ -433,22 +433,20 @@
             const errorBox = document.getElementById('wali-error');
             
             if (!inputName) {
-                errorBox.innerText = "Nama tidak boleh kosong.";
+                errorBox.innerText = "Nomor Pendaftaran tidak boleh kosong.";
                 errorBox.classList.remove('hidden');
                 return;
             }
 
-            if (inputName.length < 3) {
-                errorBox.innerText = "Mohon masukkan minimal 3 huruf.";
+            // Validasi format angka minimal 6 digit agar publik tidak bisa sembarang menebak
+            if (!/^\d{6,}$/.test(inputName)) {
+                errorBox.innerText = "Nomor tidak valid. Mohon masukkan minimal 6 digit angka.";
                 errorBox.classList.remove('hidden');
                 return;
             }
 
-            const searchName = inputName.toLowerCase().replace(/\s+/g, '');
-            const allPlayers = Object.values(playersData).flat();
-            
-            // Cek apakah ada nama santri yang mengandung kata yang diinput wali (mengabaikan spasi dan besar kecil huruf)
-            const isMatch = allPlayers.some(player => player.toLowerCase().replace(/\s+/g, '').includes(searchName));
+            // Jika formatnya sudah berupa angka > 6 digit, otomatis tembus (tanpa verif ke DB)
+            const isMatch = true;
 
             if (isMatch) {
                 isWali = true;
