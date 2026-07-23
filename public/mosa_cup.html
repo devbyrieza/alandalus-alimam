@@ -403,8 +403,8 @@
             <h3 class="font-display text-xl font-bold text-gray-900 mb-2">Akses Wali Santri</h3>
             <p class="text-xs text-gray-500 mb-5 leading-relaxed">Abu/Ummu, silakan masukkan <strong>Nomor Pendaftaran / No. Induk ananda</strong> untuk membuka privasi absensi dan melihat ananda berada di tim mana.</p>
             
-            <input type="number" id="wali-input" placeholder="Ketik Nomor Pendaftaran..." class="w-full text-center text-lg font-bold border-2 border-gray-300 rounded-xl p-3 mb-2 outline-none focus:border-blue-500">
-            <div id="wali-error" class="hidden text-[11px] text-red-500 font-bold mb-3">Mohon masukkan minimal 6 digit angka.</div>
+            <input type="text" id="wali-input" placeholder="MTA... atau ILA..." class="w-full text-center text-lg font-bold border-2 border-gray-300 rounded-xl p-3 mb-2 outline-none focus:border-blue-500 uppercase">
+            <div id="wali-error" class="hidden text-[11px] text-red-500 font-bold mb-3">Mohon masukkan format yang valid (MTA... / ILA...).</div>
 
             <div class="flex gap-3 mt-2">
                 <button onclick="closeWaliModal()" class="flex-1 bg-gray-100 text-gray-700 font-bold py-3 rounded-xl hover:bg-gray-200 transition-colors">Batal</button>
@@ -438,9 +438,9 @@
                 return;
             }
 
-            // Validasi format angka minimal 6 digit agar publik tidak bisa sembarang menebak
-            if (!/^\d{6,}$/.test(inputName)) {
-                errorBox.innerText = "Nomor tidak valid. Mohon masukkan minimal 6 digit angka.";
+            // Validasi format: Diawali dengan MTA atau ILA, diikuti angka
+            if (!/^(mta|ila)\d{3,}$/i.test(inputName)) {
+                errorBox.innerText = "Nomor tidak valid. Pastikan diawali dengan MTA atau ILA (contoh: MTA2601...).";
                 errorBox.classList.remove('hidden');
                 return;
             }
