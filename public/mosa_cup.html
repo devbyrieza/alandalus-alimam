@@ -70,13 +70,51 @@
                     <span id="admin-btn-icon"><i data-lucide="key" class="w-4 h-4 inline-block"></i></span> <span id="admin-btn-text">Login Panitia</span>
                 </button>
             </div>
-        </div>
     </header>
 
+    <!-- Public Live Timer -->
+    <div id="live-timer-banner" class="hidden bg-gradient-to-r from-red-600 to-brand-900 text-white shadow-xl sticky top-[72px] md:top-[88px] z-40 border-b border-red-500/50">
+        <div class="max-w-7xl mx-auto px-4 py-2 md:py-2.5 flex items-center justify-between text-sm md:text-base font-bold tracking-wider">
+            <div class="flex items-center gap-2 md:gap-3">
+                <span class="w-2.5 h-2.5 rounded-full bg-white animate-pulse shadow-[0_0_8px_rgba(255,255,255,0.8)]"></span>
+                <span class="text-xs md:text-sm">LIVE MATCH</span>
+            </div>
+            <div class="flex flex-col md:flex-row items-end md:items-center gap-0 md:gap-4">
+                <span id="live-timer-period" class="text-[10px] md:text-xs text-red-200 uppercase tracking-widest">Babak 1</span>
+                <span id="live-timer-clock" class="text-xl md:text-3xl font-black font-display tracking-widest tabular-nums leading-none">00:00</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Admin Status Banner (shown when logged in) -->
-    <div id="admin-banner" class="hidden bg-amber-400 text-brand-900 px-4 py-2 text-xs font-bold text-center border-b border-amber-500 shadow-inner flex items-center justify-center gap-2">
-        <span><i data-lucide="unlock" class="w-4 h-4 inline-block"></i> MODE PANITIA AKTIF (Ust. Rieza Eka Tomara / Ust. Iqbal) &bull; Anda dapat menginput skor & top scorer.</span>
-        <button onclick="logoutAdmin()" class="underline text-brand-900 font-extrabold hover:text-black ml-2">[ Keluar Admin ]</button>
+    <div id="admin-banner" class="hidden bg-amber-400 text-brand-900 flex-col border-b border-amber-500 shadow-inner w-full">
+        <div class="px-4 py-2 text-[10px] md:text-xs font-bold text-center flex items-center justify-center gap-2 border-b border-amber-500/30">
+            <span><i data-lucide="unlock" class="w-4 h-4 inline-block"></i> MODE PANITIA AKTIF &bull; Bisa input skor & timer.</span>
+            <button onclick="logoutAdmin()" class="underline text-brand-900 font-extrabold hover:text-black ml-2">[ Keluar Admin ]</button>
+        </div>
+        
+        <!-- Admin Timer Controls -->
+        <div class="px-2 md:px-4 py-3 bg-amber-300 flex flex-wrap items-center justify-center gap-2 md:gap-4 w-full relative z-50">
+            <div class="text-[10px] md:text-xs font-bold border-r border-amber-500 pr-2 mr-1">TIMER:</div>
+            
+            <select id="admin-timer-period" onchange="syncTimerState()" class="text-xs md:text-sm font-bold bg-white border border-amber-500 rounded px-2 py-1.5 md:py-2 outline-none">
+                <option value="Babak 1">Babak 1</option>
+                <option value="Babak 2">Babak 2</option>
+                <option value="Extra Time">Extra Time</option>
+                <option value="Penalti">Penalti</option>
+            </select>
+            
+            <div class="flex items-center gap-1 md:gap-2 bg-white rounded-lg p-1 border border-amber-500 shadow-sm">
+                <button id="btn-timer-toggle" type="button" onclick="toggleTimer()" class="bg-brand-600 text-white hover:bg-brand-700 px-3 md:px-5 py-1.5 md:py-2 rounded font-bold text-xs md:text-sm flex items-center gap-1.5 transition-colors">
+                    <i data-lucide="play" class="w-3 h-3 md:w-4 md:h-4"></i> Mulai
+                </button>
+                <button type="button" onclick="resetTimer()" class="bg-slate-200 text-slate-700 hover:bg-slate-300 px-2 md:px-3 py-1.5 md:py-2 rounded font-bold text-xs md:text-sm transition-colors">Reset</button>
+            </div>
+            
+            <div class="ml-1 md:ml-2 bg-brand-900 text-white font-black font-display text-lg md:text-2xl px-3 md:px-4 py-1 rounded tabular-nums" id="admin-timer-display">
+                00:00
+            </div>
+        </div>
     </div>
 
     <main class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -111,46 +149,7 @@
                     <!-- Day 4 (Finals & Super Match) -->
                     <div>
                         <h3 class="text-sm font-bold text-brand-900 bg-amber-400 inline-block px-3 py-1 rounded-md mb-3">Hari 4 - Final & Super Match (Sabtu, 25 Juli)</h3>
-                        <div class="space-y-3">
-                            <!-- Juara 3 -->
-                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-2">
-                                <div class="flex items-center gap-2">
-                                    <div class="bg-slate-200 text-slate-600 p-1.5 rounded-lg"><i data-lucide="medal" class="w-4 h-4"></i></div>
-                                    <div>
-                                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">16.30 - 16.45 WIB</div>
-                                        <div class="text-xs font-bold text-slate-700">Perebutan Juara 3</div>
-                                    </div>
-                                </div>
-                                <div class="text-xs font-bold bg-white px-3 py-1.5 rounded-lg border border-slate-200 text-center text-slate-700">Rank 3 <span class="text-gray-400 font-normal mx-1">vs</span> Rank 4</div>
-                            </div>
-                            
-                            <!-- Grand Final -->
-                            <div class="bg-amber-50 border border-amber-300 rounded-xl p-3 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-2">
-                                <div class="flex items-center gap-2">
-                                    <div class="bg-amber-400 text-amber-900 p-1.5 rounded-lg shadow-sm"><i data-lucide="trophy" class="w-4 h-4"></i></div>
-                                    <div>
-                                        <div class="text-[10px] font-bold text-amber-600 uppercase tracking-wider">16.50 - 17.05 WIB</div>
-                                        <div class="text-xs font-black text-amber-900">GRAND FINAL</div>
-                                    </div>
-                                </div>
-                                <div class="text-xs font-bold bg-white px-3 py-1.5 rounded-lg border border-amber-200 text-center shadow-sm text-amber-900">Rank 1 <span class="text-gray-400 font-normal mx-1">vs</span> Rank 2</div>
-                            </div>
-
-                            <!-- Super Match -->
-                            <div class="bg-gradient-to-r from-brand-900 to-brand-700 border border-brand-800 rounded-xl p-3 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-3 relative overflow-hidden">
-                                <div class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4">
-                                    <i data-lucide="flame" class="w-24 h-24 text-white"></i>
-                                </div>
-                                <div class="flex items-center gap-2 relative z-10">
-                                    <div class="bg-brand-600 text-white p-1.5 rounded-lg border border-white/20"><i data-lucide="swords" class="w-4 h-4"></i></div>
-                                    <div>
-                                        <div class="text-[10px] font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1.5">17.15 - 17.30 WIB <span class="bg-black/40 text-white px-1.5 py-0.5 rounded-md text-[8px] border border-white/20 hidden sm:inline-block shadow-sm">Pasca Final</span></div>
-                                        <div class="text-xs font-black text-white">EXHIBITION SUPER MATCH</div>
-                                    </div>
-                                </div>
-                                <div class="text-xs font-black bg-white text-brand-900 px-3 py-1.5 rounded-lg border-2 border-gold-400 text-center shadow-lg relative z-10">JUARA 1 <span class="text-gray-400 font-normal mx-0.5">vs</span> TIM ASATIDZAH</div>
-                            </div>
-                        </div>
+                        <div class="space-y-3" id="day4-matches"></div>
                     </div>
                 </form>
             </div>
@@ -487,12 +486,16 @@
             { id: 'm8', day: 3, home: 'Khandaq', away: 'Tabuk' },
             { id: 'm9', day: 3, home: 'Badar', away: 'Khaibar' },
             { id: 'm10', day: 3, home: 'Uhud', away: 'Tabuk' },
+            { id: 'f1', day: 4, home: 'Uhud', away: 'Tabuk', isFinal: true, title: 'GRAND FINAL', time: '07.30 - 08.00 WIB', color: 'amber' },
+            { id: 'f2', day: 4, home: 'Juara 1', away: 'All-Star Badar', isFinal: true, title: 'LAGA BINTANG', time: '08.15 - 08.35 WIB', color: 'blue' },
+            { id: 'f3', day: 4, home: 'Pemenang', away: 'Asatidzah', isFinal: true, title: 'PUNCAK GENGSI', time: '08.50 - 09.15 WIB', color: 'brand' },
         ];
 
         let scores = {};
         let goals = {};
         let attendance = {}; // { 'day_team_player': 'hadir'|'alpha'|'belum' }
         let specialAwards = {}; // { 'best-player': '', 'best-gk': '', 'fair-play': '' }
+        let timerState = { isRunning: false, startTime: null, elapsed: 0, period: 'Babak 1' };
         let currentAbsensiDay = 1;
 
         // Load data & admin state
@@ -507,10 +510,20 @@
                 const res = await fetch('/api/mosa-cup');
                 if (res.ok) {
                     const data = await res.json();
-                    if (data.scores) scores = data.scores;
-                    if (data.goals) goals = data.goals;
-                    if (data.attendance) attendance = data.attendance;
-                    if (data.awards) specialAwards = data.awards;
+                    
+                    if (!isAdmin) {
+                        // Only sync scores and goals if not admin, to avoid overwriting local edits
+                        if (data.scores) scores = data.scores;
+                        if (data.goals) goals = data.goals;
+                        if (data.attendance) attendance = data.attendance;
+                        if (data.awards) specialAwards = data.awards;
+                    }
+                    
+                    // Timer is synced for everyone (even admin, so they see updates from other admins)
+                    if (data.timer) {
+                        timerState = data.timer;
+                        updateTimerUI();
+                    }
                 }
             } catch(e) {
                 console.error("Gagal memuat data dari server:", e);
@@ -586,6 +599,102 @@
             renderTopScorers(); refreshIcons();
         }
 
+        // --- TIMER LOGIC ---
+        function formatTime(ms) {
+            const totalSeconds = Math.floor(ms / 1000);
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function getElapsedMs() {
+            if (timerState.isRunning && timerState.startTime) {
+                return timerState.elapsed + (Date.now() - timerState.startTime);
+            }
+            return timerState.elapsed;
+        }
+
+        function tickTimer() {
+            const ms = getElapsedMs();
+            const formatted = formatTime(ms);
+            
+            const adminDisplay = document.getElementById('admin-timer-display');
+            if(adminDisplay) adminDisplay.innerText = formatted;
+            
+            const publicDisplay = document.getElementById('live-timer-clock');
+            if(publicDisplay) publicDisplay.innerText = formatted;
+        }
+
+        setInterval(tickTimer, 1000); // UI tick every second
+
+        // Poll server for updates every 10 seconds
+        setInterval(() => {
+            loadData();
+        }, 10000);
+
+        function toggleTimer() {
+            if (!isAdmin) return;
+            if (timerState.isRunning) {
+                timerState.isRunning = false;
+                timerState.elapsed += (Date.now() - timerState.startTime);
+            } else {
+                timerState.isRunning = true;
+                timerState.startTime = Date.now();
+            }
+            syncTimerState();
+            updateTimerUI();
+        }
+
+        function resetTimer() {
+            if (!isAdmin) return;
+            if (confirm("Yakin ingin mereset waktu ke 00:00?")) {
+                timerState.isRunning = false;
+                timerState.elapsed = 0;
+                timerState.startTime = null;
+                syncTimerState();
+                updateTimerUI();
+            }
+        }
+
+        function syncTimerState() {
+            if (!isAdmin) return;
+            const periodSelect = document.getElementById('admin-timer-period');
+            if(periodSelect) timerState.period = periodSelect.value;
+            saveData(); // Sends updated timerState to API
+        }
+
+        function updateTimerUI() {
+            const btn = document.getElementById('btn-timer-toggle');
+            if(btn) {
+                if(timerState.isRunning) {
+                    btn.innerHTML = `<i data-lucide="pause" class="w-3 h-3 md:w-4 md:h-4 inline-block"></i> Jeda`;
+                    btn.className = "bg-amber-600 text-white hover:bg-amber-700 px-3 md:px-5 py-1.5 md:py-2 rounded font-bold text-xs md:text-sm flex items-center gap-1.5 transition-colors";
+                } else {
+                    btn.innerHTML = `<i data-lucide="play" class="w-3 h-3 md:w-4 md:h-4 inline-block"></i> Mulai`;
+                    btn.className = "bg-brand-600 text-white hover:bg-brand-700 px-3 md:px-5 py-1.5 md:py-2 rounded font-bold text-xs md:text-sm flex items-center gap-1.5 transition-colors";
+                }
+            }
+            
+            const banner = document.getElementById('live-timer-banner');
+            const periodDisplay = document.getElementById('live-timer-period');
+            if(banner && periodDisplay) {
+                if(timerState.elapsed > 0 || timerState.isRunning) {
+                    banner.classList.remove('hidden');
+                    periodDisplay.innerText = timerState.period || 'Babak 1';
+                } else {
+                    if(!isAdmin) banner.classList.add('hidden');
+                }
+            }
+            
+            if(isAdmin) {
+                const periodSelect = document.getElementById('admin-timer-period');
+                if(periodSelect && timerState.period) periodSelect.value = timerState.period;
+            }
+            
+            tickTimer();
+        }
+        // --- END TIMER LOGIC ---
+
         function updateAdminUI() {
             const modeBadge = document.getElementById('mode-badge');
             const modeText = document.getElementById('mode-text');
@@ -608,6 +717,8 @@
                 tsActionHeader.classList.remove('hidden');
                 absensiNote.classList.remove('hidden');
                 document.querySelectorAll('.award-admin-box').forEach(el => el.classList.remove('hidden'));
+                
+                // Show admin timer controls, hide public banner if not running? Actually public banner logic is handled in updateTimerUI
             } else {
                 modeBadge.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 flex items-center gap-1.5";
                 modeText.innerHTML = `<i data-lucide="eye" class="w-4 h-4 inline-block"></i> Mode Penonton (Read-Only)`;
@@ -620,6 +731,7 @@
                 absensiNote.classList.add('hidden');
                 document.querySelectorAll('.award-admin-box').forEach(el => el.classList.add('hidden'));
             }
+            updateTimerUI();
             renderAbsensi(); refreshIcons();
         }
 
@@ -667,8 +779,9 @@
 
         // Render match inputs or read-only view
         function renderMatches() {
-            [1, 2, 3].forEach(day => {
+            [1, 2, 3, 4].forEach(day => {
                 const container = document.getElementById(`day${day}-matches`);
+                if (!container) return;
                 container.innerHTML = '';
                 
                 matchesData.filter(m => m.day === day).forEach(match => {
@@ -683,12 +796,14 @@
                     let penContent = '';
                     if (isAdmin) {
                         centerContent = `
-                            <div class="mx-2 md:mx-4 flex items-center gap-1.5">
-                                <input type="number" min="0" data-match="${match.id}" data-team="home" value="${homeScore}"
-                                    class="score-input w-9 md:w-11 h-9 md:h-11 text-center font-bold text-base md:text-lg border-2 border-gray-300 rounded-lg focus:border-brand-500 outline-none bg-white">
-                                <span class="text-gray-400 font-bold text-xs">VS</span>
-                                <input type="number" min="0" data-match="${match.id}" data-team="away" value="${awayScore}"
-                                    class="score-input w-9 md:w-11 h-9 md:h-11 text-center font-bold text-base md:text-lg border-2 border-gray-300 rounded-lg focus:border-brand-500 outline-none bg-white">
+                            <div class="mx-2 md:mx-4 flex flex-col items-center gap-1">
+                                <div class="flex items-center gap-1.5">
+                                    <input type="number" min="0" data-match="${match.id}" data-team="home" value="${homeScore}"
+                                        class="score-input w-9 md:w-11 h-9 md:h-11 text-center font-bold text-base md:text-lg border-2 border-gray-300 rounded-lg focus:border-brand-500 outline-none bg-white">
+                                    <span class="text-gray-400 font-bold text-xs">VS</span>
+                                    <input type="number" min="0" data-match="${match.id}" data-team="away" value="${awayScore}"
+                                        class="score-input w-9 md:w-11 h-9 md:h-11 text-center font-bold text-base md:text-lg border-2 border-gray-300 rounded-lg focus:border-brand-500 outline-none bg-white">
+                                </div>
                             </div>
                         `;
                         penContent = `
@@ -720,16 +835,52 @@
                         }
                     }
 
-                    const html = `
-                        <div class="p-3 bg-gray-50 rounded-xl border border-gray-200 flex flex-col">
-                            <div class="flex items-center justify-between">
-                                <div class="flex-1 text-right font-semibold text-xs md:text-sm ${homeScore !== '' && homeScore > awayScore ? 'text-brand-700 font-extrabold' : 'text-gray-700'}">${match.home}</div>
-                                ${centerContent}
-                                <div class="flex-1 text-left font-semibold text-xs md:text-sm ${awayScore !== '' && awayScore > homeScore ? 'text-brand-700 font-extrabold' : 'text-gray-700'}">${match.away}</div>
+                    let html = '';
+                    if (match.isFinal) {
+                        let bgClass, titleColor, iconHtml, titleHtml;
+                        if (match.color === 'amber') {
+                            bgClass = "bg-amber-50 border-amber-300";
+                            iconHtml = `<div class="bg-amber-400 text-amber-900 p-1.5 rounded-lg shadow-sm"><i data-lucide="trophy" class="w-4 h-4"></i></div>`;
+                            titleHtml = `<div class="text-[10px] font-bold text-amber-600 uppercase tracking-wider">${match.time}</div><div class="text-xs font-black text-amber-900">${match.title}</div>`;
+                        } else if (match.color === 'blue') {
+                            bgClass = "bg-blue-50 border-blue-300";
+                            iconHtml = `<div class="bg-blue-400 text-blue-900 p-1.5 rounded-lg shadow-sm"><i data-lucide="star" class="w-4 h-4"></i></div>`;
+                            titleHtml = `<div class="text-[10px] font-bold text-blue-600 uppercase tracking-wider">${match.time}</div><div class="text-xs font-black text-blue-900">${match.title}</div>`;
+                        } else {
+                            bgClass = "bg-gradient-to-r from-brand-900 to-brand-700 border-brand-800 text-white";
+                            iconHtml = `<div class="bg-brand-600 text-white p-1.5 rounded-lg border border-white/20"><i data-lucide="swords" class="w-4 h-4"></i></div>`;
+                            titleHtml = `<div class="text-[10px] font-bold text-amber-300 uppercase tracking-wider">${match.time}</div><div class="text-xs font-black text-white">${match.title}</div>`;
+                        }
+                        
+                        html = `
+                            <div class="${bgClass} border rounded-xl p-3 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3 relative overflow-hidden">
+                                ${match.color === 'brand' ? '<div class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4"><i data-lucide="flame" class="w-24 h-24 text-white"></i></div>' : ''}
+                                <div class="flex flex-col flex-1 relative z-10 w-full">
+                                    <div class="flex items-center gap-2 mb-2 w-full justify-center md:justify-start">
+                                        ${iconHtml}
+                                        <div class="text-center md:text-left">${titleHtml}</div>
+                                    </div>
+                                    <div class="flex items-center justify-between w-full bg-white/90 p-2 rounded-lg border border-black/10">
+                                        <div class="flex-1 text-right font-semibold text-xs md:text-sm text-gray-800">${match.home}</div>
+                                        ${centerContent}
+                                        <div class="flex-1 text-left font-semibold text-xs md:text-sm text-gray-800">${match.away}</div>
+                                    </div>
+                                    ${penContent}
+                                </div>
                             </div>
-                            ${penContent}
-                        </div>
-                    `;
+                        `;
+                    } else {
+                        html = `
+                            <div class="p-3 bg-gray-50 rounded-xl border border-gray-200 flex flex-col">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex-1 text-right font-semibold text-xs md:text-sm ${homeScore !== '' && homeScore > awayScore ? 'text-brand-700 font-extrabold' : 'text-gray-700'}">${match.home}</div>
+                                    ${centerContent}
+                                    <div class="flex-1 text-left font-semibold text-xs md:text-sm ${awayScore !== '' && awayScore > homeScore ? 'text-brand-700 font-extrabold' : 'text-gray-700'}">${match.away}</div>
+                                </div>
+                                ${penContent}
+                            </div>
+                        `;
+                    }
                     container.insertAdjacentHTML('beforeend', html);
                 });
             });
@@ -761,7 +912,21 @@
                             }
                         }
                         
-                        saveData();
+                        const dataToSave = {
+                            scores,
+                            goals,
+                            attendance,
+                            awards: specialAwards,
+                            timer: timerState
+                        };
+
+                        try {
+                            fetch('/api/mosa-cup', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(dataToSave)
+                            });
+                        } catch (err) { console.error('Save failed', err); }
                     });
                 });
             }
@@ -775,6 +940,8 @@
             });
 
             matchesData.forEach(match => {
+                if(match.isFinal) return; // Skip finals for standings
+                
                 const hScore = scores[`${match.id}_home`];
                 const aScore = scores[`${match.id}_away`];
 

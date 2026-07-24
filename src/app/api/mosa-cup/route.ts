@@ -20,6 +20,8 @@ export async function POST(req: Request) {
       scores: body.scores || {},
       goals: body.goals || {},
       attendance: body.attendance || {},
+      awards: body.awards || {},
+      timer: body.timer || {},
       lastUpdated: new Date().toISOString()
     };
     
