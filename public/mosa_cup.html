@@ -335,7 +335,7 @@
             <div class="bg-gradient-to-r from-emerald-800 to-emerald-600 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                     <h2 class="font-display text-2xl font-bold text-white tracking-wide"><i data-lucide="clipboard-list" class="w-6 h-6 inline-block"></i> ABSENSI SANTRI</h2>
-                    <p class="text-emerald-100 text-sm mt-1">Total 50 Santri Baru • 5 Tim @ 10 Anak</p>
+                    <p id="santri-count-info" class="hidden text-emerald-100 text-sm mt-1">Total 50 Santri Baru • 5 Tim @ 10 Anak</p>
                 </div>
                 <!-- Day Tabs -->
                 <div class="flex gap-2 flex-wrap">
@@ -705,20 +705,35 @@
             const topScorerBox = document.getElementById('top-scorer-input-box');
             const tsActionHeader = document.getElementById('ts-action-header');
             const absensiNote = document.getElementById('absensi-admin-note');
+            const santriCountInfo = document.getElementById('santri-count-info');
 
             if (isAdmin) {
-                modeBadge.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-amber-400 text-brand-900 border border-amber-300 flex items-center gap-1.5";
-                modeText.innerHTML = `<i data-lucide="unlock" class="w-4 h-4 inline-block"></i> Mode Panitia (Edit Aktif)`;
-                adminBtnIcon.innerHTML = `<i data-lucide="lock" class="w-4 h-4 inline-block"></i>`;
-                adminBtnText.innerText = "Keluar Admin";
+                modeBadge.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-amber-500/20 text-amber-500 border border-amber-400/40 flex items-center gap-1.5";
+                modeText.innerHTML = `<i data-lucide="unlock" class="w-4 h-4 inline-block"></i> Mode Panitia`;
+                adminBtnIcon.innerHTML = `<i data-lucide="user" class="w-4 h-4 inline-block"></i>`;
+                adminBtnText.innerText = "Ust. Rieza Eka Tomara";
                 adminBanner.classList.remove('hidden');
+                adminBanner.classList.add('flex');
                 resetBtn.classList.remove('hidden');
                 topScorerBox.classList.remove('hidden');
                 tsActionHeader.classList.remove('hidden');
                 absensiNote.classList.remove('hidden');
                 document.querySelectorAll('.award-admin-box').forEach(el => el.classList.remove('hidden'));
+                if (santriCountInfo) santriCountInfo.classList.remove('hidden');
                 
                 // Show admin timer controls, hide public banner if not running? Actually public banner logic is handled in updateTimerUI
+            } else if (isWali) {
+                modeBadge.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-blue-500/20 text-blue-500 border border-blue-400/40 flex items-center gap-1.5";
+                modeText.innerHTML = `<i data-lucide="users" class="w-4 h-4 inline-block"></i> Akses Wali Santri`;
+                adminBtnIcon.innerHTML = `<i data-lucide="key" class="w-4 h-4 inline-block"></i>`;
+                adminBtnText.innerText = "Login Panitia";
+                adminBanner.classList.add('hidden');
+                resetBtn.classList.add('hidden');
+                topScorerBox.classList.add('hidden');
+                tsActionHeader.classList.add('hidden');
+                absensiNote.classList.add('hidden');
+                document.querySelectorAll('.award-admin-box').forEach(el => el.classList.add('hidden'));
+                if (santriCountInfo) santriCountInfo.classList.remove('hidden');
             } else {
                 modeBadge.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 flex items-center gap-1.5";
                 modeText.innerHTML = `<i data-lucide="eye" class="w-4 h-4 inline-block"></i> Mode Penonton (Read-Only)`;
@@ -730,6 +745,7 @@
                 tsActionHeader.classList.add('hidden');
                 absensiNote.classList.add('hidden');
                 document.querySelectorAll('.award-admin-box').forEach(el => el.classList.add('hidden'));
+                if (santriCountInfo) santriCountInfo.classList.add('hidden');
             }
             updateTimerUI();
             renderAbsensi(); refreshIcons();
