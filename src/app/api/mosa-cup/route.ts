@@ -22,6 +22,7 @@ export async function POST(req: Request) {
       attendance: body.attendance || {},
       awards: body.awards || {},
       timer: body.timer || {},
+      allStarSquad: body.allStarSquad || [],
       lastUpdated: new Date().toISOString()
     };
     

@@ -195,7 +195,8 @@
                             INFO & PERATURAN TURNAMEN:
                         </div>
                         <ul class="list-disc pl-5 space-y-1 text-gray-700">
-                            <li><strong>Durasi Laga:</strong> 2 x 5 Menit (waktu normal) + 1 Menit <i>injury time</i> per babak (Total 12 Menit).</li>
+                            <li><strong>Durasi Laga (Fase Grup & Laga Bintang):</strong> 2 x 5 Menit.</li>
+                            <li><strong>Durasi Laga (Grand Final & Lawan Asatidzah):</strong> 2 x 7 Menit.</li>
                             <li><strong>Menang Waktu Normal:</strong> 3 Poin</li>
                             <li><strong>Menang Adu Penalti:</strong> 2 Poin</li>
                             <li><strong>Kalah Adu Penalti:</strong> 1 Poin</li>
@@ -322,6 +323,29 @@
                             </select>
                             <button onclick="saveAward('fair-play')" class="bg-emerald-600 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow w-full hover:bg-emerald-700">Simpan</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- All Star Section (Hidden from Public) -->
+            <div id="all-star-section" class="hidden bg-white rounded-2xl shadow-xl border border-blue-200 overflow-hidden mt-6">
+                <div class="bg-gradient-to-r from-blue-900 to-blue-700 p-4 border-b border-blue-800 flex justify-between items-center relative overflow-hidden">
+                    <div class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4"><i data-lucide="star" class="w-24 h-24 text-white"></i></div>
+                    <h2 class="font-display text-xl font-bold text-white tracking-wide relative z-10"><i data-lucide="users" class="w-5 h-5 inline-block"></i> AL-IMAM ALL STAR SQUAD</h2>
+                </div>
+                
+                <div class="p-5">
+                    <div id="all-star-admin-controls" class="hidden mb-4 p-4 bg-blue-50 border border-blue-200 rounded-xl">
+                        <h3 class="text-xs font-bold text-blue-900 mb-2">Tambah Pemain ke Skuad:</h3>
+                        <div class="flex gap-2">
+                            <select id="all-star-select" class="flex-1 text-sm p-2 border border-blue-300 rounded focus:outline-none focus:border-blue-600 font-semibold bg-white">
+                                <option value="">-- Pilih Pemain --</option>
+                            </select>
+                            <button onclick="addAllStar()" class="bg-blue-600 text-white font-bold text-sm px-4 py-2 rounded-lg hover:bg-blue-700">Tambah</button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="all-star-roster">
+                        <!-- JS Rendered -->
                     </div>
                 </div>
             </div>
@@ -495,6 +519,7 @@
         let goals = {};
         let attendance = {}; // { 'day_team_player': 'hadir'|'alpha'|'belum' }
         let specialAwards = {}; // { 'best-player': '', 'best-gk': '', 'fair-play': '' }
+        let allStarSquad = [];
         let timerState = { isRunning: false, startTime: null, elapsed: 0, period: 'Babak 1' };
         let currentAbsensiDay = 1;
 
@@ -517,6 +542,12 @@
                         if (data.goals) goals = data.goals;
                         if (data.attendance) attendance = data.attendance;
                         if (data.awards) specialAwards = data.awards;
+                        if (data.allStarSquad) allStarSquad = data.allStarSquad;
+                        
+                        // Default All-Star jika kosong
+                        if (allStarSquad.length === 0) {
+                            allStarSquad = ['Fazril Alkais', 'Lalu Muhamad Rizky Ananda', 'Abdullah Rasyid'];
+                        }
                     }
                     
                     // Timer is synced for everyone (even admin, so they see updates from other admins)
@@ -933,7 +964,8 @@
                             goals,
                             attendance,
                             awards: specialAwards,
-                            timer: timerState
+                            timer: timerState,
+                            allStarSquad
                         };
 
                         try {
@@ -1161,10 +1193,76 @@
                 `;
                 tbody.insertAdjacentHTML('beforeend', tr);
             });
+            
+            // Render All-Star every updateAdminUI
+            renderAllStar(); refreshIcons();
+            
+            updateTimerUI();
+            renderAbsensi(); refreshIcons();
         }
 
+        // --- ALL STAR LOGIC ---
+        function renderAllStar() {
+            const section = document.getElementById('all-star-section');
+            const adminControls = document.getElementById('all-star-admin-controls');
+            const rosterDiv = document.getElementById('all-star-roster');
+            
+            if (!section || !rosterDiv) return;
+            
+            if (isAdmin || isWali) {
+                section.classList.remove('hidden');
+                if (isAdmin) adminControls.classList.remove('hidden');
+                else adminControls.classList.add('hidden');
+            } else {
+                section.classList.add('hidden');
+            }
+
+            rosterDiv.innerHTML = '';
+            if (allStarSquad.length === 0) {
+                rosterDiv.innerHTML = '<div class="col-span-1 sm:col-span-2 text-center py-4 text-sm text-gray-500 italic">Belum ada pemain terpilih</div>';
+                return;
+            }
+            
+            allStarSquad.forEach(player => {
+                const removeBtn = isAdmin ? `<button onclick="removeAllStar('${player}')" class="text-red-500 hover:text-red-700 ml-2 p-1 rounded-full hover:bg-red-50"><i data-lucide="x" class="w-4 h-4"></i></button>` : '';
+                rosterDiv.insertAdjacentHTML('beforeend', `
+                    <div class="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-3 shadow-sm hover:border-blue-300 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center shadow-sm"><i data-lucide="user" class="w-4 h-4"></i></div>
+                            <span class="font-bold text-sm text-gray-800">${player}</span>
+                        </div>
+                        ${removeBtn}
+                    </div>
+                `);
+            });
+        }
+
+        function addAllStar() {
+            if(!isAdmin) return;
+            const select = document.getElementById('all-star-select');
+            const player = select.value;
+            if (!player) return;
+            
+            if (!allStarSquad.includes(player)) {
+                allStarSquad.push(player);
+                saveData();
+                renderAllStar(); refreshIcons();
+            }
+            select.value = "";
+        }
+
+        function removeAllStar(player) {
+            if(!isAdmin) return;
+            if (confirm("Hapus " + player + " dari skuad All-Star?")) {
+                allStarSquad = allStarSquad.filter(p => p !== player);
+                saveData();
+                renderAllStar(); refreshIcons();
+            }
+        }
+        // --- END ALL STAR ---
+
         // =============================================
-        // ABSENSI MODULE
+        // RENDER LOGIC
         // =============================================
         const teamColors = {
             'Badar':   { bg: 'bg-blue-50',   border: 'border-blue-300',   header: 'bg-blue-600',   icon: '<i data-lucide="shield-half" class="w-4 h-4 inline-block"></i>' },
@@ -1306,6 +1404,8 @@
             }
             document.getElementById('input-best-player').insertAdjacentHTML('beforeend', optionsHtml);
             document.getElementById('input-best-gk').insertAdjacentHTML('beforeend', optionsHtml);
+            const allStarSelect = document.getElementById('all-star-select');
+            if (allStarSelect) allStarSelect.insertAdjacentHTML('beforeend', optionsHtml);
         }
 
         function refreshIcons() { if(window.lucide) { lucide.createIcons(); } }
