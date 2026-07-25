@@ -526,6 +526,7 @@
         let allStarSquad = [];
         let timerState = { isRunning: false, startTime: null, elapsed: 0, period: 'Babak 1', matchId: '' };
         let currentAbsensiDay = 1;
+        let isInitialLoad = true;
 
         // Load data & admin state
         async function loadData() {
@@ -540,19 +541,43 @@
                 if (res.ok) {
                     const data = await res.json();
                     
-                    if (!isAdmin) {
-                        // Only sync scores and goals if not admin, to avoid overwriting local edits
-                        if (data.scores) scores = data.scores;
-                        if (data.goals) goals = data.goals;
-                        if (data.attendance) attendance = data.attendance;
-                        if (data.awards) specialAwards = data.awards;
-                        if (data.allStarSquad) allStarSquad = data.allStarSquad;
+                    if (!isAdmin || isInitialLoad) {
+                        // Only sync scores and goals if not admin or if it's the first load
+                        if (data.scores && Object.keys(data.scores).length > 0) {
+                            scores = data.scores;
+                        } else {
+                            const ls = localStorage.getItem('mosa_scores_draft');
+                            if(ls) { try { scores = JSON.parse(ls); } catch(e){} }
+                        }
                         
-                        // Default All-Star jika kosong
-                        if (allStarSquad.length === 0) {
+                        if (data.goals && Object.keys(data.goals).length > 0) {
+                            goals = data.goals;
+                        } else {
+                            const lg = localStorage.getItem('mosa_goals_draft');
+                            if(lg) { try { goals = JSON.parse(lg); } catch(e){} }
+                        }
+                        
+                        if (data.attendance && Object.keys(data.attendance).length > 0) {
+                            attendance = data.attendance;
+                        } else {
+                            const la = localStorage.getItem('mosa_attendance_draft');
+                            if(la) { try { attendance = JSON.parse(la); } catch(e){} }
+                        }
+                        
+                        if (data.awards && Object.keys(data.awards).length > 0) {
+                            specialAwards = data.awards;
+                        } else {
+                            const lw = localStorage.getItem('mosa_awards_draft');
+                            if(lw) { try { specialAwards = JSON.parse(lw); } catch(e){} }
+                        }
+                        
+                        if (data.allStarSquad && data.allStarSquad.length > 0) {
+                            allStarSquad = data.allStarSquad;
+                        } else {
                             allStarSquad = ['Fazril Alkais', 'Lalu Muhamad Rizky Ananda', 'Abdullah Rasyid'];
                         }
                     }
+                    isInitialLoad = false;
                     
                     // Timer is synced for everyone (even admin, so they see updates from other admins)
                     if (data.timer) {
