@@ -831,9 +831,44 @@
         function editMatchTime(matchId) {
             if(!isAdmin) return;
             const current = scores[`${matchId}_time`] || matchesData.find(m => m.id === matchId).time;
-            const newTime = prompt(`Ubah jadwal tayang untuk match ini:`, current);
+            const newTime = prompt(`PENGATURAN JADWAL:\nKetik jadwal baru (contoh: '08.00 - 08.30 WIB').\n\nATUR OTOMATIS (Khusus F1):\nKetik jam mulai (contoh: 08.00 atau 16.00) agar sistem otomatis menghitung jadwal F1, F2, & F3 secara berurutan.`, current);
+            
             if(newTime !== null && newTime.trim() !== "") {
-                scores[`${matchId}_time`] = newTime.trim();
+                const input = newTime.trim();
+                const timeRegex = /^(\d{1,2})[\.:](\d{2})$/;
+                
+                if (matchId === 'f1' && timeRegex.test(input)) {
+                    let mMatch = input.match(timeRegex);
+                    let h = parseInt(mMatch[1]);
+                    let m = parseInt(mMatch[2]);
+                    
+                    function addM(hours, mins, add) {
+                        let d = new Date(); d.setHours(hours, mins + add, 0);
+                        let hr = d.getHours().toString().padStart(2, '0');
+                        let mn = d.getMinutes().toString().padStart(2, '0');
+                        return { h: d.getHours(), m: d.getMinutes(), str: `${hr}.${mn}` };
+                    }
+                    
+                    // f1: 30 mins
+                    let f1Start = { h, m, str: addM(h, m, 0).str };
+                    let f1End = addM(f1Start.h, f1Start.m, 30);
+                    scores['f1_time'] = `${f1Start.str} - ${f1End.str} WIB`;
+                    
+                    // f2: gap 15m, duration 20m
+                    let f2Start = addM(f1End.h, f1End.m, 15);
+                    let f2End = addM(f2Start.h, f2Start.m, 20);
+                    scores['f2_time'] = `${f2Start.str} - ${f2End.str} WIB`;
+                    
+                    // f3: gap 15m, duration 25m
+                    let f3Start = addM(f2End.h, f2End.m, 15);
+                    let f3End = addM(f3Start.h, f3Start.m, 25);
+                    scores['f3_time'] = `${f3Start.str} - ${f3End.str} WIB`;
+                    
+                    alert(`Jadwal Final berhasil dihitung otomatis!\n\nF1 (Grand Final): ${scores['f1_time']}\nF2 (Laga Bintang): ${scores['f2_time']}\nF3 (Puncak Gengsi): ${scores['f3_time']}`);
+                } else {
+                    scores[`${matchId}_time`] = input;
+                }
+                
                 saveData();
                 renderMatches(); refreshIcons();
             }
