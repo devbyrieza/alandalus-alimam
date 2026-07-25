@@ -183,16 +183,19 @@
 <body>
 
 <div class="info-bar">
-  <strong>📋 Panduan Cetak 8 Voucher (Khusus Penghargaan Individu)</strong><br>
+  <strong>📋 Panduan Cetak 42 Voucher Tema KREM EMAS (3×9 per lembar)</strong><br>
   Tekan <strong>Ctrl+P</strong> → Kertas: <strong>A4</strong> · Orientasi: <strong>Portrait</strong> ·
   Margin: <strong>None</strong> · Scale: <strong>100%</strong> ·
   <strong>✅ Centang "Background graphics/colors"</strong><br>
-  <em>Lembar 1: 8 voucher (Juara)</em><br>
+  <em>Lembar 1: 27 voucher (Juara) · Lembar 2: 8 voucher (Juara) + 7 voucher (Materi) · Total: 42 voucher</em><br>
   <button class="print-btn" onclick="window.print()">🖨️ Cetak Sekarang</button>
 </div>
 
-<div class="page-label">— Lembar 1 · 8 Voucher (Hadiah Individu) —</div>
+<div class="page-label">— Lembar 1 · 27 Voucher (Juara MOSA CUP) —</div>
 <div class="page" id="page1"></div>
+
+<div class="page-label">— Lembar 2 · 15 Voucher (8 Juara + 7 Materi) —</div>
+<div class="page" id="page2"></div>
 
 <script>
 const BW = [1,2,1,2,1,1,2,1,2,1,1,2,1,2,1,1,2,1];
@@ -281,8 +284,11 @@ function createVoucher(type) {
 }
 
 const p1 = document.getElementById('page1');
+const p2 = document.getElementById('page2');
 
-for(let i=0; i<8; i++) p1.appendChild(createVoucher('juara'));
+for(let i=0; i<27; i++) p1.appendChild(createVoucher('juara'));
+for(let i=0; i<8; i++) p2.appendChild(createVoucher('juara'));
+for(let i=0; i<7; i++) p2.appendChild(createVoucher('materi'));
 </script>
 </body>
 </html>
