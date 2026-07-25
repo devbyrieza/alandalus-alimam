@@ -75,9 +75,9 @@
     <!-- Public Live Timer -->
     <div id="live-timer-banner" class="hidden bg-gradient-to-r from-red-600 to-brand-900 text-white shadow-xl sticky top-[72px] md:top-[88px] z-40 border-b border-red-500/50">
         <div class="max-w-7xl mx-auto px-4 py-2 md:py-2.5 flex items-center justify-between text-sm md:text-base font-bold tracking-wider">
-            <div class="flex items-center gap-2 md:gap-3">
-                <span class="w-2.5 h-2.5 rounded-full bg-white animate-pulse shadow-[0_0_8px_rgba(255,255,255,0.8)]"></span>
-                <span class="text-xs md:text-sm">LIVE MATCH</span>
+            <div class="flex items-center gap-2 md:gap-3 max-w-[50%] md:max-w-[70%]">
+                <span class="w-2.5 h-2.5 rounded-full bg-white animate-pulse shadow-[0_0_8px_rgba(255,255,255,0.8)] flex-shrink-0"></span>
+                <span id="live-timer-match-label" class="text-[10px] md:text-sm truncate">LIVE MATCH</span>
             </div>
             <div class="flex flex-col md:flex-row items-end md:items-center gap-0 md:gap-4">
                 <span id="live-timer-period" class="text-[10px] md:text-xs text-red-200 uppercase tracking-widest">Babak 1</span>
@@ -96,6 +96,10 @@
         <!-- Admin Timer Controls -->
         <div class="px-2 md:px-4 py-3 bg-amber-300 flex flex-wrap items-center justify-center gap-2 md:gap-4 w-full relative z-50">
             <div class="text-[10px] md:text-xs font-bold border-r border-amber-500 pr-2 mr-1">TIMER:</div>
+            
+            <select id="admin-timer-match" onchange="syncTimerState()" class="text-xs md:text-sm font-bold bg-white border border-amber-500 rounded px-2 py-1.5 md:py-2 outline-none max-w-[140px] md:max-w-[200px] truncate">
+                <option value="">-- Pilih Match --</option>
+            </select>
             
             <select id="admin-timer-period" onchange="syncTimerState()" class="text-xs md:text-sm font-bold bg-white border border-amber-500 rounded px-2 py-1.5 md:py-2 outline-none">
                 <option value="Babak 1">Babak 1</option>
@@ -520,7 +524,7 @@
         let attendance = {}; // { 'day_team_player': 'hadir'|'alpha'|'belum' }
         let specialAwards = {}; // { 'best-player': '', 'best-gk': '', 'fair-play': '' }
         let allStarSquad = [];
-        let timerState = { isRunning: false, startTime: null, elapsed: 0, period: 'Babak 1' };
+        let timerState = { isRunning: false, startTime: null, elapsed: 0, period: 'Babak 1', matchId: '' };
         let currentAbsensiDay = 1;
 
         // Load data & admin state
@@ -690,7 +694,9 @@
         function syncTimerState() {
             if (!isAdmin) return;
             const periodSelect = document.getElementById('admin-timer-period');
+            const matchSelect = document.getElementById('admin-timer-match');
             if(periodSelect) timerState.period = periodSelect.value;
+            if(matchSelect) timerState.matchId = matchSelect.value;
             saveData(); // Sends updated timerState to API
         }
 
@@ -719,7 +725,20 @@
             
             if(isAdmin) {
                 const periodSelect = document.getElementById('admin-timer-period');
+                const matchSelect = document.getElementById('admin-timer-match');
                 if(periodSelect && timerState.period) periodSelect.value = timerState.period;
+                if(matchSelect && timerState.matchId) matchSelect.value = timerState.matchId;
+            }
+            
+            const matchLabel = document.getElementById('live-timer-match-label');
+            if (matchLabel) {
+                if (timerState.matchId) {
+                    const m = matchesData.find(x => x.id === timerState.matchId);
+                    if (m) matchLabel.innerText = m.isFinal ? `${m.title}: ${m.home} vs ${m.away}` : `${m.home} vs ${m.away}`;
+                    else matchLabel.innerText = "LIVE MATCH";
+                } else {
+                    matchLabel.innerText = "LIVE MATCH";
+                }
             }
             
             tickTimer();
@@ -1408,10 +1427,20 @@
             if (allStarSelect) allStarSelect.insertAdjacentHTML('beforeend', optionsHtml);
         }
 
+        function populateTimerMatchDropdown() {
+            const select = document.getElementById('admin-timer-match');
+            if(!select) return;
+            matchesData.forEach(m => {
+                let text = m.isFinal ? `[${m.title}] ${m.home} vs ${m.away}` : `Hari ${m.day}: ${m.home} vs ${m.away}`;
+                select.insertAdjacentHTML('beforeend', `<option value="${m.id}">${text}</option>`);
+            });
+        }
+
         function refreshIcons() { if(window.lucide) { lucide.createIcons(); } }
 
         // Init
         populatePlayerDropdowns();
+        populateTimerMatchDropdown();
         loadData();
 
     </script>
