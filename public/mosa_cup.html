@@ -1311,23 +1311,32 @@
             }
 
             rosterDiv.innerHTML = '';
-            if (allStarSquad.length === 0) {
-                rosterDiv.innerHTML = '<div class="col-span-1 sm:col-span-2 text-center py-4 text-sm text-gray-500 italic">Belum ada pemain terpilih</div>';
-                return;
-            }
             
-            allStarSquad.forEach(player => {
-                const removeBtn = isAdmin ? `<button onclick="removeAllStar('${player}')" class="text-red-500 hover:text-red-700 ml-2 p-1 rounded-full hover:bg-red-50"><i data-lucide="x" class="w-4 h-4"></i></button>` : '';
-                rosterDiv.insertAdjacentHTML('beforeend', `
-                    <div class="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-3 shadow-sm hover:border-blue-300 transition-colors">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center shadow-sm"><i data-lucide="user" class="w-4 h-4"></i></div>
-                            <span class="font-bold text-sm text-gray-800">${player}</span>
+            const maxSlots = 7;
+            const totalToRender = Math.max(maxSlots, allStarSquad.length);
+            
+            for (let i = 0; i < totalToRender; i++) {
+                if (i < allStarSquad.length) {
+                    const player = allStarSquad[i];
+                    const removeBtn = isAdmin ? `<button onclick="removeAllStar('${player}')" class="text-red-500 hover:text-red-700 ml-2 p-1 rounded-full hover:bg-red-50"><i data-lucide="x" class="w-4 h-4"></i></button>` : '';
+                    rosterDiv.insertAdjacentHTML('beforeend', `
+                        <div class="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-3 shadow-sm hover:border-blue-300 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center shadow-sm"><i data-lucide="user" class="w-4 h-4"></i></div>
+                                <span class="font-bold text-sm text-gray-800">${player}</span>
+                            </div>
+                            ${removeBtn}
                         </div>
-                        ${removeBtn}
-                    </div>
-                `);
-            });
+                    `);
+                } else {
+                    rosterDiv.insertAdjacentHTML('beforeend', `
+                        <div class="flex items-center gap-3 bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg p-3 opacity-70">
+                            <div class="w-8 h-8 bg-gray-200 text-gray-400 rounded-full flex items-center justify-center"><i data-lucide="help-circle" class="w-4 h-4"></i></div>
+                            <span class="font-medium text-xs text-gray-500 italic">Sedang Tahap Seleksi...</span>
+                        </div>
+                    `);
+                }
+            }
         }
 
         function addAllStar() {
