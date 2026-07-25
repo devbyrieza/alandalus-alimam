@@ -516,7 +516,7 @@
             { id: 'm10', day: 3, home: 'Uhud', away: 'Tabuk' },
             { id: 'f1', day: 4, home: 'Uhud', away: 'Tabuk', isFinal: true, title: 'GRAND FINAL', time: '07.30 - 08.00 WIB', color: 'amber' },
             { id: 'f2', day: 4, home: 'Juara 1', away: 'Tim All-Star', isFinal: true, title: 'LAGA BINTANG', time: '08.15 - 08.35 WIB', color: 'blue' },
-            { id: 'f3', day: 4, home: 'Pemenang Laga Bintang', away: 'Tim Asatidzah', isFinal: true, title: 'PUNCAK GENGSI', time: '08.50 - 09.15 WIB', color: 'brand' },
+            { id: 'f3', day: 4, home: 'Pemenang Laga Bintang', away: 'Tim Asatidzah', isFinal: true, title: 'PUNCAK GENGSI', time: '16.30 - 17.00 WIB', color: 'brand' },
         ];
 
         let scores = {};
@@ -828,6 +828,17 @@
             }
         }
 
+        function editMatchTime(matchId) {
+            if(!isAdmin) return;
+            const current = scores[`${matchId}_time`] || matchesData.find(m => m.id === matchId).time;
+            const newTime = prompt(`Ubah jadwal tayang untuk match ini:`, current);
+            if(newTime !== null && newTime.trim() !== "") {
+                scores[`${matchId}_time`] = newTime.trim();
+                saveData();
+                renderMatches(); refreshIcons();
+            }
+        }
+
         function resetData() {
             if(confirm("Apakah Anda yakin ingin menghapus semua data (Skor Laga, Top Skor, & Absensi)?")) {
                 scores = {};
@@ -904,18 +915,21 @@
                     let html = '';
                     if (match.isFinal) {
                         let bgClass, titleColor, iconHtml, titleHtml;
+                        let displayTime = scores[`${match.id}_time`] || match.time;
+                        const editTimeBtn = isAdmin ? `<button onclick="editMatchTime('${match.id}')" class="ml-1 opacity-70 hover:opacity-100"><i data-lucide="edit-2" class="w-3 h-3 inline-block"></i></button>` : '';
+
                         if (match.color === 'amber') {
                             bgClass = "bg-amber-50 border-amber-300";
                             iconHtml = `<div class="bg-amber-400 text-amber-900 p-1.5 rounded-lg shadow-sm"><i data-lucide="trophy" class="w-4 h-4"></i></div>`;
-                            titleHtml = `<div class="text-[10px] font-bold text-amber-600 uppercase tracking-wider">${match.time}</div><div class="text-xs font-black text-amber-900">${match.title}</div>`;
+                            titleHtml = `<div class="text-[10px] font-bold text-amber-600 uppercase tracking-wider flex justify-center items-center">${displayTime} ${editTimeBtn}</div><div class="text-xs font-black text-amber-900">${match.title}</div>`;
                         } else if (match.color === 'blue') {
                             bgClass = "bg-blue-50 border-blue-300";
                             iconHtml = `<div class="bg-blue-400 text-blue-900 p-1.5 rounded-lg shadow-sm"><i data-lucide="star" class="w-4 h-4"></i></div>`;
-                            titleHtml = `<div class="text-[10px] font-bold text-blue-600 uppercase tracking-wider">${match.time}</div><div class="text-xs font-black text-blue-900">${match.title}</div>`;
+                            titleHtml = `<div class="text-[10px] font-bold text-blue-600 uppercase tracking-wider flex justify-center items-center">${displayTime} ${editTimeBtn}</div><div class="text-xs font-black text-blue-900">${match.title}</div>`;
                         } else {
                             bgClass = "bg-gradient-to-r from-brand-900 to-brand-700 border-brand-800 text-white";
                             iconHtml = `<div class="bg-brand-600 text-white p-1.5 rounded-lg border border-white/20"><i data-lucide="swords" class="w-4 h-4"></i></div>`;
-                            titleHtml = `<div class="text-[10px] font-bold text-amber-300 uppercase tracking-wider">${match.time}</div><div class="text-xs font-black text-white">${match.title}</div>`;
+                            titleHtml = `<div class="text-[10px] font-bold text-amber-300 uppercase tracking-wider flex justify-center items-center">${displayTime} ${editTimeBtn}</div><div class="text-xs font-black text-white">${match.title}</div>`;
                         }
                         
                         html = `
