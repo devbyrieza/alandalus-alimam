@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buku Saku Guru</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; background: #f4f6f8; color: #333; line-height: 1.6; padding-bottom: 70px; }
+  .header { background: #1d3557; color: white; padding: 20px; text-align: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+  .header h1 { margin: 0; font-size: 1.5rem; font-weight: 800; }
+  .content { padding: 20px; }
+  .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; }
+  h2 { color: #e63946; font-size: 1.2rem; margin-top: 0; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+  h3 { color: #1d3557; font-size: 1.1rem; }
+  ul, ol { padding-left: 20px; }
+  li { margin-bottom: 10px; }
+  .highlight { background: #fff3cd; padding: 2px 5px; border-radius: 4px; font-weight: 600; color: #856404; }
+  .kunci { font-weight: 800; color: #d90429; font-size: 1.2rem; }
+  
+  .tab-content { display: none; }
+  .tab-content.active { display: block; animation: fadeIn 0.3s; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 100; }
+  .nav-btn { flex: 1; padding: 15px 0; border: none; background: none; font-size: 0.9rem; font-weight: 600; color: #6c757d; cursor: pointer; transition: 0.2s; border-top: 3px solid transparent; }
+  .nav-btn.active { color: #e63946; border-top: 3px solid #e63946; background: #fffcfc; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📱 Buku Saku Guru</h1>
+</div>
+
+<div id="panduan" class="tab-content active content">
+  <div class="card">
+    <h2>⏰ Sesi 1: Pembukaan (07.00 - 07.20)</h2>
+    <ul>
+      <li>Salam & Absen singkat.</li>
+      <li><b>Game Sambung Kata:</b> "Daripada... Lebih Baik..."</li>
+      <li>Hukuman mikir lama: Berdiri menghadap teman, senyum 5 detik pamer gigi.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>⏰ Sesi 2: Aturan & Motivasi (07.20 - 07.50)</h2>
+    <ul>
+      <li><b>Slide 1:</b> Matematika melatih cara berpikir & logika.</li>
+      <li><b>Slide 2 (Aturan Kelas):</b> 1. Tidak Takut Salah. 2. Jangan Menertawakan Berlebihan (Bercanda boleh, mengejek jangan). 3. Saling Menghargai & Peduli (Bantu teman, beri kesempatan).</li>
+      <li><b>Slide 3-4 (Al-Khawarizmi):</b> Bapak Matematika Dunia. Penemu angka Nol.</li>
+      <li><b>Slide 5 (Agama):</b> Zakat, Waris, Kiblat.</li>
+      <li><b>Slide 6 (Cita-cita):</b> Pengusaha, Dokter, IT, Chef.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>⏰ Sesi 3: Pemanasan Logika (07.50 - 08.20)</h2>
+    <ul>
+      <li><b>Tebakan Jebakan 1:</b> "Sapi satu kaki 4. Sapi dua kaki 8. Sapi sepuluh kaki berapa?" (Jawab: Empat! Karena Sapi Sepuluh itu nama/nomor urut sapi).</li>
+      <li><b>Tebakan Jebakan 2:</b> "Berapa kali bisa mengurangi 5 dari angka 25?" (Jawab: Sekali! Karena selanjutnya angkanya jadi 20).</li>
+      <li><b>Tantangan Papan Tulis:</b> Tulis huruf E kapital tanpa angkat spidol.</li>
+      <li><b>Slide 7 (Algoritma):</b> Penjelasan Algoritma.</li>
+      <li><b>Jokes Indomie:</b> Bikin mie urutannya dibalik pasti hancur. Ingatkan: <i>Banyak jalan/urutan menuju benar!</i></li>
+      <li>Tes Logika KABATAKU di Papan Tulis (Cek Tab Bank Soal).</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>⏰ Sesi 4: Tugas Kertas Akhir (08.20 - 08.45)</h2>
+    <ul>
+      <li><b>Slide 8 (Tantangan 3 Soal):</b> Minta santri mengeluarkan kertas. Waktu 15 menit.</li>
+      <li>Soal 1: Algoritma. Soal 2: Saldo jajan (Bilangan Bulat). Soal 3: Makan Pizza (Pecahan).</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>⏰ Sesi 5: Nasihat Jumat & Penutup (08.45 - 09.00)</h2>
+    <ul>
+      <li><b>Slide 9 (Adab):</b> Doa makan shahih ("...min ghairi hawlin..."). Jelaskan ini sebagai <span class="highlight">Kartu Spesial</span> penghapus dosa harian anak SMP.</li>
+      <li><b>Slide 10 (Shalawat):</b> Ceritakan kisah sahabat keheranan saat Nabi menaiki mimbar dan tiba-tiba bilang Aamiin 3x. Jibril melaknat orang pelit shalawat!</li>
+      <li><b>Slide 11 (Fiqih Shalat):</b> Syarat rakaat = dapat Ruku' imam. Berjalan ke masjid tenang, dilarang lari.</li>
+      <li><b>Slide 12 (Akhlak):</b> Puji akhlak santri Ulul Albaab. Pacu santri Al-Imam agar lebih hebat karena akhlak adalah timbangan terberat di hari kiamat.</li>
+      <li><b>Slide 13 (Kuis Mindset):</b> Lempar kuis jebakan Benar/Salah: <i>"Bantu teman bikin capek & rugi?"</i> Biarkan debat. Jelaskan bahwa menolong teman bisa menjadi asbab Allah melindungi keluarga di rumah!</li>
+      <li><b>Slide 14 (Dalil Kebaikan):</b> Kebaikan mutlak kembali ke diri sendiri (QS. Al Isra: 7 & HR. Muslim). Jangan pernah takut dimanfaatkan.</li>
+      <li>Tugas Kamar: Baca Bab 1 santai seperti komik.</li>
+    </ul>
+  </div>
+</div>
+
+<div id="soal" class="tab-content content">
+  <div class="card">
+    <h2>A. Kunci Jawaban Slide 8</h2>
+    <h3>Soal 2 (Bilangan Bulat):</h3>
+    <ul>
+      <li><span class="kunci">-5.000 (Atau hutang 5.000).</span></li>
+    </ul>
+    <h3>Soal 3 (Pecahan):</h3>
+    <ul>
+      <li><span class="kunci">3/8</span> (Tiga per delapan).</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>B. Soal Jebakan Papan Tulis (KABATAKU)</h2>
+    <p><i>Jelaskan: Kali/Bagi adalah BOS, harus dikerjakan duluan!</i></p>
+    <h3>Soal 1: <code>2 + 3 x 4 = ...</code></h3>
+    <ul>
+      <li>Jawaban Salah Anak: 20</li>
+      <li><span class="kunci">Kunci Benar: 14</span></li>
+    </ul>
+    <h3>Soal 2: <code>10 - 10 x 10 + 10 = ...</code></h3>
+    <ul>
+      <li>Jawaban Salah Anak: 10</li>
+      <li><span class="kunci">Kunci Benar: -80</span> (Minus 80)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>C. Soal Tunjuk Acak (Mudah)</h2>
+    <p><i>Gunakan untuk memancing anak yang pasif.</i></p>
+    <ul>
+      <li><code>15 + 8 =</code> <span class="kunci">23</span></li>
+      <li><code>20 - 7 =</code> <span class="kunci">13</span></li>
+      <li><code>35 : 5 =</code> <span class="kunci">7</span></li>
+    </ul>
+  </div>
+</div>
+
+<div id="cadangan" class="tab-content content">
+  <div class="card">
+    <h2>🎮 Game: Tebak Angka Rahasia</h2>
+    <p>Gunakan HANYA jika ada sisa waktu luang.</p>
+    <ol>
+      <li>Ustaz memikirkan angka rahasia (1-100).</li>
+      <li>Santri menebak satu angka.</li>
+      <li>Ustaz hanya menjawab <b>"TERLALU BESAR"</b> atau <b>"TERLALU KECIL"</b>.</li>
+      <li>Terus sampai ada yang tepat.</li>
+    </ol>
+    <p class="highlight">Ilmu Komputernya: Binary Search (Pencarian Cepat dengan metode membagi dua).</p>
+  </div>
+  <div class="card">
+    <h2>🗣️ Hukuman Senam Otak</h2>
+    <p>Jika ada santri yang dihukum, minta dia maju: Tangan kanannya menepuk-nepuk puncak kepalanya sendiri, sementara tangan kirinya mengelus-elus perut memutar secara bersamaan.</p>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <button class="nav-btn active" onclick="openTab('panduan', this)">📖 Panduan</button>
+  <button class="nav-btn" onclick="openTab('soal', this)">🧮 Bank Soal</button>
+  <button class="nav-btn" onclick="openTab('cadangan', this)">🎮 Cadangan</button>
+</div>
+
+<script>
+function openTab(tabId, btn) {
+  document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+</script>
+
+</body>
+</html>

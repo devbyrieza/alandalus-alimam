@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Surat Perjanjian Kerja Sama - Kepala Madrasah</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0; /* Wajib 0 agar background full-bleed ke ujung kertas */
+        }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact; 
+            print-color-adjust: exact;
+        }
+        
+        /* Background yang mengulang di setiap halaman cetak */
+        .page-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .page-background img {
+            width: 210mm;
+            height: 297mm;
+            object-fit: fill;
+        }
+
+        /* Tabel layout untuk margin atas-bawah otomatis di tiap halaman */
+        table.layout-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: none;
+        }
+        
+        table.layout-table td {
+            border: none;
+            vertical-align: top;
+        }
+        
+        /* Margin kiri-kanan teks */
+        .content-container {
+            padding-left: 30mm;
+            padding-right: 25mm;
+            text-align: justify;
+        }
+
+        .center { text-align: center; }
+        .bold { font-weight: bold; }
+        h1, h2, h3 { text-align: center; font-size: 14pt; margin: 0; padding: 0; }
+        .title { text-transform: uppercase; text-decoration: underline; margin-bottom: 5px; }
+        .nomor { text-align: center; margin-bottom: 20px; }
+        .list-container { margin-top: 5px; margin-bottom: 5px; }
+        
+        table.signature {
+            width: 100%;
+            margin-top: 50px;
+            text-align: center;
+        }
+        .ttd-box {
+            position: relative;
+            display: inline-block;
+            width: 200px;
+            height: 120px;
+        }
+        .stempel {
+            position: absolute;
+            left: -30px;
+            top: -30px;
+            width: 120px;
+            opacity: 0.85;
+            z-index: 1;
+        }
+        .ttd {
+            position: absolute;
+            left: 20px;
+            top: 10px;
+            width: 150px;
+            z-index: 2;
+        }
+        .nama-ttd {
+            position: relative;
+            z-index: 3;
+            margin-top: 90px;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        
+        /* Mencegah terpotong di tengah baris/elemen penting */
+        .avoid-break {
+            page-break-inside: avoid;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Background Image -->
+    <div class="page-background">
+        <img src="./public/images/kop-surat-full.jpg" alt="Background">
+    </div>
+
+    <table class="layout-table">
+        <thead>
+            <tr>
+                <!-- Tinggi ruang kosong untuk Header (Kop Surat) -->
+                <!-- Diperbesar agar tidak menabrak garis alamat -->
+                <td style="height: 65mm;">
+                    <!-- Spacer -->
+                </td>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr>
+                <td class="content-container">
+                    
+                    <h3 class="title">SURAT PERJANJIAN KERJA SAMA</h3>
+                    <h3>PENGANGKATAN KEPALA MADRASAH</h3>
+                    <div class="nomor">Nomor: ........ /SP/YYS/PP-AI/VII/2026</div>
+
+                    <p>Pada hari ini ............. tanggal ............. bulan ............. tahun ............., bertempat di ..................................., telah dibuat dan disepakati Perjanjian Kerja Sama Pengangkatan Kepala Madrasah antara:</p>
+
+                    <p class="bold">PIHAK PERTAMA</p>
+                    <table style="margin-left: 20px;">
+                        <tr><td width="100">Yayasan</td><td>: ..............................................</td></tr>
+                        <tr><td>Alamat</td><td>: ..............................................</td></tr>
+                    </table>
+                    <p>Dalam hal ini diwakili oleh Ketua Yayasan:</p>
+                    <table style="margin-left: 20px;">
+                        <tr><td width="100">Nama</td><td>: ..............................................</td></tr>
+                        <tr><td>Jabatan</td><td>: Ketua Yayasan</td></tr>
+                    </table>
+                    <p>Selanjutnya disebut <span class="bold">PIHAK PERTAMA</span>.</p>
+
+                    <p class="bold" style="margin-top: 15px;">PIHAK KEDUA</p>
+                    <table style="margin-left: 20px;">
+                        <tr><td width="150">Nama</td><td>: ..............................................</td></tr>
+                        <tr><td>Tempat/Tanggal Lahir</td><td>: ..............................................</td></tr>
+                        <tr><td>Alamat</td><td>: ..............................................</td></tr>
+                        <tr><td>Jabatan</td><td>: Kepala Madrasah</td></tr>
+                    </table>
+                    <p>Selanjutnya disebut <span class="bold">PIHAK KEDUA</span>.</p>
+
+                    <p>Kedua belah pihak sepakat mengadakan perjanjian kerja sama dengan ketentuan sebagai berikut:</p>
+
+                    <div class="center bold" style="margin-top: 20px;">Pasal 1<br>Maksud dan Tujuan</div>
+                    <ol>
+                        <li>Mengangkat PIHAK KEDUA sebagai Kepala Madrasah.</li>
+                        <li>Menjamin terlaksananya tata kelola madrasah yang profesional, akuntabel, efektif, dan sesuai visi misi yayasan.</li>
+                        <li>Menetapkan hak, kewajiban, wewenang, dan tanggung jawab kedua belah pihak.</li>
+                    </ol>
+
+                    <div class="center bold" style="margin-top: 20px;">Pasal 2<br>Masa Jabatan</div>
+                    <ol>
+                        <li>Masa jabatan Kepala Madrasah adalah ....... tahun terhitung sejak tanggal ............. sampai dengan .............</li>
+                        <li>Jabatan dapat diperpanjang berdasarkan hasil evaluasi kinerja.</li>
+                    </ol>
+
+                    <div class="center bold" style="margin-top: 20px;">Pasal 3<br>Tugas Pokok Kepala Madrasah</div>
+                    <p>PIHAK KEDUA bertanggung jawab memimpin madrasah dengan melaksanakan tugas sebagai berikut:</p>
+                    
+                    <ol class="list-container">
+                        <li class="avoid-break"><span class="bold">Tugas Manajerial</span>
+                            <ol type="a">
+                                <li>Menyusun visi, misi, tujuan, dan Rencana Kerja Madrasah (RKM).</li>
+                                <li>Menyusun RKAM.</li>
+                                <li>Mengembangkan budaya mutu madrasah.</li>
+                                <li>Mengelola kurikulum.</li>
+                                <li>Mengelola peserta didik.</li>
+                                <li>Mengelola guru dan tenaga kependidikan.</li>
+                                <li>Mengelola sarana dan prasarana.</li>
+                                <li>Mengelola administrasi madrasah.</li>
+                                <li>Mengembangkan hubungan dengan masyarakat dan komite madrasah.</li>
+                                <li>Menjamin terlaksananya Standar Nasional Pendidikan.</li>
+                            </ol>
+                        </li>
+                        <li class="avoid-break"><span class="bold">Pengembangan Kewirausahaan</span>
+                            <ol type="a">
+                                <li>Mengembangkan inovasi madrasah.</li>
+                                <li>Menciptakan program unggulan.</li>
+                                <li>Mengembangkan unit usaha madrasah bila memungkinkan.</li>
+                                <li>Mengoptimalkan potensi sumber daya.</li>
+                                <li>Menjalin kerja sama dengan berbagai pihak.</li>
+                                <li>Mengembangkan jiwa mandiri warga madrasah.</li>
+                            </ol>
+                        </li>
+                        <li class="avoid-break"><span class="bold">Supervisi kepada Guru dan Tenaga Kependidikan</span>
+                            <ol type="a">
+                                <li>Menyusun program supervisi akademik.</li>
+                                <li>Melaksanakan observasi pembelajaran.</li>
+                                <li>Memberikan pembinaan kepada guru.</li>
+                                <li>Menindaklanjuti hasil supervisi.</li>
+                                <li>Membimbing peningkatan kompetensi guru dan tenaga kependidikan.</li>
+                            </ol>
+                        </li>
+                        <li class="avoid-break"><span class="bold">Kepemimpinan (Leadership)</span>
+                            <ol type="a">
+                                <li>Menjadi teladan akhlak dan disiplin.</li>
+                                <li>Mengambil keputusan secara bijaksana.</li>
+                                <li>Membangun kerja sama tim.</li>
+                                <li>Memotivasi seluruh warga madrasah.</li>
+                                <li>Menyelesaikan konflik secara adil.</li>
+                                <li>Membangun budaya kerja yang profesional.</li>
+                            </ol>
+                        </li>
+                        <li class="avoid-break"><span class="bold">Pengembangan Mutu Pendidikan</span>
+                            <ol type="a">
+                                <li>Memimpin pelaksanaan kurikulum.</li>
+                                <li>Mengawal asesmen madrasah.</li>
+                                <li>Mengembangkan literasi dan numerasi.</li>
+                                <li>Meningkatkan prestasi akademik dan nonakademik.</li>
+                                <li>Mengembangkan program keagamaan dan karakter.</li>
+                            </ol>
+                        </li>
+                        <li class="avoid-break"><span class="bold">Pengelolaan Administrasi</span>
+                            <ol type="a">
+                                <li>Memastikan data EMIS selalu valid.</li>
+                                <li>Menandatangani berbagai dokumen resmi.</li>
+                                <li>Mengawasi administrasi guru, dan siswa.</li>
+                                <li>Menyusun laporan kepada Kantor Kementerian Agama.</li>
+                            </ol>
+                        </li>
+                        <li class="avoid-break"><span class="bold">Pengembangan SDM</span>
+                            <ol type="a">
+                                <li>Menyusun pembagian tugas guru.</li>
+                                <li>Mendorong guru mengikuti pelatihan.</li>
+                                <li>Melaksanakan PKG dan PKKM.</li>
+                                <li>Membina tenaga administrasi.</li>
+                            </ol>
+                        </li>
+                        <li class="avoid-break"><span class="bold">Pengelolaan Peserta Didik</span>
+                            <ol type="a">
+                                <li>PPDB.</li>
+                                <li>Pembinaan karakter.</li>
+                                <li>Tata tertib.</li>
+                                <li>Layanan BK.</li>
+                                <li>Kegiatan OSIM dan ekstrakurikuler.</li>
+                                <li>Pencegahan perundungan dan kekerasan.</li>
+                            </ol>
+                        </li>
+                        <li class="avoid-break"><span class="bold">Hubungan dengan Masyarakat</span>
+                            <ol type="a">
+                                <li>Berkoordinasi dengan komite.</li>
+                                <li>Menjalin kemitraan dengan pemerintah, dunia usaha, alumni, dan masyarakat.</li>
+                                <li>Membangun citra positif madrasah.</li>
+                            </ol>
+                        </li>
+                        <li class="avoid-break"><span class="bold">Tugas Tambahan Tahun 2025</span>
+                            <ol type="a">
+                                <li>Seiring kebijakan Direktorat GTK Madrasah, kepala madrasah juga bertanggung jawab:</li>
+                                <li>Memastikan validitas data EMIS GTK.</li>
+                                <li>Melakukan verifikasi SKMT dan SKBK.</li>
+                                <li>Mengawal implementasi Kurikulum Madrasah.</li>
+                                <li>Melaksanakan Penilaian Kinerja Kepala Madrasah (PKKM).</li>
+                                <li>Mengembangkan kompetensi minimal satu kegiatan setiap semester sesuai ketentuan GTK Madrasah Lanjutan.</li>
+                            </ol>
+                        </li>
+                        <li class="avoid-break">Mengurus seluruh kebutuhan pengajuan, pencairan dan laporan dana BOSP.</li>
+                        <li class="avoid-break">Berkoordinasi dengan OPS Menginput, merevisi, melaporkan DAPODIK/EMIS secara berkala dan menginformasikan progressnya kepada mudir.</li>
+                        <li class="avoid-break">Menyampaikan berbagai informasi kedinasan kepada bagian kurikulum dan mudir serta berkoordinasi dengan mudir jika ada agenda yang harus melibatkan para guru.</li>
+                        <li class="avoid-break">Menyiapkan seluruh berkas yang dibutuhkan saat akan dilakukan Monev/Rekon oleh dinas/pengawas.</li>
+                        <li class="avoid-break">Mengkoordinasikan penyusunan program kerja madrasah bersama tim (RKS, RKT, RKJM).</li>
+                        <li class="avoid-break">Berkoordinasi dengan kurikulum pelaksanaan KBM agar berjalan sesuai jadwal dan ketentuan.</li>
+                        <li class="avoid-break">Melakukan koordinasi dengan guru dan tenaga kependidikan.</li>
+                        <li class="avoid-break">Menghadiri rapat kedinasan dan yayasan kemudian menyampaikan kepihak terkait.</li>
+                        <li class="avoid-break">Mengkoordinasikan pelaksanaan assessment, ujian serta kegiatan akademik lainnya bersama kurikulum.</li>
+                        <li class="avoid-break">Mengkoordinasikan persiapan supervisi, akreditasi dan kegiatan penjamin mutu madrasah.</li>
+                        <li class="avoid-break">Memastikan sarana prasarana dimanfaatkan dengan baik serta mengusulkan kebutuhan yang diperlukan.</li>
+                        <li class="avoid-break">Melaksanakan tugas tugas lain yang diberikan oleh mudir demi kelancaran penyelenggaraan pendidikan di madrasah.</li>
+                    </ol>
+                    
+                    <div class="center bold" style="margin-top: 20px;">Pasal 4<br>Fungsi Kepala Madrasah</div>
+                    <p>PIHAK KEDUA menjalankan fungsi sebagai:</p>
+                    <ul>
+                        <li>Educator (Pendidik)</li>
+                        <li>Manager (Manajer)</li>
+                        <li>Administrator</li>
+                        <li>Supervisor</li>
+                        <li>Leader (Pemimpin)</li>
+                        <li>Innovator</li>
+                        <li>Motivator</li>
+                        <li>Entrepreneur madrasah.</li>
+                    </ul>
+
+                    <div class="center bold" style="margin-top: 20px;">Pasal 5<br>Hak Kepala Madrasah</div>
+                    <p>PIHAK KEDUA berhak:</p>
+                    <ol>
+                        <li>Memimpin seluruh kegiatan operasional madrasah.</li>
+                        <li>Mengusulkan program dan anggaran madrasah.</li>
+                        <li>Mendapat dukungan sarana dan kebijakan dari yayasan.</li>
+                        <li>Mendapat pembinaan dan penghargaan atas prestasi kerja.</li>
+                        <li>Menerima gaji, tunjangan, dan fasilitas sesuai keputusan yayasan.</li>
+                    </ol>
+
+                    <div class="center bold" style="margin-top: 20px;">Pasal 6<br>Kewajiban Yayasan</div>
+                    <p>PIHAK PERTAMA berkewajiban:</p>
+                    <ol>
+                        <li>Menetapkan arah kebijakan strategis yayasan.</li>
+                        <li>Memberikan dukungan anggaran sesuai kemampuan yayasan.</li>
+                        <li>Memberikan pembinaan dan evaluasi secara berkala.</li>
+                        <li>Tidak melakukan intervensi terhadap teknis akademik sehari-hari kecuali dalam kebijakan strategis.</li>
+                        <li>Memberikan perlindungan hukum selama Kepala Madrasah menjalankan tugas sesuai ketentuan.</li>
+                    </ol>
+
+                    <div class="center bold" style="margin-top: 20px;">Pasal 7<br>Kewajiban Kepala Madrasah</div>
+                    <p>PIHAK KEDUA wajib:</p>
+                    <ol>
+                        <li>Menjaga nama baik yayasan dan madrasah.</li>
+                        <li>Menjalankan seluruh peraturan yayasan.</li>
+                        <li>Mematuhi peraturan perundang-undangan.</li>
+                        <li>Tidak melakukan penyalahgunaan jabatan.</li>
+                        <li>Tidak melakukan konflik kepentingan.</li>
+                        <li>Menjaga kerahasiaan dokumen madrasah.</li>
+                        <li>Menyampaikan laporan bulanan, semester, dan tahunan.</li>
+                    </ol>
+
+                    <div class="center bold" style="margin-top: 20px;">Pasal 8<br>Indikator Kinerja</div>
+                    <p>Keberhasilan Kepala Madrasah diukur berdasarkan:</p>
+                    <ul>
+                        <li>Peningkatan mutu pendidikan.</li>
+                        <li>Kedisiplinan guru dan tenaga kependidikan.</li>
+                        <li>Prestasi peserta didik.</li>
+                        <li>Kepuasan orang tua.</li>
+                        <li>Ketertiban administrasi.</li>
+                        <li>Kesehatan keuangan madrasah.</li>
+                        <li>Pengembangan SDM.</li>
+                        <li>Pertumbuhan jumlah peserta didik.</li>
+                        <li>Implementasi visi dan misi yayasan.</li>
+                    </ul>
+
+                    <div class="center bold" style="margin-top: 20px;">Pasal 9<br>Evaluasi</div>
+                    <ol>
+                        <li>Yayasan melakukan evaluasi minimal satu kali setiap semester.</li>
+                        <li>Hasil evaluasi menjadi dasar pembinaan, perpanjangan jabatan, atau pemberhentian.</li>
+                    </ol>
+
+                    <div class="center bold" style="margin-top: 20px;">Pasal 10<br>Larangan</div>
+                    <p>PIHAK KEDUA dilarang:</p>
+                    <ol>
+                        <li>Menyalahgunakan wewenang.</li>
+                        <li>Menggunakan aset madrasah untuk kepentingan pribadi.</li>
+                        <li>Melakukan tindakan yang merugikan yayasan.</li>
+                        <li>Melakukan korupsi, kolusi, dan nepotisme.</li>
+                        <li>Membuat kebijakan yang bertentangan dengan visi yayasan tanpa persetujuan.</li>
+                    </ol>
+
+                    <div class="center bold" style="margin-top: 20px;">Pasal 11<br>Pengakhiran Perjanjian</div>
+                    <p>Perjanjian dapat berakhir apabila:</p>
+                    <ol>
+                        <li>Masa jabatan berakhir.</li>
+                        <li>Mengundurkan diri.</li>
+                        <li>Meninggal dunia.</li>
+                        <li>Tidak memenuhi target kinerja.</li>
+                        <li>Melakukan pelanggaran berat.</li>
+                        <li>Melanggar hukum yang berkekuatan hukum tetap.</li>
+                    </ol>
+
+                    <div class="center bold" style="margin-top: 20px;">Pasal 12<br>Penyelesaian Perselisihan</div>
+                    <p>Apabila terjadi perselisihan, kedua belah pihak sepakat menyelesaikannya terlebih dahulu melalui musyawarah. Apabila tidak tercapai mufakat, penyelesaian dilakukan sesuai ketentuan hukum yang berlaku.</p>
+
+                    <div class="center bold" style="margin-top: 20px;">Pasal 13<br>Penutup</div>
+                    <p>Perjanjian ini dibuat dengan itikad baik, tanpa adanya paksaan dari pihak mana pun, dalam rangkap dua yang mempunyai kekuatan hukum yang sama.</p>
+
+                    <div class="avoid-break">
+                        <div style="text-align: right; margin-top: 30px; margin-right: 50px;">
+                            Ditetapkan di : ......................................<br>
+                            Tanggal : .............................................
+                        </div>
+
+                        <table class="signature">
+                            <tr>
+                                <td width="50%">
+                                    <p class="bold">PIHAK PERTAMA<br>Ketua Yayasan</p>
+                                    <br>
+                                    <br>
+                                    <p style="font-size: 10px; color: gray;">(Materai Rp10.000)</p>
+                                    <div class="ttd-box">
+                                        <img src="./public/images/stempel-pesantren.png" class="stempel" alt="Stempel">
+                                        <img src="./public/images/ttd-mudir.png" class="ttd" alt="TTD Mudir">
+                                        <div class="nama-ttd">................................</div>
+                                    </div>
+                                </td>
+                                <td width="50%" style="vertical-align: top;">
+                                    <p class="bold">PIHAK KEDUA<br>Kepala Madrasah</p>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <div class="nama-ttd">................................</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </td>
+            </tr>
+        </tbody>
+        
+        <tfoot>
+            <tr>
+                <!-- Tinggi ruang kosong untuk Footer (Stempel/Logo Kemenkumham di bawah) -->
+                <td style="height: 35mm;">
+                    <!-- Spacer -->
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    
+</body>
+</html>
