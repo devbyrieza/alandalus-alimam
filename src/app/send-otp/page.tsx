@@ -1,7 +1,7 @@
 // app/send-otp/page.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Send, Mail, MessageSquare, Smartphone, ArrowLeft } from "lucide-react";
 import BackToHomeButton from "@/components/common/BackToHomeButton";
 
@@ -22,6 +22,37 @@ export default function SendOtpPage() {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  // Autosave draft to localStorage
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("alandalus_alimam_send_otp_draft");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed.selectedChannel) setSelectedChannel(parsed.selectedChannel);
+          if (parsed.email) setEmail(parsed.email);
+          if (parsed.telegram) setTelegram(parsed.telegram);
+          if (parsed.phone) setPhone(parsed.phone);
+        }
+      } catch (e) {
+        console.warn("Failed to load send-otp draft:", e);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem(
+          "alandalus_alimam_send_otp_draft",
+          JSON.stringify({ selectedChannel, email, telegram, phone })
+        );
+      } catch (e) {
+        console.warn("Failed to save send-otp draft:", e);
+      }
+    }
+  }, [selectedChannel, email, telegram, phone]);
 
   const handleSendOtp = async () => {
     // Reset messages

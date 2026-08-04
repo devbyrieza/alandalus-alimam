@@ -7,6 +7,7 @@ import {
   Save,
   Users,
   AlertCircle,
+  AlertTriangle,
   Edit,
   Clock,
   MapPin,
@@ -376,7 +377,10 @@ export default function WelcomeDayPage() {
             <Shirt className="w-5 h-5 text-white" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-black text-orange-900">⚠️ Ukuran Seragam Belum Diisi!</p>
+            <p className="text-sm font-black text-orange-900 flex items-center gap-1.5">
+              <AlertTriangle className="w-4 h-4 text-orange-600 shrink-0" />
+              Ukuran Seragam Belum Diisi!
+            </p>
             <p className="text-xs text-orange-700 leading-snug mt-1">
               Sebelum Welcome Day, pastikan Anda sudah mengisi ukuran seragam santri agar dapat disiapkan tepat waktu.
             </p>

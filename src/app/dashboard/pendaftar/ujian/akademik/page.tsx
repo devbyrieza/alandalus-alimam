@@ -22,6 +22,33 @@ export default function AkademikTestPage() {
   const [isLocked, setIsLocked] = useState(false);
   const [lockMessage, setLockMessage] = useState("");
   const [answers, setAnswers] = useState<Record<number, string>>({});
+
+  // Autosave answers to localStorage
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("alandalus_alimam_ujian_akademik_draft");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && typeof parsed === "object") {
+            setAnswers(parsed);
+          }
+        }
+      } catch (e) {
+        console.warn("Failed to load akademik test draft:", e);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && Object.keys(answers).length > 0) {
+      try {
+        localStorage.setItem("alandalus_alimam_ujian_akademik_draft", JSON.stringify(answers));
+      } catch (e) {
+        console.warn("Failed to save akademik test draft:", e);
+      }
+    }
+  }, [answers]);
   const [jenjang, setJenjang] = useState<"MTs" | "IL">("MTs");
   const [questions, setQuestions] = useState<Question[]>(AKADEMIK_MTS);
   const [timeLeft, setTimeLeft] = useState(3600); // 60 minutes
@@ -108,6 +135,10 @@ export default function AkademikTestPage() {
         body: JSON.stringify({ type: "akademik", answers, jenjang }),
       });
       if (!res.ok) throw new Error("Gagal mengirim");
+
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("alandalus_alimam_ujian_akademik_draft");
+      }
 
       await Swal.fire({
         icon: "success",

@@ -123,6 +123,33 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
+  // Autosave draft to localStorage
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("alandalus_alimam_kontak_form_draft");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && typeof parsed === "object") {
+            setFormData((prev) => ({ ...prev, ...parsed }));
+          }
+        }
+      } catch (e) {
+        console.warn("Failed to load contact form draft:", e);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem("alandalus_alimam_kontak_form_draft", JSON.stringify(formData));
+      } catch (e) {
+        console.warn("Failed to save contact form draft:", e);
+      }
+    }
+  }, [formData]);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -138,6 +165,9 @@ export default function ContactPage() {
     setTimeout(() => {
       setShowSuccess(true);
       setFormData({ nama: "", email: "", telepon: "", pesan: "" });
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("alandalus_alimam_kontak_form_draft");
+      }
       setIsSubmitting(false);
       setTimeout(() => setShowSuccess(false), 5000);
     }, 1500);

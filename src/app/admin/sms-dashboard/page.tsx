@@ -1,7 +1,21 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { RefreshCw, Check, Smartphone, User, Key } from "lucide-react";
+import {
+  RefreshCw,
+  Check,
+  Smartphone,
+  User,
+  Key,
+  ClipboardList,
+  CheckCircle2,
+  MessageSquare,
+  BarChart3,
+  Calendar,
+  Sparkles,
+  Send,
+  AlertCircle,
+} from "lucide-react";
 
 interface PendingSMS {
   id: string;
@@ -55,107 +69,145 @@ export default function AdminSMSDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <RefreshCw className="w-8 h-8 animate-spin mx-auto text-primary-600" />
-          <p className="mt-4 text-gray-600">Memuat data SMS...</p>
+      <div className="min-h-screen bg-slate-50/50 flex items-center justify-center p-6 md:p-10">
+        <div className="text-center p-8 bg-white rounded-3xl shadow-xl border border-slate-100 max-w-sm w-full">
+          <RefreshCw className="w-10 h-10 animate-spin mx-auto text-emerald-600 mb-4" />
+          <p className="text-slate-700 font-bold text-base">Memuat data SMS...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">
-            📱 Dashboard Admin - SMS Manual
-          </h1>
-          <p className="text-gray-600 mb-4">
-            Sistem dalam{" "}
-            <span className="font-bold text-yellow-600">Simulation Mode</span>.
-            Kirim SMS manual ke user berikut:
-          </p>
+    <div className="min-h-screen bg-slate-50/50 p-6 md:p-10">
+      <div className="max-w-7xl mx-auto space-y-8">
+        {/* Main Card */}
+        <div className="bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-6 md:p-10 border border-slate-100 relative overflow-hidden">
+          {/* Decorative Top Bar */}
+          <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-emerald-500 via-teal-500 to-amber-500" />
 
-          <div className="bg-primary-50 border border-primary-200 rounded-lg p-4 mb-6">
-            <h3 className="font-bold text-primary-800 mb-2">📋 Instruksi:</h3>
-            <ol className="list-decimal list-inside text-primary-700 space-y-1">
-              <li>Salin nomor HP dan OTP di bawah</li>
-              <li>Kirim SMS dari HP Admin ke nomor tersebut</li>
-              <li>Pesan: "PPDB AL-IMAM: Kode OTP: [OTP] untuk [NAMA]"</li>
-              <li>Klik tombol "✓ Sudah Dikirim" setelah selesai</li>
-            </ol>
-          </div>
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center shadow-xs">
+                <Smartphone className="w-7 h-7" />
+              </div>
+              <div>
+                <h1 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+                  Dashboard Admin SMS Manual
+                </h1>
+                <p className="text-slate-500 font-medium text-sm mt-0.5">
+                  Sistem dalam{" "}
+                  <span className="font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-lg border border-amber-200/60 inline-flex items-center gap-1">
+                    <Sparkles className="w-3.5 h-3.5" /> Simulation Mode
+                  </span>
+                  . Kirim SMS manual ke pendaftar berikut:
+                </p>
+              </div>
+            </div>
 
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-bold text-gray-800">
-              📋 Daftar SMS yang Perlu Dikirim: {pendingSMS.length}
-            </h2>
             <button
               onClick={fetchPendingSMS}
-              className="flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl shadow-lg shadow-emerald-600/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               <RefreshCw className="w-4 h-4" />
-              Refresh
+              Refresh Data
             </button>
           </div>
 
+          {/* Instructions Banner */}
+          <div className="bg-emerald-50/60 border border-emerald-100 rounded-3xl p-6 mb-8">
+            <h3 className="font-black text-emerald-900 text-base mb-3 flex items-center gap-2">
+              <ClipboardList className="w-5 h-5 text-emerald-600" />
+              Instruksi Pengiriman:
+            </h3>
+            <ol className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm font-medium text-emerald-800">
+              <li className="flex items-start gap-2.5 bg-white/80 p-3 rounded-2xl border border-emerald-100/50">
+                <span className="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shrink-0">1</span>
+                <span>Salin nomor HP dan kode OTP dari daftar di bawah</span>
+              </li>
+              <li className="flex items-start gap-2.5 bg-white/80 p-3 rounded-2xl border border-emerald-100/50">
+                <span className="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shrink-0">2</span>
+                <span>Kirim SMS dari HP Admin ke nomor tujuan</span>
+              </li>
+              <li className="flex items-start gap-2.5 bg-white/80 p-3 rounded-2xl border border-emerald-100/50">
+                <span className="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shrink-0">3</span>
+                <span>Format: "PPDB AL-IMAM: Kode OTP: [OTP] untuk [NAMA]"</span>
+              </li>
+              <li className="flex items-start gap-2.5 bg-white/80 p-3 rounded-2xl border border-emerald-100/50">
+                <span className="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shrink-0">4</span>
+                <span>Klik tombol "Sudah Dikirim" untuk memperbarui status</span>
+              </li>
+            </ol>
+          </div>
+
+          {/* Section Header */}
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-lg font-black text-slate-900 flex items-center gap-2">
+              <MessageCircle className="w-5 h-5 text-emerald-600" />
+              Daftar SMS Antrean ({pendingSMS.length})
+            </h2>
+          </div>
+
+          {/* SMS List */}
           {pendingSMS.length === 0 ? (
-            <div className="text-center py-10">
-              <Check className="w-12 h-12 text-green-500 mx-auto mb-4" />
-              <p className="text-gray-600">
-                🎉 Tidak ada SMS yang perlu dikirim!
-              </p>
-              <p className="text-sm text-gray-500 mt-2">
-                Semua OTP sudah terkirim atau belum ada pendaftaran.
+            <div className="text-center py-16 px-4 bg-slate-50/50 rounded-3xl border border-dashed border-slate-200">
+              <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4 border border-emerald-200">
+                <CheckCircle2 className="w-8 h-8" />
+              </div>
+              <h4 className="text-lg font-black text-slate-900 mb-1">
+                Tidak ada SMS yang perlu dikirim
+              </h4>
+              <p className="text-sm text-slate-500 font-medium max-w-md mx-auto">
+                Semua kode OTP telah berhasil diproses atau belum ada antrean pendaftaran baru.
               </p>
             </div>
           ) : (
-            <div className="grid gap-4">
+            <div className="grid gap-6">
               {pendingSMS.map((item) => (
                 <div
                   key={item.id}
-                  className="border-2 border-secondary-200 bg-secondary-50 rounded-xl p-5"
+                  className="border border-slate-200/80 bg-slate-50/30 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all space-y-6"
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-primary-100 rounded-lg">
-                        <Smartphone className="w-5 h-5 text-primary-600" />
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="flex items-center gap-3.5 bg-white p-4 rounded-2xl border border-slate-100 shadow-xs">
+                      <div className="p-3 bg-emerald-50 text-emerald-600 rounded-xl">
+                        <Smartphone className="w-5 h-5" />
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">Nomor HP</p>
-                        <p className="font-bold text-lg">{item.phone}</p>
+                        <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Nomor HP</p>
+                        <p className="font-black text-slate-900 text-base">{item.phone}</p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-green-100 rounded-lg">
-                        <User className="w-5 h-5 text-green-600" />
+                    <div className="flex items-center gap-3.5 bg-white p-4 rounded-2xl border border-slate-100 shadow-xs">
+                      <div className="p-3 bg-teal-50 text-teal-600 rounded-xl">
+                        <User className="w-5 h-5" />
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">Nama Santri</p>
-                        <p className="font-bold text-lg">{item.nama}</p>
+                        <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Nama Santri</p>
+                        <p className="font-black text-slate-900 text-base">{item.nama}</p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-red-100 rounded-lg">
-                        <Key className="w-5 h-5 text-red-600" />
+                    <div className="flex items-center gap-3.5 bg-white p-4 rounded-2xl border border-slate-100 shadow-xs">
+                      <div className="p-3 bg-rose-50 text-rose-600 rounded-xl">
+                        <Key className="w-5 h-5" />
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">Kode OTP</p>
-                        <p className="font-bold text-2xl text-red-600">
+                        <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Kode OTP</p>
+                        <p className="font-black text-2xl text-rose-600 tracking-wider">
                           {item.otp}
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="bg-white rounded-lg p-4 mb-4">
-                    <p className="text-sm text-gray-500 mb-2">
-                      📝 Pesan yang dikirim:
+                  <div className="bg-slate-900 text-slate-100 rounded-2xl p-5 shadow-inner">
+                    <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                      <MessageSquare className="w-3.5 h-3.5 text-emerald-400" /> Pratinjau Pesan:
                     </p>
-                    <pre className="bg-gray-900 text-white p-4 rounded-lg text-sm">
+                    <pre className="font-mono text-sm leading-relaxed whitespace-pre-wrap">
                       {`PPDB AL-IMAM
 Kode OTP: ${item.otp}
 Untuk: ${item.nama}
@@ -165,19 +217,21 @@ Hubungi 0851-1152-4441 jika ada masalah.`}
                     </pre>
                   </div>
 
-                  <div className="flex gap-3">
+                  <div className="flex flex-col sm:flex-row gap-3 pt-2">
                     <button
                       onClick={() => markAsSent(item.id)}
-                      className="flex-1 py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 flex items-center justify-center gap-2"
+                      className="flex-1 py-3.5 px-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl shadow-md shadow-emerald-600/20 transition-all flex items-center justify-center gap-2"
                     >
-                      <Check className="w-5 h-5" />✓ Sudah Dikirim
+                      <CheckCircle2 className="w-5 h-5" />
+                      Tandai Sudah Dikirim
                     </button>
 
                     <a
                       href={`sms:${item.phone}&body=PPDB AL-IMAM: Kode OTP: ${item.otp} untuk ${item.nama}`}
-                      className="px-6 py-3 bg-primary-600 text-white font-bold rounded-lg hover:bg-primary-700"
+                      className="py-3.5 px-6 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-2xl transition-all flex items-center justify-center gap-2"
                     >
-                      📱 Buka Aplikasi SMS
+                      <Send className="w-5 h-5" />
+                      Buka Aplikasi SMS
                     </a>
                   </div>
                 </div>
@@ -186,24 +240,35 @@ Hubungi 0851-1152-4441 jika ada masalah.`}
           )}
         </div>
 
-        <div className="bg-white rounded-xl shadow-lg p-6">
-          <h3 className="font-bold text-gray-900 mb-4">📊 Status Sistem:</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-primary-50 p-4 rounded-lg">
-              <p className="text-sm text-primary-600">SMS Service</p>
-              <p className="text-2xl font-bold">🔄 Simulation</p>
+        {/* System Status Section */}
+        <div className="bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-6 md:p-8 border border-slate-100">
+          <h3 className="font-black text-slate-900 text-lg mb-6 flex items-center gap-2">
+            <BarChart3 className="w-5 h-5 text-emerald-600" /> Status Layanan & Integrasi
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="bg-emerald-50/50 border border-emerald-100 p-5 rounded-2xl">
+              <p className="text-xs text-emerald-700 font-bold uppercase tracking-wider mb-1">SMS Service</p>
+              <p className="text-xl font-black text-emerald-950 flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4 text-emerald-600" /> Simulation
+              </p>
             </div>
-            <div className="bg-green-50 p-4 rounded-lg">
-              <p className="text-sm text-green-600">Telegram</p>
-              <p className="text-2xl font-bold">✅ Ready</p>
+            <div className="bg-teal-50/50 border border-teal-100 p-5 rounded-2xl">
+              <p className="text-xs text-teal-700 font-bold uppercase tracking-wider mb-1">Telegram</p>
+              <p className="text-xl font-black text-teal-950 flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-teal-600" /> Ready
+              </p>
             </div>
-            <div className="bg-purple-50 p-4 rounded-lg">
-              <p className="text-sm text-purple-600">Email</p>
-              <p className="text-2xl font-bold">✅ Ready</p>
+            <div className="bg-sky-50/50 border border-sky-100 p-5 rounded-2xl">
+              <p className="text-xs text-sky-700 font-bold uppercase tracking-wider mb-1">Email</p>
+              <p className="text-xl font-black text-sky-950 flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-sky-600" /> Ready
+              </p>
             </div>
-            <div className="bg-secondary-50 p-4 rounded-lg">
-              <p className="text-sm text-secondary-600">Launch Date</p>
-              <p className="text-2xl font-bold">📅 22 Jan</p>
+            <div className="bg-amber-50/50 border border-amber-100 p-5 rounded-2xl">
+              <p className="text-xs text-amber-700 font-bold uppercase tracking-wider mb-1">Jadwal Launch</p>
+              <p className="text-xl font-black text-amber-950 flex items-center gap-1.5">
+                <Calendar className="w-4 h-4 text-amber-600" /> 22 Jan
+              </p>
             </div>
           </div>
         </div>

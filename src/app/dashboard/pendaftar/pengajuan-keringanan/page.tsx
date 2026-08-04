@@ -9,6 +9,7 @@ import {
   ShieldCheck,
   HelpCircle,
   File,
+  ClipboardList,
 } from "lucide-react";
 import { Alert } from "@/components/ui";
 
@@ -20,6 +21,35 @@ export default function PengajuanKeringananPage() {
   // Form State
   const [kesanggupanBayar, setKesanggupanBayar] = useState("");
   const [alasan, setAlasan] = useState("");
+
+  // Autosave draft to localStorage
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("alandalus_alimam_keringanan_draft");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed.kesanggupanBayar) setKesanggupanBayar(parsed.kesanggupanBayar);
+          if (parsed.alasan) setAlasan(parsed.alasan);
+        }
+      } catch (e) {
+        console.warn("Failed to load keringanan draft:", e);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem(
+          "alandalus_alimam_keringanan_draft",
+          JSON.stringify({ kesanggupanBayar, alasan })
+        );
+      } catch (e) {
+        console.warn("Failed to save keringanan draft:", e);
+      }
+    }
+  }, [kesanggupanBayar, alasan]);
 
   // File State — Keringanan: SKTM + Surat Permohonan
   const [fileSktm, setFileSktm] = useState<File | null>(null);
@@ -105,6 +135,9 @@ export default function PengajuanKeringananPage() {
         type: "success",
         text: "Pengajuan berhasil dikirim dan sedang dalam proses peninjauan oleh Tim Finance.",
       });
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("alandalus_alimam_keringanan_draft");
+      }
       fetchData();
     } catch (error: any) {
       setMessage({ type: "error", text: error.message });
@@ -296,12 +329,15 @@ export default function PengajuanKeringananPage() {
             </h3>
 
             {/* Info syarat */}
-            <div className="bg-blue-50 border border-blue-100 rounded-xl p-3 text-xs text-blue-800 font-medium">
-              📋 Keringanan memerlukan 2 dokumen wajib: <strong>SKTM</strong>{" "}
-              dan{" "}
-              <strong>Surat Permohonan Keringanan Biaya</strong>. Surat
-              Permohonan harus menyebutkan jenis biaya (Uang Pangkal / SPP),
-              jumlah yang sanggup dibayar, dan/atau potongan yang diminta.
+            <div className="bg-blue-50 border border-blue-100 rounded-xl p-3 text-xs text-blue-800 font-medium flex items-start gap-2">
+              <ClipboardList className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+              <span>
+                Keringanan memerlukan 2 dokumen wajib: <strong>SKTM</strong>{" "}
+                dan{" "}
+                <strong>Surat Permohonan Keringanan Biaya</strong>. Surat
+                Permohonan harus menyebutkan jenis biaya (Uang Pangkal / SPP),
+                jumlah yang sanggup dibayar, dan/atau potongan yang diminta.
+              </span>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">

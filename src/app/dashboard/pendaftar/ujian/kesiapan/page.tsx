@@ -15,6 +15,33 @@ export default function KesiapanTestPage() {
   const [lockMessage, setLockMessage] = useState("");
   const [answers, setAnswers] = useState<Record<number, number>>({});
 
+  // Autosave answers to localStorage
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("alandalus_alimam_ujian_kesiapan_draft");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && typeof parsed === "object") {
+            setAnswers(parsed);
+          }
+        }
+      } catch (e) {
+        console.warn("Failed to load kesiapan test draft:", e);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && Object.keys(answers).length > 0) {
+      try {
+        localStorage.setItem("alandalus_alimam_ujian_kesiapan_draft", JSON.stringify(answers));
+      } catch (e) {
+        console.warn("Failed to save kesiapan test draft:", e);
+      }
+    }
+  }, [answers]);
+
   const totalQuestions = KESIAPAN_QUESTIONS.reduce(
     (acc, s) => acc + s.items.length,
     0,
@@ -68,6 +95,10 @@ export default function KesiapanTestPage() {
         body: JSON.stringify({ type: "kesiapan", answers }),
       });
       if (!res.ok) throw new Error("Gagal mengirim");
+
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("alandalus_alimam_ujian_kesiapan_draft");
+      }
 
       await Swal.fire({
         icon: "success",

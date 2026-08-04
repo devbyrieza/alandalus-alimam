@@ -301,6 +301,38 @@ function InputNilaiContent() {
   const [hafalanForm, setHafalanForm] = useState<any>({});
   const [lisanArabForm, setLisanArabForm] = useState<any>({});
 
+  // Autosave grading forms draft
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("alandalus_alimam_penguji_nilai_draft");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed.quranForm) setQuranForm(parsed.quranForm);
+          if (parsed.calsanForm) setSantriForm(parsed.calsanForm);
+          if (parsed.cawalsanForm) setOrangTuaForm(parsed.cawalsanForm);
+          if (parsed.hafalanForm) setHafalanForm(parsed.hafalanForm);
+          if (parsed.lisanArabForm) setLisanArabForm(parsed.lisanArabForm);
+        }
+      } catch (e) {
+        console.warn("Failed to load penguji nilai draft:", e);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem(
+          "alandalus_alimam_penguji_nilai_draft",
+          JSON.stringify({ quranForm, calsanForm, cawalsanForm, hafalanForm, lisanArabForm })
+        );
+      } catch (e) {
+        console.warn("Failed to save penguji nilai draft:", e);
+      }
+    }
+  }, [quranForm, calsanForm, cawalsanForm, hafalanForm, lisanArabForm]);
+
   // Determine which form types are visible based on the active session role
   const visibleFormTypes = ["admin", "admin_super"].includes(activeRole) 
     ? ['quran', 'wawancara', 'ortu', 'hafalan', 'lisan_arab'] 

@@ -98,7 +98,7 @@ export default function DaftarPage() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const savedData = sessionStorage.getItem("pendaftaran_form");
+      const savedData = localStorage.getItem("pendaftaran_form") || sessionStorage.getItem("pendaftaran_form");
       if (savedData) {
         try {
           const parsed = JSON.parse(savedData);
@@ -119,10 +119,11 @@ export default function DaftarPage() {
     }
   }, [jenjangFromUrl]);
 
-  // Save data on change
+  // Save data on change to localStorage
   useEffect(() => {
     if (typeof window !== "undefined") {
       const timeoutId = setTimeout(() => {
+        localStorage.setItem("pendaftaran_form", JSON.stringify(formData));
         sessionStorage.setItem("pendaftaran_form", JSON.stringify(formData));
       }, 500);
       return () => clearTimeout(timeoutId);
@@ -326,6 +327,7 @@ export default function DaftarPage() {
                         });
 
                         if (result.isConfirmed) {
+                          localStorage.removeItem("pendaftaran_form");
                           sessionStorage.removeItem("pendaftaran_form");
                           setFormData({
                             nik: "",

@@ -35,6 +35,35 @@ export default function KartuJajanPage() {
 
   const presetAmounts = [20000, 50000, 100000, 200000, 500000];
 
+  // Autosave draft settings
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("alandalus_alimam_kartu_jajan_draft");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed.topupAmount) setTopupAmount(parsed.topupAmount);
+          if (parsed.newLimit) setNewLimit(parsed.newLimit);
+        }
+      } catch (e) {
+        console.warn("Failed to load kartu jajan draft:", e);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem(
+          "alandalus_alimam_kartu_jajan_draft",
+          JSON.stringify({ topupAmount, newLimit })
+        );
+      } catch (e) {
+        console.warn("Failed to save kartu jajan draft:", e);
+      }
+    }
+  }, [topupAmount, newLimit]);
+
   useEffect(() => {
     fetchDompet();
   }, []);

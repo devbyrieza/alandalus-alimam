@@ -107,7 +107,7 @@ export default function DaftarPindahanPage() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const savedData = sessionStorage.getItem("pendaftaran_pindahan_form");
+      const savedData = localStorage.getItem("pendaftaran_pindahan_form") || sessionStorage.getItem("pendaftaran_pindahan_form");
       if (savedData) {
         try {
           const parsed = JSON.parse(savedData);
@@ -128,10 +128,11 @@ export default function DaftarPindahanPage() {
     }
   }, [jenjangFromUrl]);
 
-  // Save data on change
+  // Save data on change to localStorage
   useEffect(() => {
     if (typeof window !== "undefined") {
       const timeoutId = setTimeout(() => {
+        localStorage.setItem("pendaftaran_pindahan_form", JSON.stringify(formData));
         sessionStorage.setItem("pendaftaran_pindahan_form", JSON.stringify(formData));
       }, 500);
       return () => clearTimeout(timeoutId);
@@ -362,6 +363,7 @@ export default function DaftarPindahanPage() {
                         });
 
                         if (result.isConfirmed) {
+                          localStorage.removeItem("pendaftaran_pindahan_form");
                           sessionStorage.removeItem("pendaftaran_pindahan_form");
                           setFormData({
                             nik: "",

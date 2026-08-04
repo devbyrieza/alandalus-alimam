@@ -14,6 +14,33 @@ export default function KepribadianTestPage() {
   const [isLocked, setIsLocked] = useState(false);
   const [lockMessage, setLockMessage] = useState("");
   const [answers, setAnswers] = useState<Record<number, string>>({});
+
+  // Autosave answers to localStorage
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("alandalus_alimam_ujian_kepribadian_draft");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && typeof parsed === "object") {
+            setAnswers(parsed);
+          }
+        }
+      } catch (e) {
+        console.warn("Failed to load kepribadian test draft:", e);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && Object.keys(answers).length > 0) {
+      try {
+        localStorage.setItem("alandalus_alimam_ujian_kepribadian_draft", JSON.stringify(answers));
+      } catch (e) {
+        console.warn("Failed to save kepribadian test draft:", e);
+      }
+    }
+  }, [answers]);
   const [page, setPage] = useState(0);
   const topRef = useRef<HTMLDivElement>(null);
 
@@ -89,6 +116,10 @@ export default function KepribadianTestPage() {
         body: JSON.stringify({ type: "kepribadian", answers }),
       });
       if (!res.ok) throw new Error("Gagal mengirim");
+
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("alandalus_alimam_ujian_kepribadian_draft");
+      }
 
       await Swal.fire({
         icon: "success",

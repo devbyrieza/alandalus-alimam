@@ -13,6 +13,33 @@ export default function IsiSeragamClient({ code, pendaftar }: { code: string; pe
   });
   const [message, setMessage] = useState({ type: "", text: "" });
 
+  // Autosave draft to localStorage
+  useEffect(() => {
+    if (typeof window !== "undefined" && code) {
+      try {
+        const saved = localStorage.getItem(`alandalus_alimam_isi_seragam_${code}_draft`);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && typeof parsed === "object") {
+            setFormData((prev) => ({ ...prev, ...parsed }));
+          }
+        }
+      } catch (e) {
+        console.warn("Failed to load seragam draft:", e);
+      }
+    }
+  }, [code]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && code && isEditing) {
+      try {
+        localStorage.setItem(`alandalus_alimam_isi_seragam_${code}_draft`, JSON.stringify(formData));
+      } catch (e) {
+        console.warn("Failed to save seragam draft:", e);
+      }
+    }
+  }, [formData, code, isEditing]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
@@ -40,6 +67,9 @@ export default function IsiSeragamClient({ code, pendaftar }: { code: string; pe
       if (!res.ok) throw new Error(data.message || "Gagal menyimpan data");
 
       setMessage({ type: "success", text: "Ukuran seragam berhasil disimpan!" });
+      if (typeof window !== "undefined") {
+        localStorage.removeItem(`alandalus_alimam_isi_seragam_${code}_draft`);
+      }
       setIsEditing(false);
     } catch (error: any) {
       setMessage({ type: "error", text: error.message });
