@@ -57,9 +57,12 @@ export async function POST(req: Request) {
       "accepted",
       "enrolled",
     ];
+    
+    const isAdmin = ["admin", "admin_super", "penguji"].includes(session.role);
+
     if (
       !pendaftar ||
-      !ALLOWED_STATUSES.includes(pendaftar.status_pendaftaran || "")
+      (!isAdmin && !ALLOWED_STATUSES.includes(pendaftar.status_pendaftaran || ""))
     ) {
       return NextResponse.json(
         {

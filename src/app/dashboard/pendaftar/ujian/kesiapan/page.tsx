@@ -14,6 +14,7 @@ export default function KesiapanTestPage() {
   const [isLocked, setIsLocked] = useState(false);
   const [lockMessage, setLockMessage] = useState("");
   const [answers, setAnswers] = useState<Record<number, number>>({});
+  const [pendaftarId, setPendaftarId] = useState<string | null>(null);
 
   // Autosave answers to localStorage
   useEffect(() => {
@@ -49,8 +50,16 @@ export default function KesiapanTestPage() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    const params = new URLSearchParams(window.location.search);
+    const pid = params.get("pendaftarId");
+    if (pid) setPendaftarId(pid);
+
+    const fetchUrl = pid 
+      ? `/api/pendaftar/undangan-seleksi?pendaftarId=${pid}`
+      : "/api/pendaftar/undangan-seleksi";
+
     // Check if already completed
-    fetch("/api/pendaftar/undangan-seleksi")
+    fetch(fetchUrl)
       .then((res) => res.json())
       .then((data) => {
         const info = data.data;
@@ -89,10 +98,13 @@ export default function KesiapanTestPage() {
 
     try {
       setLoading(true);
+      const payload: any = { type: "kesiapan", answers };
+      if (pendaftarId) payload.pendaftar_id = pendaftarId;
+      
       const res = await fetch("/api/pendaftar/ujian/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "kesiapan", answers }),
+        body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error("Gagal mengirim");
 
@@ -171,9 +183,15 @@ export default function KesiapanTestPage() {
 
   return (
     <div className="max-w-4xl mx-auto p-4 md:p-6 pb-24">
+      {pendaftarId && (
+        <div className="mb-4 p-4 bg-amber-100 border border-amber-300 rounded-xl text-amber-900 flex items-center gap-3">
+          <AlertCircle className="w-5 h-5 flex-shrink-0" />
+          <p className="text-sm font-bold">MODE ADMIN: Anda sedang mengakses/mengisikan ujian atas nama santri lain.</p>
+        </div>
+      )}
       <button
         onClick={() => router.back()}
-        className="flex items-center gap-2 text-stone-500 hover:text-stone-700 mb-4 text-sm font-medium"
+        className="flex items-center gap-2 text-stone-500 hover:text-stone-700 mb-6 text-sm font-medium"
       >
         <ArrowLeft className="w-4 h-4" /> Kembali
       </button>

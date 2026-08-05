@@ -65,15 +65,29 @@ async function getSession() {
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   const session = await getSession();
-  if (!session || session.role !== "pendaftar") {
+  
+  const { searchParams } = new URL(request.url);
+  const targetPendaftarId = searchParams.get("pendaftarId");
+
+  let pendaftarId = "";
+  let isAdminBypass = false;
+
+  if (session?.role === "admin_super" || session?.role === "admin" || session?.role === "penguji") {
+    if (targetPendaftarId) {
+      pendaftarId = targetPendaftarId;
+      isAdminBypass = true;
+    } else {
+      return NextResponse.json({ error: "Unauthorized or missing pendaftarId" }, { status: 401 });
+    }
+  } else if (session?.role === "pendaftar") {
+    pendaftarId = session.id;
+  } else {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
-    const pendaftarId = session.id;
-
     // 1. Fetch pendaftar with notification flags and status
     const pendaftar = await prisma.pendaftar.findUnique({
       where: { id: pendaftarId },
@@ -110,7 +124,7 @@ export async function GET() {
       pendaftar.status_pendaftaran || "",
     );
 
-    if (isLocked) {
+    if (isLocked && !isAdminBypass) {
       return NextResponse.json({
         data: {
           locked: true,
