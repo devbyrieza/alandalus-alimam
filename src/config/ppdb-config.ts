@@ -111,6 +111,9 @@ export const PPDB_CONFIG = {
     youtube: "Belum Tersedia",
   },
 
+  tahunAjaran: "2027-2028",
+  angkatan: "Angkatan IX",
+
   // ⚙️ SETTING TEKNIS (UMUMNYA TIDAK PERLU DIUBAH)
   technical: {
     appName: "PPDB Al Imam Al Islami",
