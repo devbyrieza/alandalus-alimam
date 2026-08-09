@@ -603,7 +603,7 @@ export default function DashboardPage() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.8 }}
-              className="bg-primary-950 p-6 sm:p-5 md:p-8 md:p-10 rounded-[2.5rem] sm:rounded-[3rem] shadow-2xl relative overflow-hidden group"
+              className="bg-primary-950 p-6 sm:p-5 md:p-8 rounded-[2.5rem] sm:rounded-[3rem] shadow-2xl relative overflow-hidden group"
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-gold-400" />
               <div className="absolute bottom-0 right-0 w-40 h-40 bg-primary-500/10 rounded-full blur-[60px] translate-y-1/2 translate-x-1/2 pointer-events-none" />
