@@ -639,7 +639,7 @@ export default function ExaminerDashboard() {
         <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
           
         {/* Header Stats (Rekap Kelulusan) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           <div className="bg-green-50 p-6 rounded-xl shadow-sm border border-green-100 relative overflow-hidden">
             <p className="text-green-600 text-sm font-bold tracking-wider uppercase mb-1">Total Diterima</p>
             <div className="flex items-end gap-2">
@@ -669,6 +669,16 @@ export default function ExaminerDashboard() {
               <span className="text-rose-600/70 font-medium mb-1 pl-1">Santri</span>
             </div>
             <div className="absolute -right-4 -bottom-4 bg-rose-200/50 w-24 h-24 rounded-full blur-xl"></div>
+          </div>
+          <div className="bg-ink-50 p-6 rounded-xl shadow-sm border border-ink-200 relative overflow-hidden">
+            <p className="text-ink-600 text-sm font-bold tracking-wider uppercase mb-1">Proses Penilaian</p>
+            <div className="flex items-end gap-2">
+              <h3 className="text-2xl md:text-4xl font-black text-ink-700">
+                {students.filter(c => !["accepted", "enrolled", "cadangan", "announced", "rejected"].includes(c.status_pendaftaran)).length}
+              </h3>
+              <span className="text-ink-600/70 font-medium mb-1 pl-1">Santri</span>
+            </div>
+            <div className="absolute -right-4 -bottom-4 bg-ink-200/50 w-24 h-24 rounded-full blur-xl"></div>
           </div>
         </div>
       
