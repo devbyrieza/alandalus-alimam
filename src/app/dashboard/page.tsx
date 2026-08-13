@@ -91,7 +91,7 @@ const STATUS_LABELS: Record<
     color: "emerald",
     bg: "bg-emerald-50",
     border: "border-emerald-200",
-    text: "text-emerald-700",
+    text: "text-[#550000]",
     icon: CheckCircle,
     message: "Luar biasa! Semua data sudah lengkap. Menunggu verifikasi admin.",
   },
@@ -100,7 +100,7 @@ const STATUS_LABELS: Record<
     color: "emerald",
     bg: "bg-emerald-50",
     border: "border-emerald-200",
-    text: "text-emerald-700",
+    text: "text-[#550000]",
     icon: CheckCircle,
     message: "Alhamdulillah! Pendaftaran Anda telah diverifikasi.",
   },
@@ -118,7 +118,7 @@ const STATUS_LABELS: Record<
     color: "emerald",
     bg: "bg-emerald-50",
     border: "border-emerald-200",
-    text: "text-emerald-700",
+    text: "text-[#550000]",
     icon: CheckCircle,
     message: "Selamat! Anda lulus tes tertulis. Lanjutkan ke tahap berikutnya!",
   },
@@ -146,7 +146,7 @@ const STATUS_LABELS: Record<
     color: "emerald",
     bg: "bg-emerald-50",
     border: "border-emerald-200",
-    text: "text-emerald-700",
+    text: "text-[#550000]",
     icon: CheckCircle,
     message: "Ujian selesai! Menunggu hasil pengumuman. Do'akan yang terbaik!",
   },
@@ -155,7 +155,7 @@ const STATUS_LABELS: Record<
     color: "emerald",
     bg: "bg-emerald-50",
     border: "border-emerald-200",
-    text: "text-emerald-700",
+    text: "text-[#550000]",
     icon: Trophy,
     message:
       "Alhamdulillah! Selamat, putra/putri Anda diterima di Pesantren Al Imam Al Islami!",
@@ -224,7 +224,7 @@ const ActionCard = ({
           <Icon className="w-7 h-7" />
         </div>
         <span
-          className={`px-4 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest ${disabled ? "bg-ink-100 text-ink-600" : "bg-gold-400 text-primary-950 shadow-sm"}`}
+          className={`px-4 py-1.5 rounded-3xl text-[10px] font-black uppercase tracking-widest ${disabled ? "bg-ink-100 text-ink-600" : "bg-gold-400 text-primary-950 shadow-md"}`}
         >
           Tahap {step.replace("Step ", "")}
         </span>
@@ -359,7 +359,7 @@ export default function DashboardPage() {
                 animate={{ opacity: 1, x: 0 }}
                 className="flex items-center gap-3 mb-6"
               >
-                <div className="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center text-primary-600 border border-primary-100 shadow-sm">
+                <div className="w-10 h-10 rounded-3xl bg-primary-50 flex items-center justify-center text-primary-600 border border-primary-100 shadow-md">
                   <LayoutDashboard className="w-6 h-6" />
                 </div>
                 <div className="h-0.5 w-12 bg-primary-100 rounded-full" />
@@ -452,10 +452,10 @@ export default function DashboardPage() {
                 </p>
 
                 <div className="mt-12 flex flex-wrap gap-4">
-                  <div className="px-5 md:px-8 py-3 rounded-2xl bg-primary-50 border border-primary-100 text-[10px] font-black uppercase tracking-[0.2em] text-primary-700 shadow-sm">
+                  <div className="px-5 md:px-8 py-3 rounded-2xl bg-primary-50 border border-primary-100 text-[10px] font-black uppercase tracking-[0.2em] text-primary-700 shadow-md">
                     ID: {pendaftar.id.substring(0, 8).toUpperCase()}
                   </div>
-                  <div className="px-5 md:px-8 py-3 rounded-2xl bg-primary-50 border border-primary-100 text-[10px] font-black uppercase tracking-[0.2em] text-primary-700 shadow-sm">
+                  <div className="px-5 md:px-8 py-3 rounded-2xl bg-primary-50 border border-primary-100 text-[10px] font-black uppercase tracking-[0.2em] text-primary-700 shadow-md">
                     Tgl:{" "}
                     {new Date(pendaftar.created_at).toLocaleDateString(
                       "id-ID",
@@ -578,7 +578,7 @@ export default function DashboardPage() {
               className="bg-white p-6 sm:p-5 md:p-8 rounded-[2rem] sm:rounded-[3rem] shadow-2xl shadow-primary-900/5 border border-ink-50 flex flex-col items-center text-center relative overflow-hidden group"
             >
               <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary-600 to-primary-900" />
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-[1.5rem] sm:rounded-[2rem] bg-primary-50 flex items-center justify-center text-primary-600 mb-6 sm:mb-8 border border-primary-100 shadow-sm transition-transform group-hover:scale-110">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-[1.5rem] sm:rounded-[2rem] bg-primary-50 flex items-center justify-center text-primary-600 mb-6 sm:mb-8 border border-primary-100 shadow-md transition-transform group-hover:scale-110">
                 <IdCard className="w-8 h-8 sm:w-10 sm:h-10" />
               </div>
               <p className="text-[10px] font-black uppercase tracking-[0.4em] text-ink-500 mb-2">

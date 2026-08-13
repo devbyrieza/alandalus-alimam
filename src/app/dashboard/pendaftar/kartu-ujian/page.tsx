@@ -157,7 +157,7 @@ export default function ExamCardPage() {
             </div>
 
             <div className="mb-8 font-serif">
-              <div className="bg-gray-50 p-4 border border-gray-200 rounded text-sm">
+              <div className="bg-gray-50 p-6 sm:p-8 border border-gray-200 rounded text-sm">
                 <div className="grid grid-cols-12 gap-2 mb-2">
                   <span className="col-span-3 font-bold">
                     Nomor Pendaftaran
@@ -185,14 +185,14 @@ export default function ExamCardPage() {
               <table className="w-full border-collapse border border-black text-sm">
                 <thead>
                   <tr className="bg-gray-100">
-                    <th className="border border-black p-2 text-left">
+                    <th className="border border-black p-4 text-left">
                       Mata Ujian
                     </th>
-                    <th className="border border-black p-2 text-left">
+                    <th className="border border-black p-4 text-left">
                       Hari, Tanggal
                     </th>
-                    <th className="border border-black p-2 text-left">Waktu</th>
-                    <th className="border border-black p-2 text-left">
+                    <th className="border border-black p-4 text-left">Waktu</th>
+                    <th className="border border-black p-4 text-left">
                       Lokasi
                     </th>
                   </tr>
@@ -201,23 +201,23 @@ export default function ExamCardPage() {
                   {data.jadwal && data.jadwal.length > 0 ? (
                     data.jadwal.map((j, idx) => (
                       <tr key={idx}>
-                        <td className="border border-black p-2 font-medium">
+                        <td className="border border-black p-4 font-medium">
                           {expandExamTitle(j.jenis_ujian)}
                         </td>
-                        <td className="border border-black p-2">
+                        <td className="border border-black p-4">
                           {j.tanggal_ujian}
                         </td>
-                        <td className="border border-black p-2">
+                        <td className="border border-black p-4">
                           {j.waktu} WIB
                         </td>
-                        <td className="border border-black p-2">{j.lokasi}</td>
+                        <td className="border border-black p-4">{j.lokasi}</td>
                       </tr>
                     ))
                   ) : (
                     <tr>
                       <td
                         colSpan={4}
-                        className="border border-black p-4 text-center italic text-gray-500"
+                        className="border border-black p-6 sm:p-8 text-center italic text-gray-500"
                       >
                         Jadwal belum dipilih/ditentukan
                       </td>

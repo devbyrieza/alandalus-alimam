@@ -216,7 +216,7 @@ function StatusGrid({ status, statusLabel, pengumuman }: any) {
       val: (pengumuman && isFinalStatus) ? pengumuman.status_kelulusan : "Belum Dirilis",
       desc: "Hasil penerimaan santri",
       icon: CheckCircle,
-      color: "text-emerald-600",
+      color: "text-[#550000]",
       bg: "bg-emerald-50",
     },
   ];
@@ -226,7 +226,7 @@ function StatusGrid({ status, statusLabel, pengumuman }: any) {
       {items.map((item, id) => (
         <div
           key={id}
-          className="bg-white rounded-[1.5rem] border border-surface-200 p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-shadow"
+          className="bg-white rounded-[1.5rem] border border-surface-200 p-6 flex flex-col gap-4 shadow-md hover:shadow-lg transition-shadow"
         >
           <div className="flex items-center gap-4">
             <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${item.bg} ${item.color}`}>

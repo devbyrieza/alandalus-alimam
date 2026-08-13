@@ -68,7 +68,7 @@ export default function GaleriPage() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-primary-50 border border-primary-100 text-primary-700 text-xs font-bold uppercase tracking-widest mb-10 shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-primary-50 border border-primary-100 text-primary-700 text-xs font-bold uppercase tracking-widest mb-10 shadow-md"
           >
             <Camera className="w-3.5 h-3.5" />
             <span>Dokumentasi Pesantren</span>
@@ -110,7 +110,7 @@ export default function GaleriPage() {
               className="mb-12"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center text-primary-700 border border-primary-100">
+                <div className="w-10 h-10 rounded-3xl bg-primary-50 flex items-center justify-center text-primary-700 border border-primary-100">
                   <Images className="w-5 h-5" />
                 </div>
                 <h2 className="text-3xl md:text-4xl font-display font-black text-ink-950 tracking-tight">
@@ -172,7 +172,7 @@ export default function GaleriPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center px-4">
                 <Link href="/kontak">
-                  <button className="w-full sm:w-auto px-6 sm:px-6 md:px-10 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white text-primary-950 font-black text-sm sm:text-base md:text-lg hover:bg-primary-50 shadow-md transition-all min-h-[48px] sm:min-h-[52px]">
+                  <button className="w-full sm:w-auto px-6 sm:px-6 md:px-10 py-3.5 sm:py-4 md:py-5 rounded-pill bg-white text-primary-950 font-black text-sm sm:text-base md:text-lg hover:bg-primary-50 shadow-lg transition-all min-h-[48px] sm:min-h-[52px]">
                     Jadwalkan Kunjungan
                   </button>
                 </Link>

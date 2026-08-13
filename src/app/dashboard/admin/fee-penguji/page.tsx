@@ -101,10 +101,10 @@ export default function RekapFeePengujiPage() {
   };
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto pb-10">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-6 rounded-3xl border border-ink-100 shadow-sm">
+    <div className="space-y-6 max-w-[1200px] mx-auto pb-10">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-6 rounded-3xl border border-ink-100 shadow-md">
         <div className="flex items-center gap-4">
-          <div className="p-4 bg-primary-50 text-primary-600 rounded-2xl">
+          <div className="p-6 sm:p-8 bg-primary-50 text-primary-600 rounded-2xl">
             <Wallet className="w-8 h-8 font-black" />
           </div>
           <div>
@@ -127,7 +127,7 @@ export default function RekapFeePengujiPage() {
           </Button>
           <Button
             onClick={handleExportExcel}
-            className="rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-lg shadow-emerald-600/20 h-11"
+            className="rounded-2xl bg-[#550000] hover:bg-[#550000] text-white font-black shadow-lg shadow-emerald-600/20 h-11"
           >
             <Download className="w-4 h-4 mr-2" />
             Export Excel
@@ -135,7 +135,7 @@ export default function RekapFeePengujiPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-3xl border border-ink-100 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-3xl border border-ink-100 shadow-md overflow-hidden">
         <div className="p-6 border-b border-ink-100 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="relative w-full md:max-w-md">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -150,10 +150,10 @@ export default function RekapFeePengujiPage() {
             />
           </div>
           <div className="flex items-center gap-4 text-sm">
-            <div className="bg-orange-50 text-orange-700 px-4 py-2 rounded-xl font-bold border border-orange-100">
+            <div className="bg-orange-50 text-orange-700 px-4 py-2 rounded-3xl font-bold border border-orange-100">
               Total Sesi: <span className="font-black text-lg">{totalSesiSemua}</span>
             </div>
-            <div className="bg-primary-50 text-primary-700 px-4 py-2 rounded-xl font-bold border border-primary-100">
+            <div className="bg-primary-50 text-primary-700 px-4 py-2 rounded-3xl font-bold border border-primary-100">
               Total Fee: <span className="font-black text-lg">Rp {totalFeeSemua.toLocaleString("id-ID")}</span>
             </div>
           </div>
@@ -195,7 +195,7 @@ export default function RekapFeePengujiPage() {
                   <th className="px-6 py-4 text-xs font-black text-primary-600 uppercase tracking-wider text-center bg-primary-50/30">
                     Total Sesi
                   </th>
-                  <th className="px-6 py-4 text-xs font-black text-emerald-600 uppercase tracking-wider text-right bg-emerald-50/30">
+                  <th className="px-6 py-4 text-xs font-black text-[#550000] uppercase tracking-wider text-right bg-emerald-50/30">
                     Fee (Rp)
                   </th>
                 </tr>
@@ -239,7 +239,7 @@ export default function RekapFeePengujiPage() {
                       <td className="px-6 py-4 text-center font-black text-primary-700 bg-primary-50/30">
                         {item.total_sesi}
                       </td>
-                      <td className="px-6 py-4 text-right font-black text-emerald-700 bg-emerald-50/30 text-base">
+                      <td className="px-6 py-4 text-right font-black text-[#550000] bg-emerald-50/30 text-base">
                         {item.total_fee.toLocaleString("id-ID")}
                       </td>
                     </tr>

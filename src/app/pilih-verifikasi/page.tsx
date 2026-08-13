@@ -106,7 +106,7 @@ function PilihVerifikasiContent() {
     <div className="max-w-lg w-full bg-white rounded-2xl shadow-2xl border-2 border-primary-200 p-5 md:p-8">
       {/* Demo Mode Badge */}
       {DEMO_MODE && (
-        <div className="mb-6 p-3 bg-primary-50 border-2 border-primary-100 rounded-xl app-card">
+        <div className="mb-6 p-3 bg-primary-50 border-2 border-primary-100 rounded-3xl app-card">
           <div className="flex items-center gap-3 justify-center">
             <Zap className="w-5 h-5 text-primary-600" />
             <p className="text-sm font-black text-primary-900">
@@ -144,13 +144,13 @@ function PilihVerifikasiContent() {
           }}
           className={`app-card w-full p-6 rounded-[1.5rem] border-2 transition-all duration-300 text-left relative ${
             selectedChannel === "whatsapp"
-              ? "border-primary-600 bg-primary-50 shadow-md scale-[1.02]"
-              : "border-primary-100 bg-white hover:border-primary-200 hover:shadow-sm"
+              ? "border-primary-600 bg-primary-50 shadow-lg scale-[1.02]"
+              : "border-primary-100 bg-white hover:border-primary-200 hover:shadow-md"
           }`}
         >
           {/* Selected Badge */}
           {selectedChannel === "whatsapp" && (
-            <div className="absolute -top-3 -right-3 bg-primary-600 text-white rounded-full p-2 shadow-lg animate-bounce">
+            <div className="absolute -top-3 -right-3 bg-primary-600 text-white rounded-full p-4 shadow-lg animate-bounce">
               <Check className="w-5 h-5" />
             </div>
           )}
@@ -158,9 +158,9 @@ function PilihVerifikasiContent() {
           <div className="flex items-center gap-4">
             {/* Icon */}
             <div
-              className={`p-4 rounded-xl transition-all duration-300 ${
+              className={`p-6 sm:p-8 rounded-3xl transition-all duration-300 ${
                 selectedChannel === "whatsapp"
-                  ? "bg-primary-600 shadow-md"
+                  ? "bg-primary-600 shadow-lg"
                   : "bg-gold-100"
               }`}
             >
@@ -221,13 +221,13 @@ function PilihVerifikasiContent() {
           }}
           className={`app-card w-full p-6 rounded-[1.5rem] border-2 transition-all duration-300 text-left relative ${
             selectedChannel === "sms"
-              ? "border-primary-600 bg-gold-50 shadow-md scale-[1.02]"
-              : "border-gold-200 bg-white hover:border-primary-200 hover:shadow-sm"
+              ? "border-primary-600 bg-gold-50 shadow-lg scale-[1.02]"
+              : "border-gold-200 bg-white hover:border-primary-200 hover:shadow-md"
           }`}
         >
           {/* Selected Badge */}
           {selectedChannel === "sms" && (
-            <div className="absolute -top-3 -right-3 bg-primary-600 text-white rounded-full p-2 shadow-lg animate-bounce">
+            <div className="absolute -top-3 -right-3 bg-primary-600 text-white rounded-full p-4 shadow-lg animate-bounce">
               <Check className="w-5 h-5" />
             </div>
           )}
@@ -235,9 +235,9 @@ function PilihVerifikasiContent() {
           <div className="flex items-center gap-4">
             {/* Icon */}
             <div
-              className={`p-4 rounded-xl transition-all duration-300 ${
+              className={`p-6 sm:p-8 rounded-3xl transition-all duration-300 ${
                 selectedChannel === "sms"
-                  ? "bg-primary-600 shadow-md"
+                  ? "bg-primary-600 shadow-lg"
                   : "bg-gold-100"
               }`}
             >
@@ -281,7 +281,7 @@ function PilihVerifikasiContent() {
 
       {/* Info Box - Pilihan Aktif */}
       <div
-        className={`relative z-10 mb-6 p-4 rounded-xl border transition-all duration-300 ${
+        className={`relative z-10 mb-6 p-6 sm:p-8 rounded-3xl border transition-all duration-300 ${
           selectedChannel === "whatsapp"
             ? "bg-gold-50 border-primary-200"
             : "bg-gold-50 border-primary-200"
@@ -289,7 +289,7 @@ function PilihVerifikasiContent() {
       >
         <div className="flex items-center gap-3">
           <div
-            className={`p-2 rounded-lg ${
+            className={`p-4 rounded-2xl ${
               selectedChannel === "whatsapp" ? "bg-primary-600" : "bg-primary-600"
             }`}
           >
@@ -316,7 +316,7 @@ function PilihVerifikasiContent() {
         <button
           onClick={handleProsesDemo}
           disabled={isLoading}
-          className={`w-full py-4 px-6 font-black text-lg md:text-xl rounded-pill transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-3 shadow-md hover:scale-[1.02] active:scale-95 ${
+          className={`w-full py-4 px-6 font-black text-lg md:text-xl rounded-pill transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-3 shadow-lg hover:scale-[1.02] active:scale-95 ${
             selectedChannel === "whatsapp"
               ? "bg-primary-900 hover:bg-secondary-100 border border-primary-900 hover:text-primary-900 text-white"
               : "bg-primary-900 hover:bg-secondary-100 border border-primary-900 hover:text-primary-900 text-white"
@@ -355,7 +355,7 @@ function PilihVerifikasiContent() {
       </div>
 
       {/* Tips */}
-      <div className="mt-6 p-4 bg-secondary-50 border border-secondary-200 rounded-[1.5rem] relative z-10">
+      <div className="mt-6 p-6 sm:p-8 bg-secondary-50 border border-secondary-200 rounded-[1.5rem] relative z-10">
         <div className="flex items-start gap-3">
           <AlertTriangle className="w-5 h-5 text-primary-600 flex-shrink-0 mt-0.5" />
           <div>

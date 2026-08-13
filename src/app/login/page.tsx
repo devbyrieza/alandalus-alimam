@@ -345,9 +345,9 @@ export default function LoginPage() {
               />
             </div>
           </Link>
-          <h1 className="text-3xl md:text-5xl font-display font-black text-white mb-2 tracking-tight drop-shadow-md">
+          <h1 className="text-3xl md:text-5xl font-display font-black text-white mb-2 tracking-tight drop-shadow-lg">
             Portal{" "}
-            <span className="text-secondary-400 font-black drop-shadow-md">
+            <span className="text-secondary-400 font-black drop-shadow-lg">
               {BRANDING.schoolShortName}
             </span>
           </h1>
@@ -368,12 +368,12 @@ export default function LoginPage() {
 
           {/* Tab Switcher - Premium "Pill" style */}
           {!roleSelectionData && (
-            <div className="bg-slate-100 p-2 rounded-[2rem] flex relative mb-12 border border-slate-200">
+            <div className="bg-slate-100 p-4 rounded-[2rem] flex relative mb-12 border border-slate-200">
               {/* Animated Background Pill */}
               <motion.div
                 layoutId="auth-tab"
                 transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                className={`absolute top-2 bottom-2 rounded-2xl bg-white shadow-sm border border-slate-200/50 ${
+                className={`absolute top-2 bottom-2 rounded-2xl bg-white shadow-md border border-slate-200/50 ${
                   activeTab === "pendaftar"
                     ? "left-2 w-[calc(50%-8px)]"
                     : "left-[calc(50%+4px)] w-[calc(50%-8px)]"
@@ -461,9 +461,9 @@ export default function LoginPage() {
                           whileTap={{ scale: 0.98 }}
                           onClick={() => handleSelectRole(role)}
                           disabled={selectingRole}
-                          className={`w-full p-4 rounded-2xl bg-linear-to-r ${info.color} border text-left flex items-center gap-4 transition-all hover:shadow-md disabled:opacity-60`}
+                          className={`w-full p-6 sm:p-8 rounded-2xl bg-linear-to-r ${info.color} border text-left flex items-center gap-4 transition-all hover:shadow-lg disabled:opacity-60`}
                         >
-                          <div className="w-10 h-10 rounded-xl bg-white/80 shadow-xs flex items-center justify-center text-primary-700 shrink-0">
+                          <div className="w-10 h-10 rounded-3xl bg-white/80 shadow-xs flex items-center justify-center text-primary-700 shrink-0">
                             <IconComp className="w-5 h-5" />
                           </div>
                           <div className="flex-1">
@@ -513,7 +513,7 @@ export default function LoginPage() {
                         setNomorPendaftaran(e.target.value.toUpperCase())
                       }
                       placeholder="Contoh: MTI2600001"
-                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-14 md:pl-16 rounded-xl md:rounded-2xl bg-white/50 backdrop-blur-sm border border-white/50 focus:bg-white/90 focus:border-secondary-400 focus:ring-4 focus:ring-secondary-100 transition-all font-bold text-ink-950 uppercase placeholder:normal-case placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
+                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-14 md:pl-16 rounded-3xl md:rounded-2xl bg-white/50 backdrop-blur-sm border border-white/50 focus:bg-white/90 focus:border-secondary-400 focus:ring-4 focus:ring-secondary-100 transition-all font-bold text-ink-950 uppercase placeholder:normal-case placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
                       disabled={isLoading}
                     />
                   </AuthInput>
@@ -528,7 +528,7 @@ export default function LoginPage() {
                         setNikPendaftar(e.target.value.replace(/\D/g, ""))
                       }
                       placeholder="16 Digit NIK Sesuai KK"
-                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-14 md:pl-16 rounded-xl md:rounded-2xl bg-white/50 backdrop-blur-sm border border-white/50 focus:bg-white/90 focus:border-secondary-400 focus:ring-4 focus:ring-secondary-100 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
+                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-14 md:pl-16 rounded-3xl md:rounded-2xl bg-white/50 backdrop-blur-sm border border-white/50 focus:bg-white/90 focus:border-secondary-400 focus:ring-4 focus:ring-secondary-100 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
                       disabled={isLoading}
                     />
                   </AuthInput>
@@ -556,7 +556,7 @@ export default function LoginPage() {
                     </p>
                     <Link
                       href="/daftar"
-                      className="inline-flex items-center gap-2 px-6 md:px-10 py-3 rounded-xl bg-white/50 backdrop-blur-sm text-primary-800 font-black text-sm border border-primary-100 hover:bg-white hover:shadow-md hover:-translate-y-1 transition-all"
+                      className="inline-flex items-center gap-2 px-6 md:px-10 py-3 rounded-3xl bg-white/50 backdrop-blur-sm text-primary-800 font-black text-sm border border-primary-100 hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all"
                     >
                       Daftar Baru Di Sini
                     </Link>
@@ -577,7 +577,7 @@ export default function LoginPage() {
                       value={emailAdmin}
                       onChange={(e) => setEmailAdmin(e.target.value)}
                       placeholder="admin@pesantren-alandalus.com"
-                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-14 md:pl-16 rounded-xl md:rounded-2xl bg-white/50 backdrop-blur-sm border border-white/50 focus:bg-white/90 focus:border-secondary-400 focus:ring-4 focus:ring-secondary-100 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
+                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-14 md:pl-16 rounded-3xl md:rounded-2xl bg-white/50 backdrop-blur-sm border border-white/50 focus:bg-white/90 focus:border-secondary-400 focus:ring-4 focus:ring-secondary-100 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
                       disabled={isLoading}
                     />
                   </AuthInput>
@@ -589,7 +589,7 @@ export default function LoginPage() {
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="text-ink-500 hover:text-ink-800 transition-colors duration-300 p-2"
+                        className="text-ink-500 hover:text-ink-800 transition-colors duration-300 p-4"
                       >
                         {showPassword ? (
                           <EyeOff className="w-5 h-5" />
@@ -604,7 +604,7 @@ export default function LoginPage() {
                       value={passwordAdmin}
                       onChange={(e) => setPasswordAdmin(e.target.value)}
                       placeholder="••••••••"
-                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-14 md:pl-16 pr-12 md:pr-16 rounded-xl md:rounded-2xl bg-white/50 backdrop-blur-sm border border-white/50 focus:bg-white/90 focus:border-secondary-400 focus:ring-4 focus:ring-secondary-100 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
+                      className="w-full px-5 py-3 md:px-8 md:py-5 pl-14 md:pl-16 pr-12 md:pr-16 rounded-3xl md:rounded-2xl bg-white/50 backdrop-blur-sm border border-white/50 focus:bg-white/90 focus:border-secondary-400 focus:ring-4 focus:ring-secondary-100 transition-all font-bold text-ink-950 placeholder:font-medium placeholder:text-ink-400 text-sm md:text-base shadow-inner"
                       disabled={isLoading}
                     />
                   </AuthInput>
@@ -627,7 +627,7 @@ export default function LoginPage() {
                   </motion.button>
 
                   <div className="p-6 bg-secondary-50/50 rounded-2xl border border-secondary-100 flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-xl bg-secondary-100 flex items-center justify-center text-primary-700 shrink-0">
+                    <div className="w-8 h-8 rounded-3xl bg-secondary-100 flex items-center justify-center text-primary-700 shrink-0">
                       <Sparkles className="w-4 h-4" />
                     </div>
                     <p className="text-xs text-ink-600 font-bold leading-relaxed mt-0.5">

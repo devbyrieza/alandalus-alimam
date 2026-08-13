@@ -229,10 +229,10 @@ function VerifikasiDokumenContent() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white rounded-2xl shadow-sm p-4 md:p-8 border border-primary-100 mb-8">
+      <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8 md:p-8 border border-primary-100 mb-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 flex-wrap">
           <div className="flex flex-wrap items-center gap-3 md:gap-5">
-            <div className="p-2.5 md:p-4 bg-linear-to-br from-primary-600 to-primary-900 rounded-2xl shadow-xl shadow-primary-900/20 flex-shrink-0">
+            <div className="p-4.5 md:p-6 sm:p-8 bg-linear-to-br from-primary-600 to-primary-900 rounded-2xl shadow-xl shadow-primary-900/20 flex-shrink-0">
               <FileCheck className="w-6 h-6 md:w-8 md:h-8 text-secondary-100" />
             </div>
             <div>
@@ -249,7 +249,7 @@ function VerifikasiDokumenContent() {
               <button
                 type="button"
                 onClick={() => setShowSearchModal(true)}
-                className="flex items-center gap-2 px-3 md:px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl text-sm font-bold transition-all shadow-lg shadow-primary-600/20 whitespace-nowrap"
+                className="flex items-center gap-2 px-3 md:px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-3xl text-sm font-bold transition-all shadow-lg shadow-primary-600/20 whitespace-nowrap"
               >
                 <UploadCloud className="w-4 h-4" />
                 <span className="hidden sm:inline">Upload Atas Nama</span>
@@ -258,7 +258,7 @@ function VerifikasiDokumenContent() {
             <button
               onClick={() => handleExport("excel")}
               disabled={exporting}
-              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-all disabled:opacity-50 text-sm"
+              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-emerald-50 text-[#550000] hover:bg-[#550000] hover:text-white rounded-3xl font-bold transition-all disabled:opacity-50 text-sm"
             >
               <FileSpreadsheet className="w-4 h-4" />
               Excel
@@ -266,7 +266,7 @@ function VerifikasiDokumenContent() {
             <button
               onClick={() => handleExport("pdf")}
               disabled={exporting}
-              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white rounded-xl font-bold transition-all disabled:opacity-50 text-sm"
+              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white rounded-3xl font-bold transition-all disabled:opacity-50 text-sm"
             >
               <FileText className="w-4 h-4" />
               PDF
@@ -275,7 +275,7 @@ function VerifikasiDokumenContent() {
               href="/api/admin/export/foto"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-all text-sm"
+              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-blue-50 text-[#550000] hover:bg-[#550000] hover:text-white rounded-3xl font-bold transition-all text-sm"
             >
               <Download className="w-4 h-4" />
               <span className="hidden sm:inline">Foto ZIP</span>
@@ -283,7 +283,7 @@ function VerifikasiDokumenContent() {
             <button
               onClick={fetchData}
               disabled={refreshing}
-              className="p-2 bg-primary-50 text-primary-600 hover:bg-primary-600 hover:text-white rounded-xl transition-all disabled:opacity-50"
+              className="p-4 bg-primary-50 text-primary-600 hover:bg-primary-600 hover:text-white rounded-3xl transition-all disabled:opacity-50"
               title="Muat Ulang Data"
             >
               <RefreshCw
@@ -330,7 +330,7 @@ function VerifikasiDokumenContent() {
       </div>
 
       {refreshing && (
-        <div className="fixed inset-0 bg-white/40 backdrop-blur-[1px] z-[100] flex items-start md:items-center pt-10 md:pt-0 pb-20 md:pb-0 justify-center pointer-events-none overflow-y-auto overflow-x-hidden p-4 overscroll-contain custom-scrollbar">
+        <div className="fixed inset-0 bg-white/40 backdrop-blur-[1px] z-[100] flex items-start md:items-center pt-10 md:pt-0 pb-20 md:pb-0 justify-center pointer-events-none overflow-y-auto overflow-x-hidden p-6 sm:p-8 overscroll-contain custom-scrollbar">
           <div className="bg-white/80 px-6 py-3 rounded-2xl shadow-xl border border-primary-100 flex items-center gap-3 animate-in fade-in zoom-in duration-300">
             <Loader2 className="w-5 h-5 animate-spin text-primary-600" />
             <span className="text-sm font-bold text-ink-700 tracking-tight">
@@ -422,13 +422,13 @@ function VerifikasiDokumenContent() {
                         </div>
                         <div className="flex items-center gap-4">
                           <div className="flex items-center gap-1.5">
-                            <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50" />
+                            <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-md shadow-emerald-500/50" />
                             <span className="text-xs font-bold text-ink-600">
                               {verifiedCount} Terverifikasi
                             </span>
                           </div>
                           <div className="flex items-center gap-1.5">
-                            <div className="w-2 h-2 rounded-full bg-secondary-400 shadow-sm shadow-secondary-400/50" />
+                            <div className="w-2 h-2 rounded-full bg-secondary-400 shadow-md shadow-secondary-400/50" />
                             <span className="text-xs font-bold text-ink-600">
                               {totalCount - verifiedCount} Menunggu
                             </span>

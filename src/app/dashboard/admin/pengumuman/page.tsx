@@ -136,28 +136,28 @@ export default function PengumumanPage() {
     <div className="space-y-6">
       {/* Header Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-stone-100">
+        <div className="bg-white p-6 rounded-3xl shadow-md border border-stone-100">
           <p className="text-stone-500 text-sm font-medium">Kandidat Tampil</p>
           <h3 className="text-2xl font-bold text-stone-800">{stats.total}</h3>
         </div>
-        <div className="bg-primary-50 p-6 rounded-xl shadow-sm border border-primary-100">
+        <div className="bg-primary-50 p-6 rounded-3xl shadow-md border border-primary-100">
           <p className="text-primary-600 text-sm font-medium">
             Proses Seleksi (Belum Selesai)
           </p>
           <h3 className="text-2xl font-bold text-primary-700">{stats.ready}</h3>
         </div>
-        <div className="bg-green-50 p-6 rounded-xl shadow-sm border border-green-100">
-          <p className="text-green-600 text-sm font-medium">Sudah Lulus</p>
-          <h3 className="text-2xl font-bold text-green-700">
+        <div className="bg-green-50 p-6 rounded-3xl shadow-md border border-green-100">
+          <p className="text-[#550000] text-sm font-medium">Sudah Lulus</p>
+          <h3 className="text-2xl font-bold text-[#550000]">
             {stats.accepted}
           </h3>
         </div>
       </div>
 
       {/* Filters & Actions */}
-      <div className="bg-white p-4 rounded-xl shadow-sm border border-stone-100 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-md border border-stone-100 flex flex-col md:flex-row justify-between items-center gap-4">
         <div className="flex items-center gap-4 w-full md:w-auto">
-          <div className="flex items-center gap-2 px-3 py-2 bg-stone-50 rounded-lg border border-stone-200">
+          <div className="flex items-center gap-2 px-3 py-2 bg-stone-50 rounded-2xl border border-stone-200">
             <Filter className="w-4 h-4 text-stone-500" />
             <select
               className="bg-transparent text-sm focus:outline-none"
@@ -172,7 +172,7 @@ export default function PengumumanPage() {
             </select>
           </div>
 
-          <div className="flex items-center gap-2 px-3 py-2 bg-stone-50 rounded-lg border border-stone-200">
+          <div className="flex items-center gap-2 px-3 py-2 bg-stone-50 rounded-2xl border border-stone-200">
             <Search className="w-4 h-4 text-stone-500" />
             <select
               className="bg-transparent text-sm focus:outline-none"
@@ -189,7 +189,7 @@ export default function PengumumanPage() {
         <button
           onClick={handlePublish}
           disabled={selectedIds.length === 0 || isPublishing}
-          className="flex items-center gap-2 px-6 py-2.5 bg-green-600 hover:bg-green-700 disabled:bg-stone-300 text-white rounded-xl font-bold transition-all shadow-lg shadow-green-200 disabled:shadow-none"
+          className="flex items-center gap-2 px-6 py-2.5 bg-[#550000] hover:bg-[#550000] disabled:bg-stone-300 text-white rounded-3xl font-bold transition-all shadow-lg shadow-green-200 disabled:shadow-none"
         >
           {isPublishing ? (
             "Memproses..."
@@ -203,7 +203,7 @@ export default function PengumumanPage() {
       </div>
 
       {/* Table & Mobile View */}
-      <div className="bg-white rounded-xl shadow-lg border border-stone-200 overflow-hidden">
+      <div className="bg-white rounded-3xl shadow-lg border border-stone-200 overflow-hidden">
         {/* Mobile View: Cards */}
         <div className="md:hidden divide-y divide-stone-100 select-none">
           {candidates.length === 0 ? (
@@ -251,12 +251,12 @@ export default function PengumumanPage() {
                 <div
                   key={c.id}
                   onClick={() => handleSelectOne(c.id)}
-                  className={`p-4 flex items-start gap-4 active:bg-stone-50 transition-colors ${selectedIds.includes(c.id) ? "bg-green-50/50" : ""}`}
+                  className={`p-6 sm:p-8 flex items-start gap-4 active:bg-stone-50 transition-colors ${selectedIds.includes(c.id) ? "bg-green-50/50" : ""}`}
                 >
                   <div className="mt-1" onClick={(e) => e.stopPropagation()}>
                     <input
                       type="checkbox"
-                      className="w-5 h-5 rounded border-stone-300 text-green-600 focus:ring-green-500"
+                      className="w-5 h-5 rounded border-stone-300 text-[#550000] focus:ring-green-500"
                       checked={selectedIds.includes(c.id)}
                       onChange={() => handleSelectOne(c.id)}
                     />
@@ -304,7 +304,7 @@ export default function PengumumanPage() {
                       </div>
                       <div>
                         {c.status_pendaftaran === "accepted" ? (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-green-100 text-green-700 text-[10px] font-black uppercase">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-green-100 text-[#550000] text-[10px] font-black uppercase">
                             <CheckCircle2 className="w-3 h-3" /> Lulus
                           </span>
                         ) : c.status_pendaftaran === "scheduled" ? (
@@ -333,7 +333,7 @@ export default function PengumumanPage() {
                 <th className="px-6 py-4 w-12">
                   <input
                     type="checkbox"
-                    className="w-4 h-4 rounded border-stone-300 text-green-600 focus:ring-green-500"
+                    className="w-4 h-4 rounded border-stone-300 text-[#550000] focus:ring-green-500"
                     onChange={handleSelectAll}
                     checked={
                       candidates.length > 0 &&
@@ -408,7 +408,7 @@ export default function PengumumanPage() {
                       <td className="px-6 py-4">
                         <input
                           type="checkbox"
-                          className="w-4 h-4 rounded border-stone-300 text-green-600 focus:ring-green-500"
+                          className="w-4 h-4 rounded border-stone-300 text-[#550000] focus:ring-green-500"
                           checked={selectedIds.includes(c.id)}
                           onChange={() => handleSelectOne(c.id)}
                         />
@@ -454,7 +454,7 @@ export default function PengumumanPage() {
                       </td>
                       <td className="px-6 py-4 text-center">
                         {c.status_pendaftaran === "accepted" ? (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-green-100 text-[#550000] text-xs font-bold">
                             <CheckCircle2 className="w-3 h-3" /> Lulus
                           </span>
                         ) : c.status_pendaftaran === "scheduled" ? (

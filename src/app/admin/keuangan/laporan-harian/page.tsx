@@ -46,7 +46,7 @@ export default function LaporanHarianPage() {
   };
 
   return (
-    <div className="p-4 md:p-8 max-w-5xl mx-auto h-full flex flex-col">
+    <div className="p-6 sm:p-8 md:p-8 max-w-5xl mx-auto h-full flex flex-col">
       <div className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4 print:hidden">
         <div>
           <h1 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">Rekap & Tutup Kasir</h1>
@@ -60,12 +60,12 @@ export default function LaporanHarianPage() {
               type="date" 
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="bg-white border border-slate-200 font-bold text-slate-700 rounded-xl py-2 pl-10 pr-4 focus:outline-none focus:border-maroon-500"
+              className="bg-white border border-slate-200 font-bold text-slate-700 rounded-3xl py-2 pl-10 pr-4 focus:outline-none focus:border-maroon-500"
             />
           </div>
           <button 
             onClick={handlePrint}
-            className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-5 rounded-xl flex items-center gap-2 transition-all shadow-sm"
+            className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-5 rounded-3xl flex items-center gap-2 transition-all shadow-md"
           >
             <Printer className="w-4 h-4" /> Cetak Laporan
           </button>
@@ -73,7 +73,7 @@ export default function LaporanHarianPage() {
       </div>
 
       {/* PRINTABLE AREA */}
-      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 print:shadow-none print:border-none print:p-0">
+      <div className="bg-white rounded-3xl border border-slate-200 shadow-md p-8 print:shadow-none print:border-none print:p-0">
         
         {/* Laporan Header */}
         <div className="text-center border-b-2 border-slate-900 pb-6 mb-6">
@@ -153,8 +153,8 @@ export default function LaporanHarianPage() {
             </tbody>
             <tfoot>
               <tr>
-                <td colSpan={3} className="p-4 text-right font-black text-slate-800 uppercase">Total Akhir Omzet Kantin:</td>
-                <td className="p-4 text-right font-black text-maroon-700 text-xl">Rp {ringkasan.totalNominal.toLocaleString('id-ID')}</td>
+                <td colSpan={3} className="p-6 sm:p-8 text-right font-black text-slate-800 uppercase">Total Akhir Omzet Kantin:</td>
+                <td className="p-6 sm:p-8 text-right font-black text-maroon-700 text-xl">Rp {ringkasan.totalNominal.toLocaleString('id-ID')}</td>
               </tr>
             </tfoot>
           </table>

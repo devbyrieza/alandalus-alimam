@@ -71,7 +71,7 @@ export default function AdminSMSDashboard() {
     return (
       <div className="min-h-screen bg-slate-50/50 flex items-center justify-center p-6 md:p-10">
         <div className="text-center p-8 bg-white rounded-3xl shadow-xl border border-slate-100 max-w-sm w-full">
-          <RefreshCw className="w-10 h-10 animate-spin mx-auto text-emerald-600 mb-4" />
+          <RefreshCw className="w-10 h-10 animate-spin mx-auto text-[#550000] mb-4" />
           <p className="text-slate-700 font-bold text-base">Memuat data SMS...</p>
         </div>
       </div>
@@ -80,7 +80,7 @@ export default function AdminSMSDashboard() {
 
   return (
     <div className="min-h-screen bg-slate-50/50 p-6 md:p-10">
-      <div className="max-w-7xl mx-auto space-y-8">
+      <div className="max-w-[1200px] mx-auto space-y-8">
         {/* Main Card */}
         <div className="bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-6 md:p-10 border border-slate-100 relative overflow-hidden">
           {/* Decorative Top Bar */}
@@ -89,7 +89,7 @@ export default function AdminSMSDashboard() {
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center shadow-xs">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-[#550000] border border-emerald-100 flex items-center justify-center shadow-xs">
                 <Smartphone className="w-7 h-7" />
               </div>
               <div>
@@ -98,7 +98,7 @@ export default function AdminSMSDashboard() {
                 </h1>
                 <p className="text-slate-500 font-medium text-sm mt-0.5">
                   Sistem dalam{" "}
-                  <span className="font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-lg border border-amber-200/60 inline-flex items-center gap-1">
+                  <span className="font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-2xl border border-amber-200/60 inline-flex items-center gap-1">
                     <Sparkles className="w-3.5 h-3.5" /> Simulation Mode
                   </span>
                   . Kirim SMS manual ke pendaftar berikut:
@@ -108,7 +108,7 @@ export default function AdminSMSDashboard() {
 
             <button
               onClick={fetchPendingSMS}
-              className="inline-flex items-center gap-2 px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl shadow-lg shadow-emerald-600/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-[#550000] hover:bg-[#550000] text-white font-bold rounded-2xl shadow-lg shadow-emerald-600/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               <RefreshCw className="w-4 h-4" />
               Refresh Data
@@ -117,25 +117,25 @@ export default function AdminSMSDashboard() {
 
           {/* Instructions Banner */}
           <div className="bg-emerald-50/60 border border-emerald-100 rounded-3xl p-6 mb-8">
-            <h3 className="font-black text-emerald-900 text-base mb-3 flex items-center gap-2">
-              <ClipboardList className="w-5 h-5 text-emerald-600" />
+            <h3 className="font-black text-[#550000] text-base mb-3 flex items-center gap-2">
+              <ClipboardList className="w-5 h-5 text-[#550000]" />
               Instruksi Pengiriman:
             </h3>
-            <ol className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm font-medium text-emerald-800">
+            <ol className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm font-medium text-[#550000]">
               <li className="flex items-start gap-2.5 bg-white/80 p-3 rounded-2xl border border-emerald-100/50">
-                <span className="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shrink-0">1</span>
+                <span className="w-6 h-6 rounded-full bg-[#550000] text-white font-bold text-xs flex items-center justify-center shrink-0">1</span>
                 <span>Salin nomor HP dan kode OTP dari daftar di bawah</span>
               </li>
               <li className="flex items-start gap-2.5 bg-white/80 p-3 rounded-2xl border border-emerald-100/50">
-                <span className="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shrink-0">2</span>
+                <span className="w-6 h-6 rounded-full bg-[#550000] text-white font-bold text-xs flex items-center justify-center shrink-0">2</span>
                 <span>Kirim SMS dari HP Admin ke nomor tujuan</span>
               </li>
               <li className="flex items-start gap-2.5 bg-white/80 p-3 rounded-2xl border border-emerald-100/50">
-                <span className="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shrink-0">3</span>
+                <span className="w-6 h-6 rounded-full bg-[#550000] text-white font-bold text-xs flex items-center justify-center shrink-0">3</span>
                 <span>Format: "PPDB AL-IMAM: Kode OTP: [OTP] untuk [NAMA]"</span>
               </li>
               <li className="flex items-start gap-2.5 bg-white/80 p-3 rounded-2xl border border-emerald-100/50">
-                <span className="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shrink-0">4</span>
+                <span className="w-6 h-6 rounded-full bg-[#550000] text-white font-bold text-xs flex items-center justify-center shrink-0">4</span>
                 <span>Klik tombol "Sudah Dikirim" untuk memperbarui status</span>
               </li>
             </ol>
@@ -144,7 +144,7 @@ export default function AdminSMSDashboard() {
           {/* Section Header */}
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-lg font-black text-slate-900 flex items-center gap-2">
-              <MessageCircle className="w-5 h-5 text-emerald-600" />
+              <MessageCircle className="w-5 h-5 text-[#550000]" />
               Daftar SMS Antrean ({pendingSMS.length})
             </h2>
           </div>
@@ -152,7 +152,7 @@ export default function AdminSMSDashboard() {
           {/* SMS List */}
           {pendingSMS.length === 0 ? (
             <div className="text-center py-16 px-4 bg-slate-50/50 rounded-3xl border border-dashed border-slate-200">
-              <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4 border border-emerald-200">
+              <div className="w-16 h-16 rounded-full bg-emerald-100 text-[#550000] flex items-center justify-center mx-auto mb-4 border border-emerald-200">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
               <h4 className="text-lg font-black text-slate-900 mb-1">
@@ -167,11 +167,11 @@ export default function AdminSMSDashboard() {
               {pendingSMS.map((item) => (
                 <div
                   key={item.id}
-                  className="border border-slate-200/80 bg-slate-50/30 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all space-y-6"
+                  className="border border-slate-200/80 bg-slate-50/30 rounded-3xl p-6 shadow-md hover:shadow-lg transition-all space-y-6"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="flex items-center gap-3.5 bg-white p-4 rounded-2xl border border-slate-100 shadow-xs">
-                      <div className="p-3 bg-emerald-50 text-emerald-600 rounded-xl">
+                    <div className="flex items-center gap-3.5 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 shadow-xs">
+                      <div className="p-3 bg-emerald-50 text-[#550000] rounded-3xl">
                         <Smartphone className="w-5 h-5" />
                       </div>
                       <div>
@@ -180,8 +180,8 @@ export default function AdminSMSDashboard() {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3.5 bg-white p-4 rounded-2xl border border-slate-100 shadow-xs">
-                      <div className="p-3 bg-teal-50 text-teal-600 rounded-xl">
+                    <div className="flex items-center gap-3.5 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 shadow-xs">
+                      <div className="p-3 bg-teal-50 text-teal-600 rounded-3xl">
                         <User className="w-5 h-5" />
                       </div>
                       <div>
@@ -190,8 +190,8 @@ export default function AdminSMSDashboard() {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3.5 bg-white p-4 rounded-2xl border border-slate-100 shadow-xs">
-                      <div className="p-3 bg-rose-50 text-rose-600 rounded-xl">
+                    <div className="flex items-center gap-3.5 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 shadow-xs">
+                      <div className="p-3 bg-rose-50 text-rose-600 rounded-3xl">
                         <Key className="w-5 h-5" />
                       </div>
                       <div>
@@ -220,7 +220,7 @@ Hubungi 0851-1152-4441 jika ada masalah.`}
                   <div className="flex flex-col sm:flex-row gap-3 pt-2">
                     <button
                       onClick={() => markAsSent(item.id)}
-                      className="flex-1 py-3.5 px-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl shadow-md shadow-emerald-600/20 transition-all flex items-center justify-center gap-2"
+                      className="flex-1 py-3.5 px-6 bg-[#550000] hover:bg-[#550000] text-white font-bold rounded-2xl shadow-lg shadow-emerald-600/20 transition-all flex items-center justify-center gap-2"
                     >
                       <CheckCircle2 className="w-5 h-5" />
                       Tandai Sudah Dikirim
@@ -243,13 +243,13 @@ Hubungi 0851-1152-4441 jika ada masalah.`}
         {/* System Status Section */}
         <div className="bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-6 md:p-8 border border-slate-100">
           <h3 className="font-black text-slate-900 text-lg mb-6 flex items-center gap-2">
-            <BarChart3 className="w-5 h-5 text-emerald-600" /> Status Layanan & Integrasi
+            <BarChart3 className="w-5 h-5 text-[#550000]" /> Status Layanan & Integrasi
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             <div className="bg-emerald-50/50 border border-emerald-100 p-5 rounded-2xl">
-              <p className="text-xs text-emerald-700 font-bold uppercase tracking-wider mb-1">SMS Service</p>
+              <p className="text-xs text-[#550000] font-bold uppercase tracking-wider mb-1">SMS Service</p>
               <p className="text-xl font-black text-emerald-950 flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-emerald-600" /> Simulation
+                <Sparkles className="w-4 h-4 text-[#550000]" /> Simulation
               </p>
             </div>
             <div className="bg-teal-50/50 border border-teal-100 p-5 rounded-2xl">

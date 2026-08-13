@@ -75,14 +75,14 @@ export default function UserManagementPage() {
                 <label class="block text-[10px] font-black uppercase text-primary-600 mb-1.5 tracking-wider">
                   Link Singkat (Akses Cepat)
                 </label>
-                <input type="text" value="${data.shortLink}" class="w-full p-3 border-2 border-primary-100 rounded-xl bg-stone-50 font-bold focus:outline-none focus:border-primary-500 text-sm" readonly onclick="this.select()" />
+                <input type="text" value="${data.shortLink}" class="w-full p-3 border-2 border-primary-100 rounded-3xl bg-stone-50 font-bold focus:outline-none focus:border-primary-500 text-sm" readonly onclick="this.select()" />
               </div>
 
               <div>
                 <label class="block text-[10px] font-black uppercase text-stone-400 mb-1.5 tracking-wider">
                   Link Lengkap (Alternatif)
                 </label>
-                <input type="text" value="${data.link}" class="w-full p-3 border border-stone-200 rounded-xl bg-stone-50 focus:outline-none text-xs text-stone-400" readonly onclick="this.select()" />
+                <input type="text" value="${data.link}" class="w-full p-3 border border-stone-200 rounded-3xl bg-stone-50 focus:outline-none text-xs text-stone-400" readonly onclick="this.select()" />
               </div>
             </div>
           `,
@@ -263,7 +263,7 @@ export default function UserManagementPage() {
               <span className="bg-white/10 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border border-white/10">
                 Control Console
               </span>
-              <h1 className="text-3xl md:text-5xl font-black font-display tracking-tight mt-2 italic shadow-sm text-white">
+              <h1 className="text-3xl md:text-5xl font-black font-display tracking-tight mt-2 italic shadow-md text-white">
                 Admin Management
               </h1>
             </div>
@@ -281,7 +281,7 @@ export default function UserManagementPage() {
       </div>
 
       {/* User List Dashboard */}
-      <div className="bg-white rounded-4xl border border-secondary-100 shadow-sm overflow-hidden app-card">
+      <div className="bg-white rounded-4xl border border-secondary-100 shadow-md overflow-hidden app-card">
         <div className="p-5 md:p-8 border-b border-stone-50 flex flex-col md:flex-row justify-between items-center gap-6 bg-secondary-50/10">
           <div className="relative w-full md:w-[28rem]">
             <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-300" />
@@ -290,7 +290,7 @@ export default function UserManagementPage() {
               placeholder="Search system users..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-16 pr-8 py-5 bg-white border-2 border-secondary-100 rounded-[2.5rem] focus:outline-none focus:border-primary-500 font-bold shadow-sm placeholder:text-stone-300"
+              className="w-full pl-16 pr-8 py-5 bg-white border-2 border-secondary-100 rounded-[2.5rem] focus:outline-none focus:border-primary-500 font-bold shadow-md placeholder:text-stone-300"
             />
           </div>
           <p className="text-[10px] font-black uppercase tracking-widest text-stone-500 bg-stone-100 px-4 py-2 rounded-full">
@@ -323,7 +323,7 @@ export default function UserManagementPage() {
                   >
                     <td className="p-5 md:p-8">
                       <div className="flex items-center gap-5">
-                        <div className="w-12 h-12 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-700 font-black text-xs border-2 border-white shadow-sm">
+                        <div className="w-12 h-12 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-700 font-black text-xs border-2 border-white shadow-md">
                           {user.full_name.charAt(0)}
                         </div>
                         <div>
@@ -338,7 +338,7 @@ export default function UserManagementPage() {
                     </td>
                     <td className="p-5 md:p-8 text-center">
                       <div className="flex flex-wrap justify-center gap-2">
-                        <span className="px-4 py-1.5 bg-primary-50 text-primary-700 text-[10px] font-black rounded-xl border border-primary-100 uppercase tracking-widest shadow-sm">
+                        <span className="px-4 py-1.5 bg-primary-50 text-primary-700 text-[10px] font-black rounded-3xl border border-primary-100 uppercase tracking-widest shadow-md">
                           {ROLE_LABELS[user.role as UserRole] ||
                             user.role.replace("_", " ")}
                         </span>
@@ -348,7 +348,7 @@ export default function UserManagementPage() {
                             .map((r, i) => (
                               <span
                                 key={i}
-                                className="px-4 py-1.5 bg-stone-100 text-stone-600 text-[10px] font-black rounded-xl border border-stone-200 uppercase tracking-widest shadow-sm"
+                                className="px-4 py-1.5 bg-stone-100 text-stone-600 text-[10px] font-black rounded-3xl border border-stone-200 uppercase tracking-widest shadow-md"
                               >
                                 {ROLE_LABELS[r as UserRole] ||
                                   r.replace("_", " ")}
@@ -425,7 +425,7 @@ export default function UserManagementPage() {
               </div>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="text-stone-300 hover:text-rose-600 transition-colors p-2 bg-stone-100 rounded-full hover:bg-rose-50"
+                className="text-stone-300 hover:text-rose-600 transition-colors p-4 bg-stone-100 rounded-full hover:bg-rose-50"
               >
                 <XCircle className="w-10 h-10" />
               </button>
@@ -498,7 +498,7 @@ export default function UserManagementPage() {
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-stone-400 hover:text-primary-600 transition-colors z-10"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 p-4 text-stone-400 hover:text-primary-600 transition-colors z-10"
                     >
                       {showPassword ? (
                         <EyeOff className="w-5 h-5" />
@@ -546,7 +546,7 @@ export default function UserManagementPage() {
                     {ROLE_OPTIONS.map((o) => (
                       <label
                         key={o.value}
-                        className={`flex items-center gap-2 px-4 py-2 rounded-xl border cursor-pointer transition-all ${formData.secondary_roles.includes(o.value) ? "bg-primary-50 border-primary-200 text-primary-800" : "bg-stone-50 border-stone-200 text-stone-500 hover:bg-stone-100"} ${formData.role === o.value ? "opacity-50 cursor-not-allowed" : ""}`}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-3xl border cursor-pointer transition-all ${formData.secondary_roles.includes(o.value) ? "bg-primary-50 border-primary-200 text-primary-800" : "bg-stone-50 border-stone-200 text-stone-500 hover:bg-stone-100"} ${formData.role === o.value ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
                         <input
                           type="checkbox"

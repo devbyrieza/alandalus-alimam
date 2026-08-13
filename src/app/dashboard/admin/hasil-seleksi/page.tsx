@@ -129,7 +129,7 @@ export default function HasilSeleksiPage() {
   };
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto p-4 md:p-8">
+    <div className="space-y-6 max-w-[1200px] mx-auto p-6 sm:p-8 md:p-8">
       {/* Page Title */}
       <div>
         <h1 className="text-2xl font-black text-stone-800">
@@ -143,21 +143,21 @@ export default function HasilSeleksiPage() {
 
       {/* Header Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-green-50 p-6 rounded-xl shadow-sm border border-green-100 relative overflow-hidden">
-          <p className="text-green-600 text-sm font-bold tracking-wider uppercase mb-1">
+        <div className="bg-green-50 p-6 rounded-3xl shadow-md border border-green-100 relative overflow-hidden">
+          <p className="text-[#550000] text-sm font-bold tracking-wider uppercase mb-1">
             Total Diterima
           </p>
           <div className="flex items-end gap-2">
-            <h3 className="text-2xl md:text-4xl font-black text-green-700">
+            <h3 className="text-2xl md:text-4xl font-black text-[#550000]">
               {stats.total_lulus}
             </h3>
-            <span className="text-green-600/70 font-medium mb-1 pl-1">
+            <span className="text-[#550000]/70 font-medium mb-1 pl-1">
               Santri
             </span>
           </div>
           <div className="absolute -right-4 -bottom-4 bg-green-200/50 w-24 h-24 rounded-full blur-xl"></div>
         </div>
-        <div className="bg-secondary-50 p-6 rounded-xl shadow-sm border border-secondary-100 relative overflow-hidden">
+        <div className="bg-secondary-50 p-6 rounded-3xl shadow-md border border-secondary-100 relative overflow-hidden">
           <p className="text-secondary-600 text-sm font-bold tracking-wider uppercase mb-1">
             Cadangan
           </p>
@@ -171,7 +171,7 @@ export default function HasilSeleksiPage() {
           </div>
           <div className="absolute -right-4 -bottom-4 bg-secondary-200/50 w-24 h-24 rounded-full blur-xl"></div>
         </div>
-        <div className="bg-rose-50 p-6 rounded-xl shadow-sm border border-rose-100 relative overflow-hidden">
+        <div className="bg-rose-50 p-6 rounded-3xl shadow-md border border-rose-100 relative overflow-hidden">
           <p className="text-rose-600 text-sm font-bold tracking-wider uppercase mb-1">
             Ditolak
           </p>
@@ -188,9 +188,9 @@ export default function HasilSeleksiPage() {
       </div>
 
       {/* Filters & Actions */}
-      <div className="bg-white p-4 rounded-xl shadow-sm border border-stone-200 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-md border border-stone-200 flex flex-col md:flex-row justify-between items-center gap-4">
         <div className="flex items-center gap-4 w-full md:w-auto">
-          <div className="flex items-center gap-2 px-3 py-2 bg-stone-50 rounded-lg border border-stone-200">
+          <div className="flex items-center gap-2 px-3 py-2 bg-stone-50 rounded-2xl border border-stone-200">
             <Filter className="w-4 h-4 text-stone-500" />
             <select
               className="bg-transparent text-sm font-bold text-stone-700 focus:outline-none"
@@ -205,7 +205,7 @@ export default function HasilSeleksiPage() {
             </select>
           </div>
 
-          <div className="flex items-center gap-2 px-3 py-2 bg-stone-50 rounded-lg border border-stone-200">
+          <div className="flex items-center gap-2 px-3 py-2 bg-stone-50 rounded-2xl border border-stone-200">
             <Search className="w-4 h-4 text-stone-500" />
             <select
               className="bg-transparent text-sm font-bold text-stone-700 focus:outline-none"
@@ -223,7 +223,7 @@ export default function HasilSeleksiPage() {
         <button
           onClick={handleExportExcel}
           disabled={candidates.length === 0 || loading}
-          className="flex items-center justify-center gap-2 px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold transition-all shadow-lg shadow-green-200 disabled:shadow-none disabled:bg-stone-300 w-full md:w-auto"
+          className="flex items-center justify-center gap-2 px-6 py-2.5 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl font-bold transition-all shadow-lg shadow-green-200 disabled:shadow-none disabled:bg-stone-300 w-full md:w-auto"
         >
           <Download className="w-4 h-4" />
           Ekspor Excel
@@ -231,7 +231,7 @@ export default function HasilSeleksiPage() {
       </div>
 
       {/* Table & Mobile View */}
-      <div className="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+      <div className="bg-white rounded-3xl shadow-md border border-stone-200 overflow-hidden">
         {/* Mobile View: Cards */}
         <div className="md:hidden divide-y divide-stone-100">
           {loading ? (
@@ -260,7 +260,7 @@ export default function HasilSeleksiPage() {
                       {c.nomor_pendaftaran}
                     </p>
                   </div>
-                  <span className="px-2 py-0.5 bg-stone-100 text-stone-600 rounded text-[9px] font-black uppercase shrink-0 border border-stone-200 shadow-sm">
+                  <span className="px-2 py-0.5 bg-stone-100 text-stone-600 rounded text-[9px] font-black uppercase shrink-0 border border-stone-200 shadow-md">
                     {c.jenjang}
                   </span>
                 </div>
@@ -279,7 +279,7 @@ export default function HasilSeleksiPage() {
                   <div className="shrink-0">
                     {c.status_pendaftaran === "accepted" ||
                     c.status_pendaftaran === "enrolled" ? (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-100 text-green-700 text-[10px] font-black uppercase border border-green-200">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-100 text-[#550000] text-[10px] font-black uppercase border border-green-200">
                         <CheckCircle2 className="w-3 h-3" /> DITERIMA
                       </span>
                     ) : c.status_pendaftaran === "cadangan" ? (
@@ -405,7 +405,7 @@ export default function HasilSeleksiPage() {
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <span className="px-2 py-1 bg-stone-100 text-stone-700 rounded-md text-xs font-bold border border-stone-200 shadow-sm">
+                        <span className="px-2 py-1 bg-stone-100 text-stone-700 rounded-md text-xs font-bold border border-stone-200 shadow-md">
                           {c.jenjang}
                         </span>
                       </td>
@@ -431,7 +431,7 @@ export default function HasilSeleksiPage() {
                       <td className="px-6 py-4 text-center">
                         {c.status_pendaftaran === "accepted" ||
                         c.status_pendaftaran === "enrolled" ? (
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-100 text-green-700 text-xs font-bold border border-green-200">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-100 text-[#550000] text-xs font-bold border border-green-200">
                             <CheckCircle2 className="w-3.5 h-3.5" /> DITERIMA
                           </span>
                         ) : c.status_pendaftaran === "cadangan" ||

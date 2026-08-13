@@ -443,10 +443,10 @@ function PPDBContent() {
                         {req.items.map((item, i) => (
                           <li
                             key={i}
-                            className="flex items-center gap-3 md:gap-4 bg-surface-50/50 p-3 md:p-4 rounded-xl md:rounded-2xl border border-surface-100 group hover:bg-white transition-all"
+                            className="flex items-center gap-3 md:gap-4 bg-surface-50/50 p-3 md:p-6 sm:p-8 rounded-3xl md:rounded-2xl border border-surface-100 group hover:bg-white transition-all"
                           >
                             <div
-                              className={`w-8 h-8 rounded-xl flex items-center justify-center shadow-premium-xs ${
+                              className={`w-8 h-8 rounded-3xl flex items-center justify-center shadow-premium-xs ${
                                 item.type === "Wajib" ||
                                 item.type === "Required"
                                   ? "bg-primary-500 text-white"
@@ -554,7 +554,7 @@ function PPDBContent() {
                     <motion.div key={i} className="group">
                       <details className="bg-white rounded-2xl border border-surface-100 shadow-premium-sm transition-all duration-300 open:shadow-premium-lg">
                         <summary className="p-5 md:p-6 flex items-center gap-4 md:gap-5 cursor-pointer list-none">
-                          <div className="w-8 h-8 md:w-10 md:h-10 bg-primary-50 rounded-xl flex items-center justify-center text-primary-600 group-hover:bg-primary-600 group-hover:text-white transition-all shrink-0">
+                          <div className="w-8 h-8 md:w-10 md:h-10 bg-primary-50 rounded-3xl flex items-center justify-center text-primary-600 group-hover:bg-primary-600 group-hover:text-white transition-all shrink-0">
                             <HelpCircle className="w-4 h-4 md:w-5 md:h-5" />
                           </div>
                           <span className="flex-1 font-black text-ink-950 tracking-tight text-sm md:text-base">
