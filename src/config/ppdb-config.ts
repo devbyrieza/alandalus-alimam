@@ -75,12 +75,12 @@ export const PPDB_CONFIG = {
   pricing: [
     {
       label: "Uang Pendaftaran",
-      amount: "Rp 200.000",
+      amount: "Rp 250.000",
       note: "Tidak dapat dikembalikan",
     },
     {
       label: "Uang Pangkal",
-      amount: "Rp 7.500.000",
+      amount: "Rp 7.650.000",
       note: "Pembayaran dapat dicicil",
     },
     {
@@ -90,7 +90,7 @@ export const PPDB_CONFIG = {
     },
     {
       label: "Total Daftar Ulang",
-      amount: "Rp 8.500.000",
+      amount: "Rp 8.650.000",
       note: "Uang Pangkal + SPP Bulan Pertama",
     },
   ],
