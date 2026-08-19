@@ -480,7 +480,7 @@ export default function DashboardPage() {
                   href="/dashboard/pendaftar/pembayaran-pendaftaran"
                   icon={CreditCard}
                   title="Biaya Pendaftaran"
-                  description="Selesaikan pembayaran administrasi sebesar Rp 200.000 untuk mengaktifkan formulir."
+                  description="Selesaikan pembayaran administrasi sebesar Rp 250.000 untuk mengaktifkan formulir."
                   step="01"
                   color="maroon"
                   disabled={false}

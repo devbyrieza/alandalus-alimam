@@ -167,7 +167,7 @@ export async function POST(request: NextRequest) {
       const totalPaid = existingPayments.reduce((acc, p) => acc + Number(p.jumlah), 0);
       const totalAccumulated = totalPaid + biaya;
 
-      let expectedTagihan = jenisPembayaran === "DAFTAR_ULANG" ? 7500000 : 1000000;
+      let expectedTagihan = jenisPembayaran === "DAFTAR_ULANG" ? 7650000 : 1000000;
       let dataLengkap: any = {};
       if (pendaftar.data_lengkap) {
         try {
@@ -293,7 +293,7 @@ export async function POST(request: NextRequest) {
           cicilan_ke: cicilanKe,
           keringanan_reason: keringananReason as any,
           jumlah: biaya,
-          total_tagihan: jenisPembayaran === "DAFTAR_ULANG" ? 7500000 : (jenisPembayaran === "SPP" ? 1000000 : biaya),
+          total_tagihan: jenisPembayaran === "DAFTAR_ULANG" ? 7650000 : (jenisPembayaran === "SPP" ? 1000000 : biaya),
           bukti_transfer_path: filePath,
           bukti_transfer_filename: safeFileName,
           status_pembayaran: "pending",
@@ -345,3 +345,4 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+

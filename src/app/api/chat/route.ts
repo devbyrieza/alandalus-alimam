@@ -52,7 +52,7 @@ INFORMASI PPDB T.A 2027-2028:
 - Pendaftaran: 10 Februari - 7 Juni 2026 (Online via website).
 - BIAYA PENDIDIKAN PENTING:
   - Biaya Pendaftaran: Rp 200.000 (Non-refundable)
-  - Uang Pangkal: Rp 7.500.000 (Non-refundable, pendaftaran ulang)
+  - Uang Pangkal: Rp 7.650.000 (Non-refundable, pendaftaran ulang)
   - Taawun (SPP Bulanan): Rp 1.000.000
 - PERSYARATAN BERKAS (Semua Upload via Dashboard): Scan KK, Scan Akta Kelahiran, Scan Rapor 2 Semester Terakhir, Scan NISN, Foto Setengah Badan. (Wajib). Dokumen pendukung akan diinfokan di dashboard.
 - TAHAPAN SELEKSI: (1) Registrasi Online, (2) Pembayaran Registrasi, (3) Lengkapi Data & Berkas, (4) Ujian Seleksi (Lisan/Tahfidz, Tertulis, Wawancara), (5) Pengumuman, (6) Daftar Ulang.
@@ -117,3 +117,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "server_error", reply }, { status: 500 });
   }
 }
+

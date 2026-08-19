@@ -124,7 +124,7 @@ export default function DaftarUlangTab() {
   const potonganSPP =
     keringanan?.potongan_spp ?? 0;
 
-  const expectedUangPangkal = 7500000 - potonganUP;
+  const expectedUangPangkal = 7650000 - potonganUP;
   const expectedSpp = 1000000 - potonganSPP;
   const expectedTagihan =
     subTab === "uang_pangkal" ? expectedUangPangkal : expectedSpp;
@@ -441,7 +441,7 @@ export default function DaftarUlangTab() {
           <div className="space-y-1 text-sm">
             <div className="flex justify-between">
               <span className="text-ink-500">Uang Pangkal Normal:</span>
-              <span className="font-bold text-ink-800">Rp 7.500.000</span>
+              <span className="font-bold text-ink-800">Rp 7.650.000</span>
             </div>
             {potonganUP > 0 && (
               <div className="flex justify-between items-center text-sm text-emerald-600">
@@ -916,3 +916,4 @@ export default function DaftarUlangTab() {
     </div>
   );
 }
+

@@ -123,7 +123,7 @@ const BERKAS_CONFIG: BerkasConfigItem[] = [
 const formatCurrency = (n: number) =>
   n === 0 ? "Rp 0" : `Rp ${n.toLocaleString("id-ID")}`;
 
-const MAX_UP = 7_500_000;
+const MAX_UP = 7_650_000;
 const MAX_SPP = 1_000_000;
 
 function parseKeringanan(raw: any): KeringananData | null {
@@ -892,3 +892,4 @@ export default function AdminBeasiswaBlock({
     </div>
   );
 }
+

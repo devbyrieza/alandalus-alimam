@@ -261,7 +261,7 @@ export async function PATCH(request: NextRequest) {
           where: { id: pembayaran.pendaftar_id },
           select: { data_lengkap: true },
         });
-        let expectedDU = 7500000;
+        let expectedDU = 7650000;
         if (pendaftarData?.data_lengkap) {
           try {
             const dl = typeof pendaftarData.data_lengkap === "string"
@@ -453,4 +453,5 @@ export async function DELETE(request: NextRequest) {
     );
   }
 }
+
 
