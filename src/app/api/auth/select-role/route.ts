@@ -52,15 +52,16 @@ export async function POST(request: NextRequest) {
         role: chosen_role,
         id: profile.id,
         full_name: profile.full_name,
+        username: profile.username,
       }),
       {
         path: "/",
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
-      domain: process.env.NEXT_PUBLIC_COOKIE_DOMAIN || undefined,
+        domain: process.env.NEXT_PUBLIC_COOKIE_DOMAIN || undefined,
         maxAge: 60 * 60 * 24 * 90,
-          expires: new Date(Date.now() + 60 * 60 * 24 * 90 * 1000), // 90 Days Persistent Session
+        expires: new Date(Date.now() + 60 * 60 * 24 * 90 * 1000), // 90 Days Persistent Session
       },
     );
 

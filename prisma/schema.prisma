@@ -3,6 +3,7 @@ generator client {
   engineType = "library"
 }
 
+
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
@@ -13,6 +14,7 @@ model Profile {
   id                    String                @id @default(uuid()) @db.Uuid
   role                  String                @default("pendaftar")
   secondary_roles       String[]              @default([])
+  username              String?               @unique
   full_name             String
     jenis_kelamin         String?
   email                 String?
