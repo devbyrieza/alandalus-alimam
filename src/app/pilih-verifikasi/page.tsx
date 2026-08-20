@@ -60,10 +60,7 @@ function PilihVerifikasiContent() {
       // Simulasi loading (agar terlihat profesional)
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      // Generate nomor pendaftaran
-      const nomorPendaftaran = generateNomorPendaftaran();
-
-      // Simpan data ke database (buat API endpoint /api/register/demo-direct)
+      // Simpan data ke database (API endpoint /api/register/demo-direct)
       const response = await fetch("/api/register/demo-direct", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -74,7 +71,6 @@ function PilihVerifikasiContent() {
           no_hp,
           jenis_kelamin,
           jenjang,
-          nomor_pendaftaran: nomorPendaftaran,
         }),
       });
 

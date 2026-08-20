@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { generateNomorPendaftaran } from "@/lib/utils/nomor-pendaftaran";
 
 export async function POST(request: NextRequest) {
   try {
@@ -11,7 +12,6 @@ export async function POST(request: NextRequest) {
       no_hp,
       jenis_kelamin,
       jenjang,
-      nomor_pendaftaran,
     } = body;
 
     // Validasi input
@@ -21,21 +21,13 @@ export async function POST(request: NextRequest) {
       !tanggal_lahir ||
       !no_hp ||
       !jenis_kelamin ||
-      !jenjang ||
-      !nomor_pendaftaran
+      !jenjang
     ) {
       return NextResponse.json(
         { error: "Semua field wajib diisi" },
         { status: 400 },
       );
     }
-
-    console.log(`\n🎭 MODE DEMO - Direct Registration (Bypass OTP)`);
-    console.log(`════════════════════════════════════════════════`);
-    console.log(`Nama: ${nama_lengkap}`);
-    console.log(`NIK: ${nik}`);
-    console.log(`Nomor: ${nomor_pendaftaran}`);
-    console.log(`════════════════════════════════════════════════\n`);
 
     // 1. Get tahun ajaran aktif
     const tahunAjaranData = await prisma.tahunAjaran.findFirst({
@@ -51,6 +43,20 @@ export async function POST(request: NextRequest) {
     }
 
     const tahun_ajaran_id = tahunAjaranData.id;
+
+    // Generate real sequential registration number
+    const nomor_pendaftaran = await generateNomorPendaftaran(
+      jenjang,
+      jenis_kelamin,
+      tahun_ajaran_id
+    );
+
+    console.log(`\n🎭 MODE DEMO - Direct Registration (Bypass OTP)`);
+    console.log(`════════════════════════════════════════════════`);
+    console.log(`Nama: ${nama_lengkap}`);
+    console.log(`NIK: ${nik}`);
+    console.log(`Nomor: ${nomor_pendaftaran}`);
+    console.log(`════════════════════════════════════════════════\n`);
 
     // 2. Cek apakah NIK sudah terdaftar di tahun ajaran ini (ignore soft-deleted)
     const existingPendaftar = await prisma.pendaftar.findFirst({
