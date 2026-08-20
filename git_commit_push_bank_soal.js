@@ -5,11 +5,13 @@ const fs = require('fs');
 const PROJECTS = [
   'alandalus-alimam',
   'alandalus-ululalbaab',
-  'template-demo'
+  'template-demo',
+  'andalus-pusat-putra',
+  'andalus-pusat-putri'
 ];
 
 const ROOT_DIR = 'C:\\Users\\itpua\\Dev\\Work\\al-andalus';
-const COMMIT_MSG = 'feat(ppdb): tambah portal bank soal panitia & form penilaian (penegasan syarat MA/SMA tanpa IL) serta sync tiering';
+const COMMIT_MSG = 'feat(ppdb): tambah portal bank soal panitia, form penilaian, penegasan syarat MA/SMA & responsive image fix';
 
 console.log('=== MULAI PROSES GIT COMMIT & PUSH LINTAS PROYEK ===\n');
 

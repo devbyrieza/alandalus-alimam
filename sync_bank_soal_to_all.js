@@ -9,40 +9,48 @@ console.log('=== EKSEKUSI TIERING FITUR PPDB SESUAI KATALOG BISNIS ===\n');
 console.log('1. [FLAGSHIP TIER - Al-Imam v17]: Full Interactive Portal, WA Share, Multi-Role Penguji & CBT (Selesai Aktif)');
 
 // 2. GOLD TIER (Template Demo / Al-Andalus Pusat - v15): Standard Interactive Portal & WA Share
-const goldPath = 'c:/Users/itpua/Dev/Work/al-andalus/template-demo';
-if (fs.existsSync(goldPath)) {
-  console.log('\n2. [GOLD TIER - Template Demo / Pusat v15]: Syncing Interactive Bank Soal & WA Share...');
-  const goldFiles = [
-    'src/lib/access-control.ts',
-    'middleware.ts',
-    'src/app/dashboard/admin/penilaian/page.tsx',
-    'src/app/dashboard/admin/bank-soal/page.tsx',
-    'src/app/panitia/bank-soal/page.tsx',
-    'src/app/dashboard/penguji/bank-soal/page.tsx',
-    'src/app/program/page.tsx',
-    'src/app/tentang/page.tsx',
-    'src/app/fasilitas/page.tsx',
-    'src/app/kegiatan/page.tsx',
-    'Bank_Soal_dan_Form_Penilaian_PPDB_AlImam_2027-2028.html',
-    'Bank_Soal_dan_Form_Penilaian_PPDB_AlImam_2027-2028.md'
-  ];
+const goldTargets = [
+  { name: 'Template Demo', path: 'c:/Users/itpua/Dev/Work/al-andalus/template-demo', domain: 'ppdb-demo.com', code: 'demo' },
+  { name: 'Al-Andalus Pusat Putra', path: 'c:/Users/itpua/Dev/Work/al-andalus/andalus-pusat-putra', domain: 'pesantren-alandalus.com', code: 'pusat-putra' },
+  { name: 'Al-Andalus Pusat Putri', path: 'c:/Users/itpua/Dev/Work/al-andalus/andalus-pusat-putri', domain: 'pesantren-alandalus-putri.com', code: 'pusat-putri' },
+];
 
-  goldFiles.forEach(relPath => {
-    const srcFile = path.join(sourceRoot, relPath);
-    const destFile = path.join(goldPath, relPath);
-    if (fs.existsSync(srcFile)) {
-      const destDir = path.dirname(destFile);
-      if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
+const goldFiles = [
+  'src/lib/access-control.ts',
+  'middleware.ts',
+  'src/app/dashboard/admin/penilaian/page.tsx',
+  'src/app/dashboard/admin/bank-soal/page.tsx',
+  'src/app/panitia/bank-soal/page.tsx',
+  'src/app/dashboard/penguji/bank-soal/page.tsx',
+  'src/app/program/page.tsx',
+  'src/app/tentang/page.tsx',
+  'src/app/fasilitas/page.tsx',
+  'src/app/kegiatan/page.tsx',
+  'Bank_Soal_dan_Form_Penilaian_PPDB_AlImam_2027-2028.html',
+  'Bank_Soal_dan_Form_Penilaian_PPDB_AlImam_2027-2028.md'
+];
 
-      let content = fs.readFileSync(srcFile, 'utf8');
-      content = content.replace(/Al-Imam/g, 'Demo')
-                       .replace(/alimam/g, 'demo')
-                       .replace(/pesantren-alimam.com/g, 'ppdb-demo.com');
-      fs.writeFileSync(destFile, content, 'utf8');
-      console.log(`  ✓ Synced Gold: ${relPath}`);
-    }
-  });
-}
+goldTargets.forEach(target => {
+  if (fs.existsSync(target.path)) {
+    console.log(`\n2. [GOLD TIER - ${target.name}]: Syncing Interactive Bank Soal, Responsive Fixes & WA Share...`);
+
+    goldFiles.forEach(relPath => {
+      const srcFile = path.join(sourceRoot, relPath);
+      const destFile = path.join(target.path, relPath);
+      if (fs.existsSync(srcFile)) {
+        const destDir = path.dirname(destFile);
+        if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
+
+        let content = fs.readFileSync(srcFile, 'utf8');
+        content = content.replace(/Al-Imam/g, 'Al-Andalus')
+                         .replace(/alimam/g, target.code)
+                         .replace(/pesantren-alimam.com/g, target.domain);
+        fs.writeFileSync(destFile, content, 'utf8');
+        console.log(`  ✓ Synced Gold (${target.name}): ${relPath}`);
+      }
+    });
+  }
+});
 
 // 3. SILVER TIER (Ulul Albaab - v14): Printable HTML/MD Documents & Base System Sync
 const silverPath = 'c:/Users/itpua/Dev/Work/al-andalus/alandalus-ululalbaab';
