@@ -212,7 +212,7 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
               className="relative hidden lg:grid grid-cols-1 md:grid-cols-2 gap-6 h-[600px]"
             >
               <div className="space-y-6 pt-12">
-                <div className="aspect-4/5 rounded-[3rem] overflow-hidden shadow-lg relative group border border-primary-100">
+                <div className="aspect-[4/5] max-h-[500px] w-full rounded-[3rem] overflow-hidden shadow-lg relative group border border-primary-100 bg-gradient-to-br from-primary-950 to-primary-900">
                   <Image
                     src="/images/masjid.webp"
                     alt="Masjid"
@@ -227,7 +227,7 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
                     </div>
                   </div>
                 </div>
-                <div className="aspect-square rounded-[3rem] overflow-hidden shadow-lg relative group border border-primary-100">
+                <div className="aspect-square rounded-[3rem] overflow-hidden shadow-lg relative group border border-primary-100 bg-gradient-to-br from-primary-950 to-primary-900">
                   <Image
                     src="/images/lapangan-minisoccer.webp"
                     alt="Lapangan"
@@ -244,7 +244,7 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
                 </div>
               </div>
               <div className="space-y-6">
-                <div className="aspect-square rounded-[3rem] overflow-hidden shadow-lg relative group border border-primary-100">
+                <div className="aspect-square rounded-[3rem] overflow-hidden shadow-lg relative group border border-primary-100 bg-gradient-to-br from-primary-950 to-primary-900">
                   <Image
                     src="/images/asrama.webp"
                     alt="Asrama"
@@ -259,7 +259,7 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
                     </div>
                   </div>
                 </div>
-                <div className="aspect-4/5 rounded-[3rem] overflow-hidden shadow-lg relative group border border-primary-100">
+                <div className="aspect-[4/5] max-h-[500px] w-full rounded-[3rem] overflow-hidden shadow-lg relative group border border-primary-100 bg-gradient-to-br from-primary-950 to-primary-900">
                   <Image
                     src="/images/kelas-dari-dalam.webp"
                     alt="Kelas"

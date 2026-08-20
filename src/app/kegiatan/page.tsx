@@ -123,16 +123,16 @@ const FeatureCard = ({
     {/* Image Side */}
     <div className={`relative ${index % 2 === 1 ? "lg:col-start-2" : ""}`}>
       <div
-        className={`aspect-4/3 rounded-[3.5rem] overflow-hidden shadow-lg relative group ${index % 2 === 0 ? "rotate-2" : "-rotate-2"} hover:rotate-0 transition-transform duration-700 border border-primary-100 p-4 bg-white`}
+        className={`aspect-[4/3] max-h-[480px] min-h-[300px] w-full rounded-[3.5rem] overflow-hidden shadow-lg relative group ${index % 2 === 0 ? "rotate-2" : "-rotate-2"} hover:rotate-0 transition-transform duration-700 border border-primary-100 p-4 bg-white`}
       >
-        <div className="relative w-full h-full rounded-[3rem] overflow-hidden">
+        <div className="relative w-full h-full rounded-[3rem] overflow-hidden bg-gradient-to-br from-primary-950 to-primary-900">
           <Image
             src={item.image}
             alt={item.title}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
         </div>
       </div>
 

@@ -190,20 +190,17 @@ export default function ProgramPage() {
                   viewport={{ once: true }}
                   className={`relative ${idx % 2 === 1 ? "lg:col-start-2" : ""}`}
                 >
-                  <div className="aspect-4/5 rounded-[3.5rem] overflow-hidden shadow-lg relative z-10 p-3 bg-white border border-primary-100">
-                    <div className="relative w-full h-full rounded-[2.8rem] overflow-hidden">
+                  <div className="aspect-[4/5] max-h-[520px] min-h-[350px] md:min-h-[440px] w-full rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden shadow-lg relative z-10 p-2.5 md:p-3 bg-white border border-primary-100">
+                    <div className="relative w-full h-full min-h-[330px] md:min-h-[420px] rounded-[2rem] md:rounded-[2.8rem] overflow-hidden bg-gradient-to-br from-primary-950 via-primary-900 to-primary-950">
                       <Image
                         src={program.image}
                         alt={program.fullName}
                         fill
                         priority={idx === 0}
                         sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover transition-transform duration-700 hover:scale-110 bg-surface-200 animate-pulse"
-                        onLoad={(e) =>
-                          e.currentTarget.classList.remove("animate-pulse")
-                        }
+                        className="object-cover transition-transform duration-700 hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
                       <div className="absolute bottom-10 left-10 right-10 z-20">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 text-white text-[10px] font-black uppercase tracking-widest mb-3">
