@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import Swal from "sweetalert2";
 import { exportToExcelProfessional, exportToPDF } from "@/lib/utils/export";
+import Link from "next/link";
 import {
   ClipboardEdit,
   MessageSquare,
@@ -22,6 +23,9 @@ import {
   ChevronRight,
   Search,
   Filter,
+  FileText,
+  Eye,
+  Share2,
 } from "lucide-react";
 
 // Removed basic xlsx imports in favor of professional utility
@@ -627,9 +631,241 @@ export default function ExaminerDashboard() {
             Monitoring Notifikasi
             {queueStats?.pending ? (
               <span className="bg-secondary-100 text-secondary-700 text-[10px] px-1.5 py-0.5 rounded-full ml-1">
+});
+        return selected;
+      },
+    });
+
+    if (result.isConfirmed) {
+      const skipped_stages = result.value || [];
+      try {
+        Swal.fire({
+          title: "Memproses...",
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+
+        const res = await fetch("/api/penilaian/skip", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            pendaftar_id: student.id,
+            skipped_stages,
+          }),
+        });
+
+        if (!res.ok) {
+          const errorJson = await res.json();
+          throw new Error(errorJson.error || "Gagal menyimpan konfigurasi skip");
+        }
+
+        Swal.fire({
+          title: "Sukses!",
+          text: "Konfigurasi bypass berhasil disimpan dan nilai telah dikalkulasi ulang.",
+          icon: "success",
+        });
+
+        fetchStudents();
+      } catch (err: any) {
+        console.error(err);
+        Swal.fire("Error", err.message || "Gagal menyimpan konfigurasi skip", "error");
+      }
+    }
+  };
+
+  const filteredStudents = (students || []).filter((s) => {
+    const name = (s?.nama_lengkap || "").toLowerCase();
+    const regNum = (s?.nomor_pendaftaran || "").toLowerCase();
+    const query = (searchQuery || "").toLowerCase();
+    return name.includes(query) || regNum.includes(query);
+  });
+
+  const handleExportExcel = async () => {
+    if (!students?.length)
+      return Swal.fire("Info", "Tidak ada data untuk diekspor", "info");
+
+    const getGrade = (score: number | undefined | null, type: string) => {
+      if (score == null) return "-";
+      if (type === "akademik") {
+        if (score >= 75) return "A";
+        if (score >= 60) return "B";
+        if (score >= 45) return "C";
+        if (score >= 30) return "D";
+        return "E";
+      }
+      if (type === "quran") {
+        if (score >= 80) return "A";
+        if (score >= 65) return "B";
+        if (score >= 50) return "C";
+        if (score >= 35) return "D";
+        return "E";
+      }
+      if (type === "kepribadian") {
+        if (score >= 85) return "A";
+        if (score >= 70) return "B";
+        if (score >= 55) return "C";
+        if (score >= 40) return "D";
+        return "E";
+      }
+      // Wawancara & Kesiapan
+      if (score >= 80) return "A";
+      if (score >= 65) return "B";
+      if (score >= 50) return "C";
+      if (score >= 35) return "D";
+      return "E";
+    };
+
+    const formatStudentForExport = (s: Student) => {
+      const ws = s.nilai_ujian?.nilai_wawancara_santri || 0;
+      const wo = s.nilai_ujian?.nilai_wawancara_ortu || 0;
+      const avgWawancara = ws > 0 && wo > 0 ? (ws + wo) / 2 : ws || wo || 0;
+
+      return [
+        s.nomor_pendaftaran || "-",
+        (s.nama_lengkap || "").toUpperCase(),
+        s.jenjang || "-",
+        getGrade(s.nilai_ujian?.score_quran, "quran"),
+        getGrade(s.nilai_ujian?.score_akademik, "akademik"),
+        getGrade(s.nilai_ujian?.score_kepribadian, "kepribadian"),
+        getGrade(avgWawancara, "wawancara"),
+        getGrade(s.nilai_ujian?.score_kesiapan, "kesiapan"),
+        s.nilai_ujian?.status_kelulusan || "BELUM LENGKAP",
+      ];
+    };
+
+    const header = [
+      "NP",
+      "Nama Santri",
+      "Jenjang",
+      "Al-Qur'an",
+      "Akademik",
+      "Kepribadian",
+      "Wawancara",
+      "Kesiapan",
+      "Keputusan",
+    ];
+
+    // Grouping by Jenjang
+    const jenjangGroups: Record<string, Student[]> = {};
+    students.forEach((s) => {
+      const j = s.jenjang || "LAINNYA";
+      if (!jenjangGroups[j]) jenjangGroups[j] = [];
+      jenjangGroups[j].push(s);
+    });
+
+    const sheets = [
+      {
+        name: "REKAP TOTAL",
+        title: "REKAPITULASI HASIL SELEKSI PENDAFTAR (SEMUA JENJANG)",
+        subTitle: `Tanggal Ekspor: ${new Date().toLocaleDateString("id-ID")}`,
+        header,
+        data: students.map(formatStudentForExport),
+      },
+    ];
+
+    // Add sheets for each Jenjang
+    Object.keys(jenjangGroups)
+      .sort()
+      .forEach((j) => {
+        sheets.push({
+          name: j.substring(0, 31), // Excel sheet name limit
+          title: `REKAPITULASI HASIL SELEKSI - ${j}`,
+          subTitle: `Jenjang: ${j} | Total: ${jenjangGroups[j].length} Peserta`,
+          header,
+          data: jenjangGroups[j].map(formatStudentForExport),
+        });
+      });
+
+    await exportToExcelProfessional({
+      fileName: `Rekap_Nilai_PPDB_Professional_${new Date().toISOString().split("T")[0]}`,
+      sheets,
+    });
+  };
+
+  return (
+    <div className="space-y-6 max-w-[1200px] mx-auto pb-10">
+      {/* Header Section */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-black text-ink-900 tracking-tight flex items-center gap-3">
+            <div className="p-4 bg-primary-600 rounded-3xl shadow-lg shadow-primary-600/20">
+              <ClipboardEdit className="w-6 h-6 text-white" />
+            </div>
+            Pusat <span className="text-primary-700">Penilaian</span>
+          </h1>
+          <p className="text-ink-500 font-medium mt-1">
+            Kelola skor ujian dan monitoring notifikasi pendaftar.
+          </p>
+        </div>
+
+        <div className="flex bg-ink-50 p-1 rounded-2xl border border-ink-100 w-fit">
+          <button
+            onClick={() => setActiveTab("data")}
+            className={`flex items-center gap-2 px-6 py-2.5 rounded-3xl text-sm font-bold transition-all ${
+              activeTab === "data"
+                ? "bg-white text-primary-700 shadow-clay-sm"
+                : "text-ink-500 hover:text-ink-800"
+            }`}
+          >
+            <Users className="w-4 h-4" />
+            Data Penilaian
+          </button>
+          <button
+            onClick={() => setActiveTab("system")}
+            className={`flex items-center gap-2 px-6 py-2.5 rounded-3xl text-sm font-bold transition-all ${
+              activeTab === "system"
+                ? "bg-white text-primary-700 shadow-clay-sm"
+                : "text-ink-500 hover:text-ink-800"
+            }`}
+          >
+            <Zap
+              className={`w-4 h-4 ${queueStats?.pending ? "text-secondary-500 animate-pulse" : ""}`}
+            />
+            Monitoring Notifikasi
+            {queueStats?.pending ? (
+              <span className="bg-secondary-100 text-secondary-700 text-[10px] px-1.5 py-0.5 rounded-full ml-1">
                 {queueStats.pending}
               </span>
             ) : null}
+          </button>
+        </div>
+      </div>
+      {/* BARU: Banner Akses Khusus & Share WA Bank Soal Panitia */}
+      <div className="bg-gradient-to-r from-teal-800 to-emerald-800 text-white p-5 rounded-3xl shadow-lg border border-teal-700 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          <div className="p-3.5 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 flex-shrink-0">
+            <FileText className="w-6 h-6 text-teal-200" />
+          </div>
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-teal-500/30 text-teal-200 text-[10px] font-bold rounded-full border border-teal-400/30 mb-1">
+              📌 AKSES & DISKUSI PANITIA PPDB 2027–2028
+            </div>
+            <h3 className="font-extrabold text-base text-white">Bank Soal & Form Penilaian Panitia</h3>
+            <p className="text-xs text-teal-100 max-w-xl">
+              Lihat seluruh soal ujian online, durasi pengerjaan, dan rubrik penguji Al-Qur'an & Wawancara, atau bagikan link ke grup WhatsApp panitia.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2.5 w-full md:w-auto flex-shrink-0">
+          <Link
+            href="/dashboard/admin/bank-soal"
+            className="flex-1 md:flex-none px-4 py-2.5 bg-white text-teal-800 hover:bg-teal-50 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all"
+          >
+            <Eye className="w-4 h-4 text-teal-700" /> Lihat Bank Soal
+          </Link>
+          <button
+            onClick={() => {
+              const message = encodeURIComponent(
+                `*Assalamu’alaikum Warahmatullahi Wabarakatuh*\n\nYth. Ustadz / Ustadzah Panitia PPDB Pesantren Al-Andalus Al-Imam,\n\nBerikut link akses khusus Bank Soal Seleksi & Form Penilaian Penguji untuk peninjauan & evaluasi TA 2027–2028:\n\n🔗 https://ppdb.pesantren-alimam.com/panitia/bank-soal\n\n_Mohon bantuan ustadz/ustadzah untuk meninjau relevansi soal dan rubrik wawancara._\n\nSyukron, Jazakumullahu Khairan. 🙏`
+              );
+              window.open(`https://wa.me/?text=${message}`, "_blank");
+            }}
+            className="flex-1 md:flex-none px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-2xl font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all"
+          >
+            <Share2 className="w-4 h-4" /> Bagikan ke WA Panitia
           </button>
         </div>
       </div>
