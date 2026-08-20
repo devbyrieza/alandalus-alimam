@@ -60,7 +60,7 @@ async function main() {
         jenjang: s.Kelas,
       }
     });
-    console.log(Berhasil menyuntik:  ());
+    console.log(`Berhasil menyuntik: ${s.Nama}`);
   }
   console.log('Selesai!');
 }
