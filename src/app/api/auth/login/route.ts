@@ -97,7 +97,7 @@ export async function POST(request: NextRequest) {
         );
       }
 
-            const cleanPhone = identifier.replace(/\D/g, "");
+      const cleanPhone = identifier.replace(/\D/g, "");
       let phoneVariations = [identifier];
       if (cleanPhone.startsWith("62")) {
         phoneVariations.push("0" + cleanPhone.substring(2));
