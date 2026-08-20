@@ -27,6 +27,7 @@ export default function ProfileSettings({ user }: { user: UserSession }) {
   const [fullName, setFullName] = useState(user?.full_name || "");
   const [phone, setPhone] = useState(user?.phone || "");
   const [username, setUsername] = useState(user?.username || "");
+  const [email, setEmail] = useState(user?.email || "");
 
   // UI State
   const [loading, setLoading] = useState(false);
@@ -64,7 +65,7 @@ export default function ProfileSettings({ user }: { user: UserSession }) {
       const res = await fetch("/api/profile/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ full_name: fullName, phone, username }),
+        body: JSON.stringify({ full_name: fullName, phone, username, email }),
       });
 
       const data = await res.json();
@@ -235,17 +236,27 @@ export default function ProfileSettings({ user }: { user: UserSession }) {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Email Saat Ini
+                {user?.role === "admin_super" && (
+                  <span className="ml-1 text-xs text-emerald-600 font-normal">(dapat diubah)</span>
+                )}
               </label>
               <input
-                type="text"
-                value={user?.email || ""}
-                disabled
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-500 cursor-not-allowed focus:ring-0"
+                type="email"
+                value={email}
+                onChange={user?.role === "admin_super" ? (e) => setEmail(e.target.value) : undefined}
+                disabled={user?.role !== "admin_super"}
+                placeholder="Email akun"
+                className={`w-full px-4 py-3 border border-gray-200 rounded-xl outline-none ${
+                  user?.role === "admin_super"
+                    ? "bg-white focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500"
+                    : "bg-gray-50 text-gray-500 cursor-not-allowed focus:ring-0"
+                }`}
               />
-              <p className="text-[10px] text-gray-400 mt-1.5 ml-1 italic">
-                Email tidak dapat diubah sendiri. Hubungi Admin Pusat jika ada
-                kesalahan data.
-              </p>
+              {user?.role !== "admin_super" && (
+                <p className="text-[10px] text-gray-400 mt-1.5 ml-1 italic">
+                  Email tidak dapat diubah sendiri. Hubungi Admin Pusat jika ada kesalahan data.
+                </p>
+              )}
             </div>
 
             <div className="pt-2 flex items-center justify-between">
