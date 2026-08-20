@@ -88,22 +88,37 @@ export async function POST(request: NextRequest) {
     // ═══════════════════════════════════════════
     else if (login_type === "admin") {
       const { email: rawEmail, password } = body;
-      const email = rawEmail?.trim()?.toLowerCase();
+      const identifier = rawEmail?.trim();
 
-      if (!email || !password) {
+      if (!identifier || !password) {
         return NextResponse.json(
-          { error: "Email dan Password wajib diisi" },
+          { error: "Username / Email / No. WA dan Password wajib diisi" },
           { status: 400 },
         );
       }
 
+            const cleanPhone = identifier.replace(/\D/g, "");
+      let phoneVariations = [identifier];
+      if (cleanPhone.startsWith("62")) {
+        phoneVariations.push("0" + cleanPhone.substring(2));
+      } else if (cleanPhone.startsWith("0")) {
+        phoneVariations.push("62" + cleanPhone.substring(1));
+        phoneVariations.push("+62" + cleanPhone.substring(1));
+      }
+
       const profile = await prisma.profile.findFirst({
-        where: { email },
+        where: {
+          OR: [
+            { email: { equals: identifier, mode: "insensitive" } },
+            { username: { equals: identifier, mode: "insensitive" } },
+            { phone: { in: phoneVariations } },
+          ],
+        },
       });
 
       if (!profile || !profile.password_hash) {
         return NextResponse.json(
-          { error: "Email atau Password salah" },
+          { error: "Username / Email / No. WA atau Password salah" },
           { status: 401 },
         );
       }
