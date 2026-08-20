@@ -1,7 +1,7 @@
 const XLSX = require('xlsx');
 const path = require('path');
 
-const fileV5 = path.join(__dirname, '../Data_Santri_Kepengasuhan/Data_Santri_AlImam_Kepengasuhan_2026-2027_V5.xlsx');
+const fileV5 = path.join(__dirname, '../Data_Santri_Kepengasuhan/Data_Santri_AlImam_Kepengasuhan_2026/2027_V5.xlsx');
 const fileV8 = path.join(__dirname, '../Data_Monitoring_PPDB_AlImam_Final_V8.xlsx');
 
 const wbV5 = XLSX.readFile(fileV5);

@@ -24,7 +24,7 @@ function inspectExcel(filename) {
   });
 }
 
-inspectExcel('Data_Santri_Kepengasuhan/Data_Santri_AlImam_Kepengasuhan_2026-2027_V5.xlsx');
+inspectExcel('Data_Santri_Kepengasuhan/Data_Santri_AlImam_Kepengasuhan_2026/2027_V5.xlsx');
 inspectExcel('Data_Monitoring_PPDB_AlImam_Final_V8.xlsx');
 inspectExcel('Form_Data_Santri_Baru_Mimbar.xlsx');
 inspectExcel('Data_CRM_AlImam_2026.xlsx');

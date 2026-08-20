@@ -3,7 +3,7 @@ const ExcelJS = require('exceljs');
 const fs = require('fs');
 const path = require('path');
 
-const fileV5 = path.join(__dirname, '../Data_Santri_Kepengasuhan/Data_Santri_AlImam_Kepengasuhan_2026-2027_V5.xlsx');
+const fileV5 = path.join(__dirname, '../Data_Santri_Kepengasuhan/Data_Santri_AlImam_Kepengasuhan_2026/2027_V5.xlsx');
 const wbV5 = XLSX.readFile(fileV5);
 
 const dataUtama = XLSX.utils.sheet_to_json(wbV5.Sheets['Data Utama']);

@@ -7,7 +7,7 @@ const jsonlPath = path.join(__dirname, '../pendaftar_db.jsonl');
 const lines = fs.readFileSync(jsonlPath, 'utf8').trim().split('\n').filter(Boolean);
 
 // Read V5 Kepengasuhan file for extra details (parents, etc.)
-const fileV5 = path.join(__dirname, '../Data_Santri_Kepengasuhan/Data_Santri_AlImam_Kepengasuhan_2026-2027_V5.xlsx');
+const fileV5 = path.join(__dirname, '../Data_Santri_Kepengasuhan/Data_Santri_AlImam_Kepengasuhan_2026/2027_V5.xlsx');
 const wbV5 = XLSX.readFile(fileV5);
 const dataUtama = XLSX.utils.sheet_to_json(wbV5.Sheets['Data Utama']);
 const dataOrtu = XLSX.utils.sheet_to_json(wbV5.Sheets['Data Orang Tua']);

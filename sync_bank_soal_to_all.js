@@ -26,8 +26,8 @@ const goldFiles = [
   'src/app/tentang/page.tsx',
   'src/app/fasilitas/page.tsx',
   'src/app/kegiatan/page.tsx',
-  'Bank_Soal_dan_Form_Penilaian_PPDB_AlImam_2027-2028.html',
-  'Bank_Soal_dan_Form_Penilaian_PPDB_AlImam_2027-2028.md'
+  'Bank_Soal_dan_Form_Penilaian_PPDB_AlImam_2027/2028.html',
+  'Bank_Soal_dan_Form_Penilaian_PPDB_AlImam_2027/2028.md'
 ];
 
 goldTargets.forEach(target => {
@@ -82,8 +82,8 @@ if (fs.existsSync(silverPath)) {
     }
   });
 
-  const docHtmlSrc = path.join(sourceRoot, 'Bank_Soal_dan_Form_Penilaian_PPDB_AlImam_2027-2028.html');
-  const docMdSrc = path.join(sourceRoot, 'Bank_Soal_dan_Form_Penilaian_PPDB_AlImam_2027-2028.md');
+  const docHtmlSrc = path.join(sourceRoot, 'Bank_Soal_dan_Form_Penilaian_PPDB_AlImam_2027/2028.html');
+  const docMdSrc = path.join(sourceRoot, 'Bank_Soal_dan_Form_Penilaian_PPDB_AlImam_2027/2028.md');
 
   if (fs.existsSync(docHtmlSrc)) {
     let htmlContent = fs.readFileSync(docHtmlSrc, 'utf8')
@@ -91,8 +91,8 @@ if (fs.existsSync(silverPath)) {
       .replace(/alimam/g, 'ululalbaab')
       .replace(/pesantren-alimam.com/g, 'pesantren-ululalbaab.com');
     
-    fs.writeFileSync(path.join(silverPath, 'Bank_Soal_dan_Form_Penilaian_PPDB_UlulAlbaab_2027-2028.html'), htmlContent, 'utf8');
-    console.log('  ✓ Generated Silver Document: Bank_Soal_dan_Form_Penilaian_PPDB_UlulAlbaab_2027-2028.html');
+    fs.writeFileSync(path.join(silverPath, 'Bank_Soal_dan_Form_Penilaian_PPDB_UlulAlbaab_2027/2028.html'), htmlContent, 'utf8');
+    console.log('  ✓ Generated Silver Document: Bank_Soal_dan_Form_Penilaian_PPDB_UlulAlbaab_2027/2028.html');
   }
 
   if (fs.existsSync(docMdSrc)) {
@@ -101,8 +101,8 @@ if (fs.existsSync(silverPath)) {
       .replace(/alimam/g, 'ululalbaab')
       .replace(/pesantren-alimam.com/g, 'pesantren-ululalbaab.com');
     
-    fs.writeFileSync(path.join(silverPath, 'Bank_Soal_dan_Form_Penilaian_PPDB_UlulAlbaab_2027-2028.md'), mdContent, 'utf8');
-    console.log('  ✓ Generated Silver Document: Bank_Soal_dan_Form_Penilaian_PPDB_UlulAlbaab_2027-2028.md');
+    fs.writeFileSync(path.join(silverPath, 'Bank_Soal_dan_Form_Penilaian_PPDB_UlulAlbaab_2027/2028.md'), mdContent, 'utf8');
+    console.log('  ✓ Generated Silver Document: Bank_Soal_dan_Form_Penilaian_PPDB_UlulAlbaab_2027/2028.md');
   }
 
   console.log('  ℹ️ Dokumen cetak siap. Fitur portal interaktif web diset sebagai materi Upsell (Upgrade ke Gold/Flagship) untuk Ulul Albaab.');
