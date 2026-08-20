@@ -40,11 +40,32 @@ if (fs.existsSync(goldPath)) {
   });
 }
 
-// 3. SILVER TIER (Ulul Albaab - v14): Printable HTML/MD Documents Only (Admin-Centric Strategy)
+// 3. SILVER TIER (Ulul Albaab - v14): Printable HTML/MD Documents & Base System Sync
 const silverPath = 'c:/Users/itpua/Dev/Work/al-andalus/alandalus-ululalbaab';
 if (fs.existsSync(silverPath)) {
-  console.log('\n3. [SILVER TIER - Ulul Albaab v14]: Generating Printable HTML & MD Documents (Dokumen Cetak Panitia)...');
+  console.log('\n3. [SILVER TIER - Ulul Albaab v14]: Syncing Base System & Generating Printable Documents...');
   
+  const silverBaseFiles = [
+    'src/lib/access-control.ts',
+    'src/app/dashboard/admin/penilaian/page.tsx'
+  ];
+
+  silverBaseFiles.forEach(relPath => {
+    const srcFile = path.join(sourceRoot, relPath);
+    const destFile = path.join(silverPath, relPath);
+    if (fs.existsSync(srcFile)) {
+      const destDir = path.dirname(destFile);
+      if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
+
+      let content = fs.readFileSync(srcFile, 'utf8');
+      content = content.replace(/Al-Imam/g, 'Ulul Albaab')
+                       .replace(/alimam/g, 'ululalbaab')
+                       .replace(/pesantren-alimam.com/g, 'pesantren-ululalbaab.com');
+      fs.writeFileSync(destFile, content, 'utf8');
+      console.log(`  ✓ Synced Silver Base: ${relPath}`);
+    }
+  });
+
   const docHtmlSrc = path.join(sourceRoot, 'Bank_Soal_dan_Form_Penilaian_PPDB_AlImam_2027-2028.html');
   const docMdSrc = path.join(sourceRoot, 'Bank_Soal_dan_Form_Penilaian_PPDB_AlImam_2027-2028.md');
 
@@ -68,7 +89,7 @@ if (fs.existsSync(silverPath)) {
     console.log('  ✓ Generated Silver Document: Bank_Soal_dan_Form_Penilaian_PPDB_UlulAlbaab_2027-2028.md');
   }
 
-  console.log('  ℹ️ Fitur portal interaktif web diset sebagai materi Upsell (Upgrade ke Gold/Flagship) untuk Ulul Albaab.');
+  console.log('  ℹ️ Dokumen cetak siap. Fitur portal interaktif web diset sebagai materi Upsell (Upgrade ke Gold/Flagship) untuk Ulul Albaab.');
 }
 
 console.log('\n=== EKSEKUSI TIERING SELESAI DENGAN SUKSES ===');
