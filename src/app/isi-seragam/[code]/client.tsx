@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Loader2, Shirt, Save, CheckCircle2, Ruler, Edit } from "lucide-react";
 
 export default function IsiSeragamClient({ code, pendaftar }: { code: string; pendaftar: any }) {
