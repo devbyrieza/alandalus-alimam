@@ -7,6 +7,7 @@ import { NextResponse, type NextRequest } from "next/server";
 function getSessionFromCookie(request: NextRequest): {
   role: string | null;
   id: string | null;
+  is_default_password?: boolean;
 } {
   const sessionCookie = request.cookies.get("app_session");
 
@@ -19,6 +20,7 @@ function getSessionFromCookie(request: NextRequest): {
     return {
       role: session.role || null,
       id: session.id || null,
+      is_default_password: session.is_default_password,
     };
   } catch {
     return { role: null, id: null };
@@ -26,7 +28,7 @@ function getSessionFromCookie(request: NextRequest): {
 }
 
 export async function middleware(request: NextRequest) {
-  const { role: userRole } = getSessionFromCookie(request);
+  const { role: userRole, is_default_password } = getSessionFromCookie(request);
   const { pathname } = request.nextUrl;
   const host = request.headers.get("host") || "";
 
@@ -116,6 +118,10 @@ export async function middleware(request: NextRequest) {
     if (!userRole || !allowedAdminRoles.includes(userRole)) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
+    
+    if (is_default_password && !pathname.includes("/profil")) {
+      return NextResponse.redirect(new URL("/dashboard/admin/profil", request.url));
+    }
   }
 
   // ═══════════════════════════════════════════
@@ -125,6 +131,10 @@ export async function middleware(request: NextRequest) {
     const allowedPengujiRoles = ["penguji", "penguji_calsan", "pewawancara_calsan", "pewawancara_cawalsan", "admin_super"];
     if (!userRole || !allowedPengujiRoles.includes(userRole)) {
       return NextResponse.redirect(new URL("/login", request.url));
+    }
+    
+    if (is_default_password && !pathname.includes("/profil")) {
+      return NextResponse.redirect(new URL("/dashboard/penguji/profil", request.url));
     }
   }
 

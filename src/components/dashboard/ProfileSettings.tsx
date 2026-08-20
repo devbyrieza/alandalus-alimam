@@ -88,8 +88,18 @@ export default function ProfileSettings({ user }: { user: UserSession }) {
       return;
     }
 
-    if (newPassword.length < 6) {
-      setError("Password baru minimal 6 karakter.");
+    if (newPassword.length < 8) {
+      setError("Password baru minimal 8 karakter.");
+      return;
+    }
+
+    const hasUpperCase = /[A-Z]/.test(newPassword);
+    const hasLowerCase = /[a-z]/.test(newPassword);
+    const hasNumbers = /\d/.test(newPassword);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(newPassword);
+
+    if (!hasUpperCase || !hasLowerCase || !hasNumbers || !hasSpecialChar) {
+      setError("Password baru harus mengandung huruf besar, huruf kecil, angka, dan karakter khusus.");
       return;
     }
 
