@@ -26,6 +26,7 @@ model Profile {
   plain_password        String?
   tanggal_lahir          DateTime?             @db.Date
   must_change_password   Boolean               @default(false)
+  photo_url              String?
   kesehatan_verified    DataKesehatan[]       @relation("KesehatanVerifiedBy")
   dokumen_verified      Dokumen[]             @relation("DokumenVerifiedBy")
   sessions_created      ExamSession[]         @relation("SessionCreatedBy")
@@ -738,3 +739,4 @@ model PengajuanBeasiswa {
 
   @@map("pengajuan_beasiswa")
 }
+
