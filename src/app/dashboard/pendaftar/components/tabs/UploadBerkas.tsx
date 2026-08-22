@@ -355,7 +355,7 @@ function DokumenCard({
                 target="_blank"
                 rel="noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-100 hover:bg-emerald-600 text-emerald-800 hover:text-white rounded-lg text-[10px] font-black border border-emerald-300 transition-colors shadow-sm"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-primary-100 hover:bg-primary-600 text-primary-800 hover:text-white rounded-lg text-[10px] font-black border border-primary-300 transition-colors shadow-sm"
                 title="Download Format Surat Keterangan Kesehatan Panitia"
               >
                 <Download className="w-3.5 h-3.5" />
@@ -369,7 +369,7 @@ function DokumenCard({
                 target="_blank"
                 rel="noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-100 hover:bg-emerald-600 text-emerald-800 hover:text-white rounded-lg text-[10px] font-black border border-emerald-300 transition-colors shadow-sm"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-primary-100 hover:bg-primary-600 text-primary-800 hover:text-white rounded-lg text-[10px] font-black border border-primary-300 transition-colors shadow-sm"
                 title="Download Format Pakta Integritas Panitia"
               >
                 <Download className="w-3.5 h-3.5" />
@@ -383,7 +383,7 @@ function DokumenCard({
                 target="_blank"
                 rel="noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-100 hover:bg-emerald-600 text-emerald-800 hover:text-white rounded-lg text-[10px] font-black border border-emerald-300 transition-colors shadow-sm"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-primary-100 hover:bg-primary-600 text-primary-800 hover:text-white rounded-lg text-[10px] font-black border border-primary-300 transition-colors shadow-sm"
                 title="Download Format Surat Pernyataan Orang Tua Panitia"
               >
                 <Download className="w-3.5 h-3.5" />
