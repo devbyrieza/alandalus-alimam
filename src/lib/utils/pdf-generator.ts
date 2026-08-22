@@ -1,4 +1,4 @@
-﻿import { jsPDF } from "jspdf";
+import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import { PDF_BRANDING } from "@/config/pdf-branding";
 
@@ -261,10 +261,9 @@ const drawFormalSignature = async (doc: jsPDF, y: number) => {
   const pageWidth = doc.internal.pageSize.getWidth();
   const { authority, assets, coords } = PDF_BRANDING;
   
-  // Reposisi tanda tangan: jika full_image (seperti Al-Imam), geser ke kiri agar tidak menabrak Kemenkumham.
-  // Jika programmatic (generik), tetap di kanan bawah seperti biasa.
+  // Reposisi tanda tangan ke kanan sesuai permintaan
   const isFullImage = PDF_BRANDING.template === "full_image";
-  const xBase = isFullImage ? 28 : pageWidth - coords.signature.margin_right;
+  const xBase = pageWidth - (isFullImage ? 70 : coords.signature.margin_right);
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10.5);
@@ -561,13 +560,13 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
   const colonX = margin + 20;
   doc.text("Lamp.", leftColX, y);
   doc.text(":", colonX, y);
-  doc.text("1 Lembar", colonX + 4, y);
+  doc.text("-", colonX + 4, y);
   y += 5; // Diubah dari 6 ke 5
   doc.text("Hal", leftColX, y);
   doc.text(":", colonX, y);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(0, 0, 0);
-  const halText = `Pemeriksaan Kesehatan Calon Santri Baru\n${institution.name}`;
+  const halText = `Pemeriksaan Kesehatan Calon Santri Baru\nPesantren Al Imam Al Islami`;
   doc.text(halText, colonX + 4, y);
   doc.setFont("helvetica", "normal");
 
@@ -588,7 +587,7 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
   doc.setFont("helvetica", "normal");
 
   y += 6; // Diubah dari 8 ke 6
-  const intro = `Sehubungan dengan kegiatan penerimaan calon santri baru ${institution.name} Tahun Pelajaran 2027/2028, kami selaku panitia membutuhkan pemeriksaan kesehatan bagi para calon santri sebagai salah satu bagian dari rangkaian proses seleksi.`;
+  const intro = `Sehubungan dengan kegiatan penerimaan calon santri baru Pesantren Al Imam Al Islami Tahun Pelajaran 2027/2028, kami selaku panitia membutuhkan pemeriksaan kesehatan bagi para calon santri sebagai salah satu bagian dari rangkaian proses seleksi.`;
   const introLines = doc.splitTextToSize(intro, contentW);
   doc.text(introLines, leftColX, y);
   y += introLines.length * 5 + 3; // Diubah dari 5.5 + 4 ke 5 + 3
@@ -599,12 +598,12 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
   doc.text(intro2Lines, leftColX, y);
   y += intro2Lines.length * 5 + 3;
 
-  // Data calon santri
+  // Data calon santri (Dikosongkan agar diisi manual)
   const fields1: [string, string][] = [
-    ["Nama", data.nama_lengkap ? toTitleCase(data.nama_lengkap) : ".................................................................................."],
-    ["Nomor Pendaftaran", data.nomor_pendaftaran || ".................................................................................."],
-    ["Tempat, Tanggal Lahir", (data.tempat_lahir && data.tanggal_lahir) ? `${toTitleCase(data.tempat_lahir)}, ${data.tanggal_lahir}` : ".................................................................................."],
-    ["Alamat", data.alamat || ".................................................................................."],
+    ["Nama", ".................................................................................."],
+    ["Nomor Pendaftaran", ".................................................................................."],
+    ["Tempat, Tanggal Lahir", ".................................................................................."],
+    ["Alamat", ".................................................................................."],
   ];
   for (const [label, value] of fields1) {
     doc.setFont("helvetica", "bold");
@@ -672,7 +671,7 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
   y += 7;
   doc.setFontSize(11);
   doc.text(
-    `CALON SANTRI BARU ${institution.name.toUpperCase()}`,
+    `CALON SANTRI BARU Pesantren Al Imam Al Islami`,
     pageWidth / 2,
     y,
     { align: "center" },

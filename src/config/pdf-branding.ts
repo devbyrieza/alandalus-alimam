@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Single Source of Truth for Institutional PDF Branding
  * "Locked" specifications for headers, backgrounds, and signatures.
  *
@@ -27,7 +27,7 @@ export const PDF_BRANDING = {
   assets: {
     logo: "/images/kop-surat.png",
     kop_full: "/images/kop-surat-full.jpg", // Gambar kop surat penuh (full letterhead)
-    stamp: "/images/stempel-pesantren.jpg", // Dikembalikan ke stempel lama bawaan (stempel-pesantren.jpg)
+    stamp: "/images/stempel-5.png", // Menggunakan stempel alimam baru (Stempel 5)
     signature: "/images/ttd-mudir.png",
   },
 
