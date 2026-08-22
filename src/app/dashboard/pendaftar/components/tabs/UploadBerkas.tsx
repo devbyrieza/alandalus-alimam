@@ -350,7 +350,7 @@ function DokumenCard({
             {/* Template Download Buttons */}
             {dokumen.key === "surat_kesehatan" && (
               <a
-                href="/templates/surat-kesehatan.pdf"
+                href="/templates/surat-kesehatan.pdf?v=2"
                 download="Surat_Keterangan_Kesehatan_AlAndalus.pdf"
                 target="_blank"
                 rel="noreferrer"
@@ -364,7 +364,7 @@ function DokumenCard({
             )}
             {(dokumen.key === "pakta_integritas_santri" || dokumen.key === "pakta_integritas_ortu" || dokumen.key === "pakta_integritas") && (
               <a
-                href="/templates/pakta-integritas.pdf"
+                href="/templates/pakta-integritas.pdf?v=2"
                 download="Pakta_Integritas_AlAndalus.pdf"
                 target="_blank"
                 rel="noreferrer"
@@ -378,7 +378,7 @@ function DokumenCard({
             )}
             {(dokumen.key === "pernyataan_bebas_negatif" || dokumen.key === "surat_pernyataan" || dokumen.key === "surat_pernyataan_ortu") && (
               <a
-                href="/templates/surat-pernyataan.pdf"
+                href="/templates/surat-pernyataan.pdf?v=2"
                 download="Surat_Pernyataan_Orang_Tua_AlAndalus.pdf"
                 target="_blank"
                 rel="noreferrer"
