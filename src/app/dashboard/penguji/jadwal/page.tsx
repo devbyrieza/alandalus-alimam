@@ -1,27 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import {
-  Calendar,
-  Clock,
-  MapPin,
-  Users,
-  FileText,
-  Loader2,
-  Plus,
-  Trash2,
-  CheckCircle,
-  XCircle,
-  Hash,
-  AlertTriangle,
-  Save,
-  Trophy,
-  AlertCircle,
-  Edit2,
-  CheckSquare,
-  Square,
-  Layers,
-} from "lucide-react";
+import { Calendar, Clock, MapPin, Users, FileText, Loader2, Plus, Trash2, CheckCircle, XCircle, Hash, AlertTriangle, Save, Trophy, AlertCircle, Edit2, CheckSquare, Square, Layers, , Sparkles } from "lucide-react";
 import Swal from "sweetalert2";
 
 // --- Types ---
@@ -2199,7 +2179,7 @@ export default function JadwalPengujiPage() {
                 <div className="bg-primary-600 rounded-2xl p-6 sm:p-8 shadow-lg shadow-primary-950/20 text-white flex items-start gap-3 relative overflow-hidden group">
                   <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -mr-10 -mt-10 blur-xl"></div>
                   <div className="w-8 h-8 bg-white/20 backdrop-blur-md rounded-3xl flex items-center justify-center shrink-0">
-                    <span className="text-sm">✨</span>
+                    <span className="text-sm"><Sparkles className="w-4 h-4 inline-block mr-1" /></span>
                   </div>
                   <div>
                     <p className="text-[10px] text-primary-100 font-black uppercase tracking-widest mb-0.5">

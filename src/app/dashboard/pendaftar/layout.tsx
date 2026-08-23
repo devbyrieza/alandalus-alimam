@@ -76,7 +76,7 @@ export default function DashboardLayout({
         );
 
         if (!statusRes.ok) {
-          console.error("❌ [Layout] Status fetch failed:", statusRes.status);
+          console.error(" [Layout] Status fetch failed:", statusRes.status);
           setNamaLengkap(fallbackName);
           setLoading(false);
           return;

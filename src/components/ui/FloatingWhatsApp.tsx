@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { X, MessageSquare } from "lucide-react";
 import { BRANDING } from "@/config/branding";
 
 const WA_NUMBER = "6285111524441";
@@ -58,7 +58,7 @@ export default function FloatingWhatsApp() {
               </span>
             </div>
             <p className="text-[0.75rem] font-bold text-ink-800 leading-snug pr-3">
-              Ada pertanyaan seputar PPDB? Chat kami! 😊
+              Ada pertanyaan seputar PPDB? Chat kami! <MessageSquare className="w-4 h-4 inline-block mr-1" />
             </p>
             <p className="text-[0.65rem] text-ink-500 mt-1">
               Biasanya membalas dalam beberapa menit

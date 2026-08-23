@@ -1552,7 +1552,7 @@ function AdminPendaftarContent() {
               <option value="all">Semua Tahun Ajaran</option>
               {tahunAjaranList.map((ta) => (
                 <option key={ta.id} value={ta.id}>
-                  {ta.nama} {ta.is_active && "⭐"}
+                  {ta.nama} {ta.is_active && ""}
                 </option>
               ))}
             </select>

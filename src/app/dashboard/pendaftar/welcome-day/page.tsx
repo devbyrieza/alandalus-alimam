@@ -1,45 +1,6 @@
 ﻿"use client";
 
-import {
-  Loader2,
-  Calendar,
-  CheckCircle2,
-  Save,
-  Users,
-  AlertCircle,
-  AlertTriangle,
-  Edit,
-  Clock,
-  MapPin,
-  Package,
-  MessageCircle,
-  Phone,
-  Shirt,
-  ChevronDown,
-  ChevronUp,
-  Star,
-  Info,
-  CheckSquare,
-  Square,
-  PartyPopper,
-  Bus,
-  UtensilsCrossed,
-  BookOpen,
-  Heart,
-  Home,
-  Tent,
-  Mic,
-  Presentation,
-  School,
-  Utensils,
-  Handshake,
-  HeartHandshake,
-  XCircle,
-  X,
-  FileCheck,
-  ChevronRight,
-  Download
-} from "lucide-react";
+import { Loader2, Calendar, CheckCircle2, Save, Users, AlertCircle, AlertTriangle, Edit, Clock, MapPin, Package, MessageCircle, Phone, Shirt, ChevronDown, ChevronUp, Star, Info, CheckSquare, Square, PartyPopper, Bus, UtensilsCrossed, BookOpen, Heart, Home, Tent, Mic, Presentation, School, Utensils, Handshake, HeartHandshake, XCircle, X, FileCheck, ChevronRight, Download } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -246,7 +207,7 @@ export default function WelcomeDayPage() {
       const result = await res.json();
       if (!res.ok) throw new Error(result.message || "Gagal menyimpan konfirmasi");
 
-      setMessage({ type: "success", text: "✅ Konfirmasi kehadiran Welcome Day berhasil disimpan! Terima kasih." });
+      setMessage({ type: "success", text: " Konfirmasi kehadiran Welcome Day berhasil disimpan! Terima kasih." });
       setIsEditing(false);
     } catch (error: any) {
       setMessage({ type: "error", text: error.message || "Terjadi kesalahan. Silakan coba lagi." });
@@ -400,7 +361,7 @@ export default function WelcomeDayPage() {
         <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-2xl px-4 py-3">
           <CheckCircle2 className="w-5 h-5 text-[#550000] flex-shrink-0" />
           <div className="flex-1">
-            <p className="text-sm font-black text-[#550000]">✅ Ukuran Seragam Sudah Terisi</p>
+            <p className="text-sm font-black text-[#550000]"><CheckCircle2 className="w-4 h-4 inline-block mr-1" /> Ukuran Seragam Sudah Terisi</p>
             <p className="text-xs text-[#550000] mt-0.5">
               Baju: <strong>{seragamStatus.baju}</strong> · Celana/Rok: <strong>{seragamStatus.celana}</strong> · Almamater: <strong>{seragamStatus.almamater}</strong>
             </p>

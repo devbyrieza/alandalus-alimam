@@ -418,7 +418,7 @@ export default function DaftarUlangTab() {
                       ? "✓ Verified"
                       : p.status_pembayaran === "rejected"
                       ? "✗ Ditolak"
-                      : "⏰ Pending"}
+                      : " Pending"}
                   </span>
                 </div>
               </div>

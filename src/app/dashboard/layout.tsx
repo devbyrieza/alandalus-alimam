@@ -5,6 +5,8 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 import IdleTimeoutTracker from "@/components/auth/IdleTimeoutTracker";
+import { AlertTriangle, BookOpen, Target, CheckCircle2, XCircle } from "lucide-react";
+
 
 export default function DashboardLayout({
   children,
@@ -13,7 +15,7 @@ export default function DashboardLayout({
 }) {
   return (
     <>
-      {/* 🚨 Idle Timeout Tracker - Auto logout setelah 24 jam */}
+      {/* <AlertTriangle className="w-4 h-4 inline-block mr-1" /> Idle Timeout Tracker - Auto logout setelah 24 jam */}
       <IdleTimeoutTracker />
 
       {/* Dashboard Content */}
@@ -23,7 +25,7 @@ export default function DashboardLayout({
 }
 
 // ============================================
-// 📖 CATATAN:
+// <BookOpen className="w-4 h-4 inline-block mr-1" /> CATATAN:
 // ============================================
 //
 // 1. IdleTimeoutTracker akan otomatis track user activity
@@ -33,14 +35,14 @@ export default function DashboardLayout({
 // 3. User bisa klik "Saya Masih Di Sini" untuk reset timer
 //
 // ============================================
-// 🎯 AKTIVITAS YANG DI-TRACK:
+// <Target className="w-4 h-4 inline-block mr-1" /> AKTIVITAS YANG DI-TRACK:
 // ============================================
 //
-// ✅ Klik mouse
-// ✅ Gerak mouse
-// ✅ Tekan keyboard
-// ✅ Scroll halaman
-// ✅ Touch di mobile
+// <CheckCircle2 className="w-4 h-4 inline-block mr-1" /> Klik mouse
+// <CheckCircle2 className="w-4 h-4 inline-block mr-1" /> Gerak mouse
+// <CheckCircle2 className="w-4 h-4 inline-block mr-1" /> Tekan keyboard
+// <CheckCircle2 className="w-4 h-4 inline-block mr-1" /> Scroll halaman
+// <CheckCircle2 className="w-4 h-4 inline-block mr-1" /> Touch di mobile
 //
-// ❌ Buka tab lain (tidak dihitung aktivitas)
-// ❌ Minimize browser (tidak dihitung aktivitas)
+// <XCircle className="w-4 h-4 inline-block mr-1" /> Buka tab lain (tidak dihitung aktivitas)
+// <XCircle className="w-4 h-4 inline-block mr-1" /> Minimize browser (tidak dihitung aktivitas)
