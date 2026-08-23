@@ -232,7 +232,32 @@ export default function DaftarUlangTab() {
         <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">
           Pilih Jenis Pembayaran Daftar Ulang
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {/* Header Tabs Navigation */}
+        <div className="flex bg-slate-100/50 p-1 rounded-2xl mb-6">
+          <button
+            onClick={() => setSubTab("uang_pangkal")}
+            className={`flex-1 py-3 px-4 text-sm font-bold rounded-xl transition-all ${
+              subTab === "uang_pangkal"
+                ? "bg-white text-primary-700 shadow-sm border border-slate-200/60"
+                : "text-slate-500 hover:text-slate-700"
+            }`}
+          >
+            Uang Pangkal & Seragam
+          </button>
+        </div>
+
+        {/* Info SPP Banner */}
+        <div className="mb-6 bg-blue-50 border border-blue-200 rounded-2xl p-4 flex gap-3 text-blue-800">
+          <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+          <div>
+            <h4 className="font-bold text-sm">Informasi Pembayaran SPP</h4>
+            <p className="text-xs mt-1">
+              Berdasarkan kebijakan sistem terintegrasi, tagihan pembayaran SPP Bulan Pertama tidak ditagihkan di web PPDB ini. Tagihan SPP akan dikirimkan melalui <strong>Aplikasi Keuangan PSP Mobile / Sistem Siakad</strong> menjelang kedatangan santri ke asrama. Silakan lunasi tagihan Uang Pangkal Anda di bawah ini.
+            </p>
+          </div>
+        </div>
+
+        <div className="hidden">
           {/* Tab: Uang Pangkal */}
           <button
             type="button"
