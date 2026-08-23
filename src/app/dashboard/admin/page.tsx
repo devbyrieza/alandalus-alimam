@@ -32,7 +32,7 @@ const StatWidget = ({ label, value, icon: Icon, color, trend, breakdown, highlig
       }`} aria-hidden="true" />
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-8">
-          <div className={`icon-box w-14 h-14 rounded-2xl bg-linear-to-br ${colorMap[color] || colorMap.blue} text-white shadow-xl group-hover:scale-110 group-hover:rotate-3 duration-500`}>
+          <div className={`icon-box w-14 h-14 rounded-2xl bg-linear-to-br ${colorMap[color] || colorMap.blue} text-white shadow-2xl shadow-primary/30 group-hover:scale-110 group-hover:rotate-3 duration-500`}>
             <Icon className="w-6 h-6" />
           </div>
           {trend && (
@@ -104,7 +104,7 @@ const StatWidget = ({ label, value, icon: Icon, color, trend, breakdown, highlig
             <button
               onClick={(e) => { e.stopPropagation(); onPromote(); }}
               disabled={isPromoting}
-              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl font-black text-xs uppercase tracking-widest transition-all shadow-lg shadow-emerald-600/20 hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl font-black text-xs uppercase tracking-widest transition-all shadow-2xl shadow-primary/30  shadow-primary/20 shadow-emerald-600/20 hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isPromoting ? (
                 <>
@@ -403,33 +403,33 @@ export default function AdminDashboardPage() {
               <Activity className="w-4 h-4 text-secondary-300" />
               <span className="text-white">Status Operasional: Aktif</span>
             </div>
-            <h2 className="text-3xl sm:text-2xl md:text-4xl lg:text-6xl font-black mb-4 sm:mb-6 tracking-tighter leading-tight text-white drop-shadow-md">
+            <h2 className="text-3xl sm:text-2xl md:text-4xl lg:text-6xl font-black mb-4 sm:mb-6 tracking-tighter leading-tight text-white drop-shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
               Pantau <span className="text-secondary-300">Pendaftaran</span>
             </h2>
             <div className="flex items-center gap-8 sm:gap-12 mt-8 lg:mt-12">
               <div>
-                <span className="text-3xl sm:text-3xl md:text-5xl font-black text-white drop-shadow-lg">{stats.total_pendaftar}</span>
+                <span className="text-3xl sm:text-3xl md:text-5xl font-black text-white drop-shadow-2xl shadow-primary/30  shadow-primary/20 ">{stats.total_pendaftar}</span>
                 <p className="text-[10px] sm:text-[11px] font-black text-primary-200/70 uppercase tracking-widest mt-2">Pendaftar</p>
               </div>
               <div className="w-px h-12 sm:h-16 bg-white/20" />
               <div>
-                <span className="text-3xl sm:text-3xl md:text-5xl font-black text-secondary-300 drop-shadow-lg">{stats.sudah_bayar}</span>
+                <span className="text-3xl sm:text-3xl md:text-5xl font-black text-secondary-300 drop-shadow-2xl shadow-primary/30  shadow-primary/20 ">{stats.sudah_bayar}</span>
                 <p className="text-[10px] sm:text-[11px] font-black text-primary-200/70 uppercase tracking-widest mt-2">Bayar Pendaftaran</p>
               </div>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 w-full lg:w-auto">
-             <div className="bg-white/10 backdrop-blur-xl p-6 sm:p-8 sm:p-6 lg:p-5 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-white/20 shadow-xl flex flex-col items-center group hover:bg-white/15 transition-all">
+             <div className="bg-white/10 backdrop-blur-xl p-6 sm:p-8 sm:p-6 lg:p-5 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-white/20 shadow-2xl shadow-primary/30 flex flex-col items-center group hover:bg-white/15 transition-all">
                 <p className="text-[9px] sm:text-[10px] font-black text-white/80 uppercase tracking-widest mb-2 sm:mb-4 text-center group-hover:text-white transition-colors">Diterima</p>
-                <p className="text-2xl sm:text-2xl md:text-4xl font-black text-emerald-300 drop-shadow-lg">{stats.diterima}</p>
+                <p className="text-2xl sm:text-2xl md:text-4xl font-black text-emerald-300 drop-shadow-2xl shadow-primary/30  shadow-primary/20 ">{stats.diterima}</p>
              </div>
-             <div className="bg-white/10 backdrop-blur-xl p-6 sm:p-8 sm:p-6 lg:p-5 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-white/20 shadow-xl flex flex-col items-center group hover:bg-white/15 transition-all">
+             <div className="bg-white/10 backdrop-blur-xl p-6 sm:p-8 sm:p-6 lg:p-5 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-white/20 shadow-2xl shadow-primary/30 flex flex-col items-center group hover:bg-white/15 transition-all">
                 <p className="text-[9px] sm:text-[10px] font-black text-white/80 uppercase tracking-widest mb-2 sm:mb-4 text-center group-hover:text-white transition-colors">Proses Daftar Ulang</p>
-                <p className="text-2xl sm:text-2xl md:text-4xl font-black text-secondary-300 drop-shadow-lg">{stats.daftar_ulang_sedang}</p>
+                <p className="text-2xl sm:text-2xl md:text-4xl font-black text-secondary-300 drop-shadow-2xl shadow-primary/30  shadow-primary/20 ">{stats.daftar_ulang_sedang}</p>
              </div>
-             <div className="bg-white/10 backdrop-blur-xl p-6 sm:p-8 sm:p-6 lg:p-5 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-white/20 shadow-xl flex flex-col items-center group hover:bg-white/15 transition-all md:col-span-2">
+             <div className="bg-white/10 backdrop-blur-xl p-6 sm:p-8 sm:p-6 lg:p-5 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-white/20 shadow-2xl shadow-primary/30 flex flex-col items-center group hover:bg-white/15 transition-all md:col-span-2">
                 <p className="text-[9px] sm:text-[10px] font-black text-white/80 uppercase tracking-widest mb-2 sm:mb-4 text-center group-hover:text-white transition-colors">Lunas Daftar Ulang</p>
-                <p className="text-2xl sm:text-2xl md:text-4xl font-black text-emerald-300 drop-shadow-lg">{stats.daftar_ulang_selesai}</p>
+                <p className="text-2xl sm:text-2xl md:text-4xl font-black text-emerald-300 drop-shadow-2xl shadow-primary/30  shadow-primary/20 ">{stats.daftar_ulang_selesai}</p>
              </div>
           </div>
         </div>
@@ -516,7 +516,7 @@ export default function AdminDashboardPage() {
             <div className="space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between p-6 sm:p-8 sm:p-6 bg-secondary-50 rounded-2xl sm:rounded-3xl border border-secondary-200 hover:border-primary-200 transition-all cursor-default group/item gap-4">
                 <div className="flex items-center gap-4 sm:gap-5">
-                  <div className="w-12 h-12 rounded-2xl bg-white shadow-md flex items-center justify-center text-primary-600 transition-transform group-hover/item:scale-110 shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-white shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 flex items-center justify-center text-primary-600 transition-transform group-hover/item:scale-110 shrink-0">
                     <Users className="w-6 h-6" />
                   </div>
                   <div>
@@ -531,7 +531,7 @@ export default function AdminDashboardPage() {
               </div>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between p-6 sm:p-8 sm:p-6 bg-secondary-50 rounded-2xl sm:rounded-3xl border border-secondary-200 hover:border-emerald-200 transition-all cursor-default group/item gap-4">
                 <div className="flex items-center gap-4 sm:gap-5">
-                  <div className="w-12 h-12 rounded-2xl bg-white shadow-md flex items-center justify-center text-[#550000] transition-transform group-hover/item:scale-110 shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-white shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 flex items-center justify-center text-[#550000] transition-transform group-hover/item:scale-110 shrink-0">
                     <Wallet className="w-6 h-6" />
                   </div>
                   <div>

@@ -178,7 +178,7 @@ export default function BroadcastPage() {
       <div className="bg-white rounded-2xl shadow-clay-lg p-5 md:p-8 border border-white/40 overflow-hidden relative">
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary-600/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
         <div className="relative flex items-center gap-6">
-          <div className="p-6 sm:p-8 bg-gradient-to-br from-primary-600 to-[#7a0000] rounded-2xl shadow-lg shadow-primary-600/20">
+          <div className="p-6 sm:p-8 bg-gradient-to-br from-primary-600 to-[#7a0000] rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary-600/20">
             <Bell className="w-8 h-8 text-white" />
           </div>
           <div>
@@ -347,7 +347,7 @@ export default function BroadcastPage() {
               <span className="text-[10px] font-black uppercase text-ink-400 tracking-widest block mb-3">
                 Pratinjau Pesan (Contoh)
               </span>
-              <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-md text-sm whitespace-pre-wrap font-medium text-ink-800 leading-relaxed border border-white/80">
+              <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 text-sm whitespace-pre-wrap font-medium text-ink-800 leading-relaxed border border-white/80">
                 {previewMessage("Muhammad Al-Fatih")}
               </div>
             </div>
@@ -355,7 +355,7 @@ export default function BroadcastPage() {
             <button
               onClick={handleSendBroadcast}
               disabled={sending || selectedIds.length === 0 || !message}
-              className="w-full py-4 bg-gradient-to-br from-primary-600 to-[#7a0000] text-white rounded-2xl font-black shadow-lg shadow-primary-600/20 hover:shadow-primary-600/30 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:shadow-none"
+              className="w-full py-4 bg-gradient-to-br from-primary-600 to-[#7a0000] text-white rounded-2xl font-black shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary-600/20 hover:shadow-primary-600/30 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:shadow-none"
             >
               {sending ? (
                 <>

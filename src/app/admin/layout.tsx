@@ -22,7 +22,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <nav className="p-4 space-y-2">
           <Link 
             href="/admin/kartu-jajan" 
-            className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${pathname.includes('kartu-jajan') ? 'bg-gold-500 text-slate-900 font-bold' : 'text-slate-300 hover:bg-slate-800 hover:text-white'}`}
+            className={`flex items-center gap-3 px-4 py-3 rounded-2xl transition-all ${pathname.includes('kartu-jajan') ? 'bg-gold-500 text-slate-900 font-bold' : 'text-slate-300 hover:bg-slate-800 hover:text-white'}`}
           >
             <Printer className="w-5 h-5" />
             Cetak Kartu Jajan
@@ -30,7 +30,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           
           <Link 
             href="/dashboard" 
-            className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all mt-8"
+            className="flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all mt-8"
           >
             <ArrowLeft className="w-5 h-5" />
             Kembali ke Portal

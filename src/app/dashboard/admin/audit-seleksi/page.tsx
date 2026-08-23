@@ -231,7 +231,7 @@ export default function AuditSeleksiPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-black text-ink-900 tracking-tight flex items-center gap-3">
-            <div className="p-4.5 bg-primary-600 rounded-2xl shadow-lg shadow-primary-600/20">
+            <div className="p-4.5 bg-primary-600 rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary-600/20">
               <Activity className="w-6 h-6 text-white" />
             </div>
             Audit <span className="text-primary-700">Hasil Seleksi</span>
@@ -308,21 +308,21 @@ export default function AuditSeleksiPage() {
           <Button
             onClick={() => handleBatchPublish("accepted")}
             disabled={selectedIds.length === 0 || isPublishing}
-            className="flex-1 lg:flex-none bg-[#550000] hover:bg-[#550000] text-white rounded-3xl font-black text-[11px] px-6 py-2.5 shadow-lg shadow-emerald-200 transition-all active:scale-95"
+            className="flex-1 lg:flex-none bg-[#550000] hover:bg-[#550000] text-white rounded-3xl font-black text-[11px] px-6 py-2.5 shadow-2xl shadow-primary/30  shadow-primary/20 shadow-emerald-200 transition-all active:scale-95"
           >
             DITERIMA ({selectedIds.length})
           </Button>
           <Button
             onClick={() => handleBatchPublish("cadangan")}
             disabled={selectedIds.length === 0 || isPublishing}
-            className="flex-1 lg:flex-none bg-secondary-500 hover:bg-secondary-600 text-white rounded-3xl font-black text-[11px] px-6 py-2.5 shadow-lg shadow-secondary-200 transition-all active:scale-95"
+            className="flex-1 lg:flex-none bg-secondary-500 hover:bg-secondary-600 text-white rounded-3xl font-black text-[11px] px-6 py-2.5 shadow-2xl shadow-primary/30  shadow-primary/20 shadow-secondary-200 transition-all active:scale-95"
           >
             CADANGAN
           </Button>
           <Button
             onClick={() => handleBatchPublish("rejected")}
             disabled={selectedIds.length === 0 || isPublishing}
-            className="flex-1 lg:flex-none bg-rose-600 hover:bg-rose-700 text-white rounded-3xl font-black text-[11px] px-6 py-2.5 shadow-lg shadow-rose-200 transition-all active:scale-95"
+            className="flex-1 lg:flex-none bg-rose-600 hover:bg-rose-700 text-white rounded-3xl font-black text-[11px] px-6 py-2.5 shadow-2xl shadow-primary/30  shadow-primary/20 shadow-rose-200 transition-all active:scale-95"
           >
             TOLAK
           </Button>
@@ -437,7 +437,7 @@ export default function AuditSeleksiPage() {
                         return (
                           <td key={i} className="px-3 py-4 text-center">
                             <div className="flex flex-col items-center gap-1">
-                              <span className={`${g.color} text-white text-[10px] font-black w-6 h-6 flex items-center justify-center rounded-2xl shadow-md`}>
+                              <span className={`${g.color} text-white text-[10px] font-black w-6 h-6 flex items-center justify-center rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10`}>
                                 {g.label}
                               </span>
                               <span className="text-[9px] font-bold text-ink-300">
@@ -471,7 +471,7 @@ export default function AuditSeleksiPage() {
                           };
                           const meta = labels[s] || { l: s.toUpperCase() || "UNKNOWN", c: "text-ink-400 bg-ink-50 border-ink-100" };
                           return (
-                            <span className={`px-3 py-1 rounded-full text-[9px] font-black border uppercase shadow-md ${meta.c}`}>
+                            <span className={`px-3 py-1 rounded-full text-[9px] font-black border uppercase shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 ${meta.c}`}>
                               {meta.l}
                             </span>
                           );
@@ -488,7 +488,7 @@ export default function AuditSeleksiPage() {
       
       {/* Legend & Help */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-        <div className="bg-primary-950 rounded-3xl p-5 md:p-8 text-white relative overflow-hidden group shadow-xl shadow-primary-900/20">
+        <div className="bg-primary-950 rounded-3xl p-5 md:p-8 text-white relative overflow-hidden group shadow-2xl shadow-primary/30  shadow-primary-900/20">
           <div className="absolute top-0 right-0 p-5 md:p-8 opacity-10 group-hover:rotate-12 transition-transform duration-700">
             <Activity className="w-40 h-40 text-white" />
           </div>
@@ -498,15 +498,15 @@ export default function AuditSeleksiPage() {
             </h3>
             <div className="space-y-3 text-sm font-medium leading-relaxed">
               <p className="flex items-start gap-2 !text-white">
-                <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5 shrink-0 shadow-md shadow-emerald-900/50" />
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5 shrink-0 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 shadow-emerald-900/50" />
                 <span><b className="font-extrabold text-emerald-400">DITERIMA:</b> Quran Grade A, maksimal satu Grade C di komponen pendukung.</span>
               </p>
               <p className="flex items-start gap-2 !text-white">
-                <div className="w-1.5 h-1.5 rounded-full bg-secondary-400 mt-1.5 shrink-0 shadow-md shadow-secondary-900/50" />
+                <div className="w-1.5 h-1.5 rounded-full bg-secondary-400 mt-1.5 shrink-0 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 shadow-secondary-900/50" />
                 <span><b className="font-extrabold text-secondary-400">CADANGAN:</b> Quran Grade B, atau Wawancara Santri Grade B.</span>
               </p>
               <p className="flex items-start gap-2 !text-white">
-                <div className="w-1.5 h-1.5 rounded-full bg-rose-400 mt-1.5 shrink-0 shadow-md shadow-rose-900/50" />
+                <div className="w-1.5 h-1.5 rounded-full bg-rose-400 mt-1.5 shrink-0 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 shadow-rose-900/50" />
                 <span><b className="font-extrabold text-rose-400">DITOLAK:</b> Terdapat Grade D/E, atau Quran/Wawancara Santri Grade C.</span>
               </p>
             </div>
@@ -527,7 +527,7 @@ export default function AuditSeleksiPage() {
             </p>
           </div>
           <div className="mt-8 flex items-center gap-4 p-6 sm:p-8 bg-primary-50 rounded-2xl border border-primary-100">
-             <div className="p-3 bg-white rounded-3xl shadow-md">
+             <div className="p-3 bg-white rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
                 <RefreshCcw className="w-5 h-5 text-primary-600" />
              </div>
              <p className="text-[11px] font-bold text-primary-800 leading-snug">

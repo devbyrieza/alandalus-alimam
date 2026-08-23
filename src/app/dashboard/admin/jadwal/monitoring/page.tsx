@@ -209,7 +209,7 @@ export default function MonitoringJadwalPage() {
             {/* Simplified Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-primary-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-primary-600/20">
+                    <div className="w-12 h-12 bg-primary-600 rounded-2xl flex items-center justify-center text-white shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary-600/20">
                         <Calendar className="w-6 h-6" />
                     </div>
                     <div>
@@ -254,7 +254,7 @@ export default function MonitoringJadwalPage() {
                 <motion.div 
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
-                    className="bg-rose-50 border border-rose-200 rounded-2xl p-5 flex items-start gap-4 shadow-md shadow-rose-100"
+                    className="bg-rose-50 border border-rose-200 rounded-2xl p-5 flex items-start gap-4 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 shadow-rose-100"
                 >
                     <div className="w-10 h-10 bg-rose-100 rounded-3xl flex items-center justify-center text-rose-600 shrink-0">
                         <XCircle className="w-6 h-6" />
@@ -294,13 +294,13 @@ export default function MonitoringJadwalPage() {
                                 placeholder="Cari santri/penguji Al-Qur'an..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
-                                className="w-full bg-white border border-slate-200 rounded-2xl pl-10 pr-4 py-2 text-sm focus:ring-4 focus:ring-primary-500/5 focus:border-primary-500 outline-none font-bold h-12 transition-all shadow-md"
+                                className="w-full bg-white border border-slate-200 rounded-2xl pl-10 pr-4 py-2 text-sm focus:ring-4 focus:ring-primary-500/5 focus:border-primary-500 outline-none font-bold h-12 transition-all shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10"
                             />
                         </div>
                         <select 
                             value={filterJenjang}
                             onChange={(e) => setFilterJenjang(e.target.value)}
-                            className="w-32 bg-white border border-slate-200 rounded-2xl px-3 py-2 text-[11px] font-black text-ink-600 focus:ring-4 focus:ring-primary-500/5 focus:border-primary-500 outline-none h-12 shadow-md appearance-none text-center uppercase tracking-wider"
+                            className="w-32 bg-white border border-slate-200 rounded-2xl px-3 py-2 text-[11px] font-black text-ink-600 focus:ring-4 focus:ring-primary-500/5 focus:border-primary-500 outline-none h-12 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 appearance-none text-center uppercase tracking-wider"
                         >
                             <option value="ALL">SEMUA</option>
                             <option value="MTs">MTs</option>
@@ -319,7 +319,7 @@ export default function MonitoringJadwalPage() {
                                 <button 
                                     key={mode.id}
                                     onClick={() => setViewMode(mode.id as any)}
-                                    className={`px-5 rounded-3xl text-[11px] font-bold uppercase tracking-wider transition-all ${viewMode === mode.id ? "bg-white text-primary-700 shadow-md" : "text-slate-400 hover:text-slate-600"}`}
+                                    className={`px-5 rounded-3xl text-[11px] font-bold uppercase tracking-wider transition-all ${viewMode === mode.id ? "bg-white text-primary-700 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10" : "text-slate-400 hover:text-slate-600"}`}
                                 >
                                     {mode.label}
                                 </button>
@@ -327,14 +327,14 @@ export default function MonitoringJadwalPage() {
                         </div>
                         <button 
                             onClick={fetchMonitoringData}
-                            className="w-12 h-12 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-2xl shadow-md transition-all flex items-center justify-center shrink-0"
+                            className="w-12 h-12 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 transition-all flex items-center justify-center shrink-0"
                             title="Refresh Data"
                         >
                             <Loader2 className={`w-4 h-4 ${loading ? 'animate-spin text-primary-500' : ''}`} />
                         </button>
                         <button 
                             onClick={() => setShowPast(!showPast)}
-                            className={`px-4 rounded-2xl text-[11px] font-bold uppercase tracking-wider transition-all border h-12 shadow-md ${
+                            className={`px-4 rounded-2xl text-[11px] font-bold uppercase tracking-wider transition-all border h-12 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 ${
                                 showPast 
                                 ? "bg-secondary-100 border-secondary-200 text-secondary-700" 
                                 : "bg-white border-slate-200 text-slate-400 hover:text-slate-600"
@@ -522,7 +522,7 @@ export default function MonitoringJadwalPage() {
                             <div key={group.name} className="bg-white rounded-[2rem] shadow-clay-m border border-slate-100 overflow-hidden">
                                 <div className="bg-slate-50 px-7 py-5 flex items-center justify-between border-b border-slate-100/50">
                                     <div className="flex items-center gap-4">
-                                        <div className="w-11 h-11 bg-primary-600 rounded-3xl flex items-center justify-center text-white shadow-lg shadow-primary-600/20">
+                                        <div className="w-11 h-11 bg-primary-600 rounded-3xl flex items-center justify-center text-white shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary-600/20">
                                             <Users className="w-5 h-5" />
                                         </div>
                                         <h2 className="text-[17px] font-extrabold text-slate-800">{group.name} <span className="text-primary-600 ml-1">({group.items.length})</span></h2>
@@ -580,7 +580,7 @@ export default function MonitoringJadwalPage() {
                             <div key={group.name} className="bg-white rounded-[2rem] shadow-clay-m border border-slate-100 overflow-hidden flex flex-col transition-all hover:translate-y-[-4px] group">
                                 <div className="bg-slate-50 px-6 py-6 border-b border-slate-100 group-hover:bg-primary-50/50 transition-colors">
                                     <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-md border border-slate-100">
+                                        <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-slate-100">
                                             <Users className="w-6 h-6 text-primary-600" />
                                         </div>
                                         <div>

@@ -68,7 +68,7 @@ export default function ManajemenTagihanPage() {
           <button 
             onClick={handleGenerateSPP}
             disabled={isGenerating}
-            className="bg-maroon-600 hover:bg-maroon-700 disabled:bg-slate-300 text-white font-bold py-2 px-4 rounded-3xl flex items-center gap-2 transition-all shadow-md whitespace-nowrap"
+            className="bg-maroon-600 hover:bg-maroon-700 disabled:bg-slate-300 text-white font-bold py-2 px-4 rounded-3xl flex items-center gap-2 transition-all shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 whitespace-nowrap"
           >
             {isGenerating ? <Loader2 className="w-5 h-5 animate-spin" /> : <Plus className="w-5 h-5" />}
             Generate SPP
@@ -77,13 +77,13 @@ export default function ManajemenTagihanPage() {
       </div>
 
       {message.text && (
-        <div className={`mb-6 p-6 sm:p-8 rounded-3xl flex items-center gap-3 font-bold shadow-md animate-in fade-in ${message.type === 'success' ? 'bg-green-50 text-[#550000] border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
+        <div className={`mb-6 p-6 sm:p-8 rounded-3xl flex items-center gap-3 font-bold shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 animate-in fade-in ${message.type === 'success' ? 'bg-green-50 text-[#550000] border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
           <CheckCircle2 className="w-5 h-5" />
           {message.text}
         </div>
       )}
 
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-md overflow-hidden flex-1 flex flex-col">
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 overflow-hidden flex-1 flex flex-col">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>

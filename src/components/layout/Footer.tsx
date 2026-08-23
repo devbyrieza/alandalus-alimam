@@ -121,7 +121,7 @@ export default function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 group/social"
+                  className="w-10 h-10 rounded-2xl flex items-center justify-center transition-all duration-300 group/social"
                   style={{
                     background: "rgba(255,255,255,0.06)",
                     border: "1px solid rgba(255,255,255,0.10)",
@@ -230,7 +230,7 @@ export default function Footer() {
               {/* Alamat */}
               <div className="flex gap-3.5">
                 <div
-                  className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
+                  className="w-9 h-9 rounded-2xl flex items-center justify-center flex-shrink-0 mt-0.5"
                   style={{
                     background: "rgba(255,255,255,0.06)",
                     border: "1px solid rgba(255,255,255,0.10)",
@@ -251,7 +251,7 @@ export default function Footer() {
               {/* Telepon */}
               <div className="flex gap-3.5">
                 <div
-                  className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                  className="w-9 h-9 rounded-2xl flex items-center justify-center flex-shrink-0"
                   style={{
                     background: "rgba(255,255,255,0.06)",
                     border: "1px solid rgba(255,255,255,0.10)",
@@ -276,7 +276,7 @@ export default function Footer() {
               {/* Email */}
               <div className="flex gap-3.5">
                 <div
-                  className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                  className="w-9 h-9 rounded-2xl flex items-center justify-center flex-shrink-0"
                   style={{
                     background: "rgba(255,255,255,0.06)",
                     border: "1px solid rgba(255,255,255,0.10)",
@@ -328,7 +328,7 @@ export default function Footer() {
 
             {/* Language toggle */}
             <div
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-2xl text-xs font-semibold"
               style={{
                 background: "rgba(255,255,255,0.06)",
                 border: "1px solid rgba(255,255,255,0.10)",

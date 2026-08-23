@@ -203,7 +203,7 @@ export default function FaqSection() {
             {/* Hover bg */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-            <div className="relative z-10 w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-xs border border-secondary-200 group-hover:border-primary-100 transition-colors duration-300">
+            <div className="relative z-10 w-12 h-12 rounded-2xl bg-white flex items-center justify-center shadow-xs border border-secondary-200 group-hover:border-primary-100 transition-colors duration-300">
               <MessageCircleMore
                 className="w-5 h-5 text-primary-500"
                 strokeWidth={1.75}

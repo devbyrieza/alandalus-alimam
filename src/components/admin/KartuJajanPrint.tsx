@@ -21,7 +21,7 @@ export default function KartuJajanPrint({ santri, fotoUrl }: KartuJajanPrintProp
   return (
     <>
       {/* ===================== KARTU BAGIAN DEPAN ===================== */}
-      <div className="w-[54mm] h-[86mm] bg-white rounded-lg shadow-md flex flex-col relative overflow-hidden print:shadow-none print:border-none shrink-0" style={{ margin: '0 auto', boxSizing: 'border-box', border: '2px solid #ddc192' }}>
+      <div className="w-[54mm] h-[86mm] bg-white rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 flex flex-col relative overflow-hidden print:shadow-none print:border-none shrink-0" style={{ margin: '0 auto', boxSizing: 'border-box', border: '2px solid #ddc192' }}>
       
       {/* Background Header - Maroon & Gold Accent */}
       <div className="absolute top-0 left-0 w-full h-[35%] z-0" style={{ backgroundColor: '#550000', borderBottom: '4px solid #ddc192' }}></div>
@@ -39,13 +39,13 @@ export default function KartuJajanPrint({ santri, fotoUrl }: KartuJajanPrintProp
         ></div>
 
         {/* Logo & Title */}
-        <div className="flex flex-col items-center mb-3 drop-shadow-md relative z-10">
+        <div className="flex flex-col items-center mb-3 drop-shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 relative z-10">
           <img src="/images/logo.png" alt="Logo Al Imam" className="w-8 h-8 rounded-full object-cover border-[1.5px] border-gold-500/80 mb-1.5" onError={(e) => e.currentTarget.style.display = 'none'} />
           <h1 className="text-white text-[10px] font-black tracking-widest uppercase">Pesantren Al Imam Al Islami</h1>
         </div>
         
         {/* Foto Container dengan Auto-Crop yang Diperbaiki */}
-        <div className="w-20 h-28 rounded-md overflow-hidden shadow-md bg-white z-10 relative mt-1" style={{ border: '3px solid #ddc192' }}>
+        <div className="w-20 h-28 rounded-md overflow-hidden shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 bg-white z-10 relative mt-1" style={{ border: '3px solid #ddc192' }}>
           <img 
             src={fotoUrl || defaultFoto} 
             alt={`Foto ${santri.nama_lengkap}`}
@@ -85,7 +85,7 @@ export default function KartuJajanPrint({ santri, fotoUrl }: KartuJajanPrintProp
     </div>
 
       {/* ===================== KARTU BAGIAN BELAKANG ===================== */}
-      <div className="w-[54mm] h-[86mm] bg-white rounded-lg shadow-md flex flex-col relative overflow-hidden print:shadow-none print:border-none shrink-0" style={{ margin: '0 auto', boxSizing: 'border-box', border: '2px solid #ddc192' }}>
+      <div className="w-[54mm] h-[86mm] bg-white rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 flex flex-col relative overflow-hidden print:shadow-none print:border-none shrink-0" style={{ margin: '0 auto', boxSizing: 'border-box', border: '2px solid #ddc192' }}>
         
         {/* Watermark Gedung (Sangat Transparan agar teks tetap terbaca 100%) */}
         <div 

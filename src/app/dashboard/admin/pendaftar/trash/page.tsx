@@ -151,7 +151,7 @@ export default function TrashPage() {
       </Link>
 
       {/* Header */}
-      <div className="bg-white rounded-3xl shadow-lg p-6 sm:p-8 md:p-6 border-2 border-red-100">
+      <div className="bg-white rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20 p-6 sm:p-8 md:p-6 border-2 border-red-100">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-3 md:gap-4">
             <div className="p-4.5 md:p-3 bg-gradient-to-br from-red-500 to-rose-600 rounded-3xl flex-shrink-0">
@@ -205,7 +205,7 @@ export default function TrashPage() {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-3xl shadow-lg border-2 border-red-100 overflow-hidden">
+      <div className="bg-white rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20 border-2 border-red-100 overflow-hidden">
         {loading ? (
           <div className="flex items-center justify-center py-20">
             <div className="text-center">
@@ -297,7 +297,7 @@ export default function TrashPage() {
                             setRestoringItem(item);
                             setIsRestoreModalOpen(true);
                           }}
-                          className="inline-flex items-center gap-2 px-4 py-2 bg-[#550000] hover:bg-[#550000] text-white rounded-2xl text-sm font-bold transition-all shadow-md hover:shadow-lg"
+                          className="inline-flex items-center gap-2 px-4 py-2 bg-[#550000] hover:bg-[#550000] text-white rounded-2xl text-sm font-bold transition-all shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 hover:shadow-2xl shadow-primary/30  shadow-primary/20 "
                         >
                           <RotateCcw className="w-4 h-4" />
                           <span>Restore</span>
@@ -356,7 +356,7 @@ export default function TrashPage() {
       {/* Restore Confirmation Modal */}
       {isRestoreModalOpen && restoringItem && (
         <div className="fixed inset-0 z-50 flex items-start md:items-center pt-10 md:pt-0 pb-20 md:pb-0 justify-center bg-black/50 backdrop-blur-sm p-6 sm:p-8 overflow-y-auto overflow-x-hidden overscroll-contain custom-scrollbar">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md border-2 border-green-100 animate-in fade-in zoom-in duration-200">
+          <div className="bg-white rounded-2xl shadow-2xl shadow-primary/30 w-full max-w-md border-2 border-green-100 animate-in fade-in zoom-in duration-200">
             <div className="flex justify-between items-center p-6 border-b border-green-100">
               <div className="flex items-center gap-3">
                 <div className="p-4 bg-green-100 rounded-2xl">
@@ -401,7 +401,7 @@ export default function TrashPage() {
                 <button
                   onClick={handleRestore}
                   disabled={isRestoring}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-[#550000] hover:bg-[#550000] text-white font-bold rounded-3xl shadow-lg shadow-green-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-[#550000] hover:bg-[#550000] text-white font-bold rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20 shadow-green-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isRestoring ? (
                     <>

@@ -123,10 +123,10 @@ export default function PengujiDashboardPage() {
         {statCards.map((card, index) => (
           <div
             key={index}
-            className="bg-white rounded-3xl p-5 md:p-8 border border-gold-100 shadow-xs hover:shadow-xl hover:shadow-primary-900/5 transition-all duration-500 app-card group"
+            className="bg-white rounded-3xl p-5 md:p-8 border border-gold-100 shadow-xs hover:shadow-2xl shadow-primary/30 hover:shadow-primary-900/5 transition-all duration-500 app-card group"
           >
             <div
-              className={`w-14 h-14 ${card.bgColor} rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}
+              className={`w-14 h-14 ${card.bgColor} rounded-2xl flex items-center justify-center mb-6 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}
             >
               <card.icon className={`w-7 h-7 ${card.iconColor}`} />
             </div>
@@ -143,7 +143,7 @@ export default function PengujiDashboardPage() {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-4xl p-5 md:p-8 border border-gold-100 shadow-md app-card">
+      <div className="bg-white rounded-4xl p-5 md:p-8 border border-gold-100 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 app-card">
         <div className="flex items-center justify-between mb-8">
           <h3 className="text-2xl font-black text-primary-950 tracking-tight font-display">
             Aksi Cepat
@@ -152,12 +152,12 @@ export default function PengujiDashboardPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Link
             href="/dashboard/penguji/jadwal"
-            className="flex items-center gap-6 p-7 bg-gold-50/50 hover:bg-gold-100/50 rounded-4xl transition-all duration-500 border border-gold-100 hover:shadow-xl hover:shadow-gold-400/10 group relative overflow-hidden"
+            className="flex items-center gap-6 p-7 bg-gold-50/50 hover:bg-gold-100/50 rounded-4xl transition-all duration-500 border border-gold-100 hover:shadow-2xl shadow-primary/30 hover:shadow-gold-400/10 group relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 p-6 sm:p-8 opacity-5 group-hover:opacity-10 transition-opacity">
               <Calendar className="w-20 h-20 text-primary-900" />
             </div>
-            <div className="w-16 h-16 bg-gold-400 rounded-2xl flex items-center justify-center shadow-lg shadow-gold-400/20 group-hover:scale-110 group-hover:-rotate-3 transition-all shrink-0">
+            <div className="w-16 h-16 bg-gold-400 rounded-2xl flex items-center justify-center shadow-2xl shadow-primary/30  shadow-primary/20 shadow-gold-400/20 group-hover:scale-110 group-hover:-rotate-3 transition-all shrink-0">
               <Calendar className="w-8 h-8 text-primary-950" />
             </div>
             <div>
@@ -172,7 +172,7 @@ export default function PengujiDashboardPage() {
 
           <Link
             href="/dashboard/penguji/input-nilai"
-            className="flex items-center gap-6 p-7 bg-primary-700 hover:bg-primary-800 rounded-4xl transition-all duration-500 border border-primary-800 shadow-xl shadow-primary-900/20 hover:shadow-2xl hover:shadow-primary-900/30 group relative overflow-hidden"
+            className="flex items-center gap-6 p-7 bg-primary-700 hover:bg-primary-800 rounded-4xl transition-all duration-500 border border-primary-800 shadow-2xl shadow-primary/30  shadow-primary-900/20 hover:shadow-2xl hover:shadow-primary-900/30 group relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 p-6 sm:p-8 opacity-10 group-hover:opacity-20 transition-opacity">
               <ClipboardCheck className="w-20 h-20 text-white" />
@@ -199,7 +199,7 @@ export default function PengujiDashboardPage() {
         </div>
         <div className="flex gap-6 relative z-10">
           <div className="shrink-0">
-            <div className="w-14 h-14 bg-secondary-100 rounded-2xl flex items-center justify-center border border-secondary-200 shadow-md">
+            <div className="w-14 h-14 bg-secondary-100 rounded-2xl flex items-center justify-center border border-secondary-200 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
               <Users className="w-7 h-7 text-secondary-700" />
             </div>
           </div>

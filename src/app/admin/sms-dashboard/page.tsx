@@ -70,7 +70,7 @@ export default function AdminSMSDashboard() {
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-50/50 flex items-center justify-center p-6 md:p-10">
-        <div className="text-center p-8 bg-white rounded-3xl shadow-xl border border-slate-100 max-w-sm w-full">
+        <div className="text-center p-8 bg-white rounded-3xl shadow-2xl shadow-primary/30 border border-slate-100 max-w-sm w-full">
           <RefreshCw className="w-10 h-10 animate-spin mx-auto text-[#550000] mb-4" />
           <p className="text-slate-700 font-bold text-base">Memuat data SMS...</p>
         </div>
@@ -82,7 +82,7 @@ export default function AdminSMSDashboard() {
     <div className="min-h-screen bg-slate-50/50 p-6 md:p-10">
       <div className="max-w-[1200px] mx-auto space-y-8">
         {/* Main Card */}
-        <div className="bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-6 md:p-10 border border-slate-100 relative overflow-hidden">
+        <div className="bg-white rounded-3xl shadow-2xl shadow-primary/30 shadow-slate-200/50 p-6 md:p-10 border border-slate-100 relative overflow-hidden">
           {/* Decorative Top Bar */}
           <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-emerald-500 via-teal-500 to-amber-500" />
 
@@ -108,7 +108,7 @@ export default function AdminSMSDashboard() {
 
             <button
               onClick={fetchPendingSMS}
-              className="inline-flex items-center gap-2 px-5 py-3 bg-[#550000] hover:bg-[#550000] text-white font-bold rounded-2xl shadow-lg shadow-emerald-600/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-[#550000] hover:bg-[#550000] text-white font-bold rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20 shadow-emerald-600/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               <RefreshCw className="w-4 h-4" />
               Refresh Data
@@ -167,7 +167,7 @@ export default function AdminSMSDashboard() {
               {pendingSMS.map((item) => (
                 <div
                   key={item.id}
-                  className="border border-slate-200/80 bg-slate-50/30 rounded-3xl p-6 shadow-md hover:shadow-lg transition-all space-y-6"
+                  className="border border-slate-200/80 bg-slate-50/30 rounded-3xl p-6 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 hover:shadow-2xl shadow-primary/30  shadow-primary/20 transition-all space-y-6"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="flex items-center gap-3.5 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 shadow-xs">
@@ -220,7 +220,7 @@ Hubungi 0851-1152-4441 jika ada masalah.`}
                   <div className="flex flex-col sm:flex-row gap-3 pt-2">
                     <button
                       onClick={() => markAsSent(item.id)}
-                      className="flex-1 py-3.5 px-6 bg-[#550000] hover:bg-[#550000] text-white font-bold rounded-2xl shadow-lg shadow-emerald-600/20 transition-all flex items-center justify-center gap-2"
+                      className="flex-1 py-3.5 px-6 bg-[#550000] hover:bg-[#550000] text-white font-bold rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20 shadow-emerald-600/20 transition-all flex items-center justify-center gap-2"
                     >
                       <CheckCircle2 className="w-5 h-5" />
                       Tandai Sudah Dikirim
@@ -241,7 +241,7 @@ Hubungi 0851-1152-4441 jika ada masalah.`}
         </div>
 
         {/* System Status Section */}
-        <div className="bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-6 md:p-8 border border-slate-100">
+        <div className="bg-white rounded-3xl shadow-2xl shadow-primary/30 shadow-slate-200/50 p-6 md:p-8 border border-slate-100">
           <h3 className="font-black text-slate-900 text-lg mb-6 flex items-center gap-2">
             <BarChart3 className="w-5 h-5 text-[#550000]" /> Status Layanan & Integrasi
           </h3>

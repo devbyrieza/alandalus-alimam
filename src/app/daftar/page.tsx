@@ -261,7 +261,7 @@ export default function DaftarPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-2xl shadow-md border border-secondary-200 mb-6 group hover:scale-110 transition-transform app-card">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-secondary-200 mb-6 group hover:scale-110 transition-transform app-card">
             <School className="w-8 h-8 text-primary-600" />
           </div>
           <motion.h1
@@ -288,7 +288,7 @@ export default function DaftarPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3 }}
-            className="app-card bg-white rounded-[2.5rem] md:rounded-[3.5rem] shadow-lg p-6 md:p-16 border border-secondary-200 relative overflow-hidden"
+            className="app-card bg-white rounded-[2.5rem] md:rounded-[3.5rem] shadow-2xl shadow-primary/30  shadow-primary/20 p-6 md:p-16 border border-secondary-200 relative overflow-hidden"
           >
             {/* Soft decorative blur inside card */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-secondary-50/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
@@ -359,7 +359,7 @@ export default function DaftarPage() {
                 transition={{ delay: 0.4 }}
               >
                 <div className="flex items-center gap-3 mb-8">
-                  <div className="w-10 h-10 rounded-3xl bg-secondary-50 flex items-center justify-center text-primary-600 shadow-md border border-secondary-200">
+                  <div className="w-10 h-10 rounded-3xl bg-secondary-50 flex items-center justify-center text-primary-600 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-secondary-200">
                     <GraduationCap className="w-6 h-6" />
                   </div>
                   <h3 className="text-2xl font-display font-black text-ink-950">
@@ -415,12 +415,12 @@ export default function DaftarPage() {
                           isClosed
                             ? "opacity-50 grayscale cursor-not-allowed border-secondary-200 bg-stone-50"
                             : formData.jenjang === option.value
-                              ? "border-primary-600 bg-secondary-50 shadow-lg"
-                              : "border-secondary-200 bg-white hover:border-primary-200 hover:shadow-md"
+                              ? "border-primary-600 bg-secondary-50 shadow-2xl shadow-primary/30  shadow-primary/20 "
+                              : "border-secondary-200 bg-white hover:border-primary-200 hover:shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10"
                         }`}
                       >
                         {isClosed && (
-                          <div className="absolute top-4 right-4 bg-red-600 text-white text-[10px] font-black px-2 py-1 rounded-full uppercase tracking-tighter shadow-md z-10">
+                          <div className="absolute top-4 right-4 bg-red-600 text-white text-[10px] font-black px-2 py-1 rounded-full uppercase tracking-tighter shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 z-10">
                             {closedLabel}
                           </div>
                         )}
@@ -501,7 +501,7 @@ export default function DaftarPage() {
                 className="space-y-8"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-3xl bg-secondary-50 flex items-center justify-center text-primary-600 shadow-md border border-secondary-200">
+                  <div className="w-10 h-10 rounded-3xl bg-secondary-50 flex items-center justify-center text-primary-600 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-secondary-200">
                     <User className="w-6 h-6" />
                   </div>
                   <h3 className="text-2xl font-display font-black text-ink-950">
@@ -584,7 +584,7 @@ export default function DaftarPage() {
                             whileTap={{ scale: 0.98 }}
                             className={`flex-1 flex items-center justify-center px-4 md:px-6 py-3 md:py-4 rounded-[1.5rem] md:rounded-[2rem] border-2 cursor-pointer transition-all duration-300 text-sm md:text-base ${
                               formData.jenis_kelamin === jk.val
-                                ? "bg-primary-700 border-primary-700 text-white font-black shadow-lg"
+                                ? "bg-primary-700 border-primary-700 text-white font-black shadow-2xl shadow-primary/30  shadow-primary/20 "
                                 : "bg-secondary-50 border-secondary-200 text-ink-800 hover:border-primary-200 hover:bg-white font-bold"
                             }`}
                           >
@@ -618,7 +618,7 @@ export default function DaftarPage() {
                 className="space-y-8"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-3xl bg-secondary-50 flex items-center justify-center text-primary-600 shadow-md border border-secondary-200">
+                  <div className="w-10 h-10 rounded-3xl bg-secondary-50 flex items-center justify-center text-primary-600 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-secondary-200">
                     <Phone className="w-6 h-6" />
                   </div>
                   <h3 className="text-2xl font-display font-black text-ink-950">
@@ -630,7 +630,7 @@ export default function DaftarPage() {
                   label="Nomor WhatsApp Orang Tua"
                   error={fieldErrors.no_hp}
                 >
-                  <div className="relative flex shadow-md border border-transparent focus-within:border-primary-200 focus-within:ring-4 focus-within:ring-secondary-50 rounded-3xl md:rounded-2xl overflow-hidden bg-secondary-50 transition-all">
+                  <div className="relative flex shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-transparent focus-within:border-primary-200 focus-within:ring-4 focus-within:ring-secondary-50 rounded-3xl md:rounded-2xl overflow-hidden bg-secondary-50 transition-all">
                     <div className="relative">
                       <select
                         value={countryCode}
@@ -679,7 +679,7 @@ export default function DaftarPage() {
                   whileTap={{ scale: 0.98 }}
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-4 md:py-6 rounded-pill bg-primary-700 text-white font-black text-lg md:text-xl hover:bg-primary-800 shadow-lg transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                  className="w-full py-4 md:py-6 rounded-pill bg-primary-700 text-white font-black text-lg md:text-xl hover:bg-primary-800 shadow-2xl shadow-primary/30  shadow-primary/20 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                 >
                   {isLoading ? (
                     <>

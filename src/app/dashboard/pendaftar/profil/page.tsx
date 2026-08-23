@@ -148,7 +148,7 @@ export default function ProfilPage() {
         {/* Request Status Banner */}
         {requestStatus && (
           <div
-            className={`px-5 py-4 rounded-2xl flex items-center gap-4 transition-all hover:scale-[1.02] shadow-md ${
+            className={`px-5 py-4 rounded-2xl flex items-center gap-4 transition-all hover:scale-[1.02] shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 ${
               requestStatus.status === "pending"
                 ? "bg-secondary-50 border border-secondary-200 text-secondary-800"
                 : requestStatus.status === "approved_to_edit"
@@ -210,7 +210,7 @@ export default function ProfilPage() {
             {requestStatus.status === "approved_to_edit" && (
               <Link
                 href="/dashboard/pendaftar/kelengkapan-berkas"
-                className="ml-auto px-4 py-2 bg-pine-600 text-white text-xs font-bold rounded-3xl hover:bg-pine-700 shadow-pine-500/20 shadow-lg transition-all"
+                className="ml-auto px-4 py-2 bg-pine-600 text-white text-xs font-bold rounded-3xl hover:bg-pine-700 shadow-pine-500/20 shadow-2xl shadow-primary/30  shadow-primary/20 transition-all"
               >
                 Edit Sekarang
               </Link>
@@ -225,7 +225,7 @@ export default function ProfilPage() {
           {/* Identity Card */}
           <div className="glass-panel p-6 md:p-8 rounded-[2rem] shadow-clay-md">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 rounded-2xl bg-pine-100 flex items-center justify-center text-pine-600 shadow-md">
+              <div className="w-12 h-12 rounded-2xl bg-pine-100 flex items-center justify-center text-pine-600 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
                 <User className="w-6 h-6" />
               </div>
               <div>
@@ -284,7 +284,7 @@ export default function ProfilPage() {
           {/* Address Card */}
           <div className="glass-panel p-6 md:p-8 rounded-[2rem] shadow-clay-md">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 shadow-md">
+              <div className="w-12 h-12 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
                 <MapPin className="w-6 h-6" />
               </div>
               <div>
@@ -346,7 +346,7 @@ export default function ProfilPage() {
           {/* School Card */}
           <div className="glass-panel p-6 md:p-8 rounded-[2rem] shadow-clay-md">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 rounded-2xl bg-secondary-100 flex items-center justify-center text-secondary-600 shadow-md">
+              <div className="w-12 h-12 rounded-2xl bg-secondary-100 flex items-center justify-center text-secondary-600 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
                 <School className="w-6 h-6" />
               </div>
               <div>
@@ -402,7 +402,7 @@ export default function ProfilPage() {
                 !isRequesting ? (
                   <button
                     onClick={() => setIsRequesting(true)}
-                    className="w-full py-4 bg-white border border-ink-200 text-ink-700 font-bold rounded-2xl hover:bg-surface-50 hover:border-primary-300 hover:text-primary-700 transition-all shadow-md hover:shadow-lg"
+                    className="w-full py-4 bg-white border border-ink-200 text-ink-700 font-bold rounded-2xl hover:bg-surface-50 hover:border-primary-300 hover:text-primary-700 transition-all shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 hover:shadow-2xl shadow-primary/30  shadow-primary/20 "
                   >
                     Ajukan Perubahan
                   </button>
@@ -429,7 +429,7 @@ export default function ProfilPage() {
                       <button
                         onClick={handleRequestEdit}
                         disabled={submittingRequest}
-                        className="py-3 text-sm font-bold text-white bg-pine-600 hover:bg-pine-700 rounded-3xl shadow-lg shadow-pine-500/20 disabled:opacity-50"
+                        className="py-3 text-sm font-bold text-white bg-pine-600 hover:bg-pine-700 rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20 shadow-pine-500/20 disabled:opacity-50"
                       >
                         {submittingRequest ? "Mengirim..." : "Kirim Pengajuan"}
                       </button>
@@ -452,7 +452,7 @@ export default function ProfilPage() {
 
           {/* Admin Note if Rejected */}
           {requestStatus?.status === "rejected" && requestStatus.admin_note && (
-            <div className="bg-red-50 border border-red-200 p-6 rounded-[2rem] shadow-md">
+            <div className="bg-red-50 border border-red-200 p-6 rounded-[2rem] shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
               <div className="flex items-center gap-3 mb-3 text-red-800">
                 <AlertCircle className="w-5 h-5" />
                 <h4 className="font-bold">Catatan Penolakan</h4>

@@ -109,7 +109,7 @@ export default function FinanceTopupPage() {
 
       <div className="grid lg:grid-cols-3 gap-8 flex-1 items-start">
         {/* Kiri: Daftar Santri */}
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-md overflow-hidden flex flex-col h-[600px]">
+        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 overflow-hidden flex flex-col h-[600px]">
           <div className="bg-slate-50 p-6 sm:p-8 border-b border-slate-200 flex justify-between items-center">
             <h3 className="font-bold text-slate-700">Daftar Santri Aktif</h3>
             <button onClick={fetchSantri} className="text-slate-400 hover:text-maroon-600 transition-colors" title="Refresh Data">
@@ -150,7 +150,7 @@ export default function FinanceTopupPage() {
         </div>
 
         {/* Kanan: Panel Top Up */}
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-md p-6 relative overflow-hidden">
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 p-6 relative overflow-hidden">
           {/* Header Panel */}
           <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
             <div className="w-10 h-10 bg-maroon-100 text-maroon-700 rounded-3xl flex items-center justify-center">
@@ -230,7 +230,7 @@ export default function FinanceTopupPage() {
               <button
                 onClick={handleTopup}
                 disabled={!nominal || isProcessing}
-                className="w-full mt-6 bg-maroon-600 hover:bg-maroon-700 disabled:bg-slate-200 disabled:text-slate-400 text-white font-black py-4 rounded-3xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2"
+                className="w-full mt-6 bg-maroon-600 hover:bg-maroon-700 disabled:bg-slate-200 disabled:text-slate-400 text-white font-black py-4 rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20 transition-all active:scale-95 flex items-center justify-center gap-2"
               >
                 {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : "Tambahkan Saldo"}
               </button>

@@ -175,7 +175,7 @@ function ExtraChip({ item, index }: { item: ExtraActivity; index: number }) {
     >
       <div
         className={[
-          "w-12 h-12 md:w-13 md:h-13 rounded-xl flex items-center justify-center shadow-xs",
+          "w-12 h-12 md:w-13 md:h-13 rounded-2xl flex items-center justify-center shadow-xs",
           "transition-all duration-400 group-hover:scale-110",
           "ring-1 ring-transparent group-hover:ring-2",
           colorMap[item.color],
@@ -296,9 +296,9 @@ export default function ActivitiesSection() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.1 + idx * 0.05 }}
-                  className="flex flex-col items-center gap-3 p-4 bg-white rounded-2xl border border-primary-50 shadow-sm hover:border-primary-100 hover:shadow-md transition-all group text-center"
+                  className="flex flex-col items-center gap-3 p-4 bg-white rounded-2xl border border-primary-50 shadow-sm hover:border-primary-100 hover:shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 transition-all group text-center"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-secondary-50 flex items-center justify-center text-primary-600 group-hover:bg-primary-600 group-hover:text-white transition-colors">
+                  <div className="w-10 h-10 rounded-2xl bg-secondary-50 flex items-center justify-center text-primary-600 group-hover:bg-primary-600 group-hover:text-white transition-colors">
                     <Icon className="w-5 h-5" />
                   </div>
                   <span className="text-[11px] font-bold text-ink-950 uppercase tracking-wider">
@@ -335,7 +335,7 @@ export default function ActivitiesSection() {
 
                 <div className="shrink-0">
                   <Link href="/kegiatan">
-                    <button className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gold-500 text-primary-950 font-black text-sm uppercase tracking-widest rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-105 active:scale-95">
+                    <button className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gold-500 text-primary-950 font-black text-sm uppercase tracking-widest rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95">
                       <span className="relative z-10">Eksplorasi Seluruh Kegiatan</span>
                       <CalendarIcon className="relative z-10 w-5 h-5 transition-transform duration-300 group-hover:rotate-12" />
                       <div className="absolute inset-0 bg-gold-400 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />

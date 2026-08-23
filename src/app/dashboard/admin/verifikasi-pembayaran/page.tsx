@@ -464,7 +464,7 @@ function VerifikasiPembayaranContent() {
       {/* Refreshing Overlay */}
       {isRefreshing && (
         <div className="fixed inset-0 bg-white/40 backdrop-blur-[1px] z-[100] flex items-start md:items-center pt-10 md:pt-0 pb-20 md:pb-0 justify-center pointer-events-none overflow-y-auto overflow-x-hidden p-6 sm:p-8 overscroll-contain custom-scrollbar">
-          <div className="bg-white/80 px-6 py-3 rounded-2xl shadow-xl border border-stone-100 flex items-center gap-3 animate-in fade-in zoom-in duration-300">
+          <div className="bg-white/80 px-6 py-3 rounded-2xl shadow-2xl shadow-primary/30 border border-stone-100 flex items-center gap-3 animate-in fade-in zoom-in duration-300">
             <Loader2 className="w-5 h-5 animate-spin text-primary-600" />
             <span className="text-sm font-bold text-stone-700 tracking-tight">
               Memperbarui data...
@@ -481,7 +481,7 @@ function VerifikasiPembayaranContent() {
         accept="image/jpeg, image/png, application/pdf"
       />
       {/* Header */}
-      <div className="bg-white rounded-[2rem] shadow-md p-5 md:p-8 border border-stone-100">
+      <div className="bg-white rounded-[2rem] shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 p-5 md:p-8 border border-stone-100">
         <div className="flex flex-col xl:flex-row xl:items-center gap-4 xl:justify-between flex-wrap">
           <div className="flex flex-wrap sm:flex-nowrap items-center gap-4">
             <div className="w-12 h-12 md:w-16 md:h-16 bg-primary-50 rounded-2xl flex items-center justify-center border border-primary-100 shrink-0">
@@ -502,7 +502,7 @@ function VerifikasiPembayaranContent() {
               <button
                 type="button"
                 onClick={() => setShowUploadAtasNamaModal(true)}
-                className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-3xl text-sm font-bold transition-all shadow-lg shadow-primary-600/20 whitespace-nowrap"
+                className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-3xl text-sm font-bold transition-all shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary-600/20 whitespace-nowrap"
               >
                 <UploadCloud className="w-4 h-4" />
                 Upload Atas Nama
@@ -521,7 +521,7 @@ function VerifikasiPembayaranContent() {
             >
               Pendaftaran
               {counts.PENDAFTARAN > 0 && (
-                <span className="bg-rose-500 text-white flex items-center justify-center w-5 h-5 text-[10px] rounded-full shrink-0 shadow-md">
+                <span className="bg-rose-500 text-white flex items-center justify-center w-5 h-5 text-[10px] rounded-full shrink-0 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
                   {counts.PENDAFTARAN}
                 </span>
               )}
@@ -536,7 +536,7 @@ function VerifikasiPembayaranContent() {
             >
               Uang Pangkal
               {counts.DAFTAR_ULANG > 0 && (
-                <span className="bg-rose-500 text-white flex items-center justify-center w-5 h-5 text-[10px] rounded-full shrink-0 shadow-md">
+                <span className="bg-rose-500 text-white flex items-center justify-center w-5 h-5 text-[10px] rounded-full shrink-0 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
                   {counts.DAFTAR_ULANG}
                 </span>
               )}
@@ -551,7 +551,7 @@ function VerifikasiPembayaranContent() {
             >
               SPP
               {counts.SPP > 0 && (
-                <span className="bg-rose-500 text-white flex items-center justify-center w-5 h-5 text-[10px] rounded-full shrink-0 shadow-md">
+                <span className="bg-rose-500 text-white flex items-center justify-center w-5 h-5 text-[10px] rounded-full shrink-0 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
                   {counts.SPP}
                 </span>
               )}
@@ -562,7 +562,7 @@ function VerifikasiPembayaranContent() {
             <button
               onClick={() => handleExport("excel")}
               disabled={exporting}
-              className="flex items-center gap-2 px-3 md:px-4 py-2.5 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl font-bold transition-all shadow-md hover:shadow-lg disabled:opacity-50 text-sm"
+              className="flex items-center gap-2 px-3 md:px-4 py-2.5 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl font-bold transition-all shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 hover:shadow-2xl shadow-primary/30  shadow-primary/20 disabled:opacity-50 text-sm"
               title="Download Excel"
             >
               {exporting ? (
@@ -575,7 +575,7 @@ function VerifikasiPembayaranContent() {
             <button
               onClick={() => handleExport("pdf")}
               disabled={exporting}
-              className="flex items-center gap-2 px-3 md:px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-3xl font-bold transition-all shadow-md hover:shadow-lg disabled:opacity-50 text-sm"
+              className="flex items-center gap-2 px-3 md:px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-3xl font-bold transition-all shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 hover:shadow-2xl shadow-primary/30  shadow-primary/20 disabled:opacity-50 text-sm"
               title="Download PDF"
             >
               {exporting ? (
@@ -587,7 +587,7 @@ function VerifikasiPembayaranContent() {
             </button>
             <button
               onClick={() => fetchPembayaran(true)}
-              className="flex items-center gap-2 px-3 md:px-6 py-2.5 bg-white hover:bg-stone-50 border border-stone-200 text-stone-700 rounded-3xl font-bold transition-all shadow-md hover:shadow-lg text-sm"
+              className="flex items-center gap-2 px-3 md:px-6 py-2.5 bg-white hover:bg-stone-50 border border-stone-200 text-stone-700 rounded-3xl font-bold transition-all shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 hover:shadow-2xl shadow-primary/30  shadow-primary/20 text-sm"
             >
               <RefreshCw className="w-4 h-4" />
               <span className="hidden sm:inline">Refresh</span>
@@ -604,12 +604,12 @@ function VerifikasiPembayaranContent() {
           placeholder="Cari nama atau nomor pendaftaran..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full pl-12 pr-4 py-4 bg-white border border-stone-200 rounded-2xl focus:border-primary-500 focus:ring-4 focus:ring-primary-500/5 focus:outline-none transition-all text-sm md:text-base font-bold text-stone-800 placeholder:text-stone-400 shadow-md"
+          className="w-full pl-12 pr-4 py-4 bg-white border border-stone-200 rounded-2xl focus:border-primary-500 focus:ring-4 focus:ring-primary-500/5 focus:outline-none transition-all text-sm md:text-base font-bold text-stone-800 placeholder:text-stone-400 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10"
         />
       </div>
 
       {/* Stats / Filter Bar */}
-      <div className="flex flex-wrap items-center gap-3 bg-white p-6 sm:p-8 rounded-2xl shadow-md border border-stone-100">
+      <div className="flex flex-wrap items-center gap-3 bg-white p-6 sm:p-8 rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-stone-100">
         <div className="px-4 py-2 bg-stone-100 rounded-2xl text-sm font-bold text-stone-600">
           Total: {filteredPembayaran.length}
         </div>
@@ -666,7 +666,7 @@ function VerifikasiPembayaranContent() {
                     onClick={() => setTipeCicilanFilter(tipe as any)}
                     className={`px-3 py-1.5 rounded-2xl text-xs font-black uppercase tracking-wider transition-all ${
                       tipeCicilanFilter === tipe
-                        ? "bg-primary-700 text-white shadow-md shadow-primary-700/20"
+                        ? "bg-primary-700 text-white shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 shadow-primary-700/20"
                         : "bg-white text-stone-500 border border-stone-200 hover:bg-stone-50"
                     }`}
                   >
@@ -679,7 +679,7 @@ function VerifikasiPembayaranContent() {
         )}
       </div>
       {/* List */}
-      <div className="bg-white rounded-[2rem] shadow-md border border-stone-100 overflow-hidden min-h-[400px]">
+      <div className="bg-white rounded-[2rem] shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-stone-100 overflow-hidden min-h-[400px]">
         {loading ? (
           <div className="flex items-center justify-center h-[400px]">
             <div className="text-center">
@@ -815,7 +815,7 @@ function VerifikasiPembayaranContent() {
                     {statusFilter === "pending" && (
                       <button
                         onClick={() => openModal(pay)}
-                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-3 bg-primary-700 hover:bg-primary-800 text-white rounded-3xl text-sm font-bold shadow-lg shadow-primary-700/20 transition-all hover:-translate-y-0.5"
+                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-3 bg-primary-700 hover:bg-primary-800 text-white rounded-3xl text-sm font-bold shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary-700/20 transition-all hover:-translate-y-0.5"
                       >
                         <CheckCircle className="w-4 h-4" />
                         Verifikasi
@@ -877,7 +877,7 @@ function VerifikasiPembayaranContent() {
             {/* Scrollable Content */}
             <div className="flex-1 overflow-y-auto p-6 space-y-6 overscroll-contain custom-scrollbar">
               <div className="flex gap-4 p-6 sm:p-8 bg-primary-50 rounded-2xl border border-primary-100">
-                <div className="p-3 bg-white rounded-3xl shadow-md h-fit">
+                <div className="p-3 bg-white rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 h-fit">
                   <DollarSign className="w-6 h-6 text-primary-700" />
                 </div>
                 <div>
@@ -913,7 +913,7 @@ function VerifikasiPembayaranContent() {
                         onClick={() => setEditTipeCicilan("LUNAS")}
                         className={`flex-1 py-2 rounded-3xl text-xs font-black transition-all ${
                           editTipeCicilan === "LUNAS"
-                            ? "bg-violet-600 text-white shadow-lg"
+                            ? "bg-violet-600 text-white shadow-2xl shadow-primary/30  shadow-primary/20 "
                             : "bg-white text-violet-600 border border-violet-200"
                         }`}
                       >
@@ -928,7 +928,7 @@ function VerifikasiPembayaranContent() {
                         }}
                         className={`flex-1 py-2 rounded-3xl text-xs font-black transition-all ${
                           editTipeCicilan === "CICILAN"
-                            ? "bg-violet-600 text-white shadow-lg"
+                            ? "bg-violet-600 text-white shadow-2xl shadow-primary/30  shadow-primary/20 "
                             : "bg-white text-violet-600 border border-violet-200"
                         }`}
                       >
@@ -962,7 +962,7 @@ function VerifikasiPembayaranContent() {
               )}
 
               {selectedPembayaran.keringanan_reason && (
-                <div className="p-5 bg-secondary-50 border-2 border-secondary-100 rounded-2xl space-y-3 shadow-md">
+                <div className="p-5 bg-secondary-50 border-2 border-secondary-100 rounded-2xl space-y-3 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
                   <div className="flex items-center gap-2 text-secondary-800">
                     <AlertCircle className="w-5 h-5" />
                     <span className="font-black text-xs uppercase tracking-widest">
@@ -1018,7 +1018,7 @@ function VerifikasiPembayaranContent() {
                         href={selectedPembayaran.bukti_transfer_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-3 bg-white rounded-full font-bold text-stone-900 shadow-xl hover:scale-105 transition-transform flex items-center gap-2"
+                        className="px-6 py-3 bg-white rounded-full font-bold text-stone-900 shadow-2xl shadow-primary/30 hover:scale-105 transition-transform flex items-center gap-2"
                       >
                         <Eye className="w-4 h-4" />
                         Lihat Full Size
@@ -1068,7 +1068,7 @@ function VerifikasiPembayaranContent() {
                     handleVerify(selectedPembayaran.id, "verified")
                   }
                   disabled={processing || (activeTab === "DAFTAR_ULANG" && !editTipeCicilan)}
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-4 bg-emerald-500 hover:bg-[#550000] text-white rounded-3xl font-bold transition-all hover:shadow-lg hover:shadow-emerald-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-4 bg-emerald-500 hover:bg-[#550000] text-white rounded-3xl font-bold transition-all hover:shadow-2xl shadow-primary/30  shadow-primary/20 hover:shadow-emerald-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {processing ? (
                     <Loader2 className="w-5 h-5 animate-spin" />
@@ -1085,7 +1085,7 @@ function VerifikasiPembayaranContent() {
                     handleVerify(selectedPembayaran.id, "rejected")
                   }
                   disabled={processing}
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-4 bg-rose-500 hover:bg-rose-600 text-white rounded-3xl font-bold transition-all hover:shadow-lg hover:shadow-rose-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-4 bg-rose-500 hover:bg-rose-600 text-white rounded-3xl font-bold transition-all hover:shadow-2xl shadow-primary/30  shadow-primary/20 hover:shadow-rose-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {processing ? (
                     <Loader2 className="w-5 h-5 animate-spin" />

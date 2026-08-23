@@ -175,7 +175,7 @@ export default function KartuJajanPage() {
 
   if (!dompet) {
     return (
-      <div className="bg-white rounded-[1.5rem] p-8 text-center shadow-md border border-gold-100">
+      <div className="bg-white rounded-[1.5rem] p-8 text-center shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-gold-100">
         <AlertCircle className="w-12 h-12 text-ink-300 mx-auto mb-4" />
         <h3 className="text-xl font-bold text-ink-900 mb-2">Kartu Jajan Belum Aktif</h3>
         <p className="text-ink-500 max-w-md mx-auto">
@@ -237,7 +237,7 @@ export default function KartuJajanPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Top-up Form */}
-        <div className="lg:col-span-1 bg-white p-6 rounded-[2rem] shadow-md border border-surface-100 h-fit">
+        <div className="lg:col-span-1 bg-white p-6 rounded-[2rem] shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-surface-100 h-fit">
           <h3 className="text-lg font-bold text-primary-950 mb-4 flex items-center gap-2">
             <HandCoins className="w-5 h-5 text-gold-500" />
             Top Up Saldo
@@ -279,7 +279,7 @@ export default function KartuJajanPage() {
             <button
               onClick={handleTopup}
               disabled={processing || topupAmount < 10000 || dompet.status !== "AKTIF"}
-              className="w-full py-3.5 bg-primary-600 hover:bg-primary-700 disabled:bg-surface-200 disabled:text-ink-400 text-white font-black rounded-3xl transition-colors flex items-center justify-center gap-2 shadow-md"
+              className="w-full py-3.5 bg-primary-600 hover:bg-primary-700 disabled:bg-surface-200 disabled:text-ink-400 text-white font-black rounded-3xl transition-colors flex items-center justify-center gap-2 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10"
             >
               {processing ? <RefreshCw className="w-5 h-5 animate-spin" /> : "Top Up Sekarang"}
             </button>
@@ -290,7 +290,7 @@ export default function KartuJajanPage() {
         </div>
 
         {/* Transaction History */}
-        <div className="lg:col-span-2 bg-white p-6 rounded-[2rem] shadow-md border border-surface-100">
+        <div className="lg:col-span-2 bg-white p-6 rounded-[2rem] shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-surface-100">
           <h3 className="text-lg font-bold text-primary-950 mb-6 flex items-center gap-2">
             <Clock className="w-5 h-5 text-gold-500" />
             Riwayat Transaksi

@@ -65,7 +65,7 @@ export default function LaporanHarianPage() {
           </div>
           <button 
             onClick={handlePrint}
-            className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-5 rounded-3xl flex items-center gap-2 transition-all shadow-md"
+            className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-5 rounded-3xl flex items-center gap-2 transition-all shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10"
           >
             <Printer className="w-4 h-4" /> Cetak Laporan
           </button>
@@ -73,7 +73,7 @@ export default function LaporanHarianPage() {
       </div>
 
       {/* PRINTABLE AREA */}
-      <div className="bg-white rounded-3xl border border-slate-200 shadow-md p-8 print:shadow-none print:border-none print:p-0">
+      <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 p-8 print:shadow-none print:border-none print:p-0">
         
         {/* Laporan Header */}
         <div className="text-center border-b-2 border-slate-900 pb-6 mb-6">

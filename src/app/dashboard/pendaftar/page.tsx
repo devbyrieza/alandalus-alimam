@@ -127,7 +127,7 @@ function HeroBanner({ nama, nomorPendaftaran, lastUpdate }: any) {
           </div>
           <h1 className="text-3xl sm:text-3xl md:text-5xl lg:text-7xl font-black leading-[1.1] font-display tracking-tight text-white italic">
             Selamat Datang, <br />
-            <span className="text-secondary-400 not-italic uppercase drop-shadow-lg">
+            <span className="text-secondary-400 not-italic uppercase drop-shadow-2xl shadow-primary/30  shadow-primary/20 ">
               {nama}!
             </span>
           </h1>
@@ -150,7 +150,7 @@ function HeroBanner({ nama, nomorPendaftaran, lastUpdate }: any) {
 
 function GuidedActionCard({ nextStep }: any) {
   return (
-    <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[2.5rem] border-2 border-primary-100 shadow-xl shadow-primary/5 overflow-hidden group">
+    <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[2.5rem] border-2 border-primary-100 shadow-2xl shadow-primary/30  shadow-primary/5 overflow-hidden group">
       <div className="flex flex-col md:flex-row items-stretch">
         <div className="bg-secondary-400 p-6 sm:p-5 md:p-8 flex flex-col items-center justify-center text-primary-950 min-w-[200px]">
           <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -226,7 +226,7 @@ function StatusGrid({ status, statusLabel, pengumuman }: any) {
       {items.map((item, id) => (
         <div
           key={id}
-          className="bg-white rounded-[1.5rem] border border-surface-200 p-6 flex flex-col gap-4 shadow-md hover:shadow-lg transition-shadow"
+          className="bg-white rounded-[1.5rem] border border-surface-200 p-6 flex flex-col gap-4 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 hover:shadow-2xl shadow-primary/30  shadow-primary/20 transition-shadow"
         >
           <div className="flex items-center gap-4">
             <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${item.bg} ${item.color}`}>
@@ -269,7 +269,7 @@ function SupportCenter() {
           <a
             href="https://wa.me/6281285300800"
             target="_blank"
-            className="flex items-center justify-center gap-3 px-6 py-4 bg-secondary-400 text-primary-950 font-black text-sm uppercase tracking-widest rounded-2xl hover:bg-secondary-300 shadow-xl transition-all hover:scale-105 active:scale-95 w-full"
+            className="flex items-center justify-center gap-3 px-6 py-4 bg-secondary-400 text-primary-950 font-black text-sm uppercase tracking-widest rounded-2xl hover:bg-secondary-300 shadow-2xl shadow-primary/30 transition-all hover:scale-105 active:scale-95 w-full"
           >
             Chat di WhatsApp
             <ArrowRight className="w-4 h-4" />
@@ -292,7 +292,7 @@ function LoadingState() {
 
 function ErrorState({ message }: { message: string }) {
   return (
-    <div className="p-20 text-center text-red-600 font-bold bg-white rounded-4xl border border-red-100 shadow-xl">
+    <div className="p-20 text-center text-red-600 font-bold bg-white rounded-4xl border border-red-100 shadow-2xl shadow-primary/30 ">
       {message}
     </div>
   );

@@ -345,9 +345,9 @@ export default function LoginPage() {
               />
             </div>
           </Link>
-          <h1 className="text-3xl md:text-5xl font-display font-black text-white mb-2 tracking-tight drop-shadow-lg">
+          <h1 className="text-3xl md:text-5xl font-display font-black text-white mb-2 tracking-tight drop-shadow-2xl shadow-primary/30  shadow-primary/20 ">
             Portal{" "}
-            <span className="text-secondary-400 font-black drop-shadow-lg">
+            <span className="text-secondary-400 font-black drop-shadow-2xl shadow-primary/30  shadow-primary/20 ">
               {BRANDING.schoolShortName}
             </span>
           </h1>
@@ -373,7 +373,7 @@ export default function LoginPage() {
               <motion.div
                 layoutId="auth-tab"
                 transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                className={`absolute top-2 bottom-2 rounded-2xl bg-white shadow-md border border-slate-200/50 ${
+                className={`absolute top-2 bottom-2 rounded-2xl bg-white shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-slate-200/50 ${
                   activeTab === "pendaftar"
                     ? "left-2 w-[calc(50%-8px)]"
                     : "left-[calc(50%+4px)] w-[calc(50%-8px)]"
@@ -461,7 +461,7 @@ export default function LoginPage() {
                           whileTap={{ scale: 0.98 }}
                           onClick={() => handleSelectRole(role)}
                           disabled={selectingRole}
-                          className={`w-full p-6 sm:p-8 rounded-2xl bg-linear-to-r ${info.color} border text-left flex items-center gap-4 transition-all hover:shadow-lg disabled:opacity-60`}
+                          className={`w-full p-6 sm:p-8 rounded-2xl bg-linear-to-r ${info.color} border text-left flex items-center gap-4 transition-all hover:shadow-2xl shadow-primary/30  shadow-primary/20 disabled:opacity-60`}
                         >
                           <div className="w-10 h-10 rounded-3xl bg-white/80 shadow-xs flex items-center justify-center text-primary-700 shrink-0">
                             <IconComp className="w-5 h-5" />
@@ -538,7 +538,7 @@ export default function LoginPage() {
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-4 md:py-5 rounded-[1.5rem] bg-gradient-to-r from-secondary-400 to-secondary-600 text-primary-950 font-black text-lg md:text-xl shadow-xl shadow-secondary-400/20 border border-secondary-300 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                    className="w-full py-4 md:py-5 rounded-[1.5rem] bg-gradient-to-r from-secondary-400 to-secondary-600 text-primary-950 font-black text-lg md:text-xl shadow-2xl shadow-primary/30 shadow-secondary-400/20 border border-secondary-300 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                   >
                     {isLoading ? (
                       <Loader2 className="w-6 h-6 animate-spin" />
@@ -556,7 +556,7 @@ export default function LoginPage() {
                     </p>
                     <Link
                       href="/daftar"
-                      className="inline-flex items-center gap-2 px-6 md:px-10 py-3 rounded-3xl bg-white/50 backdrop-blur-sm text-primary-800 font-black text-sm border border-primary-100 hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all"
+                      className="inline-flex items-center gap-2 px-6 md:px-10 py-3 rounded-3xl bg-white/50 backdrop-blur-sm text-primary-800 font-black text-sm border border-primary-100 hover:bg-white hover:shadow-2xl shadow-primary/30  shadow-primary/20 hover:-translate-y-1 transition-all"
                     >
                       Daftar Baru Di Sini
                     </Link>
@@ -614,7 +614,7 @@ export default function LoginPage() {
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-4 md:py-5 rounded-[1.5rem] bg-gradient-to-r from-primary-700 to-primary-900 text-white font-black text-lg md:text-xl shadow-xl shadow-primary-900/20 border border-primary-600 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                    className="w-full py-4 md:py-5 rounded-[1.5rem] bg-gradient-to-r from-primary-700 to-primary-900 text-white font-black text-lg md:text-xl shadow-2xl shadow-primary/30  shadow-primary-900/20 border border-primary-600 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                   >
                     {isLoading ? (
                       <Loader2 className="w-6 h-6 animate-spin" />

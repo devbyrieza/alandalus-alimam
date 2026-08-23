@@ -356,7 +356,7 @@ export default function JadwalUjianPage() {
         <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
         <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-center gap-6">
-            <div className="p-6 sm:p-8 bg-gradient-to-br from-purple-500 to-[#7a0000] rounded-2xl shadow-lg shadow-purple-500/20">
+            <div className="p-6 sm:p-8 bg-gradient-to-br from-purple-500 to-[#7a0000] rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20 shadow-purple-500/20">
               <Calendar className="w-8 h-8 text-white" />
             </div>
             <div>
@@ -379,7 +379,7 @@ export default function JadwalUjianPage() {
             </button>
             <button
               onClick={() => setShowAddSession(true)}
-              className="flex items-center gap-3 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl font-black shadow-lg shadow-purple-600/20 transition-all hover:-translate-y-0.5"
+              className="flex items-center gap-3 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl font-black shadow-2xl shadow-primary/30  shadow-primary/20 shadow-purple-600/20 transition-all hover:-translate-y-0.5"
             >
               <Plus className="w-5 h-5" />
               Sesi Baru
@@ -390,7 +390,7 @@ export default function JadwalUjianPage() {
 
       {/* Broadcast Info Card */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-gradient-to-br from-[#550000] to-purple-700 rounded-2xl p-6 text-white shadow-lg overflow-hidden relative">
+        <div className="bg-gradient-to-br from-[#550000] to-purple-700 rounded-2xl p-6 text-white shadow-2xl shadow-primary/30  shadow-primary/20 overflow-hidden relative">
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-xl"></div>
           <div className="relative flex items-center gap-6">
             <div className="p-6 sm:p-8 bg-white/20 rounded-2xl backdrop-blur-md">
@@ -484,7 +484,7 @@ export default function JadwalUjianPage() {
                       <button
                         onClick={() => handleAssign(s.id)}
                         disabled={assigning || s.booked_count >= s.quota}
-                        className="w-full md:w-auto px-6 py-3 bg-gradient-to-br from-primary-600 to-[#7a0000] text-white rounded-3xl font-black shadow-lg shadow-primary-600/20 hover:scale-105 transition-all flex items-center justify-center gap-2"
+                        className="w-full md:w-auto px-6 py-3 bg-gradient-to-br from-primary-600 to-[#7a0000] text-white rounded-3xl font-black shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary-600/20 hover:scale-105 transition-all flex items-center justify-center gap-2"
                       >
                         {assigning ? (
                           <Loader2 className="w-4 h-4 animate-spin" />
@@ -730,7 +730,7 @@ export default function JadwalUjianPage() {
                 </button>
                 <button
                   type="submit"
-                  className="flex-[2] py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl font-black shadow-lg shadow-purple-600/20 transition-all"
+                  className="flex-[2] py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl font-black shadow-2xl shadow-primary/30  shadow-primary/20 shadow-purple-600/20 transition-all"
                 >
                   Simpan Sesi
                 </button>
@@ -856,7 +856,7 @@ export default function JadwalUjianPage() {
                     broadcasting ||
                     (availStats.eligibleCount === 0 && !resetFlags)
                   }
-                  className="flex-[2] py-4 bg-[#550000] hover:bg-[#550000] text-white rounded-2xl font-black shadow-lg shadow-indigo-600/20 transition-all flex items-center justify-center gap-2"
+                  className="flex-[2] py-4 bg-[#550000] hover:bg-[#550000] text-white rounded-2xl font-black shadow-2xl shadow-primary/30  shadow-primary/20 shadow-indigo-600/20 transition-all flex items-center justify-center gap-2"
                 >
                   {broadcasting && <Loader2 className="w-4 h-4 animate-spin" />}
                   Kirim Sekarang

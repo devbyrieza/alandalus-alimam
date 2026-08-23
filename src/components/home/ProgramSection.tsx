@@ -102,7 +102,7 @@ function getTokens(variant: ProgramVariant) {
           "group-hover/item:bg-primary-600 group-hover/item:border-primary-600",
         checkIcon: "text-primary-600 group-hover/item:text-white",
         ctaBtn:
-          "bg-white border-primary-200 text-primary-800 hover:bg-primary-700 hover:border-primary-700 hover:text-white shadow-sm hover:shadow-md",
+          "bg-white border-primary-200 text-primary-800 hover:bg-primary-700 hover:border-primary-700 hover:text-white shadow-sm hover:shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10",
       };
     case "gold":
       return {
@@ -116,7 +116,7 @@ function getTokens(variant: ProgramVariant) {
           "group-hover/item:bg-primary-500 group-hover/item:border-primary-500",
         checkIcon: "text-primary-600 group-hover/item:text-white",
         ctaBtn:
-          "bg-white border-primary-300 text-primary-800 hover:bg-primary-500 hover:border-primary-500 hover:text-white shadow-sm hover:shadow-md",
+          "bg-white border-primary-300 text-primary-800 hover:bg-primary-500 hover:border-primary-500 hover:text-white shadow-sm hover:shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10",
       };
     case "cream":
       return {
@@ -130,7 +130,7 @@ function getTokens(variant: ProgramVariant) {
           "group-hover/item:bg-primary-900 group-hover/item:border-primary-900",
         checkIcon: "text-primary-700 group-hover/item:text-white",
         ctaBtn:
-          "bg-white border-primary-100 text-primary-800 hover:bg-primary-900 hover:border-primary-900 hover:text-white shadow-sm hover:shadow-md",
+          "bg-white border-primary-100 text-primary-800 hover:bg-primary-900 hover:border-primary-900 hover:text-white shadow-sm hover:shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10",
       };
   }
 }
