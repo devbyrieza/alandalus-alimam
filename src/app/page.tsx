@@ -60,11 +60,7 @@ export default function HomePage() {
           </ScrollAnimation>
         </section>
 
-        <section id="beasiswa" aria-label="Program Beasiswa">
-          <ScrollAnimation delay={0.1} direction="none" duration={0.8}>
-            <ScholarshipSection variant="maroon" />
-          </ScrollAnimation>
-        </section>
+        
 
         {/* scale → "none" = fade saja, kesan muncul halus */}
         <section id="keunggulan" aria-label="Keunggulan Pesantren">
