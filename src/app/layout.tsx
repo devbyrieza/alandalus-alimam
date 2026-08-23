@@ -1,4 +1,4 @@
-﻿import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import type { Metadata } from "next";
 import "./globals.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -33,6 +33,7 @@ const inter = Inter({
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 export const metadata: Metadata = {
   metadataBase: new URL(BRANDING.websiteUrl),
+  manifest: "/manifest.json",
 
   title: {
     default: `${BRANDING.schoolName} | PPDB 2027/2028`,
