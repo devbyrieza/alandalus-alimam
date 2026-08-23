@@ -9,8 +9,7 @@ import {
   ShieldCheck,
   HelpCircle,
   File,
-  ClipboardList,
-} from "lucide-react";
+  ClipboardList } from "lucide-react";
 import { Alert } from "@/components/ui";
 
 export default function PengajuanKeringananPage() {
@@ -107,8 +106,7 @@ export default function PengajuanKeringananPage() {
     if (!fileSktm || !filePermohonan) {
       setMessage({
         type: "error",
-        text: "Mohon lengkapi seluruh dokumen WAJIB (SKTM dan Surat Permohonan Keringanan).",
-      });
+        text: "Mohon lengkapi seluruh dokumen WAJIB (SKTM dan Surat Permohonan Keringanan)." });
       return;
     }
 
@@ -125,16 +123,14 @@ export default function PengajuanKeringananPage() {
     try {
       const res = await fetch("/api/pendaftar/pengajuan-keringanan", {
         method: "POST",
-        body: formData,
-      });
+        body: formData });
 
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || "Gagal mengirim pengajuan");
 
       setMessage({
         type: "success",
-        text: "Pengajuan berhasil dikirim dan sedang dalam proses peninjauan oleh Tim Finance.",
-      });
+        text: "Pengajuan berhasil dikirim dan sedang dalam proses peninjauan oleh Tim Finance." });
       if (typeof window !== "undefined") {
         localStorage.removeItem("alandalus_alimam_keringanan_draft");
       }

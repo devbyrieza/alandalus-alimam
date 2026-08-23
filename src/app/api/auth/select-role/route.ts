@@ -16,8 +16,7 @@ export async function POST(request: NextRequest) {
 
     // Fetch profile
     const profile = (await prisma.profile.findUnique({
-      where: { id: profile_id },
-    })) as any;
+      where: { id: profile_id } })) as any;
 
     if (!profile) {
       return NextResponse.json(
@@ -43,8 +42,7 @@ export async function POST(request: NextRequest) {
     const response = NextResponse.json({
       success: true,
       role: chosen_role,
-      redirectTo,
-    });
+      redirectTo });
 
     response.cookies.set(
       "al_session",
@@ -52,8 +50,7 @@ export async function POST(request: NextRequest) {
         role: chosen_role,
         id: profile.id,
         full_name: profile.full_name,
-        username: profile.username,
-      }),
+        username: profile.username }),
       {
         path: "/",
         httpOnly: true,

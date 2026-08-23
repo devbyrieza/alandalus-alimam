@@ -27,8 +27,7 @@ import {
   BookOpen,
   MessageSquare,
   Settings,
-  KeyRound,
-} from "lucide-react";
+  KeyRound } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { motion, AnimatePresence } from "framer-motion";
 import { BRANDING } from "@/config/branding";
@@ -42,57 +41,47 @@ const ROLE_INFO: Record<
     label: "Admin Super",
     icon: Crown,
     desc: "Akses penuh semua fitur",
-    color: "from-secondary-50 to-yellow-50 border-secondary-200",
-  },
+    color: "from-secondary-50 to-yellow-50 border-secondary-200" },
   admin_berkas: {
     label: "Admin Berkas",
     icon: Folder,
     desc: "Verifikasi dokumen pendaftar",
-    color: "from-primary-50 to-indigo-50 border-primary-200",
-  },
+    color: "from-primary-50 to-indigo-50 border-primary-200" },
   admin_keuangan: {
     label: "Admin Keuangan",
     icon: Coins,
     desc: "Verifikasi pembayaran",
-    color: "from-emerald-50 to-primary-50 border-emerald-200",
-  },
+    color: "from-emerald-50 to-primary-50 border-emerald-200" },
   pewawancara_cawalsan: {
     label: "Pewawancara Cawalsan",
     icon: Mic,
     desc: "Wawancara calon orangtua/wali santri",
-    color: "from-purple-50 to-violet-50 border-purple-200",
-  },
+    color: "from-purple-50 to-violet-50 border-purple-200" },
   pewawancara_calsan: {
     label: "Pewawancara Calon Santri",
     icon: Mic,
     desc: "Wawancara calon santri",
-    color: "from-rose-50 to-pink-50 border-rose-200",
-  },
+    color: "from-rose-50 to-pink-50 border-rose-200" },
   penguji: {
     label: "Penguji Al-Qur'an",
     icon: BookOpen,
     desc: "Penguji tes Al-Qur'an",
-    color: "from-green-50 to-lime-50 border-green-200",
-  },
+    color: "from-green-50 to-lime-50 border-green-200" },
   penguji_hafalan: {
     label: "Penguji Hafalan",
     icon: BookOpen,
     desc: "Penguji tes Hafalan Al-Qur'an",
-    color: "from-teal-50 to-emerald-50 border-teal-200",
-  },
+    color: "from-teal-50 to-emerald-50 border-teal-200" },
   penguji_bahasa_arab: {
     label: "Penguji Lisan B. Arab",
     icon: MessageSquare,
     desc: "Penguji tes Lisan Bahasa Arab",
-    color: "from-sky-50 to-blue-50 border-sky-200",
-  },
+    color: "from-sky-50 to-blue-50 border-sky-200" },
   admin: {
     label: "Admin",
     icon: Settings,
     desc: "Panel administrasi",
-    color: "from-orange-50 to-secondary-50 border-orange-200",
-  },
-};
+    color: "from-orange-50 to-secondary-50 border-orange-200" } };
 
 // ========================================
 // REUSABLE COMPONENTS
@@ -103,8 +92,7 @@ const AuthInput = ({
   icon: Icon,
   error,
   children,
-  rightElement,
-}: {
+  rightElement }: {
   label: string;
   icon: any;
   error?: string;
@@ -209,9 +197,7 @@ export default function LoginPage() {
         body: JSON.stringify({
           login_type: "pendaftar",
           nik: nik,
-          nomor_pendaftaran: no,
-        }),
-      });
+          nomor_pendaftaran: no }) });
 
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Login gagal");
@@ -252,9 +238,7 @@ export default function LoginPage() {
           login_type: "admin",
           email: email,
           password: pass,
-          chosen_role: chosenRole,
-        }),
-      });
+          chosen_role: chosenRole }) });
 
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Login gagal");
@@ -266,8 +250,7 @@ export default function LoginPage() {
         setRoleSelectionData({
           profile_id: data.profile_id,
           full_name: data.full_name,
-          available_roles: data.available_roles,
-        });
+          available_roles: data.available_roles });
         return;
       }
 
@@ -310,9 +293,7 @@ export default function LoginPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           profile_id: roleSelectionData.profile_id,
-          chosen_role: chosenRole,
-        }),
-      });
+          chosen_role: chosenRole }) });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Gagal memilih role");
       window.location.href = data.redirectTo;
@@ -451,8 +432,7 @@ export default function LoginPage() {
                         label: role,
                         icon: KeyRound,
                         desc: "",
-                        color: "from-slate-50 to-gray-50 border-slate-200",
-                      };
+                        color: "from-slate-50 to-gray-50 border-slate-200" };
                       const IconComp = info.icon;
                       return (
                         <motion.button

@@ -14,8 +14,7 @@ import {
   Calendar,
   Sparkles,
   Send,
-  AlertCircle,
-} from "lucide-react";
+  AlertCircle } from "lucide-react";
 
 interface PendingSMS {
   id: string;
@@ -49,8 +48,7 @@ export default function AdminSMSDashboard() {
       const response = await fetch("/api/admin/pending-sms", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id, status: "sent" }),
-      });
+        body: JSON.stringify({ id, status: "sent" }) });
 
       if (response.ok) {
         fetchPendingSMS(); // Refresh list

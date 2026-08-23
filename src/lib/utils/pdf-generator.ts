@@ -334,8 +334,7 @@ export const generateBuktiPendaftaran = async (data: PendaftarPdfData) => {
     body: tableData,
     theme: "plain",
     styles: { fontSize: 11, cellPadding: 3 },
-    columnStyles: { 0: { fontStyle: "bold", cellWidth: 50 } },
-  });
+    columnStyles: { 0: { fontStyle: "bold", cellWidth: 50 } } });
 
   const finalY = (doc as any).lastAutoTable.finalY + 15;
   doc.setFontSize(11);
@@ -398,8 +397,7 @@ export const generateKartuUjian = async (data: PendaftarPdfData) => {
     theme: "plain",
     margin: { right: 65 },
     styles: { fontSize: 11, cellPadding: 3 },
-    columnStyles: { 0: { fontStyle: "bold", cellWidth: 40 } },
-  });
+    columnStyles: { 0: { fontStyle: "bold", cellWidth: 40 } } });
 
   const finalY = (doc as any).lastAutoTable.finalY + 20;
   await drawFormalSignature(doc, finalY);
@@ -428,8 +426,7 @@ export const generateSuratKelulusan = async (data: PendaftarPdfData) => {
   doc.setFontSize(16);
   doc.setFont("helvetica", "bold");
   doc.text("SURAT KETERANGAN HASIL SELEKSI", pageWidth / 2, startY + 10, {
-    align: "center",
-  });
+    align: "center" });
   doc.setFontSize(10);
   doc.text(
     `Nomor: ${data.nomor_pendaftaran}/SKL-PPDB/${new Date().getFullYear()}`,
@@ -456,8 +453,7 @@ export const generateSuratKelulusan = async (data: PendaftarPdfData) => {
     theme: "plain",
     margin: { left: 25 },
     styles: { fontSize: 11, cellPadding: 3 },
-    columnStyles: { 0: { fontStyle: "bold", cellWidth: 50 } },
-  });
+    columnStyles: { 0: { fontStyle: "bold", cellWidth: 50 } } });
 
   const finalY = (doc as any).lastAutoTable.finalY + 10;
 
@@ -473,8 +469,7 @@ export const generateSuratKelulusan = async (data: PendaftarPdfData) => {
     statusText = "BELUM DITERIMA";
 
   doc.text(`DINYATAKAN: ${statusText}`, pageWidth / 2, finalY + 10, {
-    align: "center",
-  });
+    align: "center" });
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(11);
@@ -666,8 +661,7 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(13);
   doc.text("FORMULIR HASIL PEMERIKSAAN KESEHATAN", pageWidth / 2, y, {
-    align: "center",
-  });
+    align: "center" });
   y += 7;
   doc.setFontSize(11);
   doc.text(
@@ -735,8 +729,7 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
     columnStyles: {
       0: { cellWidth: 80 },
       1: { cellWidth: 30 },
-      2: { cellWidth: 64 },
-    },
+      2: { cellWidth: 64 } },
     margin: { top: getContentStartY() + 5, bottom: 48, left: margin, right: margin },
     didDrawPage: (data) => {
       // Menggambar kop dan footer secara sinkron di halaman luapan (page break)
@@ -744,8 +737,7 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
         drawHeaderSync(doc);
         drawFooterSync(doc);
       }
-    },
-  });
+    } });
 
   y = (doc as any).lastAutoTable.finalY + 6;
   doc.setFont("helvetica", "bold");
@@ -793,10 +785,8 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
       2: { cellWidth: 10 },
       3: { cellWidth: 43 },
       4: { cellWidth: 41 },
-      5: { cellWidth: 10 },
-    },
-    margin: { top: getContentStartY() + 5, bottom: 48, left: margin, right: margin },
-  });
+      5: { cellWidth: 10 } },
+    margin: { top: getContentStartY() + 5, bottom: 48, left: margin, right: margin } });
 
   let finalY2 = (doc as any).lastAutoTable.finalY + 8; // Memberikan jarak nafas yang lebih lega antara tabel dan teks
   const pageHeight = doc.internal.pageSize.getHeight();
@@ -861,8 +851,7 @@ export const generateSuratPernyataan = async (data: PendaftarPdfData) => {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(14);
   doc.text("SURAT PERNYATAAN ORANG TUA/WALI SANTRI", pageWidth / 2, y, {
-    align: "center",
-  });
+    align: "center" });
   y += 8;
 
   doc.setFont("helvetica", "normal");
@@ -1127,8 +1116,7 @@ export const generatePaktaIntegritas = async (data: PendaftarPdfData) => {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(14);
   doc.text("PAKTA INTEGRITAS ORANG TUA/WALI SANTRI", pageWidth / 2, y, {
-    align: "center",
-  });
+    align: "center" });
   y += 12;
 
   doc.setFont("helvetica", "normal");

@@ -11,8 +11,7 @@ export async function POST(request: NextRequest) {
       tanggal_lahir,
       no_hp,
       jenis_kelamin,
-      jenjang,
-    } = body;
+      jenjang } = body;
 
     // Validasi input
     if (
@@ -32,8 +31,7 @@ export async function POST(request: NextRequest) {
     // 1. Get tahun ajaran aktif
     const tahunAjaranData = await prisma.tahunAjaran.findFirst({
       where: { is_active: true },
-      select: { id: true },
-    });
+      select: { id: true } });
 
     if (!tahunAjaranData) {
       return NextResponse.json(
@@ -63,17 +61,14 @@ export async function POST(request: NextRequest) {
       where: {
         nik: nik,
         tahun_ajaran_id: tahun_ajaran_id,
-        deleted_at: null,
-      },
-      select: { nomor_pendaftaran: true },
-    });
+        deleted_at: null },
+      select: { nomor_pendaftaran: true } });
 
     if (existingPendaftar) {
       return NextResponse.json(
         {
           error: "NIK sudah terdaftar di tahun ajaran ini",
-          nomor_pendaftaran: existingPendaftar.nomor_pendaftaran,
-        },
+          nomor_pendaftaran: existingPendaftar.nomor_pendaftaran },
         { status: 409 },
       );
     }
@@ -93,8 +88,7 @@ export async function POST(request: NextRequest) {
         status_pendaftaran: "draft", // Status draft untuk mode demo
         // user_id left null for demo mode without auth user
         // password_hash is optional/null
-      },
-    });
+      } });
 
     console.log(`✅ Pendaftaran sukses!`);
     console.log(`   ID: ${pendaftarData.id}`);
@@ -111,9 +105,7 @@ export async function POST(request: NextRequest) {
         nik,
         jenjang,
         jenis_kelamin,
-        status_pendaftaran: pendaftarData.status_pendaftaran,
-      },
-    });
+        status_pendaftaran: pendaftarData.status_pendaftaran } });
   } catch (error: any) {
     console.error("❌ Demo Registration Error:", error);
     return NextResponse.json(

@@ -32,8 +32,7 @@ export async function POST() {
 
       // 1. Cari atau buat 2027/2028 (dengan tahun_mulai: 2027 yang BENAR)
       let ta2027 = await tx.tahunAjaran.findFirst({
-        where: { tahun_mulai: 2027, tahun_selesai: 2028 },
-      });
+        where: { tahun_mulai: 2027, tahun_selesai: 2028 } });
 
       if (!ta2027) {
         ta2027 = await tx.tahunAjaran.create({
@@ -44,21 +43,17 @@ export async function POST() {
             is_active: true,
             tanggal_buka_pendaftaran: new Date("2026-08-01"),
             tanggal_tutup_pendaftaran: new Date("2027-01-31"),
-            biaya_pendaftaran: 250000,
-          },
-        });
+            biaya_pendaftaran: 250000 } });
       } else {
         await tx.tahunAjaran.update({
           where: { id: ta2027.id },
-          data: { is_active: true, biaya_pendaftaran: 250000, nama: "2027/2028" },
-        });
+          data: { is_active: true, biaya_pendaftaran: 250000, nama: "2027/2028" } });
       }
 
       // 2. Nonaktifkan yang lain
       await tx.tahunAjaran.updateMany({
         where: { id: { not: ta2027.id }, is_active: true },
-        data: { is_active: false },
-      });
+        data: { is_active: false } });
 
 
 
@@ -68,8 +63,7 @@ export async function POST() {
     return NextResponse.json({
       success: true,
       message: "Tahun Ajaran 2027/2028 berhasil dibuat/diaktifkan dan Data pendaftar berhasil dimigrasi (koreksi awalan nomor).",
-      data: result,
-    });
+      data: result });
   } catch (error) {
     console.error("Seed tahun ajaran error:", error);
     return NextResponse.json(
@@ -104,8 +98,7 @@ export async function GET() {
     }
 
     const data = await prisma.tahunAjaran.findMany({
-      orderBy: { tahun_mulai: "desc" },
-    });
+      orderBy: { tahun_mulai: "desc" } });
 
     const active = data.find((ta) => ta.is_active);
     const has2027 = data.find(
@@ -115,8 +108,7 @@ export async function GET() {
     return NextResponse.json({
       all: data,
       active,
-      has2027_2028: !!has2027,
-    });
+      has2027_2028: !!has2027 });
   } catch (error) {
     console.error("Get tahun ajaran error:", error);
     return NextResponse.json(
