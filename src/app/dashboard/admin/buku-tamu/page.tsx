@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { Users, Clock, CheckCircle2, UserPlus, Star, Shield, ArrowRight } from "lucide-react";
-import DashboardLayout from "../../components/DashboardLayout";
 
 // The Roster based on user instructions
 const ROSTER: Record<number, string> = {
@@ -70,7 +69,7 @@ export default function RadarTamuAdmin() {
   };
 
   return (
-    <DashboardLayout>
+    <>
       <div className="p-8 max-w-7xl mx-auto space-y-8">
         
         {/* Header & Roster Banner */}
@@ -188,6 +187,6 @@ export default function RadarTamuAdmin() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </>
   );
 }
