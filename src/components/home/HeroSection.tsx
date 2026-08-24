@@ -119,23 +119,15 @@ export default function HeroSection() {
               className="space-y-3"
             >
               <h1
-                className="leading-[1.06] tracking-[-0.03em] mx-auto lg:mx-0 max-w-2xl lg:max-w-none font-black text-center lg:text-left"
-                style={{
-                  fontSize: "clamp(2.5rem, 5vw + 1rem, 5rem)" }}
-              >
-                <span className="block text-ink-950">
-                  Kaderisasi Ummat
-                </span>
-                <span className="block mt-1 text-[var(--color-primary-700)]">
-                  <span className="gradient-text-maroon">
-                    Hanif, Kontributif,
+                  className="leading-[1.1] tracking-[-0.03em] mx-auto lg:mx-0 max-w-2xl lg:max-w-none font-black text-center lg:text-left text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem]"
+                >
+                  <span className="text-ink-950 block mb-1">
+                    Kaderisasi Ummat
                   </span>
-                  <br className="hidden sm:block" />
                   <span className="gradient-text-maroon">
-                    dan Adaptif
+                    Hanif, Kontributif, dan Adaptif
                   </span>
-                </span>
-              </h1>
+                </h1>
             </motion.div>
 
             {/* Body Copy */}
@@ -288,7 +280,7 @@ export default function HeroSection() {
             initial="hidden"
             animate={animate}
             transition={{ delay: shouldReduceMotion ? 0 : 0.25 }}
-            className="relative w-full mt-8 lg:-mt-8 xl:-mt-12 lg:max-w-[500px] xl:max-w-[540px] lg:ml-auto"
+            className="relative w-full mt-6 lg:mt-6 xl:mt-8 lg:max-w-[500px] xl:max-w-[540px] lg:ml-auto"
             style={{ overflow: "visible" }}
           >
             {/* Main Image */}
