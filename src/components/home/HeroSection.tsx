@@ -119,7 +119,7 @@ export default function HeroSection() {
               className="space-y-3"
             >
               <h1
-                className="leading-[1.06] tracking-[-0.03em] mx-auto lg:mx-0 max-w-2xl lg:max-w-none font-black text-balance text-center lg:text-left"
+                className="leading-[1.06] tracking-[-0.03em] mx-auto lg:mx-0 max-w-2xl lg:max-w-none font-black text-center lg:text-left"
                 style={{
                   fontSize: "clamp(2.5rem, 5vw + 1rem, 5rem)" }}
               >
