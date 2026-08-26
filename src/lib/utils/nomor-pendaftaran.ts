@@ -103,25 +103,12 @@ export async function generateNomorPendaftaran(
  * @param jenis_kelamin - L (Laki-laki) or P (Perempuan)
  * @returns Prefix string (MTI, MTA, ILI, ILA, MAI, MAA)
  */
-export function generatePrefix(jenjang: string, jenis_kelamin: string): string {
-  let prefix = "";
+export function generatePrefix(jenjang: string, jenis_kelamin?: string): string {
   const normJenjang = (jenjang || "").toUpperCase().replace(/[\s\-_]/g, "");
-
-  if (normJenjang.includes("MTS")) {
-    prefix = "MT";
-  } else if (normJenjang.includes("IL") || normJenjang.includes("IDAD") || normJenjang.includes("LUGHAW")) {
-    prefix = "IL";
-  } else if (normJenjang.includes("MA")) {
-    prefix = "MA";
-  } else {
-    prefix = normJenjang.slice(0, 2) || "MT";
-  }
-
-  // Al-Imam khusus Putra (A)
-  const normGender = (jenis_kelamin || "L").toUpperCase();
-  prefix += (normGender === "P" || normGender === "PUTRI" || normGender === "AKHAWAT") ? "I" : "A";
-
-  return prefix;
+  if (normJenjang.includes("MTS") || normJenjang.includes("SMP")) return "MTA";
+  if (normJenjang.includes("IL") || normJenjang.includes("IDAD") || normJenjang.includes("LUGHAW")) return "ILA";
+  if (normJenjang.includes("MA") || normJenjang.includes("SMA")) return "MAA";
+  return "MTA";
 }
 
 // ===================================
