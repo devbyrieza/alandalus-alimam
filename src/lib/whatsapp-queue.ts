@@ -687,9 +687,9 @@ export function buildMessageRegistrationSuccess(
 ): string {
     let jenjangStr = jenjang;
     const normJ = (jenjang || "").toUpperCase().replace(/[\s\-_]/g, "");
-    if (normJ.includes("MTS") || normJ.includes("SMP")) jenjangStr = "Madrasah Tsanawiyah (MTs Putra)";
-    else if (normJ.includes("IL") || normJ.includes("IDAD") || normJ.includes("LUGHAW")) jenjangStr = "I'dad Lughowi (Persiapan Bahasa & Kepesantrenan Putra)";
-    else if (normJ.includes("MA") || normJ.includes("SMA")) jenjangStr = "Madrasah Aliyah (MA Langsung Putra)";
+    if (normJ.includes("MTS") || normJ.includes("SMP")) jenjangStr = "MTs (Madrasah Tsanawiyah) Putra";
+    else if (normJ.includes("IL") || normJ.includes("IDAD") || normJ.includes("LUGHAW")) jenjangStr = "I'dad Lughowi (Persiapan Bahasa & Kepesantrenan) Putra";
+    else if (normJ.includes("MA") || normJ.includes("SMA")) jenjangStr = "MA (Madrasah Aliyah) Putra (Tanpa IL)";
     else jenjangStr = jenjang || "MTs Putra";
 
     return `🎉 *Pendaftaran Berhasil!*
