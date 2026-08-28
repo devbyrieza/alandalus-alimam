@@ -130,7 +130,7 @@ export default function AdminSMSDashboard() {
               </li>
               <li className="flex items-start gap-2.5 bg-white/80 p-3 rounded-2xl border border-emerald-100/50">
                 <span className="w-6 h-6 rounded-full bg-[#550000] text-white font-bold text-xs flex items-center justify-center shrink-0">3</span>
-                <span>Format: "PPDB AL-IMAM: Kode OTP: [OTP] untuk [NAMA]"</span>
+                <span>Format: "SPMB AL-IMAM: Kode OTP: [OTP] untuk [NAMA]"</span>
               </li>
               <li className="flex items-start gap-2.5 bg-white/80 p-3 rounded-2xl border border-emerald-100/50">
                 <span className="w-6 h-6 rounded-full bg-[#550000] text-white font-bold text-xs flex items-center justify-center shrink-0">4</span>
@@ -206,7 +206,7 @@ export default function AdminSMSDashboard() {
                       <MessageSquare className="w-3.5 h-3.5 text-emerald-400" /> Pratinjau Pesan:
                     </p>
                     <pre className="font-mono text-sm leading-relaxed whitespace-pre-wrap">
-                      {`PPDB AL-IMAM
+                      {`SPMB AL-IMAM
 Kode OTP: ${item.otp}
 Untuk: ${item.nama}
 

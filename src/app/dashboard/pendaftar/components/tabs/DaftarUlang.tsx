@@ -252,7 +252,7 @@ export default function DaftarUlangTab() {
           <div>
             <h4 className="font-bold text-sm">Informasi Pembayaran SPP</h4>
             <p className="text-xs mt-1">
-              Berdasarkan kebijakan sistem terintegrasi, tagihan pembayaran SPP Bulan Pertama tidak ditagihkan di web PPDB ini. Tagihan SPP akan dikirimkan melalui <strong>Aplikasi Keuangan PSP Mobile / Sistem Siakad</strong> menjelang kedatangan santri ke asrama. Silakan lunasi tagihan Uang Pangkal Anda di bawah ini.
+              Berdasarkan kebijakan sistem terintegrasi, tagihan pembayaran SPP Bulan Pertama tidak ditagihkan di web SPMB ini. Tagihan SPP akan dikirimkan melalui <strong>Aplikasi Keuangan PSP Mobile / Sistem Siakad</strong> menjelang kedatangan santri ke asrama. Silakan lunasi tagihan Uang Pangkal Anda di bawah ini.
             </p>
           </div>
         </div>

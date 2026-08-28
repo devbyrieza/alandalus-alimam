@@ -351,7 +351,7 @@ export default function JadwalUjianPage() {
                 <span className="text-purple-600">Jadwal Seleksi</span>
               </h1>
               <p className="text-[#550000]/60 font-medium">
-                Panel Pengaturan Jadwal Seleksi PPDB Al Imam
+                Panel Pengaturan Jadwal Seleksi SPMB Al Imam
               </p>
             </div>
           </div>

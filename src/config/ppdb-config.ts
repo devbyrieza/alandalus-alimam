@@ -1,5 +1,5 @@
 ﻿// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//   PPDB CONFIGURATION - EASY CUSTOMIZATION
+//   SPMB CONFIGURATION - EASY CUSTOMIZATION
 //   Ganti bagian ini saja untuk setiap pesantren baru!
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -106,8 +106,8 @@ export const PPDB_CONFIG = {
 
   // ⚙️ SETTING TEKNIS (UMUMNYA TIDAK PERLU DIUBAH)
   technical: {
-    appName: "PPDB Al Imam Al Islami",
-    appDescription: "Sistem Penerimaan Peserta Didik Baru",
+    appName: "SPMB Al Imam Al Islami",
+    appDescription: "Sistem Sistem Penerimaan Murid Baru",
     version: "2.0.0",
     author: "Rieza Eka Tomara" } };
 
