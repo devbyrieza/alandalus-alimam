@@ -18,6 +18,7 @@ export const BRANDING = {
     process.env.NEXT_PUBLIC_ADDRESS ||
     "Jl. Pelabuhan II KM 18 Kampung Pupunjul, RT./RW/RW.01, 02, Cikembar, Kec. Cikembar, Kabupaten Sukabumi, Jawa Barat 43157",
   phone: process.env.NEXT_PUBLIC_PHONE || "+62 851-1152-4441",
+  financePhone: "+62 851-1152-4441",
   email: process.env.NEXT_PUBLIC_EMAIL || "alandalusalimam@gmail.com",
   igUrl:
     process.env.NEXT_PUBLIC_IG_URL ||

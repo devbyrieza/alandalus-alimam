@@ -487,7 +487,7 @@ export const generateSuratKelulusan = async (data: PendaftarPdfData) => {
 
   if (statusText === "LULUS / DITERIMA") {
     const daftarUlangInfo =
-      "Pembayaran daftar ulang harus segera dibayarkan minimal 50% paling lambat sepekan setelah pengumuman hasil. Bagi yang membutuhkan keringanan, silakan menghubungi bagian Finance di 0812-2063-6945.";
+      "Pembayaran daftar ulang harus segera dibayarkan minimal 50% paling lambat sepekan setelah pengumuman hasil. Bagi yang membutuhkan keringanan, silakan menghubungi bagian Finance di 0851-1152-4441.";
     doc.setFont("helvetica", "bold");
     doc.setFontSize(10);
     doc.text(
