@@ -1272,7 +1272,7 @@ export default function PembayaranPendaftaranTab({
               kami.
             </p>
             <a
-              href="https://wa.me/6281285300800"
+              href="https://wa.me/6285111524441"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 p-3 bg-white rounded-2xl border border-ink-100 hover:border-secondary-200 transition-colors group"
