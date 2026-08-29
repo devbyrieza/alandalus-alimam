@@ -58,7 +58,9 @@ const FILTER_LABELS: Record<string, string> = {
   hasil_ujian: "Hasil Ujian & Wawancara",
   diterima: "Diterima",
   belum_daftar_ulang: "Belum Daftar Ulang",
-  sudah_daftar_ulang: "Daftar Ulang" };
+  sudah_daftar_ulang: "Daftar Ulang",
+  dikeluarkan: "Dikeluarkan (DO)",
+  mengundurkan_diri: "Mengundurkan Diri" };
 
 interface Pendaftar {
   id: string;
