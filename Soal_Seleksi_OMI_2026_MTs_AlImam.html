@@ -68,6 +68,18 @@
     .kunci-jawaban h2 {
       color: #d32f2f;
     }
+    @media print {
+      body, .container {
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        max-width: 100%;
+      }
+      @page {
+        margin: 2cm 2.5cm; /* Atas/Bawah 2cm, Kiri/Kanan 2.5cm */
+      }
+    }
   </style>
 </head>
 <body>
