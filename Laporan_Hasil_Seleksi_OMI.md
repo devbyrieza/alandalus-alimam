@@ -114,3 +114,79 @@ Sampaikan fakta ini:
 Lalu berikan pujian luar biasa kepada **Tim Cadangan (Naufal Dzaki, Asrorin, Naufal Alfaniri, Abdul Hakim, Azzam) serta Andi Ibra** karena merekalah pahlawan ketaatan instruksi yang sesungguhnya. 
 
 Ini akan "Menampar" ego Tim Inti agar tidak sombong, sekaligus "Mengangkat" derajat Tim Cadangan agar merasa sangat dihargai dan setara!
+
+---
+
+## ?? RINCIAN JAWABAN BENAR & SALAH PER PESERTA
+
+*(Kunci Jawaban Asli: MTK [C A C C A] - IPA [B B C C C] - IPS [C C B D A])*
+
+**1. M Hafidz Reo Afelano** (Skor: 13)
+*   **MTK:** Benar Semua (No. 1, 2, 3, 4, 5)
+*   **IPA:** Benar (No. 6, 7, 10) | Salah (No. 8, 9)
+*   **IPS:** Benar Semua (No. 11, 12, 13, 14, 15)
+
+**2. M Fazril Alkais** (Skor: 12)
+*   **MTK:** Benar Semua (No. 1, 2, 3, 4, 5)
+*   **IPA:** Benar (No. 6, 10) | Salah (No. 7, 8, 9)
+*   **IPS:** Benar Semua (No. 11, 12, 13, 14, 15)
+
+**3. Labibullah El Fatih** (Skor: 12)
+*   **MTK:** Benar Semua (No. 1, 2, 3, 4, 5)
+*   **IPA:** Benar (No. 7, 8, 9, 10) | Salah (No. 6)
+*   **IPS:** Benar (No. 11, 12, 14) | Salah (No. 13, 15)
+
+**4. Muhammad Rifqi Hamid** (Skor: 11)
+*   **MTK:** Benar (No. 1, 2, 3, 5) | Salah (No. 4)
+*   **IPA:** Benar (No. 8, 10) | Salah (No. 6, 7, 9)
+*   **IPS:** Benar Semua (No. 11, 12, 13, 14, 15)
+
+**5. Rifqi Arsyad Fadilah** (Skor: 11)
+*   **MTK:** Benar (No. 2, 3) | Salah (No. 1, 4, 5)
+*   **IPA:** Benar Semua (No. 6, 7, 8, 9, 10)
+*   **IPS:** Benar (No. 11, 12, 14, 15) | Salah (No. 13)
+
+**6. Naufal Dzaki Purnama** (Skor: 11)
+*   **MTK:** Benar (No. 1, 2, 5) | Salah (No. 3, 4)
+*   **IPA:** Benar (No. 6, 8, 10) | Salah (No. 7, 9)
+*   **IPS:** Benar Semua (No. 11, 12, 13, 14, 15)
+
+**7. Ahmad Farros Al Barqy** (Skor: 10)
+*   **MTK:** Benar (No. 2, 5) | Salah (No. 1, 3, 4)
+*   **IPA:** Benar (No. 6, 8, 10) | Salah (No. 7, 9)
+*   **IPS:** Benar Semua (No. 11, 12, 13, 14, 15)
+
+**8. Khalish** (Skor: 10)
+*   **MTK:** Benar (No. 3, 5) | Salah (No. 1, 2, 4)
+*   **IPA:** Benar (No. 6, 8, 10) | Salah (No. 7, 9)
+*   **IPS:** Benar Semua (No. 11, 12, 13, 14, 15)
+
+**9. M Naufal Alfaniri** (Skor: 10)
+*   **MTK:** Benar (No. 1, 2, 3) | Salah (No. 4, 5)
+*   **IPA:** Benar (No. 8, 10) | Salah (No. 6, 7, 9)
+*   **IPS:** Benar Semua (No. 11, 12, 13, 14, 15)
+
+**10. Haidar Ayyubi** (Skor: 9)
+*   **MTK:** Benar (No. 1, 3, 5) | Salah (No. 2, 4)
+*   **IPA:** Benar (No. 8) | Salah (No. 6, 7, 9, 10)
+*   **IPS:** Benar Semua (No. 11, 12, 13, 14, 15)
+
+**11. Muh Asrorin Da Silva** (Skor: 9)
+*   **MTK:** Benar (No. 4, 5) | Salah (No. 1, 2, 3)
+*   **IPA:** Benar (No. 6, 7, 10) | Salah (No. 8, 9)
+*   **IPS:** Benar (No. 11, 12, 14, 15) | Salah (No. 13)
+
+**12. Abdul Hakim** (Skor: 8)
+*   **MTK:** Benar (No. 5) | Salah (No. 1, 2, 3, 4)
+*   **IPA:** Benar (No. 6, 10) | Salah (No. 7, 8, 9)
+*   **IPS:** Benar Semua (No. 11, 12, 13, 14, 15)
+
+**13. Andi Ibra Faeyza** (Skor: 7)
+*   **MTK:** Benar (No. 5) | Salah (No. 1, 2, 3, 4)
+*   **IPA:** Benar (No. 6, 7, 9, 10) | Salah (No. 8)
+*   **IPS:** Benar (No. 14, 15) | Salah (No. 11, 12, 13) *(Kosong di No. 12)*
+
+**14. M Azzam Al Hafizh** (Skor: 6)
+*   **MTK:** Benar (No. 2, 5) | Salah (No. 1, 3, 4) *(Kosong di No. 4)*
+*   **IPA:** Benar (No. 8) | Salah (No. 6, 7, 9, 10)
+*   **IPS:** Benar (No. 11, 13, 15) | Salah (No. 12, 14)
