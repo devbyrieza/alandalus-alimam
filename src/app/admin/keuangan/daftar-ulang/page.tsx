@@ -20,7 +20,7 @@ export default function DaftarUlangPage() {
     <div className="p-6 sm:p-8 md:p-8 max-w-[1200px] mx-auto h-full flex flex-col">
       <div className="mb-6">
         <h1 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">Rekap Daftar Ulang</h1>
-        <p className="text-slate-500 mt-1">Pantau pembayaran uang pangkal santri baru yang terintegrasi dari portal PPDB.</p>
+        <p className="text-slate-500 mt-1">Pantau pembayaran uang pangkal santri baru yang terintegrasi dari portal SPMB.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">

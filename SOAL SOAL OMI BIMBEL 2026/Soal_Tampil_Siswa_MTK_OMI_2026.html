@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lembar Tampil Siswa - MTK OMI 2026</title>
+<style>
+  body { 
+    font-family: 'Segoe UI', Arial, sans-serif; 
+    line-height: 1.8; 
+    margin: 0 auto; 
+    max-width: 1000px; 
+    color: #2c3e50; 
+    padding: 20px; 
+    font-size: 18px; /* Ukuran font diperbesar untuk proyektor */
+    background-color: #fcfcfc;
+  }
+  @media (max-width: 600px) { 
+    h1 { font-size: 22px; } 
+    h2 { font-size: 20px; } 
+    body { padding: 10px; font-size: 16px; } 
+    .question-box, .clone-box { padding: 15px; margin-bottom: 25px; } 
+  }
+  h1 { 
+    color: #2980b9; 
+    text-align: center; 
+    border-bottom: 3px solid #2980b9; 
+    padding-bottom: 15px; 
+    text-transform: uppercase; 
+    margin-bottom: 40px;
+  }
+  h2 { 
+    color: #d35400; 
+    margin-top: 50px; 
+    font-size: 24px;
+    border-bottom: 2px dashed #ccc;
+    padding-bottom: 10px;
+  }
+  ul, ol { margin-top: 10px; }
+  li { margin-bottom: 8px; }
+  p { margin-bottom: 15px; }
+  
+  .question-box { 
+    background: #ffffff; 
+    padding: 25px 30px; 
+    border: 1px solid #bdc3c7; 
+    border-left: 8px solid #2980b9; 
+    margin-bottom: 20px; 
+    border-radius: 6px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+  }
+  
+  .clone-box { 
+    background: #f8f9f9; 
+    padding: 25px 30px; 
+    border: 1px dashed #95a5a6; 
+    border-left: 8px solid #34495e; 
+    margin-bottom: 60px; /* Jarak jauh antar sesi soal */
+    border-radius: 6px; 
+  }
+  
+  .clone-box h4 { 
+    margin-top: 0; 
+    color: #2c3e50; 
+    text-transform: uppercase; 
+    font-size: 16px;
+    background: #ecf0f1;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+  }
+  
+  .options-list { 
+    list-style-type: none; 
+    padding-left: 0; 
+    margin-top: 15px; 
+    font-weight: bold;
+  }
+  
+  .options-list li {
+    padding: 5px 0;
+  }
+</style>
+</head>
+<body>
+
+  <h1>SIMULASI SOAL OLIMPIADE MATEMATIKA<br><small style="font-size: 18px; color: #7f8c8d;">BIMBINGAN BELAJAR MTs AL-IMAM (2026)</small></h1>
+
+  <!-- SESI SOAL 1 -->
+  <h2>SESI 1: PELUANG BERSYARAT</h2>
+  
+  <div class="question-box">
+    <strong>Soal 1:</strong><br>
+    Sebuah kotak amal berisi gulungan kertas bernomor 1 sampai dengan nomor yang mewakili jumlah Asmaul Husna. Jika diambil <strong>2 kertas satu per satu tanpa mengembalikannya</strong>, berapakah peluang bahwa <strong>kedua</strong> kertas yang terambil bernomor kelipatan dari jumlah total rakaat shalat wajib sehari semalam?
+    <ul class="options-list">
+      <li>A. 10 / 4851</li>
+      <li>B. 20 / 9801</li>
+      <li>C. 25 / 9801</li>
+      <li>D. 5 / 4851</li>
+    </ul>
+  </div>
+  
+  <div class="clone-box">
+    <h4>UJI PEMAHAMAN (Soal Latihan 1)</h4>
+    <strong>Soal:</strong> Di dalam kotak terdapat gulungan nomor 1 sampai 25 (Mewakili jumlah Nabi & Rasul yang wajib diimani). Diambil 2 kertas secara berurutan <em>tanpa pengembalian</em>. Berapa peluang keduanya bernomor kelipatan jumlah Rasul Ulul Azmi?
+    <ul class="options-list" style="font-weight:normal;">
+      <li>A. 1 / 25</li>
+      <li>B. 1 / 30</li>
+      <li>C. 4 / 125</li>
+      <li>D. 1 / 6</li>
+    </ul>
+  </div>
+
+  <!-- SESI SOAL 2 -->
+  <h2>SESI 2: PELUANG SALING LEPAS</h2>
+  
+  <div class="question-box">
+    <strong>Soal 2:</strong><br>
+    Masih menggunakan kotak amal berisi 99 kertas bernomor (jumlah Asmaul Husna). Jika Ustadz mengambil <strong>hanya 1 kertas</strong> secara acak, berapakah peluang terambilnya kertas bernomor kelipatan jumlah rakaat shalat wajib sehari semalam (17) <strong>ATAU</strong> kertas bernomor jumlah Rasul Ulul Azmi (5)?
+    <ul class="options-list">
+      <li>A. 5 / 99</li>
+      <li>B. 6 / 99</li>
+      <li>C. 10 / 99</li>
+      <li>D. 1 / 99</li>
+    </ul>
+  </div>
+  
+  <div class="clone-box">
+    <h4>UJI PEMAHAMAN (Soal Latihan 2)</h4>
+    <strong>Soal:</strong> Sebuah kotak berisi kertas bernomor 1 sampai 30 (Mewakili jumlah Juz dalam Al-Quran). Jika diambil 1 kertas secara acak, berapa peluang terambilnya kertas bernomor kelipatan ayat surat Al-Fatihah (7) <strong>ATAU</strong> kelipatan jumlah bulan dalam setahun (12)?
+    <ul class="options-list" style="font-weight:normal;">
+      <li>A. 4 / 30</li>
+      <li>B. 1 / 5</li>
+      <li>C. 1 / 6</li>
+      <li>D. 2 / 15</li>
+    </ul>
+  </div>
+
+  <!-- SESI SOAL 3 -->
+  <h2>SESI 3: ALJABAR & EKOTEOLOGI</h2>
+  
+  <div class="question-box">
+    <strong>Soal 3:</strong><br>
+    OSIS MTs mengumpulkan botol plastik (x) dan kardus (y) bekas. <br>
+    - Minggu 1: 15x + 10y laku Rp 80.000. <br>
+    - Minggu 2: 20x + 15y laku Rp 115.000. <br>
+    Seluruh hasil penjualan dibelikan paket sembako. Diketahui <strong>harga 1 paket sembako setara dengan hasil penjualan 5x dan 2y</strong>. Berapa maksimal paket sembako yang bisa dibeli dari total hasil penjualan?
+    <ul class="options-list">
+      <li>A. 7 Paket</li>
+      <li>B. 8 Paket</li>
+      <li>C. 9 Paket</li>
+      <li>D. 10 Paket</li>
+    </ul>
+  </div>
+  
+  <div class="clone-box">
+    <h4>UJI PEMAHAMAN (Soal Latihan 3)</h4>
+    <strong>Soal:</strong> Santri mengumpulkan pakaian bekas (x) dan sepatu bekas (y). <br>
+    - Bulan 1: 10x + 5y laku Rp 100.000.<br>
+    - Bulan 2: 12x + 10y laku Rp 140.000.<br>
+    Uang hasil penjualan digunakan untuk membeli Al-Quran. Jika <strong>harga 1 Al-Quran setara dengan nilai jual 2x + 2y</strong>, berapa maksimal jumlah Al-Quran yang bisa dibeli dari total 2 bulan penjualan?
+    <ul class="options-list" style="font-weight:normal;">
+      <li>A. 8 Buah</li>
+      <li>B. 9 Buah</li>
+      <li>C. 10 Buah</li>
+      <li>D. 11 Buah</li>
+    </ul>
+  </div>
+
+  <!-- SESI SOAL 4 -->
+  <h2>SESI 4: GEOMETRI & IBADAH</h2>
+  
+  <div class="question-box">
+    <strong>Soal 4:</strong><br>
+    Jarak rata-rata lintasan jamaah Thawaf dari pusat Ka'bah adalah 14 meter. Jika jamaah menyelesaikan Thawaf secara sempurna (7 putaran), berapakah total jarak tempuh yang mereka lalui? (&pi; = 22/7)
+    <ul class="options-list">
+      <li>A. 88 meter</li>
+      <li>B. 308 meter</li>
+      <li>C. 616 meter</li>
+      <li>D. 1.232 meter</li>
+    </ul>
+  </div>
+  
+  <div class="clone-box">
+    <h4>UJI PEMAHAMAN (Soal Latihan 4)</h4>
+    <strong>Soal:</strong> Santri dihukum lari mengelilingi lapangan utama masjid yang berbentuk lingkaran sempurna dengan jari-jari 21 meter. Jika santri diwajibkan berlari sebanyak 5 putaran, berapa meter total jarak tempuhnya? (&pi; = 22/7)
+    <ul class="options-list" style="font-weight:normal;">
+      <li>A. 132 meter</li>
+      <li>B. 330 meter</li>
+      <li>C. 528 meter</li>
+      <li>D. 660 meter</li>
+    </ul>
+  </div>
+
+  <!-- SESI SOAL 5 -->
+  <h2>SESI 5: BARISAN ARITMETIKA</h2>
+  
+  <div class="question-box">
+    <strong>Soal 5:</strong><br>
+    Target hafalan santri dicatat setiap hari: <br>
+    - Hari ke-1 menghafal 3 ayat <br>
+    - Hari ke-2 menghafal 7 ayat <br>
+    - Hari ke-3 menghafal 11 ayat <br>
+    Dengan pola peningkatan hafalan yang selalu tetap, pada hari ke berapakah santri tersebut menghafal <em>tepat</em> 39 ayat pada hari itu?
+    <ul class="options-list">
+      <li>A. Hari ke-8</li>
+      <li>B. Hari ke-9</li>
+      <li>C. Hari ke-10</li>
+      <li>D. Hari ke-11</li>
+    </ul>
+  </div>
+  
+  <div class="clone-box">
+    <h4>UJI PEMAHAMAN (Soal Latihan 5)</h4>
+    <strong>Soal:</strong> Seorang santri rutin menyisihkan uang infak. <br>
+    - Hari ke-1 ia infak Rp 2.000 <br>
+    - Hari ke-2 ia infak Rp 5.000 <br>
+    - Hari ke-3 ia infak Rp 8.000 <br>
+    Jika nominal infaknya selalu bertambah dengan pola yang sama, pada hari ke berapakah ia mengeluarkan infak tepat sebesar Rp 32.000 di hari tersebut?
+    <ul class="options-list" style="font-weight:normal;">
+      <li>A. Hari ke-9</li>
+      <li>B. Hari ke-10</li>
+      <li>C. Hari ke-11</li>
+      <li>D. Hari ke-12</li>
+    </ul>
+  </div>
+
+  <!-- SESI SOAL 6 -->
+  <h2>SESI 6: PENALARAN ANALITIK (Logika)</h2>
+  
+  <div class="question-box">
+    <strong>Soal 6:</strong><br>
+    Isi kotak amal A adalah dua kali lipat isi kotak B (A = 2B). Sementara itu, isi kotak amal C adalah setengah dari isi kotak A (C = 0,5A). Jika total isi ketiga kotak tersebut dijumlahkan adalah Rp 400.000. Berapakah isi kotak B?
+    <ul class="options-list">
+      <li>A. Rp 50.000</li>
+      <li>B. Rp 100.000</li>
+      <li>C. Rp 150.000</li>
+      <li>D. Rp 200.000</li>
+    </ul>
+  </div>
+  
+  <div class="clone-box">
+    <h4>UJI PEMAHAMAN (Soal Latihan 6)</h4>
+    <strong>Soal:</strong> Ada 3 donatur zakat: Ali, Budi, dan Hasan. Zakat Ali besarnya 3 kali lipat dari zakat Budi (A = 3B). Zakat Hasan besarnya sepertiga dari zakat Ali (H = 1/3 A). Jika total zakat ketiganya digabungkan mencapai Rp 500.000, berapakah nominal zakat yang dikeluarkan oleh Budi?
+    <ul class="options-list" style="font-weight:normal;">
+      <li>A. Rp 50.000</li>
+      <li>B. Rp 100.000</li>
+      <li>C. Rp 150.000</li>
+      <li>D. Rp 300.000</li>
+    </ul>
+  </div>
+
+</body>
+</html>

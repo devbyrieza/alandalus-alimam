@@ -225,7 +225,7 @@ Hubungi 0851-1152-4441 jika ada masalah.`}
                     </button>
 
                     <a
-                      href={`sms:${item.phone}&body=PPDB AL-IMAM: Kode OTP: ${item.otp} untuk ${item.nama}`}
+                      href={`sms:${item.phone}&body=SPMB AL-IMAM: Kode OTP: ${item.otp} untuk ${item.nama}`}
                       className="py-3.5 px-6 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-2xl transition-all flex items-center justify-center gap-2"
                     >
                       <Send className="w-5 h-5" />

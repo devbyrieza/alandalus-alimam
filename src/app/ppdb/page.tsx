@@ -1,4 +1,4 @@
-﻿// src/app/ppdb/page.tsx
+﻿// src/app/SPMB/page.tsx
 "use client";
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
@@ -55,3 +55,4 @@ export default function PPDBPage() {
     </main>
   );
 }
+

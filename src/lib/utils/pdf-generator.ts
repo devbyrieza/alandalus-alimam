@@ -429,7 +429,7 @@ export const generateSuratKelulusan = async (data: PendaftarPdfData) => {
     align: "center" });
   doc.setFontSize(10);
   doc.text(
-    `Nomor: ${data.nomor_pendaftaran}/SKL-PPDB/${new Date().getFullYear()}`,
+    `Nomor: ${data.nomor_pendaftaran}/SKL-SPMB/${new Date().getFullYear()}`,
     pageWidth / 2,
     startY + 17,
     { align: "center" },
@@ -437,7 +437,7 @@ export const generateSuratKelulusan = async (data: PendaftarPdfData) => {
 
   doc.setFontSize(11);
   doc.setFont("helvetica", "normal");
-  const content = `Berdasarkan hasil seleksi Penerimaan Santri Baru (PPDB) Tahun Ajaran ${data.tahun_ajaran}, dengan ini Panitia menyatakan bahwa:`;
+  const content = `Berdasarkan hasil seleksi Penerimaan Santri Baru (SPMB) Tahun Ajaran ${data.tahun_ajaran}, dengan ini Panitia menyatakan bahwa:`;
   doc.text(doc.splitTextToSize(content, pageWidth - 40), 20, startY + 30);
 
   const tableData = [

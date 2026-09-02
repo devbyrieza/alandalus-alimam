@@ -139,7 +139,7 @@ export default function ProcessSection() {
           transition={{ delay: 0.2, duration: 0.6, ease: EASE }}
           className="mt-16 md:mt-20 flex justify-center"
         >
-          <Link href="/ppdb">
+          <Link href="/SPMB">
             <button className="btn-glow-maroon inline-flex items-center gap-2.5 px-10 group/btn">
               <span>Daftar Sebagai Santri</span>
               <ArrowRight
@@ -153,3 +153,4 @@ export default function ProcessSection() {
     </section>
   );
 }
+

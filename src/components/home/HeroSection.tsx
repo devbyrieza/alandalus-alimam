@@ -1,4 +1,4 @@
-// src/components/home/HeroSection.tsx
+﻿// src/components/home/HeroSection.tsx
 // EXTREME OVERHAUL: Pure Cinova/OMI SaaS Premium Feel
 "use client";
 
@@ -63,7 +63,7 @@ export default function HeroSection() {
 
   return (
     <section ref={ref} className="relative w-full overflow-hidden bg-[#FAFAFA] pt-12 pb-20 lg:pt-20 lg:pb-32">
-      {/* ─── MARQUEE ANNOUNCEMENT BAR (Cinova Style) ─── */}
+      {/* â”€â”€â”€ MARQUEE ANNOUNCEMENT BAR (Cinova Style) â”€â”€â”€ */}
       <div className="absolute top-0 left-0 w-full announcement-bar z-50">
         <div className="announcement-track">
           {[...Array(6)].map((_, i) => (
@@ -77,7 +77,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* ─── AMBIENT BACKGROUND BLOBS ─── */}
+      {/* â”€â”€â”€ AMBIENT BACKGROUND BLOBS â”€â”€â”€ */}
       <div className="absolute top-[10%] right-[-5%] w-[600px] h-[600px] bg-maroon-600/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-cream-500/10 rounded-full blur-[100px] pointer-events-none" />
       
@@ -87,7 +87,7 @@ export default function HeroSection() {
       <Container className="relative z-10 mt-16 md:mt-12 lg:mt-8">
         <div className="grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-8 items-center">
           
-          {/* ═════════ LEFT: MASSIVE TYPOGRAPHY & CTA ═════════ */}
+          {/* â•â•â•â•â•â•â•â•â• LEFT: MASSIVE TYPOGRAPHY & CTA â•â•â•â•â•â•â•â•â• */}
           <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
             <motion.div variants={fadeUp} initial="hidden" animate={animate} className="mb-6">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-maroon-50 border border-maroon-100 text-maroon-700 text-xs font-black uppercase tracking-[0.15em] shadow-sm">
@@ -108,7 +108,7 @@ export default function HeroSection() {
             <motion.p variants={fadeUp} initial="hidden" animate={animate} transition={{ delay: 0.2 }}
               className="text-lg md:text-xl text-ink-600 mb-6 max-w-2xl font-medium leading-relaxed"
             >
-              Bukan sekadar tempat belajar — sebuah ekosistem pembentukan karakter yang <strong className="font-semibold text-ink-800">mengedepankan keteladanan dan mendidik tanpa luka</strong>, memadukan Tahfidz Al-Qur'an, Ilmu Syar'i, Akademik, Leadership, dan Entrepreneurship.
+              Bukan sekadar tempat belajar â€” sebuah ekosistem pembentukan karakter yang <strong className="font-semibold text-ink-800">mengedepankan keteladanan dan mendidik tanpa luka</strong>, memadukan Tahfidz Al-Qur'an, Ilmu Syar'i, Akademik, Leadership, dan Entrepreneurship.
             </motion.p>
 
             {/* Tagline */}
@@ -133,7 +133,7 @@ export default function HeroSection() {
                 </Link>
               ) : (
                 <>
-                  <Link href="/ppdb" className="w-full sm:w-auto">
+                  <Link href="/SPMB" className="w-full sm:w-auto">
                     <button className="btn-glow-maroon w-full sm:w-auto px-10 py-5 text-base md:text-lg flex items-center justify-center gap-3">
                       Daftar Sekarang <ArrowRight className="w-5 h-5" />
                     </button>
@@ -173,7 +173,7 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* ═════════ RIGHT: 3D UI MOCKUP (No static photo) ═════════ */}
+          {/* â•â•â•â•â•â•â•â•â• RIGHT: 3D UI MOCKUP (No static photo) â•â•â•â•â•â•â•â•â• */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }} 
             animate={animate === "visible" ? { opacity: 1, scale: 1 } : {}} 
@@ -272,3 +272,4 @@ export default function HeroSection() {
     </section>
   );
 }
+

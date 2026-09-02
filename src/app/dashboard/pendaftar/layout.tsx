@@ -362,7 +362,7 @@ export default function DashboardLayout({
                   </div>
                   <div>
                     <h1 className="font-black text-xl text-primary-950 leading-none tracking-tight">
-                      PPDB{" "}
+                      SPMB{" "}
                       <span className="text-primary-700">
                         {BRANDING.schoolName}
                       </span>
@@ -686,4 +686,5 @@ export default function DashboardLayout({
     </>
   );
 }
+
 

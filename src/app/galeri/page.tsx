@@ -104,7 +104,7 @@ const ALBUMS: Album[] = [
     id: "pelayanan",
     title: "Kantor Layanan & Penunjang",
     category: "Pelayanan & Bimbingan",
-    desc: "Kantor informasi PPDB, ruang tamu representatif, serta depot galon air higienis santri.",
+    desc: "Kantor informasi SPMB, ruang tamu representatif, serta depot galon air higienis santri.",
     cover: "/images/kantor-ppdb-tamu.webp",
     items: [
       { src: "/images/kantor-ppdb-tamu.webp", label: "Kantor Layanan SPMB & Ruang Tamu" },

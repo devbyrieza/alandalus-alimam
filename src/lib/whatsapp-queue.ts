@@ -1004,7 +1004,7 @@ export function buildMessageHasilTes(nama: string): string {
 
 Assalamu'alaikum Abu/Ummu,
 
-Alhamdulillah, hasil seleksi Ananda *${nama}* sudah tersedia dan dapat dilihat di dashboard PPDB.
+Alhamdulillah, hasil seleksi Ananda *${nama}* sudah tersedia dan dapat dilihat di dashboard SPMB.
 
 🔗 *Lihat Hasil Seleksi:*
 ${BRANDING.websiteUrl}/dashboard/pendaftar/pengumuman

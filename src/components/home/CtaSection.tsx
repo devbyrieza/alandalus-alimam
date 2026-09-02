@@ -32,7 +32,7 @@ export default function CtaSection() {
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="/ppdb">
+              <Link href="/SPMB">
                 <button className="w-full sm:w-auto px-10 py-5 bg-white text-maroon-950 hover:bg-cream-50 rounded-full font-bold text-lg transition-transform hover:scale-105 flex items-center justify-center gap-3">
                   Daftar Sekarang <ArrowRight className="w-5 h-5" />
                 </button>
@@ -49,3 +49,4 @@ export default function CtaSection() {
     </section>
   );
 }
+
