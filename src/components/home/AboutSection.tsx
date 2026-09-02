@@ -11,9 +11,9 @@ export default function AboutSection() {
     <section id="tentang" className="py-24 bg-white border-b border-slate-200 scroll-mt-20">
       <Container className="max-w-7xl mx-auto px-4 md:px-6 space-y-16">
         
-        {/* Section Header (OMI Exact) */}
+        {/* Section Header (Al-Imam Maroon & Krem Emas) */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-blue-700 bg-blue-50 px-4 py-1.5 rounded-full border border-blue-200 inline-block">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-[#550000] bg-[#ddc192]/20 px-4 py-1.5 rounded-full border border-[#ddc192]/50 inline-block">
             Landasan & Visi Pendidikan
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
@@ -24,12 +24,12 @@ export default function AboutSection() {
           </p>
         </div>
 
-        {/* 2-Column Bento Layout (OMI Exact) */}
+        {/* 2-Column Bento Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           {/* Left: Branding Card */}
           <div className="lg:col-span-5">
-            <div className="bg-gradient-to-b from-blue-50/70 via-white to-slate-50 border border-slate-200 rounded-3xl p-8 text-center shadow-sm">
+            <div className="bg-gradient-to-b from-[#ddc192]/15 via-white to-slate-50 border border-slate-200 rounded-3xl p-8 text-center shadow-sm">
               <div className="w-32 h-32 relative mx-auto mb-4">
                 <Image
                   src={BRANDING.logoPath}
@@ -56,11 +56,11 @@ export default function AboutSection() {
                 <strong className="text-slate-900">{BRANDING.schoolName}</strong> didirikan sebagai ikhtiar melahirkan generasi muslim yang kokoh aqidahnya, fasih bertutur bahasa Arab, serta menguasai ilmu pengetahuan kontemporer.
               </p>
               <p>
-                Pola pengasuhan berlandaskan <strong className="text-blue-700">prinsip keteladanan tanpa kekerasan fisik dan verbal</strong>, memadukan kurikulum khas pesantren dengan bimbingan intensif hafalan Al-Qur'an bersanad.
+                Pola pengasuhan berlandaskan <strong className="text-[#550000]">prinsip keteladanan tanpa kekerasan fisik dan verbal</strong>, memadukan kurikulum khas pesantren dengan bimbingan intensif hafalan Al-Qur'an bersanad.
               </p>
             </div>
 
-            {/* 4 Feature Badges with Checkmarks (OMI Exact) */}
+            {/* 4 Feature Badges with Al-Imam Checkmarks */}
             <div className="grid sm:grid-cols-2 gap-3.5">
               {[
                 "Pendidikan adab dan keteladanan 24 jam.",
@@ -70,9 +70,9 @@ export default function AboutSection() {
               ].map((text, i) => (
                 <div
                   key={i}
-                  className="bg-white border border-slate-200 p-4 rounded-xl flex items-start gap-3 shadow-sm hover:border-blue-300 transition-colors"
+                  className="bg-white border border-slate-200 p-4 rounded-xl flex items-start gap-3 shadow-sm hover:border-[#ddc192] transition-colors"
                 >
-                  <span className="w-6 h-6 rounded-lg bg-blue-50 text-blue-700 font-extrabold flex items-center justify-center text-xs shrink-0 mt-0.5">
+                  <span className="w-6 h-6 rounded-lg bg-[#ddc192]/25 text-[#550000] font-extrabold flex items-center justify-center text-xs shrink-0 mt-0.5">
                     <Check className="w-3.5 h-3.5 stroke-[3]" />
                   </span>
                   <span className="text-xs text-slate-700 font-semibold leading-relaxed">
