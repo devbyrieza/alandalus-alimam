@@ -1,241 +1,71 @@
+﻿// src/components/home/AboutSection.tsx
 "use client";
-
-import Link from "next/link";
-import {
-  CheckCircle,
-  Target,
-  Rocket,
-  ArrowRight,
-  Sparkles } from "lucide-react";
 import { Container } from "@/components/layout/Container";
-import { motion, Variants } from "framer-motion";
-import { navigateToDetail } from "@/lib/navigation-scroll";
+import { motion } from "framer-motion";
+import { Sparkles, CheckCircle2, ShieldCheck, HeartHandshake } from "lucide-react";
+import { BRANDING } from "@/config/branding";
 
-const SPRING: [number, number, number, number] = [0.16, 1, 0.3, 1];
-
-const misi = [
-  {
-    label: "Hanif",
-    text: "Membentuk pribadi yang lurus akidahnya, benar ibadahnya, dan baik akhlaqnya." },
-  {
-    label: "Kontributif",
-    text: "Membentuk pribadi yang memiliki karya, gagasan, dan peran nyata bagi lingkungannya." },
-  {
-    label: "Adaptif",
-    text: "Membentuk pribadi yang terbuka terhadap kritik, cerdas membaca realitas, kuat menjaga prinsip." },
-  {
-    label: "Dakwah",
-    text: "Menanamkan jiwa dakwah melalui keteladanan para pendidik serta bimbingan tanpa kekerasan dan luka pengasuhan." },
-];
-
-const containerVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.08 } } };
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "tween",
-      duration: 0.55,
-      ease: SPRING } } };
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+};
 
 export default function AboutSection() {
-  const handleNavigateToDetail = () => {
-    navigateToDetail("/tentang", "#about");
-  };
-
   return (
-    <section id="about" className="section-alt relative overflow-hidden">
-      {/* Ambient background blobs */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 overflow-hidden"
-      >
-        <div className="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full bg-primary-100/30 blur-3xl" />
-        <div className="absolute -bottom-24 -right-24 w-[360px] h-[360px] rounded-full bg-secondary-200/40 blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full bg-secondary-100/20 blur-3xl" />
-      </div>
-
+    <section id="tentang" className="bg-white py-24 md:py-32 overflow-hidden relative">
       <Container className="relative z-10">
-        <div className="max-w-5xl mx-auto">
-          {/* ── Header ─────────────────────────────── */}
-          <motion.div
-            className="text-center mb-16 lg:mb-24"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            variants={containerVariants}
-          >
-            <motion.div variants={itemVariants} className="inline-flex mb-6">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-primary-100 text-primary-700 text-[11px] font-bold uppercase tracking-[0.12em] shadow-xs">
-                <Sparkles className="w-3 h-3" />
-                Profil Pesantren
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+          
+          {/* Left: Huge Typography */}
+          <div>
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+              <span className="eyebrow-pill mb-6">
+                <ShieldCheck className="w-4 h-4" />
+                Tentang Al Imam
               </span>
-            </motion.div>
-
-            <motion.h2
-              variants={itemVariants}
-              className="section-title mb-5 text-balance"
-            >
-              Mengedepankan{" "}
-              <span className="text-gradient-primary">
-                Bimbingan &amp; Pengawasan Melekat
-              </span>
-            </motion.h2>
-
-            <motion.p
-              variants={itemVariants}
-              className="section-subtitle text-justify md:text-center"
-            >
-              <span className="font-semibold text-primary-800">
-                Bukan sekadar tempat belajar agama.
-              </span>{" "}
-              Sistem pembentukan karakter yang mengedepankan keteladanan para pendidik serta mendidik tanpa kekerasan dan luka pengasuhan — untuk mengusung visi Kaderisasi Ummat Hanif, Kontributif, dan Adaptif.
-            </motion.p>
-          </motion.div>
-
-          {/* ── Visi & Misi Grid ─────────────────── */}
-          <div className="grid gap-5 lg:gap-6 mb-16 lg:mb-20">
-            {/* Visi — Full Width, Statement Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ type: "tween", duration: 0.6, ease: SPRING }}
-            >
-              <div className="relative overflow-hidden rounded-2xl border border-primary-100 bg-white shadow-premium-sm group">
-                {/* Card top accent bar */}
-                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary-700 via-primary-500 to-primary-800 rounded-t-2xl" />
-
-                <div className="flex flex-col items-center text-center px-8 py-12 md:px-16 md:py-16">
-                  {/* Icon */}
-                  <div className="mb-7 w-14 h-14 rounded-2xl bg-primary-50 border border-primary-100 flex items-center justify-center shadow-xs group-hover:shadow-sm transition-shadow duration-300">
-                    <Target
-                      className="w-6 h-6 text-primary-700"
-                      strokeWidth={1.75}
-                    />
-                  </div>
-
-                  <span className="badge badge-primary mb-5 text-[11px] tracking-wider uppercase">
-                    Visi Utama
-                  </span>
-
-                  <blockquote className="max-w-2xl mx-auto">
-                    <p className="font-display font-black text-2xl md:text-[2.15rem] leading-[1.2] tracking-tight text-primary-900 italic">
-                      &ldquo;Kaderisasi Ummat Hanif,
-                      Kontributif, dan Adaptif.&rdquo;
-                    </p>
-                  </blockquote>
-
-                  <div className="mt-8 flex items-center gap-3">
-                    <div className="h-px w-10 bg-gradient-to-r from-transparent to-primary-200" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary-300" />
-                    <div className="h-px w-10 bg-gradient-to-l from-transparent to-primary-200" />
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Misi — Full Width */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{
-                type: "tween",
-                duration: 0.6,
-                ease: SPRING,
-                delay: 0.08 }}
-            >
-              <div className="rounded-2xl border border-primary-100 bg-white shadow-premium-sm overflow-hidden">
-                {/* Header */}
-                <div className="flex items-center gap-4 px-8 py-7 md:px-10 border-b border-primary-50">
-                  <div className="w-11 h-11 rounded-2xl bg-primary-50 border border-primary-100 flex items-center justify-center shrink-0">
-                    <Rocket
-                      className="w-5 h-5 text-primary-600"
-                      strokeWidth={1.75}
-                    />
-                  </div>
-                  <div>
-                    <h3 className="font-display font-bold text-xl text-primary-900 tracking-tight leading-tight">
-                      Misi Kami
-                    </h3>
-                    <p className="text-[13px] text-ink-400 mt-0.5">
-                      Empat langkah strategis pembentukan karakter
-                    </p>
-                  </div>
-                  <div className="ml-auto hidden sm:block">
-                    <span className="badge badge-secondary text-[11px] tracking-wider uppercase">
-                      Langkah Strategis
-                    </span>
-                  </div>
-                </div>
-
-                {/* Misi list */}
-                <motion.ul
-                  className="grid md:grid-cols-2 divide-y divide-primary-50 md:divide-y-0 md:divide-x"
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-40px" }}
-                  variants={containerVariants}
-                >
-                  {misi.map((item, i) => (
-                    <motion.li
-                      key={i}
-                      variants={itemVariants}
-                      className="flex gap-4 items-start p-6 md:p-8 group/item hover:bg-secondary-50/60 transition-colors duration-200"
-                    >
-                      <div className="mt-0.5 shrink-0">
-                        <div className="w-7 h-7 rounded-full bg-primary-50 border border-primary-100 flex items-center justify-center group-hover/item:bg-primary-100 transition-colors duration-200">
-                          <CheckCircle
-                            className="w-3.5 h-3.5 text-primary-600"
-                            strokeWidth={2.25}
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <span className="block text-[11px] font-bold uppercase tracking-[0.1em] text-primary-500 mb-1.5">
-                          {item.label}
-                        </span>
-                        <p className="text-[14.5px] text-ink-600 leading-relaxed font-[450]">
-                          {item.text}
-                        </p>
-                      </div>
-                    </motion.li>
-                  ))}
-                </motion.ul>
-              </div>
+              <h2 className="text-4xl md:text-5xl lg:text-[3.5rem] font-black text-ink-950 leading-[1.1] tracking-tight mb-8">
+                Bukan Sekadar <br />
+                <span className="gradient-text-maroon">Pesantren Biasa.</span>
+              </h2>
+              <p className="text-lg md:text-xl text-ink-600 leading-relaxed font-medium mb-8">
+                Di {BRANDING.schoolName}, kami tidak hanya mentransfer ilmu. Kami membangun sebuah ekosistem pendidikan di mana santri dibentuk menjadi kader ummat yang <strong>Hanif</strong>, <strong>Kontributif</strong>, dan <strong>Adaptif</strong> tanpa kekerasan fisik maupun verbal.
+              </p>
+              
+              <ul className="space-y-4">
+                {["Fasilitas modern & asrama nyaman", "Pengajar tersertifikasi & kompeten", "Pendekatan tarbiyah penuh kasih sayang"].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-ink-700 font-bold">
+                    <CheckCircle2 className="w-5 h-5 text-maroon-600" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           </div>
 
-          {/* ── CTA ──────────────────────────────── */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{
-              type: "tween",
-              duration: 0.5,
-              ease: SPRING,
-              delay: 0.1 }}
-            className="flex flex-col items-center"
-          >
-            <Link
-              href="/tentang"
-              onClick={handleNavigateToDetail}
-              className="w-full sm:w-auto"
-            >
-              <button className="btn-secondary w-full px-10 py-3.5 group">
-                Lanjut Baca Profil
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
-            </Link>
-          </motion.div>
+          {/* Right: Cinova style Fit-Box / Grid */}
+          <div className="relative">
+            <div className="absolute inset-0 bg-maroon-50 rounded-[3rem] rotate-3 scale-105" />
+            <div className="relative bg-white border border-surface-200 rounded-[2.5rem] p-8 md:p-12 shadow-premium-lg">
+              <h3 className="text-2xl font-black text-ink-900 mb-8 text-center">Mengapa Memilih Kami?</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {[
+                  { title: "Bebas Bullying", desc: "Pengawasan 24 jam & zero tolerance terhadap perundungan.", icon: HeartHandshake },
+                  { title: "Talaqqi Bersanad", desc: "Hafalan Al-Qur'an dengan sanad yang muttashil.", icon: Sparkles },
+                ].map((feature, i) => (
+                  <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                    className="bg-surface-50 p-6 rounded-3xl border border-surface-100 hover:border-maroon-200 transition-colors"
+                  >
+                    <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-4">
+                      <feature.icon className="w-6 h-6 text-maroon-600" />
+                    </div>
+                    <h4 className="text-lg font-bold text-ink-950 mb-2">{feature.title}</h4>
+                    <p className="text-sm text-ink-500 font-medium leading-relaxed">{feature.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+
         </div>
       </Container>
     </section>

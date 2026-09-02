@@ -1,79 +1,47 @@
-﻿"use client";
-
-import Link from "next/link";
-import { Send, ShieldCheck, Award, BookOpen } from "lucide-react";
+﻿// src/components/home/CtaSection.tsx
+"use client";
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
+import { ArrowRight, Sparkles } from "lucide-react";
+import Link from "next/link";
 import { BRANDING } from "@/config/branding";
-
-const EASE = [0.16, 1, 0.3, 1] as const;
 
 export default function CtaSection() {
   return (
-    <section className="py-16 md:py-24 lg:py-28 bg-white relative overflow-hidden border-t border-secondary-200">
+    <section className="bg-[#FAFAFA] py-24 md:py-32 relative overflow-hidden">
       <Container>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.97, y: 20 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.7, ease: EASE }}
-          className="glass-panel-dark rounded-[2rem] md:rounded-[2.5rem] lg:rounded-[3rem] p-8 sm:p-12 md:p-16 lg:p-20 relative overflow-hidden text-center shine-top"
-          style={{ background: "linear-gradient(135deg, var(--color-primary-800) 0%, var(--color-primary-950) 100%)" }}
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
+          className="relative w-full max-w-5xl mx-auto rounded-[3rem] p-10 md:p-20 text-center overflow-hidden bg-maroon-950 border border-maroon-800 shadow-premium-2xl"
         >
-          <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.08] mix-blend-overlay pointer-events-none" />
-          <div className="hidden sm:block glow-blob glow-blob-primary w-[600px] h-[600px] -top-32 -right-32 opacity-30" />
-          <div className="hidden sm:block glow-blob glow-blob-secondary w-[500px] h-[500px] -bottom-32 -left-32 opacity-20" />
-
-          <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
-            <div className="section-label section-label-white mb-6">
-              <span className="text-secondary-300">✦</span> Pendaftaran Dibuka
-            </div>
-
-            <h3 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] font-display font-black mb-5 tracking-tight leading-[1.1]">
-              <span className="gradient-text-white">Mulai Langkah Pertama</span> <br /> 
-              <span className="text-white">Menuju Generasi Unggul</span>
-            </h3>
-
-            <p className="text-[0.9375rem] md:text-[1.0625rem] text-secondary-50/90 mb-10 leading-relaxed font-[450] text-center max-w-2xl mx-auto">
-              Telah dibuka Pendaftaran Santri Baru (PPDB) Tahun Ajaran
-              2027/2028. Kuota sangat terbatas untuk menjaga kualitas pendidikan
-              secara optimal.
+          {/* Glowing effects */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[200px] bg-maroon-600/40 blur-[80px] rounded-full pointer-events-none" />
+          
+          <div className="relative z-10">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-cream-100 text-xs font-black uppercase tracking-[0.15em] shadow-sm mb-8 backdrop-blur-md">
+              <Sparkles className="w-3.5 h-3.5" />
+              Bergabung Bersama Kami
+            </span>
+            
+            <h2 className="text-4xl md:text-6xl font-black text-white leading-tight mb-8">
+              Masa Depan Generasi <br className="hidden md:block" />
+              Dimulai dari Sini.
+            </h2>
+            
+            <p className="text-lg text-maroon-200 max-w-2xl mx-auto mb-12 font-medium">
+              Amankan kursi putra-putri Anda. Kuota penerimaan santri baru tahun ajaran {BRANDING.academicYear} sangat terbatas.
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center px-4 max-w-xl mx-auto w-full">
-              <Link href="/ppdb" className="w-full sm:w-auto flex-1 hover-lift">
-                <button className="w-full px-8 py-4 rounded-full bg-secondary-300 text-primary-950 font-bold hover:bg-secondary-400 transition-all duration-300 text-[0.9375rem] flex items-center justify-center gap-2 glow-ring-primary">
-                  Daftar Sekarang
+            
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link href="/ppdb">
+                <button className="w-full sm:w-auto px-10 py-5 bg-white text-maroon-950 hover:bg-cream-50 rounded-full font-bold text-lg transition-transform hover:scale-105 flex items-center justify-center gap-3">
+                  Daftar Sekarang <ArrowRight className="w-5 h-5" />
                 </button>
               </Link>
-              <Link href="/kontak" className="w-full sm:w-auto flex-1 hover-lift">
-                <button className="w-full px-8 py-4 rounded-full text-white font-bold border border-white/20 hover:bg-white/10 transition-all duration-300 text-[0.9375rem] flex items-center justify-center gap-2 glass-panel-dark group/btn">
-                  Konsultasi WhatsApp
-                  <Send className="w-4 h-4 ml-1 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+              <Link href="/kontak">
+                <button className="w-full sm:w-auto px-10 py-5 bg-transparent text-white border border-white/30 hover:bg-white/10 rounded-full font-bold text-lg transition-colors flex items-center justify-center gap-3">
+                  Hubungi CS
                 </button>
               </Link>
-            </div>
-
-            {/* ── Legalitas Badges ── */}
-            <div className="mt-12 pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 w-full max-w-2xl">
-              <div className="flex items-center gap-2 text-secondary-50/70">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span className="text-[0.6rem] font-bold uppercase tracking-[0.1em]">
-                  Terakreditasi A — BAN-PDM
-                </span>
-              </div>
-              <div className="flex items-center gap-2 text-secondary-50/70">
-                <BookOpen className="w-4 h-4 text-gold-400" />
-                <span className="text-[0.6rem] font-bold uppercase tracking-[0.1em]">
-                  Kurikulum Terpadu
-                </span>
-              </div>
-              <div className="flex items-center gap-2 text-secondary-50/70">
-                <Award className="w-4 h-4 text-emerald-300" />
-                <span className="text-[0.6rem] font-bold uppercase tracking-[0.1em]">
-                  {BRANDING.schoolNetwork}
-                </span>
-              </div>
             </div>
           </div>
         </motion.div>
@@ -81,4 +49,3 @@ export default function CtaSection() {
     </section>
   );
 }
-

@@ -1,219 +1,70 @@
+﻿// src/components/home/TestimonialsSection.tsx
 "use client";
-
-import { MessageCircle, Star, Quote } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
+import { MessageSquareQuote, Star } from "lucide-react";
 
-// ─── Data ────────────────────────────────────────────
 const TESTIMONIALS = [
   {
-    no: "001",
-    name: "Bpk. Surwanto",
-    role: "Wali Santri Al Andalus Pusat",
-    city: "Sukoharjo, Jawa Tengah",
-    initial: "S",
-    date: "Oktober 2024",
-    quote:
-      "Tujuan kami menyekolahkan anak ke Al Andalus Pusat adalah agar mereka benar-benar paham agama. Alhamdulillah, sistem Al Andalus memberikan perubahan nyata pada anak kami — cara bicara, sikap, dan keseriusannya dalam ibadah." },
+    text: "Sangat bersyukur menyekolahkan anak di Al Imam. Pendekatan tanpa kekerasan membuat anak betah di asrama dan hafalannya lancar tanpa paksaan berlebih.",
+    author: "Bapak Budi Santoso",
+    role: "Wali Santri MTs"
+  },
   {
-    no: "002",
-    name: "Ibu Endah Wulandari",
-    role: "Wali Santri Al Andalus Pusat",
-    city: "Kebumen, Jawa Tengah",
-    initial: "E",
-    date: "Januari 2025",
-    quote:
-      "Awalnya saya khawatir dengan sistem boarding, namun kurikulum tahfidz di Al Andalus Jonggol sangat sistematis. Dalam 6 bulan, anak saya sudah mampu memimpin shalat berjamaah di rumah dengan makhraj yang benar." },
+    text: "Sistem pendidikannya memadukan adab dan ilmu dengan sangat seimbang. Fasilitasnya pun modern sehingga kami sebagai orang tua tenang melepas anak.",
+    author: "Ibu Aisyah Aminah",
+    role: "Wali Santri I'dad Lughowi"
+  },
   {
-    no: "003",
-    name: "Muhammad Razan",
-    role: "Alumni Al Andalus Jonggol",
-    city: "Purwokerto, Jawa Tengah",
-    initial: "R",
-    date: "Maret 2025",
-    quote:
-      "Disiplin bahasa Arab dan hafalan Al-Qur'an di Al Andalus sangat membantu saat saya melanjutkan pendidikan tinggi. Saat teman-teman lain masih belajar dasar nahwu, saya sudah bisa langsung membaca kitab." },
-  {
-    no: "004",
-    name: "Faisal Ahmad",
-    role: "Alumni Al Andalus Jonggol",
-    city: "Cilacap, Jawa Tengah",
-    initial: "A",
-    date: "Agustus 2024",
-    quote:
-      "Berkat bimbingan intensif para asatidz di Pesantren Al Andalus Pusat, saya berhasil lulus seleksi masuk universitas di Timur Tengah. Fondasi bahasa Arab aktif yang ditanamkan benar-benar menjadi kunci." },
-] as const;
+    text: "Alhamdulillah, pengajar di sini sangat komunikatif dengan orang tua. Progres hafalan dan akademik anak terpantau rutin lewat sistem digital.",
+    author: "Bapak Riza Fahlevi",
+    role: "Wali Santri MTs"
+  }
+];
 
-const EASE = [0.16, 1, 0.3, 1] as const;
-
-// ─── Testimonial Card ─────────────────────────────────
-function TestimonialCard({
-  no,
-  name,
-  role,
-  city,
-  initial,
-  date,
-  quote,
-  idx }: (typeof TESTIMONIALS)[number] & { idx: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24, scale: 0.97 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-32px" }}
-      transition={{ delay: idx * 0.08, duration: 0.6, ease: EASE }}
-      whileHover={{ y: -4 }}
-      className="group relative bg-white flex flex-col h-full rounded-2xl border border-secondary-100 shadow-premium-sm hover:shadow-premium-md hover:border-primary-200 overflow-hidden transition-all duration-400"
-    >
-      {/* Hover gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-      {/* Card inner */}
-      <div className="relative z-10 flex flex-col h-full p-6 md:p-7">
-        {/* Top row — number badge + quote icon */}
-        <div className="flex items-center justify-between mb-5">
-          <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-secondary-50 border border-secondary-200 text-[0.6rem] font-black text-primary-700 tracking-wide shadow-xs group-hover:bg-primary-50 group-hover:border-primary-100 transition-all duration-300">
-            #{no}
-          </span>
-          <Quote
-            className="w-8 h-8 text-primary-50 -rotate-12 transition-colors duration-400 group-hover:text-primary-100"
-            aria-hidden
-          />
-        </div>
-
-        {/* Stars */}
-        <div className="flex gap-1 mb-4">
-          {[...Array(5)].map((_, i) => (
-            <Star
-              key={i}
-              className="w-3.5 h-3.5 text-amber-400 fill-amber-400"
-              aria-hidden
-            />
-          ))}
-        </div>
-
-        {/* Quote */}
-        <p className="text-[0.8125rem] md:text-[0.875rem] text-ink-700 leading-relaxed font-[450] italic grow mb-6">
-          &ldquo;{quote}&rdquo;
-        </p>
-
-        {/* Author */}
-        <div className="border-t border-secondary-100 pt-5">
-          <div className="flex items-center gap-3.5">
-            {/* Avatar */}
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center shrink-0 text-white font-black text-sm shadow-xs group-hover:shadow-primary/20 group-hover:-rotate-3 transition-all duration-400">
-              {initial}
-            </div>
-
-            <div className="min-w-0 flex-1">
-              <p className="text-[0.8125rem] font-bold text-ink-900 leading-tight truncate">
-                {name}
-              </p>
-              <p className="text-[0.6rem] font-bold text-primary-600 uppercase tracking-[0.1em] leading-tight mt-0.5">
-                {role}
-              </p>
-            </div>
-
-            <span className="text-[0.575rem] font-black text-primary-600 uppercase tracking-widest bg-primary-50 px-2 py-1 rounded-full border border-primary-100 shadow-xs whitespace-nowrap">
-              {date}
-            </span>
-          </div>
-
-          <p className="text-[0.6rem] text-ink-400 font-medium mt-3 tracking-wide">
-            {city}
-          </p>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-// ─── Main ─────────────────────────────────────────────
 export default function TestimonialsSection() {
   return (
-    <section
-      id="testimonials"
-      className="section-alt relative border-y border-secondary-200 overflow-hidden"
-    >
-      {/* Background texture */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.018]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23800000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}
-      />
-      <div
-        className="absolute -top-48 -left-48 w-[500px] h-[500px] pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(253,242,242,0.6) 0%, transparent 65%)" }}
-      />
+    <section className="bg-white py-24 md:py-32">
+      <Container>
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
+          
+          {/* Header */}
+          <div className="lg:w-1/3 text-center lg:text-left">
+            <span className="eyebrow-pill-gold mb-6">
+              <MessageSquareQuote className="w-4 h-4 text-cream-600" />
+              Testimoni Wali Santri
+            </span>
+            <h2 className="text-4xl md:text-5xl font-black text-ink-950 leading-tight mb-6">
+              Apa Kata <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cream-500 to-cream-700">Mereka?</span>
+            </h2>
+            <p className="text-lg text-ink-500 font-medium">Pengalaman otentik dari para orang tua yang telah mempercayakan pendidikan putra-putrinya di Pesantren Al Imam Al Islami.</p>
+          </div>
 
-      <Container className="relative z-10">
-        {/* ── Header ── */}
-        <div className="text-center mb-14 md:mb-16 max-w-2xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: EASE }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-secondary-200 text-primary-700 text-[0.65rem] font-bold uppercase tracking-[0.12em] mb-5 shadow-xs"
-          >
-            <MessageCircle className="w-3 h-3 shrink-0" strokeWidth={2} />
-            <span>Reputasi Al Andalus Pusat (Jonggol)</span>
-          </motion.div>
+          {/* Cards */}
+          <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
+            {TESTIMONIALS.map((t, i) => (
+              <motion.div key={i} initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}
+                className={`p-8 rounded-[2rem] border ${i === 2 ? 'md:col-span-2 lg:col-span-1 hidden md:block lg:hidden xl:block' : ''} bg-surface-50 border-surface-200 shadow-sm`}
+              >
+                <div className="flex gap-1 mb-6">
+                  {[...Array(5)].map((_, idx) => <Star key={idx} className="w-5 h-5 fill-cream-500 text-cream-500" />)}
+                </div>
+                <p className="text-base text-ink-800 font-medium leading-relaxed italic mb-8">"{t.text}"</p>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-cream-200 flex items-center justify-center font-bold text-cream-700 text-lg">
+                    {t.author.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="font-bold text-ink-950">{t.author}</p>
+                    <p className="text-xs font-bold text-ink-400 uppercase tracking-widest">{t.role}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.08, duration: 0.6, ease: EASE }}
-            className="section-title mb-4"
-          >
-            Cerita Keberhasilan{" "}
-            <span className="text-gradient-primary">Alumni & Wali Santri</span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15, duration: 0.6, ease: EASE }}
-            className="section-subtitle max-w-xl mx-auto mb-6"
-          >
-            Al Imam menerapkan standar keunggulan dan sistem yang sama dengan
-            Pesantren Al Andalus Pusat (Jonggol) International Islamic Boarding
-            School.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.22, duration: 0.5, ease: EASE }}
-            className="inline-flex items-center gap-2 bg-primary-50 text-primary-800 px-4 py-2 rounded-2xl border border-primary-100 font-bold text-[0.8125rem] shadow-xs"
-          >
-            <span className="text-gold-500">✦</span> Reputasi Global yang Teruji
-          </motion.div>
         </div>
-
-        {/* ── Grid ── */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-12">
-          {TESTIMONIALS.map((testimonial, idx) => (
-            <TestimonialCard key={idx} {...testimonial} idx={idx} />
-          ))}
-        </div>
-
-        {/* ── Bottom note ── */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center text-[0.6rem] text-ink-400 font-semibold uppercase tracking-[0.12em]"
-        >
-          Testimoni asli dari wali santri &amp; alumni · Nama ditampilkan dengan
-          persetujuan
-        </motion.p>
       </Container>
     </section>
   );
