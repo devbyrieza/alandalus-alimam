@@ -1,3 +1,4 @@
+﻿// src/components/home/ProcessSection.tsx
 "use client";
 
 import Link from "next/link";
@@ -7,9 +8,10 @@ import {
   CreditCard,
   ClipboardCheck,
   GraduationCap,
-  CheckCircle2,
   BellRing,
-  ArrowRight } from "lucide-react";
+  ArrowRight,
+  Sparkles
+} from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
 
@@ -18,150 +20,67 @@ const STEPS = [
   {
     icon: UserPlus,
     title: "Buat Akun",
-    description:
-      "Daftarkan data diri awal dan buat akun pendaftaran santri baru.",
-    accent: "maroon" as const },
+    description: "Daftarkan data diri awal dan buat akun pendaftaran santri baru.",
+    accent: "maroon"
+  },
   {
     icon: CreditCard,
     title: "Pembayaran",
-    description:
-      "Bayar biaya daftar & unggah bukti transfer ke dashboard online.",
-    accent: "gold" as const },
+    description: "Bayar biaya daftar & unggah bukti transfer ke dashboard online.",
+    accent: "gold"
+  },
   {
     icon: FileText,
     title: "Lengkapi Berkas",
-    description:
-      "Isi form biodata lengkap dan unggah dokumen persyaratan digital.",
-    accent: "maroon" as const },
+    description: "Isi form biodata lengkap dan unggah dokumen persyaratan digital.",
+    accent: "maroon"
+  },
   {
     icon: ClipboardCheck,
     title: "Seleksi",
-    description:
-      "Hadiri dan ikuti ujian seleksi Al-Qur'an, wawancara, dan tes tulis.",
-    accent: "gold" as const },
+    description: "Hadiri dan ikuti ujian seleksi Al-Qur'an, wawancara, dan tes tulis.",
+    accent: "gold"
+  },
   {
     icon: BellRing,
     title: "Pengumuman",
     description: "Lihat hasil kelulusan seleksi melalui dashboard & WhatsApp.",
-    accent: "maroon" as const },
+    accent: "maroon"
+  },
   {
     icon: GraduationCap,
     title: "Daftar Ulang",
-    description:
-      "Lengkapi administrasi akhir setelah dinyatakan lolos seleksi.",
-    accent: "cream" as const },
+    description: "Lengkapi administrasi akhir setelah dinyatakan lolos seleksi.",
+    accent: "cream"
+  },
 ] as const;
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const ACCENT_MAP = {
-  maroon: {
-    icon: "bg-primary-50 text-primary-600 border-primary-100 group-hover:bg-primary-100 group-hover:border-primary-200",
-    badge: "bg-primary-600 text-white",
-    title: "group-hover:text-primary-700" },
-  gold: {
-    icon: "bg-gold-50 text-gold-700 border-gold-100 group-hover:bg-gold-100 group-hover:border-gold-200",
-    badge: "bg-gold-500 text-white",
-    title: "group-hover:text-gold-700" },
-  cream: {
-    icon: "bg-secondary-50 text-primary-600 border-secondary-200 group-hover:bg-secondary-100 group-hover:border-primary-100",
-    badge: "bg-primary-700 text-white",
-    title: "group-hover:text-primary-700" } };
-
-// ─── Step Card ────────────────────────────────────────
-function StepCard({
-  icon: Icon,
-  title,
-  description,
-  accent,
-  index,
-  isLast }: (typeof STEPS)[number] & { index: number; isLast: boolean }) {
-  const colors = ACCENT_MAP[accent];
-
-  return (
-    <div className="relative flex flex-col items-center">
-      <motion.div
-        initial={{ opacity: 0, y: 24, scale: 0.97 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        viewport={{ once: true, margin: "-30px" }}
-        transition={{ delay: index * 0.08, duration: 0.55, ease: EASE }}
-        className="group relative z-10 flex flex-col items-center text-center w-full"
-      >
-        {/* Step number badge */}
-        <div
-          className={`w-7 h-7 rounded-full flex items-center justify-center text-[0.6rem] font-black mb-4 shadow-xs ${colors.badge}`}
-        >
-          {index + 1}
-        </div>
-
-        {/* Icon box */}
-        <div
-          className={[
-            "w-16 h-16 md:w-20 md:h-20 rounded-2xl border flex items-center justify-center mb-5",
-            "transition-all duration-400 group-hover:scale-105 group-hover:shadow-premium-sm shadow-xs",
-            colors.icon,
-          ].join(" ")}
-        >
-          <Icon className="w-7 h-7 md:w-8 md:h-8" strokeWidth={1.6} />
-        </div>
-
-        {/* Text */}
-        <h4
-          className={`font-bold text-[0.9375rem] text-ink-900 mb-2 tracking-tight transition-colors duration-200 ${colors.title}`}
-        >
-          {title}
-        </h4>
-        <p className="text-[0.75rem] text-ink-500 font-[450] leading-relaxed max-w-[160px]">
-          {description}
-        </p>
-      </motion.div>
-
-      {/* Connector line — only between steps, not after last */}
-      {!isLast && (
-        <div className="hidden lg:block absolute top-[28px] left-[calc(50%+44px)] right-[calc(-50%+44px)] h-px bg-gradient-to-r from-secondary-300 to-secondary-200 z-0" />
-      )}
-
-      {/* Mobile vertical connector */}
-      {!isLast && (
-        <div className="lg:hidden mt-6 mb-2 w-px h-8 bg-gradient-to-b from-secondary-300 to-transparent rounded-full" />
-      )}
-    </div>
-  );
-}
-
 // ─── Main ─────────────────────────────────────────────
 export default function ProcessSection() {
   return (
-    <section
-      id="alur"
-      className="section-alt relative border-y border-gold-100/60 overflow-hidden"
-    >
+    <section id="alur" className="section-cream relative border-y border-maroon-100/60 overflow-hidden py-20 md:py-28">
       {/* Background glow */}
-      <div
-        className="absolute -top-32 right-0 translate-x-1/3 w-[500px] h-[500px] pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(254,243,199,0.4) 0%, transparent 65%)" }}
-      />
-      <div
-        className="absolute -bottom-24 left-0 -translate-x-1/3 w-[400px] h-[400px] pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(253,242,242,0.4) 0%, transparent 65%)" }}
-      />
+      <div className="absolute -top-32 right-0 translate-x-1/3 w-[500px] h-[500px] pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 65%)" }} />
+      <div className="absolute -bottom-24 left-0 -translate-x-1/3 w-[400px] h-[400px] pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(85,0,0,0.08) 0%, transparent 65%)" }} />
 
       <Container className="relative z-10">
         {/* ── Header ── */}
-        <div className="text-center mb-14 md:mb-18 max-w-2xl mx-auto">
+        <div className="text-center mb-16 md:mb-20 max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: EASE }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-gold-200 text-primary-700 text-[0.65rem] font-bold uppercase tracking-[0.12em] mb-5 shadow-xs"
+            className="flex justify-center mb-5"
           >
-            <CheckCircle2 className="w-3 h-3 shrink-0" strokeWidth={2} />
-            <span>Prosedur SPMB</span>
+            <span className="eyebrow-pill">
+              <Sparkles className="w-3 h-3" />
+              Prosedur Mudah & Transparan
+            </span>
           </motion.div>
 
           <motion.h2
@@ -169,9 +88,9 @@ export default function ProcessSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.08, duration: 0.6, ease: EASE }}
-            className="section-title mb-4"
+            className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 text-maroon-950"
           >
-            Alur <span className="text-gradient-primary">Pendaftaran</span>
+            Alur <span className="gradient-text-maroon">Pendaftaran</span>
           </motion.h2>
 
           <motion.p
@@ -179,22 +98,36 @@ export default function ProcessSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15, duration: 0.6, ease: EASE }}
-            className="section-subtitle max-w-xl mx-auto"
+            className="text-base text-ink-500 max-w-xl mx-auto"
           >
             Ikuti langkah-langkah mudah berikut untuk menjadi bagian dari
-            keluarga besar Pesantren Al Imam Al Islami.
+            keluarga besar Pesantren Al Imam Al Islami. Proses kami rancang untuk kenyamanan Anda.
           </motion.p>
         </div>
 
-        {/* ── Steps ── */}
-        <div className="relative grid grid-cols-1 lg:grid-cols-6 gap-1 md:gap-0 max-w-5xl mx-auto">
+        {/* ── Steps Grid (Cinova Style) ── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-8 max-w-6xl mx-auto">
           {STEPS.map((step, idx) => (
-            <StepCard
+            <motion.div
               key={idx}
-              {...step}
-              index={idx}
-              isLast={idx === STEPS.length - 1}
-            />
+              initial={{ opacity: 0, y: 24, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-30px" }}
+              transition={{ delay: idx * 0.08, duration: 0.55, ease: EASE }}
+              className="relative pt-6"
+            >
+              <div className="step-ghost-number">0{idx + 1}</div>
+              <div className="card-glass relative z-10 h-full p-8 flex flex-col items-start hover-lift">
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-sm
+                  ${step.accent === 'maroon' ? 'bg-maroon-50 text-maroon-600 border border-maroon-200' : 
+                    step.accent === 'gold' ? 'bg-cream-50 text-cream-600 border border-cream-200' : 
+                    'bg-surface-50 text-maroon-500 border border-surface-200'}`}>
+                  <step.icon className="w-7 h-7" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-xl font-bold text-maroon-900 mb-3">{step.title}</h3>
+                <p className="text-sm text-ink-500 leading-relaxed font-medium">{step.description}</p>
+              </div>
+            </motion.div>
           ))}
         </div>
 
@@ -204,17 +137,17 @@ export default function ProcessSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.6, ease: EASE }}
-          className="mt-14 md:mt-18 flex justify-center"
+          className="mt-16 md:mt-20 flex justify-center"
         >
-          <a href="/daftar">
-            <button className="btn-primary inline-flex items-center gap-2.5 px-10 group/btn">
+          <Link href="/ppdb">
+            <button className="btn-glow-maroon inline-flex items-center gap-2.5 px-10 group/btn">
               <span>Daftar Sebagai Santri</span>
               <ArrowRight
                 className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1"
                 strokeWidth={2}
               />
             </button>
-          </a>
+          </Link>
         </motion.div>
       </Container>
     </section>

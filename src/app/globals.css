@@ -2198,6 +2198,213 @@
     }
   }
 
+  /* ━━━ CINOVA-INSPIRED PREMIUM UTILITIES (Al-Imam Overhaul) ━━━
+     Referensi: creatorcinova.site + omi.kemenag.go.id design language
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /* ─── Eyebrow Pill Badge (Cinova-style) ─── */
+  .eyebrow-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.875rem;
+    border-radius: 9999px;
+    background: rgba(85, 0, 0, 0.08);
+    border: 1px solid rgba(85, 0, 0, 0.18);
+    color: var(--color-maroon-700);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow-pill-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.875rem;
+    border-radius: 9999px;
+    background: rgba(201, 168, 76, 0.12);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    color: var(--color-cream-600);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ─── CTA Button with Glow (Cinova-style) ─── */
+  .btn-glow-maroon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2.25rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    color: var(--color-cream-100);
+    background: linear-gradient(135deg, var(--color-maroon-700) 0%, var(--color-maroon-950) 100%);
+    box-shadow: 0 0 40px -10px rgba(85, 0, 0, 0.55), 0 4px 16px -4px rgba(85, 0, 0, 0.35);
+    border: none;
+    text-decoration: none;
+    transition: transform 0.2s var(--ease-spring), box-shadow 0.2s var(--ease-smooth), filter 0.2s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.10) 0%, transparent 60%);
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 60px -8px rgba(85, 0, 0, 0.65), 0 8px 24px -4px rgba(85, 0, 0, 0.4);
+      filter: brightness(1.08);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.98);
+    }
+  }
+
+  /* ─── Flow Chips (Cinova-style process strip) ─── */
+  .flow-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    background: var(--color-surface-50);
+    border: 1px solid var(--color-surface-200);
+    border-radius: 6px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-ink-700);
+  }
+
+  .flow-chip-arrow {
+    color: var(--color-maroon-500);
+    font-weight: 800;
+    font-size: 0.875rem;
+  }
+
+  /* ─── Countdown Box (OMI-style) ─── */
+  .countdown-box {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: var(--color-white);
+    border: 1px solid var(--color-maroon-100);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-premium-sm);
+  }
+
+  .countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 52px;
+  }
+
+  .countdown-number {
+    font-family: var(--font-display);
+    font-size: 1.875rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--color-maroon-900);
+    line-height: 1;
+  }
+
+  .countdown-label {
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-ink-400);
+    margin-top: 0.25rem;
+  }
+
+  .countdown-sep {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--color-maroon-200);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  /* ─── Section Cream Background ─── */
+  .section-cream {
+    background: var(--color-surface-warm);
+  }
+
+  /* ─── Step Ghost Number (Cinova-style) ─── */
+  .step-ghost-number {
+    position: absolute;
+    top: -0.5rem;
+    left: 1rem;
+    font-family: var(--font-display);
+    font-size: 5rem;
+    font-weight: 900;
+    color: var(--color-maroon-100);
+    line-height: 1;
+    z-index: 0;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* ─── Cinova-style Disclaimer / Callout Strip ─── */
+  .callout-strip-maroon {
+    display: inline-block;
+    padding: 0.625rem 1.25rem;
+    border-radius: 9999px;
+    background: rgba(85, 0, 0, 0.06);
+    border: 1px solid rgba(85, 0, 0, 0.14);
+    font-weight: 600;
+    color: var(--color-ink-700);
+    font-size: 0.875rem;
+  }
+
+  /* ─── Marquee Announcement Bar ─── */
+  .announcement-bar {
+    width: 100%;
+    background: linear-gradient(135deg, var(--color-maroon-900) 0%, var(--color-maroon-950) 100%);
+    overflow: hidden;
+    height: 36px;
+    display: flex;
+    align-items: center;
+  }
+
+  .announcement-track {
+    display: flex;
+    white-space: nowrap;
+    animation: marquee-scroll 22s linear infinite;
+  }
+
+  .announcement-track span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 2rem;
+    color: var(--color-cream-200);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+  }
+
+  .announcement-track .dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-cream-400);
+    flex-shrink: 0;
+  }
+
   /* ─── Keyframe Animations ─── */
   .float {
     animation: float 7s var(--ease-in-out) infinite;
