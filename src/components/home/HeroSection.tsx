@@ -1,4 +1,4 @@
-﻿// src/components/home/HeroSection.tsx
+// src/components/home/HeroSection.tsx
 // EXTREME OVERHAUL: Pure Cinova/OMI SaaS Premium Feel
 "use client";
 
@@ -13,7 +13,8 @@ import {
   Clock,
   UserCheck,
   TrendingUp,
-  Award
+  Award,
+  BookOpen
 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { motion, useReducedMotion } from "framer-motion";
