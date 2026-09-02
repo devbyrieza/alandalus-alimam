@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useCallback } from "react";
 import {
@@ -389,7 +389,7 @@ function InputField({
   const handleFilteredChange = (rawValue: string) => {
     if (inputFilter === "letters") {
       // Allow letters (including accented), spaces, apostrophes, hyphens, periods
-      const filtered = rawValue.replace(/[^a-zA-ZÀ-ÿ\s'.\-]/g, "");
+      const filtered = rawValue.replace(/[^a-zA-ZÃ€-Ã¿\s'.\-]/g, "");
       onChange(filtered);
     } else if (inputFilter === "numbers") {
       // Allow only digits
@@ -501,7 +501,43 @@ export default function DataLengkapForm({
     ayah: INITIAL_ORTU,
     ibu: INITIAL_ORTU,
     wali: INITIAL_WALI,
-    wali_sama_dengan_ortu: true });
+    wali_sama_dengan_ortu: true
+  });
+
+  // ============================================
+  // FORM AUTOSAVE (MANDATORY UX RULE)
+  // ============================================
+  const DRAFT_KEY = `alimam_datalengkap_draft_${pendaftarId || 'unknown'}`;
+  const [isRestored, setIsRestored] = useState(false);
+
+  // 1. State Restoration
+  useEffect(() => {
+    if (loading || isRestored) return; // Wait for initial server fetch
+
+    try {
+      const draft = localStorage.getItem(DRAFT_KEY);
+      if (draft) {
+        const parsedDraft = JSON.parse(draft);
+        setFormData(prev => ({ ...prev, ...parsedDraft }));
+        console.log("Draft autosave restored.");
+      }
+    } catch (error) {
+      console.error("Gagal memuat draft:", error);
+    } finally {
+      setIsRestored(true);
+    }
+  }, [loading, isRestored, DRAFT_KEY]);
+
+  // 2. Autosave Subscription
+  useEffect(() => {
+    if (!isRestored) return; // Don't save initial empty state
+
+    const timer = setTimeout(() => {
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(formData));
+    }, 1000); // debounce 1s
+
+    return () => clearTimeout(timer);
+  }, [formData, isRestored, DRAFT_KEY]);
 
   const [openSections, setOpenSections] = useState({
     santri: true,
@@ -1925,3 +1961,4 @@ export default function DataLengkapForm({
     </form>
   );
 }
+
