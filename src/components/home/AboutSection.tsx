@@ -1,72 +1,91 @@
 ﻿// src/components/home/AboutSection.tsx
 "use client";
-import { Container } from "@/components/layout/Container";
-import { motion } from "framer-motion";
-import { Sparkles, CheckCircle2, ShieldCheck, HeartHandshake } from "lucide-react";
-import { BRANDING } from "@/config/branding";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
-};
+import { Container } from "@/components/layout/Container";
+import Image from "next/image";
+import { Check } from "lucide-react";
+import { BRANDING } from "@/config/branding";
 
 export default function AboutSection() {
   return (
-    <section id="tentang" className="bg-white py-24 md:py-32 overflow-hidden relative">
-      <Container className="relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-          
-          {/* Left: Huge Typography */}
-          <div>
-            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-              <span className="eyebrow-pill mb-6">
-                <ShieldCheck className="w-4 h-4" />
-                Tentang Al Imam
-              </span>
-              <h2 className="text-4xl md:text-5xl lg:text-[3.5rem] font-black text-ink-950 leading-[1.1] tracking-tight mb-8">
-                Bukan Sekadar <br />
-                <span className="gradient-text-maroon">Pesantren Biasa.</span>
-              </h2>
-              <p className="text-lg md:text-xl text-ink-600 leading-relaxed font-medium mb-8">
-                Di {BRANDING.schoolName}, kami tidak hanya mentransfer ilmu. Kami membangun sebuah ekosistem pendidikan di mana santri dibentuk menjadi kader ummat yang <strong>Hanif</strong>, <strong>Kontributif</strong>, dan <strong>Adaptif</strong> tanpa kekerasan fisik maupun verbal.
-              </p>
-              
-              <ul className="space-y-4">
-                {["Fasilitas modern & asrama nyaman", "Pengajar tersertifikasi & kompeten", "Pendekatan tarbiyah penuh kasih sayang"].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-ink-700 font-bold">
-                    <CheckCircle2 className="w-5 h-5 text-maroon-600" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
+    <section id="tentang" className="py-24 bg-white border-b border-slate-200 scroll-mt-20">
+      <Container className="max-w-7xl mx-auto px-4 md:px-6 space-y-16">
+        
+        {/* Section Header (OMI Exact) */}
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-blue-700 bg-blue-50 px-4 py-1.5 rounded-full border border-blue-200 inline-block">
+            Landasan & Visi Pendidikan
+          </span>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+            Tentang {BRANDING.schoolShortName}
+          </h2>
+          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+            Ekosistem pembinaan adab, tahfidz Al-Qur'an, dan akademik untuk mewujudkan kader ummat rabbani.
+          </p>
+        </div>
 
-          {/* Right: Cinova style Fit-Box / Grid */}
-          <div className="relative">
-            <div className="absolute inset-0 bg-maroon-50 rounded-[3rem] rotate-3 scale-105" />
-            <div className="relative bg-white border border-surface-200 rounded-[2.5rem] p-8 md:p-12 shadow-premium-lg">
-              <h3 className="text-2xl font-black text-ink-900 mb-8 text-center">Mengapa Memilih Kami?</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {[
-                  { title: "Bebas Bullying", desc: "Pengawasan 24 jam & zero tolerance terhadap perundungan.", icon: HeartHandshake },
-                  { title: "Talaqqi Bersanad", desc: "Hafalan Al-Qur'an dengan sanad yang muttashil.", icon: Sparkles },
-                ].map((feature, i) => (
-                  <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                    className="bg-surface-50 p-6 rounded-3xl border border-surface-100 hover:border-maroon-200 transition-colors"
-                  >
-                    <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-4">
-                      <feature.icon className="w-6 h-6 text-maroon-600" />
-                    </div>
-                    <h4 className="text-lg font-bold text-ink-950 mb-2">{feature.title}</h4>
-                    <p className="text-sm text-ink-500 font-medium leading-relaxed">{feature.desc}</p>
-                  </motion.div>
-                ))}
+        {/* 2-Column Bento Layout (OMI Exact) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          {/* Left: Branding Card */}
+          <div className="lg:col-span-5">
+            <div className="bg-gradient-to-b from-blue-50/70 via-white to-slate-50 border border-slate-200 rounded-3xl p-8 text-center shadow-sm">
+              <div className="w-32 h-32 relative mx-auto mb-4">
+                <Image
+                  src={BRANDING.logoPath}
+                  alt={`Logo ${BRANDING.schoolName}`}
+                  fill
+                  className="object-contain drop-shadow-sm"
+                />
+              </div>
+              <div className="mt-6 pt-6 border-t border-slate-200">
+                <h4 className="font-extrabold text-slate-900 text-base">
+                  {BRANDING.schoolName}
+                </h4>
+                <p className="text-xs text-slate-500 mt-1 font-semibold">
+                  Pondok Pesantren Berbasis Sunnah & Kurikulum Modern
+                </p>
               </div>
             </div>
           </div>
 
+          {/* Right: Policy & 4 Core Pillars */}
+          <div className="lg:col-span-7 space-y-5">
+            <div className="bg-white border border-slate-200 rounded-2xl p-7 space-y-4 text-slate-700 text-sm leading-relaxed shadow-sm">
+              <p>
+                <strong className="text-slate-900">{BRANDING.schoolName}</strong> didirikan sebagai ikhtiar melahirkan generasi muslim yang kokoh aqidahnya, fasih bertutur bahasa Arab, serta menguasai ilmu pengetahuan kontemporer.
+              </p>
+              <p>
+                Pola pengasuhan berlandaskan <strong className="text-blue-700">prinsip keteladanan tanpa kekerasan fisik dan verbal</strong>, memadukan kurikulum khas pesantren dengan bimbingan intensif hafalan Al-Qur'an bersanad.
+              </p>
+            </div>
+
+            {/* 4 Feature Badges with Checkmarks (OMI Exact) */}
+            <div className="grid sm:grid-cols-2 gap-3.5">
+              {[
+                "Pendidikan adab dan keteladanan 24 jam.",
+                "Halaqah Tahfidz Al-Qur'an mutqin bersanad.",
+                "Bahasa Arab & Inggris aktif harian.",
+                "Fasilitas asrama kondusif dan ramah santri."
+              ].map((text, i) => (
+                <div
+                  key={i}
+                  className="bg-white border border-slate-200 p-4 rounded-xl flex items-start gap-3 shadow-sm hover:border-blue-300 transition-colors"
+                >
+                  <span className="w-6 h-6 rounded-lg bg-blue-50 text-blue-700 font-extrabold flex items-center justify-center text-xs shrink-0 mt-0.5">
+                    <Check className="w-3.5 h-3.5 stroke-[3]" />
+                  </span>
+                  <span className="text-xs text-slate-700 font-semibold leading-relaxed">
+                    {text}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+          </div>
+
         </div>
+
       </Container>
     </section>
   );
