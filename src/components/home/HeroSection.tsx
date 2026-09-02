@@ -97,19 +97,30 @@ export default function HeroSection() {
             </motion.div>
 
             <motion.h1 variants={fadeUp} initial="hidden" animate={animate} transition={{ delay: 0.1 }}
-              className="font-black tracking-tighter leading-[1.05] text-ink-950 mb-6 text-[3rem] md:text-[4rem] lg:text-[4.5rem] xl:text-[5rem]"
+              className="font-black tracking-tighter leading-[1.05] text-ink-950 mb-6 text-[2.75rem] md:text-[3.5rem] lg:text-[4rem] xl:text-[4.5rem]"
             >
-              Kaderisasi <br className="hidden lg:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-maroon-700 to-maroon-950">
-                Ummat Pilihan.
+              Kaderisasi Ummat <br className="hidden lg:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-maroon-700 to-maroon-950 block mt-2 text-[2.25rem] md:text-[3rem] lg:text-[3.5rem] xl:text-[4rem]">
+                Hanif, Kontributif, <br className="hidden sm:block" /> dan Adaptif
               </span>
             </motion.h1>
 
             <motion.p variants={fadeUp} initial="hidden" animate={animate} transition={{ delay: 0.2 }}
-              className="text-lg md:text-xl text-ink-600 mb-8 max-w-2xl font-medium leading-relaxed"
+              className="text-lg md:text-xl text-ink-600 mb-6 max-w-2xl font-medium leading-relaxed"
             >
-              Sistem tarbiyah yang mengedepankan keteladanan, tanpa luka pengasuhan. Memadukan Intensitas Tahfidz, Syar'i, dan Akademik Global.
+              Bukan sekadar tempat belajar — sebuah ekosistem pembentukan karakter yang <strong className="font-semibold text-ink-800">mengedepankan keteladanan dan mendidik tanpa luka</strong>, memadukan Tahfidz Al-Qur'an, Ilmu Syar'i, Akademik, Leadership, dan Entrepreneurship.
             </motion.p>
+
+            {/* Tagline */}
+            <motion.div variants={fadeUp} initial="hidden" animate={animate} transition={{ delay: 0.25 }}
+              className="flex items-center gap-3 justify-center lg:justify-start w-full max-w-2xl mb-8"
+            >
+              <div className="h-px flex-1 max-w-[2.5rem]" style={{ background: "var(--color-maroon-200)" }} />
+              <p className="text-sm font-semibold italic text-maroon-600">
+                &ldquo;{BRANDING.schoolTagline}&rdquo;
+              </p>
+              <div className="h-px flex-1 max-w-[2.5rem]" style={{ background: "var(--color-maroon-200)" }} />
+            </motion.div>
 
             <motion.div variants={fadeUp} initial="hidden" animate={animate} transition={{ delay: 0.3 }}
               className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-10"
