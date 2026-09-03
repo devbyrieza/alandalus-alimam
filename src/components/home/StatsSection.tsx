@@ -11,12 +11,13 @@ import { BRANDING } from "@/config/branding";
 const STATS = [
   {
     id: "batch",
-    label: "Angkatan Pertama",
+    label: "Angkatan Perdana",
     value: 1,
     icon: Calendar,
     suffix: "",
     sublabel: `Tahun Ajaran ${BRANDING.academicYear}`,
-    description: "Momen bersejarah pembukaan"
+    description: "Momen bersejarah pembukaan santri baru",
+    accentBorder: "border-b-[#550000]"
   },
   {
     id: "quality",
@@ -25,7 +26,8 @@ const STATS = [
     icon: Award,
     suffix: "%",
     sublabel: "Tahfidz & Akademik",
-    description: "Lima pilar pendidikan utama"
+    description: "Kombinasi kurikulum turots & nasional",
+    accentBorder: "border-b-[#ddc192]"
   },
   {
     id: "levels",
@@ -33,8 +35,9 @@ const STATS = [
     value: 2,
     icon: GraduationCap,
     suffix: "",
-    sublabel: "MTs · IL",
-    description: "Pendidikan menengah lengkap"
+    sublabel: "MTs & I'dad Lughawi",
+    description: "Pendidikan menengah terakreditasi",
+    accentBorder: "border-b-emerald-600"
   },
   {
     id: "quota",
@@ -42,8 +45,9 @@ const STATS = [
     value: 25,
     icon: Users,
     suffix: "",
-    sublabel: "Per Jenjang (Eksklusif)",
-    description: "Seleksi ketat, kualitas terjaga"
+    sublabel: "Santri / Rombel",
+    description: "Rasio pendampingan intensif & eksklusif",
+    accentBorder: "border-b-indigo-600"
   },
 ];
 
@@ -71,36 +75,40 @@ export default function StatsSection() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section className="section-cream py-16 md:py-24 border-y border-maroon-100">
-      <Container>
-        <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
+    <section className="bg-[#F8FAFC] py-14 md:py-20 border-b border-slate-200">
+      <Container className="max-w-7xl mx-auto px-4 md:px-6">
+        <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
           {STATS.map((stat, i) => (
             <motion.div
               key={stat.id}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-white rounded-3xl p-8 border border-maroon-50 shadow-premium-sm hover-lift relative overflow-hidden"
+              transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className={`bg-white rounded-2xl p-6 border border-slate-200 shadow-xs hover:shadow-md transition-all relative overflow-hidden flex flex-col justify-between border-b-4 ${stat.accentBorder}`}
             >
-              {/* Subtle ambient glow inside card */}
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-cream-50 rounded-full blur-2xl opacity-60" />
-              
-              <div className="flex flex-col items-center text-center relative z-10">
-                <div className="w-12 h-12 rounded-xl bg-maroon-50 text-maroon-700 flex items-center justify-center mb-5">
-                  <stat.icon className="w-6 h-6" strokeWidth={1.5} />
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">
+                    {stat.label}
+                  </span>
+                  <div className="w-9 h-9 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center text-[#550000]">
+                    <stat.icon className="w-4 h-4" />
+                  </div>
                 </div>
-                
-                <h3 className="text-4xl md:text-5xl font-black text-maroon-950 mb-2 font-display">
-                  <AnimatedCounter value={stat.value} trigger={inView} delay={i * 0.1} />
-                  <span className="text-maroon-500">{stat.suffix}</span>
-                </h3>
-                
-                <p className="text-[0.9375rem] font-bold text-ink-900 mb-1">{stat.label}</p>
-                <div className="inline-block px-2 py-0.5 rounded-full bg-cream-50 text-maroon-800 text-[10px] font-bold uppercase tracking-widest mb-3">
+
+                <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-1">
+                  <AnimatedCounter value={stat.value} trigger={inView} delay={i * 0.08} />
+                  <span className="text-[#550000]">{stat.suffix}</span>
+                </div>
+
+                <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#ddc192]/20 text-[#550000] text-[10px] font-extrabold uppercase tracking-wider mt-1 mb-2">
                   {stat.sublabel}
-                </div>
-                <p className="text-xs text-ink-500 font-medium leading-relaxed">{stat.description}</p>
+                </span>
               </div>
+
+              <p className="text-xs text-slate-500 font-medium leading-relaxed pt-3 border-t border-slate-100">
+                {stat.description}
+              </p>
             </motion.div>
           ))}
         </div>
