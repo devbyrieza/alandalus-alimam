@@ -1,4 +1,4 @@
-﻿// src/components/home/CtaSection.tsx
+// src/components/home/CtaSection.tsx
 "use client";
 
 import Link from "next/link";
@@ -46,13 +46,13 @@ export default function CtaSection() {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-4">
-              <Link
-                href="/SPMB"
+              <a
+                href="https://spmb.pesantren-alimam.com/daftar"
                 className="w-full sm:w-auto h-12 px-8 rounded-xl bg-[#ddc192] hover:bg-[#cfb280] text-[#550000] font-extrabold text-sm shadow-md shadow-[#ddc192]/30 transition-all inline-flex items-center justify-center gap-2 hover:-translate-y-0.5"
               >
                 <span>Daftar SPMB Online 2027</span>
                 <ArrowRight className="w-4 h-4" />
-              </Link>
+              </a>
 
               <a
                 href={WA_URL}

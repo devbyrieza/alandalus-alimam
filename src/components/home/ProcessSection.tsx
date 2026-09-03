@@ -1,4 +1,4 @@
-﻿// src/components/home/ProcessSection.tsx
+// src/components/home/ProcessSection.tsx
 "use client";
 
 import Link from "next/link";
@@ -110,13 +110,13 @@ export default function ProcessSection() {
 
         {/* Bottom CTA Button */}
         <div className="mt-14 text-center">
-          <Link
-            href="/SPMB"
+          <a
+            href="https://spmb.pesantren-alimam.com/daftar"
             className="h-12 px-8 rounded-xl bg-[#550000] hover:bg-[#400000] text-white font-extrabold text-sm shadow-md shadow-[#550000]/25 transition-all inline-flex items-center gap-2 hover:-translate-y-0.5"
           >
             <span>Mulai Pendaftaran SPMB Online</span>
             <ArrowRight className="w-4 h-4" />
-          </Link>
+          </a>
         </div>
 
       </Container>

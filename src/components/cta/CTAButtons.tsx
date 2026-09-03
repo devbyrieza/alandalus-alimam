@@ -52,7 +52,7 @@ export function CTAInfoPPDB({
         `}
         asChild
       >
-        <Link href="/ppdb" className="flex items-center justify-center gap-2">
+        <Link href="https://spmb.pesantren-alimam.com" className="flex items-center justify-center gap-2">
           <FileText className="w-5 h-5" />
           <span>Pelajari SPMB 2027/2028</span>
         </Link>
@@ -94,7 +94,7 @@ export function CTASyaratJadwal({
         asChild
       >
         <Link
-          href="/ppdb#syarat"
+          href="https://spmb.pesantren-alimam.com#syarat"
           className="flex items-center justify-center gap-2"
         >
           <FileText className="w-5 h-5" />
@@ -192,7 +192,7 @@ export function CTADaftarSekarang({
         `}
         asChild
       >
-        <Link href="/daftar" className="flex items-center justify-center gap-2">
+        <Link href="https://spmb.pesantren-alimam.com/daftar" className="flex items-center justify-center gap-2">
           {showSparkles && <Sparkles className="w-5 h-5 animate-pulse" />}
           <span>Daftar Sekarang - Kuota Terbatas!</span>
         </Link>
@@ -238,7 +238,7 @@ export function CTAStickyDaftar() {
           className="shadow-2xl shadow-primary/30 hover:shadow-2xl font-bold transition-all duration-300 hover:scale-105 bg-gradient-gold text-white"
           asChild
         >
-          <Link href="/daftar" className="flex items-center gap-2">
+          <Link href="https://spmb.pesantren-alimam.com/daftar" className="flex items-center gap-2">
             <Sparkles className="w-4 h-4" />
             Daftar Sekarang
           </Link>
@@ -262,7 +262,7 @@ export function NavbarCTAPPDB() {
       className="shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 hover:shadow-2xl shadow-primary/30 shadow-gold text-white font-semibold transition-all duration-300 hover:-translate-y-1 bg-gradient-gold"
       asChild
     >
-      <Link href="/ppdb" className="flex items-center gap-2">
+      <Link href="https://spmb.pesantren-alimam.com" className="flex items-center gap-2">
         <Sparkles className="w-3.5 h-3.5" />
         Info SPMB 2026
       </Link>
@@ -284,7 +284,7 @@ export function NavbarCTALogin() {
         color: "var(--color-brown-700)" }}
       asChild
     >
-      <Link href="/login">
+      <Link href="https://spmb.pesantren-alimam.com/login">
         <i className="fas fa-lock mr-2" />
         Login
       </Link>
@@ -325,7 +325,7 @@ export function MobileCTAPPDB() {
         className="w-full text-white font-bold shadow-2xl shadow-primary/30  shadow-primary/20 hover:shadow-2xl shadow-primary/30 shadow-gold bg-gradient-gold"
         asChild
       >
-        <Link href="/ppdb" className="flex items-center justify-center gap-2">
+        <Link href="https://spmb.pesantren-alimam.com" className="flex items-center justify-center gap-2">
           <Sparkles className="w-4 h-4" />
           <span>Pelajari SPMB 2026</span>
         </Link>
@@ -379,4 +379,5 @@ export function MobileCTAPPDB() {
  *   <NavbarCTALogin />
  * </div>
  */
+
 

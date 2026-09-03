@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -72,9 +72,9 @@ export default function Navbar() {
       return;
     }
 
-    if (typeof window !== "undefined" && window.location.hostname.startsWith("SPMB.")) {
+    if (typeof window !== "undefined" && (window.location.hostname.toLowerCase().startsWith("spmb.") || window.location.hostname.toLowerCase().startsWith("ppdb."))) {
       e.preventDefault();
-      const mainDomain = window.location.hostname.replace("SPMB.", "");
+      const mainDomain = window.location.hostname.replace(/^spmb\./i, "").replace(/^ppdb\./i, "");
       window.location.href = `https://${mainDomain}${href}`;
       return;
     }
@@ -115,8 +115,8 @@ export default function Navbar() {
   const handleBerandaClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
 
-    if (typeof window !== "undefined" && window.location.hostname.startsWith("SPMB.")) {
-      const mainDomain = window.location.hostname.replace("SPMB.", "");
+    if (typeof window !== "undefined" && (window.location.hostname.toLowerCase().startsWith("spmb.") || window.location.hostname.toLowerCase().startsWith("ppdb."))) {
+      const mainDomain = window.location.hostname.replace(/^spmb\./i, "").replace(/^ppdb\./i, "");
       window.location.href = `https://${mainDomain}/`;
       return;
     }
@@ -271,8 +271,8 @@ export default function Navbar() {
               <LanguageSwitcher />
               {session ? (
                 <div className="flex items-center gap-2 xl:gap-2.5">
-                  <Link
-                    href="/dashboard"
+                  <a
+                    href="https://spmb.pesantren-alimam.com/dashboard"
                     className="text-xs xl:text-sm font-bold text-[var(--color-ink-700)] hover:text-[var(--color-primary-800)] px-3 py-2 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-all flex items-center gap-1.5 shadow-xs"
                   >
                     <span className="relative flex h-2 w-2 mr-0.5">
@@ -280,30 +280,36 @@ export default function Navbar() {
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                     </span>
                     Masuk ke Akun
-                  </Link>
-                  <Link
-                    href="/SPMB"
+                  </a>
+                  <a
+                    href="https://spmb.pesantren-alimam.com/daftar"
                     className="btn-primary flex items-center gap-1.5 group text-xs xl:text-sm font-black px-3.5 xl:px-5 py-2 rounded-full shadow-md hover:scale-105 transition-all glow-ring-primary"
                   >
                     <span>Daftar SPMB</span>
                     <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                  </Link>
+                  </a>
                 </div>
               ) : (
                 <div className="flex items-center gap-2 xl:gap-2.5">
-                  <Link
-                    href="/login"
+                  <a
+                    href="https://spmb.pesantren-alimam.com"
+                    className="text-xs xl:text-sm font-bold text-[var(--color-ink-600)] hover:text-[var(--color-primary-800)] transition-colors duration-200 px-3 py-2 rounded-full hover:bg-[var(--color-primary-50)]"
+                  >
+                    Info SPMB
+                  </a>
+                  <a
+                    href="https://spmb.pesantren-alimam.com/login"
                     className="text-xs xl:text-sm font-bold text-[var(--color-ink-600)] hover:text-[var(--color-primary-800)] transition-colors duration-200 px-3 py-2 rounded-full hover:bg-[var(--color-primary-50)]"
                   >
                     Masuk
-                  </Link>
-                  <Link
-                    href="/SPMB"
+                  </a>
+                  <a
+                    href="https://spmb.pesantren-alimam.com/daftar"
                     className="btn-primary flex items-center gap-1.5 group text-xs xl:text-sm font-black px-3.5 xl:px-5 py-2 rounded-full shadow-md hover:scale-105 transition-all glow-ring-primary"
                   >
                     <span>Daftar SPMB</span>
                     <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                  </Link>
+                  </a>
                 </div>
               )}
             </div>
@@ -451,8 +457,8 @@ export default function Navbar() {
                 <div className="flex flex-col gap-2.5">
                   {session ? (
                     <>
-                      <Link
-                        href="/dashboard"
+                      <a
+                        href="https://spmb.pesantren-alimam.com/dashboard"
                         onClick={() => setIsMenuOpen(false)}
                         className="w-full py-3 text-sm font-bold rounded-2xl border border-[var(--color-primary-100)] text-[var(--color-primary-800)] bg-[var(--color-primary-50)] hover:bg-[var(--color-primary-100)] text-center transition-all min-h-[48px] flex items-center justify-center gap-2"
                       >
@@ -462,33 +468,41 @@ export default function Navbar() {
                         </span>
                         <span>Masuk ke Akun (Dashboard)</span>
                         <ArrowRight className="w-4 h-4 ml-1" />
-                      </Link>
-                      <Link
-                        href="/SPMB"
+                      </a>
+                      <a
+                        href="https://spmb.pesantren-alimam.com/daftar"
                         onClick={() => setIsMenuOpen(false)}
                         className="btn-primary w-full justify-center gap-2 min-h-[48px]"
                       >
                         <GraduationCap className="w-4 h-4" />
                         Daftar SPMB Online
-                      </Link>
+                      </a>
                     </>
                   ) : (
                     <>
-                      <Link
-                        href="/login"
+                      <a
+                        href="https://spmb.pesantren-alimam.com"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="w-full py-3 text-sm font-bold rounded-2xl border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 text-center transition-all min-h-[48px] flex items-center justify-center gap-2 shadow-2xs"
+                      >
+                        <FileText className="w-4 h-4" />
+                        <span>Informasi Pendaftaran SPMB</span>
+                      </a>
+                      <a
+                        href="https://spmb.pesantren-alimam.com/login"
                         onClick={() => setIsMenuOpen(false)}
                         className="w-full py-3 text-sm font-bold rounded-2xl border border-[var(--color-primary-100)] text-[var(--color-primary-800)] bg-[var(--color-primary-50)] hover:bg-[var(--color-primary-100)] text-center transition-all min-h-[48px] flex items-center justify-center gap-2"
                       >
                         Masuk ke Akun
-                      </Link>
-                      <Link
-                        href="/SPMB"
+                      </a>
+                      <a
+                        href="https://spmb.pesantren-alimam.com/daftar"
                         onClick={() => setIsMenuOpen(false)}
                         className="btn-primary w-full justify-center gap-2 min-h-[48px]"
                       >
                         <GraduationCap className="w-4 h-4" />
                         Daftar SPMB Online
-                      </Link>
+                      </a>
                     </>
                   )}
                 </div>
@@ -502,5 +516,6 @@ export default function Navbar() {
     </>
   );
 }
+
 
 

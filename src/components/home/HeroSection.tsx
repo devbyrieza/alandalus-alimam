@@ -1,4 +1,4 @@
-﻿// src/components/home/HeroSection.tsx
+// src/components/home/HeroSection.tsx
 "use client";
 
 import { useState, useEffect } from "react";
@@ -103,21 +103,21 @@ export default function HeroSection() {
             {/* 3 Action Buttons (Strict Al-Imam Palette) */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-2 w-full">
               {session ? (
-                <Link
-                  href="/dashboard"
+                <a
+                  href="https://spmb.pesantren-alimam.com/dashboard"
                   className="h-12 w-full sm:w-auto px-6 rounded-xl bg-[#550000] hover:bg-[#400000] text-white font-extrabold text-sm shadow-md shadow-[#550000]/25 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2"
                 >
                   <span>Buka Dashboard</span>
                   <ArrowRight className="w-4 h-4" />
-                </Link>
+                </a>
               ) : (
-                <Link
-                  href="/SPMB"
+                <a
+                  href="https://spmb.pesantren-alimam.com/daftar"
                   className="h-12 w-full sm:w-auto px-6 rounded-xl bg-[#550000] hover:bg-[#400000] text-white font-extrabold text-sm shadow-md shadow-[#550000]/25 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2"
                 >
                   <span>Daftar SPMB 2027</span>
                   <ArrowRight className="w-4 h-4" />
-                </Link>
+                </a>
               )}
 
               <Link

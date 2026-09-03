@@ -106,12 +106,12 @@ export default function FeaturesSection() {
               </div>
 
               <div className="pt-4">
-                <Link href="/ppdb" className="inline-block">
+                <a href="https://spmb.pesantren-alimam.com/daftar" className="inline-block">
                   <button className="btn-primary w-full sm:w-auto text-base">
                     Daftar Sekarang
                     <ArrowRight className="w-5 h-5 ml-1" />
                   </button>
-                </Link>
+                </a>
               </div>
             </motion.div>
           </div>

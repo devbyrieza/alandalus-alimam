@@ -1,4 +1,4 @@
-﻿// src/app/tentang/page.tsx
+// src/app/tentang/page.tsx
 "use client";
 
 import { useEffect } from "react";
@@ -54,13 +54,13 @@ export default function TentangPage() {
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-            <Link
-              href="/SPMB"
+            <a
+              href="https://spmb.pesantren-alimam.com/daftar"
               className="h-11 px-6 rounded-xl bg-[#550000] hover:bg-[#400000] text-white font-extrabold text-xs shadow-md shadow-[#550000]/25 transition-all inline-flex items-center gap-2"
             >
               <span>Daftar SPMB 2027/2028</span>
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </a>
             <Link
               href="/program"
               className="h-11 px-6 rounded-xl bg-white text-slate-800 font-extrabold text-xs border border-slate-200 shadow-xs hover:border-[#ddc192] transition-all inline-flex items-center"
@@ -311,13 +311,13 @@ export default function TentangPage() {
               Daftarkan putra Anda sekarang dan ikuti proses seleksi penerimaan santri baru Tahun Ajaran 2027/2028.
             </p>
             <div className="pt-2 flex flex-wrap justify-center gap-3">
-              <Link
-                href="/SPMB"
+              <a
+                href="https://spmb.pesantren-alimam.com/daftar"
                 className="h-11 px-7 rounded-xl bg-[#ddc192] hover:bg-[#cfb280] text-[#550000] font-extrabold text-xs shadow-md transition-all inline-flex items-center gap-2"
               >
                 <span>Daftar SPMB Online</span>
                 <ArrowRight className="w-4 h-4" />
-              </Link>
+              </a>
               <Link
                 href="/kontak"
                 className="h-11 px-7 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/25 font-extrabold text-xs transition-all inline-flex items-center"

@@ -1,4 +1,4 @@
-﻿// src/app/program/page.tsx
+// src/app/program/page.tsx
 "use client";
 
 import Link from "next/link";
@@ -65,13 +65,13 @@ export default function ProgramPage() {
                 </p>
               </div>
 
-              <Link
-                href="/SPMB"
+              <a
+                href="https://spmb.pesantren-alimam.com/daftar"
                 className="h-11 px-6 rounded-xl bg-[#550000] hover:bg-[#400000] text-white font-extrabold text-xs shadow-md shadow-[#550000]/25 transition-all inline-flex items-center gap-2 self-start lg:self-center"
               >
                 <span>Daftar MTs Al-Imam</span>
                 <ArrowRight className="w-4 h-4" />
-              </Link>
+              </a>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6 pt-8">
@@ -122,13 +122,13 @@ export default function ProgramPage() {
                 </p>
               </div>
 
-              <Link
-                href="/SPMB"
+              <a
+                href="https://spmb.pesantren-alimam.com/daftar"
                 className="h-11 px-6 rounded-xl bg-[#ddc192] hover:bg-[#cfb280] text-[#550000] font-extrabold text-xs shadow-md shadow-[#ddc192]/30 transition-all inline-flex items-center gap-2 self-start lg:self-center"
               >
                 <span>Daftar I'dad Lughawi</span>
                 <ArrowRight className="w-4 h-4" />
-              </Link>
+              </a>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 pt-8">
