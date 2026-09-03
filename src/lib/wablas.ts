@@ -29,7 +29,7 @@ const WABLAS_DOMAIN = process.env.WABLAS_DOMAIN || "";
 const WABLAS_TOKEN = process.env.WABLAS_TOKEN || "";
 const WABLAS_SECRET_KEY = process.env.WABLAS_SECRET_KEY || "";
 
-const DEFAULT_APP_URL = "https://pesantren-alimam.com";
+const DEFAULT_APP_URL = "https://spmb.pesantren-alimam.com";
 const DEFAULT_CONTACT = "0851-1152-4441";
 
 if (!WABLAS_DOMAIN || !WABLAS_TOKEN) {

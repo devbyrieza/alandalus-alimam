@@ -962,7 +962,7 @@ export default function WelcomeDayPage() {
             </div>
           </div>
           <a
-            href="https://ppdb.pesantren-alimam.com/berkas/Daftar%20Perlengkapan%20Santri%20Baru.pdf"
+            href="https://spmb.pesantren-alimam.com/berkas/Daftar%20Perlengkapan%20Santri%20Baru.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 bg-[#550000] hover:bg-[#550000] text-white text-xs font-black px-4 py-2.5 rounded-3xl transition-colors"
@@ -1144,4 +1144,5 @@ export default function WelcomeDayPage() {
     </div>
   );
 }
+
 
