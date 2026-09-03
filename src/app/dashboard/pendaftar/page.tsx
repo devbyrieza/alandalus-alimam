@@ -1,9 +1,9 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-// ─── ICONS ───
+// â”€â”€â”€ ICONS â”€â”€â”€
 import {
   User,
   CheckCircle,
@@ -15,7 +15,7 @@ import {
   FileText,
   Target } from "lucide-react";
 
-// ─── COMPONENTS & UTILS ───
+// â”€â”€â”€ COMPONENTS & UTILS â”€â”€â”€
 import ProgressTracker from "./components/ProgressTracker";
 import {
   getNextStep,
@@ -99,42 +99,43 @@ export default function DashboardPendaftarPage() {
   );
 }
 
-// ─── INTERNAL COMPONENTS ───
+// â”€â”€â”€ INTERNAL COMPONENTS â”€â”€â”€
 
 function HeroBanner({ nama, nomorPendaftaran, lastUpdate }: any) {
   return (
-    <div className="relative overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3.5rem] bg-linear-to-br from-primary-700 to-primary-900 text-white p-6 sm:p-5 md:p-8 shadow-2xl border border-primary-600/50">
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-secondary-400/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/2" />
-      <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-10">
-        <div className="flex-1 space-y-4 sm:space-y-6">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-[9px] sm:text-[10px] tracking-[0.2em] font-black uppercase border border-white/20 text-secondary-200">
-              PENDIDIKAN INTERNASIONAL
-            </span>
-            <span className="flex items-center gap-2 text-xs font-bold text-primary-100/70">
-              <Clock className="w-4 h-4" />
-              Pembaruan:{" "}
-              {new Date(lastUpdate).toLocaleDateString("id-ID", {
-                day: "numeric",
-                month: "long",
-                year: "numeric" })}
+    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#550000] via-[#450000] to-[#300000] text-white p-6 sm:p-8 shadow-lg shadow-[#550000]/15 border border-white/10">
+      {/* 3D Geometric Background Shapes (OMI Exact) */}
+      <div className="absolute top-0 right-0 w-80 h-80 bg-[#ddc192]/10 rounded-full blur-3xl pointer-events-none -translate-y-1/3 translate-x-1/3" />
+      <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-white/5 rounded-3xl rotate-12 pointer-events-none" />
+
+      <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="space-y-2 max-w-xl">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#ddc192]">
+              SPMB Tahun Ajaran 2027/2028
             </span>
           </div>
-          <h1 className="text-3xl sm:text-3xl md:text-5xl lg:text-7xl font-black leading-[1.1] font-display tracking-tight text-white italic">
-            Selamat Datang, <br />
-            <span className="text-secondary-400 not-italic uppercase drop-shadow-2xl shadow-primary/30  shadow-primary/20 ">
-              {nama}!
+
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight flex items-center gap-2">
+            <span>Selamat datang,</span>
+            <span className="text-[#ddc192] underline decoration-[#ddc192]/40 underline-offset-4">
+              {nama.split(" ")[0]}!
             </span>
-          </h1>
-          <p className="text-primary-100 text-base md:text-xl font-medium max-w-xl opacity-80 leading-relaxed italic border-l-4 border-secondary-500/50 pl-4 sm:pl-6">
-            "Memberdayakan generasi pemimpin Islam global berikutnya."
+            <span className="inline-block">👋</span>
+          </h2>
+
+          <p className="text-xs sm:text-sm text-slate-200/90 font-normal leading-relaxed">
+            Berikut rangkuman informasi yang dapat membantu Anda memantau proses seleksi pendaftaran santri baru.
           </p>
         </div>
-        <div className="flex-1 lg:flex-none w-full sm:w-auto bg-black/20 backdrop-blur-xl px-6 sm:px-5 md:px-8 py-5 sm:py-6 rounded-[1.5rem] sm:rounded-[2rem] border border-white/10 text-center">
-          <p className="text-[10px] font-black uppercase text-secondary-200/60 mb-1 tracking-[0.2em]">
-            ID PENDAFTARAN
+
+        {/* Registration ID Pill */}
+        <div className="w-full md:w-auto bg-black/25 backdrop-blur-md px-5 py-4 rounded-2xl border border-white/15 text-left md:text-right shrink-0">
+          <p className="text-[10px] font-extrabold uppercase text-[#ddc192] tracking-wider mb-0.5">
+            Nomor Pendaftaran
           </p>
-          <p className="font-mono text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tighter">
+          <p className="font-mono text-xl sm:text-2xl font-black text-white tracking-tight">
             {nomorPendaftaran}
           </p>
         </div>
@@ -186,52 +187,59 @@ function GuidedActionCard({ nextStep }: any) {
 
 function StatusGrid({ status, statusLabel, pengumuman }: any) {
   const isFinalStatus = ["announced", "accepted", "rejected", "enrolled", "enrolled_full"].includes(status);
-
-  const items = [
-    {
-      label: "Status Saat Ini",
-      val: statusLabel,
-      desc: "Tahap pendaftaran Anda saat ini",
-      icon: ShieldCheck,
-      color: "text-primary-600",
-      bg: "bg-primary-50" },
-    {
-      label: "Ujian Seleksi",
-      val: ["tested", "announced", "accepted", "enrolled"].includes(status)
-        ? "Selesai"
-        : "Menunggu",
-      desc: "Jadwal dan hasil ujian",
-      icon: Target,
-      color: "text-purple-600",
-      bg: "bg-purple-50" },
-    {
-      label: "Hasil Akhir",
-      val: (pengumuman && isFinalStatus) ? pengumuman.status_kelulusan : "Belum Dirilis",
-      desc: "Hasil penerimaan santri",
-      icon: CheckCircle,
-      color: "text-[#550000]",
-      bg: "bg-emerald-50" },
-  ];
+  const isTested = ["tested", "announced", "accepted", "enrolled"].includes(status);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-      {items.map((item, id) => (
-        <div
-          key={id}
-          className="bg-white rounded-[1.5rem] border border-surface-200 p-6 flex flex-col gap-4 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 hover:shadow-2xl shadow-primary/30  shadow-primary/20 transition-shadow"
-        >
-          <div className="flex items-center gap-4">
-            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${item.bg} ${item.color}`}>
-              <item.icon size={24} />
-            </div>
-            <div>
-              <div className="text-xs font-bold text-ink-500 uppercase tracking-wider">{item.label}</div>
-              <div className="text-xl font-black text-ink-950 mt-1">{item.val}</div>
-            </div>
-          </div>
-          <div className="text-xs text-ink-500 border-t border-surface-100 pt-3">{item.desc}</div>
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+      
+      {/* Card 1: Total / Status Pendaftaran (Maroon Accent - OMI Style) */}
+      <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs relative overflow-hidden flex flex-col justify-between border-b-4 border-b-[#550000] hover:shadow-md transition-all">
+        <div>
+          <p className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-2">
+            Status Pendaftaran
+          </p>
+          <h3 className="text-xl sm:text-2xl font-black text-[#550000] tracking-tight mb-2">
+            {statusLabel}
+          </h3>
         </div>
-      ))}
+        <div className="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-xs font-semibold text-slate-600">
+          <span>📋</span>
+          <span>Tahap seleksi berkas & administrasi</span>
+        </div>
+      </div>
+
+      {/* Card 2: Ujian Seleksi (Green Emerald Accent - OMI Style) */}
+      <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs relative overflow-hidden flex flex-col justify-between border-b-4 border-b-[#16A34A] hover:shadow-md transition-all">
+        <div>
+          <p className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-2">
+            Ujian & Wawancara Seleksi
+          </p>
+          <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight mb-2">
+            {isTested ? "Selesai Mengikuti Tes" : "Menunggu Jadwal Ujian"}
+          </h3>
+        </div>
+        <div className="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-xs font-semibold text-emerald-700">
+          <span>✔</span>
+          <span>{isTested ? "Semua ujian telah terlaksana" : "Silakan pantau jadwal ujian seleksi"}</span>
+        </div>
+      </div>
+
+      {/* Card 3: Hasil Akhir (Amber / Krem Emas Accent - OMI Style) */}
+      <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs relative overflow-hidden flex flex-col justify-between border-b-4 border-b-[#ddc192] hover:shadow-md transition-all">
+        <div>
+          <p className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-2">
+            Hasil Keputusan Seleksi
+          </p>
+          <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight mb-2">
+            {pengumuman && isFinalStatus ? pengumuman.status_kelulusan : "Menunggu Pengumuman"}
+          </h3>
+        </div>
+        <div className="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-xs font-semibold text-amber-700">
+          <span>🕒</span>
+          <span>Keputusan resmi panitia SPMB</span>
+        </div>
+      </div>
+
     </div>
   );
 }
@@ -272,7 +280,7 @@ function SupportCenter() {
   );
 }
 
-// ─── HELPERS ───
+// â”€â”€â”€ HELPERS â”€â”€â”€
 
 function LoadingState() {
   return (
@@ -289,3 +297,4 @@ function ErrorState({ message }: { message: string }) {
     </div>
   );
 }
+
