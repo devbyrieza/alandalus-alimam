@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -314,32 +314,32 @@ export default function LoginPage() {
       {/* Background Micro Grid */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utb3BhY2l0eT0iMC4wMiIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTAgNjBoNjBNNjAgMGwwIDYwIi8+PC9nPjwvc3ZnPg==')] opacity-70 pointer-events-none" />
 
-      {/* ─── TOP NAVIGATION PILLS (OMI MOBILE SCREENSHOT 4) ─── */}
-      <div className="w-full max-w-[500px] flex items-center justify-between gap-3 mb-4 z-10">
+      {/* TOP NAVIGATION PILLS (OMI DESKTOP STANDARD) */}
+      <div className="w-full max-w-5xl lg:max-w-6xl flex items-center justify-between gap-3 mb-4 z-10">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/95 border border-slate-200/90 shadow-sm text-xs font-extrabold uppercase tracking-wider text-slate-700 hover:text-[#550000] hover:border-[#550000]/40 transition-all hover:-translate-y-0.5"
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/95 border border-slate-200/90 shadow-2xs text-xs font-extrabold uppercase tracking-wider text-slate-700 hover:text-[#550000] hover:border-[#550000]/40 transition-all hover:-translate-y-0.5"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Kembali ke Beranda</span>
         </Link>
-        <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/95 border border-slate-200/90 shadow-sm text-xs font-bold text-slate-700">
+        <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/95 border border-slate-200/90 shadow-2xs text-xs font-bold text-slate-700">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           <span>Portal Resmi SPMB 2027</span>
         </div>
       </div>
 
-      {/* ─── TWO-SECTION OMI LOGIN CARD (OMI SCREENSHOTS 2 & 4) ─── */}
-      <div className="w-full max-w-[500px] rounded-3xl overflow-hidden shadow-xl shadow-slate-900/5 border border-slate-200 bg-white relative z-10">
+      {/* TWO-PANEL OMI LOGIN CARD (DESKTOP SPLIT / MOBILE STACKED) */}
+      <div className="w-full max-w-5xl lg:max-w-6xl rounded-3xl overflow-hidden shadow-2xl shadow-slate-950/10 border border-slate-200 bg-white grid grid-cols-1 lg:grid-cols-12 relative z-10">
         
-        {/* SECTION 1: DARK MAROON GRADIENT HEADER BLOCK */}
-        <div className="bg-gradient-to-br from-[#2D0000] via-[#400000] to-[#550000] p-6 sm:p-8 text-white relative overflow-hidden">
+        {/* SISI KIRI: PANEL IDENTITAS & 2 BENTO UNGGULAN (DESKTOP: 5 COLUMNS) */}
+        <div className="lg:col-span-5 bg-gradient-to-br from-[#2D0000] via-[#400000] to-[#550000] p-6 sm:p-8 lg:p-10 text-white relative overflow-hidden flex flex-col justify-between">
           {/* Ambient Glow */}
-          <div className="absolute top-0 right-0 w-48 h-48 bg-[#ddc192]/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#ddc192]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
           
-          <div className="relative z-10 space-y-4">
-            {/* Logo on white pill container */}
-            <div className="inline-flex items-center gap-3 bg-white px-3.5 py-1.5 rounded-2xl shadow-sm">
+          <div className="relative z-10 space-y-6">
+            {/* Logo on white container */}
+            <div className="inline-flex items-center gap-3 bg-white px-3.5 py-2 rounded-2xl shadow-sm">
               <img
                 src={BRANDING.logoPath}
                 alt={"Logo " + BRANDING.schoolName}
@@ -351,22 +351,67 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#ddc192] bg-white/10 px-3 py-1 rounded-full border border-white/15 inline-block mb-2">
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#ddc192] bg-white/10 px-3 py-1 rounded-full border border-white/15 inline-block mb-3">
                 Penerimaan Santri Baru {BRANDING.academicYear}
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
-                Masuk Portal SPMB Al-Imam
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-snug">
+                Pesantren Islam Al-Imam Sukabumi
               </h2>
-              <p className="text-xs sm:text-sm text-slate-200/90 font-normal mt-1 leading-relaxed">
-                Silakan masukkan NIK / No. Pendaftaran calon santri atau kredensial akun staf Anda.
+              <p className="text-xs sm:text-sm text-slate-200/90 font-normal mt-2 leading-relaxed">
+                Portal resmi seleksi dan pembinaan calon santri baru berbasis integrasi tahfidz Al-Qur'an, bahasa Arab aktif, dan adab islami terpadu.
               </p>
             </div>
+
+            {/* 2 KARTU BENTO FITUR UNGGULAN (PERSIS OMI DESKTOP) */}
+            <div className="space-y-3 pt-2">
+              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/15 flex items-center gap-3.5 shadow-sm">
+                <div className="w-11 h-11 rounded-xl bg-[#ddc192]/20 border border-[#ddc192]/30 flex items-center justify-center shrink-0 text-[#ddc192]">
+                  <BookOpen className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-xs sm:text-sm font-extrabold text-white">
+                    Tahfidz Al-Qur'an 30 Juz
+                  </h4>
+                  <p className="text-[11px] text-slate-300 font-normal">
+                    Bimbingan intensif mutqin &amp; sanad hafalan
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/15 flex items-center gap-3.5 shadow-sm">
+                <div className="w-11 h-11 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center shrink-0 text-emerald-300">
+                  <Sparkles className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-xs sm:text-sm font-extrabold text-white">
+                    Kurikulum Terpadu Modern
+                  </h4>
+                  <p className="text-[11px] text-slate-300 font-normal">
+                    Bahasa Arab aktif &amp; kurikulum nasional
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Legal Footer Sisi Kiri */}
+          <div className="relative z-10 pt-6 mt-6 border-t border-white/10 text-[11px] text-slate-300/80 font-medium flex items-center justify-between">
+            <span>Direktorat Tarbiyah &bull; PPDB Al-Imam</span>
+            <span className="text-[#ddc192]">&bull; Akreditasi Unggul</span>
           </div>
         </div>
 
-        {/* SECTION 2: WHITE FORM BODY */}
-        <div className="p-6 sm:p-8 bg-white space-y-6">
+        {/* SISI KANAN: WHITE FORM BODY (DESKTOP: 7 COLUMNS) */}
+        <div className="lg:col-span-7 p-6 sm:p-8 lg:p-10 bg-white space-y-6 flex flex-col justify-center">
           
+          <div>
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
+              Masuk Portal SPMB 2027
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-500 font-normal mt-1 leading-relaxed">
+              Silakan masukkan NIK / No. Pendaftaran calon santri atau kredensial akun staf Anda.
+            </p>
+          </div>
           {/* Tab Switcher (Calon Santri vs Portal Staf) */}
           {!roleSelectionData && (
             <div className="bg-slate-100 p-1.5 rounded-2xl flex relative border border-slate-200/80">
@@ -676,8 +721,10 @@ export default function LoginPage() {
         </div>
 
       </div>
+      <div className="text-center text-xs text-slate-400 mt-6 font-medium space-y-1">
+        <p>&copy; 2026 {BRANDING.schoolLegalName}. Hak Cipta Dilindungi Undang-Undang.</p>
+        <p className="text-[11px] text-slate-400/80">Direktorat Tarbiyah &bull; SPMB Al-Imam v2.0</p>
+      </div>
     </main>
   );
 }
-
-
