@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
@@ -169,7 +169,7 @@ export default function GaleriPage() {
   return (
     <main className="bg-white min-h-screen">
       {/* Hero Header */}
-      <section className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-b from-slate-50 to-white border-b border-slate-100">
+      <section className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-b from-[#FDFCF9] via-[#F8FAFC] to-white border-b border-slate-100">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
 
@@ -177,7 +177,7 @@ export default function GaleriPage() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-50 border border-primary-100 text-primary-700 text-xs font-bold uppercase tracking-widest mb-6 shadow-xs"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#ddc192]/20 border border-[#ddc192]/50 text-[#550000] text-xs font-bold uppercase tracking-widest mb-6 shadow-xs"
           >
             <Camera className="w-3.5 h-3.5" />
             <span>Dokumentasi Resmi Pesantren</span>
@@ -190,7 +190,7 @@ export default function GaleriPage() {
             className="text-3xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight text-slate-900"
           >
             Galeri &amp; Fasilitas <br />
-            <span className="text-primary-700">Pesantren Al-Imam</span>
+            <span className="text-[#550000]">Pesantren Al-Imam</span>
           </motion.h1>
 
           <motion.p
@@ -209,7 +209,7 @@ export default function GaleriPage() {
         <Container>
           <div className="flex items-center justify-between mb-10">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center text-primary-700 border border-primary-100 shadow-xs">
+              <div className="w-10 h-10 rounded-xl bg-[#ddc192]/20 flex items-center justify-center text-[#550000] border border-[#ddc192]/40 shadow-xs">
                 <Images className="w-5 h-5" />
               </div>
               <div>
@@ -261,7 +261,7 @@ export default function GaleriPage() {
                   {/* Click to open indicator */}
                   <div className="absolute bottom-3.5 right-3.5 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white text-slate-900 text-xs font-black shadow-lg">
-                      <Maximize2 className="w-3.5 h-3.5 text-primary-600" />
+                      <Maximize2 className="w-3.5 h-3.5 text-[#550000]" />
                       Lihat Album
                     </div>
                   </div>
@@ -439,3 +439,4 @@ export default function GaleriPage() {
     </main>
   );
 }
+

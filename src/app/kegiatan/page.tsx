@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -121,7 +121,7 @@ const FeatureCard = ({
     {/* Image Side */}
     <div className={`relative ${index % 2 === 1 ? "lg:col-start-2" : ""}`}>
       <div
-        className={`aspect-[4/3] max-h-[480px] min-h-[300px] w-full rounded-[3.5rem] overflow-hidden shadow-2xl shadow-primary/30  shadow-primary/20 relative group ${index % 2 === 0 ? "rotate-2" : "-rotate-2"} hover:rotate-0 transition-transform duration-700 border border-primary-100 p-4 bg-white`}
+        className={`aspect-[4/3] max-h-[480px] min-h-[300px] w-full rounded-[3.5rem] overflow-hidden shadow-2xl shadow-primary/30  shadow-primary/20 relative group ${index % 2 === 0 ? "rotate-2" : "-rotate-2"} hover:rotate-0 transition-transform duration-700 border border-slate-200 p-4 bg-white`}
       >
         <div className="relative w-full h-full rounded-[3rem] overflow-hidden bg-gradient-to-br from-primary-950 to-primary-900">
           <Image
@@ -135,7 +135,7 @@ const FeatureCard = ({
       </div>
 
       {/* Program Badge */}
-      <div className="absolute -top-4 -right-4 bg-white px-6 py-3 rounded-pill shadow-2xl shadow-primary/30  shadow-primary/20 border border-primary-100 z-10 flex items-center gap-2">
+      <div className="absolute -top-4 -right-4 bg-white px-6 py-3 rounded-pill shadow-2xl shadow-primary/30  shadow-primary/20 border border-slate-200 z-10 flex items-center gap-2">
         <Trophy className="w-5 h-5 text-gold-500" />
         <span className="text-xs font-black text-ink-950 uppercase tracking-widest">
           Unggulan
@@ -164,9 +164,9 @@ const FeatureCard = ({
         {item.stats.map((stat, statIdx) => (
           <div
             key={statIdx}
-            className="bg-primary-50 p-6 sm:p-8 rounded-[1.5rem] border border-primary-100 text-center hover:bg-white hover:shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 transition-all"
+            className="bg-primary-50 p-6 sm:p-8 rounded-[1.5rem] border border-slate-200 text-center hover:bg-white hover:shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 transition-all"
           >
-            <div className="text-2xl font-black text-primary-700 mb-1">
+            <div className="text-2xl font-black text-[#550000] mb-1">
               {stat.value}
             </div>
             <div className="text-[10px] text-ink-400 font-extrabold uppercase tracking-widest">
@@ -177,11 +177,11 @@ const FeatureCard = ({
       </div>
 
       {/* Results List */}
-      <div className="app-card bg-white p-5 md:p-8 rounded-[2.5rem] border border-primary-100 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 mb-8">
+      <div className="app-card bg-white p-5 md:p-8 rounded-[2.5rem] border border-slate-200 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 mb-8">
         <div className="space-y-4">
           {item.results.map((result, idx) => (
             <div key={idx} className="flex items-start gap-4">
-              <result.icon className="w-5 h-5 text-primary-600 mt-0.5 shrink-0" />
+              <result.icon className="w-5 h-5 text-[#550000] mt-0.5 shrink-0" />
               <span className="text-base text-ink-700 font-bold leading-tight">
                 {result.text}
               </span>
@@ -209,9 +209,9 @@ const FeatureCard = ({
 const StatsCard = ({ icon: Icon, value, label, sublabel }: HeroStat) => (
   <motion.div
     whileHover={{ y: -5 }}
-    className="app-card bg-white p-6 sm:p-8 md:p-6 rounded-[2rem] md:rounded-[2.5rem] border border-primary-100 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 text-center min-w-[140px] md:min-w-[160px] flex flex-col items-center"
+    className="app-card bg-white p-6 sm:p-8 md:p-6 rounded-[2rem] md:rounded-[2.5rem] border border-slate-200 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 text-center min-w-[140px] md:min-w-[160px] flex flex-col items-center"
   >
-    <div className="w-10 h-10 md:w-12 md:h-12 rounded-3xl md:rounded-2xl bg-primary-50 flex items-center justify-center text-primary-600 mb-3 md:mb-4 border border-primary-100">
+    <div className="w-10 h-10 md:w-12 md:h-12 rounded-3xl md:rounded-2xl bg-primary-50 flex items-center justify-center text-[#550000] mb-3 md:mb-4 border border-slate-200">
       <Icon className="w-5 h-5 md:w-6 md:h-6" />
     </div>
     <div className="text-2xl md:text-3xl font-black text-ink-950 mb-1">
@@ -237,14 +237,14 @@ const ScheduleCard = ({
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ delay: index * 0.1 }}
-    className={`group p-10 rounded-[3rem] ${schedule.bgColor} border border-primary-100 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 hover:shadow-2xl shadow-primary/30  shadow-primary/20 transition-all duration-500 hover:-translate-y-2`}
+    className={`group p-10 rounded-[3rem] ${schedule.bgColor} border border-slate-200 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 hover:shadow-2xl shadow-primary/30  shadow-primary/20 transition-all duration-500 hover:-translate-y-2`}
   >
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-between mb-8">
-        <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 group-hover:scale-110 transition-transform border border-primary-100">
+        <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 group-hover:scale-110 transition-transform border border-slate-200">
           <schedule.icon className={`${schedule.iconColor} w-8 h-8`} />
         </div>
-        <div className="text-lg font-black text-primary-700 bg-white/50 px-4 py-1.5 rounded-pill border border-primary-100">
+        <div className="text-lg font-black text-[#550000] bg-white/50 px-4 py-1.5 rounded-pill border border-slate-200">
           {schedule.time}
         </div>
       </div>
@@ -257,8 +257,8 @@ const ScheduleCard = ({
         {schedule.detail}
       </p>
 
-      <div className="mt-auto inline-flex items-center gap-3 bg-white/60 p-6 sm:p-8 rounded-2xl border border-primary-100 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
-        <Zap className="w-5 h-5 text-primary-600 flex-shrink-0" />
+      <div className="mt-auto inline-flex items-center gap-3 bg-white/60 p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
+        <Zap className="w-5 h-5 text-[#550000] flex-shrink-0" />
         <span className="text-sm font-black text-ink-950 uppercase tracking-tight">
           {schedule.benefit}
         </span>
@@ -281,7 +281,7 @@ const WeeklyActivityCard = ({
     className={`app-card group p-8 rounded-[2.5rem] bg-white border border-primary-50 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 hover:shadow-2xl shadow-primary/30  shadow-primary/20 transition-all hover:-translate-y-2 text-center`}
   >
     <div
-      className={`w-14 h-14 ${activity.bg} rounded-2xl flex items-center justify-center ${activity.color} mx-auto mb-6 group-hover:scale-110 transition-transform border border-primary-100`}
+      className={`w-14 h-14 ${activity.bg} rounded-2xl flex items-center justify-center ${activity.color} mx-auto mb-6 group-hover:scale-110 transition-transform border border-slate-200`}
     >
       <activity.icon className="w-8 h-8" />
     </div>
@@ -298,7 +298,7 @@ const WeeklyActivityCard = ({
       <p className="text-base text-ink-600 font-medium">{activity.detail}</p>
     </div>
 
-    <div className="bg-primary-50 rounded-3xl px-4 py-3 border border-primary-100">
+    <div className="bg-primary-50 rounded-3xl px-4 py-3 border border-slate-200">
       <p className="text-xs font-black text-primary-800 uppercase tracking-tight">
         {activity.benefit}
       </p>
@@ -319,7 +319,7 @@ const EkskulCard = ({
     transition={{ delay: index * 0.05 }}
     className="app-card group p-6 sm:p-8 md:p-8 rounded-[2rem] md:rounded-[2.5rem] bg-white border border-primary-50 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 hover:shadow-2xl shadow-primary/30  shadow-primary/20 hover:border-primary-200 transition-all hover:-translate-y-2 text-center h-full flex flex-col justify-between"
   >
-    <div className="w-12 h-12 md:w-16 md:h-16 bg-primary-50 rounded-3xl md:rounded-2xl flex items-center justify-center text-primary-600 mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-all duration-300 border border-primary-100">
+    <div className="w-12 h-12 md:w-16 md:h-16 bg-primary-50 rounded-3xl md:rounded-2xl flex items-center justify-center text-[#550000] mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-all duration-300 border border-slate-200">
       <ekskul.icon className="w-6 h-6 md:w-8 md:h-8" />
     </div>
 
@@ -332,7 +332,7 @@ const EkskulCard = ({
     </p>
 
     <div className="pt-3 md:pt-4 border-t border-surface-50 mt-auto">
-      <p className="text-[10px] md:text-xs font-black text-primary-700 uppercase tracking-widest break-words">
+      <p className="text-[10px] md:text-xs font-black text-[#550000] uppercase tracking-widest break-words">
         {ekskul.benefit}
       </p>
     </div>
@@ -356,7 +356,7 @@ export default function KegiatanPage() {
         "Bukan sekadar hafalan! Santri kami PAHAM isi kitab, mampu berdiskusi ilmiah, dan disiapkan menjadi ilmuwan muda.",
       icon: BookOpen,
       accentColor: "bg-primary-500",
-      bgColor: "bg-primary-600",
+      bgColor: "bg-[#550000]",
       stats: [
         { label: "Kitab Dikuasai", value: "30+" },
         { label: "Ustadz Expert", value: "20+" },
@@ -387,7 +387,7 @@ export default function KegiatanPage() {
         { label: "Setoran", value: "Harian" },
       ],
       results: [
-        { icon: TrendingUp, text: "Target Hafalan Terukur (± 4 Juz/Tahun)" },
+        { icon: TrendingUp, text: "Target Hafalan Terukur (Â± 4 Juz/Tahun)" },
         { icon: Award, text: "Standar Bacaan Bersanad & Tartil" },
         { icon: CheckCircle2, text: "Mampu Menjadi Imam Shalat Berjamaah" },
       ],
@@ -402,7 +402,7 @@ export default function KegiatanPage() {
         "Menyiapkan santri multitalenta yang juara di bidang olimpiade, olahraga, hingga public speaking.",
       icon: Target,
       accentColor: "bg-primary-500",
-      bgColor: "bg-primary-600",
+      bgColor: "bg-[#550000]",
       stats: [
         { label: "Pilihan Ekskul", value: "10+" },
         { label: "Pelatih Ahli", value: "15+" },
@@ -455,7 +455,7 @@ export default function KegiatanPage() {
         "Penyelesaian hajat mandiri, makan pagi sehat, dan mandi untuk persiapan menyambut hari dengan kebugaran fisik prima.",
       benefit: "Kesehatan tubuh & kesiapan mental.",
       bgColor: "bg-primary-50/50",
-      iconColor: "text-primary-600" },
+      iconColor: "text-[#550000]" },
     {
       icon: BookOpen,
       time: "07:00 - 12:00",
@@ -464,7 +464,7 @@ export default function KegiatanPage() {
         "Belajar aktif di kelas: Mengkaji Kitab Turots, Ilmu Syar'i, Mapel Umum (IPA, MTK, dan lain lain), Entrepreneurship, serta Leadership.",
       benefit: "Integrasi Imtak, Iptek & Entrepreneurship.",
       bgColor: "bg-primary-50",
-      iconColor: "text-primary-700" },
+      iconColor: "text-[#550000]" },
     {
       icon: Home,
       time: "12:30 - 15:00",
@@ -473,7 +473,7 @@ export default function KegiatanPage() {
         "Setelah ba'diyah dzuhur dilanjutkan makan siang dan tidur siang tertib. Seluruh santri wajib bangun sebelum adzan ashar.",
       benefit: "Pemulihan stamina & qailulah sunnah.",
       bgColor: "bg-primary-50/50",
-      iconColor: "text-primary-600" },
+      iconColor: "text-[#550000]" },
     {
       icon: Dribbble,
       time: "15:30 - 17:30",
@@ -501,7 +501,7 @@ export default function KegiatanPage() {
       detail: "Fardhu & Sunnah Rawatib berjamaah di masjid.",
       benefit: "Kebiasaan Ibadah Kokoh",
       icon: Home,
-      color: "text-primary-700",
+      color: "text-[#550000]",
       bg: "bg-primary-50" },
     {
       title: "Kajian Jum'at",
@@ -509,7 +509,7 @@ export default function KegiatanPage() {
       detail: "Tafsir, Hadits & Isu Kontemporer.",
       benefit: "Literasi Agama Matang",
       icon: BookText,
-      color: "text-primary-600",
+      color: "text-[#550000]",
       bg: "bg-primary-50" },
     {
       title: "Bela Diri",
@@ -517,7 +517,7 @@ export default function KegiatanPage() {
       detail: "Latihan rutin untuk kebugaran dan pertahanan diri.",
       benefit: "Mental & Fisik Kuat",
       icon: Shield,
-      color: "text-primary-600",
+      color: "text-[#550000]",
       bg: "bg-primary-50" },
     {
       title: "Pramuka",
@@ -616,7 +616,7 @@ export default function KegiatanPage() {
   return (
     <main className="bg-white min-h-screen">
       {/* 1. Hero Section */}
-      <section className="relative py-24 md:py-32 overflow-hidden bg-white">
+      <section className="relative pt-28 pb-20 lg:pt-36 overflow-hidden bg-gradient-to-b from-[#FDFCF9] via-[#F8FAFC] to-white border-b border-slate-200">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gold-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
 
@@ -624,7 +624,7 @@ export default function KegiatanPage() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-primary-50 border border-primary-100 text-primary-700 text-xs font-bold uppercase tracking-widest mb-10 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-[#ddc192]/20 border border-[#ddc192]/50 text-[#550000] text-xs font-extrabold uppercase tracking-wider mb-6 shadow-2xs"
           >
             <Award className="w-3.5 h-3.5" />
             <span>Program Pendidikan & Kegiatan</span>
@@ -676,7 +676,7 @@ export default function KegiatanPage() {
               </span>
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-ink-950 mb-6 md:mb-8 leading-tight">
                 Hasil Nyata <br />
-                <span className="text-primary-600">Pendidikan Kita</span>
+                <span className="text-[#550000]">Pendidikan Kita</span>
               </h2>
               <p className="text-lg md:text-xl text-ink-600 font-medium leading-relaxed mb-8 md:mb-10 text-center max-w-2xl mx-auto">
                 Alhamdulillah, dengan izin Allah, santri kami telah menunjukkan
@@ -692,7 +692,7 @@ export default function KegiatanPage() {
                   text: "Bahasa Arab sebagai Bahasa Pengantar",
                   icon: MessageCircle },
                 {
-                  text: "Target Hafalan Berstandar Sanad (± 4 Juz/Thn)",
+                  text: "Target Hafalan Berstandar Sanad (Â± 4 Juz/Thn)",
                   icon: BadgeCheck },
                 {
                   text: "Lulusan Diterima di LIPIA, PTN & Timur Tengah",
@@ -704,9 +704,9 @@ export default function KegiatanPage() {
                 <motion.div
                   key={idx}
                   whileHover={{ scale: 1.02 }}
-                  className="bg-white p-5 md:p-6 rounded-[2rem] flex items-center gap-4 border border-primary-100 group transition-all h-full text-left"
+                  className="bg-white p-5 md:p-6 rounded-[2rem] flex items-center gap-4 border border-slate-200 group transition-all h-full text-left"
                 >
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary-50 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 flex items-center justify-center text-primary-600 shrink-0 group-hover:bg-primary-600 group-hover:text-white transition-colors border border-primary-100">
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary-50 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 flex items-center justify-center text-[#550000] shrink-0 group-hover:bg-[#550000] group-hover:text-white transition-colors border border-slate-200">
                     <item.icon className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <span className="font-black text-ink-900 text-sm md:text-lg leading-tight">
@@ -771,7 +771,7 @@ export default function KegiatanPage() {
             <p className="text-xl text-ink-600 font-medium leading-relaxed">
               Aktivitas rutin pekanan dan bulanan yang dirancang untuk
               mematangkan{" "}
-              <span className="text-primary-600 font-bold uppercase tracking-tight">
+              <span className="text-[#550000] font-bold uppercase tracking-tight">
                 keterampilan non-teknis
               </span>{" "}
               dan pengalaman santri.
@@ -848,3 +848,4 @@ export default function KegiatanPage() {
     </main>
   );
 }
+
