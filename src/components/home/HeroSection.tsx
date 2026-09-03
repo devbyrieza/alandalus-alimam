@@ -101,11 +101,11 @@ export default function HeroSection() {
             </div>
 
             {/* 3 Action Buttons (Strict Al-Imam Palette) */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-2 w-full">
               {session ? (
                 <Link
                   href="/dashboard"
-                  className="h-12 px-6 rounded-xl bg-[#550000] hover:bg-[#400000] text-white font-extrabold text-sm shadow-md shadow-[#550000]/25 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2"
+                  className="h-12 w-full sm:w-auto px-6 rounded-xl bg-[#550000] hover:bg-[#400000] text-white font-extrabold text-sm shadow-md shadow-[#550000]/25 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2"
                 >
                   <span>Buka Dashboard</span>
                   <ArrowRight className="w-4 h-4" />
@@ -113,7 +113,7 @@ export default function HeroSection() {
               ) : (
                 <Link
                   href="/SPMB"
-                  className="h-12 px-6 rounded-xl bg-[#550000] hover:bg-[#400000] text-white font-extrabold text-sm shadow-md shadow-[#550000]/25 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2"
+                  className="h-12 w-full sm:w-auto px-6 rounded-xl bg-[#550000] hover:bg-[#400000] text-white font-extrabold text-sm shadow-md shadow-[#550000]/25 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2"
                 >
                   <span>Daftar SPMB 2027</span>
                   <ArrowRight className="w-4 h-4" />
@@ -122,7 +122,7 @@ export default function HeroSection() {
 
               <Link
                 href="/program"
-                className="h-12 px-6 rounded-xl bg-white text-slate-800 font-extrabold text-sm border border-slate-300 shadow-sm hover:border-[#ddc192] hover:bg-[#ddc192]/10 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center"
+                className="h-12 w-full sm:w-auto px-6 rounded-xl bg-white text-slate-800 font-extrabold text-sm border border-slate-300 shadow-sm hover:border-[#ddc192] hover:bg-[#ddc192]/10 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center"
               >
                 <span>Lihat Program</span>
               </Link>
@@ -131,7 +131,7 @@ export default function HeroSection() {
                 href="/documents/Brosur-SPMB.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="h-12 px-6 rounded-xl bg-[#ddc192] hover:bg-[#cfb280] text-[#550000] font-extrabold text-sm shadow-md shadow-[#ddc192]/30 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2 border border-[#ddc192]"
+                className="h-12 w-full sm:w-auto px-6 rounded-xl bg-[#ddc192] hover:bg-[#cfb280] text-[#550000] font-extrabold text-sm shadow-md shadow-[#ddc192]/30 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2 border border-[#ddc192]"
               >
                 <Download className="w-4 h-4" />
                 <span>Unduh Brosur (PDF)</span>
@@ -263,3 +263,4 @@ export default function HeroSection() {
     </section>
   );
 }
+
