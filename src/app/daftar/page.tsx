@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -240,48 +240,48 @@ export default function DaftarPage() {
   };
 
   return (
-    <main className="min-h-screen bg-white py-12 md:py-24 relative overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-secondary-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gold-100/30 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
-      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.02] pointer-events-none" />
+    <main className="min-h-screen bg-gradient-to-b from-[#F0F7FF] via-[#F8FAFC] to-white py-10 sm:py-16 relative overflow-hidden font-sans">
+      {/* Background Micro Grid */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utb3BhY2l0eT0iMC4wMiIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTAgNjBoNjBNNjAgMGwwIDYwIi8+PC9nPjwvc3ZnPg==')] opacity-70 pointer-events-none" />
 
-      <Container className="relative z-10">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-secondary-200 mb-6 group hover:scale-110 transition-transform app-card">
-            <School className="w-8 h-8 text-primary-600" />
+      <Container className="relative z-10 max-w-3xl mx-auto px-4">
+        
+        {/* Top Navigation Pills (OMI Mobile/Desktop Standard) */}
+        <div className="w-full flex items-center justify-between gap-3 mb-6">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/95 border border-slate-200/90 shadow-sm text-xs font-extrabold uppercase tracking-wider text-slate-700 hover:text-[#550000] hover:border-[#550000]/40 transition-all hover:-translate-y-0.5"
+          >
+            <span>← Kembali ke Beranda</span>
+          </Link>
+          <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/95 border border-slate-200/90 shadow-sm text-xs font-bold text-slate-700">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Pendaftaran Santri Baru 2027</span>
           </div>
-          <motion.h1
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-2xl md:text-4xl lg:text-6xl font-display font-black text-ink-950 mb-3 tracking-tight"
-          >
-            Mulai Pendaftaran{" "}
-            <span className="text-gradient-primary">Terpadu</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-ink-700 font-medium"
-          >
-            Tahap Awal Penerimaan Santri Baru T.A 2027/2028
-          </motion.p>
-        </motion.div>
+        </div>
 
-        <div className="w-full max-w-3xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3 }}
-            className="app-card bg-white rounded-[2.5rem] md:rounded-[3.5rem] shadow-2xl shadow-primary/30  shadow-primary/20 p-6 md:p-16 border border-secondary-200 relative overflow-hidden"
-          >
+        {/* Two-Section OMI Container Card */}
+        <div className="w-full rounded-3xl overflow-hidden shadow-xl shadow-slate-900/5 border border-slate-200 bg-white relative">
+          
+          {/* Section 1: Dark Maroon Gradient Header */}
+          <div className="bg-gradient-to-br from-[#2D0000] via-[#400000] to-[#550000] p-6 sm:p-8 text-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-48 h-48 bg-[#ddc192]/10 rounded-full blur-2xl pointer-events-none" />
+            
+            <div className="relative z-10 space-y-3">
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#ddc192] bg-white/10 px-3 py-1 rounded-full border border-white/15 inline-block">
+                Tahap 1: Registrasi Data Awal
+              </span>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+                Formulir Pendaftaran SPMB Online
+              </h1>
+              <p className="text-xs sm:text-sm text-slate-200 font-normal leading-relaxed">
+                Silakan isi data calon santri dan nomor WhatsApp aktif wali santri untuk verifikasi pendaftaran.
+              </p>
+            </div>
+          </div>
+
+          {/* Section 2: White Body Card */}
+          <div className="p-6 sm:p-10 space-y-8 bg-white">
             {/* Soft decorative blur inside card */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-secondary-50/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
@@ -661,7 +661,7 @@ export default function DaftarPage() {
                   whileTap={{ scale: 0.98 }}
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-4 md:py-6 rounded-pill bg-primary-700 text-white font-black text-lg md:text-xl hover:bg-primary-800 shadow-2xl shadow-primary/30  shadow-primary/20 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                  className="w-full py-4 md:py-6 rounded-pill bg-[#550000] text-white font-extrabold text-base hover:bg-[#400000] rounded-xl h-14 shadow-2xl shadow-primary/30  shadow-primary/20 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                 >
                   {isLoading ? (
                     <>
@@ -684,7 +684,7 @@ export default function DaftarPage() {
                 </p>
               </motion.div>
             </form>
-          </motion.div>
+          </div>
         </div>
 
         {/* Footer Link */}
@@ -705,4 +705,6 @@ export default function DaftarPage() {
     </main>
   );
 }
+
+
 

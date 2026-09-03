@@ -1,106 +1,129 @@
+﻿// src/components/home/ContactSection.tsx
 "use client";
 
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
-import { MapPin, Phone, Mail, MessageCircle, Send } from "lucide-react";
+import { MapPin, Phone, Mail, MessageCircle, ArrowRight, Clock } from "lucide-react";
 import { motion } from "framer-motion";
+import { BRANDING } from "@/config/branding";
 
-const CONTACT_INFO = [
-  {
-    icon: MapPin,
-    title: "Lokasi Pesantren",
-    content: "Jl. Pelabuhan II KM 18",
-    detail: "Kampung Pupunjul, Cikembar, Sukabumi",
-    accent: "maroon" as const },
-  {
-    icon: Phone,
-    title: "Layanan Telepon",
-    content: "+62 851-1152-4441",
-    detail: "Senin-Sabtu (08.00 - 16.00)",
-    accent: "maroon" as const },
-  {
-    icon: Mail,
-    title: "Email Resmi",
-    content: "alandalusalimam@gmail.com",
-    detail: "Kirim pertanyaan kapan saja",
-    accent: "gold" as const },
-] as const;
-
-const EASE = [0.16, 1, 0.3, 1] as const;
+const WA_URL = "https://wa.me/6285111524441";
+const MAPS_URL = "https://maps.app.goo.gl/uX3Uv4q6L7w7zPzK8";
 
 export default function ContactSection() {
   return (
-    <section
-      id="kontak"
-      className="py-20 md:py-24 bg-white relative overflow-hidden"
-    >
-      <Container>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.6, ease: EASE }}
-          className="bg-secondary-50 rounded-[2rem] lg:rounded-[2.5rem] p-8 md:p-12 lg:p-14 border border-secondary-200 relative overflow-hidden shadow-sm"
-        >
-          <div className="absolute inset-0 opacity-[0.03] bg-[url('/grid-pattern.svg')] pointer-events-none" />
+    <section id="kontak" className="py-24 bg-[#F8FAFC] border-b border-slate-200 scroll-mt-20">
+      <Container className="max-w-7xl mx-auto px-4 md:px-6">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-[#550000] bg-[#ddc192]/20 px-4 py-1.5 rounded-full border border-[#ddc192]/50 inline-block">
+            Pusat Informasi Resmi
+          </span>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+            Hubungi <span className="text-[#550000]">Panitia SPMB</span>
+          </h2>
+          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+            Konsultasikan seluruh pertanyaan Anda seputar persyaratan masuk, kurikulum, dan survei kampus langsung dengan tim admisi kami.
+          </p>
+        </div>
 
-          <div className="relative z-10 flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
-            {/* ── Text Content ── */}
-            <div className="lg:w-[45%] text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-secondary-200 text-primary-700 text-[0.65rem] font-bold uppercase tracking-[0.12em] mb-5 shadow-xs">
-                <MessageCircle className="w-3 h-3 shrink-0" strokeWidth={2} />
-                <span>Pusat Bantuan</span>
+        {/* 3 Contact Cards (OMI Standard) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          {/* Card 1: WhatsApp */}
+          <div className="bg-white rounded-3xl p-7 border border-slate-200 shadow-xs hover:shadow-md hover:border-[#ddc192] transition-all flex flex-col justify-between">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center font-bold mb-5">
+                <Phone className="w-6 h-6" />
               </div>
-
-              <h2 className="section-title mb-5">
-                Ada Pertanyaan? <br />
-                <span className="text-gradient-primary">Kami Siap Membantu</span>
-              </h2>
-
-              <p className="section-subtitle lg:ml-0 text-center lg:text-left mb-8 max-w-lg mx-auto lg:mx-0">
-                Jangan ragu untuk menghubungi kami. Tim administrasi kami siap
-                melayani pertanyaan seputar pendaftaran, kurikulum, dan
-                informasi pesantren.
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-1">
+                Layanan Cepat
+              </span>
+              <h3 className="text-xl font-extrabold text-slate-900 mb-1">
+                WhatsApp CS Admisi
+              </h3>
+              <p className="text-xs text-slate-500 mb-4">
+                Senin – Sabtu (08.00 – 16.00 WIB)
               </p>
-
-              <Link href="/kontak" className="inline-block w-full sm:w-auto">
-                <button className="btn-primary w-full sm:w-auto px-8 py-3.5 flex items-center justify-center gap-2.5 mx-auto lg:mx-0 group/btn">
-                  Hubungi Kami Sekarang
-                  <Send className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
-                </button>
-              </Link>
+              <p className="text-base font-black text-slate-900 font-mono">
+                +62 851-1152-4441
+              </p>
             </div>
-
-            {/* ── Cards Grid ── */}
-            <div className="lg:w-[55%] grid sm:grid-cols-2 gap-3 sm:gap-4 w-full">
-              {CONTACT_INFO.map((item, idx) => (
-                <div
-                  key={idx}
-                  className={`bg-white p-6 rounded-2xl border border-secondary-100 shadow-premium-sm hover:shadow-premium-md flex flex-col items-start group transition-all duration-400 ${idx === 0 ? "sm:col-span-2" : ""}`}
-                >
-                  <div
-                    className={`w-11 h-11 rounded-[12px] flex items-center justify-center mb-4 transition-transform shadow-xs group-hover:scale-105 duration-400 shrink-0 ${
-                      item.accent === "maroon"
-                        ? "bg-primary-50 text-primary-600"
-                        : "bg-gold-50 text-gold-700"
-                    }`}
-                  >
-                    <item.icon className="w-5 h-5" strokeWidth={1.8} />
-                  </div>
-                  <h3 className="text-ink-900 font-bold text-[0.9375rem] mb-1.5 tracking-tight group-hover:text-primary-700 transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-ink-700 font-bold text-[0.875rem] leading-snug mb-1">
-                    {item.content}
-                  </p>
-                  <p className="text-ink-400 text-[0.6rem] font-bold uppercase tracking-[0.1em]">
-                    {item.detail}
-                  </p>
-                </div>
-              ))}
+            <div className="pt-6 mt-6 border-t border-slate-100">
+              <a
+                href={WA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-10 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-xs transition-all inline-flex items-center justify-center gap-2 w-full"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>Chat WhatsApp Langsung</span>
+              </a>
             </div>
           </div>
-        </motion.div>
+
+          {/* Card 2: Lokasi Kampus */}
+          <div className="bg-white rounded-3xl p-7 border border-slate-200 shadow-xs hover:shadow-md hover:border-[#ddc192] transition-all flex flex-col justify-between">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-[#550000]/10 text-[#550000] border border-[#550000]/20 flex items-center justify-center font-bold mb-5">
+                <MapPin className="w-6 h-6" />
+              </div>
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-1">
+                Kampus Sukabumi
+              </span>
+              <h3 className="text-xl font-extrabold text-slate-900 mb-1">
+                Alamat Pesantren
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed mt-2">
+                Kp. Babakan RT 03/05, Desa Lembursawah, Kec. Cicantayan, Kab. Sukabumi, Jawa Barat
+              </p>
+            </div>
+            <div className="pt-6 mt-6 border-t border-slate-100">
+              <a
+                href={MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-10 px-4 rounded-xl border border-slate-200 hover:border-[#550000] text-slate-800 hover:text-[#550000] font-extrabold text-xs transition-all inline-flex items-center justify-center gap-2 w-full"
+              >
+                <span>Buka Petunjuk Google Maps</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+
+          {/* Card 3: Email & Konsultasi */}
+          <div className="bg-white rounded-3xl p-7 border border-slate-200 shadow-xs hover:shadow-md hover:border-[#ddc192] transition-all flex flex-col justify-between">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-[#ddc192]/20 text-[#550000] border border-[#ddc192]/40 flex items-center justify-center font-bold mb-5">
+                <Mail className="w-6 h-6" />
+              </div>
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-1">
+                Korespondensi
+              </span>
+              <h3 className="text-xl font-extrabold text-slate-900 mb-1">
+                Email Sekretariat
+              </h3>
+              <p className="text-xs text-slate-500 mb-4">
+                Pertanyaan resmi & kerjasama kelembagaan
+              </p>
+              <p className="text-sm font-black text-slate-900 font-mono break-all">
+                alandalusalimam@gmail.com
+              </p>
+            </div>
+            <div className="pt-6 mt-6 border-t border-slate-100">
+              <Link
+                href="/kontak"
+                className="h-10 px-4 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-800 font-extrabold text-xs border border-slate-200 transition-all inline-flex items-center justify-center gap-2 w-full"
+              >
+                <span>Buka Halaman Kontak Lengkap</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+
+        </div>
+
       </Container>
     </section>
   );
