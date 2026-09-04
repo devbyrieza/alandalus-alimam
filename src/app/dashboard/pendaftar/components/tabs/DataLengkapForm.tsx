@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect, useCallback } from "react";
 import {
@@ -504,40 +504,6 @@ export default function DataLengkapForm({
     wali_sama_dengan_ortu: true
   });
 
-  // ============================================
-  // FORM AUTOSAVE (MANDATORY UX RULE)
-  // ============================================
-  const DRAFT_KEY = `alimam_datalengkap_draft_${pendaftarId || 'unknown'}`;
-  const [isRestored, setIsRestored] = useState(false);
-
-  // 1. State Restoration
-  useEffect(() => {
-    if (loading || isRestored) return; // Wait for initial server fetch
-
-    try {
-      const draft = localStorage.getItem(DRAFT_KEY);
-      if (draft) {
-        const parsedDraft = JSON.parse(draft);
-        setFormData(prev => ({ ...prev, ...parsedDraft }));
-        console.log("Draft autosave restored.");
-      }
-    } catch (error) {
-      console.error("Gagal memuat draft:", error);
-    } finally {
-      setIsRestored(true);
-    }
-  }, [loading, isRestored, DRAFT_KEY]);
-
-  // 2. Autosave Subscription
-  useEffect(() => {
-    if (!isRestored) return; // Don't save initial empty state
-
-    const timer = setTimeout(() => {
-      localStorage.setItem(DRAFT_KEY, JSON.stringify(formData));
-    }, 1000); // debounce 1s
-
-    return () => clearTimeout(timer);
-  }, [formData, isRestored, DRAFT_KEY]);
 
   const [openSections, setOpenSections] = useState({
     santri: true,
@@ -715,8 +681,12 @@ export default function DataLengkapForm({
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ ...formData, is_draft: true }) });
         // Auto-save is silent, we don't show toast to user
+        localStorage.setItem("ppdb_datalengkap_draft", JSON.stringify(formData));
       } catch (err) {
         console.error("Background auto-save failed", err);
+        try {
+          localStorage.setItem("ppdb_datalengkap_draft", JSON.stringify(formData));
+        } catch (e) {}
       }
     }, 2000);
 
