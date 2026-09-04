@@ -135,7 +135,7 @@ export default function Navbar() {
       <header id="main-header" className="fixed w-full top-0 left-0 pt-3.5 z-50 transition-all duration-300">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           <div className="bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-2xl px-5 sm:px-6 py-3 shadow-md shadow-slate-900/5 flex items-center justify-between">
-            {/* â”€â”€ Logo â”€â”€ */}
+            {/* ── Logo ── */}
             <Link
               href="/"
               onClick={handleBerandaClick}
@@ -159,7 +159,7 @@ export default function Navbar() {
                     sizes="44px"
                   />
                 </div>
-                {/* Status dot â€” blue green */}
+                {/* Status dot — blue green */}
                 <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-[var(--color-primary-600)] border-2 border-white rounded-full z-10 shadow-sm" />
               </div>
 
@@ -179,7 +179,7 @@ export default function Navbar() {
               </div>
             </Link>
 
-            {/* â”€â”€ Desktop Nav (lg+) â”€â”€ */}
+            {/* ── Desktop Nav (lg+) ── */}
             <nav
               className={`hidden lg:flex items-center gap-0.5 p-1.5 rounded-full border transition-all duration-300 ${
                 isScrolled
@@ -266,7 +266,7 @@ export default function Navbar() {
               })}
             </nav>
 
-            {/* â”€â”€ CTA Buttons (lg+) â”€â”€ */}
+            {/* ── CTA Buttons (lg+) ── */}
             <div className="hidden lg:flex items-center gap-2 xl:gap-3 shrink-0">
               <LanguageSwitcher />
               {session ? (
@@ -314,7 +314,7 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* â”€â”€ Hamburger (below lg) â”€â”€ */}
+            {/* ── Hamburger (below lg) ── */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={`lg:hidden p-3 rounded-2xl transition-all duration-300 min-h-[48px] min-w-[48px] flex items-center justify-center border ${
@@ -352,7 +352,7 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* â”€â”€ Mobile Menu â€” Bottom Sheet â”€â”€ */}
+      {/* ── Mobile Menu — Bottom Sheet ── */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div

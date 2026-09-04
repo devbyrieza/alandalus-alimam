@@ -387,7 +387,7 @@ export default function KegiatanPage() {
         { label: "Setoran", value: "Harian" },
       ],
       results: [
-        { icon: TrendingUp, text: "Target Hafalan Terukur (Â± 4 Juz/Tahun)" },
+        { icon: TrendingUp, text: "Target Hafalan Terukur (± 4 Juz/Tahun)" },
         { icon: Award, text: "Standar Bacaan Bersanad & Tartil" },
         { icon: CheckCircle2, text: "Mampu Menjadi Imam Shalat Berjamaah" },
       ],
@@ -692,7 +692,7 @@ export default function KegiatanPage() {
                   text: "Bahasa Arab sebagai Bahasa Pengantar",
                   icon: MessageCircle },
                 {
-                  text: "Target Hafalan Berstandar Sanad (Â± 4 Juz/Thn)",
+                  text: "Target Hafalan Berstandar Sanad (± 4 Juz/Thn)",
                   icon: BadgeCheck },
                 {
                   text: "Lulusan Diterima di LIPIA, PTN & Timur Tengah",

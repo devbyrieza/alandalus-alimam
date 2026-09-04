@@ -11,9 +11,9 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import ProgressBarProvider from "@/components/providers/ProgressBarProvider";
 
-// â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // FONT CONFIGURATIONS - Harisenin & Watzap Style
-// â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import { BRANDING } from "@/config/branding";
 import SplashScreen from "@/components/ui/SplashScreen";
@@ -30,7 +30,7 @@ const inter = Inter({
   variable: "--font-inter" });
 
 // METADATA CONFIGURATION
-// â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 export const metadata: Metadata = {
   metadataBase: new URL(BRANDING.websiteUrl),
   manifest: "/manifest.json",
@@ -108,9 +108,9 @@ export const metadata: Metadata = {
   category: "education",
   classification: "Islamic Education" };
 
-// â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // ROOT LAYOUT COMPONENT (<CheckCircle2 size={20} className="inline-block mr-2" /> DENGAN NAVBAR & FOOTER)
-// â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 export default function RootLayout({
   children }: Readonly<{
   children: React.ReactNode;

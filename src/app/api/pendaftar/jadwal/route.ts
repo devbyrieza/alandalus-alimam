@@ -265,7 +265,7 @@ export async function POST(request: Request) {
         examSession.title || "Seleksi Santri Baru",
       );
 
-      // 1. Notify Pendaftar â€” SEGERA setelah booking jadwal
+      // 1. Notify Pendaftar — SEGERA setelah booking jadwal
       const konfirmasiMsg = buildMessageKonfirmasiJadwalPendaftar(
         pendaftarInfo.nama_lengkap,
         jenisUjian,
@@ -279,7 +279,7 @@ export async function POST(request: Request) {
         jenisNotif: "konfirmasi_jadwal_pendaftar",
         messageContent: konfirmasiMsg }).catch((err: any) => console.error("Failed to enqueue jadwal confirmation to pendaftar:", err));
 
-      // 2. Notify Interviewer â€” SEGERA setelah booking (Level Diamond Instant Dispatch)
+      // 2. Notify Interviewer — SEGERA setelah booking (Level Diamond Instant Dispatch)
       const finalId =
         pengujiFields.penguji_quran_id ||
         pengujiFields.penguji_santri_id ||

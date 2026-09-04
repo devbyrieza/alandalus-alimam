@@ -389,7 +389,7 @@ function InputField({
   const handleFilteredChange = (rawValue: string) => {
     if (inputFilter === "letters") {
       // Allow letters (including accented), spaces, apostrophes, hyphens, periods
-      const filtered = rawValue.replace(/[^a-zA-ZÃ€-Ã¿\s'.\-]/g, "");
+      const filtered = rawValue.replace(/[^a-zA-ZÀ-ÿ\s'.\-]/g, "");
       onChange(filtered);
     } else if (inputFilter === "numbers") {
       // Allow only digits
