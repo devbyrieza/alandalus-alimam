@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight, GraduationCap, ChevronDown, BookOpen, Users, Star } from "lucide-react";
+import { Menu, X, ArrowRight, GraduationCap, ChevronDown, BookOpen, Users, Star, FileText } from "lucide-react";
 import {
   scrollToSection,
   scrollToTop,

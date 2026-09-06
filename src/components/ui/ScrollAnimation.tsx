@@ -45,7 +45,7 @@ export default function ScrollAnimation({
         x: 0,
         y: 0,
         scale: 1,
-        filter: "blur(10px)" },
+        filter: "blur(8px)" },
       visible: {
         opacity: 1,
         x: 0,
@@ -53,7 +53,7 @@ export default function ScrollAnimation({
         scale: 1,
         filter: "blur(0px)",
         transition: {
-          duration,
+          duration: duration === 0.7 ? 0.6 : duration, // Default snappier
           delay,
           ease: easeOutExpo } } };
 

@@ -1,4 +1,4 @@
-﻿// src/components/home/BentoGridSection.tsx
+// src/components/home/BentoGridSection.tsx
 "use client";
 
 import { motion } from "framer-motion";
@@ -33,7 +33,7 @@ export default function BentoGridSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="md:col-span-2 lg:col-span-2 row-span-2 rounded-3xl overflow-hidden border border-slate-200 shadow-sm relative group bg-slate-900"
+            className="md:col-span-2 lg:col-span-2 row-span-2 rounded-3xl overflow-hidden border border-slate-200/60 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.7),_0_2px_10px_rgba(0,0,0,0.04)] relative group bg-slate-900 hover:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.9),_0_8px_30px_rgba(85,0,0,0.08)] transition-all duration-300"
           >
             <Image
               src="/images/masjid.webp"

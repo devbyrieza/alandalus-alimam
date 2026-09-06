@@ -1,4 +1,4 @@
-﻿export const BRANDING = {
+export const BRANDING = {
   schoolName: process.env.NEXT_PUBLIC_SCHOOL_NAME || "Pesantren Al Imam Al Islami",
   schoolShortName: process.env.NEXT_PUBLIC_SCHOOL_SHORT_NAME || "Al Imam Al Islami",
   schoolLegalName: process.env.NEXT_PUBLIC_SCHOOL_LEGAL_NAME || "Pesantren Al Imam Al Islami Managed by Al Andalus IIBS",
@@ -7,8 +7,8 @@
     "Kaderisasi Ummat Hanif, Kontributif, dan Adaptif",
   schoolNetwork:
     process.env.NEXT_PUBLIC_SCHOOL_NETWORK || "Perpaduan Kurikulum Nasional dan Khas Andalus",
-  primaryColor: process.env.NEXT_PUBLIC_PRIMARY_COLOR || "#800000", // Default Maroon
-  secondaryColor: process.env.NEXT_PUBLIC_SECONDARY_COLOR || "#FDF5E6", // Default Cream
+  primaryColor: process.env.NEXT_PUBLIC_PRIMARY_COLOR || "#550000", // Default Maroon
+  secondaryColor: process.env.NEXT_PUBLIC_SECONDARY_COLOR || "#ddc192", // Default Cream
   logoPath: process.env.NEXT_PUBLIC_LOGO_PATH || "/images/logo.png",
   faviconPath: process.env.NEXT_PUBLIC_FAVICON_PATH || "/favicon.ico",
   websiteUrl:
@@ -26,6 +26,7 @@
   ytUrl: process.env.NEXT_PUBLIC_YT_URL || "#",
   fbUrl:
     process.env.NEXT_PUBLIC_FB_URL || "https://www.facebook.com/wahab.rajasam/",
-  twitterUrl: process.env.NEXT_PUBLIC_TWITTER_URL || "#" };
+  twitterUrl: process.env.NEXT_PUBLIC_TWITTER_URL || "#",
+  academicYear: process.env.NEXT_PUBLIC_ACADEMIC_YEAR || "2027/2028" };
 
 
