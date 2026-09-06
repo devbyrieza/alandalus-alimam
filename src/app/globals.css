@@ -3085,6 +3085,19 @@
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
   }
 
+  .card-tactile {
+    background: #ffffff;
+    border-radius: var(--radius); /* or 20px */
+    border: 1px solid rgba(229, 231, 235, 0.6); /* slate-200/60 */
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.7), 0 2px 10px rgba(0, 0, 0, 0.04);
+    transition: transform var(--duration-base) var(--ease-spring), box-shadow var(--duration-base) var(--ease-spring);
+    overflow: hidden;
+  }
+  .card-tactile:hover {
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,1), 0 8px 30px rgba(85, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+
   .bento-card {
     background: var(--color-white);
     border-radius: var(--radius-2xl);
