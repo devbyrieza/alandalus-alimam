@@ -1,9 +1,9 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-// --- ICONS ---
+// ─── ICONS ───
 import {
   User,
   CheckCircle,
@@ -15,7 +15,7 @@ import {
   FileText,
   Target } from "lucide-react";
 
-// --- COMPONENTS & UTILS ---
+// ─── COMPONENTS & UTILS ───
 import ProgressTracker from "./components/ProgressTracker";
 import {
   getNextStep,
@@ -99,7 +99,7 @@ export default function DashboardPendaftarPage() {
   );
 }
 
-// --- INTERNAL COMPONENTS ---
+// ─── INTERNAL COMPONENTS ───
 
 function HeroBanner({ nama, nomorPendaftaran, lastUpdate }: any) {
   return (
@@ -122,7 +122,7 @@ function HeroBanner({ nama, nomorPendaftaran, lastUpdate }: any) {
             <span className="text-[#ddc192] underline decoration-[#ddc192]/40 underline-offset-4">
               {nama.split(" ")[0]}!
             </span>
-            <span className="inline-block">??</span>
+            <span className="inline-block">👋</span>
           </h2>
 
           <p className="text-xs sm:text-sm text-slate-200/90 font-normal leading-relaxed">
@@ -193,7 +193,7 @@ function StatusGrid({ status, statusLabel, pengumuman }: any) {
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
       
       {/* Card 1: Total / Status Pendaftaran (Maroon Accent - OMI Style) */}
-      <div className="card-tactile p-5 sm:p-6 flex flex-col justify-between border-b-4 border-b-[#550000] hover:shadow-md transition-all">
+      <div className="card-tactile p-5 sm:p-6 flex flex-col justify-between border-b-4 relative border-b-[#550000] hover:shadow-md transition-all">
         <div>
           <p className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-2">
             Status Pendaftaran
@@ -203,13 +203,13 @@ function StatusGrid({ status, statusLabel, pengumuman }: any) {
           </h3>
         </div>
         <div className="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-xs font-semibold text-slate-600">
-          <span>??</span>
+          <span>📋</span>
           <span>Tahap seleksi berkas & administrasi</span>
         </div>
       </div>
 
       {/* Card 2: Ujian Seleksi (Green Emerald Accent - OMI Style) */}
-      <div className="card-tactile p-5 sm:p-6 flex flex-col justify-between border-b-4 border-b-[#16A34A] hover:shadow-md transition-all">
+      <div className="card-tactile p-5 sm:p-6 flex flex-col justify-between border-b-4 relative border-b-[#16A34A] hover:shadow-md transition-all">
         <div>
           <p className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-2">
             Ujian & Wawancara Seleksi
@@ -219,13 +219,13 @@ function StatusGrid({ status, statusLabel, pengumuman }: any) {
           </h3>
         </div>
         <div className="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-xs font-semibold text-emerald-700">
-          <span>?</span>
+          <span>✔</span>
           <span>{isTested ? "Semua ujian telah terlaksana" : "Silakan pantau jadwal ujian seleksi"}</span>
         </div>
       </div>
 
       {/* Card 3: Hasil Akhir (Amber / Krem Emas Accent - OMI Style) */}
-      <div className="card-tactile p-5 sm:p-6 flex flex-col justify-between border-b-4 border-b-[#ddc192] hover:shadow-md transition-all">
+      <div className="card-tactile p-5 sm:p-6 flex flex-col justify-between border-b-4 relative border-b-[#ddc192] hover:shadow-md transition-all">
         <div>
           <p className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-2">
             Hasil Keputusan Seleksi
@@ -235,7 +235,7 @@ function StatusGrid({ status, statusLabel, pengumuman }: any) {
           </h3>
         </div>
         <div className="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-xs font-semibold text-amber-700">
-          <span>??</span>
+          <span>🕒</span>
           <span>Keputusan resmi panitia SPMB</span>
         </div>
       </div>
@@ -280,7 +280,7 @@ function SupportCenter() {
   );
 }
 
-// --- HELPERS ---
+// ─── HELPERS ───
 
 function LoadingState() {
   return (
