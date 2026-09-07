@@ -83,7 +83,7 @@ export default function TentangPage() {
               sizes="(max-width: 1200px) 100vw, 1200px"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent flex items-end p-6 sm:p-10">
+            <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/50 to-transparent flex items-end p-6 sm:p-10">
               <div className="text-white space-y-1">
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#ddc192] bg-white/10 px-3 py-1 rounded-full border border-white/20 inline-block">
                   Kampus Al-Imam Sukabumi

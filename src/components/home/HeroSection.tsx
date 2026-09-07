@@ -192,8 +192,7 @@ export default function HeroSection() {
                 className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
               />
               
-              {/* Subtle Ambient Vignette */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none" />
+              {/* No overlay — foto tampil jernih */}
 
               {/* Top-Left Floating Glass Badge (Krem Emas #ddc192) */}
               <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md rounded-2xl p-3 border border-slate-200 shadow-lg flex items-center gap-3">

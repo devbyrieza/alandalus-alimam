@@ -130,7 +130,7 @@ export default function StickyFeatureSection() {
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary-950/40 to-transparent" />
+                  {/* No overlay — foto tampil jernih */}
                 </motion.div>
               </AnimatePresence>
             </div>

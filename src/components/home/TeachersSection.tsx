@@ -78,7 +78,8 @@ export default function TeachersSection() {
             sizes="(max-width: 1200px) 100vw, 1200px"
             className="object-cover object-top"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          {/* Overlay tipis hanya di bawah untuk teks terbaca */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-white">
             <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#ddc192] bg-white/10 px-3 py-1 rounded-full border border-white/20 inline-block mb-2">
               Dewan Asatidzah Al Imam Al Islami

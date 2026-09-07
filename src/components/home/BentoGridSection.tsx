@@ -41,7 +41,7 @@ export default function BentoGridSection() {
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
             <div className="absolute inset-0 p-8 flex flex-col justify-end text-white">
               <div className="w-12 h-12 bg-[#ddc192] text-[#550000] rounded-2xl flex items-center justify-center mb-4 font-bold shadow-sm">
                 <BookOpen className="w-6 h-6" />
