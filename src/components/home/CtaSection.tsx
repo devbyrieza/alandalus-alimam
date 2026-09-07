@@ -18,7 +18,7 @@ export default function CtaSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative rounded-3xl p-8 sm:p-14 md:p-16 text-center overflow-hidden bg-gradient-to-br from-[#2D0000] via-[#400000] to-[#550000] text-white border border-white/15 shadow-xl"
+          className="relative rounded-3xl p-6 sm:p-12 md:p-16 text-center overflow-hidden bg-gradient-to-br from-[#2D0000] via-[#400000] to-[#550000] text-white border border-white/15 shadow-xl"
         >
           {/* 3D Geometric Background Shapes (OMI Banner Exact) */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#ddc192]/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/3" />

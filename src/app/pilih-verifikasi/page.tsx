@@ -79,7 +79,7 @@ function PilihVerifikasiContent() {
 
       // Redirect langsung ke halaman sukses (bypass verifikasi OTP)
       const params = new URLSearchParams({
-        nomor_pendaftaran: nomorPendaftaran,
+        nomor_pendaftaran: data.nomor_pendaftaran || data.nomorPendaftaran || "",
         nama_lengkap,
         jenjang,
         jenis_kelamin,

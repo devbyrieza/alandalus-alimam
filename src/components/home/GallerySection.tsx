@@ -125,14 +125,15 @@ function GalleryCard({
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
 
-        {/* Overlay removed for clear images */}
+        {/* Subtle bottom gradient for text readability while leaving image 100% clear */}
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
       </div>
 
       <div className="absolute top-3.5 right-3.5 w-8 h-8 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-primary-700 group-hover:border-primary-600 group-hover:text-white shadow-sm">
         <Icon className="w-4 h-4" />
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 p-5">
+      <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
         <h3 className="text-white font-bold text-[0.9375rem] tracking-tight leading-snug translate-y-1.5 group-hover:translate-y-0 transition-transform duration-300 drop-shadow-sm">
           {title}
         </h3>
@@ -247,7 +248,7 @@ export default function GallerySection() {
         >
           <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary-300 via-primary-200 to-transparent" />
 
-          <div className="relative z-10 grid lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-14 items-center p-8 md:p-12 lg:p-14 max-w-6xl mx-auto">
+          <div className="relative z-10 grid lg:grid-cols-[1fr_1.1fr] gap-8 lg:gap-14 items-center p-5 sm:p-8 md:p-12 lg:p-14 max-w-6xl mx-auto">
             <motion.div
               variants={containerVariants}
               initial="hidden"

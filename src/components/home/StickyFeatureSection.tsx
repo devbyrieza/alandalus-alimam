@@ -66,17 +66,17 @@ export default function StickyFeatureSection() {
                 <button
                   key={feature.id}
                   onClick={() => setActiveFeature(i)}
-                  className={`text-left p-6 md:p-8 rounded-[2rem] transition-all duration-300 border border-transparent ${
+                  className={`text-left p-4 sm:p-6 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] transition-all duration-300 border border-transparent ${
                     isActive 
-                      ? 'bg-white shadow-premium-lg border-primary-100 scale-[1.02]' 
+                      ? 'bg-white shadow-premium-lg border-primary-100 scale-[1.01] sm:scale-[1.02]' 
                       : 'hover:bg-white/60 hover:scale-[1.01]'
                   }`}
                 >
-                  <div className="flex items-center gap-4 mb-2">
-                    <div className={`w-12 h-12 shrink-0 rounded-2xl flex items-center justify-center transition-colors duration-300 ${isActive ? 'bg-primary-500 text-white shadow-primary-md' : 'bg-surface-200 text-ink-400'}`}>
-                      <feature.icon className="w-6 h-6" />
+                  <div className="flex items-center gap-3 sm:gap-4 mb-2">
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-2xl flex items-center justify-center transition-colors duration-300 ${isActive ? 'bg-primary-500 text-white shadow-primary-md' : 'bg-surface-200 text-ink-400'}`}>
+                      <feature.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
-                    <h3 className={`text-xl md:text-2xl font-bold transition-colors duration-300 ${isActive ? 'text-primary-900' : 'text-ink-500'}`}>
+                    <h3 className={`text-lg sm:text-xl md:text-2xl font-bold transition-colors duration-300 ${isActive ? 'text-primary-900' : 'text-ink-500'}`}>
                       {feature.title}
                     </h3>
                   </div>
@@ -90,14 +90,14 @@ export default function StickyFeatureSection() {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <div className="pt-4 pl-16">
-                          <p className="text-ink-600 mb-6 leading-relaxed">
+                        <div className="pt-3 sm:pt-4 pl-2 sm:pl-16">
+                          <p className="text-ink-600 mb-5 sm:mb-6 text-sm sm:text-base leading-relaxed">
                             {feature.description}
                           </p>
-                          <ul className="space-y-3">
+                          <ul className="space-y-2.5 sm:space-y-3">
                             {feature.points.map((point, idx) => (
-                              <li key={idx} className="flex items-center gap-3">
-                                <CheckCircle2 className="w-5 h-5 text-primary-500 shrink-0" />
+                              <li key={idx} className="flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm">
+                                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-primary-500 shrink-0" />
                                 <span className="font-medium text-ink-700">{point}</span>
                               </li>
                             ))}
@@ -112,7 +112,7 @@ export default function StickyFeatureSection() {
           </div>
 
           {/* Right Side: Sticky Visual */}
-          <div className="w-full lg:w-1/2 lg:sticky lg:top-32 h-[400px] md:h-[500px] lg:h-[600px] mt-8 lg:mt-0">
+          <div className="w-full lg:w-1/2 lg:sticky lg:top-32 h-[260px] sm:h-[380px] md:h-[500px] lg:h-[600px] mt-4 lg:mt-0">
             <div className="relative w-full h-full rounded-[2.5rem] border-[8px] border-white shadow-premium-2xl overflow-hidden bg-white">
               <AnimatePresence mode="wait">
                 <motion.div

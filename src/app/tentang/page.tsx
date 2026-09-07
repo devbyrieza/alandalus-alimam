@@ -115,13 +115,13 @@ export default function TentangPage() {
               </div>
 
               {/* Floating Badge (OMI Style) */}
-              <div className="absolute -bottom-5 -right-3 sm:-bottom-6 sm:right-4 bg-white/95 backdrop-blur-md rounded-2xl p-4 border border-slate-200 shadow-xl flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-[#ddc192] text-[#550000] flex items-center justify-center font-black text-xl shadow-xs">
-                  <Award className="w-6 h-6" />
+              <div className="relative sm:absolute -bottom-3 sm:-bottom-6 right-0 sm:right-4 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 sm:p-4 border border-slate-200 shadow-xl flex items-center gap-3 mt-3 sm:mt-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#ddc192] text-[#550000] flex items-center justify-center font-black text-lg sm:text-xl shadow-xs shrink-0">
+                  <Award className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <div>
-                  <p className="text-xs font-black uppercase text-slate-400 tracking-wider">Era Baru 2026</p>
-                  <p className="text-sm font-extrabold text-slate-900 leading-tight">Managed by Al-Andalus</p>
+                  <p className="text-[10px] sm:text-xs font-black uppercase text-slate-400 tracking-wider">Era Baru 2026</p>
+                  <p className="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">Managed by Al-Andalus</p>
                 </div>
               </div>
             </div>
@@ -151,7 +151,7 @@ export default function TentangPage() {
               </div>
 
               {/* 2 Quick KPI Pills */}
-              <div className="grid grid-cols-2 gap-4 pt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 pt-2">
                 <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs">
                   <span className="text-xs font-extrabold uppercase text-[#550000] block mb-1">Standar Mutu</span>
                   <p className="text-base sm:text-lg font-black text-slate-900">Al-Andalus IIBS</p>

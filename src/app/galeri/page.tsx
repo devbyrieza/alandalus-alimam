@@ -343,15 +343,15 @@ export default function GaleriPage() {
             </div>
 
             {/* Modal Main Photo Viewport */}
-            <div className="relative grow flex items-center justify-center p-4 md:p-8 select-none">
+            <div className="relative grow flex items-center justify-center p-2 sm:p-4 md:p-8 select-none">
               {/* Previous Button */}
               {activeAlbum.items.length > 1 && (
                 <button
                   onClick={prevPhoto}
-                  className="absolute left-4 md:left-8 z-30 w-12 h-12 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
+                  className="absolute left-2 sm:left-4 md:left-8 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
                   title="Foto Sebelumnya (Panah Kiri)"
                 >
-                  <ChevronLeft className="w-7 h-7" />
+                  <ChevronLeft className="w-5 h-5 sm:w-7 sm:h-7" />
                 </button>
               )}
 
@@ -384,18 +384,18 @@ export default function GaleriPage() {
               {activeAlbum.items.length > 1 && (
                 <button
                   onClick={nextPhoto}
-                  className="absolute right-4 md:right-8 z-30 w-12 h-12 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
+                  className="absolute right-2 sm:right-4 md:right-8 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
                   title="Foto Selanjutnya (Panah Kanan)"
                 >
-                  <ChevronRight className="w-7 h-7" />
+                  <ChevronRight className="w-5 h-5 sm:w-7 sm:h-7" />
                 </button>
               )}
             </div>
 
             {/* Modal Bottom Caption & Thumbnail Strip */}
-            <div className="p-4 md:px-8 md:py-4 bg-black/60 border-t border-white/10 shrink-0 flex flex-col items-center gap-3 z-20">
+            <div className="p-3 sm:p-4 md:px-8 md:py-4 bg-black/60 border-t border-white/10 shrink-0 flex flex-col items-center gap-2 sm:gap-3 z-20">
               {/* Caption */}
-              <p className="text-center text-sm md:text-base font-semibold text-slate-200 max-w-3xl truncate px-4">
+              <p className="text-center text-xs sm:text-sm md:text-base font-semibold text-slate-200 max-w-3xl line-clamp-2 px-4">
                 {activeAlbum.items[currentIndex].label}
               </p>
 

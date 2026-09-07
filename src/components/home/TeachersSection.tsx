@@ -69,7 +69,7 @@ export default function TeachersSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-xl border-2 border-[#ddc192]/30 mb-12"
+          className="relative w-full aspect-[16/10] sm:aspect-[16/9] lg:aspect-[21/9] min-h-[220px] sm:min-h-0 rounded-3xl overflow-hidden shadow-xl border-2 border-[#ddc192]/30 mb-12"
         >
           <Image
             src="/images/para-asatidzah.jpg"
@@ -79,15 +79,15 @@ export default function TeachersSection() {
             className="object-cover object-top"
           />
           {/* Overlay tipis hanya di bawah untuk teks terbaca */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-white">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8 text-white">
             <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#ddc192] bg-white/10 px-3 py-1 rounded-full border border-white/20 inline-block mb-2">
               Dewan Asatidzah Al Imam Al Islami
             </span>
-            <h3 className="text-lg sm:text-2xl font-extrabold leading-tight">
+            <h3 className="text-base sm:text-xl lg:text-2xl font-extrabold leading-tight">
               Para Pendidik & Pembina Santri Al Imam
             </h3>
-            <p className="text-white/80 text-xs sm:text-sm mt-1 font-normal max-w-xl">
+            <p className="text-white/80 text-xs sm:text-sm mt-1 font-normal max-w-xl line-clamp-2 sm:line-clamp-none">
               Lulusan universitas Islam ternama Timur Tengah, hafizh 30 juz bersanad, dan praktisi tarbiyah berpengalaman.
             </p>
           </div>

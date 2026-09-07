@@ -230,12 +230,12 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
           <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
             
             {/* Header Form */}
-            <div className="bg-gradient-to-br from-[#2D0000] via-[#400000] to-[#550000] p-7 sm:p-10 text-white relative overflow-hidden">
+            <div className="bg-gradient-to-br from-[#2D0000] via-[#400000] to-[#550000] p-5 sm:p-8 md:p-10 text-white relative overflow-hidden">
               <div className="relative z-10 space-y-2">
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#ddc192] bg-white/10 px-3 py-1 rounded-full border border-white/20 inline-block">
                   Layanan Survey & Kunjungan
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white">
                   Jadwalkan Kunjungan ke Kampus Al-Imam
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-200 font-normal leading-relaxed max-w-xl">
@@ -245,7 +245,7 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
             </div>
 
             {/* Body Form */}
-            <form onSubmit={handleVisitSubmit} className="p-7 sm:p-10 space-y-6">
+            <form onSubmit={handleVisitSubmit} className="p-5 sm:p-8 md:p-10 space-y-6">
               {formStatus === "success" && (
                 <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-800 flex items-center gap-2">
                   <Check className="w-4 h-4 text-emerald-600" />

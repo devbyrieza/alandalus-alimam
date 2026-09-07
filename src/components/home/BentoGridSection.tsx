@@ -42,14 +42,14 @@ export default function BentoGridSection() {
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-            <div className="absolute inset-0 p-8 flex flex-col justify-end text-white">
+            <div className="absolute inset-0 p-5 sm:p-8 flex flex-col justify-end text-white">
               <div className="w-12 h-12 bg-[#ddc192] text-[#550000] rounded-2xl flex items-center justify-center mb-4 font-bold shadow-sm">
                 <BookOpen className="w-6 h-6" />
               </div>
               <span className="text-xs font-extrabold uppercase text-[#ddc192] tracking-wider mb-1">
                 Pusat Ibadah & Halaqah
               </span>
-              <h3 className="text-2xl font-extrabold text-white mb-2">
+              <h3 className="text-xl sm:text-2xl font-extrabold text-white mb-2">
                 Masjid Jami' Al Imam
               </h3>
               <p className="text-white/80 text-xs sm:text-sm max-w-md font-normal leading-relaxed">
@@ -64,23 +64,23 @@ export default function BentoGridSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="md:col-span-1 lg:col-span-2 row-span-1 rounded-3xl border border-slate-200 bg-slate-50/70 p-6 flex items-center gap-6 shadow-xs hover:border-[#ddc192] transition-all group"
+            className="md:col-span-1 lg:col-span-2 row-span-1 rounded-3xl border border-slate-200 bg-slate-50/70 p-5 sm:p-6 flex items-center gap-4 sm:gap-6 shadow-xs hover:border-[#ddc192] transition-all group"
           >
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-2">
-                <Monitor className="w-4 h-4 text-[#550000]" />
+                <Monitor className="w-4 h-4 text-[#550000] shrink-0" />
                 <span className="font-extrabold text-[#550000] tracking-wider uppercase text-[10px]">
                   Kelas Multimedia
                 </span>
               </div>
-              <h3 className="text-lg font-extrabold text-slate-900 mb-1 group-hover:text-[#550000] transition-colors">
+              <h3 className="text-base sm:text-lg font-extrabold text-slate-900 mb-1 group-hover:text-[#550000] transition-colors leading-snug">
                 Ruang Kelas Ber-AC & Interaktif
               </h3>
-              <p className="text-slate-500 text-xs leading-relaxed font-normal">
+              <p className="text-slate-500 text-xs leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
                 Pencahayaan alami, pendingin ruangan, dan perangkat multimedia untuk pembelajaran sains dan bahasa Arab.
               </p>
             </div>
-            <div className="w-28 h-28 relative rounded-2xl overflow-hidden shrink-0 border border-slate-200">
+            <div className="w-20 h-20 sm:w-28 sm:h-28 relative rounded-2xl overflow-hidden shrink-0 border border-slate-200">
               <Image src="/images/kelas-bagian-dalam-saat-para-santri-belajar.png" alt="Santri Belajar di Kelas" fill className="object-cover" />
             </div>
           </motion.div>
