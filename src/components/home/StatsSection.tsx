@@ -1,4 +1,4 @@
-﻿// src/components/home/StatsSection.tsx
+// src/components/home/StatsSection.tsx
 "use client";
 
 import { motion, useMotionValue, animate } from "framer-motion";
@@ -36,7 +36,7 @@ const STATS = [
     icon: GraduationCap,
     suffix: "",
     sublabel: "MTs & I'dad Lughawi",
-    description: "Pendidikan menengah terakreditasi",
+    description: "Kurikulum terpadu Kemenag & Turots",
     accentBorder: "border-b-emerald-600"
   },
   {

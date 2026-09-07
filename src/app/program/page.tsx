@@ -41,7 +41,7 @@ export default function ProgramPage() {
           </h1>
 
           <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
-            Memadukan kurikulum Kementerian Agama RI, pengkajian kitab turots bersanad, tahfidz Al-Qur'an mutqin, serta keunggulan bahasa internasional.
+            Menyelaraskan penguasaan Bahasa Arab sangat intensif, bimbingan Tahfidz Al-Qur'an mutqin, pendalaman kitab turots syar'i, keunggulan sains akademik umum, serta penempaan leadership dan kewirausahaan.
           </p>
         </Container>
       </section>
@@ -77,31 +77,31 @@ export default function ProgramPage() {
             <div className="grid md:grid-cols-3 gap-6 pt-8">
               <div className="space-y-3 bg-slate-50/70 p-5 rounded-2xl border border-slate-200/80">
                 <h4 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
-                  <BookOpen className="w-4 h-4 text-[#550000]" />
-                  <span>Kurikulum Akademik & Diniyah</span>
+                  <Languages className="w-4 h-4 text-[#550000]" />
+                  <span>Bahasa Arab Sangat Intensif</span>
                 </h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Integrasi muatan nasional (Matematika, IPA, Bahasa Indonesia, Bahasa Inggris) dengan kurikulum turots (Aqidah, Fiqih, Hadits, Tarikh Islam).
+                  Santri dibiasakan muhadatsah harian, pengayaan mufrodat tematik, dan tata bahasa Nahwu-Shorof aplikatif untuk membaca kitab turots sejak dini.
                 </p>
               </div>
 
               <div className="space-y-3 bg-slate-50/70 p-5 rounded-2xl border border-slate-200/80">
                 <h4 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
-                  <Award className="w-4 h-4 text-[#ddc192]" />
-                  <span>Tahfidz Al-Qur'an Mutqin</span>
+                  <BookOpen className="w-4 h-4 text-[#ddc192]" />
+                  <span>Tahfidz Mutqin & Syar'i Sunnah</span>
                 </h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Bimbingan halaqah tahfidz intensif dengan target hafalan bertahap, setoran harian, pengujian berkala (tasmi'), dan pembinaan tajwid bersanad.
+                  Bimbingan hafalan Al-Qur'an mutqin berkaidah tajwid, tasmi' berkala, pembiasaan ibadah harian sesuai Sunnah, dan pendalaman turots aqidah-fiqih.
                 </p>
               </div>
 
               <div className="space-y-3 bg-slate-50/70 p-5 rounded-2xl border border-slate-200/80">
                 <h4 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
-                  <Languages className="w-4 h-4 text-emerald-600" />
-                  <span>Bahasa Arab Aktif</span>
+                  <GraduationCap className="w-4 h-4 text-emerald-600" />
+                  <span>Sains, Akademik & Leadership</span>
                 </h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Pembiasaan muhadatsah harian, pengayaan mufrodat, serta tata bahasa Nahwu-Shorof praktis agar santri mampu membaca kitab gundul sejak dini.
+                  Pelajaran umum (Matematika, IPA, Bahasa) tetap diajarkan berkualitas tinggi agar santri pintar, berdaya saing, mandiri, dan berjiwa kepemimpinan.
                 </p>
               </div>
             </div>
@@ -138,17 +138,17 @@ export default function ProgramPage() {
                   <span>Imersi Total Bahasa Arab</span>
                 </h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Santri dibimbing secara intensif untuk mampu mendengarkan, berbicara, membaca, dan menulis bahasa Arab dengan kaidah yang benar dalam kurun waktu 1 tahun.
+                  Santri dibimbing secara intensif untuk menguasai keterampilan mendengar, muhadatsah aktif, membaca kitab, dan menulis bahasa Arab dalam tempo 1 tahun.
                 </p>
               </div>
 
               <div className="space-y-3 bg-slate-50/70 p-5 rounded-2xl border border-slate-200/80">
                 <h4 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
                   <Layers className="w-4 h-4 text-emerald-600" />
-                  <span>Jembatan Menuju Madrasah Aliyah</span>
+                  <span>Dasar Syar'i & Kesiapan Menuju MA</span>
                 </h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Setelah menuntaskan program I'dad Lughawi, santri langsung memiliki kesiapan matang untuk melanjutkan ke jenjang Madrasah Aliyah (MA) jurusan Keagamaan.
+                  Pembekalan dasar-dasar ilmu syar'i, pembiasaan adab thalabul 'ilmi, dan adaptasi kultur asrama mandiri sebagai jembatan mantap melangkah ke jenjang MA.
                 </p>
               </div>
             </div>
@@ -172,7 +172,7 @@ export default function ProgramPage() {
 
             <div className="pt-6">
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Madrasah Aliyah Al-Imam diproyeksikan mencetak ulama muda yang kompeten dalam ijtihad fiqih, tafsir tematik, riset ilmiah hadits, serta menguasai bahasa internasional dan kepemimpinan dakwah kontemporer.
+                Madrasah Aliyah Al-Imam diproyeksikan mencetak generasi berwawasan global yang kokoh dalam riset turots Islam, fasih berbahasa Arab & Inggris, siap menembus beasiswa perguruan tinggi ternama dan Timur Tengah, serta memiliki jiwa kepemimpinan (leadership) dan kemandirian entrepreneurship beretika syar'i.
               </p>
             </div>
           </div>

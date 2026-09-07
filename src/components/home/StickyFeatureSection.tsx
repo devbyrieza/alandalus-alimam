@@ -3,46 +3,49 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/layout/Container";
-import { CheckCircle2, ShieldCheck, Star, Users } from "lucide-react";
+import { CheckCircle2, ShieldCheck, Star, Users, BookOpen } from "lucide-react";
 import Image from "next/image";
 
 const FEATURES = [
   {
-    id: "kurikulum",
-    title: "Kurikulum Terintegrasi",
-    description: "Memadukan pendidikan pesantren salaf dengan kurikulum nasional. Santri menguasai ilmu agama yang shahih sekaligus unggul dalam sains dan teknologi.",
+    id: "bahasa-syari",
+    title: "Bahasa Arab Intensif & Syar'i",
+    description: "Bahasa Arab mendapat perhatian sangat intensif sebagai bahasa percakapan harian dan kunci memahami kitab turots. Dipadukan dengan tahfidz Al-Qur'an mutqin serta penguasaan akademik sains modern.",
+    icon: BookOpen,
+    points: [
+      "Bahasa Arab sangat intensif (Muhadatsah harian & Nahwu-Shorof)",
+      "Tahfidz Al-Qur'an mutqin kaidah tajwid bersanad",
+      "Pendalaman ilmu syar'i & turots bimbingan Sunnah",
+      "Pelajaran umum & sains tetap pintar dan berdaya saing"
+    ],
+    image: "/images/kelas-bagian-dalam-saat-para-santri-belajar.png"
+  },
+  {
+    id: "mendidik-tanpa-luka",
+    title: "Mendidik Tanpa Luka Pengasuhan",
+    description: "Pola pengasuhan rabbani yang mengutamakan keteladanan 24 jam para asatidz dan pendidik dengan kasih sayang tanpa sanksi fisik. Menjaga santri dari segala bentuk pelanggaran berat demi ketentraman dan kesehatan mental santri.",
     icon: ShieldCheck,
     points: [
-      "Tahfidz Al-Qur'an bersanad",
-      "Aqidah Ahlussunnah wal Jama'ah",
-      "Matematika & Sains modern",
-      "Program bahasa Arab & Inggris aktif"
+      "Keteladanan 24 jam asatidz & musyrif tinggal mendampingi",
+      "Zero Tolerance: bebas rokok, perundungan (bullying), pacaran, & LGBT",
+      "Penindakan tegas edukatif tanpa kekerasan & tanpa sanksi fisik",
+      "Penerapan akhlak mulia & ibadah harian sesuai Sunnah"
     ],
-    image: "/images/kelas-bagian-dalam-saat-para-santri-belajar.png" },
+    image: "/images/tahfidz.webp"
+  },
   {
-    id: "pengasuhan",
-    title: "Pengasuhan Berbasis Keteladanan",
-    description: "Kami menerapkan sistem pendidikan tanpa kekerasan dan tanpa luka pengasuhan. Pendekatan holistik yang mengedepankan dialog dan teladan.",
+    id: "leadership-kemandirian",
+    title: "Leadership & Entrepreneurship",
+    description: "Menempa jiwa kepemimpinan yang amanah, kemandirian santri, dan kepekaan berwirausaha (entrepreneurship) berlandaskan etika Islam di dalam lingkungan pesantren yang asri dan representatif.",
     icon: Users,
     points: [
-      "Rasio musyrif dan santri ideal",
-      "Pendekatan persuasif dan dialogis",
-      "Konseling psikologi berkala",
-      "Pengembangan kecerdasan emosional"
+      "Penempaan kepemimpinan santri & kedisiplinan organisasi",
+      "Edukasi dasar entrepreneurship & etika muamalah syar'i",
+      "Lingkungan kampus asri & kondusif di Sukabumi",
+      "Fasilitas ruang kelas multimedia, olahraga, & asrama representatif"
     ],
-    image: "/images/tahfidz.webp" },
-  {
-    id: "fasilitas",
-    title: "Fasilitas Modern & Nyaman",
-    description: "Lingkungan belajar yang asri dan representatif, mendukung konsentrasi santri dalam menghafal Al-Qur'an dan mengkaji ilmu syar'i.",
-    icon: Star,
-    points: [
-      "Ruang kelas ber-AC & Multimedia",
-      "Masjid jami' yang luas & nyaman",
-      "Asrama bersih standar hotel",
-      "Area olahraga lengkap"
-    ],
-    image: "/images/gedung-utama-dan-lapangan-basket.png" }
+    image: "/images/gedung-utama-dan-lapangan-basket.png"
+  }
 ];
 
 export default function StickyFeatureSection() {

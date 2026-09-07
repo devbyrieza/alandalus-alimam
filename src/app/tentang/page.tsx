@@ -16,7 +16,10 @@ import {
   Heart,
   Users,
   Building,
-  Sparkles
+  Sparkles,
+  Languages,
+  AlertCircle,
+  CheckCircle2
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { BRANDING } from "@/config/branding";
@@ -49,8 +52,8 @@ export default function TentangPage() {
           </h1>
 
           <p className="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed font-normal">
-            Lembaga pendidikan Islam modern di Sukabumi yang kini dikelola secara profesional di bawah naungan{" "}
-            <strong className="text-slate-900 font-semibold">Managed by Al Andalus IIBS</strong>. Menyatukan kemurnian manhaj syar'i, tahfidz Al-Qur'an bersanad, dan kepemimpinan adaptif zaman.
+            Lembaga pendidikan Islam modern di Sukabumi yang dikelola secara profesional di bawah naungan{" "}
+            <strong className="text-slate-900 font-semibold">Managed by Al Andalus IIBS</strong>. Berorientasi pada <strong className="text-slate-900 font-semibold">kaderisasi ummat yang hanif, kontributif, dan adaptif</strong> melalui <strong className="text-slate-900">Bahasa Arab yang sangat intensif</strong>, tahfidz Al-Qur'an mutqin, pendalaman ilmu syar'i, sains akademik umum yang berdaya saing, leadership & entrepreneurship, serta pola pengasuhan <strong className="text-[#550000]">Mendidik Tanpa Luka</strong> berbasis keteladanan tanpa kekerasan fisik.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
@@ -143,7 +146,7 @@ export default function TentangPage() {
                   <strong className="text-slate-900 font-semibold">{BRANDING.schoolName}</strong> hadir sebagai ikhtiar mulia membangun pusat keilmuan Islam berbasis Ahlussunnah wal Jama'ah di Sukabumi, Jawa Barat.
                 </p>
                 <p>
-                  Mulai Tahun Ajaran 2026/2027, pengelolaan manajemen pendidikan dan asrama resmi diadopsi dan diselaraskan secara penuh oleh <strong className="text-[#550000] font-bold">Pesantren Islam Internasional Al-Andalus (Al Andalus IIBS)</strong>. Seluruh standar operasional prosedur, kurikulum turots, pembinaan adab santri, hingga rekrutmen asatidzah berstandar mutu tinggi.
+                  Mulai Tahun Ajaran 2026/2027, pengelolaan manajemen pendidikan dan asrama resmi diselaraskan secara penuh oleh <strong className="text-[#550000] font-bold">Pesantren Islam Internasional Al-Andalus (Al Andalus IIBS)</strong>. Seluruh SOP operasional, kurikulum turots, intensitas pengajaran Bahasa Arab, bimbingan tahfidz bersanad, hingga pendampingan adab santri mengadopsi standar mutu tinggi.
                 </p>
                 <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-slate-800 text-xs sm:text-sm font-semibold italic border-l-4 border-l-[#550000]">
                   &ldquo;{BRANDING.schoolTagline}&rdquo;
@@ -160,7 +163,7 @@ export default function TentangPage() {
                 <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs">
                   <span className="text-xs font-extrabold uppercase text-emerald-600 block mb-1">Pola Pengasuhan</span>
                   <p className="text-base sm:text-lg font-black text-slate-900">Mendidik Tanpa Luka</p>
-                  <p className="text-[11px] text-slate-500 mt-0.5">Keteladanan penuh tanpa kekerasan</p>
+                  <p className="text-[11px] text-slate-500 mt-0.5">Keteladanan penuh tanpa kekerasan fisik</p>
                 </div>
               </div>
 
@@ -199,7 +202,7 @@ export default function TentangPage() {
                 </h3>
               </div>
               <p className="text-xs text-slate-500 font-normal leading-relaxed mt-6 pt-4 border-t border-slate-100">
-                Melahirkan pribadi muslim yang istiqomah di atas kemurnian tauhid, bermanfaat nyata bagi masyarakat, serta tangguh menghadapi perkembangan teknologi global.
+                Melahirkan pribadi muslim yang istiqomah di atas kemurnian tauhid dan bimbingan Sunnah, bermanfaat nyata bagi masyarakat, serta cerdas dan tangguh menghadapi tantangan zaman.
               </p>
             </div>
 
@@ -211,14 +214,16 @@ export default function TentangPage() {
                 </div>
                 <span className="text-xs font-extrabold uppercase text-slate-400 tracking-wider">Misi Utama</span>
                 <h3 className="text-xl font-extrabold text-slate-900 mt-2 mb-4">
-                  4 Komitmen Pendidikan
+                  6 Komitmen Pendidikan Terpadu
                 </h3>
                 <div className="space-y-3">
                   {[
-                    "Menanamkan aqidah shahihah sesuai pemahaman para Salafush Shalih.",
-                    "Membimbing hafalan Al-Qur'an secara mutqin dengan kaidah tajwid dan sanad qira'ah.",
-                    "Membiasakan percakapan bahasa Arab dan Inggris aktif dalam ekosistem asrama.",
-                    "Membekali santri wawasan sains, kepemimpinan (leadership), dan keterampilan kewirausahaan."
+                    "Menanamkan aqidah shahihah, adab mulia, dan ibadah harian sesuai bimbingan Al-Qur'an dan Sunnah.",
+                    "Menyelenggarakan pembelajaran Bahasa Arab sangat intensif sebagai bahasa percakapan harian dan kunci memahami turots.",
+                    "Membimbing hafalan Al-Qur'an secara mutqin dengan kaidah tajwid yang benar dan bersanad.",
+                    "Mengajarkan pelajaran akademik umum dan sains secara terpadu agar santri tetap pintar, kritis, dan berdaya saing.",
+                    "Menumbuhkan jiwa kepemimpinan (leadership), kemandirian santri, dan kepekaan kewirausahaan (entrepreneurship).",
+                    "Menerapkan sistem pengasuhan 'Mendidik Tanpa Luka' berbasis keteladanan pendidik 24 jam dan kasih sayang tanpa kekerasan fisik."
                   ].map((misi, i) => (
                     <div key={i} className="flex items-start gap-3 text-xs sm:text-sm text-slate-700">
                       <span className="w-5 h-5 rounded-full bg-[#ddc192]/30 text-[#550000] flex items-center justify-center shrink-0 mt-0.5 font-bold">
@@ -235,7 +240,7 @@ export default function TentangPage() {
         </Container>
       </section>
 
-      {/* ─── 5. PILAR PENDIDIKAN (5 OMI CARDS) ─── */}
+      {/* ─── 5. PILAR PENDIDIKAN (6 OMI CARDS) ─── */}
       <section className="py-24">
         <Container className="max-w-6xl mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-2.5">
@@ -243,53 +248,58 @@ export default function TentangPage() {
               Pilar Kurikulum
             </span>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              5 Pilar Pendidikan Al-Imam
+              6 Pilar Pendidikan Al-Imam
             </h2>
             <p className="text-slate-600 text-xs sm:text-sm">
-              Keseimbangan antara ilmu akhirat dan keahlian duniawi untuk membentuk generasi unggul.
+              Harmoni antara kemurnian ilmu syar'i, keluhuran adab, penguasaan sains, dan kemandirian hidup.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
+                icon: Languages,
+                title: "Bahasa Arab Sangat Intensif",
+                desc: "Bahasa Arab mendapat perhatian penuh sebagai bahasa harian (muhadatsah harian, nahwu & shorof) dan pintu utama memahami literatur Islam."
+              },
+              {
                 icon: BookOpen,
-                title: "Tahfidz Al-Qur'an",
-                desc: "Bimbingan hafalan Al-Qur'an mutqin dengan pengujian berkala dan sanad qira'ah."
+                title: "Tahfidz Al-Qur'an Mutqin",
+                desc: "Halaqah hafalan Al-Qur'an intensif dengan bimbingan tajwid yang teliti, tasmi' berkala, dan persiapan sanad qira'ah."
               },
               {
                 icon: ShieldCheck,
-                title: "Ilmu Syar'i (Turots)",
-                desc: "Pendalaman kitab turots meliputi fiqih, tafsir, hadits, dan aqidah shahihah."
+                title: "Pendalaman Ilmu Syar'i (Turots)",
+                desc: "Kajian kitab turots Ahlussunnah wal Jama'ah meliputi aqidah, tafsir, hadits, fiqih ibadah praktis, dan adab penuntut ilmu."
               },
               {
                 icon: GraduationCap,
-                title: "Bahasa Internasional",
-                desc: "Penguasaan bahasa Arab dan Inggris aktif dalam interaksi harian santri."
-              },
-              {
-                icon: Users,
-                title: "Kepemimpinan (Leadership)",
-                desc: "Pembiasaan kepemimpinan organisasi, kedisiplinan adab, dan tanggung jawab sosial."
+                title: "Akademik & Sains Tetap Pintar",
+                desc: "Pelajaran umum berstandar nasional diajarkan secara berkualitas agar santri tetap pintar berdaya saing dan berpikiran solutif."
               },
               {
                 icon: Sparkles,
-                title: "Kewirausahaan",
-                desc: "Pengenalan dasar entrepreneurship, kemandirian finansial, dan etika bisnis Islam."
+                title: "Leadership & Entrepreneurship",
+                desc: "Penempaan jiwa kepemimpinan amanah, kemandirian hidup di asrama, serta etika dasar kewirausahaan islami."
+              },
+              {
+                icon: Heart,
+                title: "Mendidik Tanpa Luka",
+                desc: "Pola pengasuhan berbasis keteladanan 24 jam para pendidik dan kasih sayang tanpa kekerasan fisik serta tanpa perundungan."
               }
             ].map((pilar, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs hover:shadow-md hover:border-[#ddc192] transition-all flex flex-col justify-between"
+                className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-2xs hover:shadow-md hover:border-[#ddc192] transition-all flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-10 h-10 rounded-xl bg-[#ddc192]/20 text-[#550000] flex items-center justify-center font-bold mb-4">
+                  <div className="w-11 h-11 rounded-xl bg-[#ddc192]/20 text-[#550000] flex items-center justify-center font-bold mb-5 border border-[#ddc192]/40">
                     <pilar.icon className="w-5 h-5" />
                   </div>
-                  <h4 className="font-extrabold text-slate-900 text-sm mb-2">
+                  <h4 className="font-extrabold text-slate-900 text-base mb-2">
                     {pilar.title}
                   </h4>
-                  <p className="text-xs text-slate-500 font-normal leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed">
                     {pilar.desc}
                   </p>
                 </div>
@@ -297,6 +307,132 @@ export default function TentangPage() {
             ))}
           </div>
 
+        </Container>
+      </section>
+
+      {/* ─── 5.5 KOMITMEN PERLINDUNGAN SANTRI & MENDIDIK TANPA LUKA ─── */}
+      <section className="py-20 bg-[#F8FAFC] border-y border-slate-200">
+        <Container className="max-w-6xl mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-[#550000] bg-[#ddc192]/20 px-4 py-1.5 rounded-full border border-[#ddc192]/50 inline-block">
+              Pola Asuh Rabbani & Keamanan Santri
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Komitmen Pengasuhan: <span className="text-[#550000]">Mendidik Tanpa Luka</span>
+            </h2>
+            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto">
+              Pesantren Al-Imam meyakini bahwa pembentukan adab dan karakter sejati lahir dari keteladanan pendidik dan kasih sayang, bukan dari rasa takut terhadap kekerasan fisik atau intimidasi verbal.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+            
+            {/* Left Card: 3 Prinsip Keteladanan */}
+            <div className="lg:col-span-6 bg-white rounded-3xl p-8 border border-slate-200 shadow-sm flex flex-col justify-between border-t-4 border-t-emerald-600">
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold border border-emerald-100 shrink-0">
+                    <Heart className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-600">Metode Tarbiyah</span>
+                    <h3 className="text-lg sm:text-xl font-extrabold text-slate-900">Keteladanan & Kasih Sayang</h3>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3.5">
+                    <div className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                      <Check className="w-3.5 h-3.5 stroke-[3]" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs sm:text-sm font-extrabold text-slate-900">Keteladanan Pendidik 24 Jam</h4>
+                      <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                        Para asatidz dan musyrif tinggal mendampingi santri secara langsung, menjadi contoh nyata dalam shalat berjamaah, adab bertutur kata, dan ibadah harian.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3.5">
+                    <div className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                      <Check className="w-3.5 h-3.5 stroke-[3]" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs sm:text-sm font-extrabold text-slate-900">Pendekatan Dialogis & Penyadaran</h4>
+                      <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                        Setiap kekhilafan santri diarahkan melalui nasihat hikmah, konseling terarah, dan penanaman kesadaran iman tanpa melukai harga diri santri.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3.5">
+                    <div className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                      <Check className="w-3.5 h-3.5 stroke-[3]" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs sm:text-sm font-extrabold text-slate-900">Mutlak Tanpa Sanksi Fisik</h4>
+                      <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                        Pesantren melarang keras hukuman fisik dalam bentuk apapun, meniadakan senioritas menghukum, serta mengharamkan caci maki yang melukai psikologis.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-slate-100 bg-emerald-50/50 -mx-8 -mb-8 p-6 rounded-b-3xl">
+                <p className="text-xs text-emerald-800 font-semibold leading-relaxed">
+                  Menjaga fitrah santri agar tumbuh menjadi pribadi yang percaya diri, mencintai Al-Qur'an, dan memiliki kesehatan mental yang prima.
+                </p>
+              </div>
+            </div>
+
+            {/* Right Card: Zero Tolerance Pelanggaran Berat */}
+            <div className="lg:col-span-6 bg-white rounded-3xl p-8 border border-slate-200 shadow-sm flex flex-col justify-between border-t-4 border-t-[#550000]">
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
+                  <div className="w-12 h-12 rounded-2xl bg-[#550000]/10 text-[#550000] flex items-center justify-center font-bold border border-[#550000]/20 shrink-0">
+                    <ShieldCheck className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#550000]">Disiplin & Integritas</span>
+                    <h3 className="text-lg sm:text-xl font-extrabold text-slate-900">Pencegahan & Tindakan Tegas</h3>
+                  </div>
+                </div>
+
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Pesantren Al-Imam berkomitmen penuh mencegah, mengantisipasi, dan menindak tegas pelanggaran berat demi ketentraman dan kesucian lingkungan belajar:
+                </p>
+
+                <div className="grid sm:grid-cols-2 gap-3 pt-1">
+                  {[
+                    "Bebas Rokok & Zat Terlarang",
+                    "Bebas Pacaran & Pergaulan Bebas",
+                    "Bebas Penyimpangan (LGBT)",
+                    "Bebas Perundungan (Bullying)",
+                    "Bebas Kekerasan & Perkelahian",
+                    "Bebas Pencurian & Gangguan Ketentraman"
+                  ].map((rule, idx) => (
+                    <div
+                      key={idx}
+                      className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center gap-2.5 text-xs font-bold text-slate-800"
+                    >
+                      <span className="w-5 h-5 rounded-full bg-[#550000]/10 text-[#550000] flex items-center justify-center shrink-0">
+                        <ShieldCheck className="w-3 h-3" />
+                      </span>
+                      <span>{rule}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-slate-100 bg-[#550000]/5 -mx-8 -mb-8 p-6 rounded-b-3xl">
+                <p className="text-xs text-[#550000] font-semibold leading-relaxed">
+                  Penegakan aturan dilakukan secara terukur dan edukatif tanpa sanksi fisik, demi melindungi seluruh santri dan menjaga kenyamanan wali santri.
+                </p>
+              </div>
+            </div>
+
+          </div>
         </Container>
       </section>
 

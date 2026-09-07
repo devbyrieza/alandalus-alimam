@@ -12,7 +12,8 @@ import {
   Download,
   Clock,
   Sparkles,
-  Users
+  Users,
+  ShieldCheck
 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { BRANDING } from "@/config/branding";
@@ -84,11 +85,11 @@ export default function HeroSection() {
 
             {/* Description */}
             <p className="text-slate-600 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
-              Bukan sekadar tempat belajar — sebuah ekosistem pembentukan karakter yang{" "}
+              Bukan sekadar tempat belajar — sebuah ekosistem kaderisasi ummat yang hanif, kontributif, dan adaptif,{" "}
               <strong className="font-semibold text-slate-900">
-                mengedepankan keteladanan dan mendidik tanpa luka
+                mendidik dengan keteladanan tanpa luka pengasuhan
               </strong>
-              , memadukan Tahfidz Al-Qur'an, Ilmu Syar'i, Akademik, Leadership, dan Entrepreneurship.
+              . Menyelaraskan penguasaan <strong className="font-semibold text-slate-900">Bahasa Arab intensif</strong>, Tahfidz Al-Qur'an, pendalaman ilmu syar'i, keunggulan sains akademik umum, serta penempaan <em>leadership</em> dan <em>entrepreneurship</em> berlandaskan Al-Qur'an dan Sunnah.
             </p>
 
             {/* School Tagline Quote (Al-Imam Krem Emas Separator & Maroon Text) */}
@@ -224,12 +225,12 @@ export default function HeroSection() {
           
           <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-[#ddc192] transition-all">
             <div className="w-12 h-12 rounded-xl bg-[#ddc192]/20 text-[#550000] flex items-center justify-center font-bold text-xl mb-4 border border-[#ddc192]/40">
-              <Award className="w-6 h-6" />
+              <BookOpen className="w-6 h-6" />
             </div>
-            <span className="text-xs font-extrabold text-[#550000] uppercase tracking-wider">Apresiasi Prestasi</span>
-            <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Jalur Beasiswa</h3>
+            <span className="text-xs font-extrabold text-[#550000] uppercase tracking-wider">Fokus Utama</span>
+            <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Bahasa Arab & Syar'i</h3>
             <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
-              Beasiswa penuh bagi santri berprestasi tahfidz Al-Qur'an mutqin dan juara olimpiade sains nasional.
+              Penguasaan bahasa Arab intensif harian, tahfidz Al-Qur'an mutqin, dan pendalaman kitab turots sesuai bimbingan Sunnah.
             </p>
           </div>
 
@@ -237,21 +238,21 @@ export default function HeroSection() {
             <div className="w-12 h-12 rounded-xl bg-[#550000]/10 text-[#550000] flex items-center justify-center font-bold text-xl mb-4 border border-[#550000]/20">
               <GraduationCap className="w-6 h-6" />
             </div>
-            <span className="text-xs font-extrabold text-[#550000] uppercase tracking-wider">Kurikulum Terpadu</span>
-            <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Syar'i & Nasional</h3>
+            <span className="text-xs font-extrabold text-[#550000] uppercase tracking-wider">Karakter & Kemandirian</span>
+            <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Sains & Leadership</h3>
             <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
-              Integrasi pendalaman kitab turots, bahasa Arab aktif, serta kurikulum kementerian pendidikan.
+              Pelajaran umum dan sains tetap pintar berdaya saing, berpadu dengan penempaan jiwa kepemimpinan dan kewirausahaan.
             </p>
           </div>
 
           <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-emerald-300 transition-all">
             <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xl mb-4 border border-emerald-200">
-              <Users className="w-6 h-6" />
+              <ShieldCheck className="w-6 h-6" />
             </div>
-            <span className="text-xs font-extrabold text-emerald-600 uppercase tracking-wider">Kuota Eksklusif</span>
-            <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">25 Santri / Kelas</h3>
+            <span className="text-xs font-extrabold text-emerald-600 uppercase tracking-wider">Pola Pengasuhan</span>
+            <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Mendidik Tanpa Luka</h3>
             <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
-              Rasio pengasuhan intensif agar pendampingan adab dan tahfidz terpantau optimal setiap hari.
+              Keteladanan asatidz 24 jam tanpa kekerasan fisik, lingkungan aman terlindungi dari rokok, perundungan, dan penyimpangan.
             </p>
           </div>
 

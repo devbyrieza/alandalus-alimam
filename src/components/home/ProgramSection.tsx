@@ -9,15 +9,15 @@ import { BookOpen, BookKey, GraduationCap, Check, ArrowRight } from "lucide-reac
 const PROGRAMS = [
   {
     title: "Madrasah Tsanawiyah (MTs)",
-    badge: "Terakreditasi",
+    badge: "Kurikulum Terpadu",
     badgeColor: "bg-[#550000] text-white",
-    desc: "Pendidikan menengah pertama dengan ijazah negara dipadukan dengan kurikulum kepesantrenan intensif dan tahfidz mutqin.",
+    desc: "Pendidikan menengah pertama memadukan bahasa Arab intensif, tahfidz mutqin, ilmu syar'i, sains akademik umum berdaya saing, serta pola asuh mendidik tanpa luka.",
     icon: GraduationCap,
     features: [
-      "Kurikulum Nasional Kemenag & Kepesantrenan",
-      "Bimbingan Tahfidz Al-Qur'an Mutqin bersanad",
-      "Bahasa Arab & Inggris aktif percakapan harian",
-      "Pembinaan adab dan karakter 24 jam di asrama"
+      "Bahasa Arab sangat intensif & kajian turots Sunnah",
+      "Tahfidz Al-Qur'an mutqin bimbingan tajwid bersanad",
+      "Pelajaran sains & akademik umum tetap pintar berdaya saing",
+      "Mendidik tanpa luka: keteladanan 24 jam & adab Islami"
     ],
     href: "/program#mts"
   },
@@ -25,12 +25,12 @@ const PROGRAMS = [
     title: "I'dad Lughawi (IL)",
     badge: "Intensif 1 Tahun",
     badgeColor: "bg-[#ddc192] text-[#550000] font-extrabold",
-    desc: "Program matrikulasi bahasa Arab intensif selama satu tahun bagi lulusan SMP umum yang ingin melanjutkan ke jenjang MA.",
+    desc: "Program matrikulasi akselerasi bahasa Arab intensif selama satu tahun bagi lulusan SMP umum untuk persiapan mendalami ilmu syar'i dan melanjutkan ke jenjang MA.",
     icon: BookKey,
     features: [
-      "Penguasaan Nahwu, Shorof, dan Muhadatsah",
-      "Bimbingan mufrodat & kaidah bahasa Arab praktis",
-      "Adaptasi kultur tarbiyah asrama pesantren",
+      "Imersi total bahasa Arab harian (Muhadatsah)",
+      "Penguasaan kaidah Nahwu, Shorof, & mufrodat praktis",
+      "Pembiasaan adab harian, ibadah Sunnah, & kultur asrama",
       "Jembatan percepatan menuju Madrasah Aliyah"
     ],
     href: "/program#idad"
@@ -39,13 +39,13 @@ const PROGRAMS = [
     title: "Madrasah Aliyah (MA)",
     badge: "Segera Hadir",
     badgeColor: "bg-slate-100 text-slate-700 font-bold",
-    desc: "Pendidikan menengah atas berfokus pada pendalaman literatur Islam klasik (Turots) dan kesiapan studi ke universitas dunia Islam.",
+    desc: "Pendidikan tingkat menengah atas dengan pendalaman literatur turots, penguatan riset syar'i, leadership, entrepreneurship, dan persiapan studi lanjutan.",
     icon: BookOpen,
     features: [
-      "Kajian mendalam Kutubut Turots bersanad",
-      "Persiapan beasiswa Timur Tengah & PTN",
-      "Leadership, dakwah, dan riset ilmiah syar'i",
-      "Program pengabdian masyarakat terpadu"
+      "Pendalaman kitab turots bersanad para ulama",
+      "Persiapan beasiswa Timur Tengah & Perguruan Tinggi",
+      "Penempaan leadership dakwah & dasar entrepreneurship",
+      "Kemandirian santri berwawasan global & berakhlak mulia"
     ],
     href: "/program#ma"
   }

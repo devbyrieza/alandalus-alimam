@@ -7,8 +7,9 @@ import {
   Users,
   BookOpenCheck,
   ShieldCheck,
-  Zap,
-  Building2,
+  GraduationCap,
+  Heart,
+  Sparkles,
   ArrowRight } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
@@ -16,34 +17,34 @@ import { motion } from "framer-motion";
 const FEATURES = [
   {
     icon: BookOpen,
-    title: "Menghidupkan Fitrah Santri",
+    title: "Bahasa Arab Intensif & Syar'i",
     description:
-      "Berupaya maksimal menghidupkan fitrah santri, diiringi adab Islami dalam setiap interaksi." },
+      "Perhatian mendalam pada bahasa Arab aktif harian, tahfidz Al-Qur'an mutqin, serta pendalaman kitab turots bimbingan Sunnah." },
+  {
+    icon: GraduationCap,
+    title: "Akademik & Sains Tetap Pintar",
+    description:
+      "Pelajaran umum dan sains diajarkan berstandar tinggi agar santri tetap cerdas, berpikiran maju, dan berdaya saing." },
   {
     icon: ShieldCheck,
-    title: "Pengawasan di Setiap Aktivitas",
+    title: "Mendidik Tanpa Luka & Nol Sanksi Fisik",
     description:
-      "Pengawasan menyeluruh di setiap aktivitas santri untuk memastikan perkembangan yang optimal." },
+      "Pendekatan keteladanan pendidik dan kasih sayang tanpa kekerasan fisik, tanpa luka pengasuhan, serta tanpa senioritas." },
+  {
+    icon: Heart,
+    title: "Zero Tolerance Pelanggaran Berat",
+    description:
+      "Pencegahan dan penindakan tegas terhadap rokok, pergaulan bebas/pacaran, penyimpangan, perundungan (bullying), dan pencurian." },
   {
     icon: Users,
-    title: "Musyrif Tinggal di Kamar Santri",
+    title: "Pendampingan Keteladanan 24 Jam",
     description:
-      "Musyrif (Guru Asrama) tinggal langsung di kamar santri untuk pendampingan intensif 24 jam." },
+      "Musyrif dan asatidz tinggal mendampingi santri secara intensif untuk membimbing adab, shalat berjamaah, dan ibadah sunnah." },
   {
-    icon: Zap,
-    title: "Pendekatan Penyadaran & Pendewasaan",
+    icon: Sparkles,
+    title: "Leadership & Jiwa Kewirausahaan",
     description:
-      "Bimbingan dengan pendekatan penyadaran dan pendewasaan pada setiap kesalahan santri, bukan sekadar hukuman." },
-  {
-    icon: Award,
-    title: "Tidak Ada Hukuman Fisik",
-    description:
-      "Tidak menerapkan hukuman yang membahayakan fisik dalam proses pembinaan santri." },
-  {
-    icon: Building2,
-    title: "Tidak Ada Senioritas Menghukum",
-    description:
-      "Tidak memberikan kewenangan pada santri senior untuk menghukum santri lain." },
+      "Menumbuhkan kemandirian santri, kepemimpinan amanah, serta keterampilan entrepreneurship beretika syar'i." },
 ] as const;
 
 export default function FeaturesSection() {

@@ -1,4 +1,4 @@
-﻿// src/components/home/AboutSection.tsx
+// src/components/home/AboutSection.tsx
 "use client";
 
 import { Container } from "@/components/layout/Container";
@@ -20,7 +20,7 @@ export default function AboutSection() {
             Tentang {BRANDING.schoolShortName}
           </h2>
           <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-            Ekosistem pembinaan adab, tahfidz Al-Qur'an, dan akademik untuk mewujudkan kader ummat rabbani.
+            Ekosistem kaderisasi ummat yang hanif, kontributif, dan adaptif — memadukan Bahasa Arab intensif, tahfidz Al-Qur'an mutqin, ilmu syar'i, sains akademik unggul, serta mendidik tanpa luka pengasuhan.
           </p>
         </div>
 
@@ -53,20 +53,20 @@ export default function AboutSection() {
           <div className="lg:col-span-7 space-y-5">
             <div className="bg-white border border-slate-200 rounded-2xl p-7 space-y-4 text-slate-700 text-sm leading-relaxed shadow-sm">
               <p>
-                <strong className="text-slate-900">{BRANDING.schoolName}</strong> didirikan sebagai ikhtiar melahirkan generasi muslim yang kokoh aqidahnya, fasih bertutur bahasa Arab, serta menguasai ilmu pengetahuan kontemporer.
+                <strong className="text-slate-900">{BRANDING.schoolName}</strong> didirikan dengan komitmen kuat melahirkan kaderisasi ummat yang hanif, kontributif, dan adaptif — menguasai <strong className="text-slate-900">Bahasa Arab secara intensif</strong>, mutqin dalam hafalan Al-Qur'an, mendalami ilmu syar'i dan adab sunnah, serta tetap berprestasi cemerlang dalam pelajaran sains dan akademik umum.
               </p>
               <p>
-                Pola pengasuhan berlandaskan <strong className="text-[#550000]">prinsip keteladanan tanpa kekerasan fisik dan verbal</strong>, memadukan kurikulum khas pesantren dengan bimbingan intensif hafalan Al-Qur'an bersanad.
+                Dalam pembinaan karakter, Al-Imam teguh memegang prinsip <strong className="text-[#550000]">Mendidik Tanpa Luka</strong> — mengedepankan keteladanan 24 jam para pendidik dan asatidz, pendekatan kasih sayang dan dialog penyadaran <strong className="text-slate-900">tanpa sanksi fisik</strong>, sembari bertindak tegas mencegah pelanggaran berat seperti rokok, pergaulan bebas, penyimpangan, dan perundungan (bullying).
               </p>
             </div>
 
             {/* 4 Feature Badges with Al-Imam Checkmarks */}
             <div className="grid sm:grid-cols-2 gap-3.5">
               {[
-                "Pendidikan adab dan keteladanan 24 jam.",
-                "Halaqah Tahfidz Al-Qur'an mutqin bersanad.",
-                "Bahasa Arab & Inggris aktif harian.",
-                "Fasilitas asrama kondusif dan ramah santri."
+                "Bahasa Arab sangat intensif & kajian turots sunnah.",
+                "Tahfidz Al-Qur'an mutqin & pembiasaan ibadah harian.",
+                "Akademik umum & sains tetap pintar dan berdaya saing.",
+                "Mendidik tanpa luka: nol perundungan & tanpa sanksi fisik."
               ].map((text, i) => (
                 <div
                   key={i}

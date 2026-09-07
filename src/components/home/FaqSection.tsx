@@ -1,4 +1,4 @@
-﻿// src/components/home/FaqSection.tsx
+// src/components/home/FaqSection.tsx
 "use client";
 
 import { useState } from "react";
@@ -12,12 +12,20 @@ const FAQS = [
     answer: "Pendaftaran SPMB Tahun Ajaran 2027/2028 dibuka mulai tanggal 5 September sampai dengan 28 Desember 2026. Namun, pendaftaran dapat ditutup lebih awal jika kuota santri baru sebanyak 25 santri per rombel telah terpenuhi."
   },
   {
+    question: "Apa saja fokus program unggulan di Pesantren Al-Imam?",
+    answer: "Program unggulan Al-Imam berpusat pada penguasaan Bahasa Arab sangat intensif (muhadatsah harian & nahwu-shorof), tahfidz Al-Qur'an mutqin bersanad, pendalaman ilmu syar'i & ibadah harian bimbingan Sunnah, pengajaran sains akademik umum berstandar tinggi agar santri tetap pintar berdaya saing, serta penempaan jiwa kepemimpinan (leadership) dan kemandirian wirausaha (entrepreneurship)."
+  },
+  {
+    question: "Bagaimana sistem pengasuhan santri dan penegakan disiplin di Al-Imam?",
+    answer: "Al-Imam menerapkan prinsip pengasuhan 'Mendidik Tanpa Luka' yang mengedepankan keteladanan 24 jam para pendidik dan kasih sayang. Kami bersikap tegas tanpa toleransi (zero tolerance) terhadap pelanggaran berat seperti merokok, pacaran/pergaulan bebas mengarah perzinaan, LGBT, perundungan (bullying), kekerasan fisik, dan pencurian. Penindakan ditegakkan secara edukatif dan dialogis mutlak tanpa sanksi fisik."
+  },
+  {
     question: "Apakah santri diwajibkan untuk tinggal di asrama?",
     answer: "Ya, seluruh santri di Pesantren Al Imam Al Islami wajib mukim di asrama pondok guna mengikuti program pembinaan adab 24 jam, halaqah tahfidz Al-Qur'an intensif, dan penguasaan bahasa Arab secara komprehensif."
   },
   {
     question: "Kurikulum apa yang diterapkan di Pesantren Al Imam Al Islami?",
-    answer: "Kami menerapkan Kurikulum Terpadu yang mengintegrasikan Kurikulum Kementerian Agama RI dengan Kurikulum Kepesantrenan Turots (Kajian Kitab Kuning/Syar'i bersanad) serta pembekalan sains dan teknologi modern."
+    answer: "Kami menerapkan Kurikulum Terpadu yang mengintegrasikan Kurikulum Kementerian Agama RI dengan Kurikulum Kepesantrenan Turots (Kajian Kitab Kuning/Syar'i bersanad) serta pembekalan sains dan teknologi modern berstandar mutu Al-Andalus IIBS."
   },
   {
     question: "Apa saja berkas persyaratan yang harus disiapkan untuk mendaftar?",
