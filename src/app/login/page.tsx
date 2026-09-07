@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -333,7 +333,7 @@ export default function LoginPage() {
       <div className="w-full max-w-5xl lg:max-w-6xl rounded-3xl overflow-hidden shadow-2xl shadow-slate-950/10 border border-slate-200 bg-white grid grid-cols-1 lg:grid-cols-12 relative z-10">
         
         {/* SISI KIRI: PANEL IDENTITAS & 2 BENTO UNGGULAN (DESKTOP: 5 COLUMNS) */}
-        <div className="lg:col-span-5 bg-gradient-to-br from-[#2D0000] via-[#400000] to-[#550000] p-6 sm:p-8 lg:p-10 text-white relative overflow-hidden flex flex-col justify-between">
+        <div className="hidden lg:flex lg:col-span-5 bg-gradient-to-br from-[#2D0000] via-[#400000] to-[#550000] p-6 sm:p-8 lg:p-10 text-white relative overflow-hidden flex-col justify-between">
           {/* Ambient Glow */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#ddc192]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
           
