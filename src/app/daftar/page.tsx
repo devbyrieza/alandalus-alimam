@@ -164,9 +164,6 @@ export default function DaftarPage() {
     } else if (formData.jenis_kelamin === "P") {
       errors.jenis_kelamin =
         "Mohon maaf, pendaftaran Santri Putri dilakukan melalui Pesantren Ulul Albaab.";
-    } else if (formData.jenis_kelamin === "L" && formData.jenjang === "MA") {
-      errors.jenis_kelamin =
-        "Mohon maaf, pendaftaran MA Langsung Putra belum dibuka.";
     }
 
     if (!formData.jenjang) {
@@ -380,8 +377,8 @@ export default function DaftarPage() {
                   ].map((option) => {
                     const isPutra = formData.jenis_kelamin === "L";
                     const isPutri = formData.jenis_kelamin === "P";
-                    // Al Imam: Hanya MTs Putra dan IL Putra yang buka. MA Putra tutup, semua Putri tutup.
-                    const isClosed = isPutri || (option.value === "MA" && isPutra);
+                    // Al Imam: Semua Putri tutup, Putra buka semua (MTs, IL, MA)
+                    const isClosed = isPutri;
                     const closedLabel = isPutri
                       ? "Pendaftaran Putri Belum Dibuka"
                       : "Pendaftaran Putra Belum Dibuka";
