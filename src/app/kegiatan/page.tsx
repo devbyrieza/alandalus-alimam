@@ -350,7 +350,7 @@ export default function KegiatanPage() {
 
   const kegiatanUtama: KegiatanUtama[] = [
     {
-      image: "/images/pembelajaran-kitab-turotz.webp",
+      image: "/images/kelas-bagian-dalam-saat-para-santri-belajar.png",
       title: "Pembelajaran Kitab Turots",
       description:
         "Bukan sekadar hafalan! Santri kami PAHAM isi kitab, mampu berdiskusi ilmiah, dan disiapkan menjadi ilmuwan muda.",
@@ -396,7 +396,7 @@ export default function KegiatanPage() {
           "Sinergi kurikulum nasional dan tahfidznya sangat menenangkan. Anak kami tidak hanya mengejar target hafalan, tapi juga PAHAM maknanya melalui bimbingan asatidz yang kompeten.",
         parent: "Ibu Siti Aminah (Wali Santri)" } },
     {
-      image: "/images/extra-karate.webp",
+      image: "/images/ekskul-karate.webp",
       title: "Pengembangan Bakat & Prestasi",
       description:
         "Menyiapkan santri multitalenta yang juara di bidang olimpiade, olahraga, hingga public speaking.",

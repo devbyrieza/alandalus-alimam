@@ -18,7 +18,7 @@ const FEATURES = [
       "Matematika & Sains modern",
       "Program bahasa Arab & Inggris aktif"
     ],
-    image: "/images/pembelajaran-kitab-turotz.webp" },
+    image: "/images/kelas-bagian-dalam-saat-para-santri-belajar.png" },
   {
     id: "pengasuhan",
     title: "Pengasuhan Berbasis Keteladanan",
@@ -42,7 +42,7 @@ const FEATURES = [
       "Asrama bersih standar hotel",
       "Area olahraga lengkap"
     ],
-    image: "/images/gedung-utama-dan-lapangan-basket.webp" }
+    image: "/images/gedung-utama-dan-lapangan-basket.png" }
 ];
 
 export default function StickyFeatureSection() {

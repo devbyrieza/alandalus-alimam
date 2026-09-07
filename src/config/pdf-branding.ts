@@ -24,7 +24,7 @@ export const PDF_BRANDING = {
 
   // Resource Paths
   assets: {
-    logo: "/images/kop-surat.png",
+    logo: "/images/kop-surat-clean.jpg",
     kop_full: "/images/kop-surat-full.jpg", // Gambar kop surat penuh (full letterhead)
     stamp: "/images/stempel-5.png", // Menggunakan stempel alimam baru (Stempel 5)
     signature: "/images/ttd-mudir.png" },

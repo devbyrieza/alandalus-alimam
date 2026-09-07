@@ -1,27 +1,30 @@
-﻿// src/components/home/TeachersSection.tsx
+// src/components/home/TeachersSection.tsx
 "use client";
 
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
 import { Users, Award, BookOpen, GraduationCap, ShieldCheck } from "lucide-react";
 import { BRANDING } from "@/config/branding";
+import Image from "next/image";
 
 const TEACHERS = [
   {
     role: "Pimpinan / Mudir",
-    title: "Dewan Asatidzah Senior",
-    institution: "Alumni Timur Tengah & Al-Andalus",
+    title: "Ustadz Wahab Rajasam, M.Pd.",
+    institution: "Mudir Pesantren Al Imam Al Islami",
     desc: "Membina arah kebijakan pendidikan, aqidah shahihah, dan manhaj tarbiyah santri.",
     icon: Award,
-    badge: "Pimpinan"
+    badge: "Pimpinan",
+    photo: "/images/wahab-rajasam.webp"
   },
   {
-    role: "Kepala Kepesantrenan",
-    title: "Koordinator Tahfidz & Qira'ah",
-    institution: "Hafizh 30 Juz Bersanad",
-    desc: "Membimbing halaqah intensif, tahsin, mutqin, dan pengambilan sanad qira'ah Al-Qur'an.",
+    role: "Pembina / Penasehat Syar'i",
+    title: "Dr. Muhammad Arifin Badri, M.A.",
+    institution: "Pakar Fiqih & Mu'amalat Islam",
+    desc: "Memberikan bimbingan manhaj syar'i, arahan fatwa, dan pembinaan aqidah Ahlussunnah.",
     icon: BookOpen,
-    badge: "Tahfidz"
+    badge: "Penasehat",
+    photo: "/images/muhammad-arifin-badri.webp"
   },
   {
     role: "Kepala Madrasah",
@@ -29,7 +32,8 @@ const TEACHERS = [
     institution: "Pakar Kurikulum Nasional & Kemenag",
     desc: "Mengawal integrasi sains modern, literasi digital, dan kesiapan ijazah formal negara.",
     icon: GraduationCap,
-    badge: "Akademik"
+    badge: "Akademik",
+    photo: null
   },
   {
     role: "Kepala Pengasuhan & Musyrif",
@@ -37,7 +41,8 @@ const TEACHERS = [
     institution: "Tarbiyah Adab & Karakter",
     desc: "Mendampingi santri di asrama dengan pendekatan keteladanan penuh tanpa kekerasan.",
     icon: ShieldCheck,
-    badge: "Pengasuhan"
+    badge: "Pengasuhan",
+    photo: null
   }
 ];
 
@@ -59,6 +64,34 @@ export default function TeachersSection() {
           </p>
         </div>
 
+        {/* Banner Foto Dewan Asatidzah */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-xl border-2 border-[#ddc192]/30 mb-12"
+        >
+          <Image
+            src="/images/para-asatidzah.jpg"
+            alt="Dewan Asatidzah & Pengajar Pesantren Al Imam Al Islami"
+            fill
+            sizes="(max-width: 1200px) 100vw, 1200px"
+            className="object-cover object-top"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-white">
+            <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#ddc192] bg-white/10 px-3 py-1 rounded-full border border-white/20 inline-block mb-2">
+              Dewan Asatidzah Al Imam Al Islami
+            </span>
+            <h3 className="text-lg sm:text-2xl font-extrabold leading-tight">
+              Para Pendidik & Pembina Santri Al Imam
+            </h3>
+            <p className="text-white/80 text-xs sm:text-sm mt-1 font-normal max-w-xl">
+              Lulusan universitas Islam ternama Timur Tengah, hafizh 30 juz bersanad, dan praktisi tarbiyah berpengalaman.
+            </p>
+          </div>
+        </motion.div>
+
         {/* 4 Clean Asatidzah Pillar Cards (OMI Enterprise Standard) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {TEACHERS.map((teacher, idx) => (
@@ -71,10 +104,23 @@ export default function TeachersSection() {
               className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-xs hover:shadow-md hover:border-[#ddc192] transition-all flex flex-col justify-between group"
             >
               <div>
+                {/* Photo or Icon */}
                 <div className="flex items-center justify-between mb-5">
-                  <div className="w-12 h-12 rounded-2xl bg-[#ddc192]/20 border border-[#ddc192]/40 text-[#550000] flex items-center justify-center font-bold">
-                    <teacher.icon className="w-6 h-6" />
-                  </div>
+                  {teacher.photo ? (
+                    <div className="w-14 h-14 rounded-2xl overflow-hidden border border-[#ddc192]/40 shadow-sm shrink-0">
+                      <Image
+                        src={teacher.photo}
+                        alt={teacher.title}
+                        width={56}
+                        height={56}
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-12 h-12 rounded-2xl bg-[#ddc192]/20 border border-[#ddc192]/40 text-[#550000] flex items-center justify-center font-bold">
+                      <teacher.icon className="w-6 h-6" />
+                    </div>
+                  )}
                   <span className="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-slate-100 text-slate-700">
                     {teacher.badge}
                   </span>
@@ -83,7 +129,7 @@ export default function TeachersSection() {
                 <span className="text-xs font-extrabold text-[#550000] uppercase tracking-wider block mb-1">
                   {teacher.role}
                 </span>
-                <h3 className="text-lg font-extrabold text-slate-900 mb-1 group-hover:text-[#550000] transition-colors">
+                <h3 className="text-base font-extrabold text-slate-900 mb-1 group-hover:text-[#550000] transition-colors leading-tight">
                   {teacher.title}
                 </h3>
                 <p className="text-xs text-slate-400 font-semibold mb-3">

@@ -1,4 +1,4 @@
-﻿// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //   SPMB CONFIGURATION - EASY CUSTOMIZATION
 //   Ganti bagian ini saja untuk setiap pesantren baru!
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -54,7 +54,7 @@ export const PPDB_CONFIG = {
       fullName: "MTs",
       description:
         "Program pendidikan formal setara SMP dengan kurikulum integrasi pesantren.",
-      image: "/images/mts.webp",
+      image: "/images/kelas-bagian-dalam-saat-para-santri-belajar.png",
       theme: "brown" },
     {
       id: "il",
@@ -62,7 +62,7 @@ export const PPDB_CONFIG = {
       fullName: "Program Persiapan Bahasa Arab",
       description:
         "Program intensif persiapan bahasa Arab untuk jenjang lebih tinggi.",
-      image: "/images/il.webp",
+      image: "/images/foto-talent-santri-satu-orang-almamater-background-perlu-diedit.png",
       theme: "gold" },
   ],
 
@@ -107,7 +107,7 @@ export const PPDB_CONFIG = {
   // ⚙️ SETTING TEKNIS (UMUMNYA TIDAK PERLU DIUBAH)
   technical: {
     appName: "SPMB Al Imam Al Islami",
-    appDescription: "Sistem Sistem Penerimaan Murid Baru",
+    appDescription: "Sistem Penerimaan Murid Baru",
     version: "2.0.0",
     author: "Rieza Eka Tomara" } };
 
@@ -131,4 +131,3 @@ export const generateCSSVariables = () => {
     secondary: colors.secondary,
     accent: colors.accent };
 };
-

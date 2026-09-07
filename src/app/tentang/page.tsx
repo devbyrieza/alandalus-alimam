@@ -106,8 +106,8 @@ export default function TentangPage() {
             <div className="lg:col-span-5 relative">
               <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white aspect-[4/5]">
                 <Image
-                  src="/images/tentang.webp"
-                  alt="Pesantren Al Imam Al Islami"
+                  src="/images/gedung-utama-dan-lapangan-basket.png"
+                  alt="Gedung Utama Pesantren Al Imam Al Islami"
                   fill
                   sizes="(max-width: 768px) 100vw, 40vw"
                   className="object-cover"

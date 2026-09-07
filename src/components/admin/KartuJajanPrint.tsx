@@ -16,7 +16,7 @@ interface KartuJajanPrintProps {
 
 export default function KartuJajanPrint({ santri, fotoUrl }: KartuJajanPrintProps) {
   // Jika tidak ada foto khusus dari database, gunakan foto almamater yang di-upload user sebagai default
-  const defaultFoto = "/images/almamater-template.png"; // User perlu memindahkan foto ke folder ini nanti
+  const defaultFoto = ""; // Foto santri diambil dari database; jika kosong gunakan avatar otomatis
 
   return (
     <>
@@ -91,7 +91,7 @@ export default function KartuJajanPrint({ santri, fotoUrl }: KartuJajanPrintProp
         <div 
           className="absolute inset-0 z-0 opacity-10"
           style={{ 
-            backgroundImage: "url('/images/gedung-utama-dan-lapangan-basket.webp')", 
+            backgroundImage: "url('/images/gedung-utama-dan-lapangan-basket.png')", 
             backgroundSize: 'cover', 
             backgroundPosition: 'center' 
           }}

@@ -1,4 +1,4 @@
-﻿// src/app/fasilitas/page.tsx
+// src/app/fasilitas/page.tsx
 "use client";
 
 import { useState, useEffect } from "react";
@@ -22,47 +22,61 @@ import { BRANDING } from "@/config/branding";
 
 const FACILITIES = [
   {
-    title: "Masjid Jami' Al Imam",
+    title: "Masjid Jami' Al-Furqon Al Imam",
     category: "Pusat Ibadah & Tahfidz",
-    image: "/images/masjid.webp",
+    image: "/images/masjid-jami-al-furqon-al-imam-al-islami-dari-luar.png",
     desc: "Kapasitas ratusan jamaah, nyaman berkarpet tebal, dan menjadi sentra halaqah Al-Qur'an serta shalat berjamaah 5 waktu.",
     badge: "Utama"
   },
   {
     title: "Asrama Santri Kondusif",
     category: "Hunian & Tarbiyah",
-    image: "/images/asrama.webp",
-    desc: "Kamar berfentilasi luas, kasur bertingkat kokoh, lemari pribadi, dan pendampingan musyrif asrama 24 jam.",
+    image: "/images/asrama.png",
+    desc: "Kamar berventilasi luas, kasur bertingkat kokoh, lemari pribadi, dan pendampingan musyrif asrama 24 jam.",
     badge: "Ramah Santri"
   },
   {
     title: "Ruang Kelas Multimedia Ber-AC",
     category: "Akademik & Sains",
-    image: "/images/kelas-dari-dalam.webp",
+    image: "/images/kelas-bagian-dalam-saat-para-santri-belajar.png",
     desc: "Dilengkapi proyektor interaktif, pendingin ruangan (AC), serta pencahayaan alami yang mendukung konsentrasi belajar.",
     badge: "Modern"
   },
   {
-    title: "Lapangan Mini Soccer & Sport Center",
+    title: "Lapangan Basket & Mini Soccer",
     category: "Olahraga & Kebugaran",
-    image: "/images/lapangan-minisoccer.webp",
-    desc: "Fasilitas olahraga outdoor rumput sintetis untuk minisoccer, bulutangkis, dan panahan melatih ketangkasan fisik santri.",
+    image: "/images/para-santri-main-basket-di-lapangan-basket.png",
+    desc: "Fasilitas olahraga outdoor lapangan basket dan minisoccer rumput sintetis untuk melatih ketangkasan fisik santri.",
     badge: "Outdoor"
   },
   {
-    title: "Dapur & Ruang Makan Higienis",
-    category: "Layanan Gizi Santri",
-    image: "/images/welcome-selamat-datang.webp",
-    desc: "Penyajian menu makanan 3 kali sehari dengan menu seimbang, diawasi standar kebersihan dan sanitasi ketat.",
+    title: "Kantor Layanan SPMB & Ruang Tamu",
+    category: "Pelayanan Informasi",
+    image: "/images/kantor-spmb-ruang-tamu.png",
+    desc: "Ruang tamu representatif dan informatif untuk melayani wali santri yang ingin berkonsultasi langsung tentang SPMB.",
+    badge: "Layanan"
+  },
+  {
+    title: "Kantor Dewan Asatidzah & Pengasuhan",
+    category: "Manajemen & Kepengasuhan",
+    image: "/images/kantor-guru-dan-pengasuhan.png",
+    desc: "Pusat koordinasi bidang kepengasuhan, pembinaan santri, dan supervisi kurikulum diniyah pesantren.",
+    badge: "Profesional"
+  },
+  {
+    title: "Fasilitas Sanitasi & Kamar Mandi Bersih",
+    category: "Kebersihan & Kesehatan",
+    image: "/images/kamar-mandi-bagian-luar.png",
+    desc: "Dilengkapi area wudhu luar, kamar mandi keramik bersih, dan air mengalir lancar untuk menjaga kebersihan santri.",
     badge: "Sehat"
   },
   {
-    title: "Pos Kesehatan Pesantren (Poskestren)",
-    category: "Layanan Medis",
-    image: "/images/tentang.webp",
-    desc: "Fasilitas pertolongan pertama, ruang rawat isolasi santri sakit, dan rujukan cepat ke fasilitas kesehatan mitra Sukabumi.",
-    badge: "Siaga"
-  }
+    title: "Depot Air Minum Higienis (Gratis)",
+    category: "Layanan Gizi Santri",
+    image: "/images/depot-galon-gratis.webp",
+    desc: "Santri dapat mengambil air minum isi ulang secara gratis setiap saat dari depot higienis yang tersedia di area pesantren.",
+    badge: "Gratis"
+  },
 ];
 
 export default function FasilitasPage() {
