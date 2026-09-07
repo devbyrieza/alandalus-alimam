@@ -128,13 +128,12 @@ export default function HeroSection() {
               </Link>
 
               <a
-                href="/documents/Brosur-SPMB.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/documents/Brosur-SPMB-Al-Imam-2027-2028.pdf"
+                download="Brosur-SPMB-Pesantren-Al-Imam-2027-2028.pdf"
                 className="h-12 w-full sm:w-auto px-6 rounded-xl bg-[#ddc192] hover:bg-[#cfb280] text-[#550000] font-extrabold text-sm shadow-md shadow-[#ddc192]/30 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2 border border-[#ddc192]"
               >
                 <Download className="w-4 h-4" />
-                <span>Unduh Brosur (PDF)</span>
+                <span>Unduh Brosur</span>
               </a>
             </div>
 

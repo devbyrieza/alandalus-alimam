@@ -192,12 +192,11 @@ export default function ProgramPage() {
             </p>
             <div className="pt-2 flex flex-wrap justify-center gap-3">
               <a
-                href="/documents/Brosur-SPMB.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/documents/Brosur-SPMB-Al-Imam-2027-2028.pdf"
+                download="Brosur-SPMB-Pesantren-Al-Imam-2027-2028.pdf"
                 className="h-11 px-7 rounded-xl bg-[#ddc192] hover:bg-[#cfb280] text-[#550000] font-extrabold text-xs shadow-md transition-all inline-flex items-center gap-2"
               >
-                <span>Unduh Brosur Kurikulum (PDF)</span>
+                <span>Unduh Brosur</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
               <Link

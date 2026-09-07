@@ -1,4 +1,4 @@
-﻿// src/app/ppdb/page.tsx
+// src/app/ppdb/page.tsx
 "use client";
 
 import { Container } from "@/components/layout/Container";
@@ -41,12 +41,11 @@ export default function SPMBInfoPage() {
               <ArrowRight className="w-4 h-4" />
             </Link>
             <a
-              href="/documents/Brosur-SPMB.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/documents/Brosur-SPMB-Al-Imam-2027-2028.pdf"
+              download="Brosur-SPMB-Pesantren-Al-Imam-2027-2028.pdf"
               className="h-11 px-7 rounded-xl bg-white text-slate-800 font-extrabold text-xs border border-slate-200 shadow-xs hover:border-[#ddc192] transition-all inline-flex items-center"
             >
-              <span>Unduh Brosur (PDF)</span>
+              <span>Unduh Brosur</span>
             </a>
           </div>
         </Container>

@@ -709,9 +709,8 @@ export default function LoginPage() {
               Koneksi Aman Terenkripsi
             </span>
             <a
-              href="/documents/Brosur-SPMB.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/documents/Brosur-SPMB-Al-Imam-2027-2028.pdf"
+              download="Brosur-SPMB-Pesantren-Al-Imam-2027-2028.pdf"
               className="text-slate-600 hover:text-[#550000] font-bold"
             >
               Unduh Brosur SPMB ↗
