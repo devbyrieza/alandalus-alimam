@@ -88,7 +88,7 @@ export default function TeachersSection() {
               Para Pendidik & Pembina Santri Al Imam
             </h3>
             <p className="text-white/80 text-xs sm:text-sm mt-1 font-normal max-w-xl line-clamp-2 sm:line-clamp-none">
-              Lulusan universitas Islam ternama Timur Tengah, hafizh 30 juz bersanad, dan praktisi tarbiyah berpengalaman.
+              Lulusan universitas Islam ternama Timur Tengah, para hafizh Al-Qur'an bersanad, dan praktisi tarbiyah berpengalaman.
             </p>
           </div>
         </motion.div>

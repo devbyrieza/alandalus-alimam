@@ -1,4 +1,4 @@
-﻿// src/components/home/ProgramSection.tsx
+// src/components/home/ProgramSection.tsx
 "use client";
 
 import Link from "next/link";
@@ -15,7 +15,7 @@ const PROGRAMS = [
     icon: GraduationCap,
     features: [
       "Kurikulum Nasional Kemenag & Kepesantrenan",
-      "Target Tahfidz Al-Qur'an 30 Juz bersanad",
+      "Bimbingan Tahfidz Al-Qur'an Mutqin bersanad",
       "Bahasa Arab & Inggris aktif percakapan harian",
       "Pembinaan adab dan karakter 24 jam di asrama"
     ],

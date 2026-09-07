@@ -200,8 +200,8 @@ export default function HeroSection() {
                   <Award className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-xs font-extrabold text-slate-900">Akreditasi A</p>
-                  <p className="text-[10px] text-slate-500 font-semibold">Pesantren Unggul</p>
+                  <p className="text-xs font-extrabold text-slate-900">Standar Mutu</p>
+                  <p className="text-[10px] text-slate-500 font-semibold">Al-Andalus IIBS</p>
                 </div>
               </div>
 
@@ -211,8 +211,8 @@ export default function HeroSection() {
                   <BookOpen className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-xs font-extrabold text-slate-900">Tahfidz 30 Juz</p>
-                  <p className="text-[10px] text-slate-500 font-semibold">Mutqin & Bersanad</p>
+                  <p className="text-xs font-extrabold text-slate-900">Tahfidz Mutqin</p>
+                  <p className="text-[10px] text-slate-500 font-semibold">Tajwid & Bersanad</p>
                 </div>
               </div>
             </div>
@@ -230,7 +230,7 @@ export default function HeroSection() {
             <span className="text-xs font-extrabold text-[#550000] uppercase tracking-wider">Apresiasi Prestasi</span>
             <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Jalur Beasiswa</h3>
             <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
-              Beasiswa penuh bagi penghafal Al-Qur'an 30 Juz mutqin dan juara olimpiade sains nasional.
+              Beasiswa penuh bagi santri berprestasi tahfidz Al-Qur'an mutqin dan juara olimpiade sains nasional.
             </p>
           </div>
 

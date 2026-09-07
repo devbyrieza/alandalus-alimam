@@ -41,7 +41,7 @@ export default function ProgramPage() {
           </h1>
 
           <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
-            Memadukan kurikulum Kementerian Agama RI, pengkajian kitab turots bersanad, tahfidz Al-Qur'an 30 Juz, serta keunggulan bahasa internasional.
+            Memadukan kurikulum Kementerian Agama RI, pengkajian kitab turots bersanad, tahfidz Al-Qur'an mutqin, serta keunggulan bahasa internasional.
           </p>
         </Container>
       </section>
@@ -55,7 +55,7 @@ export default function ProgramPage() {
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-100">
               <div className="space-y-2">
                 <span className="px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-[#550000] text-white inline-block">
-                  Terakreditasi A • Jenjang 3 Tahun
+                  Kurikulum Terpadu Kemenag • Jenjang 3 Tahun
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
                   Madrasah Tsanawiyah (MTs)
@@ -88,10 +88,10 @@ export default function ProgramPage() {
               <div className="space-y-3 bg-slate-50/70 p-5 rounded-2xl border border-slate-200/80">
                 <h4 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
                   <Award className="w-4 h-4 text-[#ddc192]" />
-                  <span>Tahfidz 30 Juz Mutqin</span>
+                  <span>Tahfidz Al-Qur'an Mutqin</span>
                 </h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Bimbingan halaqah tahfidz pagi dan sore dengan target hafalan bertahap, setoran harian, pengujian berkala (tasmi'), dan pengambilan sanad.
+                  Bimbingan halaqah tahfidz intensif dengan target hafalan bertahap, setoran harian, pengujian berkala (tasmi'), dan pembinaan tajwid bersanad.
                 </p>
               </div>
 

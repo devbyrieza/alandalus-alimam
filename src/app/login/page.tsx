@@ -370,10 +370,10 @@ export default function LoginPage() {
                 </div>
                 <div>
                   <h4 className="text-xs sm:text-sm font-extrabold text-white">
-                    Tahfidz Al-Qur'an 30 Juz
+                    Tahfidz Al-Qur'an Mutqin
                   </h4>
                   <p className="text-[11px] text-slate-300 font-normal">
-                    Bimbingan intensif mutqin &amp; sanad hafalan
+                    Bimbingan intensif tajwid &amp; sanad hafalan
                   </p>
                 </div>
               </div>

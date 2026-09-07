@@ -216,7 +216,7 @@ export default function TentangPage() {
                 <div className="space-y-3">
                   {[
                     "Menanamkan aqidah shahihah sesuai pemahaman para Salafush Shalih.",
-                    "Membimbing hafalan Al-Qur'an 30 Juz secara mutqin dengan tajwid dan sanad qira'ah.",
+                    "Membimbing hafalan Al-Qur'an secara mutqin dengan kaidah tajwid dan sanad qira'ah.",
                     "Membiasakan percakapan bahasa Arab dan Inggris aktif dalam ekosistem asrama.",
                     "Membekali santri wawasan sains, kepemimpinan (leadership), dan keterampilan kewirausahaan."
                   ].map((misi, i) => (
@@ -255,7 +255,7 @@ export default function TentangPage() {
               {
                 icon: BookOpen,
                 title: "Tahfidz Al-Qur'an",
-                desc: "Target hafalan 30 Juz mutqin dengan pengujian berkala dan sanad qira'ah."
+                desc: "Bimbingan hafalan Al-Qur'an mutqin dengan pengujian berkala dan sanad qira'ah."
               },
               {
                 icon: ShieldCheck,
