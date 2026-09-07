@@ -144,18 +144,18 @@ export default function Navbar() {
 
   return (
     <>
-      <header id="main-header" className="fixed w-full top-0 left-0 pt-3.5 z-50 transition-all duration-300">
+      <header id="main-header" className="fixed w-full top-0 left-0 pt-2 sm:pt-3 z-50 transition-all duration-300">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
-          <div className="bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-2xl px-5 sm:px-6 py-3 shadow-md shadow-slate-900/5 flex items-center justify-between">
+          <div className="bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-2xl px-4 sm:px-6 py-1.5 sm:py-2 shadow-md shadow-slate-900/5 flex items-center justify-between">
             {/* ── Logo ── */}
             <Link
               href="/"
               onClick={handleBerandaClick}
-              className="flex items-center gap-3 group min-h-[44px]"
+              className="flex items-center gap-2.5 sm:gap-3 group shrink-0"
             >
-              <div className="relative">
+              <div className="relative shrink-0">
                 <div
-                  className={`w-10 h-10 sm:w-11 sm:h-11 rounded-[14px] flex items-center justify-center border overflow-hidden transition-all duration-500 group-hover:scale-105 group-hover:-rotate-3 ${
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-[14px] flex items-center justify-center border overflow-hidden transition-all duration-500 group-hover:scale-105 group-hover:-rotate-3 ${
                     isScrolled
                       ? "bg-white border-[var(--color-primary-100)] shadow-[var(--shadow-premium-sm)]"
                       : "bg-white/90 border-white/70 shadow-[0_2px_12px_rgba(3,105,199,0.12)]"
@@ -164,20 +164,20 @@ export default function Navbar() {
                   <Image
                     src={BRANDING.logoPath}
                     alt={`Logo ${BRANDING.schoolName}`}
-                    width={44}
-                    height={44}
+                    width={40}
+                    height={40}
                     className="w-full h-full object-contain p-0.5"
                     priority
-                    sizes="44px"
+                    sizes="40px"
                   />
                 </div>
                 {/* Status dot — blue green */}
-                <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-[var(--color-primary-600)] border-2 border-white rounded-full z-10 shadow-sm" />
+                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-[var(--color-primary-600)] border-2 border-white rounded-full z-10 shadow-sm" />
               </div>
 
-              <div className="block">
+              <div className="shrink-0 whitespace-nowrap">
                 <h1
-                  className={`text-base sm:text-lg font-black leading-none tracking-tight transition-colors duration-300 ${
+                  className={`text-sm sm:text-base font-black leading-tight tracking-tight transition-colors duration-300 ${
                     isScrolled
                       ? "text-[var(--color-ink-900)]"
                       : "text-[var(--color-ink-950)]"
@@ -185,7 +185,7 @@ export default function Navbar() {
                 >
                   {BRANDING.schoolShortName}
                 </h1>
-                <p className="text-[9px] sm:text-[10px] font-bold text-[var(--color-ink-400)] uppercase tracking-widest mt-0.5 leading-tight">
+                <p className="text-[8.5px] sm:text-[9.5px] font-bold text-[var(--color-ink-400)] uppercase tracking-wider mt-0.5 leading-none">
                   Managed by Al Andalus IIBS
                 </p>
               </div>
@@ -193,7 +193,7 @@ export default function Navbar() {
 
             {/* ── Desktop Nav (lg+) ── */}
             <nav
-              className={`hidden xl:flex items-center gap-0.5 p-1.5 rounded-full border transition-all duration-300 ${
+              className={`hidden xl:flex items-center gap-0.5 p-1 rounded-full border transition-all duration-300 ${
                 isScrolled
                   ? "bg-white/80 border-[var(--color-primary-100)] shadow-sm"
                   : "bg-white/70 backdrop-blur-md border-white/65 shadow-[0_2px_16px_rgba(3,105,199,0.10)]"
@@ -211,14 +211,14 @@ export default function Navbar() {
                       <Link
                         href={link.href}
                         onClick={(e) => handleNavClick(e, link.href)}
-                        className={`px-4 py-2 text-sm font-bold rounded-full transition-all duration-300 min-h-[40px] flex items-center gap-1.5 ${
+                        className={`px-3 xl:px-3.5 py-1.5 text-xs xl:text-sm font-bold rounded-full transition-all duration-300 min-h-[34px] flex items-center gap-1.5 ${
                           isActive(link.href)
                             ? "bg-[var(--color-primary-800)] text-[var(--color-secondary-100)] shadow-[var(--shadow-primary)]"
                             : "text-[var(--color-ink-600)] hover:text-[var(--color-primary-800)] hover:bg-[var(--color-primary-50)]"
                         }`}
                       >
                         {link.label}
-                        <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" />
+                        <ChevronDown className="w-3.5 h-3.5 transition-transform duration-300 group-hover:rotate-180" />
                       </Link>
                       
                       {/* Mega Menu Dropdown */}
@@ -229,29 +229,29 @@ export default function Navbar() {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 10, scale: 0.95 }}
                             transition={{ duration: 0.2 }}
-                            className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[600px] z-50"
+                            className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-[560px] z-50"
                           >
-                            <div className="mega-menu-content p-6 grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
+                            <div className="mega-menu-content p-5 grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
                               <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45 border-l border-t border-surface-100" />
                               
-                              <Link href="/program#mts" className="group/item p-4 rounded-2xl hover:bg-primary-50 transition-colors border border-transparent hover:border-primary-100">
-                                <div className="flex items-center gap-3 mb-2">
-                                  <div className="w-10 h-10 rounded-2xl bg-primary-100 text-primary-700 flex items-center justify-center group-hover/item:scale-110 transition-transform">
-                                    <BookOpen className="w-5 h-5" />
+                              <Link href="/program#mts" className="group/item p-3.5 rounded-2xl hover:bg-primary-50 transition-colors border border-transparent hover:border-primary-100">
+                                <div className="flex items-center gap-3 mb-1.5">
+                                  <div className="w-9 h-9 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center group-hover/item:scale-110 transition-transform">
+                                    <BookOpen className="w-4 h-4" />
                                   </div>
-                                  <h4 className="font-bold text-ink-900 group-hover/item:text-primary-700">MTs (Setara SMP)</h4>
+                                  <h4 className="font-bold text-sm text-ink-900 group-hover/item:text-primary-700">MTs (Setara SMP)</h4>
                                 </div>
-                                <p className="text-sm text-ink-500">Program menengah pertama berfokus pada tahfidz dan adab dasar.</p>
+                                <p className="text-xs text-ink-500">Program menengah pertama berfokus pada tahfidz dan adab dasar.</p>
                               </Link>
                               
-                              <Link href="/program#il" className="group/item p-4 rounded-2xl hover:bg-primary-50 transition-colors border border-transparent hover:border-primary-100">
-                                <div className="flex items-center gap-3 mb-2">
-                                  <div className="w-10 h-10 rounded-2xl bg-secondary-100 text-secondary-700 flex items-center justify-center group-hover/item:scale-110 transition-transform">
-                                    <Star className="w-5 h-5" />
+                              <Link href="/program#il" className="group/item p-3.5 rounded-2xl hover:bg-primary-50 transition-colors border border-transparent hover:border-primary-100">
+                                <div className="flex items-center gap-3 mb-1.5">
+                                  <div className="w-9 h-9 rounded-xl bg-secondary-100 text-secondary-700 flex items-center justify-center group-hover/item:scale-110 transition-transform">
+                                    <Star className="w-4 h-4" />
                                   </div>
-                                  <h4 className="font-bold text-ink-900 group-hover/item:text-primary-700">I'dad Lughowi (IL)</h4>
+                                  <h4 className="font-bold text-sm text-ink-900 group-hover/item:text-primary-700">I'dad Lughowi (IL)</h4>
                                 </div>
-                                <p className="text-sm text-ink-500">Program pemantapan bahasa Arab sebelum jenjang Aliyah.</p>
+                                <p className="text-xs text-ink-500">Program pemantapan bahasa Arab sebelum jenjang Aliyah.</p>
                               </Link>
                             </div>
                           </motion.div>
@@ -266,7 +266,7 @@ export default function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className={`px-4 py-2 text-sm font-bold rounded-full transition-all duration-300 min-h-[40px] flex items-center ${
+                    className={`px-3 xl:px-3.5 py-1.5 text-xs xl:text-sm font-bold rounded-full transition-all duration-300 min-h-[34px] flex items-center ${
                       isActive(link.href)
                         ? "bg-[var(--color-primary-800)] text-[var(--color-secondary-100)] shadow-[var(--shadow-primary)]"
                         : "text-[var(--color-ink-600)] hover:text-[var(--color-primary-800)] hover:bg-[var(--color-primary-50)]"
@@ -279,13 +279,13 @@ export default function Navbar() {
             </nav>
 
             {/* ── CTA Buttons (lg+) ── */}
-            <div className="hidden xl:flex items-center gap-2 xl:gap-3 shrink-0">
+            <div className="hidden xl:flex items-center gap-1.5 xl:gap-2.5 shrink-0">
               <LanguageSwitcher />
               {session ? (
-                <div className="flex items-center gap-2 xl:gap-2.5">
+                <div className="flex items-center gap-1.5 xl:gap-2">
                   <a
                     href="https://spmb.pesantren-alimam.com/dashboard"
-                    className="text-xs xl:text-sm font-bold text-[var(--color-ink-700)] hover:text-[var(--color-primary-800)] px-3 py-2 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-all flex items-center gap-1.5 shadow-xs"
+                    className="text-xs xl:text-sm font-bold text-[var(--color-ink-700)] hover:text-[var(--color-primary-800)] px-3 py-1.5 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-all flex items-center gap-1.5 shadow-xs"
                   >
                     <span className="relative flex h-2 w-2 mr-0.5">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -295,29 +295,29 @@ export default function Navbar() {
                   </a>
                   <a
                     href="https://spmb.pesantren-alimam.com/daftar"
-                    className="btn-primary flex items-center gap-1.5 group text-xs xl:text-sm font-black px-3.5 xl:px-5 py-2 rounded-full shadow-md hover:scale-105 transition-all glow-ring-primary"
+                    className="btn-primary flex items-center gap-1.5 group text-xs xl:text-sm font-black px-3.5 xl:px-4 py-1.5 rounded-full shadow-md hover:scale-105 transition-all glow-ring-primary"
                   >
                     <span>Daftar SPMB</span>
                     <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                   </a>
                 </div>
               ) : (
-                <div className="flex items-center gap-2 xl:gap-2.5">
+                <div className="flex items-center gap-1.5 xl:gap-2">
                   <a
                     href="https://spmb.pesantren-alimam.com"
-                    className="text-xs xl:text-sm font-bold text-[var(--color-ink-600)] hover:text-[var(--color-primary-800)] transition-colors duration-200 px-3 py-2 rounded-full hover:bg-[var(--color-primary-50)]"
+                    className="text-xs xl:text-sm font-bold text-[var(--color-ink-600)] hover:text-[var(--color-primary-800)] transition-colors duration-200 px-2.5 xl:px-3 py-1.5 rounded-full hover:bg-[var(--color-primary-50)]"
                   >
                     Info SPMB
                   </a>
                   <a
                     href="https://spmb.pesantren-alimam.com/login"
-                    className="text-xs xl:text-sm font-bold text-[var(--color-ink-600)] hover:text-[var(--color-primary-800)] transition-colors duration-200 px-3 py-2 rounded-full hover:bg-[var(--color-primary-50)]"
+                    className="text-xs xl:text-sm font-bold text-[var(--color-ink-600)] hover:text-[var(--color-primary-800)] transition-colors duration-200 px-2.5 xl:px-3 py-1.5 rounded-full hover:bg-[var(--color-primary-50)]"
                   >
                     Masuk
                   </a>
                   <a
                     href="https://spmb.pesantren-alimam.com/daftar"
-                    className="btn-primary flex items-center gap-1.5 group text-xs xl:text-sm font-black px-3.5 xl:px-5 py-2 rounded-full shadow-md hover:scale-105 transition-all glow-ring-primary"
+                    className="btn-primary flex items-center gap-1.5 group text-xs xl:text-sm font-black px-3.5 xl:px-4 py-1.5 rounded-full shadow-md hover:scale-105 transition-all glow-ring-primary"
                   >
                     <span>Daftar SPMB</span>
                     <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -329,7 +329,7 @@ export default function Navbar() {
             {/* ── Hamburger (below lg) ── */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`xl:hidden p-3 rounded-2xl transition-all duration-300 min-h-[48px] min-w-[48px] flex items-center justify-center border ${
+              className={`xl:hidden p-2 sm:p-2.5 rounded-xl transition-all duration-300 min-h-[40px] min-w-[40px] flex items-center justify-center border ${
                 isScrolled
                   ? "bg-white border-[var(--color-primary-100)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-50)] shadow-[var(--shadow-xs)]"
                   : "bg-white/85 backdrop-blur-sm border-white/70 text-[var(--color-ink-800)] hover:bg-white/95 shadow-[0_2px_12px_rgba(3,105,199,0.10)]"

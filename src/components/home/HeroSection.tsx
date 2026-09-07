@@ -55,7 +55,7 @@ export default function HeroSection() {
   return (
     <section
       id="beranda"
-      className="relative w-full overflow-hidden bg-gradient-to-b from-[#FDFCF9] via-[#F8FAFC] to-white pt-28 pb-20 lg:pt-36 lg:pb-28"
+      className="relative w-full overflow-hidden bg-gradient-to-b from-[#FDFCF9] via-[#F8FAFC] to-white pt-24 sm:pt-28 lg:pt-32 pb-16 lg:pb-24"
     >
       {/* Background Micro Grid */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utb3BhY2l0eT0iMC4wMiIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTAgNjBoNjBNNjAgMGwwIDYwIi8+PC9nPjwvc3ZnPg==')] opacity-70 pointer-events-none" />
