@@ -265,37 +265,48 @@ const drawFormalSignature = async (doc: jsPDF, y: number) => {
   const isFullImage = PDF_BRANDING.template === "full_image";
   const xBase = pageWidth - (isFullImage ? 70 : coords.signature.margin_right);
 
+  // Batas aman maksimum y agar seluruh blok tanda tangan dan nama Mudir/Ketua Panitia
+  // selesai sebelum y = 250mm, sehingga tidak akan pernah menimpa teks footer Kemenkumham (y = 265.6mm)
+  const maxSafeY = 206;
+  const actualY = isFullImage ? Math.min(y, maxSafeY) : y;
+
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10.5);
   doc.text(
     `${authority.city}, ${new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}`,
     xBase,
-    y,
+    actualY,
   );
-  doc.text(authority.role + ",", xBase, y + 6);
+  doc.text(authority.role + ",", xBase, actualY + 5);
 
   const stempel = await fetchImageAsBase64(assets.stamp);
   const ttd = await fetchImageAsBase64(assets.signature);
 
+  const stampW = coords.signature.stamp.w > 32 ? 32 : coords.signature.stamp.w;
+  const stampH = coords.signature.stamp.h > 32 ? 32 : coords.signature.stamp.h;
+  const ttdW = coords.signature.ttd.w > 32 ? 32 : coords.signature.ttd.w;
+  const ttdH = coords.signature.ttd.h > 32 ? 32 : coords.signature.ttd.h;
+
   if (isFullImage) {
     if (stempel) {
-      doc.addImage(stempel, "JPEG", xBase - 10, y + 10, coords.signature.stamp.w, coords.signature.stamp.h);
+      doc.addImage(stempel, "PNG", xBase - 10, actualY + 7, stampW, stampH);
     }
     if (ttd) {
-      doc.addImage(ttd, "PNG", xBase + 5, y + 10, coords.signature.ttd.w, coords.signature.ttd.h);
+      doc.addImage(ttd, "PNG", xBase + 5, actualY + 7, ttdW, ttdH);
     }
   } else {
     if (stempel) {
-      doc.addImage(stempel, "JPEG", xBase - 20, y + 10, coords.signature.stamp.w, coords.signature.stamp.h);
+      doc.addImage(stempel, "JPEG", xBase - 20, actualY + 7, stampW, stampH);
     }
     if (ttd) {
-      doc.addImage(ttd, "PNG", xBase + 10, y + 10, coords.signature.ttd.w, coords.signature.ttd.h);
+      doc.addImage(ttd, "PNG", xBase + 10, actualY + 7, ttdW, ttdH);
     }
   }
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(10.5);
-  doc.text(authority.name, xBase, y + 45);
+  doc.setTextColor(0, 0, 0);
+  doc.text(authority.name, xBase, actualY + 39);
 };
 
 // ============================================================
@@ -545,8 +556,9 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
   // === HALAMAN 1: SURAT PENGANTAR ===
   await drawHeader(doc);
 
-  let y = startY + 2;
-  doc.setFontSize(9.5); // Diubah dari 10.5 ke 9.5 untuk menghemat ruang
+  const isFullImage = PDF_BRANDING.template === "full_image";
+  let y = isFullImage ? 62 : startY + 2;
+  doc.setFontSize(9.5); // Ukuran proporsional dan rapi
   doc.setFont("helvetica", "normal");
   doc.setTextColor(50, 50, 50);
 
@@ -556,7 +568,7 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
   doc.text("Lamp.", leftColX, y);
   doc.text(":", colonX, y);
   doc.text("-", colonX + 4, y);
-  y += 5; // Diubah dari 6 ke 5
+  y += 4.5;
   doc.text("Hal", leftColX, y);
   doc.text(":", colonX, y);
   doc.setFont("helvetica", "bold");
@@ -565,40 +577,40 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
   doc.text(halText, colonX + 4, y);
   doc.setFont("helvetica", "normal");
 
-  y += 10; // Diubah dari 18 ke 10 untuk menghemat ruang vertikal
+  y += 9;
   doc.setTextColor(50, 50, 50);
   doc.text("Kepada Yth.", leftColX, y);
-  y += 5; // Diubah dari 6 ke 5
+  y += 4.5;
   doc.text("Petugas Kesehatan Puskesmas/Rumah Sakit", leftColX, y);
-  y += 5;
+  y += 4.5;
   doc.text(".............................................", leftColX, y);
-  y += 5;
+  y += 4.5;
   doc.text("Di Tempat", leftColX, y);
 
-  y += 8; // Diubah dari 12 ke 8
+  y += 6.5;
   doc.setTextColor(0, 0, 0);
   doc.setFont("helvetica", "italic");
   doc.text("Dengan hormat,", leftColX, y);
   doc.setFont("helvetica", "normal");
 
-  y += 6; // Diubah dari 8 ke 6
+  y += 5.5;
   const intro = `Sehubungan dengan kegiatan penerimaan calon santri baru Pesantren Al Imam Al Islami Tahun Pelajaran 2027/2028, kami selaku panitia membutuhkan pemeriksaan kesehatan bagi para calon santri sebagai salah satu bagian dari rangkaian proses seleksi.`;
   const introLines = doc.splitTextToSize(intro, contentW);
   doc.text(introLines, leftColX, y);
-  y += introLines.length * 5 + 3; // Diubah dari 5.5 + 4 ke 5 + 3
+  y += introLines.length * 4.5 + 2;
 
   const intro2 =
     "Untuk itu, kami mohon kesediaan Bapak/Ibu untuk melakukan pemeriksaan kesehatan bagi calon santri dengan identitas berikut:";
   const intro2Lines = doc.splitTextToSize(intro2, contentW);
   doc.text(intro2Lines, leftColX, y);
-  y += intro2Lines.length * 5 + 3;
+  y += intro2Lines.length * 4.5 + 2;
 
-  // Data calon santri (Dikosongkan agar diisi manual)
+  // Data calon santri (Otomatis terisi jika ada data, fallback titik-titik untuk format kosong)
   const fields1: [string, string][] = [
-    ["Nama", ".................................................................................."],
-    ["Nomor Pendaftaran", ".................................................................................."],
-    ["Tempat, Tanggal Lahir", ".................................................................................."],
-    ["Alamat", ".................................................................................."],
+    ["Nama", data.nama_lengkap ? toTitleCase(data.nama_lengkap) : ".................................................................................."],
+    ["Nomor Pendaftaran", data.nomor_pendaftaran || ".................................................................................."],
+    ["Tempat, Tanggal Lahir", (data.tempat_lahir && data.tanggal_lahir) ? `${toTitleCase(data.tempat_lahir)}, ${data.tanggal_lahir}` : ".................................................................................."],
+    ["Alamat", data.alamat || ".................................................................................."],
   ];
   for (const [label, value] of fields1) {
     doc.setFont("helvetica", "bold");
@@ -606,12 +618,12 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
     doc.setFont("helvetica", "normal");
     doc.text(":", leftColX + 54, y);
     doc.text(value, leftColX + 57, y);
-    y += 5.2; // Diubah dari 6 ke 5.2
+    y += 4.8;
   }
 
-  y += 3; // Diubah dari 5 ke 3
+  y += 2;
   doc.text("Jenis pemeriksaan kesehatan yang dibutuhkan adalah:", leftColX, y);
-  y += 5; // Diubah dari 7 ke 5
+  y += 4.5;
   const checks = [
     "Riwayat Penyakit (Anamnesis)",
     "Pemeriksaan Fisik (Physical Test)",
@@ -620,27 +632,27 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
   for (const item of checks) {
     doc.setFillColor(80, 80, 80);
     // Menggambar bulatan bullet point kecil menggunakan metode lingkaran vector
-    doc.circle(leftColX + 7, y - 1.2, 0.7, "F"); // Bulatan sedikit lebih kecil
+    doc.circle(leftColX + 7, y - 1.2, 0.7, "F");
     doc.text(item, leftColX + 11, y);
-    y += 5.2; // Diubah dari 6 ke 5.2
+    y += 4.8;
   }
 
-  y += 2; // Diubah dari 4 ke 2
+  y += 2;
   const note =
     "Catatan: Bila visus tidak normal, mohon dilengkapi dengan nilai negatif, positif, atau nilai silindrisnya (contoh: V.OD/V.OS: -1/-0,5).";
   const noteLines = doc.splitTextToSize(note, contentW - 5);
   doc.setFont("helvetica", "italic");
-  doc.setFontSize(8.5); // Ukuran catatan diperkecil sedikit
+  doc.setFontSize(8.5);
   doc.text(noteLines, leftColX + 5, y);
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(9.5); // Kembalikan ke 9.5
-  y += noteLines.length * 4.5 + 3;
+  doc.setFontSize(9.5);
+  y += noteLines.length * 4 + 2;
 
   const closing1 =
     "Hasil pemeriksaan dapat diisikan pada formulir terlampir. Seluruh biaya pemeriksaan kesehatan dibebankan kepada calon santri yang bersangkutan, dengan mekanisme yang ditentukan oleh pihak Rumah Sakit/Puskesmas.";
   const closing1Lines = doc.splitTextToSize(closing1, contentW);
   doc.text(closing1Lines, leftColX, y);
-  y += closing1Lines.length * 5 + 4;
+  y += closing1Lines.length * 4.5 + 2.5;
 
   doc.setFont("helvetica", "italic");
   doc.text(
@@ -650,7 +662,7 @@ export const generateSuratKesehatan = async (data: PendaftarPdfData) => {
   );
   doc.setFont("helvetica", "normal");
 
-  await drawFormalSignature(doc, y + 8); // Diubah dari 12 ke 8 untuk memajukan TTD Mudir
+  await drawFormalSignature(doc, y + 5);
   drawFooter(doc);
 
   // === HALAMAN 2: FORMULIR PEMERIKSAAN ===
