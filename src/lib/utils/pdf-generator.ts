@@ -1000,7 +1000,7 @@ export const generateSuratPernyataan = async (data: PendaftarPdfData) => {
  * Generate Pakta Integritas Santri (Hal. 1) dan Orangtua/Wali (Hal. 2)
  * Mengacu pada dokumen: Pakta_Integritas_Santri_dan_Orangtua
  */
-export const generatePaktaIntegritas = async (data: PendaftarPdfData) => {
+export const generatePaktaIntegritas = async (data: PendaftarPdfData, target: "santri" | "ortu" | "both" = "both") => {
   const doc = new jsPDF();
   const pageWidth = doc.internal.pageSize.getWidth();
   const { authority, institution } = PDF_BRANDING;
@@ -1010,6 +1010,10 @@ export const generatePaktaIntegritas = async (data: PendaftarPdfData) => {
 
   // ============================
   // HALAMAN 1: PAKTA INTEGRITAS SANTRI
+  let hasPage1 = false;
+  if (target === "santri" || target === "both") {
+    hasPage1 = true;
+
   // ============================
   await drawHeader(doc);
 
@@ -1107,6 +1111,7 @@ export const generatePaktaIntegritas = async (data: PendaftarPdfData) => {
   drawFooter(doc);
 
   // ============================
+
   // HALAMAN 2: PAKTA INTEGRITAS ORANGTUA/WALI
   // ============================
   doc.addPage();
@@ -1229,6 +1234,8 @@ export const generatePaktaIntegritas = async (data: PendaftarPdfData) => {
   doc.text("(Orang Tua/Wali)", sigX2 + 15, bottomY2 + 46);
 
   drawFooter(doc);
+  }
+
   if (typeof window !== "undefined") {
     doc.save(`AIIS_PaktaIntegritas_${data.nomor_pendaftaran}.pdf`);
   }
