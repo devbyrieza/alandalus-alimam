@@ -192,7 +192,7 @@ export default function TrashPage() {
               <option value="TK">TK</option>
               <option value="SD">SD</option>
               <option value="SMP">SMP</option>
-              <option value="SMA">SMA</option>
+              <option value="MA">MA</option>
               <option value="MTs">MTs</option>
               <option value="IL">IL</option>
             </select>

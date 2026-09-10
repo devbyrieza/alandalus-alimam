@@ -288,7 +288,7 @@ export default function AuditSeleksiPage() {
             >
               <option value="">Semua Jenjang</option>
               <option value="MTs">MTs</option>
-              <option value="SMA">SMA</option>
+              <option value="MA">MA</option>
               <option value="IL">I&apos;dad Lughowi</option>
             </select>
           </div>
