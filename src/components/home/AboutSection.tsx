@@ -1,6 +1,6 @@
-// src/components/home/AboutSection.tsx
 "use client";
 
+// src/components/home/AboutSection.tsx
 import { Container } from "@/components/layout/Container";
 import Image from "next/image";
 import { Check } from "lucide-react";

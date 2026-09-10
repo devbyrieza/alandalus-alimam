@@ -1,6 +1,6 @@
-﻿// src/components/home/TestimonialsSection.tsx
 "use client";
 
+// src/components/home/TestimonialsSection.tsx
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
 import { MessageSquareQuote, Star, ShieldCheck } from "lucide-react";

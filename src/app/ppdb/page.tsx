@@ -1,6 +1,6 @@
-// src/app/ppdb/page.tsx
 "use client";
 
+// src/app/ppdb/page.tsx
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
 import { Check, ArrowRight, BookOpen, ShieldCheck, FileText, Phone, HelpCircle } from "lucide-react";

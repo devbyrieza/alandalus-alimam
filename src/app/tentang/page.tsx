@@ -1,6 +1,6 @@
-// src/app/tentang/page.tsx
 "use client";
 
+// src/app/tentang/page.tsx
 import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";

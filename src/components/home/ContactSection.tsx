@@ -1,6 +1,6 @@
-﻿// src/components/home/ContactSection.tsx
 "use client";
 
+// src/components/home/ContactSection.tsx
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { MapPin, Phone, Mail, MessageCircle, ArrowRight, Clock } from "lucide-react";

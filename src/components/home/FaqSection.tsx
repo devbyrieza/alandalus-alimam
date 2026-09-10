@@ -1,6 +1,6 @@
-// src/components/home/FaqSection.tsx
 "use client";
 
+// src/components/home/FaqSection.tsx
 import { useState } from "react";
 import { ChevronDown, MessageCircle, HelpCircle } from "lucide-react";
 import { Container } from "@/components/layout/Container";

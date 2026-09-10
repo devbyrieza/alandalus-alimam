@@ -1,6 +1,6 @@
-﻿// src/app/kontak/page.tsx
 "use client";
 
+// src/app/kontak/page.tsx
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";

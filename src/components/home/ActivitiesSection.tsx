@@ -1,6 +1,6 @@
-﻿// src/components/home/ActivitiesSection.tsx
 "use client";
 
+// src/components/home/ActivitiesSection.tsx
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";

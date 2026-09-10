@@ -1,6 +1,6 @@
-// src/components/home/StatsSection.tsx
 "use client";
 
+// src/components/home/StatsSection.tsx
 import { motion, useMotionValue, animate } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useRef } from "react";

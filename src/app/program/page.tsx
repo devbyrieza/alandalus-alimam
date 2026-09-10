@@ -1,6 +1,6 @@
-// src/app/program/page.tsx
 "use client";
 
+// src/app/program/page.tsx
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import {

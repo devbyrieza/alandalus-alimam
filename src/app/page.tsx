@@ -1,6 +1,6 @@
-// src/app/page.tsx
 "use client";
 
+// src/app/page.tsx
 import { useEffect } from "react";
 import { LazyMotion, domAnimation } from "framer-motion";
 

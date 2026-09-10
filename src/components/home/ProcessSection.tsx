@@ -1,6 +1,6 @@
-// src/components/home/ProcessSection.tsx
 "use client";
 
+// src/components/home/ProcessSection.tsx
 import Link from "next/link";
 import {
   UserPlus,

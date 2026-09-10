@@ -1,6 +1,6 @@
-// src/components/home/BentoGridSection.tsx
 "use client";
 
+// src/components/home/BentoGridSection.tsx
 import { motion } from "framer-motion";
 import { Container } from "@/components/layout/Container";
 import { ArrowRight, BookOpen, Utensils, Home, Monitor, ShieldCheck } from "lucide-react";

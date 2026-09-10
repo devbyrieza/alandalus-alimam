@@ -1,6 +1,6 @@
-// src/components/home/HeroSection.tsx
 "use client";
 
+// src/components/home/HeroSection.tsx
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";

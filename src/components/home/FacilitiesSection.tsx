@@ -1,5 +1,6 @@
-﻿// src/components/home/FacilitiesSection.tsx
 "use client";
+
+// src/components/home/FacilitiesSection.tsx
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
 import { Building2, Home, BookOpen, Utensils, MonitorPlay, Dumbbell, Sparkles } from "lucide-react";

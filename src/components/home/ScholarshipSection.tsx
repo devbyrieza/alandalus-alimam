@@ -1,5 +1,6 @@
-﻿// src/components/home/ScholarshipSection.tsx
 "use client";
+
+// src/components/home/ScholarshipSection.tsx
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
 import { Award, ArrowRight } from "lucide-react";

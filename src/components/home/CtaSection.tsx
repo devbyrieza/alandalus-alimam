@@ -1,6 +1,6 @@
-// src/components/home/CtaSection.tsx
 "use client";
 
+// src/components/home/CtaSection.tsx
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";

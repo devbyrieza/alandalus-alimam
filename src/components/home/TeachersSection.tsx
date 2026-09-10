@@ -1,6 +1,6 @@
-// src/components/home/TeachersSection.tsx
 "use client";
 
+// src/components/home/TeachersSection.tsx
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
 import { Users, Award, BookOpen, GraduationCap, ShieldCheck } from "lucide-react";
