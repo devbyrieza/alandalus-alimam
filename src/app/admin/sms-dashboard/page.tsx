@@ -150,7 +150,7 @@ export default function AdminSMSDashboard() {
           {/* SMS List */}
           {pendingSMS.length === 0 ? (
             <div className="text-center py-16 px-4 bg-slate-50/50 rounded-3xl border border-dashed border-slate-200">
-              <div className="w-16 h-16 rounded-full bg-emerald-100 text-[#550000] flex items-center justify-center mx-auto mb-4 border border-emerald-200">
+              <div className="w-16 h-16 rounded-full bg-emerald-100 text-[#550000] flex items-center justify-center mx-auto mb-4 border border-emerald-200 whitespace-nowrap inline-block shrink-0">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
               <h4 className="text-lg font-black text-slate-900 mb-1">

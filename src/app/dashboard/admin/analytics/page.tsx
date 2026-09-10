@@ -55,7 +55,7 @@ export default function AnalyticsDashboard() {
             </div>
             <div>
               <div className="flex items-center gap-2 mb-2"><div className="w-3 h-3 bg-indigo-600 rounded-full"></div> <span className="text-gray-600">Lulus (846 Santri)</span></div>
-              <div className="flex items-center gap-2"><div className="w-3 h-3 bg-indigo-100 rounded-full"></div> <span className="text-gray-600">Tidak Lulus (399 Santri)</span></div>
+              <div className="flex items-center gap-2"><div className="w-3 h-3 bg-indigo-100 rounded-full whitespace-nowrap inline-block shrink-0"></div> <span className="text-gray-600">Tidak Lulus (399 Santri)</span></div>
             </div>
           </div>
         </div>

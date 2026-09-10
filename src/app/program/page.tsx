@@ -158,7 +158,7 @@ export default function ProgramPage() {
           <div id="ma" className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 shadow-sm scroll-mt-28">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-100">
               <div className="space-y-2">
-                <span className="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-700 inline-block">
+                <span className="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-700 inline-block whitespace-nowrap inline-block shrink-0">
                   Segera Hadir • Jenjang Lanjutan
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">

@@ -342,7 +342,7 @@ export default function TentangPage() {
 
                 <div className="space-y-4">
                   <div className="flex items-start gap-3.5">
-                    <div className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5 whitespace-nowrap inline-block shrink-0">
                       <Check className="w-3.5 h-3.5 stroke-[3]" />
                     </div>
                     <div>
@@ -354,7 +354,7 @@ export default function TentangPage() {
                   </div>
 
                   <div className="flex items-start gap-3.5">
-                    <div className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5 whitespace-nowrap inline-block shrink-0">
                       <Check className="w-3.5 h-3.5 stroke-[3]" />
                     </div>
                     <div>
@@ -366,7 +366,7 @@ export default function TentangPage() {
                   </div>
 
                   <div className="flex items-start gap-3.5">
-                    <div className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5 whitespace-nowrap inline-block shrink-0">
                       <Check className="w-3.5 h-3.5 stroke-[3]" />
                     </div>
                     <div>

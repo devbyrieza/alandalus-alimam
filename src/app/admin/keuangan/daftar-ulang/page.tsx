@@ -34,7 +34,7 @@ export default function DaftarUlangPage() {
           </div>
         </div>
         <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 flex items-center gap-4">
-          <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-[#550000]">
+          <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-[#550000] whitespace-nowrap inline-block shrink-0">
             <UserCheck className="w-6 h-6" />
           </div>
           <div>
@@ -72,7 +72,7 @@ export default function DaftarUlangPage() {
                 </td>
                 <td className="p-6 sm:p-8 text-center">
                   {item.status === 'lunas' && <span className="px-3 py-1 bg-green-100 text-[#550000] rounded-full text-xs font-bold">LUNAS</span>}
-                  {item.status === 'cicilan' && <span className="px-3 py-1 bg-blue-100 text-[#550000] rounded-full text-xs font-bold">CICILAN KE-{item.cicilan}</span>}
+                  {item.status === 'cicilan' && <span className="px-3 py-1 bg-blue-100 text-[#550000] rounded-full text-xs font-bold whitespace-nowrap inline-block shrink-0">CICILAN KE-{item.cicilan}</span>}
                   {item.status === 'belum' && <span className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold">BELUM BAYAR</span>}
                 </td>
                 <td className="p-6 sm:p-8 text-right font-black text-slate-700">

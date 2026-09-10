@@ -221,7 +221,7 @@ export default function AkademikTestPage() {
     return (
       <div className="max-w-3xl mx-auto p-6 sm:p-8 md:p-6">
         {pendaftarId && (
-          <div className="mb-4 p-6 sm:p-8 bg-amber-100 border border-amber-300 rounded-3xl text-amber-900 flex items-center gap-3">
+          <div className="mb-4 p-6 sm:p-8 bg-amber-100 border border-amber-300 rounded-3xl text-amber-900 flex items-center gap-3 whitespace-nowrap inline-block shrink-0">
             <AlertCircle className="w-5 h-5 flex-shrink-0" />
             <p className="text-sm font-bold">MODE ADMIN: Anda sedang mengakses/mengisikan ujian atas nama santri lain.</p>
           </div>
@@ -342,7 +342,7 @@ export default function AkademikTestPage() {
                   }
                   className={`cursor-pointer p-6 sm:p-8 border-2 rounded-2xl hover:bg-slate-50 transition-all ${answers[q.id] === opt.value ? "bg-indigo-50 border-indigo-500 text-[#550000] shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10" : "border-stone-200"}`}
                 >
-                  <span className="font-bold mr-3 inline-block w-6 text-center bg-stone-100 rounded text-stone-600">
+                  <span className="font-bold mr-3 inline-block w-6 text-center bg-stone-100 rounded text-stone-600 whitespace-nowrap inline-block shrink-0">
                     {opt.value}
                   </span>
                   {opt.label}

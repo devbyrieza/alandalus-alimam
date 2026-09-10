@@ -183,7 +183,7 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
               >
                 <div>
                   {/* Photo Container */}
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 whitespace-nowrap inline-block shrink-0">
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -212,7 +212,7 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
                 </div>
 
                 <div className="px-6 pb-6 pt-2">
-                  <div className="h-px bg-slate-100 w-full mb-3" />
+                  <div className="h-px bg-slate-100 w-full mb-3 whitespace-nowrap inline-block shrink-0" />
                   <span className="text-[11px] font-bold text-slate-400 flex items-center gap-1.5">
                     <Check className="w-3.5 h-3.5 text-emerald-600" />
                     <span>Terpelihara & Siap Pakai</span>

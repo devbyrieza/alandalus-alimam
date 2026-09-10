@@ -204,7 +204,7 @@ export default function KepribadianTestPage() {
       <div ref={topRef} />
       
       {pendaftarId && (
-        <div className="mb-4 p-6 sm:p-8 bg-amber-100 border border-amber-300 rounded-3xl text-amber-900 flex items-center gap-3">
+        <div className="mb-4 p-6 sm:p-8 bg-amber-100 border border-amber-300 rounded-3xl text-amber-900 flex items-center gap-3 whitespace-nowrap inline-block shrink-0">
           <AlertCircle className="w-5 h-5 flex-shrink-0" />
           <p className="text-sm font-bold">MODE ADMIN: Anda sedang mengakses/mengisikan ujian atas nama santri lain.</p>
         </div>
@@ -256,7 +256,7 @@ export default function KepribadianTestPage() {
             {Object.keys(answers).length}/{KEPRIBADIAN_QUESTIONS.length} dijawab
           </span>
         </div>
-        <div className="w-full h-2 bg-stone-100 rounded-full overflow-hidden">
+        <div className="w-full h-2 bg-stone-100 rounded-full overflow-hidden whitespace-nowrap inline-block shrink-0">
           <div
             className="h-full bg-linear-to-r from-primary-500 to-primary-700 rounded-full transition-all duration-500 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 shadow-primary-200"
             style={{

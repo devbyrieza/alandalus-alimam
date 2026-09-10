@@ -139,7 +139,7 @@ export default function RadarTamuAdmin() {
                       <span className={`px-3 py-1 rounded-full text-xs font-black \${tamu.status === 'WAITING' ? 'bg-orange-100 text-orange-700' : 'bg-primary-100 text-primary-700'}`}>
                         {tamu.waktu} WIB
                       </span>
-                      <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-bold">
+                      <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-bold whitespace-nowrap inline-block shrink-0">
                         {tamu.kategori}
                       </span>
                     </div>
@@ -177,7 +177,7 @@ export default function RadarTamuAdmin() {
                     )}
 
                     {tamu.status === "FINISHED" && (
-                      <div className="text-center text-slate-500 font-bold text-sm bg-slate-100 py-3 rounded-xl">
+                      <div className="text-center text-slate-500 font-bold text-sm bg-slate-100 py-3 rounded-xl whitespace-nowrap inline-block shrink-0">
                         Survei Terkirim <CheckCircle2 className="w-4 h-4 ml-1" /></div>
                     )}
                   </div>

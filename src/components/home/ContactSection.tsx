@@ -114,7 +114,7 @@ export default function ContactSection() {
             <div className="pt-6 mt-6 border-t border-slate-100">
               <Link
                 href="/kontak"
-                className="h-10 px-4 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-800 font-extrabold text-xs border border-slate-200 transition-all inline-flex items-center justify-center gap-2 w-full"
+                className="h-10 px-4 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-800 font-extrabold text-xs border border-slate-200 transition-all inline-flex items-center justify-center gap-2 w-full whitespace-nowrap inline-block shrink-0"
               >
                 <span>Buka Halaman Kontak Lengkap</span>
                 <ArrowRight className="w-4 h-4" />

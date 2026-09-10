@@ -721,7 +721,7 @@ export default function ExaminerDashboard() {
               <div className="flex flex-wrap gap-2 w-full lg:w-auto">
                 <Button
                   onClick={handleExportExcel}
-                  className="btn-secondary flex items-center gap-2 bg-emerald-50 text-[#550000] border-emerald-100 hover:bg-emerald-100 rounded-3xl font-bold py-2"
+                  className="btn-secondary flex items-center gap-2 bg-emerald-50 text-[#550000] border-emerald-100 hover:bg-emerald-100 rounded-3xl font-bold py-2 whitespace-nowrap inline-block shrink-0"
                 >
                   <Download className="w-4 h-4" /> Export Excel
                 </Button>
@@ -743,7 +743,7 @@ export default function ExaminerDashboard() {
                       Swal.fire("Error", "Gagal menghitung ulang", "error");
                     }
                   }}
-                  className="btn-secondary flex items-center gap-2 bg-purple-50 text-purple-700 border-purple-100 hover:bg-purple-100 rounded-3xl font-bold py-2"
+                  className="btn-secondary flex items-center gap-2 bg-purple-50 text-purple-700 border-purple-100 hover:bg-purple-100 rounded-3xl font-bold py-2 whitespace-nowrap inline-block shrink-0"
                 >
                   <RefreshCcw className="w-4 h-4" /> Hitung Ulang
                 </Button>
@@ -893,7 +893,7 @@ export default function ExaminerDashboard() {
 
                             if (isSkipped) {
                               return (
-                                <span className="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-1 rounded shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-amber-200">
+                                <span className="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-1 rounded shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-amber-200 whitespace-nowrap inline-block shrink-0">
                                   SKIP
                                 </span>
                               );
@@ -932,7 +932,7 @@ export default function ExaminerDashboard() {
 
                             if (isSkipped) {
                               return (
-                                <span className="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-1 rounded shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-amber-200">
+                                <span className="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-1 rounded shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-amber-200 whitespace-nowrap inline-block shrink-0">
                                   SKIP
                                 </span>
                               );
@@ -971,7 +971,7 @@ export default function ExaminerDashboard() {
 
                             if (isSkipped) {
                               return (
-                                <span className="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-1 rounded shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-amber-200">
+                                <span className="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-1 rounded shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-amber-200 whitespace-nowrap inline-block shrink-0">
                                   SKIP
                                 </span>
                               );
@@ -1012,7 +1012,7 @@ export default function ExaminerDashboard() {
 
                             if (isWsSkipped && isWoSkipped) {
                               return (
-                                <span className="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-1 rounded shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-amber-200">
+                                <span className="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-1 rounded shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-amber-200 whitespace-nowrap inline-block shrink-0">
                                   SKIP
                                 </span>
                               );
@@ -1023,14 +1023,14 @@ export default function ExaminerDashboard() {
 
                             if (isWsSkipped && wo === 0) {
                               return (
-                                <span className="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-1 rounded shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-amber-200">
+                                <span className="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-1 rounded shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-amber-200 whitespace-nowrap inline-block shrink-0">
                                   S: SKIP
                                 </span>
                               );
                             }
                             if (isWoSkipped && ws === 0) {
                               return (
-                                <span className="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-1 rounded shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-amber-200">
+                                <span className="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-1 rounded shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-amber-200 whitespace-nowrap inline-block shrink-0">
                                   O: SKIP
                                 </span>
                               );
@@ -1071,7 +1071,7 @@ export default function ExaminerDashboard() {
 
                             if (isSkipped) {
                               return (
-                                <span className="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-1 rounded shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-amber-200">
+                                <span className="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-1 rounded shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-amber-200 whitespace-nowrap inline-block shrink-0">
                                   SKIP
                                 </span>
                               );

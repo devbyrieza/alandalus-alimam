@@ -45,7 +45,7 @@ export default function BukuTamuKiosk() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans flex flex-col items-center justify-center relative overflow-hidden">
       {/* Background Decor */}
-      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-primary-100 rounded-full blur-3xl opacity-50 z-0 pointer-events-none"></div>
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-primary-100 rounded-full blur-3xl opacity-50 z-0 pointer-events-none whitespace-nowrap inline-block shrink-0"></div>
       <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-secondary-100 rounded-full blur-3xl opacity-40 z-0 pointer-events-none"></div>
 
       <div className="relative z-10 w-full max-w-4xl p-6">
@@ -116,7 +116,7 @@ export default function BukuTamuKiosk() {
                 <h2 className="text-2xl font-black text-slate-800">Lengkapi Data Diri</h2>
                 <p className="text-slate-500 mt-1">Kategori: <span className="font-bold text-primary-600">{kategori?.replace("_", " ")}</span></p>
               </div>
-              <button onClick={() => setStep(1)} className="px-4 py-2 text-sm font-bold text-slate-500 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors">
+              <button onClick={() => setStep(1)} className="px-4 py-2 text-sm font-bold text-slate-500 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors whitespace-nowrap inline-block shrink-0">
                 Ganti Kategori
               </button>
             </div>
@@ -170,7 +170,7 @@ export default function BukuTamuKiosk() {
         {/* STEP 3: SUCCESS SCREEN */}
         {step === 3 && (
           <div className="animate-in zoom-in-95 duration-500 flex flex-col items-center justify-center min-h-[60vh] text-center">
-            <div className="w-32 h-32 bg-emerald-100 rounded-full flex items-center justify-center mb-8 shadow-2xl shadow-emerald-500/20">
+            <div className="w-32 h-32 bg-emerald-100 rounded-full flex items-center justify-center mb-8 shadow-2xl shadow-emerald-500/20 whitespace-nowrap inline-block shrink-0">
               <CheckCircle2 className="w-16 h-16 text-emerald-500" />
             </div>
             <h2 className="text-4xl font-black text-slate-800 mb-4">Terima Kasih, {nama.split(' ')[0]}!</h2>

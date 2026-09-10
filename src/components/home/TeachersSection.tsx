@@ -122,7 +122,7 @@ export default function TeachersSection() {
                       <teacher.icon className="w-6 h-6" />
                     </div>
                   )}
-                  <span className="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-slate-100 text-slate-700">
+                  <span className="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-slate-100 text-slate-700 whitespace-nowrap inline-block shrink-0">
                     {teacher.badge}
                   </span>
                 </div>
