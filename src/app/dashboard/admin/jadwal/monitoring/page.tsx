@@ -256,7 +256,7 @@ export default function MonitoringJadwalPage() {
                     animate={{ opacity: 1, height: 'auto' }}
                     className="bg-rose-50 border border-rose-200 rounded-2xl p-5 flex items-start gap-4 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 shadow-rose-100"
                 >
-                    <div className="w-10 h-10 bg-rose-100 rounded-3xl flex items-center justify-center text-rose-600 shrink-0 whitespace-nowrap inline-block shrink-0">
+                    <div className="w-10 h-10 bg-rose-100 rounded-3xl flex items-center justify-center text-rose-600 shrink-0 whitespace-nowrap shrink-0">
                         <XCircle className="w-6 h-6" />
                     </div>
                     <div className="flex-1">
@@ -310,7 +310,7 @@ export default function MonitoringJadwalPage() {
 
                     {/* View Switcher & Actions */}
                     <div className="flex items-center gap-2">
-                        <div className="flex-1 md:flex-none flex bg-slate-100 p-1.5 rounded-2xl h-12 min-w-fit whitespace-nowrap inline-block shrink-0">
+                        <div className="flex-1 md:flex-none flex bg-slate-100 p-1.5 rounded-2xl h-12 min-w-fit whitespace-nowrap shrink-0">
                             {[
                                 { id: "flat", label: "List" },
                                 { id: "grouped", label: "Ustadz" },

@@ -414,7 +414,7 @@ export default function LoginPage() {
           </div>
           {/* Tab Switcher (Calon Santri vs Portal Staf) */}
           {!roleSelectionData && (
-            <div className="bg-slate-100 p-1.5 rounded-2xl flex relative border border-slate-200/80 whitespace-nowrap inline-block shrink-0">
+            <div className="bg-slate-100 p-1.5 rounded-2xl flex relative border border-slate-200/80 w-full">
               <motion.div
                 layoutId="auth-tab"
                 transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
@@ -520,7 +520,7 @@ export default function LoginPage() {
                           key={role}
                           onClick={() => handleSelectRole(role)}
                           disabled={selectingRole}
-                          className="w-full p-4 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-slate-100 hover:border-slate-300 text-left flex items-center gap-3.5 transition-all disabled:opacity-60 whitespace-nowrap inline-block shrink-0"
+                          className="w-full p-4 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-slate-100 hover:border-slate-300 text-left flex items-center gap-3.5 transition-all disabled:opacity-60 whitespace-nowrap shrink-0"
                         >
                           <div className="w-9 h-9 rounded-xl bg-white border border-slate-200 shadow-2xs flex items-center justify-center text-[#550000] shrink-0">
                             <IconComp className="w-4 h-4" />

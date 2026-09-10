@@ -95,7 +95,7 @@ export default function SPMBInfoPage() {
                 </Link>
                 <Link
                   href="/login"
-                  className="h-11 px-6 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-800 font-extrabold text-xs border border-slate-200 transition-all inline-flex items-center whitespace-nowrap inline-block shrink-0"
+                  className="h-11 px-6 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-800 font-extrabold text-xs border border-slate-200 transition-all inline-flex items-center whitespace-nowrap shrink-0"
                 >
                   <span>Sudah Punya Akun? Masuk</span>
                 </Link>

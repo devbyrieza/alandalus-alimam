@@ -48,7 +48,7 @@ export default function FilterLanjutanPage() {
           </button>
           <button 
             onClick={() => Swal.fire('Info', 'Fitur Export CSV akan segera hadir', 'info')}
-            className="flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-xl hover:bg-emerald-100 transition shadow-sm whitespace-nowrap inline-block shrink-0"
+            className="flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-xl hover:bg-emerald-100 transition shadow-sm whitespace-nowrap shrink-0"
           >
             <Download className="w-4 h-4" /> Export CSV
           </button>

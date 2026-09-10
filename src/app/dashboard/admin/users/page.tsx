@@ -319,7 +319,7 @@ export default function UserManagementPage() {
                   >
                     <td className="p-5 md:p-8">
                       <div className="flex items-center gap-5">
-                        <div className="w-12 h-12 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-700 font-black text-xs border-2 border-white shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 whitespace-nowrap inline-block shrink-0">
+                        <div className="w-12 h-12 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-700 font-black text-xs border-2 border-white shadow-2xl shadow-primary/30 shadow-primary/20 shadow-primary/10 whitespace-nowrap shrink-0">
                           {user.full_name.charAt(0)}
                         </div>
                         <div>

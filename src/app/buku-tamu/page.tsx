@@ -170,7 +170,7 @@ export default function BukuTamuKiosk() {
         {/* STEP 3: SUCCESS SCREEN */}
         {step === 3 && (
           <div className="animate-in zoom-in-95 duration-500 flex flex-col items-center justify-center min-h-[60vh] text-center">
-            <div className="w-32 h-32 bg-emerald-100 rounded-full flex items-center justify-center mb-8 shadow-2xl shadow-emerald-500/20 whitespace-nowrap inline-block shrink-0">
+            <div className="w-32 h-32 bg-emerald-100 rounded-full flex items-center justify-center mb-8 shadow-2xl shadow-emerald-500/20 whitespace-nowrap shrink-0">
               <CheckCircle2 className="w-16 h-16 text-emerald-500" />
             </div>
             <h2 className="text-4xl font-black text-slate-800 mb-4">Terima Kasih, {nama.split(' ')[0]}!</h2>

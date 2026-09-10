@@ -1388,7 +1388,7 @@ export default function JadwalPengujiPage() {
                             setIsSelectMode(true);
                             setBulkActionType("edit");
                           }}
-                          className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-4 bg-stone-50 hover:bg-stone-100 text-stone-600 rounded-2xl font-black border border-stone-200 transition-all text-xs uppercase tracking-widest active:scale-95 whitespace-nowrap inline-block shrink-0"
+                          className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-4 bg-stone-50 hover:bg-stone-100 text-stone-600 rounded-2xl font-black border border-stone-200 transition-all text-xs uppercase tracking-widest active:scale-95 whitespace-nowrap shrink-0"
                         >
                           <Layers className="w-4 h-4" /> Edit Massal
                         </button>
@@ -1405,7 +1405,7 @@ export default function JadwalPengujiPage() {
                     )}
                     <button
                       onClick={() => setIsBulkModalOpen(true)}
-                      className="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-4 bg-primary-50 hover:bg-primary-100 text-primary-700 rounded-2xl font-black border border-primary-100 transition-all text-xs uppercase tracking-widest active:scale-95 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 whitespace-nowrap inline-block shrink-0"
+                      className="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-4 bg-primary-50 hover:bg-primary-100 text-primary-700 rounded-2xl font-black border border-primary-100 transition-all text-xs uppercase tracking-widest active:scale-95 shadow-2xl shadow-primary/30 shadow-primary/20 shadow-primary/10 whitespace-nowrap shrink-0"
                     >
                       <Plus className="w-5 h-5" /> Buat Massal
                     </button>
@@ -1420,7 +1420,7 @@ export default function JadwalPengujiPage() {
                   <div className="flex items-center gap-3">
                     <button
                       onClick={toggleSelectAll}
-                      className="flex items-center gap-2 px-4 py-3 bg-primary-50 text-primary-700 rounded-3xl font-black text-xs border border-primary-100 hover:bg-primary-100 transition-all whitespace-nowrap inline-block shrink-0"
+                      className="flex items-center gap-2 px-4 py-3 bg-primary-50 text-primary-700 rounded-3xl font-black text-xs border border-primary-100 hover:bg-primary-100 transition-all whitespace-nowrap shrink-0"
                     >
                       {selectedSlotIds.size === slots.length ? (
                         <CheckSquare className="w-4 h-4" />
@@ -2141,7 +2141,7 @@ export default function JadwalPengujiPage() {
                 </div>
 
                 <div className="bg-emerald-50 rounded-2xl p-6 sm:p-8 border border-emerald-100 flex items-start gap-3">
-                  <div className="w-8 h-8 bg-emerald-100 rounded-3xl flex items-center justify-center shrink-0 text-[#550000] whitespace-nowrap inline-block shrink-0">
+                  <div className="w-8 h-8 bg-emerald-100 rounded-3xl flex items-center justify-center shrink-0 text-[#550000] whitespace-nowrap shrink-0">
                     <Users className="w-4 h-4" />
                   </div>
                   <div>

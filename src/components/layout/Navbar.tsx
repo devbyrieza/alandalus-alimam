@@ -226,7 +226,7 @@ export default function Navbar() {
                               
                               <Link href="/program#mts" className="group/item p-3.5 rounded-2xl hover:bg-primary-50 transition-colors border border-transparent hover:border-primary-100">
                                 <div className="flex items-center gap-3 mb-1.5">
-                                  <div className="w-9 h-9 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center group-hover/item:scale-110 transition-transform whitespace-nowrap inline-block shrink-0">
+                                  <div className="w-9 h-9 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center group-hover/item:scale-110 transition-transform whitespace-nowrap shrink-0">
                                     <BookOpen className="w-4 h-4" />
                                   </div>
                                   <h4 className="font-bold text-sm text-ink-900 group-hover/item:text-primary-700">MTs (Setara SMP)</h4>

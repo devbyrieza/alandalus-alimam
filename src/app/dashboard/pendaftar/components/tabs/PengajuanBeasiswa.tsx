@@ -435,7 +435,7 @@ export default function PengajuanBeasiswaTab() {
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 md:p-8 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-3xl mx-auto">
       <div className="text-center mb-8">
-        <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4 whitespace-nowrap inline-block shrink-0">
+        <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4 whitespace-nowrap shrink-0">
           <FileText className="w-8 h-8 text-primary-600" />
         </div>
         <h2 className="text-2xl font-black text-ink-950 mb-2">

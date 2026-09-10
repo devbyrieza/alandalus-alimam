@@ -81,7 +81,7 @@ export default function DashboardEksekutifPage() {
         </div>
 
         <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center text-[#550000] shrink-0 whitespace-nowrap inline-block shrink-0">
+          <div className="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center text-[#550000] shrink-0 whitespace-nowrap shrink-0">
             <Users className="w-7 h-7" />
           </div>
           <div>
