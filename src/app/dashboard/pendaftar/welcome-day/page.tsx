@@ -782,7 +782,7 @@ export default function WelcomeDayPage() {
 
       
       {/* ─── INFOGRAFIS & PANDUAN VISUAL ─── */}
-      <div className="bg-white rounded-3xl border border-ink-100 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 overflow-hidden mb-6">
+      <div className="bg-white rounded-3xl border border-ink-100 shadow-sm  shadow-primary/20  shadow-primary/10 overflow-hidden mb-6">
         <div className="px-6 py-4 border-b border-emerald-100 bg-emerald-50 flex items-center gap-3">
           <div className="w-9 h-9 bg-emerald-100 rounded-3xl flex items-center justify-center whitespace-nowrap shrink-0">
             <Calendar className="w-5 h-5 text-[#550000]" />
@@ -796,7 +796,7 @@ export default function WelcomeDayPage() {
           {/* Alur Kedatangan */}
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-6 h-6 rounded-full bg-emerald-100 text-[#550000] flex items-center justify-center font-black text-xs shadow-2xl shadow-primary/30 shadow-primary/20 shadow-primary/10 whitespace-nowrap shrink-0">
+              <div className="w-6 h-6 rounded-full bg-emerald-100 text-[#550000] flex items-center justify-center font-black text-xs shadow-md whitespace-nowrap shrink-0">
                 1
               </div>
               <h3 className="font-black text-ink-900 text-sm">Alur Kedatangan</h3>
@@ -828,7 +828,7 @@ export default function WelcomeDayPage() {
           {/* Rundown Acara */}
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-6 h-6 rounded-full bg-emerald-100 text-[#550000] flex items-center justify-center font-black text-xs shadow-2xl shadow-primary/30 shadow-primary/20 shadow-primary/10 whitespace-nowrap shrink-0">
+              <div className="w-6 h-6 rounded-full bg-emerald-100 text-[#550000] flex items-center justify-center font-black text-xs shadow-md whitespace-nowrap shrink-0">
                 2
               </div>
               <h3 className="font-black text-ink-900 text-sm">Rundown Acara</h3>
@@ -848,7 +848,7 @@ export default function WelcomeDayPage() {
         </div>
       </div>
       {/* ─── JADWAL ACARA ─── */}
-      <div className="bg-white rounded-3xl border border-ink-100 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 overflow-hidden">
+      <div className="bg-white rounded-3xl border border-ink-100 shadow-sm  shadow-primary/20  shadow-primary/10 overflow-hidden">
         <div className="px-6 py-4 border-b border-ink-100 bg-primary-50 flex items-center gap-3">
           <div className="w-9 h-9 bg-primary-100 rounded-3xl flex items-center justify-center whitespace-nowrap shrink-0">
             <Calendar className="w-5 h-5 text-primary-700" />
@@ -896,7 +896,7 @@ export default function WelcomeDayPage() {
       </div>
 
       {/* ─── BERKAS PERSYARATAN ─── */}
-      <div className="bg-white rounded-3xl border border-ink-100 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 overflow-hidden mt-6">
+      <div className="bg-white rounded-3xl border border-ink-100 shadow-sm  shadow-primary/20  shadow-primary/10 overflow-hidden mt-6">
         <div className="px-6 py-4 border-b border-ink-100 bg-blue-50 flex items-center gap-3">
           <div className="w-9 h-9 bg-blue-100 rounded-3xl flex items-center justify-center whitespace-nowrap shrink-0">
             <FileCheck className="w-5 h-5 text-[#550000]" />
@@ -924,7 +924,7 @@ export default function WelcomeDayPage() {
       </div>
 
       {/* ─── BERKAS PERSYARATAN ─── */}
-      <div className="bg-white rounded-3xl border border-ink-100 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 overflow-hidden mt-6">
+      <div className="bg-white rounded-3xl border border-ink-100 shadow-sm  shadow-primary/20  shadow-primary/10 overflow-hidden mt-6">
         <div className="px-6 py-4 border-b border-ink-100 bg-blue-50 flex items-center gap-3">
           <div className="w-9 h-9 bg-blue-100 rounded-3xl flex items-center justify-center whitespace-nowrap shrink-0">
             <FileCheck className="w-5 h-5 text-[#550000]" />
@@ -952,7 +952,7 @@ export default function WelcomeDayPage() {
       </div>
 
       {/* ─── CHECKLIST BARANG BAWAAN ─── */}
-      <div className="bg-white rounded-3xl border border-ink-100 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 overflow-hidden mt-6">
+      <div className="bg-white rounded-3xl border border-ink-100 shadow-sm  shadow-primary/20  shadow-primary/10 overflow-hidden mt-6">
         <div className="px-6 py-5 border-b border-ink-100 bg-emerald-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 bg-emerald-100 rounded-3xl flex items-center justify-center whitespace-nowrap shrink-0">
@@ -1034,7 +1034,7 @@ export default function WelcomeDayPage() {
       </div>
 
       {/* ─── FAQ ─── */}
-      <div className="bg-white rounded-3xl border border-ink-100 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 overflow-hidden">
+      <div className="bg-white rounded-3xl border border-ink-100 shadow-sm  shadow-primary/20  shadow-primary/10 overflow-hidden">
         <div className="px-6 py-4 border-b border-ink-100 bg-blue-50 flex items-center gap-3">
           <div className="w-9 h-9 bg-blue-100 rounded-3xl flex items-center justify-center whitespace-nowrap shrink-0">
             <MessageCircle className="w-5 h-5 text-[#550000]" />
