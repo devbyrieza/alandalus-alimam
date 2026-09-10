@@ -423,7 +423,7 @@ export default function DaftarPindahanPage() {
                   ].map((option) => {
                     const isPutra = formData.jenis_kelamin === "L";
                     const isPutri = formData.jenis_kelamin === "P";
-                    const isClosed = true;
+                    const isClosed = isPutri;
                     const closedLabel = "Pendaftaran Pindahan Belum Dibuka";
 
                     return (
