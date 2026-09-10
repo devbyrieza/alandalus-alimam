@@ -56,16 +56,16 @@ export default function HeroSection() {
   return (
     <section
       id="beranda"
-      className="relative w-full overflow-hidden bg-gradient-to-b from-[#FDFCF9] via-[#F8FAFC] to-white pt-24 sm:pt-28 lg:pt-32 pb-16 lg:pb-24"
+      className="relative w-full overflow-hidden bg-gradient-to-b from-[#FDFCF9] via-[#F8FAFC] to-white pt-6 sm:pt-8 lg:pt-3 xl:pt-6 pb-12 sm:pb-16 lg:pb-20"
     >
       {/* Background Micro Grid */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utb3BhY2l0eT0iMC4wMiIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTAgNjBoNjBNNjAgMGwwIDYwIi8+PC9nPjwvc3ZnPg==')] opacity-70 pointer-events-none" />
 
       <Container className="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
           
           {/* ═════════ LEFT COLUMN: OMI STRUCTURE + AL-IMAM PALETTE (#550000 & #ddc192) ═════════ */}
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div className="lg:col-span-7 space-y-4 sm:space-y-5 lg:space-y-4 xl:space-y-6 text-center lg:text-left">
             
             {/* Eyebrow Pill (Al-Imam Maroon & Krem Emas) */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#ddc192]/20 border border-[#ddc192]/50 shadow-xs">
@@ -76,7 +76,7 @@ export default function HeroSection() {
             </div>
 
             {/* Two-Tone Master Headline (Al-Imam Maroon #550000) */}
-            <h1 className="text-3xl sm:text-5xl lg:text-[3.5rem] font-extrabold text-slate-900 tracking-tight leading-[1.12]">
+            <h1 className="text-3xl sm:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] 2xl:text-[3.5rem] font-extrabold text-slate-900 tracking-tight leading-[1.12]">
               Kaderisasi Ummat <br />
               <span className="text-[#550000]">
                 Hanif, Kontributif, & Adaptif
@@ -84,7 +84,7 @@ export default function HeroSection() {
             </h1>
 
             {/* Description */}
-            <p className="text-slate-600 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
+            <p className="text-slate-600 text-sm sm:text-base lg:text-[0.95rem] xl:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
               Bukan sekadar tempat belajar — sebuah ekosistem kaderisasi ummat yang hanif, kontributif, dan adaptif,{" "}
               <strong className="font-semibold text-slate-900">
                 mendidik dengan keteladanan tanpa luka pengasuhan
@@ -102,11 +102,11 @@ export default function HeroSection() {
             </div>
 
             {/* 3 Action Buttons (Strict Al-Imam Palette) */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-2 w-full">
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2.5 sm:gap-3 pt-1 sm:pt-1.5 w-full">
               {session ? (
                 <a
                   href="https://spmb.pesantren-alimam.com/dashboard"
-                  className="h-12 w-full sm:w-auto px-6 rounded-xl bg-[#550000] hover:bg-[#400000] text-white font-extrabold text-sm shadow-md shadow-[#550000]/25 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2"
+                  className="h-11 sm:h-12 w-full sm:w-auto px-6 rounded-xl bg-[#550000] hover:bg-[#400000] text-white font-extrabold text-sm shadow-md shadow-[#550000]/25 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2"
                 >
                   <span>Buka Dashboard</span>
                   <ArrowRight className="w-4 h-4" />
@@ -114,7 +114,7 @@ export default function HeroSection() {
               ) : (
                 <a
                   href="https://spmb.pesantren-alimam.com/daftar"
-                  className="h-12 w-full sm:w-auto px-6 rounded-xl bg-[#550000] hover:bg-[#400000] text-white font-extrabold text-sm shadow-md shadow-[#550000]/25 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2"
+                  className="h-11 sm:h-12 w-full sm:w-auto px-6 rounded-xl bg-[#550000] hover:bg-[#400000] text-white font-extrabold text-sm shadow-md shadow-[#550000]/25 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2"
                 >
                   <span>Daftar SPMB 2027</span>
                   <ArrowRight className="w-4 h-4" />
@@ -123,7 +123,7 @@ export default function HeroSection() {
 
               <Link
                 href="/program"
-                className="h-12 w-full sm:w-auto px-6 rounded-xl bg-white text-slate-800 font-extrabold text-sm border border-slate-300 shadow-sm hover:border-[#ddc192] hover:bg-[#ddc192]/10 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center"
+                className="h-11 sm:h-12 w-full sm:w-auto px-6 rounded-xl bg-white text-slate-800 font-extrabold text-sm border border-slate-300 shadow-sm hover:border-[#ddc192] hover:bg-[#ddc192]/10 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center"
               >
                 <span>Lihat Program</span>
               </Link>
@@ -131,7 +131,7 @@ export default function HeroSection() {
               <a
                 href="/documents/Brosur-SPMB-Al-Imam-2027-2028.pdf"
                 download="Brosur-SPMB-Pesantren-Al-Imam-2027-2028.pdf"
-                className="h-12 w-full sm:w-auto px-6 rounded-xl bg-[#ddc192] hover:bg-[#cfb280] text-[#550000] font-extrabold text-sm shadow-md shadow-[#ddc192]/30 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2 border border-[#ddc192]"
+                className="h-11 sm:h-12 w-full sm:w-auto px-6 rounded-xl bg-[#ddc192] hover:bg-[#cfb280] text-[#550000] font-extrabold text-sm shadow-md shadow-[#ddc192]/30 hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2 border border-[#ddc192]"
               >
                 <Download className="w-4 h-4" />
                 <span>Unduh Brosur</span>
@@ -139,9 +139,9 @@ export default function HeroSection() {
             </div>
 
             {/* Live Countdown Card (Al-Imam Maroon Numbers) */}
-            <div className="pt-3 max-w-lg mx-auto lg:mx-0">
-              <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-                <div className="flex items-center justify-between text-xs font-extrabold text-slate-600 uppercase tracking-wider mb-3">
+            <div className="pt-2 sm:pt-2.5 max-w-lg mx-auto lg:mx-0">
+              <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm">
+                <div className="flex items-center justify-between text-xs font-extrabold text-slate-600 uppercase tracking-wider mb-2.5 sm:mb-3">
                   <span>Pendaftaran Dibuka: 5 Sep - 28 Des 2026</span>
                   <span className="text-[#550000] font-bold flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-[#550000]" />
@@ -149,26 +149,26 @@ export default function HeroSection() {
                   </span>
                 </div>
                 <div className="grid grid-cols-4 gap-2.5 sm:gap-3 text-center">
-                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-3">
-                    <div className="text-2xl md:text-3xl font-extrabold text-[#550000] tabular-nums">
+                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 sm:p-3">
+                    <div className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#550000] tabular-nums">
                       {pad(countdown.days)}
                     </div>
                     <div className="text-[10px] uppercase font-bold text-slate-500 mt-1">Hari</div>
                   </div>
-                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-3">
-                    <div className="text-2xl md:text-3xl font-extrabold text-[#550000] tabular-nums">
+                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 sm:p-3">
+                    <div className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#550000] tabular-nums">
                       {pad(countdown.hours)}
                     </div>
                     <div className="text-[10px] uppercase font-bold text-slate-500 mt-1">Jam</div>
                   </div>
-                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-3">
-                    <div className="text-2xl md:text-3xl font-extrabold text-[#550000] tabular-nums">
+                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 sm:p-3">
+                    <div className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#550000] tabular-nums">
                       {pad(countdown.minutes)}
                     </div>
                     <div className="text-[10px] uppercase font-bold text-slate-500 mt-1">Menit</div>
                   </div>
-                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-3">
-                    <div className="text-2xl md:text-3xl font-extrabold text-[#550000] tabular-nums">
+                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 sm:p-3">
+                    <div className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#550000] tabular-nums">
                       {pad(countdown.seconds)}
                     </div>
                     <div className="text-[10px] uppercase font-bold text-slate-500 mt-1">Detik</div>
@@ -181,7 +181,7 @@ export default function HeroSection() {
 
           {/* ═════════ RIGHT COLUMN: REAL PHOTOGRAPHIC FRAME + AL-IMAM FLOATING BADGES ═════════ */}
           <div className="lg:col-span-5 relative">
-            <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white group bg-white aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
+            <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white group bg-white aspect-[4/5] sm:aspect-square lg:aspect-[4/5] max-h-[500px] xl:max-h-[560px]">
               {/* Real Hero Image */}
               <Image
                 src="/images/hero.jpg"
@@ -221,7 +221,7 @@ export default function HeroSection() {
         </div>
 
         {/* ═════════ 3 EXECUTIVE FEATURE CARDS (AL-IMAM PALETTE) ═════════ */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 mt-12 lg:mt-16">
           
           <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-[#ddc192] transition-all">
             <div className="w-12 h-12 rounded-xl bg-[#ddc192]/20 text-[#550000] flex items-center justify-center font-bold text-xl mb-4 border border-[#ddc192]/40">
