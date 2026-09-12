@@ -325,7 +325,7 @@ export default function LoginPage() {
         </Link>
         <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/95 border border-slate-200/90 shadow-2xs text-xs font-bold text-slate-700">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>Portal Resmi SPMB 2027</span>
+          <span>Portal Resmi SPMB</span>
         </div>
       </div>
 
@@ -406,7 +406,7 @@ export default function LoginPage() {
           
           <div>
             <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
-              Masuk Portal SPMB 2027
+              Masuk Portal SPMB
             </h3>
             <p className="text-xs sm:text-sm text-slate-500 font-normal mt-1 leading-relaxed">
               Silakan masukkan NIK / No. Pendaftaran calon santri atau kredensial akun staf Anda.
