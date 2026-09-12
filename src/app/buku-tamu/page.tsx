@@ -45,7 +45,7 @@ export default function BukuTamuKiosk() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans flex flex-col items-center justify-center relative overflow-hidden">
       {/* Background Decor */}
-      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-primary-100 rounded-full blur-3xl opacity-50 z-0 pointer-events-none whitespace-nowrap inline-block shrink-0"></div>
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-primary-100 rounded-full blur-3xl opacity-50 z-0 pointer-events-none "></div>
       <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-secondary-100 rounded-full blur-3xl opacity-40 z-0 pointer-events-none"></div>
 
       <div className="relative z-10 w-full max-w-4xl p-6">
