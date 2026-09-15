@@ -327,7 +327,9 @@ export async function POST(request: Request) {
       }
 
 
-      return NextResponse.json({ success: true, data: result.jadwal });
+    }
+
+    return NextResponse.json({ success: true, data: result.jadwal });
   } catch (error: any) {
     console.error("POST pendaftar/jadwal error:", error);
     return NextResponse.json(
