@@ -56,6 +56,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 # Copy prisma folder & package.json untuk migrasi database
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/scripts ./scripts
 COPY --from=builder /app/migration ./migration
 
 # Buat direktori penyimpanan lokal dan atur CHOWN agar user nextjs bisa menulis file
@@ -69,4 +70,5 @@ ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
 CMD ["sh", "-c", "node scripts/push-db.js && node server.js"]
+
 
