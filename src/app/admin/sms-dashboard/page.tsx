@@ -8,7 +8,7 @@ import {
   User,
   Key,
   ClipboardList,
-  CheckCircle2,
+  CheckCircle2, MessageCircle,
   MessageSquare,
   BarChart3,
   Calendar,
@@ -274,3 +274,5 @@ Hubungi 0851-1152-4441 jika ada masalah.`}
     </div>
   );
 }
+
+

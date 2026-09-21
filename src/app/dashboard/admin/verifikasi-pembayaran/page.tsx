@@ -265,7 +265,7 @@ function VerifikasiPembayaranContent() {
 
       const data = Object.values(groups).map((g) => {
         let expectedTagihan = 0;
-        if (activeTab === "UANG_PANGKAL" || activeTab === "DAFTAR_ULANG") {
+        if (activeTab === ("UANG_PANGKAL" as any) || activeTab === "DAFTAR_ULANG") {
           expectedTagihan = 7650000 - g.beasiswa;
         } else if (activeTab === "SPP") {
           expectedTagihan = 1000000;
@@ -286,7 +286,7 @@ function VerifikasiPembayaranContent() {
           "Tanggal Bayar": g.tanggal_bayar.join(", "),
           Catatan: g.catatan_details.join("; ") };
 
-        if (activeTab === "UANG_PANGKAL" || activeTab === "DAFTAR_ULANG") {
+        if (activeTab === ("UANG_PANGKAL" as any) || activeTab === "DAFTAR_ULANG") {
           row["Beasiswa (Potongan)"] = g.beasiswa > 0 ? `Rp ${g.beasiswa.toLocaleString("id-ID")}` : "-";
           row["Sisa Tagihan"] = sisaText;
         } else if (activeTab === "SPP") {

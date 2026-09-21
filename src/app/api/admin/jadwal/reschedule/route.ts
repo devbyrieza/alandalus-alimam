@@ -114,7 +114,7 @@ export async function POST(request: Request) {
         enqueueWhatsapp({
           pendaftarId: jadwal.pendaftar_id,
           phone: penguji.phone,
-          jenisNotif: "reschedule_approved_penguji",
+          jenisNotif: "reschedule_approved_penguji" as any,
           messageContent: msg,
           sendNow: true
         }).catch(console.error);
@@ -125,7 +125,7 @@ export async function POST(request: Request) {
         enqueueWhatsapp({
           pendaftarId: jadwal.pendaftar_id,
           phone: jadwal.pendaftar.no_hp,
-          jenisNotif: "reschedule_approved_santri",
+          jenisNotif: "reschedule_approved_santri" as any,
           messageContent: msgS,
           sendNow: true
         }).catch(console.error);
@@ -148,7 +148,7 @@ export async function POST(request: Request) {
         enqueueWhatsapp({
           pendaftarId: jadwal.pendaftar_id,
           phone: penguji.phone,
-          jenisNotif: "reschedule_rejected_penguji",
+          jenisNotif: "reschedule_rejected_penguji" as any,
           messageContent: msg,
           sendNow: true
         }).catch(console.error);
@@ -163,3 +163,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+

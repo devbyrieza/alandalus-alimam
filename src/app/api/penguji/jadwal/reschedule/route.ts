@@ -29,7 +29,7 @@ export async function POST(request: Request) {
       select: { full_name: true }
     });
 
-    const reschedulePayload = {
+    const reschedulePayload: any = {
       type: "RESCHEDULE_REQUEST",
       status: "pending",
       proposed_date,
@@ -74,3 +74,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+

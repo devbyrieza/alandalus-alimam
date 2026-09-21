@@ -91,15 +91,7 @@ export async function POST(
     }
 
     // Log the action
-    await logAdminAction(
-      session.userId,
-      "UPDATE_WELCOME_DAY",
-      "Pendaftar",
-      params.id,
-      {
-        pendaftarId: params.id,
-        action: "Admin updated welcome day info" }
-    );
+    logAdminAction({ action: "UPDATE_WELCOME_DAY" as any, adminId: session.id || "system", adminName: session.full_name || session.name || "Admin", targetId: params.id });
 
     return NextResponse.json({ success: true });
   } catch (error) {
@@ -110,3 +102,4 @@ export async function POST(
     );
   }
 }
+

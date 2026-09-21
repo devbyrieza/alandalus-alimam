@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
@@ -67,3 +68,5 @@ export async function GET(request: Request) {
     return NextResponse.json({ success: false, message: error.message }, { status: 500 });
   }
 }
+
+

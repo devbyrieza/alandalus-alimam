@@ -97,6 +97,7 @@ export default function DaftarPindahanPage() {
     jenjang: jenjangFromUrl,
     kelas_masuk: "",
     asal_institusi: "",
+    nomor_induk_lama: "",
     nisn: "",
     npsn: "",
     catatan_pindahan: "" });
@@ -378,6 +379,7 @@ export default function DaftarPindahanPage() {
                             jenjang: "",
                             kelas_masuk: "",
                             asal_institusi: "",
+    nomor_induk_lama: "",
                             nisn: "",
     npsn: "",
                             catatan_pindahan: "" });
@@ -813,3 +815,4 @@ export default function DaftarPindahanPage() {
     </main>
   );
 }
+

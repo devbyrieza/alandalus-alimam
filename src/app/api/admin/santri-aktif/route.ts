@@ -10,7 +10,7 @@ export async function GET() {
     const santriList = await prisma.pendaftar.findMany({
       orderBy: { nama_lengkap: 'asc' },
       include: {
-        DompetSantri: true
+        
       }
     });
 

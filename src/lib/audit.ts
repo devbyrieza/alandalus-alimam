@@ -5,8 +5,7 @@
  * Currently logs to server console (standard for Docker/Cloud Logging).
  */
 
-type AuditAction =
-  | "VERIFY_PAYMENT"
+type AuditAction = "UBAH_JENJANG_PENDAFTAR" | "UPDATE_NILAI_MANUAL" | "VERIFY_PAYMENT"
   | "UPLOAD_PAYMENT_PROOF"
   | "VERIFY_DOCUMENT"
   | "ASSIGN_EXAM"
@@ -54,3 +53,5 @@ export function logAdminAction({
 
   // Future expansion: Save to Database table 'audit_logs'
 }
+
+
