@@ -38,7 +38,7 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
+    "node_modules", "scripts",
     "update-photos.ts",
     "check-restored-users.ts",
     "check_prod_users.ts",
@@ -46,3 +46,4 @@
     "test-nilai.ts"
   ]
 }
+
