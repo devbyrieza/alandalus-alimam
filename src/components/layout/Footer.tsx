@@ -43,7 +43,7 @@ export default function Footer() {
       className="relative overflow-hidden pt-20 pb-28 md:pb-14"
       style={{
         background:
-          "linear-gradient(160deg, var(--color-primary-900) 0%, var(--color-primary-950) 60%, #2A0505 100%)",
+          "linear-gradient(160deg, var(--color-primary-900) 0%, var(--color-primary-950) 80%, var(--color-secondary-900, #2A0505) 100%)",
         borderTop: "1px solid rgba(255,255,255,0.05)" }}
     >
       {/* ── Decorative orbs — maroon-warm ── */}

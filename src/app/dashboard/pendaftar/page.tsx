@@ -105,23 +105,23 @@ export default function DashboardPendaftarPage() {
 
 function HeroBanner({ nama, nomorPendaftaran, lastUpdate }: any) {
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#550000] via-[#450000] to-[#300000] text-white p-6 sm:p-8 shadow-lg shadow-[#550000]/15 border border-white/10">
+    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[var(--color-primary-700)] via-[var(--color-primary-800)] to-[var(--color-primary-950)] text-white p-6 sm:p-8 shadow-lg shadow-[var(--color-primary-900)]/20 border border-white/10">
       {/* 3D Geometric Background Shapes (OMI Exact) */}
-      <div className="absolute top-0 right-0 w-80 h-80 bg-[#ddc192]/10 rounded-full blur-3xl pointer-events-none -translate-y-1/3 translate-x-1/3" />
+      <div className="absolute top-0 right-0 w-80 h-80 bg-[var(--color-secondary-400)]/15 rounded-full blur-3xl pointer-events-none -translate-y-1/3 translate-x-1/3" />
       <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-white/5 rounded-3xl rotate-12 pointer-events-none" />
 
       <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="space-y-2 max-w-xl">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#ddc192]">
+            <span className="text-[10px] font-extrabold uppercase tracking-widest text-[var(--color-secondary-300)]">
               SPMB Tahun Ajaran 2027/2028
             </span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight flex items-center gap-2">
             <span>Selamat datang,</span>
-            <span className="text-[#ddc192] underline decoration-[#ddc192]/40 underline-offset-4">
+            <span className="text-[var(--color-secondary-300)] underline decoration-[var(--color-secondary-300)]/40 underline-offset-4">
               {nama.split(" ")[0]}!
             </span>
             <span className="inline-block">👋</span>
@@ -134,7 +134,7 @@ function HeroBanner({ nama, nomorPendaftaran, lastUpdate }: any) {
 
         {/* Registration ID Pill */}
         <div className="w-full md:w-auto bg-black/25 backdrop-blur-md px-5 py-4 rounded-2xl border border-white/15 text-left md:text-right shrink-0">
-          <p className="text-[10px] font-extrabold uppercase text-[#ddc192] tracking-wider mb-0.5">
+          <p className="text-[10px] font-extrabold uppercase text-[var(--color-secondary-300)] tracking-wider mb-0.5">
             Nomor Pendaftaran
           </p>
           <p className="font-mono text-xl sm:text-2xl font-black text-white tracking-tight">
@@ -148,7 +148,7 @@ function HeroBanner({ nama, nomorPendaftaran, lastUpdate }: any) {
 
 function GuidedActionCard({ nextStep }: any) {
   return (
-    <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[2.5rem] border-2 border-primary-100 shadow-2xl shadow-primary/30  shadow-primary/5 overflow-hidden group">
+    <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[2.5rem] border-2 border-[var(--color-primary-100)] shadow-2xl shadow-[var(--color-primary-600)]/10 hover:shadow-[var(--color-primary-600)]/20 transition-shadow duration-300 overflow-hidden group">
       <div className="flex flex-col md:flex-row items-stretch">
         <div className="bg-secondary-400 p-6 sm:p-5 md:p-8 flex flex-col items-center justify-center text-primary-950 min-w-[200px]">
           <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -195,12 +195,12 @@ function StatusGrid({ status, statusLabel, pengumuman }: any) {
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
       
       {/* Card 1: Total / Status Pendaftaran (Maroon Accent - OMI Style) */}
-      <div className="card-tactile p-5 sm:p-6 flex flex-col justify-between border-b-4 relative border-b-[#550000] hover:shadow-md transition-all">
+      <div className="card-tactile p-5 sm:p-6 flex flex-col justify-between border-b-4 relative border-b-[var(--color-primary-600)] hover:-translate-y-1 hover:shadow-md transition-all">
         <div>
           <p className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-2">
             Status Pendaftaran
           </p>
-          <h3 className="text-xl sm:text-2xl font-black text-[#550000] tracking-tight mb-2">
+          <h3 className="text-xl sm:text-2xl font-black text-[var(--color-primary-900)] tracking-tight mb-2">
             {statusLabel}
           </h3>
         </div>
@@ -211,7 +211,7 @@ function StatusGrid({ status, statusLabel, pengumuman }: any) {
       </div>
 
       {/* Card 2: Ujian Seleksi (Green Emerald Accent - OMI Style) */}
-      <div className="card-tactile p-5 sm:p-6 flex flex-col justify-between border-b-4 relative border-b-[#16A34A] hover:shadow-md transition-all">
+      <div className="card-tactile p-5 sm:p-6 flex flex-col justify-between border-b-4 relative border-b-emerald-600 hover:-translate-y-1 hover:shadow-md transition-all">
         <div>
           <p className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-2">
             Ujian & Wawancara Seleksi

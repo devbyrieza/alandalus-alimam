@@ -146,7 +146,7 @@ export default function Navbar() {
     <>
       <header id="main-header" className="fixed w-full top-0 left-0 pt-2 sm:pt-3 z-50 transition-all duration-300">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
-          <div className="bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-2xl px-4 sm:px-6 py-1.5 sm:py-2 shadow-md shadow-slate-900/5 flex items-center justify-between">
+          <div className="bg-white/80 backdrop-blur-xl border border-white/40 rounded-full px-5 py-2 sm:px-6 sm:py-2.5 shadow-2xl shadow-primary/5 transition-all duration-300 flex items-center justify-between">
             {/* ── Logo ── */}
             <Link
               href="/"
@@ -157,7 +157,7 @@ export default function Navbar() {
                 <div
                   className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-[14px] flex items-center justify-center border overflow-hidden transition-all duration-500 group-hover:scale-105 group-hover:-rotate-3 ${
                     isScrolled
-                      ? "bg-white border-[var(--color-primary-100)] shadow-[var(--shadow-premium-sm)]"
+                      ? "bg-white border-primary/20 shadow-xl shadow-primary/10"
                       : "bg-white/90 border-white/70 shadow-[0_2px_12px_rgba(3,105,199,0.12)]"
                   }`}
                 >
@@ -213,8 +213,8 @@ export default function Navbar() {
                         onClick={(e) => handleNavClick(e, link.href)}
                         className={`px-3 xl:px-3.5 py-1.5 text-xs xl:text-sm font-bold rounded-full transition-all duration-300 min-h-[34px] flex items-center gap-1.5 ${
                           isActive(link.href)
-                            ? "bg-[var(--color-primary-800)] text-[var(--color-secondary-100)] shadow-[var(--shadow-primary)]"
-                            : "text-[var(--color-ink-600)] hover:text-[var(--color-primary-800)] hover:bg-[var(--color-primary-50)]"
+                            ? "bg-primary-50 text-primary-900 font-extrabold shadow-sm"
+                            : "text-ink-600 hover:text-primary-900 hover:bg-primary-50/50"
                         }`}
                       >
                         {link.label}
@@ -268,8 +268,8 @@ export default function Navbar() {
                     onClick={(e) => handleNavClick(e, link.href)}
                     className={`px-3 xl:px-3.5 py-1.5 text-xs xl:text-sm font-bold rounded-full transition-all duration-300 min-h-[34px] flex items-center ${
                       isActive(link.href)
-                        ? "bg-[var(--color-primary-800)] text-[var(--color-secondary-100)] shadow-[var(--shadow-primary)]"
-                        : "text-[var(--color-ink-600)] hover:text-[var(--color-primary-800)] hover:bg-[var(--color-primary-50)]"
+                        ? "bg-primary-50 text-primary-900 font-extrabold shadow-sm"
+                        : "text-ink-600 hover:text-primary-900 hover:bg-primary-50/50"
                     }`}
                   >
                     {link.label}
@@ -285,7 +285,7 @@ export default function Navbar() {
                 <div className="flex items-center gap-1.5 xl:gap-2">
                   <a
                     href="https://spmb.pesantren-alimam.com/dashboard"
-                    className="text-xs xl:text-sm font-bold text-[var(--color-ink-700)] hover:text-[var(--color-primary-800)] px-3 py-1.5 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-all flex items-center gap-1.5 shadow-xs"
+                    className="text-xs xl:text-sm font-bold text-primary-950 font-bold px-5 py-2 rounded-full border border-primary/10 bg-white hover:bg-primary-50 hover:border-primary/30 transition-all hover:scale-105 shadow-sm flex items-center gap-1.5 shadow-xs"
                   >
                     <span className="relative flex h-2 w-2 mr-0.5">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -450,7 +450,7 @@ export default function Navbar() {
                         }}
                         className={`px-4 py-4 rounded-2xl text-base font-bold transition-all min-h-[56px] flex items-center justify-between group ${
                           isActive(link.href)
-                            ? "bg-[var(--color-primary-800)] text-[var(--color-secondary-100)] shadow-[var(--shadow-primary)]"
+                            ? "bg-primary-50 text-primary-900 font-extrabold shadow-sm"
                             : "text-[var(--color-ink-800)] hover:bg-[var(--color-primary-50)] hover:text-[var(--color-primary-800)]"
                         }`}
                       >
