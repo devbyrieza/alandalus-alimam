@@ -10,7 +10,10 @@ export default function ScholarshipSection() {
   return (
     <section className="py-24 md:py-32 bg-white relative overflow-hidden border-y border-maroon-100">
       <Container>
-        <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
           className="relative rounded-[3rem] p-10 md:p-16 lg:p-20 overflow-hidden bg-gradient-to-br from-maroon-900 to-maroon-950 border border-maroon-800 shadow-premium-xl flex flex-col lg:flex-row items-center gap-10 lg:gap-20"
         >
           {/* Gold Glow */}
@@ -23,9 +26,18 @@ export default function ScholarshipSection() {
             <h2 className="text-3xl md:text-5xl font-black text-white leading-tight mb-6">
               Jalur Beasiswa <br /> <span className="text-cream-400">Prestasi Santri.</span>
             </h2>
-            <p className="text-maroon-100/80 font-medium text-lg leading-relaxed">
-              Kami mengapresiasi calon santri yang memiliki hafalan Al-Qur'an mutqin atau prestasi akademik tingkat nasional dengan program beasiswa khusus.
+            <p className="text-maroon-100/80 font-medium text-lg leading-relaxed mb-8">
+              Kami mengapresiasi calon santri yang memiliki hafalan Al-Qur&apos;an mutqin atau prestasi akademik tingkat
+              nasional dengan program beasiswa khusus.
             </p>
+
+            <Link
+              href="/daftar#beasiswa"
+              className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-cream-400 hover:bg-cream-300 text-maroon-950 font-extrabold text-sm shadow-lg shadow-black/20 hover:-translate-y-0.5 transition-all group"
+            >
+              <span>Daftar Jalur Beasiswa</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
 
           <div className="lg:w-1/2 relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">

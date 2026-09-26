@@ -12,7 +12,8 @@ import StatsSection from "@/components/home/StatsSection";
 import AboutSection from "@/components/home/AboutSection";
 import ProgramSection from "@/components/home/ProgramSection";
 import ScholarshipSection from "@/components/home/ScholarshipSection";
-import FeaturesSection from "@/components/home/FeaturesSection";
+// FeaturesSection sengaja tidak dipakai — kontennya tumpang tindih dengan StickyFeatureSection di bawah.
+// File tetap ada di src/components/home/FeaturesSection.tsx untuk kemungkinan dipakai di halaman lain.
 import TeachersSection from "@/components/home/TeachersSection";
 import BoardSection from "@/components/home/BoardSection";
 import ProcessSection from "@/components/home/ProcessSection";
@@ -61,7 +62,12 @@ export default function HomePage() {
           </ScrollAnimation>
         </section>
 
-        
+        {/* Diaktifkan kembali — sebelumnya di-import tapi tidak dirender */}
+        <section id="beasiswa" aria-label="Jalur Beasiswa">
+          <ScrollAnimation delay={0.1} direction="none" duration={0.8}>
+            <ScholarshipSection />
+          </ScrollAnimation>
+        </section>
 
         {/* scale → "none" = fade saja, kesan muncul halus */}
         <section id="keunggulan" aria-label="Keunggulan Pesantren">

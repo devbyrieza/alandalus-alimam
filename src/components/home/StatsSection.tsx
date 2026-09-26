@@ -17,7 +17,7 @@ const STATS = [
     suffix: "",
     sublabel: `Tahun Ajaran ${BRANDING.academicYear}`,
     description: "Momen bersejarah pembukaan santri baru",
-    accentBorder: "border-b-[#550000]"
+    accentBorder: "border-b-primary",
   },
   {
     id: "quality",
@@ -27,7 +27,7 @@ const STATS = [
     suffix: "%",
     sublabel: "Tahfidz & Akademik",
     description: "Kombinasi kurikulum turots & nasional",
-    accentBorder: "border-b-[#ddc192]"
+    accentBorder: "border-b-secondary",
   },
   {
     id: "levels",
@@ -37,7 +37,7 @@ const STATS = [
     suffix: "",
     sublabel: "MTs & I'dad Lughawi",
     description: "Kurikulum terpadu Kemenag & Turots",
-    accentBorder: "border-b-emerald-600"
+    accentBorder: "border-b-emerald-600",
   },
   {
     id: "quota",
@@ -47,10 +47,12 @@ const STATS = [
     suffix: "",
     sublabel: "Santri / Rombel",
     description: "Rasio pendampingan intensif & eksklusif",
-    accentBorder: "border-b-indigo-600"
+    accentBorder: "border-b-indigo-600",
   },
 ];
 
+// NOTE: AnimatedCounter lokal ini SENGAJA tidak diganti ke src/components/ui/AnimatedCounter.tsx
+// untuk sekarang — cek dulu apakah keduanya identik sebelum konsolidasi (masuk agenda Fase 4).
 function AnimatedCounter({ value, trigger, delay = 0 }: { value: number; trigger: boolean; delay?: number }) {
   const motionVal = useMotionValue(0);
   const ref = useRef<HTMLSpanElement>(null);
@@ -63,7 +65,7 @@ function AnimatedCounter({ value, trigger, delay = 0 }: { value: number; trigger
       ease: [0.16, 1, 0.3, 1],
       onUpdate: (v) => {
         if (ref.current) ref.current.textContent = String(Math.floor(v));
-      }
+      },
     });
     return controls.stop;
   }, [trigger, value, delay, motionVal]);
@@ -75,8 +77,12 @@ export default function StatsSection() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section className="bg-[#F8FAFC] py-14 md:py-20 border-b border-slate-200">
+    <section className="bg-surface-50 py-14 md:py-20 border-b border-slate-200">
       <Container className="max-w-7xl mx-auto px-4 md:px-6">
+        <p className="text-center text-xs sm:text-sm font-semibold text-slate-500 mb-6 md:mb-8">
+          Dipercaya oleh wali santri &amp; calon santri {BRANDING.schoolShortName}
+        </p>
+
         <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
           {STATS.map((stat, i) => (
             <motion.div
@@ -84,24 +90,24 @@ export default function StatsSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className={`bg-white rounded-2xl p-6 border border-slate-200 shadow-xs hover:shadow-md transition-all relative overflow-hidden flex flex-col justify-between border-b-4 ${stat.accentBorder}`}
+              className={`hover-lift-sm bg-white rounded-2xl p-6 border border-slate-200 shadow-xs transition-all relative overflow-hidden flex flex-col justify-between border-b-4 ${stat.accentBorder}`}
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">
                     {stat.label}
                   </span>
-                  <div className="w-9 h-9 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center text-[#550000]">
+                  <div className="w-9 h-9 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center text-primary">
                     <stat.icon className="w-4 h-4" />
                   </div>
                 </div>
 
                 <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-1">
                   <AnimatedCounter value={stat.value} trigger={inView} delay={i * 0.08} />
-                  <span className="text-[#550000]">{stat.suffix}</span>
+                  <span className="text-primary">{stat.suffix}</span>
                 </div>
 
-                <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#ddc192]/20 text-[#550000] text-[10px] font-extrabold uppercase tracking-wider mt-1 mb-2">
+                <span className="inline-block px-2.5 py-0.5 rounded-full bg-secondary/20 text-primary text-[10px] font-extrabold uppercase tracking-wider mt-1 mb-2">
                   {stat.sublabel}
                 </span>
               </div>
