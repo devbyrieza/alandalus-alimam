@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Rekap Minat PORDAKSI V</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            font-size: 13px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #550000;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+        .header h1 {
+            color: #550000;
+            margin: 0;
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+        .header p {
+            margin: 5px 0 0;
+            color: #666;
+            font-size: 14px;
+        }
+        h2 {
+            color: #550000;
+            border-left: 5px solid #ddc192;
+            padding-left: 10px;
+            margin-top: 30px;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .quota-info {
+            font-size: 13px;
+            font-weight: normal;
+            color: #444;
+            background-color: #e2e8f0;
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid #cbd5e1;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #ddc192;
+            color: #3a1a00;
+            font-weight: bold;
+        }
+        tr:nth-child(even) { background-color: #fdf6f0; }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            min-width: 70px;
+        }
+        .bg-1 { background-color: #27ae60; } /* Hijau */
+        .bg-2 { background-color: #2980b9; } /* Biru */
+        .bg-3 { background-color: #7f8c8d; } /* Abu-abu */
+        .bg-ma { background-color: #8e44ad; }
+        .bg-il { background-color: #e67e22; }
+
+        .note-box {
+            background-color: #fff3cd;
+            border-left: 5px solid #f0a500;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+        .alert-box {
+            background-color: #f8d7da;
+            border-left: 5px solid #dc3545;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+
+        /* Tambahan untuk efek coret */
+        .coret {
+            text-decoration: line-through;
+            color: #888;
+        }
+        .ket-coret {
+            font-size: 10.5px;
+            color: #c0392b;
+            font-weight: bold;
+            margin-left: 6px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>📊 Rekap Data Minat PORDAKSI V</h1>
+        <p>Pesantren Al-Imam Al-Islami &nbsp;|&nbsp; Kelas MA & IL</p>
+    </div>
+
+    <!-- FUTSAL -->
+    <h2>
+        <span>⚽ FUTSAL</span>
+        <span class="quota-info">Peminat: 14 | <strong>Kuota Juknis: Maks 12 Pemain (1 Tim)</strong></span>
+    </h2>
+    <table>
+        <thead>
+            <tr>
+                <th width="5%">No</th>
+                <th width="20%">Prioritas</th>
+                <th width="60%">Nama Lengkap</th>
+                <th width="15%">Kelas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Muhammad Abdul Rahman</td><td><span class="badge bg-ma">MA</span></td></tr>
+            <tr><td>2</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Muhammad Abdul Rahim</td><td><span class="badge bg-ma">MA</span></td></tr>
+            <tr><td>3</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Salman Abdulrahim Uran</td><td><span class="badge bg-ma">MA</span></td></tr>
+            <tr><td>4</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Yasser Ali Nurdin</td><td><span class="badge bg-ma">MA</span></td></tr>
+            <tr><td>5</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Syafiq Karimalai</td><td><span class="badge bg-ma">MA</span></td></tr>
+            <tr><td>6</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Abdullah Rasyid</td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>7</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Abdurrahim Pati Raja</td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>8</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Daffa Muammar Dzaki</td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>9</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Ken Alfarezha Haryadi</td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>10</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Lalu Muhamad Rizky Ananda</td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>11</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Wahyu Hidayat</td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>12</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Muhammad Khoirul Azzam</td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>13</td><td><span class="badge bg-2">Pilihan 2</span></td><td><span class="coret">Farid</span> <span class="ket-coret">(Fokus Pilihan 1 di Badminton)</span></td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>14</td><td><span class="badge bg-3">Pilihan 3</span></td><td><span class="coret">Muhammad Hafidz Abdurrahman</span> <span class="ket-coret">(Fokus Pilihan 1 di Tenis Meja)</span></td><td><span class="badge bg-il">IL</span></td></tr>
+        </tbody>
+    </table>
+    <div class="note-box">
+        <strong>💡 Catatan Futsal:</strong> Abaikan nama yang dicoret. Silakan serahkan data 12 anak berlabel Pilihan 1 ini kepada Pelatih untuk diracik dan diseleksi menjadi 10-12 nama final.
+    </div>
+
+    <!-- VOLI -->
+    <h2 style="page-break-before: always; padding-top: 10px;">
+        <span>🏐 BOLA VOLI</span>
+        <span class="quota-info">Peminat: 11 | <strong>Kuota Juknis: Maks 12 Pemain + 1 Pelatih</strong></span>
+    </h2>
+    <table>
+        <thead>
+            <tr>
+                <th width="5%">No</th>
+                <th width="20%">Prioritas</th>
+                <th width="60%">Nama Lengkap</th>
+                <th width="15%">Kelas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Pandi Rianto</td><td><span class="badge bg-ma">MA</span></td></tr>
+            <tr><td>2</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Radil</td><td><span class="badge bg-ma">MA</span></td></tr>
+            <tr><td>3</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Dicky Dwy AP</td><td><span class="badge bg-ma">MA</span></td></tr>
+            <tr><td>4</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Khubaib Abdul Aziz</td><td><span class="badge bg-il">IL</span></td></tr>
+            
+            <tr><td>5</td><td><span class="badge bg-2">Pilihan 2</span></td><td><span class="coret">Muhammad Abdul Rahman</span> <span class="ket-coret">(Pilihan 1 di Futsal)</span></td><td><span class="badge bg-ma">MA</span></td></tr>
+            <tr><td>6</td><td><span class="badge bg-2">Pilihan 2</span></td><td><span class="coret">Muhammad Abdul Rahim</span> <span class="ket-coret">(Pilihan 1 di Futsal)</span></td><td><span class="badge bg-ma">MA</span></td></tr>
+            <tr><td>7</td><td><span class="badge bg-2">Pilihan 2</span></td><td><span class="coret">Salman Abdulrahim Uran</span> <span class="ket-coret">(Pilihan 1 di Futsal)</span></td><td><span class="badge bg-ma">MA</span></td></tr>
+            <tr><td>8</td><td><span class="badge bg-2">Pilihan 2</span></td><td><span class="coret">Yasser Ali Nurdin</span> <span class="ket-coret">(Pilihan 1 di Futsal)</span></td><td><span class="badge bg-ma">MA</span></td></tr>
+            <tr><td>9</td><td><span class="badge bg-2">Pilihan 2</span></td><td><span class="coret">Syafiq Karimalai</span> <span class="ket-coret">(Pilihan 1 di Futsal)</span></td><td><span class="badge bg-ma">MA</span></td></tr>
+            <tr><td>10</td><td><span class="badge bg-2">Pilihan 2</span></td><td><span class="coret">Muhammad Hafidz Abdurrahman</span> <span class="ket-coret">(Pilihan 1 di Tenis Meja)</span></td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>11</td><td><span class="badge bg-3">Pilihan 3</span></td><td><span class="coret">Abdullah Rasyid</span> <span class="ket-coret">(Pilihan 1 di Futsal)</span></td><td><span class="badge bg-il">IL</span></td></tr>
+        </tbody>
+    </table>
+    <div class="alert-box">
+        ⚠️ <strong>PERHATIAN UNTUK VOLI:</strong> Tim Voli minimal butuh 6 orang untuk bertanding, tapi yang menaruh Pilihan 1 HANYA ADA 4 ORANG. Ustadz perlu berdiskusi dengan Pelatih Futsal: Adakah dari anak-anak yang dicoret di atas (yang gagal masuk skuad Futsal) yang mau ditarik untuk melengkapi tim Voli?
+    </div>
+
+    <!-- BADMINTON -->
+    <h2 style="page-break-before: always; padding-top: 10px;">
+        <span>🏸 BADMINTON</span>
+        <span class="quota-info">Peminat: 9 | <strong>Kuota Juknis: 1 Tunggal Putra</strong></span>
+    </h2>
+    <table>
+        <thead>
+            <tr>
+                <th width="5%">No</th>
+                <th width="20%">Prioritas</th>
+                <th width="60%">Nama Lengkap</th>
+                <th width="15%">Kelas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Farid</td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>2</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Hibban Hibaturrahman</td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>3</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Muhammad Rasyid Ridho</td><td><span class="badge bg-il">IL</span></td></tr>
+            
+            <tr><td>4</td><td><span class="badge bg-2">Pilihan 2</span></td><td><span class="coret">Pandi Rianto</span> <span class="ket-coret">(Fokus Pilihan 1 di Voli)</span></td><td><span class="badge bg-ma">MA</span></td></tr>
+            <tr><td>5</td><td><span class="badge bg-2">Pilihan 2</span></td><td><span class="coret">Dicky Dwy AP</span> <span class="ket-coret">(Fokus Pilihan 1 di Voli)</span></td><td><span class="badge bg-ma">MA</span></td></tr>
+            <tr><td>6</td><td><span class="badge bg-2">Pilihan 2</span></td><td><span class="coret">Daffa Muammar Dzaki</span> <span class="ket-coret">(Fokus Pilihan 1 di Futsal)</span></td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>7</td><td><span class="badge bg-2">Pilihan 2</span></td><td><span class="coret">Lalu Muhamad Rizky Ananda</span> <span class="ket-coret">(Fokus Pilihan 1 di Futsal)</span></td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>8</td><td><span class="badge bg-2">Pilihan 2</span></td><td><span class="coret">Panji Ahmad</span> <span class="ket-coret">(Fokus Pilihan 1 di Dakwah)</span></td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>9</td><td><span class="badge bg-2">Pilihan 2</span></td><td><span class="coret">Syeh Al Bani Irsyad Amrulloh</span> <span class="ket-coret">(Fokus Pilihan 1 di MTQ)</span></td><td><span class="badge bg-il">IL</span></td></tr>
+        </tbody>
+    </table>
+    <div class="note-box">
+        <strong>💡 Catatan Badminton:</strong> Pilih 1 orang terbaik saja dari 3 kandidat Pilihan 1 melalui seleksi internal/penunjukan.
+    </div>
+
+    <!-- TENIS MEJA -->
+    <h2>
+        <span>🏓 TENIS MEJA</span>
+        <span class="quota-info">Peminat: 3 | <strong>Kuota Juknis: 1 Tunggal Putra</strong></span>
+    </h2>
+    <table>
+        <thead>
+            <tr>
+                <th width="5%">No</th>
+                <th width="20%">Prioritas</th>
+                <th width="60%">Nama Lengkap</th>
+                <th width="15%">Kelas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Muhammad Hafidz Abdurrahman</td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>2</td><td><span class="badge bg-2">Pilihan 2</span></td><td><span class="coret">Ken Alfarezha Haryadi</span> <span class="ket-coret">(Fokus Pilihan 1 di Futsal)</span></td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>3</td><td><span class="badge bg-3">Pilihan 3</span></td><td><span class="coret">Lalu Muhamad Rizky Ananda</span> <span class="ket-coret">(Fokus Pilihan 1 di Futsal)</span></td><td><span class="badge bg-il">IL</span></td></tr>
+        </tbody>
+    </table>
+
+    <!-- DAKWAH -->
+    <h2 style="page-break-before: always; padding-top: 10px;">
+        <span>🎤 DAKWAH</span>
+        <span class="quota-info">Peminat: 5 | <strong>Kuota Juknis: Maksimal 2 Peserta</strong></span>
+    </h2>
+    <table>
+        <thead>
+            <tr>
+                <th width="5%">No</th>
+                <th width="20%">Prioritas</th>
+                <th width="60%">Nama Lengkap</th>
+                <th width="15%">Kelas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Fanni Hariri Hamonangan</td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>2</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Panji Ahmad</td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>3</td><td><span class="badge bg-2">Pilihan 2</span></td><td><span class="coret">Radil</span> <span class="ket-coret">(Fokus Pilihan 1 di Voli)</span></td><td><span class="badge bg-ma">MA</span></td></tr>
+            <tr><td>4</td><td><span class="badge bg-2">Pilihan 2</span></td><td><span class="coret">Abdullah Rasyid</span> <span class="ket-coret">(Fokus Pilihan 1 di Futsal)</span></td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>5</td><td><span class="badge bg-2">Pilihan 2</span></td><td><span class="coret">Hibban Hibaturrahman</span> <span class="ket-coret">(Fokus Pilihan 1 di Badminton)</span></td><td><span class="badge bg-il">IL</span></td></tr>
+        </tbody>
+    </table>
+
+    <!-- MTQ -->
+    <h2>
+        <span>📖 MTQ</span>
+        <span class="quota-info">Peminat: 3 | <strong>Kuota Juknis: 1 Peserta Putra</strong></span>
+    </h2>
+    <table>
+        <thead>
+            <tr>
+                <th width="5%">No</th>
+                <th width="20%">Prioritas</th>
+                <th width="60%">Nama Lengkap</th>
+                <th width="15%">Kelas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td><span class="badge bg-1">Pilihan 1</span></td><td>Syeh Al Bani Irsyad Amrulloh</td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>2</td><td><span class="badge bg-2">Pilihan 2</span></td><td><span class="coret">Wahyu Hidayat</span> <span class="ket-coret">(Fokus Pilihan 1 di Futsal)</span></td><td><span class="badge bg-il">IL</span></td></tr>
+            <tr><td>3</td><td><span class="badge bg-3">Pilihan 3</span></td><td><span class="coret">Muhammad Abdul Rahim</span> <span class="ket-coret">(Fokus Pilihan 1 di Futsal)</span></td><td><span class="badge bg-ma">MA</span></td></tr>
+        </tbody>
+    </table>
+
+    <!-- KONFIRMASI -->
+    <h2>
+        <span>🚨 PERLU KONFIRMASI ULANG</span>
+    </h2>
+    <div class="alert-box">
+        <ul>
+            <li><strong>Favian Radi (IL)</strong>: Tidak mengisi form. Perlu ditanya apakah minat masuk tim futsal sesuai arahan Pelatih.</li>
+            <li><strong>Nurcahya Eka Putra (IL)</strong>: Data kosong (apakah terlewat diisi?).</li>
+            <li><strong>Miizan Alghifary Dizlilar (IL)</strong>: Data kosong (apakah terlewat diisi?).</li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>
