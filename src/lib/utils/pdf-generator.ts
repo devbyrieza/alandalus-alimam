@@ -434,81 +434,94 @@ export const generateSuratKelulusan = async (data: PendaftarPdfData) => {
 
   await drawHeader(doc);
 
-  doc.setFontSize(16);
-  doc.setFont("helvetica", "bold");
-  doc.text("SURAT KETERANGAN HASIL SELEKSI", pageWidth / 2, startY + 10, {
-    align: "center" });
-  doc.setFontSize(10);
-  doc.text(
-    `Nomor: ${data.nomor_pendaftaran}/SKL-SPMB/${new Date().getFullYear()}`,
-    pageWidth / 2,
-    startY + 17,
-    { align: "center" },
-  );
+  const toRoman = (num: number) => ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"][num];
+  const romanMonth = toRoman(new Date().getMonth() + 1);
+  const sequence = (data.nomor_pendaftaran || "001").replace(/\D/g, '').slice(-3);
+  const nomorSurat = `${sequence}-GF/PPSB-PAAI/${romanMonth}/${new Date().getFullYear()}`;
 
+  let y = startY + 5;
   doc.setFontSize(11);
   doc.setFont("helvetica", "normal");
-  const content = `Berdasarkan hasil seleksi Penerimaan Santri Baru (SPMB) Tahun Ajaran ${data.tahun_ajaran}, dengan ini Panitia menyatakan bahwa:`;
-  doc.text(doc.splitTextToSize(content, pageWidth - 40), 20, startY + 30);
+  
+  doc.text(`No      : ${nomorSurat}`, 20, y); y += 6;
+  doc.text(`Hal     : Informasi Hasil Seleksi Penerimaan Santri Baru`, 20, y); y += 12;
+
+  doc.text("Kepada Yth.", 20, y); y += 6;
+  doc.text("Orangtua/Wali Ananda Calon Santri", 20, y); y += 6;
+  doc.text("di Tempat", 20, y); y += 15;
+
+  doc.setFont("helvetica", "italic");
+  doc.text("Bismillahirrahmanirrahim", pageWidth / 2, y, { align: "center" }); y += 6;
+  doc.text("Assalamu'alaikum Warahmatullahi Wabarakatuh", pageWidth / 2, y, { align: "center" }); y += 12;
+
+  doc.setFont("helvetica", "normal");
+  const p1 = `Alhamdulillah segala puji bagi Allah Rabb semesta alam. Shalawat dan salam semoga tercurah kepada Rasulullah Shallallahu 'Alaihi Wasallam, keluarga, para sahabat, dan pengikutnya hingga akhir zaman.`;
+  doc.text(doc.splitTextToSize(p1, pageWidth - 40), 20, y, { align: "justify" });
+  y += 15;
+
+  const p2 = `Kami berharap bapak/ibu wali calon santri ${PDF_BRANDING.schoolName} senantiasa dalam keadaan sehat serta dalam ketaatan yang diridhai Allah Subhanahu Wa Ta'ala, amin.`;
+  doc.text(doc.splitTextToSize(p2, pageWidth - 40), 20, y, { align: "justify" });
+  y += 12;
+
+  const p3 = `Selanjutnya, Kami selaku Panitia Penerimaan Santri Baru ${PDF_BRANDING.schoolName} Tahun Pelajaran ${data.tahun_ajaran} mengucapkan selamat kepada putra/putri Bapak/Ibu yang bernama:`;
+  doc.text(doc.splitTextToSize(p3, pageWidth - 40), 20, y, { align: "justify" });
+  y += 12;
 
   const tableData = [
-    ["Nomor Pendaftaran", `: ${data.nomor_pendaftaran}`],
-    ["Nama Lengkap", `: ${toTitleCase(data.nama_lengkap)}`],
-    ["NIK", `: ${data.nik}`],
-    ["Jenjang Pendidikan", `: ${data.jenjang}`],
+    ["Ananda", `: ${data.nama_lengkap.toUpperCase()}`],
+    ["No. Pendaftaran", `: ${data.nomor_pendaftaran}`]
   ];
 
   autoTable(doc, {
-    startY: startY + 40,
+    startY: y,
     body: tableData,
     theme: "plain",
-    margin: { left: 25 },
-    styles: { fontSize: 11, cellPadding: 3 },
-    columnStyles: { 0: { fontStyle: "bold", cellWidth: 50 } } });
+    margin: { left: 30 },
+    styles: { fontSize: 11, cellPadding: 2, font: "helvetica", fontStyle: "bold" },
+    columnStyles: { 0: { cellWidth: 40 } } 
+  });
 
-  const finalY = (doc as any).lastAutoTable.finalY + 10;
+  y = (doc as any).lastAutoTable.finalY + 10;
 
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(14);
-
-  let statusText = "LULUS / DITERIMA";
+  let statusText = "DITERIMA";
   if (data.status_kelulusan === "cadangan") statusText = "CADANGAN";
-  if (
-    data.status_kelulusan === "ditolak" ||
-    data.status_kelulusan === "rejected"
-  )
-    statusText = "BELUM DITERIMA";
+  if (data.status_kelulusan === "ditolak" || data.status_kelulusan === "rejected") statusText = "TIDAK DITERIMA";
 
-  doc.text(`DINYATAKAN: ${statusText}`, pageWidth / 2, finalY + 10, {
-    align: "center" });
+  doc.setFontSize(14);
+  doc.setFont("helvetica", "bold");
+  doc.text(statusText, pageWidth / 2, y, { align: "center" });
+  y += 8;
 
-  doc.setFont("helvetica", "normal");
   doc.setFontSize(11);
-
-  let closing =
-    "Selamat bergabung menjadi keluarga besar Pesantren Al Imam Al Islami. Silakan segera melakukan proses daftar ulang sesuai jadwal yang ditentukan.";
-  if (statusText === "CADANGAN")
-    closing =
-      "Anda masuk dalam daftar cadangan. Panitia akan menghubungi Anda jika terdapat kuota yang kosong.";
-  if (statusText === "BELUM DITERIMA")
-    closing =
-      "Tetap semangat dan jangan berkecil hati. Anda dapat kembali mendaftar pada gelombang atau periode berikutnya.";
-
-  doc.text(doc.splitTextToSize(closing, pageWidth - 40), 20, finalY + 25);
-
-  if (statusText === "LULUS / DITERIMA") {
-    const daftarUlangInfo =
-      "Pembayaran daftar ulang harus segera dibayarkan minimal 50% paling lambat sepekan setelah pengumuman hasil. Bagi yang membutuhkan keringanan, silakan menghubungi bagian Finance di 0851-1152-4441.";
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(10);
-    doc.text(
-      doc.splitTextToSize(daftarUlangInfo, pageWidth - 40),
-      20,
-      finalY + 40,
-    );
+  if (statusText === "DITERIMA") {
+    doc.text(`Sebagai Santri ${PDF_BRANDING.schoolName} Tahun Pelajaran ${data.tahun_ajaran} di jenjang ${data.jenjang}`, pageWidth / 2, y, { align: "center" });
+    y += 12;
+    doc.setFont("helvetica", "normal");
+    const p4 = "Selanjutnya, diharapkan kepada orangtua/wali untuk segera melakukan proses Daftar Ulang dan pembayaran Uang Pangkal sesuai jadwal yang ditentukan.";
+    doc.text(doc.splitTextToSize(p4, pageWidth - 40), 20, y, { align: "justify" });
+    y += 12;
+  } else if (statusText === "CADANGAN") {
+    doc.setFont("helvetica", "normal");
+    const p4 = "Ananda masuk dalam daftar cadangan. Panitia akan menghubungi Bapak/Ibu apabila terdapat kuota yang kosong.";
+    doc.text(doc.splitTextToSize(p4, pageWidth - 40), 20, y, { align: "center" });
+    y += 12;
+  } else {
+    doc.setFont("helvetica", "normal");
+    const p4 = "Tetap semangat dan jangan berkecil hati. Ananda dapat kembali mendaftar pada gelombang atau periode berikutnya.";
+    doc.text(doc.splitTextToSize(p4, pageWidth - 40), 20, y, { align: "center" });
+    y += 12;
   }
 
-  await drawFormalSignature(doc, finalY + 65);
+  const p5 = "Demikian informasi ini kami sampaikan, semoga Allah Subhanahu Wa Ta'ala memudahkan kita dalam kebaikan, atas perhatiannya kami ucapkan terima kasih dan jazakumullohu khoiron katsiron.";
+  doc.text(doc.splitTextToSize(p5, pageWidth - 40), 20, y, { align: "justify" });
+  y += 15;
+
+  doc.setFont("helvetica", "italic");
+  doc.text("Wassalamu'alaikum Warahmatullahi Wabarakatuh", 20, y);
+  y += 20;
+
+  // Signatures
+  await drawFormalSignature(doc, y);
 
   drawFooter(doc);
   if (typeof window !== "undefined") {
