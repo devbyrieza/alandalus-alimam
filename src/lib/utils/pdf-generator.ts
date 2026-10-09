@@ -469,11 +469,11 @@ export const generateSuratKelulusan = async (data: PendaftarPdfData) => {
   doc.text(doc.splitTextToSize(p1, pageWidth - 40), 20, y, { align: "justify" });
   y += 15;
 
-  const p2 = `Kami berharap bapak/ibu wali calon santri ${PDF_BRANDING.schoolName} senantiasa dalam keadaan sehat serta dalam ketaatan yang diridhai Allah Subhanahu Wa Ta'ala, amin.`;
+  const p2 = `Kami berharap bapak/ibu wali calon santri ${PDF_BRANDING.institution.name} senantiasa dalam keadaan sehat serta dalam ketaatan yang diridhai Allah Subhanahu Wa Ta'ala, amin.`;
   doc.text(doc.splitTextToSize(p2, pageWidth - 40), 20, y, { align: "justify" });
   y += 12;
 
-  const p3 = `Selanjutnya, Kami selaku Panitia Penerimaan Santri Baru ${PDF_BRANDING.schoolName} Tahun Pelajaran ${data.tahun_ajaran} mengucapkan selamat kepada putra/putri Bapak/Ibu yang bernama:`;
+  const p3 = `Selanjutnya, Kami selaku Panitia Penerimaan Santri Baru ${PDF_BRANDING.institution.name} Tahun Pelajaran ${data.tahun_ajaran} mengucapkan selamat kepada putra/putri Bapak/Ibu yang bernama:`;
   doc.text(doc.splitTextToSize(p3, pageWidth - 40), 20, y, { align: "justify" });
   y += 12;
 
@@ -504,7 +504,7 @@ export const generateSuratKelulusan = async (data: PendaftarPdfData) => {
 
   doc.setFontSize(11);
   if (statusText === "DITERIMA") {
-    doc.text(`Sebagai Santri ${PDF_BRANDING.schoolName} Tahun Pelajaran ${data.tahun_ajaran} di jenjang ${data.jenjang}`, pageWidth / 2, y, { align: "center" });
+    doc.text(`Sebagai Santri ${PDF_BRANDING.institution.name} Tahun Pelajaran ${data.tahun_ajaran} di jenjang ${data.jenjang}`, pageWidth / 2, y, { align: "center" });
     y += 12;
     doc.setFont("helvetica", "normal");
     const p4 = "Selanjutnya, diharapkan kepada orangtua/wali untuk segera melakukan proses Daftar Ulang dan pembayaran Uang Pangkal sesuai jadwal yang ditentukan.";
