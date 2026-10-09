@@ -67,7 +67,10 @@ export async function POST(request: NextRequest) {
 
       // Upsert records in Pengumuman table so they appear in student dashboard
       for (const user of updatedUsers) {
-        if (new_status === "tested") {`n          await tx.pengumuman.deleteMany({ where: { pendaftar_id: user.id } });`n        } else {`n          await tx.pengumuman.upsert({
+        if (new_status === "tested") {
+          await tx.pengumuman.deleteMany({ where: { pendaftar_id: user.id } });
+        } else {
+          await tx.pengumuman.upsert({
           where: { pendaftar_id: user.id },
           update: {
             status_kelulusan: displayStatus,

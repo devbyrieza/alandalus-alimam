@@ -1,21 +1,14 @@
 const fs = require('fs');
-let code = fs.readFileSync('src/app/api/exam-sessions/route.ts', 'utf8');
+const file = "c:/Users/itpua/Dev/Work/al-andalus/alandalus-alimam/src/app/api/admin/pengumuman/publish/route.ts";
+let content = fs.readFileSync(file, "utf8");
 
-code = code.replace('export async function PATCH(request: Request)', 'export async function PUT(request: Request)');
+content = content.replace('if (new_status === "tested") {`n          await tx.pengumuman.deleteMany({ where: { pendaftar_id: user.id } });`n        } else {`n          await tx.pengumuman.upsert({', 
+`if (new_status === "tested") {
+          await tx.pengumuman.deleteMany({ where: { pendaftar_id: user.id } });
+        } else {
+          await tx.pengumuman.upsert({`);
 
-code = code.replace(
-  '  const { searchParams } = new URL(request.url);\n  const id = searchParams.get("id");',
-  '  let body: any = {};\n  try { body = await request.json(); } catch(e) {}\n  const id = body.id || (new URL(request.url).searchParams.get("id"));'
-);
-
-code = code.replace(
-  '    const body = await request.json();\n    const { title, start_time, end_time, location, notes } = body;',
-  '    const { title, start_time, end_time, location, notes } = body;'
-);
-
-code = code.replace(
-  '    console.error("PATCH exam-sessions error:", error);',
-  '    console.error("PUT exam-sessions error:", error);'
-);
-
-fs.writeFileSync('src/app/api/exam-sessions/route.ts', code);
+content = content.replace('tahun_ajaran_id: user.tahun_ajaran_id } });`n        }',
+`tahun_ajaran_id: user.tahun_ajaran_id } });
+        }`);
+fs.writeFileSync(file, content);
