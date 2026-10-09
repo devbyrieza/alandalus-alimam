@@ -28,6 +28,16 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: "Tahun Ajaran aktif tidak ditemukan di salah satu database." });
     }
 
+    // FIX SCHEMA: Ensure 'nis' column exists in both DBs before proceeding
+    try {
+      await prisma.$executeRawUnsafe(`ALTER TABLE "Pendaftar" ADD COLUMN IF NOT EXISTS "nis" VARCHAR(50) UNIQUE;`);
+      await ululDb.$executeRawUnsafe(`ALTER TABLE "Pendaftar" ADD COLUMN IF NOT EXISTS "nis" VARCHAR(50) UNIQUE;`);
+      await prisma.$executeRawUnsafe(`ALTER TABLE "Profile" ADD COLUMN IF NOT EXISTS "username" VARCHAR(255) UNIQUE;`);
+      await ululDb.$executeRawUnsafe(`ALTER TABLE "Profile" ADD COLUMN IF NOT EXISTS "username" VARCHAR(255) UNIQUE;`);
+    } catch (e) {
+      console.log("Schema alter skip/error:", e);
+    }
+
     // ==============================================================
     // MIGRASI 1: PUTRA (L) dari Al-Imam ke Ulul Albaab
     // ==============================================================
