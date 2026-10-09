@@ -87,8 +87,8 @@ export default function PengumumanPage() {
   const handlePublish = async (new_status: "accepted" | "cadangan" | "rejected") => {
     if (selectedIds.length === 0) return;
 
-    const actionText = new_status === "accepted" ? "MELULUSKAN" : new_status === "cadangan" ? "menjadikan CADANGAN" : "MENOLAK";
-    const btnColor = new_status === "accepted" ? "#059669" : new_status === "cadangan" ? "#d97706" : "#dc2626";
+    const actionText = new_status === "accepted" ? "MELULUSKAN" : new_status === "cadangan" ? "menjadikan CADANGAN" : new_status === "tested" ? "MEMBATALKAN KELULUSAN (kembalikan ke seleksi) untuk" : "MENOLAK";
+    const btnColor = new_status === "accepted" ? "#059669" : new_status === "cadangan" ? "#d97706" : new_status === "tested" ? "#6b7280" : "#dc2626";
 
     const result = await Swal.fire({
       title: "Publikasi Pengumuman?",
