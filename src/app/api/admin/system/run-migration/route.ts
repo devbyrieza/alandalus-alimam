@@ -67,7 +67,11 @@ export async function GET(req: Request) {
     for (const p of putraAlimam) {
       try {
         const existing = await ululDb.pendaftar.findFirst({ where: { nik: p.nik } });
-        if (existing) continue;
+        if (existing) {
+          // Jika ada di tujuan tapi MASIH ada di sumber, berarti migrasi sebelumnya gagal di tengah jalan.
+          // Kita hapus data setengah matang di tujuan agar bisa diulang dari awal dengan bersih.
+          await ululDb.pendaftar.delete({ where: { id: existing.id } });
+        }
 
         if (p.user) {
           const uExists = await ululDb.profile.findUnique({ where: { id: p.user.id } });
@@ -138,7 +142,9 @@ export async function GET(req: Request) {
     for (const p of putriUlul) {
       try {
         const existing = await prisma.pendaftar.findFirst({ where: { nik: p.nik } });
-        if (existing) continue;
+        if (existing) {
+          await prisma.pendaftar.delete({ where: { id: existing.id } });
+        }
 
         if (p.user) {
           const uExists = await prisma.profile.findUnique({ where: { id: p.user.id } });
