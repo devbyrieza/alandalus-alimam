@@ -70,14 +70,14 @@ export async function POST(request: NextRequest) {
           where: { pendaftar_id: user.id },
           update: {
             status_kelulusan: displayStatus,
-            is_published: true,
+            is_published: new_status !== "tested",
             published_at: new Date(),
             published_by: session.id,
             updated_at: new Date() },
           create: {
             pendaftar_id: user.id,
             status_kelulusan: displayStatus,
-            is_published: true,
+            is_published: new_status !== "tested",
             published_at: new Date(),
             published_by: session.id,
             tahun_ajaran_id: user.tahun_ajaran_id } });
