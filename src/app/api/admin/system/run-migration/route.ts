@@ -94,18 +94,24 @@ export async function GET(req: Request) {
         if (orang_tua) await ululDb.orangTua.create({ data: orang_tua });
         if (hasil_seleksi) {
           hasil_seleksi.tahun_ajaran_id = newTaId;
+          hasil_seleksi.ditentukan_oleh = null;
           await ululDb.hasilSeleksi.create({ data: hasil_seleksi });
         }
         for (const r of rapor) await ululDb.dataRapor.create({ data: r });
         for (const pr of prestasi) await ululDb.dataPrestasi.create({ data: pr });
-        if (kesehatan) await ululDb.dataKesehatan.create({ data: kesehatan });
+        if (kesehatan) {
+          kesehatan.verified_by = null;
+          await ululDb.dataKesehatan.create({ data: kesehatan });
+        }
         if (asrama) await ululDb.dataAsrama.create({ data: asrama });
         if (pengumuman) {
           pengumuman.tahun_ajaran_id = newTaId;
+          pengumuman.published_by = null;
           await ululDb.pengumuman.create({ data: pengumuman });
         }
         for (const b of pembayaran) {
           b.tahun_ajaran_id = newTaId;
+          b.verified_by = null;
           await ululDb.pembayaran.create({ data: b });
         }
 
@@ -159,18 +165,24 @@ export async function GET(req: Request) {
         if (orang_tua) await prisma.orangTua.create({ data: orang_tua });
         if (hasil_seleksi) {
           hasil_seleksi.tahun_ajaran_id = newTaId;
+          hasil_seleksi.ditentukan_oleh = null;
           await prisma.hasilSeleksi.create({ data: hasil_seleksi });
         }
         for (const r of rapor) await prisma.dataRapor.create({ data: r });
         for (const pr of prestasi) await prisma.dataPrestasi.create({ data: pr });
-        if (kesehatan) await prisma.dataKesehatan.create({ data: kesehatan });
+        if (kesehatan) {
+          kesehatan.verified_by = null;
+          await prisma.dataKesehatan.create({ data: kesehatan });
+        }
         if (asrama) await prisma.dataAsrama.create({ data: asrama });
         if (pengumuman) {
           pengumuman.tahun_ajaran_id = newTaId;
+          pengumuman.published_by = null;
           await prisma.pengumuman.create({ data: pengumuman });
         }
         for (const b of pembayaran) {
           b.tahun_ajaran_id = newTaId;
+          b.verified_by = null;
           await prisma.pembayaran.create({ data: b });
         }
 
