@@ -161,9 +161,9 @@ export default function DaftarPage() {
     }
     if (!formData.jenis_kelamin) {
       errors.jenis_kelamin = "Pilih jenis kelamin santri";
-    } else if (formData.jenis_kelamin === "P") {
+    } else if (formData.jenis_kelamin === "L") {
       errors.jenis_kelamin =
-        "Mohon maaf, pendaftaran Santri Putri dilakukan melalui Pesantren Ulul Albaab.";
+        "Mohon maaf, pendaftaran Santri Putra (Laki-laki) kini dilakukan melalui website SPMB Pesantren Ulul Albaab. Al-Imam Al-Islami lil Banat sekarang resmi KHUSUS PUTRI.";
     }
 
     if (!formData.jenjang) {
