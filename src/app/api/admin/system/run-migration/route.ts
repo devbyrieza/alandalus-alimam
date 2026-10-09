@@ -64,16 +64,34 @@ export async function GET(req: Request) {
         const { orang_tua, hasil_seleksi, rapor, prestasi, kesehatan, asrama, pengumuman, pembayaran, user, ...pData } = p;
         pData.tahun_ajaran_id = activeTaUlul.id;
         
+        if (pData.nomor_pendaftaran) {
+          const npCol = await ululDb.pendaftar.findUnique({ where: { nomor_pendaftaran: pData.nomor_pendaftaran } });
+          if (npCol) pData.nomor_pendaftaran += '-MIG';
+        }
+        if (pData.nis) {
+          const nisCol = await ululDb.pendaftar.findUnique({ where: { nis: pData.nis } });
+          if (nisCol) pData.nis += '-MIG';
+        }
+
         await ululDb.pendaftar.create({ data: pData });
         
         if (orang_tua) await ululDb.orangTua.create({ data: orang_tua });
-        if (hasil_seleksi) await ululDb.hasilSeleksi.create({ data: hasil_seleksi });
+        if (hasil_seleksi) {
+          hasil_seleksi.tahun_ajaran_id = activeTaUlul.id;
+          await ululDb.hasilSeleksi.create({ data: hasil_seleksi });
+        }
         for (const r of rapor) await ululDb.dataRapor.create({ data: r });
         for (const pr of prestasi) await ululDb.dataPrestasi.create({ data: pr });
         if (kesehatan) await ululDb.dataKesehatan.create({ data: kesehatan });
         if (asrama) await ululDb.dataAsrama.create({ data: asrama });
-        if (pengumuman) await ululDb.pengumuman.create({ data: pengumuman });
-        for (const b of pembayaran) await ululDb.pembayaran.create({ data: b });
+        if (pengumuman) {
+          pengumuman.tahun_ajaran_id = activeTaUlul.id;
+          await ululDb.pengumuman.create({ data: pengumuman });
+        }
+        for (const b of pembayaran) {
+          b.tahun_ajaran_id = activeTaUlul.id;
+          await ululDb.pembayaran.create({ data: b });
+        }
 
         // Jika sukses, hapus dari Al-Imam
         await prisma.pendaftar.delete({ where: { id: p.id } });
@@ -110,16 +128,34 @@ export async function GET(req: Request) {
         const { orang_tua, hasil_seleksi, rapor, prestasi, kesehatan, asrama, pengumuman, pembayaran, user, ...pData } = p;
         pData.tahun_ajaran_id = activeTaAlimam.id;
         
+        if (pData.nomor_pendaftaran) {
+          const npCol = await prisma.pendaftar.findUnique({ where: { nomor_pendaftaran: pData.nomor_pendaftaran } });
+          if (npCol) pData.nomor_pendaftaran += '-MIG';
+        }
+        if (pData.nis) {
+          const nisCol = await prisma.pendaftar.findUnique({ where: { nis: pData.nis } });
+          if (nisCol) pData.nis += '-MIG';
+        }
+
         await prisma.pendaftar.create({ data: pData });
         
         if (orang_tua) await prisma.orangTua.create({ data: orang_tua });
-        if (hasil_seleksi) await prisma.hasilSeleksi.create({ data: hasil_seleksi });
+        if (hasil_seleksi) {
+          hasil_seleksi.tahun_ajaran_id = activeTaAlimam.id;
+          await prisma.hasilSeleksi.create({ data: hasil_seleksi });
+        }
         for (const r of rapor) await prisma.dataRapor.create({ data: r });
         for (const pr of prestasi) await prisma.dataPrestasi.create({ data: pr });
         if (kesehatan) await prisma.dataKesehatan.create({ data: kesehatan });
         if (asrama) await prisma.dataAsrama.create({ data: asrama });
-        if (pengumuman) await prisma.pengumuman.create({ data: pengumuman });
-        for (const b of pembayaran) await prisma.pembayaran.create({ data: b });
+        if (pengumuman) {
+          pengumuman.tahun_ajaran_id = activeTaAlimam.id;
+          await prisma.pengumuman.create({ data: pengumuman });
+        }
+        for (const b of pembayaran) {
+          b.tahun_ajaran_id = activeTaAlimam.id;
+          await prisma.pembayaran.create({ data: b });
+        }
 
         // Jika sukses, hapus dari Ulul Albaab
         await ululDb.pendaftar.delete({ where: { id: p.id } });
