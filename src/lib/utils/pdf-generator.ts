@@ -447,7 +447,7 @@ export const generateSuratKelulusan = async (data: PendaftarPdfData) => {
   };
   const alphaCode = getAlphaCode(seqNumber);
 
-  const nomorSurat = `${sequenceStr}/${alphaCode}/PSB-PAAI/${romanMonth}/${new Date().getFullYear()}`;
+  const nomorSurat = "012//PSB-PAAI//";
 
   let y = startY + 5;
   doc.setFontSize(11);
