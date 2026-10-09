@@ -1,13 +1,19 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-
-async function main() {
-  const p = await prisma.profile.findMany({
-    where: { role: { not: 'pendaftar' }, google_meet_link: { not: null } },
-    select: { full_name: true, google_meet_link: true }
-  });
-  console.log(p);
+async function run() {
+  const fathi = await prisma.pendaftar.findFirst({ where: { nomor_pendaftaran: "MTA2700004" }, select: { id: true, status_pendaftaran: true } });
+  if (fathi) {
+    console.log("Fathi status:", fathi.status_pendaftaran);
+    const p = await prisma.pengumuman.findUnique({ where: { pendaftar_id: fathi.id } });
+    console.log("Pengumuman record:", p);
+    
+    // forcefully delete it
+    if (p) {
+        await prisma.pengumuman.delete({ where: { id: p.id }});
+        console.log("Deleted pengumuman!");
+    }
+  } else {
+    console.log("Fathi not found");
+  }
 }
-main()
-  .catch(e => console.error(e))
-  .finally(() => prisma.$disconnect());
+run().finally(() => prisma.$disconnect());

@@ -54,7 +54,8 @@ export default function Navbar() {
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, [isMenuOpen]);
+  }, [isMenuOpen]);
+
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -295,7 +296,7 @@ export default function Navbar() {
                   </a>
                   <a
                     href="https://spmb.pesantren-alimam.com/daftar"
-                    className="btn-primary flex items-center gap-1.5 group text-xs xl:text-sm font-black px-3.5 xl:px-4 py-1.5 rounded-full shadow-md hover:scale-105 transition-all glow-ring-primary"
+                    className="btn-primary flex items-center gap-1.5 group text-xs xl:text-sm font-black px-3.5 xl:px-4 py-1.5 rounded-xl shadow-lg shadow-maroon-500/30 hover:scale-105 transition-all glow-ring-primary"
                   >
                     <span>Daftar SPMB</span>
                     <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -317,7 +318,7 @@ export default function Navbar() {
                   </a>
                   <a
                     href="https://spmb.pesantren-alimam.com/daftar"
-                    className="btn-primary flex items-center gap-1.5 group text-xs xl:text-sm font-black px-3.5 xl:px-4 py-1.5 rounded-full shadow-md hover:scale-105 transition-all glow-ring-primary"
+                    className="btn-primary flex items-center gap-1.5 group text-xs xl:text-sm font-black px-3.5 xl:px-4 py-1.5 rounded-xl shadow-lg shadow-maroon-500/30 hover:scale-105 transition-all glow-ring-primary"
                   >
                     <span>Daftar SPMB</span>
                     <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -484,7 +485,7 @@ export default function Navbar() {
                       <a
                         href="https://spmb.pesantren-alimam.com/daftar"
                         onClick={() => setIsMenuOpen(false)}
-                        className="btn-primary w-full justify-center gap-2 min-h-[48px]"
+                        className="btn-primary w-full justify-center gap-2 min-h-[48px] rounded-xl shadow-lg shadow-maroon-500/30"
                       >
                         <GraduationCap className="w-4 h-4" />
                         Daftar SPMB Online
@@ -510,7 +511,7 @@ export default function Navbar() {
                       <a
                         href="https://spmb.pesantren-alimam.com/daftar"
                         onClick={() => setIsMenuOpen(false)}
-                        className="btn-primary w-full justify-center gap-2 min-h-[48px]"
+                        className="btn-primary w-full justify-center gap-2 min-h-[48px] rounded-xl shadow-lg shadow-maroon-500/30"
                       >
                         <GraduationCap className="w-4 h-4" />
                         Daftar SPMB Online

@@ -69,7 +69,7 @@ export default function HeroSection() {
           {/* ═════════ LEFT COLUMN ═════════ */}
           <div className="lg:col-span-7 space-y-4 sm:space-y-5 lg:space-y-4 xl:space-y-6 text-center lg:text-left">
             {/* Eyebrow pill — pakai token secondary/primary */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/20 border border-secondary/50 shadow-xs">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/20 border border-maroon-300 shadow-xs shadow-maroon-500/20">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
               <span className="text-xs font-extrabold uppercase tracking-wider text-primary">
                 Portal Resmi SPMB Tahun Ajaran {BRANDING.academicYear}
@@ -84,7 +84,7 @@ export default function HeroSection() {
 
             {/* Description */}
             <p className="text-slate-600 text-sm sm:text-base lg:text-[0.95rem] xl:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
-              Bukan sekadar tempat belajar — sebuah ekosistem kaderisasi ummat yang hanif, kontributif, dan adaptif,{" "}
+              Bukan sekadar tempat belajar — pesantren khusus putri dengan ekosistem kaderisasi ummat yang hanif, kontributif, dan adaptif,{" "}
               <strong className="font-semibold text-slate-900">
                 mendidik dengan keteladanan tanpa luka pengasuhan
               </strong>
@@ -103,12 +103,12 @@ export default function HeroSection() {
             {/* 3 Action Buttons — pakai .btn-primary yang sudah ada di globals.css */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2.5 sm:gap-3 pt-1 sm:pt-1.5 w-full">
               {session ? (
-                <a href="https://spmb.pesantren-alimam.com/dashboard" className="btn-primary w-full sm:w-auto">
+                <a href="https://spmb.pesantren-alimam.com/dashboard" className="btn-primary w-full sm:w-auto shadow-lg shadow-maroon-500/30 hover:shadow-maroon-500/50">
                   <span>Buka Dashboard</span>
                   <ArrowRight className="w-4 h-4" />
                 </a>
               ) : (
-                <a href="https://spmb.pesantren-alimam.com/daftar" className="btn-primary w-full sm:w-auto">
+                <a href="https://spmb.pesantren-alimam.com/daftar" className="btn-primary w-full sm:w-auto shadow-lg shadow-maroon-500/30 hover:shadow-maroon-500/50">
                   <span>Daftar SPMB 2027</span>
                   <ArrowRight className="w-4 h-4" />
                 </a>
@@ -159,10 +159,10 @@ export default function HeroSection() {
 
           {/* ═════════ RIGHT COLUMN: PHOTO + FLOATING BADGES ═════════ */}
           <div className="lg:col-span-5 relative">
-            <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white group bg-white aspect-[4/5] sm:aspect-square lg:aspect-[4/5] max-h-[500px] xl:max-h-[560px]">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-maroon-600/30 border-4 border-white group bg-white/60 backdrop-blur-sm aspect-[4/5] sm:aspect-square lg:aspect-[4/5] max-h-[500px] xl:max-h-[560px]">
               <Image
                 src="/images/hero.jpg"
-                alt="Santri Pesantren Al Imam Al Islami"
+                alt="Santriwati Pesantren Al-Imam Al-Islami lil Banat"
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 40vw"
@@ -170,7 +170,7 @@ export default function HeroSection() {
               />
 
               {/* Top-Left Floating Badge */}
-              <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md rounded-2xl p-3 border border-slate-200 shadow-lg flex items-center gap-3">
+              <div className="absolute top-4 left-4 bg-white/80 backdrop-blur-sm rounded-2xl p-3 border border-slate-200 shadow-xl flex items-center gap-3">
                 <div className="icon-box icon-box-secondary w-10 h-10">
                   <Award className="w-5 h-5" />
                 </div>
@@ -181,7 +181,7 @@ export default function HeroSection() {
               </div>
 
               {/* Bottom-Right Floating Badge */}
-              <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-md rounded-2xl p-3 border border-slate-200 shadow-lg flex items-center gap-3">
+              <div className="absolute bottom-4 right-4 bg-white/80 backdrop-blur-sm rounded-2xl p-3 border border-slate-200 shadow-xl flex items-center gap-3">
                 <div className="icon-box icon-box-primary w-10 h-10">
                   <BookOpen className="w-5 h-5" />
                 </div>

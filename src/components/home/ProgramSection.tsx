@@ -45,7 +45,7 @@ const PROGRAMS = [
       "Pendalaman kitab turots bersanad para ulama",
       "Persiapan beasiswa Timur Tengah & Perguruan Tinggi",
       "Penempaan leadership dakwah & dasar entrepreneurship",
-      "Kemandirian santri berwawasan global & berakhlak mulia",
+      "Kemandirian santriwati berwawasan global & berakhlak mulia",
     ],
     href: "/program#ma",
   },
@@ -75,7 +75,7 @@ export default function ProgramSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="bg-white rounded-3xl p-7 md:p-8 border border-slate-200 shadow-xs hover:shadow-md hover:border-secondary transition-all flex flex-col justify-between group"
+              className="bg-white/80 backdrop-blur-sm rounded-3xl p-7 md:p-8 border border-slate-200 shadow-2xl shadow-maroon-500/15 hover:shadow-maroon-500/30 hover:-translate-y-1 hover:border-secondary transition-all duration-300 flex flex-col justify-between group"
             >
               <div>
                 {/* Card Top: Icon & Badge */}

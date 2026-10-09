@@ -90,7 +90,7 @@ export default function StatsSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className={`hover-lift-sm bg-white rounded-2xl p-6 border border-slate-200 shadow-xs transition-all relative overflow-hidden flex flex-col justify-between border-b-4 ${stat.accentBorder}`}
+              className={`hover-lift-sm bg-white/70 backdrop-blur-sm rounded-3xl p-6 border border-maroon-100 shadow-xl shadow-maroon-500/10 transition-all relative overflow-hidden flex flex-col justify-between border-b-4 ${stat.accentBorder}`}
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
@@ -102,7 +102,7 @@ export default function StatsSection() {
                   </div>
                 </div>
 
-                <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-1">
+                <div className="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight mb-1">
                   <AnimatedCounter value={stat.value} trigger={inView} delay={i * 0.08} />
                   <span className="text-primary">{stat.suffix}</span>
                 </div>

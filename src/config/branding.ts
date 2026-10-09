@@ -1,14 +1,18 @@
 export const BRANDING = {
-  schoolName: process.env.NEXT_PUBLIC_SCHOOL_NAME || "Pesantren Al Imam Al Islami",
-  schoolShortName: process.env.NEXT_PUBLIC_SCHOOL_SHORT_NAME || "Al Imam Al Islami",
-  schoolLegalName: process.env.NEXT_PUBLIC_SCHOOL_LEGAL_NAME || "Pesantren Al Imam Al Islami Managed by Al Andalus IIBS",
+  schoolName: "Pesantren Al-Imam Al-Islami lil Banat",
+  schoolShortName: "Al-Imam Al-Islami lil Banat",
+  schoolLegalName: "Pesantren Al-Imam Al-Islami lil Banat Managed by Al Andalus IIBS",
+  subtitle: "Pesantren Islam Internasional Khusus Putri",
+  gender: "Putri",
+  shaleh: "shalehah",
+  santri: "santriwati",
   schoolTagline:
     process.env.NEXT_PUBLIC_SCHOOL_TAGLINE ||
     "Kaderisasi Ummat Hanif, Kontributif, dan Adaptif",
   schoolNetwork:
     process.env.NEXT_PUBLIC_SCHOOL_NETWORK || "Perpaduan Kurikulum Nasional dan Khas Andalus",
-  primaryColor: process.env.NEXT_PUBLIC_PRIMARY_COLOR || "#550000", // Default Maroon
-  secondaryColor: process.env.NEXT_PUBLIC_SECONDARY_COLOR || "#ddc192", // Default Cream
+  primaryColor: process.env.NEXT_PUBLIC_PRIMARY_COLOR || "#800a0a", // Maroon
+  secondaryColor: process.env.NEXT_PUBLIC_SECONDARY_COLOR || "#f4d8cd", // Cream/Rose-gold
   logoPath: process.env.NEXT_PUBLIC_LOGO_PATH || "/images/logo.png",
   faviconPath: process.env.NEXT_PUBLIC_FAVICON_PATH || "/favicon.ico",
   websiteUrl:
