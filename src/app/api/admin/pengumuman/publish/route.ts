@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { enqueueWhatsapp, buildMessageHasilTes } from "@/lib/whatsapp-queue";
 import { getServerSession } from "@/lib/session";
-import { invalidateAdminPendaftarCache } from "@/lib/redis";
+import { invalidateAdminPendaftarCache, redis } from "@/lib/redis";
 import { logAdminAction } from "@/lib/audit";
 
 export async function POST(request: NextRequest) {
@@ -86,6 +86,9 @@ export async function POST(request: NextRequest) {
     });
 
     await invalidateAdminPendaftarCache();
+    for (const uid of pendaftar_ids) {
+      await redis.del("pengumuman_");
+    }
     // Logging audit action
     logAdminAction({
       action: "PUBLISH_ANNOUNCEMENT",
