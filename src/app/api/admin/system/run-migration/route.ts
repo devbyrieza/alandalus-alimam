@@ -20,12 +20,27 @@ export async function GET(req: Request) {
   };
 
   try {
-    // 1. Get active TAs
+    // 1. Get TAs and create mappings
     const activeTaAlimam = await prisma.tahunAjaran.findFirst({ where: { is_active: true } });
     const activeTaUlul = await ululDb.tahunAjaran.findFirst({ where: { is_active: true } });
 
     if (!activeTaAlimam || !activeTaUlul) {
       return NextResponse.json({ error: "Tahun Ajaran aktif tidak ditemukan di salah satu database." });
+    }
+
+    const allTaAlimam = await prisma.tahunAjaran.findMany();
+    const allTaUlul = await ululDb.tahunAjaran.findMany();
+
+    const alimamToUlulTaMap = new Map<string, string>();
+    for (const ta of allTaAlimam) {
+      const match = allTaUlul.find(u => u.nama === ta.nama);
+      alimamToUlulTaMap.set(ta.id, match ? match.id : activeTaUlul.id);
+    }
+
+    const ululToAlimamTaMap = new Map<string, string>();
+    for (const ta of allTaUlul) {
+      const match = allTaAlimam.find(a => a.nama === ta.nama);
+      ululToAlimamTaMap.set(ta.id, match ? match.id : activeTaAlimam.id);
     }
 
     // FIX SCHEMA: Ensure 'nis' column exists in both DBs before proceeding
@@ -62,7 +77,8 @@ export async function GET(req: Request) {
         }
 
         const { orang_tua, hasil_seleksi, rapor, prestasi, kesehatan, asrama, pengumuman, pembayaran, user, ...pData } = p;
-        pData.tahun_ajaran_id = activeTaUlul.id;
+        const newTaId = alimamToUlulTaMap.get(p.tahun_ajaran_id) || activeTaUlul.id;
+        pData.tahun_ajaran_id = newTaId;
         
         if (pData.nomor_pendaftaran) {
           const npCol = await ululDb.pendaftar.findUnique({ where: { nomor_pendaftaran: pData.nomor_pendaftaran } });
@@ -77,7 +93,7 @@ export async function GET(req: Request) {
         
         if (orang_tua) await ululDb.orangTua.create({ data: orang_tua });
         if (hasil_seleksi) {
-          hasil_seleksi.tahun_ajaran_id = activeTaUlul.id;
+          hasil_seleksi.tahun_ajaran_id = newTaId;
           await ululDb.hasilSeleksi.create({ data: hasil_seleksi });
         }
         for (const r of rapor) await ululDb.dataRapor.create({ data: r });
@@ -85,11 +101,11 @@ export async function GET(req: Request) {
         if (kesehatan) await ululDb.dataKesehatan.create({ data: kesehatan });
         if (asrama) await ululDb.dataAsrama.create({ data: asrama });
         if (pengumuman) {
-          pengumuman.tahun_ajaran_id = activeTaUlul.id;
+          pengumuman.tahun_ajaran_id = newTaId;
           await ululDb.pengumuman.create({ data: pengumuman });
         }
         for (const b of pembayaran) {
-          b.tahun_ajaran_id = activeTaUlul.id;
+          b.tahun_ajaran_id = newTaId;
           await ululDb.pembayaran.create({ data: b });
         }
 
@@ -126,7 +142,8 @@ export async function GET(req: Request) {
         }
 
         const { orang_tua, hasil_seleksi, rapor, prestasi, kesehatan, asrama, pengumuman, pembayaran, user, ...pData } = p;
-        pData.tahun_ajaran_id = activeTaAlimam.id;
+        const newTaId = ululToAlimamTaMap.get(p.tahun_ajaran_id) || activeTaAlimam.id;
+        pData.tahun_ajaran_id = newTaId;
         
         if (pData.nomor_pendaftaran) {
           const npCol = await prisma.pendaftar.findUnique({ where: { nomor_pendaftaran: pData.nomor_pendaftaran } });
@@ -141,7 +158,7 @@ export async function GET(req: Request) {
         
         if (orang_tua) await prisma.orangTua.create({ data: orang_tua });
         if (hasil_seleksi) {
-          hasil_seleksi.tahun_ajaran_id = activeTaAlimam.id;
+          hasil_seleksi.tahun_ajaran_id = newTaId;
           await prisma.hasilSeleksi.create({ data: hasil_seleksi });
         }
         for (const r of rapor) await prisma.dataRapor.create({ data: r });
@@ -149,11 +166,11 @@ export async function GET(req: Request) {
         if (kesehatan) await prisma.dataKesehatan.create({ data: kesehatan });
         if (asrama) await prisma.dataAsrama.create({ data: asrama });
         if (pengumuman) {
-          pengumuman.tahun_ajaran_id = activeTaAlimam.id;
+          pengumuman.tahun_ajaran_id = newTaId;
           await prisma.pengumuman.create({ data: pengumuman });
         }
         for (const b of pembayaran) {
-          b.tahun_ajaran_id = activeTaAlimam.id;
+          b.tahun_ajaran_id = newTaId;
           await prisma.pembayaran.create({ data: b });
         }
 
