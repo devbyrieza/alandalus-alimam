@@ -84,7 +84,7 @@ export default function PengumumanPage() {
     }
   };
 
-  const handlePublish = async (new_status: "accepted" | "cadangan" | "rejected") => {
+  const handlePublish = async (new_status: "accepted" | "cadangan" | "rejected" | "tested") => {
     if (selectedIds.length === 0) return;
 
     const actionText = new_status === "accepted" ? "MELULUSKAN" : new_status === "cadangan" ? "menjadikan CADANGAN" : new_status === "tested" ? "MEMBATALKAN KELULUSAN (kembalikan ke seleksi) untuk" : "MENOLAK";
@@ -201,7 +201,8 @@ export default function PengumumanPage() {
           >
             {isPublishing ? "Proses..." : `Cadangkan (${selectedIds.length})`}
           </button>
-          <button onClick={() => handlePublish("tested")} disabled={isPublishing || selectedIds.length === 0} className={`flex items-center justify-center gap-2 px-4 py-2 bg-gray-500 text-white rounded-xl hover:bg-gray-600 transition-all font-bold ${selectedIds.length === 0 ? "opacity-50 cursor-not-allowed" : "shadow hover:shadow-lg"}`}>Batalkan Kelulusan (Kembalikan ke Seleksi)</button>`n                  <button onClick={() => handlePublish("rejected")}
+          <button onClick={() => handlePublish("tested")} disabled={isPublishing || selectedIds.length === 0} className={`flex items-center justify-center gap-2 px-4 py-2 bg-gray-500 text-white rounded-xl hover:bg-gray-600 transition-all font-bold ${selectedIds.length === 0 ? "opacity-50 cursor-not-allowed" : "shadow hover:shadow-lg"}`}>Batalkan Kelulusan (Kembalikan ke Seleksi)</button>
+                  <button onClick={() => handlePublish("rejected")}
             disabled={selectedIds.length === 0 || isPublishing}
             className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 disabled:bg-stone-300 text-white rounded-xl font-bold transition-all shadow-sm"
           >
