@@ -51,7 +51,7 @@ export async function GET(req: Request) {
 
     for (const p of putraAlimam) {
       try {
-        const existing = await ululDb.pendaftar.findUnique({ where: { nik: p.nik } });
+        const existing = await ululDb.pendaftar.findFirst({ where: { nik: p.nik } });
         if (existing) continue;
 
         if (p.user) {
@@ -97,7 +97,7 @@ export async function GET(req: Request) {
 
     for (const p of putriUlul) {
       try {
-        const existing = await prisma.pendaftar.findUnique({ where: { nik: p.nik } });
+        const existing = await prisma.pendaftar.findFirst({ where: { nik: p.nik } });
         if (existing) continue;
 
         if (p.user) {
