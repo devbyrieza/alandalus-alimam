@@ -34,8 +34,8 @@ export async function GET(req: Request) {
       await ululDb.$executeRawUnsafe(`ALTER TABLE "pendaftar" ADD COLUMN IF NOT EXISTS "nis" VARCHAR(50) UNIQUE;`);
       await prisma.$executeRawUnsafe(`ALTER TABLE "profiles" ADD COLUMN IF NOT EXISTS "username" VARCHAR(255) UNIQUE;`);
       await ululDb.$executeRawUnsafe(`ALTER TABLE "profiles" ADD COLUMN IF NOT EXISTS "username" VARCHAR(255) UNIQUE;`);
-    } catch (e) {
-      console.log("Schema alter skip/error:", e);
+    } catch (e: any) {
+      return NextResponse.json({ error: "Failed to alter schema: " + e.message, details: e });
     }
 
     // ==============================================================
