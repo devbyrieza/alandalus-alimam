@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
 
     if (
       !new_status ||
-      !["accepted", "rejected", "cadangan"].includes(new_status)
+      !["accepted", "rejected", "cadangan", "tested"].includes(new_status)
     ) {
       return NextResponse.json({ error: "Invalid status" }, { status: 400 });
     }
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
     const statusMap: Record<string, string> = {
       accepted: "Diterima",
       rejected: "Ditolak",
-      cadangan: "Cadangan" };
+      cadangan: "Cadangan", tested: "Belum Lengkap" };
     const displayStatus = statusMap[new_status] || new_status;
 
     // Fetch user data first to get their current Tahun Ajaran for Pengumuman table
@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
     }[] = [];
 
     for (const user of updatedUsers) {
-      if (!user.no_hp) {
+      if (!user.no_hp || new_status === "tested") {
         skippedCount++;
         details.push({
           id: user.id,
