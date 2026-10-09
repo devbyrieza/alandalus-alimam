@@ -71,26 +71,28 @@ export async function POST(request: NextRequest) {
           await tx.pengumuman.deleteMany({ where: { pendaftar_id: user.id } });
         } else {
           await tx.pengumuman.upsert({
-          where: { pendaftar_id: user.id },
-          update: {
-            status_kelulusan: displayStatus,
-            is_published: new_status !== "tested",
-            published_at: new Date(),
-            published_by: session.id,
-            updated_at: new Date() },
-          create: {
-            pendaftar_id: user.id,
-            status_kelulusan: displayStatus,
-            is_published: new_status !== "tested",
-            published_at: new Date(),
-            published_by: session.id,
-            tahun_ajaran_id: user.tahun_ajaran_id } });
+            where: { pendaftar_id: user.id },
+            update: {
+              status_kelulusan: displayStatus,
+              is_published: new_status !== "tested",
+              published_at: new Date(),
+              published_by: session.id,
+              updated_at: new Date() },
+            create: {
+              pendaftar_id: user.id,
+              status_kelulusan: displayStatus,
+              is_published: new_status !== "tested",
+              published_at: new Date(),
+              published_by: session.id,
+              tahun_ajaran_id: user.tahun_ajaran_id } 
+          });
+        }
       }
     });
 
     await invalidateAdminPendaftarCache();
     for (const uid of pendaftar_ids) {
-      await redis.del("pengumuman_");
+      await redis.del(`pengumuman_${uid}`);
     }
     // Logging audit action
     logAdminAction({
