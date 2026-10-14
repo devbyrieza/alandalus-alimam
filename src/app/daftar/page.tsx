@@ -377,11 +377,9 @@ export default function DaftarPage() {
                   ].map((option) => {
                     const isPutra = formData.jenis_kelamin === "L";
                     const isPutri = formData.jenis_kelamin === "P";
-                    // Al Imam: Semua Putri tutup, Putra buka semua (MTs, IL, MA)
-                    const isClosed = isPutri;
-                    const closedLabel = isPutri
-                      ? "Pendaftaran Putri Belum Dibuka"
-                      : "Pendaftaran Putra Belum Dibuka";
+                    // Al-Imam: KHUSUS PUTRI - Putra dialihkan ke Ulul Albaab
+                    const isClosed = isPutra;
+                    const closedLabel = "Pendaftaran Putra tidak tersedia di sini. Silakan daftar via website Ulul Albaab.";
 
                     return (
                       <motion.div
