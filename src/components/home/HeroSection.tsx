@@ -55,14 +55,14 @@ export default function HeroSection() {
   return (
     <section
       id="beranda"
-      className="relative w-full overflow-hidden bg-gradient-to-b from-[#FDFCF9] via-[#F8FAFC] to-white pt-6 sm:pt-8 lg:pt-3 xl:pt-6 pb-12 sm:pb-16 lg:pb-20"
+      className="relative w-full overflow-hidden bg-gradient-to-b from-[#fff5f8] via-[#FAF8F9] to-white pt-6 sm:pt-8 lg:pt-3 xl:pt-6 pb-12 sm:pb-16 lg:pb-20"
     >
       {/* Background micro grid */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utb3BhY2l0eT0iMC4wMiIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTAgNjBoNjBNNjAgMGwwIDYwIi8+PC9nPjwvc3ZnPg==')] opacity-70 pointer-events-none" />
 
-      {/* Ambient glow — pakai token brand, bukan hex manual */}
-      <div className="glow-blob glow-blob-primary w-[420px] h-[420px] -top-32 -right-24" aria-hidden="true" />
-      <div className="glow-blob glow-blob-secondary w-[320px] h-[320px] bottom-0 -left-20" aria-hidden="true" />
+      {/* Ambient glow — soft diffuse aura */}
+      <div className="glow-blob glow-blob-primary w-[450px] h-[450px] -top-24 -right-16 opacity-20" aria-hidden="true" />
+      <div className="glow-blob glow-blob-secondary w-[320px] h-[320px] bottom-0 -left-20 opacity-15" aria-hidden="true" />
 
       <Container className="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
@@ -159,7 +159,7 @@ export default function HeroSection() {
 
           {/* ═════════ RIGHT COLUMN: PHOTO + FLOATING BADGES ═════════ */}
           <div className="lg:col-span-5 relative">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-rose-500/30 border-4 border-white group bg-white/60 backdrop-blur-sm aspect-[4/5] sm:aspect-square lg:aspect-[4/5] max-h-[500px] xl:max-h-[560px]">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-rose-500/15 border-4 border-white group bg-white/60 backdrop-blur-sm aspect-[4/5] sm:aspect-square lg:aspect-[4/5] max-h-[500px] xl:max-h-[560px]">
               <Image
                 src="/images/hero.jpg"
                 alt="Santriwati Pesantren Al-Imam Al-Islami lil Banat"
