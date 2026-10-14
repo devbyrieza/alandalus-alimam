@@ -64,26 +64,26 @@
   --color-gold-700: #b45309;
 
   /* â”€â”€â”€ Maroon (Al Imam Primary) â”€â”€â”€ */
-  --color-maroon-50: #fdf5f5;
-  --color-maroon-100: #f7e6e6;
-  --color-maroon-200: #edcaca;
-  --color-maroon-300: #dda0a0;
-  --color-maroon-400: #c06060;  /* lebih cerah & vibrant */
-  --color-maroon-500: #a03030;  /* lebih vibrant */
-  --color-maroon-600: #800a0a;  /* lebih bold */
-  --color-maroon-700: #640a0a;  /* sedikit lebih cerah */
-  --color-maroon-800: #520a0a;
-  --color-maroon-900: #3d0707;
-  --color-maroon-950: #550000;  /* identitas utama Al Imam */
+  --color-maroon-50: #fdf2f8;
+  --color-maroon-100: #fce7f3;
+  --color-maroon-200: #fbcfe8;
+  --color-maroon-300: #f472b6;
+  --color-maroon-400: #fb7185;
+  --color-maroon-500: #f43f5e;
+  --color-maroon-600: #e11d74; /* Rose Pink Khas Putri */
+  --color-maroon-700: #be123c;
+  --color-maroon-800: #9f1239;
+  --color-maroon-900: #881337;
+  --color-maroon-950: #700c28;
 
   /* â”€â”€â”€ Cream (Al Imam Secondary) â”€â”€â”€ */
-  --color-cream-50: #fefcf7;
-  --color-cream-100: #fdf8ee;
-  --color-cream-200: #faf0d7;
-  --color-cream-300: #f0d8a8;  /* lebih warm */
-  --color-cream-400: #ddc192;  /* identitas utama */
-  --color-cream-500: #c9a84c;  /* lebih gold */
-  --color-cream-600: #b8922e;
+  --color-cream-50: #f0f8ff;
+  --color-cream-100: #dcedff;
+  --color-cream-200: #b3d7ff;
+  --color-cream-300: #7dbeff;
+  --color-cream-400: #38bdf8;
+  --color-cream-500: #0977e6; /* Biru Khas Ulul Albaab */
+  --color-cream-600: #0284c7;
 
   /* â”€â”€â”€ Teal Fresh Accent (pai-next spirit â€” untuk keseimbangan cerah) â”€â”€â”€ */
   --color-teal-accent: #0d9488;
@@ -209,9 +209,9 @@
     0 8px 28px -4px rgba(245, 158, 11, 0.38),
     0 4px 10px rgba(245, 158, 11, 0.08);
   --shadow-maroon:
-    0 4px 16px -2px rgba(128, 0, 0, 0.3), 0 2px 6px rgba(128, 0, 0, 0.15);
+    0 4px 16px -2px rgba(225, 29, 116, 0.30), 0 2px 6px rgba(225, 29, 116, 0.15);
   --shadow-maroon-lg:
-    0 8px 28px -4px rgba(128, 0, 0, 0.36), 0 4px 10px rgba(128, 0, 0, 0.18);
+    0 8px 28px -4px rgba(225, 29, 116, 0.38), 0 4px 10px rgba(225, 29, 116, 0.18);
   --shadow-gold:
     0 4px 16px -2px rgba(212, 175, 55, 0.35), 0 2px 6px rgba(0, 0, 0, 0.06);
   --shadow-gold-lg:
@@ -253,35 +253,35 @@
    â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â” */
 @layer base {
   :root {
-  /* TIER PLATINUM: The Best of Both Worlds */
-  --primary:        #550000;
-  --primary-dark:   #3d0707;
-  --primary-light:  #8b2020;
-  --secondary:      #ddc192;
-  --secondary-light: #ebd6b3;
-  --secondary-pale: #fcfaf5;
-  --bg:             #fdfaf6;
+  /* TIER PLATINUM: The Best of Both Worlds - Al-Imam Lil Banat */
+  --primary:        #E11D74; /* Rose Pink Khas Putri */
+  --primary-dark:   #9F1239; /* Deep Rose */
+  --primary-light:  #F43F5E; /* Bright Rose */
+  --secondary:      #0977E6; /* Biru Khas Ulul Albaab */
+  --secondary-light: #38BDF8; /* Sky Blue */
+  --secondary-pale: #F0F8FF;
+  --bg:             #FDF2F8; /* Soft Rose Pale */
   --bg-card:        #ffffff;
   --text-main:      #1a1a1a;
   --text-muted:     #6b7280;
-  --border:         #e5e2db;
+  --border:         #FCE7F3; /* Rose border */
   --success:        #16a34a;
   --warning:        #d97706;
   --danger:         #dc2626;
-  --info:           #2563eb;
+  --info:           #0977E6;
   
   /* GEOMETRY: Ultra Rounded (Glass & Breathable) */
   --radius:         20px;
   
   /* ELEVATION: Glowing / Deep 3D Shadows */
-  --shadow-sm:      0 2px 8px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.03);
-  --shadow-md:      0 8px 24px rgba(0,0,0,.06), 0 2px 6px rgba(0,0,0,.04);
-  --shadow-lg:      0 16px 40px rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.05);
+  --shadow-sm:      0 2px 8px rgba(225,29,116,.08), 0 1px 2px rgba(0,0,0,.03);
+  --shadow-md:      0 8px 24px rgba(225,29,116,.14), 0 2px 6px rgba(0,0,0,.04);
+  --shadow-lg:      0 16px 40px rgba(225,29,116,.18), 0 4px 12px rgba(0,0,0,.05);
   
   --font-sans:      'Plus Jakarta Sans', system-ui, sans-serif;
   --font-arabic:    'Amiri', serif;
 
-    color-scheme: light;
+  color-scheme: light;
   }
 
   html {

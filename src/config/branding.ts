@@ -11,8 +11,8 @@ export const BRANDING = {
     "Kaderisasi Ummat Hanif, Kontributif, dan Adaptif",
   schoolNetwork:
     process.env.NEXT_PUBLIC_SCHOOL_NETWORK || "Perpaduan Kurikulum Nasional dan Khas Andalus",
-  primaryColor: process.env.NEXT_PUBLIC_PRIMARY_COLOR || "#800a0a", // Maroon
-  secondaryColor: process.env.NEXT_PUBLIC_SECONDARY_COLOR || "#f4d8cd", // Cream/Rose-gold
+  primaryColor: process.env.NEXT_PUBLIC_PRIMARY_COLOR || "#E11D74", // Rose Pink Lil Banat
+  secondaryColor: process.env.NEXT_PUBLIC_SECONDARY_COLOR || "#0977E6", // Biru Khas Ulul Albaab
   logoPath: process.env.NEXT_PUBLIC_LOGO_PATH || "/images/logo.png",
   faviconPath: process.env.NEXT_PUBLIC_FAVICON_PATH || "/favicon.ico",
   websiteUrl:
