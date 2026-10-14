@@ -114,7 +114,7 @@ const ALBUMS: Album[] = [
     items: [
       { src: "/images/kegiatan-halaqah-akhwat.jpg", label: "Halaqah Tahfidz Al-Qur'an Intensif Bersama Ustadzah" },
       { src: "/images/kegiatan-belajar-akhwat.jpg", label: "Pembelajaran Kitab Turots & Sains Akademik" },
-      { src: "/images/tahfidz.webp", label: "Ujian Target Bulanan Tahfidz Mutqin" },
+      { src: "/images/ekskul-english-club.jpg", label: "Ujian Lisan & Semaan Tahfidz Mutqin Santriwati" },
     ],
   },
   {
