@@ -39,7 +39,7 @@ export default function UrgencyBar() {
   if (!visible || !countdown) return null;
 
   return (
-    <div className="relative w-full bg-primary-950 text-white overflow-hidden">
+    <div className="relative w-full bg-slate-900 text-white overflow-hidden">
       {/* On mobile: 2-row layout. On sm+: single row */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-y-1 gap-x-3 px-3 sm:px-8 py-1.5 sm:py-2">
         {/* Row 1 (mobile) / Left section (desktop): Badge + Countdown */}
@@ -47,20 +47,20 @@ export default function UrgencyBar() {
           {/* Badge */}
           <div className="flex items-center gap-1.5 shrink-0">
             <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse shrink-0" />
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-primary-200 whitespace-nowrap">
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-pink-300 whitespace-nowrap">
               SPMB 2027/2028 Dibuka
             </span>
           </div>
 
           {/* Countdown */}
           <div className="flex items-center gap-1 sm:gap-1.5">
-            <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-gold-400 shrink-0" />
+            <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-pink-400 shrink-0" />
             <div className="flex items-center gap-0.5 font-display font-black text-[11px] sm:text-sm">
               <div className="flex items-center gap-0.5">
                 <span className="bg-white/10 rounded px-1.5 py-0.5 tabular-nums">
                   {String(countdown.days).padStart(2, "0")}
                 </span>
-                <span className="text-gold-200 text-[9px] sm:text-[10px]">
+                <span className="text-pink-200 text-[9px] sm:text-[10px]">
                   h
                 </span>
               </div>
@@ -94,7 +94,7 @@ export default function UrgencyBar() {
 
         {/* Row 2 (mobile) / Right section (desktop): hint + CTA */}
         <div className="flex items-center gap-2">
-          <span className="text-[9px] sm:text-xs text-primary-300 whitespace-nowrap">
+          <span className="text-[9px] sm:text-xs text-pink-200 whitespace-nowrap">
             lagi • Kuota terbatas
           </span>
 

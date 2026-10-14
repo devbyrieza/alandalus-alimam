@@ -34,7 +34,7 @@ export default function FloatingCta() {
           <div className="bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl shadow-primary/10 rounded-full p-2 flex items-center gap-2 pointer-events-auto">
             <a
               href="https://spmb.pesantren-alimam.com/daftar"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm text-[#fdf8f0] bg-gradient-to-r from-primary to-primary-dark shadow-[inset_0_0_0_1.5px_rgba(255,255,255,0.2)] hover:shadow-[inset_0_0_0_1.5px_rgba(255,255,255,0.3),_0_8px_20px_-4px_rgba(85,0,0,0.4)] hover:-translate-y-1 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm text-[#fdf8f0] bg-gradient-to-r from-primary to-primary-dark shadow-[inset_0_0_0_1.5px_rgba(255,255,255,0.2)] hover:shadow-[inset_0_0_0_1.5px_rgba(255,255,255,0.3),_0_8px_20px_-4px_rgba(225,29,116,0.35)] hover:-translate-y-1 transition-all duration-300"
             >
               <span>Daftar Sekarang</span>
               <ArrowRight className="w-4 h-4" />

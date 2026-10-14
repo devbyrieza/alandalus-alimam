@@ -69,12 +69,12 @@
   --color-maroon-200: #fbcfe8;
   --color-maroon-300: #f472b6;
   --color-maroon-400: #fb7185;
-  --color-maroon-500: #f43f5e;
-  --color-maroon-600: #e11d74; /* Rose Pink Khas Putri */
-  --color-maroon-700: #be123c;
-  --color-maroon-800: #9f1239;
-  --color-maroon-900: #881337;
-  --color-maroon-950: #700c28;
+  --color-maroon-500: #FB7185;
+  --color-maroon-600: #E11D74; /* Rose Pink Khas Putri */
+  --color-maroon-700: #F43F5E;
+  --color-maroon-800: #E11D74;
+  --color-maroon-900: #BE123C;
+  --color-maroon-950: #9F1239;
 
   /* â”€â”€â”€ Cream (Al Imam Secondary) â”€â”€â”€ */
   --color-cream-50: #f0f8ff;
@@ -118,15 +118,15 @@
   --color-primary-200: var(--color-maroon-200);
   --color-primary-300: var(--color-maroon-300);
   --color-primary-400: var(--color-maroon-400);
-  --color-primary-500: var(--color-maroon-500);
-  --color-primary-600: var(--color-maroon-600);
-  --color-primary-700: var(--color-maroon-700);
-  --color-primary-800: var(--color-maroon-800);
-  --color-primary-900: var(--color-maroon-900);
-  --color-primary-950: var(--color-maroon-950);
-  --color-primary: var(--color-maroon-950);
-  --color-primary-light: var(--color-maroon-50);
-  --color-primary-dark: var(--color-maroon-900);
+  --color-primary-500: #FB7185;
+  --color-primary-600: #E11D74;
+  --color-primary-700: #F43F5E;
+  --color-primary-800: #E11D74;
+  --color-primary-900: #BE123C;
+  --color-primary-950: #9F1239;
+  --color-primary: #E11D74; /* Rose Pink Khas Putri */
+  --color-primary-light: #FCE7F3; /* Pastel Rose */
+  --color-primary-dark: #BE123C; /* Deep Rose */
 
   --color-secondary-50: var(--color-cream-50);
   --color-secondary-100: var(--color-cream-100);
@@ -139,9 +139,9 @@
   --color-secondary-800: var(--color-cream-800);
   --color-secondary-900: var(--color-cream-900);
   --color-secondary-950: var(--color-cream-950);
-  --color-secondary: var(--color-cream-400);
-  --color-secondary-light: var(--color-cream-50);
-  --color-secondary-dark: var(--color-cream-800);
+  --color-secondary: #0977E6; /* Biru Khas Ulul Albaab */
+  --color-secondary-light: #38BDF8;
+  --color-secondary-dark: #075985;
 
   /* â”€â”€â”€ Status Colors â”€â”€â”€ */
   --color-success-500: #16a34a;
@@ -162,11 +162,11 @@
    â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â” */
 
   /* â”€â”€â”€ Islamic Color Palette â€” Semantic Tokens â”€â”€â”€ */
-  --color-primary: var(--color-maroon-950);
+  --color-primary: #E11D74; /* Rose Pink Khas Putri */
   /* Maroon utama #550000 */
-  --color-primary-light: var(--color-maroon-50);
+  --color-primary-light: #FCE7F3; /* Pastel Rose */
   /* Maroon muda / background aksen */
-  --color-secondary: var(--color-cream-400);
+  --color-secondary: #0977E6; /* Biru Khas Ulul Albaab */
   /* Cream Secondary #ddc192 */
   --color-background: #fafaf9; /* Warm white â€” lebih segar dari pure white */
   /* Background utama */
@@ -255,7 +255,7 @@
   :root {
   /* TIER PLATINUM: The Best of Both Worlds - Al-Imam Lil Banat */
   --primary:        #E11D74; /* Rose Pink Khas Putri */
-  --primary-dark:   #9F1239; /* Deep Rose */
+  --primary-dark:   #BE123C; /* Deep Rose */
   --primary-light:  #F43F5E; /* Bright Rose */
   --secondary:      #0977E6; /* Biru Khas Ulul Albaab */
   --secondary-light: #38BDF8; /* Sky Blue */
@@ -482,10 +482,8 @@
     font-weight: 700;
     font-size: 0.9375rem;
     letter-spacing: -0.01em;
-    color: var(--color-cream-100);
-    background: linear-gradient(135deg,
-        var(--color-maroon-700) 0%,
-        var(--color-maroon-950) 100%);
+    color: #ffffff;
+    background: linear-gradient(135deg, #E11D74 0%, #BE123C 100%);
     box-shadow: var(--shadow-maroon);
     transition: all var(--duration-base) var(--ease-spring);
     border: none;
@@ -535,9 +533,7 @@
     font-size: 0.9375rem;
     letter-spacing: -0.01em;
     color: var(--color-cream-100);
-    background: linear-gradient(135deg,
-        var(--color-maroon-600) 0%,
-        var(--color-maroon-900) 100%);
+    background: linear-gradient(135deg, #E11D74 0%, #0977E6 100%);
     box-shadow: var(--shadow-maroon);
     transition: all var(--duration-base) var(--ease-spring);
     border: none;
@@ -586,10 +582,8 @@
     font-weight: 700;
     font-size: 0.9375rem;
     letter-spacing: -0.01em;
-    color: var(--color-cream-100);
-    background: linear-gradient(135deg,
-        var(--color-maroon-700) 0%,
-        var(--color-maroon-950) 100%);
+    color: #ffffff;
+    background: linear-gradient(135deg, #E11D74 0%, #BE123C 100%);
     box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.15), var(--shadow-maroon);
     transition: transform 0.3s var(--ease-spring), box-shadow 0.3s var(--ease-spring), filter 0.3s var(--ease-spring);
     border: none;
@@ -1039,9 +1033,7 @@
 
   /* Dark teal (Template-Demo â€” hero/CTA) */
   .card-dark-teal {
-    background: linear-gradient(135deg,
-        var(--color-maroon-700) 0%,
-        var(--color-maroon-950) 100%);
+    background: linear-gradient(135deg, #E11D74 0%, #0977E6 100%);
     border-radius: var(--radius-xl);
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: var(--shadow-premium-lg);
@@ -1940,7 +1932,7 @@
   }
 
   .text-gradient-maroon {
-    background: linear-gradient(135deg, var(--color-maroon-600) 0%, var(--color-maroon-900) 100%);
+    background: linear-gradient(135deg, #E11D74 0%, #0977E6 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1985,7 +1977,7 @@
   }
 
   .bg-maroon-gradient {
-    background: linear-gradient(135deg, var(--color-maroon-600) 0%, var(--color-maroon-900) 100%);
+    background: linear-gradient(135deg, #E11D74 0%, #0977E6 100%);
   }
 
   .bg-maroon-subtle {
@@ -2001,7 +1993,7 @@
   }
 
   .bg-maroon-gradient {
-    background: linear-gradient(135deg, var(--color-maroon-600) 0%, var(--color-maroon-900) 100%);
+    background: linear-gradient(135deg, #E11D74 0%, #0977E6 100%);
   }
 
   /* Fresher bg-maroon-subtle â€” pai-next spirit */
@@ -2246,8 +2238,8 @@
     border-radius: 9999px;
     font-weight: 700;
     font-size: 0.9375rem;
-    color: var(--color-cream-100);
-    background: linear-gradient(135deg, var(--color-maroon-700) 0%, var(--color-maroon-950) 100%);
+    color: #ffffff;
+    background: linear-gradient(135deg, #E11D74 0%, #BE123C 100%);
     box-shadow: 0 0 40px -10px rgba(85, 0, 0, 0.55), 0 4px 16px -4px rgba(85, 0, 0, 0.35);
     border: none;
     text-decoration: none;
@@ -2267,7 +2259,7 @@
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 60px -8px rgba(85, 0, 0, 0.65), 0 8px 24px -4px rgba(85, 0, 0, 0.4);
+      box-shadow: 0 0 60px -8px rgba(85, 0, 0, 0.65), 0 8px 24px -4px rgba(225, 29, 116, 0.35);
       filter: brightness(1.08);
     }
 
@@ -2625,7 +2617,7 @@
   .section-label-teal {
     background: rgba(128, 0, 0, 0.08);
     color: var(--color-maroon-700);
-    border-color: rgba(128, 0, 0, 0.18);
+    border-color: rgba(225, 29, 116, 0.20);
   }
 
   /* Blue variant (Ulul Albaab) */
@@ -2716,7 +2708,7 @@
     background: rgba(128, 0, 0, 0.07);
     backdrop-filter: blur(20px) saturate(1.5);
     -webkit-backdrop-filter: blur(20px) saturate(1.5);
-    border: 1px solid rgba(128, 0, 0, 0.14);
+    border: 1px solid rgba(225, 29, 116, 0.20);
     box-shadow: 0 2px 16px rgba(128, 0, 0, 0.08);
   }
 
@@ -2749,7 +2741,7 @@
      Contoh: <span class="gradient-text-maroon">Penerimaan Santri</span>
   */
   .gradient-text-maroon {
-    background: linear-gradient(135deg, var(--color-maroon-700) 0%, var(--color-maroon-950) 100%);
+    background: linear-gradient(135deg, #E11D74 0%, #0977E6 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -2787,7 +2779,7 @@
      Menambah glow effect pada elemen dengan brand color
   */
   .glow-ring-maroon {
-    box-shadow: 0 0 0 1px rgba(128, 0, 0, 0.3), 0 0 20px rgba(128, 0, 0, 0.15);
+    box-shadow: 0 0 0 1px rgba(225, 29, 116, 0.35), 0 0 20px rgba(225, 29, 116, 0.20);
     transition: box-shadow var(--duration-base) var(--ease-smooth);
 
     &:hover {

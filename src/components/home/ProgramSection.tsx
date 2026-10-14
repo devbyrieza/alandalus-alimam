@@ -75,7 +75,7 @@ export default function ProgramSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="bg-white/80 backdrop-blur-sm rounded-3xl p-7 md:p-8 border border-slate-200 shadow-2xl shadow-maroon-500/15 hover:shadow-maroon-500/30 hover:-translate-y-1 hover:border-secondary transition-all duration-300 flex flex-col justify-between group"
+              className="bg-white/80 backdrop-blur-sm rounded-3xl p-7 md:p-8 border border-slate-200 shadow-2xl shadow-rose-500/15 hover:shadow-rose-500/30 hover:-translate-y-1 hover:border-secondary transition-all duration-300 flex flex-col justify-between group"
             >
               <div>
                 {/* Card Top: Icon & Badge */}
