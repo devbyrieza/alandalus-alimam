@@ -18,7 +18,7 @@ const FEATURES = [
       "Pendalaman ilmu syar'i & turots bimbingan Sunnah",
       "Pelajaran umum & sains tetap pintar dan berdaya saing"
     ],
-    image: "/images/kelas-bagian-dalam-saat-para-santri-belajar.png"
+    image: "/images/kegiatan-belajar-akhwat.jpg"
   },
   {
     id: "mendidik-tanpa-luka",
@@ -31,7 +31,7 @@ const FEATURES = [
       "Penindakan tegas edukatif tanpa kekerasan & tanpa sanksi fisik",
       "Penerapan akhlak mulia & ibadah harian sesuai Sunnah"
     ],
-    image: "/images/tahfidz.webp"
+    image: "/images/kegiatan-halaqah-akhwat.jpg"
   },
   {
     id: "leadership-kemandirian",
@@ -44,7 +44,7 @@ const FEATURES = [
       "Lingkungan kampus asri & kondusif di Sukabumi",
       "Fasilitas ruang kelas multimedia, olahraga, & asrama representatif"
     ],
-    image: "/images/gedung-utama-dan-lapangan-basket.png"
+    image: "/images/ekskul-tataboga-1.jpg"
   }
 ];
 

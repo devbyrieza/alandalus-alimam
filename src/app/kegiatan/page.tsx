@@ -350,10 +350,10 @@ export default function KegiatanPage() {
 
   const kegiatanUtama: KegiatanUtama[] = [
     {
-      image: "/images/kelas-bagian-dalam-saat-para-santri-belajar.png",
+      image: "/images/kegiatan-belajar-akhwat.jpg",
       title: "Pembelajaran Kitab Turots",
       description:
-        "Bukan sekadar hafalan! Santri kami PAHAM isi kitab, mampu berdiskusi ilmiah, dan disiapkan menjadi ilmuwan muda.",
+        "Bukan sekadar hafalan! Santriwati kami PAHAM isi kitab, mampu berdiskusi ilmiah, dan disiapkan menjadi ilmuwan muda.",
       icon: BookOpen,
       accentColor: "bg-primary-500",
       bgColor: "bg-[#550000]",
@@ -374,7 +374,7 @@ export default function KegiatanPage() {
           "Prioritas utama kami adalah pendidikan agama. Di sini, kami melihat langsung bagaimana anak dididik menjaga adab dan shalat berjamaah tepat waktu. Investasi akhirat yang luar biasa.",
         parent: "Bapak Surwanto (Wali Santri)" } },
     {
-      image: "/images/tahfidz.webp",
+      image: "/images/kegiatan-halaqah-akhwat.jpg",
       title: "Tahfidz Al-Qur'an Intensif",
       description:
         "Metode menghafal terukur sesuai kemampuan santri dengan target yang jelas setiap jenjang pendidikan.",
@@ -396,7 +396,7 @@ export default function KegiatanPage() {
           "Sinergi kurikulum nasional dan tahfidznya sangat menenangkan. Anak kami tidak hanya mengejar target hafalan, tapi juga PAHAM maknanya melalui bimbingan asatidz yang kompeten.",
         parent: "Ibu Siti Aminah (Wali Santri)" } },
     {
-      image: "/images/ekskul-karate.webp",
+      image: "/images/ekskul-tataboga-1.jpg",
       title: "Pengembangan Bakat & Prestasi",
       description:
         "Menyiapkan santri multitalenta yang juara di bidang olimpiade, olahraga, hingga public speaking.",
@@ -416,7 +416,7 @@ export default function KegiatanPage() {
       testimonial: {
         quote:
           "Fondasi ilmu syar'i dan disiplin bahasa Arab yang saya dapatkan menjadi modal utama saya saat melanjutkan studi. Lingkungan di sini sangat mendukung pembentukan karakter saya.",
-        parent: "Muhammad Razan (Alumni)" } },
+        parent: "Aisyah Humaira (Alumni)" } },
   ];
 
   const heroStats: HeroStat[] = [
@@ -434,7 +434,7 @@ export default function KegiatanPage() {
       icon: Target,
       value: "10+",
       label: "Ekstrakurikuler",
-      sublabel: "Asah bakat santri" },
+      sublabel: "Asah bakat santriwati" },
   ];
 
   const jadwalHarian: JadwalHarian[] = [
@@ -531,86 +531,71 @@ export default function KegiatanPage() {
   ];
 
   const ekstrakurikuler: Ekstrakurikuler[] = [
-    // Baris 1: Establised & Populer
+    // Baris 1: Life Skill & Keputrian
     {
-      name: "Karate",
+      name: "Tata Boga & Baking",
+      icon: Sparkles,
+      desc: "Keterampilan memasak hidangan sehat, baking kue & pastry profesional.",
+      benefit: "Kemandirian Wirausaha" },
+    {
+      name: "Menjahit & Fashion",
+      icon: PenTool,
+      desc: "Dasar pola, memotong bahan, dan menjahit busana muslimah syar'i.",
+      benefit: "Kreativitas & Keterampilan" },
+    {
+      name: "Merajut (Handicraft)",
+      icon: Heart,
+      desc: "Seni merajut tas, konektor hijab, dan aneka kerajinan tangan bernilai seni.",
+      benefit: "Ketelitian & Kesabaran" },
+    {
+      name: "Keputrian & Adab",
+      icon: Award,
+      desc: "Pembekalan fiqih wanita, adab mahram, dan manajemen rumah tangga islami.",
+      benefit: "Karakter Shalihah" },
+
+    // Baris 2: Bahasa, Media & Teknologi
+    {
+      name: "English Club",
+      icon: Globe,
+      desc: "Percakapan aktif, story telling, dan public speaking bahasa Inggris.",
+      benefit: "Komunikasi Global" },
+    {
+      name: "Desain Grafis",
+      icon: PenTool,
+      desc: "Penguasaan Canva & Adobe untuk media dakwah visual muslimah.",
+      benefit: "Kreativitas Digital" },
+    {
+      name: "Fotografi Akhwat",
+      icon: Camera,
+      desc: "Teknik fotografi estetis, pencahayaan, dan dokumentasi kegiatan bernilai syar'i.",
+      benefit: "Keahlian Visual" },
+    {
+      name: "Komputer & Perkantoran",
+      icon: Globe,
+      desc: "Penguasaan software produktivitas, administrasi, dan literasi teknologi.",
+      benefit: "Kecakapan Digital" },
+
+    // Baris 3: Olahraga Sunnah & Karakter
+    {
+      name: "Karate Akhwat",
       icon: Shield,
-      desc: "Bela diri untuk ketahanan fisik dan disiplin diri.",
-      benefit: "Mentalitas Tangguh" },
+      desc: "Bela diri khusus santriwati untuk ketahanan fisik, refleks, dan penjagaan diri.",
+      benefit: "Fisik Tangguh & Sigap" },
     {
-      name: "Pramuka",
-      icon: Tent,
-      desc: "Pembentukan karakter, leadership & kemandirian.",
-      benefit: "Jiwa Pemimpin" },
-    {
-      name: "Panahan",
+      name: "Panahan (Archery)",
       icon: Target,
-      desc: "Olahraga sunnah untuk melatih fokus & ketenangan.",
+      desc: "Olahraga sunnah Rasulullah ﷺ untuk melatih fokus, ketenangan & presisi.",
       benefit: "Fokus & Konsentrasi" },
     {
-      name: "Futsal",
-      icon: Dribbble,
-      desc: "Olahraga tim untuk kesehatan dan sportivitas.",
-      benefit: "Kerjasama Tim" },
+      name: "Pramuka & Kepanduan",
+      icon: Tent,
+      desc: "Latihan kemandirian, kepemimpinan regu, P3K, dan kepedulian lingkungan.",
+      benefit: "Jiwa Pemimpin" },
     {
-      name: "Volly",
-      icon: Trophy,
-      desc: "Melatih koordinasi mata-tangan dan kerjasama regu.",
-      benefit: "Ketangkasan Sosial" },
-
-    // Baris 2: Kompetensi & Soft Skills
-    {
-      name: "Komputer",
-      icon: Globe,
-      desc: "Penguasaan software perkantoran & literasi digital.",
-      benefit: "Kecakapan Teknologi" },
-    {
-      name: "Design Grafis",
-      icon: PenTool,
-      desc: "Seni kreativitas digital dan pengolahan visual.",
-      benefit: "Kreativitas Modern" },
-    {
-      name: "Kaligrafi",
-      icon: PenTool,
-      desc: "Seni menulis indah ayat-ayat Al-Qur'an.",
-      benefit: "Ketekunan Seni" },
-    {
-      name: "Jurnalistik",
+      name: "Kaligrafi Al-Qur'an",
       icon: BookText,
-      desc: "Melatih kemampuan menulis dan analisis informasi.",
-      benefit: "Komunikasi Publik" },
-    {
-      name: "Konten Kreator",
-      icon: Camera,
-      desc: "Edukasi pembuatan konten positif & beradab.",
-      benefit: "Dakwah Digital" },
-
-    // Baris 3: Pengembangan & Masa Depan
-    {
-      name: "Basket",
-      icon: Trophy,
-      desc: "Olahraga dinamis untuk stamina dan tinggi badan.",
-      benefit: "Stamina & Endurance" },
-    {
-      name: "Bulutangkis",
-      icon: Zap,
-      desc: "Melatih ketangkasan dan koordinasi motorik.",
-      benefit: "Kelincahan Fisik" },
-    {
-      name: "Pertanian",
-      icon: Home,
-      desc: "Edukasi kemandirian pangan dan cinta alam.",
-      benefit: "Kemandirian Hidup" },
-    {
-      name: "Periklanan",
-      icon: MessageCircle,
-      desc: "Belajar strategi komunikasi visual dan pemasaran.",
-      benefit: "Jiwa Entrepreneur" },
-    {
-      name: "Programming & AI",
-      icon: Zap,
-      desc: "Belajar dasar algoritma, logika pemrograman, dan pengenalan Artificial Intelligence (AI) modern.",
-      benefit: "Inovator Digital" },
+      desc: "Seni menulis indah mushaf khat naskhi, tsuluts, dan riq'ah.",
+      benefit: "Kecintaan Al-Qur'an" },
   ];
 
   return (
@@ -672,14 +657,14 @@ export default function KegiatanPage() {
 
             <div className="relative z-10 max-w-4xl mx-auto">
               <span className="text-gold-600 font-extrabold tracking-widest uppercase text-xs mb-4 md:mb-6 block">
-                Output Santri
+                Output Santriwati
               </span>
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-ink-950 mb-6 md:mb-8 leading-tight">
                 Hasil Nyata <br />
                 <span className="text-[#550000]">Pendidikan Kita</span>
               </h2>
               <p className="text-lg md:text-xl text-ink-600 font-medium leading-relaxed mb-8 md:mb-10 text-center max-w-2xl mx-auto">
-                Alhamdulillah, dengan izin Allah, santri kami telah menunjukkan
+                Alhamdulillah, dengan izin Allah, santriwati kami telah menunjukkan
                 perkembangan nyata baik dari sisi hafidz, pemahaman kitab,
                 hingga mentalitas juara.
               </p>

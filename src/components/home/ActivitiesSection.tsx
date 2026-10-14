@@ -23,22 +23,22 @@ const ACTIVITIES = [
     icon: BookOpen
   },
   {
-    name: "Bela Diri Karate & Silat",
-    category: "Kebugaran Fisik",
-    desc: "Melatih ketahanan fisik, konsentrasi, kedisiplinan, dan sportivitas bela diri.",
-    icon: Shield
+    name: "Tata Boga, Menjahit & Merajut",
+    category: "Life Skill Muslimah",
+    desc: "Baking, pastry, menjahit busana muslimah, merajut, dan adab keputrian.",
+    icon: Sparkles
   },
   {
-    name: "Klub Bahasa Arab & Inggris",
+    name: "English Club & Bahasa Arab",
     category: "Bahasa Dunia",
-    desc: "Debat ilmiah, pidato (muhadharah), dan penguasaan kosakata aktif harian.",
+    desc: "Debat ilmiah, public speaking (muhadharah 3 bahasa), dan percakapan aktif.",
     icon: Globe
   },
   {
-    name: "Pramuka & Kepanduan",
-    category: "Leadership",
-    desc: "Latihan kemandirian alam terbuka, survival, dan kepemimpinan regu santri.",
-    icon: Tent
+    name: "Karate Akhwat & Panahan",
+    category: "Kebugaran Fisik",
+    desc: "Melatih ketangkasan fisik, stamina, kedisiplinan, dan sportivitas bela diri muslimah.",
+    icon: Shield
   }
 ];
 
@@ -53,10 +53,10 @@ export default function ActivitiesSection() {
             Pengembangan Minat & Bakat
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
-            Aktivitas Santri & <span className="text-[#550000]">Ekstrakurikuler</span>
+            Aktivitas Santriwati & <span className="text-[#550000]">Ekstrakurikuler</span>
           </h2>
           <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-            Menyeimbangkan pembentukan ruhiyah, pengasahan logika, dan ketangkasan fisik santri melalui kegiatan positif.
+            Menyeimbangkan pembentukan ruhiyah, pengasahan logika, dan ketangkasan fisik santriwati melalui kegiatan positif.
           </p>
         </div>
 

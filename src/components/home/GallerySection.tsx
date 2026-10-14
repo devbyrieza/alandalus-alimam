@@ -22,24 +22,24 @@ import { Container } from "@/components/layout/Container";
 
 const GALLERY_ITEMS = [
   {
-    image: "/images/kelas-bagian-dalam-saat-para-santri-belajar.png",
+    image: "/images/kegiatan-belajar-akhwat.jpg",
     title: "Kajian Kitab Turots",
     description: "Mengkaji Kitab Turots & Ulama Salaf",
     icon: BookOpen },
   {
-    image: "/images/tahfidz.webp",
+    image: "/images/kegiatan-halaqah-akhwat.jpg",
     title: "Halaqoh Tahfidz",
     description: "Setoran Hafalan & Muroja'ah",
     icon: BookMarked },
   {
-    image: "/images/ekskul-karate.webp",
-    title: "Ekstrakurikuler",
-    description: "Bela Diri, Panahan & Lifeskill",
+    image: "/images/ekskul-tataboga-1.jpg",
+    title: "Tata Boga & Lifeskill",
+    description: "Baking, Menjahit & Keputrian",
     icon: Target },
   {
     image: "/images/masjid-jami-al-furqon-al-imam-al-islami-dari-luar.png",
     title: "Masjid Jami' Al-Furqon",
-    description: "Pusat Ibadah & Tarbiyah Santri",
+    description: "Pusat Ibadah & Tarbiyah Santriwati",
     icon: School },
 ] as const;
 
@@ -218,7 +218,7 @@ export default function GallerySection() {
               variants={fadeUpVariants}
               className="section-subtitle lg:ml-0 text-left mt-3 text-justify"
             >
-              Intip kegiatan sehari-hari para santri dalam menuntut ilmu dan
+              Intip kegiatan sehari-hari para santriwati dalam menuntut ilmu dan
               beribadah.
             </motion.p>
           </div>
@@ -272,7 +272,7 @@ export default function GallerySection() {
                 variants={fadeUpVariants}
                 className="text-ink-600 font-[450] mb-8 max-w-md leading-relaxed text-[0.9375rem] text-justify"
               >
-                Setiap detik sangat berharga. Kami mengatur jadwal santri agar
+                Setiap detik sangat berharga. Kami mengatur jadwal santriwati agar
                 seimbang antara ibadah, belajar, istirahat, dan bersosialisasi.
               </motion.p>
 

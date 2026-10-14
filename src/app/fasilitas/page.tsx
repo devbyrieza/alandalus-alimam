@@ -29,25 +29,39 @@ const FACILITIES = [
     badge: "Utama"
   },
   {
-    title: "Asrama Santri Kondusif",
+    title: "Asrama Santriwati Kondusif",
     category: "Hunian & Tarbiyah",
     image: "/images/asrama.png",
-    desc: "Kamar berventilasi luas, kasur bertingkat kokoh, lemari pribadi, dan pendampingan musyrif asrama 24 jam.",
-    badge: "Ramah Santri"
+    desc: "Kamar berventilasi luas, kasur bertingkat kokoh, lemari pribadi, dan pendampingan musyrifah asrama 24 jam.",
+    badge: "Ramah Santriwati"
   },
   {
     title: "Ruang Kelas Multimedia Ber-AC",
     category: "Akademik & Sains",
-    image: "/images/kelas-bagian-dalam-saat-para-santri-belajar.png",
-    desc: "Dilengkapi proyektor interaktif, pendingin ruangan (AC), serta pencahayaan alami yang mendukung konsentrasi belajar.",
+    image: "/images/kegiatan-belajar-akhwat.jpg",
+    desc: "Dilengkapi proyektor interaktif, pendingin ruangan (AC), serta suasana belajar santriwati yang nyaman dan interaktif.",
     badge: "Modern"
   },
   {
-    title: "Lapangan Basket & Mini Soccer",
+    title: "Laboratorium Tata Boga & Pastry",
+    category: "Life Skill & Kewirausahaan",
+    image: "/images/ekskul-tataboga-1.jpg",
+    desc: "Dapur praktik pembuatan kue, roti, dan aneka olahan kuliner sehat untuk mengasah bakat tata boga santriwati.",
+    badge: "Kreatif"
+  },
+  {
+    title: "Studio Menjahit & Merajut",
+    category: "Life Skill & Seni Busana",
+    image: "/images/ekskul-menjahit.jpg",
+    desc: "Fasilitas mesin jahit modern dan peralatan merajut untuk membekali santriwati keterampilan busana muslimah dan kerajinan tangan.",
+    badge: "Kemandirian"
+  },
+  {
+    title: "Sarana Olahraga & Bela Diri Muslimah",
     category: "Olahraga & Kebugaran",
-    image: "/images/para-santri-main-basket-di-lapangan-basket.png",
-    desc: "Fasilitas olahraga outdoor lapangan basket dan minisoccer rumput sintetis untuk melatih ketangkasan fisik santri.",
-    badge: "Outdoor"
+    image: "/images/ekskul-karate-akhwat.jpg",
+    desc: "Fasilitas olahraga dan latihan karate santriwati untuk melatih ketangkasan fisik, kesehatan jasmani, dan kepercayaan diri.",
+    badge: "Kebugaran"
   },
   {
     title: "Kantor Layanan SPMB & Ruang Tamu",
@@ -60,21 +74,21 @@ const FACILITIES = [
     title: "Kantor Dewan Asatidzah & Pengasuhan",
     category: "Manajemen & Kepengasuhan",
     image: "/images/kantor-guru-dan-pengasuhan.png",
-    desc: "Pusat koordinasi bidang kepengasuhan, pembinaan santri, dan supervisi kurikulum diniyah pesantren.",
+    desc: "Pusat koordinasi bidang kepengasuhan putri, pembinaan santriwati, dan supervisi kurikulum diniyah pesantren.",
     badge: "Profesional"
   },
   {
     title: "Fasilitas Sanitasi & Kamar Mandi Bersih",
     category: "Kebersihan & Kesehatan",
     image: "/images/kamar-mandi-bagian-luar.png",
-    desc: "Dilengkapi area wudhu luar, kamar mandi keramik bersih, dan air mengalir lancar untuk menjaga kebersihan santri.",
+    desc: "Dilengkapi area wudhu, kamar mandi keramik bersih, dan air mengalir lancar untuk menjaga kebersihan santriwati.",
     badge: "Sehat"
   },
   {
     title: "Depot Air Minum Higienis (Gratis)",
-    category: "Layanan Gizi Santri",
+    category: "Layanan Gizi Santriwati",
     image: "/images/depot-galon-gratis.webp",
-    desc: "Santri dapat mengambil air minum isi ulang secara gratis setiap saat dari depot higienis yang tersedia di area pesantren.",
+    desc: "Santriwati dapat mengambil air minum isi ulang secara gratis setiap saat dari depot higienis yang tersedia di area pesantren.",
     badge: "Gratis"
   },
 ];

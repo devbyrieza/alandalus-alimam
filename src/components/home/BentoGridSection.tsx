@@ -81,7 +81,7 @@ export default function BentoGridSection() {
               </p>
             </div>
             <div className="w-20 h-20 sm:w-28 sm:h-28 relative rounded-2xl overflow-hidden shrink-0 border border-slate-200">
-              <Image src="/images/kelas-bagian-dalam-saat-para-santri-belajar.png" alt="Santri Belajar di Kelas" fill className="object-cover" />
+              <Image src="/images/kegiatan-belajar-akhwat.jpg" alt="Santriwati Belajar di Kelas" fill className="object-cover" />
             </div>
           </motion.div>
 
@@ -98,10 +98,10 @@ export default function BentoGridSection() {
                 <Home className="w-5 h-5" />
               </div>
               <h3 className="text-base font-extrabold text-slate-900 mb-1 group-hover:text-[#550000] transition-colors">
-                Asrama Santri
+                Asrama Santriwati
               </h3>
               <p className="text-slate-500 text-xs leading-relaxed font-normal">
-                Hunian bersih, kasur bertingkat kokoh, dan bimbingan musyrif adab 24 jam.
+                Hunian bersih, kasur bertingkat kokoh, dan bimbingan musyrifah adab 24 jam.
               </p>
             </div>
           </motion.div>

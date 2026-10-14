@@ -444,7 +444,7 @@ export default function TentangPage() {
               Tertarik Bergabung dengan Keluarga Besar Al-Imam?
             </h3>
             <p className="text-xs sm:text-sm text-slate-200 max-w-xl mx-auto font-normal leading-relaxed">
-              Daftarkan putra Anda sekarang dan ikuti proses seleksi penerimaan santri baru Tahun Ajaran 2027/2028.
+              Daftarkan putri Anda sekarang dan ikuti proses seleksi penerimaan santriwati baru Tahun Ajaran 2027/2028.
             </p>
             <div className="pt-2 flex flex-wrap justify-center gap-3">
               <a

@@ -11,36 +11,54 @@ const TEACHERS = [
     role: "Pimpinan / Mudir",
     title: "Ustadz Wahab Rajasam, M.Pd.",
     institution: "Mudir Pesantren Al Imam Al Islami",
-    desc: "Membina arah kebijakan pendidikan, aqidah shahihah, dan manhaj tarbiyah santri.",
+    desc: "Membina arah kebijakan pendidikan, aqidah shahihah, dan manhaj tarbiyah santriwati.",
     icon: Award,
     badge: "Pimpinan",
     photo: "/images/wahab-rajasam.webp",
   },
   {
-    role: "Pembina / Penasehat Syar'i",
+    role: "Penasehat Syar'i",
     title: "Dr. Muhammad Arifin Badri, M.A.",
     institution: "Pakar Fiqih & Mu'amalat Islam",
-    desc: "Memberikan bimbingan manhaj syar'i, arahan fatwa, dan pembinaan aqidah Ahlussunnah.",
+    desc: "Memberikan bimbingan manhaj syar'i, fatwa tarbiyah, dan pembinaan aqidah Ahlussunnah.",
     icon: BookOpen,
     badge: "Penasehat",
     photo: "/images/muhammad-arifin-badri.webp",
   },
   {
-    role: "Kepala Madrasah",
-    title: "Tim Kurikulum Akademik",
-    institution: "Pakar Kurikulum Nasional & Kemenag",
-    desc: "Mengawal integrasi sains modern, literasi digital, dan kesiapan ijazah formal negara.",
-    icon: GraduationCap,
-    badge: "Akademik",
+    role: "Pembina Yayasan",
+    title: "H. Tarmen Tascha, SE",
+    institution: "Dewan Pembina Yayasan",
+    desc: "Mengawal visi strategis pengembangan sarana, infrastruktur, dan kelembagaan pesantren.",
+    icon: ShieldCheck,
+    badge: "Pembina",
     photo: null,
   },
   {
-    role: "Kepala Pengasuhan & Musyrif",
+    role: "Dewan Pembina Pendidikan",
+    title: "Ust. Aminullah Yasin, Lc., M.Pd.",
+    institution: "Pakar Kurikulum & Pendidikan Islam",
+    desc: "Supervisi mutu kurikulum integrasi turots, tahfidz mutqin, dan kurikulum formal.",
+    icon: GraduationCap,
+    badge: "Kurikulum",
+    photo: null,
+  },
+  {
+    role: "Dewan Pembina Kepengasuhan",
+    title: "Ust. Thoriq Ziyad, Lc.",
+    institution: "Dewan Pembina Ma'had",
+    desc: "Penguatan tarbiyah ruhiyah, adab santriwati, dan kepengasuhan Mendidik Tanpa Luka.",
+    icon: Award,
+    badge: "Pengasuhan",
+    photo: null,
+  },
+  {
+    role: "Kepala Pengasuhan & Musyrifah",
     title: "Tim Kesantrian 24 Jam",
     institution: "Tarbiyah Adab & Karakter",
-    desc: "Mendampingi santri di asrama dengan pendekatan keteladanan penuh tanpa kekerasan.",
+    desc: "Mendampingi santriwati di asrama 24 jam dengan penuh keibuan dan keteladanan tanpa kekerasan.",
     icon: ShieldCheck,
-    badge: "Pengasuhan",
+    badge: "Asrama 24 Jam",
     photo: null,
   },
 ];
@@ -79,16 +97,16 @@ export default function TeachersSection() {
             <span className="text-[10px] font-extrabold uppercase tracking-widest text-secondary bg-white/10 px-3 py-1 rounded-full border border-white/20 inline-block mb-2">
               Dewan Asatidzah Al Imam Al Islami
             </span>
-            <h3 className="text-base sm:text-xl lg:text-2xl font-extrabold leading-tight">Para Pendidik &amp; Pembina Santri Al Imam</h3>
+            <h3 className="text-base sm:text-xl lg:text-2xl font-extrabold leading-tight">Para Pendidik &amp; Pembina Santriwati Al Imam</h3>
             <p className="text-white/80 text-xs sm:text-sm mt-1 font-normal max-w-xl line-clamp-2 sm:line-clamp-none">
-              Lulusan universitas Islam ternama Timur Tengah, para hafizh Al-Qur&apos;an bersanad, dan praktisi tarbiyah
+              Lulusan universitas Islam ternama Timur Tengah, para hafizhah Al-Qur&apos;an bersanad, dan praktisi tarbiyah
               berpengalaman.
             </p>
           </div>
         </motion.div>
 
-        {/* 4 Pillar Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* 6 Pillar Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {TEACHERS.map((teacher, idx) => (
             <motion.div
               key={idx}
