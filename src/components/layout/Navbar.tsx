@@ -113,7 +113,7 @@ function canHover(): boolean {
 }
 
 const desktopLinkClass = (active: boolean) =>
-  `px-3 xl:px-3.5 py-1.5 text-xs xl:text-sm font-bold rounded-full transition-all duration-300 min-h-[34px] flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-300 ${
+  `px-3 py-1.5 text-xs xl:text-sm font-bold rounded-full transition-all duration-300 min-h-[34px] flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-300 ${
     active
       ? "bg-primary-50 text-primary-900 font-extrabold shadow-sm"
       : "text-ink-600 hover:text-primary-900 hover:bg-primary-50/50"
@@ -274,7 +274,7 @@ export default function Navbar() {
               href="/"
               onClick={handleBerandaClick}
               aria-label={`${BRANDING.schoolShortName} — Beranda`}
-              className="flex items-center gap-2.5 sm:gap-3 group min-w-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-300"
+              className="flex items-center gap-2.5 sm:gap-3 group min-w-0 xl:shrink-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-300"
             >
               <div className="relative shrink-0">
                 <div
@@ -297,12 +297,12 @@ export default function Navbar() {
                 <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-[var(--color-primary-600)] border-2 border-white rounded-full z-10 shadow-sm" />
               </div>
 
-              <div className="min-w-0">
+              <div className="min-w-0 xl:shrink-0">
                 {/* <span>, bukan <h1>: judul utama halaman milik konten halaman */}
-                <span className="block truncate text-sm sm:text-base font-black leading-tight tracking-tight text-[var(--color-ink-900)]">
+                <span className="block truncate text-sm sm:text-base font-black leading-tight tracking-tight text-[var(--color-ink-900)] xl:whitespace-normal xl:line-clamp-2 xl:max-w-[10rem] xl:leading-[1.15]">
                   {BRANDING.schoolShortName}
                 </span>
-                <span className="block truncate max-[359px]:hidden text-[8.5px] sm:text-[9.5px] font-bold text-[var(--color-ink-400)] uppercase tracking-wider mt-0.5 leading-none">
+                <span className="block truncate max-[359px]:hidden xl:max-w-[10rem] text-[8.5px] sm:text-[9.5px] font-bold text-[var(--color-ink-400)] uppercase tracking-wider mt-0.5 leading-none">
                   {MANAGED_BY}
                 </span>
               </div>
@@ -433,7 +433,7 @@ export default function Navbar() {
               {isLoggedIn ? (
                 <a
                   href={SPMB_LINKS.dashboard}
-                  className="text-xs xl:text-sm font-bold text-primary-950 px-5 py-2 rounded-full border border-primary/10 bg-white hover:bg-primary-50 hover:border-primary/30 transition-all hover:scale-105 shadow-sm flex items-center gap-1.5"
+                  className="text-xs xl:text-sm font-bold text-primary-950 px-4 py-2 rounded-full border border-primary/10 bg-white hover:bg-primary-50 hover:border-primary/30 transition-all hover:scale-105 shadow-sm flex items-center gap-1.5"
                 >
                   <span className="relative flex h-2 w-2 mr-0.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 motion-reduce:animate-none" />
