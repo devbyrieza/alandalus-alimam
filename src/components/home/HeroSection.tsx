@@ -215,11 +215,11 @@ export default function HeroSection() {
               aria-hidden="true"
             />
 
-            {/* Foto: rasio 4:5 di semua ukuran layar. Titik fokus crop diatur lewat kelas object-* pada <Image> */}
+            {/* Kampus Representatif Al-Imam Lil Banat: Asri, megah, dan bebas dari fitnah visual makhluk bernyawa */}
             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border-4 border-white bg-white/60 shadow-2xl shadow-rose-500/15 group">
               <Image
-                src="/images/talent-akhwat.png"
-                alt="Santriwati Pesantren Al-Imam Al-Islami lil Banat"
+                src="/images/gedung-utama-dan-lapangan-basket.png"
+                alt="Kampus Pesantren Al-Imam Al-Islami lil Banat Sukabumi"
                 fill
                 priority
                 sizes="(max-width: 1024px) 90vw, 460px"
@@ -227,10 +227,10 @@ export default function HeroSection() {
               />
 
               {/* Gradasi halus di bagian bawah agar badge tetap terbaca jelas */}
-              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-slate-900/30 to-transparent pointer-events-none" aria-hidden="true" />
+              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-slate-900/40 via-slate-900/10 to-transparent pointer-events-none" aria-hidden="true" />
 
-              {/* Badge Kiri-Atas: Standar Mutu Al Andalus IIBS (rapi di dalam sudut bingkai) */}
-              <div className="absolute top-3.5 left-3.5 sm:top-5 sm:left-5 z-10 bg-white/90 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 pr-3.5 sm:pr-4 border border-white/60 shadow-lg shadow-black/5 flex items-center gap-2.5 sm:gap-3 transition-transform duration-300 hover:scale-105">
+              {/* Badge Kanan-Atas: Standar Mutu Al Andalus IIBS (rapi di dalam sudut bingkai) */}
+              <div className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 z-10 bg-white/90 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 pr-3.5 sm:pr-4 border border-white/60 shadow-lg shadow-black/5 flex items-center gap-2.5 sm:gap-3 transition-transform duration-300 hover:scale-105">
                 <div className="icon-box icon-box-secondary w-9 h-9 sm:w-10 sm:h-10 shrink-0">
                   <Award className="w-5 h-5" aria-hidden="true" />
                 </div>
@@ -240,8 +240,8 @@ export default function HeroSection() {
                 </div>
               </div>
 
-              {/* Badge Kanan-Bawah: Tahfidz Mutqin (rapi di dalam sudut bingkai) */}
-              <div className="absolute bottom-3.5 right-3.5 sm:bottom-5 sm:right-5 z-10 bg-white/90 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 pr-3.5 sm:pr-4 border border-white/60 shadow-lg shadow-black/5 flex items-center gap-2.5 sm:gap-3 transition-transform duration-300 hover:scale-105">
+              {/* Badge Kiri-Bawah: Tahfidz Mutqin (aman dari popup WhatsApp floating button di kanan-bawah) */}
+              <div className="absolute bottom-3.5 left-3.5 sm:bottom-5 sm:left-5 z-10 bg-white/90 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 pr-3.5 sm:pr-4 border border-white/60 shadow-lg shadow-black/5 flex items-center gap-2.5 sm:gap-3 transition-transform duration-300 hover:scale-105">
                 <div className="icon-box icon-box-primary w-9 h-9 sm:w-10 sm:h-10 shrink-0">
                   <BookOpen className="w-5 h-5" aria-hidden="true" />
                 </div>
