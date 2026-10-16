@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const FAQS = [
   {
     question: "Kapan pendaftaran santri baru angkatan 2027/2028 dibuka?",
-    answer: "Pendaftaran SPMB Tahun Ajaran 2027/2028 dibuka mulai tanggal 5 September sampai dengan 28 Desember 2026. Namun, pendaftaran dapat ditutup lebih awal jika kuota santri baru sebanyak 25 santri per rombel telah terpenuhi."
+    answer: "Pendaftaran SPMB Tahun Ajaran 2027/2028 dibuka mulai tanggal 16 Oktober sampai dengan 20 Desember 2026. Namun, pendaftaran dapat ditutup lebih awal jika kuota santri baru sebanyak 25 santri per rombel telah terpenuhi."
   },
   {
     question: "Apa saja fokus program unggulan di Pesantren Al-Imam?",

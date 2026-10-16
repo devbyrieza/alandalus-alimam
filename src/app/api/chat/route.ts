@@ -1,4 +1,4 @@
-﻿import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 
 // Initialize Gemini API
@@ -49,7 +49,7 @@ PROGRAM PENDIDIKAN:
    - Target Hafalan 16 Juz, Penguasaan Kitab Turots, Bahasa Arab Aktif & Formal. Persiapan Universitas Timur Tengah & Dalam Negeri.
 
 INFORMASI SPMB T.A 2027/2028:
-- Pendaftaran: 10 Februari - 7 Juni 2026 (Online via website).
+- Pendaftaran: 16 Oktober - 20 Desember 2026 (Online via website).
 - BIAYA PENDIDIKAN PENTING:
   - Biaya Pendaftaran: Rp 200.000 (Non-refundable)
   - Uang Pangkal: Rp 7.650.000 (Non-refundable, pendaftaran ulang)
