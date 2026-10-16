@@ -203,8 +203,9 @@ export default function HeroSection() {
           </div>
 
           {/* ═════════ RIGHT COLUMN: PHOTO ═════════ */}
+          {/* Rasio 4:5 standar proporsional tanpa perpanjangan height bingkai */}
           <div
-            className={`relative w-full max-w-[21rem] sm:max-w-[23rem] lg:max-w-[24.5rem] xl:max-w-[26rem] mx-auto lg:mx-0 lg:col-span-5 lg:justify-self-end ${enter}`}
+            className={`relative w-full max-w-[26rem] sm:max-w-[28rem] mx-auto lg:mx-0 lg:max-w-[28.75rem] lg:col-span-5 lg:justify-self-end ${enter}`}
             style={delay(200)}
           >
             {/* Bingkai dekoratif di belakang foto */}
@@ -214,14 +215,14 @@ export default function HeroSection() {
             />
 
             {/* Santriwati Pesantren Al-Imam Al-Islami lil Banat: Almamater & Rok utuh tampak jelas */}
-            <div className="relative aspect-[9/16] sm:aspect-[1/2] rounded-3xl overflow-hidden border-4 border-white bg-white/60 shadow-2xl shadow-rose-500/15 group">
+            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border-4 border-white bg-white/60 shadow-2xl shadow-rose-500/15 group">
               <Image
                 src="/images/hero-putri-alimam.jpeg"
                 alt="Santriwati Pesantren Al-Imam Al-Islami lil Banat"
                 fill
                 priority
-                sizes="(max-width: 1024px) 90vw, 420px"
-                className="object-cover object-bottom transform group-hover:scale-105 transition-transform duration-700 motion-reduce:transition-none"
+                sizes="(max-width: 1024px) 90vw, 460px"
+                className="object-cover object-center transform group-hover:scale-105 transition-transform duration-700 motion-reduce:transition-none"
               />
             </div>
           </div>
