@@ -1,7 +1,7 @@
 export const BRANDING = {
-  schoolName: "Pesantren Al-Imam Al-Islami lil Banat",
-  schoolShortName: "Al-Imam Al-Islami lil Banat",
-  schoolLegalName: "Pesantren Al-Imam Al-Islami lil Banat Managed by Al Andalus IIBS",
+  schoolName: "Pesantren Al-Imam Al-Islami",
+  schoolShortName: "Al-Imam Al-Islami",
+  schoolLegalName: "Pesantren Al-Imam Al-Islami Managed by Al Andalus IIBS",
   subtitle: "Pesantren Islam Internasional Khusus Putri",
   gender: "Putri",
   shaleh: "shalehah",
@@ -11,7 +11,7 @@ export const BRANDING = {
     "Kaderisasi Ummat Hanif, Kontributif, dan Adaptif",
   schoolNetwork:
     process.env.NEXT_PUBLIC_SCHOOL_NETWORK || "Perpaduan Kurikulum Nasional dan Khas Andalus",
-  primaryColor: process.env.NEXT_PUBLIC_PRIMARY_COLOR || "#E11D74", // Rose Pink Lil Banat
+  primaryColor: process.env.NEXT_PUBLIC_PRIMARY_COLOR || "#800a0a", // Maroon Al-Imam Khusus Putri
   secondaryColor: process.env.NEXT_PUBLIC_SECONDARY_COLOR || "#0977E6", // Biru Khas Ulul Albaab
   logoPath: process.env.NEXT_PUBLIC_LOGO_PATH || "/images/logo.png",
   faviconPath: process.env.NEXT_PUBLIC_FAVICON_PATH || "/favicon.ico",

@@ -14,7 +14,8 @@ import {
   School,
   ChevronDown,
   Sparkles,
-  RefreshCw } from "lucide-react";
+  RefreshCw,
+  ExternalLink } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { countries } from "@/lib/data/countries";
 import { formatNamaLengkap } from "@/lib/validations/registration";
@@ -163,7 +164,7 @@ export default function DaftarPage() {
       errors.jenis_kelamin = "Pilih jenis kelamin santri";
     } else if (formData.jenis_kelamin === "L") {
       errors.jenis_kelamin =
-        "Mohon maaf, pendaftaran Santri Putra (Laki-laki) kini dilakukan melalui website SPMB Pesantren Ulul Albaab. Al-Imam Al-Islami lil Banat sekarang resmi KHUSUS PUTRI.";
+        "Mohon maaf, pendaftaran Santri Putra (Laki-laki) dialihkan melalui website SPMB Pesantren Ulul Albaab. Pesantren Al-Imam Al-Islami resmi KHUSUS PUTRI.";
     }
 
     if (!formData.jenjang) {
@@ -257,6 +258,35 @@ export default function DaftarPage() {
           </div>
         </div>
 
+        {/* Banner Pengalihan Pendaftaran Santri Putra ke Ulul Albaab */}
+        <div className="w-full mb-6 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-blue-50/95 via-sky-50/90 to-blue-50/95 border-2 border-blue-200 p-4 sm:p-5 shadow-lg shadow-blue-500/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-start gap-3.5">
+            <div className="w-11 h-11 rounded-2xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-blue-600/25 mt-0.5 sm:mt-0">
+              <School className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-[10px] font-black uppercase tracking-wider bg-blue-600 text-white px-2.5 py-0.5 rounded-full shadow-xs">
+                  Khusus Calon Santri Putra
+                </span>
+                <span className="text-xs font-bold text-blue-900">Mencari Pendaftaran Santri Putra (Laki-laki)?</span>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
+                Pesantren Al-Imam Al-Islami <strong>resmi khusus santriwati (Putri)</strong>. Pendaftaran santri <strong>Putra</strong> dialihkan ke <strong>Pesantren Ulul Albaab</strong>.
+              </p>
+            </div>
+          </div>
+          <a
+            href="https://pesantren-ululalbaab.com/daftar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-extrabold text-xs uppercase tracking-wider shadow-md shadow-blue-600/20 hover:shadow-lg transition-all shrink-0 w-full sm:w-auto"
+          >
+            <span>Daftar Santri Putra</span>
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        </div>
+
         {/* Two-Section OMI Container Card */}
         <div className="w-full rounded-3xl overflow-hidden shadow-xl shadow-slate-900/5 border border-slate-200 bg-white relative">
           
@@ -265,14 +295,19 @@ export default function DaftarPage() {
             <div className="absolute top-0 right-0 w-48 h-48 bg-[#ddc192]/10 rounded-full blur-2xl pointer-events-none" />
             
             <div className="relative z-10 space-y-3">
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#ddc192] bg-white/10 px-3 py-1 rounded-full border border-white/15 inline-block">
-                Tahap 1: Registrasi Data Awal
-              </span>
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#ddc192] bg-white/10 px-3 py-1 rounded-full border border-white/15 inline-block">
+                  Tahap 1: Registrasi Data Awal
+                </span>
+                <span className="text-[10px] font-black uppercase tracking-widest text-rose-200 bg-rose-500/25 px-3 py-1 rounded-full border border-rose-400/30 inline-block">
+                  KHUSUS PUTRI
+                </span>
+              </div>
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
                 Formulir Pendaftaran SPMB Online
               </h1>
               <p className="text-xs sm:text-sm text-slate-200 font-normal leading-relaxed">
-                Silakan isi data calon santri dan nomor WhatsApp aktif wali santri untuk verifikasi pendaftaran.
+                Silakan isi data calon santriwati dan nomor WhatsApp aktif wali santri untuk verifikasi pendaftaran.
               </p>
             </div>
           </div>
@@ -554,15 +589,17 @@ export default function DaftarPage() {
                     >
                       <div className="flex gap-4">
                         {[
-                          { val: "L", label: "Santri Putra" },
-                          { val: "P", label: "Santri Putri" },
+                          { val: "P", label: "Santri Putri (Perempuan)", sub: "Tersedia di Al-Imam" },
+                          { val: "L", label: "Santri Putra (Laki-laki)", sub: "Dialihkan ke Ulul Albaab" },
                         ].map((jk) => (
                           <motion.label
                             key={jk.val}
                             whileTap={{ scale: 0.98 }}
-                            className={`flex-1 flex items-center justify-center px-4 md:px-6 py-3 md:py-4 rounded-[1.5rem] md:rounded-[2rem] border-2 cursor-pointer transition-all duration-300 text-sm md:text-base ${
+                            className={`flex-1 flex flex-col items-center justify-center text-center px-4 md:px-6 py-3.5 md:py-4 rounded-[1.5rem] md:rounded-[2rem] border-2 cursor-pointer transition-all duration-300 text-sm md:text-base ${
                               formData.jenis_kelamin === jk.val
-                                ? "bg-primary-700 border-primary-700 text-white font-black shadow-2xl shadow-primary/30  shadow-primary/20 "
+                                ? jk.val === "P"
+                                  ? "bg-primary-700 border-primary-700 text-white font-black shadow-2xl shadow-primary/30"
+                                  : "bg-blue-600 border-blue-600 text-white font-black shadow-lg"
                                 : "bg-secondary-50 border-secondary-200 text-ink-800 hover:border-primary-200 hover:bg-white font-bold"
                             }`}
                           >
@@ -574,14 +611,47 @@ export default function DaftarPage() {
                               onChange={() =>
                                 setFormData((p) => ({
                                   ...p,
-                                  jenis_kelamin: jk.val as any }))
+                                  jenis_kelamin: jk.val as any,
+                                }))
                               }
                               className="hidden"
                             />
-                            {jk.label}
+                            <span>{jk.label}</span>
+                            <span
+                              className={`text-[10px] sm:text-xs mt-0.5 ${
+                                formData.jenis_kelamin === jk.val
+                                  ? "text-white/80 font-medium"
+                                  : "text-slate-500 font-medium"
+                              }`}
+                            >
+                              {jk.sub}
+                            </span>
                           </motion.label>
                         ))}
                       </div>
+
+                      {/* Callout jika memilih Putra */}
+                      {formData.jenis_kelamin === "L" && (
+                        <div className="mt-3.5 p-4 rounded-2xl bg-blue-50 border border-blue-200 text-blue-900 text-xs sm:text-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 animate-fadeIn">
+                          <div>
+                            <p className="font-extrabold text-blue-950">
+                              Pendaftaran Santri Putra dialihkan ke Pesantren Ulul Albaab.
+                            </p>
+                            <p className="text-slate-600 text-xs mt-0.5">
+                              Pesantren Al-Imam Al-Islami hanya menerima pendaftaran santriwati (Putri).
+                            </p>
+                          </div>
+                          <a
+                            href="https://pesantren-ululalbaab.com/daftar"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 text-white font-bold text-xs uppercase tracking-wider hover:bg-blue-700 shadow-sm transition-all shrink-0 w-full sm:w-auto justify-center"
+                          >
+                            <span>Ke Pendaftaran Putra</span>
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
+                        </div>
+                      )}
                     </InputField>
                   </div>
                 </div>

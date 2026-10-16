@@ -96,7 +96,7 @@ export default function HeroSection() {
             >
               <span className="w-2 h-2 rounded-full bg-primary motion-safe:animate-pulse" />
               <span className="text-xs font-extrabold uppercase tracking-wider text-primary">
-                Portal Resmi SPMB Tahun Ajaran {BRANDING.academicYear}
+                Portal Resmi SPMB TA {BRANDING.academicYear} • KHUSUS PUTRI
               </span>
             </div>
 
@@ -214,11 +214,18 @@ export default function HeroSection() {
               aria-hidden="true"
             />
 
-            {/* Santriwati Pesantren Al-Imam Al-Islami lil Banat: Almamater & Rok utuh tampak jelas */}
+            {/* Santriwati Pesantren Al-Imam Al-Islami: Almamater & Rok utuh tampak jelas */}
             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border-4 border-white bg-white/60 shadow-2xl shadow-rose-500/15 group">
+              {/* Badge Khusus Putri di dalam bingkai foto */}
+              <div className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-rose-200 shadow-md flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-rose-600 animate-pulse" />
+                <span className="text-[11px] font-black tracking-wider text-rose-900 uppercase">
+                  Khusus Putri
+                </span>
+              </div>
               <Image
                 src="/images/hero-putri-alimam.jpeg"
-                alt="Santriwati Pesantren Al-Imam Al-Islami lil Banat"
+                alt="Santriwati Pesantren Al-Imam Al-Islami"
                 fill
                 priority
                 sizes="(max-width: 1024px) 90vw, 460px"

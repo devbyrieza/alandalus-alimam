@@ -57,9 +57,9 @@ export default function ProgramSection() {
       <Container className="max-w-7xl mx-auto px-4 md:px-6">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <span className="section-label section-label-primary inline-flex">Jenjang Pendidikan &amp; Kurikulum</span>
+          <span className="section-label section-label-primary inline-flex">Jenjang Pendidikan &amp; Kurikulum • Khusus Putri</span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
-            Pilihan Program <span className="text-primary">Pendidikan</span>
+            Pilihan Program <span className="text-primary">Pendidikan Khusus Putri</span>
           </h2>
           <p className="text-slate-600 text-sm md:text-base leading-relaxed">
             Dirancang komprehensif untuk mencetak generasi yang mutafaqqih fiddin, berwawasan luas, dan berakhlak mulia.
