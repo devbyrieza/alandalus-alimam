@@ -2,7 +2,7 @@ export const BRANDING = {
   schoolName: "Pesantren Al-Imam Al-Islami",
   schoolShortName: "Al-Imam Al-Islami",
   schoolLegalName: "Pesantren Al-Imam Al-Islami Managed by Al Andalus IIBS",
-  subtitle: "Pesantren Islam Internasional Khusus Putri",
+  subtitle: "Pesantren Islam Khusus Putri",
   gender: "Putri",
   shaleh: "shalehah",
   santri: "santriwati",

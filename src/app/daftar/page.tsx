@@ -164,7 +164,7 @@ export default function DaftarPage() {
       errors.jenis_kelamin = "Pilih jenis kelamin santri";
     } else if (formData.jenis_kelamin === "L") {
       errors.jenis_kelamin =
-        "Mohon maaf, pendaftaran Santri Putra (Laki-laki) dialihkan melalui website SPMB Pesantren Ulul Albaab. Pesantren Al-Imam Al-Islami resmi KHUSUS PUTRI.";
+        "Mohon maaf, pendaftaran Santri Putra (Laki-laki) dialihkan ke Pesantren Ulul Albaab (Managed by Al-Andalus IIBS). Pesantren Al-Imam Al-Islami resmi KHUSUS PUTRI.";
     }
 
     if (!formData.jenjang) {
@@ -272,7 +272,7 @@ export default function DaftarPage() {
                 <span className="text-xs font-bold text-blue-900">Mencari Pendaftaran Santri Putra (Laki-laki)?</span>
               </div>
               <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
-                Pesantren Al-Imam Al-Islami <strong>resmi khusus santriwati (Putri)</strong>. Pendaftaran santri <strong>Putra</strong> dialihkan ke <strong>Pesantren Ulul Albaab</strong>.
+                Pesantren Al-Imam Al-Islami <strong>resmi khusus santriwati (Putri)</strong>. Pendaftaran santri <strong>Putra</strong> dialihkan ke <strong>Pesantren Ulul Albaab (Managed by Al-Andalus IIBS)</strong>.
               </p>
             </div>
           </div>
@@ -635,10 +635,10 @@ export default function DaftarPage() {
                         <div className="mt-3.5 p-4 rounded-2xl bg-blue-50 border border-blue-200 text-blue-900 text-xs sm:text-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 animate-fadeIn">
                           <div>
                             <p className="font-extrabold text-blue-950">
-                              Pendaftaran Santri Putra dialihkan ke Pesantren Ulul Albaab.
+                              Pendaftaran Santri Putra dialihkan ke Pesantren Ulul Albaab (Managed by Al-Andalus IIBS).
                             </p>
                             <p className="text-slate-600 text-xs mt-0.5">
-                              Pesantren Al-Imam Al-Islami hanya menerima pendaftaran santriwati (Putri).
+                              Al-Imam Al-Islami khusus santriwati (Putri). Kedua pesantren dikelola bersama di bawah naungan manajemen & kurikulum Al-Andalus IIBS.
                             </p>
                           </div>
                           <a

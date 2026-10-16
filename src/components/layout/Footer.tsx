@@ -95,7 +95,7 @@ export default function Footer() {
                   className="text-[10px] font-bold uppercase tracking-widest mt-1.5"
                   style={{ color: "var(--color-secondary-400)" }}
                 >
-                  Pesantren Islam Internasional Khusus Putri
+                  Pesantren Islam Khusus Putri
                 </p>
               </div>
             </Link>
