@@ -215,15 +215,15 @@ export default function HeroSection() {
               aria-hidden="true"
             />
 
-            {/* Kampus Representatif Al-Imam Lil Banat: Asri, megah, dan bebas dari fitnah visual makhluk bernyawa */}
+            {/* Santriwati Pesantren Al-Imam Al-Islami lil Banat */}
             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border-4 border-white bg-white/60 shadow-2xl shadow-rose-500/15 group">
               <Image
-                src="/images/gedung-utama-dan-lapangan-basket.png"
-                alt="Kampus Pesantren Al-Imam Al-Islami lil Banat Sukabumi"
+                src="/images/hero-putri-alimam.jpeg"
+                alt="Santriwati Pesantren Al-Imam Al-Islami lil Banat"
                 fill
                 priority
                 sizes="(max-width: 1024px) 90vw, 460px"
-                className="object-cover object-center transform group-hover:scale-105 transition-transform duration-700 motion-reduce:transition-none"
+                className="object-cover object-[center_28%] transform group-hover:scale-105 transition-transform duration-700 motion-reduce:transition-none"
               />
 
               {/* Gradasi halus di bagian bawah agar badge tetap terbaca jelas */}
