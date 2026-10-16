@@ -1,9 +1,7 @@
-// @ts-nocheck
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { enqueueWhatsapp } from "@/lib/whatsapp-queue";
-import { generateMagicToken, getPermanentAuthUrl } from "@/lib/utils/magic-link";
 
 export async function POST(request: Request) {
   try {
@@ -17,10 +15,10 @@ export async function POST(request: Request) {
 
     const upcomingSchedules = await prisma.jadwalUjian.findMany({
       where: {
-        
-        exam_session: {
-          start_time: { gte: today },
-        },
+        OR: [
+          { tanggal_ujian: { gte: today } },
+          { exam_session: { start_time: { gte: today } } },
+        ],
       },
       include: {
         exam_session: true,
@@ -28,7 +26,7 @@ export async function POST(request: Request) {
     });
 
     if (upcomingSchedules.length === 0) {
-      return NextResponse.json({ success: true, count: 0, message: "Tidak ada jadwal ujian ke depan." });
+      return NextResponse.json({ success: true, count: 0, message: "Tidak ada jadwal ujian aktif ke depan." });
     }
 
     // 2. Collect unique Penguji IDs
@@ -42,7 +40,7 @@ export async function POST(request: Request) {
     });
 
     if (pengujiIds.size === 0) {
-      return NextResponse.json({ success: true, count: 0, message: "Tidak ada penguji yang ditugaskan." });
+      return NextResponse.json({ success: true, count: 0, message: "Tidak ada penguji yang ditugaskan pada jadwal aktif." });
     }
 
     // 3. Fetch Penguji Profiles
@@ -52,37 +50,43 @@ export async function POST(request: Request) {
       },
     });
 
+    // 4. Determine base URL
+    const host = request.headers.get("x-forwarded-host") || request.headers.get("host") || "";
+    const proto = request.headers.get("x-forwarded-proto") || "https";
+    const appBaseUrl = host 
+      ? `${proto}://${host}` 
+      : (process.env.NEXT_PUBLIC_APP_URL || "https://spmb.pesantren-alimam.com");
+
     let successCount = 0;
 
-    // 4. Send WA to each Penguji
+    // 5. Send WA to each Penguji
     for (const profile of pengujiProfiles) {
       if (!profile.phone) continue;
 
-      const title = profile.gender === "P" ? "Ustadzah" : "Ustadz";
-      const token = await generateMagicToken(profile.id, "penguji");
-      const shortUrl = await getPermanentAuthUrl(token);
+      const title = profile.jenis_kelamin === "P" ? "Ustadzah" : "Ustadz";
+      const authUrl = `${appBaseUrl}/x/${profile.id}`;
 
       const message = `*PEMBERITAHUAN JADWAL MENGUJI*
 
 Assalamu'alaikum ${title} *${profile.full_name}*,
 
-Mengingatkan bahwa Anda telah dijadwalkan untuk menguji pada sesi seleksi penerimaan santri baru PPDB Al-Andalus.
+Mengingatkan bahwa Anda telah dijadwalkan untuk menguji pada sesi seleksi penerimaan santri baru PPDB Pesantren Al-Imam Al-Islami.
 
-Untuk melihat rincian lengkap daftar santri, waktu, dan form penilaian, silakan klik tautan masuk otomatis berikut:
-${shortUrl}
+Untuk melihat rincian lengkap daftar santri, waktu, dan form penilaian, silakan klik tautan masuk berikut:
+${authUrl}
 
-_Link ini terenkripsi dan otomatis memasukkan Anda ke dashboard tanpa password._
+_Link ini aman dan dapat diakses dengan memasukkan 4 digit terakhir nomor WhatsApp Anda._
 
 Jazakumullahu khairan.
-Panitia PPDB Al-Andalus`;
+Panitia PPDB Pesantren Al-Imam Al-Islami`;
 
       await enqueueWhatsapp({
-        pendaftarId: "penguji-broadcast", // dummy ID since we don't have a single pendaftar
+        pendaftarId: null,
         phone: profile.phone,
-        jenisNotif: "broadcast_penguji" as any,
+        jenisNotif: "broadcast_penguji",
         messageContent: message,
-        scheduledAt: new Date(),
-        sendNow: true, // Force send now
+        force: true,
+        sendNow: true,
       });
 
       successCount++;
@@ -98,5 +102,3 @@ Panitia PPDB Al-Andalus`;
     return NextResponse.json({ error: error.message || "Failed to broadcast" }, { status: 500 });
   }
 }
-
-
