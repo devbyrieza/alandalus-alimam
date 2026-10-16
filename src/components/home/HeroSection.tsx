@@ -7,7 +7,6 @@ import Image from "next/image";
 import {
   ArrowRight,
   GraduationCap,
-  Award,
   BookOpen,
   Download,
   ShieldCheck,
@@ -203,10 +202,9 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* ═════════ RIGHT COLUMN: PHOTO + FLOATING BADGES ═════════ */}
-          {/* Yang dibatasi lebarnya, bukan tingginya: rasio 4:5 selalu terjaga sehingga foto tidak terdistorsi */}
+          {/* ═════════ RIGHT COLUMN: PHOTO ═════════ */}
           <div
-            className={`relative w-full max-w-[26rem] sm:max-w-[28rem] mx-auto lg:mx-0 lg:max-w-[28.75rem] lg:col-span-5 lg:justify-self-end ${enter}`}
+            className={`relative w-full max-w-[21rem] sm:max-w-[23rem] lg:max-w-[24.5rem] xl:max-w-[26rem] mx-auto lg:mx-0 lg:col-span-5 lg:justify-self-end ${enter}`}
             style={delay(200)}
           >
             {/* Bingkai dekoratif di belakang foto */}
@@ -215,41 +213,16 @@ export default function HeroSection() {
               aria-hidden="true"
             />
 
-            {/* Santriwati Pesantren Al-Imam Al-Islami lil Banat */}
-            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border-4 border-white bg-white/60 shadow-2xl shadow-rose-500/15 group">
+            {/* Santriwati Pesantren Al-Imam Al-Islami lil Banat: Almamater & Rok utuh tampak jelas */}
+            <div className="relative aspect-[9/16] sm:aspect-[1/2] rounded-3xl overflow-hidden border-4 border-white bg-white/60 shadow-2xl shadow-rose-500/15 group">
               <Image
                 src="/images/hero-putri-alimam.jpeg"
                 alt="Santriwati Pesantren Al-Imam Al-Islami lil Banat"
                 fill
                 priority
-                sizes="(max-width: 1024px) 90vw, 460px"
-                className="object-cover object-[center_28%] transform group-hover:scale-105 transition-transform duration-700 motion-reduce:transition-none"
+                sizes="(max-width: 1024px) 90vw, 420px"
+                className="object-cover object-bottom transform group-hover:scale-105 transition-transform duration-700 motion-reduce:transition-none"
               />
-
-              {/* Gradasi halus di bagian bawah agar badge tetap terbaca jelas */}
-              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-slate-900/40 via-slate-900/10 to-transparent pointer-events-none" aria-hidden="true" />
-
-              {/* Badge Kanan-Atas: Standar Mutu Al Andalus IIBS (rapi di dalam sudut bingkai) */}
-              <div className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 z-10 bg-white/90 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 pr-3.5 sm:pr-4 border border-white/60 shadow-lg shadow-black/5 flex items-center gap-2.5 sm:gap-3 transition-transform duration-300 hover:scale-105">
-                <div className="icon-box icon-box-secondary w-9 h-9 sm:w-10 sm:h-10 shrink-0">
-                  <Award className="w-5 h-5" aria-hidden="true" />
-                </div>
-                <div>
-                  <p className="text-xs font-extrabold text-slate-900 leading-tight">Standar Mutu</p>
-                  <p className="text-[10px] sm:text-[11px] text-slate-500 font-semibold">Al Andalus IIBS</p>
-                </div>
-              </div>
-
-              {/* Badge Kiri-Bawah: Tahfidz Mutqin (aman dari popup WhatsApp floating button di kanan-bawah) */}
-              <div className="absolute bottom-3.5 left-3.5 sm:bottom-5 sm:left-5 z-10 bg-white/90 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 pr-3.5 sm:pr-4 border border-white/60 shadow-lg shadow-black/5 flex items-center gap-2.5 sm:gap-3 transition-transform duration-300 hover:scale-105">
-                <div className="icon-box icon-box-primary w-9 h-9 sm:w-10 sm:h-10 shrink-0">
-                  <BookOpen className="w-5 h-5" aria-hidden="true" />
-                </div>
-                <div>
-                  <p className="text-xs font-extrabold text-slate-900 leading-tight">Tahfidz Mutqin</p>
-                  <p className="text-[10px] sm:text-[11px] text-slate-500 font-semibold">Tajwid &amp; Bersanad</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
