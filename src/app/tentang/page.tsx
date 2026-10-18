@@ -37,36 +37,36 @@ export default function TentangPage() {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utb3BhY2l0eT0iMC4wMiIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTAgNjBoNjBNNjAgMGwwIDYwIi8+PC9nPjwvc3ZnPg==')] opacity-70 pointer-events-none" />
 
         <Container className="relative z-10 max-w-5xl mx-auto px-4 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#ddc192]/20 border border-[#ddc192]/50 shadow-2xs">
-            <span className="w-2 h-2 rounded-full bg-[#550000] animate-pulse" />
-            <span className="text-xs font-extrabold uppercase tracking-wider text-[#550000]">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-50 border border-pink-200 shadow-2xs">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            <span className="text-xs font-extrabold uppercase tracking-wider text-primary">
               Profil Resmi {BRANDING.schoolName}
             </span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
             Mengenal Lebih Dekat <br />
-            <span className="text-[#550000]">
+            <span className="text-primary">
               Pesantren Al Imam Al Islami
             </span>
           </h1>
 
           <p className="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed font-normal">
             Lembaga pendidikan Islam modern di Sukabumi yang dikelola secara profesional di bawah naungan{" "}
-            <strong className="text-slate-900 font-semibold">Managed by Al Andalus IIBS</strong>. Berorientasi pada <strong className="text-slate-900 font-semibold">kaderisasi ummat yang hanif, kontributif, dan adaptif</strong> melalui <strong className="text-slate-900">Bahasa Arab yang sangat intensif</strong>, tahfidz Al-Qur'an mutqin, pendalaman ilmu syar'i, sains akademik umum yang berdaya saing, leadership & entrepreneurship, serta pola pengasuhan <strong className="text-[#550000]">Mendidik Tanpa Luka</strong> berbasis keteladanan tanpa kekerasan fisik.
+            <strong className="text-slate-900 font-semibold">Managed by Al Andalus IIBS</strong>. Berorientasi pada <strong className="text-slate-900 font-semibold">kaderisasi ummat yang hanif, kontributif, dan adaptif</strong> melalui <strong className="text-slate-900">Bahasa Arab yang sangat intensif</strong>, tahfidz Al-Qur'an mutqin, pendalaman ilmu syar'i, sains akademik umum yang berdaya saing, leadership & entrepreneurship, serta pola pengasuhan <strong className="text-primary">Mendidik Tanpa Luka</strong> berbasis keteladanan tanpa kekerasan fisik.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
             <a
               href="https://spmb.pesantren-alimam.com/daftar"
-              className="h-11 px-6 rounded-xl bg-[#550000] hover:bg-[#400000] text-white font-extrabold text-xs shadow-md shadow-[#550000]/25 transition-all inline-flex items-center gap-2"
+              className="h-11 px-6 rounded-xl bg-primary hover:bg-primary-dark text-white font-extrabold text-xs shadow-md shadow-primary/25 transition-all inline-flex items-center gap-2"
             >
               <span>Daftar SPMB 2027/2028</span>
               <ArrowRight className="w-4 h-4" />
             </a>
             <Link
               href="/program"
-              className="h-11 px-6 rounded-xl bg-white text-slate-800 font-extrabold text-xs border border-slate-200 shadow-xs hover:border-[#ddc192] transition-all inline-flex items-center"
+              className="h-11 px-6 rounded-xl bg-white text-slate-800 font-extrabold text-xs border border-slate-200 shadow-xs hover:border-pink-200 transition-all inline-flex items-center"
             >
               <span>Lihat Kurikulum Pendidikan</span>
             </Link>
@@ -88,7 +88,7 @@ export default function TentangPage() {
             />
             <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/50 to-transparent flex items-end p-6 sm:p-10">
               <div className="text-white space-y-1">
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#ddc192] bg-white/10 px-3 py-1 rounded-full border border-white/20 inline-block">
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-pink-200 bg-white/10 px-3 py-1 rounded-full border border-white/20 inline-block">
                   Kampus Al-Imam Sukabumi
                 </span>
                 <h3 className="text-xl sm:text-2xl font-extrabold">
@@ -119,7 +119,7 @@ export default function TentangPage() {
 
               {/* Floating Badge (OMI Style) */}
               <div className="relative sm:absolute -bottom-3 sm:-bottom-6 right-0 sm:right-4 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 sm:p-4 border border-slate-200 shadow-xl flex items-center gap-3 mt-3 sm:mt-0">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#ddc192] text-[#550000] flex items-center justify-center font-black text-lg sm:text-xl shadow-xs shrink-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary text-primary flex items-center justify-center font-black text-lg sm:text-xl shadow-xs shrink-0">
                   <Award className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <div>
@@ -132,12 +132,12 @@ export default function TentangPage() {
             {/* Right Column: Editorial Text */}
             <div className="lg:col-span-7 space-y-6">
               <div className="space-y-2">
-                <span className="text-xs font-extrabold uppercase tracking-widest text-[#550000] bg-[#ddc192]/20 px-3.5 py-1 rounded-full border border-[#ddc192]/50 inline-block">
+                <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-3.5 py-1 rounded-full border border-pink-200/50 inline-block">
                   Transformasi Pendidikan
                 </span>
                 <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
                   Sejarah & Babak Baru <br />
-                  <span className="text-[#550000]">Pesantren Al Imam</span>
+                  <span className="text-primary">Pesantren Al Imam</span>
                 </h2>
               </div>
 
@@ -146,9 +146,9 @@ export default function TentangPage() {
                   <strong className="text-slate-900 font-semibold">{BRANDING.schoolName}</strong> hadir sebagai ikhtiar mulia membangun pusat keilmuan Islam berbasis Ahlussunnah wal Jama'ah di Sukabumi, Jawa Barat.
                 </p>
                 <p>
-                  Mulai Tahun Ajaran 2026/2027, pengelolaan manajemen pendidikan dan asrama resmi diselaraskan secara penuh oleh <strong className="text-[#550000] font-bold">Pesantren Islam Internasional Al-Andalus (Al Andalus IIBS)</strong>. Seluruh SOP operasional, kurikulum turots, intensitas pengajaran Bahasa Arab, bimbingan tahfidz bersanad, hingga pendampingan adab santri mengadopsi standar mutu tinggi.
+                  Mulai Tahun Ajaran 2026/2027, pengelolaan manajemen pendidikan dan asrama resmi diselaraskan secara penuh oleh <strong className="text-primary font-bold">Pesantren Islam Internasional Al-Andalus (Al Andalus IIBS)</strong>. Seluruh SOP operasional, kurikulum turots, intensitas pengajaran Bahasa Arab, bimbingan tahfidz bersanad, hingga pendampingan adab santri mengadopsi standar mutu tinggi.
                 </p>
-                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-slate-800 text-xs sm:text-sm font-semibold italic border-l-4 border-l-[#550000]">
+                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-slate-800 text-xs sm:text-sm font-semibold italic border-l-4 border-l-primary">
                   &ldquo;{BRANDING.schoolTagline}&rdquo;
                 </div>
               </div>
@@ -156,7 +156,7 @@ export default function TentangPage() {
               {/* 2 Quick KPI Pills */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 pt-2">
                 <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs">
-                  <span className="text-xs font-extrabold uppercase text-[#550000] block mb-1">Standar Mutu</span>
+                  <span className="text-xs font-extrabold uppercase text-primary block mb-1">Standar Mutu</span>
                   <p className="text-base sm:text-lg font-black text-slate-900">Al-Andalus IIBS</p>
                   <p className="text-[11px] text-slate-500 mt-0.5">Sistem akademik & kepesantrenan teruji</p>
                 </div>
@@ -178,7 +178,7 @@ export default function TentangPage() {
         <Container className="max-w-6xl mx-auto px-4">
           
           <div className="text-center max-w-2xl mx-auto mb-14 space-y-2.5">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-[#550000] bg-[#ddc192]/20 px-3.5 py-1 rounded-full border border-[#ddc192]/50 inline-block">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-3.5 py-1 rounded-full border border-pink-200/50 inline-block">
               Kompas Arah Pembinaan
             </span>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -191,9 +191,9 @@ export default function TentangPage() {
 
           <div className="grid md:grid-cols-12 gap-6">
             {/* Visi (Card 1) */}
-            <div className="md:col-span-5 bg-white rounded-3xl p-8 border border-slate-200 shadow-xs flex flex-col justify-between border-t-4 border-t-[#550000]">
+            <div className="md:col-span-5 bg-white rounded-3xl p-8 border border-slate-200 shadow-xs flex flex-col justify-between border-t-4 border-t-primary">
               <div>
-                <div className="w-12 h-12 rounded-2xl bg-[#ddc192]/20 text-[#550000] flex items-center justify-center font-bold mb-6">
+                <div className="w-12 h-12 rounded-2xl bg-pink-50 text-primary flex items-center justify-center font-bold mb-6">
                   <Target className="w-6 h-6" />
                 </div>
                 <span className="text-xs font-extrabold uppercase text-slate-400 tracking-wider">Visi Pesantren</span>
@@ -207,9 +207,9 @@ export default function TentangPage() {
             </div>
 
             {/* Misi (Card 2) */}
-            <div className="md:col-span-7 bg-white rounded-3xl p-8 border border-slate-200 shadow-xs flex flex-col justify-between border-t-4 border-t-[#ddc192]">
+            <div className="md:col-span-7 bg-white rounded-3xl p-8 border border-slate-200 shadow-xs flex flex-col justify-between border-t-4 border-t-blue-500">
               <div>
-                <div className="w-12 h-12 rounded-2xl bg-[#550000]/10 text-[#550000] flex items-center justify-center font-bold mb-6">
+                <div className="w-12 h-12 rounded-2xl bg-pink-50 text-primary flex items-center justify-center font-bold mb-6">
                   <ShieldCheck className="w-6 h-6" />
                 </div>
                 <span className="text-xs font-extrabold uppercase text-slate-400 tracking-wider">Misi Utama</span>
@@ -226,7 +226,7 @@ export default function TentangPage() {
                     "Menerapkan sistem pengasuhan 'Mendidik Tanpa Luka' berbasis keteladanan pendidik 24 jam dan kasih sayang tanpa kekerasan fisik."
                   ].map((misi, i) => (
                     <div key={i} className="flex items-start gap-3 text-xs sm:text-sm text-slate-700">
-                      <span className="w-5 h-5 rounded-full bg-[#ddc192]/30 text-[#550000] flex items-center justify-center shrink-0 mt-0.5 font-bold">
+                      <span className="w-5 h-5 rounded-full bg-pink-100 text-primary flex items-center justify-center shrink-0 mt-0.5 font-bold">
                         <Check className="w-3 h-3 stroke-[3]" />
                       </span>
                       <span className="leading-relaxed">{misi}</span>
@@ -244,7 +244,7 @@ export default function TentangPage() {
       <section className="py-24">
         <Container className="max-w-6xl mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-2.5">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-[#550000] bg-[#ddc192]/20 px-3.5 py-1 rounded-full border border-[#ddc192]/50 inline-block">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-3.5 py-1 rounded-full border border-pink-200/50 inline-block">
               Pilar Kurikulum
             </span>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -290,10 +290,10 @@ export default function TentangPage() {
             ].map((pilar, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-2xs hover:shadow-md hover:border-[#ddc192] transition-all flex flex-col justify-between"
+                className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-2xs hover:shadow-md hover:border-pink-200 transition-all flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-11 h-11 rounded-xl bg-[#ddc192]/20 text-[#550000] flex items-center justify-center font-bold mb-5 border border-[#ddc192]/40">
+                  <div className="w-11 h-11 rounded-xl bg-pink-50 text-primary flex items-center justify-center font-bold mb-5 border border-pink-200">
                     <pilar.icon className="w-5 h-5" />
                   </div>
                   <h4 className="font-extrabold text-slate-900 text-base mb-2">
@@ -314,11 +314,11 @@ export default function TentangPage() {
       <section className="py-20 bg-[#F8FAFC] border-y border-slate-200">
         <Container className="max-w-6xl mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-[#550000] bg-[#ddc192]/20 px-4 py-1.5 rounded-full border border-[#ddc192]/50 inline-block">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-4 py-1.5 rounded-full border border-pink-200/50 inline-block">
               Pola Asuh Rabbani & Keamanan Santri
             </span>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Komitmen Pengasuhan: <span className="text-[#550000]">Mendidik Tanpa Luka</span>
+              Komitmen Pengasuhan: <span className="text-primary">Mendidik Tanpa Luka</span>
             </h2>
             <p className="text-slate-600 text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto">
               Pesantren Al-Imam meyakini bahwa pembentukan adab dan karakter sejati lahir dari keteladanan pendidik dan kasih sayang, bukan dari rasa takut terhadap kekerasan fisik atau intimidasi verbal.
@@ -387,14 +387,14 @@ export default function TentangPage() {
             </div>
 
             {/* Right Card: Zero Tolerance Pelanggaran Berat */}
-            <div className="lg:col-span-6 bg-white rounded-3xl p-8 border border-slate-200 shadow-sm flex flex-col justify-between border-t-4 border-t-[#550000]">
+            <div className="lg:col-span-6 bg-white rounded-3xl p-8 border border-slate-200 shadow-sm flex flex-col justify-between border-t-4 border-t-primary">
               <div className="space-y-6">
                 <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
-                  <div className="w-12 h-12 rounded-2xl bg-[#550000]/10 text-[#550000] flex items-center justify-center font-bold border border-[#550000]/20 shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-pink-50 text-primary flex items-center justify-center font-bold border border-pink-200 shrink-0">
                     <ShieldCheck className="w-6 h-6" />
                   </div>
                   <div>
-                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#550000]">Disiplin & Integritas</span>
+                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-primary">Disiplin & Integritas</span>
                     <h3 className="text-lg sm:text-xl font-extrabold text-slate-900">Pencegahan & Tindakan Tegas</h3>
                   </div>
                 </div>
@@ -416,7 +416,7 @@ export default function TentangPage() {
                       key={idx}
                       className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center gap-2.5 text-xs font-bold text-slate-800"
                     >
-                      <span className="w-5 h-5 rounded-full bg-[#550000]/10 text-[#550000] flex items-center justify-center shrink-0">
+                      <span className="w-5 h-5 rounded-full bg-pink-50 text-primary flex items-center justify-center shrink-0">
                         <ShieldCheck className="w-3 h-3" />
                       </span>
                       <span>{rule}</span>
@@ -425,8 +425,8 @@ export default function TentangPage() {
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-slate-100 bg-[#550000]/5 -mx-8 -mb-8 p-6 rounded-b-3xl">
-                <p className="text-xs text-[#550000] font-semibold leading-relaxed">
+              <div className="mt-6 pt-4 border-t border-slate-100 bg-pink-50/50 -mx-8 -mb-8 p-6 rounded-b-3xl">
+                <p className="text-xs text-primary font-semibold leading-relaxed">
                   Penegakan aturan dilakukan secara terukur dan edukatif tanpa sanksi fisik, demi melindungi seluruh santri dan menjaga kenyamanan wali santri.
                 </p>
               </div>
@@ -439,7 +439,7 @@ export default function TentangPage() {
       {/* ─── 6. BOTTOM CTA (OMI ENTERPRISE BANNER) ─── */}
       <section className="py-12">
         <Container className="max-w-5xl mx-auto px-4">
-          <div className="rounded-3xl p-8 sm:p-12 text-center bg-gradient-to-br from-[#2D0000] via-[#400000] to-[#550000] text-white shadow-xl border border-white/15 space-y-5">
+          <div className="rounded-3xl p-8 sm:p-12 text-center bg-gradient-to-br from-[#831843] via-[#9F1239] to-[#E11D74] text-white shadow-xl border border-white/15 space-y-5">
             <h3 className="text-2xl sm:text-3xl font-extrabold">
               Tertarik Bergabung dengan Keluarga Besar Al-Imam?
             </h3>
@@ -449,7 +449,7 @@ export default function TentangPage() {
             <div className="pt-2 flex flex-wrap justify-center gap-3">
               <a
                 href="https://spmb.pesantren-alimam.com/daftar"
-                className="h-11 px-7 rounded-xl bg-[#ddc192] hover:bg-[#cfb280] text-[#550000] font-extrabold text-xs shadow-md transition-all inline-flex items-center gap-2"
+                className="h-11 px-7 rounded-xl bg-white hover:bg-pink-50 text-primary font-extrabold text-xs shadow-md transition-all inline-flex items-center gap-2"
               >
                 <span>Daftar SPMB Online</span>
                 <ArrowRight className="w-4 h-4" />

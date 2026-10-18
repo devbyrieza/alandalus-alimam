@@ -3,44 +3,44 @@
 // src/components/home/TestimonialsSection.tsx
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
-import { MessageSquareQuote, Star, ShieldCheck } from "lucide-react";
+import { Star, ShieldCheck } from "lucide-react";
 
 const TESTIMONIALS = [
   {
     text: "Sangat bersyukur menyekolahkan anak di Al-Imam. Pendekatan keteladanan tanpa kekerasan membuat anak betah di asrama dan hafalannya lancar tanpa tekanan berlebih.",
     author: "Bapak Budi Santoso",
-    role: "Wali Santri MTs Al-Imam",
+    role: "Wali Santriwati MTs Al-Imam",
     city: "Jakarta Selatan"
   },
   {
     text: "Sistem pendidikannya memadukan adab, bahasa Arab, dan akademik dengan sangat seimbang. Fasilitasnya representatif sehingga kami sebagai orang tua tenang melepas anak mukim.",
     author: "Ibu Aisyah Aminah",
-    role: "Wali Santri I'dad Lughawi",
+    role: "Wali Santriwati I'dad Lughawi",
     city: "Bandung"
   },
   {
     text: "Alhamdulillah, pengajar di sini sangat komunikatif dengan orang tua. Perkembangan adab, sholat berjamaah, dan progres hafalan anak terpantau rutin lewat sistem digital.",
     author: "Bapak Riza Fahlevi",
-    role: "Wali Santri MTs Al-Imam",
+    role: "Wali Santriwati MTs Al-Imam",
     city: "Sukabumi"
   }
 ];
 
 export default function TestimonialsSection() {
   return (
-    <section id="testimoni" className="py-24 bg-[#F8FAFC] border-b border-slate-200 scroll-mt-20">
+    <section id="testimoni" className="py-24 bg-[#FAF8F9] border-b border-slate-200 scroll-mt-20">
       <Container className="max-w-7xl mx-auto px-4 md:px-6">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-[#550000] bg-[#ddc192]/20 px-4 py-1.5 rounded-full border border-[#ddc192]/50 inline-block">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-4 py-1.5 rounded-full border border-pink-200 inline-block">
             Pengalaman Otentik
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
-            Apa Kata <span className="text-[#550000]">Wali Santri?</span>
+            Apa Kata <span className="text-primary">Wali Santriwati?</span>
           </h2>
           <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-            Kepercayaan para orang tua yang telah mempercayakan pendidikan aqidah, tahfidz, dan karakter putranya di Pesantren Al Imam.
+            Kepercayaan para orang tua yang telah mempercayakan pendidikan aqidah, tahfidz, dan karakter putrinya di Pesantren Al Imam.
           </p>
         </div>
 
@@ -53,13 +53,13 @@ export default function TestimonialsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="bg-white rounded-3xl p-7 sm:p-8 border border-slate-200 shadow-xs hover:shadow-md hover:border-[#ddc192] transition-all flex flex-col justify-between"
+              className="bg-white rounded-3xl p-7 sm:p-8 border border-slate-200 shadow-xs hover:shadow-md hover:border-primary/40 transition-all flex flex-col justify-between"
             >
               <div>
                 {/* 5 Stars */}
                 <div className="flex items-center gap-1 mb-5">
                   {[...Array(5)].map((_, idx) => (
-                    <Star key={idx} className="w-4 h-4 fill-[#ddc192] text-[#ddc192]" />
+                    <Star key={idx} className="w-4 h-4 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
 
@@ -77,7 +77,7 @@ export default function TestimonialsSection() {
                     {t.role} • {t.city}
                   </p>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-[#ddc192]/20 text-[#550000] flex items-center justify-center font-bold">
+                <div className="w-8 h-8 rounded-full bg-pink-50 text-primary flex items-center justify-center font-bold">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
               </div>

@@ -85,16 +85,16 @@ Mohon informasinya. Terima kasih.`;
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utb3BhY2l0eT0iMC4wMiIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTAgNjBoNjBNNjAgMGwwIDYwIi8+PC9nPjwvc3ZnPg==')] opacity-70 pointer-events-none" />
 
         <Container className="relative z-10 max-w-4xl mx-auto px-4 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#ddc192]/20 border border-[#ddc192]/50 shadow-2xs">
-            <span className="w-2 h-2 rounded-full bg-[#550000] animate-pulse" />
-            <span className="text-xs font-extrabold uppercase tracking-wider text-[#550000]">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-50 border border-pink-200 shadow-2xs">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            <span className="text-xs font-extrabold uppercase tracking-wider text-primary">
               Pusat Layanan & Informasi Resmi
             </span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
             Hubungi Panitia <br />
-            <span className="text-[#550000]">Pesantren Al Imam Sukabumi</span>
+            <span className="text-primary">Pesantren Al Imam Sukabumi</span>
           </h1>
 
           <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
@@ -111,7 +111,7 @@ Mohon informasinya. Terima kasih.`;
             {/* Left Column: Filament-Style Message Form */}
             <div className="lg:col-span-7 bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
               <div className="p-7 sm:p-9 border-b border-slate-100 bg-slate-50/50">
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#550000] bg-[#ddc192]/20 px-3 py-1 rounded-full border border-[#ddc192]/40 inline-block mb-2">
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-3 py-1 rounded-full border border-pink-200 inline-block mb-2">
                   Kirim Pesan Cepat
                 </span>
                 <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900">
@@ -134,7 +134,7 @@ Mohon informasinya. Terima kasih.`;
                     value={formData.nama}
                     onChange={(e) => setFormData({ ...formData, nama: e.target.value })}
                     placeholder="Contoh: Abdullah"
-                    className="w-full h-12 px-4 bg-slate-50/50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:bg-white focus:border-[#550000] focus:ring-4 focus:ring-[#550000]/10 transition-all"
+                    className="w-full h-12 px-4 bg-slate-50/50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all"
                   />
                 </div>
 
@@ -149,7 +149,7 @@ Mohon informasinya. Terima kasih.`;
                     value={formData.wa}
                     onChange={(e) => setFormData({ ...formData, wa: e.target.value })}
                     placeholder="Contoh: 081234567890"
-                    className="w-full h-12 px-4 bg-slate-50/50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:bg-white focus:border-[#550000] focus:ring-4 focus:ring-[#550000]/10 transition-all"
+                    className="w-full h-12 px-4 bg-slate-50/50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all"
                   />
                 </div>
 
@@ -162,7 +162,7 @@ Mohon informasinya. Terima kasih.`;
                     required
                     value={formData.subjek}
                     onChange={(e) => setFormData({ ...formData, subjek: e.target.value })}
-                    className="w-full h-12 px-4 bg-slate-50/50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 focus:bg-white focus:border-[#550000] focus:ring-4 focus:ring-[#550000]/10 transition-all"
+                    className="w-full h-12 px-4 bg-slate-50/50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all"
                   >
                     <option value="Informasi Pendaftaran SPMB">Informasi Pendaftaran SPMB 2027</option>
                     <option value="Rincian Biaya & Beasiswa">Rincian Biaya & Kuota Beasiswa</option>
@@ -183,14 +183,14 @@ Mohon informasinya. Terima kasih.`;
                     value={formData.pesan}
                     onChange={(e) => setFormData({ ...formData, pesan: e.target.value })}
                     placeholder="Tuliskan pertanyaan atau hal yang ingin dikonsultasikan secara jelas..."
-                    className="w-full p-4 bg-slate-50/50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-[#550000] focus:ring-4 focus:ring-[#550000]/10 transition-all resize-none"
+                    className="w-full p-4 bg-slate-50/50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all resize-none"
                   />
                 </div>
 
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="h-12 px-8 rounded-xl bg-[#550000] hover:bg-[#400000] text-white font-extrabold text-sm shadow-md shadow-[#550000]/25 transition-all inline-flex items-center gap-2 hover:-translate-y-0.5 w-full sm:w-auto justify-center"
+                    className="h-12 px-8 rounded-xl bg-primary hover:bg-primary-dark text-white font-extrabold text-sm shadow-md shadow-primary/25 transition-all inline-flex items-center gap-2 hover:-translate-y-0.5 w-full sm:w-auto justify-center"
                   >
                     <MessageCircle className="w-4 h-4" />
                     <span>Kirim Pesan via WhatsApp CS</span>
@@ -203,7 +203,7 @@ Mohon informasinya. Terima kasih.`;
             <div className="lg:col-span-5 space-y-5">
               
               {/* Card 1: WhatsApp CS */}
-              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs hover:border-[#ddc192] transition-all">
+              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs hover:border-pink-200 transition-all">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center font-bold shrink-0">
                     <Phone className="w-5 h-5" />
@@ -221,9 +221,9 @@ Mohon informasinya. Terima kasih.`;
               </div>
 
               {/* Card 2: Jam Pelayanan */}
-              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs hover:border-[#ddc192] transition-all">
+              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs hover:border-pink-200 transition-all">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#ddc192]/20 border border-[#ddc192]/40 text-[#550000] flex items-center justify-center font-bold shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-pink-50 border border-pink-200 text-primary flex items-center justify-center font-bold shrink-0">
                     <Clock className="w-5 h-5" />
                   </div>
                   <div>
@@ -239,9 +239,9 @@ Mohon informasinya. Terima kasih.`;
               </div>
 
               {/* Card 3: Alamat Kampus */}
-              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs hover:border-[#ddc192] transition-all">
+              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs hover:border-pink-200 transition-all">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#550000]/10 border border-[#550000]/20 text-[#550000] flex items-center justify-center font-bold shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-pink-50 border border-pink-200 text-primary flex items-center justify-center font-bold shrink-0">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div className="space-y-2">
@@ -259,7 +259,7 @@ Mohon informasinya. Terima kasih.`;
                         href={MAPS_URL}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#550000] hover:underline"
+                        className="inline-flex items-center gap-1.5 text-xs font-extrabold text-primary hover:underline"
                       >
                         <span>Buka di Google Maps</span>
                         <ExternalLink className="w-3.5 h-3.5" />

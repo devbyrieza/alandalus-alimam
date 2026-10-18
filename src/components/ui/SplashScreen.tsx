@@ -58,7 +58,7 @@ export default function SplashScreen() {
         >
           <div className="relative flex items-center justify-center">
             {/* Spinning Ring */}
-            <div className="absolute w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-slate-100 border-t-[#800a0a] animate-spin"></div>
+            <div className="absolute w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-slate-100 border-t-primary animate-spin"></div>
             
             {/* Logo */}
             <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden bg-white shadow-sm flex items-center justify-center p-2">

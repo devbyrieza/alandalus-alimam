@@ -248,7 +248,7 @@ export default function DaftarPage() {
         <div className="w-full flex items-center justify-between gap-3 mb-6">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/95 border border-slate-200/90 shadow-sm text-xs font-extrabold uppercase tracking-wider text-slate-700 hover:text-[#550000] hover:border-[#550000]/40 transition-all hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/95 border border-slate-200/90 shadow-sm text-xs font-extrabold uppercase tracking-wider text-slate-700 hover:text-primary hover:border-primary/40 transition-all hover:-translate-y-0.5"
           >
             <span>← Kembali ke Beranda</span>
           </Link>
@@ -291,12 +291,12 @@ export default function DaftarPage() {
         <div className="w-full rounded-3xl overflow-hidden shadow-xl shadow-slate-900/5 border border-slate-200 bg-white relative">
           
           {/* Section 1: Dark Maroon Gradient Header */}
-          <div className="bg-gradient-to-br from-[#2D0000] via-[#400000] to-[#550000] p-6 sm:p-8 text-white relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-48 h-48 bg-[#ddc192]/10 rounded-full blur-2xl pointer-events-none" />
+          <div className="bg-gradient-to-br from-[#831843] via-[#9F1239] to-[#E11D74] p-6 sm:p-8 text-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none" />
             
             <div className="relative z-10 space-y-3">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#ddc192] bg-white/10 px-3 py-1 rounded-full border border-white/15 inline-block">
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-pink-200 bg-white/10 px-3 py-1 rounded-full border border-white/15 inline-block">
                   Tahap 1: Registrasi Data Awal
                 </span>
                 <span className="text-[10px] font-black uppercase tracking-widest text-rose-200 bg-rose-500/25 px-3 py-1 rounded-full border border-rose-400/30 inline-block">
@@ -726,7 +726,7 @@ export default function DaftarPage() {
                   whileTap={{ scale: 0.98 }}
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-4 md:py-6 rounded-pill bg-[#550000] text-white font-extrabold text-base hover:bg-[#400000] rounded-xl h-14 shadow-2xl shadow-primary/30  shadow-primary/20 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                  className="w-full py-4 md:py-6 rounded-pill bg-primary text-white font-extrabold text-base hover:bg-primary-dark rounded-xl h-14 shadow-2xl shadow-primary/30  shadow-primary/20 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                 >
                   {isLoading ? (
                     <>

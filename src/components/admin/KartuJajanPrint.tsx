@@ -21,10 +21,10 @@ export default function KartuJajanPrint({ santri, fotoUrl }: KartuJajanPrintProp
   return (
     <>
       {/* ===================== KARTU BAGIAN DEPAN ===================== */}
-      <div className="w-[54mm] h-[86mm] bg-white rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 flex flex-col relative overflow-hidden print:shadow-none print:border-none shrink-0" style={{ margin: '0 auto', boxSizing: 'border-box', border: '2px solid #ddc192' }}>
+      <div className="w-[54mm] h-[86mm] bg-white rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 flex flex-col relative overflow-hidden print:shadow-none print:border-none shrink-0" style={{ margin: '0 auto', boxSizing: 'border-box', border: '2px solid #F59E0B' }}>
       
       {/* Background Header - Maroon & Gold Accent */}
-      <div className="absolute top-0 left-0 w-full h-[35%] z-0" style={{ backgroundColor: '#550000', borderBottom: '4px solid #ddc192' }}></div>
+      <div className="absolute top-0 left-0 w-full h-[35%] z-0" style={{ backgroundColor: '#E11D74', borderBottom: '4px solid #F59E0B' }}></div>
       
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center pt-3 px-3 pb-6 w-full h-full">
@@ -45,24 +45,24 @@ export default function KartuJajanPrint({ santri, fotoUrl }: KartuJajanPrintProp
         </div>
         
         {/* Foto Container dengan Auto-Crop yang Diperbaiki */}
-        <div className="w-20 h-28 rounded-md overflow-hidden shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 bg-white z-10 relative mt-1" style={{ border: '3px solid #ddc192' }}>
+        <div className="w-20 h-28 rounded-md overflow-hidden shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 bg-white z-10 relative mt-1" style={{ border: '3px solid #F59E0B' }}>
           <img 
             src={fotoUrl || defaultFoto} 
             alt={`Foto ${santri.nama_lengkap}`}
             className="absolute top-0 left-0 w-full h-[130%] object-cover"
             style={{ objectPosition: 'center top' }} // Memotong bagian perut, fokus ke dada dan wajah
             onError={(e) => {
-              e.currentTarget.src = "https://ui-avatars.com/api/?name=" + santri.nama_lengkap + "&background=550000&color=ddc192";
+              e.currentTarget.src = "https://ui-avatars.com/api/?name=" + santri.nama_lengkap + "&background=E11D74&color=F59E0B";
             }}
           />
         </div>
 
         {/* Info Santri (Text in Maroon) */}
         <div className="mt-4 text-center w-full px-1 flex-1 flex flex-col justify-center relative z-10">
-          <h2 className="text-[11.5px] font-black leading-tight uppercase line-clamp-2" style={{ color: '#550000' }}>
+          <h2 className="text-[11.5px] font-black leading-tight uppercase line-clamp-2" style={{ color: '#E11D74' }}>
             {santri.nama_lengkap}
           </h2>
-          <p className="text-[8px] font-bold mt-1 uppercase tracking-widest" style={{ color: '#ddc192' }}>
+          <p className="text-[8px] font-bold mt-1 uppercase tracking-widest" style={{ color: '#F59E0B' }}>
             {santri.jenjang === 'MTs' ? 'Madrasah Tsanawiyah' : "I'dad Lughowi"}
           </p>
         </div>
@@ -77,15 +77,15 @@ export default function KartuJajanPrint({ santri, fotoUrl }: KartuJajanPrintProp
         </div>
 
         {/* Footer Area */}
-        <div className="w-full h-5 flex items-center justify-center absolute bottom-0 left-0 z-20" style={{ backgroundColor: '#550000', borderTop: '2px solid #ddc192' }}>
-          <p className="text-[6.5px] font-bold uppercase tracking-widest" style={{ color: '#ddc192' }}>NIS: {santri.nis || '-'}</p>
+        <div className="w-full h-5 flex items-center justify-center absolute bottom-0 left-0 z-20" style={{ backgroundColor: '#E11D74', borderTop: '2px solid #F59E0B' }}>
+          <p className="text-[6.5px] font-bold uppercase tracking-widest" style={{ color: '#F59E0B' }}>NIS: {santri.nis || '-'}</p>
         </div>
 
       </div>
     </div>
 
       {/* ===================== KARTU BAGIAN BELAKANG ===================== */}
-      <div className="w-[54mm] h-[86mm] bg-white rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 flex flex-col relative overflow-hidden print:shadow-none print:border-none shrink-0" style={{ margin: '0 auto', boxSizing: 'border-box', border: '2px solid #ddc192' }}>
+      <div className="w-[54mm] h-[86mm] bg-white rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 flex flex-col relative overflow-hidden print:shadow-none print:border-none shrink-0" style={{ margin: '0 auto', boxSizing: 'border-box', border: '2px solid #F59E0B' }}>
         
         {/* Watermark Gedung (Sangat Transparan agar teks tetap terbaca 100%) */}
         <div 
@@ -98,12 +98,12 @@ export default function KartuJajanPrint({ santri, fotoUrl }: KartuJajanPrintProp
         ></div>
 
         {/* Header Belakang */}
-        <div className="w-full text-center py-2 relative z-10" style={{ backgroundColor: '#550000', borderBottom: '2px solid #ddc192' }}>
-           <h2 className="text-[9px] font-black uppercase tracking-widest" style={{ color: '#ddc192' }}>Ketentuan Penggunaan</h2>
+        <div className="w-full text-center py-2 relative z-10" style={{ backgroundColor: '#E11D74', borderBottom: '2px solid #F59E0B' }}>
+           <h2 className="text-[9px] font-black uppercase tracking-widest" style={{ color: '#F59E0B' }}>Ketentuan Penggunaan</h2>
         </div>
         
         {/* Isi Ketentuan */}
-        <div className="px-4 py-4 text-[7px] leading-[1.6] text-left flex-1 font-semibold relative z-10" style={{ color: '#550000' }}>
+        <div className="px-4 py-4 text-[7px] leading-[1.6] text-left flex-1 font-semibold relative z-10" style={{ color: '#E11D74' }}>
           <ol className="list-decimal pl-3 space-y-2">
              <li>Kartu ini berfungsi sebagai identitas resmi santri dan alat pembayaran elektronik (Kartu Jajan) di lingkungan Pesantren Al Imam Al Islami.</li>
              <li>Segala bentuk transaksi wajib menggunakan kartu ini. Saldo dapat diisi ulang oleh wali santri melalui Portal Resmi.</li>
@@ -114,10 +114,10 @@ export default function KartuJajanPrint({ santri, fotoUrl }: KartuJajanPrintProp
         </div>
         
         {/* Footer Belakang & Alamat */}
-        <div className="w-full text-center p-2.5 mt-auto relative z-10 flex flex-col items-center justify-center" style={{ borderTop: '1px dashed #ddc192', backgroundColor: '#fdfbf7' }}>
-           <p className="text-[8px] font-black uppercase mb-1.5" style={{ color: '#550000' }}>Pesantren Al Imam Al Islami</p>
+        <div className="w-full text-center p-2.5 mt-auto relative z-10 flex flex-col items-center justify-center" style={{ borderTop: '1px dashed #F59E0B', backgroundColor: '#fdfbf7' }}>
+           <p className="text-[8px] font-black uppercase mb-1.5" style={{ color: '#E11D74' }}>Pesantren Al Imam Al Islami</p>
            <p className="text-[5.5px] text-gray-600 font-bold leading-relaxed">Jl. Kp. Cijurey, Gn. Geulis, Kec. Sukaraja<br/>Kabupaten Bogor, Jawa Barat 16710</p>
-           <div className="flex justify-center items-center gap-3 mt-2 text-[6px] font-black" style={{ color: '#550000' }}>
+           <div className="flex justify-center items-center gap-3 mt-2 text-[6px] font-black" style={{ color: '#E11D74' }}>
              <span className="flex items-center gap-1"><Phone className="w-2 h-2" /> 0812-xxxx-xxxx</span>
              <span className="flex items-center gap-1"><Globe className="w-2 h-2" /> al-imam.com</span>
            </div>

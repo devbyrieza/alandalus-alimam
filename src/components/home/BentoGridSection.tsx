@@ -14,14 +14,14 @@ export default function BentoGridSection() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-[#550000] bg-[#ddc192]/20 px-4 py-1.5 rounded-full border border-[#ddc192]/50 inline-block">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-4 py-1.5 rounded-full border border-pink-200 inline-block">
             Sarana & Prasarana
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
-            Lingkungan Belajar <span className="text-[#550000]">Kondusif & Terpadu</span>
+            Lingkungan Belajar <span className="text-primary">Kondusif & Terpadu</span>
           </h2>
           <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-            Fasilitas representatif didesain untuk menunjang kelancaran hafalan Al-Qur'an, kajian kitab turots, dan kesehatan fisik santri.
+            Fasilitas representatif didesain untuk menunjang kelancaran hafalan Al-Qur'an, kajian kitab turots, dan kesehatan fisik santriwati.
           </p>
         </div>
 
@@ -33,7 +33,7 @@ export default function BentoGridSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="md:col-span-2 lg:col-span-2 row-span-2 rounded-3xl overflow-hidden border border-slate-200/60 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.7),_0_2px_10px_rgba(0,0,0,0.04)] relative group bg-slate-900 hover:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.9),_0_8px_30px_rgba(85,0,0,0.08)] transition-all duration-300"
+            className="md:col-span-2 lg:col-span-2 row-span-2 rounded-3xl overflow-hidden border border-slate-200/60 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.7),_0_2px_10px_rgba(0,0,0,0.04)] relative group bg-slate-900 hover:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.9),_0_8px_30px_rgba(225,29,116,0.12)] transition-all duration-300"
           >
             <Image
               src="/images/masjid-jami-al-furqon-al-imam-al-islami-dari-luar.png"
@@ -41,19 +41,19 @@ export default function BentoGridSection() {
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="absolute inset-0 p-5 sm:p-8 flex flex-col justify-end text-white">
-              <div className="w-12 h-12 bg-[#ddc192] text-[#550000] rounded-2xl flex items-center justify-center mb-4 font-bold shadow-sm">
+              <div className="w-12 h-12 bg-primary text-white rounded-2xl flex items-center justify-center mb-4 font-bold shadow-md shadow-primary/30">
                 <BookOpen className="w-6 h-6" />
               </div>
-              <span className="text-xs font-extrabold uppercase text-[#ddc192] tracking-wider mb-1">
+              <span className="text-xs font-extrabold uppercase text-pink-200 tracking-wider mb-1">
                 Pusat Ibadah & Halaqah
               </span>
               <h3 className="text-xl sm:text-2xl font-extrabold text-white mb-2">
                 Masjid Jami' Al Imam
               </h3>
               <p className="text-white/80 text-xs sm:text-sm max-w-md font-normal leading-relaxed">
-                Pusat kegiatan sholat berjamaah lima waktu, halaqah tahfidz Al-Qur'an intensif, serta taklim rutin santri.
+                Pusat kegiatan sholat berjamaah lima waktu, halaqah tahfidz Al-Qur'an intensif, serta taklim rutin santriwati.
               </p>
             </div>
           </motion.div>
@@ -64,16 +64,16 @@ export default function BentoGridSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="md:col-span-1 lg:col-span-2 row-span-1 rounded-3xl border border-slate-200 bg-slate-50/70 p-5 sm:p-6 flex items-center gap-4 sm:gap-6 shadow-xs hover:border-[#ddc192] transition-all group"
+            className="md:col-span-1 lg:col-span-2 row-span-1 rounded-3xl border border-slate-200 bg-slate-50/70 p-5 sm:p-6 flex items-center gap-4 sm:gap-6 shadow-xs hover:border-primary/40 transition-all group"
           >
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-2">
-                <Monitor className="w-4 h-4 text-[#550000] shrink-0" />
-                <span className="font-extrabold text-[#550000] tracking-wider uppercase text-[10px]">
+                <Monitor className="w-4 h-4 text-primary shrink-0" />
+                <span className="font-extrabold text-primary tracking-wider uppercase text-[10px]">
                   Kelas Multimedia
                 </span>
               </div>
-              <h3 className="text-base sm:text-lg font-extrabold text-slate-900 mb-1 group-hover:text-[#550000] transition-colors leading-snug">
+              <h3 className="text-base sm:text-lg font-extrabold text-slate-900 mb-1 group-hover:text-primary transition-colors leading-snug">
                 Ruang Kelas Ber-AC & Interaktif
               </h3>
               <p className="text-slate-500 text-xs leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
@@ -91,13 +91,13 @@ export default function BentoGridSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="col-span-1 row-span-1 rounded-3xl border border-slate-200 bg-white p-6 flex flex-col justify-between shadow-xs hover:border-[#ddc192] transition-all group"
+            className="col-span-1 row-span-1 rounded-3xl border border-slate-200 bg-white p-6 flex flex-col justify-between shadow-xs hover:border-primary/40 transition-all group"
           >
             <div>
-              <div className="w-10 h-10 rounded-xl bg-[#ddc192]/20 text-[#550000] flex items-center justify-center font-bold mb-4">
+              <div className="w-10 h-10 rounded-xl bg-pink-50 border border-pink-200 text-primary flex items-center justify-center font-bold mb-4">
                 <Home className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-extrabold text-slate-900 mb-1 group-hover:text-[#550000] transition-colors">
+              <h3 className="text-base font-extrabold text-slate-900 mb-1 group-hover:text-primary transition-colors">
                 Asrama Santriwati
               </h3>
               <p className="text-slate-500 text-xs leading-relaxed font-normal">
@@ -112,7 +112,7 @@ export default function BentoGridSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="col-span-1 row-span-1 rounded-3xl border border-slate-200 bg-white p-6 flex flex-col justify-between shadow-xs hover:border-[#ddc192] transition-all group"
+            className="col-span-1 row-span-1 rounded-3xl border border-slate-200 bg-white p-6 flex flex-col justify-between shadow-xs hover:border-emerald-300 transition-all group"
           >
             <div>
               <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold mb-4 border border-emerald-100">
@@ -132,7 +132,7 @@ export default function BentoGridSection() {
         <div className="mt-12 text-center">
           <Link
             href="/fasilitas"
-            className="inline-flex items-center gap-2 text-xs font-extrabold text-[#550000] hover:underline uppercase tracking-wider"
+            className="inline-flex items-center gap-2 text-xs font-extrabold text-primary hover:underline uppercase tracking-wider"
           >
             <span>Jelajahi Seluruh Sarana Kampus</span>
             <ArrowRight className="w-4 h-4" />

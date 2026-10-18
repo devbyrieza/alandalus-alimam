@@ -166,7 +166,7 @@ const FeatureCard = ({
             key={statIdx}
             className="bg-primary-50 p-6 sm:p-8 rounded-[1.5rem] border border-slate-200 text-center hover:bg-white hover:shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 transition-all"
           >
-            <div className="text-2xl font-black text-[#550000] mb-1">
+            <div className="text-2xl font-black text-primary mb-1">
               {stat.value}
             </div>
             <div className="text-[10px] text-ink-400 font-extrabold uppercase tracking-widest">
@@ -181,7 +181,7 @@ const FeatureCard = ({
         <div className="space-y-4">
           {item.results.map((result, idx) => (
             <div key={idx} className="flex items-start gap-4">
-              <result.icon className="w-5 h-5 text-[#550000] mt-0.5 shrink-0" />
+              <result.icon className="w-5 h-5 text-primary mt-0.5 shrink-0" />
               <span className="text-base text-ink-700 font-bold leading-tight">
                 {result.text}
               </span>
@@ -211,7 +211,7 @@ const StatsCard = ({ icon: Icon, value, label, sublabel }: HeroStat) => (
     whileHover={{ y: -5 }}
     className="app-card bg-white p-6 sm:p-8 md:p-6 rounded-[2rem] md:rounded-[2.5rem] border border-slate-200 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 text-center min-w-[140px] md:min-w-[160px] flex flex-col items-center"
   >
-    <div className="w-10 h-10 md:w-12 md:h-12 rounded-3xl md:rounded-2xl bg-primary-50 flex items-center justify-center text-[#550000] mb-3 md:mb-4 border border-slate-200">
+    <div className="w-10 h-10 md:w-12 md:h-12 rounded-3xl md:rounded-2xl bg-primary-50 flex items-center justify-center text-primary mb-3 md:mb-4 border border-slate-200">
       <Icon className="w-5 h-5 md:w-6 md:h-6" />
     </div>
     <div className="text-2xl md:text-3xl font-black text-ink-950 mb-1">
@@ -244,7 +244,7 @@ const ScheduleCard = ({
         <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 group-hover:scale-110 transition-transform border border-slate-200">
           <schedule.icon className={`${schedule.iconColor} w-8 h-8`} />
         </div>
-        <div className="text-lg font-black text-[#550000] bg-white/50 px-4 py-1.5 rounded-pill border border-slate-200">
+        <div className="text-lg font-black text-primary bg-white/50 px-4 py-1.5 rounded-pill border border-slate-200">
           {schedule.time}
         </div>
       </div>
@@ -258,7 +258,7 @@ const ScheduleCard = ({
       </p>
 
       <div className="mt-auto inline-flex items-center gap-3 bg-white/60 p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
-        <Zap className="w-5 h-5 text-[#550000] flex-shrink-0" />
+        <Zap className="w-5 h-5 text-primary flex-shrink-0" />
         <span className="text-sm font-black text-ink-950 uppercase tracking-tight">
           {schedule.benefit}
         </span>
@@ -319,7 +319,7 @@ const EkskulCard = ({
     transition={{ delay: index * 0.05 }}
     className="app-card group p-6 sm:p-8 md:p-8 rounded-[2rem] md:rounded-[2.5rem] bg-white border border-primary-50 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 hover:shadow-2xl shadow-primary/30  shadow-primary/20 hover:border-primary-200 transition-all hover:-translate-y-2 text-center h-full flex flex-col justify-between"
   >
-    <div className="w-12 h-12 md:w-16 md:h-16 bg-primary-50 rounded-3xl md:rounded-2xl flex items-center justify-center text-[#550000] mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-all duration-300 border border-slate-200">
+    <div className="w-12 h-12 md:w-16 md:h-16 bg-primary-50 rounded-3xl md:rounded-2xl flex items-center justify-center text-primary mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-all duration-300 border border-slate-200">
       <ekskul.icon className="w-6 h-6 md:w-8 md:h-8" />
     </div>
 
@@ -332,7 +332,7 @@ const EkskulCard = ({
     </p>
 
     <div className="pt-3 md:pt-4 border-t border-surface-50 mt-auto">
-      <p className="text-[10px] md:text-xs font-black text-[#550000] uppercase tracking-widest break-words">
+      <p className="text-[10px] md:text-xs font-black text-primary uppercase tracking-widest break-words">
         {ekskul.benefit}
       </p>
     </div>
@@ -356,7 +356,7 @@ export default function KegiatanPage() {
         "Bukan sekadar hafalan! Santriwati kami PAHAM isi kitab, mampu berdiskusi ilmiah, dan disiapkan menjadi ilmuwan muda.",
       icon: BookOpen,
       accentColor: "bg-primary-500",
-      bgColor: "bg-[#550000]",
+      bgColor: "bg-primary",
       stats: [
         { label: "Kitab Dikuasai", value: "30+" },
         { label: "Ustadz Expert", value: "20+" },
@@ -402,7 +402,7 @@ export default function KegiatanPage() {
         "Menyiapkan santri multitalenta yang juara di bidang olimpiade, olahraga, hingga public speaking.",
       icon: Target,
       accentColor: "bg-primary-500",
-      bgColor: "bg-[#550000]",
+      bgColor: "bg-primary",
       stats: [
         { label: "Pilihan Ekskul", value: "10+" },
         { label: "Pelatih Ahli", value: "15+" },
@@ -455,7 +455,7 @@ export default function KegiatanPage() {
         "Penyelesaian hajat mandiri, makan pagi sehat, dan mandi untuk persiapan menyambut hari dengan kebugaran fisik prima.",
       benefit: "Kesehatan tubuh & kesiapan mental.",
       bgColor: "bg-primary-50/50",
-      iconColor: "text-[#550000]" },
+      iconColor: "text-primary" },
     {
       icon: BookOpen,
       time: "07:00 - 12:00",
@@ -464,7 +464,7 @@ export default function KegiatanPage() {
         "Belajar aktif di kelas: Mengkaji Kitab Turots, Ilmu Syar'i, Mapel Umum (IPA, MTK, dan lain lain), Entrepreneurship, serta Leadership.",
       benefit: "Integrasi Imtak, Iptek & Entrepreneurship.",
       bgColor: "bg-primary-50",
-      iconColor: "text-[#550000]" },
+      iconColor: "text-primary" },
     {
       icon: Home,
       time: "12:30 - 15:00",
@@ -473,7 +473,7 @@ export default function KegiatanPage() {
         "Setelah ba'diyah dzuhur dilanjutkan makan siang dan tidur siang tertib. Seluruh santri wajib bangun sebelum adzan ashar.",
       benefit: "Pemulihan stamina & qailulah sunnah.",
       bgColor: "bg-primary-50/50",
-      iconColor: "text-[#550000]" },
+      iconColor: "text-primary" },
     {
       icon: Dribbble,
       time: "15:30 - 17:30",
@@ -501,7 +501,7 @@ export default function KegiatanPage() {
       detail: "Fardhu & Sunnah Rawatib berjamaah di masjid.",
       benefit: "Kebiasaan Ibadah Kokoh",
       icon: Home,
-      color: "text-[#550000]",
+      color: "text-primary",
       bg: "bg-primary-50" },
     {
       title: "Kajian Jum'at",
@@ -509,7 +509,7 @@ export default function KegiatanPage() {
       detail: "Tafsir, Hadits & Isu Kontemporer.",
       benefit: "Literasi Agama Matang",
       icon: BookText,
-      color: "text-[#550000]",
+      color: "text-primary",
       bg: "bg-primary-50" },
     {
       title: "Bela Diri",
@@ -517,7 +517,7 @@ export default function KegiatanPage() {
       detail: "Latihan rutin untuk kebugaran dan pertahanan diri.",
       benefit: "Mental & Fisik Kuat",
       icon: Shield,
-      color: "text-[#550000]",
+      color: "text-primary",
       bg: "bg-primary-50" },
     {
       title: "Pramuka",
@@ -609,7 +609,7 @@ export default function KegiatanPage() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-[#ddc192]/20 border border-[#ddc192]/50 text-[#550000] text-xs font-extrabold uppercase tracking-wider mb-6 shadow-2xs"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-pink-50 border border-pink-200 text-primary text-xs font-extrabold uppercase tracking-wider mb-6 shadow-2xs"
           >
             <Award className="w-3.5 h-3.5" />
             <span>Program Pendidikan & Kegiatan</span>
@@ -661,7 +661,7 @@ export default function KegiatanPage() {
               </span>
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-ink-950 mb-6 md:mb-8 leading-tight">
                 Hasil Nyata <br />
-                <span className="text-[#550000]">Pendidikan Kita</span>
+                <span className="text-primary">Pendidikan Kita</span>
               </h2>
               <p className="text-lg md:text-xl text-ink-600 font-medium leading-relaxed mb-8 md:mb-10 text-center max-w-2xl mx-auto">
                 Alhamdulillah, dengan izin Allah, santriwati kami telah menunjukkan
@@ -691,7 +691,7 @@ export default function KegiatanPage() {
                   whileHover={{ scale: 1.02 }}
                   className="bg-white p-5 md:p-6 rounded-[2rem] flex items-center gap-4 border border-slate-200 group transition-all h-full text-left"
                 >
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary-50 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 flex items-center justify-center text-[#550000] shrink-0 group-hover:bg-[#550000] group-hover:text-white transition-colors border border-slate-200">
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary-50 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-colors border border-slate-200">
                     <item.icon className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <span className="font-black text-ink-900 text-sm md:text-lg leading-tight">
@@ -756,7 +756,7 @@ export default function KegiatanPage() {
             <p className="text-xl text-ink-600 font-medium leading-relaxed">
               Aktivitas rutin pekanan dan bulanan yang dirancang untuk
               mematangkan{" "}
-              <span className="text-[#550000] font-bold uppercase tracking-tight">
+              <span className="text-primary font-bold uppercase tracking-tight">
                 keterampilan non-teknis
               </span>{" "}
               dan pengalaman santri.

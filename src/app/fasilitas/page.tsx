@@ -168,16 +168,16 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utb3BhY2l0eT0iMC4wMiIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTAgNjBoNjBNNjAgMGwwIDYwIi8+PC9nPjwvc3ZnPg==')] opacity-70 pointer-events-none" />
 
         <Container className="relative z-10 max-w-4xl mx-auto px-4 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#ddc192]/20 border border-[#ddc192]/50 shadow-2xs">
-            <span className="w-2 h-2 rounded-full bg-[#550000] animate-pulse" />
-            <span className="text-xs font-extrabold uppercase tracking-wider text-[#550000]">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-50 border border-pink-200 shadow-2xs">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            <span className="text-xs font-extrabold uppercase tracking-wider text-primary">
               Sarana & Prasarana Modern
             </span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
             Fasilitas Kampus <br />
-            <span className="text-[#550000]">Pesantren Al Imam Sukabumi</span>
+            <span className="text-primary">Pesantren Al Imam Sukabumi</span>
           </h1>
 
           <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
@@ -193,7 +193,7 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
             {FACILITIES.map((item, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md hover:border-[#ddc192] transition-all group flex flex-col justify-between"
+                className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md hover:border-pink-200 transition-all group flex flex-col justify-between"
               >
                 <div>
                   {/* Photo Container */}
@@ -206,7 +206,7 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full border border-slate-200/80 shadow-xs">
-                      <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#550000]">
+                      <span className="text-[10px] font-extrabold uppercase tracking-wider text-primary">
                         {item.badge}
                       </span>
                     </div>
@@ -216,7 +216,7 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
                     <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-1">
                       {item.category}
                     </span>
-                    <h3 className="text-lg font-extrabold text-slate-900 group-hover:text-[#550000] transition-colors mb-2">
+                    <h3 className="text-lg font-extrabold text-slate-900 group-hover:text-primary transition-colors mb-2">
                       {item.title}
                     </h3>
                     <p className="text-xs text-slate-500 font-normal leading-relaxed">
@@ -244,9 +244,9 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
           <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
             
             {/* Header Form */}
-            <div className="bg-gradient-to-br from-[#2D0000] via-[#400000] to-[#550000] p-5 sm:p-8 md:p-10 text-white relative overflow-hidden">
+            <div className="bg-gradient-to-br from-[#831843] via-[#9F1239] to-[#E11D74] p-5 sm:p-8 md:p-10 text-white relative overflow-hidden">
               <div className="relative z-10 space-y-2">
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#ddc192] bg-white/10 px-3 py-1 rounded-full border border-white/20 inline-block">
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-pink-200 bg-white/10 px-3 py-1 rounded-full border border-white/20 inline-block">
                   Layanan Survey & Kunjungan
                 </span>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white">
@@ -279,7 +279,7 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
                     value={visitForm.nama}
                     onChange={(e) => setVisitForm({ ...visitForm, nama: e.target.value })}
                     placeholder="Contoh: Fulan bin Fulan"
-                    className="w-full h-12 px-4 bg-slate-50/50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:bg-white focus:border-[#550000] focus:ring-4 focus:ring-[#550000]/10 transition-all"
+                    className="w-full h-12 px-4 bg-slate-50/50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all"
                   />
                 </div>
 
@@ -294,7 +294,7 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
                     value={visitForm.wa}
                     onChange={(e) => setVisitForm({ ...visitForm, wa: e.target.value })}
                     placeholder="Contoh: 08123456789"
-                    className="w-full h-12 px-4 bg-slate-50/50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:bg-white focus:border-[#550000] focus:ring-4 focus:ring-[#550000]/10 transition-all"
+                    className="w-full h-12 px-4 bg-slate-50/50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all"
                   />
                 </div>
 
@@ -308,7 +308,7 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
                     required
                     value={visitForm.tanggal}
                     onChange={(e) => setVisitForm({ ...visitForm, tanggal: e.target.value })}
-                    className="w-full h-12 px-4 bg-slate-50/50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 focus:bg-white focus:border-[#550000] focus:ring-4 focus:ring-[#550000]/10 transition-all"
+                    className="w-full h-12 px-4 bg-slate-50/50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all"
                   />
                 </div>
 
@@ -321,7 +321,7 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
                     required
                     value={visitForm.jam}
                     onChange={(e) => setVisitForm({ ...visitForm, jam: e.target.value })}
-                    className="w-full h-12 px-4 bg-slate-50/50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 focus:bg-white focus:border-[#550000] focus:ring-4 focus:ring-[#550000]/10 transition-all"
+                    className="w-full h-12 px-4 bg-slate-50/50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all"
                   >
                     <option value="">Pilih Jam Kedatangan</option>
                     <option value="09.00">Pagi (09.00 - 11.30 WIB)</option>
@@ -344,14 +344,14 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
                   value={visitForm.jumlah}
                   onChange={(e) => setVisitForm({ ...visitForm, jumlah: e.target.value })}
                   placeholder="Contoh: 3"
-                  className="w-full h-12 px-4 bg-slate-50/50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:bg-white focus:border-[#550000] focus:ring-4 focus:ring-[#550000]/10 transition-all"
+                  className="w-full h-12 px-4 bg-slate-50/50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all"
                 />
               </div>
 
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="h-12 px-8 rounded-xl bg-[#550000] hover:bg-[#400000] text-white font-extrabold text-sm shadow-md shadow-[#550000]/25 transition-all inline-flex items-center gap-2 hover:-translate-y-0.5 w-full sm:w-auto justify-center"
+                  className="h-12 px-8 rounded-xl bg-primary hover:bg-primary-dark text-white font-extrabold text-sm shadow-md shadow-primary/25 transition-all inline-flex items-center gap-2 hover:-translate-y-0.5 w-full sm:w-auto justify-center"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>Kirim Jadwal Survey via WhatsApp</span>

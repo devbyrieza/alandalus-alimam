@@ -8,20 +8,20 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const FAQS = [
   {
-    question: "Kapan pendaftaran santri baru angkatan 2027/2028 dibuka?",
-    answer: "Pendaftaran SPMB Tahun Ajaran 2027/2028 dibuka mulai tanggal 16 Oktober sampai dengan 20 Desember 2026. Namun, pendaftaran dapat ditutup lebih awal jika kuota santri baru sebanyak 25 santri per rombel telah terpenuhi."
+    question: "Kapan pendaftaran santriwati baru angkatan 2027/2028 dibuka?",
+    answer: "Pendaftaran SPMB Tahun Ajaran 2027/2028 dibuka mulai tanggal 16 Oktober sampai dengan 20 Desember 2026. Namun, pendaftaran dapat ditutup lebih awal jika kuota santriwati baru sebanyak 25 santriwati per rombel telah terpenuhi."
   },
   {
     question: "Apa saja fokus program unggulan di Pesantren Al-Imam?",
-    answer: "Program unggulan Al-Imam berpusat pada penguasaan Bahasa Arab sangat intensif (muhadatsah harian & nahwu-shorof), tahfidz Al-Qur'an mutqin bersanad, pendalaman ilmu syar'i & ibadah harian bimbingan Sunnah, pengajaran sains akademik umum berstandar tinggi agar santri tetap pintar berdaya saing, serta penempaan jiwa kepemimpinan (leadership) dan kemandirian wirausaha (entrepreneurship)."
+    answer: "Program unggulan Al-Imam berpusat pada penguasaan Bahasa Arab sangat intensif (muhadatsah harian & nahwu-shorof), tahfidz Al-Qur'an mutqin bersanad, pendalaman ilmu syar'i & ibadah harian bimbingan Sunnah, pengajaran sains akademik umum berstandar tinggi agar santriwati tetap pintar berdaya saing, serta penempaan jiwa kepemimpinan (leadership), keterampilan keputrian, dan kemandirian wirausaha (entrepreneurship)."
   },
   {
-    question: "Bagaimana sistem pengasuhan santri dan penegakan disiplin di Al-Imam?",
-    answer: "Al-Imam menerapkan prinsip pengasuhan 'Mendidik Tanpa Luka' yang mengedepankan keteladanan 24 jam para pendidik dan kasih sayang. Kami bersikap tegas tanpa toleransi (zero tolerance) terhadap pelanggaran berat seperti merokok, pacaran/pergaulan bebas mengarah perzinaan, LGBT, perundungan (bullying), kekerasan fisik, dan pencurian. Penindakan ditegakkan secara edukatif dan dialogis mutlak tanpa sanksi fisik."
+    question: "Bagaimana sistem pengasuhan santriwati dan penegakan disiplin di Al-Imam?",
+    answer: "Al-Imam menerapkan prinsip pengasuhan 'Mendidik Tanpa Luka' yang mengedepankan keteladanan 24 jam para pendidik dan kasih sayang. Kami bersikap tegas tanpa toleransi (zero tolerance) terhadap pelanggaran berat seperti pergaulan bebas, perundungan (bullying), kekerasan fisik, dan pencurian. Penindakan ditegakkan secara edukatif dan dialogis mutlak tanpa sanksi fisik."
   },
   {
-    question: "Apakah santri diwajibkan untuk tinggal di asrama?",
-    answer: "Ya, seluruh santri di Pesantren Al Imam Al Islami wajib mukim di asrama pondok guna mengikuti program pembinaan adab 24 jam, halaqah tahfidz Al-Qur'an intensif, dan penguasaan bahasa Arab secara komprehensif."
+    question: "Apakah santriwati diwajibkan untuk tinggal di asrama?",
+    answer: "Ya, seluruh santriwati di Pesantren Al Imam Al Islami wajib mukim di asrama pondok guna mengikuti program pembinaan adab 24 jam, halaqah tahfidz Al-Qur'an intensif, dan penguasaan bahasa Arab secara komprehensif."
   },
   {
     question: "Kurikulum apa yang diterapkan di Pesantren Al Imam Al Islami?",
@@ -32,12 +32,12 @@ const FAQS = [
     answer: "Berkas utama meliputi Akta Kelahiran, Kartu Keluarga (KK), NISN, rapor pendidikan terakhir, serta pas foto terbaru. Seluruh berkas diunggah secara digital dalam format PDF/JPG melalui dashboard pendaftaran."
   },
   {
-    question: "Bagaimana tahapan ujian seleksi masuk santri baru?",
-    answer: "Ujian seleksi terdiri dari tes lisan (tahfidz dan kemampuan membaca Al-Qur'an), tes tertulis (kemampuan dasar akademik), serta tes wawancara kesiapan belajar bagi calon santri dan orang tua/wali."
+    question: "Bagaimana tahapan ujian seleksi masuk santriwati baru?",
+    answer: "Ujian seleksi terdiri dari tes lisan (tahfidz dan kemampuan membaca Al-Qur'an), tes tertulis (kemampuan dasar akademik), serta tes wawancara kesiapan belajar bagi calon santriwati dan orang tua/wali."
   },
   {
     question: "Apakah tersedia program beasiswa prestasi?",
-    answer: "Ya, Pesantren Al Imam Al Islami menyediakan kuota beasiswa khusus bagi calon santri berprestasi yang telah memiliki hafalan Al-Qur'an mutqin serta juara olimpiade sains tingkat kabupaten/provinsi/nasional."
+    answer: "Ya, Pesantren Al Imam Al Islami menyediakan kuota beasiswa khusus bagi calon santriwati berprestasi yang telah memiliki hafalan Al-Qur'an mutqin serta juara olimpiade sains tingkat kabupaten/provinsi/nasional."
   }
 ];
 
@@ -56,18 +56,18 @@ export default function FaqSection() {
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-[#550000] bg-[#ddc192]/20 px-4 py-1.5 rounded-full border border-[#ddc192]/50 inline-block">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-4 py-1.5 rounded-full border border-pink-200 inline-block">
             Pusat Bantuan & Informasi
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
-            Pertanyaan yang <span className="text-[#550000]">Sering Diajukan</span>
+            Pertanyaan yang <span className="text-primary">Sering Diajukan</span>
           </h2>
           <p className="text-slate-600 text-sm md:text-base leading-relaxed">
             Temukan jawaban cepat seputar persyaratan, kurikulum, sistem asrama, dan prosedur SPMB.
           </p>
         </div>
 
-        {/* Clean Accordion List (OMI FAQ Standard) */}
+        {/* Clean Accordion List */}
         <div className="space-y-3.5">
           {FAQS.map((faq, idx) => {
             const isOpen = openIndex === idx;
@@ -75,7 +75,7 @@ export default function FaqSection() {
               <div
                 key={idx}
                 className={`rounded-2xl border transition-all duration-200 overflow-hidden bg-white ${
-                  isOpen ? "border-[#ddc192] shadow-sm bg-[#FDFCF9]" : "border-slate-200 hover:border-slate-300"
+                  isOpen ? "border-pink-300 shadow-sm bg-pink-50/20" : "border-slate-200 hover:border-slate-300"
                 }`}
               >
                 <button
@@ -84,12 +84,12 @@ export default function FaqSection() {
                   className="w-full text-left flex items-center justify-between gap-4 p-5 sm:p-6 focus:outline-none"
                 >
                   <span className={`text-sm sm:text-base font-extrabold transition-colors leading-snug ${
-                    isOpen ? "text-[#550000]" : "text-slate-900"
+                    isOpen ? "text-primary" : "text-slate-900"
                   }`}>
                     {faq.question}
                   </span>
                   <div className={`w-7 h-7 rounded-xl flex items-center justify-center shrink-0 transition-all ${
-                    isOpen ? "bg-[#550000] text-white rotate-180" : "bg-slate-100 text-slate-500"
+                    isOpen ? "bg-primary text-white rotate-180" : "bg-slate-100 text-slate-500"
                   }`}>
                     <ChevronDown className="w-4 h-4" />
                   </div>
@@ -103,7 +103,7 @@ export default function FaqSection() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.25, ease: "easeInOut" }}
                     >
-                      <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-600 font-normal leading-relaxed border-t border-slate-100/80">
+                      <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-600 font-normal leading-relaxed border-t border-pink-100/60">
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -117,7 +117,7 @@ export default function FaqSection() {
         {/* Bottom Help Banner */}
         <div className="mt-12 bg-slate-50 border border-slate-200 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-[#ddc192]/25 text-[#550000] flex items-center justify-center shrink-0 font-bold">
+            <div className="w-10 h-10 rounded-xl bg-pink-100 text-primary flex items-center justify-center shrink-0 font-bold">
               <HelpCircle className="w-5 h-5" />
             </div>
             <div>
@@ -133,7 +133,7 @@ export default function FaqSection() {
             href={WA_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="h-10 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-sm transition-all inline-flex items-center gap-2 shrink-0"
+            className="h-10 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-sm transition-all inline-flex items-center gap-2 shrink-0 active:scale-95"
           >
             <MessageCircle className="w-4 h-4" />
             <span>Chat WhatsApp CS</span>
