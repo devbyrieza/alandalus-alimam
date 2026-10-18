@@ -10,6 +10,7 @@ import {
   BookOpen,
   Download,
   ShieldCheck,
+  CheckCircle2,
 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { BRANDING } from "@/config/branding";
@@ -133,31 +134,44 @@ export default function HeroSection() {
               <div className="h-px w-8 bg-secondary" />
             </div>
 
-            {/* 3 Action Buttons — pakai .btn-primary yang sudah ada di globals.css */}
+            {/* Trust checklist — Identik dengan Ulul Albaab (Twin Sister Standard) */}
+            <ul
+              className={`flex flex-wrap gap-x-5 gap-y-2 justify-center lg:justify-start ${enter}`}
+              style={delay(260)}
+            >
+              {["MTs & IL Putri", "Kurikulum TICE Terpadu", "Boarding Asrama Representatif"].map((item) => (
+                <li key={item} className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            {/* CTA Buttons */}
             <div
               className={`flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2.5 sm:gap-3 pt-1 sm:pt-1.5 w-full ${enter}`}
-              style={delay(280)}
+              style={delay(320)}
             >
               {session ? (
-                <a href="https://spmb.pesantren-alimam.com/dashboard" className="btn-primary w-full sm:w-auto shadow-lg shadow-rose-500/30 hover:shadow-rose-500/50">
+                <a href="https://spmb.pesantren-alimam.com/dashboard" className="btn-primary w-full sm:w-auto shadow-lg shadow-rose-500/30 hover:shadow-rose-500/50 flex items-center justify-center gap-2">
                   <span>Buka Dashboard</span>
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </a>
               ) : (
-                <a href="https://spmb.pesantren-alimam.com/daftar" className="btn-primary w-full sm:w-auto shadow-lg shadow-rose-500/30 hover:shadow-rose-500/50">
+                <a href="https://spmb.pesantren-alimam.com/daftar" className="btn-primary w-full sm:w-auto shadow-lg shadow-rose-500/30 hover:shadow-rose-500/50 flex items-center justify-center gap-2">
                   <span>Daftar SPMB 2027</span>
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </a>
               )}
 
-              <Link href="/program" className="btn-secondary w-full sm:w-auto">
+              <Link href="/program" className="btn-secondary w-full sm:w-auto flex items-center justify-center gap-2">
                 <span>Lihat Program</span>
               </Link>
 
               <a
                 href="/documents/Brosur-SPMB-Al-Imam-2027-2028.pdf"
                 download="Brosur-SPMB-Pesantren-Al-Imam-2027-2028.pdf"
-                className="btn-cream w-full sm:w-auto"
+                className="btn-cream w-full sm:w-auto flex items-center justify-center gap-2"
               >
                 <Download className="w-4 h-4" aria-hidden="true" />
                 <span>Unduh Brosur</span>
@@ -165,7 +179,7 @@ export default function HeroSection() {
             </div>
 
             {/* Live Countdown Card */}
-            <div className={`pt-2 sm:pt-2.5 max-w-lg mx-auto lg:mx-0 ${enter}`} style={delay(340)}>
+            <div className={`pt-2 sm:pt-2.5 max-w-lg mx-auto lg:mx-0 ${enter}`} style={delay(380)}>
               <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm">
                 <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs font-extrabold text-slate-600 uppercase tracking-wider mb-2.5 sm:mb-3">
                   <span>Pendaftaran Dibuka: {REG_PERIOD_LABEL}</span>
@@ -187,8 +201,7 @@ export default function HeroSection() {
                   aria-label="Hitung mundur penutupan pendaftaran"
                 >
                   {units.map((unit) => (
-                    <div key={unit.label} className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 sm:p-3">
-                      {/* Tidak memakai .stat-value: kelas itu menimpa text-primary dan ukuran font di sini */}
+                    <div key={unit.label} className="bg-pink-50/70 border border-pink-100 rounded-xl p-2.5 sm:p-3">
                       <div className="text-xl sm:text-2xl md:text-3xl font-extrabold text-primary tabular-nums leading-none">
                         {countdown.ready ? pad(unit.value) : "--"}
                       </div>
@@ -202,27 +215,21 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* ═════════ RIGHT COLUMN: PHOTO ═════════ */}
+          {/* ═════════ RIGHT COLUMN: PHOTO (Twin Sister 4:5 Aspect Studio Standard) ═════════ */}
           <div
-            className={`relative w-full max-w-[24rem] sm:max-w-[26rem] mx-auto lg:mx-0 lg:max-w-[27.5rem] xl:max-w-[28.5rem] lg:col-span-5 lg:justify-self-end ${enter}`}
+            className={`relative w-full max-w-[26rem] sm:max-w-[28rem] mx-auto lg:mx-0 lg:max-w-[28.75rem] lg:col-span-5 lg:justify-self-end ${enter}`}
             style={delay(200)}
           >
             {/* Bingkai dekoratif di belakang foto (glow aura) */}
             <div
-              className="absolute -inset-3 rounded-[2.25rem] bg-gradient-to-br from-pink-300/50 via-rose-100/30 to-sky-200/40 blur-md"
+              className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-pink-300/50 via-transparent to-rose-200/50 blur-sm"
               aria-hidden="true"
             />
 
-            {/* Santriwati Pesantren Al-Imam Al-Islami: Ujung atas kepala sampai bawah almamater utuh tampak jelas */}
-            <div className="relative aspect-[10/14] rounded-3xl overflow-hidden border-4 border-white bg-gradient-to-b from-[#FFF5F8] via-[#FAF8F9] to-[#FCE7F3] shadow-2xl shadow-rose-500/15 group">
-              {/* Subtle spotlight aura behind talent */}
-              <div
-                className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(255,255,255,0.95),rgba(255,245,248,0.3)_60%,transparent_100%)] pointer-events-none"
-                aria-hidden="true"
-              />
-
+            {/* Foto: rasio 4:5 identik dengan Ulul Albaab */}
+            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border-4 border-white bg-white/60 shadow-2xl shadow-rose-500/25 group">
               {/* Badge Khusus Putri di dalam bingkai foto */}
-              <div className="absolute top-4 left-4 z-10 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-rose-200 shadow-md flex items-center gap-2">
+              <div className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-rose-200 shadow-md flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-rose-600 animate-pulse" />
                 <span className="text-[11px] font-black tracking-wider text-rose-900 uppercase">
                   Khusus Putri
@@ -230,12 +237,12 @@ export default function HeroSection() {
               </div>
 
               <Image
-                src="/images/talent-putri.png"
+                src="/images/talent-santriwati.png"
                 alt="Santriwati Pesantren Al-Imam Al-Islami"
                 fill
                 priority
-                sizes="(max-width: 1024px) 90vw, 480px"
-                className="object-contain object-bottom pt-3 transform group-hover:scale-[1.02] transition-transform duration-700 motion-reduce:transition-none drop-shadow-[0_10px_20px_rgba(225,29,116,0.12)]"
+                sizes="(max-width: 1024px) 90vw, 460px"
+                className="object-cover object-top transform group-hover:scale-105 transition-transform duration-700 motion-reduce:transition-none"
               />
             </div>
           </div>
