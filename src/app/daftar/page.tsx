@@ -277,7 +277,7 @@ export default function DaftarPage() {
             </div>
           </div>
           <a
-            href="https://pesantren-ululalbaab.com/daftar"
+            href="https://spmb.pesantren-ululalbaab.com/daftar"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-extrabold text-xs uppercase tracking-wider shadow-md shadow-blue-600/20 hover:shadow-lg transition-all shrink-0 w-full sm:w-auto"
@@ -642,7 +642,7 @@ export default function DaftarPage() {
                             </p>
                           </div>
                           <a
-                            href="https://pesantren-ululalbaab.com/daftar"
+                            href="https://spmb.pesantren-ululalbaab.com/daftar"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 text-white font-bold text-xs uppercase tracking-wider hover:bg-blue-700 shadow-sm transition-all shrink-0 w-full sm:w-auto justify-center"
