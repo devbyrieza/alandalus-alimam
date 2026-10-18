@@ -203,33 +203,39 @@ export default function HeroSection() {
           </div>
 
           {/* ═════════ RIGHT COLUMN: PHOTO ═════════ */}
-          {/* Rasio 4:5 standar proporsional tanpa perpanjangan height bingkai */}
           <div
-            className={`relative w-full max-w-[26rem] sm:max-w-[28rem] mx-auto lg:mx-0 lg:max-w-[28.75rem] lg:col-span-5 lg:justify-self-end ${enter}`}
+            className={`relative w-full max-w-[24rem] sm:max-w-[26rem] mx-auto lg:mx-0 lg:max-w-[27.5rem] xl:max-w-[28.5rem] lg:col-span-5 lg:justify-self-end ${enter}`}
             style={delay(200)}
           >
-            {/* Bingkai dekoratif di belakang foto */}
+            {/* Bingkai dekoratif di belakang foto (glow aura) */}
             <div
-              className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-pink-200/60 via-transparent to-sky-200/50 blur-sm"
+              className="absolute -inset-3 rounded-[2.25rem] bg-gradient-to-br from-pink-300/50 via-rose-100/30 to-sky-200/40 blur-md"
               aria-hidden="true"
             />
 
-            {/* Santriwati Pesantren Al-Imam Al-Islami: Almamater & Rok utuh tampak jelas */}
-            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border-4 border-white bg-white/60 shadow-2xl shadow-rose-500/15 group">
+            {/* Santriwati Pesantren Al-Imam Al-Islami: Ujung atas kepala sampai bawah almamater utuh tampak jelas */}
+            <div className="relative aspect-[10/14] rounded-3xl overflow-hidden border-4 border-white bg-gradient-to-b from-[#FFF5F8] via-[#FAF8F9] to-[#FCE7F3] shadow-2xl shadow-rose-500/15 group">
+              {/* Subtle spotlight aura behind talent */}
+              <div
+                className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(255,255,255,0.95),rgba(255,245,248,0.3)_60%,transparent_100%)] pointer-events-none"
+                aria-hidden="true"
+              />
+
               {/* Badge Khusus Putri di dalam bingkai foto */}
-              <div className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-rose-200 shadow-md flex items-center gap-2">
+              <div className="absolute top-4 left-4 z-10 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-rose-200 shadow-md flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-rose-600 animate-pulse" />
                 <span className="text-[11px] font-black tracking-wider text-rose-900 uppercase">
                   Khusus Putri
                 </span>
               </div>
+
               <Image
-                src="/images/hero-putri-alimam.jpeg"
+                src="/images/talent-putri.png"
                 alt="Santriwati Pesantren Al-Imam Al-Islami"
                 fill
                 priority
-                sizes="(max-width: 1024px) 90vw, 460px"
-                className="object-cover object-center transform group-hover:scale-105 transition-transform duration-700 motion-reduce:transition-none"
+                sizes="(max-width: 1024px) 90vw, 480px"
+                className="object-contain object-bottom pt-3 transform group-hover:scale-[1.02] transition-transform duration-700 motion-reduce:transition-none drop-shadow-[0_10px_20px_rgba(225,29,116,0.12)]"
               />
             </div>
           </div>
