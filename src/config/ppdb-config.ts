@@ -1,118 +1,204 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//   SPMB CONFIGURATION - EASY CUSTOMIZATION
-//   Ganti bagian ini saja untuk setiap pesantren baru!
+//   SPMB CONFIGURATION - PESANTREN AL IMAM AL ISLAMI (KHUSUS PUTRI)
+//   Tahun Ajaran 2027/2028 (SPMB)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export const PPDB_CONFIG = {
-  // 🏫 INFO PESANTREN (GANTI INI DULU!)
+  // 🏫 INFO PESANTREN
   pesantren: {
     nama: "Pesantren Al Imam Al Islami",
     singkatan: "Al Imam Al Islami",
+    legal: "Pesantren Al-Imam Al-Islami Managed by Al Andalus IIBS",
     alamat:
-      "Jl. Pelabuhan II KM 18 Kampung Pupunjul, RT./RW/RW.01, 02, Cikembar, Kec. Cikembar, Kabupaten Sukabumi, Jawa Barat 43157",
+      "Jl. Pelabuhan II KM 18, Kampung Pupunjul, RT.01/RW.02, Cikembar, Kec. Cikembar, Kabupaten Sukabumi, Jawa Barat 43157",
     telepon: "+62 851-1152-4441",
     email: "alandalusalimam@gmail.com",
     emailPpdb: "alandalusalimam@gmail.com",
-    website: "https://www.pesantren-alimam.com" },
+    website: "https://spmb.pesantren-alimam.com",
+  },
 
-  // 🎨 BRAND COLORS (GANTI SESUAI LOGO)
+  // 🎨 BRAND COLORS (Pink Rose Khas Al-Imam Khusus Putri)
   colors: {
-    // Primary Colors (Maroon / Cream - Warna Khas Al Imam)
     primary: {
-      50: "#fdf6e3",
-      100: "#f9e8c8",
-      200: "#f0cc99",
-      300: "#e0a868",
-      400: "#c07840",
-      500: "#9b5e28",
-      600: "#7c3a1e", // Warna tombol & aksi utama
-      700: "#6b1c1c", // Warna teks penting
-      800: "#521414",
-      900: "#3d0d0d", // Warna teks gelap
+      50: "#fff1f2",
+      100: "#ffe4e6",
+      200: "#fecdd3",
+      300: "#fda4af",
+      400: "#fb7185",
+      500: "#f43f5e",
+      600: "#e11d74", // Warna utama tombol & aksi
+      700: "#be123c",
+      800: "#9f1239",
+      900: "#881337",
     },
-
-    // Secondary Colors (Kuning / Amber)
     secondary: {
       50: "#fffbeb",
       100: "#fef3c7",
       200: "#fde68a",
       300: "#fcd34d",
-      400: "#fbbf24" },
-
-    // Accent Colors (Warna Aksen)
+      400: "#fbbf24",
+    },
     accent: {
-      gold: "#fbbf24", // Untuk highlight & achievement
-      teal: "#14b8a6", // Untuk success & info
-      red: "#ef4444", // Untuk error & warning
-    } },
+      gold: "#fbbf24",
+      teal: "#14b8a6",
+      red: "#ef4444",
+    },
+  },
 
-  // 📱 PROGRAM PENDIDIKAN (SESUAIKAN!)
+  // 📱 PROGRAM PENDIDIKAN (KHUSUS PUTRI)
   programs: [
     {
       id: "mts",
       name: "MTs",
-      fullName: "MTs",
+      fullName: "Madrasah Tsanawiyah (MTs)",
       description:
-        "Program pendidikan formal setara SMP dengan kurikulum integrasi pesantren.",
+        "Program pendidikan formal setara SMP memadukan kurikulum kepesantrenan turots khas Andalus, Tahfidz Al-Qur'an, dan kurikulum nasional.",
       image: "/images/kelas-bagian-dalam-saat-para-santri-belajar.png",
-      theme: "brown" },
+      theme: "pink",
+      kuotaPutri: 48,
+    },
     {
       id: "il",
       name: "I'dad Lughowi",
-      fullName: "Program Persiapan Bahasa Arab",
+      fullName: "Program I'dad Lughowi (Persiapan Bahasa Arab)",
       description:
-        "Program intensif persiapan bahasa Arab untuk jenjang lebih tinggi.",
+        "Program persiapan bahasa Arab 1 tahun bagi yang belum mampu berbahasa Arab aktif sebelum masuk MA.",
       image: "/images/foto-talent-santri-satu-orang-almamater-background-perlu-diedit.png",
-      theme: "gold" },
+      theme: "gold",
+      kuotaPutri: 24,
+    },
   ],
 
-  // 💰 BIAYA PENDAFTARAN (GANTI SESUAI)
+  // 💰 BIAYA PENDIDIKAN & PENDAFTARAN
   pricing: [
     {
       label: "Uang Pendaftaran",
       amount: "Rp 250.000",
-      note: "Tidak dapat dikembalikan" },
+      note: "Biaya pendaftaran dan tes seleksi (non-refundable)",
+    },
     {
       label: "Uang Pangkal",
-      amount: "Rp 7.650.000",
-      note: "Pembayaran dapat dicicil" },
+      amount: "Rp 9.900.000",
+      note: "Dapat dicicil 3x: cicilan 1 sebesar 50% sepekan setelah pengumuman kelulusan, sisanya 2x s/d Mei 2027",
+    },
     {
-      label: "SPP Bulan Pertama",
-      amount: "Rp 1.000.000",
-      note: "Biaya SPP" },
-    {
-      label: "Total Daftar Ulang",
-      amount: "Rp 8.650.000",
-      note: "Uang Pangkal + SPP Bulan Pertama" },
+      label: "SPP Bulanan (All-In)",
+      amount: "Rp 1.100.000",
+      note: "Per bulan (Total 1 tahun Rp 13.200.000 All-In mencakup makan, asrama, & kegiatan)",
+    },
   ],
 
-  // 📋 PERSYARATAN BERKAS (SESUAIKAN!)
+  // 🏦 REKENING BANK RESMI
+  bank: {
+    namaBank: "Bank Syariah Indonesia (BSI)",
+    nomorRekening: "4222224441",
+    atasNama: "Al Andalus Al Imam",
+    kodeBank: "451",
+  },
+
+  // 📅 JADWAL SPMB 2027/2028
+  schedule: {
+    tahunAjaran: "2027/2028",
+    pembukaan: "16 Oktober 2026",
+    penutupan: "20 Desember 2026",
+    jadwalTes: "16 Oktober – 20 Desember 2026",
+  },
+
+  // 👥 DEWAN PEMBINA, PENGURUS & PENGASUH
+  dewanPembina: [
+    "Ust. Dr. Muhammad Arifin Badri, Lc., M.A.",
+    "Ust. Dr. Nurdin Apud Sarbini, Lc., M.Pd.",
+    "H. Tarmen Tascha, S.E.",
+    "Ust. Aminullah Yasin, Lc., M.Pd.",
+    "Ust. Wahab Rajasam, M.Pd.",
+    "Ust. Thoriq Ziyad, Lc.",
+  ],
+
+  // 🎯 VISI & MISI
+  visi: "Kaderisasi Ummat Hanif, Kontributif, dan Adaptif",
+  misi: [
+    "Melaksanakan pendidikan aqidah yang shohihah dan ibadah yang sesuai sunnah.",
+    "Menumbuhkembangkan soft skill berupa fitrah potensi dan growth mindset.",
+    "Mengembangkan hard skill berupa jiwa kewirausahaan dan life skills.",
+    "Membentuk generasi yang berjiwa dakwah dan mau'idzoh hasanah.",
+  ],
+
+  // 6 KEUNGGULAN PENGASUHAN (BROSUR RESMI)
+  keunggulanPengasuhan: [
+    "Berupaya maksimal menghidupkan fitrah santriwati diiringi adab Islami dalam interaksi.",
+    "Pengawasan di setiap aktifitas santriwati.",
+    "Musyrifah (guru asrama) tinggal di kamar santri.",
+    "Bimbingan dengan pendekatan penyadaran dan pendewasaan pada setiap kesalahan santriwati, bukan sekedar hukuman.",
+    "Pengasuhan dilakukan sepenuhnya oleh ustadzah.",
+    "Tidak memberikan kewenangan pada santriwati senior untuk menghukum santriwati lain.",
+  ],
+
+  // 📋 FASILITAS PESANTREN (14 ITEM BROSUR)
+  fasilitas: [
+    "Masjid Kapasitas 600 Jamaah",
+    "Gedung Sekolah Terpadu",
+    "Asrama Representatif",
+    "Fasilitas Olahraga",
+    "Laboratorium IPA",
+    "UKS (Unit Kesehatan Santri)",
+    "Mini Market",
+    "Mesin Air Bio & RO",
+    "Lab Komputer",
+    "Ruang Makan",
+    "Perpustakaan",
+    "Kolam Ikan",
+    "Kantin",
+    "Aula",
+  ],
+
+  // 🧶 EKSTRAKURIKULER (11 ITEM BROSUR)
+  ekstrakurikuler: [
+    "Merajut",
+    "Menjahit",
+    "Tata Boga",
+    "Karate",
+    "Komputer",
+    "Photography",
+    "Panahan",
+    "Pramuka",
+    "Keputrian",
+    "English Club",
+    "Desain Grafis",
+  ],
+
+  // 📋 PERSYARATAN BERKAS
   requirements: [
-    "Fotocopy Kartu Keluarga (1 lembar)",
     "Fotocopy Akta Kelahiran (1 lembar)",
-    "Fotocopy Rapor (2 semester terakhir)",
-    "Pas Foto 3x4 (4 lembar)",
+    "Fotocopy Kartu Keluarga (1 lembar)",
+    "Fotocopy Rapor SD/MI sederajat (bagi MTs) atau Ijazah SMP/MTs (bagi IL)",
+    "Pas Foto 3x4 (4 lembar) memakai jilbab hitam latar belakang biru",
+    "Surat Keterangan Sehat dari Dokter/Puskesmas",
+    "Surat kesediaan mematuhi tata tertib pesantren dan bebas dari perilaku menyimpang",
   ],
 
-  // 🔗 KONTAK & SOSMED (GANTI SESUAI!)
+  // 🔗 KONTAK & SOSMED
   contact: {
     whatsapp: "+6285111524441",
+    phone: "0851-1152-4441",
     instagram: "@alandalusalimam",
-    facebook: "Wahab Rajasam",
-    youtube: "Belum Tersedia" },
+    facebook: "Al-Andalus Al-Imam",
+    youtube: "Al Andalus Al Imam",
+  },
 
   tahunAjaran: "2027/2028",
-  angkatan: "Angkatan IX",
+  angkatan: "Angkatan ke-5 (2027/2028)",
 
-  // ⚙️ SETTING TEKNIS (UMUMNYA TIDAK PERLU DIUBAH)
+  // ⚙️ SETTING TEKNIS
   technical: {
     appName: "SPMB Al Imam Al Islami",
-    appDescription: "Sistem Penerimaan Murid Baru",
+    appDescription: "Sistem Penerimaan Murid Baru (SPMB) 2027/2028",
     version: "2.0.0",
-    author: "Rieza Eka Tomara" } };
+    author: "Rieza Eka Tomara",
+  },
+};
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//   HELPER FUNCTIONS (Jangan diubah)
+//   HELPER FUNCTIONS
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export const getPesantrenInfo = () => PPDB_CONFIG.pesantren;
@@ -121,13 +207,15 @@ export const getPricing = () => PPDB_CONFIG.pricing;
 export const getRequirements = () => PPDB_CONFIG.requirements;
 export const getContact = () => PPDB_CONFIG.contact;
 export const getColors = () => PPDB_CONFIG.colors;
+export const getBank = () => PPDB_CONFIG.bank;
+export const getSchedule = () => PPDB_CONFIG.schedule;
+export const getDewanPembina = () => PPDB_CONFIG.dewanPembina;
 
-// Untuk generate CSS variables otomatis
 export const generateCSSVariables = () => {
   const { colors } = PPDB_CONFIG;
-
   return {
     primary: colors.primary,
     secondary: colors.secondary,
-    accent: colors.accent };
+    accent: colors.accent,
+  };
 };

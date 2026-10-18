@@ -200,7 +200,7 @@ const INITIAL_SANTRI: DataDiriSantri = {
   nama_lengkap: "",
   tempat_lahir: "",
   tanggal_lahir: "",
-  jenis_kelamin: "",
+  jenis_kelamin: "Perempuan",
   kewarganegaraan: "Indonesia",
   tinggal_bersama: "Kedua Orang Tua",
   tinggal_bersama_lainnya: "",
@@ -1045,19 +1045,15 @@ export default function DataLengkapForm({
                     required
                   />
                   <InputField
-                    label="Jenis Kelamin"
+                    label="Jenis Kelamin (Khusus Putri)"
                     name="jenis_kelamin"
-                    value={formData.santri.jenis_kelamin}
-                    onChange={(v) => updateSantri("jenis_kelamin", v)}
+                    value={formData.santri.jenis_kelamin || "Perempuan"}
+                    onChange={(v) => updateSantri("jenis_kelamin", "Perempuan")}
                     options={[
-                      { label: "Laki-laki", value: "Laki-laki" },
                       { label: "Perempuan", value: "Perempuan" },
                     ]}
                     required
-                    disabled={
-                      jenjang.toLowerCase().includes("putra") ||
-                      jenjang.toLowerCase().includes("putri")
-                    }
+                    disabled={true}
                   />
                   <InputField
                     label="Kewarganegaraan"

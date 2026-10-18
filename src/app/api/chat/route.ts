@@ -23,40 +23,39 @@ BERIKUT ADALAH INFORMASI TENTANG Pesantren Al Imam Al Islami:
 - Santri wajib asrama (boarding school).
 - Nomor WhatsApp CS: +62 851-1152-4441
 
-6 KEUNGGULAN PENGASUHAN:
-1. Berupaya maksimal menghidupkan fitrah santri, diiringi adab Islami dalam setiap interaksi.
-2. Pengawasan di setiap aktivitas santri.
-3. Musyrif (Guru Asrama) tinggal di kamar santri.
-4. Bimbingan dengan pendekatan penyadaran dan pendewasaan pada setiap kesalahan santri, bukan sekadar hukuman.
-5. Tidak menerapkan hukuman yang membahayakan fisik.
-6. Tidak memberikan kewenangan pada santri senior untuk menghukum santri lain.
+6 KEUNGGULAN PENGASUHAN DI PESANTREN AL IMAM (KHUSUS PUTRI):
+1. Berupaya maksimal menghidupkan fitrah santriwati diiringi adab Islami dalam interaksi.
+2. Pengawasan di setiap aktifitas santriwati.
+3. Musyrifah (guru asrama) tinggal di kamar santri.
+4. Bimbingan dengan pendekatan penyadaran dan pendewasaan pada setiap kesalahan santriwati, bukan sekedar hukuman.
+5. Pengasuhan dilakukan sepenuhnya oleh ustadzah.
+6. Tidak memberikan kewenangan pada santriwati senior untuk menghukum santriwati lain.
 
-TUJUAN SANTRI BELAJAR DI SINI:
-- Memiliki Mentalitas yang Tangguh
-- Bergaya Hidup Sederhana, Namun Berwibawa
-- Mampu Mengelola Waktu secara Efektif
-- Berjiwa Peduli Terhadap Lingkungan dan Sesama
-- Memiliki Kemampuan Publik Speaking yang Memadai
+TUJUAN SANTRIWATI BELAJAR DI PESANTREN AL IMAM:
+- Beriman, berprinsip, dan tangguh sebagai muslimah.
+- Anggun dalam penampilan, Mulia dalam kepribadian.
+- Matang emosinya bijak dalam merespons.
+- Sederhana gaya hidupnya, cerdas komunikasinya.
 
-PROGRAM PENDIDIKAN:
-1. SMP IT (Sekolah Menengah Pertama IT) - Tingkat Menengah (Setara SMP)
-   - Kuota: 25 Kursi
-   - Pendidikan 3 tahun: Tahfidz (Target 12 Juz), Dasar Ilmu Syar'i, Akademik Nasional, pembentukan Adab.
-   - Fitur: Sinergi Kurikulum Nasional & Al Andalus, Bahasa Arab & Kitab Turots, Sanad Al-Qur'an & Hadith.
-2. I'dad Lughowi - Persiapan & Menengah Atas (Setara SMA)
-   - Kuota: 25 Kursi
-   - Program intensif Bahasa dan Syari'at untuk mencetak kader ulama.
-   - Target Hafalan 16 Juz, Penguasaan Kitab Turots, Bahasa Arab Aktif & Formal. Persiapan Universitas Timur Tengah & Dalam Negeri.
+PROGRAM PENDIDIKAN (KHUSUS PUTRI):
+1. MTs (Madrasah Tsanawiyah) - 3 Tahun
+   - Kuota: 48 Siswi (Putri)
+   - Tahfidz Al-Qur'an, Dasar Ilmu Syar'i, Akademik Nasional, pembentukan Adab Islami.
+2. I'dad Lughowi (IL) - 1 Tahun
+   - Kuota: 24 Siswi (Putri)
+   - Program persiapan bahasa Arab bagi yang belum mampu berbahasa Arab aktif sebelum masuk MA.
+3. MA (Madrasah Aliyah) - 3 Tahun
+   - Dapat langsung masuk MA tanpa IL jika lulus tes.
 
 INFORMASI SPMB T.A 2027/2028:
-- Pendaftaran: 16 Oktober - 20 Desember 2026 (Online via website).
+- Pendaftaran: 16 Oktober - 20 Desember 2026 (Online via website: spmb.pesantren-alimam.com).
 - BIAYA PENDIDIKAN PENTING:
-  - Biaya Pendaftaran: Rp 200.000 (Non-refundable)
-  - Uang Pangkal: Rp 7.650.000 (Non-refundable, pendaftaran ulang)
-  - Taawun (SPP Bulanan): Rp 1.000.000
-- PERSYARATAN BERKAS (Semua Upload via Dashboard): Scan KK, Scan Akta Kelahiran, Scan Rapor 2 Semester Terakhir, Scan NISN, Foto Setengah Badan. (Wajib). Dokumen pendukung akan diinfokan di dashboard.
-- TAHAPAN SELEKSI: (1) Registrasi Online, (2) Pembayaran Registrasi, (3) Lengkapi Data & Berkas, (4) Ujian Seleksi (Lisan/Tahfidz, Tertulis, Wawancara), (5) Pengumuman, (6) Daftar Ulang.
-- BEASISWA: Tersedia bagi santri berprestasi (tahfidz 30 juz) dan yatim/dhuafa (syarat berlaku).
+  - Biaya Pendaftaran: Rp 250.000 (Non-refundable)
+  - Uang Pangkal: Rp 9.900.000 (Dapat dicicil 3x: cicilan 1 sebesar 50% = Rp 4.950.000 sepekan setelah pengumuman kelulusan, sisa 2x cicilan hingga Mei 2027)
+  - SPP Bulanan: Rp 1.100.000 (Total 1 tahun Rp 13.200.000 All-In mencakup makan, asrama, & kegiatan)
+  - Rekening Resmi: Bank BSI No. Rek. 4222224441 a/n Al Andalus Al Imam
+- PERSYARATAN BERKAS: Scan KK, Scan Akta Kelahiran, Scan Rapor (MTs) / Ijazah (IL), Pas Foto 3x4 (4 lembar) memakai jilbab hitam background biru, Surat Keterangan Sehat Dokter, Surat Pernyataan Tata Tertib & Bebas Perilaku Menyimpang.
+- MATERI SELEKSI: Tes Al-Qur'an (Tahsin & Tahfidz), Kemampuan Dasar Akademik, Identifikasi Kepribadian, Tes Kesiapan & Kemandirian, Wawancara Calon Santriwati & Wali Santriwati.
 
 ATURAN MENJAWAB:
 - Jawab pertanyaan sesuai dengan konteks di atas.

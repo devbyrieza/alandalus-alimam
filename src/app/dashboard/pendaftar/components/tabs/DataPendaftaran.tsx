@@ -9,14 +9,14 @@ import { ChevronRight, Edit, User, FileText, CreditCard, Award, Clock, AlertCirc
 const DUMMY_DATA = {
   id: "dummy-id",
   nik: "3201010120100001",
-  nomor_pendaftaran: "MTI20260006",
-  nama_lengkap: "Ahmad Zaki Mubarak",
-  jenis_kelamin: "Laki-laki",
+  nomor_pendaftaran: "MTI20270001",
+  nama_lengkap: "Aisyah Zahra Khairunnisa",
+  jenis_kelamin: "Perempuan",
   jenjang: "MTs",
   tempat_lahir: "Sukabumi",
-  tanggal_lahir: "2010-08-15",
-  alamat: "Jl. Pesantren No. 123",
-  no_hp: "081234567890",
+  tanggal_lahir: "2012-04-12",
+  alamat: "Jl. Pelabuhan II KM 18, Cikembar",
+  no_hp: "085111524441",
   status_pendaftaran: "draft",
   created_at: new Date().toISOString() };
 

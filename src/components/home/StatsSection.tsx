@@ -11,12 +11,12 @@ import { BRANDING } from "@/config/branding";
 const STATS = [
   {
     id: "batch",
-    label: "Angkatan Perdana",
-    value: 1,
+    label: "Angkatan",
+    value: 5,
     icon: Calendar,
     suffix: "",
-    sublabel: `Tahun Ajaran ${BRANDING.academicYear}`,
-    description: "Momen bersejarah pembukaan santri baru",
+    sublabel: `T.A ${BRANDING.academicYear}`,
+    description: "Angkatan ke-5 Al-Imam Khusus Putri",
     accentBorder: "border-b-primary",
   },
   {
@@ -41,11 +41,11 @@ const STATS = [
   },
   {
     id: "quota",
-    label: "Kuota Terbatas",
-    value: 25,
+    label: "Total Kuota",
+    value: 72,
     icon: Users,
     suffix: "",
-    sublabel: "Santri / Rombel",
+    sublabel: "Santriwati (48 MTs + 24 IL)",
     description: "Rasio pendampingan intensif & eksklusif",
     accentBorder: "border-b-indigo-600",
   },

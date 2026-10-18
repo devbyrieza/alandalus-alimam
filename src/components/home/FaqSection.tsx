@@ -9,15 +9,19 @@ import { motion, AnimatePresence } from "framer-motion";
 const FAQS = [
   {
     question: "Kapan pendaftaran santriwati baru angkatan 2027/2028 dibuka?",
-    answer: "Pendaftaran SPMB Tahun Ajaran 2027/2028 dibuka mulai tanggal 16 Oktober sampai dengan 20 Desember 2026. Namun, pendaftaran dapat ditutup lebih awal jika kuota santriwati baru sebanyak 25 santriwati per rombel telah terpenuhi."
+    answer: "Pendaftaran SPMB Tahun Ajaran 2027/2028 dibuka mulai tanggal 16 Oktober sampai dengan 20 Desember 2026. Kuota penerimaan terbatas: MTs Putri sebanyak 48 santriwati dan I'dad Lughowi Putri sebanyak 24 santriwati. Pendaftaran dapat ditutup lebih awal jika kuota telah terpenuhi."
+  },
+  {
+    question: "Berapa rincian biaya pendidikan dan bagaimana skema cicilan uang pangkal?",
+    answer: "Biaya pendaftaran sebesar Rp 250.000. Uang pangkal sebesar Rp 9.900.000 dapat dicicil maksimal 3x: Cicilan 1 sebesar 50% (Rp 4.950.000) sepekan setelah menerima surat pengumuman hasil kelulusan, dan sisanya (Rp 4.950.000) boleh dicicil 2x dengan batas waktu hingga Mei 2027. SPP bulanan sebesar Rp 1.100.000/bulan (Total Rp 13.200.000/tahun All-In mencakup asrama, makan, dan seluruh kegiatan). Seluruh pembayaran resmi ditransfer ke Bank Syariah Indonesia (BSI) No. Rek. 4222224441 a/n Al Andalus Al Imam."
   },
   {
     question: "Apa saja fokus program unggulan di Pesantren Al-Imam?",
-    answer: "Program unggulan Al-Imam berpusat pada penguasaan Bahasa Arab sangat intensif (muhadatsah harian & nahwu-shorof), tahfidz Al-Qur'an mutqin bersanad, pendalaman ilmu syar'i & ibadah harian bimbingan Sunnah, pengajaran sains akademik umum berstandar tinggi agar santriwati tetap pintar berdaya saing, serta penempaan jiwa kepemimpinan (leadership), keterampilan keputrian, dan kemandirian wirausaha (entrepreneurship)."
+    answer: "Program unggulan Al-Imam berpusat pada penguasaan Bahasa Arab sangat intensif (muhadatsah harian & nahwu-shorof), tahfidz Al-Qur'an mutqin bersanad, pendalaman ilmu syar'i & ibadah harian bimbingan Sunnah, pengajaran sains akademik umum berstandar tinggi, serta keterampilan keputrian (merajut, menjahit, tata boga) dan kemandirian."
   },
   {
     question: "Bagaimana sistem pengasuhan santriwati dan penegakan disiplin di Al-Imam?",
-    answer: "Al-Imam menerapkan prinsip pengasuhan 'Mendidik Tanpa Luka' yang mengedepankan keteladanan 24 jam para pendidik dan kasih sayang. Kami bersikap tegas tanpa toleransi (zero tolerance) terhadap pelanggaran berat seperti pergaulan bebas, perundungan (bullying), kekerasan fisik, dan pencurian. Penindakan ditegakkan secara edukatif dan dialogis mutlak tanpa sanksi fisik."
+    answer: "Al-Imam menerapkan prinsip pengasuhan 6 Keunggulan Pengasuhan Khusus Putri yang berfokus pada adab Islami, musyrifah tinggal di kamar santri, pengawasan 24 jam sepenuhnya oleh ustadzah, pendekatan penyadaran dan pendewasaan tanpa kekerasan fisik, serta meniadakan kewenangan senior untuk menghukum adik kelasnya."
   },
   {
     question: "Apakah santriwati diwajibkan untuk tinggal di asrama?",
@@ -29,11 +33,11 @@ const FAQS = [
   },
   {
     question: "Apa saja berkas persyaratan yang harus disiapkan untuk mendaftar?",
-    answer: "Berkas utama meliputi Akta Kelahiran, Kartu Keluarga (KK), NISN, rapor pendidikan terakhir, serta pas foto terbaru. Seluruh berkas diunggah secara digital dalam format PDF/JPG melalui dashboard pendaftaran."
+    answer: "Berkas utama meliputi Pas foto 3x4 berjilbab hitam dengan latar belakang biru, Akta Kelahiran, Kartu Keluarga (KK), NISN, dan rapor 2 semester terakhir / ijazah. Seluruh berkas diunggah secara digital melalui dashboard pendaftaran."
   },
   {
     question: "Bagaimana tahapan ujian seleksi masuk santriwati baru?",
-    answer: "Ujian seleksi terdiri dari tes lisan (tahfidz dan kemampuan membaca Al-Qur'an), tes tertulis (kemampuan dasar akademik), serta tes wawancara kesiapan belajar bagi calon santriwati dan orang tua/wali."
+    answer: "Ujian seleksi terdiri dari tes Al-Qur'an (Tahsin & Tahfidz), Kemampuan Dasar Akademik, Identifikasi Kepribadian, Seleksi Kesiapan & Kemandirian, serta Wawancara Calon Santriwati dan Wali Santriwati."
   },
   {
     question: "Apakah tersedia program beasiswa prestasi?",

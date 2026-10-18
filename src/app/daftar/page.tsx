@@ -87,7 +87,7 @@ export default function DaftarPage() {
     nama_lengkap: "",
     tanggal_lahir: "",
     no_hp: "",
-    jenis_kelamin: "",
+    jenis_kelamin: "P",
     jenjang: jenjangFromUrl });
 
   const [countryCode, setCountryCode] = useState("+62");
@@ -161,10 +161,7 @@ export default function DaftarPage() {
       }
     }
     if (!formData.jenis_kelamin) {
-      errors.jenis_kelamin = "Pilih jenis kelamin santri";
-    } else if (formData.jenis_kelamin === "L") {
-      errors.jenis_kelamin =
-        "Mohon maaf, pendaftaran Santri Putra (Laki-laki) dialihkan ke Pesantren Ulul Albaab (Managed by Al-Andalus IIBS). Pesantren Al-Imam Al-Islami resmi KHUSUS PUTRI.";
+      formData.jenis_kelamin = "P";
     }
 
     if (!formData.jenjang) {
@@ -357,7 +354,7 @@ export default function DaftarPage() {
                             nama_lengkap: "",
                             tanggal_lahir: "",
                             no_hp: "",
-                            jenis_kelamin: "",
+                            jenis_kelamin: "P",
                             jenjang: "" });
                           setFieldErrors({});
                         }
@@ -396,19 +393,19 @@ export default function DaftarPage() {
                   {[
                     {
                       value: "MTs",
-                      title: "SMP IT",
-                      subtitle: "Lulusan SD/Sederajat",
-                      desc: "Jenjang pendidikan dasar setingkat SMP." },
+                      title: "Madrasah Tsanawiyah (MTs)",
+                      subtitle: "Lulusan SD/MI Sederajat",
+                      desc: "Pendidikan setara SMP memadukan kurikulum turots khas Al-Andalus, Tahfidz, dan Diknas." },
                     {
                       value: "IL",
-                      title: "I'dad Lughowi",
-                      subtitle: "Lulusan SMP/Sederajat",
-                      desc: "Kelas persiapan bahasa Arab sebelum masuk MA." },
+                      title: "I'dad Lughowi (Persiapan Bahasa)",
+                      subtitle: "Lulusan SMP/MTs Sederajat",
+                      desc: "Program persiapan bahasa Arab 1 tahun sebelum masuk jenjang Madrasah Aliyah (MA)." },
                     {
                       value: "MA",
-                      title: "SMA IT (Sekolah Menengah Atas IT) Langsung",
-                      subtitle: "Lulusan SMP/Sederajat",
-                      desc: "Jalur langsung tanpa IL. Khusus yang lancar berbahasa Arab & hafal minimal 5 juz mutqin." },
+                      title: "Madrasah Aliyah (MA) Khusus Putri",
+                      subtitle: "Lulusan SMP/MTs Sederajat",
+                      desc: "Jalur langsung tanpa IL bagi santriwati yang lancar bahasa Arab aktif & hafalan Al-Qur'an mutqin." },
                   ].map((option) => {
                     const isPutra = formData.jenis_kelamin === "L";
                     const isPutri = formData.jenis_kelamin === "P";
@@ -587,71 +584,32 @@ export default function DaftarPage() {
                       label="Jenis Kelamin"
                       error={fieldErrors.jenis_kelamin}
                     >
-                      <div className="flex gap-4">
-                        {[
-                          { val: "P", label: "Santri Putri (Perempuan)", sub: "Tersedia di Al-Imam" },
-                          { val: "L", label: "Santri Putra (Laki-laki)", sub: "Dialihkan ke Ulul Albaab" },
-                        ].map((jk) => (
-                          <motion.label
-                            key={jk.val}
-                            whileTap={{ scale: 0.98 }}
-                            className={`flex-1 flex flex-col items-center justify-center text-center px-4 md:px-6 py-3.5 md:py-4 rounded-[1.5rem] md:rounded-[2rem] border-2 cursor-pointer transition-all duration-300 text-sm md:text-base ${
-                              formData.jenis_kelamin === jk.val
-                                ? jk.val === "P"
-                                  ? "bg-primary-700 border-primary-700 text-white font-black shadow-2xl shadow-primary/30"
-                                  : "bg-blue-600 border-blue-600 text-white font-black shadow-lg"
-                                : "bg-secondary-50 border-secondary-200 text-ink-800 hover:border-primary-200 hover:bg-white font-bold"
-                            }`}
-                          >
-                            <input
-                              type="radio"
-                              name="jk"
-                              value={jk.val}
-                              checked={formData.jenis_kelamin === jk.val}
-                              onChange={() =>
-                                setFormData((p) => ({
-                                  ...p,
-                                  jenis_kelamin: jk.val as any,
-                                }))
-                              }
-                              className="hidden"
-                            />
-                            <span>{jk.label}</span>
-                            <span
-                              className={`text-[10px] sm:text-xs mt-0.5 ${
-                                formData.jenis_kelamin === jk.val
-                                  ? "text-white/80 font-medium"
-                                  : "text-slate-500 font-medium"
-                              }`}
-                            >
-                              {jk.sub}
-                            </span>
-                          </motion.label>
-                        ))}
-                      </div>
-
-                      {/* Callout jika memilih Putra */}
-                      {formData.jenis_kelamin === "L" && (
-                        <div className="mt-3.5 p-4 rounded-2xl bg-blue-50 border border-blue-200 text-blue-900 text-xs sm:text-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 animate-fadeIn">
+                      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 md:p-5 rounded-2xl bg-pink-50/70 border border-pink-200">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center font-black shadow-md shadow-primary/20 text-sm">
+                            P
+                          </div>
                           <div>
-                            <p className="font-extrabold text-blue-950">
-                              Pendaftaran Santri Putra dialihkan ke Pesantren Ulul Albaab (Managed by Al-Andalus IIBS).
+                            <p className="font-extrabold text-slate-900 text-sm md:text-base">
+                              Khusus Santriwati Putri (Perempuan)
                             </p>
-                            <p className="text-slate-600 text-xs mt-0.5">
-                              Al-Imam Al-Islami khusus santriwati (Putri). Kedua pesantren dikelola bersama di bawah naungan manajemen & kurikulum Al-Andalus IIBS.
+                            <p className="text-xs text-slate-500 font-medium">
+                              Pesantren Al-Imam Al-Islami khusus mendidik santriwati Putri
                             </p>
                           </div>
+                        </div>
+                        <div className="sm:text-right text-xs text-slate-500 font-medium border-t sm:border-t-0 sm:border-l border-pink-200/80 pt-2 sm:pt-0 sm:pl-4">
+                          <span>Untuk calon santri putra?</span>
                           <a
                             href="https://spmb.pesantren-ululalbaab.com/daftar"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 text-white font-bold text-xs uppercase tracking-wider hover:bg-blue-700 shadow-sm transition-all shrink-0 w-full sm:w-auto justify-center"
+                            className="block font-bold text-blue-600 hover:text-blue-700 hover:underline"
                           >
-                            <span>Ke Pendaftaran Putra</span>
-                            <ExternalLink className="w-3.5 h-3.5" />
+                            Daftar di Ulul Albaab (Putra) →
                           </a>
                         </div>
-                      )}
+                      </div>
                     </InputField>
                   </div>
                 </div>

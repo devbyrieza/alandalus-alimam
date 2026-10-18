@@ -1,4 +1,4 @@
-﻿import { redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
 export default function SpmbPage() {
   redirect("https://spmb.pesantren-alimam.com");
