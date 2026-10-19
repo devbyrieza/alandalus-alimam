@@ -113,14 +113,14 @@ function canHover(): boolean {
 }
 
 const desktopLinkClass = (active: boolean) =>
-  `px-3 py-1.5 text-xs xl:text-sm font-bold rounded-full transition-all duration-300 min-h-[34px] flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-300 ${
+  `px-2.5 2xl:px-3 py-1 2xl:py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold rounded-full transition-all duration-300 min-h-[34px] 2xl:min-h-[38px] flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-300 whitespace-nowrap ${
     active
-      ? "bg-primary-50 text-primary-900 font-extrabold shadow-sm"
+      ? "bg-primary-50 text-primary-900 font-extrabold shadow-xs"
       : "text-ink-600 hover:text-primary-900 hover:bg-primary-50/50"
   }`;
 
 const textActionClass =
-  "text-xs xl:text-sm font-bold text-[var(--color-ink-600)] hover:text-[var(--color-primary-800)] transition-colors duration-200 px-2.5 xl:px-3 py-1.5 rounded-full hover:bg-[var(--color-primary-50)]";
+  "text-xs 2xl:text-sm font-bold text-[var(--color-ink-600)] hover:text-[var(--color-primary-800)] transition-colors duration-200 px-2.5 2xl:px-3 py-1.5 rounded-full hover:bg-[var(--color-primary-50)] whitespace-nowrap shrink-0";
 
 /* ─────────────────────────── Komponen ─────────────────────────── */
 
@@ -259,14 +259,14 @@ export default function Navbar() {
     <>
       <header
         id="main-header"
-        className="fixed w-full top-0 left-0 pt-[max(0.5rem,env(safe-area-inset-top))] sm:pt-3 z-50"
+        className="fixed w-full top-0 left-0 pt-[max(0.5rem,env(safe-area-inset-top))] sm:pt-3 z-50 px-2 sm:px-4"
       >
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="mx-auto max-w-7xl 2xl:max-w-[1400px]">
           <div
-            className={`backdrop-blur-xl border border-white/40 rounded-full px-5 sm:px-6 flex items-center justify-between transition-all duration-300 ${
+            className={`backdrop-blur-xl border border-white/40 rounded-full pl-3.5 pr-4 sm:pl-5 sm:pr-5 2xl:pl-6 2xl:pr-6 flex items-center justify-between gap-2 xl:gap-3 transition-all duration-300 ${
               isScrolled
-                ? "bg-white/90 py-1.5 sm:py-2 shadow-xl shadow-primary/10"
-                : "bg-white/80 py-2 sm:py-2.5 shadow-2xl shadow-primary/5"
+                ? "bg-white/95 py-1.5 sm:py-2 shadow-xl shadow-primary/10"
+                : "bg-white/90 py-2 sm:py-2.5 shadow-2xl shadow-primary/5"
             }`}
           >
             {/* ── Logo ── */}
@@ -274,11 +274,11 @@ export default function Navbar() {
               href="/"
               onClick={handleBerandaClick}
               aria-label={`${BRANDING.schoolShortName} — Beranda`}
-              className="flex items-center gap-2.5 sm:gap-3 group min-w-0 xl:shrink-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-300"
+              className="flex items-center gap-2 sm:gap-2.5 group min-w-0 shrink-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-300"
             >
               <div className="relative shrink-0">
                 <div
-                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-[14px] flex items-center justify-center border overflow-hidden transition-all duration-500 group-hover:scale-105 group-hover:-rotate-3 ${
+                  className={`w-9 h-9 sm:w-10 sm:h-10 2xl:w-11 2xl:h-11 rounded-xl sm:rounded-[14px] flex items-center justify-center border overflow-hidden transition-all duration-500 group-hover:scale-105 group-hover:-rotate-3 ${
                     isScrolled
                       ? "bg-white border-primary/20 shadow-xl shadow-primary/10"
                       : "bg-white/90 border-white/70 shadow-[0_2px_12px_rgba(3,105,199,0.12)]"
@@ -297,17 +297,16 @@ export default function Navbar() {
                 <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-[var(--color-primary-600)] border-2 border-white rounded-full z-10 shadow-sm" />
               </div>
 
-              <div className="min-w-0 xl:shrink-0">
-                {/* <span>, bukan <h1>: judul utama halaman milik konten halaman */}
+              <div className="min-w-0 shrink-0">
                 <div className="flex items-center gap-1.5">
-                  <span className="block truncate text-sm sm:text-base font-black leading-tight tracking-tight text-[var(--color-ink-900)] xl:whitespace-normal xl:line-clamp-2 xl:max-w-[10rem] xl:leading-[1.15]">
+                  <span className="block truncate text-xs sm:text-sm 2xl:text-base font-black leading-tight tracking-tight text-[var(--color-ink-900)]">
                     {BRANDING.schoolShortName}
                   </span>
-                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9.5px] font-black tracking-wide bg-rose-100 text-rose-800 border border-rose-200 shrink-0 shadow-xs">
+                  <span className="inline-flex items-center px-1.5 2xl:px-2 py-0.5 rounded-full text-[8.5px] 2xl:text-[9.5px] font-black tracking-wide bg-rose-100 text-rose-800 border border-rose-200 shrink-0 shadow-xs">
                     KHUSUS PUTRI
                   </span>
                 </div>
-                <span className="block truncate max-[359px]:hidden xl:max-w-[10rem] text-[8.5px] sm:text-[9.5px] font-bold text-[var(--color-ink-400)] uppercase tracking-wider mt-0.5 leading-none">
+                <span className="block truncate max-[359px]:hidden text-[8px] 2xl:text-[9.5px] font-bold text-[var(--color-ink-400)] uppercase tracking-wider mt-0.5 leading-none">
                   {MANAGED_BY}
                 </span>
               </div>
@@ -316,7 +315,7 @@ export default function Navbar() {
             {/* ── Desktop Nav (xl+) ── */}
             <nav
               aria-label="Navigasi utama"
-              className={`hidden xl:flex items-center gap-0.5 p-1 rounded-full border transition-all duration-300 ${
+              className={`hidden xl:flex items-center gap-0.5 p-1 2xl:p-1.5 rounded-full border transition-all duration-300 shrink-0 ${
                 isScrolled
                   ? "bg-white/80 border-[var(--color-primary-100)] shadow-sm"
                   : "bg-white/70 backdrop-blur-md border-white/65 shadow-[0_2px_16px_rgba(3,105,199,0.10)]"
@@ -432,23 +431,23 @@ export default function Navbar() {
             </nav>
 
             {/* ── CTA (xl+) ── */}
-            <div className="hidden xl:flex items-center gap-1.5 xl:gap-2.5 shrink-0">
+            <div className="hidden xl:flex items-center gap-1.5 2xl:gap-2.5 shrink-0">
               <LanguageSwitcher />
 
               {isLoggedIn ? (
                 <a
                   href={SPMB_LINKS.dashboard}
-                  className="text-xs xl:text-sm font-bold text-primary-950 px-4 py-2 rounded-full border border-primary/10 bg-white hover:bg-primary-50 hover:border-primary/30 transition-all hover:scale-105 shadow-sm flex items-center gap-1.5"
+                  className="text-xs 2xl:text-sm font-bold text-primary-950 px-2.5 2xl:px-3.5 py-1.5 2xl:py-2 rounded-full border border-primary/10 bg-white hover:bg-primary-50 hover:border-primary/30 transition-all hover:scale-105 shadow-xs flex items-center gap-1.5 shrink-0 whitespace-nowrap"
                 >
-                  <span className="relative flex h-2 w-2 mr-0.5">
+                  <span className="relative flex h-2 w-2 mr-0.5 shrink-0">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 motion-reduce:animate-none" />
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
                   </span>
-                  Masuk ke Akun
+                  <span>Masuk ke Akun</span>
                 </a>
               ) : (
                 <>
-                  <a href={SPMB_LINKS.info} className={textActionClass}>
+                  <a href={SPMB_LINKS.info} className={`${textActionClass} hidden 2xl:inline-block`}>
                     Info SPMB
                   </a>
                   <a href={SPMB_LINKS.login} className={textActionClass}>
@@ -459,10 +458,10 @@ export default function Navbar() {
 
               <a
                 href={SPMB_LINKS.register}
-                className="btn-primary flex items-center gap-1.5 group text-xs xl:text-sm font-black px-3.5 xl:px-4 py-1.5 rounded-xl shadow-lg shadow-rose-500/30 hover:scale-105 transition-all glow-ring-primary"
+                className="btn-primary flex items-center gap-1.5 group text-xs xl:text-[13px] 2xl:text-sm font-black px-3.5 2xl:px-4.5 py-1.5 2xl:py-2 rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all glow-ring-primary shrink-0 whitespace-nowrap"
               >
                 <span>{REGISTER_LABEL}</span>
-                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1 shrink-0" />
               </a>
             </div>
 
