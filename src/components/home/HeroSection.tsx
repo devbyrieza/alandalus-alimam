@@ -11,6 +11,9 @@ import {
   Download,
   ShieldCheck,
   CheckCircle2,
+  Heart,
+  Sparkles,
+  MessageCircle,
 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { BRANDING } from "@/config/branding";
@@ -18,6 +21,8 @@ import { BRANDING } from "@/config/branding";
 // Jadwal pendaftaran: satu sumber agar label dan countdown selalu sinkron
 const REG_CLOSE_ISO = "2026-12-20T23:59:59+07:00";
 const REG_PERIOD_LABEL = "16 Okt - 20 Des 2026";
+const WA_CONSULT_URL =
+  "https://wa.me/6285111524441?text=Halo%20Admin%20SPMB%20Pesantren%20Al-Imam%2C%20saya%20ingin%20konsultasi%20pendaftaran%20santriwati%20baru";
 
 function useCountdown(targetDate: string) {
   const [timeLeft, setTimeLeft] = useState({
@@ -134,10 +139,46 @@ export default function HeroSection() {
               <div className="h-px w-8 bg-secondary" />
             </div>
 
+            {/* Quick-Value Objection/Confidence Pills (Al-Ma'tuq & SUNI Standard - Khusus Putri) */}
+            <div
+              className={`grid grid-cols-1 sm:grid-cols-3 gap-2.5 max-w-xl mx-auto lg:mx-0 pt-1 ${enter}`}
+              style={delay(260)}
+            >
+              <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-pink-100 shadow-xs backdrop-blur-xs text-left">
+                <div className="w-8 h-8 rounded-lg bg-pink-50 text-rose-600 flex items-center justify-center shrink-0 border border-pink-200">
+                  <ShieldCheck className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-slate-900 leading-tight">100% Kampus Putri</div>
+                  <div className="text-[10px] text-slate-500 font-medium leading-tight">Aman, asri &amp; terjaga</div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-pink-100 shadow-xs backdrop-blur-xs text-left">
+                <div className="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center shrink-0 border border-rose-200">
+                  <Heart className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-slate-900 leading-tight">Ustadzah 24 Jam</div>
+                  <div className="text-[10px] text-slate-500 font-medium leading-tight">Mendidik tanpa luka</div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-pink-100 shadow-xs backdrop-blur-xs text-left">
+                <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-200">
+                  <Sparkles className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-slate-900 leading-tight">Tahfidz &amp; Keputrian</div>
+                  <div className="text-[10px] text-slate-500 font-medium leading-tight">Tata boga, rajut &amp; jahit</div>
+                </div>
+              </div>
+            </div>
+
             {/* Trust checklist — Identik dengan Ulul Albaab (Twin Sister Standard) */}
             <ul
               className={`flex flex-wrap gap-x-5 gap-y-2 justify-center lg:justify-start ${enter}`}
-              style={delay(260)}
+              style={delay(290)}
             >
               {["MTs & IL Putri", "Kurikulum TICE Terpadu", "Boarding Asrama Representatif"].map((item) => (
                 <li key={item} className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
@@ -149,8 +190,8 @@ export default function HeroSection() {
 
             {/* CTA Buttons */}
             <div
-              className={`flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2.5 sm:gap-3 pt-1 sm:pt-1.5 w-full ${enter}`}
-              style={delay(320)}
+              className={`flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 pt-1 sm:pt-1.5 w-full ${enter}`}
+              style={delay(330)}
             >
               {session ? (
                 <a href="https://spmb.pesantren-alimam.com/dashboard" className="btn-primary w-full sm:w-auto shadow-lg shadow-rose-500/30 hover:shadow-rose-500/50 flex items-center justify-center gap-2">
@@ -163,6 +204,16 @@ export default function HeroSection() {
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </a>
               )}
+
+              <a
+                href={WA_CONSULT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-xs sm:text-sm bg-emerald-50 text-emerald-700 border border-emerald-300 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 shadow-sm transition-all duration-200"
+              >
+                <MessageCircle className="w-4 h-4 shrink-0" />
+                <span>Konsultasi Panitia</span>
+              </a>
 
               <Link href="/program" className="btn-secondary w-full sm:w-auto flex items-center justify-center gap-2">
                 <span>Lihat Program</span>
