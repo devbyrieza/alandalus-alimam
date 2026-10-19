@@ -65,8 +65,8 @@ export default function BankSoalPanitiaPage() {
 
   const filteredKepribadian = KEPRIBADIAN_QUESTIONS.filter(
     (q) =>
-      q.optionA.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      q.optionB.toLowerCase().includes(searchQuery.toLowerCase())
+      (q.optionA || q.text || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (q.optionB || '').toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const getSubjectBadge = (index: number) => {
