@@ -105,7 +105,7 @@ export default function BankSoalPanitiaPage() {
               <Sparkles className="w-3.5 h-3.5 text-[#ddc192] animate-pulse" /> PORTAL EKSKLUSIF PANITIA & PENGUJI SPMB
             </span>
             <span
-              className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-[#ddc192] text-[#550000] rounded-full text-xs font-black shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-[#ddc192]"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-[#ddc192] text-[#550000] rounded-full text-xs font-black border border-[#ddc192]"
               style={{ backgroundColor: "#ddc192", color: "#550000" }}
             >
               <Award className="w-3.5 h-3.5 text-[#550000]" /> TA 2027/2028
@@ -113,7 +113,7 @@ export default function BankSoalPanitiaPage() {
           </div>
 
           <div className="space-y-1.5">
-            <h1 className="text-xl sm:text-2xl md:text-4xl font-black tracking-tight text-white drop-shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
+            <h1 className="text-xl sm:text-2xl md:text-4xl font-black tracking-tight text-white drop-">
               Bank Soal Seleksi & Form Penilaian SPMB
             </h1>
             <p className="text-[#ddc192] text-xs md:text-sm max-w-3xl leading-relaxed font-medium">
@@ -163,7 +163,7 @@ export default function BankSoalPanitiaPage() {
         <div className="flex items-center gap-3 w-full md:w-auto justify-end">
           <button
             onClick={() => window.print()}
-            className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#550000] text-white rounded-2xl font-black text-xs md:text-sm shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 transition-all cursor-pointer border border-[#ddc192]/40 min-h-[44px]"
+            className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#550000] text-white rounded-2xl font-black text-xs md:text-sm shadow-2xl transition-all cursor-pointer border border-[#ddc192]/40 min-h-[44px]"
             style={{ backgroundColor: "#550000", background: "linear-gradient(to right, #550000, #700000)" }}
           >
             <Printer className="w-4 h-4 text-[#ddc192]" /> <span className="text-white font-black">Cetak / Export PDF</span>
@@ -192,7 +192,7 @@ export default function BankSoalPanitiaPage() {
               onClick={() => setActiveTab(tab.id as any)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl font-extrabold text-xs md:text-sm whitespace-nowrap transition-all cursor-pointer ${
                 isActive
-                  ? "bg-[#550000] text-[#ddc192] shadow-2xl shadow-primary/30  shadow-primary/20 shadow-[#550000]/25 ring-2 ring-[#ddc192]/60 border border-[#ddc192]/40"
+                  ? "bg-[#550000] text-[#ddc192] shadow-2xl    shadow-[#550000]/25 ring-2 ring-[#ddc192]/60 border border-[#ddc192]/40"
                   : "bg-white text-slate-700 border border-slate-200 hover:bg-[#550000]/5 hover:text-[#550000]"
               }`}
             >
@@ -214,7 +214,7 @@ export default function BankSoalPanitiaPage() {
       {activeTab === "mts" && (
         <div className="space-y-4">
           <div
-            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-[#680000] flex items-start gap-3.5"
+            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#680000] flex items-start gap-3.5"
             style={{ backgroundColor: "#550000", background: "linear-gradient(to right, #550000, #3a0000)" }}
           >
             <Clock className="w-5 h-5 text-[#ddc192] flex-shrink-0 mt-0.5" />
@@ -233,7 +233,7 @@ export default function BankSoalPanitiaPage() {
             {filteredMts.map((q, idx) => {
               const badge = getSubjectBadge(idx);
               return (
-                <div key={q.id} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 transition-all space-y-3.5">
+                <div key={q.id} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all space-y-3.5">
                   <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-2.5">
                     <div className="flex items-center gap-2">
                       <span className="text-[11px] font-black px-2.5 py-1 bg-[#550000] text-[#ddc192] rounded-2xl border border-[#550000]">
@@ -272,7 +272,7 @@ export default function BankSoalPanitiaPage() {
       {activeTab === "il" && (
         <div className="space-y-4">
           <div
-            className="bg-[#4d0000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-[#5a0000] flex items-start gap-3.5"
+            className="bg-[#4d0000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#5a0000] flex items-start gap-3.5"
             style={{ backgroundColor: "#4d0000", background: "linear-gradient(to right, #4d0000, #330000)" }}
           >
             <Clock className="w-5 h-5 text-[#ddc192] flex-shrink-0 mt-0.5" />
@@ -291,7 +291,7 @@ export default function BankSoalPanitiaPage() {
             {filteredIl.map((q, idx) => {
               const badge = getSubjectBadge(idx);
               return (
-                <div key={idx} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 transition-all space-y-3.5">
+                <div key={idx} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all space-y-3.5">
                   <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-2.5">
                     <div className="flex items-center gap-2">
                       <span className="text-[11px] font-black px-2.5 py-1 bg-[#550000] text-[#ddc192] rounded-2xl border border-[#550000]">
@@ -330,7 +330,7 @@ export default function BankSoalPanitiaPage() {
       {activeTab === "ma" && (
         <div className="space-y-4">
           <div
-            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-[#660000] flex items-start gap-3.5"
+            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#660000] flex items-start gap-3.5"
             style={{ backgroundColor: "#550000", background: "linear-gradient(to right, #550000, #300000)" }}
           >
             <Clock className="w-5 h-5 text-[#ddc192] flex-shrink-0 mt-0.5" />
@@ -358,7 +358,7 @@ export default function BankSoalPanitiaPage() {
             {filteredMa.map((q, idx) => {
               const badge = getMaSubjectBadge(idx);
               return (
-                <div key={idx} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 transition-all space-y-3.5">
+                <div key={idx} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all space-y-3.5">
                   <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-2.5">
                     <div className="flex items-center gap-2">
                       <span className="text-[11px] font-black px-2.5 py-1 bg-[#550000] text-[#ddc192] rounded-2xl border border-[#550000]">
@@ -399,7 +399,7 @@ export default function BankSoalPanitiaPage() {
       {activeTab === "kesiapan" && (
         <div className="space-y-4">
           <div
-            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-[#550000] flex items-start gap-3.5"
+            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#550000] flex items-start gap-3.5"
             style={{ backgroundColor: "#550000", background: "linear-gradient(to right, #550000, #380000)" }}
           >
             <Heart className="w-5 h-5 text-[#ddc192] flex-shrink-0 mt-0.5" />
@@ -445,7 +445,7 @@ export default function BankSoalPanitiaPage() {
       {activeTab === "kepribadian" && (
         <div className="space-y-4">
           <div
-            className="bg-[#550000] text-white border border-[#550000] p-4 sm:p-5 rounded-2xl shadow-2xl shadow-primary/30 border flex items-start gap-3.5"
+            className="bg-[#550000] text-white border border-[#550000] p-4 sm:p-5 rounded-2xl shadow-2xl border flex items-start gap-3.5"
             style={{ background: "linear-gradient(to right, #550000, #380000)" }}
           >
             <Brain className="w-5 h-5 text-amber-300 flex-shrink-0 mt-0.5" />
@@ -509,7 +509,7 @@ export default function BankSoalPanitiaPage() {
       {activeTab === "calsan" && (
         <div className="space-y-4">
           <div
-            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-[#550000] flex items-start gap-3.5"
+            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#550000] flex items-start gap-3.5"
             style={{ backgroundColor: "#550000", background: "linear-gradient(to right, #550000, #380000)" }}
           >
             <Users className="w-5 h-5 text-[#ddc192] flex-shrink-0 mt-0.5" />
@@ -562,7 +562,7 @@ export default function BankSoalPanitiaPage() {
       {activeTab === "cawalsan" && (
         <div className="space-y-4">
           <div
-            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-[#550000] flex items-start gap-3.5"
+            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#550000] flex items-start gap-3.5"
             style={{ backgroundColor: "#550000", background: "linear-gradient(to right, #550000, #380000)" }}
           >
             <UserCheck className="w-5 h-5 text-[#ddc192] flex-shrink-0 mt-0.5" />
@@ -614,7 +614,7 @@ export default function BankSoalPanitiaPage() {
       {activeTab === "quran" && (
         <div className="space-y-4">
           <div
-            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-[#550000] flex items-start gap-3.5"
+            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#550000] flex items-start gap-3.5"
             style={{ backgroundColor: "#550000", background: "linear-gradient(to right, #550000, #380000)" }}
           >
             <BookOpenCheck className="w-5 h-5 text-[#ddc192] flex-shrink-0 mt-0.5" />
@@ -642,7 +642,7 @@ export default function BankSoalPanitiaPage() {
               </ul>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl border-2 border-[#550000] shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 space-y-4 relative overflow-hidden">
+            <div className="bg-white p-6 rounded-2xl border-2 border-[#550000] shadow-2xl space-y-4 relative overflow-hidden">
               <div className="absolute top-0 right-0 bg-[#550000] text-[#ddc192] text-[10px] font-black px-3 py-1 rounded-bl-xl shadow-sm border-b border-l border-[#ddc192]">
                 KHUSUS MA/SMA LANGSUNG (TANPA IL)
               </div>
@@ -663,7 +663,7 @@ export default function BankSoalPanitiaPage() {
               </ul>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl border-2 border-[#550000] shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 space-y-4 relative overflow-hidden">
+            <div className="bg-white p-6 rounded-2xl border-2 border-[#550000] shadow-2xl space-y-4 relative overflow-hidden">
               <div className="absolute top-0 right-0 bg-[#550000] text-[#ddc192] text-[10px] font-black px-3 py-1 rounded-bl-xl shadow-sm border-b border-l border-[#ddc192]">
                 KHUSUS MA/SMA LANGSUNG (TANPA IL)
               </div>

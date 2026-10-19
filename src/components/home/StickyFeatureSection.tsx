@@ -76,7 +76,7 @@ export default function StickyFeatureSection() {
                   }`}
                 >
                   <div className="flex items-center gap-3 sm:gap-4 mb-2">
-                    <div className={`w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-2xl flex items-center justify-center transition-colors duration-300 ${isActive ? 'bg-primary-500 text-white shadow-primary-md' : 'bg-surface-200 text-ink-400'}`}>
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-2xl flex items-center justify-center transition-colors duration-300 ${isActive ? 'bg-primary-500 text-white shadow-md' : 'bg-surface-200 text-ink-400'}`}>
                       <feature.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
                     <h3 className={`text-lg sm:text-xl md:text-2xl font-bold transition-colors duration-300 ${isActive ? 'text-primary-900' : 'text-ink-500'}`}>

@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
    BUTTON — Al Imam Edition
    Token-aligned dengan globals.css alimam:
    · Warna   : maroon, cream, gold, ink
-   · Shadow  : --shadow-primary, --shadow-primary-lg, --shadow-gold, --shadow-secondary
+   · Shadow  : --, --shadow-lg, --shadow-gold, --shadow-secondary
    · Radius  : --radius-full (pill), --radius-md, --radius-lg
    · Easing  : --ease-spring, --ease-smooth
    · Duration: --duration-fast, --duration-base
@@ -42,13 +42,13 @@ const buttonVariants = cva(
           "relative overflow-hidden",
           "bg-gradient-to-br from-[var(--color-primary-700)] to-[var(--color-primary-950)]",
           "text-[var(--color-secondary-100)]",
-          "[box-shadow:var(--shadow-primary)]",
+          "[box-shadow:var(--)]",
           /* Shine overlay */
           "before:absolute before:inset-0 before:rounded-[inherit]",
           "before:bg-gradient-to-br before:from-white/[0.10] before:to-transparent",
           "before:pointer-events-none",
           "hover:-translate-y-[2px]",
-          "hover:[box-shadow:var(--shadow-primary-lg)]",
+          "hover:[box-shadow:var(--shadow-lg)]",
           "hover:brightness-[1.07]",
           "active:translate-y-0",
         ].join(" "),
@@ -105,7 +105,7 @@ const buttonVariants = cva(
           "hover:bg-[var(--color-primary-950)]",
           "hover:text-[var(--color-secondary-100)]",
           "hover:border-[var(--color-primary-950)]",
-          "hover:[box-shadow:var(--shadow-primary)]",
+          "hover:[box-shadow:var(--)]",
           "hover:-translate-y-[1px]",
           "active:translate-y-0",
         ].join(" "),
@@ -279,8 +279,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         ref={ref}
-        className={computedClass}
-        disabled={isDisabled}
+        className={computedClass} disabled={isDisabled}
         aria-busy={isLoading}
         aria-disabled={isDisabled}
         {...props}

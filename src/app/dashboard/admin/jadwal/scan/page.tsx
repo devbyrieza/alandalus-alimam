@@ -36,7 +36,7 @@ export default function QRScannerPage() {
         </p>
       </div>
 
-      <div className="bg-white rounded-3xl shadow-xl shadow-emerald-900/5 border border-gray-100 overflow-hidden">
+      <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
         <div className="p-10 flex flex-col items-center justify-center text-center">
           <div className="relative mb-8">
             <div className="w-64 h-64 border-4 border-emerald-500 border-dashed rounded-3xl flex items-center justify-center bg-emerald-50 relative overflow-hidden">
@@ -48,7 +48,7 @@ export default function QRScannerPage() {
 
           <button 
             onClick={simulateScan}
-            className="px-8 py-4 bg-emerald-600 text-white font-bold text-lg rounded-2xl hover:bg-emerald-700 transition shadow-lg shadow-emerald-600/30"
+            className="px-8 py-4 bg-emerald-600 text-white font-bold text-lg rounded-2xl hover:bg-emerald-700 transition shadow-lg"
           >
             Simulasi Scan QR Code
           </button>

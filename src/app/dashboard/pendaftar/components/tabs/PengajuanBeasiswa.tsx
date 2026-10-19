@@ -579,7 +579,7 @@ export default function PengajuanBeasiswaTab() {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full mt-6 py-4 bg-primary-600 hover:bg-primary-700 text-white font-black rounded-2xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary-500/30 flex justify-center items-center gap-2 transition-all disabled:opacity-70"
+          className="w-full mt-6 py-4 bg-primary-600 hover:bg-primary-700 text-white font-black rounded-2xl shadow-md flex justify-center items-center gap-2 transition-all disabled:opacity-70"
         >
           {submitting ? (
             <Loader2 className="w-5 h-5 animate-spin" />

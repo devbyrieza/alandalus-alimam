@@ -175,7 +175,7 @@ function GuidedActionCard({ nextStep }: any) {
           <div className="flex flex-wrap gap-4">
             <Link
               href={nextStep.href}
-              className="px-6 sm:px-6 md:px-10 py-4 sm:py-5 bg-primary-700 hover:bg-primary-800 text-white rounded-2xl font-black uppercase text-xs sm:text-sm shadow-2xl shadow-primary/20 transition-all hover:scale-105 active:scale-95 flex items-center gap-3 group/btn w-full sm:w-auto justify-center"
+              className="px-6 sm:px-6 md:px-10 py-4 sm:py-5 bg-primary-700 hover:bg-primary-800 text-white rounded-2xl font-black uppercase text-xs sm:text-sm shadow-2xl transition-all hover:scale-105 active:scale-95 flex items-center gap-3 group/btn w-full sm:w-auto justify-center"
             >
               Mulai Sekarang{" "}
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover/btn:translate-x-2 transition-transform" />
@@ -271,7 +271,7 @@ function SupportCenter() {
           <a
             href="https://wa.me/6285111524441"
             target="_blank"
-            className="flex items-center justify-center gap-3 px-6 py-4 bg-secondary-400 text-primary-950 font-black text-sm uppercase tracking-widest rounded-2xl hover:bg-secondary-300 shadow-2xl shadow-primary/30 transition-all hover:scale-105 active:scale-95 w-full"
+            className="flex items-center justify-center gap-3 px-6 py-4 bg-secondary-400 text-primary-950 font-black text-sm uppercase tracking-widest rounded-2xl hover:bg-secondary-300 shadow-2xl transition-all hover:scale-105 active:scale-95 w-full"
           >
             Chat di WhatsApp
             <ArrowRight className="w-4 h-4" />
@@ -294,7 +294,7 @@ function LoadingState() {
 
 function ErrorState({ message }: { message: string }) {
   return (
-    <div className="p-20 text-center text-red-600 font-bold bg-white rounded-4xl border border-red-100 shadow-2xl shadow-primary/30 ">
+    <div className="p-20 text-center text-red-600 font-bold bg-white rounded-4xl border border-red-100 shadow-2xl">
       {message}
     </div>
   );

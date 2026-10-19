@@ -242,7 +242,7 @@ export default function DataPendaftaranTab() {
         {/* Step 1: Pembayaran */}
         <Link
           href="/dashboard/pendaftar/pembayaran-pendaftaran"
-          className="group bg-white rounded-2xl p-6 border-2 border-stone-200 hover:border-secondary-300 hover:shadow-2xl shadow-primary/30  shadow-primary/20 transition-all duration-300"
+          className="group bg-white rounded-2xl p-6 border-2 border-stone-200 hover:border-secondary-300 hover:shadow-xl transition-all duration-300"
         >
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
@@ -268,7 +268,7 @@ export default function DataPendaftaranTab() {
         {/* Step 2: Isi Data Lengkap */}
         <Link
           href="/dashboard/pendaftar/isi-data-lengkap"
-          className="group bg-white rounded-2xl p-6 border-2 border-stone-200 hover:border-primary-300 hover:shadow-2xl shadow-primary/30  shadow-primary/20 transition-all duration-300"
+          className="group bg-white rounded-2xl p-6 border-2 border-stone-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300"
         >
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
@@ -296,7 +296,7 @@ export default function DataPendaftaranTab() {
         {/* Step 3: Upload Dokumen */}
         <Link
           href="/dashboard/pendaftar/upload-berkas"
-          className="group bg-white rounded-2xl p-6 border-2 border-stone-200 hover:border-green-300 hover:shadow-2xl shadow-primary/30  shadow-primary/20 transition-all duration-300"
+          className="group bg-white rounded-2xl p-6 border-2 border-stone-200 hover:border-green-300 hover:shadow-xl transition-all duration-300"
         >
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">

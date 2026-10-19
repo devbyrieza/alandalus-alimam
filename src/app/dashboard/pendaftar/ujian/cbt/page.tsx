@@ -117,7 +117,7 @@ export default function CBTRoomPage() {
             {currentQuestion === questions.length - 1 ? (
               <button 
                 onClick={handleSubmit}
-                className="flex items-center gap-2 px-8 py-3 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 transition shadow-lg shadow-emerald-500/30"
+                className="flex items-center gap-2 px-8 py-3 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 transition shadow-lg"
               >
                 Selesai & Kumpulkan <Send className="w-5 h-5" />
               </button>
@@ -142,8 +142,7 @@ export default function CBTRoomPage() {
               <button
                 key={idx}
                 onClick={() => setCurrentQuestion(idx)}
-                className={`h-12 rounded-lg font-bold text-sm transition-all border-2 
-                  ${currentQuestion === idx ? 'border-indigo-600 ring-2 ring-indigo-200' : answers[idx] ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white border-gray-200 text-gray-600 hover:border-indigo-300'}
+                className={`h-12 rounded-lg font-bold text-sm transition-all border-2 ${currentQuestion === idx ? 'border-indigo-600 ring-2 ring-indigo-200' : answers[idx] ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white border-gray-200 text-gray-600 hover:border-indigo-300'}
                 `}
               >
                 {idx + 1}

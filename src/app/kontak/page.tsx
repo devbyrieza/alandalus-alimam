@@ -190,7 +190,7 @@ Mohon informasinya. Terima kasih.`;
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="h-12 px-8 rounded-xl bg-primary hover:bg-primary-dark text-white font-extrabold text-sm shadow-md shadow-primary/25 transition-all inline-flex items-center gap-2 hover:-translate-y-0.5 w-full sm:w-auto justify-center"
+                    className="h-12 px-8 rounded-xl bg-primary hover:bg-primary-dark text-white font-extrabold text-sm shadow-md transition-all inline-flex items-center gap-2 hover:-translate-y-0.5 w-full sm:w-auto justify-center"
                   >
                     <MessageCircle className="w-4 h-4" />
                     <span>Kirim Pesan via WhatsApp CS</span>

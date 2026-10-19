@@ -43,7 +43,7 @@ export default function BentoGridSection() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="absolute inset-0 p-5 sm:p-8 flex flex-col justify-end text-white">
-              <div className="w-12 h-12 bg-primary text-white rounded-2xl flex items-center justify-center mb-4 font-bold shadow-md shadow-primary/30">
+              <div className="w-12 h-12 bg-primary text-white rounded-2xl flex items-center justify-center mb-4 font-bold shadow-md">
                 <BookOpen className="w-6 h-6" />
               </div>
               <span className="text-xs font-extrabold uppercase text-pink-200 tracking-wider mb-1">

@@ -67,7 +67,7 @@ export default function ProgramPage() {
 
               <a
                 href="https://spmb.pesantren-alimam.com/daftar"
-                className="h-11 px-6 rounded-xl bg-primary hover:bg-primary-dark text-white font-extrabold text-xs shadow-md shadow-primary/25 transition-all inline-flex items-center gap-2 self-start lg:self-center"
+                className="h-11 px-6 rounded-xl bg-primary hover:bg-primary-dark text-white font-extrabold text-xs shadow-md transition-all inline-flex items-center gap-2 self-start lg:self-center"
               >
                 <span>Daftar MTs Al-Imam</span>
                 <ArrowRight className="w-4 h-4" />
@@ -124,7 +124,7 @@ export default function ProgramPage() {
 
               <a
                 href="https://spmb.pesantren-alimam.com/daftar"
-                className="h-11 px-6 rounded-xl bg-white hover:bg-pink-50 text-primary font-extrabold text-xs shadow-md shadow-primary/20 transition-all inline-flex items-center gap-2 self-start lg:self-center"
+                className="h-11 px-6 rounded-xl bg-white hover:bg-pink-50 text-primary font-extrabold text-xs shadow-md transition-all inline-flex items-center gap-2 self-start lg:self-center"
               >
                 <span>Daftar I'dad Lughawi</span>
                 <ArrowRight className="w-4 h-4" />
@@ -171,7 +171,7 @@ export default function ProgramPage() {
 
               <Link
                 href="/daftar"
-                className="h-11 px-6 rounded-xl bg-primary hover:bg-primary-dark text-white font-extrabold text-xs shadow-md shadow-primary/25 transition-all inline-flex items-center gap-2 self-start lg:self-center"
+                className="h-11 px-6 rounded-xl bg-primary hover:bg-primary-dark text-white font-extrabold text-xs shadow-md transition-all inline-flex items-center gap-2 self-start lg:self-center"
               >
                 <span>Daftar MA Al-Imam</span>
                 <ArrowRight className="w-4 h-4" />

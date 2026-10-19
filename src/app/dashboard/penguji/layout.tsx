@@ -123,7 +123,7 @@ export default function PengujiDashboardLayout({
           onClick={() => setSidebarOpen(false)}
           className={`group flex items-center px-4 py-3 text-sm font-bold rounded-2xl transition-all duration-200 ${
             item.active
-              ? "bg-primary-600 text-white shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary-200"
+              ? "bg-primary-600 text-white shadow-2xl     "
               : "text-ink-600 hover:bg-primary-50 hover:text-primary-700"
           }`}
         >
@@ -209,7 +209,7 @@ export default function PengujiDashboardLayout({
           className="lg:hidden sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-surface-200 px-5 py-4 flex items-center justify-center"
         >
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-2xl bg-linear-to-br from-primary-600 to-primary-700 flex items-center justify-center text-white text-sm font-black shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
+            <div className="w-8 h-8 rounded-2xl bg-linear-to-br from-primary-600 to-primary-700 flex items-center justify-center text-white text-sm font-black shadow-2xl">
               <ShieldCheck className="w-4 h-4" />
             </div>
             <span className="font-black text-ink-950 tracking-tight leading-none text-sm">
@@ -225,7 +225,7 @@ export default function PengujiDashboardLayout({
               {/* Brand Header */}
               <div className="px-5 md:px-8 pt-10 pb-8 border-b border-surface-100 mb-8">
                 <div className="flex items-center gap-4 mb-2">
-                  <div className="w-10 h-10 rounded-2xl bg-linear-to-br from-primary-600 to-primary-700 flex items-center justify-center text-white shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary-200">
+                  <div className="w-10 h-10 rounded-2xl bg-linear-to-br from-primary-600 to-primary-700 flex items-center justify-center text-white shadow-2xl-200">
                     <ShieldCheck className="w-6 h-6" />
                   </div>
                   <div>
@@ -324,7 +324,7 @@ export default function PengujiDashboardLayout({
                 >
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-2xl bg-linear-to-br from-primary-600 to-primary-700 flex items-center justify-center text-white shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
+                      <div className="w-8 h-8 rounded-2xl bg-linear-to-br from-primary-600 to-primary-700 flex items-center justify-center text-white shadow-2xl">
                         <ShieldCheck className="w-5 h-5" />
                       </div>
                       <span className="font-black text-ink-950">
@@ -457,7 +457,7 @@ export default function PengujiDashboardLayout({
                   className="flex flex-col items-center gap-1 group py-1 min-w-[70px]"
                 >
                   <div
-                    className={`p-2 rounded-2xl transition-all ${item.active ? "bg-primary-600 text-white shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary-200" : "text-ink-400 group-hover:bg-primary-50"}`}
+                    className={`p-2 rounded-2xl transition-all ${item.active ? "bg-primary-600 text-white shadow-2xl     " : "text-ink-400 group-hover:bg-primary-50"}`}
                   >
                     <item.icon className="w-5 h-5" />
                   </div>

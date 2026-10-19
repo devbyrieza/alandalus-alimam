@@ -59,7 +59,7 @@ export default function TentangPage() {
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
             <a
               href="https://spmb.pesantren-alimam.com/daftar"
-              className="h-11 px-6 rounded-xl bg-primary hover:bg-primary-dark text-white font-extrabold text-xs shadow-md shadow-primary/25 transition-all inline-flex items-center gap-2"
+              className="h-11 px-6 rounded-xl bg-primary hover:bg-primary-dark text-white font-extrabold text-xs shadow-md transition-all inline-flex items-center gap-2"
             >
               <span>Daftar SPMB 2027/2028</span>
               <ArrowRight className="w-4 h-4" />

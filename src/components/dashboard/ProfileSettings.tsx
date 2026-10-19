@@ -447,8 +447,7 @@ export default function ProfileSettings({ user }: { user: UserSession }) {
               <button
                 type="submit"
                 disabled={loading || !newPassword || !confirmPassword}
-                className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm text-white shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500
-                                    ${
+                className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm text-white shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 ${
                                       loading ||
                                       !newPassword ||
                                       !confirmPassword

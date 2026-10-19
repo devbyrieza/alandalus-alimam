@@ -207,7 +207,7 @@ export default function HeroSection() {
               href={WA_CONSULT_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl font-bold text-sm sm:text-base bg-[#25D366] text-white hover:bg-[#20ba59] shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:-translate-y-0.5 transition-all duration-300"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl font-bold text-sm sm:text-base bg-[#25D366] text-white hover:bg-[#20ba59] shadow-lg hover: hover:-translate-y-0.5 transition-all duration-300"
             >
               <MessageCircle className="w-5 h-5 shrink-0" />
               <span>Konsultasi Panitia</span>

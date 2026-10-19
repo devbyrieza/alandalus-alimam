@@ -265,8 +265,8 @@ export default function Navbar() {
           <div
             className={`backdrop-blur-xl border border-white/40 rounded-full pl-3.5 pr-4 sm:pl-5 sm:pr-5 2xl:pl-6 2xl:pr-6 flex items-center justify-between gap-2 xl:gap-3 transition-all duration-300 ${
               isScrolled
-                ? "bg-white/95 py-1.5 sm:py-2 shadow-xl shadow-primary/10"
-                : "bg-white/90 py-2 sm:py-2.5 shadow-2xl shadow-primary/5"
+                ? "bg-white/95 py-1.5 sm:py-2 shadow-xl "
+                : "bg-white/90 py-2 sm:py-2.5 shadow-2xl "
             }`}
           >
             {/* ── Logo ── */}
@@ -280,7 +280,7 @@ export default function Navbar() {
                 <div
                   className={`w-9 h-9 sm:w-10 sm:h-10 2xl:w-11 2xl:h-11 rounded-xl sm:rounded-[14px] flex items-center justify-center border overflow-hidden transition-all duration-500 group-hover:scale-105 group-hover:-rotate-3 ${
                     isScrolled
-                      ? "bg-white border-primary/20 shadow-xl shadow-primary/10"
+                      ? "bg-white border-primary/20 shadow-xl "
                       : "bg-white/90 border-white/70 shadow-[0_2px_12px_rgba(3,105,199,0.12)]"
                   }`}
                 >
@@ -329,9 +329,7 @@ export default function Navbar() {
                       href={link.href}
                       onClick={(e) => handleNavClick(e, link)}
                       aria-current={isActive(link.href) ? "page" : undefined}
-                      className={desktopLinkClass(isActive(link.href))}
-                    >
-                      {link.label}
+                      className={desktopLinkClass(isActive(link.href))} >{link.label}
                     </Link>
                   );
                 }
@@ -363,9 +361,7 @@ export default function Navbar() {
                       }}
                       aria-expanded={megaOpen}
                       aria-current={isActive(link.href) ? "page" : undefined}
-                      className={desktopLinkClass(isActive(link.href))}
-                    >
-                      {link.label}
+                      className={desktopLinkClass(isActive(link.href))} >{link.label}
                       <ChevronDown
                         className={`w-3.5 h-3.5 transition-transform duration-300 ${
                           megaOpen ? "rotate-180" : ""
@@ -450,14 +446,7 @@ export default function Navbar() {
                   <a href={SPMB_LINKS.info} className={`${textActionClass} hidden 2xl:inline-block`}>
                     Info SPMB
                   </a>
-                  <a href={SPMB_LINKS.login} className={textActionClass}>
-                    Masuk
-                  </a>
-                </>
-              )}
-
-              <a
-                href={SPMB_LINKS.register}
+                  <a href={SPMB_LINKS.login} className={textActionClass}> Masuk </a> </> )} <a href={SPMB_LINKS.register}
                 className="btn-primary flex items-center gap-1.5 group text-xs xl:text-[13px] 2xl:text-sm font-black px-3.5 2xl:px-4.5 py-1.5 2xl:py-2 rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all glow-ring-primary shrink-0 whitespace-nowrap"
               >
                 <span>{REGISTER_LABEL}</span>
@@ -616,9 +605,7 @@ export default function Navbar() {
                               closeMobile();
                             }}
                             aria-current={active ? "page" : undefined}
-                            className={rowClass}
-                          >
-                            <span>{link.label}</span>
+                            className={rowClass} > <span>{link.label}</span>
                             {active && (
                               <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-secondary-300)]/70" />
                             )}

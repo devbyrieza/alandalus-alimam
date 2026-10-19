@@ -88,14 +88,7 @@ export default function CalendarSection() {
                     >
                       {/* Number Bubble */}
                       <div
-                        className={[
-                          "w-11 h-11 rounded-2xl flex items-center justify-center relative z-10 shrink-0 shadow-xs",
-                          "transition-transform duration-400 group-hover:scale-110",
-                          colors.number,
-                        ].join(" ")}
-                      >
-                        <span className="font-display font-black text-[1.0625rem]">
-                          {idx + 1}
+                        className={[ "w-11 h-11 rounded-2xl flex items-center justify-center relative z-10 shrink-0 shadow-xs", "transition-transform duration-400 group-hover:scale-110", colors.number, ].join(" ")} > <span className="font-display font-black text-[1.0625rem]">{idx + 1}
                         </span>
                       </div>
 
@@ -105,12 +98,7 @@ export default function CalendarSection() {
 
                         <div className="relative z-10">
                           <span
-                            className={[
-                              "inline-block px-2.5 py-1 rounded-md text-[0.6rem] font-black uppercase tracking-widest mb-3 border shadow-xs",
-                              colors.badge,
-                            ].join(" ")}
-                          >
-                            {item.date}
+                            className={[ "inline-block px-2.5 py-1 rounded-md text-[0.6rem] font-black uppercase tracking-widest mb-3 border shadow-xs", colors.badge, ].join(" ")} >{item.date}
                           </span>
                           <h4
                             className={`font-bold text-ink-900 text-lg mb-1.5 tracking-tight transition-colors duration-200 ${colors.title}`}
@@ -161,7 +149,7 @@ export default function CalendarSection() {
 
                 <div className="space-y-3.5 w-full max-w-[240px]">
                   <Link href="/kalender" className="block w-full">
-                    <button className="btn-primary w-full justify-center py-3 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
+                    <button className="btn-primary w-full justify-center py-3 shadow-md">
                       Cek Kalender
                       <ArrowUpRight className="w-4 h-4 ml-1" />
                     </button>

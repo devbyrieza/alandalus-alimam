@@ -34,7 +34,7 @@ export default function AnalyticsDashboard() {
           </div>
         </div>
         
-        <div className="bg-gradient-to-br from-emerald-500 to-emerald-700 p-6 rounded-3xl text-white shadow-xl shadow-emerald-500/30">
+        <div className="bg-gradient-to-br from-emerald-500 to-emerald-700 p-6 rounded-3xl text-white shadow-xl">
           <div className="flex justify-between items-start">
             <div>
               <p className="text-emerald-100 font-medium">Total Pendapatan</p>

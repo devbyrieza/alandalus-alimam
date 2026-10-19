@@ -481,9 +481,7 @@ function InputField({
         disabled={disabled}
         maxLength={maxLength}
         inputMode={inputMode}
-        className={baseInputClass}
-      />
-      {filterHint && <p className="text-xs text-ink-600 ml-1">{filterHint}</p>}
+        className={baseInputClass} />{filterHint && <p className="text-xs text-ink-600 ml-1">{filterHint}</p>}
     </div>
   );
 }
@@ -895,7 +893,7 @@ export default function DataLengkapForm({
         <div
           className={`fixed top-6 right-6 z-50 px-6 py-4 rounded-2xl shadow-clay-lg flex items-center gap-3 animate-in slide-in-from-right duration-300 ${
             toastMessage.type === "success"
-              ? "bg-emerald-500 text-white shadow-emerald-500/20"
+              ? "bg-emerald-500 text-white "
               : "bg-red-500 text-white shadow-red-500/20"
           }`}
         >
@@ -1905,7 +1903,7 @@ export default function DataLengkapForm({
           <button
             type="submit"
             disabled={saving}
-            className="flex items-center gap-2 px-5 md:px-8 py-4 rounded-2xl bg-gradient-to-r from-primary-600 to-primary-700 text-white font-bold text-lg shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary-600/30 hover:shadow-primary-600/40 hover:-translate-y-1 transition-all disabled:opacity-50 disabled:transform-none"
+            className="flex items-center gap-2 px-5 md:px-8 py-4 rounded-2xl bg-gradient-to-r from-primary-600 to-primary-700 text-white font-bold text-lg shadow-md hover: hover:-translate-y-1 transition-all disabled:opacity-50 disabled:transform-none"
           >
             {saving ? (
               <Loader2 className="w-6 h-6 animate-spin" />

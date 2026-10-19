@@ -39,11 +39,12 @@ const Section = React.forwardRef<HTMLElement, SectionProps>(
       <section
         ref={ref}
         className={cn(
-          // <CheckCircle2 className="w-4 h-4 inline-block mr-1" /> ONLY VERTICAL SPACING - NO HORIZONTAL PADDING!
-          { 
+          // ONLY VERTICAL SPACING - NO HORIZONTAL PADDING!
+          {
             "py-12 md:py-16": spacing === "sm",
             "py-16 md:py-20": spacing === "md",
-            "py-20 md:py-28": spacing === "lg" },
+            "py-20 md:py-28": spacing === "lg",
+          },
           // Background
           {
             "bg-white": background === "white",

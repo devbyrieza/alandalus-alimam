@@ -239,7 +239,7 @@ export default function UndanganSeleksiTab() {
   if (data.locked && !isTestingAccount) {
     return (
       <div className="space-y-6">
-        <div className="bg-linear-to-r from-stone-600 to-stone-800 rounded-2xl p-6 md:p-8 text-white shadow-2xl shadow-primary/30  shadow-primary/20 relative overflow-hidden">
+        <div className="bg-linear-to-r from-stone-600 to-stone-800 rounded-2xl p-6 md:p-8 text-white shadow-2xl relative overflow-hidden">
           <div className="relative z-10">
             <h1 className="text-2xl font-black mb-2 text-white flex items-center gap-3">
               <svg
@@ -287,7 +287,7 @@ export default function UndanganSeleksiTab() {
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link
               href="/dashboard/pendaftar?tab=upload-berkas"
-              className="px-5 md:px-8 py-3 bg-primary-700 text-white font-black rounded-2xl hover:bg-primary-800 transition-all shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 uppercase tracking-widest text-sm"
+              className="px-5 md:px-8 py-3 bg-primary-700 text-white font-black rounded-2xl hover:bg-primary-800 transition-all shadow-2xl uppercase tracking-widest text-sm"
             >
               Cek Status Berkas
             </Link>
@@ -311,7 +311,7 @@ export default function UndanganSeleksiTab() {
     return (
       <div className="space-y-6">
         {/* Header */}
-        <div className="bg-linear-to-r from-emerald-700 to-emerald-900 rounded-2xl p-6 md:p-8 text-white shadow-2xl shadow-primary/30  shadow-primary/20 relative overflow-hidden">
+        <div className="bg-linear-to-r from-emerald-700 to-emerald-900 rounded-2xl p-6 md:p-8 text-white shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
           <div className="relative z-10">
             <div className="flex items-center gap-3 mb-2">
@@ -331,7 +331,7 @@ export default function UndanganSeleksiTab() {
             <span className="text-sm font-black text-emerald-600">6/6 Tahap ✓</span>
           </div>
           <div className="w-full h-3 bg-surface-100 rounded-full overflow-hidden">
-            <div className="h-full bg-linear-to-r from-emerald-500 to-emerald-700 rounded-full w-full shadow-2xl shadow-primary/30  shadow-primary/20 shadow-emerald-500/20" />
+            <div className="h-full bg-linear-to-r from-emerald-500 to-emerald-700 rounded-full w-full shadow-2xl" />
           </div>
           <p className="text-xs text-emerald-600 mt-2 font-medium">100% selesai — Semua tahapan seleksi telah dilalui ✓</p>
         </div>
@@ -341,7 +341,7 @@ export default function UndanganSeleksiTab() {
           {/* Card Pengumuman */}
           <Link
             href="/dashboard/pendaftar/pengumuman"
-            className="bg-white rounded-2xl border-2 border-primary-100 hover:border-primary-300 p-6 shadow-sm hover:shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 transition-all group"
+            className="bg-white rounded-2xl border-2 border-primary-100 hover:border-primary-300 p-6 shadow-sm hover:shadow-xl transition-all group"
           >
             <div className="flex items-center gap-3 mb-3">
               <div className="w-12 h-12 bg-primary-50 rounded-2xl flex items-center justify-center group-hover:bg-primary-100 transition-colors whitespace-nowrap shrink-0">
@@ -379,7 +379,7 @@ export default function UndanganSeleksiTab() {
           ) : (
             <Link
               href="/dashboard/pendaftar/daftar-ulang"
-              className="bg-white rounded-2xl border-2 border-gold-200 hover:border-gold-400 p-6 shadow-sm hover:shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 transition-all group"
+              className="bg-white rounded-2xl border-2 border-gold-200 hover:border-gold-400 p-6 shadow-sm hover:shadow-xl transition-all group"
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-12 h-12 bg-gold-50 rounded-2xl flex items-center justify-center group-hover:bg-gold-100 transition-colors">
@@ -406,7 +406,7 @@ export default function UndanganSeleksiTab() {
   return (
     <div className="space-y-6">
       {/* ========== HEADER ========== */}
-      <div className="bg-linear-to-r from-primary-700 to-primary-900 rounded-2xl p-6 md:p-8 text-white shadow-2xl shadow-primary/30  shadow-primary/20 relative overflow-hidden">
+      <div className="bg-linear-to-r from-primary-700 to-primary-900 rounded-2xl p-6 md:p-8 text-white shadow-2xl relative overflow-hidden">
         <div className="relative z-10">
           <h1 className="text-2xl font-black mb-2 text-white">
             Jadwal Seleksi
@@ -455,7 +455,7 @@ export default function UndanganSeleksiTab() {
         </div>
         <div className="w-full h-3 bg-surface-100 rounded-full overflow-hidden">
           <div
-            className="h-full bg-linear-to-r from-primary-500 to-primary-700 rounded-full transition-all duration-700 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary-500/20"
+            className="h-full bg-linear-to-r from-primary-500 to-primary-700 rounded-full transition-all duration-700 shadow-2xl"
             style={{ width: `${data.progress.percentage}%` }}
           />
         </div>
@@ -489,7 +489,7 @@ export default function UndanganSeleksiTab() {
                 className={`bg-white rounded-2xl border-2 p-5 transition-all ${
                   item.completed
                     ? "border-emerald-200 bg-emerald-50/50"
-                    : "border-stone-100 hover:border-primary-200 hover:shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10"
+                    : "border-stone-100 hover:border-primary-200 hover:shadow-xl     "
                 }`}
               >
                 <div className="flex items-start justify-between mb-3">
@@ -742,7 +742,7 @@ export default function UndanganSeleksiTab() {
                         className={`bg-white rounded-2xl shadow-sm p-5 border-2 transition-all ${
                           slot.isFull
                             ? "opacity-75 border-surface-200 bg-surface-50"
-                            : "border-surface-100 hover:border-primary-300 hover:shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10"
+                            : "border-surface-100 hover:border-primary-300 hover:shadow-xl     "
                         }`}
                       >
                         <div className="flex justify-between items-start mb-3">

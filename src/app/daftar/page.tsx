@@ -256,9 +256,9 @@ export default function DaftarPage() {
         </div>
 
         {/* Banner Pengalihan Pendaftaran Santri Putra ke Ulul Albaab */}
-        <div className="w-full mb-6 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-blue-50/95 via-sky-50/90 to-blue-50/95 border-2 border-blue-200 p-4 sm:p-5 shadow-lg shadow-blue-500/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="w-full mb-6 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-blue-50/95 via-sky-50/90 to-blue-50/95 border-2 border-blue-200 p-4 sm:p-5 shadow-lg flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-start gap-3.5">
-            <div className="w-11 h-11 rounded-2xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-blue-600/25 mt-0.5 sm:mt-0">
+            <div className="w-11 h-11 rounded-2xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-md mt-0.5 sm:mt-0">
               <School className="w-5 h-5" />
             </div>
             <div>
@@ -277,7 +277,7 @@ export default function DaftarPage() {
             href="https://spmb.pesantren-ululalbaab.com/daftar"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-extrabold text-xs uppercase tracking-wider shadow-md shadow-blue-600/20 hover:shadow-lg transition-all shrink-0 w-full sm:w-auto"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all shrink-0 w-full sm:w-auto"
           >
             <span>Daftar Santri Putra</span>
             <ExternalLink className="w-3.5 h-3.5" />
@@ -378,7 +378,7 @@ export default function DaftarPage() {
                 transition={{ delay: 0.4 }}
               >
                 <div className="flex items-center gap-3 mb-8">
-                  <div className="w-10 h-10 rounded-3xl bg-secondary-50 flex items-center justify-center text-primary-600 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-secondary-200">
+                  <div className="w-10 h-10 rounded-3xl bg-secondary-50 flex items-center justify-center text-primary-600 shadow-2xl border border-secondary-200">
                     <GraduationCap className="w-6 h-6" />
                   </div>
                   <h3 className="text-2xl font-display font-black text-ink-950">
@@ -428,12 +428,12 @@ export default function DaftarPage() {
                           isClosed
                             ? "opacity-50 grayscale cursor-not-allowed border-secondary-200 bg-stone-50"
                             : formData.jenjang === option.value
-                              ? "border-primary-600 bg-secondary-50 shadow-2xl shadow-primary/30  shadow-primary/20 "
-                              : "border-secondary-200 bg-white hover:border-primary-200 hover:shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10"
+                              ? "border-primary-600 bg-secondary-50 shadow-2xl    "
+                              : "border-secondary-200 bg-white hover:border-primary-200 hover:shadow-xl     "
                         }`}
                       >
                         {isClosed && (
-                          <div className="absolute top-4 right-4 bg-red-600 text-white text-[10px] font-black px-2 py-1 rounded-full uppercase tracking-tighter shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 z-10">
+                          <div className="absolute top-4 right-4 bg-red-600 text-white text-[10px] font-black px-2 py-1 rounded-full uppercase tracking-tighter shadow-2xl z-10">
                             {closedLabel}
                           </div>
                         )}
@@ -514,7 +514,7 @@ export default function DaftarPage() {
                 className="space-y-8"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-3xl bg-secondary-50 flex items-center justify-center text-primary-600 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-secondary-200">
+                  <div className="w-10 h-10 rounded-3xl bg-secondary-50 flex items-center justify-center text-primary-600 shadow-2xl border border-secondary-200">
                     <User className="w-6 h-6" />
                   </div>
                   <h3 className="text-2xl font-display font-black text-ink-950">
@@ -586,7 +586,7 @@ export default function DaftarPage() {
                     >
                       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 md:p-5 rounded-2xl bg-pink-50/70 border border-pink-200">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center font-black shadow-md shadow-primary/20 text-sm">
+                          <div className="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center font-black shadow-md text-sm">
                             P
                           </div>
                           <div>
@@ -623,7 +623,7 @@ export default function DaftarPage() {
                 className="space-y-8"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-3xl bg-secondary-50 flex items-center justify-center text-primary-600 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-secondary-200">
+                  <div className="w-10 h-10 rounded-3xl bg-secondary-50 flex items-center justify-center text-primary-600 shadow-2xl border border-secondary-200">
                     <Phone className="w-6 h-6" />
                   </div>
                   <h3 className="text-2xl font-display font-black text-ink-950">
@@ -635,7 +635,7 @@ export default function DaftarPage() {
                   label="Nomor WhatsApp Orang Tua"
                   error={fieldErrors.no_hp}
                 >
-                  <div className="relative flex shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 border border-transparent focus-within:border-primary-200 focus-within:ring-4 focus-within:ring-secondary-50 rounded-3xl md:rounded-2xl overflow-hidden bg-secondary-50 transition-all">
+                  <div className="relative flex shadow-2xl border border-transparent focus-within:border-primary-200 focus-within:ring-4 focus-within:ring-secondary-50 rounded-3xl md:rounded-2xl overflow-hidden bg-secondary-50 transition-all">
                     <div className="relative">
                       <select
                         value={countryCode}
@@ -684,7 +684,7 @@ export default function DaftarPage() {
                   whileTap={{ scale: 0.98 }}
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-4 md:py-6 rounded-pill bg-primary text-white font-extrabold text-base hover:bg-primary-dark rounded-xl h-14 shadow-2xl shadow-primary/30  shadow-primary/20 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                  className="w-full py-4 md:py-6 rounded-pill bg-primary text-white font-extrabold text-base hover:bg-primary-dark rounded-xl h-14 shadow-2xl transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                 >
                   {isLoading ? (
                     <>

@@ -59,7 +59,7 @@ export default function FilterLanjutanPage() {
       <form onSubmit={handleSearch} className="space-y-4">
         
         {/* Section 1: Data Sekolah & Jenjang */}
-        <div className="bg-white/80 backdrop-blur-xl border border-gray-100 rounded-2xl shadow-xl shadow-primary/5 overflow-hidden transition-all">
+        <div className="bg-white/80 backdrop-blur-xl border border-gray-100 rounded-2xl shadow-xl overflow-hidden transition-all">
           <button 
             type="button" 
             onClick={() => toggleSection('sekolah')}
@@ -113,7 +113,7 @@ export default function FilterLanjutanPage() {
         </div>
 
         {/* Section 2: Data Santri */}
-        <div className="bg-white/80 backdrop-blur-xl border border-gray-100 rounded-2xl shadow-xl shadow-primary/5 overflow-hidden transition-all">
+        <div className="bg-white/80 backdrop-blur-xl border border-gray-100 rounded-2xl shadow-xl overflow-hidden transition-all">
           <button 
             type="button" 
             onClick={() => toggleSection('santri')}
@@ -152,7 +152,7 @@ export default function FilterLanjutanPage() {
         </div>
 
         {/* Section 3: Kelengkapan & Pembayaran */}
-        <div className="bg-white/80 backdrop-blur-xl border border-gray-100 rounded-2xl shadow-xl shadow-primary/5 overflow-hidden transition-all">
+        <div className="bg-white/80 backdrop-blur-xl border border-gray-100 rounded-2xl shadow-xl overflow-hidden transition-all">
           <button 
             type="button" 
             onClick={() => toggleSection('kelengkapan')}
@@ -200,7 +200,7 @@ export default function FilterLanjutanPage() {
         </div>
 
         {/* Section 4: Seleksi & Hasil */}
-        <div className="bg-white/80 backdrop-blur-xl border border-gray-100 rounded-2xl shadow-xl shadow-primary/5 overflow-hidden transition-all">
+        <div className="bg-white/80 backdrop-blur-xl border border-gray-100 rounded-2xl shadow-xl overflow-hidden transition-all">
           <button 
             type="button" 
             onClick={() => toggleSection('seleksi')}
@@ -255,7 +255,7 @@ export default function FilterLanjutanPage() {
         </div>
 
         {/* Section 5: Orang Tua */}
-        <div className="bg-white/80 backdrop-blur-xl border border-gray-100 rounded-2xl shadow-xl shadow-primary/5 overflow-hidden transition-all">
+        <div className="bg-white/80 backdrop-blur-xl border border-gray-100 rounded-2xl shadow-xl overflow-hidden transition-all">
           <button 
             type="button" 
             onClick={() => toggleSection('ortu')}
@@ -301,7 +301,7 @@ export default function FilterLanjutanPage() {
         <div className="flex justify-center pt-6 pb-12">
           <button 
             type="submit"
-            className="flex items-center gap-2 px-8 py-4 bg-primary text-white text-lg font-bold rounded-2xl hover:bg-primary-hover hover:scale-105 active:scale-95 transition-all shadow-xl shadow-primary/30"
+            className="flex items-center gap-2 px-8 py-4 bg-primary text-white text-lg font-bold rounded-2xl hover:bg-primary-hover hover:scale-105 active:scale-95 transition-all shadow-xl"
           >
             <Search className="w-6 h-6" />
             Terapkan Filter & Tampilkan Data

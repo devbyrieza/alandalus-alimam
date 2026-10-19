@@ -78,8 +78,7 @@ const TimelineItem = ({ item, index }: { item: any; index: number }) => (
 
     {/* Dot */}
     <div
-      className={`absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-2xl border-4 flex items-center justify-center bg-white z-10 shadow-sm transition-all duration-500
-      ${
+      className={`absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-2xl border-4 flex items-center justify-center bg-white z-10 shadow-sm transition-all duration-500 ${
         item.status === "active"
           ? "border-primary text-primary"
           : "border-slate-200 text-slate-400"
@@ -281,7 +280,7 @@ export default function SPMBInfoPage() {
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
             <Link
               href="/daftar"
-              className="h-12 px-8 rounded-xl bg-primary hover:bg-primary-dark text-white font-extrabold text-sm shadow-lg shadow-primary/25 transition-all inline-flex items-center gap-2 active:scale-95"
+              className="h-12 px-8 rounded-xl bg-primary hover:bg-primary-dark text-white font-extrabold text-sm shadow-lg transition-all inline-flex items-center gap-2 active:scale-95"
             >
               <span>Mulai Pendaftaran Online</span>
               <ArrowRight className="w-4 h-4" />
@@ -808,7 +807,7 @@ export default function SPMBInfoPage() {
               <div className="pt-2 flex flex-wrap justify-center gap-4">
                 <Link
                   href="/daftar"
-                  className="h-12 px-8 rounded-xl bg-primary hover:bg-primary-dark text-white font-extrabold text-sm shadow-lg shadow-primary/25 transition-all inline-flex items-center gap-2 active:scale-95"
+                  className="h-12 px-8 rounded-xl bg-primary hover:bg-primary-dark text-white font-extrabold text-sm shadow-lg transition-all inline-flex items-center gap-2 active:scale-95"
                 >
                   <span>Daftar Sekarang</span>
                   <ArrowRight className="w-4 h-4" />

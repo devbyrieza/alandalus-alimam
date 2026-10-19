@@ -73,7 +73,7 @@ export default function RadarTamuAdmin() {
       <div className="p-8 max-w-7xl mx-auto space-y-8">
         
         {/* Header & Roster Banner */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gradient-to-r from-primary-900 to-primary-700 p-8 rounded-3xl text-white shadow-xl shadow-primary-900/20">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gradient-to-r from-primary-900 to-primary-700 p-8 rounded-3xl text-white shadow-xl">
           <div>
             <h1 className="text-3xl font-black mb-2">Live Radar Tamu</h1>
             <p className="text-primary-100 font-medium">Sistem Monitoring & Resepsionis Digital Al-Andalus</p>
@@ -157,7 +157,7 @@ export default function RadarTamuAdmin() {
                   {/* Actions (The "Claim" Logic) */}
                   <div className="flex flex-col gap-2 min-w-[200px]">
                     {tamu.status === "WAITING" && (
-                      <button onClick={() => handleClaim(tamu.id)} className="w-full flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-primary-600/20">
+                      <button onClick={() => handleClaim(tamu.id)} className="w-full flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg">
                         <UserPlus className="w-5 h-5" />
                         Sambut Tamu
                       </button>
@@ -165,7 +165,7 @@ export default function RadarTamuAdmin() {
                     
                     {tamu.status === "HANDLED" && (
                       <>
-                        <button onClick={() => handleFinish(tamu.id)} className="w-full flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-emerald-500/20">
+                        <button onClick={() => handleFinish(tamu.id)} className="w-full flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg">
                           <CheckCircle2 className="w-5 h-5" />
                           Selesai Kunjungan
                         </button>

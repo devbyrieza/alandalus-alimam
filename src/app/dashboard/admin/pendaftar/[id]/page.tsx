@@ -851,10 +851,10 @@ export default function PendaftarDetailPage() {
         color: "bg-purple-50 text-purple-800 border border-purple-100" },
       tested: {
         label: "Proses Seleksi",
-        color: "bg-primary-600 text-white shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10" },
+        color: "bg-primary-600 text-white shadow-2xl     " },
       exam_completed: {
         label: "Proses Seleksi",
-        color: "bg-primary-600 text-white shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10" },
+        color: "bg-primary-600 text-white shadow-2xl     " },
       announced: {
         label: "Cadangan",
         color: "bg-gold-100 text-gold-800 border border-gold-200" },
@@ -1091,7 +1091,7 @@ export default function PendaftarDetailPage() {
       </Link>
 
       {/* Summary Card */}
-      <div className="bg-linear-to-br from-primary-600 to-primary-900 rounded-3xl shadow-2xl shadow-primary/30  shadow-primary-900/20 p-5 md:p-8 text-white relative overflow-hidden">
+      <div className="bg-linear-to-br from-primary-600 to-primary-900 rounded-3xl shadow-2xl p-5 md:p-8 text-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-gold-400/10 rounded-full -mr-20 -mt-20 blur-3xl pointer-events-none"></div>
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 relative z-10">
           {/* Main Info */}
@@ -1107,7 +1107,7 @@ export default function PendaftarDetailPage() {
                 <span className="font-mono bg-white/20 px-2.5 py-1 rounded-2xl text-sm font-black text-white border border-white/20">
                   {pendaftar.nomor_pendaftaran}
                 </span>
-                <span className="px-2.5 py-1 bg-gold-400 text-primary-900 rounded-2xl text-xs font-black uppercase shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
+                <span className="px-2.5 py-1 bg-gold-400 text-primary-900 rounded-2xl text-xs font-black uppercase">
                   {pendaftar.jenjang}
                 </span>
                 <span className="text-primary-100 font-bold">
@@ -1214,7 +1214,7 @@ export default function PendaftarDetailPage() {
                 });
               }}
               disabled={savingStatus || pendaftar.status_proses === "draft"}
-              className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-3xl text-xs font-black transition-all flex items-center gap-1 disabled:opacity-50 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 active:scale-95"
+              className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-3xl text-xs font-black transition-all flex items-center gap-1 disabled:opacity-50 shadow-2xl active:scale-95"
             >
               <X className="w-3.5 h-3.5" />
               Buka Kunci
@@ -1224,7 +1224,7 @@ export default function PendaftarDetailPage() {
                 href={`https://wa.me/${pendaftar.no_hp.replace(/\D/g, "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl text-xs font-black transition-all flex items-center gap-1 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 active:scale-95"
+                className="px-4 py-2 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl text-xs font-black transition-all flex items-center gap-1 shadow-2xl active:scale-95"
               >
                 <Phone className="w-3.5 h-3.5" />
                 WhatsApp
@@ -1234,14 +1234,14 @@ export default function PendaftarDetailPage() {
               <>
                 <button
                   onClick={handleUbahJenjang}
-                  className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-3xl text-xs font-black transition-all flex items-center gap-1.5 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 active:scale-95 border border-purple-500 mr-2"
+                  className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-3xl text-xs font-black transition-all flex items-center gap-1.5 shadow-md active:scale-95 border border-purple-500 mr-2"
                 >
                   <School className="w-3.5 h-3.5" />
                   Ubah Jenjang
                 </button>
                 <button
                   onClick={handleOpenEditModal}
-                  className="px-4 py-2 bg-gold-400 hover:bg-yellow-500 text-primary-900 rounded-3xl text-xs font-black transition-all flex items-center gap-1.5 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 active:scale-95 border border-gold-300 mr-2"
+                  className="px-4 py-2 bg-gold-400 hover:bg-yellow-500 text-primary-900 rounded-3xl text-xs font-black transition-all flex items-center gap-1.5 shadow-md active:scale-95 border border-gold-300 mr-2"
                 >
                   <Edit className="w-3.5 h-3.5" />
                   Edit Biodata & Ortu
@@ -1249,7 +1249,7 @@ export default function PendaftarDetailPage() {
                 <button
                   onClick={() => handleExportSingle('excel')}
                   disabled={exporting}
-                  className="px-4 py-2 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl text-xs font-black transition-all flex items-center gap-1.5 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 active:scale-95 mr-2"
+                  className="px-4 py-2 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl text-xs font-black transition-all flex items-center gap-1.5 shadow-2xl active:scale-95 mr-2"
                 >
                   {exporting ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <FileSpreadsheet className="w-3.5 h-3.5" />}
                   Excel
@@ -1257,7 +1257,7 @@ export default function PendaftarDetailPage() {
                 <button
                   onClick={() => handleExportSingle('pdf')}
                   disabled={exporting}
-                  className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-3xl text-xs font-black transition-all flex items-center gap-1.5 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 active:scale-95 mr-2"
+                  className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-3xl text-xs font-black transition-all flex items-center gap-1.5 shadow-2xl active:scale-95 mr-2"
                 >
                   {exporting ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <FileText className="w-3.5 h-3.5" />}
                   PDF
@@ -1283,7 +1283,7 @@ export default function PendaftarDetailPage() {
         <div className="lg:col-span-2 space-y-6">
           {/* Untuk Admin Berkas: Dokumen pindah ke kolom utama paling atas */}
           {isBerkas && (
-            <div className="bg-white rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 p-6 border border-gold-100">
+            <div className="bg-white rounded-3xl shadow-2xl p-6 border border-gold-100">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-3 bg-primary-50 rounded-3xl">
                   <FileText className="w-6 h-6 text-primary-700" />
@@ -1415,7 +1415,7 @@ export default function PendaftarDetailPage() {
           {(isPenguji ||
             userRole === "admin_super" ||
             userRole === "admin") && (
-            <div className="bg-white rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 p-6 border border-gold-100">
+            <div className="bg-white rounded-3xl shadow-2xl p-6 border border-gold-100">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-3 bg-gold-50 rounded-3xl">
                   <Trophy className="w-6 h-6 text-gold-600" />
@@ -1440,21 +1440,21 @@ export default function PendaftarDetailPage() {
                     <a
                       href={`/dashboard/pendaftar/ujian/akademik?pendaftarId=${pendaftar.id}`}
                       target="_blank"
-                      className="px-3 py-1.5 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl text-[11px] font-bold transition-colors shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10"
+                      className="px-3 py-1.5 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl text-[11px] font-bold transition-colors shadow-2xl"
                     >
                       Buka CBT Akademik
                     </a>
                     <a
                       href={`/dashboard/pendaftar/ujian/kepribadian?pendaftarId=${pendaftar.id}`}
                       target="_blank"
-                      className="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white rounded-3xl text-[11px] font-bold transition-colors shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10"
+                      className="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white rounded-3xl text-[11px] font-bold transition-colors shadow-2xl"
                     >
                       Buka CBT Kepribadian
                     </a>
                     <a
                       href={`/dashboard/pendaftar/ujian/kesiapan?pendaftarId=${pendaftar.id}`}
                       target="_blank"
-                      className="px-3 py-1.5 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl text-[11px] font-bold transition-colors shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10"
+                      className="px-3 py-1.5 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl text-[11px] font-bold transition-colors shadow-2xl"
                     >
                       Buka CBT Kesiapan
                     </a>
@@ -1735,7 +1735,7 @@ export default function PendaftarDetailPage() {
                 <div className="mt-4 flex justify-end">
                   <Link
                     href={`/dashboard/penguji/input-nilai?search=${pendaftar.nomor_pendaftaran}`}
-                    className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-2xl hover:bg-purple-700 transition-colors shadow hover:shadow-2xl shadow-primary/30  shadow-primary/20 font-bold text-sm"
+                    className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-2xl hover:bg-purple-700 transition-colors shadow hover:shadow-xl font-bold text-sm"
                   >
                     <Edit className="w-4 h-4" />
                     Input / Lengkapi Edit Nilai
@@ -1783,7 +1783,7 @@ export default function PendaftarDetailPage() {
                           Swal.fire("Error", err.message || "Terjadi kesalahan", "error");
                         }
                       }}
-                      className="flex items-center gap-2 px-4 py-2 bg-amber-500 text-white rounded-2xl hover:bg-amber-600 transition-colors shadow hover:shadow-2xl shadow-primary/30  shadow-primary/20 font-bold text-sm"
+                      className="flex items-center gap-2 px-4 py-2 bg-amber-500 text-white rounded-2xl hover:bg-amber-600 transition-colors shadow hover:shadow-xl font-bold text-sm"
                     >
                       <AlertCircle className="w-4 h-4" />
                       Override Status
@@ -1813,7 +1813,7 @@ export default function PendaftarDetailPage() {
                           catatan_arab: (pendaftar.nilai_ujian as any)?.catatan_arab || (pendaftar.nilai_ujian as any)?.catatan_lisan_arab || "" });
                         setIsNilaiModalOpen(true);
                       }}
-                      className="flex items-center gap-2 px-4 py-2 bg-amber-500 text-white rounded-2xl hover:bg-amber-600 transition-colors shadow hover:shadow-2xl shadow-primary/30  shadow-primary/20 font-bold text-sm"
+                      className="flex items-center gap-2 px-4 py-2 bg-amber-500 text-white rounded-2xl hover:bg-amber-600 transition-colors shadow hover:shadow-xl font-bold text-sm"
                     >
                       <Edit className="w-4 h-4" />
                       Input Nilai Khusus
@@ -1840,7 +1840,7 @@ export default function PendaftarDetailPage() {
                         Swal.fire("Error", err.message || "Terjadi kesalahan", "error");
                       }
                     }}
-                    className="flex items-center gap-2 px-4 py-2 bg-violet-600 text-white rounded-2xl hover:bg-violet-700 transition-colors shadow hover:shadow-2xl shadow-primary/30  shadow-primary/20 font-bold text-sm"
+                    className="flex items-center gap-2 px-4 py-2 bg-violet-600 text-white rounded-2xl hover:bg-violet-700 transition-colors shadow hover:shadow-xl font-bold text-sm"
                   >
                     <Trophy className="w-4 h-4" />
                     Hitung Ulang Nilai
@@ -1853,7 +1853,7 @@ export default function PendaftarDetailPage() {
           {/* Kehadiran Welcome Day (Tampil jika sudah accepted/enrolled) */}
           {(userRole === "admin_super" || userRole === "admin") && 
             (pendaftar.status_proses === "accepted" || pendaftar.status_proses === "enrolled" || pendaftar.status_proses === "enrolled_full") && (
-            <div className="bg-white rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 p-6 border border-emerald-100">
+            <div className="bg-white rounded-3xl shadow-2xl p-6 border border-emerald-100">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-3 bg-emerald-50 rounded-3xl">
                   <CheckCircle className="w-6 h-6 text-[#550000]" />
@@ -1892,7 +1892,7 @@ export default function PendaftarDetailPage() {
                   {pendaftar.reservasi.map((res: any) => {
                     const data = res.data_penginap || {};
                     return (
-                      <div key={res.id} className="p-5 bg-emerald-50/50 rounded-2xl border border-emerald-100 shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 relative">
+                      <div key={res.id} className="p-5 bg-emerald-50/50 rounded-2xl border border-emerald-100 shadow-2xl relative">
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                           <div>
                             <span className="block text-[10px] text-[#550000] font-black uppercase tracking-widest mb-1">Status Kehadiran</span>
@@ -1949,9 +1949,9 @@ export default function PendaftarDetailPage() {
           {/* Untuk Admin Keuangan: Pembayaran pindah ke kolom utama paling atas */}
           {/* TODO: Ganti logic check permission dengan session role yang sebenarnya */}
           {isKeuangan && (
-            <div className="bg-white rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 p-6 border border-gold-100">
+            <div className="bg-white rounded-3xl shadow-2xl p-6 border border-gold-100">
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-gold-100 rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10">
+                <div className="p-3 bg-gold-100 rounded-3xl shadow-2xl">
                   <CreditCard className="w-6 h-6 text-gold-700" />
                 </div>
                 <h3 className="text-xl font-black text-primary-950 tracking-tight">
@@ -2057,7 +2057,7 @@ export default function PendaftarDetailPage() {
           )}
 
           {/* Data Pribadi (Selalu tampil, tapi mungkin disederhanakan) */}
-          <div className="bg-white rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 p-6 border border-gold-100">
+          <div className="bg-white rounded-3xl shadow-2xl p-6 border border-gold-100">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-3 bg-primary-50 rounded-3xl">
                 <User className="w-6 h-6 text-primary-600" />
@@ -2122,7 +2122,7 @@ export default function PendaftarDetailPage() {
           </div>
 
           {/* Kontak & Alamat (Penting untuk Penagihan) */}
-          <div className="bg-white rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 p-6 border border-gold-100">
+          <div className="bg-white rounded-3xl shadow-2xl p-6 border border-gold-100">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-3 bg-emerald-50 rounded-3xl">
                 <MapPin className="w-6 h-6 text-[#550000]" />
@@ -2223,7 +2223,7 @@ export default function PendaftarDetailPage() {
 
           {/* Asal Sekolah (Sembunyikan untuk Keuangan) */}
           {!isKeuangan && (
-            <div className="bg-white rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 p-6 border border-gold-100">
+            <div className="bg-white rounded-3xl shadow-2xl p-6 border border-gold-100">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-3 bg-gold-50 rounded-3xl">
                   <School className="w-6 h-6 text-gold-600" />
@@ -2256,7 +2256,7 @@ export default function PendaftarDetailPage() {
 
           {/* Data Orang Tua (Penting untuk Penagihan) */}
           {pendaftar.orang_tua && (
-            <div className="bg-white rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20  shadow-primary/10 p-6 border border-gold-100">
+            <div className="bg-white rounded-3xl shadow-2xl p-6 border border-gold-100">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-3 bg-gold-100 rounded-3xl">
                   <Users className="w-6 h-6 text-gold-700" />
@@ -2404,7 +2404,7 @@ export default function PendaftarDetailPage() {
 
           {/* Riwayat Penyakit (Sembunyikan untuk Keuangan) */}
           {!isKeuangan && (
-            <div className="bg-white rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20 p-6 border-2 border-red-100">
+            <div className="bg-white rounded-3xl shadow-2xl p-6 border-2 border-red-100">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-4 bg-red-100 rounded-2xl">
                   <Heart className="w-6 h-6 text-red-600" />
@@ -2439,7 +2439,7 @@ export default function PendaftarDetailPage() {
 
           {/* Status Dokumen */}
           {!isKeuangan && (
-            <div className="bg-white rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20 p-6 border-2 border-primary-100">
+            <div className="bg-white rounded-3xl shadow-2xl p-6 border-2 border-primary-100">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-4 bg-primary-100 rounded-2xl whitespace-nowrap inline-block shrink-0">
                   <FileText className="w-6 h-6 text-primary-700" />
@@ -2500,7 +2500,7 @@ export default function PendaftarDetailPage() {
           {/* Status Pembayaran (Sidebar View - Hide IF Keuangan because it's already on top, OR keep as consistent view) */}
           {/* Hide IF Berkas as well, unless we want them to see it. User request implies focus on relevant data. */}
           {!isKeuangan && !isBerkas && !isPenguji && (
-            <div className="bg-white rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20 p-6 border-2 border-primary-100">
+            <div className="bg-white rounded-3xl shadow-2xl p-6 border-2 border-primary-100">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-4 bg-emerald-100 rounded-2xl whitespace-nowrap inline-block shrink-0">
                   <CreditCard className="w-6 h-6 text-[#550000]" />
@@ -2559,7 +2559,7 @@ export default function PendaftarDetailPage() {
           )}
 
           {/* Timestamps */}
-          <div className="bg-white rounded-3xl shadow-2xl shadow-primary/30  shadow-primary/20 p-6 border-2 border-primary-100">
+          <div className="bg-white rounded-3xl shadow-2xl p-6 border-2 border-primary-100">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-4 bg-stone-100 rounded-2xl whitespace-nowrap inline-block shrink-0">
                 <Calendar className="w-6 h-6 text-stone-600" />
@@ -3417,7 +3417,7 @@ export default function PendaftarDetailPage() {
                 <button
                   type="submit"
                   disabled={savingEdit}
-                  className="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-3xl font-black text-sm uppercase transition-all shadow-2xl shadow-primary/30  shadow-primary/20 flex items-center gap-2 disabled:opacity-50"
+                  className="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-3xl font-black text-sm uppercase transition-all shadow-md flex items-center gap-2 disabled:opacity-50"
                 >
                   {savingEdit ? "Menyimpan..." : "Simpan Perubahan"}
                 </button>
@@ -3685,7 +3685,7 @@ export default function PendaftarDetailPage() {
                 <button
                   type="submit"
                   disabled={savingNilai}
-                  className="px-6 py-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-3xl font-black text-sm uppercase transition-all shadow-2xl shadow-primary/30  shadow-primary/20 disabled:opacity-50"
+                  className="px-6 py-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-3xl font-black text-sm uppercase transition-all shadow-md disabled:opacity-50"
                 >
                   {savingNilai ? "Menyimpan..." : "Simpan Nilai"}
                 </button>
@@ -3834,7 +3834,7 @@ export default function PendaftarDetailPage() {
                 type="button"
                 disabled={savingWd}
                 onClick={handleSaveWd}
-                className="px-6 py-2.5 rounded-3xl bg-[#550000] hover:bg-[#550000] text-white font-black shadow-2xl shadow-primary/30  shadow-primary/20 shadow-emerald-500/30 transition-all active:scale-95 disabled:opacity-50"
+                className="px-6 py-2.5 rounded-3xl bg-[#550000] hover:bg-[#550000] text-white font-black shadow-md transition-all active:scale-95 disabled:opacity-50"
               >
                 {savingWd ? "Menyimpan..." : "Simpan Perubahan"}
               </button>

@@ -15,7 +15,7 @@ export default function DashboardPendaftarPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-secondary-50 via-white to-primary-50">
       {/* Header */}
-      <header className="bg-white border-b-2 border-primary-200 shadow-2xl shadow-primary/30  shadow-primary/20 ">
+      <header className="bg-white border-b-2 border-primary-200 shadow-2xl">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
@@ -59,7 +59,7 @@ export default function DashboardPendaftarPage() {
         {/* Status Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {/* Status Pendaftaran */}
-          <div className="bg-white rounded-2xl p-6 border-2 border-stone-200 shadow-2xl shadow-primary/30  shadow-primary/20 ">
+          <div className="bg-white rounded-2xl p-6 border-2 border-stone-200 shadow-2xl">
             <div className="flex items-center gap-3 mb-2">
               <CheckCircle2 className="w-6 h-6 text-green-500" />
               <h3 className="font-bold text-stone-900">Status</h3>
@@ -69,7 +69,7 @@ export default function DashboardPendaftarPage() {
           </div>
 
           {/* Dokumen */}
-          <div className="bg-white rounded-2xl p-6 border-2 border-stone-200 shadow-2xl shadow-primary/30  shadow-primary/20 ">
+          <div className="bg-white rounded-2xl p-6 border-2 border-stone-200 shadow-2xl">
             <div className="flex items-center gap-3 mb-2">
               <FileText className="w-6 h-6 text-primary-500" />
               <h3 className="font-bold text-stone-900">Dokumen</h3>
@@ -79,7 +79,7 @@ export default function DashboardPendaftarPage() {
           </div>
 
           {/* Jadwal Seleksi */}
-          <div className="bg-white rounded-2xl p-6 border-2 border-stone-200 shadow-2xl shadow-primary/30  shadow-primary/20 ">
+          <div className="bg-white rounded-2xl p-6 border-2 border-stone-200 shadow-2xl">
             <div className="flex items-center gap-3 mb-2">
               <Calendar className="w-6 h-6 text-secondary-500" />
               <h3 className="font-bold text-stone-900">Jadwal Seleksi</h3>
@@ -89,7 +89,7 @@ export default function DashboardPendaftarPage() {
           </div>
 
           {/* Pengumuman */}
-          <div className="bg-white rounded-2xl p-6 border-2 border-stone-200 shadow-2xl shadow-primary/30  shadow-primary/20 ">
+          <div className="bg-white rounded-2xl p-6 border-2 border-stone-200 shadow-2xl">
             <div className="flex items-center gap-3 mb-2">
               <Award className="w-6 h-6 text-purple-500" />
               <h3 className="font-bold text-stone-900">Pengumuman</h3>
