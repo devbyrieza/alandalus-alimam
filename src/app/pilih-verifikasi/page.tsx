@@ -34,21 +34,17 @@ function PilihVerifikasiContent() {
   );
   const [isLoading, setIsLoading] = useState(false);
 
-  // Function untuk generate nomor pendaftaran (sama seperti di backend)
+  // Function untuk generate nomor pendaftaran (Al-Imam: Khusus Putri -> MTI, ILI, MAI)
   const generateNomorPendaftaran = () => {
-    const year = new Date().getFullYear();
-    const prefix =
-      jenis_kelamin === "L"
-        ? jenjang === "MTs"
-          ? "MTI"
-          : "ILI"
-        : jenjang === "MTs"
-          ? "MTA"
-          : "ILA";
+    const year = String(new Date().getFullYear()).slice(-2);
+    const normJenjang = (jenjang || "").toUpperCase();
+    let prefix = "MTI";
+    if (normJenjang.includes("IL")) prefix = "ILI";
+    else if (normJenjang.includes("MA") || normJenjang.includes("SMA")) prefix = "MAI";
+    else prefix = "MTI";
 
-    // Random 4 digit untuk demo
-    const randomNum = Math.floor(1000 + Math.random() * 9000);
-
+    // Random 5 digit untuk demo
+    const randomNum = Math.floor(10000 + Math.random() * 90000);
     return `${prefix}${year}${randomNum}`;
   };
 

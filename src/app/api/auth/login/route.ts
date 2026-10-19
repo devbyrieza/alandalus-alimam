@@ -27,10 +27,17 @@ export async function POST(request: NextRequest) {
         );
       }
 
+      const inputNomor = (nomor_pendaftaran || "").trim().toUpperCase();
+      const putriMappedNomor = inputNomor
+        .replace(/^MTA/, "MTI")
+        .replace(/^ILA/, "ILI")
+        .replace(/^MAA/, "MAI")
+        .replace(/^SMA/, "MAI");
+
       const pendaftar = await prisma.pendaftar.findFirst({
         where: {
           nik,
-          nomor_pendaftaran: nomor_pendaftaran.toUpperCase() } });
+          nomor_pendaftaran: { in: [inputNomor, putriMappedNomor] } } });
 
       if (!pendaftar) {
         return NextResponse.json(

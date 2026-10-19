@@ -34,6 +34,58 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
+    // Auto-sync prefix: Pastikan seluruh pendaftar di Al-Imam (Putri) menggunakan prefix MTI, ILI, MAI
+    try {
+      const mismatched = await prisma.pendaftar.findMany({
+        where: {
+          OR: [
+            { nomor_pendaftaran: { startsWith: "MTA" } },
+            { nomor_pendaftaran: { startsWith: "ILA" } },
+            { nomor_pendaftaran: { startsWith: "MAA" } },
+            { nomor_pendaftaran: { startsWith: "SMA" } },
+            { jenis_kelamin: "L" },
+          ],
+        },
+        select: { id: true, nomor_pendaftaran: true, jenjang: true, jenis_kelamin: true },
+        take: 100,
+      });
+
+      if (mismatched.length > 0) {
+        for (const item of mismatched) {
+          let targetPrefix = "MTI";
+          const normJ = (item.jenjang || "").toUpperCase();
+          if (normJ.includes("IL")) targetPrefix = "ILI";
+          else if (normJ.includes("MA") || normJ.includes("SMA")) targetPrefix = "MAI";
+          else targetPrefix = "MTI";
+
+          let newNomor = item.nomor_pendaftaran;
+          if (item.nomor_pendaftaran && /^(MTA|ILA|MAA|SMA)/.test(item.nomor_pendaftaran)) {
+            newNomor = `${targetPrefix}${item.nomor_pendaftaran.slice(3)}`;
+          }
+
+          const updateData: any = {};
+          if (newNomor !== item.nomor_pendaftaran) {
+            const conflict = await prisma.pendaftar.findUnique({ where: { nomor_pendaftaran: newNomor } });
+            if (!conflict) {
+              updateData.nomor_pendaftaran = newNomor;
+            }
+          }
+          if (item.jenis_kelamin !== "P") {
+            updateData.jenis_kelamin = "P";
+          }
+
+          if (Object.keys(updateData).length > 0) {
+            await prisma.pendaftar.update({
+              where: { id: item.id },
+              data: updateData,
+            });
+          }
+        }
+      }
+    } catch (e: any) {
+      console.warn("[AUTO-SYNC-PREFIX-ALIMAM] Warning:", e?.message);
+    }
+
     // Get query params
     const searchParams = request.nextUrl.searchParams;
     const page = parseInt(searchParams.get("page") || "1");

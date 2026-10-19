@@ -93,7 +93,7 @@ export async function GET(req: Request) {
           if (nisCol) pData.nis += '-MIG';
         }
 
-        await ululDb.pendaftar.create({ data: pData });
+        await ululDb.pendaftar.create({ data: pData as any });
         
         if (orang_tua) await ululDb.orangTua.create({ data: orang_tua });
         if (hasil_seleksi) {
@@ -116,7 +116,7 @@ export async function GET(req: Request) {
         for (const b of pembayaran) {
           b.tahun_ajaran_id = newTaId;
           b.verified_by = null;
-          await ululDb.pembayaran.create({ data: b });
+          await ululDb.pembayaran.create({ data: b as any });
         }
 
         // Jika sukses, hapus dari Al-Imam
@@ -166,7 +166,7 @@ export async function GET(req: Request) {
           if (nisCol) pData.nis += '-MIG';
         }
 
-        await prisma.pendaftar.create({ data: pData });
+        await prisma.pendaftar.create({ data: pData as any });
         
         if (orang_tua) await prisma.orangTua.create({ data: orang_tua });
         if (hasil_seleksi) {
@@ -189,7 +189,7 @@ export async function GET(req: Request) {
         for (const b of pembayaran) {
           b.tahun_ajaran_id = newTaId;
           b.verified_by = null;
-          await prisma.pembayaran.create({ data: b });
+          await prisma.pembayaran.create({ data: b as any });
         }
 
         // Jika sukses, hapus dari Ulul Albaab

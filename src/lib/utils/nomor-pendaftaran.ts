@@ -105,10 +105,10 @@ export async function generateNomorPendaftaran(
  */
 export function generatePrefix(jenjang: string, jenis_kelamin?: string): string {
   const normJenjang = (jenjang || "").toUpperCase().replace(/[\s\-_]/g, "");
-  if (normJenjang.includes("MTS") || normJenjang.includes("SMP")) return "MTA";
-  if (normJenjang.includes("IL") || normJenjang.includes("IDAD") || normJenjang.includes("LUGHAW")) return "ILA";
-  if (normJenjang.includes("MA") || normJenjang.includes("SMA")) return "MAA";
-  return "MTA";
+  // Al-Imam adalah pesantren khusus Putri: MTI (MTs), ILI (IL), MAI (MA)
+  if (normJenjang.includes("IL") || normJenjang.includes("IDAD") || normJenjang.includes("LUGHAW")) return "ILI";
+  if (normJenjang.includes("MA") || normJenjang.includes("SMA")) return "MAI";
+  return "MTI";
 }
 
 // ===================================
