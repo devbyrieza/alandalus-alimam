@@ -23,6 +23,8 @@ import {
   Coffee,
   Sparkle,
   Copy,
+  AlertTriangle,
+  CheckCircle2,
 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
@@ -491,6 +493,107 @@ export default function SPMBInfoPage() {
                 <p className="text-xs text-slate-600 leading-relaxed font-normal">
                   Pelunasan sisa uang pangkal sebelum santriwati mulai masuk asrama, dengan batas waktu maksimal <strong>hingga Mei 2027</strong>.
                 </p>
+              </div>
+            </div>
+          </div>
+
+                    {/* Rincian Fasilitas Uang Pangkal & Keterangan SPP (Sesuai Brosur Belakang) */}
+          <div className="max-w-5xl mx-auto grid md:grid-cols-12 gap-6 mb-10">
+            {/* Kolom Kiri: 9 Item Fasilitas Uang Pangkal */}
+            <div className="md:col-span-7 bg-white rounded-3xl border border-pink-200 p-6 sm:p-8 shadow-premium-sm flex flex-col justify-between space-y-5">
+              <div>
+                <div className="flex items-center gap-3 pb-4 border-b border-pink-100">
+                  <div className="w-10 h-10 rounded-2xl bg-pink-50 text-primary flex items-center justify-center shrink-0 border border-pink-200">
+                    <Shield className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-primary">
+                      Keterangan Tambahan Uang Pangkal
+                    </span>
+                    <h3 className="text-lg sm:text-xl font-display font-black text-slate-900">
+                      Uang Pangkal Sudah Termasuk:
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-2.5 pt-4">
+                  {[
+                    "1. Seragam 3 stel + 1 almamater",
+                    "2. Buku paket 18 mapel selama 1 tahun",
+                    "3. Kasur, ranjang, bantal dan sprei baru",
+                    "4. Lemari baru",
+                    "5. Meja kursi belajar di kelas",
+                    "6. Uang kegiatan 1 tahun",
+                    "7. Fasilitas kebersihan",
+                    "8. Fasilitas belajar",
+                    "9. Kartu jajan/kartu pelajar, Dll",
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-2.5 text-xs font-bold text-slate-700 bg-pink-50/40 p-2.5 rounded-xl border border-pink-100">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Warning Box Identik Brosur */}
+              <div className="pt-2">
+                <div className="flex items-center gap-3.5 bg-amber-50/90 border-2 border-amber-300 p-4 rounded-2xl shadow-2xs">
+                  <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 border border-amber-300">
+                    <AlertTriangle className="w-5 h-5 text-amber-600" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-black uppercase tracking-wider text-amber-900 leading-tight">
+                      UANG PANGKAL, TIDAK TERMASUK SPP
+                    </div>
+                    <div className="text-[11px] text-amber-800 font-semibold mt-0.5">
+                      *Biaya yang telah dibayarkan tidak dapat dikembalikan.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Kolom Kanan: Keterangan Tambahan SPP */}
+            <div className="md:col-span-5 bg-gradient-to-br from-slate-900 to-rose-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 pb-3 border-b border-white/10">
+                  <div className="w-10 h-10 rounded-2xl bg-white/10 text-pink-300 flex items-center justify-center shrink-0 border border-white/20">
+                    <CreditCard className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-pink-300">
+                      Iuran Bulanan Santriwati
+                    </span>
+                    <h3 className="text-lg sm:text-xl font-display font-black text-white">
+                      Keterangan Tambahan SPP
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="space-y-3 pt-2">
+                  <div className="bg-white/10 p-4 rounded-2xl border border-white/10">
+                    <div className="text-xs text-pink-200 font-medium">Total Iuran dalam 1 Tahun:</div>
+                    <div className="text-2xl sm:text-3xl font-display font-black text-amber-400">
+                      Rp 13.200.000 <span className="text-xs font-bold text-white">(All In)</span>
+                    </div>
+                  </div>
+
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                    Pembayaran dapat dilakukan secara cicilan bulanan sebesar <strong className="text-white font-bold">Rp 1.100.000 / bulan</strong> selama 12 bulan.
+                  </p>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-white/10 space-y-2 text-xs text-slate-300">
+                <div className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>All-In: makan 3x sehari bergizi, asrama, laundry &amp; kegiatan santriwati.</span>
+                </div>
+                <div className="flex items-center gap-2 text-amber-300 font-medium">
+                  <Check className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>Bank BSI No. Rek. 4222224441 a/n Al Andalus Al Imam</span>
+                </div>
               </div>
             </div>
           </div>
