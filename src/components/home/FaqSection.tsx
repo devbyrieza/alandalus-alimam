@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const FAQS = [
   {
     question: "Kapan pendaftaran santriwati baru angkatan 2027/2028 dibuka?",
-    answer: "Pendaftaran SPMB Tahun Ajaran 2027/2028 dibuka mulai tanggal 16 Oktober sampai dengan 20 Desember 2026. Kuota penerimaan terbatas: MTs Putri sebanyak 48 santriwati dan I'dad Lughowi Putri sebanyak 24 santriwati. Pendaftaran dapat ditutup lebih awal jika kuota telah terpenuhi."
+    answer: "Pendaftaran SPMB Tahun Ajaran 2027/2028 dibuka mulai tanggal 16 Oktober sampai dengan 20 Desember 2026. Kuota penerimaan terbatas: MTs Putri sebanyak 48 santriwati dan IL / MA Putri sebanyak 24 santriwati. Pendaftaran dapat ditutup lebih awal jika kuota telah terpenuhi."
   },
   {
     question: "Berapa rincian biaya pendidikan dan bagaimana skema cicilan uang pangkal?",

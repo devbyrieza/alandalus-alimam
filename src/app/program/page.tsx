@@ -158,22 +158,56 @@ export default function ProgramPage() {
           <div id="ma" className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 shadow-sm scroll-mt-28">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-100">
               <div className="space-y-2">
-                <span className="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-700 inline-block whitespace-nowrap inline-block shrink-0">
-                  Segera Hadir • Jenjang Lanjutan
+                <span className="px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-primary text-white inline-block">
+                  Jalur Langsung 3 Tahun (Tanpa IL) • Lulusan SMP/MTs
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
-                  Madrasah Aliyah (MA) Keagamaan
+                  Madrasah Aliyah (MA) Langsung
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-500">
-                  Pendidikan tingkat menengah atas dengan orientasi studi ke Timur Tengah dan Perguruan Tinggi Negeri.
+                  Pendidikan tingkat menengah atas jalur langsung bagi santriwati yang telah lancar berbahasa Arab aktif dan memiliki hafalan Al-Qur'an mutqin.
                 </p>
               </div>
+
+              <Link
+                href="/daftar"
+                className="h-11 px-6 rounded-xl bg-primary hover:bg-primary-dark text-white font-extrabold text-xs shadow-md shadow-primary/25 transition-all inline-flex items-center gap-2 self-start lg:self-center"
+              >
+                <span>Daftar MA Al-Imam</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
 
-            <div className="pt-6">
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Madrasah Aliyah Al-Imam diproyeksikan mencetak generasi berwawasan global yang kokoh dalam riset turots Islam, fasih berbahasa Arab & Inggris, siap menembus beasiswa perguruan tinggi ternama dan Timur Tengah, serta memiliki jiwa kepemimpinan (leadership) dan kemandirian entrepreneurship beretika syar'i.
-              </p>
+            <div className="grid md:grid-cols-3 gap-6 pt-8">
+              <div className="space-y-3 bg-slate-50/70 p-5 rounded-2xl border border-slate-200/80">
+                <h4 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+                  <BookOpen className="w-4 h-4 text-primary" />
+                  <span>Pendalaman Kitab Turots</span>
+                </h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Kajian literatur kitab para ulama bersanad dalam Aqidah, Fiqih, Ushul, dan Hadits dengan pengantar bahasa Arab penuh.
+                </p>
+              </div>
+
+              <div className="space-y-3 bg-slate-50/70 p-5 rounded-2xl border border-slate-200/80">
+                <h4 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+                  <GraduationCap className="w-4 h-4 text-primary" />
+                  <span>Persiapan PTN & Timur Tengah</span>
+                </h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Bimbingan intensif persiapan seleksi beasiswa universitas Islam di Timur Tengah serta seleksi SNBP/SNBT Perguruan Tinggi Negeri.
+                </p>
+              </div>
+
+              <div className="space-y-3 bg-slate-50/70 p-5 rounded-2xl border border-slate-200/80">
+                <h4 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+                  <Award className="w-4 h-4 text-emerald-600" />
+                  <span>Leadership & Keputrian</span>
+                </h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Kaderisasi dakwah, kecakapan keputrian (tata boga, menjahit, merajut), serta kemandirian santriwati berakhlakul karimah.
+                </p>
+              </div>
             </div>
           </div>
 

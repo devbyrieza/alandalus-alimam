@@ -137,7 +137,7 @@ export default function SPMBInfoPage() {
       value: "72 Santriwati",
       icon: GraduationCap,
     },
-    { label: "Kuota IL Putri", value: "24 Santriwati", icon: Users },
+    { label: "Kuota IL / MA Putri", value: "24 Santriwati", icon: Users },
     { label: "Tahun Ajaran", value: "2027/2028", icon: Calendar },
   ];
 
@@ -802,7 +802,7 @@ export default function SPMBInfoPage() {
                 Wujudkan Masa Depan Putri Shalihah Bersama Kami
               </h3>
               <p className="text-sm sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
-                Kuota terbatas: MTs Putri (48 Santriwati) dan I'dad Lughowi Putri (24 Santriwati).
+                Kuota terbatas: MTs Putri (48 Santriwati) dan IL / MA Putri (24 Santriwati).
                 Daftarkan segera sebelum kuota terpenuhi.
               </p>
               <div className="pt-2 flex flex-wrap justify-center gap-4">

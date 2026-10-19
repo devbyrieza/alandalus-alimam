@@ -67,6 +67,16 @@ export const PPDB_CONFIG = {
       theme: "gold",
       kuotaPutri: 24,
     },
+    {
+      id: "ma",
+      name: "MA",
+      fullName: "Madrasah Aliyah (MA) Langsung",
+      description:
+        "Program MA 3 tahun langsung tanpa IL bagi santriwati yang lancar berbahasa Arab aktif dan memiliki hafalan Al-Qur'an mutqin.",
+      image: "/images/kelas-bagian-dalam-saat-para-santri-belajar.png",
+      theme: "pink",
+      kuotaPutri: 24,
+    },
   ],
 
   // 💰 BIAYA PENDIDIKAN & PENDAFTARAN

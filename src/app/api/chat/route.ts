@@ -39,13 +39,15 @@ TUJUAN SANTRIWATI BELAJAR DI PESANTREN AL IMAM:
 
 PROGRAM PENDIDIKAN (KHUSUS PUTRI):
 1. MTs (Madrasah Tsanawiyah) - 3 Tahun
-   - Kuota: 48 Siswi (Putri)
+   - Kuota: 48 Santriwati (Putri)
    - Tahfidz Al-Qur'an, Dasar Ilmu Syar'i, Akademik Nasional, pembentukan Adab Islami.
 2. I'dad Lughowi (IL) - 1 Tahun
-   - Kuota: 24 Siswi (Putri)
+   - Kuota Gabungan IL / MA: 24 Santriwati (Putri)
    - Program persiapan bahasa Arab bagi yang belum mampu berbahasa Arab aktif sebelum masuk MA.
-3. MA (Madrasah Aliyah) - 3 Tahun
-   - Dapat langsung masuk MA tanpa IL jika lulus tes.
+3. MA (Madrasah Aliyah) Langsung - 3 Tahun
+   - Kuota Gabungan IL / MA: 24 Santriwati (Putri)
+   - Jalur langsung masuk kelas 10 MA 3 tahun tanpa IL bagi santriwati yang lancar bahasa Arab aktif & hafalan Al-Qur'an mutqin.
+- Total Kuota Keseluruhan: 72 Santriwati (48 MTs + 24 IL/MA).
 
 INFORMASI SPMB T.A 2027/2028:
 - Pendaftaran: 16 Oktober - 20 Desember 2026 (Online via website: spmb.pesantren-alimam.com).
