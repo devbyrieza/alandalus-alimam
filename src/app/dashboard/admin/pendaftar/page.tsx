@@ -1856,10 +1856,11 @@ function AdminPendaftarContent() {
                           </span>
                         )}
                       </Link>
-                      <p className="text-xs text-stone-500 mt-0.5">
-                        Perempuan
-                        {item.no_hp && <> &bull; {item.no_hp}</>}
-                      </p>
+                      {item.no_hp && (
+                        <p className="text-xs text-stone-500 mt-0.5">
+                          {item.no_hp}
+                        </p>
+                      )}
                       <div className="flex flex-wrap items-center gap-2 mt-2">
                         {formatStatus(item.status_pendaftaran, item.data_lengkap)}
                         <span className="text-[10px] text-stone-500">
@@ -2056,9 +2057,6 @@ function AdminPendaftarContent() {
                               </span>
                             )}
                           </Link>
-                          <div className="text-xs text-stone-600 font-medium">
-                            Perempuan
-                          </div>
                         </div>
                       </td>
                       <td className="px-4 py-3">

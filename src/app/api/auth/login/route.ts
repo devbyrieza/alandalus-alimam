@@ -37,7 +37,12 @@ export async function POST(request: NextRequest) {
       const pendaftar = await prisma.pendaftar.findFirst({
         where: {
           nik,
-          nomor_pendaftaran: { in: [inputNomor, putriMappedNomor] } } });
+          OR: [
+            { nomor_pendaftaran: { in: [inputNomor, putriMappedNomor] } },
+            { data_lengkap: { path: ["legacy_nomor_pendaftaran"], equals: inputNomor } }
+          ]
+        }
+      });
 
       if (!pendaftar) {
         return NextResponse.json(
