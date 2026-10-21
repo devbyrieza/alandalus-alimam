@@ -303,7 +303,7 @@ export default function UndanganSeleksiTab() {
       text: "Apakah Anda yakin ingin memilih jadwal ini? Jadwal tidak dapat diubah setelah dipilih.",
       icon: "question",
       showCancelButton: true,
-      confirmButtonColor: "#831843",
+      confirmButtonColor: "#E11D74",
       cancelButtonColor: "#ef4444",
       confirmButtonText: "Ya, Pilih Jadwal",
       cancelButtonText: "Batal",
@@ -328,7 +328,7 @@ export default function UndanganSeleksiTab() {
           icon: "success",
           title: "Berhasil!",
           text: "Jadwal seleksi Anda telah tersimpan. Notifikasi WhatsApp akan dikirimkan.",
-          confirmButtonColor: "#831843",
+          confirmButtonColor: "#E11D74",
         });
         fetchData();
       } else {
