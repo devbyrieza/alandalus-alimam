@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 
 const prisma = new PrismaClient();
 
-const DEFAULT_PASSWORD_ALIMAM = "PAAS2026!";
+const DEFAULT_PASSWORD_ALIMAM = "Paas2026!";
 
 async function main() {
   console.log("=== STEP 1: UPSERT PROFILES FOR AL-IMAM ===");
