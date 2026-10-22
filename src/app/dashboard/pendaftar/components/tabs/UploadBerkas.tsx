@@ -84,6 +84,16 @@ async function compressImage(file: File): Promise<File> {
   }
 
   return new Promise((resolve) => {
+    // Safety timeout: don't freeze upload if image processing hangs
+    const timer = setTimeout(() => {
+      resolve(file);
+    }, 4000);
+
+    const safeResolve = (f: File) => {
+      clearTimeout(timer);
+      resolve(f);
+    };
+
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = (event) => {
@@ -121,18 +131,18 @@ async function compressImage(file: File): Promise<File> {
                 type: "image/jpeg",
                 lastModified: Date.now() });
               // Hanya gunakan hasil kompresi jika ukurannya lebih kecil
-              resolve(compressedFile.size < file.size ? compressedFile : file);
+              safeResolve(compressedFile.size < file.size ? compressedFile : file);
             } else {
-              resolve(file);
+              safeResolve(file);
             }
           },
           "image/jpeg",
           0.7,
         );
       };
-      img.onerror = () => resolve(file);
+      img.onerror = () => safeResolve(file);
     };
-    reader.onerror = () => resolve(file);
+    reader.onerror = () => safeResolve(file);
   });
 }
 
@@ -268,29 +278,11 @@ function DokumenCard({
 
   return (
     <div
-      className={`group rounded-[1.5rem] border transition-all duration-300 overflow-hidden relative ${
-        isDragging
-          ? "border-primary-600 bg-primary-50 shadow-2xl    scale-[1.02] ring-4 ring-primary-600/10"
-          : dokumen.status === "verified"
-            ? "border-emerald-200 bg-emerald-50/50"
-            : dokumen.status === "rejected"
-              ? "border-red-200 bg-red-50/50"
-              : dokumen.status === "uploaded"
-                ? "border-primary-200 bg-primary-50/50"
-                : "border-ink-100 bg-white hover:border-primary-300 hover:shadow-xl    hover:"
-      }`}
+      className={`group rounded-[1.5rem] border transition-all duration-300 overflow-hidden relative ${ isDragging ? "border-primary-600 bg-primary-50 shadow-2xl    scale-[1.02] ring-4 ring-primary-600/10" : dokumen.status === "verified" ? "border-emerald-200 bg-emerald-50/50" : dokumen.status === "rejected" ? "border-red-200 bg-red-50/50" : dokumen.status === "uploaded" ? "border-primary-200 bg-primary-50/50" : "border-ink-100 bg-white hover:border-primary-300 hover:shadow-xl    hover:" }`}
     >
       {/* Status Bar */}
       <div
-        className={`absolute top-0 left-0 bottom-0 w-1.5 transition-colors ${
-          dokumen.status === "verified"
-            ? "bg-emerald-500"
-            : dokumen.status === "rejected"
-              ? "bg-red-500"
-              : dokumen.status === "uploaded"
-                ? "bg-primary-500"
-                : "bg-transparent group-hover:bg-primary-500"
-        }`}
+        className={`absolute top-0 left-0 bottom-0 w-1.5 transition-colors ${ dokumen.status === "verified" ? "bg-emerald-500" : dokumen.status === "rejected" ? "bg-red-500" : dokumen.status === "uploaded" ? "bg-primary-500" : "bg-transparent group-hover:bg-primary-500" }`}
       />
 
       {/* Header */}
@@ -301,15 +293,7 @@ function DokumenCard({
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <div className="flex items-center gap-4 flex-1">
             <div
-              className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm transition-all ${
-                dokumen.status === "verified"
-                  ? "bg-emerald-100 text-emerald-600"
-                  : dokumen.status === "rejected"
-                    ? "bg-red-100 text-red-600"
-                    : dokumen.status === "uploaded"
-                      ? "bg-primary-100 text-primary-600"
-                      : "bg-surface-100 text-ink-400 group-hover:bg-primary-50 group-hover:text-primary-700"
-              }`}
+              className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm transition-all ${ dokumen.status === "verified" ? "bg-emerald-100 text-emerald-600" : dokumen.status === "rejected" ? "bg-red-100 text-red-600" : dokumen.status === "uploaded" ? "bg-primary-100 text-primary-600" : "bg-surface-100 text-ink-400 group-hover:bg-primary-50 group-hover:text-primary-700" }`}
             >
               <StatusIcon className="w-6 h-6" />
             </div>
@@ -329,29 +313,21 @@ function DokumenCard({
                 )}
               </div>
               <p
-                className={`text-sm font-medium ${
-                  dokumen.status === "verified"
-                    ? "text-emerald-700"
-                    : dokumen.status === "rejected"
-                      ? "text-red-700"
-                      : dokumen.status === "uploaded"
-                        ? "text-primary-700"
-                        : "text-ink-500"
-                }`}
+                className={`text-sm font-medium ${ dokumen.status === "verified" ? "text-emerald-700" : dokumen.status === "rejected" ? "text-red-700" : dokumen.status === "uploaded" ? "text-primary-700" : "text-ink-500" }`}
               >
                 {getStatusLabel(dokumen.status)}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-2">
-                        {/* Template Download Buttons */}
+            {/* Template Download Buttons */}
             {dokumen.key === "surat_kesehatan" && (
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   window.open(`/api/dokumen/download/surat-kesehatan?v=${Date.now()}`, "_blank");
                 }}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-primary-100 hover:bg-primary-600 text-primary-800 hover:text-white rounded-2xl text-[10px] font-black border border-primary-300 transition-colors shadow-sm whitespace-nowrap shrink-0"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-primary-100 hover:bg-primary-600 text-primary-700 hover:text-white rounded-2xl text-[10px] font-black border border-primary-200 transition-colors shadow-sm whitespace-nowrap shrink-0"
                 title="Download Format Surat Keterangan Kesehatan Panitia"
               >
                 <Download className="w-3.5 h-3.5" />
@@ -364,7 +340,7 @@ function DokumenCard({
                   e.stopPropagation();
                   window.open(`/api/dokumen/download/pakta-integritas-santri?v=${Date.now()}`, "_blank");
                 }}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-primary-100 hover:bg-primary-600 text-primary-800 hover:text-white rounded-2xl text-[10px] font-black border border-primary-300 transition-colors shadow-sm whitespace-nowrap shrink-0"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-primary-100 hover:bg-primary-600 text-primary-700 hover:text-white rounded-2xl text-[10px] font-black border border-primary-200 transition-colors shadow-sm whitespace-nowrap shrink-0"
                 title="Download Format Pakta Integritas Calon Santri"
               >
                 <Download className="w-3.5 h-3.5" />
@@ -377,7 +353,7 @@ function DokumenCard({
                   e.stopPropagation();
                   window.open(`/api/dokumen/download/pakta-integritas-ortu?v=${Date.now()}`, "_blank");
                 }}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-primary-100 hover:bg-primary-600 text-primary-800 hover:text-white rounded-2xl text-[10px] font-black border border-primary-300 transition-colors shadow-sm whitespace-nowrap shrink-0"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-primary-100 hover:bg-primary-600 text-primary-700 hover:text-white rounded-2xl text-[10px] font-black border border-primary-200 transition-colors shadow-sm whitespace-nowrap shrink-0"
                 title="Download Format Pakta Integritas Calon Orangtua/Wali"
               >
                 <Download className="w-3.5 h-3.5" />
@@ -390,7 +366,7 @@ function DokumenCard({
                   e.stopPropagation();
                   window.open(`/api/dokumen/download/pakta-integritas?v=${Date.now()}`, "_blank");
                 }}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-primary-100 hover:bg-primary-600 text-primary-800 hover:text-white rounded-2xl text-[10px] font-black border border-primary-300 transition-colors shadow-sm whitespace-nowrap shrink-0"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-primary-100 hover:bg-primary-600 text-primary-700 hover:text-white rounded-2xl text-[10px] font-black border border-primary-200 transition-colors shadow-sm whitespace-nowrap shrink-0"
                 title="Download Format Pakta Integritas Panitia"
               >
                 <Download className="w-3.5 h-3.5" />
@@ -403,7 +379,7 @@ function DokumenCard({
                   e.stopPropagation();
                   window.open(`/api/dokumen/download/surat-pernyataan?v=${Date.now()}`, "_blank");
                 }}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-primary-100 hover:bg-primary-600 text-primary-800 hover:text-white rounded-2xl text-[10px] font-black border border-primary-300 transition-colors shadow-sm whitespace-nowrap shrink-0"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-primary-100 hover:bg-primary-600 text-primary-700 hover:text-white rounded-2xl text-[10px] font-black border border-primary-200 transition-colors shadow-sm whitespace-nowrap shrink-0"
                 title="Download Format Surat Pernyataan Bebas Perilaku Buruk Panitia"
               >
                 <Download className="w-3.5 h-3.5" />
@@ -552,11 +528,7 @@ function DokumenCard({
 
           {/* Upload Area */}
           <div
-            className={`border-2 border-dashed rounded-[1.5rem] p-8 text-center transition-all cursor-pointer group ${
-              isDragging
-                ? "border-primary-600 bg-primary-50"
-                : "border-ink-200 hover:border-primary-400 hover:bg-surface-50"
-            } ${isUploading || isLocked ? "pointer-events-none opacity-50" : ""}`}
+            className={`border-2 border-dashed rounded-[1.5rem] p-8 text-center transition-all cursor-pointer group ${ isDragging ? "border-primary-600 bg-primary-50" : "border-ink-200 hover:border-primary-400 hover:bg-surface-50" } ${isUploading || isLocked ? "pointer-events-none opacity-50" : ""}`}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
@@ -567,7 +539,7 @@ function DokumenCard({
                 ref={fileInputRef}
                 type="file"
                 className="hidden"
-                accept={config?.allowedTypes.join(",")}
+                accept="image/*,application/pdf,.heic,.heif,.jpg,.jpeg,.png,.webp"
                 onChange={handleFileSelect}
               />
             )}
@@ -927,11 +899,7 @@ export default function UploadBerkasTab() {
       {/* Toast Notification */}
       {toast && (
         <div
-          className={`fixed top-4 right-4 z-50 px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 animate-fadeInRight ${
-            toast.type === "success"
-              ? "bg-green-500 text-white"
-              : "bg-red-500 text-white"
-          }`}
+          className={`fixed top-4 right-4 z-50 px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 animate-fadeInRight ${ toast.type === "success" ? "bg-green-500 text-white" : "bg-red-500 text-white" }`}
         >
           {toast.type === "success" ? (
             <CheckCircle className="w-5 h-5" />
@@ -950,10 +918,10 @@ export default function UploadBerkasTab() {
 
       {/* Header */}
       <div className="relative overflow-hidden rounded-[2rem] bg-linear-to-br from-primary-700 to-primary-900 border border-primary-600 p-5 md:p-8 text-white shadow-2xl app-card">
-        <div className="absolute top-0 right-0 w-full max-w-[400px] h-[400px] bg-secondary-50/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-secondary-50/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-center gap-5">
-            <div className="w-16 h-16 rounded-[1.5rem] bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-sm shrink-0">
+            <div className="w-16 h-16 rounded-[1.5rem] bg-white/10 flex items-center justify-center border border-white/20 shadow-sm shrink-0 backdrop-blur-md">
               <Upload className="w-8 h-8 text-secondary-100" />
             </div>
             <div>
@@ -979,7 +947,7 @@ export default function UploadBerkasTab() {
       {/* Progress Summary */}
       {summary && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white rounded-2xl p-5 border border-ink-100 shadow-sm hover:shadow-xl transition-all">
+          <div className="bg-white rounded-2xl p-5 border border-ink-100 shadow-2xl hover:shadow-xl transition-all">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-secondary-50 rounded-2xl flex items-center justify-center">
                 <FileText className="w-6 h-6 text-secondary-600" />
@@ -995,7 +963,7 @@ export default function UploadBerkasTab() {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl p-5 border border-ink-100 shadow-sm hover:shadow-xl transition-all">
+          <div className="bg-white rounded-2xl p-5 border border-ink-100 shadow-2xl hover:shadow-xl transition-all">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-primary-50 rounded-2xl flex items-center justify-center">
                 <Upload className="w-6 h-6 text-primary-600" />
@@ -1016,7 +984,7 @@ export default function UploadBerkasTab() {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl p-5 border border-ink-100 shadow-sm hover:shadow-xl transition-all">
+          <div className="bg-white rounded-2xl p-5 border border-ink-100 shadow-2xl hover:shadow-xl transition-all">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center">
                 <FileCheck className="w-6 h-6 text-emerald-600" />
@@ -1037,7 +1005,7 @@ export default function UploadBerkasTab() {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl p-5 border border-ink-100 shadow-sm hover:shadow-xl transition-all">
+          <div className="bg-white rounded-2xl p-5 border border-ink-100 shadow-2xl hover:shadow-xl transition-all">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-secondary-50 rounded-2xl flex items-center justify-center">
                 <div className="w-6 h-6 flex items-center justify-center">
@@ -1072,7 +1040,7 @@ export default function UploadBerkasTab() {
           <h4 className="font-bold text-secondary-900 mb-2 text-lg">
             Petunjuk Upload Dokumen
           </h4>
-          <ul className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-sm text-secondary-800 list-disc pl-4 marker:text-secondary-500">
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-sm text-secondary-800 list-disc pl-4 marker:text-secondary-500">
             <li>
               Pastikan dokumen hasil scan atau foto terlihat{" "}
               <strong>jelas dan terbaca</strong>
@@ -1098,7 +1066,7 @@ export default function UploadBerkasTab() {
           </span>
           Dokumen Wajib
         </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-1 md:grid-cols-2 gap-4">
           {dokumenList
             .filter((d) => d.required)
             .map((dokumen) => (
@@ -1127,7 +1095,7 @@ export default function UploadBerkasTab() {
           </span>
           Dokumen Opsional
         </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-1 md:grid-cols-2 gap-4">
           {dokumenList
             .filter((d) => !d.required)
             .map((dokumen) => (
@@ -1233,12 +1201,12 @@ export default function UploadBerkasTab() {
                     <p className="text-emerald-700 text-xs mt-0.5 font-medium">
                       Anda bisa menghubungi CS di nomor{" "}
                       <a
-                        href="https://wa.me/6285111524441"
+                        href="https://wa.me/6281285300800"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="font-black underline hover:text-emerald-900"
                       >
-                        0851-1152-4441
+                        0812-8530-0800
                       </a>{" "}
                       jika ingin cepat diverifikasi.
                     </p>
@@ -1249,11 +1217,7 @@ export default function UploadBerkasTab() {
           ) : (
             <>
               <div
-                className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto transition-colors ${
-                  summary && summary.progress.required.percentage === 100
-                    ? "bg-secondary-100 text-primary-700"
-                    : "bg-surface-100 text-ink-300"
-                }`}
+                className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto transition-colors ${ summary && summary.progress.required.percentage === 100 ? "bg-secondary-100 text-primary-700" : "bg-surface-100 text-ink-300" }`}
               >
                 <FileCheck className="w-8 h-8" />
               </div>
@@ -1278,13 +1242,7 @@ export default function UploadBerkasTab() {
                   summary.progress.required.percentage < 100 ||
                   isSubmitting
                 }
-                className={`w-full py-4 rounded-2xl font-black text-lg flex items-center justify-center gap-3 transition-all ${
-                  summary &&
-                  summary.progress.required.percentage === 100 &&
-                  !isSubmitting
-                    ? "bg-secondary-400 text-primary-950 hover:bg-secondary-300 shadow-md  shadow-secondary-400/20 hover:-translate-y-1 border border-secondary-500"
-                    : "bg-surface-200 text-ink-400 cursor-not-allowed"
-                }`}
+                className={`w-full py-4 rounded-2xl font-black text-lg flex items-center justify-center gap-3 transition-all ${ summary && summary.progress.required.percentage === 100 && !isSubmitting ? "bg-secondary-400 text-primary-950 hover:bg-secondary-300 shadow-md    shadow-secondary-400/20 hover:-translate-y-1 border border-secondary-500" : "bg-surface-200 text-ink-400 cursor-not-allowed" }`}
               >
                 {isSubmitting ? (
                   <>
