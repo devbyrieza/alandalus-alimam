@@ -16,6 +16,9 @@ const nextConfig: any = {
   experimental: {
     scrollRestoration: false,
     optimizePackageImports: ['lucide-react', '@headlessui/react'],
+    // Turbopack (default di Next 16) memakai CA sistem agar fetch Google Fonts
+    // tidak gagal TLS saat build di Docker/CI.
+    turbopackUseSystemTlsCerts: true,
   },
   // Rewrite khusus untuk subdomain MOSA CUP
   async rewrites() {
