@@ -230,8 +230,8 @@ export async function GET(req: NextRequest) {
         if (keringananJson.jenis_bantuan) {
           const cakupan = keringananJson.cakupan || "KEDUANYA";
           if (keringananJson.jenis_bantuan === "BEASISWA") {
-            potUP = (cakupan === "UANG_PANGKAL" || cakupan === "KEDUANYA") ? 7650000 : 0;
-            potSPP = (cakupan === "SPP" || cakupan === "KEDUANYA") ? 1000000 : 0;
+            potUP = (cakupan === "UANG_PANGKAL" || cakupan === "KEDUANYA") ? 9900000 : 0;
+            potSPP = (cakupan === "SPP" || cakupan === "KEDUANYA") ? 1100000 : 0;
           } else { // KERINGANAN
             potUP = Number(keringananJson.potongan_uang_pangkal || 0);
             potSPP = Number(keringananJson.potongan_spp || 0);
@@ -241,8 +241,8 @@ export async function GET(req: NextRequest) {
         
         if (!isParsed) {
           if (item.jenis_pengajuan === "BEASISWA_PRESTASI") {
-            potUP = 7650000;
-            potSPP = 1000000;
+            potUP = 9900000;
+            potSPP = 1100000;
           } else {
             const legacyNominal = Number(keringananJson.nominal_potongan ?? item.nominal_potongan ?? discountValue);
             potUP = legacyNominal;
@@ -251,8 +251,8 @@ export async function GET(req: NextRequest) {
         }
         
         const totalPotongan = potUP + potSPP;
-        const sisaUP = Math.max(0, 7650000 - potUP);
-        const sisaSPP = Math.max(0, 1000000 - potSPP);
+        const sisaUP = Math.max(0, 9900000 - potUP);
+        const sisaSPP = Math.max(0, 1100000 - potSPP);
         const totalSisa = sisaUP + sisaSPP;
 
         const rowValues = [
@@ -321,7 +321,7 @@ export async function GET(req: NextRequest) {
       sheet.getColumn(10).width = 22;
     };
 
-    buildSheet("Beasiswa Full", beasiswaFull, 7650000);
+    buildSheet("Beasiswa Full", beasiswaFull, 9900000);
     buildSheet("Keringanan Potongan", keringananPotongan, 1500000);
 
 

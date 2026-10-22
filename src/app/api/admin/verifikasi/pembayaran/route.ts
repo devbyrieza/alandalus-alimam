@@ -239,7 +239,7 @@ export async function PATCH(request: NextRequest) {
         const pendaftarData = await prisma.pendaftar.findUnique({
           where: { id: pembayaran.pendaftar_id },
           select: { data_lengkap: true } });
-        let expectedDU = 7650000;
+        let expectedDU = 9900000;
         if (pendaftarData?.data_lengkap) {
           try {
             const dl = typeof pendaftarData.data_lengkap === "string"
@@ -255,7 +255,7 @@ export async function PATCH(request: NextRequest) {
         const totalSPPPaid = allSppVerified.reduce((acc, p) => acc + Number(p.jumlah), 0);
 
         const duLunas = totalDUPaid >= expectedDU;
-        const sppLunas = totalSPPPaid >= 1000000;
+        const sppLunas = totalSPPPaid >= 1100000;
 
         if (duLunas && sppLunas) {
           newPendaftarStatus = "enrolled_full";
