@@ -167,8 +167,9 @@ export default function PengumumanPage() {
               }
             >
               <option value="">Semua Jenjang</option>
-              <option value="MTs">SMP IT</option>
-              <option value="SMA">SMA</option>
+              <option value="MTs">MTs</option>
+              <option value="IL">IL</option>
+              <option value="MA">MA</option>
             </select>
           </div>
 

@@ -7,7 +7,7 @@ import { Users } from "lucide-react";
 // Fallback data (shown while API loads or if DB is empty)
 const FALLBACK_ACTIVITIES = [
   { name: "Yusuf K.", city: "Depok", program: "SD IT" },
-  { name: "Hasan B.", city: "Jakarta", program: "SMP IT" },
+  { name: "Hasan B.", city: "Jakarta", program: "MTs" },
   { name: "Umar A.", city: "Bogor", program: "Pesantren" }
 ];
 

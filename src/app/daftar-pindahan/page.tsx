@@ -418,12 +418,12 @@ export default function DaftarPindahanPage() {
                   {[
                     {
                       value: "MTs",
-                      title: "SMP IT",
-                      subtitle: "Pindahan tingkat SMP/MTs" },
+                      title: "MTs",
+                      subtitle: "Pindahan tingkat MTs" },
                     {
                       value: "MA",
-                      title: "SMA IT",
-                      subtitle: "Pindahan tingkat SMA/MA" },
+                      title: "MA",
+                      subtitle: "Pindahan tingkat MA" },
                   ].map((option) => {
                     const isPutra = formData.jenis_kelamin === "L";
                     const isPutri = formData.jenis_kelamin === "P";

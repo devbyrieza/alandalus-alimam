@@ -485,8 +485,10 @@ export async function notifyRegistrationSuccess(data: {
       nomor_pendaftaran: data.nomor_pendaftaran,
       jenjang:
         data.jenjang === "MTs"
-          ? "SMP IT"
-          : "I'dad Lughowi (Setara SMA)",
+          ? "MTs"
+          : data.jenjang === "MA"
+          ? "MA"
+          : "I'dad Lughowi (Setara MA)",
       dashboard_url: `${process.env.NEXT_PUBLIC_APP_URL || DEFAULT_APP_URL}/dashboard/pendaftar`,
       kontak: DEFAULT_CONTACT } });
 }
