@@ -327,25 +327,16 @@ export async function POST(request: Request) {
       if (finalId) {
         const interviewer = await prisma.profile.findUnique({
           where: { id: finalId },
-          select: { full_name: true, phone: true, google_meet_link: true } });
+          select: { id: true, full_name: true, phone: true, jenis_kelamin: true, google_meet_link: true } });
 
         if (interviewer && interviewer.phone) {
-          // Generate Magic Link for this interviewer
-          const redirectPathPath = `/dashboard/penguji/input-nilai?search=${encodeURIComponent(pendaftarInfo.nama_lengkap)}`;
-          const token = generateMagicToken(
-            finalId,
-            "penguji",
-            interviewer.full_name,
-            72, // 3 days expiry
-            redirectPathPath,
-          );
           const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://spmb.pesantren-alimam.com";
-          const magicLink = `${appUrl}/api/auth/magic?token=${token}`;
-
-          // Use manual tinyurl if available, otherwise generate automatic
-          const { generateShortLink } = await import("@/lib/utils/magic-link");
-          
-          const shortUrlKonfirmasi = (await generateShortLink(magicLink));
+          const { generateExaminerInputLink } = await import("@/lib/utils/magic-link");
+          const shortUrlKonfirmasi = generateExaminerInputLink(
+            interviewer.id,
+            pendaftarInfo.nomor_pendaftaran,
+            appUrl
+          );
 
           const intMessage = buildMessageKonfirmasiJadwalInterviewer(
             interviewer.full_name,
@@ -355,6 +346,7 @@ export async function POST(request: Request) {
             interviewer.google_meet_link || lokasi,
             jenisUjian,
             shortUrlKonfirmasi,
+            interviewer.jenis_kelamin
           );
 
           // Delay 1 menit untuk menghindari burst pesan berturut-turut
