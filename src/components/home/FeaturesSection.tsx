@@ -145,18 +145,18 @@ export default function FeaturesSection() {
 
                 <div className="bg-linear-to-br from-primary-700 via-primary-800 to-primary-950 shine-top border border-white/10 p-6 sm:p-8 rounded-2xl shadow-2xl min-h-64 md:h-72 flex flex-col justify-center items-center text-center relative overflow-hidden group hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
                   {/* CiroAI-style ambient glow inside dark card */}
-                  <div className="absolute -top-16 -right-16 w-40 h-40 bg-secondary-400/25 blur-[60px] rounded-full pointer-events-none group-hover:bg-secondary-400/40 transition-colors duration-700" />
+                  <div className="absolute -top-16 -right-16 w-40 h-40 bg-amber-400/25 blur-[60px] rounded-full pointer-events-none group-hover:bg-amber-400/40 transition-colors duration-700" />
                   <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-primary-300/10 blur-[50px] rounded-full pointer-events-none" />
 
-                  <div className="icon-box icon-box-secondary w-20 h-20 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-500">
+                  <div className="icon-box icon-box-gold w-20 h-20 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-500">
                     <BookOpenCheck className="w-10 h-10" />
                   </div>
-                  <h3 className="font-black text-2xl text-white tracking-tight leading-tight group-hover:text-secondary-100 transition-colors">
+                  <h3 className="font-black text-2xl text-white tracking-tight leading-tight group-hover:text-amber-100 transition-colors">
                     Tahfidz
                     <br />
                     Intensif
                   </h3>
-                  <div className="mt-4 w-12 h-0.5 bg-secondary-400/40 rounded-full group-hover:w-16 group-hover:bg-secondary-300 transition-all duration-500" />
+                  <div className="mt-4 w-12 h-0.5 bg-amber-300/50 rounded-full group-hover:w-16 group-hover:bg-amber-300 transition-all duration-500" />
                 </div>
               </div>
 

@@ -2921,6 +2921,12 @@
     box-shadow: var(--shadow-sm);
   }
 
+  .icon-box-gold {
+    background: linear-gradient(135deg, var(--color-amber-300), var(--color-amber-500));
+    color: var(--color-primary-950);
+    box-shadow: var(--shadow-sm);
+  }
+
 /* â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
    6. CEKAT.AI INSPIRED â€” PREMIUM ADDITIONS
    Infinite Marquee Â· Section Numbering

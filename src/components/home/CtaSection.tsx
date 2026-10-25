@@ -29,7 +29,7 @@ export default function CtaSection() {
             
             {/* Pill Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 border border-white/25 text-pink-100 text-xs font-extrabold uppercase tracking-wider backdrop-blur-md">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-amber-300 animate-pulse" />
               <span>SPMB Tahun Ajaran {BRANDING.academicYear} Telah Dibuka</span>
             </div>
 

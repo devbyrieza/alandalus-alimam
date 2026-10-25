@@ -17,14 +17,14 @@ export default function ScholarshipSection() {
           className="relative rounded-[3rem] p-10 md:p-16 lg:p-20 overflow-hidden bg-gradient-to-br from-maroon-900 to-maroon-950 border border-maroon-800 shadow-premium-xl flex flex-col lg:flex-row items-center gap-10 lg:gap-20"
         >
           {/* Gold Glow */}
-          <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[300px] h-[300px] bg-cream-500/20 blur-[80px] rounded-full pointer-events-none" />
+          <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[300px] h-[300px] bg-amber-400/20 blur-[80px] rounded-full pointer-events-none" />
 
           <div className="lg:w-1/2 text-center lg:text-left relative z-10">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cream-100 text-cream-800 text-[10px] font-black uppercase tracking-widest mb-6">
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-black uppercase tracking-widest mb-6">
               <Award className="w-4 h-4" /> Program Prestasi
             </span>
             <h2 className="text-3xl md:text-5xl font-black text-white leading-tight mb-6">
-              Jalur Beasiswa <br /> <span className="text-cream-400">Prestasi Santri.</span>
+              Jalur Beasiswa <br /> <span className="text-amber-300">Prestasi Santri.</span>
             </h2>
             <p className="text-maroon-100/80 font-medium text-lg leading-relaxed mb-8">
               Kami mengapresiasi calon santri yang memiliki hafalan Al-Qur&apos;an mutqin atau prestasi akademik tingkat
@@ -33,7 +33,7 @@ export default function ScholarshipSection() {
 
             <Link
               href="/daftar#beasiswa"
-              className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-cream-400 hover:bg-cream-300 text-maroon-950 font-extrabold text-sm shadow-lg shadow-black/20 hover:-translate-y-0.5 transition-all group"
+              className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-amber-400 hover:bg-amber-300 text-maroon-950 font-extrabold text-sm shadow-lg shadow-black/20 hover:-translate-y-0.5 transition-all group"
             >
               <span>Daftar Jalur Beasiswa</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -48,7 +48,7 @@ export default function ScholarshipSection() {
               { title: "Yatim Piatu", desc: "Kuota khusus pendaftar jalur dhuafa & yatim." },
             ].map((item, i) => (
               <div key={i} className="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl hover:bg-white/20 transition-colors">
-                <h3 className="font-bold text-cream-100 mb-1">{item.title}</h3>
+                <h3 className="font-bold text-white mb-1">{item.title}</h3>
                 <p className="text-xs text-maroon-200/80 font-medium">{item.desc}</p>
               </div>
             ))}

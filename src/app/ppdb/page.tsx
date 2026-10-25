@@ -586,7 +586,7 @@ export default function SPMBInfoPage() {
 
               <div className="pt-4 border-t border-white/10 space-y-2 text-xs text-slate-300">
                 <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <Check className="w-4 h-4 text-amber-300 shrink-0" />
                   <span>All-In: makan 3x sehari bergizi, asrama, laundry &amp; kegiatan santriwati.</span>
                 </div>
                 <div className="flex items-center gap-2 text-amber-300 font-medium">
