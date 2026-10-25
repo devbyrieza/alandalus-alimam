@@ -17,7 +17,7 @@ export default function ContactSection() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-4 py-1.5 rounded-full border border-pink-200 inline-block">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-primary-900 bg-pink-50 px-4 py-1.5 rounded-full border border-pink-200 inline-block">
             Pusat Informasi Resmi
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
@@ -34,7 +34,7 @@ export default function ContactSection() {
           {/* Card 1: WhatsApp */}
           <div className="bg-white rounded-3xl p-7 border border-slate-200 shadow-xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center font-bold mb-5">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 border border-emerald-100 flex items-center justify-center font-bold mb-5">
                 <Phone className="w-6 h-6" />
               </div>
               <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-1">
@@ -66,7 +66,7 @@ export default function ContactSection() {
           {/* Card 2: Lokasi Kampus */}
           <div className="bg-white rounded-3xl p-7 border border-slate-200 shadow-xs hover:shadow-md hover:border-primary/40 transition-all flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-pink-50 text-primary border border-pink-200 flex items-center justify-center font-bold mb-5">
+              <div className="w-12 h-12 rounded-2xl bg-pink-50 text-primary-900 border border-pink-200 flex items-center justify-center font-bold mb-5">
                 <MapPin className="w-6 h-6" />
               </div>
               <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-1">
@@ -95,7 +95,7 @@ export default function ContactSection() {
           {/* Card 3: Email & Konsultasi */}
           <div className="bg-white rounded-3xl p-7 border border-slate-200 shadow-xs hover:shadow-md hover:border-blue-300 transition-all flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 border border-blue-200 flex items-center justify-center font-bold mb-5">
+              <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-700 border border-blue-200 flex items-center justify-center font-bold mb-5">
                 <Mail className="w-6 h-6" />
               </div>
               <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-1">

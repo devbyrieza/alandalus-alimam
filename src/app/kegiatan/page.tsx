@@ -211,7 +211,7 @@ const StatsCard = ({ icon: Icon, value, label, sublabel }: HeroStat) => (
     whileHover={{ y: -5 }}
     className="app-card bg-white p-6 sm:p-8 md:p-6 rounded-[2rem] md:rounded-[2.5rem] border border-slate-200 shadow-2xl text-center min-w-[140px] md:min-w-[160px] flex flex-col items-center"
   >
-    <div className="w-10 h-10 md:w-12 md:h-12 rounded-3xl md:rounded-2xl bg-primary-50 flex items-center justify-center text-primary mb-3 md:mb-4 border border-slate-200">
+    <div className="w-10 h-10 md:w-12 md:h-12 rounded-3xl md:rounded-2xl bg-primary-50 flex items-center justify-center text-primary-900 mb-3 md:mb-4 border border-slate-200">
       <Icon className="w-5 h-5 md:w-6 md:h-6" />
     </div>
     <div className="text-2xl md:text-3xl font-black text-ink-950 mb-1">
@@ -316,7 +316,7 @@ const EkskulCard = ({
     transition={{ delay: index * 0.05 }}
     className="app-card group p-6 sm:p-8 md:p-8 rounded-[2rem] md:rounded-[2.5rem] bg-white border border-primary-50 shadow-2xl hover:shadow-xl hover:border-primary-200 transition-all hover:-translate-y-2 text-center h-full flex flex-col justify-between"
   >
-    <div className="w-12 h-12 md:w-16 md:h-16 bg-primary-50 rounded-3xl md:rounded-2xl flex items-center justify-center text-primary mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-all duration-300 border border-slate-200">
+    <div className="w-12 h-12 md:w-16 md:h-16 bg-primary-50 rounded-3xl md:rounded-2xl flex items-center justify-center text-primary-900 mx-auto mb-4 md:mb-6 group-hover:scale-110 transition-all duration-300 border border-slate-200">
       <ekskul.icon className="w-6 h-6 md:w-8 md:h-8" />
     </div>
 
@@ -606,7 +606,7 @@ export default function KegiatanPage() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-pink-50 border border-pink-200 text-primary text-xs font-extrabold uppercase tracking-wider mb-6 shadow-2xs"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-pill bg-pink-50 border border-pink-200 text-primary-900 text-xs font-extrabold uppercase tracking-wider mb-6 shadow-2xs"
           >
             <Award className="w-3.5 h-3.5" />
             <span>Program Pendidikan & Kegiatan</span>
@@ -688,7 +688,7 @@ export default function KegiatanPage() {
                   whileHover={{ scale: 1.02 }}
                   className="bg-white p-5 md:p-6 rounded-[2rem] flex items-center gap-4 border border-slate-200 group transition-all h-full text-left"
                 >
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary-50 shadow-2xl flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-colors border border-slate-200">
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary-50 shadow-2xl flex items-center justify-center text-primary-900 shrink-0 group-hover:bg-primary group-hover:text-white transition-colors border border-slate-200">
                     <item.icon className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <span className="font-black text-ink-900 text-sm md:text-lg leading-tight">

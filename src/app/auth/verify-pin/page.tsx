@@ -148,7 +148,7 @@ function VerifyPinContent() {
                                           success
                                             ? "border-emerald-500 text-[#550000] bg-emerald-50"
                                             : error
-                                              ? "border-red-300 bg-red-50 text-red-600 focus:border-red-500"
+                                              ? "border-red-300 bg-red-50 text-red-700 focus:border-red-500"
                                               : "border-stone-100 focus:border-indigo-500 focus:bg-white focus:shadow-md    "
                                         }`}
                   placeholder="•"

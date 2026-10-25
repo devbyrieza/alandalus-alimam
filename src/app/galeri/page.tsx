@@ -199,7 +199,7 @@ export default function GaleriPage() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-50 border border-pink-200 text-primary text-xs font-bold uppercase tracking-widest mb-6 shadow-xs"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-50 border border-pink-200 text-primary-900 text-xs font-bold uppercase tracking-widest mb-6 shadow-xs"
           >
             <Camera className="w-3.5 h-3.5" />
             <span>Dokumentasi Resmi Pesantren</span>
@@ -231,7 +231,7 @@ export default function GaleriPage() {
         <Container>
           <div className="flex items-center justify-between mb-10">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-pink-50 flex items-center justify-center text-primary border border-pink-200 shadow-xs">
+              <div className="w-10 h-10 rounded-xl bg-pink-50 flex items-center justify-center text-primary-900 border border-pink-200 shadow-xs">
                 <Images className="w-5 h-5" />
               </div>
               <div>
@@ -444,7 +444,7 @@ export default function GaleriPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/fasilitas"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary-600 hover:bg-primary-500 text-white font-bold text-base shadow-lg transition-all hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary-600 hover:bg-primary-500 text-ink-950 font-bold text-base shadow-lg transition-all hover:-translate-y-0.5"
             >
               Rincian Fasilitas Lengkap <ArrowRight className="w-4 h-4" />
             </Link>

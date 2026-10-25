@@ -49,7 +49,7 @@ export default function ActivitiesSection() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-4 py-1.5 rounded-full border border-pink-200 inline-block">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-primary-900 bg-pink-50 px-4 py-1.5 rounded-full border border-pink-200 inline-block">
             Pengembangan Minat & Bakat
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
@@ -72,7 +72,7 @@ export default function ActivitiesSection() {
               className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-xs hover:shadow-md hover:border-primary/40 transition-all flex flex-col justify-between group"
             >
               <div>
-                <div className="w-12 h-12 rounded-2xl bg-pink-50 border border-pink-200 text-primary flex items-center justify-center font-bold mb-5">
+                <div className="w-12 h-12 rounded-2xl bg-pink-50 border border-pink-200 text-primary-900 flex items-center justify-center font-bold mb-5">
                   <act.icon className="w-6 h-6" />
                 </div>
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-1">

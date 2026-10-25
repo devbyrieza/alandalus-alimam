@@ -24,7 +24,7 @@ const PROGRAMS = [
   {
     title: "I'dad Lughawi (IL)",
     badge: "Intensif 1 Tahun",
-    badgeColor: "bg-secondary text-primary font-extrabold",
+    badgeColor: "bg-secondary text-white font-extrabold",
     desc: "Program matrikulasi akselerasi bahasa Arab intensif selama satu tahun bagi lulusan SMP umum untuk persiapan mendalami ilmu syar'i dan melanjutkan ke jenjang MA.",
     icon: BookKey,
     features: [

@@ -14,7 +14,7 @@ export default function BentoGridSection() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-4 py-1.5 rounded-full border border-pink-200 inline-block">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-primary-900 bg-pink-50 px-4 py-1.5 rounded-full border border-pink-200 inline-block">
             Sarana & Prasarana
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
@@ -94,7 +94,7 @@ export default function BentoGridSection() {
             className="col-span-1 row-span-1 rounded-3xl border border-slate-200 bg-white p-6 flex flex-col justify-between shadow-xs hover:border-primary/40 transition-all group"
           >
             <div>
-              <div className="w-10 h-10 rounded-xl bg-pink-50 border border-pink-200 text-primary flex items-center justify-center font-bold mb-4">
+              <div className="w-10 h-10 rounded-xl bg-pink-50 border border-pink-200 text-primary-900 flex items-center justify-center font-bold mb-4">
                 <Home className="w-5 h-5" />
               </div>
               <h3 className="text-base font-extrabold text-slate-900 mb-1 group-hover:text-primary transition-colors">
@@ -115,7 +115,7 @@ export default function BentoGridSection() {
             className="col-span-1 row-span-1 rounded-3xl border border-slate-200 bg-white p-6 flex flex-col justify-between shadow-xs hover:border-emerald-300 transition-all group"
           >
             <div>
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold mb-4 border border-emerald-100">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold mb-4 border border-emerald-100">
                 <Utensils className="w-5 h-5" />
               </div>
               <h3 className="text-base font-extrabold text-slate-900 mb-1 group-hover:text-emerald-700 transition-colors">

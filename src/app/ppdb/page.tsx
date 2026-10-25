@@ -103,8 +103,8 @@ const TimelineItem = ({ item, index }: { item: any; index: number }) => (
         <span
           className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${
             item.status === "active"
-              ? "bg-pink-100 text-primary"
-              : "bg-slate-100 text-slate-500"
+              ? "bg-pink-100 text-primary-900"
+              : "bg-slate-100 text-slate-600"
           }`}
         >
           {item.date}
@@ -324,7 +324,7 @@ export default function SPMBInfoPage() {
       <section className="py-16 bg-white border-y border-pink-100">
         <Container className="max-w-6xl mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-3.5 py-1 rounded-full border border-pink-200 inline-block">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-primary-900 bg-pink-50 px-3.5 py-1 rounded-full border border-pink-200 inline-block">
               Pilar Pendidikan
             </span>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900">
@@ -357,7 +357,7 @@ export default function SPMBInfoPage() {
       <section className="py-20 md:py-28 bg-gradient-to-b from-[#FFF5F8]/40 via-white to-white border-y border-pink-100">
         <Container className="max-w-6xl mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-4 py-1.5 rounded-full border border-pink-200 inline-block shadow-2xs">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-primary-900 bg-pink-50 px-4 py-1.5 rounded-full border border-pink-200 inline-block shadow-2xs">
               Investasi Masa Depan Santriwati
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
@@ -372,7 +372,7 @@ export default function SPMBInfoPage() {
           {/* 3 Main Overview Cards */}
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             <div className="bg-white p-7 sm:p-8 rounded-3xl border border-pink-100 shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center group">
-              <div className="w-16 h-16 bg-pink-50 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform shadow-2xs">
+              <div className="w-16 h-16 bg-pink-50 rounded-2xl flex items-center justify-center text-primary-900 mb-6 group-hover:scale-110 transition-transform shadow-2xs">
                 <CreditCard className="w-8 h-8" />
               </div>
               <h3 className="text-xs text-slate-500 font-extrabold uppercase tracking-wider mb-2">
@@ -390,7 +390,7 @@ export default function SPMBInfoPage() {
               <div className="absolute -top-3.5 px-4 py-1 rounded-full bg-primary text-white text-[11px] font-black uppercase tracking-wider shadow-sm">
                 Bisa Dicicil 3x
               </div>
-              <div className="w-16 h-16 bg-pink-100/70 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform shadow-2xs">
+              <div className="w-16 h-16 bg-pink-100/70 rounded-2xl flex items-center justify-center text-primary-900 mb-6 group-hover:scale-110 transition-transform shadow-2xs">
                 <Shield className="w-8 h-8" />
               </div>
               <h3 className="text-xs text-primary font-extrabold uppercase tracking-wider mb-2">
@@ -405,7 +405,7 @@ export default function SPMBInfoPage() {
             </div>
 
             <div className="bg-white p-7 sm:p-8 rounded-3xl border border-pink-100 shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center group">
-              <div className="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-600 mb-6 group-hover:scale-110 transition-transform shadow-2xs">
+              <div className="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-700 mb-6 group-hover:scale-110 transition-transform shadow-2xs">
                 <Star className="w-8 h-8" />
               </div>
               <h3 className="text-xs text-slate-500 font-extrabold uppercase tracking-wider mb-2">
@@ -424,7 +424,7 @@ export default function SPMBInfoPage() {
           <div className="bg-white rounded-3xl border border-pink-200 p-6 sm:p-10 shadow-sm mb-10">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-8 mb-8 border-b border-pink-100 text-center sm:text-left">
               <div>
-                <span className="text-[11px] font-black uppercase tracking-widest text-primary bg-pink-50 px-3 py-1 rounded-full border border-pink-200 inline-block mb-1">
+                <span className="text-[11px] font-black uppercase tracking-widest text-primary-900 bg-pink-50 px-3 py-1 rounded-full border border-pink-200 inline-block mb-1">
                   Skema Pembayaran Transparan
                 </span>
                 <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900">
@@ -443,7 +443,7 @@ export default function SPMBInfoPage() {
                   <span className="w-8 h-8 rounded-full bg-primary text-white font-black text-sm flex items-center justify-center shadow-xs">
                     1
                   </span>
-                  <span className="text-[10px] font-black uppercase tracking-wider text-primary bg-pink-100 px-2.5 py-1 rounded-full">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-primary-900 bg-pink-100 px-2.5 py-1 rounded-full">
                     Kunci Kuota
                   </span>
                 </div>
@@ -502,7 +502,7 @@ export default function SPMBInfoPage() {
             <div className="md:col-span-7 bg-white rounded-3xl border border-pink-200 p-6 sm:p-8 shadow-premium-sm flex flex-col justify-between space-y-5">
               <div>
                 <div className="flex items-center gap-3 pb-4 border-b border-pink-100">
-                  <div className="w-10 h-10 rounded-2xl bg-pink-50 text-primary flex items-center justify-center shrink-0 border border-pink-200">
+                  <div className="w-10 h-10 rounded-2xl bg-pink-50 text-primary-900 flex items-center justify-center shrink-0 border border-pink-200">
                     <Shield className="w-5 h-5" />
                   </div>
                   <div>
@@ -644,7 +644,7 @@ export default function SPMBInfoPage() {
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
             {/* Sticky Content */}
             <div className="lg:w-2/5 lg:sticky lg:top-36 h-fit text-center lg:text-left space-y-6">
-              <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-3.5 py-1 rounded-full border border-pink-200 inline-block">
+              <span className="text-xs font-extrabold uppercase tracking-widest text-primary-900 bg-pink-50 px-3.5 py-1 rounded-full border border-pink-200 inline-block">
                 Tahapan Pendaftaran
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
@@ -691,7 +691,7 @@ export default function SPMBInfoPage() {
       <section className="py-20 bg-gradient-to-b from-[#FFF5F8]/30 to-white">
         <Container className="max-w-6xl mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-3.5 py-1 rounded-full border border-pink-200 inline-block">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-primary-900 bg-pink-50 px-3.5 py-1 rounded-full border border-pink-200 inline-block">
               Kelengkapan Berkas
             </span>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900">
@@ -711,7 +711,7 @@ export default function SPMBInfoPage() {
                   className="bg-white p-7 sm:p-9 rounded-3xl border border-pink-100 shadow-sm space-y-6"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-pink-50 rounded-2xl flex items-center justify-center text-primary shadow-2xs shrink-0">
+                    <div className="w-12 h-12 bg-pink-50 rounded-2xl flex items-center justify-center text-primary-900 shadow-2xs shrink-0">
                       <ReqIcon className="w-6 h-6" />
                     </div>
                     <div>
@@ -736,7 +736,7 @@ export default function SPMBInfoPage() {
                           <Check className="w-4 h-4 text-primary shrink-0 stroke-[2.5]" />
                           <span>{item.name}</span>
                         </div>
-                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-pink-100 text-primary uppercase shrink-0">
+                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-pink-100 text-primary-900 uppercase shrink-0">
                           {item.type}
                         </span>
                       </li>
@@ -777,7 +777,7 @@ export default function SPMBInfoPage() {
                 {PPDB_CONFIG.ekstrakurikuler.map((e, i) => (
                   <span
                     key={i}
-                    className="text-xs px-3.5 py-1.5 rounded-xl bg-pink-50/70 border border-pink-200/80 text-primary font-bold"
+                    className="text-xs px-3.5 py-1.5 rounded-xl bg-pink-50/70 border border-pink-200/80 text-primary-900 font-bold"
                   >
                     {e}
                   </span>

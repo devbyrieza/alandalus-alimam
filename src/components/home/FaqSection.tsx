@@ -61,7 +61,7 @@ export default function FaqSection() {
           {/* ═════════ LEFT COLUMN (Sticky Header & Helpdesk) ═════════ */}
           <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6">
             <div>
-              <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-4 py-1.5 rounded-full border border-pink-200 inline-block mb-4 shadow-2xs">
+              <span className="text-xs font-extrabold uppercase tracking-widest text-primary-900 bg-pink-50 px-4 py-1.5 rounded-full border border-pink-200 inline-block mb-4 shadow-2xs">
                 Pusat Bantuan &amp; Tanya Jawab
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-extrabold text-slate-900 tracking-tight leading-[1.15]">
@@ -97,7 +97,7 @@ export default function FaqSection() {
                 href={WA_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl font-bold text-sm text-white bg-[#25D366] hover:bg-[#20ba59] shadow-lg hover: hover:-translate-y-0.5 transition-all duration-300"
+                className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl font-bold text-sm text-ink-950 bg-[#25D366] hover:bg-[#20ba59] shadow-lg hover: hover:-translate-y-0.5 transition-all duration-300"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -138,7 +138,7 @@ export default function FaqSection() {
                       {faq.question}
                     </span>
                     <div className={`w-7 h-7 rounded-xl flex items-center justify-center shrink-0 transition-all ${
-                      isOpen ? "bg-primary text-white rotate-180" : "bg-slate-100 text-slate-500"
+                      isOpen ? "bg-primary text-white rotate-180" : "bg-slate-100 text-slate-600"
                     }`}>
                       <ChevronDown className="w-4 h-4" />
                     </div>

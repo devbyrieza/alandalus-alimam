@@ -39,7 +39,7 @@ export default function TestimonialsSection() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-4 py-1.5 rounded-full border border-pink-200 inline-block">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-primary-900 bg-pink-50 px-4 py-1.5 rounded-full border border-pink-200 inline-block">
             Pengalaman Otentik Wali Santriwati
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
@@ -69,7 +69,7 @@ export default function TestimonialsSection() {
                       <Star key={idx} className="w-4 h-4 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
-                  <span className="text-[10px] font-black uppercase tracking-wider text-primary bg-pink-50 px-2.5 py-0.5 rounded-full border border-pink-200">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-primary-900 bg-pink-50 px-2.5 py-0.5 rounded-full border border-pink-200">
                     {t.badge}
                   </span>
                 </div>
@@ -88,7 +88,7 @@ export default function TestimonialsSection() {
                     {t.role} • {t.city}
                   </p>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-pink-50 text-primary flex items-center justify-center font-bold shrink-0">
+                <div className="w-8 h-8 rounded-full bg-pink-50 text-primary-900 flex items-center justify-center font-bold shrink-0">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
               </div>

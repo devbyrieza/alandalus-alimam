@@ -111,7 +111,7 @@ Mohon informasinya. Terima kasih.`;
             {/* Left Column: Filament-Style Message Form */}
             <div className="lg:col-span-7 bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
               <div className="p-7 sm:p-9 border-b border-slate-100 bg-slate-50/50">
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-3 py-1 rounded-full border border-pink-200 inline-block mb-2">
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-primary-900 bg-pink-50 px-3 py-1 rounded-full border border-pink-200 inline-block mb-2">
                   Kirim Pesan Cepat
                 </span>
                 <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900">
@@ -205,7 +205,7 @@ Mohon informasinya. Terima kasih.`;
               {/* Card 1: WhatsApp CS */}
               <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs hover:border-pink-200 transition-all">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center font-bold shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center font-bold shrink-0">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
@@ -223,7 +223,7 @@ Mohon informasinya. Terima kasih.`;
               {/* Card 2: Jam Pelayanan */}
               <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs hover:border-pink-200 transition-all">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-pink-50 border border-pink-200 text-primary flex items-center justify-center font-bold shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-pink-50 border border-pink-200 text-primary-900 flex items-center justify-center font-bold shrink-0">
                     <Clock className="w-5 h-5" />
                   </div>
                   <div>
@@ -241,7 +241,7 @@ Mohon informasinya. Terima kasih.`;
               {/* Card 3: Alamat Kampus */}
               <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs hover:border-pink-200 transition-all">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-pink-50 border border-pink-200 text-primary flex items-center justify-center font-bold shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-pink-50 border border-pink-200 text-primary-900 flex items-center justify-center font-bold shrink-0">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div className="space-y-2">

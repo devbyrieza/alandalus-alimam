@@ -111,7 +111,7 @@ export default function ProgramPage() {
           <div id="idad" className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 shadow-sm scroll-mt-28">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-100">
               <div className="space-y-2">
-                <span className="px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-primary text-white text-primary inline-block">
+                <span className="px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-primary text-white inline-block">
                   Program Matrikulasi • 1 Tahun
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">

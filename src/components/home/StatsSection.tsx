@@ -97,7 +97,7 @@ export default function StatsSection() {
                   <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">
                     {stat.label}
                   </span>
-                  <div className="w-9 h-9 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center text-primary">
+                  <div className="w-9 h-9 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center text-primary-900">
                     <stat.icon className="w-4 h-4" />
                   </div>
                 </div>

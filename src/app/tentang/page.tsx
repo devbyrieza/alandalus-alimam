@@ -119,7 +119,7 @@ export default function TentangPage() {
 
               {/* Floating Badge (OMI Style) */}
               <div className="relative sm:absolute -bottom-3 sm:-bottom-6 right-0 sm:right-4 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 sm:p-4 border border-slate-200 shadow-xl flex items-center gap-3 mt-3 sm:mt-0">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary text-primary flex items-center justify-center font-black text-lg sm:text-xl shadow-xs shrink-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary text-white flex items-center justify-center font-black text-lg sm:text-xl shadow-xs shrink-0">
                   <Award className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <div>
@@ -132,7 +132,7 @@ export default function TentangPage() {
             {/* Right Column: Editorial Text */}
             <div className="lg:col-span-7 space-y-6">
               <div className="space-y-2">
-                <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-3.5 py-1 rounded-full border border-pink-200/50 inline-block">
+                <span className="text-xs font-extrabold uppercase tracking-widest text-primary-900 bg-pink-50 px-3.5 py-1 rounded-full border border-pink-200/50 inline-block">
                   Transformasi Pendidikan
                 </span>
                 <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -178,7 +178,7 @@ export default function TentangPage() {
         <Container className="max-w-6xl mx-auto px-4">
           
           <div className="text-center max-w-2xl mx-auto mb-14 space-y-2.5">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-3.5 py-1 rounded-full border border-pink-200/50 inline-block">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-primary-900 bg-pink-50 px-3.5 py-1 rounded-full border border-pink-200/50 inline-block">
               Kompas Arah Pembinaan
             </span>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -193,7 +193,7 @@ export default function TentangPage() {
             {/* Visi (Card 1) */}
             <div className="md:col-span-5 bg-white rounded-3xl p-8 border border-slate-200 shadow-xs flex flex-col justify-between border-t-4 border-t-primary">
               <div>
-                <div className="w-12 h-12 rounded-2xl bg-pink-50 text-primary flex items-center justify-center font-bold mb-6">
+                <div className="w-12 h-12 rounded-2xl bg-pink-50 text-primary-900 flex items-center justify-center font-bold mb-6">
                   <Target className="w-6 h-6" />
                 </div>
                 <span className="text-xs font-extrabold uppercase text-slate-400 tracking-wider">Visi Pesantren</span>
@@ -209,7 +209,7 @@ export default function TentangPage() {
             {/* Misi (Card 2) */}
             <div className="md:col-span-7 bg-white rounded-3xl p-8 border border-slate-200 shadow-xs flex flex-col justify-between border-t-4 border-t-blue-500">
               <div>
-                <div className="w-12 h-12 rounded-2xl bg-pink-50 text-primary flex items-center justify-center font-bold mb-6">
+                <div className="w-12 h-12 rounded-2xl bg-pink-50 text-primary-900 flex items-center justify-center font-bold mb-6">
                   <ShieldCheck className="w-6 h-6" />
                 </div>
                 <span className="text-xs font-extrabold uppercase text-slate-400 tracking-wider">Misi Utama</span>
@@ -226,7 +226,7 @@ export default function TentangPage() {
                     "Menerapkan sistem pengasuhan 'Mendidik Tanpa Luka' berbasis keteladanan pendidik 24 jam dan kasih sayang tanpa kekerasan fisik."
                   ].map((misi, i) => (
                     <div key={i} className="flex items-start gap-3 text-xs sm:text-sm text-slate-700">
-                      <span className="w-5 h-5 rounded-full bg-pink-100 text-primary flex items-center justify-center shrink-0 mt-0.5 font-bold">
+                      <span className="w-5 h-5 rounded-full bg-pink-100 text-primary-900 flex items-center justify-center shrink-0 mt-0.5 font-bold">
                         <Check className="w-3 h-3 stroke-[3]" />
                       </span>
                       <span className="leading-relaxed">{misi}</span>
@@ -244,7 +244,7 @@ export default function TentangPage() {
       <section className="py-24">
         <Container className="max-w-6xl mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-2.5">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-3.5 py-1 rounded-full border border-pink-200/50 inline-block">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-primary-900 bg-pink-50 px-3.5 py-1 rounded-full border border-pink-200/50 inline-block">
               Pilar Kurikulum
             </span>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -293,7 +293,7 @@ export default function TentangPage() {
                 className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-2xs hover:shadow-md hover:border-pink-200 transition-all flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-11 h-11 rounded-xl bg-pink-50 text-primary flex items-center justify-center font-bold mb-5 border border-pink-200">
+                  <div className="w-11 h-11 rounded-xl bg-pink-50 text-primary-900 flex items-center justify-center font-bold mb-5 border border-pink-200">
                     <pilar.icon className="w-5 h-5" />
                   </div>
                   <h4 className="font-extrabold text-slate-900 text-base mb-2">
@@ -314,7 +314,7 @@ export default function TentangPage() {
       <section className="py-20 bg-[#F8FAFC] border-y border-slate-200">
         <Container className="max-w-6xl mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-primary bg-pink-50 px-4 py-1.5 rounded-full border border-pink-200/50 inline-block">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-primary-900 bg-pink-50 px-4 py-1.5 rounded-full border border-pink-200/50 inline-block">
               Pola Asuh Rabbani & Keamanan Santri
             </span>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -331,7 +331,7 @@ export default function TentangPage() {
             <div className="lg:col-span-6 bg-white rounded-3xl p-8 border border-slate-200 shadow-sm flex flex-col justify-between border-t-4 border-t-emerald-600">
               <div className="space-y-6">
                 <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
-                  <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold border border-emerald-100 shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold border border-emerald-100 shrink-0">
                     <Heart className="w-6 h-6" />
                   </div>
                   <div>
@@ -390,7 +390,7 @@ export default function TentangPage() {
             <div className="lg:col-span-6 bg-white rounded-3xl p-8 border border-slate-200 shadow-sm flex flex-col justify-between border-t-4 border-t-primary">
               <div className="space-y-6">
                 <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
-                  <div className="w-12 h-12 rounded-2xl bg-pink-50 text-primary flex items-center justify-center font-bold border border-pink-200 shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-pink-50 text-primary-900 flex items-center justify-center font-bold border border-pink-200 shrink-0">
                     <ShieldCheck className="w-6 h-6" />
                   </div>
                   <div>
@@ -416,7 +416,7 @@ export default function TentangPage() {
                       key={idx}
                       className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center gap-2.5 text-xs font-bold text-slate-800"
                     >
-                      <span className="w-5 h-5 rounded-full bg-pink-50 text-primary flex items-center justify-center shrink-0">
+                      <span className="w-5 h-5 rounded-full bg-pink-50 text-primary-900 flex items-center justify-center shrink-0">
                         <ShieldCheck className="w-3 h-3" />
                       </span>
                       <span>{rule}</span>

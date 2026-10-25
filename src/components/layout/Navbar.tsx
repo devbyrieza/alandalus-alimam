@@ -58,8 +58,8 @@ type NavLink = {
 };
 
 const TONE_CLASS: Record<SubItem["tone"], string> = {
-  primary: "bg-primary-100 text-primary-700",
-  secondary: "bg-secondary-100 text-secondary-700",
+  primary: "bg-primary-100 text-primary-900",
+  secondary: "bg-secondary-100 text-secondary-800",
 };
 
 const NAV_LINKS: NavLink[] = [
@@ -226,8 +226,6 @@ export default function Navbar() {
 
     if (pathname === "/") {
       e.preventDefault();
-      sessionStorage.removeItem("scroll_to_section");
-      sessionStorage.removeItem("scroll_to_position");
       scrollToTop();
     }
     // Selain itu: biarkan <Link> menangani navigasi client-side.
