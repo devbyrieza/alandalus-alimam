@@ -90,14 +90,14 @@ export default function BoardSection() {
   return (
     <section id="pembina" className="py-20 md:py-28 bg-[#FFF9FA] relative overflow-hidden">
       <div
-        className="absolute -top-32 -right-32 w-[480px] h-[480px] pointer-events-none"
+        className="absolute -top-32 -right-32 w-[480px] h-[480px] pointer-events-none max-w-full"
         style={{
           background:
             "radial-gradient(circle, rgba(253,242,248,0.7) 0%, transparent 65%)",
         }}
       />
       <div
-        className="absolute -bottom-24 -left-24 w-[360px] h-[360px] pointer-events-none"
+        className="absolute -bottom-24 -left-24 w-[360px] h-[360px] pointer-events-none max-w-full"
         style={{
           background:
             "radial-gradient(circle, rgba(254,243,199,0.4) 0%, transparent 65%)",

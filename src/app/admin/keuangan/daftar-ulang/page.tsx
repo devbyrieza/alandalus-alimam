@@ -54,7 +54,7 @@ export default function DaftarUlangPage() {
       </div>
 
       <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl overflow-hidden flex-1">
-        <div className="w-full overflow-x-auto rounded-xl border border-slate-200 shadow-sm custom-scrollbar"><table className="w-full min-w-[800px] text-left">
+        <div className="w-full overflow-x-auto rounded-xl border border-slate-200 shadow-sm custom-scrollbar"><table className="w-full min-w-[800px] text-left max-w-full">
           <thead className="bg-slate-50 border-b border-slate-200">
             <tr className="text-xs font-bold text-slate-500 uppercase tracking-wider">
               <th className="p-6 sm:p-8">Santri</th>
