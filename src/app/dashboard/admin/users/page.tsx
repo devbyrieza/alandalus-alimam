@@ -288,10 +288,10 @@ export default function UserManagementPage() {
     <div className="space-y-10 pb-16 animate-in fade-in duration-700">
       {/* Admin Banner */}
       <div className="relative overflow-hidden rounded-4xl bg-linear-to-br from-primary-700 to-primary-900 text-white p-6 md:p-10 shadow-2xl app-card border border-primary-600">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-secondary-400/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-300/10 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="flex items-center gap-6">
-            <div className="w-20 h-20 rounded-3xl bg-white/10 flex items-center justify-center border border-white/20 text-secondary-300">
+            <div className="w-20 h-20 rounded-3xl bg-white/10 flex items-center justify-center border border-white/20 text-amber-300">
               <ShieldAlert className="w-10 h-10" />
             </div>
             <div>
@@ -308,7 +308,7 @@ export default function UserManagementPage() {
               resetForm();
               setIsModalOpen(true);
             }}
-            className="bg-secondary-400 hover:bg-secondary-300 text-primary-950 px-6 md:px-10 py-5 rounded-3xl font-black uppercase text-xs shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 hover:scale-105 active:scale-95"
+            className="bg-amber-300 hover:bg-amber-200 text-primary-950 px-6 md:px-10 py-5 rounded-3xl font-black uppercase text-xs shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 hover:scale-105 active:scale-95"
           >
             <Plus className="w-6 h-6" /> Tambah Pengguna
           </button>

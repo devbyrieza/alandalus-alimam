@@ -93,7 +93,7 @@ export default function DataPendaftaranTab() {
         <div className="flex flex-col md:flex-row md:items-center justify-between">
           <div>
             <h1 className="text-2xl font-black">Data Pendaftaran</h1>
-            <p className="text-secondary-100">
+            <p className="text-white/80">
               Kelola data dan dokumen pendaftaran Anda
             </p>
           </div>

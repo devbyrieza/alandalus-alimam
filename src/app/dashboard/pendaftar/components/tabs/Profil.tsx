@@ -133,7 +133,7 @@ export default function ProfilTab() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-black mb-2">Profil Saya</h1>
-            <p className="text-secondary-100">
+            <p className="text-white/80">
               Informasi pribadi dan status pendaftaran Anda
             </p>
           </div>

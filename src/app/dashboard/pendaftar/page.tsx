@@ -249,18 +249,18 @@ function StatusGrid({ status, statusLabel, pengumuman }: any) {
 function SupportCenter() {
   return (
     <div className="bg-primary-950 text-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 md:p-12 relative overflow-hidden group shadow-2xl">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-secondary-400 rounded-full blur-[120px] opacity-20 -translate-y-1/2 translate-x-1/2" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-amber-400 rounded-full blur-[120px] opacity-20 -translate-y-1/2 translate-x-1/2" />
       <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 text-center md:text-left">
         <div className="flex-1 space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-full border border-white/10">
-            <span className="w-2 h-2 rounded-full bg-secondary-400 animate-pulse" />
-            <span className="text-[10px] font-black uppercase tracking-widest text-secondary-200">
+            <span className="w-2 h-2 rounded-full bg-amber-300 animate-pulse" />
+            <span className="text-[10px] font-black uppercase tracking-widest text-amber-100">
               PUSAT BANTUAN SPMB
             </span>
           </div>
           <h3 className="font-black text-2xl sm:text-3xl md:text-4xl font-display leading-tight">
             Butuh Bantuan? <br />
-            <span className="text-secondary-400">Hubungi Tim Kami!</span>
+            <span className="text-amber-300">Hubungi Tim Kami!</span>
           </h3>
           <p className="text-primary-100 text-sm sm:text-base font-medium opacity-80 max-w-xl">
             Jangan ragu untuk bertanya. Tim kami siap membantu Anda menyelesaikan
@@ -271,7 +271,7 @@ function SupportCenter() {
           <a
             href="https://wa.me/6285111524441"
             target="_blank"
-            className="flex items-center justify-center gap-3 px-6 py-4 bg-secondary-400 text-primary-950 font-black text-sm uppercase tracking-widest rounded-2xl hover:bg-secondary-300 shadow-2xl transition-all hover:scale-105 active:scale-95 w-full"
+            className="flex items-center justify-center gap-3 px-6 py-4 bg-amber-300 text-primary-950 font-black text-sm uppercase tracking-widest rounded-2xl hover:bg-amber-200 shadow-2xl transition-all hover:scale-105 active:scale-95 w-full"
           >
             Chat di WhatsApp
             <ArrowRight className="w-4 h-4" />

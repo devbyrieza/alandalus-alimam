@@ -105,13 +105,13 @@ export default function DownloadBerkasTab() {
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-secondary-50/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         <div className="relative z-10 flex items-start md:items-center gap-6">
           <div className="w-16 h-16 rounded-[1.5rem] bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-sm shrink-0">
-            <Download className="w-8 h-8 text-secondary-100" />
+            <Download className="w-8 h-8 text-amber-300" />
           </div>
           <div>
             <h1 className="text-2xl md:text-3xl font-black mb-2 tracking-tight text-white font-display">
               Download Berkas
             </h1>
-            <p className="text-secondary-100/90 font-medium max-w-xl text-sm md:text-base">
+            <p className="text-white/80 font-medium max-w-xl text-sm md:text-base">
               Unduh dokumen penting untuk proses pendaftaran Anda.
             </p>
           </div>

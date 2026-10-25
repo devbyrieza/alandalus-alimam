@@ -1128,11 +1128,11 @@ export default function PendaftarDetailPage() {
               <p className="font-black text-xl flex items-center gap-1.5 text-white">
                 {isEnrolled || hasPaidRegistration ? (
                   <>
-                    <CheckCircle className="w-5 h-5 text-emerald-400" /> Lunas
+                    <CheckCircle className="w-5 h-5 text-amber-300" /> Lunas
                   </>
                 ) : hasPendingPayment ? (
                   <>
-                    <AlertCircle className="w-5 h-5 text-secondary-400" />{" "}
+                    <AlertCircle className="w-5 h-5 text-amber-300" />{" "}
                     Pending
                   </>
                 ) : (

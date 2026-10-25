@@ -922,13 +922,13 @@ export default function UploadBerkasTab() {
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-center gap-5">
             <div className="w-16 h-16 rounded-[1.5rem] bg-white/10 flex items-center justify-center border border-white/20 shadow-sm shrink-0 backdrop-blur-md">
-              <Upload className="w-8 h-8 text-secondary-100" />
+              <Upload className="w-8 h-8 text-amber-300" />
             </div>
             <div>
               <h1 className="text-2xl md:text-3xl font-black mb-2 tracking-tight text-white font-display">
                 Upload Berkas
               </h1>
-              <p className="text-secondary-100/90 font-medium max-w-xl text-sm md:text-base">
+              <p className="text-white/80 font-medium max-w-xl text-sm md:text-base">
                 Lengkapi dokumen persyaratan untuk verifikasi data.
               </p>
             </div>

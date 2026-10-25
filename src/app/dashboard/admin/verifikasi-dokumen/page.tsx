@@ -229,7 +229,7 @@ function VerifikasiDokumenContent() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 flex-wrap">
           <div className="flex flex-wrap items-center gap-3 md:gap-5">
             <div className="p-4.5 md:p-6 sm:p-8 bg-linear-to-br from-primary-600 to-primary-900 rounded-2xl shadow-2xl flex-shrink-0">
-              <FileCheck className="w-6 h-6 md:w-8 md:h-8 text-secondary-100" />
+              <FileCheck className="w-6 h-6 md:w-8 md:h-8 text-amber-300" />
             </div>
             <div>
               <h1 className="text-lg md:text-3xl font-black text-primary-950 tracking-tight leading-none mb-1">

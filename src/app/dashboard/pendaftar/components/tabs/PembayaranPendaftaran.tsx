@@ -787,16 +787,16 @@ export default function PembayaranPendaftaranTab({
           <div className="flex items-start gap-5">
             <div className="w-16 h-16 rounded-[1.5rem] bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-sm shrink-0">
               {isStatusOnly ? (
-                <Shield className="w-8 h-8 text-secondary-100" />
+                <Shield className="w-8 h-8 text-amber-300" />
               ) : (
-                <CreditCard className="w-8 h-8 text-secondary-100" />
+                <CreditCard className="w-8 h-8 text-amber-300" />
               )}
             </div>
             <div>
               <h1 className="text-2xl md:text-3xl font-black mb-2 tracking-tight text-white">
                 {isStatusOnly ? "Status Pembayaran" : "Pembayaran Pendaftaran"}
               </h1>
-              <p className="text-emerald-50 font-medium max-w-lg">
+              <p className="text-white/80 font-medium max-w-lg">
                 {isStatusOnly
                   ? "Lihat status verifikasi pembayaran Anda dan riwayat bukti transfer."
                   : "Selesaikan pembayaran untuk membuka akses pengisian data santri lengkap."}

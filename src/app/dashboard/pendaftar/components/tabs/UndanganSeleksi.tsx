@@ -443,7 +443,7 @@ export default function UndanganSeleksiTab() {
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black bg-white/10 text-white/90 backdrop-blur-md mb-3 border border-white/15">
-            <Sparkles className="w-3.5 h-3.5 text-secondary-400" />
+            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
             Tahun Ajaran 2027/2028
           </div>
           <h1 className="text-2xl md:text-3xl font-black mb-2 text-white">
@@ -456,7 +456,7 @@ export default function UndanganSeleksiTab() {
           <div className="mt-6 flex flex-wrap items-center gap-4 text-xs font-bold">
             <div className="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/15 flex items-center gap-2">
               <span className="text-white/70">Total Progres:</span>
-              <span className="text-secondary-400 font-black text-sm">
+              <span className="text-amber-300 font-black text-sm">
                 {data.progress?.percentage || 0}%
               </span>
             </div>
@@ -667,7 +667,7 @@ export default function UndanganSeleksiTab() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
                 <div>
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/10 text-white/90 backdrop-blur-md mb-2 border border-white/15">
-                    <Sparkles className="w-3.5 h-3.5 text-secondary-400" />
+                    <Sparkles className="w-3.5 h-3.5 text-amber-300" />
                     Pilih Jadwal Sesuai Kategori
                   </div>
                   <h3 className="text-xl font-black text-white">
@@ -681,13 +681,13 @@ export default function UndanganSeleksiTab() {
                 <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/15 min-w-[220px]">
                   <div className="flex items-center justify-between text-xs font-bold text-white mb-2">
                     <span>Progres Pemilihan:</span>
-                    <span className="text-secondary-400 font-black">
+                    <span className="text-amber-300 font-black">
                       {bookedCount} / {availableCategories.length} Selesai
                     </span>
                   </div>
                   <div className="w-full bg-black/25 h-2.5 rounded-full overflow-hidden p-0.5">
                     <div
-                      className="bg-gradient-to-r from-secondary-400 to-emerald-400 h-full rounded-full transition-all duration-500"
+                      className="bg-gradient-to-r from-amber-300 to-amber-500 h-full rounded-full transition-all duration-500"
                       style={{
                         width: `${Math.round(
                           (bookedCount / availableCategories.length) * 100,
