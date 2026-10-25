@@ -1934,7 +1934,7 @@
   }
 
   .text-gradient-maroon {
-    background: linear-gradient(135deg, #E11D74 0%, #0977E6 100%);
+    background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-900) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -2743,7 +2743,7 @@
      Contoh: <span class="gradient-text-maroon">Penerimaan Santri</span>
   */
   .gradient-text-maroon {
-    background: linear-gradient(135deg, #E11D74 0%, #0977E6 100%);
+    background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-900) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
