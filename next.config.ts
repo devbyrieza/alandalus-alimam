@@ -20,6 +20,15 @@ const nextConfig: any = {
     // tidak gagal TLS saat build di Docker/CI.
     turbopackUseSystemTlsCerts: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/dashboard/pendaftar/ujian-online/:path*',
+        destination: '/dashboard/pendaftar/ujian/:path*',
+        permanent: false,
+      },
+    ];
+  },
   // Rewrite khusus untuk subdomain MOSA CUP
   async rewrites() {
     return {
