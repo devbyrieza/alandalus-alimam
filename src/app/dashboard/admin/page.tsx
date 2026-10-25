@@ -372,7 +372,7 @@ export default function AdminDashboardPage() {
         </button>
       </div>
 
-      <div className="bg-linear-to-br from-primary-800 via-primary-700 to-rose-950 rounded-[2.5rem] lg:rounded-[3rem] p-6 sm:p-5 md:p-8 lg:p-6 text-white relative overflow-hidden shadow-[0_32px_64px_-16px_rgba(159,18,57,0.4)] border border-white/10">
+      <div className="bg-linear-to-br from-primary-900 via-primary-950 to-rose-950 rounded-[2.5rem] lg:rounded-[3rem] p-6 sm:p-5 md:p-8 lg:p-6 text-white relative overflow-hidden shadow-[0_32px_64px_-16px_rgba(159,18,57,0.4)] border border-white/10">
         
         <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
           <div className="max-w-xl w-full">
@@ -381,32 +381,32 @@ export default function AdminDashboardPage() {
               <span className="text-white">Status Operasional: Aktif</span>
             </div>
             <h2 className="text-3xl sm:text-2xl md:text-4xl lg:text-6xl font-black mb-4 sm:mb-6 tracking-tighter leading-tight text-white drop-">
-              Pantau <span className="text-amber-300">Pendaftaran</span>
+              Pantau <span className="text-amber-200">Pendaftaran</span>
             </h2>
             <div className="flex items-center gap-8 sm:gap-12 mt-8 lg:mt-12">
               <div>
                 <span className="text-3xl sm:text-3xl md:text-5xl font-black text-white drop-">{stats.total_pendaftar}</span>
-                <p className="text-[10px] sm:text-[11px] font-black text-white/75 uppercase tracking-widest mt-2">Pendaftar</p>
+                <p className="text-[10px] sm:text-[11px] font-black text-white/90 uppercase tracking-widest mt-2">Pendaftar</p>
               </div>
               <div className="w-px h-12 sm:h-16 bg-white/20" />
               <div>
-                <span className="text-3xl sm:text-3xl md:text-5xl font-black text-amber-300 drop-">{stats.sudah_bayar}</span>
-                <p className="text-[10px] sm:text-[11px] font-black text-white/75 uppercase tracking-widest mt-2">Bayar Pendaftaran</p>
+                <span className="text-3xl sm:text-3xl md:text-5xl font-black text-amber-200 drop-">{stats.sudah_bayar}</span>
+                <p className="text-[10px] sm:text-[11px] font-black text-white/90 uppercase tracking-widest mt-2">Bayar Pendaftaran</p>
               </div>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 w-full lg:w-auto">
              <div className="bg-white/10 backdrop-blur-xl p-6 sm:p-8 sm:p-6 lg:p-5 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-white/20 shadow-2xl flex flex-col items-center group hover:bg-white/15 transition-all">
-                <p className="text-[9px] sm:text-[10px] font-black text-white/80 uppercase tracking-widest mb-2 sm:mb-4 text-center group-hover:text-white transition-colors">Diterima</p>
-                <p className="text-2xl sm:text-2xl md:text-4xl font-black text-amber-300 drop-">{stats.diterima}</p>
+                <p className="text-[9px] sm:text-[10px] font-black text-white/90 uppercase tracking-widest mb-2 sm:mb-4 text-center group-hover:text-white transition-colors">Diterima</p>
+                <p className="text-2xl sm:text-2xl md:text-4xl font-black text-amber-200 drop-">{stats.diterima}</p>
              </div>
              <div className="bg-white/10 backdrop-blur-xl p-6 sm:p-8 sm:p-6 lg:p-5 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-white/20 shadow-2xl flex flex-col items-center group hover:bg-white/15 transition-all">
-                <p className="text-[9px] sm:text-[10px] font-black text-white/80 uppercase tracking-widest mb-2 sm:mb-4 text-center group-hover:text-white transition-colors">Proses Daftar Ulang</p>
-                <p className="text-2xl sm:text-2xl md:text-4xl font-black text-amber-300 drop-">{stats.daftar_ulang_sedang}</p>
+                <p className="text-[9px] sm:text-[10px] font-black text-white/90 uppercase tracking-widest mb-2 sm:mb-4 text-center group-hover:text-white transition-colors">Proses Daftar Ulang</p>
+                <p className="text-2xl sm:text-2xl md:text-4xl font-black text-amber-200 drop-">{stats.daftar_ulang_sedang}</p>
              </div>
              <div className="bg-white/10 backdrop-blur-xl p-6 sm:p-8 sm:p-6 lg:p-5 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-white/20 shadow-2xl flex flex-col items-center group hover:bg-white/15 transition-all md:col-span-2">
-                <p className="text-[9px] sm:text-[10px] font-black text-white/80 uppercase tracking-widest mb-2 sm:mb-4 text-center group-hover:text-white transition-colors">Lunas Daftar Ulang</p>
-                <p className="text-2xl sm:text-2xl md:text-4xl font-black text-amber-300 drop-">{stats.daftar_ulang_selesai}</p>
+                <p className="text-[9px] sm:text-[10px] font-black text-white/90 uppercase tracking-widest mb-2 sm:mb-4 text-center group-hover:text-white transition-colors">Lunas Daftar Ulang</p>
+                <p className="text-2xl sm:text-2xl md:text-4xl font-black text-amber-200 drop-">{stats.daftar_ulang_selesai}</p>
              </div>
           </div>
         </div>
@@ -440,7 +440,7 @@ export default function AdminDashboardPage() {
       {/* SUMMARY INSIGHTS - Terbuka untuk semua Admin */}
       {(isAdminSuper || isAdminBerkas || isAdminKeuangan) && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-        <div className="bg-linear-to-br from-primary-800 to-primary-950 rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[2.5rem] p-5 sm:p-5 md:p-8 lg:p-6 text-white relative overflow-hidden group shadow-[0_16px_40px_-12px_rgba(159,18,57,0.4)] border border-white/5">
+        <div className="bg-linear-to-br from-primary-900 to-primary-950 rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[2.5rem] p-5 sm:p-5 md:p-8 lg:p-6 text-white relative overflow-hidden group shadow-[0_16px_40px_-12px_rgba(159,18,57,0.4)] border border-white/5">
           <div className="absolute top-0 right-0 p-5 md:p-8 opacity-5 group-hover:rotate-12 transition-transform duration-700">
             <TrendingUp className="w-48 h-48" />
           </div>
@@ -452,32 +452,32 @@ export default function AdminDashboardPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
               <div className="space-y-6 sm:space-y-8">
                 <div>
-                  <p className="text-[10px] font-black text-white/70 uppercase tracking-widest mb-2">Total Lunas</p>
+                  <p className="text-[10px] font-black text-white/90 uppercase tracking-widest mb-2">Total Lunas</p>
                   <p className="text-2xl sm:text-2xl md:text-4xl font-black text-white">{stats.sudah_bayar}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-black text-white/70 uppercase tracking-widest mb-2">Data Komplit</p>
-                  <p className="text-2xl sm:text-2xl md:text-4xl font-black text-amber-300">{stats.sudah_isi_data}</p>
+                  <p className="text-[10px] font-black text-white/90 uppercase tracking-widest mb-2">Data Komplit</p>
+                  <p className="text-2xl sm:text-2xl md:text-4xl font-black text-amber-200">{stats.sudah_isi_data}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-black text-white/70 uppercase tracking-widest mb-2">Proses Daftar Ulang</p>
-                  <p className="text-2xl sm:text-2xl md:text-4xl font-black text-amber-300">{stats.daftar_ulang_sedang}</p>
+                  <p className="text-[10px] font-black text-white/90 uppercase tracking-widest mb-2">Proses Daftar Ulang</p>
+                  <p className="text-2xl sm:text-2xl md:text-4xl font-black text-amber-200">{stats.daftar_ulang_sedang}</p>
                 </div>
               </div>
               <div className="space-y-6 sm:space-y-8 pl-4 sm:pl-10 border-l border-white/10">
                 <div>
-                  <p className="text-[10px] font-black text-white/70 uppercase tracking-widest mb-2">Antrean Aktif</p>
-                  <p className="text-2xl sm:text-2xl md:text-4xl font-black text-amber-300">{stats.waiting_payment + stats.waiting_docs}</p>
+                  <p className="text-[10px] font-black text-white/90 uppercase tracking-widest mb-2">Antrean Aktif</p>
+                  <p className="text-2xl sm:text-2xl md:text-4xl font-black text-amber-200">{stats.waiting_payment + stats.waiting_docs}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-black text-white/70 uppercase tracking-widest mb-2">Tingkat Kelulusan</p>
-                  <p className="text-2xl sm:text-2xl md:text-4xl font-black text-amber-300">
+                  <p className="text-[10px] font-black text-white/90 uppercase tracking-widest mb-2">Tingkat Kelulusan</p>
+                  <p className="text-2xl sm:text-2xl md:text-4xl font-black text-amber-200">
                     {stats.total_pendaftar > 0 ? Math.round((stats.diterima / stats.total_pendaftar) * 100) : 0}%
                   </p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-black text-white/70 uppercase tracking-widest mb-2">Lunas Daftar Ulang</p>
-                  <p className="text-2xl sm:text-2xl md:text-4xl font-black text-amber-300">{stats.daftar_ulang_selesai}</p>
+                  <p className="text-[10px] font-black text-white/90 uppercase tracking-widest mb-2">Lunas Daftar Ulang</p>
+                  <p className="text-2xl sm:text-2xl md:text-4xl font-black text-amber-200">{stats.daftar_ulang_selesai}</p>
                 </div>
               </div>
             </div>
