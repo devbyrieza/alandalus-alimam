@@ -596,7 +596,7 @@ export default function KegiatanPage() {
   ];
 
   return (
-    <main className="bg-white min-h-screen">
+    <main className="bg-white min-h-dvh">
       {/* 1. Hero Section */}
       <section className="relative pt-28 pb-20 lg:pt-36 overflow-hidden bg-gradient-to-b from-[#FDFCF9] via-[#F8FAFC] to-white border-b border-slate-200">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gold-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none max-w-full" />

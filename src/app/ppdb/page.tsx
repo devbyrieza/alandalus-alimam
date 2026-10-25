@@ -253,7 +253,7 @@ export default function SPMBInfoPage() {
   ];
 
   return (
-    <main className="bg-gradient-to-b from-[#FFF5F8] via-[#FAF8F9] to-white min-h-screen pt-28 pb-24 lg:pt-36">
+    <main className="bg-gradient-to-b from-[#FFF5F8] via-[#FAF8F9] to-white min-h-dvh pt-28 pb-24 lg:pt-36">
       {/* ─── 1. HERO SECTION ─── */}
       <section className="relative overflow-hidden pb-14">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utb3BhY2l0eT0iMC4wMiIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTAgNjBoNjBNNjAgMGwwIDYwIi8+PC9nPjwvc3ZnPg==')] opacity-70 pointer-events-none" />

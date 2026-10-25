@@ -78,7 +78,7 @@ Mohon informasinya. Terima kasih.`;
   };
 
   return (
-    <main className="bg-gradient-to-b from-[#FDFCF9] via-[#F8FAFC] to-white min-h-screen pt-28 pb-24 lg:pt-36">
+    <main className="bg-gradient-to-b from-[#FDFCF9] via-[#F8FAFC] to-white min-h-dvh pt-28 pb-24 lg:pt-36">
       
       {/* ─── 1. HERO OMI EDITORIAL ─── */}
       <section className="relative overflow-hidden pb-14">
