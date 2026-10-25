@@ -1,10 +1,8 @@
 "use client";
 
 // src/app/page.tsx
-import { useEffect } from "react";
 import { LazyMotion, domAnimation } from "framer-motion";
 
-import { restoreScrollPosition } from "@/lib/navigation-scroll";
 import ScrollAnimation from "@/components/ui/ScrollAnimation";
 
 import HeroSection from "@/components/home/HeroSection";
@@ -28,10 +26,6 @@ import BentoGridSection from "@/components/home/BentoGridSection";
 import FloatingCta from "@/components/home/FloatingCta";
 
 export default function HomePage() {
-  useEffect(() => {
-    restoreScrollPosition();
-  }, []);
-
   return (
     <LazyMotion features={domAnimation}>
       <main
