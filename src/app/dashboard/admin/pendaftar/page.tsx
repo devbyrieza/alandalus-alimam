@@ -1421,9 +1421,9 @@ function AdminPendaftarContent() {
                     <option value="belum_daftar_ulang">
                       Belum Daftar Ulang
                     </option>
-                    <option value="sudah_daftar_ulang">
-                      Daftar Ulang
-                    </option>
+                    <option value="sudah_daftar_ulang">Semua Daftar Ulang</option>
+                    <option value="daftar_ulang_sedang">Proses Daftar Ulang (Cicil)</option>
+                    <option value="daftar_ulang_selesai">Lunas Daftar Ulang</option>
                   </optgroup>
                 </>
               )}
