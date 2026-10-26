@@ -433,7 +433,7 @@ export default function PendaftarDetailPage() {
         icon: "success",
         title: "Berhasil",
         text: data.message || "Data pendaftar berhasil diperbarui secara lengkap!",
-        confirmButtonColor: "#800000" });
+        confirmButtonColor: "#BE185D" });
 
       setIsEditModalOpen(false);
       // reload pendaftar data
@@ -448,7 +448,7 @@ export default function PendaftarDetailPage() {
         icon: "error",
         title: "Gagal",
         text: err.message || "Terjadi kesalahan saat menyimpan data",
-        confirmButtonColor: "#800000" });
+        confirmButtonColor: "#BE185D" });
     } finally {
       setSavingEdit(false);
       setLoading(false);
@@ -839,7 +839,7 @@ export default function PendaftarDetailPage() {
         color: "bg-gold-50 text-gold-800 border border-gold-100" },
       docs_verified: {
         label: "Berkas Lengkap",
-        color: "bg-emerald-50 text-[#550000] border border-emerald-100" },
+        color: "bg-emerald-50 text-[#9D174D] border border-emerald-100" },
       scheduled: {
         label: "Proses Seleksi",
         color: "bg-purple-50 text-purple-800 border border-purple-100" },
@@ -861,7 +861,7 @@ export default function PendaftarDetailPage() {
       cadangan: {
         label: "Cadangan",
         color: "bg-gold-100 text-gold-800 border border-gold-200" },
-      accepted: { label: "Diterima", color: "bg-[#550000] text-white" },
+      accepted: { label: "Diterima", color: "bg-[#9D174D] text-white" },
       rejected: { label: "Ditolak", color: "bg-rose-600 text-white" },
       mengundurkan_diri: {
         label: "Mengundurkan Diri",
@@ -871,7 +871,7 @@ export default function PendaftarDetailPage() {
         color: "bg-slate-100 text-slate-600 border border-slate-200" },
       enrolled: {
         label: "Proses Daftar Ulang",
-        color: "bg-emerald-100 text-[#550000]" },
+        color: "bg-emerald-100 text-[#9D174D]" },
       enrolled_full: {
         label: "Lunas Daftar Ulang",
         color: "bg-primary-100 text-primary-800 border border-primary-200" } };
@@ -1224,7 +1224,7 @@ export default function PendaftarDetailPage() {
                 href={`https://wa.me/${pendaftar.no_hp.replace(/\D/g, "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl text-xs font-black transition-all flex items-center gap-1 shadow-2xl active:scale-95"
+                className="px-4 py-2 bg-[#9D174D] hover:bg-[#9D174D] text-white rounded-3xl text-xs font-black transition-all flex items-center gap-1 shadow-2xl active:scale-95"
               >
                 <Phone className="w-3.5 h-3.5" />
                 WhatsApp
@@ -1249,7 +1249,7 @@ export default function PendaftarDetailPage() {
                 <button
                   onClick={() => handleExportSingle('excel')}
                   disabled={exporting}
-                  className="px-4 py-2 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl text-xs font-black transition-all flex items-center gap-1.5 shadow-2xl active:scale-95 mr-2"
+                  className="px-4 py-2 bg-[#9D174D] hover:bg-[#9D174D] text-white rounded-3xl text-xs font-black transition-all flex items-center gap-1.5 shadow-2xl active:scale-95 mr-2"
                 >
                   {exporting ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <FileSpreadsheet className="w-3.5 h-3.5" />}
                   Excel
@@ -1391,7 +1391,7 @@ export default function PendaftarDetailPage() {
                         <span
                           className={`px-3 py-1 rounded-full text-xs font-bold ${
                             isVerified
-                              ? "bg-green-100 text-[#550000]"
+                              ? "bg-green-100 text-[#9D174D]"
                               : isRejected
                                 ? "bg-red-100 text-red-700"
                                 : "bg-secondary-100 text-secondary-700"
@@ -1433,14 +1433,14 @@ export default function PendaftarDetailPage() {
 
               {userRole === "admin_super" && (
                 <div className="mb-6 p-6 sm:p-8 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row sm:items-center gap-3">
-                  <span className="text-xs font-black uppercase tracking-widest text-[#550000]">
+                  <span className="text-xs font-black uppercase tracking-widest text-[#9D174D]">
                     Aksi Admin (Bypass):
                   </span>
                   <div className="flex flex-wrap gap-2">
                     <a
                       href={`/dashboard/pendaftar/ujian/akademik?pendaftarId=${pendaftar.id}`}
                       target="_blank"
-                      className="px-3 py-1.5 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl text-[11px] font-bold transition-colors shadow-2xl"
+                      className="px-3 py-1.5 bg-[#9D174D] hover:bg-[#9D174D] text-white rounded-3xl text-[11px] font-bold transition-colors shadow-2xl"
                      rel="noopener noreferrer">
                       Buka CBT Akademik
                     </a>
@@ -1454,7 +1454,7 @@ export default function PendaftarDetailPage() {
                     <a
                       href={`/dashboard/pendaftar/ujian/kesiapan?pendaftarId=${pendaftar.id}`}
                       target="_blank"
-                      className="px-3 py-1.5 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl text-[11px] font-bold transition-colors shadow-2xl"
+                      className="px-3 py-1.5 bg-[#9D174D] hover:bg-[#9D174D] text-white rounded-3xl text-[11px] font-bold transition-colors shadow-2xl"
                      rel="noopener noreferrer">
                       Buka CBT Kesiapan
                     </a>
@@ -1485,7 +1485,7 @@ export default function PendaftarDetailPage() {
 
                 {/* 2. Tes Identifikasi Kepribadian (CBT) */}
                 <div className="bg-indigo-50/50 p-6 sm:p-8 rounded-3xl border border-indigo-100">
-                  <span className="block text-xs text-[#550000] font-bold uppercase tracking-wide mb-1">
+                  <span className="block text-xs text-[#9D174D] font-bold uppercase tracking-wide mb-1">
                     CBT: Kepribadian
                   </span>
                   {!pendaftar.nilai_ujian ? (
@@ -1494,7 +1494,7 @@ export default function PendaftarDetailPage() {
                     </span>
                   ) : (
                     <div className="flex items-baseline gap-2">
-                      <span className="text-3xl font-black text-[#550000]">
+                      <span className="text-3xl font-black text-[#9D174D]">
                         {pendaftar.nilai_ujian?.score_kepribadian != null ? Number(pendaftar.nilai_ujian.score_kepribadian).toFixed(1).replace(".0", "") : "-"}
                       </span>
                       <span className="text-sm text-indigo-400 font-medium">
@@ -1528,7 +1528,7 @@ export default function PendaftarDetailPage() {
                 {/* 4. Seleksi Al Qur'an (Offline) */}
                 <div className="bg-emerald-50/50 p-6 sm:p-8 rounded-3xl border border-emerald-100 flex flex-col justify-between">
                   <div>
-                    <span className="block text-xs text-[#550000] font-bold uppercase tracking-wide mb-1">
+                    <span className="block text-xs text-[#9D174D] font-bold uppercase tracking-wide mb-1">
                       Tes Al-Qur&apos;an
                     </span>
                     {!pendaftar.nilai_ujian ? (
@@ -1537,7 +1537,7 @@ export default function PendaftarDetailPage() {
                       </span>
                     ) : (
                       <div className="flex items-baseline gap-2">
-                        <span className="text-3xl font-black text-[#550000]">
+                        <span className="text-3xl font-black text-[#9D174D]">
                           {pendaftar.nilai_ujian?.score_quran != null
                             ? Number(pendaftar.nilai_ujian.score_quran).toFixed(1).replace(".0", "")
                             : pendaftar.nilai_ujian?.nilai_tes_quran != null
@@ -1761,7 +1761,7 @@ export default function PendaftarDetailPage() {
                           showCancelButton: true,
                           confirmButtonText: "Simpan Perubahan",
                           cancelButtonText: "Batal",
-                          confirmButtonColor: "#800000",
+                          confirmButtonColor: "#BE185D",
                           inputValidator: (value) => {
                             if (!value) return "Pilih status terlebih dahulu!";
                           }
@@ -1828,7 +1828,7 @@ export default function PendaftarDetailPage() {
                         showCancelButton: true,
                         confirmButtonText: "Ya, Hitung Ulang!",
                         cancelButtonText: "Batal",
-                        confirmButtonColor: "#800000" });
+                        confirmButtonColor: "#BE185D" });
                       if (!result.isConfirmed) return;
                       try {
                         const res = await fetch(`/api/penilaian/recalculate/${params.id}`, { method: "POST" });
@@ -1856,7 +1856,7 @@ export default function PendaftarDetailPage() {
             <div className="bg-white rounded-3xl shadow-2xl p-6 border border-emerald-100">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-3 bg-emerald-50 rounded-3xl">
-                  <CheckCircle className="w-6 h-6 text-[#550000]" />
+                  <CheckCircle className="w-6 h-6 text-[#9D174D]" />
                 </div>
                 <div>
                   <h3 className="text-xl font-black text-emerald-950 tracking-tight leading-tight">
@@ -1882,7 +1882,7 @@ export default function PendaftarDetailPage() {
                         jumlahMotor: 0 });
                       setIsWdModalOpen(true);
                     }}
-                    className="px-4 py-2 bg-[#550000] text-white rounded-3xl text-xs font-black"
+                    className="px-4 py-2 bg-[#9D174D] text-white rounded-3xl text-xs font-black"
                   >
                     Input Data
                   </button>
@@ -1895,27 +1895,27 @@ export default function PendaftarDetailPage() {
                       <div key={res.id} className="p-5 bg-emerald-50/50 rounded-2xl border border-emerald-100 shadow-2xl relative">
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                           <div>
-                            <span className="block text-[10px] text-[#550000] font-black uppercase tracking-widest mb-1">Status Kehadiran</span>
-                            <span className={`px-2.5 py-1 rounded-2xl text-xs font-black ${data.statusKehadiran === 'HADIR' ? 'bg-emerald-100 text-[#550000]' : 'bg-red-100 text-red-700'}`}>
+                            <span className="block text-[10px] text-[#9D174D] font-black uppercase tracking-widest mb-1">Status Kehadiran</span>
+                            <span className={`px-2.5 py-1 rounded-2xl text-xs font-black ${data.statusKehadiran === 'HADIR' ? 'bg-emerald-100 text-[#9D174D]' : 'bg-red-100 text-red-700'}`}>
                               {data.statusKehadiran === 'HADIR' ? 'Hadir' : 'Tidak Hadir'}
                             </span>
                           </div>
                           {data.statusKehadiran === 'HADIR' && (
                             <>
                               <div>
-                                <span className="block text-[10px] text-[#550000] font-black uppercase tracking-widest mb-1">Rombongan</span>
+                                <span className="block text-[10px] text-[#9D174D] font-black uppercase tracking-widest mb-1">Rombongan</span>
                                 <span className="text-sm font-black text-emerald-950">{data.totalPengantar || 0} Orang</span>
-                                <span className="block text-xs text-[#550000]">Ruang Utama: {(Number(data.jumlahPendamping) || 0) + 1} Org</span>
+                                <span className="block text-xs text-[#9D174D]">Ruang Utama: {(Number(data.jumlahPendamping) || 0) + 1} Org</span>
                               </div>
                               <div>
-                                <span className="block text-[10px] text-[#550000] font-black uppercase tracking-widest mb-1">Kendaraan</span>
+                                <span className="block text-[10px] text-[#9D174D] font-black uppercase tracking-widest mb-1">Kendaraan</span>
                                 <span className="text-sm font-black text-emerald-950">{data.jumlahMobil || 0} Mobil, {data.jumlahMotor || 0} Motor</span>
                               </div>
                             </>
                           )}
                           {data.catatanTambahan && (
                             <div className="sm:col-span-2 md:col-span-3">
-                              <span className="block text-[10px] text-[#550000] font-black uppercase tracking-widest mb-1">Catatan</span>
+                              <span className="block text-[10px] text-[#9D174D] font-black uppercase tracking-widest mb-1">Catatan</span>
                               <span className="text-xs text-emerald-950">{data.catatanTambahan}</span>
                             </div>
                           )}
@@ -1932,7 +1932,7 @@ export default function PendaftarDetailPage() {
                                 jumlahMotor: data.jumlahMotor || 0 });
                               setIsWdModalOpen(true);
                             }}
-                            className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-emerald-200 text-[#550000] hover:bg-emerald-50 rounded-2xl text-xs font-black transition-colors"
+                            className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-emerald-200 text-[#9D174D] hover:bg-emerald-50 rounded-2xl text-xs font-black transition-colors"
                           >
                             <Edit className="w-3.5 h-3.5" />
                             Edit
@@ -1976,7 +1976,7 @@ export default function PendaftarDetailPage() {
                         <span
                           className={`px-3 py-1 rounded-2xl text-[10px] font-black uppercase tracking-widest ${
                             payment.status_pembayaran === "verified"
-                              ? "bg-emerald-100 text-[#550000] border border-emerald-200"
+                              ? "bg-emerald-100 text-[#9D174D] border border-emerald-200"
                               : payment.status_pembayaran === "rejected"
                                 ? "bg-rose-100 text-rose-700 border border-rose-200"
                                 : "bg-gold-100 text-gold-700 border border-gold-200"
@@ -2125,7 +2125,7 @@ export default function PendaftarDetailPage() {
           <div className="bg-white rounded-3xl shadow-2xl p-6 border border-gold-100">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-3 bg-emerald-50 rounded-3xl">
-                <MapPin className="w-6 h-6 text-[#550000]" />
+                <MapPin className="w-6 h-6 text-[#9D174D]" />
               </div>
               <h3 className="text-xl font-black text-primary-950 tracking-tight">
                 Kontak & Alamat
@@ -2151,7 +2151,7 @@ export default function PendaftarDetailPage() {
                       <button
                         onClick={handleUpdatePhone}
                         disabled={savingPhone}
-                        className="p-4 bg-[#550000] text-white rounded-2xl hover:bg-[#550000] transition-colors disabled:opacity-50"
+                        className="p-4 bg-[#9D174D] text-white rounded-2xl hover:bg-[#9D174D] transition-colors disabled:opacity-50"
                         title="Simpan Nomor"
                       >
                         {savingPhone ? (
@@ -2279,7 +2279,7 @@ export default function PendaftarDetailPage() {
                         className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
                           pendaftar.orang_tua.status_ayah === "Sudah Meninggal"
                             ? "bg-red-100 text-red-600 border border-red-200"
-                            : "bg-emerald-100 text-[#550000] border border-emerald-200"
+                            : "bg-emerald-100 text-[#9D174D] border border-emerald-200"
                         }`}
                       >
                         {pendaftar.orang_tua.status_ayah}
@@ -2345,7 +2345,7 @@ export default function PendaftarDetailPage() {
                         className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
                           pendaftar.orang_tua.status_ibu === "Sudah Meninggal"
                             ? "bg-red-100 text-red-600 border border-red-200"
-                            : "bg-emerald-100 text-[#550000] border border-emerald-200"
+                            : "bg-emerald-100 text-[#9D174D] border border-emerald-200"
                         }`}
                       >
                         {pendaftar.orang_tua.status_ibu}
@@ -2477,7 +2477,7 @@ export default function PendaftarDetailPage() {
                         <span
                           className={`px-2 py-1 rounded text-xs font-bold ${
                             isVerified
-                              ? "bg-green-100 text-[#550000]"
+                              ? "bg-green-100 text-[#9D174D]"
                               : isRejected
                                 ? "bg-red-100 text-red-700"
                                 : "bg-secondary-100 text-secondary-700"
@@ -2503,7 +2503,7 @@ export default function PendaftarDetailPage() {
             <div className="bg-white rounded-3xl shadow-2xl p-6 border-2 border-primary-100">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-4 bg-emerald-100 rounded-2xl whitespace-nowrap inline-block shrink-0">
-                  <CreditCard className="w-6 h-6 text-[#550000]" />
+                  <CreditCard className="w-6 h-6 text-[#9D174D]" />
                 </div>
                 <h3 className="text-lg font-bold text-stone-900">Pembayaran</h3>
               </div>
@@ -2523,7 +2523,7 @@ export default function PendaftarDetailPage() {
                         <span
                           className={`px-2 py-1 rounded text-xs font-bold ${
                             payment.status_pembayaran === "verified"
-                              ? "bg-green-100 text-[#550000]"
+                              ? "bg-green-100 text-[#9D174D]"
                               : payment.status_pembayaran === "rejected"
                                 ? "bg-red-100 text-red-700"
                                 : "bg-secondary-100 text-secondary-700"
@@ -3720,7 +3720,7 @@ export default function PendaftarDetailPage() {
                 <div className="flex gap-4">
                   <label className={`flex-1 flex items-center justify-center gap-2 p-3 rounded-3xl border-2 cursor-pointer transition-all ${
                     wdFormData.statusKehadiran === "HADIR"
-                      ? "border-emerald-500 bg-emerald-50 text-[#550000]"
+                      ? "border-emerald-500 bg-emerald-50 text-[#9D174D]"
                       : "border-surface-200 bg-white text-ink-400 hover:bg-surface-50"
                   }`}>
                     <input
@@ -3834,7 +3834,7 @@ export default function PendaftarDetailPage() {
                 type="button"
                 disabled={savingWd}
                 onClick={handleSaveWd}
-                className="px-6 py-2.5 rounded-3xl bg-[#550000] hover:bg-[#550000] text-white font-black shadow-md transition-all active:scale-95 disabled:opacity-50"
+                className="px-6 py-2.5 rounded-3xl bg-[#9D174D] hover:bg-[#9D174D] text-white font-black shadow-md transition-all active:scale-95 disabled:opacity-50"
               >
                 {savingWd ? "Menyimpan..." : "Simpan Perubahan"}
               </button>

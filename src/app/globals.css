@@ -67,14 +67,14 @@
   --color-maroon-50: #fdf2f8;
   --color-maroon-100: #fce7f3;
   --color-maroon-200: #fbcfe8;
-  --color-maroon-300: #f472b6;
-  --color-maroon-400: #fb7185;
-  --color-maroon-500: #FB7185;
+  --color-maroon-300: #f9a8d4;
+  --color-maroon-400: #f472b6;
+  --color-maroon-500: #ec4899;
   --color-maroon-600: #E11D74; /* Rose Pink Khas Putri */
-  --color-maroon-700: #F43F5E;
-  --color-maroon-800: #E11D74;
-  --color-maroon-900: #BE123C;
-  --color-maroon-950: #9F1239;
+  --color-maroon-700: #BE185D;
+  --color-maroon-800: #9D174D;
+  --color-maroon-900: #831843;
+  --color-maroon-950: #500724;
 
   /* â”€â”€â”€ Cream (Al Imam Secondary) â”€â”€â”€ */
   --color-cream-50: #f0f8ff;
@@ -118,15 +118,15 @@
   --color-primary-200: var(--color-maroon-200);
   --color-primary-300: var(--color-maroon-300);
   --color-primary-400: var(--color-maroon-400);
-  --color-primary-500: #FB7185;
-  --color-primary-600: #E11D74;
-  --color-primary-700: #F43F5E;
-  --color-primary-800: #E11D74;
-  --color-primary-900: #BE123C;
-  --color-primary-950: #9F1239;
-  --color-primary: #E11D74; /* Rose Pink Khas Putri */
+  --color-primary-500: var(--color-maroon-500);
+  --color-primary-600: var(--color-maroon-600);
+  --color-primary-700: var(--color-maroon-700);
+  --color-primary-800: var(--color-maroon-800);
+  --color-primary-900: var(--color-maroon-900);
+  --color-primary-950: var(--color-maroon-950);
+  --color-primary: var(--color-maroon-600); /* Rose Pink Khas Putri */
   --color-primary-light: #FCE7F3; /* Pastel Rose */
-  --color-primary-dark: #BE123C; /* Deep Rose */
+  --color-primary-dark: var(--color-maroon-800); /* Deep Rose */
 
   --color-secondary-50: var(--color-cream-50);
   --color-secondary-100: var(--color-cream-100);
@@ -163,9 +163,7 @@
 
   /* â”€â”€â”€ Islamic Color Palette â€” Semantic Tokens â”€â”€â”€ */
   --color-primary: #E11D74; /* Rose Pink Khas Putri */
-  /* Maroon utama #550000 */
   --color-primary-light: #FCE7F3; /* Pastel Rose */
-  /* Maroon muda / background aksen */
   --color-secondary: #0977E6; /* Biru Khas Ulul Albaab */
   /* Cream Secondary #ddc192 */
   --color-background: #fafaf9; /* Warm white â€” lebih segar dari pure white */
@@ -255,7 +253,7 @@
   :root {
   /* TIER PLATINUM: The Best of Both Worlds - Al-Imam (Khusus Putri) */
   --primary:        #E11D74; /* Rose Pink Khas Putri */
-  --primary-dark:   #BE123C; /* Deep Rose */
+  --primary-dark:   #BE185D; /* Deep Rose */
   --primary-light:  #F43F5E; /* Bright Rose */
   --secondary:      #0977E6; /* Biru Khas Ulul Albaab */
   --secondary-light: #38BDF8; /* Sky Blue */
@@ -485,7 +483,7 @@
     font-size: 0.9375rem;
     letter-spacing: -0.01em;
     color: #ffffff;
-    background: linear-gradient(135deg, #E11D74 0%, #BE123C 100%);
+    background: linear-gradient(135deg, #E11D74 0%, #BE185D 100%);
     box-shadow: var(--shadow-maroon);
     transition: all var(--duration-base) var(--ease-spring);
     border: none;
@@ -585,7 +583,7 @@
     font-size: 0.9375rem;
     letter-spacing: -0.01em;
     color: #ffffff;
-    background: linear-gradient(135deg, #E11D74 0%, #BE123C 100%);
+    background: linear-gradient(135deg, #E11D74 0%, #BE185D 100%);
     box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.15), var(--shadow-maroon);
     transition: transform 0.3s var(--ease-spring), box-shadow 0.3s var(--ease-spring), filter 0.3s var(--ease-spring);
     border: none;
@@ -1204,7 +1202,7 @@
       background: var(--color-background);
       border-color: var(--color-primary);
       box-shadow:
-        0 0 0 3px rgba(139, 32, 32, 0.12),
+        0 0 0 3px rgba(157,23,77, 0.12),
         var(--shadow-xs);
     }
 
@@ -1239,7 +1237,7 @@
       background: var(--color-background);
       border-color: var(--color-primary);
       box-shadow:
-        0 0 0 3px rgba(139, 32, 32, 0.12),
+        0 0 0 3px rgba(157,23,77, 0.12),
         var(--shadow-xs);
     }
   }
@@ -1269,7 +1267,7 @@
       background: var(--color-background);
       border-color: var(--color-primary);
       box-shadow:
-        0 0 0 3px rgba(139, 32, 32, 0.12),
+        0 0 0 3px rgba(157,23,77, 0.12),
         var(--shadow-xs);
     }
   }
@@ -2021,7 +2019,7 @@
   }
 
   .glass-teal {
-    background: rgba(107, 15, 15, 0.82);
+    background: rgba(131,24,67, 0.82);
     backdrop-filter: blur(24px) saturate(1.5);
     -webkit-backdrop-filter: blur(24px) saturate(1.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -2035,7 +2033,7 @@
   }
 
   .glass-maroon {
-    background: rgba(128, 0, 0, 0.75);
+    background: rgba(190,24,93, 0.75);
     backdrop-filter: blur(24px) saturate(1.5);
     -webkit-backdrop-filter: blur(24px) saturate(1.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -2206,8 +2204,8 @@
     gap: 0.5rem;
     padding: 0.375rem 0.875rem;
     border-radius: 9999px;
-    background: rgba(85, 0, 0, 0.08);
-    border: 1px solid rgba(85, 0, 0, 0.18);
+    background: rgba(157,23,77, 0.08);
+    border: 1px solid rgba(157,23,77, 0.18);
     color: var(--color-maroon-700);
     font-weight: 700;
     font-size: 0.75rem;
@@ -2241,8 +2239,8 @@
     font-weight: 700;
     font-size: 0.9375rem;
     color: #ffffff;
-    background: linear-gradient(135deg, #E11D74 0%, #BE123C 100%);
-    box-shadow: 0 0 40px -10px rgba(85, 0, 0, 0.55), 0 4px 16px -4px rgba(85, 0, 0, 0.35);
+    background: linear-gradient(135deg, #E11D74 0%, #BE185D 100%);
+    box-shadow: 0 0 40px -10px rgba(157,23,77, 0.55), 0 4px 16px -4px rgba(157,23,77, 0.35);
     border: none;
     text-decoration: none;
     transition: transform 0.2s var(--ease-spring), box-shadow 0.2s var(--ease-smooth), filter 0.2s ease;
@@ -2261,7 +2259,7 @@
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 60px -8px rgba(85, 0, 0, 0.65), 0 8px 24px -4px rgba(225, 29, 116, 0.35);
+      box-shadow: 0 0 60px -8px rgba(157,23,77, 0.65), 0 8px 24px -4px rgba(225, 29, 116, 0.35);
       filter: brightness(1.08);
     }
 
@@ -2359,8 +2357,8 @@
     display: inline-block;
     padding: 0.625rem 1.25rem;
     border-radius: 9999px;
-    background: rgba(85, 0, 0, 0.06);
-    border: 1px solid rgba(85, 0, 0, 0.14);
+    background: rgba(157,23,77, 0.06);
+    border: 1px solid rgba(157,23,77, 0.14);
     font-weight: 600;
     color: var(--color-ink-700);
     font-size: 0.875rem;
@@ -2617,7 +2615,7 @@
 
   /* Teal variant (Template-Demo) â€” mapped to maroon for Al Imam brand */
   .section-label-teal {
-    background: rgba(128, 0, 0, 0.08);
+    background: rgba(190,24,93, 0.08);
     color: var(--color-maroon-700);
     border-color: rgba(225, 29, 116, 0.20);
   }
@@ -2631,16 +2629,16 @@
 
   /* Maroon variant (Al Imam) */
   .section-label-maroon {
-    background: rgba(100, 10, 10, 0.09);
+    background: rgba(157,23,77, 0.09);
     color: var(--color-maroon-700);
-    border-color: rgba(100, 10, 10, 0.20);
+    border-color: rgba(157,23,77, 0.20);
   }
 
   /* Alias primary â€” untuk kemudahan pakai di Al Imam */
   .section-label-primary {
-    background: rgba(100, 10, 10, 0.09);
+    background: rgba(157,23,77, 0.09);
     color: var(--color-maroon-700);
-    border-color: rgba(100, 10, 10, 0.20);
+    border-color: rgba(157,23,77, 0.20);
   }
 
   /* White variant (untuk section gelap) */
@@ -2707,11 +2705,11 @@
 
   /* Maroon glass (Al Imam) */
   .glass-panel-maroon {
-    background: rgba(128, 0, 0, 0.07);
+    background: rgba(190,24,93, 0.07);
     backdrop-filter: blur(20px) saturate(1.5);
     -webkit-backdrop-filter: blur(20px) saturate(1.5);
     border: 1px solid rgba(225, 29, 116, 0.20);
-    box-shadow: 0 2px 16px rgba(128, 0, 0, 0.08);
+    box-shadow: 0 2px 16px rgba(190,24,93, 0.08);
   }
 
   /* â”€â”€ Ambient Glow Blobs (CiroAI background orbs) â”€â”€
@@ -2785,7 +2783,7 @@
     transition: box-shadow var(--duration-base) var(--ease-smooth);
 
     &:hover {
-      box-shadow: 0 0 0 1px rgba(128, 0, 0, 0.5), 0 0 30px rgba(128, 0, 0, 0.22);
+      box-shadow: 0 0 0 1px rgba(190,24,93, 0.5), 0 0 30px rgba(190,24,93, 0.22);
     }
   }
 
@@ -3095,7 +3093,7 @@
     overflow: hidden;
   }
   .card-tactile:hover {
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,1), 0 8px 30px rgba(85, 0, 0, 0.08);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,1), 0 8px 30px rgba(157,23,77, 0.08);
     transform: translateY(-2px);
   }
 
@@ -3164,7 +3162,7 @@ html, body {
 @layer base {
   body {
     background:
-      radial-gradient(ellipse at 85% 0%, rgba(85, 0, 0, 0.035) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 0%, rgba(157,23,77, 0.035) 0%, transparent 55%),
       radial-gradient(ellipse at 0% 100%, rgba(221, 193, 146, 0.055) 0%, transparent 55%),
       var(--color-surface-50, #f8fafc) !important;
     background-attachment: fixed !important;
@@ -3193,7 +3191,7 @@ html, body {
 }
 .stat-card:hover {
   transform: translateY(-2px) scale(1.01) !important;
-  box-shadow: 0 10px 28px rgba(85, 0, 0, 0.08), 0 2px 8px rgba(0,0,0,0.04) !important;
+  box-shadow: 0 10px 28px rgba(157,23,77, 0.08), 0 2px 8px rgba(0,0,0,0.04) !important;
 }
 .stat-icon {
   transition: transform 0.2s ease;

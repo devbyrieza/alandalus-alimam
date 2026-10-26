@@ -152,7 +152,7 @@ export default function SearchableSelect({
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           aria-label={`${label}${value ? `: ${value}` : ""}`}
-          className={[ "w-full flex items-center justify-between gap-3", "px-4 py-3 rounded-[var(--radius-md)]", "text-left text-[0.9375rem] font-medium", "border-[1.5px] outline-none", "transition-all duration-[var(--duration-base)] [transition-timing-function:var(--ease-smooth)]", "min-h-[48px]", disabled ? "bg-[var(--color-surface-100)] border-[var(--color-ink-100)] text-[var(--color-ink-300)] cursor-not-allowed" : isOpen ? "bg-[var(--color-white)] border-[var(--color-primary-500)] shadow-[0_0_0_3px_rgba(128,0,0,0.08),var(--shadow-xs)] text-[var(--color-ink-900)]" : value ? "bg-[var(--color-white)] border-[var(--color-primary-200)] hover:border-[var(--color-primary-400)] shadow-[var(--shadow-xs)] text-[var(--color-ink-900)]" : "bg-[var(--color-white)] border-[var(--color-primary-100)] hover:border-[var(--color-primary-300)] hover:bg-[var(--color-white)] shadow-[var(--shadow-xs)] text-[var(--color-ink-400)]", ].join(" ")} >{/* Selected value or placeholder */}
+          className={[ "w-full flex items-center justify-between gap-3", "px-4 py-3 rounded-[var(--radius-md)]", "text-left text-[0.9375rem] font-medium", "border-[1.5px] outline-none", "transition-all duration-[var(--duration-base)] [transition-timing-function:var(--ease-smooth)]", "min-h-[48px]", disabled ? "bg-[var(--color-surface-100)] border-[var(--color-ink-100)] text-[var(--color-ink-300)] cursor-not-allowed" : isOpen ? "bg-[var(--color-white)] border-[var(--color-primary-500)] shadow-[0_0_0_3px_rgba(190,24,93,0.08),var(--shadow-xs)] text-[var(--color-ink-900)]" : value ? "bg-[var(--color-white)] border-[var(--color-primary-200)] hover:border-[var(--color-primary-400)] shadow-[var(--shadow-xs)] text-[var(--color-ink-900)]" : "bg-[var(--color-white)] border-[var(--color-primary-100)] hover:border-[var(--color-primary-300)] hover:bg-[var(--color-white)] shadow-[var(--shadow-xs)] text-[var(--color-ink-400)]", ].join(" ")} >{/* Selected value or placeholder */}
           <span className="truncate flex-1">{value || placeholder}</span>
 
           {/* Right icon */}
@@ -227,7 +227,7 @@ export default function SearchableSelect({
                       e.currentTarget.style.borderColor =
                         "var(--color-primary-400)";
                       e.currentTarget.style.boxShadow =
-                        "0 0 0 3px rgba(128,0,0,0.07)";
+                        "0 0 0 3px rgba(190,24,93,0.07)";
                     }}
                     onBlur={(e) => {
                       e.currentTarget.style.borderColor =

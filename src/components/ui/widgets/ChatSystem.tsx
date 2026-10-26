@@ -225,7 +225,7 @@ export default function ChatSystem() {
                 animate={{ opacity: 1, scale: 1 }}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-[60px] h-[60px] md:w-16 md:h-16 bg-primary-700 text-white rounded-[1.2rem] md:rounded-[1.3rem] flex items-center justify-center shadow-[0_10px_30px_rgba(128,0,0,0.4)] relative transition-all duration-300"
+                className="w-[60px] h-[60px] md:w-16 md:h-16 bg-primary-700 text-white rounded-[1.2rem] md:rounded-[1.3rem] flex items-center justify-center shadow-[0_10px_30px_rgba(190,24,93,0.4)] relative transition-all duration-300"
               >
                 {/* Pulse Effect */}
                 <span

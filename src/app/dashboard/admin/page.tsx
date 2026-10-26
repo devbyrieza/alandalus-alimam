@@ -11,7 +11,7 @@ import { BRANDING } from "@/config/branding";
 const StatWidget = ({ label, value, icon: Icon, color, trend, breakdown, highlighted, onDownload, isDownloading, onPromote, isPromoting }: any) => {
     const colorMap: any = {
     blue: "from-primary-600 to-primary-800",
-    emerald: "from-emerald-500 to-[#7a0000]",
+    emerald: "from-emerald-500 to-emerald-700",
     amber: "from-amber-500 to-amber-600",
     purple: "from-primary-500 to-primary-700",
     rose: "from-rose-500 to-rose-600",
@@ -38,7 +38,7 @@ const StatWidget = ({ label, value, icon: Icon, color, trend, breakdown, highlig
             <div className={`flex items-center gap-1.5 text-[10px] font-black px-3 py-1.5 rounded-full border ${
               highlighted
                 ? "text-amber-300 bg-white/5 border-white/10"
-                : "text-[#550000] bg-emerald-50 border-emerald-100"
+                : "text-primary-700 bg-emerald-50 border-emerald-100"
             }`}>
               <TrendingUp className="w-3.5 h-3.5" />
               <span className="uppercase tracking-wider">{trend}</span>
@@ -68,7 +68,7 @@ const StatWidget = ({ label, value, icon: Icon, color, trend, breakdown, highlig
                   className={`p-4 rounded-3xl border transition-all hover:scale-105 duration-300 ${
                     highlighted 
                       ? "bg-emerald-500/10 border-emerald-500/20 text-amber-300 hover:bg-emerald-500/20" 
-                      : "bg-emerald-50 border-emerald-100 text-[#550000] hover:bg-emerald-100"
+                      : "bg-emerald-50 border-emerald-100 text-primary-700 hover:bg-emerald-100"
                   }`}
                 >
                   {isDownloading === "excel" ? (
@@ -103,7 +103,7 @@ const StatWidget = ({ label, value, icon: Icon, color, trend, breakdown, highlig
             <button
               onClick={(e) => { e.stopPropagation(); onPromote(); }}
               disabled={isPromoting}
-              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl font-black text-xs uppercase tracking-widest transition-all shadow-2xl hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-primary-700 hover:bg-primary-800 text-white rounded-3xl font-black text-xs uppercase tracking-widest transition-all shadow-2xl hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isPromoting ? (
                 <>
@@ -372,7 +372,7 @@ export default function AdminDashboardPage() {
         </button>
       </div>
 
-      <div className="bg-linear-to-br from-primary-900 via-primary-950 to-rose-950 rounded-[2.5rem] lg:rounded-[3rem] p-6 sm:p-5 md:p-8 lg:p-6 text-white relative overflow-hidden shadow-[0_32px_64px_-16px_rgba(159,18,57,0.4)] border border-white/10">
+      <div className="bg-linear-to-br from-primary-600 via-primary-700 to-primary-900 rounded-[2.5rem] lg:rounded-[3rem] p-6 sm:p-5 md:p-8 lg:p-6 text-white relative overflow-hidden shadow-[0_32px_64px_-16px_rgba(225,29,116,0.35)] border border-white/10">
         
         <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
           <div className="max-w-xl w-full">
@@ -440,7 +440,7 @@ export default function AdminDashboardPage() {
       {/* SUMMARY INSIGHTS - Terbuka untuk semua Admin */}
       {(isAdminSuper || isAdminBerkas || isAdminKeuangan) && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-        <div className="bg-linear-to-br from-primary-900 to-primary-950 rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[2.5rem] p-5 sm:p-5 md:p-8 lg:p-6 text-white relative overflow-hidden group shadow-[0_16px_40px_-12px_rgba(159,18,57,0.4)] border border-white/5">
+        <div className="bg-linear-to-br from-primary-800 to-primary-950 rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[2.5rem] p-5 sm:p-5 md:p-8 lg:p-6 text-white relative overflow-hidden group shadow-[0_16px_40px_-12px_rgba(225,29,116,0.35)] border border-white/5">
           <div className="absolute top-0 right-0 p-5 md:p-8 opacity-5 group-hover:rotate-12 transition-transform duration-700">
             <TrendingUp className="w-48 h-48" />
           </div>
@@ -508,7 +508,7 @@ export default function AdminDashboardPage() {
               </div>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between p-6 sm:p-8 sm:p-6 bg-secondary-50 rounded-2xl sm:rounded-3xl border border-secondary-200 hover:border-emerald-200 transition-all cursor-default group/item gap-4">
                 <div className="flex items-center gap-4 sm:gap-5">
-                  <div className="w-12 h-12 rounded-2xl bg-white shadow-2xl flex items-center justify-center text-[#550000] transition-transform group-hover/item:scale-110 shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-white shadow-2xl flex items-center justify-center text-primary-600 transition-transform group-hover/item:scale-110 shrink-0">
                     <Wallet className="w-6 h-6" />
                   </div>
                   <div>

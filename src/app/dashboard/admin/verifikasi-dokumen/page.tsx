@@ -254,7 +254,7 @@ function VerifikasiDokumenContent() {
             <button
               onClick={() => handleExport("excel")}
               disabled={exporting}
-              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-emerald-50 text-[#550000] hover:bg-[#550000] hover:text-white rounded-3xl font-bold transition-all disabled:opacity-50 text-sm"
+              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-emerald-50 text-[#9D174D] hover:bg-[#9D174D] hover:text-white rounded-3xl font-bold transition-all disabled:opacity-50 text-sm"
             >
               <FileSpreadsheet className="w-4 h-4" />
               Excel
@@ -271,7 +271,7 @@ function VerifikasiDokumenContent() {
               href="/api/admin/export/foto"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-blue-50 text-[#550000] hover:bg-[#550000] hover:text-white rounded-3xl font-bold transition-all text-sm"
+              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-blue-50 text-[#9D174D] hover:bg-[#9D174D] hover:text-white rounded-3xl font-bold transition-all text-sm"
             >
               <Download className="w-4 h-4" />
               <span className="hidden sm:inline">Foto ZIP</span>

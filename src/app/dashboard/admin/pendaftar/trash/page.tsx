@@ -293,7 +293,7 @@ export default function TrashPage() {
                             setRestoringItem(item);
                             setIsRestoreModalOpen(true);
                           }}
-                          className="inline-flex items-center gap-2 px-4 py-2 bg-[#550000] hover:bg-[#550000] text-white rounded-2xl text-sm font-bold transition-all shadow-2xl hover:shadow-xl"
+                          className="inline-flex items-center gap-2 px-4 py-2 bg-[#9D174D] hover:bg-[#9D174D] text-white rounded-2xl text-sm font-bold transition-all shadow-2xl hover:shadow-xl"
                         >
                           <RotateCcw className="w-4 h-4" />
                           <span>Restore</span>
@@ -356,7 +356,7 @@ export default function TrashPage() {
             <div className="flex justify-between items-center p-6 border-b border-green-100">
               <div className="flex items-center gap-3">
                 <div className="p-4 bg-green-100 rounded-2xl">
-                  <RotateCcw className="w-6 h-6 text-[#550000]" />
+                  <RotateCcw className="w-6 h-6 text-[#9D174D]" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-stone-900">
@@ -377,7 +377,7 @@ export default function TrashPage() {
 
             <div className="p-6 space-y-4">
               <div className="bg-green-50 border-2 border-green-200 rounded-3xl p-6 sm:p-8">
-                <p className="text-sm text-[#550000] font-medium">
+                <p className="text-sm text-[#9D174D] font-medium">
                   <CheckCircle2 className="w-4 h-4 inline-block mr-1" /> Data{" "}
                   <strong>{toTitleCase(restoringItem.nama_lengkap)}</strong> (
                   {restoringItem.nomor_pendaftaran}) akan dipulihkan dan muncul
@@ -397,7 +397,7 @@ export default function TrashPage() {
                 <button
                   onClick={handleRestore}
                   disabled={isRestoring}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-[#550000] hover:bg-[#550000] text-white font-bold rounded-3xl shadow-md shadow-green-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-[#9D174D] hover:bg-[#9D174D] text-white font-bold rounded-3xl shadow-md shadow-green-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isRestoring ? (
                     <>

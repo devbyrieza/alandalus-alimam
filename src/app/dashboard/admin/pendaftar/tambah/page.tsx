@@ -131,8 +131,8 @@ export default function AdminTambahPendaftar() {
         </div>
       </div>
 
-      <div className="bg-blue-50 border-l-4 border-blue-500 p-6 sm:p-8 rounded-r-xl flex gap-3 text-[#550000] text-sm">
-        <Info className="w-5 h-5 shrink-0 text-[#550000]" />
+      <div className="bg-blue-50 border-l-4 border-blue-500 p-6 sm:p-8 rounded-r-xl flex gap-3 text-[#9D174D] text-sm">
+        <Info className="w-5 h-5 shrink-0 text-[#9D174D]" />
         <p>
           Menggunakan form ini akan langsung membuatkan akun login pendaftar tanpa melewati verifikasi kode OTP via WhatsApp. Nomor HP yang dimasukkan otomatis menjadi nomor login pendaftar.
         </p>

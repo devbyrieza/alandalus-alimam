@@ -79,7 +79,7 @@ export default function PengujiDashboardPage() {
       icon: CheckCircle,
       accent: "emerald",
       bgColor: "bg-emerald-50",
-      iconColor: "text-[#550000]" },
+      iconColor: "text-[#9D174D]" },
     {
       title: "Belum Dinilai",
       value: stats.belum_dinilai,

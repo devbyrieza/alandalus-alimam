@@ -154,7 +154,7 @@ export default function PengaturanPage() {
       <div className="bg-white rounded-3xl shadow-2xl p-6 border-2 border-purple-100">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="p-3 bg-gradient-to-br from-purple-500 to-[#7a0000] rounded-3xl">
+            <div className="p-3 bg-gradient-to-br from-purple-500 to-[#BE185D] rounded-3xl">
               <Settings className="w-8 h-8 text-white" />
             </div>
             <div>
@@ -178,7 +178,7 @@ export default function PengaturanPage() {
         <div
           className={`p-6 sm:p-8 rounded-3xl border-2 ${
             message.type === "success"
-              ? "bg-green-50 border-green-200 text-[#550000]"
+              ? "bg-green-50 border-green-200 text-[#9D174D]"
               : "bg-red-50 border-red-200 text-red-800"
           }`}
         >
@@ -214,12 +214,12 @@ export default function PengaturanPage() {
               {activeTahunAjaran ? (
                 <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-3xl p-6 sm:p-8 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <Star className="w-6 h-6 text-[#550000] fill-green-600" />
+                    <Star className="w-6 h-6 text-[#9D174D] fill-green-600" />
                     <div>
-                      <p className="text-lg font-bold text-[#550000]">
+                      <p className="text-lg font-bold text-[#9D174D]">
                         {activeTahunAjaran.nama}
                       </p>
-                      <p className="text-sm text-[#550000]">
+                      <p className="text-sm text-[#9D174D]">
                         Pendaftaran:{" "}
                         {formatDate(activeTahunAjaran.tanggal_buka_pendaftaran)}{" "}
                         -{" "}
@@ -227,7 +227,7 @@ export default function PengaturanPage() {
                           activeTahunAjaran.tanggal_tutup_pendaftaran,
                         )}
                       </p>
-                      <p className="text-sm text-[#550000] font-bold">
+                      <p className="text-sm text-[#9D174D] font-bold">
                         Biaya:{" "}
                         {formatCurrency(activeTahunAjaran.biaya_pendaftaran)}
                       </p>
@@ -235,7 +235,7 @@ export default function PengaturanPage() {
                   </div>
                   <button
                     onClick={() => startEdit(activeTahunAjaran)}
-                    className="p-4 bg-white text-[#550000] rounded-2xl hover:shadow-xl transition-all border border-green-100"
+                    className="p-4 bg-white text-[#9D174D] rounded-2xl hover:shadow-xl transition-all border border-green-100"
                   >
                     <Edit3 className="w-5 h-5" />
                   </button>
@@ -255,7 +255,7 @@ export default function PengaturanPage() {
                 <button
                   onClick={handleSeed2026}
                   disabled={seeding}
-                  className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-[#7a0000] hover:from-purple-700 hover:to-[#7a0000] text-white rounded-3xl font-bold transition-all disabled:opacity-50"
+                  className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-[#BE185D] hover:from-purple-700 hover:to-[#BE185D] text-white rounded-3xl font-bold transition-all disabled:opacity-50"
                 >
                   {seeding ? (
                     <Loader2 className="w-5 h-5 animate-spin" />
@@ -301,7 +301,7 @@ export default function PengaturanPage() {
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           {ta.is_active && (
-                            <span className="px-2 py-1 bg-[#550000] text-white text-xs font-bold rounded-full">
+                            <span className="px-2 py-1 bg-[#9D174D] text-white text-xs font-bold rounded-full">
                               AKTIF
                             </span>
                           )}
@@ -347,7 +347,7 @@ export default function PengaturanPage() {
       {editingTa && (
         <div onWheel={(e) => e.stopPropagation()} data-modal="true" aria-modal="true" role="dialog" className="fixed inset-0 z-[9999] flex items-start md:items-center pt-10 md:pt-0 pb-20 md:pb-0 justify-center bg-stone-900/50 backdrop-blur-sm p-6 sm:p-8 overflow-y-auto overflow-x-hidden overscroll-contain custom-scrollbar">
           <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="px-6 py-4 bg-gradient-to-r from-purple-600 to-[#7a0000] text-white flex items-center justify-between">
+            <div className="px-6 py-4 bg-gradient-to-r from-purple-600 to-[#BE185D] text-white flex items-center justify-between">
               <h3 className="text-lg font-bold">Edit Tahun Ajaran</h3>
               <button
                 onClick={() => setEditingTa(null)}

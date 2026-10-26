@@ -202,7 +202,7 @@ export default function VerifikasiManualPage() {
                         onClick={() =>
                           openWhatsApp(item.no_hp, item.kode_verifikasi)
                         }
-                        className="px-4 py-2 bg-[#550000] text-white rounded-2xl hover:bg-[#550000] flex items-center gap-2"
+                        className="px-4 py-2 bg-[#9D174D] text-white rounded-2xl hover:bg-[#9D174D] flex items-center gap-2"
                       >
                         <MessageCircle className="w-4 h-4" />
                         Buka WhatsApp

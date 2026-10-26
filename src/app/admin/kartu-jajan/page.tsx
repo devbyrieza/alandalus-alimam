@@ -89,7 +89,7 @@ export default function AdminKartuJajanPage() {
                     <td className="px-4 py-3 font-bold text-slate-900">{santri.nama_lengkap}</td>
                     <td className="px-4 py-3 text-slate-600">{santri.jenjang}</td>
                     <td className="px-4 py-3">
-                      <div className="flex items-center justify-center gap-1 text-[#550000] text-xs font-bold bg-green-50 py-1 px-2 rounded-2xl">
+                      <div className="flex items-center justify-center gap-1 text-[#9D174D] text-xs font-bold bg-green-50 py-1 px-2 rounded-2xl">
                         <CheckCircle2 className="w-4 h-4" /> Diterima
                       </div>
                     </td>

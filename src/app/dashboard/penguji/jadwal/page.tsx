@@ -1179,7 +1179,7 @@ export default function JadwalPengujiPage() {
       {/* Message */}
       {message && (
         <div
-          className={`p-6 sm:p-8 rounded-3xl border-2 flex items-center justify-between ${message.type === "success" ? "bg-green-50 border-green-200 text-[#550000]" : "bg-red-50 border-red-200 text-red-800"}`}
+          className={`p-6 sm:p-8 rounded-3xl border-2 flex items-center justify-between ${message.type === "success" ? "bg-green-50 border-green-200 text-[#9D174D]" : "bg-red-50 border-red-200 text-red-800"}`}
         >
           <div className="flex items-center gap-2">
             {message.type === "success" ? (
@@ -1350,7 +1350,7 @@ export default function JadwalPengujiPage() {
                             {userId &&
                               showSantri &&
                               (item.status_santri === "completed" ? (
-                                <div className="flex items-center gap-2 px-4 py-3 bg-green-50 text-[#550000] rounded-2xl text-sm font-bold border border-green-100">
+                                <div className="flex items-center gap-2 px-4 py-3 bg-green-50 text-[#9D174D] rounded-2xl text-sm font-bold border border-green-100">
                                   <CheckCircle className="w-4 h-4" /> Seleksi
                                   Wawancara Calon Santri Selesai
                                 </div>
@@ -1365,7 +1365,7 @@ export default function JadwalPengujiPage() {
                             {userId &&
                               showQuran &&
                               (item.status_quran === "completed" ? (
-                                <div className="flex items-center gap-2 px-4 py-3 bg-green-50 text-[#550000] rounded-2xl text-sm font-bold border border-green-100">
+                                <div className="flex items-center gap-2 px-4 py-3 bg-green-50 text-[#9D174D] rounded-2xl text-sm font-bold border border-green-100">
                                   <CheckCircle className="w-4 h-4" /> Seleksi Al
                                   Qur'an Selesai
                                 </div>
@@ -1380,7 +1380,7 @@ export default function JadwalPengujiPage() {
                             {userId &&
                               showOrtu &&
                               (item.status_ortu === "completed" ? (
-                                <div className="flex items-center gap-2 px-4 py-3 bg-green-50 text-[#550000] rounded-2xl text-sm font-bold border border-green-100">
+                                <div className="flex items-center gap-2 px-4 py-3 bg-green-50 text-[#9D174D] rounded-2xl text-sm font-bold border border-green-100">
                                   <CheckCircle className="w-4 h-4" /> Seleksi
                                   Wawancara Orang Tua Selesai
                                 </div>
@@ -2248,14 +2248,14 @@ export default function JadwalPengujiPage() {
                 </div>
 
                 <div className="bg-emerald-50 rounded-2xl p-6 sm:p-8 border border-emerald-100 flex items-start gap-3">
-                  <div className="w-8 h-8 bg-emerald-100 rounded-3xl flex items-center justify-center shrink-0 text-[#550000] whitespace-nowrap shrink-0">
+                  <div className="w-8 h-8 bg-emerald-100 rounded-3xl flex items-center justify-center shrink-0 text-[#9D174D] whitespace-nowrap shrink-0">
                     <Users className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-[10px] text-[#550000] font-black uppercase tracking-widest mb-0.5">
+                    <p className="text-[10px] text-[#9D174D] font-black uppercase tracking-widest mb-0.5">
                       Kapasitas
                     </p>
-                    <p className="text-[11px] text-[#550000] leading-relaxed font-medium">
+                    <p className="text-[11px] text-[#9D174D] leading-relaxed font-medium">
                       Setiap sesi memiliki <b>Kuota 1 Santri</b> (Private /
                       1-on-1).
                     </p>
@@ -2456,7 +2456,7 @@ export default function JadwalPengujiPage() {
                     <label className="block text-secondary-500 text-xs">
                       No. WA / HP (Wali/Utama)
                     </label>
-                    <p className="font-mono font-bold text-[#550000]">
+                    <p className="font-mono font-bold text-[#9D174D]">
                       {selectedPendaftar.no_hp || "-"}
                     </p>
                   </div>
@@ -2798,7 +2798,7 @@ export default function JadwalPengujiPage() {
                   <p className="text-[11px] text-primary-900 leading-relaxed font-bold">
                     Semua sesi yang dibuat massal akan otomatis diset sebagai{" "}
                     <span className="text-primary-600">Online</span> dan memiliki{" "}
-                    <span className="text-[#550000]">Kuota 1 Santri</span>.
+                    <span className="text-[#9D174D]">Kuota 1 Santri</span>.
                   </p>
                 </div>
               </div>

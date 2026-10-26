@@ -191,10 +191,10 @@ export default function BantuanBiayaPage() {
         </div>
         <div className="bg-emerald-50 rounded-2xl p-6 sm:p-8 border border-emerald-100 shadow-2xl">
           <div className="flex items-center gap-1.5 mb-2">
-            <GraduationCap className="w-4 h-4 text-[#550000]" />
-            <p className="text-xs font-black text-[#550000] uppercase tracking-widest">Beasiswa</p>
+            <GraduationCap className="w-4 h-4 text-[#9D174D]" />
+            <p className="text-xs font-black text-[#9D174D] uppercase tracking-widest">Beasiswa</p>
           </div>
-          <p className="text-2xl font-black text-[#550000]">{totalBeasiswa}</p>
+          <p className="text-2xl font-black text-[#9D174D]">{totalBeasiswa}</p>
         </div>
         <div className="bg-amber-50 rounded-2xl p-6 sm:p-8 border border-amber-100 shadow-2xl">
           <div className="flex items-center gap-1.5 mb-2">
@@ -226,7 +226,7 @@ export default function BantuanBiayaPage() {
               className={`flex items-center gap-1.5 px-4 py-2 text-sm font-bold rounded-2xl transition-all whitespace-nowrap ${
                 filterTab === t
                   ? t === "BEASISWA"
-                    ? "bg-emerald-100 text-[#550000]"
+                    ? "bg-emerald-100 text-[#9D174D]"
                     : t === "KERINGANAN"
                     ? "bg-amber-100 text-amber-800"
                     : "bg-primary-50 text-primary-700 shadow-2xl     "
@@ -318,7 +318,7 @@ export default function BantuanBiayaPage() {
                       {/* Jenis Bantuan */}
                       <td className="px-6 py-4">
                         {isBeasiswa ? (
-                          <span className="flex items-center gap-1.5 bg-emerald-50 text-[#550000] border border-emerald-200 px-3 py-1.5 rounded-full text-xs font-black w-max">
+                          <span className="flex items-center gap-1.5 bg-emerald-50 text-[#9D174D] border border-emerald-200 px-3 py-1.5 rounded-full text-xs font-black w-max">
                             <GraduationCap className="w-3.5 h-3.5" />
                             Beasiswa
                           </span>
@@ -347,7 +347,7 @@ export default function BantuanBiayaPage() {
                       {/* Potongan UP */}
                       <td className="px-6 py-4">
                         {pUP > 0 ? (
-                          <span className={`font-bold ${isBeasiswa ? "text-[#550000]" : "text-amber-700"}`}>
+                          <span className={`font-bold ${isBeasiswa ? "text-[#9D174D]" : "text-amber-700"}`}>
                             {isBeasiswa ? "GRATIS" : fmt(pUP)}
                           </span>
                         ) : (
@@ -358,7 +358,7 @@ export default function BantuanBiayaPage() {
                       {/* Potongan SPP */}
                       <td className="px-6 py-4">
                         {pSPP > 0 ? (
-                          <span className={`font-bold ${isBeasiswa ? "text-[#550000]" : "text-amber-700"}`}>
+                          <span className={`font-bold ${isBeasiswa ? "text-[#9D174D]" : "text-amber-700"}`}>
                             {isBeasiswa ? "GRATIS" : fmt(pSPP)}
                           </span>
                         ) : (
@@ -371,7 +371,7 @@ export default function BantuanBiayaPage() {
                         <span
                           className={`flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-2xl w-max ${
                             item.status === "DISETUJUI"
-                              ? "bg-green-50 text-[#550000] border border-green-100"
+                              ? "bg-green-50 text-[#9D174D] border border-green-100"
                               : item.status === "DITOLAK"
                               ? "bg-red-50 text-red-700 border border-red-100"
                               : "bg-amber-50 text-amber-700 border border-amber-100"

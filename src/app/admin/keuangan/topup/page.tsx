@@ -221,7 +221,7 @@ export default function FinanceTopupPage() {
               </div>
 
               {message.text && (
-                <div className={`mt-5 p-3 rounded-3xl border flex items-center gap-2 text-sm font-bold ${message.type === 'success' ? 'bg-green-50 text-[#550000] border-green-200' : 'bg-red-50 text-red-700 border-red-200'}`}>
+                <div className={`mt-5 p-3 rounded-3xl border flex items-center gap-2 text-sm font-bold ${message.type === 'success' ? 'bg-green-50 text-[#9D174D] border-green-200' : 'bg-red-50 text-red-700 border-red-200'}`}>
                   {message.type === 'success' ? <CheckCircle2 className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
                   {message.text}
                 </div>

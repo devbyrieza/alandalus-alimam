@@ -206,7 +206,7 @@ export default function KartuJajanPage() {
                     onChange={(e) => setNewLimit(Number(e.target.value))}
                     className="w-24 bg-transparent border-b border-white/50 text-white font-bold outline-hidden focus:border-white"
                   />
-                  <button onClick={handleSaveLimit} disabled={savingLimit} className="p-1.5 bg-green-500 hover:bg-[#550000] rounded-2xl text-white">
+                  <button onClick={handleSaveLimit} disabled={savingLimit} className="p-1.5 bg-green-500 hover:bg-[#9D174D] rounded-2xl text-white">
                     {savingLimit ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                   </button>
                   <button onClick={() => setIsEditingLimit(false)} className="p-1.5 bg-red-500 hover:bg-red-600 rounded-2xl text-white">
@@ -303,7 +303,7 @@ export default function KartuJajanPage() {
                 <div key={trx.id} className="flex items-center justify-between p-6 sm:p-8 rounded-2xl bg-surface-50 border border-surface-100 hover:border-gold-200 transition-colors">
                   <div className="flex items-center gap-4">
                     <div className={`w-10 h-10 rounded-3xl flex items-center justify-center shrink-0 ${
-                      trx.jenis_transaksi === "TOPUP" ? "bg-green-100 text-[#550000]" : "bg-red-100 text-red-600"
+                      trx.jenis_transaksi === "TOPUP" ? "bg-green-100 text-[#9D174D]" : "bg-red-100 text-red-600"
                     }`}>
                       {trx.jenis_transaksi === "TOPUP" ? <CheckCircle2 className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
                     </div>
@@ -313,7 +313,7 @@ export default function KartuJajanPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className={`font-black text-sm ${trx.jenis_transaksi === "TOPUP" ? "text-[#550000]" : "text-ink-900"}`}>
+                    <p className={`font-black text-sm ${trx.jenis_transaksi === "TOPUP" ? "text-[#9D174D]" : "text-ink-900"}`}>
                       {trx.jenis_transaksi === "TOPUP" ? "+" : "-"} Rp {Number(trx.nominal).toLocaleString("id-ID")}
                     </p>
                     <p className="text-[10px] text-ink-400 font-medium">Saldo: Rp {Number(trx.saldo_akhir).toLocaleString("id-ID")}</p>

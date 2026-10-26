@@ -714,7 +714,7 @@ export default function VerifikasiDokumenDetailPage() {
                   {dok.jenis_dokumen.replace(/_/g, " ")}
                 </h3>
                 {dok.status_verifikasi === "verified" ? (
-                  <div className="flex items-center gap-1 text-[#550000] bg-emerald-50 px-2 py-1 rounded-2xl text-[10px] font-black uppercase">
+                  <div className="flex items-center gap-1 text-[#9D174D] bg-emerald-50 px-2 py-1 rounded-2xl text-[10px] font-black uppercase">
                     <CheckCircle className="w-3 h-3" />
                     Diterima
                   </div>
@@ -765,8 +765,8 @@ export default function VerifikasiDokumenDetailPage() {
                   }
                   className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-3xl text-xs font-bold transition-all ${
                     dok.status_verifikasi === "verified"
-                      ? "bg-emerald-50 text-[#550000] border border-emerald-100 cursor-default"
-                      : "bg-[#550000] hover:bg-[#550000] text-white shadow-2xl     active:scale-95 disabled:opacity-50"
+                      ? "bg-emerald-50 text-[#9D174D] border border-emerald-100 cursor-default"
+                      : "bg-[#9D174D] hover:bg-[#9D174D] text-white shadow-2xl     active:scale-95 disabled:opacity-50"
                   }`}
                 >
                   {processingDocs.has(dok.id) ? (

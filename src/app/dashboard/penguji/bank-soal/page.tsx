@@ -70,14 +70,14 @@ export default function BankSoalPanitiaPage() {
   );
 
   const getSubjectBadge = (index: number) => {
-    if (index < 5) return { label: "PAI / Studi Islam", color: "bg-[#ddc192]/30 text-[#550000] border-[#ddc192] font-bold" };
+    if (index < 5) return { label: "PAI / Studi Islam", color: "bg-[#ddc192]/30 text-[#9D174D] border-[#ddc192] font-bold" };
     if (index < 10) return { label: "Bahasa Indonesia", color: "bg-blue-100 text-blue-950 border-blue-200 font-bold" };
     if (index < 15) return { label: "IPA Terpadu", color: "bg-purple-100 text-purple-950 border-purple-200 font-bold" };
     return { label: "Matematika", color: "bg-amber-100 text-amber-950 border-amber-200 font-bold" };
   };
 
   const getMaSubjectBadge = (index: number) => {
-    if (index < 10) return { label: "Bahasa Arab & Nahwu", color: "bg-[#ddc192] text-[#550000] border-[#c5a775] font-black" };
+    if (index < 10) return { label: "Bahasa Arab & Nahwu", color: "bg-[#ddc192] text-[#9D174D] border-[#c5a775] font-black" };
     if (index < 15) return { label: "Studi Islam & Umum", color: "bg-indigo-100 text-indigo-950 border-indigo-200 font-bold" };
     return { label: "Logika & Sains", color: "bg-amber-100 text-amber-950 border-amber-200 font-bold" };
   };
@@ -86,8 +86,8 @@ export default function BankSoalPanitiaPage() {
     <div className="min-h-dvh bg-[#faf8f5] p-3 sm:p-5 md:p-8 space-y-5 md:space-y-6 max-w-[1400px] mx-auto pb-16">
       {/* HEADER BANNER MAROON & KREM EMAS AL-IMAM (FAILSAFE INLINE STYLES FOR MOBILE) */}
       <div
-        className="relative overflow-hidden rounded-3xl bg-[#550000] text-white p-5 sm:p-7 md:p-9 shadow-2xl border border-[#6b0000]"
-        style={{ backgroundColor: "#550000", background: "linear-gradient(135deg, #550000 0%, #440000 60%, #300000 100%)" }}
+        className="relative overflow-hidden rounded-3xl bg-[#9D174D] text-white p-5 sm:p-7 md:p-9 shadow-2xl border border-[#831843]"
+        style={{ backgroundColor: "#9D174D", background: "linear-gradient(135deg, #9D174D 0%, #831843 60%, #500724 100%)" }}
       >
         {/* Pattern Decorator Background */}
         <div className="absolute right-0 top-0 opacity-10 pointer-events-none transform translate-x-12 -translate-y-12">
@@ -98,16 +98,16 @@ export default function BankSoalPanitiaPage() {
         <div className="relative z-10 space-y-3.5">
           <div className="flex flex-wrap items-center gap-2">
             <span
-              className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#3a0000] rounded-full text-xs font-bold text-[#ddc192] border border-[#ddc192]/40 shadow-inner"
-              style={{ backgroundColor: "#3a0000" }}
+              className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#500724] rounded-full text-xs font-bold text-[#ddc192] border border-[#ddc192]/40 shadow-inner"
+              style={{ backgroundColor: "#500724" }}
             >
               <Sparkles className="w-3.5 h-3.5 text-[#ddc192] animate-pulse" /> PORTAL EKSKLUSIF PANITIA & PENGUJI SPMB
             </span>
             <span
-              className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-[#ddc192] text-[#550000] rounded-full text-xs font-black border border-[#ddc192]"
-              style={{ backgroundColor: "#ddc192", color: "#550000" }}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-[#ddc192] text-[#9D174D] rounded-full text-xs font-black border border-[#ddc192]"
+              style={{ backgroundColor: "#ddc192", color: "#9D174D" }}
             >
-              <Award className="w-3.5 h-3.5 text-[#550000]" /> TA 2027/2028
+              <Award className="w-3.5 h-3.5 text-[#9D174D]" /> TA 2027/2028
             </span>
           </div>
 
@@ -122,22 +122,22 @@ export default function BankSoalPanitiaPage() {
 
           <div className="pt-2 flex flex-wrap items-center gap-2.5 text-xs font-semibold text-[#ddc192]">
             <div
-              className="flex items-center gap-2 bg-[#3b0000] px-3.5 py-2 rounded-2xl border border-[#ddc192]/30 shadow-sm text-white"
-              style={{ backgroundColor: "#3b0000" }}
+              className="flex items-center gap-2 bg-[#500724] px-3.5 py-2 rounded-2xl border border-[#ddc192]/30 shadow-sm text-white"
+              style={{ backgroundColor: "#500724" }}
             >
               <Clock className="w-4 h-4 text-[#ddc192]" />
               <span className="text-white text-xs">Ujian Online: <strong className="text-[#ddc192]">45–60 Menit</strong></span>
             </div>
             <div
-              className="flex items-center gap-2 bg-[#3b0000] px-3.5 py-2 rounded-2xl border border-[#ddc192]/30 shadow-sm text-white"
-              style={{ backgroundColor: "#3b0000" }}
+              className="flex items-center gap-2 bg-[#500724] px-3.5 py-2 rounded-2xl border border-[#ddc192]/30 shadow-sm text-white"
+              style={{ backgroundColor: "#500724" }}
             >
               <BookOpenCheck className="w-4 h-4 text-[#ddc192]" />
               <span className="text-white text-xs">Lisan & Wawancara: <strong className="text-[#ddc192]">15–20 Menit</strong></span>
             </div>
             <div
-              className="flex items-center gap-2 bg-[#3b0000] px-3.5 py-2 rounded-2xl border border-[#ddc192]/30 shadow-sm text-white"
-              style={{ backgroundColor: "#3b0000" }}
+              className="flex items-center gap-2 bg-[#500724] px-3.5 py-2 rounded-2xl border border-[#ddc192]/30 shadow-sm text-white"
+              style={{ backgroundColor: "#500724" }}
             >
               <ShieldCheck className="w-4 h-4 text-[#ddc192]" />
               <span className="text-white text-xs">Standar Operasional Panitia Resmi</span>
@@ -155,15 +155,15 @@ export default function BankSoalPanitiaPage() {
             placeholder="Cari pertanyaan, kata kunci, atau materi soal..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#550000] focus:bg-white transition-all placeholder:text-slate-400"
+            className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#9D174D] focus:bg-white transition-all placeholder:text-slate-400"
           />
         </div>
 
         <div className="flex items-center gap-3 w-full md:w-auto justify-end">
           <button
             onClick={() => window.print()}
-            className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#550000] text-white rounded-2xl font-black text-xs md:text-sm shadow-2xl transition-all cursor-pointer border border-[#ddc192]/40 min-h-[44px]"
-            style={{ backgroundColor: "#550000", background: "linear-gradient(to right, #550000, #700000)" }}
+            className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#9D174D] text-white rounded-2xl font-black text-xs md:text-sm shadow-2xl transition-all cursor-pointer border border-[#ddc192]/40 min-h-[44px]"
+            style={{ backgroundColor: "#9D174D", background: "linear-gradient(to right, #9D174D, #831843)" }}
           >
             <Printer className="w-4 h-4 text-[#ddc192]" /> <span className="text-white font-black">Cetak / Export PDF</span>
           </button>
@@ -191,15 +191,15 @@ export default function BankSoalPanitiaPage() {
               onClick={() => setActiveTab(tab.id as any)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl font-extrabold text-xs md:text-sm whitespace-nowrap transition-all cursor-pointer ${
                 isActive
-                  ? "bg-[#550000] text-[#ddc192] shadow-2xl    shadow-[#550000]/25 ring-2 ring-[#ddc192]/60 border border-[#ddc192]/40"
-                  : "bg-white text-slate-700 border border-slate-200 hover:bg-[#550000]/5 hover:text-[#550000]"
+                  ? "bg-[#9D174D] text-[#ddc192] shadow-2xl    shadow-[#9D174D]/25 ring-2 ring-[#ddc192]/60 border border-[#ddc192]/40"
+                  : "bg-white text-slate-700 border border-slate-200 hover:bg-[#9D174D]/5 hover:text-[#9D174D]"
               }`}
             >
               <Icon className={`w-4 h-4 ${isActive ? "text-[#ddc192]" : "text-slate-400"}`} />
               <span>{tab.label}</span>
               <span
                 className={`ml-1 px-2 py-0.5 rounded-md text-[10px] font-black ${
-                  isActive ? "bg-[#ddc192] text-[#550000]" : "bg-slate-100 text-slate-600 border border-slate-200"
+                  isActive ? "bg-[#ddc192] text-[#9D174D]" : "bg-slate-100 text-slate-600 border border-slate-200"
                 }`}
               >
                 {tab.count}
@@ -213,8 +213,8 @@ export default function BankSoalPanitiaPage() {
       {activeTab === "mts" && (
         <div className="space-y-4">
           <div
-            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#680000] flex items-start gap-3.5"
-            style={{ backgroundColor: "#550000", background: "linear-gradient(to right, #550000, #3a0000)" }}
+            className="bg-[#9D174D] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#831843] flex items-start gap-3.5"
+            style={{ backgroundColor: "#9D174D", background: "linear-gradient(to right, #9D174D, #500724)" }}
           >
             <Clock className="w-5 h-5 text-[#ddc192] flex-shrink-0 mt-0.5" />
             <div className="space-y-1">
@@ -235,14 +235,14 @@ export default function BankSoalPanitiaPage() {
                 <div key={q.id} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all space-y-3.5">
                   <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-2.5">
                     <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-black px-2.5 py-1 bg-[#550000] text-[#ddc192] rounded-2xl border border-[#550000]">
+                      <span className="text-[11px] font-black px-2.5 py-1 bg-[#9D174D] text-[#ddc192] rounded-2xl border border-[#9D174D]">
                         SOAL #{idx + 1} (ID: {q.id})
                       </span>
                       <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md border ${badge.color}`}>
                         {badge.label}
                       </span>
                     </div>
-                    <span className="text-xs font-black text-[#550000] bg-[#ddc192] px-2.5 py-0.5 rounded-full border border-[#c5a775]">
+                    <span className="text-xs font-black text-[#9D174D] bg-[#ddc192] px-2.5 py-0.5 rounded-full border border-[#c5a775]">
                       5.0 Poin
                     </span>
                   </div>
@@ -253,7 +253,7 @@ export default function BankSoalPanitiaPage() {
                         key={opt.value}
                         className="p-3 rounded-2xl bg-slate-50 border border-slate-100 text-xs font-medium text-slate-800 flex items-start gap-2.5 hover:bg-slate-100/80 transition-colors whitespace-nowrap shrink-0"
                       >
-                        <span className="font-black text-[#ddc192] bg-[#550000] px-2.5 py-0.5 rounded-md border border-[#550000]">
+                        <span className="font-black text-[#ddc192] bg-[#9D174D] px-2.5 py-0.5 rounded-md border border-[#9D174D]">
                           {opt.value}
                         </span>
                         <span className="leading-snug">{opt.label}</span>
@@ -271,8 +271,8 @@ export default function BankSoalPanitiaPage() {
       {activeTab === "il" && (
         <div className="space-y-4">
           <div
-            className="bg-[#4d0000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#5a0000] flex items-start gap-3.5"
-            style={{ backgroundColor: "#4d0000", background: "linear-gradient(to right, #4d0000, #330000)" }}
+            className="bg-[#9D174D] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#9D174D] flex items-start gap-3.5"
+            style={{ backgroundColor: "#9D174D", background: "linear-gradient(to right, #9D174D, #500724)" }}
           >
             <Clock className="w-5 h-5 text-[#ddc192] flex-shrink-0 mt-0.5" />
             <div className="space-y-1">
@@ -293,14 +293,14 @@ export default function BankSoalPanitiaPage() {
                 <div key={idx} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all space-y-3.5">
                   <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-2.5">
                     <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-black px-2.5 py-1 bg-[#550000] text-[#ddc192] rounded-2xl border border-[#550000]">
+                      <span className="text-[11px] font-black px-2.5 py-1 bg-[#9D174D] text-[#ddc192] rounded-2xl border border-[#9D174D]">
                         SOAL #{idx + 1} (IL)
                       </span>
                       <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md border ${badge.color}`}>
                         {badge.label}
                       </span>
                     </div>
-                    <span className="text-xs font-black text-[#550000] bg-[#ddc192] px-2.5 py-0.5 rounded-full border border-[#c5a775]">
+                    <span className="text-xs font-black text-[#9D174D] bg-[#ddc192] px-2.5 py-0.5 rounded-full border border-[#c5a775]">
                       5.0 Poin
                     </span>
                   </div>
@@ -311,7 +311,7 @@ export default function BankSoalPanitiaPage() {
                         key={opt.value}
                         className="p-3 rounded-2xl bg-slate-50 border border-slate-100 text-xs font-medium text-slate-800 flex items-start gap-2.5 hover:bg-slate-100/80 transition-colors whitespace-nowrap shrink-0"
                       >
-                        <span className="font-black text-[#ddc192] bg-[#550000] px-2.5 py-0.5 rounded-md border border-[#550000]">
+                        <span className="font-black text-[#ddc192] bg-[#9D174D] px-2.5 py-0.5 rounded-md border border-[#9D174D]">
                           {opt.value}
                         </span>
                         <span className="leading-snug">{opt.label}</span>
@@ -329,8 +329,8 @@ export default function BankSoalPanitiaPage() {
       {activeTab === "ma" && (
         <div className="space-y-4">
           <div
-            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#660000] flex items-start gap-3.5"
-            style={{ backgroundColor: "#550000", background: "linear-gradient(to right, #550000, #300000)" }}
+            className="bg-[#9D174D] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#831843] flex items-start gap-3.5"
+            style={{ backgroundColor: "#9D174D", background: "linear-gradient(to right, #9D174D, #500724)" }}
           >
             <Clock className="w-5 h-5 text-[#ddc192] flex-shrink-0 mt-0.5" />
             <div className="space-y-1.5">
@@ -341,11 +341,11 @@ export default function BankSoalPanitiaPage() {
                 Durasi Pengerjaan: <strong className="text-[#ddc192]">60 Menit</strong> | Total Soal: <strong className="text-[#ddc192]">20 Butir (Nahwu Bahasa Arab, B.Indo, IPA, Matematika)</strong>
               </p>
               <div
-                className="mt-2.5 p-3.5 bg-[#3b0000] border border-[#ddc192]/40 rounded-2xl text-[#ddc192] text-xs font-medium leading-relaxed"
-                style={{ backgroundColor: "#3b0000" }}
+                className="mt-2.5 p-3.5 bg-[#500724] border border-[#ddc192]/40 rounded-2xl text-[#ddc192] text-xs font-medium leading-relaxed"
+                style={{ backgroundColor: "#500724" }}
               >
-                <span className="inline-flex items-center gap-1.5 bg-[#ddc192] text-[#550000] font-black px-2.5 py-0.5 rounded text-[11px] uppercase mb-1">
-                  <AlertTriangle className="w-3.5 h-3.5 text-[#550000]" /> SYARAT WAJIB LULUS JALUR SMA/MA LANGSUNG (TANPA IL):
+                <span className="inline-flex items-center gap-1.5 bg-[#ddc192] text-[#9D174D] font-black px-2.5 py-0.5 rounded text-[11px] uppercase mb-1">
+                  <AlertTriangle className="w-3.5 h-3.5 text-[#9D174D]" /> SYARAT WAJIB LULUS JALUR SMA/MA LANGSUNG (TANPA IL):
                 </span>
                 <br />
                 Pendaftar Jalur SMA/MA Langsung <strong>WAJIB</strong> mengikuti <strong>Tes Lisan Bahasa Arab</strong> serta memiliki <strong>Tes Hafalan Al-Qur'an Minimal 4 Juz Mutqin</strong>. Apabila tidak memenuhi syarat 4 Juz Mutqin & Lisan Arab, pendaftar akan diarahkan ke Jalur I'dad Lughawi (IL).
@@ -360,14 +360,14 @@ export default function BankSoalPanitiaPage() {
                 <div key={idx} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all space-y-3.5">
                   <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-2.5">
                     <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-black px-2.5 py-1 bg-[#550000] text-[#ddc192] rounded-2xl border border-[#550000]">
+                      <span className="text-[11px] font-black px-2.5 py-1 bg-[#9D174D] text-[#ddc192] rounded-2xl border border-[#9D174D]">
                         SOAL #{idx + 1} (MA/SMA)
                       </span>
                       <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md border ${badge.color}`}>
                         {badge.label}
                       </span>
                     </div>
-                    <span className="text-xs font-black text-[#550000] bg-[#ddc192] px-2.5 py-0.5 rounded-full border border-[#c5a775]">
+                    <span className="text-xs font-black text-[#9D174D] bg-[#ddc192] px-2.5 py-0.5 rounded-full border border-[#c5a775]">
                       5.0 Poin
                     </span>
                   </div>
@@ -380,7 +380,7 @@ export default function BankSoalPanitiaPage() {
                         key={opt.value}
                         className="p-3 rounded-2xl bg-slate-50 border border-slate-100 text-xs font-medium text-slate-800 flex items-start justify-between gap-2.5 hover:bg-slate-100/80 transition-colors whitespace-nowrap shrink-0"
                       >
-                        <span className="font-black text-[#ddc192] bg-[#550000] px-2.5 py-0.5 rounded-md border border-[#550000]">
+                        <span className="font-black text-[#ddc192] bg-[#9D174D] px-2.5 py-0.5 rounded-md border border-[#9D174D]">
                           {opt.value}
                         </span>
                         <span className="leading-relaxed font-serif text-base text-right" dir="auto">{opt.label}</span>
@@ -398,8 +398,8 @@ export default function BankSoalPanitiaPage() {
       {activeTab === "kesiapan" && (
         <div className="space-y-4">
           <div
-            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#550000] flex items-start gap-3.5"
-            style={{ backgroundColor: "#550000", background: "linear-gradient(to right, #550000, #380000)" }}
+            className="bg-[#9D174D] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#9D174D] flex items-start gap-3.5"
+            style={{ backgroundColor: "#9D174D", background: "linear-gradient(to right, #9D174D, #500724)" }}
           >
             <Heart className="w-5 h-5 text-[#ddc192] flex-shrink-0 mt-0.5" />
             <div className="space-y-1">
@@ -414,7 +414,7 @@ export default function BankSoalPanitiaPage() {
             {KESIAPAN_QUESTIONS.map((sec, sIdx) => (
               <div key={sIdx} className="border-b border-slate-200 last:border-b-0">
                 <div className="bg-slate-100 px-5 py-3 font-extrabold text-slate-900 text-sm flex items-center gap-2.5 border-b border-slate-200 whitespace-nowrap shrink-0">
-                  <span className="w-6 h-6 rounded-full bg-[#550000] text-[#ddc192] flex items-center justify-center text-xs font-black shadow-sm">
+                  <span className="w-6 h-6 rounded-full bg-[#9D174D] text-[#ddc192] flex items-center justify-center text-xs font-black shadow-sm">
                     {sIdx + 1}
                   </span>
                   <span>{sec.section}</span>
@@ -426,7 +426,7 @@ export default function BankSoalPanitiaPage() {
                         <span className="text-[10px] font-black text-slate-400">ITEM #{item.id}</span>
                         <p className="text-sm font-bold text-slate-800">{item.text}</p>
                       </div>
-                      <div className="flex items-center gap-2 text-xs font-bold bg-[#550000]/10 text-[#550000] px-3 py-1.5 rounded-2xl border border-[#550000]/20">
+                      <div className="flex items-center gap-2 text-xs font-bold bg-[#9D174D]/10 text-[#9D174D] px-3 py-1.5 rounded-2xl border border-[#9D174D]/20">
                         <span>{item.labelMin}</span>
                         <span>➔</span>
                         <span>{item.labelMax}</span>
@@ -444,8 +444,8 @@ export default function BankSoalPanitiaPage() {
       {activeTab === "kepribadian" && (
         <div className="space-y-4">
           <div
-            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#550000] flex items-start gap-3.5"
-            style={{ backgroundColor: "#550000", background: "linear-gradient(to right, #550000, #380000)" }}
+            className="bg-[#9D174D] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#9D174D] flex items-start gap-3.5"
+            style={{ backgroundColor: "#9D174D", background: "linear-gradient(to right, #9D174D, #500724)" }}
           >
             <Brain className="w-5 h-5 text-[#ddc192] flex-shrink-0 mt-0.5" />
             <div className="space-y-1">
@@ -459,12 +459,12 @@ export default function BankSoalPanitiaPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {filteredKepribadian.map((q) => (
               <div key={q.id} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all space-y-3">
-                <span className="text-[11px] font-black px-2.5 py-1 bg-[#550000] text-[#ddc192] rounded-2xl border border-[#550000]">
+                <span className="text-[11px] font-black px-2.5 py-1 bg-[#9D174D] text-[#ddc192] rounded-2xl border border-[#9D174D]">
                   PASANGAN #{q.id}
                 </span>
                 <div className="space-y-2 pt-1">
-                  <div className="p-3 bg-[#550000]/5 border border-[#550000]/20 rounded-2xl text-xs font-medium text-slate-900 leading-relaxed">
-                    <strong className="text-[#550000] font-black">A:</strong> {q.optionA}
+                  <div className="p-3 bg-[#9D174D]/5 border border-[#9D174D]/20 rounded-2xl text-xs font-medium text-slate-900 leading-relaxed">
+                    <strong className="text-[#9D174D] font-black">A:</strong> {q.optionA}
                   </div>
                   <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs font-medium text-slate-800 leading-relaxed">
                     <strong className="text-slate-700 font-black">B:</strong> {q.optionB}
@@ -480,8 +480,8 @@ export default function BankSoalPanitiaPage() {
       {activeTab === "calsan" && (
         <div className="space-y-4">
           <div
-            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#550000] flex items-start gap-3.5"
-            style={{ backgroundColor: "#550000", background: "linear-gradient(to right, #550000, #380000)" }}
+            className="bg-[#9D174D] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#9D174D] flex items-start gap-3.5"
+            style={{ backgroundColor: "#9D174D", background: "linear-gradient(to right, #9D174D, #500724)" }}
           >
             <Users className="w-5 h-5 text-[#ddc192] flex-shrink-0 mt-0.5" />
             <div className="space-y-1">
@@ -494,8 +494,8 @@ export default function BankSoalPanitiaPage() {
 
           <div className="card-tactile p-5 md:p-7 space-y-6">
             <div className="space-y-4">
-              <h3 className="font-black text-lg text-[#550000] flex items-center gap-2 border-b pb-3">
-                <User className="w-5 h-5 text-[#550000]" /> Kriteria Penilaian Calsan Putra (7 Indikator)
+              <h3 className="font-black text-lg text-[#9D174D] flex items-center gap-2 border-b pb-3">
+                <User className="w-5 h-5 text-[#9D174D]" /> Kriteria Penilaian Calsan Putra (7 Indikator)
               </h3>
 
               <div className="grid grid-cols-1 gap-4">
@@ -514,8 +514,8 @@ export default function BankSoalPanitiaPage() {
                       <div className="bg-emerald-50 text-emerald-950 p-3 rounded-2xl border border-emerald-200 leading-relaxed">
                         <strong className="block text-emerald-800 font-black mb-0.5">Skor 5 (Sangat Baik):</strong> {item.s5}
                       </div>
-                      <div className="bg-[#ddc192]/20 text-[#550000] p-3 rounded-2xl border border-[#ddc192] leading-relaxed">
-                        <strong className="block text-[#550000] font-black mb-0.5">Skor 3 (Cukup):</strong> {item.s3}
+                      <div className="bg-[#ddc192]/20 text-[#9D174D] p-3 rounded-2xl border border-[#ddc192] leading-relaxed">
+                        <strong className="block text-[#9D174D] font-black mb-0.5">Skor 3 (Cukup):</strong> {item.s3}
                       </div>
                       <div className="bg-rose-50 text-rose-950 p-3 rounded-2xl border border-rose-200 leading-relaxed">
                         <strong className="block text-rose-800 font-black mb-0.5">Skor 1 (Kurang):</strong> {item.s1}
@@ -533,8 +533,8 @@ export default function BankSoalPanitiaPage() {
       {activeTab === "cawalsan" && (
         <div className="space-y-4">
           <div
-            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#550000] flex items-start gap-3.5"
-            style={{ backgroundColor: "#550000", background: "linear-gradient(to right, #550000, #380000)" }}
+            className="bg-[#9D174D] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#9D174D] flex items-start gap-3.5"
+            style={{ backgroundColor: "#9D174D", background: "linear-gradient(to right, #9D174D, #500724)" }}
           >
             <UserCheck className="w-5 h-5 text-[#ddc192] flex-shrink-0 mt-0.5" />
             <div className="space-y-1">
@@ -567,8 +567,8 @@ export default function BankSoalPanitiaPage() {
                     <div className="p-3 bg-emerald-50 text-emerald-950 rounded-2xl border border-emerald-200 leading-relaxed">
                       <strong className="text-emerald-800 font-black">Opsi A:</strong> {q.a}
                     </div>
-                    <div className="p-3 bg-[#ddc192]/20 text-[#550000] rounded-2xl border border-[#ddc192] leading-relaxed">
-                      <strong className="text-[#550000] font-black">Opsi B:</strong> {q.b}
+                    <div className="p-3 bg-[#ddc192]/20 text-[#9D174D] rounded-2xl border border-[#ddc192] leading-relaxed">
+                      <strong className="text-[#9D174D] font-black">Opsi B:</strong> {q.b}
                     </div>
                     <div className="p-3 bg-rose-50 text-rose-950 rounded-2xl border border-rose-200 leading-relaxed">
                       <strong className="text-rose-800 font-black">Opsi C:</strong> {q.c}
@@ -585,8 +585,8 @@ export default function BankSoalPanitiaPage() {
       {activeTab === "quran" && (
         <div className="space-y-4">
           <div
-            className="bg-[#550000] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#550000] flex items-start gap-3.5"
-            style={{ backgroundColor: "#550000", background: "linear-gradient(to right, #550000, #380000)" }}
+            className="bg-[#9D174D] text-white p-4 sm:p-5 rounded-2xl shadow-2xl border border-[#9D174D] flex items-start gap-3.5"
+            style={{ backgroundColor: "#9D174D", background: "linear-gradient(to right, #9D174D, #500724)" }}
           >
             <BookOpenCheck className="w-5 h-5 text-[#ddc192] flex-shrink-0 mt-0.5" />
             <div className="space-y-1">
@@ -599,57 +599,57 @@ export default function BankSoalPanitiaPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-              <span className="inline-block px-3.5 py-1 bg-[#550000] text-[#ddc192] rounded-full text-xs font-black border border-[#550000]">
+              <span className="inline-block px-3.5 py-1 bg-[#9D174D] text-[#ddc192] rounded-full text-xs font-black border border-[#9D174D]">
                 1. TES AL-QUR'AN (UTAMA)
               </span>
               <ul className="text-xs space-y-2.5 text-slate-800 pt-1">
-                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#550000] flex-shrink-0" /> Fashohah & Kelancaran Bacaan</li>
-                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#550000] flex-shrink-0" /> Penguasaan Tajwid</li>
-                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#550000] flex-shrink-0" /> Ketepatan Makhorijul Huruf</li>
-                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#550000] flex-shrink-0" /> Capaian Juz & Surat</li>
-                <li className="flex items-center gap-2 font-bold text-[#550000] pt-3 border-t border-slate-100">
+                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#9D174D] flex-shrink-0" /> Fashohah & Kelancaran Bacaan</li>
+                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#9D174D] flex-shrink-0" /> Penguasaan Tajwid</li>
+                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#9D174D] flex-shrink-0" /> Ketepatan Makhorijul Huruf</li>
+                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#9D174D] flex-shrink-0" /> Capaian Juz & Surat</li>
+                <li className="flex items-center gap-2 font-bold text-[#9D174D] pt-3 border-t border-slate-100">
                   Rekomendasi Status: A (Mumtaz), B (Jayyid), C (Dha'if)
                 </li>
               </ul>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl border-2 border-[#550000] shadow-2xl space-y-4 relative overflow-hidden">
-              <div className="absolute top-0 right-0 bg-[#550000] text-[#ddc192] text-[10px] font-black px-3 py-1 rounded-bl-xl shadow-sm border-b border-l border-[#ddc192]">
+            <div className="bg-white p-6 rounded-2xl border-2 border-[#9D174D] shadow-2xl space-y-4 relative overflow-hidden">
+              <div className="absolute top-0 right-0 bg-[#9D174D] text-[#ddc192] text-[10px] font-black px-3 py-1 rounded-bl-xl shadow-sm border-b border-l border-[#ddc192]">
                 KHUSUS MA/SMA LANGSUNG (TANPA IL)
               </div>
-              <span className="inline-block px-3.5 py-1 bg-[#550000] text-[#ddc192] rounded-full text-xs font-black border border-[#550000]">
+              <span className="inline-block px-3.5 py-1 bg-[#9D174D] text-[#ddc192] rounded-full text-xs font-black border border-[#9D174D]">
                 2. TES TAMBAHAN HAFALAN
               </span>
-              <div className="p-3 bg-[#ddc192]/20 rounded-2xl border border-[#ddc192] text-[#550000] text-xs font-bold leading-relaxed flex items-start gap-2">
-                <Star className="w-4 h-4 text-[#550000] flex-shrink-0 mt-0.5" />
+              <div className="p-3 bg-[#ddc192]/20 rounded-2xl border border-[#ddc192] text-[#9D174D] text-xs font-bold leading-relaxed flex items-start gap-2">
+                <Star className="w-4 h-4 text-[#9D174D] flex-shrink-0 mt-0.5" />
                 <span>Syarat Wajib: Hafalan Al-Qur'an Minimal 4 Juz Mutqin</span>
               </div>
               <ul className="text-xs space-y-2.5 text-slate-800 pt-1">
-                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#550000] flex-shrink-0" /> Hafalan Ziyadah (Baru)</li>
-                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#550000] flex-shrink-0" /> Kekuatan Muraja'ah (Lama)</li>
-                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#550000] flex-shrink-0" /> Sambung Ayat Al-Qur'an (Min 4 Juz Mutqin)</li>
-                <li className="flex items-center gap-2 font-bold text-[#550000] pt-3 border-t border-slate-100">
+                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#9D174D] flex-shrink-0" /> Hafalan Ziyadah (Baru)</li>
+                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#9D174D] flex-shrink-0" /> Kekuatan Muraja'ah (Lama)</li>
+                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#9D174D] flex-shrink-0" /> Sambung Ayat Al-Qur'an (Min 4 Juz Mutqin)</li>
+                <li className="flex items-center gap-2 font-bold text-[#9D174D] pt-3 border-t border-slate-100">
                   Skor Nilai: 0 – 100 & Catatan Penguji Hafalan
                 </li>
               </ul>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl border-2 border-[#550000] shadow-2xl space-y-4 relative overflow-hidden">
-              <div className="absolute top-0 right-0 bg-[#550000] text-[#ddc192] text-[10px] font-black px-3 py-1 rounded-bl-xl shadow-sm border-b border-l border-[#ddc192]">
+            <div className="bg-white p-6 rounded-2xl border-2 border-[#9D174D] shadow-2xl space-y-4 relative overflow-hidden">
+              <div className="absolute top-0 right-0 bg-[#9D174D] text-[#ddc192] text-[10px] font-black px-3 py-1 rounded-bl-xl shadow-sm border-b border-l border-[#ddc192]">
                 KHUSUS MA/SMA LANGSUNG (TANPA IL)
               </div>
-              <span className="inline-block px-3.5 py-1 bg-[#550000] text-[#ddc192] rounded-full text-xs font-black border border-[#550000]">
+              <span className="inline-block px-3.5 py-1 bg-[#9D174D] text-[#ddc192] rounded-full text-xs font-black border border-[#9D174D]">
                 3. TES LISAN BAHASA ARAB
               </span>
-              <div className="p-3 bg-[#ddc192]/20 rounded-2xl border border-[#ddc192] text-[#550000] text-xs font-bold leading-relaxed flex items-start gap-2">
-                <MessageSquare className="w-4 h-4 text-[#550000] flex-shrink-0 mt-0.5" />
+              <div className="p-3 bg-[#ddc192]/20 rounded-2xl border border-[#ddc192] text-[#9D174D] text-xs font-bold leading-relaxed flex items-start gap-2">
+                <MessageSquare className="w-4 h-4 text-[#9D174D] flex-shrink-0 mt-0.5" />
                 <span>Syarat Wajib: Kemampuan Komunikasi & Nahwu Lisan</span>
               </div>
               <ul className="text-xs space-y-2.5 text-slate-800 pt-1">
-                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#550000] flex-shrink-0" /> Muhadatsah (Percakapan Bahasa Arab)</li>
-                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#550000] flex-shrink-0" /> Kafa'ah Lughawiyyah (Grammar/Nahwu)</li>
-                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#550000] flex-shrink-0" /> Fahmul Maqru' (Pemahaman Bacaan Kitab)</li>
-                <li className="flex items-center gap-2 font-bold text-[#550000] pt-3 border-t border-slate-100">
+                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#9D174D] flex-shrink-0" /> Muhadatsah (Percakapan Bahasa Arab)</li>
+                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#9D174D] flex-shrink-0" /> Kafa'ah Lughawiyyah (Grammar/Nahwu)</li>
+                <li className="flex items-center gap-2.5 font-medium"><CheckCircle2 className="w-4 h-4 text-[#9D174D] flex-shrink-0" /> Fahmul Maqru' (Pemahaman Bacaan Kitab)</li>
+                <li className="flex items-center gap-2 font-bold text-[#9D174D] pt-3 border-t border-slate-100">
                   Skor Nilai: 0 – 100 & Catatan Penguji Bahasa Arab
                 </li>
               </ul>
@@ -662,8 +662,8 @@ export default function BankSoalPanitiaPage() {
       {activeTab === "aturan" && (
         <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
           <div className="space-y-2 border-b border-slate-100 pb-4">
-            <h3 className="font-black text-xl text-[#550000] flex items-center gap-2">
-              <Settings className="w-6 h-6 text-[#550000]" /> Bobot Rumus Nilai Akhir & Penentuan Kelulusan Sistem SPMB
+            <h3 className="font-black text-xl text-[#9D174D] flex items-center gap-2">
+              <Settings className="w-6 h-6 text-[#9D174D]" /> Bobot Rumus Nilai Akhir & Penentuan Kelulusan Sistem SPMB
             </h3>
             <p className="text-xs md:text-sm text-slate-600 font-medium">
               Sistem SPMB mengkalkulasi nilai secara otomatis begitu penguji memasukkan nilai pada portal penguji.
@@ -672,30 +672,30 @@ export default function BankSoalPanitiaPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
-              <h4 className="font-black text-base text-[#550000] flex items-center gap-2">
-                <BarChart3 className="w-4 h-4 text-[#550000]" /> Bobot Komponen Penilaian (100%):
+              <h4 className="font-black text-base text-[#9D174D] flex items-center gap-2">
+                <BarChart3 className="w-4 h-4 text-[#9D174D]" /> Bobot Komponen Penilaian (100%):
               </h4>
               <ul className="text-xs md:text-sm space-y-2 text-slate-800 font-medium">
-                <li className="flex items-center justify-between bg-white p-2.5 rounded-2xl border border-slate-200"><span>• Tes Akademik (Online):</span> <strong className="text-[#550000]">30%</strong></li>
-                <li className="flex items-center justify-between bg-white p-2.5 rounded-2xl border border-slate-200"><span>• Tes Al-Qur'an (Tahfizh & Tajwid):</span> <strong className="text-[#550000]">30%</strong></li>
-                <li className="flex items-center justify-between bg-white p-2.5 rounded-2xl border border-slate-200"><span>• Wawancara Calon Santri:</span> <strong className="text-[#550000]">10%</strong></li>
-                <li className="flex items-center justify-between bg-white p-2.5 rounded-2xl border border-slate-200"><span>• Wawancara Orang Tua:</span> <strong className="text-[#550000]">10%</strong></li>
-                <li className="flex items-center justify-between bg-white p-2.5 rounded-2xl border border-slate-200"><span>• Tes Kepribadian Santri:</span> <strong className="text-[#550000]">10%</strong></li>
-                <li className="flex items-center justify-between bg-white p-2.5 rounded-2xl border border-slate-200"><span>• Tes Kesiapan Santri:</span> <strong className="text-[#550000]">10%</strong></li>
+                <li className="flex items-center justify-between bg-white p-2.5 rounded-2xl border border-slate-200"><span>• Tes Akademik (Online):</span> <strong className="text-[#9D174D]">30%</strong></li>
+                <li className="flex items-center justify-between bg-white p-2.5 rounded-2xl border border-slate-200"><span>• Tes Al-Qur'an (Tahfizh & Tajwid):</span> <strong className="text-[#9D174D]">30%</strong></li>
+                <li className="flex items-center justify-between bg-white p-2.5 rounded-2xl border border-slate-200"><span>• Wawancara Calon Santri:</span> <strong className="text-[#9D174D]">10%</strong></li>
+                <li className="flex items-center justify-between bg-white p-2.5 rounded-2xl border border-slate-200"><span>• Wawancara Orang Tua:</span> <strong className="text-[#9D174D]">10%</strong></li>
+                <li className="flex items-center justify-between bg-white p-2.5 rounded-2xl border border-slate-200"><span>• Tes Kepribadian Santri:</span> <strong className="text-[#9D174D]">10%</strong></li>
+                <li className="flex items-center justify-between bg-white p-2.5 rounded-2xl border border-slate-200"><span>• Tes Kesiapan Santri:</span> <strong className="text-[#9D174D]">10%</strong></li>
               </ul>
             </div>
 
             <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
-              <h4 className="font-black text-base text-[#550000] flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#550000]" /> Kriteria Keputusan Sistem:
+              <h4 className="font-black text-base text-[#9D174D] flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-[#9D174D]" /> Kriteria Keputusan Sistem:
               </h4>
               <div className="space-y-2 text-xs md:text-sm font-medium">
                 <div className="p-3 bg-emerald-50 text-emerald-950 rounded-2xl border border-emerald-200 space-y-1">
                   <strong className="block text-emerald-800 font-black">DITERIMA:</strong>
                   <span>Jika Nilai Akhir &ge; 75 dan Rekomendasi Al-Qur'an Status A/B.</span>
                 </div>
-                <div className="p-3 bg-[#ddc192]/20 text-[#550000] rounded-2xl border border-[#ddc192] space-y-1">
-                  <strong className="block text-[#550000] font-black">CADANGAN:</strong>
+                <div className="p-3 bg-[#ddc192]/20 text-[#9D174D] rounded-2xl border border-[#ddc192] space-y-1">
+                  <strong className="block text-[#9D174D] font-black">CADANGAN:</strong>
                   <span>Jika Nilai Akhir 65–74 atau kuota gelombang penuh.</span>
                 </div>
                 <div className="p-3 bg-rose-50 text-rose-950 rounded-2xl border border-rose-200 space-y-1">

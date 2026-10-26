@@ -242,7 +242,7 @@ export default function KesiapanTestPage() {
                   {[1, 2, 3, 4, 5].map((val) => (
                     <label
                       key={val}
-                      className={`cursor-pointer border p-3 rounded-2xl flex-1 text-center hover:bg-slate-50 transition-all ${answers[q.id] === val ? "bg-emerald-100 border-emerald-500 font-bold text-[#550000] shadow-2xl     " : "border-stone-200"}`}
+                      className={`cursor-pointer border p-3 rounded-2xl flex-1 text-center hover:bg-slate-50 transition-all ${answers[q.id] === val ? "bg-emerald-100 border-emerald-500 font-bold text-[#9D174D] shadow-2xl     " : "border-stone-200"}`}
                     >
                       <input
                         type="radio"
@@ -270,7 +270,7 @@ export default function KesiapanTestPage() {
         <button
           onClick={handleSubmit}
           disabled={loading}
-          className="w-full py-4 bg-[#550000] hover:bg-[#550000] disabled:bg-stone-300 text-white font-bold rounded-3xl shadow-md transition-colors flex items-center justify-center gap-2"
+          className="w-full py-4 bg-[#9D174D] hover:bg-[#9D174D] disabled:bg-stone-300 text-white font-bold rounded-3xl shadow-md transition-colors flex items-center justify-center gap-2"
         >
           {loading ? (
             <>

@@ -159,7 +159,7 @@ export default function SeragamPage() {
 
       {message.text && (
         <div className={`p-6 sm:p-8 rounded-2xl border flex items-center gap-3 text-sm font-bold ${
-          message.type === 'success' ? 'bg-green-50 border-green-200 text-[#550000]' : 'bg-red-50 border-red-200 text-red-700'
+          message.type === 'success' ? 'bg-green-50 border-green-200 text-[#9D174D]' : 'bg-red-50 border-red-200 text-red-700'
         }`}>
           {message.type === 'success' && <CheckCircle2 className="w-5 h-5" />}
           {message.text}
@@ -253,7 +253,7 @@ export default function SeragamPage() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
                 </span>
-                <span className="text-xs font-black text-[#550000] uppercase tracking-wider">
+                <span className="text-xs font-black text-[#9D174D] uppercase tracking-wider">
                   Data Sudah Disimpan
                 </span>
               </div>

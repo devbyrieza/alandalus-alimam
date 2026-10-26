@@ -89,7 +89,7 @@ const STATUS_LABELS: Record<
     color: "emerald",
     bg: "bg-emerald-50",
     border: "border-emerald-200",
-    text: "text-[#550000]",
+    text: "text-[#9D174D]",
     icon: CheckCircle,
     message: "Luar biasa! Semua data sudah lengkap. Menunggu verifikasi admin." },
   verified: {
@@ -97,7 +97,7 @@ const STATUS_LABELS: Record<
     color: "emerald",
     bg: "bg-emerald-50",
     border: "border-emerald-200",
-    text: "text-[#550000]",
+    text: "text-[#9D174D]",
     icon: CheckCircle,
     message: "Alhamdulillah! Pendaftaran Anda telah diverifikasi." },
   tes_tertulis: {
@@ -113,7 +113,7 @@ const STATUS_LABELS: Record<
     color: "emerald",
     bg: "bg-emerald-50",
     border: "border-emerald-200",
-    text: "text-[#550000]",
+    text: "text-[#9D174D]",
     icon: CheckCircle,
     message: "Selamat! Anda lulus tes tertulis. Lanjutkan ke tahap berikutnya!" },
   tidak_lulus_tes_tertulis: {
@@ -138,7 +138,7 @@ const STATUS_LABELS: Record<
     color: "emerald",
     bg: "bg-emerald-50",
     border: "border-emerald-200",
-    text: "text-[#550000]",
+    text: "text-[#9D174D]",
     icon: CheckCircle,
     message: "Ujian selesai! Menunggu hasil pengumuman. Do'akan yang terbaik!" },
   accepted: {
@@ -146,7 +146,7 @@ const STATUS_LABELS: Record<
     color: "emerald",
     bg: "bg-emerald-50",
     border: "border-emerald-200",
-    text: "text-[#550000]",
+    text: "text-[#9D174D]",
     icon: Trophy,
     message:
       "Alhamdulillah! Selamat, putra/putri Anda diterima di Pesantren Al Imam Al Islami!" },

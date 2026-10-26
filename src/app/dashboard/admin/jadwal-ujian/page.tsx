@@ -671,7 +671,7 @@ export default function JadwalUjianPage() {
           hour: "2-digit",
           minute: "2-digit",
         })} WIB telah berhasil dijadwalkan & notifikasi WhatsApp dikirim.`,
-        confirmButtonColor: "#800000",
+        confirmButtonColor: "#BE185D",
       });
 
       setScheduleModalOpen(false);

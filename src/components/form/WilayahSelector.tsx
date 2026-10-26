@@ -146,7 +146,7 @@ function WilayahSelect({
               : isFilled
                 ? "bg-white border-primary-300 text-ink-900 shadow-[var(--shadow-premium-sm)] cursor-pointer"
                 : open
-                  ? "bg-white border-primary-500 text-ink-900 shadow-[0_0_0_3px_rgba(128,0,0,0.08)] cursor-pointer"
+                  ? "bg-white border-primary-500 text-ink-900 shadow-[0_0_0_3px_rgba(190,24,93,0.08)] cursor-pointer"
                   : "bg-white border-primary-100 text-ink-600 hover:border-primary-300 hover:bg-primary-50/40 cursor-pointer"
           }
           ${disabled ? "!bg-surface-100 !border-primary-100 !text-ink-300 !cursor-not-allowed !opacity-60" : ""}
@@ -208,7 +208,7 @@ function WilayahSelect({
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder={`Cari ${label.toLowerCase()}...`}
-                    className="w-full pl-8 pr-3 py-2 text-sm rounded-2xl bg-primary-50/60 border border-primary-100 text-ink-900 placeholder:text-ink-300 focus:outline-none focus:border-primary-400 focus:bg-white focus:shadow-[0_0_0_3px_rgba(128,0,0,0.06)] transition-all duration-150 font-medium"
+                    className="w-full pl-8 pr-3 py-2 text-sm rounded-2xl bg-primary-50/60 border border-primary-100 text-ink-900 placeholder:text-ink-300 focus:outline-none focus:border-primary-400 focus:bg-white focus:shadow-[0_0_0_3px_rgba(190,24,93,0.06)] transition-all duration-150 font-medium"
                   />
                   <svg
                     className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-ink-400 pointer-events-none"
@@ -558,7 +558,7 @@ export default function WilayahSelector({
                     ? "bg-surface-100 border-primary-100 text-ink-300 cursor-not-allowed opacity-60"
                     : value.kode_pos
                       ? "bg-white border-primary-300 shadow-[var(--shadow-premium-sm)]"
-                      : "bg-white border-primary-100 hover:border-primary-300 hover:bg-primary-50/40 focus:border-primary-500 focus:shadow-[0_0_0_3px_rgba(128,0,0,0.08)]"
+                      : "bg-white border-primary-100 hover:border-primary-300 hover:bg-primary-50/40 focus:border-primary-500 focus:shadow-[0_0_0_3px_rgba(190,24,93,0.08)]"
                 }
               `}
             />

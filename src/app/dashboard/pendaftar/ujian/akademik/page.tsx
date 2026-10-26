@@ -301,7 +301,7 @@ export default function AkademikTestPage() {
             </div>
             <button
               onClick={handleStart}
-              className="w-full py-4 bg-[#550000] hover:bg-[#550000] text-white font-bold rounded-3xl transition-colors text-lg"
+              className="w-full py-4 bg-[#9D174D] hover:bg-[#9D174D] text-white font-bold rounded-3xl transition-colors text-lg"
             >
               Mulai Tes
             </button>
@@ -315,13 +315,13 @@ export default function AkademikTestPage() {
     <div className="max-w-4xl mx-auto p-6 sm:p-8 md:p-6 pb-32">
       {/* Floating Timer */}
       <div
-        className={`fixed top-20 right-4 md:right-10 bg-white border shadow-2xl rounded-full px-4 py-2 z-50 flex items-center gap-2 font-bold font-mono text-xl ${timeLeft <= 300 ? "text-red-600 animate-pulse" : "text-[#550000]"}`}
+        className={`fixed top-20 right-4 md:right-10 bg-white border shadow-2xl rounded-full px-4 py-2 z-50 flex items-center gap-2 font-bold font-mono text-xl ${timeLeft <= 300 ? "text-red-600 animate-pulse" : "text-[#9D174D]"}`}
       >
         <Timer className="w-5 h-5" /> {formatTime(timeLeft)}
       </div>
 
       <div className="mt-2 space-y-6">
-        <div className="bg-gradient-to-r from-[#550000] to-primary-700 rounded-3xl p-6">
+        <div className="bg-gradient-to-r from-[#9D174D] to-primary-700 rounded-3xl p-6">
           <h2 className="text-xl font-bold text-white">
             Seleksi Akademik — {jenjang}
           </h2>
@@ -343,7 +343,7 @@ export default function AkademikTestPage() {
                   onClick={() =>
                     setAnswers((p) => ({ ...p, [q.id]: opt.value }))
                   }
-                  className={`cursor-pointer p-6 sm:p-8 border-2 rounded-2xl hover:bg-slate-50 transition-all ${answers[q.id] === opt.value ? "bg-indigo-50 border-indigo-500 text-[#550000] shadow-2xl     " : "border-stone-200"}`}
+                  className={`cursor-pointer p-6 sm:p-8 border-2 rounded-2xl hover:bg-slate-50 transition-all ${answers[q.id] === opt.value ? "bg-indigo-50 border-indigo-500 text-[#9D174D] shadow-2xl     " : "border-stone-200"}`}
                 >
                   <span className="font-bold mr-3 inline-block w-6 text-center bg-stone-100 rounded text-stone-600 whitespace-nowrap inline-block shrink-0">
                     {opt.value}

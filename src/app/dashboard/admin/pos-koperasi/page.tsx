@@ -81,7 +81,7 @@ export default function POSKoperasi() {
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8 text-[#550000]">POS Kasir Koperasi</h1>
+      <h1 className="text-3xl font-bold mb-8 text-[#9D174D]">POS Kasir Koperasi</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Kolom Scan */}
@@ -104,7 +104,7 @@ export default function POSKoperasi() {
             {!santriData && (
               <button 
                 type="submit" 
-                className="w-full bg-[#550000] text-white py-3 rounded-2xl font-medium hover:bg-red-900 transition disabled:opacity-50"
+                className="w-full bg-[#9D174D] text-white py-3 rounded-2xl font-medium hover:bg-red-900 transition disabled:opacity-50"
                 disabled={loading || !qrCode}
               >
                 {loading ? "Memeriksa..." : "Cek Kartu"}
@@ -129,7 +129,7 @@ export default function POSKoperasi() {
                   </div>
                   <div className="text-right">
                     <p className="text-xs text-gray-500">Saldo Saat Ini</p>
-                    <p className="font-bold text-[#550000]">Rp {Number(santriData.saldo).toLocaleString('id-ID')}</p>
+                    <p className="font-bold text-[#9D174D]">Rp {Number(santriData.saldo).toLocaleString('id-ID')}</p>
                   </div>
                 </div>
               </div>
@@ -141,7 +141,7 @@ export default function POSKoperasi() {
                     type="number"
                     value={nominal}
                     onChange={(e) => setNominal(e.target.value)}
-                    className="w-full px-4 py-3 text-2xl font-bold border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#550000] focus:border-transparent outline-none transition"
+                    className="w-full px-4 py-3 text-2xl font-bold border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#9D174D] focus:border-transparent outline-none transition"
                     placeholder="0"
                     required
                     min="1"
@@ -158,7 +158,7 @@ export default function POSKoperasi() {
                   </button>
                   <button 
                     type="submit" 
-                    className="flex-[2] bg-[#ddc192] text-[#550000] py-3 rounded-2xl font-bold hover:brightness-95 transition disabled:opacity-50"
+                    className="flex-[2] bg-[#ddc192] text-[#9D174D] py-3 rounded-2xl font-bold hover:brightness-95 transition disabled:opacity-50"
                     disabled={loading || !nominal}
                   >
                     {loading ? "Memproses..." : "Bayar Sekarang"}

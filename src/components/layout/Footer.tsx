@@ -43,7 +43,7 @@ export default function Footer() {
       className="relative overflow-hidden pt-20 pb-28 md:pb-14"
       style={{
         background:
-          "linear-gradient(160deg, var(--color-primary-900) 0%, var(--color-primary-950) 80%, var(--color-secondary-900, #2A0505) 100%)",
+          "linear-gradient(160deg, var(--color-primary-900) 0%, var(--color-primary-950) 80%, var(--color-secondary-900, #500724) 100%)",
         borderTop: "1px solid rgba(255,255,255,0.05)" }}
     >
       {/* ── Decorative orbs — maroon-warm ── */}
@@ -51,7 +51,7 @@ export default function Footer() {
         className="absolute top-0 right-0 w-[480px] h-[480px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/3 max-w-full"
         style={{
           background:
-            "radial-gradient(circle, rgba(176,64,64,0.18) 0%, transparent 70%)" }}
+            "radial-gradient(circle, rgba(190,24,93,0.18) 0%, transparent 70%)" }}
       />
       <div
         className="absolute bottom-0 left-0 w-[320px] h-[320px] rounded-full pointer-events-none translate-y-1/2 -translate-x-1/3"

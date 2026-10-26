@@ -439,7 +439,7 @@ export default function TentangPage() {
       {/* ─── 6. BOTTOM CTA (OMI ENTERPRISE BANNER) ─── */}
       <section className="py-12">
         <Container className="max-w-5xl mx-auto px-4">
-          <div className="rounded-3xl p-8 sm:p-12 text-center bg-gradient-to-br from-[#831843] via-[#9F1239] to-[#E11D74] text-white shadow-xl border border-white/15 space-y-5">
+          <div className="rounded-3xl p-8 sm:p-12 text-center bg-gradient-to-br from-[#831843] via-[#BE185D] to-[#E11D74] text-white shadow-xl border border-white/15 space-y-5">
             <h3 className="text-2xl sm:text-3xl font-extrabold">
               Tertarik Bergabung dengan Keluarga Besar Al-Imam?
             </h3>

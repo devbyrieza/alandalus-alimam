@@ -622,7 +622,7 @@ export default function ExaminerDashboard() {
         </div>
       </div>
       {/* BARU: Banner Akses Khusus & Share WA Bank Soal Panitia (Al-Imam Maroon & Krem Emas) */}
-      <div style={{ background: "linear-gradient(135deg, #550000 0%, #360000 100%)" }} className="text-white p-5 sm:p-6 rounded-3xl shadow-2xl border border-[#6b0000]/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div style={{ background: "linear-gradient(135deg, #9D174D 0%, #500724 100%)" }} className="text-white p-5 sm:p-6 rounded-3xl shadow-2xl border border-[#831843]/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
           <div className="p-3.5 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 flex-shrink-0">
             <FileText className="w-6 h-6 text-[#ddc192]" />
@@ -641,9 +641,9 @@ export default function ExaminerDashboard() {
         <div className="flex items-center gap-2.5 w-full md:w-auto flex-shrink-0">
           <Link
             href="/dashboard/admin/bank-soal"
-            className="flex-1 md:flex-none px-4 py-2.5 bg-[#ddc192] text-[#550000] hover:bg-[#c5a775] rounded-2xl font-black text-xs flex items-center justify-center gap-2 shadow-sm transition-all border border-[#ddc192]"
+            className="flex-1 md:flex-none px-4 py-2.5 bg-[#ddc192] text-[#9D174D] hover:bg-[#c5a775] rounded-2xl font-black text-xs flex items-center justify-center gap-2 shadow-sm transition-all border border-[#ddc192]"
           >
-            <Eye className="w-4 h-4 text-[#550000]" /> Lihat Bank Soal
+            <Eye className="w-4 h-4 text-[#9D174D]" /> Lihat Bank Soal
           </Link>
           <button
             onClick={() => {
@@ -666,12 +666,12 @@ export default function ExaminerDashboard() {
         {/* Header Stats (Rekap Kelulusan) */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           <div className="bg-green-50 p-6 rounded-3xl shadow-2xl border border-green-100 relative overflow-hidden">
-            <p className="text-[#550000] text-sm font-bold tracking-wider uppercase mb-1">Total Diterima</p>
+            <p className="text-[#9D174D] text-sm font-bold tracking-wider uppercase mb-1">Total Diterima</p>
             <div className="flex items-end gap-2">
-              <h3 className="text-2xl md:text-4xl font-black text-[#550000]">
+              <h3 className="text-2xl md:text-4xl font-black text-[#9D174D]">
                 {students.filter(c => c.status_pendaftaran === "accepted" || c.status_pendaftaran === "enrolled").length}
               </h3>
-              <span className="text-[#550000]/70 font-medium mb-1 pl-1">Santri</span>
+              <span className="text-[#9D174D]/70 font-medium mb-1 pl-1">Santri</span>
             </div>
             <div className="absolute -right-4 -bottom-4 bg-green-200/50 w-24 h-24 rounded-full blur-xl"></div>
           </div>
@@ -723,7 +723,7 @@ export default function ExaminerDashboard() {
               <div className="flex flex-wrap gap-2 w-full lg:w-auto">
                 <Button
                   onClick={handleExportExcel}
-                  className="btn-secondary flex items-center gap-2 bg-emerald-50 text-[#550000] border-emerald-100 hover:bg-emerald-100 rounded-3xl font-bold py-2 whitespace-nowrap shrink-0"
+                  className="btn-secondary flex items-center gap-2 bg-emerald-50 text-[#9D174D] border-emerald-100 hover:bg-emerald-100 rounded-3xl font-bold py-2 whitespace-nowrap shrink-0"
                 >
                   <Download className="w-4 h-4" /> Export Excel
                 </Button>
@@ -860,9 +860,9 @@ export default function ExaminerDashboard() {
 
                             const colors: any = {
                               LULUS:
-                                "bg-green-100 text-[#550000] border-green-200",
+                                "bg-green-100 text-[#9D174D] border-green-200",
                               DITERIMA:
-                                "bg-green-100 text-[#550000] border-green-200",
+                                "bg-green-100 text-[#9D174D] border-green-200",
                               CADANGAN:
                                 "bg-secondary-100 text-secondary-700 border-secondary-200",
                               DITOLAK: "bg-red-100 text-red-700 border-red-200",
@@ -1121,7 +1121,7 @@ export default function ExaminerDashboard() {
                                 </button>
                                 <button
                                   onClick={() => handleOpenAssignDialog(s)}
-                                  className="flex items-center gap-1.5 bg-[#550000] text-white px-3 py-1.5 rounded-3xl text-[10px] font-black hover:bg-[#550000] transition-all shadow-2xl group-hover:scale-105"
+                                  className="flex items-center gap-1.5 bg-[#9D174D] text-white px-3 py-1.5 rounded-3xl text-[10px] font-black hover:bg-[#9D174D] transition-all shadow-2xl group-hover:scale-105"
                                 >
                                   <Users className="w-3 h-3" /> PLOT
                                 </button>
@@ -1216,9 +1216,9 @@ export default function ExaminerDashboard() {
                     {(() => {
                       const examStatus = s.nilai_ujian?.status_kelulusan;
                       const colors: any = {
-                        LULUS: "bg-green-100 text-[#550000] border-green-200",
+                        LULUS: "bg-green-100 text-[#9D174D] border-green-200",
                         DITERIMA:
-                          "bg-green-100 text-[#550000] border-green-200",
+                          "bg-green-100 text-[#9D174D] border-green-200",
                         CADANGAN:
                           "bg-secondary-100 text-secondary-700 border-secondary-200",
                         DITOLAK: "bg-red-100 text-red-700 border-red-200",
@@ -1307,7 +1307,7 @@ export default function ExaminerDashboard() {
                           </button>
                           <button
                             onClick={() => handleOpenAssignDialog(s)}
-                            className="flex items-center justify-center gap-2 bg-[#550000] text-white py-3 rounded-2xl text-[11px] font-black shadow-2xl active:scale-95 transition-all"
+                            className="flex items-center justify-center gap-2 bg-[#9D174D] text-white py-3 rounded-2xl text-[11px] font-black shadow-2xl active:scale-95 transition-all"
                           >
                             <Users className="w-3.5 h-3.5" /> PLOT
                           </button>
@@ -1385,7 +1385,7 @@ export default function ExaminerDashboard() {
               </div>
             </div>
             <div className="bg-white rounded-3xl p-6 shadow-clay-md border border-white/40 flex items-center gap-4">
-              <div className="p-6 sm:p-8 bg-green-50 text-[#550000] rounded-2xl">
+              <div className="p-6 sm:p-8 bg-green-50 text-[#9D174D] rounded-2xl">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
               <div>
@@ -1417,12 +1417,12 @@ export default function ExaminerDashboard() {
         {/* Header Stats (Rekap Kelulusan) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <div className="bg-green-50 p-6 rounded-3xl shadow-2xl border border-green-100 relative overflow-hidden">
-            <p className="text-[#550000] text-sm font-bold tracking-wider uppercase mb-1">Total Diterima</p>
+            <p className="text-[#9D174D] text-sm font-bold tracking-wider uppercase mb-1">Total Diterima</p>
             <div className="flex items-end gap-2">
-              <h3 className="text-2xl md:text-4xl font-black text-[#550000]">
+              <h3 className="text-2xl md:text-4xl font-black text-[#9D174D]">
                 {students.filter(c => c.status_pendaftaran === "accepted" || c.status_pendaftaran === "enrolled").length}
               </h3>
-              <span className="text-[#550000]/70 font-medium mb-1 pl-1">Santri</span>
+              <span className="text-[#9D174D]/70 font-medium mb-1 pl-1">Santri</span>
             </div>
             <div className="absolute -right-4 -bottom-4 bg-green-200/50 w-24 h-24 rounded-full blur-xl"></div>
           </div>
@@ -1524,17 +1524,17 @@ export default function ExaminerDashboard() {
                 </div>
 
                 <div className="p-6 bg-emerald-50/30 rounded-3xl border border-emerald-100/50 hover:bg-emerald-50 transition-colors">
-                  <h4 className="font-black text-[#550000] mb-2">
+                  <h4 className="font-black text-[#9D174D] mb-2">
                     Kirim Paksa Antrean (Flush)
                   </h4>
-                  <p className="text-xs text-[#550000]/70 mb-6 font-medium leading-relaxed">
+                  <p className="text-xs text-[#9D174D]/70 mb-6 font-medium leading-relaxed">
                     Jalankan pemicu manual untuk mengirim pesan yang sedang
                     tertahan di antrean ke server provider WhatsApp (Wablas).
                   </p>
                   <Button
                     onClick={handleFlushQueue}
                     disabled={isProcessingQueue || !queueStats?.pending}
-                    className="w-full bg-[#550000] hover:bg-[#550000] text-white rounded-2xl py-6 font-black text-base shadow-md disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
+                    className="w-full bg-[#9D174D] hover:bg-[#9D174D] text-white rounded-2xl py-6 font-black text-base shadow-md disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
                   >
                     {isProcessingQueue
                       ? `Mengirim (${flushProgress}%)...`

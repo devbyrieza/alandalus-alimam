@@ -244,7 +244,7 @@ Mohon konfirmasi kesediaan waktu kunjungan tersebut. Terima kasih.`;
           <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
             
             {/* Header Form */}
-            <div className="bg-gradient-to-br from-[#831843] via-[#9F1239] to-[#E11D74] p-5 sm:p-8 md:p-10 text-white relative overflow-hidden">
+            <div className="bg-gradient-to-br from-[#831843] via-[#BE185D] to-[#E11D74] p-5 sm:p-8 md:p-10 text-white relative overflow-hidden">
               <div className="relative z-10 space-y-2">
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-pink-200 bg-white/10 px-3 py-1 rounded-full border border-white/20 inline-block">
                   Layanan Survey & Kunjungan

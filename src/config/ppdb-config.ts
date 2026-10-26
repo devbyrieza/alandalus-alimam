@@ -20,16 +20,16 @@ export const PPDB_CONFIG = {
   // 🎨 BRAND COLORS (Pink Rose Khas Al-Imam Khusus Putri)
   colors: {
     primary: {
-      50: "#fff1f2",
-      100: "#ffe4e6",
-      200: "#fecdd3",
-      300: "#fda4af",
-      400: "#fb7185",
-      500: "#f43f5e",
-      600: "#e11d74", // Warna utama tombol & aksi
-      700: "#be123c",
-      800: "#9f1239",
-      900: "#881337",
+      50: "#fdf2f8",
+      100: "#fce7f3",
+      200: "#fbcfe8",
+      300: "#f9a8d4",
+      400: "#f472b6",
+      500: "#ec4899",
+      600: "#E11D74", // Warna utama tombol & aksi
+      700: "#BE185D",
+      800: "#9D174D",
+      900: "#831843",
     },
     secondary: {
       50: "#fffbeb",

@@ -129,7 +129,7 @@ export default function POSPerizinan() {
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8 text-[#550000]">Gerbang Perizinan Santri</h1>
+      <h1 className="text-3xl font-bold mb-8 text-[#9D174D]">Gerbang Perizinan Santri</h1>
       
       {/* Mode Switcher */}
       <div className="flex space-x-4 mb-8">
@@ -137,7 +137,7 @@ export default function POSPerizinan() {
           onClick={() => { setMode("KELUAR"); resetForm(); }}
           className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-3xl font-bold text-lg transition-all ${
             mode === "KELUAR" 
-              ? "bg-[#550000] text-white shadow-2xl    scale-105" 
+              ? "bg-[#9D174D] text-white shadow-2xl    scale-105" 
               : "bg-white text-gray-500 hover:bg-red-50 border"
           }`}
         >
@@ -147,7 +147,7 @@ export default function POSPerizinan() {
           onClick={() => { setMode("KEMBALI"); resetForm(); }}
           className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-3xl font-bold text-lg transition-all ${
             mode === "KEMBALI" 
-              ? "bg-[#ddc192] text-[#550000] shadow-2xl    scale-105" 
+              ? "bg-[#ddc192] text-[#9D174D] shadow-2xl    scale-105" 
               : "bg-white text-gray-500 hover:bg-yellow-50 border"
           }`}
         >
@@ -170,7 +170,7 @@ export default function POSPerizinan() {
                 value={qrCode}
                 onChange={(e) => setQrCode(e.target.value)}
                 className={`w-full px-4 py-3 border rounded-2xl focus:ring-2 focus:border-transparent outline-none transition ${
-                  mode === "KELUAR" ? "focus:ring-[#550000] border-gray-300" : "focus:ring-[#ddc192] border-yellow-300 bg-yellow-50"
+                  mode === "KELUAR" ? "focus:ring-[#9D174D] border-gray-300" : "focus:ring-[#ddc192] border-yellow-300 bg-yellow-50"
                 }`}
                 placeholder="Scan di sini..."
                 disabled={loading || (mode === "KELUAR" && santriData !== null)}
@@ -199,7 +199,7 @@ export default function POSPerizinan() {
             
             {santriData && (
               <div className="bg-red-50 p-3 rounded-2xl border border-red-100 mb-4">
-                <p className="font-bold text-[#550000]">{santriData.nama}</p>
+                <p className="font-bold text-[#9D174D]">{santriData.nama}</p>
                 <p className="text-sm text-gray-600">NIS: {santriData.nis}</p>
               </div>
             )}
@@ -250,7 +250,7 @@ export default function POSPerizinan() {
                 </button>
                 <button 
                   type="submit" 
-                  className="flex-[2] bg-[#550000] text-white py-3 rounded-2xl font-bold hover:bg-red-900 transition disabled:opacity-50"
+                  className="flex-[2] bg-[#9D174D] text-white py-3 rounded-2xl font-bold hover:bg-red-900 transition disabled:opacity-50"
                   disabled={loading || !alasan}
                 >
                   {loading ? "Memproses..." : "Izinkan Keluar"}

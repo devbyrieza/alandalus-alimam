@@ -347,7 +347,7 @@ export default function RekapSeragamPage() {
                         </td>
                         <td className="px-6 py-4 text-center">
                           {item.ukuran_seragam_baju ? (
-                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-2xl bg-blue-50 text-[#550000] font-black text-xs border border-blue-100">
+                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-2xl bg-blue-50 text-[#9D174D] font-black text-xs border border-blue-100">
                               {item.ukuran_seragam_baju}
                             </span>
                           ) : (
@@ -356,7 +356,7 @@ export default function RekapSeragamPage() {
                         </td>
                         <td className="px-6 py-4 text-center">
                           {item.ukuran_seragam_celana ? (
-                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-2xl bg-emerald-50 text-[#550000] font-black text-xs border border-emerald-100">
+                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-2xl bg-emerald-50 text-[#9D174D] font-black text-xs border border-emerald-100">
                               {item.ukuran_seragam_celana}
                             </span>
                           ) : (
@@ -374,7 +374,7 @@ export default function RekapSeragamPage() {
                         </td>
                         <td className="px-6 py-4 text-center">
                           {sudahIsi ? (
-                            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50 text-[#550000] border border-green-200 text-xs font-black">
+                            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50 text-[#9D174D] border border-green-200 text-xs font-black">
                               <CheckCircle2 className="w-3.5 h-3.5" />
                               LENGKAP
                             </div>
@@ -411,7 +411,7 @@ export default function RekapSeragamPage() {
             </div>
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-green-100 text-[#550000] flex items-center justify-center">
+                <div className="w-8 h-8 rounded-full bg-green-100 text-[#9D174D] flex items-center justify-center">
                   <CheckCircle2 className="w-4 h-4" />
                 </div>
                 <div>

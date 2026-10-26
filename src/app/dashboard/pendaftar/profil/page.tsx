@@ -324,7 +324,7 @@ export default function ProfilPage() {
               </div>
 
               <div className="pt-6 border-t border-ink-100/50 flex flex-wrap gap-4">
-                <div className="flex items-center gap-3 px-4 py-2 bg-green-50 text-[#550000] rounded-2xl border border-green-100">
+                <div className="flex items-center gap-3 px-4 py-2 bg-green-50 text-[#9D174D] rounded-2xl border border-green-100">
                   <Phone className="w-4 h-4" />
                   <span className="font-bold text-sm">
                     {data?.santri?.no_hp || "-"}

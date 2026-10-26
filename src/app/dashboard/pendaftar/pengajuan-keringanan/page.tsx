@@ -166,7 +166,7 @@ export default function PengajuanKeringananPage() {
           <div
             className={`w-24 h-24 rounded-[2rem] flex items-center justify-center mb-6 shadow-2xl border ${
               pengajuan.status === "approved"
-                ? "bg-emerald-50 text-[#550000] border-emerald-100"
+                ? "bg-emerald-50 text-[#9D174D] border-emerald-100"
                 : pengajuan.status === "rejected"
                 ? "bg-rose-50 text-rose-600 border-rose-100"
                 : "bg-amber-50 text-amber-600 border-amber-100"
@@ -202,7 +202,7 @@ export default function PengajuanKeringananPage() {
               <span
                 className={`px-3 py-1 rounded-full text-xs font-black border ${
                   pengajuan.status === "approved"
-                    ? "bg-emerald-100 text-[#550000] border-emerald-200"
+                    ? "bg-emerald-100 text-[#9D174D] border-emerald-200"
                     : pengajuan.status === "rejected"
                     ? "bg-rose-100 text-rose-700 border-rose-200"
                     : "bg-amber-100 text-amber-700 border-amber-200"
@@ -227,10 +227,10 @@ export default function PengajuanKeringananPage() {
             {pengajuan.nominal_disetujui > 0 &&
               pengajuan.status === "approved" && (
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-bold text-[#550000] uppercase tracking-wider">
+                  <span className="text-sm font-bold text-[#9D174D] uppercase tracking-wider">
                     Nilai Potongan Disetujui
                   </span>
-                  <span className="font-black text-[#550000] text-lg">
+                  <span className="font-black text-[#9D174D] text-lg">
                     Rp{" "}
                     {pengajuan.nominal_disetujui.toLocaleString("id-ID")}
                   </span>
@@ -325,8 +325,8 @@ export default function PengajuanKeringananPage() {
             </h3>
 
             {/* Info syarat */}
-            <div className="bg-blue-50 border border-blue-100 rounded-3xl p-3 text-xs text-[#550000] font-medium flex items-start gap-2">
-              <ClipboardList className="w-4 h-4 text-[#550000] shrink-0 mt-0.5" />
+            <div className="bg-blue-50 border border-blue-100 rounded-3xl p-3 text-xs text-[#9D174D] font-medium flex items-start gap-2">
+              <ClipboardList className="w-4 h-4 text-[#9D174D] shrink-0 mt-0.5" />
               <span>
                 Keringanan memerlukan 2 dokumen wajib: <strong>SKTM</strong>{" "}
                 dan{" "}

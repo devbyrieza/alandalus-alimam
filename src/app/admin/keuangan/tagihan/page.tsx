@@ -77,7 +77,7 @@ export default function ManajemenTagihanPage() {
       </div>
 
       {message.text && (
-        <div className={`mb-6 p-6 sm:p-8 rounded-3xl flex items-center gap-3 font-bold shadow-2xl animate-in fade-in ${message.type === 'success' ? 'bg-green-50 text-[#550000] border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
+        <div className={`mb-6 p-6 sm:p-8 rounded-3xl flex items-center gap-3 font-bold shadow-2xl animate-in fade-in ${message.type === 'success' ? 'bg-green-50 text-[#9D174D] border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
           <CheckCircle2 className="w-5 h-5" />
           {message.text}
         </div>
@@ -118,7 +118,7 @@ export default function ManajemenTagihanPage() {
                   </td>
                   <td className="p-6 sm:p-8 text-center">
                     {t.status === 'lunas' ? (
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-[#550000]">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-[#9D174D]">
                         <CheckCircle2 className="w-3.5 h-3.5" /> Lunas
                       </span>
                     ) : (

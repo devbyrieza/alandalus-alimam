@@ -1117,7 +1117,7 @@ function AdminPendaftarContent() {
         color: "bg-gold-50 text-gold-800 border border-gold-100" },
       docs_verified: {
         label: "Berkas Lengkap",
-        color: "bg-emerald-50 text-[#550000] border border-emerald-100" },
+        color: "bg-emerald-50 text-[#9D174D] border border-emerald-100" },
       selection: {
         label: "Proses Seleksi",
         color: "bg-purple-50 text-purple-800 border border-purple-100" },
@@ -1139,11 +1139,11 @@ function AdminPendaftarContent() {
       cadangan: {
         label: "Cadangan",
         color: "bg-gold-100 text-gold-800 border border-gold-200" },
-      accepted: { label: "Diterima", color: "bg-[#550000] text-white" },
+      accepted: { label: "Diterima", color: "bg-[#9D174D] text-white" },
       rejected: { label: "Ditolak", color: "bg-rose-600 text-white" },
       enrolled: {
         label: "Proses Daftar Ulang",
-        color: "bg-emerald-100 text-[#550000]" },
+        color: "bg-emerald-100 text-[#9D174D]" },
       enrolled_full: {
         label: "Lunas Daftar Ulang",
         color: "bg-primary-100 text-primary-800 border border-primary-200" },
@@ -1268,7 +1268,7 @@ function AdminPendaftarContent() {
             <button
               onClick={() => handleExport("excel")}
               disabled={exporting}
-              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-[#550000] hover:bg-[#550000] text-white rounded-2xl transition-colors disabled:opacity-50 text-sm"
+              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-[#9D174D] hover:bg-[#9D174D] text-white rounded-2xl transition-colors disabled:opacity-50 text-sm"
               title="Download Excel"
             >
               {exporting ? (
@@ -1770,7 +1770,7 @@ function AdminPendaftarContent() {
                     return p && (p.status_pendaftaran === "announced" || p.status_pendaftaran === "cadangan");
                   }))}
                   disabled={isPromotingCadangan}
-                  className="flex items-center justify-center gap-2 px-5 md:px-8 py-2.5 bg-[#550000] hover:bg-[#550000] text-white rounded-3xl font-black transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl active:scale-95 text-sm"
+                  className="flex items-center justify-center gap-2 px-5 md:px-8 py-2.5 bg-[#9D174D] hover:bg-[#9D174D] text-white rounded-3xl font-black transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl active:scale-95 text-sm"
                 >
                   {isPromotingCadangan ? (
                     <>
@@ -2274,7 +2274,7 @@ function AdminPendaftarContent() {
                       className={`py-3 px-4 rounded-3xl border-2 font-bold transition-all ${
                         announcementForm.status_kelulusan === status
                           ? status === "Diterima"
-                            ? "border-green-500 bg-green-50 text-[#550000]"
+                            ? "border-green-500 bg-green-50 text-[#9D174D]"
                             : status === "Cadangan"
                               ? "border-yellow-500 bg-yellow-50 text-yellow-700"
                               : "border-red-500 bg-red-50 text-red-700"

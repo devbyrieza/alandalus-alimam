@@ -210,7 +210,7 @@ export default function AdminSidebar({
       text: "Anda akan diarahkan kembali ke halaman login.",
       icon: "question",
       showCancelButton: true,
-      confirmButtonColor: "#7c2d12", // Maroon 900
+      confirmButtonColor: "#9D174D", // Maroon 900
       cancelButtonColor: "#94a3b8", // Slate 400
       confirmButtonText: "Ya, Keluar",
       cancelButtonText: "Batal",

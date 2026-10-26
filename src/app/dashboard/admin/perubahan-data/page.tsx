@@ -170,7 +170,7 @@ export default function PerubahanDataPage() {
                                                   ? "bg-primary-100 text-primary-700"
                                                   : req.status === "submitted"
                                                     ? "bg-purple-100 text-purple-700"
-                                                    : "bg-emerald-100 text-[#550000]"
+                                                    : "bg-emerald-100 text-[#9D174D]"
                                             }
                                         `}
                       >
@@ -235,7 +235,7 @@ export default function PerubahanDataPage() {
                       <button
                         onClick={() => handleAction(req.id, "complete")}
                         disabled={processing === req.id}
-                        className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-[#550000] text-white rounded-3xl text-sm font-bold shadow-2xl hover:bg-[#550000] transition-all disabled:opacity-50"
+                        className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-[#9D174D] text-white rounded-3xl text-sm font-bold shadow-2xl hover:bg-[#9D174D] transition-all disabled:opacity-50"
                       >
                         {processing === req.id ? (
                           <Loader2 className="w-4 h-4 animate-spin" />

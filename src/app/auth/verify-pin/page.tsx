@@ -107,7 +107,7 @@ function VerifyPinContent() {
     <div className="min-h-dvh bg-stone-50 flex items-center justify-center p-6 font-sans">
       <div className="max-w-md w-full animate-in fade-in zoom-in duration-500">
         <div className="bg-white rounded-[2.5rem] shadow-2xl shadow-indigo-100/50 border border-stone-100 overflow-hidden text-stone-900">
-          <div className="bg-[#550000] p-5 md:p-8 sm:p-6 text-center relative overflow-hidden">
+          <div className="bg-[#9D174D] p-5 md:p-8 sm:p-6 text-center relative overflow-hidden">
             {/* Decorative background circle */}
             <div className="absolute top-[-50px] right-[-50px] w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
             <div className="absolute bottom-[-30px] left-[-30px] w-24 h-24 bg-white/5 rounded-full blur-xl"></div>
@@ -126,7 +126,7 @@ function VerifyPinContent() {
           <div className="p-7 sm:p-6 md:p-10 text-center">
             <p className="text-stone-900 text-sm sm:text-base mb-8 leading-relaxed font-medium">
               Masukkan{" "}
-              <span className="font-black text-[#550000]">
+              <span className="font-black text-[#9D174D]">
                 4 digit terakhir
               </span>{" "}
               nomor WhatsApp Anda untuk melanjutkan.
@@ -146,7 +146,7 @@ function VerifyPinContent() {
                   disabled={loading || success}
                   className={`w-12 h-16 sm:w-14 sm:h-18 text-center text-2xl sm:text-3xl font-black bg-stone-50 border-2 rounded-2xl transition-all duration-300 outline-none ${
                                           success
-                                            ? "border-emerald-500 text-[#550000] bg-emerald-50"
+                                            ? "border-emerald-500 text-[#9D174D] bg-emerald-50"
                                             : error
                                               ? "border-red-300 bg-red-50 text-red-700 focus:border-red-500"
                                               : "border-stone-100 focus:border-indigo-500 focus:bg-white focus:shadow-md    "
@@ -164,7 +164,7 @@ function VerifyPinContent() {
             )}
 
             {success && (
-              <div className="flex items-center justify-center gap-2 text-[#550000] font-bold text-base mb-6 animate-pulse">
+              <div className="flex items-center justify-center gap-2 text-[#9D174D] font-bold text-base mb-6 animate-pulse">
                 <CheckCircle2 className="w-5 h-5" />
                 Akses Diterima! Mengalihkan...
               </div>
@@ -205,7 +205,7 @@ export default function VerifyPinPage() {
       fallback={
         <div className="min-h-dvh bg-stone-50 flex items-center justify-center p-6">
           <div className="max-w-md w-full bg-white p-6 md:p-10 rounded-3xl shadow-2xl flex flex-col items-center gap-4">
-            <Loader2 className="w-12 h-12 text-[#550000] animate-spin" />
+            <Loader2 className="w-12 h-12 text-[#9D174D] animate-spin" />
             <p className="text-stone-500 font-medium">
               Menyiapkan halaman keamanan...
             </p>

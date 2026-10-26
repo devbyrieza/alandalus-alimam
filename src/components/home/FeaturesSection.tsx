@@ -189,7 +189,7 @@ export default function FeaturesSection() {
             </motion.div>
 
             {/* CiroAI-style center ambient glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-full blur-[120px] z-0 pointer-events-none" style={{ background: "radial-gradient(ellipse, rgba(128,0,0,0.07) 0%, rgba(255,253,240,0.06) 50%, transparent 70%)" }} aria-hidden="true" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-full blur-[120px] z-0 pointer-events-none" style={{ background: "radial-gradient(ellipse, rgba(190,24,93,0.07) 0%, rgba(255,253,240,0.06) 50%, transparent 70%)" }} aria-hidden="true" />
           </div>
         </div>
       </Container>

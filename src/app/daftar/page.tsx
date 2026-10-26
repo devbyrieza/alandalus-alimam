@@ -288,7 +288,7 @@ export default function DaftarPage() {
         <div className="w-full rounded-3xl overflow-hidden shadow-xl shadow-slate-900/5 border border-slate-200 bg-white relative">
           
           {/* Section 1: Dark Maroon Gradient Header */}
-          <div className="bg-gradient-to-br from-[#831843] via-[#9F1239] to-[#E11D74] p-6 sm:p-8 text-white relative overflow-hidden">
+          <div className="bg-gradient-to-br from-[#831843] via-[#BE185D] to-[#E11D74] p-6 sm:p-8 text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none" />
             
             <div className="relative z-10 space-y-3">

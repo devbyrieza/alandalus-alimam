@@ -18,7 +18,7 @@ export default function CtaSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative rounded-3xl p-6 sm:p-12 md:p-16 text-center overflow-hidden bg-gradient-to-br from-[#831843] via-[#9F1239] to-[#E11D74] text-white border border-white/20 shadow-2xl shadow-rose-950/20"
+          className="relative rounded-3xl p-6 sm:p-12 md:p-16 text-center overflow-hidden bg-gradient-to-br from-[#831843] via-[#BE185D] to-[#E11D74] text-white border border-white/20 shadow-2xl shadow-rose-950/20"
         >
           {/* 3D Geometric Background Shapes */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/3" />
@@ -48,7 +48,7 @@ export default function CtaSection() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-4">
               <a
                 href="https://spmb.pesantren-alimam.com/daftar"
-                className="w-full sm:w-auto h-12 px-8 rounded-xl bg-white hover:bg-pink-50 text-[#BE123C] font-extrabold text-sm shadow-xl shadow-black/20 transition-all inline-flex items-center justify-center gap-2 hover:-translate-y-0.5 active:scale-95"
+                className="w-full sm:w-auto h-12 px-8 rounded-xl bg-white hover:bg-pink-50 text-[#BE185D] font-extrabold text-sm shadow-xl shadow-black/20 transition-all inline-flex items-center justify-center gap-2 hover:-translate-y-0.5 active:scale-95"
               >
                 <span>Daftar SPMB Online 2027</span>
                 <ArrowRight className="w-4 h-4" />
