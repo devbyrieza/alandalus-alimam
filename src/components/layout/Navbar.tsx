@@ -450,7 +450,7 @@ export default function Navbar() {
                     Info SPMB
                   </a>
                   <a href={SPMB_LINKS.login} className={textActionClass}> Masuk </a> </> )} <a href={SPMB_LINKS.register}
-                className="btn-primary flex items-center gap-1.5 group text-xs xl:text-[13px] 2xl:text-sm font-black px-3.5 2xl:px-4.5 py-1.5 2xl:py-2 rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all glow-ring-primary shrink-0 whitespace-nowrap"
+                className="btn-primary flex items-center gap-1.5 group text-xs xl:text-[13px] 2xl:text-sm px-3.5 2xl:px-4.5 py-1.5 2xl:py-2 shrink-0 whitespace-nowrap"
               >
                 <span>{REGISTER_LABEL}</span>
                 <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1 shrink-0" />
