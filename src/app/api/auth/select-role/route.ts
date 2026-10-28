@@ -26,8 +26,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate chosen_role is one of the allowed roles for this profile
-    const allowedRoles = [profile.role, ...(profile.secondary_roles || [])];
-    if (!allowedRoles.includes(chosen_role)) {
+    const allowedRoles = [profile.role, ...(profile.secondary_roles || [])].map((r: string) => r.toLowerCase());
+    if (!allowedRoles.includes(chosen_role.toLowerCase())) {
       return NextResponse.json(
         { error: "Role tidak valid untuk akun ini" },
         { status: 403 },
@@ -37,6 +37,12 @@ export async function POST(request: NextRequest) {
     // Determine redirect based on chosen role using centralized config
     const role = chosen_role as UserRole;
     const redirectTo = DASHBOARD_ROUTES[role] || "/dashboard";
+
+    const isDefaultPassword =
+      profile.must_change_password === true ||
+      profile.plain_password === "2026#@" ||
+      profile.plain_password === "Paas2026!" ||
+      profile.plain_password === "PAAS2026!";
 
     // Set session cookie with chosen role
     const response = NextResponse.json({
@@ -50,7 +56,10 @@ export async function POST(request: NextRequest) {
         role: chosen_role,
         id: profile.id,
         full_name: profile.full_name,
-        username: profile.username }),
+        email: profile.email,
+        username: profile.username,
+        is_default_password: isDefaultPassword,
+      }),
       {
         path: "/",
         httpOnly: true,

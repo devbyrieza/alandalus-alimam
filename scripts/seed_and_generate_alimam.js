@@ -61,8 +61,8 @@ async function main() {
     {
       full_name: "Maulidin Bachtiar",
       username: "maulidin.bachtiar",
-      role: "pewawancara_cawalsan",
-      secondary_roles: [],
+      role: "admin_keuangan",
+      secondary_roles: ["pewawancara_cawalsan"],
       phone: "0895332071063",
       jenis_kelamin: "L",
     },
