@@ -11,7 +11,6 @@ import {
   ShieldCheck,
   CheckCircle2,
   Heart,
-  Sparkles,
   MessageCircle,
 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
@@ -142,8 +141,8 @@ export default function HeroSection() {
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-xs font-bold text-slate-900 leading-tight">100% Kampus Putri</div>
-                <div className="text-[11px] text-slate-500 font-medium leading-tight">Aman, asri &amp; terjaga</div>
+                <div className="text-xs font-bold text-slate-900 leading-tight">Mendidik Tanpa Luka</div>
+                <div className="text-[11px] text-slate-500 font-medium leading-tight">Nol kekerasan &amp; perundungan</div>
               </div>
             </div>
 
@@ -152,18 +151,18 @@ export default function HeroSection() {
                 <Heart className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-xs font-bold text-slate-900 leading-tight">Ustadzah 24 Jam</div>
-                <div className="text-[11px] text-slate-500 font-medium leading-tight">Mendidik tanpa luka</div>
+                <div className="text-xs font-bold text-slate-900 leading-tight">100% Kampus Putri</div>
+                <div className="text-[11px] text-slate-500 font-medium leading-tight">Ustadzah pengasuh 24 jam, aman &amp; terjaga</div>
               </div>
             </div>
 
             <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/90 border border-pink-100 shadow-sm backdrop-blur-xs text-left">
               <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center shrink-0 border border-amber-200 shadow-2xs">
-                <Sparkles className="w-5 h-5" />
+                <GraduationCap className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-xs font-bold text-slate-900 leading-tight">Tahfidz &amp; Keputrian</div>
-                <div className="text-[11px] text-slate-500 font-medium leading-tight">Tata boga, rajut &amp; jahit</div>
+                <div className="text-xs font-bold text-slate-900 leading-tight">Tahfidz &amp; Ijazah Resmi</div>
+                <div className="text-[11px] text-slate-500 font-medium leading-tight">Sanad mutqin • Kemenag &amp; Kemendikbud</div>
               </div>
             </div>
           </div>
