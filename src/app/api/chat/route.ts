@@ -50,7 +50,7 @@ PROGRAM PENDIDIKAN (KHUSUS PUTRI):
 - Total Kuota Keseluruhan: 72 Santriwati (48 MTs + 24 IL/MA).
 
 INFORMASI SPMB T.A 2027/2028:
-- Pendaftaran: 16 Oktober - 20 Desember 2026 (Online via website: spmb.pesantren-alimam.com).
+- Pendaftaran: 24 Oktober - 20 Desember 2026 (Online via website: spmb.pesantren-alimam.com).
 - BIAYA PENDIDIKAN PENTING:
   - Biaya Pendaftaran: Rp 250.000 (Non-refundable)
   - Uang Pangkal: Rp 9.900.000 (Dapat dicicil 3x: cicilan 1 sebesar 50% = Rp 4.950.000 sepekan setelah pengumuman kelulusan, sisa 2x cicilan hingga Mei 2027)

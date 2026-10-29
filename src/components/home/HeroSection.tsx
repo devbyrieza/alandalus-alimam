@@ -18,7 +18,7 @@ import { BRANDING } from "@/config/branding";
 
 // Jadwal pendaftaran: satu sumber agar label dan countdown selalu sinkron
 const REG_CLOSE_ISO = "2026-12-20T23:59:59+07:00";
-const REG_PERIOD_LABEL = "16 Okt - 20 Des 2026";
+const REG_PERIOD_LABEL = "24 Okt - 20 Des 2026";
 const WA_CONSULT_URL =
   "https://wa.me/6285111524441?text=Halo%20Admin%20SPMB%20Pesantren%20Al-Imam%2C%20saya%20ingin%20konsultasi%20pendaftaran%20santriwati%20baru";
 
@@ -118,7 +118,8 @@ export default function HeroSection() {
             </strong>
             . Menyelaraskan penguasaan <strong className="font-semibold text-slate-900">Bahasa Arab intensif</strong>, Tahfidz
             Al-Qur&apos;an, pendalaman ilmu syar&apos;i, keunggulan sains akademik umum, serta penempaan{" "}
-            <em>leadership</em> dan <em>entrepreneurship</em> berlandaskan Al-Qur&apos;an dan Sunnah.
+            ilmu memimpin dan mendidik generasi penerus kelak, serta kewirausahaan berlandaskan
+            Al-Qur&apos;an dan Sunnah.
           </p>
 
           {/* Tagline */}

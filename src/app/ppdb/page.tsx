@@ -143,7 +143,7 @@ export default function SPMBInfoPage() {
   const timeline = [
     {
       phase: "Registrasi Online",
-      date: "16 Oktober - 20 Desember 2026",
+      date: "24 Oktober - 20 Desember 2026",
       desc: "Daftar dan buat akun pendaftar melalui website resmi atau scan barcode di brosur.",
       status: "active",
     },
