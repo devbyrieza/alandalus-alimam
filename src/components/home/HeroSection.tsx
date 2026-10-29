@@ -261,7 +261,7 @@ export default function HeroSection() {
                 100% Putri
               </div>
               <p className="text-[11px] text-slate-500 font-medium">
-                Kaderisasi Muslimah
+                Asrama &amp; pembinaan khusus putri
               </p>
             </div>
 
