@@ -1184,7 +1184,7 @@ export function buildMessageReminderQuranPendaftar(params: {
 
     return `*🔔 PENGINGAT JADWAL TES AL-QUR'AN*
 
-Assalamu'alaikum warahmatullahi wabarakatuh, Abu/Ummu *${wali}*,
+Assalamu'alaikum warahmatullahi wabarakatuh, Abu/Ummu,
 
 Mengingatkan jadwal Tes Al-Qur'an ananda:
 
@@ -1219,7 +1219,7 @@ export function buildMessageReminderSantriPendaftar(params: {
 
     return `*🔔 PENGINGAT JADWAL WAWANCARA CALON SANTRI*
 
-Assalamu'alaikum warahmatullahi wabarakatuh, Abu/Ummu *${wali}*,
+Assalamu'alaikum warahmatullahi wabarakatuh, Abu/Ummu,
 
 Mengingatkan jadwal Wawancara Calon Santri ananda:
 
@@ -1254,7 +1254,7 @@ export function buildMessageReminderOrtuPendaftar(params: {
 
     return `*🔔 PENGINGAT JADWAL WAWANCARA CALON ORANGTUA/WALI SANTRI*
 
-Assalamu'alaikum warahmatullahi wabarakatuh, Abu/Ummu *${wali}*,
+Assalamu'alaikum warahmatullahi wabarakatuh, Abu/Ummu,
 
 Mengingatkan jadwal Wawancara Calon Orangtua/Wali Santri:
 
