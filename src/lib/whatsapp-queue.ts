@@ -1320,6 +1320,78 @@ ${SYSTEM_FOOTER_ALIMAM}`;
 }
 
 /**
+ * A. UNTUK PENDAFTAR — 4. Pengingat Jadwal Tes Lisan Bahasa Arab
+ */
+export function buildMessageReminderArabPendaftar(params: {
+    namaWali?: string | null;
+    namaSantri: string;
+    jenjang?: string | null;
+    hariTanggal: string;
+    waktu: string;
+    googleMeetLink?: string | null;
+}): string {
+    const wali = (params.namaWali || "").trim() || "Wali Santri";
+    const jenjang = formatJenjangAlImam(params.jenjang);
+    const meet = params.googleMeetLink && params.googleMeetLink !== "-" ? params.googleMeetLink.trim() : "-";
+
+    return `*🔔 PENGINGAT JADWAL TES LISAN BAHASA ARAB*
+
+Assalamu'alaikum warahmatullahi wabarakatuh, Abu/Ummu,
+
+Mengingatkan jadwal Tes Lisan Bahasa Arab ananda:
+
+👤 *Nama Santri:* ${params.namaSantri}
+🎓 *Jenjang:* ${jenjang}
+📅 *Hari/Tanggal:* ${params.hariTanggal}
+⏰ *Waktu:* ${params.waktu}
+📍 *Link Google Meet:* ${meet}
+
+Mohon ananda bersiap dan masuk ke ruang Meet tepat waktu ya, Abu/Ummu.
+
+Jazakumullahu khairan.
+
+---
+${SYSTEM_FOOTER_ALIMAM}`;
+}
+
+/**
+ * B. UNTUK PENGUJI & PEWAWANCARA — 4. Pengingat Jadwal Menguji Tes Lisan Bahasa Arab
+ */
+export function buildMessageReminderArabPenguji(params: {
+    namaPenguji: string;
+    gender?: string | null;
+    namaSantri: string;
+    jenjang?: string | null;
+    hariTanggal: string;
+    waktu: string;
+    googleMeetLink?: string | null;
+    linkInputNilai: string;
+}): string {
+    const jenjang = formatJenjangAlImam(params.jenjang);
+    const meet = params.googleMeetLink && params.googleMeetLink !== "-" ? params.googleMeetLink.trim() : "-";
+    const inputNilai = params.linkInputNilai && params.linkInputNilai !== "-" ? params.linkInputNilai.trim() : "-";
+    const title = getExaminerSalutationAlImam(params.gender, params.namaPenguji);
+
+    return `*🔔 PENGINGAT JADWAL MENGUJI — TES LISAN BAHASA ARAB*
+
+Assalamu'alaikum warahmatullahi wabarakatuh, ${title} *${params.namaPenguji}*,
+
+Mengingatkan jadwal Tes Lisan Bahasa Arab:
+
+👤 *Nama Santri:* ${params.namaSantri}
+🎓 *Jenjang:* ${jenjang}
+📅 *Hari/Tanggal:* ${params.hariTanggal}
+⏰ *Waktu:* ${params.waktu}
+📍 *Link Google Meet:* ${meet}
+🔗 *Input Nilai:* ${inputNilai}
+
+Mohon kehadirannya tepat waktu. Jazakumullahu khairan.
+
+---
+${SYSTEM_FOOTER_ALIMAM}`;
+}
+
+/**
  * B. UNTUK PENGUJI & PEWAWANCARA — 2. Pengingat Jadwal Mewawancara Calon Santri
  */
 export function buildMessageReminderSantriPenguji(params: {
