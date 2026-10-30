@@ -310,10 +310,10 @@ export default function HeroSection() {
               </span>
             </div>
             <h3 className="text-xl font-extrabold text-slate-900 mt-1 leading-snug">
-              Sains &amp; Leadership
+              Sains &amp; Karakter Mandiri
             </h3>
             <p className="text-sm text-slate-500 mt-2 leading-relaxed">
-              Pelajaran umum dan sains tetap pintar berdaya saing, berpadu dengan penempaan jiwa kepemimpinan dan kewirausahaan.
+              Pelajaran umum dan sains tetap unggul berdaya saing, berpadu dengan penempaan kemandirian, adab keputrian, dan bekal mendidik generasi ummat.
             </p>
           </div>
 
