@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { logAdminAction } from "@/lib/audit";
 import { prisma } from "@/lib/prisma";
-import { invalidateAdminPendaftarCache, redis } from "@/lib/redis";
+import { delCache, invalidateAdminPendaftarCache, redis } from "@/lib/redis";
 import { getServerSession } from "@/lib/session";
 import { buildMessageHasilTes, enqueueWhatsapp } from "@/lib/whatsapp-queue";
 
@@ -104,6 +104,11 @@ export async function POST(request: NextRequest) {
     for (const uid of pendaftar_ids) {
       await redis.del(`pengumuman_${uid}`);
     }
+    // Invalidasi cache pengumuman agar dashboard pendaftar langsung menampilkan hasil
+    for (const user of updatedUsers) {
+      await delCache(`pengumuman_${user.id}`);
+    }
+
     // Logging audit action
     logAdminAction({
       action: "PUBLISH_ANNOUNCEMENT",
