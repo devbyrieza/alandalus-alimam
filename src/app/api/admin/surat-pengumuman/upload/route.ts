@@ -96,10 +96,44 @@ export async function POST(request: Request) {
           published_by: admin.id,
         },
       });
+      const isDiterimaIL = (kelasDiterima || "").toUpperCase().includes("IL");
+      const isDaftarMA =
+        (pendaftar.jenjang || "").toUpperCase().includes("MA") ||
+        (pendaftar.jenjang || "").toUpperCase().includes("SMA") ||
+        pendaftar.nomor_pendaftaran.toUpperCase().startsWith("MA");
+
+      const updateData: any = { status_pendaftaran: "accepted" };
+      if (isDiterimaIL && isDaftarMA) {
+        updateData.jenjang = "IL";
+        if (!(pendaftar as any).catatan_pindahan) {
+          updateData.catatan_pindahan =
+            "Diterima di I'dad Lughowi (Pengalihan dari pendaftaran awal MA/SMA Putri)";
+        }
+      }
+
       await tx.pendaftar.update({
         where: { id: pendaftarId },
-        data: { status_pendaftaran: "accepted" },
+        data: updateData,
       });
+
+      if (isDiterimaIL && isDaftarMA) {
+        const nu = await tx.nilaiUjian.findFirst({
+          where: { pendaftar_id: pendaftarId },
+          select: { id: true },
+        });
+        const catatanIL =
+          "DITERIMA DI I'DAD LUGHOWI (IL) - Rekomendasi matrikulasi persiapan Bahasa Arab intensif 1 tahun sebelum menuju jenjang Aliyah Putri.";
+        if (nu) {
+          await tx.nilaiUjian.update({
+            where: { id: nu.id },
+            data: {
+              catatan_kelulusan: catatanIL,
+              catatan_umum: "Diterima di Program I'dad Lughowi Putri (IL).",
+              status_kelulusan: "Diterima",
+            },
+          });
+        }
+      }
 
       // Persistensi permanen binary PDF ke tabel Dokumen (BYTEA)
       const existingDoc = await tx.dokumen.findFirst({

@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2, FileText, Loader2, Upload, X } from "lucide-react";
+import { CheckCircle2, FileText, GraduationCap, Loader2, Upload, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
@@ -8,6 +8,7 @@ interface PendaftarRingkas {
   id: string;
   nama_lengkap: string;
   nomor_pendaftaran: string;
+  jenjang?: string;
 }
 
 /**
@@ -25,11 +26,25 @@ export function SuratPengumumanDialog({
   onClose: () => void;
   onDone?: () => void;
 }) {
+  const isDaftarMA =
+    (pendaftar.nomor_pendaftaran || "").toUpperCase().startsWith("MA") ||
+    (pendaftar.jenjang || "").toUpperCase().includes("MA") ||
+    (pendaftar.jenjang || "").toUpperCase().includes("SMA");
+
+  const defaultKelas = (() => {
+    const j = (pendaftar.jenjang || "").toUpperCase();
+    if (j.includes("IL")) return "IL Putri";
+    if (j.includes("MA") || j.includes("SMA")) return "X MA Putri";
+    return "VII MTs Putri";
+  })();
+
   const [file, setFile] = useState<File | null>(null);
   const [nomorSurat, setNomorSurat] = useState("");
-  const [kelas, setKelas] = useState("VII MTs");
+  const [kelas, setKelas] = useState(defaultKelas);
   const [kirimWa, setKirimWa] = useState(true);
   const [uploading, setUploading] = useState(false);
+
+  const isDialihkanKeIL = isDaftarMA && kelas.toUpperCase().includes("IL");
 
   // Body Scroll Lock (Mandatory UX Rule)
   useEffect(() => {
@@ -129,6 +144,80 @@ export function SuratPengumumanDialog({
               </p>
             </div>
           </div>
+
+          {/* Quick Selector Kelas untuk Jalur MA */}
+          {isDaftarMA ? (
+            <div className="p-4 bg-stone-50 border border-stone-200/80 rounded-2xl space-y-3">
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <div className="flex items-center gap-2">
+                  <GraduationCap className="w-4 h-4 text-primary-700" />
+                  <span className="text-xs font-bold text-stone-800 uppercase tracking-wide">
+                    Kelas Kelulusan yang Diterima
+                  </span>
+                </div>
+                {isDialihkanKeIL && (
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-amber-100 text-amber-800 border border-amber-300 inline-flex items-center gap-1 shadow-xs">
+                    ⚡ Pengalihan MA ➔ IL
+                  </span>
+                )}
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <button
+                  type="button"
+                  onClick={() => setKelas("X MA Putri")}
+                  className={`p-3 rounded-xl border text-left transition-all ${
+                    kelas === "X MA Putri"
+                      ? "bg-primary-50/80 border-primary-500 ring-2 ring-primary-500/20 shadow-xs"
+                      : "bg-white border-stone-200 hover:border-stone-300"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-black text-stone-900">X MA Putri</span>
+                    {kelas === "X MA Putri" && (
+                      <CheckCircle2 className="w-4 h-4 text-primary-600" />
+                    )}
+                  </div>
+                  <p className="text-[11px] text-stone-500 mt-0.5">
+                    Lulus Langsung MA Putri (Bahasa Arab Lulus)
+                  </p>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setKelas("IL Putri")}
+                  className={`p-3 rounded-xl border text-left transition-all ${
+                    kelas === "IL Putri"
+                      ? "bg-amber-50/80 border-amber-500 ring-2 ring-amber-500/20 shadow-xs"
+                      : "bg-white border-stone-200 hover:border-amber-300"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-black text-stone-900">IL Putri (I&apos;dad Lughowi)</span>
+                    {kelas === "IL Putri" && (
+                      <CheckCircle2 className="w-4 h-4 text-amber-600" />
+                    )}
+                  </div>
+                  <p className="text-[11px] text-stone-500 mt-0.5">
+                    Matrikulasi Persiapan Bahasa Arab 1 Tahun
+                  </p>
+                </button>
+              </div>
+
+              {isDialihkanKeIL && (
+                <div className="p-3 bg-amber-50/80 border border-amber-200/90 rounded-xl text-xs text-amber-900 leading-relaxed flex items-start gap-2">
+                  <span className="text-base leading-none">💡</span>
+                  <div>
+                    <p className="font-bold">Otomatis Sinkronisasi Jenjang &amp; Catatan Kelulusan</p>
+                    <p className="text-[11px] text-amber-800 mt-0.5">
+                      Santri mendaftar di jalur MA tetapi diterima di <b>I&apos;dad Lughowi (IL Putri)</b>.
+                      Saat disimpan, sistem akan otomatis mengubah data jenjang menjadi <code>IL</code> di database agar kuota santri sinkron.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : null}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <label className="text-xs font-bold text-stone-700 block">

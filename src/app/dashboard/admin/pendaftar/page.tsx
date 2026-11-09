@@ -84,6 +84,7 @@ interface Pendaftar {
   };
   pembayaran?: Array<{ id: string; status_pembayaran: string }>;
   tipe_pendaftaran?: string;
+  catatan_pindahan?: string | null;
   data_lengkap?: any;
 }
 
@@ -1842,9 +1843,15 @@ function AdminPendaftarContent() {
                         >
                           {item.nomor_pendaftaran}
                         </Link>
-                        <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 bg-purple-100 text-purple-700 rounded-full whitespace-nowrap inline-block shrink-0">
-                          {item.jenjang}
-                        </span>
+                        {(item.nomor_pendaftaran?.startsWith("MA") || item.nomor_pendaftaran?.startsWith("SMA")) && (item.jenjang === "IL" || item.catatan_pindahan?.includes("Pengalihan")) ? (
+                          <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 bg-amber-100 text-amber-800 border border-amber-300 rounded-full whitespace-nowrap inline-flex items-center gap-1 shrink-0" title="Pendaftaran awal MA dialihkan ke I'dad Lughowi Putri">
+                            MA ➔ IL
+                          </span>
+                        ) : (
+                          <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 bg-purple-100 text-purple-700 rounded-full whitespace-nowrap inline-block shrink-0">
+                            {item.jenjang}
+                          </span>
+                        )}
                       </div>
                       <Link
                         href={`/dashboard/admin/pendaftar/${item.id}`}
@@ -2086,9 +2093,18 @@ function AdminPendaftarContent() {
                         </td>
                       )}
                       <td className="px-4 py-3">
-                        <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-bold whitespace-nowrap inline-block shrink-0">
-                          {item.jenjang}
-                        </span>
+                        {(item.nomor_pendaftaran?.startsWith("MA") || item.nomor_pendaftaran?.startsWith("SMA")) && (item.jenjang === "IL" || item.catatan_pindahan?.includes("Pengalihan")) ? (
+                          <div className="flex flex-col gap-0.5 items-start">
+                            <span className="px-2.5 py-1 bg-amber-100 text-amber-900 border border-amber-300 rounded-full text-xs font-black inline-flex items-center gap-1 shadow-xs" title="Pendaftaran awal MA dialihkan ke I'dad Lughowi Putri">
+                              MA ➔ IL
+                            </span>
+                            <span className="text-[10px] text-amber-700 font-semibold">Pengalihan IL</span>
+                          </div>
+                        ) : (
+                          <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-bold whitespace-nowrap inline-block shrink-0">
+                            {item.jenjang}
+                          </span>
+                        )}
                       </td>
                       <td className="px-4 py-3">
                         {formatStatus(item.status_pendaftaran, item.data_lengkap)}
