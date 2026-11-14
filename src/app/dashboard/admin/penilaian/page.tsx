@@ -44,6 +44,8 @@ type Student = {
     status_kelulusan: string;
     catatan_kelulusan: string;
     score_quran: number;
+    score_hafalan?: number;
+    score_arab?: number;
     score_wawancara: number;
     nilai_wawancara_santri: number;
     score_akademik: number;
@@ -578,6 +580,8 @@ export default function ExaminerDashboard() {
           (s?.nama_lengkap || "").toUpperCase(),
           s?.jenjang || "-",
           getGrade(s?.nilai_ujian?.score_quran, "quran"),
+          getGrade(s?.nilai_ujian?.score_hafalan, "quran"),
+          getGrade(s?.nilai_ujian?.score_arab, "akademik"),
           getGrade(s?.nilai_ujian?.score_akademik, "akademik"),
           getGrade(s?.nilai_ujian?.score_kepribadian, "kepribadian"),
           getGrade(avgWawancara, "wawancara"),
@@ -591,7 +595,9 @@ export default function ExaminerDashboard() {
         "NP",
         "Nama Santri",
         "Jenjang",
-        "Al-Qur'an",
+        "Bacaan Qur'an",
+        "Hafalan Qur'an",
+        "Lisan B. Arab",
         "Akademik",
         "Kepribadian",
         "Wawancara",
