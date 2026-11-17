@@ -574,7 +574,6 @@ export default function ExaminerDashboard() {
       const formatStudentForExport = (s: Student) => {
         const ws = s?.nilai_ujian?.nilai_wawancara_santri || 0;
         const wo = s?.nilai_ujian?.nilai_wawancara_ortu || 0;
-        const avgWawancara = ws > 0 && wo > 0 ? (ws + wo) / 2 : ws || wo || 0;
 
         let examStatus = s?.nilai_ujian?.status_kelulusan;
         const pendaftaranStatus = (s?.status_pendaftaran || "").toUpperCase();
@@ -603,7 +602,8 @@ export default function ExaminerDashboard() {
           getGrade(s?.nilai_ujian?.score_arab, "akademik"),
           getGrade(s?.nilai_ujian?.score_akademik, "akademik"),
           getGrade(s?.nilai_ujian?.score_kepribadian, "kepribadian"),
-          getGrade(avgWawancara, "wawancara"),
+          getGrade(ws, "wawancara"),
+          getGrade(wo, "wawancara"),
           getGrade(s?.nilai_ujian?.score_kesiapan, "kesiapan"),
           totalScore,
           examStatus || "BELUM LENGKAP",
@@ -619,7 +619,8 @@ export default function ExaminerDashboard() {
         "Lisan B. Arab",
         "Akademik",
         "Kepribadian",
-        "Wawancara",
+        "W. Santri",
+        "W. Ortu",
         "Kesiapan",
         "Total Skor",
         "Keputusan",
@@ -678,6 +679,100 @@ export default function ExaminerDashboard() {
       );
     } finally {
       setIsExporting(false);
+    }
+  };
+
+  const handleExportPDF = () => {
+    if (!students?.length) {
+      return Swal.fire("Info", "Tidak ada data santri untuk diekspor", "info");
+    }
+
+    try {
+      const getGrade = (score: number | undefined | null, type: string) => {
+        if (score == null) return "-";
+        if (type === "akademik") {
+          if (score >= 75) return "A";
+          if (score >= 60) return "B";
+          if (score >= 45) return "C";
+          if (score >= 30) return "D";
+          return "E";
+        }
+        if (type === "quran") {
+          if (score >= 85) return "A";
+          if (score >= 75) return "B";
+          if (score >= 70) return "C";
+          if (score >= 40) return "D";
+          return "E";
+        }
+        if (type === "kepribadian") {
+          if (score >= 80) return "A";
+          if (score >= 65) return "B";
+          if (score >= 50) return "C";
+          if (score >= 35) return "D";
+          return "E";
+        }
+        if (score >= 80) return "A";
+        if (score >= 65) return "B";
+        if (score >= 50) return "C";
+        if (score >= 35) return "D";
+        return "E";
+      };
+
+      const columns = [
+        "No",
+        "NP",
+        "Nama Santri",
+        "Jenjang",
+        "Qur'an",
+        "Hafalan",
+        "B. Arab",
+        "Akademik",
+        "Kepribadian",
+        "W. Santri",
+        "W. Ortu",
+        "Kesiapan",
+        "Total",
+        "Keputusan",
+      ];
+
+      const data = students.map((s, idx) => {
+        const ws = s?.nilai_ujian?.nilai_wawancara_santri || 0;
+        const wo = s?.nilai_ujian?.nilai_wawancara_ortu || 0;
+        let examStatus = s?.nilai_ujian?.status_kelulusan;
+        const pendaftaranStatus = (s?.status_pendaftaran || "").toUpperCase();
+        if (["ACCEPTED", "ENROLLED", "ENROLLED_FULL", "DITERIMA"].includes(pendaftaranStatus)) {
+          examStatus = "DITERIMA";
+        }
+        const totalScore = s?.nilai_ujian?.nilai_total != null ? Number(s.nilai_ujian.nilai_total).toFixed(1) : "-";
+
+        return [
+          String(idx + 1),
+          s?.nomor_pendaftaran || "-",
+          (s?.nama_lengkap || "").substring(0, 18),
+          s?.jenjang || "-",
+          getGrade(s?.nilai_ujian?.score_quran, "quran"),
+          getGrade(s?.nilai_ujian?.score_hafalan, "quran"),
+          getGrade(s?.nilai_ujian?.score_arab, "akademik"),
+          getGrade(s?.nilai_ujian?.score_akademik, "akademik"),
+          getGrade(s?.nilai_ujian?.score_kepribadian, "kepribadian"),
+          getGrade(ws, "wawancara"),
+          getGrade(wo, "wawancara"),
+          getGrade(s?.nilai_ujian?.score_kesiapan, "kesiapan"),
+          totalScore,
+          examStatus || "BELUM LENGKAP",
+        ];
+      });
+
+      exportToPDF(
+        "REKAPITULASI PENILAIAN HASIL SELEKSI PPDB",
+        columns,
+        data,
+        `Rekap_Nilai_PPDB_${new Date().toISOString().split("T")[0]}`,
+        "landscape"
+      );
+    } catch (e: any) {
+      console.error("Export PDF error:", e);
+      Swal.fire("Gagal Ekspor", "Terjadi kesalahan saat mengekspor ke PDF", "error");
     }
   };
 
@@ -899,6 +994,14 @@ export default function ExaminerDashboard() {
                       <Download className="w-4 h-4" /> Export Excel
                     </>
                   )}
+                </Button>
+
+                <Button
+                  onClick={handleExportPDF}
+                  disabled={isExporting}
+                  className="btn-secondary flex items-center gap-2 bg-rose-50 text-rose-800 border-rose-200 hover:bg-rose-100 rounded-3xl font-bold py-2 whitespace-nowrap shrink-0 disabled:opacity-50"
+                >
+                  <FileText className="w-4 h-4" /> Export PDF
                 </Button>
 
                 <Button

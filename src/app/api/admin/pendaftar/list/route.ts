@@ -308,6 +308,20 @@ export async function GET(request: NextRequest) {
         pengumuman: {
           select: { status_kelulusan: true, is_published: true, surat_pengumuman_path: true },
         },
+        jadwal_ujian: {
+          select: {
+            id: true,
+            tanggal_ujian: true,
+            metode_ujian: true,
+            status_quran: true,
+            status_santri: true,
+            status_ortu: true,
+            penguji_quran_id: true,
+            penguji_santri_id: true,
+            penguji_ortu_id: true,
+          },
+          take: 1,
+        },
         whatsapp_logs: {
           orderBy: { created_at: "desc" },
           take: 1,
@@ -353,13 +367,37 @@ export async function GET(request: NextRequest) {
 
       let examScoreCount = 0;
       if (mergedNilai) {
+        if (mergedNilai.score_quran != null) examScoreCount++;
         if (mergedNilai.score_akademik != null) examScoreCount++;
         if (mergedNilai.score_kepribadian != null) examScoreCount++;
+        if (mergedNilai.nilai_wawancara_santri != null || mergedNilai.score_wawancara != null) examScoreCount++;
+        if (mergedNilai.nilai_wawancara_ortu != null) examScoreCount++;
         if (mergedNilai.score_kesiapan != null) examScoreCount++;
-        if (mergedNilai.score_quran != null) examScoreCount++;
-        if (mergedNilai.score_wawancara != null) examScoreCount++;
-        if (mergedNilai.nilai_wawancara_santri != null || mergedNilai.nilai_wawancara_ortu != null)
-          examScoreCount++;
+        if (mergedNilai.score_hafalan != null) examScoreCount++;
+        if (mergedNilai.score_arab != null) examScoreCount++;
+      }
+
+      const jadwalList = item.jadwal_ujian || [];
+      const j = jadwalList[0];
+      const hasValidJadwal =
+        Boolean(j && j.tanggal_ujian) ||
+        ["scheduled", "selection", "testing", "tested", "passed"].includes(item.status_pendaftaran);
+
+      // Kategori belum lengkap jika examScoreCount < 6
+      // Aturan: Jika ada seleksi yang belum dinilai dan ada yang belum pilih jadwal, masukkan ke belum_pilih_jadwal
+      let kategoriBelumLengkap: "belum_pilih_jadwal" | "menunggu_penilaian" | null = null;
+      if (examScoreCount < 6) {
+        if (
+          !hasValidJadwal ||
+          item.status_pendaftaran === "submitted" ||
+          item.status_pendaftaran === "docs_verified" ||
+          item.status_pendaftaran === "registered" ||
+          item.status_pendaftaran === "data_completed"
+        ) {
+          kategoriBelumLengkap = "belum_pilih_jadwal";
+        } else {
+          kategoriBelumLengkap = "menunggu_penilaian";
+        }
       }
 
       let examStatus = "unregistered";
@@ -371,7 +409,7 @@ export async function GET(request: NextRequest) {
         sp === "tested" ||
         sp === "passed"
       ) {
-        if (examScoreCount === 6 || sp === "passed") {
+        if (examScoreCount >= 6 || sp === "passed") {
           examStatus = "tested";
         } else if (examScoreCount > 0) {
           examStatus = "testing";
@@ -385,6 +423,9 @@ export async function GET(request: NextRequest) {
         nilai_ujian: mergedNilai,
         exam_score_count: examScoreCount,
         exam_status: examStatus,
+        has_jadwal: hasValidJadwal,
+        kategori_belum_lengkap: kategoriBelumLengkap,
+        jadwal_ujian: j || null,
         whatsapp_status: item.whatsapp_logs?.[0] || null,
         dokumen: item.dokumen.map((doc) => ({
           jenis_dokumen: doc.jenis_dokumen,
