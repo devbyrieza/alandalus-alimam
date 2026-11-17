@@ -614,15 +614,21 @@ export default function JadwalUjianPage() {
         metode_ujian: formLocationType,
       };
 
-      if (
-        formTestType === "Tes Al-Qur'an (Bacaan & Hafalan)" ||
-        (formTestType === "Tes Al-Qur'an (Bacaan & Hafalan)" || formTestType === "Tes Bacaan Al-Qur'an") ||
-        formTestType === "Tes Hafalan Al-Qur'an"
-      ) {
-        const quranId = formPengujiQuranId || formPengujiSantriId || formPengujiHafalanId;
+      if (formTestType === "Tes Al-Qur'an (Bacaan & Hafalan)") {
+        const quranId = formPengujiQuranId || formPengujiHafalanId || formPengujiSantriId;
         if (quranId) {
           assignPayload.penguji_quran_id = quranId;
-          assignPayload.penguji_hafalan_id = null;
+          assignPayload.penguji_hafalan_id = formPengujiHafalanId || quranId;
+        }
+      } else if (formTestType === "Tes Bacaan Al-Qur'an") {
+        const quranId = formPengujiQuranId || formPengujiSantriId;
+        if (quranId) {
+          assignPayload.penguji_quran_id = quranId;
+        }
+      } else if (formTestType === "Tes Hafalan Al-Qur'an") {
+        const hafalanId = formPengujiHafalanId || formPengujiQuranId;
+        if (hafalanId) {
+          assignPayload.penguji_hafalan_id = hafalanId;
         }
       } else if (formTestType === "Wawancara Calon Santri") {
         if (formPengujiSantriId) {
@@ -641,7 +647,6 @@ export default function JadwalUjianPage() {
         if (generalId) {
           assignPayload.penguji_santri_id = generalId;
           assignPayload.penguji_quran_id = generalId;
-          assignPayload.penguji_hafalan_id = null;
         }
       }
 
@@ -651,7 +656,7 @@ export default function JadwalUjianPage() {
         if (formPengujiSantriId) assignPayload.penguji_santri_id = formPengujiSantriId;
         if (formPengujiQuranId) assignPayload.penguji_quran_id = formPengujiQuranId;
         if (formPengujiArabId) assignPayload.penguji_arab_id = formPengujiArabId;
-        assignPayload.penguji_hafalan_id = null;
+        if (formPengujiHafalanId) assignPayload.penguji_hafalan_id = formPengujiHafalanId;
       }
 
       const assignRes = await fetch("/api/admin/jadwal-ujian/assign", {
