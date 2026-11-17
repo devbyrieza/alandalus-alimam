@@ -519,6 +519,16 @@ function InputNilaiContent() {
       let body: any = {};
 
       if (formType === "quran") {
+        if (!quranForm.catatan || !quranForm.catatan.trim()) {
+          setSaving(null);
+          await Swal.fire({
+            icon: 'warning',
+            title: 'Catatan Penguji Wajib Diisi',
+            text: 'Mohon berikan catatan/komentar evaluasi Al-Qur\'an untuk santri ini sebelum menyimpan nilai. Catatan ini sangat penting untuk bahan pertimbangan rapat pleno kelulusan.'
+          });
+          return;
+        }
+
         const tajwid = parseFloat(quranForm.tajwid) || 0;
         const kelancaran = parseFloat(quranForm.kelancaran) || 0;
         const hafalanVal = quranForm.hafalan !== undefined && quranForm.hafalan !== "" ? parseFloat(quranForm.hafalan) : null;
@@ -534,8 +544,18 @@ function InputNilaiContent() {
           score_quran: totalScore,
           nilai_tes_quran: totalScore,
           ...(hafalanVal !== null ? { nilai_tes_hafalan: hafalanVal, score_hafalan: hafalanVal } : {}),
-          catatan_quran: quranForm.catatan || "" };
+          catatan_quran: quranForm.catatan.trim() };
       } else if (formType === "wawancara") {
+        if (!calsanForm.catatan || !calsanForm.catatan.trim()) {
+          setSaving(null);
+          await Swal.fire({
+            icon: 'warning',
+            title: 'Catatan Pewawancara Wajib Diisi',
+            text: 'Mohon berikan catatan/komentar hasil wawancara calon santri sebelum menyimpan nilai. Catatan ini sangat penting untuk bahan pertimbangan rapat pleno kelulusan.'
+          });
+          return;
+        }
+
         const isPutriByJenjang = (p?.jenjang?.toLowerCase() || "").includes('putri');
         const isPutriByPrefix = ['SPI', 'SMI', 'ILI', 'MTI', 'MAI'].some(prefix => p.nomor_pendaftaran?.startsWith(prefix));
         // Fallback: If examiner is Halimah or Rima, it's definitely a Putri session
@@ -554,17 +574,37 @@ function InputNilaiContent() {
           },
           score_wawancara: avgScore,
           nilai_wawancara_santri: avgScore,
-          catatan_santri: calsanForm.catatan || "" };
+          catatan_santri: calsanForm.catatan.trim() };
       } else if (formType === "ortu") {
+        if (!cawalsanForm.catatan || !cawalsanForm.catatan.trim()) {
+          setSaving(null);
+          await Swal.fire({
+            icon: 'warning',
+            title: 'Catatan Pewawancara Wajib Diisi',
+            text: 'Mohon berikan catatan/komentar hasil wawancara orang tua/wali santri sebelum menyimpan nilai. Catatan ini sangat penting untuk bahan pertimbangan rapat pleno kelulusan.'
+          });
+          return;
+        }
+
         body = {
           detail_cawalsan: {
             ...cawalsanForm,
             nama_pewawancara: cawalsanForm.nama_pewawancara || activeName,
           },
-          catatan_ortu: cawalsanForm.catatan || "",
+          catatan_ortu: cawalsanForm.catatan.trim(),
           nilai_wawancara_ortu: 1, // Flag that form is filled
         };
       } else if (formType === "hafalan") {
+        if (!hafalanForm.catatan_tambahan || !hafalanForm.catatan_tambahan.trim()) {
+          setSaving(null);
+          await Swal.fire({
+            icon: 'warning',
+            title: 'Catatan Penguji Wajib Diisi',
+            text: 'Mohon berikan catatan/komentar hasil tes hafalan sebelum menyimpan nilai. Catatan ini sangat penting untuk bahan pertimbangan rapat pleno kelulusan.'
+          });
+          return;
+        }
+
         const finalScore = hafalanForm.score_override !== undefined && hafalanForm.score_override !== ""
           ? Math.min(100, Math.max(0, parseFloat(hafalanForm.score_override)))
           : 0;
@@ -582,9 +622,19 @@ function InputNilaiContent() {
           score_hafalan: finalScore,
           nilai_tes_hafalan: finalScore,
           nilai_hafalan_total: finalScore,
-          catatan_hafalan: hafalanForm.catatan_tambahan || "",
+          catatan_hafalan: hafalanForm.catatan_tambahan.trim(),
         };
       } else if (formType === "lisan_arab") {
+        if (!lisanArabForm.catatan_tambahan || !lisanArabForm.catatan_tambahan.trim()) {
+          setSaving(null);
+          await Swal.fire({
+            icon: 'warning',
+            title: 'Catatan Penguji Wajib Diisi',
+            text: 'Mohon berikan catatan/komentar hasil tes bahasa Arab sebelum menyimpan nilai. Catatan ini sangat penting untuk bahan pertimbangan rapat pleno kelulusan.'
+          });
+          return;
+        }
+
         const muhadatsah = parseFloat(lisanArabForm.muhadatsah) || 0;
         const qiraah = parseFloat(lisanArabForm.qiraah) || 0;
         const qawaid = parseFloat(lisanArabForm.qawaid) || 0;
@@ -609,7 +659,7 @@ function InputNilaiContent() {
           },
           score_arab: finalScore,
           nilai_arab_total: finalScore,
-          catatan_arab: lisanArabForm.catatan_tambahan || ""
+          catatan_arab: lisanArabForm.catatan_tambahan.trim()
         };
       }
 
@@ -861,13 +911,15 @@ function InputNilaiContent() {
             </div>
 
             <div>
-              <label className="block text-[10px] sm:text-xs font-black text-ink-700 uppercase tracking-widest mb-2 sm:mb-3">Catatan Penguji</label>
-              <textarea value={hafalanForm.catatan_tambahan || ""} onChange={(e) => setHafalanForm({ ...hafalanForm, catatan_tambahan: e.target.value })} className="w-full px-4 sm:px-5 py-4 bg-white border-2 border-teal-100 rounded-3xl sm:rounded-2xl focus:border-teal-500 outline-none font-medium text-teal-950 min-h-[120px] transition-all resize-none" placeholder="Tuliskan catatan tambahan terkait hafalan santri..." />
+              <label className="block text-[10px] sm:text-xs font-black text-ink-700 uppercase tracking-widest mb-2 sm:mb-3">
+                Catatan / Komentar Penguji <span className="text-red-600 font-bold">* (Wajib Diisi untuk Rapat)</span>
+              </label>
+              <textarea value={hafalanForm.catatan_tambahan || ""} onChange={(e) => setHafalanForm({ ...hafalanForm, catatan_tambahan: e.target.value })} required className="w-full px-4 sm:px-5 py-4 bg-white border-2 border-teal-100 rounded-3xl sm:rounded-2xl focus:border-teal-500 outline-none font-medium text-teal-950 min-h-[120px] transition-all resize-none" placeholder="Tuliskan catatan/komentar evaluasi hafalan santri (misal: jumlah juz, kelancaran tajwid, mutqin/ziyadah)..." />
             </div>
 
             <div className="flex flex-col-reverse sm:flex-row gap-3 pt-4 border-t border-teal-100/60">
               <button onClick={cancelEditing} disabled={!!saving} className="px-6 py-4 rounded-3xl sm:rounded-2xl font-black text-xs uppercase tracking-widest text-ink-500 hover:bg-ink-100 transition-all flex-1 text-center">Batal</button>
-              <button onClick={() => saveForm(p, "hafalan")} disabled={isInputtedByAdmin || !!saving || !hafalanForm.score_override || !hafalanForm.rekomendasi} className="px-6 py-4 rounded-3xl sm:rounded-2xl font-black text-xs uppercase tracking-widest bg-teal-600 text-white hover:bg-teal-700 transition-all shadow-2xl shadow-teal-900/20 disabled:opacity-50 disabled:cursor-not-allowed flex-1 text-center flex justify-center items-center gap-2">
+              <button onClick={() => saveForm(p, "hafalan")} disabled={isInputtedByAdmin || !!saving || !hafalanForm.score_override || !hafalanForm.rekomendasi || !hafalanForm.catatan_tambahan?.trim()} className="px-6 py-4 rounded-3xl sm:rounded-2xl font-black text-xs uppercase tracking-widest bg-teal-600 text-white hover:bg-teal-700 transition-all shadow-2xl shadow-teal-900/20 disabled:opacity-50 disabled:cursor-not-allowed flex-1 text-center flex justify-center items-center gap-2">
                 {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} {saving ? 'Menyimpan...' : 'Simpan Nilai Hafalan'}
               </button>
             </div>
@@ -1140,13 +1192,14 @@ function InputNilaiContent() {
                     {/* Catatan Penguji */}
                     <div>
                       <label className="block text-[10px] sm:text-xs font-black text-ink-700 uppercase tracking-widest mb-2">
-                        Catatan Penguji
+                        Catatan / Komentar Penguji <span className="text-red-600 font-bold">* (Wajib Diisi untuk Rapat)</span>
                       </label>
                       <textarea
                         value={lisanArabForm.catatan_tambahan || ""}
                         onChange={(e) => setLisanArabForm({ ...lisanArabForm, catatan_tambahan: e.target.value })}
+                        required
                         className="w-full px-4 py-3 bg-white border border-sky-100 rounded-lg focus:border-sky-500 outline-none font-medium text-sky-950 min-h-[90px] transition-all resize-none text-xs"
-                        placeholder="Tuliskan catatan khusus terkait kelancaran qira'ah, pemahaman nahwu, atau kesiapan bahasa santri..."
+                        placeholder="Tuliskan catatan khusus terkait kelancaran qira'ah, pemahaman nahwu, mufrodat, atau kesiapan bahasa santri..."
                       />
                     </div>
 
@@ -1160,7 +1213,7 @@ function InputNilaiContent() {
                       </button>
                       <button
                         onClick={() => saveForm(p, "lisan_arab")}
-                        disabled={isInputtedByAdmin || !!saving || (currentScore === 0 && !lisanArabForm.score_override) || !lisanArabForm.rekomendasi}
+                        disabled={isInputtedByAdmin || !!saving || (currentScore === 0 && !lisanArabForm.score_override) || !lisanArabForm.rekomendasi || !lisanArabForm.catatan_tambahan?.trim()}
                         className="px-6 py-3.5 rounded-lg font-black text-xs uppercase tracking-widest bg-sky-600 text-white hover:bg-sky-700 transition-all shadow-sm shadow-sky-900/20 disabled:opacity-50 disabled:cursor-not-allowed flex-1 text-center flex justify-center items-center gap-2"
                       >
                         {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} {saving ? 'Menyimpan...' : 'Simpan Nilai B. Arab'}
@@ -1306,13 +1359,15 @@ function InputNilaiContent() {
             </div>
 
             <div>
-              <label className="block text-[10px] sm:text-xs font-black text-ink-700 uppercase tracking-widest mb-2 sm:mb-3">Catatan Tambahan (opsional)</label>
-              <textarea value={quranForm.catatan || ""} onChange={(e) => setQuranForm({ ...quranForm, catatan: e.target.value })} rows={3} className="w-full px-4 sm:px-5 py-3.5 sm:py-4 bg-white border-2 border-emerald-100 rounded-3xl sm:rounded-2xl focus:border-emerald-500 outline-none font-black text-emerald-950 transition-all resize-none placeholder:text-ink-400" placeholder="Catatan tambahan penguji..." />
+              <label className="block text-[10px] sm:text-xs font-black text-ink-700 uppercase tracking-widest mb-2 sm:mb-3">
+                Catatan / Komentar Penguji <span className="text-red-600 font-bold">* (Wajib Diisi untuk Rapat)</span>
+              </label>
+              <textarea value={quranForm.catatan || ""} onChange={(e) => setQuranForm({ ...quranForm, catatan: e.target.value })} rows={3} required className="w-full px-4 sm:px-5 py-3.5 sm:py-4 bg-white border-2 border-emerald-100 rounded-3xl sm:rounded-2xl focus:border-emerald-500 outline-none font-medium text-emerald-950 transition-all resize-none placeholder:text-ink-400" placeholder="Tuliskan catatan/komentar evaluasi Al-Qur'an santri (misal: makharijul huruf, tajwid, kelancaran, irama, adab)..." />
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
               <button onClick={cancelEditing} className="w-full sm:w-auto px-5 md:px-8 py-4 bg-emerald-100 text-[#9D174D] rounded-3xl sm:rounded-2xl font-black uppercase tracking-widest text-[10px] sm:text-xs hover:bg-emerald-200 transition-all active:scale-95 whitespace-nowrap inline-block shrink-0">Batal</button>
-              <button onClick={() => saveForm(p, "quran")} disabled={isInputtedByAdmin || !quranForm.tajwid || !quranForm.kelancaran || !quranForm.rekomendasi || !(quranForm.nama_penguji || activeName) || saving === p.id + "quran"} className="w-full sm:w-auto px-5 md:px-8 py-4 bg-[#9D174D] text-white rounded-3xl sm:rounded-2xl font-black uppercase tracking-widest text-[10px] sm:text-xs hover:bg-[#9D174D] transition-all shadow-2xl disabled:opacity-50 flex items-center justify-center gap-2 active:scale-95">
+              <button onClick={() => saveForm(p, "quran")} disabled={isInputtedByAdmin || !quranForm.tajwid || !quranForm.kelancaran || !quranForm.rekomendasi || !(quranForm.nama_penguji || activeName) || !quranForm.catatan?.trim() || saving === p.id + "quran"} className="w-full sm:w-auto px-5 md:px-8 py-4 bg-[#9D174D] text-white rounded-3xl sm:rounded-2xl font-black uppercase tracking-widest text-[10px] sm:text-xs hover:bg-[#9D174D] transition-all shadow-2xl disabled:opacity-50 flex items-center justify-center gap-2 active:scale-95">
                 {saving === p.id + "quran" ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />} Simpan
               </button>
             </div>
@@ -1463,14 +1518,16 @@ function InputNilaiContent() {
               </div>
 
               <div>
-                <label className="block text-[10px] sm:text-xs font-black text-ink-800 uppercase tracking-widest mb-2 sm:mb-3">Catatan Pewawancara (opsional)</label>
-                <textarea value={calsanForm.catatan || ""} onChange={(e) => setSantriForm({ ...calsanForm, catatan: e.target.value })} rows={4} className="w-full px-4 sm:px-5 py-3.5 sm:py-4 bg-ink-50/50 border-2 border-ink-100 rounded-3xl sm:rounded-2xl focus:border-primary-500 outline-none font-black text-primary-950 transition-all resize-none placeholder:text-ink-400" placeholder="Catatan pewawancara..." />
+                <label className="block text-[10px] sm:text-xs font-black text-ink-800 uppercase tracking-widest mb-2 sm:mb-3">
+                  Catatan / Komentar Pewawancara <span className="text-red-600 font-bold">* (Wajib Diisi untuk Rapat)</span>
+                </label>
+                <textarea value={calsanForm.catatan || ""} onChange={(e) => setSantriForm({ ...calsanForm, catatan: e.target.value })} rows={4} required className="w-full px-4 sm:px-5 py-3.5 sm:py-4 bg-ink-50/50 border-2 border-ink-100 rounded-3xl sm:rounded-2xl focus:border-primary-500 outline-none font-medium text-primary-950 transition-all resize-none placeholder:text-ink-400" placeholder="Tuliskan catatan/komentar hasil wawancara calon santri (misal: motivasi, karakter, kemandirian, pergaulan, kesiapan tinggal di asrama)..." />
               </div>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
               <button onClick={cancelEditing} className="w-full sm:w-auto px-5 md:px-8 py-4 bg-ink-100 text-ink-800 rounded-3xl sm:rounded-2xl font-black uppercase tracking-widest text-[10px] sm:text-xs hover:bg-ink-200 transition-all active:scale-95">Batal</button>
-              <button onClick={() => saveForm(p, "wawancara")} disabled={isInputtedByAdmin || !criteria.every((c) => calsanForm[c.key]) || !calsanForm.rekomendasi || !(calsanForm.nama_pewawancara || activeName) || saving === p.id + "wawancara"} className="w-full sm:w-auto px-5 md:px-8 py-4 bg-primary-700 text-white rounded-3xl sm:rounded-2xl font-black uppercase tracking-widest text-[10px] sm:text-xs hover:bg-primary-800 transition-all shadow-2xl disabled:opacity-50 flex items-center justify-center gap-2 active:scale-95">
+              <button onClick={() => saveForm(p, "wawancara")} disabled={isInputtedByAdmin || !criteria.every((c) => calsanForm[c.key]) || !calsanForm.rekomendasi || !(calsanForm.nama_pewawancara || activeName) || !calsanForm.catatan?.trim() || saving === p.id + "wawancara"} className="w-full sm:w-auto px-5 md:px-8 py-4 bg-primary-700 text-white rounded-3xl sm:rounded-2xl font-black uppercase tracking-widest text-[10px] sm:text-xs hover:bg-primary-800 transition-all shadow-2xl disabled:opacity-50 flex items-center justify-center gap-2 active:scale-95">
                 {saving === p.id + "wawancara" ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />} Simpan
               </button>
             </div>
@@ -1651,14 +1708,16 @@ function InputNilaiContent() {
               </div>
 
               <div>
-                <label className="block text-[10px] sm:text-xs font-black text-ink-800 uppercase tracking-widest mb-2 sm:mb-3">Catatan Tambahan (opsional)</label>
-                <textarea value={cawalsanForm.catatan || ""} onChange={(e) => setOrangTuaForm({ ...cawalsanForm, catatan: e.target.value })} rows={3} className="w-full px-4 sm:px-5 py-3.5 sm:py-4 bg-ink-50/30 border-2 border-ink-100 rounded-3xl sm:rounded-2xl focus:border-secondary-500 outline-none font-black text-primary-950 transition-all resize-none placeholder:text-ink-400" placeholder="Catatan tambahan pewawancara..." />
+                <label className="block text-[10px] sm:text-xs font-black text-ink-800 uppercase tracking-widest mb-2 sm:mb-3">
+                  Catatan / Komentar Pewawancara <span className="text-red-600 font-bold">* (Wajib Diisi untuk Rapat)</span>
+                </label>
+                <textarea value={cawalsanForm.catatan || ""} onChange={(e) => setOrangTuaForm({ ...cawalsanForm, catatan: e.target.value })} rows={3} required className="w-full px-4 sm:px-5 py-3.5 sm:py-4 bg-ink-50/30 border-2 border-ink-100 rounded-3xl sm:rounded-2xl focus:border-secondary-500 outline-none font-medium text-primary-950 transition-all resize-none placeholder:text-ink-400" placeholder="Tuliskan catatan/komentar hasil wawancara orang tua/wali santri (misal: komitmen kepesantrenan, kesiapan pembiayaan, dukungan orang tua)..." />
               </div>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
               <button onClick={cancelEditing} className="w-full sm:w-auto px-5 md:px-8 py-4 bg-secondary-100 text-secondary-900 rounded-3xl sm:rounded-2xl font-black uppercase tracking-widest text-[10px] sm:text-xs hover:bg-secondary-200 transition-all active:scale-95">Batal</button>
-              <button onClick={() => saveForm(p, "ortu")} disabled={isInputtedByAdmin || !cawalsanForm.nama_orangtua || !cawalsanForm.asal || !cawalsanForm.kategori || !cawalsanForm.sumber_info || !cawalsanForm.karakter || !cawalsanForm.tahu_spp || !cawalsanForm.rekomendasi || !(cawalsanForm.nama_pewawancara || activeName) || !CAWALSAN_QUESTIONS.every((q) => cawalsanForm[q.key]) || saving === p.id + "ortu"} className="w-full sm:w-auto px-5 md:px-8 py-4 bg-secondary-400 text-primary-950 rounded-3xl sm:rounded-2xl font-black uppercase tracking-widest text-[10px] sm:text-xs hover:bg-secondary-500 transition-all shadow-2xl shadow-secondary-400/20 disabled:opacity-50 flex items-center justify-center gap-2 active:scale-95">
+              <button onClick={() => saveForm(p, "ortu")} disabled={isInputtedByAdmin || !cawalsanForm.nama_orangtua || !cawalsanForm.asal || !cawalsanForm.kategori || !cawalsanForm.sumber_info || !cawalsanForm.karakter || !cawalsanForm.tahu_spp || !cawalsanForm.rekomendasi || !(cawalsanForm.nama_pewawancara || activeName) || !CAWALSAN_QUESTIONS.every((q) => cawalsanForm[q.key]) || !cawalsanForm.catatan?.trim() || saving === p.id + "ortu"} className="w-full sm:w-auto px-5 md:px-8 py-4 bg-secondary-400 text-primary-950 rounded-3xl sm:rounded-2xl font-black uppercase tracking-widest text-[10px] sm:text-xs hover:bg-secondary-500 transition-all shadow-2xl shadow-secondary-400/20 disabled:opacity-50 flex items-center justify-center gap-2 active:scale-95">
                 {saving === p.id + "ortu" ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />} Simpan
               </button>
             </div>
