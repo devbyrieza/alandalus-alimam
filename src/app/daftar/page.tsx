@@ -21,6 +21,7 @@ import { countries } from "@/lib/data/countries";
 import { formatNamaLengkap } from "@/lib/validations/registration";
 import { motion, AnimatePresence } from "framer-motion";
 import Swal from "sweetalert2";
+import { getInstitutionType, normalizeJenjang } from "@/lib/utils/jenjang";
 
 interface FormData {
   nik: string;
@@ -28,7 +29,7 @@ interface FormData {
   tanggal_lahir: string;
   no_hp: string;
   jenis_kelamin: "L" | "P" | "";
-  jenjang: "MTs" | "IL" | "MA" | "";
+  jenjang: string;
 }
 
 // ========================================
@@ -70,14 +71,14 @@ export default function DaftarPage() {
   }, []);
 
   const router = useRouter();
-  const [jenjangFromUrl, setJenjangFromUrl] = useState<"MTs" | "IL" | "MA" | "">("");
+  const [jenjangFromUrl, setJenjangFromUrl] = useState<string>("");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
-      const jenjang = params.get("jenjang") as "MTs" | "IL" | "MA" | null;
+      const jenjang = params.get("jenjang");
       if (jenjang) {
-        setJenjangFromUrl(jenjang);
+        setJenjangFromUrl(normalizeJenjang(jenjang));
       }
     }
   }, []);
@@ -388,30 +389,78 @@ export default function DaftarPage() {
 
                 <div
                   data-error={!!fieldErrors.jenjang}
-                  className="grid grid-cols-1 md:grid-cols-3 gap-6"
+                  className={`grid grid-cols-1 ${getInstitutionType() === "ANDALUS_PUSAT" ? "md:grid-cols-2" : "md:grid-cols-3"} gap-6`}
                 >
-                  {[
-                    {
-                      value: "MTs",
-                      title: "Madrasah Tsanawiyah (MTs)",
-                      subtitle: "Lulusan SD/MI Sederajat",
-                      desc: "Pendidikan setara SMP memadukan kurikulum turots khas Al-Andalus, Tahfidz, dan Diknas." },
-                    {
-                      value: "IL",
-                      title: "I'dad Lughowi (Persiapan Bahasa)",
-                      subtitle: "Lulusan SMP/MTs Sederajat",
-                      desc: "Program persiapan bahasa Arab 1 tahun sebelum masuk jenjang Madrasah Aliyah (MA)." },
-                    {
-                      value: "MA",
-                      title: "Madrasah Aliyah (MA) Khusus Putri",
-                      subtitle: "Lulusan SMP/MTs Sederajat",
-                      desc: "Jalur langsung tanpa IL bagi santriwati yang lancar bahasa Arab aktif & hafalan Al-Qur'an mutqin." },
-                  ].map((option) => {
+                  {(() => {
+                    const inst = getInstitutionType();
+                    if (inst === "ANDALUS_PUSAT") {
+                      return [
+                        {
+                          value: "SMP IT",
+                          title: "SMP IT Al-Andalus",
+                          subtitle: "Lulusan SD/MI Sederajat",
+                          desc: "Pendidikan setara SMP memadukan kurikulum turots khas Al-Andalus, Tahfidz, dan Diknas.",
+                        },
+                        {
+                          value: "IL",
+                          title: "I'dad Lughowi (Persiapan Bahasa)",
+                          subtitle: "Lulusan SMP/MTs Sederajat",
+                          desc: "Program persiapan intensif bahasa Arab 1 tahun sebelum masuk jenjang lanjutan.",
+                        },
+                      ];
+                    }
+                    if (inst === "ULUL_ALBAAB") {
+                      return [
+                        {
+                          value: "MTs",
+                          title: "Madrasah Tsanawiyah (MTs)",
+                          subtitle: "Lulusan SD/MI Sederajat",
+                          desc: "Pendidikan setara SMP memadukan kurikulum turots khas Al-Andalus, Tahfidz, dan Diknas.",
+                        },
+                        {
+                          value: "IL",
+                          title: "I'dad Lughowi (Persiapan Bahasa)",
+                          subtitle: "Lulusan SMP/MTs Sederajat",
+                          desc: "Program persiapan bahasa Arab 1 tahun sebelum masuk jenjang Sekolah Menengah Atas (SMA).",
+                        },
+                        {
+                          value: "SMA",
+                          title: "Sekolah Menengah Atas (SMA)",
+                          subtitle: "Lulusan SMP/MTs Sederajat",
+                          desc: "Jalur langsung tanpa IL bagi santri yang lancar bahasa Arab aktif & hafalan Al-Qur'an mutqin.",
+                        },
+                      ];
+                    }
+                    return [
+                      {
+                        value: "MTs",
+                        title: "Madrasah Tsanawiyah (MTs)",
+                        subtitle: "Lulusan SD/MI Sederajat",
+                        desc: "Pendidikan setara SMP memadukan kurikulum turots khas Al-Andalus, Tahfidz, dan Diknas.",
+                      },
+                      {
+                        value: "IL",
+                        title: "I'dad Lughowi (Persiapan Bahasa)",
+                        subtitle: "Lulusan SMP/MTs Sederajat",
+                        desc: "Program persiapan bahasa Arab 1 tahun sebelum masuk jenjang Madrasah Aliyah (MA).",
+                      },
+                      {
+                        value: "MA",
+                        title: "Madrasah Aliyah (MA) Khusus Putri",
+                        subtitle: "Lulusan SMP/MTs Sederajat",
+                        desc: "Jalur langsung tanpa IL bagi santriwati yang lancar bahasa Arab aktif & hafalan Al-Qur'an mutqin.",
+                      },
+                    ];
+                  })().map((option) => {
                     const isPutra = formData.jenis_kelamin === "L";
                     const isPutri = formData.jenis_kelamin === "P";
-                    // Al-Imam: KHUSUS PUTRI - Putra dialihkan ke Ulul Albaab
-                    const isClosed = isPutra;
-                    const closedLabel = "Pendaftaran Putra tidak tersedia di sini. Silakan daftar via website Ulul Albaab.";
+                    const inst = getInstitutionType();
+                    const isClosed = inst === "AL_IMAM" ? isPutra : inst === "ULUL_ALBAAB" ? isPutri : false;
+                    const closedLabel = inst === "AL_IMAM" 
+                      ? "Pendaftaran Putra tidak tersedia di sini. Silakan daftar via website Ulul Albaab."
+                      : inst === "ULUL_ALBAAB"
+                        ? "Pendaftaran Putri tidak tersedia di sini. Silakan daftar via website Al-Imam."
+                        : "Pendaftaran tidak tersedia.";
 
                     return (
                       <motion.div

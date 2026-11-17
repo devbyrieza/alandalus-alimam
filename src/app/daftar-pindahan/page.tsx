@@ -19,6 +19,7 @@ import { countries } from "@/lib/data/countries";
 import { formatNamaLengkap } from "@/lib/validations/registration";
 import { motion, AnimatePresence } from "framer-motion";
 import Swal from "sweetalert2";
+import { getInstitutionType, normalizeJenjang } from "@/lib/utils/jenjang";
 
 interface FormData {
   nisn: string;
@@ -29,7 +30,7 @@ interface FormData {
   tanggal_lahir: string;
   no_hp: string;
   jenis_kelamin: "L" | "P" | "";
-  jenjang: "MTs" | "MA" | "";
+  jenjang: string;
   kelas_masuk: string;
   asal_institusi: string;
   nomor_induk_lama: string;
@@ -75,14 +76,14 @@ export default function DaftarPindahanPage() {
   }, []);
 
   const router = useRouter();
-  const [jenjangFromUrl, setJenjangFromUrl] = useState<"MTs" | "MA" | "">("");
+  const [jenjangFromUrl, setJenjangFromUrl] = useState<string>("");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
-      const jenjang = params.get("jenjang") as "MTs" | "MA" | null;
+      const jenjang = params.get("jenjang");
       if (jenjang) {
-        setJenjangFromUrl(jenjang);
+        setJenjangFromUrl(normalizeJenjang(jenjang));
       }
     }
   }, []);
@@ -140,9 +141,9 @@ export default function DaftarPindahanPage() {
 
   // Handle class default options based on Jenjang
   useEffect(() => {
-    if (formData.jenjang === "MTs") {
+    if (formData.jenjang === "MTs" || formData.jenjang === "SMP IT") {
       setFormData((p) => ({ ...p, kelas_masuk: "8" }));
-    } else if (formData.jenjang === "MA") {
+    } else if (formData.jenjang === "MA" || formData.jenjang === "SMA") {
       setFormData((p) => ({ ...p, kelas_masuk: "11" }));
     } else {
       setFormData((p) => ({ ...p, kelas_masuk: "" }));
@@ -415,16 +416,24 @@ export default function DaftarPindahanPage() {
                   data-error={!!fieldErrors.jenjang}
                   className="grid grid-cols-1 sm:grid-cols-2 gap-6"
                 >
-                  {[
-                    {
-                      value: "MTs",
-                      title: "MTs",
-                      subtitle: "Pindahan tingkat MTs" },
-                    {
-                      value: "MA",
-                      title: "MA",
-                      subtitle: "Pindahan tingkat MA" },
-                  ].map((option) => {
+                  {(() => {
+                    const inst = getInstitutionType();
+                    if (inst === "ANDALUS_PUSAT") {
+                      return [
+                        { value: "SMP IT", title: "SMP IT", subtitle: "Pindahan tingkat SMP IT" },
+                      ];
+                    }
+                    if (inst === "ULUL_ALBAAB") {
+                      return [
+                        { value: "MTs", title: "MTs", subtitle: "Pindahan tingkat MTs" },
+                        { value: "SMA", title: "SMA", subtitle: "Pindahan tingkat SMA" },
+                      ];
+                    }
+                    return [
+                      { value: "MTs", title: "MTs", subtitle: "Pindahan tingkat MTs" },
+                      { value: "MA", title: "MA", subtitle: "Pindahan tingkat MA" },
+                    ];
+                  })().map((option) => {
                     const isPutra = formData.jenis_kelamin === "L";
                     const isPutri = formData.jenis_kelamin === "P";
                     const isClosed = isPutri;
