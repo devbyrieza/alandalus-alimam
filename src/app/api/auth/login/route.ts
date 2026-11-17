@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { BRANDING } from "@/config/branding";
 import { comparePassword, hashPassword } from "@/lib/utils/password";
 import crypto from "crypto";
 
@@ -28,18 +29,31 @@ export async function POST(request: NextRequest) {
         );
       }
 
+      const isPutraInstitution = 
+        BRANDING?.gender?.toLowerCase() === "putra" ||
+        (BRANDING?.subtitle || "").toLowerCase().includes("putra") ||
+        (BRANDING?.schoolName || "").toLowerCase().includes("putra") ||
+        (BRANDING?.schoolShortName || "").toLowerCase().includes("ulul albaab");
+
       const inputNomor = (nomor_pendaftaran || "").trim().toUpperCase();
-      const putriMappedNomor = inputNomor
-        .replace(/^MTA/, "MTI")
-        .replace(/^ILA/, "ILI")
-        .replace(/^MAA/, "MAI")
-        .replace(/^SMA/, "MAI");
+      const mappedNomor = isPutraInstitution
+        ? inputNomor
+            .replace(/^MTI/, "MTA")
+            .replace(/^ILI/, "ILA")
+            .replace(/^MAI/, "SMA")
+            .replace(/^MAA/, "SMA")
+            .replace(/^SMI/, "SMA")
+        : inputNomor
+            .replace(/^MTA/, "MTI")
+            .replace(/^ILA/, "ILI")
+            .replace(/^MAA/, "MAI")
+            .replace(/^SMA/, "MAI");
 
       const pendaftar = await prisma.pendaftar.findFirst({
         where: {
           nik,
           OR: [
-            { nomor_pendaftaran: { in: [inputNomor, putriMappedNomor] } },
+            { nomor_pendaftaran: { in: [inputNomor, mappedNomor] } },
             { data_lengkap: { path: ["legacy_nomor_pendaftaran"], equals: inputNomor } }
           ]
         }

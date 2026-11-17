@@ -13,6 +13,7 @@ import {
   ArrowLeft,
   Zap } from "lucide-react";
 import Swal from "sweetalert2";
+import { BRANDING } from "@/config/branding";
 
 // MODE DEMO - Set true untuk bypass OTP
 const DEMO_MODE = true;
@@ -34,14 +35,23 @@ function PilihVerifikasiContent() {
   );
   const [isLoading, setIsLoading] = useState(false);
 
-  // Function untuk generate nomor pendaftaran (Al-Imam: Khusus Putri -> MTI, ILI, MAI)
+  // Function untuk generate nomor pendaftaran (sesuai identitas institusi)
   const generateNomorPendaftaran = () => {
     const year = String(new Date().getFullYear()).slice(-2);
     const normJenjang = (jenjang || "").toUpperCase();
-    let prefix = "MTI";
-    if (normJenjang.includes("IL")) prefix = "ILI";
-    else if (normJenjang.includes("MA") || normJenjang.includes("SMA")) prefix = "MAI";
-    else prefix = "MTI";
+
+    const isPutraInstitution = 
+      BRANDING?.gender?.toLowerCase() === "putra" ||
+      (BRANDING?.subtitle || "").toLowerCase().includes("putra") ||
+      (BRANDING?.schoolName || "").toLowerCase().includes("putra") ||
+      (BRANDING?.schoolShortName || "").toLowerCase().includes("ulul albaab");
+
+    let prefix = isPutraInstitution ? "MTA" : "MTI";
+    if (normJenjang.includes("IL")) {
+      prefix = isPutraInstitution ? "ILA" : "ILI";
+    } else if (normJenjang.includes("SMA") || normJenjang.includes("MA")) {
+      prefix = isPutraInstitution ? "SMA" : "MAI";
+    }
 
     // Random 5 digit untuk demo
     const randomNum = Math.floor(10000 + Math.random() * 90000);
