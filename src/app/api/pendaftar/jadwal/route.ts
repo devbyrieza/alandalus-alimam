@@ -196,6 +196,39 @@ export async function POST(request: Request) {
       );
     }
 
+    // 2b. Guard: Mencegah pendaftar memilih dua ujian berbeda pada rentang waktu yang sama (bentrok waktu santri)
+    const sStart = new Date(examSession.start_time).getTime();
+    const sEnd = new Date(examSession.end_time).getTime();
+    const overlappingCandidateBooking = existingBookings.find((b) => {
+      if (!b.exam_session) return false;
+      const bStart = new Date(b.exam_session.start_time).getTime();
+      const bEnd = new Date(b.exam_session.end_time).getTime();
+      return sStart < bEnd && sEnd > bStart;
+    });
+
+    if (overlappingCandidateBooking) {
+      const bookedCat = getExamCategory(overlappingCandidateBooking.exam_session?.title || "");
+      const bookedLabel =
+        bookedCat === "HAFALAN"
+          ? "Tes Hafalan Al-Qur'an"
+          : bookedCat === "LISAN_ARAB"
+          ? "Tes Lisan Bahasa Arab"
+          : bookedCat === "QURAN"
+          ? "Tes Bacaan Al-Qur'an"
+          : bookedCat === "W_SANTRI"
+          ? "Seleksi Wawancara Calon Santri"
+          : bookedCat === "W_ORTU"
+          ? "Wawancara Calon Orang Tua/Wali"
+          : overlappingCandidateBooking.exam_session?.title || "Ujian lain";
+
+      return NextResponse.json(
+        {
+          error: `Jadwal bentrok: Anda sudah memiliki jadwal untuk ${bookedLabel} pada rentang waktu yang sama. Silakan pilih jam atau hari lain agar jadwal tidak tumpang tindih.`
+        },
+        { status: 400 }
+      );
+    }
+
     // Fetch pendaftar first (outside transaction to avoid deadlocks)
     const pendaftar = await prisma.pendaftar.findUnique({
       where: { id: session.id } });
