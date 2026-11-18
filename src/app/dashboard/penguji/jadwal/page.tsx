@@ -207,6 +207,28 @@ export default function JadwalPengujiPage() {
   const [activeTab, setActiveTab] = useState<"assigned" | "slots">("assigned");
   const [userId, setUserId] = useState<string | null>(null);
   const [activeRole, setActiveRole] = useState<string>("");
+  const [userRoles, setUserRoles] = useState<string[]>([]);
+
+  // List of session titles available to this user (based on primary + secondary roles, or all for admin)
+  const availableSessionTitles = useMemo(() => {
+    if (ADMIN_ROLES.includes(activeRole)) {
+      return [
+        "Tes Al-Qur'an (Bacaan & Hafalan)",
+        "Tes Lisan Bahasa Arab",
+        "Seleksi Wawancara Calon Santri",
+        "Seleksi Wawancara Orang Tua",
+      ];
+    }
+    const titles: string[] = [];
+    userRoles.forEach((r) => {
+      const t = ROLE_TO_SESSION_TITLE[r];
+      if (t && !titles.includes(t)) titles.push(t);
+    });
+    if (titles.length === 0 && ROLE_TO_SESSION_TITLE[activeRole]) {
+      titles.push(ROLE_TO_SESSION_TITLE[activeRole]);
+    }
+    return titles.length > 0 ? titles : ["Seleksi Wawancara Calon Santri"];
+  }, [userRoles, activeRole]);
 
   // State for Assignments
   const [assignments, setAssignments] = useState<JadwalAssignment[]>([]);
@@ -431,6 +453,11 @@ export default function JadwalPengujiPage() {
           if (session) {
             setUserId(session.id || session.user_id);
             setActiveRole(session.role || "");
+            if (Array.isArray(data.availableRoles) && data.availableRoles.length > 0) {
+              setUserRoles(data.availableRoles);
+            } else if (session.role) {
+              setUserRoles([session.role]);
+            }
           }
         }
       } catch (e) {
@@ -474,17 +501,32 @@ export default function JadwalPengujiPage() {
 
   // Auto-set session title and duration from role when role is known
   useEffect(() => {
-    const autoTitle = ROLE_TO_SESSION_TITLE[activeRole];
-    if (autoTitle) {
-      const defDur = getDurationFromTitle(autoTitle);
-      setSlotForm((prev) => ({
-        ...prev,
-        title: autoTitle,
-        duration: defDur,
-        end_time: calculateEndTime(prev.start_time, autoTitle, defDur) }));
-      setBulkForm((prev) => ({ ...prev, title: autoTitle, duration: defDur }));
+    if (availableSessionTitles.length > 0) {
+      setSlotForm((prev) => {
+        const titleToUse = availableSessionTitles.includes(prev.title)
+          ? prev.title
+          : availableSessionTitles[0];
+        const defDur = getDurationFromTitle(titleToUse);
+        return {
+          ...prev,
+          title: titleToUse,
+          duration: defDur,
+          end_time: calculateEndTime(prev.start_time, titleToUse, defDur),
+        };
+      });
+      setBulkForm((prev) => {
+        const titleToUse = availableSessionTitles.includes(prev.title)
+          ? prev.title
+          : availableSessionTitles[0];
+        const defDur = getDurationFromTitle(titleToUse);
+        return {
+          ...prev,
+          title: titleToUse,
+          duration: defDur,
+        };
+      });
     }
-  }, [activeRole]);
+  }, [availableSessionTitles]);
 
   // Update end_time when title changes (for admins or manual selection)
   useEffect(() => {
@@ -2153,7 +2195,7 @@ export default function JadwalPengujiPage() {
               )}
 
               {/* Jenis Ujian */}
-              {ADMIN_ROLES.includes(activeRole) ? (
+              {availableSessionTitles.length > 1 || ADMIN_ROLES.includes(activeRole) ? (
                 <div>
                   <label className="block text-xs font-black text-ink-400 uppercase tracking-widest mb-2">
                     Jenis Ujian
@@ -2162,22 +2204,28 @@ export default function JadwalPengujiPage() {
                     required
                     className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-3xl focus:ring-2 focus:ring-primary-500 outline-none font-bold text-primary-950 transition-all"
                     value={slotForm.title}
-                    onChange={(e) =>
-                      setSlotForm({ ...slotForm, title: e.target.value })
-                    }
+                    onChange={(e) => {
+                      const newTitle = e.target.value;
+                      const newDur = getDurationFromTitle(newTitle);
+                      setSlotForm((prev) => ({
+                        ...prev,
+                        title: newTitle,
+                        duration: newDur,
+                        end_time: calculateEndTime(prev.start_time, newTitle, newDur),
+                      }));
+                    }}
                   >
-                    <option value="" disabled>
-                      Pilih Jenis Ujian
-                    </option>
-                    <option value="Tes Al-Qur'an (Bacaan & Hafalan)">Tes Al-Qur'an (Bacaan & Hafalan)</option>
-                    <option value="Tes Lisan Bahasa Arab">Tes Lisan Bahasa Arab</option>
-                    <option value="Seleksi Wawancara Calon Santri">
-                      Seleksi Wawancara Calon Santri
-                    </option>
-                    <option value="Seleksi Wawancara Orang Tua">
-                      Seleksi Wawancara Orang Tua
-                    </option>
+                    {availableSessionTitles.map((t) => (
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
+                    ))}
                   </select>
+                  {availableSessionTitles.length > 1 && !ADMIN_ROLES.includes(activeRole) && (
+                    <p className="text-[10px] text-ink-400 font-bold mt-1.5">
+                      *Pilih jenis ujian sesuai penugasan peran Anda.
+                    </p>
+                  )}
                 </div>
               ) : (
                 <div>
@@ -2679,21 +2727,49 @@ export default function JadwalPengujiPage() {
                 </div>
               )}
 
-              {/* Jenis Ujian Info */}
-              <div className="bg-primary-600 rounded-3xl p-6 shadow-2xl text-white relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
-                <p className="text-[10px] text-primary-100 font-black uppercase tracking-widest mb-1.5 leading-none">
-                  Mata Ujian Terpilih
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-3xl flex items-center justify-center text-xl shadow-inner">
-                    <Trophy className="w-5 h-5 text-gold-300" />
-                  </div>
-                  <p className="text-2xl font-black tracking-tight text-white">
-                    {bulkForm.title || "—"}
+              {/* Jenis Ujian Info / Selector */}
+              {availableSessionTitles.length > 1 || ADMIN_ROLES.includes(activeRole) ? (
+                <div className="space-y-3">
+                  <label className="block text-sm font-black text-primary-950 uppercase tracking-wider">
+                    Pilih Jenis Ujian / Sesi
+                  </label>
+                  <select
+                    className="w-full px-5 py-4 bg-stone-100/50 border border-stone-200 text-stone-900 font-bold rounded-2xl focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all appearance-none outline-none"
+                    value={bulkForm.title}
+                    onChange={(e) => {
+                      const newTitle = e.target.value;
+                      const newDur = getDurationFromTitle(newTitle);
+                      setBulkForm((prev) => ({ ...prev, title: newTitle, duration: newDur }));
+                    }}
+                  >
+                    {availableSessionTitles.map((t) => (
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
+                    ))}
+                  </select>
+                  <p className="text-xs text-stone-500 font-medium">
+                    {ADMIN_ROLES.includes(activeRole)
+                      ? "Pilih jenis ujian yang ingin dibuat slot massalnya."
+                      : "Akun Anda memiliki beberapa peran penguji. Silakan pilih jenis ujian yang ingin dibuat slot ketersediaannya."}
                   </p>
                 </div>
-              </div>
+              ) : (
+                <div className="bg-primary-600 rounded-3xl p-6 shadow-2xl text-white relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+                  <p className="text-[10px] text-primary-100 font-black uppercase tracking-widest mb-1.5 leading-none">
+                    Mata Ujian Terpilih
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-3xl flex items-center justify-center text-xl shadow-inner">
+                      <Trophy className="w-5 h-5 text-gold-300" />
+                    </div>
+                    <p className="text-2xl font-black tracking-tight text-white">
+                      {bulkForm.title || "—"}
+                    </p>
+                  </div>
+                </div>
+              )}
 
               {/* Day Selection */}
               <div>
