@@ -1978,34 +1978,61 @@ function PengumumanContent() {
                             </>
                           ) : activeTab === "sudah_diumumkan" ? (
                             <>
-                              {/* Ganti Surat */}
-                              <button
-                                onClick={() => {
-                                  setSuratTarget({
-                                    id: c.id,
-                                    nama_lengkap: c.nama_lengkap,
-                                    nomor_pendaftaran: c.nomor_pendaftaran,
-                                  });
-                                }}
-                                title="Upload / Ganti Surat Pengumuman Resmi"
-                                className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all flex items-center gap-1 cursor-pointer"
-                              >
-                                <UploadCloud className="w-3.5 h-3.5" />
-                                <span>Ganti Surat</span>
-                              </button>
+                              {/* Jika Santri Cadangan: Tombol Promosikan ke Diterima */}
+                              {(c.status_pendaftaran === "cadangan" || c.pengumuman?.status_kelulusan === "Cadangan") ? (
+                                <>
+                                  <button
+                                    onClick={() => {
+                                      setSelectedIds([c.id]);
+                                      setShowBulkAcceptedDialog(true);
+                                    }}
+                                    title="Promosikan Santri Cadangan ke Diterima & Terbitkan Surat"
+                                    className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all flex items-center gap-1 cursor-pointer"
+                                  >
+                                    <CheckCircle2 className="w-3.5 h-3.5" />
+                                    <span>Promosikan ke Diterima</span>
+                                  </button>
+                                  <button
+                                    onClick={() => handlePublishSingle(c.id, c.nama_lengkap, "rejected")}
+                                    title="Tutup Kuota & Tetapkan Ditolak"
+                                    className="px-2.5 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all flex items-center gap-1 cursor-pointer"
+                                  >
+                                    <XCircle className="w-3.5 h-3.5" />
+                                    <span>Tutup / Tolak</span>
+                                  </button>
+                                </>
+                              ) : (
+                                <>
+                                  {/* Ganti Surat (untuk santri diterima) */}
+                                  <button
+                                    onClick={() => {
+                                      setSuratTarget({
+                                        id: c.id,
+                                        nama_lengkap: c.nama_lengkap,
+                                        nomor_pendaftaran: c.nomor_pendaftaran,
+                                      });
+                                    }}
+                                    title="Upload / Ganti Surat Pengumuman Resmi"
+                                    className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all flex items-center gap-1 cursor-pointer"
+                                  >
+                                    <UploadCloud className="w-3.5 h-3.5" />
+                                    <span>Ganti Surat</span>
+                                  </button>
 
-                              {/* Lihat Surat jika ada */}
-                              {c.pengumuman?.surat_pengumuman_path && (
-                                <a
-                                  href={c.pengumuman.surat_pengumuman_path}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  title="Lihat Surat Pengumuman Resmi"
-                                  className="px-2.5 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-bold border border-stone-200 flex items-center gap-1 cursor-pointer"
-                                >
-                                  <FileText className="w-3.5 h-3.5 text-red-600" />
-                                  <span>Lihat</span>
-                                </a>
+                                  {/* Lihat Surat jika ada */}
+                                  {c.pengumuman?.surat_pengumuman_path && (
+                                    <a
+                                      href={c.pengumuman.surat_pengumuman_path}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      title="Lihat Surat Pengumuman Resmi"
+                                      className="px-2.5 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-bold border border-stone-200 flex items-center gap-1 cursor-pointer"
+                                    >
+                                      <FileText className="w-3.5 h-3.5 text-red-600" />
+                                      <span>Lihat</span>
+                                    </a>
+                                  )}
+                                </>
                               )}
 
                               {/* Kembalikan ke Pleno */}

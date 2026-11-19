@@ -9,10 +9,12 @@ import {
   FileCheck,
   FileText,
   Loader2,
+  MessageCircle,
   Trophy,
   XCircle,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { BRANDING } from "@/config/branding";
 import { generateSuratKelulusan } from "@/lib/utils/pdf-generator";
 
 interface Pengumuman {
@@ -329,14 +331,25 @@ export default function PengumumanTab() {
                   </h2>
                 </div>
               </div>
-              <p className="text-secondary-50/90 mb-10 max-w-xl text-lg leading-relaxed">
-                Berdasarkan hasil seleksi, Anda dinyatakan masuk dalam{" "}
-                <strong>DAFTAR CADANGAN</strong> santri baru Pesantren Al-Imam Al-Islami.
+              <p className="text-secondary-50/90 mb-8 max-w-xl text-base sm:text-lg leading-relaxed">
+                Berdasarkan hasil seleksi pleno, ananda dinyatakan masuk dalam{" "}
+                <strong>DAFTAR CADANGAN</strong> santri baru {BRANDING.schoolName || "Pesantren"}.
               </p>
 
-              <div className="inline-flex items-center justify-center gap-3 px-5 md:px-8 py-3.5 bg-white text-secondary-900 rounded-full font-black shadow-lg transition-all border border-secondary-100">
-                <Calendar className="w-5 h-5" />
-                Menunggu Konfirmasi Kuota
+              <div className="flex flex-wrap items-center gap-3">
+                <div className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-white text-secondary-900 rounded-full font-black shadow-lg transition-all border border-secondary-100 text-xs sm:text-sm">
+                  <Clock className="w-4 h-4 text-amber-600 animate-pulse" />
+                  <span>Tahap Evaluasi Kuota (Maksimal 14 Hari Kerja)</span>
+                </div>
+                <a
+                  href={`https://wa.me/${((BRANDING as any).phone || "081296869854").replace(/[^0-9]/g, "")}?text=${encodeURIComponent(`Assalamu'alaikum Panitia SPMB ${BRANDING.schoolName}, saya wali santri dari calon santri yang berstatus Cadangan, izin bertanya terkait perkembangan evaluasi kuota.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full font-bold shadow-md transition-all text-xs cursor-pointer"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>Konsultasi CS / Helpdesk</span>
+                </a>
               </div>
             </div>
           </div>
@@ -347,7 +360,7 @@ export default function PengumumanTab() {
               <div className="p-2 bg-secondary-100 rounded-xl">
                 <FileText className="w-6 h-6 text-secondary-600" />
               </div>
-              <h3 className="text-lg font-bold text-stone-900">Detail Pengumuman</h3>
+              <h3 className="text-lg font-bold text-stone-900">Detail Status Cadangan</h3>
             </div>
 
             <div className="space-y-3">
@@ -362,7 +375,7 @@ export default function PengumumanTab() {
                 <p className="text-sm text-secondary-900 leading-relaxed">
                   <strong>Catatan Panitia:</strong>{" "}
                   {pengumuman.catatan ||
-                    "Mohon bersabar menunggu informasi lebih lanjut jika terdapat kuota yang tersedia dari pembatalan pendaftar lain."}
+                    "Ketersediaan kuota dievaluasi secara berkala seiring penyelesaian daftar ulang santri diterima (maksimal 7 hari kerja). Jika terdapat kuota kosong akibat pembatalan, panitia akan langsung mempromosikan santri cadangan sesuai urutan nilai seleksi."}
                 </p>
               </div>
             </div>
@@ -377,11 +390,12 @@ export default function PengumumanTab() {
                 </div>
               </div>
               <div>
-                <h4 className="font-bold text-primary-900 mb-2">Informasi Penting</h4>
-                <ul className="text-sm text-primary-800 space-y-1">
-                  <li>• Panitia akan menghubungi Anda jika terdapat kuota yang kosong</li>
-                  <li>• Pastikan nomor WhatsApp pendaftaran tetap aktif</li>
-                  <li>• Hubungi panitia melalui layanan informasi untuk pertanyaan lebih lanjut</li>
+                <h4 className="font-bold text-primary-900 mb-2">Informasi Penting &amp; Prosedur</h4>
+                <ul className="text-sm text-primary-800 space-y-1.5 leading-relaxed">
+                  <li>• Santri cadangan diprioritaskan berdasarkan <strong>urutan peringkat nilai ujian</strong> jika ada kursi kosong.</li>
+                  <li>• Estimasi kepastian kuota: <strong>maksimal 14 hari kerja</strong> sejak tanggal pengumuman terbit.</li>
+                  <li>• Pastikan nomor WhatsApp pendaftaran tetap aktif untuk menerima konfirmasi dari panitia.</li>
+                  <li>• Untuk konsultasi atau pertanyaan lebih lanjut, silakan hubungi tim CS/Helpdesk kami.</li>
                 </ul>
               </div>
             </div>
