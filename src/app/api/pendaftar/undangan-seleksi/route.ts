@@ -230,6 +230,7 @@ export async function GET(request: Request) {
             id: true,
             role: true,
             secondary_roles: true,
+            jenis_kelamin: true,
           },
         },
       },
@@ -481,8 +482,9 @@ export async function GET(request: Request) {
     const isTahap1Completed = isGrupACompleted && hasQuranCompleted && hasSantriCompleted && hasOrtuCompleted;
     const stage2Unlocked = isDirectSMAorMA && isTahap1Completed;
 
-    // Filter sesi yang boleh dipilih berdasarkan tahap seleksi
-    const openSlots: any[] = [];
+    // Filter dan konsolidasikan sesi per kategori & jam ujian agar tidak ada duplikasi tampilan
+    // dan kuota mencerminkan akumulasi seluruh penguji yang bertugas di jam tersebut
+    const slotMap = new Map<string, any>();
 
     availableSessions.forEach((s) => {
       const cat = getExamCategory(s.title || "");
@@ -496,6 +498,17 @@ export async function GET(request: Request) {
         }
       }
 
+      // Filter gender penguji jika relevan dengan pendaftar
+      if (pendaftar.jenis_kelamin && s.creator?.jenis_kelamin) {
+        const pJk = pendaftar.jenis_kelamin.toUpperCase();
+        const isPutra = pJk === "L" || pJk === "LAKI-LAKI" || pJk.includes("PUTRA");
+        const cJk = s.creator.jenis_kelamin.toUpperCase();
+        const isCPutra = cJk === "L" || cJk === "LAKI-LAKI" || cJk.includes("PUTRA");
+        if (isPutra !== isCPutra) {
+          return;
+        }
+      }
+
       const busy = isExaminerBusy(s);
       const isFull = s._count.bookings >= s.quota || busy;
 
@@ -506,30 +519,15 @@ export async function GET(request: Request) {
         displayTitle = "Tes Hafalan Al-Qur'an";
       }
 
-      openSlots.push({
-        id: s.id,
-        title: displayTitle,
-        raw_title: s.title,
-        category: cat,
-        start_time: s.start_time,
-        end_time: s.end_time,
-        quota: s.quota,
-        booked: busy ? s.quota : s._count.bookings,
-        location: s.location,
-        notes: s.notes,
-        isFull,
-      });
+      const key = `${cat}_${new Date(s.start_time).getTime()}`;
+      const existing = slotMap.get(key);
 
-      // ── DUAL ROLE PENGUJI QURAN & HAFALAN (SHARED EXCLUSIVE SLOT) ──
-      // Siapapun penguji Al-Qur'an, dia otomatis juga bertindak sebagai penguji Hafalan.
-      // Sesi ketersediaan yang sama dapat dipilih untuk Tes Hafalan oleh calon santri MA/SMA (jika tahap 2 sudah terbuka).
-      const isQuranSession = cat === "QURAN" || (s.creator?.role && ["penguji", "penguji_quran", "penguji_hafalan"].includes(s.creator.role));
-      if (isQuranSession && cat !== "HAFALAN" && stage2Unlocked) {
-        openSlots.push({
+      if (!existing) {
+        slotMap.set(key, {
           id: s.id,
-          title: "Tes Hafalan Al-Qur'an",
+          title: displayTitle,
           raw_title: s.title,
-          category: "HAFALAN",
+          category: cat,
           start_time: s.start_time,
           end_time: s.end_time,
           quota: s.quota,
@@ -538,8 +536,48 @@ export async function GET(request: Request) {
           notes: s.notes,
           isFull,
         });
+      } else {
+        existing.quota += s.quota;
+        existing.booked += (busy ? s.quota : s._count.bookings);
+        existing.isFull = existing.booked >= existing.quota;
+        if (!isFull && existing.isFull) {
+          existing.id = s.id;
+        }
+      }
+
+      // ── DUAL ROLE PENGUJI QURAN & HAFALAN (SHARED EXCLUSIVE SLOT) ──
+      // Siapapun penguji Al-Qur'an, dia otomatis juga bertindak sebagai penguji Hafalan.
+      // Sesi ketersediaan yang sama dapat dipilih untuk Tes Hafalan oleh calon santri MA/SMA (jika tahap 2 sudah terbuka).
+      const isQuranSession = cat === "QURAN" || (s.creator?.role && ["penguji", "penguji_quran", "penguji_hafalan"].includes(s.creator.role));
+      if (isQuranSession && cat !== "HAFALAN" && stage2Unlocked) {
+        const hafalanKey = `HAFALAN_${new Date(s.start_time).getTime()}`;
+        const existingHafalan = slotMap.get(hafalanKey);
+        if (!existingHafalan) {
+          slotMap.set(hafalanKey, {
+            id: s.id,
+            title: "Tes Hafalan Al-Qur'an",
+            raw_title: s.title,
+            category: "HAFALAN",
+            start_time: s.start_time,
+            end_time: s.end_time,
+            quota: s.quota,
+            booked: busy ? s.quota : s._count.bookings,
+            location: s.location,
+            notes: s.notes,
+            isFull,
+          });
+        } else {
+          existingHafalan.quota += s.quota;
+          existingHafalan.booked += (busy ? s.quota : s._count.bookings);
+          existingHafalan.isFull = existingHafalan.booked >= existingHafalan.quota;
+          if (!isFull && existingHafalan.isFull) {
+            existingHafalan.id = s.id;
+          }
+        }
       }
     });
+
+    const openSlots = Array.from(slotMap.values());
 
     // Perhitungan Progress
     const totalTests = isDirectSMAorMA ? 8 : 6;
