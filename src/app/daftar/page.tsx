@@ -104,6 +104,7 @@ export default function DaftarPage() {
           setFormData((prev) => ({
             ...prev,
             ...parsed,
+            jenis_kelamin: "P",
             jenjang: jenjangFromUrl || parsed.jenjang || "" }));
         } catch (error) {
           console.error("Error parsing saved data:", error);
